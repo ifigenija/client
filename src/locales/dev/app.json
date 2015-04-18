@@ -1,0 +1,10 @@
+{
+    "name": "boris",
+    "nav": {
+        "home": "Domov",
+        "prijava": "Prijava",
+        "uprizoritve": "Uprizoritve",
+        "program": "Program"
+    }
+    
+}
