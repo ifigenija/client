@@ -12,6 +12,7 @@ define([
     'app/seznami/Module/Seznami',
     'app/nastavitve/Module/Nastavitve',
     'app/aaa/Module/Aaa',
+    'app/max/Module/UI',
     'bootstrap'
 ], function (
         Marionette,
@@ -29,7 +30,8 @@ define([
     var app = new Marionette.Application();
 
     app.module('auth', navInit);
-    app.module('nav', navInit);
+    app.module('UI', uiInit)
+;    app.module('nav', navInit);
     app.module('uprizoritve', produkcijaInit);
     app.module('koledar', koledarInit);
     app.module('arhiv', arhivInit);

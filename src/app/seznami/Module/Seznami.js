@@ -16,9 +16,7 @@ define([
 
 
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
-
-
-      
+    
         mod.tipFunkcije = function () {
 
         };
