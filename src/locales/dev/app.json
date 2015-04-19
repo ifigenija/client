@@ -1,10 +1,67 @@
 {
-    "name": "boris",
     "nav": {
         "home": "Domov",
-        "prijava": "Prijava",
+        "prijava": "Vpis",
         "uprizoritve": "Uprizoritve",
-        "program": "Program"
+        "program": "Program",
+        "brandPrivate": "iFigenija",
+        "brandPublic": "iFigenija"
+    },
+    "login": {
+        "prompt": "Vpišite se",
+        "email": "Email naslov",
+        "password": "Geslo",
+        "remember": "Ostani prijavljen",
+        "signIn": "Vpis",
+        "failed": "Vpis neuspešen."
+    },
+    "aaa": {
+        "nav": {
+            "label": "Dostopi",
+            "addUser": "Dodaj uporabnika",
+            "users": "Uporabniki",
+            "roles": "Vloge"
+        }
+    },
+    "koledar": {
+        "nav": {
+            "label": "Koledar",
+            "dodajDogodek": "Dodaj dogodek",
+            "prostori": "Prostori",
+            "dogodki": "Dogodki",
+            "ljudje": "Ljudje",
+            "zasedenost": "Rezervacije"
+        }
+    },
+    "arhiv": {
+        "nav": {
+            "label": "Arhiv",
+            "isci": "Poišči",
+            "arhiviraj": "Arhiviraj",
+            "besedila": "Arhiv besedil"
+        }
+    },
+    "poziv": {
+        "nav": {
+            "label": "Poziv"
+        }
+    },
+    "produkcija": {
+        "nav": {
+            "label": "Produkcija"
+        }
+    },
+    "seznami": {
+        "nav": {
+            "label": "Seznami",
+            "tipFunkcije": "Tip funkcij",
+            "zvrstUprizoritve": "Zvrsti uprizoritev"
+            
+        }
+    },
+     "nastavitve": {
+        "nav": {
+            "label": "Nastavitve"
+        }
     }
-    
 }

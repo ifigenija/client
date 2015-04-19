@@ -9,7 +9,7 @@ require.config({
         'bootstrap-datepicker': 'lib/bootstrap-datepicker/dist/js/bootstrap-datepicker',
         'jquery': 'lib/jquery/dist/jquery',
         'jquery.fileupload': 'lib/jquery-file-upload/js/jquery.fileupload',
-        'jquery.jsonrpc': 'lib/jquery-jsonrpcclientjquery.jsonrpcclient',
+        'jquery.jsonrpc': 'lib/jquery-jsonrpcclient/jquery.jsonrpcclient',
         'backbone': 'lib/backbone/backbone',
         'text': 'lib/requirejs-text/text',
         'marionette': 'lib/marionette/lib/backbone.marionette',

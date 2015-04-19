@@ -6,15 +6,16 @@
 define(['marionette',
     'jquery',
     'app/public/Module/Public',
-    'app/public/View/Navbar'
+    'app/public/View/Navbar',
+    'jquery.jsonrpc'
 ], function (
         Marionette,
         $,
         publicInit,
-                Navbar
-       ) {
+        Navbar
+        ) {
 
- 
+
     var app = new Marionette.Application();
 
     // aplikacijo skranimo za globalni dostop
@@ -28,7 +29,6 @@ define(['marionette',
         });
         var nav = new Navbar();
         this.navContainer.show(nav);
-        
     });
 
     return app;

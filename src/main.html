@@ -4,20 +4,26 @@
         <title>Ifigenija</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <link rel="stylesheet" href="lib/botstrap/dist/bootstrap.css">
-        <link rel="stylesheet" href="lib/botstrap-datepicker/dist/css/bootstrap-datepicker3.css">
+        <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="lib/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css">
         <link rel="stylesheet" href="lib/backgrid/lib/backgrid.css">
-        <link rel="stylesheet" href="lib/font-awsome/css/font-awsome.css">
+        <link rel="stylesheet" href="lib/font-awsome/css/font-awesome.css">
+        <link rel="stylesheet" href="css/layout.css">
         <script type="text/javascript" src="lib/requirejs/require.js"></script>        
     </head>
     <body>
-        <div>Ifigenija app</div>
-        
-        
+        <div id="sidenav"></div>
+        <div id="main" style="border:1px; border-style: solid; ">       
+            main
+        </div>
         <script type="text/javascript">
             require(['requireconfig'], function () {
-                require(['app/main']);
+                require(['app/main', 'backbone', 'jquery', 'app/aaa/checkauth'], function (app, Backbone, $, auth) {
+                    auth(function (user) {
+                        app.start({user: user});
+                        Backbone.history.start();
+1                    });
+                });
             });
         </script>
     </body>
