@@ -28,7 +28,6 @@ define([
         tagName: "li",
         template: Handlebars.compile('<a href="{{ uri }}"><span class="fa"></span> {{ label }}</a>'),
         onRender: function () {
-            console.log('dropitem', this.model);
             if (this.model.get('divider')) {
                 this.$el.html('');
                 this.$el.addClass('divider');
@@ -73,10 +72,12 @@ define([
         tagName: 'ul',
         className: "navbar-nav nav",
         getChildView: function (item) {
-            console.log(item);
             if (item.get('pages')) {
-                return DropDownMenu;
+           
+              return DropDownMenu;
             } else {
+            console.log("simple");
+
                 return MenuItem;
             }
         },

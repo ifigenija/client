@@ -44,6 +44,7 @@ require.config({
         'backbone-modal': ['jquery', 'backbone'],
         'bootstrap': ['jquery'],
         'bootstrap-datepicker': ['jquery', 'bootstrap'],
+        'jquery.jsonrpc': ['jquery']
     },
     noGlobal: true
 });
