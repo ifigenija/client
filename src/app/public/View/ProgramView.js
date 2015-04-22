@@ -1,7 +1,12 @@
 /* 
  * Licenca GPLv3
  */
-define(["marionette", "app/handlebars"], function (Marionette, Handlebars) {
+define([
+    "marionette",
+    "app/handlebars"
+], function (
+        Marionette,
+        Handlebars) {
 
 
     var DebelaKnjigaView = Marionette.ItemView.extend({
