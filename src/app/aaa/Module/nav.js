@@ -16,16 +16,11 @@ define(['i18next'], function (i18n) {
                 {
                     label: i18n.t("aaa.nav.users"),
                     icon: "fa-user-plus",
-                    uri: "#aaa/user/dodaj"
-                },
-                {
-                    label: i18n.t("aaa.nav.users"),
-                    icon: "fa-users",
-                    uri: "#aaa/user/dodaj"
+                    uri: "#aaa/users"
                 },
                 {
                     label: i18n.t("aaa.nav.roles"),
-                    uri: "#aaa/user/dodaj"
+                    uri: "#aaa/roles"
                 }
             ]
         }

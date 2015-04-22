@@ -22,7 +22,8 @@ require.config({
         'handlebars': 'lib/handlebars/handlebars.amd',
         'i18next-actual': 'lib/i18next/i18next.amd.withJQuery',
         'i18next': 'app/i18next-wrapper',
-        'app/handlebars': 'app/handlebars-wrapper'
+        'app/handlebars': 'app/handlebars-wrapper',
+        'baseUrl': 'app/public'
     },
     shim: {
         underscore: {

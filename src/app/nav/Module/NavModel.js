@@ -1,11 +1,14 @@
 define([
     'i18next',
     'underscore',
-    'backbone'
+    'backbone',
+    '../Model/Crumbs'
 ], function (
         i18n,
         _,
-        Backbone
+        Backbone,
+        Crumbs
+                
         ) {
 
 
@@ -56,13 +59,14 @@ define([
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
 
         mod.navigation = {};
-
+        mod.crumbs = new Crumbs();
+        
         mod.registerNav = function (navData) {
             this.navigation.registerNav(navData);
         };
 
         mod.addInitializer(function (options) {
-
+            
             mod.navigation = new NavModel({
                 label: i18n.t('nav.brandPrivate'),
                 uri: '#',

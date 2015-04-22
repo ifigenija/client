@@ -2,7 +2,7 @@ define([
     'baseUrl',
     'underscore',
     'backbone',
-    'lib/pageable'
+    'pageable'
 ], function (
         baseUrl,
         _,

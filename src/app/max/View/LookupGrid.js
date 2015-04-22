@@ -16,11 +16,7 @@ define([
                 LookupModel,
                 tpl)
         {
-
-
-
-     
-            var LookupGrid = Marionette.Layout.extend({
+            var LookupGrid = Marionette.LayoutView.extend({
                 template: _.template(tpl),
                 regions: {
                     filter: '.lookup-filter',

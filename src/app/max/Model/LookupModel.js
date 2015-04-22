@@ -3,7 +3,7 @@ define([
     'backbone',
     'underscore',
     'backgrid',
-    'lib/pageable'
+    'pageable'
 ], function(baseUrl, Backbone, _, Backgrid, PageableCollection) {
 
     var LookupModel = Backbone.Model.extend({

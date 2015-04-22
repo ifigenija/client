@@ -2,15 +2,11 @@
  * Licenca GPLv3
  */
 define([
-    'marionette',
     'require',
-    'backbone',
     'app/handlebars'
 
 ], function (
-        Marionette,
         require,
-        Backbone,
         Handlebars
         ) {
 
@@ -22,10 +18,33 @@ define([
          * @returns {undefined}
          */
         mod.program = function () {
-            var xx = new Marionette.ItemView({
-                template: Handlebars.compile("<div>program</div>")
+            require(["../View/ProgramView", "../Model/Program"], function (ProgramView, Program) {
+
+                var collection = new Backbone.Collection([
+                    {
+                        "id": 1,
+                        "naslov": "ena",
+                        "avtor": "lovro"
+                    },
+                    {
+                        "id": 2,
+                        "naslov": "dva",
+                        "avtor": "boris",
+                        "debela": "je"
+                    },
+                    {
+                        "id": 3,
+                        "naslov": "tri",
+                        "avtor": "ales"
+                    }
+                ]);
+                var view = new ProgramView({
+                    collection: collection
+                });
+
+                App.glavniContainer.show(view);
+                
             });
-            App.glavniContainer.show(xx);
         };
 
         /**
@@ -66,16 +85,16 @@ define([
          * @returns {undefined}
          */
         mod.redirectToMain = function (userData) {
-            
+
             // shranim podatke, ki smo jih dobili iz strežnika v session storage 
             var url = 'main.html';
             sessionStorage.setItem('ifi.user.data', JSON.stringify(userData));
-            
+
             if (userData.defaultRoute) {
                 url = url + '#' + userData.defaultRoute;
             }
             window.location.href = url;
-            
+
         };
 
         /**
@@ -120,11 +139,13 @@ define([
             });
         };
 
-
         /**
          * Routing za javni pogled 
          */
         mod.addInitializer(function (options) {
+
+
+
             new Marionette.AppRouter({
                 controller: mod,
                 appRoutes: {

@@ -4,7 +4,7 @@ define([
     'backbone-forms',
     'jquery',
     'moment',
-    'lib/bootstrap-datepicker'
+    'bootstrap-datepicker'
 ], function (Backbone, _, Form, $, moment) {
 
 var App;

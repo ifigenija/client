@@ -3,7 +3,7 @@ define([
     'backbone-forms',
     'jquery',
     'moment',
-    'lib/bootstrap-datepicker'
+    'bootstrap-datepicker'
 ], function(Backbone, Form, $, moment) {
 
     var DATE_FORMAT = 'DD.MM.YYYY';
@@ -14,7 +14,7 @@ define([
             this.$el.attr('type', 'text');
             this.$el.datepicker({
                 format: 'dd.mm.yyyy',
-                language: moment.lang(),
+                language: moment.locale(),
                 weekStart: 1,
                 calendarWeeks: true
             }).on('changeDate', function(ev) {
@@ -27,7 +27,7 @@ define([
         getValue: function() {
             var val = this.$el.val();
             if (val) {
-                moment.lang();
+                moment.locale();
                 var m = moment.utc(val, DATE_FORMAT);
                 var xvalue = m.toISOString();
                 return xvalue;
@@ -47,7 +47,7 @@ define([
             Backbone.Form.editors.Text.prototype.render.apply(this, arguments);
             this.$el.datepicker({
                 format: 'dd.mm.yyyy',
-                language: moment.lang(),
+                language: moment.locale(),
                 weekStart: 1,
                 calendarWeeks: true
             });

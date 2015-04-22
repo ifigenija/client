@@ -4,6 +4,7 @@
 define([
     'marionette',
     'app/nav/View/SidebarMenu',
+    'app/nav/View/OrodnaVrsticaView',
     'app/nav/Module/NavModel',
     'app/produkcija/Module/Produkcija',
     'app/poziv/Module/Poziv',
@@ -11,11 +12,13 @@ define([
     'app/arhiv/Module/Arhiv',
     'app/seznami/Module/Seznami',
     'app/nastavitve/Module/Nastavitve',
-    'app/aaa/Module/Aaa',   
+    'app/aaa/Module/Aaa',
+    'app/aaa/View/uporabnikView',
     'bootstrap'
 ], function (
         Marionette,
         SidebarMenu,
+        OrodnaVrsticaView,
         navInit,
         produkcijaInit,
         pozivInit,
@@ -23,7 +26,8 @@ define([
         arhivInit,
         seznamiInit,
         nastavitveInit,
-        aaaInit
+        aaaInit,
+        UporabnikView
         ) {
 
     var app = new Marionette.Application();
@@ -45,13 +49,22 @@ define([
     app.on('start', function (options) {
 
         this.addRegions({
+            orodnaVrstica: "#orodna-vrstica",
             glavniContainer: '#main'
         });
+        
+        var uv = new UporabnikView();
+        var ovv = new OrodnaVrsticaView({
+            crumbsColl: app.nav.crumbs
+        });
+        
+        this.glavniContainer.show(uv);
+        this.orodnaVrstica.show(ovv);
 
         var menu = new SidebarMenu({
             model: this.nav.navigation
         });
-        menu.render().$el.insertBefore("#main");
+        menu.render().$el.insertBefore("#orodna-vrstica");
     });
 
     return app;

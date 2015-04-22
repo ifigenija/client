@@ -8,19 +8,19 @@ define([
     'underscore',
     'backbone-forms',
     'moment',
-    'app/Max/Editor/LookupSelectEditor',
-    'app/Max/Editor/ToOneEditor',
-    'app/Max/Editor/DatePicker',
-    'app/Max/Editor/Daterange',
-    'app/Max/Editor/Cena',
-    'app/Max/Editor/Hidden',
-    'app/Max/Editor/NumberEditor',
-    'app/Max/Editor/Text',
-    'app/Max/Editor/TextArea'
+    'app/max/Editor/LookupSelectEditor',
+    'app/max/Editor/ToOneEditor',
+    'app/max/Editor/DatePicker',
+    'app/max/Editor/Daterange',
+    'app/max/Editor/Cena',
+    'app/max/Editor/Hidden',
+    'app/max/Editor/NumberEditor',
+    'app/max/Editor/Text',
+    'app/max/Editor/TextArea'
 ], function (
         Marionette,
         _,
-        F,
+        Form,
         moment,
         LookupSelectEditor,
         TooneEditor,
@@ -32,12 +32,6 @@ define([
         Text,
         TextArea
         ) {
-    
-    
-    
-    var Form = F;
-   
-   
 
     /**
      * Bootstrap templates for Backbone Forms
@@ -103,26 +97,26 @@ define([
     ');
 
     }
-    
+
     Form.validators.minNumber = function (options) {
         options = _.extend({
             type: 'minNumber',
             message: 'Vrednost mora biti večja ali enaka ' + options.value
         }, options);
-        
+
         return function (value) {
             if (value < options.value) {
                 return options;
             }
         };
     };
-    
+
     Form.validators.maxNumber = function (options) {
         options = _.extend({
             type: 'minNumber',
             message: 'Vrednost mora biti manjša ali enaka ' + options.value
         }, options);
-        
+
         return function (value) {
             if (value < options.value) {
                 return options;
@@ -203,13 +197,13 @@ define([
         };
 
     };
-    
+
     Form.validators.validNumber = function (options) {
         options = _.extend({
             type: 'validNumber',
             message: 'Ni veljavno število. Preveri tisočice in decimalke'
         }, options);
-        
+
         return function (value) {
             if (isNaN(value)) {
                 return options;

@@ -1,5 +1,5 @@
 define([
-    'lib/pageable',
+    'pageable',
     'underscore'
 ], function (
         PageableCollection,

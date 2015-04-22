@@ -63,7 +63,7 @@ define([
 
                     this.$('input').datepicker({
                         format: 'dd.mm.yyyy',
-                        language: moment.lang(),
+                        language: moment.locale(),
                         weekStart: 1,
                         calendarWeeks: true
                     }).on('changeDate', function(ev) {

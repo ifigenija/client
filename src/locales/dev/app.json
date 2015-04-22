@@ -5,7 +5,9 @@
         "uprizoritve": "Uprizoritve",
         "program": "Program",
         "brandPrivate": "iFigenija",
-        "brandPublic": "iFigenija"
+        "brandPublic": "iFigenija",
+        "obvestilo" : "Obvestilo",
+        "uporabnik" : "Uporabnik"
     },
     "login": {
         "prompt": "Vpišite se",

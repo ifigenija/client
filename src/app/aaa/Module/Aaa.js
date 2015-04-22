@@ -20,15 +20,16 @@ define([
 
 
         mod.addUser = function () {
-
+            App.nav.crumbs.addCrumb("tralla", "#trallaa");
         };
 
         mod.manageUsers = function () {
+            App.nav.crumbs.addCrumb("HOPSASA", "#hopsasa");
 
         };
 
         mod.roles = function () {
-
+            App.nav.crumbs.reset();
         };
 
         /**
