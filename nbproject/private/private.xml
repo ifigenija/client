@@ -35,15 +35,9 @@
             <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/aaa/checkauth.js</file>
         </group>
         <group name="TIP2">
-            <file>file:/home/lovro/ifi/client/src/app/aaa/View/uporabnikView.js</file>
-            <file>file:/home/lovro/ifi/client/src/app/nav/View/CrumbsView.js</file>
-            <file>file:/home/lovro/ifi/client/src/app/nav/Module/NavModel.js</file>
-            <file>file:/home/lovro/ifi/client/src/app/nav/View/OrodnaVrsticaView.js</file>
-            <file>file:/home/lovro/ifi/client/src/app/main.js</file>
+            <file>file:/home/lovro/ifi/client/src/app/aaa/View/UporabnikView.js</file>
+            <file>file:/home/lovro/ifi/client/src/app/max/View/PaginatedGrid.js</file>
             <file>file:/home/lovro/ifi/client/src/app/aaa/tpl/uporabnik.tpl</file>
-            <file>file:/home/lovro/ifi/client/src/requireconfig.js</file>
-            <file>file:/home/lovro/ifi/client/src/app/aaa/Module/Aaa.js</file>
-            <file>file:/home/lovro/ifi/client/src/app/nav/Model/Crumbs.js</file>
         </group>
     </open-files>
 </project-private>

@@ -20,7 +20,7 @@ define([
         authService.call(
                 'checkLogin', [],
                 function (result) {
-                    if (result.roles && result.username) {
+                    if (result.roles && result.email) {
                         next(result);
                     } else {
                         window.location.href = "/";

@@ -3,13 +3,13 @@
  */
 
 define([
-    'application',
     'backbone',
     'marionette',
     'underscore',
     './PaginatorControl',
     'text!../tpl/paginated-grid.tpl',
-], function(App, Backbone, Marionette, _, PaginatorControl, tpl) {
+    'backgrid'
+], function(Backbone, Marionette, _, PaginatorControl, tpl, Backgrid) {
 
 
     var SumItemView = Marionette.ItemView.extend({
@@ -17,7 +17,7 @@ define([
         template: _.template('<div class="col-xs-6"><%= label %></div><div class="col-xs-6"><span class="pull-right"><%= sum %></span></div>'),
         initialize: function(options) {
             this.listenTo(this.model, 'change:sum', this.render);
-            this.formatter = new App.UI.Backgrid.NumberFormatter();
+            this.formatter = new Backgrid.NumberFormatter();
         },
         serializeData: function() {
             return {
@@ -32,7 +32,7 @@ define([
         template: _.template('<div class="col-xs-6"><%= label %></div><div class="col-xs-6"><span class="pull-right"><%= sum %></span><span style="min-width:100px"><%= proc %>%</span></div>'),
         initialize: function(options) {
             this.listenTo(this.model, 'change:part', this.render);
-            this.formatter = new App.UI.Backgrid.NumberFormatter();
+            this.formatter = new Backgrid.NumberFormatter();
         },
         serializeData: function() {
             return {
@@ -75,7 +75,7 @@ define([
              * 
              * Pogledam, če ima select-all kolono, pomeni, da lahko delam delne vsote
              */
-            this.selectable = this.grid.columns.findWhere({cell: App.UI.Backgrid.Extension.SelectRowCell});
+            this.selectable = this.grid.columns.findWhere({cell: Backgrid.Extension.SelectRowCell});
             this.sumColl = new Backbone.Collection();
 
             var self = this;
@@ -158,7 +158,7 @@ define([
     });
 
 
-    var PaginatedGrid = Marionette.Layout.extend({
+    var PaginatedGrid = Marionette.LayoutView.extend({
         template: _.template(tpl),
         entity: '',
         paginatorName: 'default',
@@ -180,12 +180,12 @@ define([
         columns: [],
         constructor: function(options) {
 
-            Marionette.Layout.prototype.constructor.call(this, options);
+            Marionette.LayoutView.prototype.constructor.call(this, options);
 
             this.collection = options.collection || this.collection || null;
             this.columns = options.columns || this.columns || [];
             
-            this.gridView = new App.UI.Backgrid.Grid(_.pick(options, 'collection','columns', 'row'));
+            this.gridView = new Backgrid.Grid(_.pick(options, 'collection','columns', 'row'));
         
             this.paginatorView = new PaginatorControl({
                 collection: this.collection,
@@ -220,10 +220,10 @@ define([
             //   this.pager.show(this.paginatorView);
         },
         render: function() {
-            Marionette.Layout.prototype.render.call(this);
+            Marionette.LayoutView.prototype.render.call(this);
             this.gridR.show(this.gridView);
             this.pagerR.show(this.paginatorView);
-            this.filterR.show(this.filterView || new App.UI.Backgrid.Extension.ServerSideFilter({
+            this.filterR.show(this.filterView || new Backgrid.Extension.ServerSideFilter({
                 collection: this.collection
             }));
             if (this.footerView) {
