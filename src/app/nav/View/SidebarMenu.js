@@ -76,8 +76,6 @@ define([
            
               return DropDownMenu;
             } else {
-            console.log("simple");
-
                 return MenuItem;
             }
         },

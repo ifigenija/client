@@ -13,7 +13,7 @@ define([
     'app/seznami/Module/Seznami',
     'app/nastavitve/Module/Nastavitve',
     'app/aaa/Module/Aaa',
-    'app/aaa/View/uporabnikView',
+    'app/aaa/View/UporabnikView',
     'bootstrap'
 ], function (
         Marionette,
