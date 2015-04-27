@@ -3,36 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/less/site.less</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/less/max-backgrid.less</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/main.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/public/View/Navbar.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/locales/texts.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/bower.json</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/index.html</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/public/View/LoginView.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/public/tpl/login.tpl</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/nav/tpl/sidebar.tpl</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/css/sidebar.css</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/css/layout.css</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/less/layout.less</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/public.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/public/tpl/navbar.tpl</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/nav/tpl/menu-item.tpl</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/aaa/Module/nav.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/aaa/Module/Aaa.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/main.html</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/arhiv/Module/nav.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/arhiv/Module/Arhiv.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/poziv/Module/nav.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/nav/Module/NavModel.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/poziv/Module/Poziv.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/produkcija/Module/nav.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/produkcija/Module/Produkcija.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/seznami/Module/Seznami.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/seznami/Module/nav.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/nastavitve/Module/Nastavitve.js</file>
-            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/aaa/checkauth.js</file>
+            <file>file:/Users/boris/NetBeansProjects/IfiClient/src/app/priponke/View/DodajPriponko.js</file>
         </group>
         <group name="TIP2">
             <file>file:/home/lovro/ifi/client/src/app/aaa/View/uporabnikView.js</file>

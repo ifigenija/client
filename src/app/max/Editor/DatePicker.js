@@ -12,13 +12,12 @@ define([
             Backbone.Form.editors.Text.prototype.initialize.call(this, options);
             this.$el.addClass('datepicker input-small-custom');
             this.$el.attr('type', 'text');
-            this.$el.datepicker({
-                format: 'dd.mm.yyyy',
-                language: moment.locale(),
-                weekStart: 1,
-                calendarWeeks: true
+            this.$el.datetimepicker({
+                format: 'DD.MM.YYYY',
+                locale: moment.locale(),
+
             }).on('changeDate', function(ev) {
-                $(this).datepicker('hide'); //close when select a date
+                $(this).datetimepicker('hide'); //close when select a date
             });
             
             this.validators = options.schema.validators || [];
@@ -45,13 +44,12 @@ define([
         },
         render: function() {
             Backbone.Form.editors.Text.prototype.render.apply(this, arguments);
-            this.$el.datepicker({
-                format: 'dd.mm.yyyy',
-                language: moment.locale(),
-                weekStart: 1,
-                calendarWeeks: true
+            this.$el.datetimepicker({
+                format: 'DD.MM.YYYY',
+                locale: moment.locale(),
+                
             });
-            this.$el.datepicker('update');
+            this.$el.datetimepicker('update');
 
             return this;
         }
