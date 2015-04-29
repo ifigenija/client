@@ -25,9 +25,13 @@
     "jquery-jsonrpcclient": "~0.7.0",
     "backbone-deep-model": "~0.10.4",
     "backbone.paginator": "~2.0.2",
-    "bootstrap-datepicker": "~1.4.0",
     "jquery-file-upload": "~9.9.3",
     "moment": "~2.10.2",
-    "handlebars": "~3.0.x"
+    "handlebars": "~3.0.x",
+    "eonasdan-bootstrap-datetimepicker":"latest"
+  },
+  "resolutions": {
+    "underscore": "1.4.4 - 1.6.0",
+    "jquery": "^1.8.0 || ^2.0.0"
   }
 }

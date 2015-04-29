@@ -6,7 +6,6 @@ require.config({
         'application': 'app/application',
         'underscore': 'lib/underscore/underscore',
         'bootstrap': 'lib/bootstrap/dist/js/bootstrap.min',
-        'bootstrap-datepicker': 'lib/bootstrap-datepicker/dist/js/bootstrap-datepicker',
         'jquery': 'lib/jquery/dist/jquery',
         'jquery.fileupload': 'lib/jquery-file-upload/js/jquery.fileupload',
         'jquery.jsonrpc': 'lib/jquery-jsonrpcclient/jquery.jsonrpcclient',
@@ -23,7 +22,7 @@ require.config({
         'i18next-actual': 'lib/i18next/i18next.amd.withJQuery',
         'i18next': 'app/i18next-wrapper',
         'app/handlebars': 'app/handlebars-wrapper',
-        'baseUrl': 'app/public'
+        'bootstrap-datepicker': 'lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min'
     },
     shim: {
         underscore: {

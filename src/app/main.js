@@ -42,7 +42,7 @@ define([
     app.module('nastavitve', nastavitveInit);
     app.module('aaa', aaaInit);
 
-    
+
     /**
      * Regije in navigacija  
      */
@@ -52,12 +52,12 @@ define([
             orodnaVrstica: "#orodna-vrstica",
             glavniContainer: '#main'
         });
-        
+
         var uv = new UporabnikView();
         var ovv = new OrodnaVrsticaView({
             crumbsColl: app.nav.crumbs
         });
-        
+
         this.glavniContainer.show(uv);
         this.orodnaVrstica.show(ovv);
 
