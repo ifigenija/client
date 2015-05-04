@@ -1,4 +1,6 @@
 define([
+    'radio',
+    'app/Max/Module/Backgrid',
     'backbone',
     'app/bars',
     'underscore',
@@ -6,6 +8,8 @@ define([
     'app/Dokument/View/FormView',
     'text!app/Dokument/tpl/postavke.tpl'
 ], function (
+        Radio,
+        Backgrid,
         Backbone,
         Handlebars,
         _,
@@ -91,7 +95,7 @@ define([
     };
 
     PostavkeView.prototype.renderList = function () {
-        var grid = new App.UI.Backgrid.Grid({
+        var grid = new Backgrid.Grid({
             collection: this.collection,
             columns: this.gridMeta,
             footer: BackgridFooter.extend({columns: this.gridMeta})
@@ -132,7 +136,7 @@ define([
         collection.create(model, {
             wait: true,
             success: function () {
-                App.FlashManager.flash({
+                Radio.channel('error').command('flash', {
                     message: 'Postavka uspešno shranjena',
                     severity: 'success'
                 });
@@ -144,7 +148,7 @@ define([
                 }
             },
             error: function (model, xhr) {
-                App.FlashManager.fromXhr(model, xhr);
+               Radio.channel('error').command('xhr',model, xhr);
                 if (options.error) {
                     options.error.apply(self, arguments);
                 }

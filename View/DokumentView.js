@@ -1,13 +1,14 @@
 define([
-   
+    'radio',
     'app/bars',
     'backbone',
+    
     'app/Dokument/View/FormView',
     'text!app/Dokument/tpl/dokument.tpl'
 ], function (
+        Radio,
         Handlebars,
         Backbone,
-        Form,
         FormView,
         tpl
         ) {
@@ -48,10 +49,9 @@ define([
             docStatus: this.getStatus(),
             docNaslov: this.getNaslov(),
             formTitle: this.formTitle,
-            
         });
     };
-    
+
     DokumentView.prototype.getNaslov = function () {
         if (this.isNew()) {
             return 'Nov dokument';
@@ -124,13 +124,12 @@ define([
     DokumentView.prototype.onShrani = function (options) {
         options = options || {};
         var isNew = this.isNew();
-        var channel = Backbone.Wreqr.radio.channel('global');
         if (this.commit()) {
             var self = this;
             this.model.save({}, {
                 wait: true,
                 success: function (model) {
-                    channel.flash({
+                    Radio.channel('error').command('flash',{
                         message: 'Dokument uspešno shranjen',
                         severity: 'success'
                     });
@@ -139,12 +138,9 @@ define([
                             // zamenjamo zadnji del url z id (#model/dodaj -> #model/id)
                             var url = Backbone.history.location.hash;
                             var newUrl = url.replace(/([\w-]+)$/g, self.model.id);
-                            App.TabLayout.replaceUrl(newUrl);
-                            App.TabLayout.setTabTitle(self.getNaslov());
+                            Radio.channel('layout').command('replaceUrl', newUrl);
+                            Radio.channel('layout').command('setTitle', self.getNaslov());
                             self.render();
-                        } else if (this.viewRoute) {
-                            App.TabLayout.closeActiveTab();
-                            App.TabLayout.loadFragment(self.viewRoute + self.model.id);
                         }
                     } else {
                         options.sucess.apply(self, arguments);
@@ -153,9 +149,8 @@ define([
                     var but = tb.getButton('doc-shrani');
                     but.set('disabled', true);
                 },
-                error: function (model, xhr) {
-                    var fromXhr = Backbone.Wreqr.radio.channel('global').reqres.request('getFromXhrHandler'); 
-                    fromXhr(model, xhr);
+                error: function (model, xhr) {                    
+                    Radio.channel('error').command('xhr',model, xhr);
                     if (options.error) {
                         options.error.apply(self, arguments);
                     }
@@ -165,6 +160,6 @@ define([
         }
         return false;
     };
-    
+
     return DokumentView;
 });
