@@ -11,6 +11,9 @@ define([
     //'app/max/View/PaginatorControl',
     'app/max/View/PaginatedGrid',
     'app/max/Model/MaxPageableCollection',
+    'underscore',
+    'jquery',
+    'app/max/Model/FormMetaCollection',
     'text!../tpl/uporabnik.tpl'
 
 ], function (
@@ -22,6 +25,9 @@ define([
         //PaginatorControl,
         PaginatedGrid,
         MaxPageableCollection,
+        _,
+        $,
+        FormMetaCollection,
         uporabnikTpl
         ) {
 
@@ -87,107 +93,52 @@ define([
     var UporabnikView = Marionette.LayoutView.extend({
         template: Handlebars.compile(uporabnikTpl),
         regions: {
-            'up': "#uporabniski-podatki",
+            'uporabniskiPodatki': "#uporabniski-podatki",
             'vloge': "#vloge",
             'strani': "#strani"
         },
         triggers: {
             "click #shrani": "shrani",
-            "click #dodaj": "dodaj"
+            "click #dodaj": "dodaj",
+            "click #json": "json"
         },
         initialize: function () {
             this.drzave = new DrzaveColl();
+
+        },
+        onRender: function () {
+            var coll = this;
+            this.formMetaCollection = new FormMetaCollection();
+            this.formMetaCollection.getFormMeta(
+                    'drzava',
+                    '',
+                    function (schema) {
+                        coll.schema = schema;
+                        coll.form = coll.getForm(new DrzavaModel());
+                        coll.uporabniskiPodatki.show(coll.form);
+                        coll.onPrikazi();
+                    });
         }
     });
+
+    UporabnikView.prototype.onJson = function () {
+        $.ajax({
+            url: '/rest/drzava',
+            method: 'OPTIONS',
+            mimeType: 'application/json',
+            success: function (data, textStatus, json) {
+                console.log(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    };
 
     UporabnikView.prototype.getForm = function (model) {
         return new Form({
             template: Handlebars.compile(formTpl),
-            schema: {
-                "sifra": {
-                    "name": "sifra",
-                    "validators": [],
-                    "type": "Text",
-                    "help": "",
-                    "editorAttrs": {
-                        "type": "sifra",
-                        "class": "sifra-polje form-control",
-                        "name": "sifra",
-                        "required": false,
-                        "maxlength": 2,
-                        "prependIcon": "fa fa-flag"
-                    },
-                    "group": "default",
-                    "title": "Koda države"
-                },
-                "sifDolg": {
-                    "name": "sifDolg",
-                    "validators": [],
-                    "type": "Text",
-                    "help": "",
-                    "editorAttrs": {
-                        "name": "sifDolg",
-                        "type": null,
-                        "class": " form-control"
-                    }
-                },
-                "isoNum": {
-                    "name": "isoNum",
-                    "validators": [
-                        "required"
-                    ],
-                    "type": "Text",
-                    "help": "",
-                    "editorAttrs": {
-                        "type": "string",
-                        "class": "naziv-polje form-control",
-                        "name": "isoNum",
-                        "maxlength": 3,
-                        "prependIcon": "fa fa-flag",
-                        "required": "required"
-                    },
-                    "group": "default",
-                    "title": "Številčna koda"
-                },
-                "isoNaziv": {
-                    "name": "isoNaziv",
-                    "validators": [],
-                    "type": "Text",
-                    "help": "",
-                    "editorAttrs": {
-                        "type": "string",
-                        "class": "naziv-polje form-control",
-                        "name": "isoNaziv",
-                        "maxlength": 50
-                    },
-                    "title": "Iso Naziv"
-                },
-                "naziv": {
-                    "name": "naziv",
-                    "validators": [],
-                    "type": "Text",
-                    "help": "",
-                    "editorAttrs": {
-                        "type": "string",
-                        "class": "naziv-polje form-control",
-                        "name": "naziv",
-                        "maxlength": 50
-                    },
-                    "title": "Naziv"
-                },
-                "opomba": {
-                    "name": "opomba",
-                    "validators": [],
-                    "type": "TextArea",
-                    "help": "",
-                    "editorAttrs": {
-                        "type": "TextArea",
-                        "name": "opomba",
-                        "class": " form-control"
-                    },
-                    "title": "Opomba"
-                }
-            },
+            schema: this.schema,
             model: model
         });
 
@@ -222,8 +173,7 @@ define([
 
     UporabnikView.prototype.onUredi = function (model) {
         this.form = this.getForm(model);
-
-        this.up.show(this.form);
+        this.uporabniskiPodatki.show(this.form);
     };
 
     UporabnikView.prototype.onShrani = function (model, column, command) {
@@ -241,7 +191,6 @@ define([
         if (!command.cancel()) {
             if (model.changedAttributes() || _.isObject(schema.get('optionValues'))) {
                 model.save({});
-
             }
         }
 
@@ -256,7 +205,7 @@ define([
                 }});
 
             this.form = this.getForm(new DrzavaModel());
-            this.up.show(this.form);
+            this.uporabniskiPodatki.show(this.form);
         } else {
             console.log(err);
         }
@@ -264,16 +213,7 @@ define([
 
     UporabnikView.prototype.onDodaj = function () {
         this.form = this.getForm(new DrzavaModel());
-        this.up.show(this.form);
-
-    };
-
-    UporabnikView.prototype.onShow = function () {
-
-        this.form = this.getForm(new DrzavaModel());
-
-        this.up.show(this.form);
-        this.onPrikazi();
+        this.uporabniskiPodatki.show(this.form);
 
     };
 
