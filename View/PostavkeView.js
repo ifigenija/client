@@ -1,5 +1,4 @@
 define([
-    'application',
     'backbone',
     'app/bars',
     'underscore',
@@ -7,7 +6,6 @@ define([
     'app/Dokument/View/FormView',
     'text!app/Dokument/tpl/postavke.tpl'
 ], function (
-        App,
         Backbone,
         Handlebars,
         _,

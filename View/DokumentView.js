@@ -1,13 +1,13 @@
 define([
-    'application',
+   
     'app/bars',
     'backbone',
     'app/Dokument/View/FormView',
     'text!app/Dokument/tpl/dokument.tpl'
 ], function (
-        App,
         Handlebars,
         Backbone,
+        Form,
         FormView,
         tpl
         ) {
@@ -124,12 +124,13 @@ define([
     DokumentView.prototype.onShrani = function (options) {
         options = options || {};
         var isNew = this.isNew();
+        var channel = Backbone.Wreqr.radio.channel('global');
         if (this.commit()) {
             var self = this;
             this.model.save({}, {
                 wait: true,
                 success: function (model) {
-                    App.FlashManager.flash({
+                    channel.flash({
                         message: 'Dokument uspešno shranjen',
                         severity: 'success'
                     });
@@ -153,7 +154,8 @@ define([
                     but.set('disabled', true);
                 },
                 error: function (model, xhr) {
-                    App.FlashManager.fromXhr(model, xhr);
+                    var fromXhr = Backbone.Wreqr.radio.channel('global').reqres.request('getFromXhrHandler'); 
+                    fromXhr(model, xhr);
                     if (options.error) {
                         options.error.apply(self, arguments);
                     }

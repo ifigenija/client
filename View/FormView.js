@@ -2,11 +2,13 @@ define([
     'marionette',
     'underscore',
     'app/bars',
+    'app/Max/Module/Form',
     'text!../tpl/form.tpl'
 ], function (
         Marionette,
         _,
         Handlebars,
+        Form,
         tpl
         ) {
 
@@ -21,9 +23,8 @@ define([
             if (!entity) {
                 throw new Error('FormView nima definirane entitete.');
             }
-            var app = window.App;
             // dobimo formMeta podatke
-            this.formMeta = app.request('formMeta', entity);
+            this.formMeta = window.App.request('formMeta', entity);
 
             Marionette.LayoutView.call(this, options);
 
@@ -106,8 +107,8 @@ define([
     FormView.prototype.renderForm = function () {
 
 
-        var ui = window.App.UI;
-        var form = this.form = new ui.Form({
+        
+        var form = this.form = new Form({
             template: this.formTemplate,
             schema: this.formMeta.schema,
             model: this.model
