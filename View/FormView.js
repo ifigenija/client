@@ -73,7 +73,7 @@ define([
 
         var groups = this.prepareToolbar();
         
-        var toolbar = App.request('makeToolbar', {
+        var toolbar = Radio.channel('global').request('makeToolbar', {
             buttonGroups: groups,
             listener: this,
             size: 'md'
