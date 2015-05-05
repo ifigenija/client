@@ -58,10 +58,10 @@
             "label": "Seznami",
             "tipFunkcije": "Tip funkcij",
             "zvrstUprizoritve": "Zvrsti uprizoritev",
-            "drzava": "Drzave"
+            "drzava": "Države"
         },
         "drzava":{
-            "title": "Drzave"
+            "title": "Države"
         },
         "tipFunkcije" :{
             "title" : "Tipi Funkcij"

@@ -52,13 +52,18 @@ define([
      * Regije in navigacija  
      */
     app.on('start', function (options) {
-
+        this.addRegions({
+            obvestilaR: '#obvestila'
+        });
 
         var layout = this.ifiLayout.layout  = new this.ifiLayout.Layout({
             el: $("body")            
         });
         
         layout.render();
+        
+        this.obvestilaR.show(this.flashManager.manager);
+        this.flashManager.createSporocilaView();
     });
 
     return app;
