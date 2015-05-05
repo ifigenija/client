@@ -25,8 +25,12 @@ define([
             if (!entity) {
                 throw new Error('FormView nima definirane entitete.');
             }
-            // dobimo formMeta podatke
-            this.formMeta = App.request('formMeta', entity);
+            
+            // form meta ? a gremo po metapodatke na stari načina 
+            // ali pa z options klicem
+            var useFormMeta = (options.collection || options.model).useFormMeta;
+            
+            this.formMeta = Radio.channel('global').request('formMeta', entity,useFormMeta );
 
             Marionette.LayoutView.call(this, options);
 
