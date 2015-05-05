@@ -1,1 +1,1 @@
-<a href="#uporabnik">{{t "nav.uporabnik" }}</a>
+<a href="#uporabnik/{{ id }}">{{ name }}</a>

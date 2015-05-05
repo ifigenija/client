@@ -2,6 +2,7 @@
  * Licenca GPLv3
  */
 define([
+    'backbone',
     'marionette',
     'app/bars',
     "./CrumbsView",
@@ -10,6 +11,7 @@ define([
     'text!../tpl/obvestila.tpl'
     
 ], function (
+        Backbone,
         Marionette,
         Handlebars,
         CrumbsView,
@@ -18,16 +20,7 @@ define([
         obvestilaTpl
         ) {
     
-    var ObvestilaView = Marionette.ItemView.extend({
-       template: Handlebars.compile(obvestilaTpl),
-       triggers : {
-            'click' : 'ne'
-        },
-        
-        onNe: function (){
-            console.log("NE!!!");
-        }
-    });
+
     
     var UporabnikView = Marionette.ItemView.extend({
        template: Handlebars.compile(uporabnikTpl)
@@ -36,40 +29,34 @@ define([
     var OrodnaVrsticaView = Marionette.LayoutView.extend({
         initialize: function (options){
            
-            this.listenTo(this.uporabnik , "bos:delal" , this.pd);
         },
         
         template: Handlebars.compile(orodnaVrsticaTpl),
         regions: {
-            'uporabnik': "#uporabnik",
-            'obvestila': "#obvestila",
-            'crumbs': "#drobtine"
+            'uporabnikR': "#uporabnik",
+            'obvestilaR': "#obvestila",
+            'crumbsR': "#drobtine"
         },
         
         triggers : {
             'click #uporabnik' : 'bos:delal'
         },
         
-        onBosDelal: function (){
-            console.log("Bom DELAL!!!");
-        },
-        
-        potrjeno: function(){
-           console.log("potrjujem!!!");
-        },
+  
         
         onShow: function(){
-            var up = new UporabnikView();
-            var ob = new ObvestilaView();
+            var up = new UporabnikView({
+                model: new Backbone.Model(this.options.user)
+            });
+            
             var cr = new CrumbsView({
                 collection: this.options.crumbsColl
             });
             
-            this.uporabnik.show(up);
-            this.obvestila.show(ob);
-            this.crumbs.show(cr);
+            this.uporabnikR.show(up);
+      
+            this.crumbsR.show(cr);
             
-            this.listenTo(ob, "ne" , this.potrjeno);
         }
     });
     

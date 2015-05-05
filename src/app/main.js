@@ -37,8 +37,8 @@ define([
 
 
     app.module('nav', navInit);
-    app.module('ifiLayout', ifiLayoutInit);
     app.module('flashManager', fmInit);
+    app.module('ifiLayout', ifiLayoutInit);
     app.module('uprizoritve', produkcijaInit);
     app.module('koledar', koledarInit);
     app.module('arhiv', arhivInit);
@@ -52,18 +52,14 @@ define([
      * Regije in navigacija  
      */
     app.on('start', function (options) {
-        this.addRegions({
-            obvestilaR: '#obvestila'
+
+        var layout = this.ifiLayout.layout = new this.ifiLayout.Layout({
+            el: $("body"),
+            user: options.user
         });
 
-        var layout = this.ifiLayout.layout  = new this.ifiLayout.Layout({
-            el: $("body")            
-        });
-        
         layout.render();
-        
-        this.obvestilaR.show(this.flashManager.manager);
-        this.flashManager.createSporocilaView();
+
     });
 
     return app;

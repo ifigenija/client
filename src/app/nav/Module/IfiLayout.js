@@ -37,17 +37,23 @@ define([
         });
 
         Layout.prototype.initialize = function (options) {
-
+            
         };
 
         Layout.prototype.onRender = function () {
 //            this.tabsR.show(this.tabControl);
 
             var ovv = new OrodnaVrsticaView({
-                crumbsColl: module.crumbsColl
+                crumbsColl: module.crumbsColl,
+                user: this.options.user
             });
-            
+
             this.orodnaR.show(ovv);
+
+            ovv.obvestilaR.show(application.flashManager.manager);
+            application.flashManager.createSporocilaView();
+            
+            
             
             var menu = new SidebarMenu({
                 model: application.nav.navigation

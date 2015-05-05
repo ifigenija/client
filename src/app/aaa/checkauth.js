@@ -21,6 +21,7 @@ define([
                 'checkLogin', [],
                 function (result) {
                     if (result.roles && result.username) {
+                        console.log(result);
                         next(result);
                     } else {
                         window.location.href = "/";
