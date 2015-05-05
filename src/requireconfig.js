@@ -28,7 +28,10 @@ require.config({
         'app/bars': 'app/Max/handlebars-wrapper',
         'ckeditor': 'lib/ckeditor/ckeditor',
         'radio': 'lib/backbone.radio/build/backbone.radio',
-        'bootstrap-datepicker': 'lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min'
+        'bootstrap-datepicker': 'lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
+        'formSchema': 'app/Max/Loader/formSchema',
+        'formMeta': 'app/Max/Loader/formMeta',
+        'template': 'app/Max/Loader/template'
     },
     shim: {
         underscore: {
