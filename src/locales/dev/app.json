@@ -57,9 +57,20 @@
         "nav": {
             "label": "Seznami",
             "tipFunkcije": "Tip funkcij",
-            "zvrstUprizoritve": "Zvrsti uprizoritev"
-            
+            "zvrstUprizoritve": "Zvrsti uprizoritev",
+            "drzava": "Drzave"
+        },
+        "drzava":{
+            "title": "Drzave"
+        },
+        "tipFunkcije" :{
+            "title" : "Tipi Funkcij"
+        },
+        "zvrstUprozoritve" :{
+            "title" : "Zvrsti Uprizoritev"
         }
+        
+        
     },
      "nastavitve": {
         "nav": {

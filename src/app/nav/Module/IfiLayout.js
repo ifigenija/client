@@ -46,9 +46,9 @@ define([
             var ovv = new OrodnaVrsticaView({
                 crumbsColl: module.crumbsColl
             });
-//
+            
             this.orodnaR.show(ovv);
-//
+            
             var menu = new SidebarMenu({
                 model: application.nav.navigation
             });
@@ -89,8 +89,6 @@ define([
         module.closeActiveTab = function () {
             module.layout.tabs.remove(module.getActiveTab());
         };
-
-
 
         module.addInitializer(function (options) {
             this.Layout = Layout;
