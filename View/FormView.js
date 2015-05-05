@@ -4,6 +4,7 @@ define([
     'underscore',
     'app/bars',
     'app/Max/Module/Form',
+    'app/Max/View/Toolbar',
     'text!../tpl/form.tpl'
 ], function (
         Radio,
@@ -11,26 +12,28 @@ define([
         _,
         Handlebars,
         Form,
+        Toolbar,
         tpl
         ) {
 
     var FormView = Marionette.LayoutView.extend({
         template: Handlebars.compile(tpl),
         form: null,
-        formMeta: null,
+        schema: null,
         formTemplate: null,
         buttons: {},
         constructor: function (options) {
-            var entity = (options.collection || options.model).entity;
-            if (!entity) {
-                throw new Error('FormView nima definirane entitete.');
+
+
+            this.schema = options.schema || this.schema ;
+
+            if (!this.schema) {
+                var entity = (options.collection || options.model).entity;
+                if (!entity) {
+                    throw new Error('FormView nima definirane entitete.');
+                }
+                this.schema = Radio.channel('global').request('formMeta', entity);
             }
-            
-            // form meta ? a gremo po metapodatke na stari načina 
-            // ali pa z options klicem
-            var useFormMeta = (options.collection || options.model).useFormMeta;
-            
-            this.formMeta = Radio.channel('global').request('formMeta', entity,useFormMeta );
 
             Marionette.LayoutView.call(this, options);
 
@@ -46,7 +49,10 @@ define([
 
     FormView.prototype.renderFormAndToolbar = function () {
         this.toolbarView = this.renderToolbar();
-        this.form = this.model ? this.renderForm() : null;
+
+        var self = this;
+
+        self.form = this.model ? this.renderForm() : null;
 
 
     };
@@ -72,8 +78,8 @@ define([
     FormView.prototype.renderToolbar = function () {
 
         var groups = this.prepareToolbar();
-        
-        var toolbar = Radio.channel('global').request('makeToolbar', {
+
+        var toolbar = new Toolbar( {
             buttonGroups: groups,
             listener: this,
             size: 'md'
@@ -96,7 +102,7 @@ define([
      */
     FormView.prototype.disableFields = function (fields) {
 
-        _.each(this.formMeta.schema, function (e) {
+        _.each(this.schema, function (e) {
             if (fields.indexOf(e.name) >= 0) {
                 e.editorAttrs.disabled = 'disabled';
             } else {
@@ -113,10 +119,10 @@ define([
     FormView.prototype.renderForm = function () {
 
 
-        
+
         var form = this.form = new Form({
             template: this.formTemplate,
-            schema: this.formMeta.schema,
+            schema: this.schema,
             model: this.model
         });
 
@@ -138,7 +144,7 @@ define([
         var errors = this.form.commit({validate: true});
         var fm = Radio.channel('error');
         if (errors) {
-            fm.command('validation', errors, this.formMeta.schema);
+            fm.command('validation', errors, this.schema);
             return false;
         } else {
             return true;
