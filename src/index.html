@@ -14,12 +14,15 @@
         <div class="container">
             <nav id="nav" class="navbar navbar-default"></nav>
             <div id="glavni-container">
-                
+
             </div>
         </div>        
         <script type="text/javascript">
+            define('baseUrl', function () {
+                return "/";
+            });
             require(['requireconfig'], function () {
-                require(['app/public','backbone'], function (public, Backbone) {
+                require(['app/public', 'backbone'], function (public, Backbone) {
                     public.start();
                     Backbone.history.start();
                 });

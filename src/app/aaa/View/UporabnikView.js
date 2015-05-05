@@ -6,7 +6,7 @@ define([
     'marionette',
     'backbone',
     '../../max/Module/Form',
-    'app/handlebars',
+    'app/bars',
     //'app/max/Module/Backgrid',
     //'app/max/View/PaginatorControl',
     'app/max/View/PaginatedGrid',

@@ -3,7 +3,7 @@
  */
 define([
     'marionette',
-    'app/handlebars',
+    'app/bars',
     "./CrumbsView",
     'text!../tpl/orodnavrstica.tpl',
     'text!../tpl/uporabnik.tpl',

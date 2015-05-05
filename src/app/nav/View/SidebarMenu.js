@@ -6,7 +6,7 @@
 
 define([
     'marionette',
-    'app/handlebars',
+    'app/bars',
     'text!../tpl/sidebar.tpl',
     'text!../tpl/menu-item.tpl',
     'text!../tpl/dropdown.tpl'

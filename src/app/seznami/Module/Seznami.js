@@ -3,26 +3,38 @@
  */
 define([
     'marionette',
+    'radio',
     'require',
     'backbone',
-    './nav'
+    './nav',
+    'i18next'
 
 ], function (
         Marionette,
+        Radio,
         require,
         Backbone,
-        moduleNav
+        moduleNav,
+        i18next
         ) {
 
 
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
-    
+        var ch = Radio.channel('layout');
+
         mod.tipFunkcije = function () {
+            require(['../View/TipFunkcijeView'], function (TipFunkcijeView) {
+                var view = new TipFunkcijeView();
+                ch.command('open', view, i18next.t('seznam.tipFunkcije.title'));
+            });
 
         };
-      
-        mod.zvrstUprizoritve = function () {
 
+        mod.zvrstUprizoritve = function () {
+            require(['../View/ZvrstUprizoritveView'], function (ZvrstUprizoritveView) {
+                var view = new ZvrstUprizoritveView();
+                ch.command('open', view, i18next.t('Zvrst uprizoritve'));
+            });
         };
 
         /**
@@ -35,8 +47,8 @@ define([
             new Marionette.AppRouter({
                 controller: mod,
                 appRoutes: {
-                    'tipFunkcije': 'tipFunkcije',                    
-                    'zvrstUproziritve': 'zvrstUprizoritve',                    
+                    'tipFunkcije': 'tipFunkcije',
+                    'zvrstUprizoritve': 'zvrstUprizoritve',
                 }
             });
         });

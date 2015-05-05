@@ -3,7 +3,7 @@
  * Licenca GPLv3
  */
 define([
-    'app/handlebars',
+    'app/bars',
     'marionette',
     'jquery',
     'text!../tpl/login.tpl',

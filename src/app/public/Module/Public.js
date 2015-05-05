@@ -3,7 +3,7 @@
  */
 define([
     'require',
-    'app/handlebars'
+    'app/bars'
 
 ], function (
         require,

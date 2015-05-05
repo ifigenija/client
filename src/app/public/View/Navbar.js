@@ -3,7 +3,7 @@
  */
 define([
     'marionette',
-    'app/handlebars',
+    'app/bars',
     'text!../tpl/navbar.tpl'
 ], function (
         Marionette,

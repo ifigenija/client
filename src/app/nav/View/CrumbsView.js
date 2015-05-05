@@ -3,7 +3,7 @@
  */
 define([
     'marionette',
-    'app/handlebars'
+    'app/bars'
     
 ], function (Marionette, Handlebars) {
    

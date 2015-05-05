@@ -3,9 +3,11 @@
  */
 define([
     'marionette',
-    'app/nav/View/SidebarMenu',
-    'app/nav/View/OrodnaVrsticaView',
+    'radio',
+    'jquery',
+    'app/Max/Module/FlashManager',
     'app/nav/Module/NavModel',
+    'app/nav/Module/IfiLayout',
     'app/produkcija/Module/Produkcija',
     'app/poziv/Module/Poziv',
     'app/koledar/Module/Koledar',
@@ -13,27 +15,30 @@ define([
     'app/seznami/Module/Seznami',
     'app/nastavitve/Module/Nastavitve',
     'app/aaa/Module/Aaa',
-    'app/aaa/View/UporabnikView',
     'bootstrap'
 ], function (
         Marionette,
-        SidebarMenu,
-        OrodnaVrsticaView,
+        Radio,
+        $,
+        fmInit,
         navInit,
+        ifiLayoutInit,
         produkcijaInit,
         pozivInit,
         koledarInit,
         arhivInit,
         seznamiInit,
         nastavitveInit,
-        aaaInit,
-        UporabnikView
+        aaaInit
+
         ) {
 
     var app = new Marionette.Application();
 
-    
+
     app.module('nav', navInit);
+    app.module('ifiLayout', ifiLayoutInit);
+    app.module('flashManager', fmInit);
     app.module('uprizoritve', produkcijaInit);
     app.module('koledar', koledarInit);
     app.module('arhiv', arhivInit);
@@ -48,23 +53,12 @@ define([
      */
     app.on('start', function (options) {
 
-        this.addRegions({
-            orodnaVrstica: "#orodna-vrstica",
-            glavniContainer: '#main'
-        });
 
-        var uv = new UporabnikView();
-        var ovv = new OrodnaVrsticaView({
-            crumbsColl: app.nav.crumbs
+        var layout = this.ifiLayout.layout  = new this.ifiLayout.Layout({
+            el: $("body")            
         });
-
-        this.glavniContainer.show(uv);
-        this.orodnaVrstica.show(ovv);
-
-        var menu = new SidebarMenu({
-            model: this.nav.navigation
-        });
-        menu.render().$el.insertBefore("#orodna-vrstica");
+        
+        layout.render();
     });
 
     return app;
