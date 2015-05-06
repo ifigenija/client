@@ -41,9 +41,9 @@ define([
         });
         this.gridR.show(this.grid);
         coll.fetch();
-        coll.on('selectValue', this.onSelected, this);
-        coll.on('deselect', this.onSelected, this);
-        coll.on('backgrid:action', this.onGridAction, this);
+        this.listenTo(coll, 'selectValue', this.onSelected);
+        this.listenTo(coll, 'deselect', this.onSelected);
+        this.listenTo(coll, 'backgrid:action', this.onGridAction);
     };
     
     BaseView.prototype.onGridAction = function (model, action) {
@@ -83,7 +83,7 @@ define([
             model: model
         });
         this.formR.show(form);
-        form.on('preklici', this.preklici, this);
+        this.listenTo(form, 'preklici', this.preklici);
     };
     BaseView.prototype.preklici = function () {
         this.formR.empty();
