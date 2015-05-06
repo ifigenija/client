@@ -64,7 +64,7 @@ define([
 
         Layout.prototype.open = function (view, name, route) {
             name = name || view.cid;
-            this.contentR.show(view);
+            this.contentR.show(view, { preventDestroy: true });
             if (name) {
                 module.setTitle(name);
             }

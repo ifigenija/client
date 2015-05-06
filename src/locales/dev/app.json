@@ -58,7 +58,15 @@
             "label": "Seznami",
             "tipFunkcije": "Tip funkcij",
             "zvrstUprizoritve": "Zvrsti uprizoritev",
-            "drzava": "Države"
+            "drzava": "Države",
+            "oseba": "Osebe",
+            "uporabnik": "Uporabniki",
+            "posta": "Pošte",
+            "postniNaslov": "Poštni naslovi",
+            "trr": "Transakcijski računi",
+            "telefonska": "Telefonske številke",
+            "popa": "Poslovni partnerji",
+            "vloga": "Vloge"
         },
         "drzava":{
             "title": "Države"
@@ -68,6 +76,30 @@
         },
         "zvrstUprozoritve" :{
             "title" : "Zvrsti Uprizoritev"
+        },
+        "oseba" :{
+            "title" : "Osebe"
+        },
+        "uporabnik" :{
+            "title" : "Uporabniki"
+        },
+        "posta" :{
+            "title" : "Pošta"
+        },
+        "postniNaslov" :{
+            "title" : "Poštni Naslovi"
+        },
+        "trr" :{
+            "title" : "Transakcijski računi"
+        },
+        "telefonska" :{
+            "title" : "Telefonske številke"
+        },
+        "popa" :{
+            "title" : "Poslovni partnerji"
+        },
+        "vloga" :{
+            "title" : "Vloge"
         }
         
         
