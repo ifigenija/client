@@ -63,6 +63,7 @@ define([
             this.model.save(null, {
                 success: function (model) {
                     self.triggerMethod('save:success', model);
+                    Radio.channel('error').command('flash', {message:'Uspešno shranjeno', code: 0, severity:'success'});
                 },
                 error: Radio.channel('error').request('handler', 'xhr')
             });
