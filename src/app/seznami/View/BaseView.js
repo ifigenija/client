@@ -45,7 +45,7 @@ define([
         this.listenTo(coll, 'deselect', this.onSelected);
         this.listenTo(coll, 'backgrid:action', this.onGridAction);
     };
-    
+
     BaseView.prototype.onGridAction = function (model, action) {
         this.triggerMethod(action, model);
     };
@@ -62,21 +62,33 @@ define([
             formTitle: this.name + model.get('naziv'),
             buttons: {
                 shrani: {
-                    id: 'doc-postavka-shrani',
+                    id: 'doc-shrani',
                     label: 'Shrani',
                     element: 'button-trigger',
                     trigger: 'shrani',
                     disabled: true
                 },
                 preklici: {
-                    id: 'docedit-skrij-postavko',
+                    id: 'doc-preklici',
                     label: 'Prekliči',
                     element: 'button-trigger',
                     trigger: 'preklici'
                 }
             },
             schema: this.shema.toFormSchema().schema,
-            formTemplate: this.formTemplate
+            formTemplate: this.formTemplate,
+            onFormChange: function (form) {
+                var tb = this.getToolbarModel();
+                var but = tb.getButton('doc-shrani');
+                if (but.get('disabled')) {
+                    but.set({
+                        disabled: false
+                    });
+                }
+            },
+            onSaveSuccess: function (model) {
+                console.log('shranilo');
+            }
         });
 
         var form = new Fv({

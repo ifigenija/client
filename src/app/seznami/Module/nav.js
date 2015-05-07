@@ -25,33 +25,13 @@ define(['i18next'], function (i18n) {
                     uri: "#oseba"
                 },
                 {
-                    label: i18n.t("seznami.nav.uporabnik"),
-                    uri: "#uporabnik"
-                },
-                {
-                    label: i18n.t("seznami.nav.posta"),
-                    uri: "#posta"
-                },
-                {
                     label: i18n.t("seznami.nav.postniNaslov"),
                     uri: "#postniNaslov"
                 },
                 {
-                    label: i18n.t("seznami.nav.trr"),
-                    uri: "#trr"
-                },
-                {
-                    label: i18n.t("seznami.nav.telefonska"),
-                    uri: "#telefonska"
-                },
-                {
                     label: i18n.t("seznami.nav.popa"),
                     uri: "#popa"
-                },
-                {
-                    label: i18n.t("seznami.nav.vloga"),
-                    uri: "#vloga"
-                },
+                }
             ]
         }
     ];

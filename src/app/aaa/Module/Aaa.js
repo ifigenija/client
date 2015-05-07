@@ -2,45 +2,53 @@
  * Licenca GPLv3
  */
 define([
+    'radio',
     'marionette',
     'require',
     'backbone',
+    'i18next',
     './nav'
 
 ], function (
+        Radio,
         Marionette,
         require,
         Backbone,
+        i18next,
         moduleNav
         ) {
 
 
-    var modInit = function (mod, App, Backbone, Marionette, $, _) {
+    var modInit = function (model, App, Backbone, Marionette, $, _) {
+        var ch = Radio.channel('layout');
 
-
-
-        mod.addUser = function () {
+        model.addUser = function () {
             App.nav.crumbs.addCrumb("tralla", "#trallaa");
         };
 
-        mod.manageUsers = function () {
-            App.nav.crumbs.addCrumb("HOPSASA", "#hopsasa");
-
+        model.manageUsers = function () {
+            require(['../View/UporabnikView'], function (UporabnikView) {
+                var view = new UporabnikView();
+                ch.command('open', view, i18next.t('aaa.uporabnik.title'));
+            });
         };
 
-        mod.roles = function () {
-            App.nav.crumbs.reset();
+        model.roles = function () {
+            require(['../View/VlogaView'], function (VlogaView) {
+                var view = new VlogaView();
+                ch.command('open', view, i18next.t('aaa.vloga.title'));
+            });
         };
 
         /**
          * 
          * Routing za javni pogled 
          */
-        mod.addInitializer(function (options) {
+        model.addInitializer(function (options) {
 
             App.nav.registerNav(moduleNav);
             new Marionette.AppRouter({
-                controller: mod,
+                controller: model,
                 appRoutes: {
                     'aaa/user/dodaj': 'addUser',
                     'aaa/users': 'manageUsers',
