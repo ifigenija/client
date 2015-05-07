@@ -100,7 +100,6 @@ define([
             columns: this.gridMeta,
             footer: BackgridFooter.extend({columns: this.gridMeta})
         });
-        this.listenTo(this.collection, 'backgrid:edited', this.onGridItemEdited);
         this.regionList.show(grid);
         return grid;
     };
@@ -167,12 +166,12 @@ define([
     PostavkeView.prototype.onDodaj = function () {
         this.model = this.dokument.dodajPostavko(this.detailName);
         this.triggerMethod('get:defaults', this.model);
-        this.render();
+        this.renderForm();
     };
 
     PostavkeView.prototype.onUredi = function (model) {
         this.model = model;
-        this.render();
+        this.renderForm();
     };
 
     PostavkeView.prototype.onShrani = function () {
@@ -185,7 +184,7 @@ define([
                     if (but) {
                         but.set('disabled', true);
                     }
-                    this.render();
+                    this.regionForm.empty();
                 }
             });
         }
@@ -194,7 +193,7 @@ define([
 
     PostavkeView.prototype.onPreklici = function () {
         this.model = null;
-        this.render();
+        this.regionForm.empty();
     };
 
     PostavkeView.prototype.onBrisi = function (model) {
