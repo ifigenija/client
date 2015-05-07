@@ -22,28 +22,28 @@ define([
                 editable: false,
                 label: 'Šifra',
                 name: 'sifra',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: 'Naziv ',
                 name: 'naziv',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: 'Iso Šifra',
                 name: 'isoNum',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: 'Iso Naziv',
                 name: 'isoNaziv',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'action',
