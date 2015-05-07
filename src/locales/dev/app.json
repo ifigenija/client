@@ -66,7 +66,7 @@
             "zvrstUprizoritve": "Zvrsti uprizoritev",
             "drzava": "Države",
             "oseba": "Osebe",
-            "postniNaslov": "Poštni naslovi",
+            "postniNaslov": "Naslovi",
             "popa": "Poslovni partnerji"
         },
         "drzava":{
@@ -82,7 +82,7 @@
             "title" : "Osebe"
         },
         "postniNaslov" :{
-            "title" : "Poštni Naslovi"
+            "title" : "Naslovi"
         },
         "popa" :{
             "title" : "Poslovni partnerji"

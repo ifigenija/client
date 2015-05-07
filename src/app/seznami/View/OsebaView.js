@@ -4,17 +4,17 @@
 define([
     'app/seznami/View/BaseView',
     'template!../tpl/oseba-form.tpl',
-    'formSchema!oseba'
+    //'formSchema!oseba'
 ], function (
         BaseView,
-        formTpl,
-        shema
+        formTpl//,
+        //shema
         ) {
 
     var OsebaView = BaseView.extend({
         url: '/rest/oseba',
         formTemplate: formTpl,
-        shema: shema,
+        //shema: shema,
         name: 'Oseba',
         columns: [
             {

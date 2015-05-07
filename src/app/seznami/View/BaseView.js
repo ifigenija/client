@@ -7,14 +7,16 @@ define([
     'app/Max/View/PaginatedGrid',
     'app/Max/Module/Backgrid',
     'template!../tpl/seznam.html',
-    'app/Max/Model/MaxPageableCollection'
+    'app/Max/Model/MaxPageableCollection',
+    'app/seznami/View/OsebaTabView'
 ], function (
         Marionette,
         FormView,
         PaginatedGrid,
         Backgrid,
         seznamTpl,
-        Coll
+        Coll,
+        OsebaTabView
         ) {
 
     var BaseView = Marionette.LayoutView.extend({
@@ -22,7 +24,7 @@ define([
         url: null,
         columns: null,
         formTemplate: null,
-        shema: null,
+        //schema: null,
         name: null,
         regions: {
             formR: '.seznam-forma',
@@ -34,11 +36,16 @@ define([
         var coll = new Coll();
         coll.url = this.url;
 
+        var fv = new Backgrid.Extension.ServerSideFilter({
+            collection: coll
+        });
         this.grid = new PaginatedGrid({
             collection: coll,
             row: Backgrid.ClickableRow,
-            columns: this.columns
+            columns: this.columns,
+            filterView: fv
         });
+
         this.gridR.show(this.grid);
         coll.fetch();
         this.listenTo(coll, 'selectValue', this.onSelected);
@@ -56,9 +63,13 @@ define([
         this.onSelected(model);
     };
     BaseView.prototype.onSelected = function (model) {
-
-
-        var Fv = FormView.extend({
+        
+        var view = new OsebaTabView({
+            model: model
+        });
+        
+        this.formR.show(view);
+        /*var Fv = FormView.extend({
             formTitle: this.name + model.get('naziv'),
             buttons: {
                 shrani: {
@@ -75,7 +86,7 @@ define([
                     trigger: 'preklici'
                 }
             },
-            schema: this.shema.toFormSchema().schema,
+            schema: this.schema.toFormSchema().schema,
             formTemplate: this.formTemplate,
             onFormChange: function (form) {
                 var tb = this.getToolbarModel();
@@ -95,7 +106,7 @@ define([
             model: model
         });
         this.formR.show(form);
-        this.listenTo(form, 'preklici', this.preklici);
+        this.listenTo(form, 'preklici', this.preklici);*/
     };
     BaseView.prototype.preklici = function () {
         this.formR.empty();
