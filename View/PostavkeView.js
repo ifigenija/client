@@ -73,6 +73,12 @@ define([
         }
     });
 
+    /**
+     * Osnovni hook za spremembe na formi. tukaj preklapljamo 
+     * gumb shrani
+     * @param {type} form
+     * @returns {undefined}
+     */
     PostavkeView.prototype.onFormChange = function (form) {
         var tb = this.getToolbarModel();
         var but = tb.getButton('doc-postavka-shrani');
@@ -147,7 +153,7 @@ define([
                 }
             },
             error: function (model, xhr) {
-               Radio.channel('error').command('xhr',model, xhr);
+                Radio.channel('error').command('xhr', model, xhr);
                 if (options.error) {
                     options.error.apply(self, arguments);
                 }
@@ -166,12 +172,12 @@ define([
     PostavkeView.prototype.onDodaj = function () {
         this.model = this.dokument.dodajPostavko(this.detailName);
         this.triggerMethod('get:defaults', this.model);
-        this.renderForm();
+        this.renderFormAndToolbar();
     };
 
     PostavkeView.prototype.onUredi = function (model) {
         this.model = model;
-        this.renderForm();
+        this.renderFormAndToolbar();
     };
 
     PostavkeView.prototype.onShrani = function () {
@@ -185,6 +191,7 @@ define([
                         but.set('disabled', true);
                     }
                     this.regionForm.empty();
+                    this.renderToolbar();
                 }
             });
         }
@@ -194,6 +201,7 @@ define([
     PostavkeView.prototype.onPreklici = function () {
         this.model = null;
         this.regionForm.empty();
+        this.renderToolbar();
     };
 
     PostavkeView.prototype.onBrisi = function (model) {
