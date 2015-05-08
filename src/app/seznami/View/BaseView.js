@@ -24,10 +24,11 @@ define([
         url: null,
         columns: null,
         formTemplate: null,
-        //schema: null,
+        schema: null,
         name: null,
         regions: {
             formR: '.seznam-forma',
+            tabR: '.seznam-tab',
             gridR: '.seznam-tabela'
         }
     });
@@ -63,13 +64,8 @@ define([
         this.onSelected(model);
     };
     BaseView.prototype.onSelected = function (model) {
-        
-        var view = new OsebaTabView({
-            model: model
-        });
-        
-        this.formR.show(view);
-        /*var Fv = FormView.extend({
+
+        var Fv = FormView.extend({
             formTitle: this.name + model.get('naziv'),
             buttons: {
                 shrani: {
@@ -96,9 +92,6 @@ define([
                         disabled: false
                     });
                 }
-            },
-            onSaveSuccess: function (model) {
-                console.log('shranilo');
             }
         });
 
@@ -106,7 +99,7 @@ define([
             model: model
         });
         this.formR.show(form);
-        this.listenTo(form, 'preklici', this.preklici);*/
+        this.listenTo(form, 'preklici', this.preklici);
     };
     BaseView.prototype.preklici = function () {
         this.formR.empty();

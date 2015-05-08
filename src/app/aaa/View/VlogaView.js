@@ -8,13 +8,13 @@ define([
 ], function (
         BaseView,
         formTpl,
-        shema
+        schema
         ) {
 
     var VlogaView = BaseView.extend({
         url: '/rest/role',
         formTemplate: formTpl,
-        shema: shema,
+        schema: schema,
         name: 'Vloga',
         columns: [
             {

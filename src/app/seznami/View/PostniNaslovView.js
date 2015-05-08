@@ -8,13 +8,13 @@ define([
 ], function (
         BaseView,
         formTpl,
-        shema
+        schema
         ) {
 
     var PostniNaslovView = BaseView.extend({
         url: '/rest/postniNaslov',
         formTemplate: formTpl,
-        shema: shema,
+        schema: schema,
         name: 'PostniNaslov',
         columns: [
             {
