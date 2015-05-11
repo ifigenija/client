@@ -33,25 +33,36 @@ define([
         }
     });
 
-    BaseView.prototype.onRender = function () {
+    BaseView.prototype.initialize = function (options) {
+        if (!this.collection) {
+            this.collection = this.getCollection();
+        }
+    };
+
+
+    BaseView.prototype.getCollection = function () {
         var coll = new Coll();
         coll.url = this.url;
+        return coll;
+    };
+    
+    BaseView.prototype.onRender = function () {
 
         var fv = new Backgrid.Extension.ServerSideFilter({
-            collection: coll
+            collection: this.collection
         });
         this.grid = new PaginatedGrid({
-            collection: coll,
+            collection: this.collection,
             row: Backgrid.ClickableRow,
             columns: this.columns,
             filterView: fv
         });
 
         this.gridR.show(this.grid);
-        coll.fetch();
-        this.listenTo(coll, 'selectValue', this.onSelected);
-        this.listenTo(coll, 'deselect', this.onSelected);
-        this.listenTo(coll, 'backgrid:action', this.onGridAction);
+        this.collection.fetch();
+        this.listenTo(this.collection, 'selectValue', this.onSelected);
+        this.listenTo(this.collection, 'deselect', this.onSelected);
+        this.listenTo(this.collection, 'backgrid:action', this.onGridAction);
     };
 
     BaseView.prototype.onGridAction = function (model, action) {
@@ -64,7 +75,15 @@ define([
         this.onSelected(model);
     };
     BaseView.prototype.onSelected = function (model) {
+        var form = this.getFormView(model);
+        this.formR.show(form);
+        this.listenTo(form, 'preklici', this.preklici);
+    };
+    BaseView.prototype.preklici = function () {
+        this.formR.empty();
+    };
 
+    BaseView.prototype.getFormView = function (model) {
         var Fv = FormView.extend({
             formTitle: this.name + model.get('naziv'),
             buttons: {
@@ -95,15 +114,11 @@ define([
             }
         });
 
-        var form = new Fv({
+        return  new Fv({
             model: model
         });
-        this.formR.show(form);
-        this.listenTo(form, 'preklici', this.preklici);
-    };
-    BaseView.prototype.preklici = function () {
-        this.formR.empty();
-    };
+
+    }
 
     return BaseView;
 });

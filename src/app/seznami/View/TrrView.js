@@ -2,20 +2,20 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/BaseView',
+    'app/Dokument/View/PostavkeView',
     'template!../tpl/trr-form.tpl',
     'formSchema!trr'
 ], function (
-        BaseView,
+        PostavkeView,
         formTpl,
         schema
         ) {
 
-    var TrrView = BaseView.extend({
-        url: '/rest/trr',
+    var TrrView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: schema,
+        schema: schema.toFormSchema().schema,
         name: 'Trr',
+        detailName: 'trrji',
         columns: [
             {
                 cell: 'string',

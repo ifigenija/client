@@ -2,19 +2,19 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/BaseView',
+    'app/Dokument/View/PostavkeView',
     'template!../tpl/telefonska-form.tpl',
     'formSchema!telefonska'
 ], function (
-        BaseView,
+        PostavkeView,
         formTpl,
         schema
         ) {
 
-    var TelefonskaView = BaseView.extend({
-        url: '/rest/telefonska',
+    var TelefonskaView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: schema,
+        schema: schema.toFormSchema().schema,
+        detailName: 'telefonske',
         name: 'Telefonska',
         columns: [
             {

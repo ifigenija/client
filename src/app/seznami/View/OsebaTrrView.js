@@ -23,25 +23,20 @@ define([
         formTitle: 'Trr',
         detailName: 'trr',
         gridMeta: [
-            {
-                cell: 'string',
-                editable: false,
-                label: 'Poslovni partner',
-                name: 'popa',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: 'Oseba ',
-                name: 'oseba',
-                sortable: false
-            },
+
             {
                 cell: 'string',
                 editable: false,
                 label: 'Banka',
                 name: 'banka',
+                sortable: false
+            },
+
+            {
+                cell: 'string',
+                editable: false,
+                label: 'Številka',
+                name: 'stevilka',
                 sortable: false
             },
             {
@@ -50,9 +45,7 @@ define([
                 sortable: false,
                 actions: [
                     {event: 'brisi', title: 'Briši'},
-                    {event: 'uredi', title: 'Uredi'},
-                    {event: 'premakniGor', title: 'Gor'},
-                    {event: 'premakniDol', title: 'Dol'}
+                    {event: 'uredi', title: 'Uredi'}
                 ]
             }
         ]

@@ -2,19 +2,19 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/BaseView',
+    'app/Dokument/View/PostavkeView',
     'template!../tpl/postniNaslov-form.tpl',
     'formSchema!postniNaslov'
 ], function (
-        BaseView,
+        PostavkeView,
         formTpl,
         schema
         ) {
 
-    var PostniNaslovView = BaseView.extend({
-        url: '/rest/postniNaslov',
+    var PostniNaslovView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema,
+        detailName: 'naslovi',
         name: 'PostniNaslov',
         columns: [
             {
@@ -43,13 +43,6 @@ define([
                 editable: false,
                 label: 'Država',
                 name: 'drzava',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: 'Oseba',
-                name: 'oseba',
                 sortable: false
             },
             {

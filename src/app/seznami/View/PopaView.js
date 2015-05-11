@@ -4,18 +4,18 @@
 define([
     'app/seznami/View/BaseView',
     'template!../tpl/popa-form.tpl',
-    'formSchema!popa'
+    './PopaEditView',
+    '../Model/Popa'
 ], function (
         BaseView,
         formTpl,
-        schema
+        PopaEditView,
+        Popa
         ) {
 
     var PopaView = BaseView.extend({
         url: '/rest/popa',
-        formTemplate: formTpl,
-        schema: schema,
-        name: 'Popa',
+        name: 'Poslovni partner',
         columns: [
             {
                 cell: 'string',
@@ -61,7 +61,14 @@ define([
                     {event: 'uredi', title: 'Uredi'},
                 ]
             }
-        ]
+        ],
+        getFormView : function (model) {
+            
+            var editModel = new Popa.Model({id: model.get('id')});
+            editModel.fetch();
+            return new PopaEditView({model: editModel});
+            
+        }
     });
 
     return PopaView;

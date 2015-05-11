@@ -70,7 +70,7 @@ define([
      */
     var MenuItems = Marionette.CollectionView.extend({
         tagName: 'ul',
-        className: "navbar-nav nav",
+        className: "nav navbar-nav",
         getChildView: function (item) {
             if (item.get('pages')) {
            
@@ -115,7 +115,7 @@ define([
      * @type Marionette.ItemView
      */
     var SidebarMenu = Marionette.ItemView.extend({
-        className: "navbar navbar-inverse sidebar",
+        className: "navbar navbar-default",
         tagName: "nav",
         template: Handlebars.compile(sidebarTpl),
         onRender: function () {
@@ -124,22 +124,11 @@ define([
                 collection: this.model.get('pages')
             });
 
-            this.$el.append(menu.el);
+            this.$el.find('#navbar').append(menu.el);
             menu.render();
             this.$el.prop('role', 'navigation');
 
-            /**
-             * Povežemo dogodke za update višine navigacije 
-             */
-            $(document).ready(function () {
-                htmlbodyHeightUpdate();
-                $(window).resize(function () {
-                    htmlbodyHeightUpdate();
-                });
-                $(window).scroll(function () {
-                    htmlbodyHeightUpdate();
-                });
-            });
+           
 
         }
     });

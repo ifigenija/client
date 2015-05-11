@@ -12,7 +12,7 @@ Licenca GPLv3
   padding: 0px;
 }
 .paginated-grid > .panel-heading {
-  padding: 2px 2px 2px 15px;
+  padding: 2px 5px 2px 5px;
 }
 .grid-filter.paginated-grid {
   margin-left: 0px;
@@ -38,5 +38,11 @@ table.backgrid > thead > tr > th.backgrid-kolona-stevilk {
 }
 table.backgrid > thead th.label {
   font-size: 100%;
+}
+.filter-search {
+  margin-bottom: 0px;
+}
+.filter-search .input-group {
+  width: 180px;
 }
 /*# sourceMappingURL=max-backgrid.css.map */
