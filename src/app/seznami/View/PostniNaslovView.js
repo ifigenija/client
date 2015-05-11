@@ -13,9 +13,10 @@ define([
 
     var PostniNaslovView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: schema,
+        schema: schema.toFormSchema().schema,
         detailName: 'naslovi',
         name: 'PostniNaslov',
+        formTitle: 'Naslovi',
         columns: [
             {
                 cell: 'string',

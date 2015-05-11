@@ -6,8 +6,8 @@
         "program": "Program",
         "brandPrivate": "iFigenija",
         "brandPublic": "iFigenija",
-        "obvestilo" : "Obvestilo",
-        "uporabnik" : "Uporabnik"
+        "obvestilo": "Obvestilo",
+        "uporabnik": "Uporabnik"
     },
     "login": {
         "prompt": "Vpišite se",
@@ -24,11 +24,11 @@
             "users": "Uporabniki",
             "roles": "Vloge"
         },
-        "uporabnik" :{
-            "title" : "Uporabniki"
+        "uporabnik": {
+            "title": "Uporabniki"
         },
-        "vloga" :{
-            "title" : "Vloge"
+        "vloga": {
+            "title": "Vloge"
         }
     },
     "koledar": {
@@ -69,28 +69,63 @@
             "postniNaslov": "Naslovi",
             "popa": "Poslovni partnerji"
         },
-        "drzava":{
+        "view": {
+            "brisi": "Briši",
+            "uredi": "Uredi",
+            "splosno": "Splošno",
+            "ePosta": "E-Pošta",
+            "naziv": "Naziv",
+            "sifra": "Šifra",
+            "oseba": {
+                "nova": "Nova oseba",
+                "kontakti": "Kontakti",
+                "racuni": "Računi",
+                "ime": "Ime",
+                "priimek": "Priimek",
+                "psevdonim": "Psevdonim",
+                "uporabnik": "Uporabnik"
+            },
+            "popa": {
+                "nova": "Nov poslovni partner",
+                "panoga": "Panoga",
+                "url": "Spletna stran",
+                "kontakti": "Kontakti",
+                "racuni": "Računi",
+                "osebe": "Osebe"
+            },
+            "uporabnik": {
+                "nova": "Nov uporabnik",
+                "vloge": "Vloge",
+                "veljavnost":"Poteče veljavnost",
+                "privzetaStran": "Privzeta stran"
+            },
+            "vloga": {
+                "nova": "Nova Vloga",
+                "dovoljenja": "Dovoljenja"
+            }
+        },
+        "drzava": {
             "title": "Države"
         },
-        "tipFunkcije" :{
-            "title" : "Tipi Funkcij"
+        "tipFunkcije": {
+            "title": "Tipi Funkcij"
         },
-        "zvrstUprozoritve" :{
-            "title" : "Zvrsti Uprizoritev"
+        "zvrstUprozoritve": {
+            "title": "Zvrsti Uprizoritev"
         },
-        "oseba" :{
-            "title" : "Osebe"
+        "oseba": {
+            "title": "Osebe"
         },
-        "postniNaslov" :{
-            "title" : "Naslovi"
+        "postniNaslov": {
+            "title": "Naslovi"
         },
-        "popa" :{
-            "title" : "Poslovni partnerji"
+        "popa": {
+            "title": "Poslovni partnerji"
         }
-        
-        
+
+
     },
-     "nastavitve": {
+    "nastavitve": {
         "nav": {
             "label": "Nastavitve"
         }

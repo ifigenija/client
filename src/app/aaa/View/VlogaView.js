@@ -4,17 +4,18 @@
 define([
     'app/seznami/View/BaseView',
     'template!../tpl/vloga-form.tpl',
-    'formSchema!role'
+    './VlogaEditView',
+    '../Model/Vloga'
 ], function (
         BaseView,
         formTpl,
-        schema
+        VlogaEditView,
+        Vloga
         ) {
 
     var VlogaView = BaseView.extend({
         url: '/rest/role',
         formTemplate: formTpl,
-        schema: schema,
         name: 'Vloga',
         columns: [
             {
@@ -40,7 +41,21 @@ define([
                     {event: 'uredi', title: 'Uredi'},
                 ]
             }
-        ]
+        ],
+        getFormView: function (model) {
+
+            var editModel = new Vloga.Model({id: model.get('id')});
+            editModel.fetch();
+            return new VlogaEditView({model: editModel});
+
+        },
+        onDodaj: function () {
+            var model = new Vloga.Model();
+            this.collection.add(model);
+            this.formR.show(new VlogaEditView({model: model}));
+
+
+        }
     });
 
     return VlogaView;

@@ -16,6 +16,7 @@ define([
         schema: schema.toFormSchema().schema,
         name: 'Trr',
         detailName: 'trrji',
+        formTitle: 'TRR',
         columns: [
             {
                 cell: 'string',

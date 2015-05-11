@@ -5,12 +5,14 @@ define([
     'app/seznami/View/BaseView',
     'template!../tpl/popa-form.tpl',
     './PopaEditView',
-    '../Model/Popa'
+    '../Model/Popa',
+    'i18next'
 ], function (
         BaseView,
         formTpl,
         PopaEditView,
-        Popa
+        Popa,
+        i18next
         ) {
 
     var PopaView = BaseView.extend({
@@ -20,35 +22,35 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: 'Šifra',
+                label: i18next.t('seznami.view.sifra'),
                 name: 'sifra',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Naziv ',
+                label: i18next.t('seznami.view.naziv'),
                 name: 'naziv',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Panoga',
+                label: i18next.t('seznami.view.popa.panoga'),
                 name: 'panoga',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'E-pošta',
+                label: i18next.t('seznami.view.ePosta'),
                 name: 'email',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Spletna stran',
+                label: i18next.t('seznami.view.popa.url'),
                 name: 'url',
                 sortable: false
             },
@@ -57,8 +59,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: 'Briši'},
-                    {event: 'uredi', title: 'Uredi'},
+                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
                 ]
             }
         ],

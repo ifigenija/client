@@ -8,7 +8,7 @@ define([
     'app/Max/Module/Backgrid',
     'template!../tpl/seznam.html',
     'app/Max/Model/MaxPageableCollection',
-    'app/seznami/View/OsebaTabView'
+    'app/Max/View/Toolbar'
 ], function (
         Marionette,
         FormView,
@@ -16,7 +16,7 @@ define([
         Backgrid,
         seznamTpl,
         Coll,
-        OsebaTabView
+        Toolbar
         ) {
 
     var BaseView = Marionette.LayoutView.extend({
@@ -29,7 +29,8 @@ define([
         regions: {
             formR: '.seznam-forma',
             tabR: '.seznam-tab',
-            gridR: '.seznam-tabela'
+            gridR: '.seznam-tabela',
+            toolR: '.region-toolbar'
         }
     });
 
@@ -38,7 +39,6 @@ define([
             this.collection = this.getCollection();
         }
     };
-
 
     BaseView.prototype.getCollection = function () {
         var coll = new Coll();
@@ -57,7 +57,23 @@ define([
             columns: this.columns,
             filterView: fv
         });
+        
+        var tool = [[
+           {
+                id: 'doc-dodaj',
+                label: 'Dodaj',
+                element: 'button-trigger',
+                trigger: 'dodaj'
+            }
+        ]];
 
+        var tb = new Toolbar({
+            buttonGroups: tool,
+            listener: this
+        });
+        
+        this.tabR.show(tb);
+        
         this.gridR.show(this.grid);
         this.collection.fetch();
         this.listenTo(this.collection, 'selectValue', this.onSelected);

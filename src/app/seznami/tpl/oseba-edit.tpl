@@ -7,15 +7,14 @@
 <div role="tabpanel">
 
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs popa-tabs" role="tablist">
+    <ul class="nav nav-tabs oseba-tabs" role="tablist">
         <li role="presentation" class="tab-splosno active"><a href="javascript:void(0)">{{t 'seznami.view.splosno'}}</a></li>
-        <li role="presentation" class="tab-kontakti"><a href="javascript:void(0)" >{{t 'seznami.view.popa.kontakti'}}</a></li>
-        <li role="presentation" class="tab-osebe"><a href="javascript:void(0)" >{{t 'seznami.view.popa.osebe'}}</a></li>
-        <li role="presentation" class="tab-trrji"><a href="javascript:void(0)" >{{t 'seznami.view.popa.racuni'}}</a></li>
+        <li role="presentation" class="tab-kontakti"><a href="javascript:void(0)" >{{t 'seznami.view.oseba.kontakti'}}</a></li>
+        <li role="presentation" class="tab-trrji"><a href="javascript:void(0)" >{{t 'seznami.view.oseba.racuni'}}</a></li>
     </ul>
 
     <!-- Tab panes -->
-    <div class="tab-content popa-panels">
+    <div class="tab-content oseba-panels">
         <div role="tabpanel" class="tab-pane active pnl-splosno">
             <div class="region-toolbar pull-right"></div>
             <div class="clearfix"></div>
