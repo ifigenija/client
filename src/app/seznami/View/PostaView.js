@@ -2,16 +2,16 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/BaseView',
+    'app/seznami/View/SeznamiView',
     'template!../tpl/posta-form.tpl',
     'formSchema!posta'
 ], function (
-        BaseView,
+        SeznamiView,
         formTpl,
         schema
         ) {
 
-    var PostaView = BaseView.extend({
+    var PostaView = SeznamiView.extend({
         url: '/rest/posta',
         formTemplate: formTpl,
         schema: schema,

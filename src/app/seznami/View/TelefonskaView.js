@@ -17,19 +17,12 @@ define([
         detailName: 'telefonske',
         name: 'Telefonska',
         formTitle: 'Telefonska',
-        columns: [
+        gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: 'Poslovni Partner',
-                name: 'popa',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: 'Oseba',
-                name: 'oseba',
+                label: 'Vrsta',
+                name: 'vrsta',
                 sortable: false
             },
             {
@@ -37,6 +30,13 @@ define([
                 editable: false,
                 label: 'Stevilka',
                 name: 'stevilka',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: 'Privzeta',
+                name: 'privzeta',
                 sortable: false
             },
             {

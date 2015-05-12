@@ -50,7 +50,7 @@ define([
     
     OsebaEditView.prototype.onBeforeRender = function(){
         var self = this;
-        this.listenTo(this.model, 'sync', function () {
+        this.listenTo(this.model, 'sync', function (coll) {
             self.render();
         });
     };
@@ -58,11 +58,10 @@ define([
 
     OsebaEditView.prototype.onRender = function () {
         if (this.isNew()) {
-            this.$('.tab-kotakti a').prop('disabled', 'disabled');
+            this.$('.tab-kontakti a').prop('disabled', 'disabled');
             this.$('.tab-trriji a').prop('disabled', 'disabled');
         } else {
             this.renderNaslovi();
-            this.renderTelefonske();
             this.renderTrrji();
         }
     };

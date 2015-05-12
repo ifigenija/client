@@ -17,26 +17,33 @@ define([
         name: 'Trr',
         detailName: 'trrji',
         formTitle: 'TRR',
-        columns: [
-            {
-                cell: 'string',
-                editable: false,
-                label: 'Poslovni partner',
-                name: 'popa',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: 'Oseba ',
-                name: 'oseba',
-                sortable: false
-            },
+        gridMeta: [
             {
                 cell: 'string',
                 editable: false,
                 label: 'Banka',
                 name: 'banka',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: 'Stevilka',
+                name: 'stevilka',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: 'Swift',
+                name: 'swift',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: 'Bic',
+                name: 'bic',
                 sortable: false
             },
             {

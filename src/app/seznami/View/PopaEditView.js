@@ -52,7 +52,7 @@ i18next
     PopaEditView.prototype.onRender = function () {
         if (this.isNew()) {
             this.$('.tab-osebe').prop('disabled', 'disabled');
-            this.$('.tab-kotakti').prop('disabled', 'disabled');
+            this.$('.tab-kontakti').prop('disabled', 'disabled');
             this.$('.tab-trriji').prop('disabled', 'disabled');
         } else {
             this.renderNaslovi();

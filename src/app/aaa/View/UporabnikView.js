@@ -2,20 +2,20 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/BaseView',
+    'app/seznami/View/SeznamiView',
     'template!../tpl/uporabnik-form.tpl',
     './UporabnikEditView',
     '../Model/Uporabnik',
     'i18next'
 ], function (
-        BaseView,
+        SeznamiView,
         formTpl,
         UporabnikEditView,
         Uporabnik,
         i18next
         ) {
 
-    var UporabnikView = BaseView.extend({
+    var UporabnikView = SeznamiView.extend({
         url: '/rest/user',
         formTemplate: formTpl,
         name: 'Uporabnik',

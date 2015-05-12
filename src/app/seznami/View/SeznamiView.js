@@ -28,9 +28,8 @@ define([
         name: null,
         regions: {
             formR: '.seznam-forma',
-            tabR: '.seznam-tab',
             gridR: '.seznam-tabela',
-            toolR: '.region-toolbar'
+            toolbarR: '.seznam-toolbar'
         }
     });
 
@@ -61,7 +60,7 @@ define([
         var tool = [[
            {
                 id: 'doc-dodaj',
-                label: 'Dodaj',
+                label: 'Dodaj' + ' ' + this.name,
                 element: 'button-trigger',
                 trigger: 'dodaj'
             }
@@ -72,7 +71,7 @@ define([
             listener: this
         });
         
-        this.tabR.show(tb);
+        this.toolbarR.show(tb);
         
         this.gridR.show(this.grid);
         this.collection.fetch();

@@ -122,8 +122,9 @@
         "popa": {
             "title": "Poslovni partnerji"
         }
-
-
+    },
+    "flashManager":{
+        "messages": "Obvestila"
     },
     "nastavitve": {
         "nav": {

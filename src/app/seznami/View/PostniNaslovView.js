@@ -17,7 +17,7 @@ define([
         detailName: 'naslovi',
         name: 'PostniNaslov',
         formTitle: 'Naslovi',
-        columns: [
+        gridMeta: [
             {
                 cell: 'string',
                 editable: false,

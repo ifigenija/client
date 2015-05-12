@@ -2,20 +2,20 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/BaseView',
+    'app/seznami/View/SeznamiView',
     'template!../tpl/popa-form.tpl',
     './PopaEditView',
     '../Model/Popa',
     'i18next'
 ], function (
-        BaseView,
+        SeznamiView,
         formTpl,
         PopaEditView,
         Popa,
         i18next
         ) {
 
-    var PopaView = BaseView.extend({
+    var PopaView = SeznamiView.extend({
         url: '/rest/popa',
         name: 'Poslovni partner',
         columns: [
@@ -63,15 +63,20 @@ define([
                     {event: 'uredi', title: i18next.t('seznami.view.uredi')},
                 ]
             }
-        ],
-        getFormView : function (model) {
-            
-            var editModel = new Popa.Model({id: model.get('id')});
-            editModel.fetch();
-            return new PopaEditView({model: editModel});
-            
-        }
+        ]
     });
+    
+    PopaView.prototype.getFormView = function (model) {
+        var editModel = new Popa.Model({id: model.get('id')});
+        editModel.fetch();
+        return new PopaEditView({model: editModel});
+
+    };
+    PopaView.prototype.onDodaj = function () {
+        var model = new Popa.Model();
+        this.collection.add(model);
+        this.formR.show(new PopaEditView({model: model}));
+    };
 
     return PopaView;
 });

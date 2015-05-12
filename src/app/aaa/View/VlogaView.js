@@ -2,18 +2,18 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/BaseView',
+    'app/seznami/View/SeznamiView',
     'template!../tpl/vloga-form.tpl',
     './VlogaEditView',
     '../Model/Vloga'
 ], function (
-        BaseView,
+        SeznamiView,
         formTpl,
         VlogaEditView,
         Vloga
         ) {
 
-    var VlogaView = BaseView.extend({
+    var VlogaView = SeznamiView.extend({
         url: '/rest/role',
         formTemplate: formTpl,
         name: 'Vloga',

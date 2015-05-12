@@ -2,20 +2,20 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/BaseView',
+    'app/seznami/View/SeznamiView',
     'template!../tpl/oseba-form.tpl',
     './OsebaEditView',
     '../Model/Oseba',
     'i18next'
 ], function (
-        BaseView,
+        SeznamiView,
         formTpl,
         OsebaEditView,
         Oseba,
         i18next
         ) {
 
-    var OsebaView = BaseView.extend({
+    var OsebaView = SeznamiView.extend({
         url: '/rest/oseba',
         name: 'Oseba',
         columns: [
@@ -43,7 +43,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.ePosta'),
+                label: i18next.t('seznami.view.ePosta'),
                 name: 'email',
                 sortable: false
             },
@@ -64,20 +64,19 @@ define([
                 ]
             }
         ],
-        getFormView: function (model) {
-            var editModel = new Oseba.Model({id: model.get('id')});
-            editModel.fetch();
-            return new OsebaEditView({model: editModel});
-
-        },
-        onDodaj: function () {
-            var model = new Oseba.Model();
-            this.collection.add(model);
-            this.formR.show(new OsebaEditView({model: model}));
-
-
-        }
     });
+
+    OsebaView.prototype.getFormView = function (model) {
+        var editModel = new Oseba.Model({id: model.get('id')});
+        editModel.fetch();
+        return new OsebaEditView({model: editModel});
+
+    };
+    OsebaView.prototype.onDodaj = function () {
+        var model = new Oseba.Model();
+        this.collection.add(model);
+        this.formR.show(new OsebaEditView({model: model}));
+    };
 
     return OsebaView;
 });
