@@ -8,7 +8,7 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs vloga-tabs" role="tablist">
-        <li role="presentation" class="tab-splosno active"><a href="javascript:void(0)">{{t 'seznami.view.vloga.splosno'}}</a></li>
+        <li role="presentation" class="tab-splosno active"><a href="javascript:void(0)">{{t 'seznami.view.splosno'}}</a></li>
         <li role="presentation" class="tab-dovoljenja"><a href="javascript:void(0)" >{{t 'seznami.view.vloga.dovoljenja'}}</a></li>
     </ul>
 

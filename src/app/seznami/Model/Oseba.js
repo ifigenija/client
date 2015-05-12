@@ -8,24 +8,41 @@ define([
         _
         ) {
 
-    var PostavkaOseba = Dokument.Postavka.extend({
-        defaults: {
-            kolicina: 1,
-            status: '100'
-        },
-        urlRoot: '/rest/oseba'
+    var OsebaTrr = Dokument.Postavka.extend({
+        urlRoot: '/rest/trr'
     });
+    var OsebaNaslov = Dokument.Postavka.extend({
+        urlRoot: '/rest/postniNaslov'
+    });
+    var OsebaTelefon = Dokument.Postavka.extend({
+        urlRoot: '/rest/telefonska'
+    });    
     
-    var PostavkaOsebaCollection = Dokument.PostavkaCollection.extend({
-        model: PostavkaOseba,
+    var OsebaTelefonCollection = Dokument.PostavkaCollection.extend({
+        model: OsebaTelefon,
         url: '/rest/oseba',
         index: 'pozicija'
     });
     
-    var DokumentOseba = Dokument.Model.extend({
+    var OsebaTrrCollection = Dokument.PostavkaCollection.extend({
+        model: OsebaTrr,
+        url: '/rest/trr',
+        index: 'pozicija'
+    });
+
+    
+    var OsebaNaslovCollection = Dokument.PostavkaCollection.extend({
+        model: OsebaNaslov,
+        url: '/rest/postniNaslov',
+        index: 'pozicija'
+    });
+    
+    var OsebaModel = Dokument.Model.extend({
         urlRoot: '/rest/oseba',
         nestedCollections: {
-            osebe: {collection: PostavkaOsebaCollection, mappedBy: 'dokument'}
+            trrji: {collection: OsebaTrrCollection, mappedBy: 'trrji', filterBy: 'oseba'},
+            telefonske: {collection: OsebaTelefonCollection, mappedBy: 'telefonske', filterBy: 'oseba'},
+            naslovi: {collection: OsebaNaslovCollection, mappedBy: 'naslovi', filterBy: 'oseba'},
         },
         dodajPostavko: function (nested) {
 
@@ -34,9 +51,19 @@ define([
             }
             var postavka;
             switch (nested) {
-                case 'osebe':
-                    postavka = new PostavkaOseba({
-                        dokument: this.id
+                case 'trrji':
+                    postavka = new OsebaTrr({
+                        oseba: this.id
+                    });
+                    break;
+                case 'naslovi':
+                    postavka = new OsebaNaslov({
+                        oseba: this.id
+                    });
+                    break;
+                case 'telefonske':
+                    postavka = new OsebaTelefon({
+                        oseba: this.id
                     });
                     break;
             }
@@ -45,6 +72,6 @@ define([
         }
     });
     return {
-        Dokument: DokumentOseba
+        Model: OsebaModel,
     };
 });
