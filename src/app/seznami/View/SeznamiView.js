@@ -60,7 +60,7 @@ define([
         var tool = [[
            {
                 id: 'doc-dodaj',
-                label: 'Dodaj' + ' ' + this.name,
+                label: 'Dodaj' + ' ' + this.dodaj,
                 element: 'button-trigger',
                 trigger: 'dodaj'
             }

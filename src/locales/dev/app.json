@@ -82,6 +82,7 @@
             "opis": "Opis",
             "oseba": {
                 "title": "Osebe",
+                "dodaj" : "osebo",
                 "nova": "Nova oseba",
                 "kontakti": "Kontakti",
                 "racuni": "Računi",
@@ -97,6 +98,7 @@
                 "url": "Spletna stran",
                 "kontakti": "Kontakti",
                 "racuni": "Računi",
+                "dodaj" : "poslovnega partnerja",                
                 "osebe": "Osebe"
             },
             "uporabnik": {
@@ -104,37 +106,44 @@
                 "nova": "Nov uporabnik",
                 "vloge": "Vloge",
                 "veljavnost": "Poteče veljavnost",
+                "dodaj" : "uporabnika",
                 "privzetaStran": "Privzeta stran"
             },
             "vloga": {
                 "title": "Vloge",
                 "nova": "Nova Vloga",
+                "dodaj" : "vlogo",
                 "dovoljenja": "Dovoljenja"
             },
             "drzava": {
                 "title": "Države",
                 "nova": "Nova država",
                 "isoNum": "Iso Num",
+                "dodaj" : "državo",
                 "isoNaziv": "Iso naziv"
             },
             "posta": {
                 "title": "Pošte",
+                "dodaj" : "pošto",
                 "nova": "Nova pošta"
             },
             "zvrstSurs": {
                 "title": "Zvrsti SURS",
                 "nova": "Nova zvrst SURS",
                 "isoSifra": "Iso šifra",
+                "dodaj" : "zvrst SURS",
                 "isoNaziv": "Iso naziv"
             },
             "tipFunkcije": {
                 "nova": "Nov tip funkcije",
                 "title": "Tipi funkcij",
                 "dovoliPrekrivanje": "Dovoli Prekrivanje",
+                "dodaj" : "tip funkcije",
                 "nastopajoc": "Nastopajoc"
             },
             "zvrstUprizoritve": {
                 "nova": "Nova zvrst uprizoritve",
+                "dodaj" : "zvrst uprizoritve",
                 "title": "Zvrsti uprizoritev"
             },            
             "postniNaslov":{
@@ -142,6 +151,7 @@
                 "naziv": "Naziv",
                 "ulica": "Ulica",
                 "posta": "Posta",
+                "dodaj" : "poštni naslov",
                 "drzava": "Država"
                 
             },
@@ -149,6 +159,7 @@
                 "title": "Telefonske",
                 "vrsta": "Vrsta",
                 "stevilka": "Stevilka",
+                "dodaj" : "telefonsko",
                 "privzeta": "Privzeta"
                 
             },
@@ -157,6 +168,7 @@
                 "banka": "Banka",
                 "stevilka": "Stevilka",
                 "swift": "Swift",
+                "dodaj" : "TRR",
                 "bic": "Bic"                
             }
             

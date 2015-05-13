@@ -18,6 +18,7 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'naslovi',
         name: 'PostniNaslov',
+        dodaj: i18next.t('seznami.view.postniNaslov.dodaj'),
         formTitle: i18next.t('seznami.view.postniNaslov.title'),
         gridMeta: [
             {

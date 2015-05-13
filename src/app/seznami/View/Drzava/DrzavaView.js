@@ -16,6 +16,7 @@ define([
     var DrzavaView = SeznamiView.extend({
         url: '/rest/drzava',
         name: 'Drzava',
+        dodaj: i18next.t('seznami.view.drzava.dodaj'),
         columns: [
             {
                 cell: 'string',

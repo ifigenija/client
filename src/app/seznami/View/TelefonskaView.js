@@ -18,6 +18,7 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'telefonske',
         name: 'Telefonska',
+        dodaj: i18next.t('seznami.view.telefonska.dodaj'),
         formTitle: i18next.t('seznami.view.telefonska.title'),
         gridMeta: [
             {

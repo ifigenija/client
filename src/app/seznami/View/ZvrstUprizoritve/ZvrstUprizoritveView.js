@@ -16,6 +16,7 @@ define([
     var ZvrstUprizoritveView = SeznamiView.extend({
         url: '/rest/zvrstUprizoritve',
         name: 'ZvrstUprizoritve',
+        dodaj: i18next.t('seznami.view.zvrstUprizoritve.dodaj'),
         columns: [
             {
                 cell: 'string',

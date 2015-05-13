@@ -131,7 +131,7 @@ define([
         var self = this;
         require(['app/seznami/View/PostniNaslovView'], function (View) {
             var view = new View({
-                collection: self.model.telefonskeCollection,
+                collection: self.model.nasloviCollection,
                 dokument: self.model
             });
             self.regionNaslovi.show(view);

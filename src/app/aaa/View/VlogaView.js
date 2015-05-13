@@ -5,30 +5,33 @@ define([
     'app/seznami/View/SeznamiView',
     'template!../tpl/vloga-form.tpl',
     './VlogaEditView',
-    '../Model/Vloga'
+    '../Model/Vloga',
+    'i18next'
 ], function (
         SeznamiView,
         formTpl,
         VlogaEditView,
-        Vloga
+        Vloga,
+        i18next
         ) {
 
     var VlogaView = SeznamiView.extend({
         url: '/rest/role',
         formTemplate: formTpl,
         name: 'Vloga',
+        dodaj: i18next.t('seznami.view.vloga.dodaj'),
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: 'Naziv',
+                label: i18next.t('seznami.view.naziv'),
                 name: 'name',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Opis',
+                label: i18next.t('seznami.view.opis'),
                 name: 'description',
                 sortable: false
             },

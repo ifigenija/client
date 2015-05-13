@@ -16,6 +16,7 @@ define([
     var ZvrstSursView = SeznamiView.extend({
         url: '/rest/zvrstSurs',
         name: 'ZvrstSurs',
+        dodaj: i18next.t('seznami.view.zvrstSurs.dodaj'),
         columns: [
             {
                 cell: 'string',

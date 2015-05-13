@@ -16,6 +16,7 @@ define([
     var PostaView = SeznamiView.extend({
         url: '/rest/posta',
         name: 'Posta',
+        dodaj: i18next.t('seznami.view.posta.dodaj'),
         columns: [
             {
                 cell: 'string',

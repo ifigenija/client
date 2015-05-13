@@ -16,6 +16,7 @@ define([
     var TipFunkcijeView = SeznamiView.extend({
         url: '/rest/tipFunkcije',
         name: 'TipFunkcije',
+        dodaj: i18next.t('seznami.view.tipFunkcije.dodaj'),
         columns: [
             {
                 cell: 'string',
