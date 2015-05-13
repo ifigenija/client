@@ -63,6 +63,7 @@ define([
         } else {
             this.renderNaslovi();
             this.renderTrrji();
+            this.renderTelefonske();
         }
     };
     /**

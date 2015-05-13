@@ -29,7 +29,7 @@ define([
     
     var PopaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: PopaTelefon,
-        url: '/rest/oseba',
+        url: '/rest/telefonska',
         index: 'pozicija'
     });
     

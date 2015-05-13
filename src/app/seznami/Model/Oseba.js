@@ -20,7 +20,7 @@ define([
     
     var OsebaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTelefon,
-        url: '/rest/oseba',
+        url: '/rest/telefonska',
         index: 'pozicija'
     });
     
