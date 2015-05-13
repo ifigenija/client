@@ -3,13 +3,11 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    'template!../tpl/popa-form.tpl',
     './PopaEditView',
-    '../Model/Popa',
+    '../../Model/Popa',
     'i18next'
 ], function (
         SeznamiView,
-        formTpl,
         PopaEditView,
         Popa,
         i18next

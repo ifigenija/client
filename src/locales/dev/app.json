@@ -62,12 +62,13 @@
     "seznami": {
         "nav": {
             "label": "Seznami",
+            "oseba": "Osebe",
+            "posta": "Pošta",
+            "popa": "Poslovni partnerji",
+            "drzava": "Države",
             "tipFunkcije": "Tip funkcij",
             "zvrstUprizoritve": "Zvrsti uprizoritev",
-            "drzava": "Države",
-            "oseba": "Osebe",
-            "postniNaslov": "Naslovi",
-            "popa": "Poslovni partnerji"
+            "tipUprizoritev" : "Tip uprizoritev"
         },
         "view": {
             "brisi": "Briši",
@@ -102,6 +103,12 @@
             "vloga": {
                 "nova": "Nova Vloga",
                 "dovoljenja": "Dovoljenja"
+            },
+            "drzava":{
+                "nova" : "Nova država"
+            },
+            "posta":{
+                "nova" : "Nova posta"
             }
         },
         "drzava": {

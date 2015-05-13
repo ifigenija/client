@@ -19,7 +19,7 @@ define([
         Toolbar
         ) {
 
-    var BaseView = Marionette.LayoutView.extend({
+    var SeznamiView = Marionette.LayoutView.extend({
         template: seznamTpl,
         url: null,
         columns: null,
@@ -33,19 +33,19 @@ define([
         }
     });
 
-    BaseView.prototype.initialize = function (options) {
+    SeznamiView.prototype.initialize = function (options) {
         if (!this.collection) {
             this.collection = this.getCollection();
         }
     };
 
-    BaseView.prototype.getCollection = function () {
+    SeznamiView.prototype.getCollection = function () {
         var coll = new Coll();
         coll.url = this.url;
         return coll;
     };
     
-    BaseView.prototype.onRender = function () {
+    SeznamiView.prototype.onRender = function () {
 
         var fv = new Backgrid.Extension.ServerSideFilter({
             collection: this.collection
@@ -80,25 +80,25 @@ define([
         this.listenTo(this.collection, 'backgrid:action', this.onGridAction);
     };
 
-    BaseView.prototype.onGridAction = function (model, action) {
+    SeznamiView.prototype.onGridAction = function (model, action) {
         this.triggerMethod(action, model);
     };
-    BaseView.prototype.onBrisi = function (model) {
+    SeznamiView.prototype.onBrisi = function (model) {
         console.log('Brisi');
     };
-    BaseView.prototype.onUredi = function (model) {
+    SeznamiView.prototype.onUredi = function (model) {
         this.onSelected(model);
     };
-    BaseView.prototype.onSelected = function (model) {
+    SeznamiView.prototype.onSelected = function (model) {
         var form = this.getFormView(model);
         this.formR.show(form);
         this.listenTo(form, 'preklici', this.preklici);
     };
-    BaseView.prototype.preklici = function () {
+    SeznamiView.prototype.preklici = function () {
         this.formR.empty();
     };
 
-    BaseView.prototype.getFormView = function (model) {
+    SeznamiView.prototype.getFormView = function (model) {
         var Fv = FormView.extend({
             formTitle: this.name + model.get('naziv'),
             buttons: {
@@ -135,5 +135,5 @@ define([
 
     }
 
-    return BaseView;
+    return SeznamiView;
 });

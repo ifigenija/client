@@ -3,47 +3,33 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    'template!../tpl/drzava-form.tpl',
-    'formSchema!drzava'
+    './PostaEditView',
+    '../../Model/Posta',
+    'i18next'
 ], function (
         SeznamiView,
-        formTpl,
-        schema
+        PostaEditView,
+        Posta,
+        i18next
         ) {
 
-    var DrzavaView = SeznamiView.extend({
-        url: '/rest/drzava',
-        formTemplate: formTpl,
-        schema: schema,
-        name: 'Drzava',
+    var PostaView = SeznamiView.extend({
+        url: '/rest/posta',
+        name: 'Posta',
         columns: [
             {
                 cell: 'string',
                 editable: false,
                 label: 'Šifra',
                 name: 'sifra',
-                sortable: true
+                sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
                 label: 'Naziv ',
                 name: 'naziv',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: 'Iso Šifra',
-                name: 'isoNum',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: 'Iso Naziv',
-                name: 'isoNaziv',
-                sortable: true
+                sortable: false
             },
             {
                 cell: 'action',
@@ -57,5 +43,18 @@ define([
         ]
     });
 
-    return DrzavaView;
+    PostaView.prototype.getFormView = function (model) {
+        var editModel = new Posta.Model({id: model.get('id')});
+        editModel.fetch();
+        return new PostaEditView({model: editModel});
+
+    };
+
+    PostaView.prototype.onDodaj = function () {
+        var model = new Posta.Model();
+        //this.collection.add(model);
+        this.formR.show(new PostaEditView({model: model}));
+    };
+
+    return PostaView;
 });

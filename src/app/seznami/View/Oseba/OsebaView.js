@@ -3,13 +3,11 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    'template!../tpl/oseba-form.tpl',
     './OsebaEditView',
-    '../Model/Oseba',
+    '../../Model/Oseba',
     'i18next'
 ], function (
         SeznamiView,
-        formTpl,
         OsebaEditView,
         Oseba,
         i18next
@@ -74,7 +72,7 @@ define([
     };
     OsebaView.prototype.onDodaj = function () {
         var model = new Oseba.Model();
-        this.collection.add(model);
+        //this.collection.add(model);
         this.formR.show(new OsebaEditView({model: model}));
     };
 

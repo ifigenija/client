@@ -38,25 +38,25 @@ define([
         };
 
         model.drzava = function () {
-            require(['../View/DrzavaView'], function (DrzavaView) {
+            require(['../View/Drzava/DrzavaView'], function (DrzavaView) {
                 var view = new DrzavaView();
                 ch.command('open', view, i18next.t('seznami.drzava.title'));
             });
         };
         model.oseba = function () {
-            require(['../View/OsebaView'], function (OsebaView) {
+            require(['../View/Oseba/OsebaView'], function (OsebaView) {
                 var view = new OsebaView();
                 ch.command('open', view, i18next.t('seznami.oseba.title'));
             });
         };
-        model.postniNaslov = function () {
-            require(['../View/PostniNaslovView'], function (PostniNaslovView) {
-                var view = new PostniNaslovView();
-                ch.command('open', view, i18next.t('seznami.postniNaslov.title'));
+        model.posta = function () {
+            require(['../View/Posta/PostaView'], function (PostaView) {
+                var view = new PostaView();
+                ch.command('open', view, i18next.t('seznami.posta.title'));
             });
         };
         model.popa = function () {
-            require(['../View/PopaView'], function (PopaView) {
+            require(['../View/Popa/PopaView'], function (PopaView) {
                 var view = new PopaView();
                 ch.command('open', view, i18next.t('seznami.popa.title'));
             });
@@ -76,7 +76,7 @@ define([
                     'zvrstUprizoritve': 'zvrstUprizoritve',
                     'drzava': 'drzava',
                     'oseba': 'oseba',
-                    'postniNaslov': 'postniNaslov',
+                    'posta': 'posta',
                     'popa': 'popa'
                 }
             });
