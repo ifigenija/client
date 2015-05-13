@@ -4,11 +4,13 @@
 define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/postniNaslov-form.tpl',
-    'formSchema!postniNaslov'
+    'formSchema!postniNaslov',
+    'i18next'
 ], function (
         PostavkeView,
         formTpl,
-        schema
+        schema,
+        i18next
         ) {
 
     var PostniNaslovView = PostavkeView.extend({
@@ -16,33 +18,33 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'naslovi',
         name: 'PostniNaslov',
-        formTitle: 'Naslovi',
+        formTitle: i18next.t('seznami.view.postniNaslov.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: 'Naziv',
+                label: i18next.t('seznami.view.postniNaslov.naziv'),
                 name: 'naziv',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Ulica',
+                label: i18next.t('seznami.view.postniNaslov.ulica'),
                 name: 'ulica',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Pošta',
+                label: i18next.t('seznami.view.postniNaslov.posta'),
                 name: 'posta',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Država',
+                label: i18next.t('seznami.view.postniNaslov.drzava'),
                 name: 'drzava',
                 sortable: false
             },
@@ -51,8 +53,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: 'Briši'},
-                    {event: 'uredi', title: 'Uredi'},
+                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
                 ]
             }
         ]

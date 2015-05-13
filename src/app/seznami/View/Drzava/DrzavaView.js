@@ -34,7 +34,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.drzava.isoSifra'),
+                label: i18next.t('seznami.view.drzava.isoNum'),
                 name: 'isoNum',
                 sortable: true
             },
@@ -51,7 +51,7 @@ define([
                 sortable: false,
                 actions: [
                     {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
                 ]
             }
         ]

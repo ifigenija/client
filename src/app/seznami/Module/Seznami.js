@@ -32,7 +32,7 @@ define([
         model.zvrstUprizoritve = function () {
             require(['../View/ZvrstUprizoritve/ZvrstUprizoritveView'], function (ZvrstUprizoritveView) {
                 var view = new ZvrstUprizoritveView();
-                ch.command('open', view, i18next.t('seznami.view.zvrstUprozoritve.title'));
+                ch.command('open', view, i18next.t('seznami.view.zvrstUprizoritve.title'));
             });
         };
         model.drzava = function () {

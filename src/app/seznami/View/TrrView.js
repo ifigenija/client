@@ -4,11 +4,13 @@
 define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/trr-form.tpl',
-    'formSchema!trr'
+    'formSchema!trr',
+    'i18next'
 ], function (
         PostavkeView,
         formTpl,
-        schema
+        schema,
+        i18next
         ) {
 
     var TrrView = PostavkeView.extend({
@@ -16,33 +18,33 @@ define([
         schema: schema.toFormSchema().schema,
         name: 'Trr',
         detailName: 'trrji',
-        formTitle: 'TRR',
+        formTitle: i18next.t('seznami.view.trr.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: 'Banka',
+                label: i18next.t('seznami.view.trr.banka'),
                 name: 'banka',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Stevilka',
+                label: i18next.t('seznami.view.trr.stevilka'),
                 name: 'stevilka',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Swift',
+                label: i18next.t('seznami.view.trr.swift'),
                 name: 'swift',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Bic',
+                label: i18next.t('seznami.view.trr.bic'),
                 name: 'bic',
                 sortable: false
             },

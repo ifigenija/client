@@ -69,7 +69,7 @@
             "tipFunkcije": "Tipi funkcij",
             "zvrstUprizoritve": "Zvrsti uprizoritev",
             "zvrstSurs": "Zvrsti SURS",
-            "tipUprizoritev" : "Tip uprizoritev"
+            "tipUprizoritev": "Tip uprizoritev"
         },
         "view": {
             "brisi": "Briši",
@@ -78,9 +78,8 @@
             "ePosta": "E-Pošta",
             "naziv": "Naziv",
             "sifra": "Šifra",
-            "ime" : "Ime",
-            "opis" : "Opis",
-            
+            "ime": "Ime",
+            "opis": "Opis",
             "oseba": {
                 "title": "Osebe",
                 "nova": "Nova oseba",
@@ -104,7 +103,7 @@
                 "title": "Uporabniki",
                 "nova": "Nov uporabnik",
                 "vloge": "Vloge",
-                "veljavnost":"Poteče veljavnost",
+                "veljavnost": "Poteče veljavnost",
                 "privzetaStran": "Privzeta stran"
             },
             "vloga": {
@@ -112,30 +111,58 @@
                 "nova": "Nova Vloga",
                 "dovoljenja": "Dovoljenja"
             },
-            "drzava":{
+            "drzava": {
                 "title": "Države",
-                "nova" : "Nova država",
-                "isoSifra" : "Iso šifra",
-                "isoNaziv" : "Iso naziv"
+                "nova": "Nova država",
+                "isoNum": "Iso Num",
+                "isoNaziv": "Iso naziv"
             },
-            "posta":{
+            "posta": {
                 "title": "Pošte",
-                "nova" : "Nova pošta"
+                "nova": "Nova pošta"
             },
-            "zvrstSurs" : {
+            "zvrstSurs": {
                 "title": "Zvrsti SURS",
-                "nova" : "Nova zvrst SURS",
-                "isoSifra" : "Iso šifra",
-                "isoNaziv" : "Iso naziv"
+                "nova": "Nova zvrst SURS",
+                "isoSifra": "Iso šifra",
+                "isoNaziv": "Iso naziv"
             },
-            "tipFunkcije" : {
+            "tipFunkcije": {
+                "nova": "Nov tip funkcije",
                 "title": "Tipi funkcij",
-                "dovoliPrekrivanje" : "Dovoli Prekrivanje",
-                "nastopajoc" : "Nastopajoc"
+                "dovoliPrekrivanje": "Dovoli Prekrivanje",
+                "nastopajoc": "Nastopajoc"
+            },
+            "zvrstUprizoritve": {
+                "nova": "Nova zvrst uprizoritve",
+                "title": "Zvrsti uprizoritev"
+            },            
+            "postniNaslov":{
+                "title": "Naslovi",
+                "naziv": "Naziv",
+                "ulica": "Ulica",
+                "posta": "Posta",
+                "drzava": "Država"
+                
+            },
+            "telefonska":{
+                "title": "Telefonske",
+                "vrsta": "Vrsta",
+                "stevilka": "Stevilka",
+                "privzeta": "Privzeta"
+                
+            },
+            "trr":{
+                "title": "TRR",
+                "banka": "Banka",
+                "stevilka": "Stevilka",
+                "swift": "Swift",
+                "bic": "Bic"                
             }
+            
         }
     },
-    "flashManager":{
+    "flashManager": {
         "messages": "Obvestila"
     },
     "nastavitve": {

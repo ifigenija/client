@@ -51,7 +51,7 @@ define([
                 sortable: false,
                 actions: [
                     {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
                 ]
             }
         ]

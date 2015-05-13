@@ -20,14 +20,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: 'Šifra',
+                label: i18next.t('seznami.view.sifra'),
                 name: 'sifra',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Naziv ',
+                label: i18next.t('seznami.view.oseba.naziv'),
                 name: 'naziv',
                 sortable: false
             },
@@ -36,8 +36,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: 'Briši'},
-                    {event: 'uredi', title: 'Uredi'},
+                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
                 ]
             }
         ]

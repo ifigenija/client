@@ -4,11 +4,13 @@
 define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/telefonska-form.tpl',
-    'formSchema!telefonska'
+    'formSchema!telefonska',
+    'i18next'
 ], function (
         PostavkeView,
         formTpl,
-        schema
+        schema,
+        i18next
         ) {
 
     var TelefonskaView = PostavkeView.extend({
@@ -16,26 +18,26 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'telefonske',
         name: 'Telefonska',
-        formTitle: 'Telefonska',
+        formTitle: i18next.t('seznami.view.telefonska.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: 'Vrsta',
+                label: i18next.t('seznami.view.telefonska.vrsta'),
                 name: 'vrsta',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Stevilka',
+                label: i18next.t('seznami.view.telefonska.stevilka'),
                 name: 'stevilka',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: 'Privzeta',
+                label: i18next.t('seznami.view.telefonska.privzeta'),
                 name: 'privzeta',
                 sortable: false
             },
@@ -44,8 +46,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: 'Briši'},
-                    {event: 'uredi', title: 'Uredi'},
+                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
                 ]
             }
         ]
