@@ -66,8 +66,9 @@
             "posta": "Pošta",
             "popa": "Poslovni partnerji",
             "drzava": "Države",
-            "tipFunkcije": "Tip funkcij",
+            "tipFunkcije": "Tipi funkcij",
             "zvrstUprizoritve": "Zvrsti uprizoritev",
+            "zvrstSurs": "Zvrsti SURS",
             "tipUprizoritev" : "Tip uprizoritev"
         },
         "view": {
@@ -77,7 +78,11 @@
             "ePosta": "E-Pošta",
             "naziv": "Naziv",
             "sifra": "Šifra",
+            "ime" : "Ime",
+            "opis" : "Opis",
+            
             "oseba": {
+                "title": "Osebe",
                 "nova": "Nova oseba",
                 "kontakti": "Kontakti",
                 "racuni": "Računi",
@@ -87,6 +92,7 @@
                 "uporabnik": "Uporabnik"
             },
             "popa": {
+                "title": "Poslovni partnerji",
                 "nova": "Nov poslovni partner",
                 "panoga": "Panoga",
                 "url": "Spletna stran",
@@ -95,39 +101,38 @@
                 "osebe": "Osebe"
             },
             "uporabnik": {
+                "title": "Uporabniki",
                 "nova": "Nov uporabnik",
                 "vloge": "Vloge",
                 "veljavnost":"Poteče veljavnost",
                 "privzetaStran": "Privzeta stran"
             },
             "vloga": {
+                "title": "Vloge",
                 "nova": "Nova Vloga",
                 "dovoljenja": "Dovoljenja"
             },
             "drzava":{
-                "nova" : "Nova država"
+                "title": "Države",
+                "nova" : "Nova država",
+                "isoSifra" : "Iso šifra",
+                "isoNaziv" : "Iso naziv"
             },
             "posta":{
-                "nova" : "Nova posta"
+                "title": "Pošte",
+                "nova" : "Nova pošta"
+            },
+            "zvrstSurs" : {
+                "title": "Zvrsti SURS",
+                "nova" : "Nova zvrst SURS",
+                "isoSifra" : "Iso šifra",
+                "isoNaziv" : "Iso naziv"
+            },
+            "tipFunkcije" : {
+                "title": "Tipi funkcij",
+                "dovoliPrekrivanje" : "Dovoli Prekrivanje",
+                "nastopajoc" : "Nastopajoc"
             }
-        },
-        "drzava": {
-            "title": "Države"
-        },
-        "tipFunkcije": {
-            "title": "Tipi Funkcij"
-        },
-        "zvrstUprozoritve": {
-            "title": "Zvrsti Uprizoritev"
-        },
-        "oseba": {
-            "title": "Osebe"
-        },
-        "postniNaslov": {
-            "title": "Naslovi"
-        },
-        "popa": {
-            "title": "Poslovni partnerji"
         }
     },
     "flashManager":{

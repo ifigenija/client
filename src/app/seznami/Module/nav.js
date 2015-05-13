@@ -29,12 +29,12 @@ define(['i18next'], function (i18n) {
                     uri: "#tipFunkcije"
                 },
                 {
-                    label: i18n.t("seznami.nav.tipUprizoritev"),
-                    uri: "#tipUprizoritev"
-                },
-                {
                     label: i18n.t("seznami.nav.zvrstUprizoritve"),
                     uri: "#zvrstUprizoritve"
+                },
+                {
+                    label: i18n.t("seznami.nav.zvrstSurs"),
+                    uri: "#zvrstSurs"
                 }
             ]
         }

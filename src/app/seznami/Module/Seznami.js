@@ -23,42 +23,46 @@ define([
         var ch = Radio.channel('layout');
 
         model.tipFunkcije = function () {
-            require(['../View/TipFunkcijeView'], function (TipFunkcijeView) {
+            require(['../View/TipFunkcije/TipFunkcijeView'], function (TipFunkcijeView) {
                 var view = new TipFunkcijeView();
-                ch.command('open', view, i18next.t('seznami.tipFunkcije.title'));
+                ch.command('open', view, i18next.t('seznami.view.tipFunkcije.title'));
             });
 
         };
-
         model.zvrstUprizoritve = function () {
-            require(['../View/ZvrstUprizoritveView'], function (ZvrstUprizoritveView) {
+            require(['../View/ZvrstUprizoritve/ZvrstUprizoritveView'], function (ZvrstUprizoritveView) {
                 var view = new ZvrstUprizoritveView();
-                ch.command('open', view, i18next.t('seznami.zvrstUprozoritve.title'));
+                ch.command('open', view, i18next.t('seznami.view.zvrstUprozoritve.title'));
             });
         };
-
         model.drzava = function () {
             require(['../View/Drzava/DrzavaView'], function (DrzavaView) {
                 var view = new DrzavaView();
-                ch.command('open', view, i18next.t('seznami.drzava.title'));
+                ch.command('open', view, i18next.t('seznami.view.drzava.title'));
             });
         };
         model.oseba = function () {
             require(['../View/Oseba/OsebaView'], function (OsebaView) {
                 var view = new OsebaView();
-                ch.command('open', view, i18next.t('seznami.oseba.title'));
+                ch.command('open', view, i18next.t('seznami.view.oseba.title'));
             });
         };
         model.posta = function () {
             require(['../View/Posta/PostaView'], function (PostaView) {
                 var view = new PostaView();
-                ch.command('open', view, i18next.t('seznami.posta.title'));
+                ch.command('open', view, i18next.t('seznami.view.posta.title'));
             });
         };
         model.popa = function () {
             require(['../View/Popa/PopaView'], function (PopaView) {
                 var view = new PopaView();
-                ch.command('open', view, i18next.t('seznami.popa.title'));
+                ch.command('open', view, i18next.t('seznami.view.popa.title'));
+            });
+        };
+        model.zvrstSurs = function () {
+            require(['../View/ZvrstSurs/ZvrstSursView'], function (ZvrstSursView) {
+                var view = new ZvrstSursView();
+                ch.command('open', view, i18next.t('seznami.view.zvrstSurs.title'));
             });
         };
 
@@ -74,6 +78,7 @@ define([
                 appRoutes: {
                     'tipFunkcije': 'tipFunkcije',
                     'zvrstUprizoritve': 'zvrstUprizoritve',
+                    'zvrstSurs': 'zvrstSurs',
                     'drzava': 'drzava',
                     'oseba': 'oseba',
                     'posta': 'posta',
