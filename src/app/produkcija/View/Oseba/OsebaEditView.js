@@ -156,7 +156,7 @@ define([
         var self = this;
         require(['app/produkcija/View/ZaposlitevView'], function (View) {
             var view = new View({
-                collection: self.model.nasloviCollection,
+                collection: self.model.zaposlitveCollection,
                 dokument: self.model
             });
             self.regionZaposlitve.show(view);

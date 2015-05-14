@@ -5,7 +5,7 @@ define([
     'app/Dokument/View/DokumentView',
     'template!../tpl/vloga-edit.tpl',
     'template!../tpl/vloga-form.tpl',
-    'formSchema!user',
+    'formSchema!role',
     'i18next'
 ], function (
         DokumentView,

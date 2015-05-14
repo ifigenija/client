@@ -21,7 +21,7 @@ define([
     var VlogaModel = Dokument.Model.extend({
         urlRoot: '/rest/role',
         nestedCollections: {
-            vloge: {collection: VlogaDovoljenjaCollection, mappedBy: 'dovoljenja', filterBy: 'user'}
+            vloge: {collection: VlogaDovoljenjaCollection, mappedBy: 'dovoljenja', filterBy: 'role'}
         },
         dodajPostavko: function (nested) {
 
