@@ -52,13 +52,19 @@ define([
 
 
     UprizoritevEditView.prototype.onRender = function () {
-        if (this.isNew()) {
-            this.$('.tab-osebe a').prop('disabled', 'disabled');
-            this.$('.tab-arhivalije a').prop('disabled', 'disabled');
-        } else {
+//        if (this.isNew()) {
+//            this.$('.tab-osebe a').prop('disabled', 'disabled');
+//            this.$('.tab-arhivalije a').prop('disabled', 'disabled');
+//            this.$('.tab-ostaliSodelujoci a').prop('disabled', 'disabled');
+//            this.$('.tab-nastopajoci a').prop('disabled', 'disabled');
+//            this.$('.tab-umetniskeEkipe a').prop('disabled', 'disabled');
+//        } else {
             this.renderOsebe();
             this.renderArhivalije();
-        }
+            this.renderUmetniskeEkipe();
+            this.renderNastopajoci();
+            this.renderOstaliSodelujoci();
+//        }
     };
     /**
      * Klik na splošni tab
@@ -80,13 +86,40 @@ define([
         this.$('.tab-osebe').addClass('active');
     };
     /**
-     * Klik na tab za trr podatke 
+     * Klik na tab za arhivalije podatke 
      * @returns {undefined}
      */
     UprizoritevEditView.prototype.onArhivalije = function () {
         this.deselectTab();
         this.$('.pnl-arhivalije').addClass('active');
         this.$('.tab-arhivalije').addClass('active');
+    };
+    /**
+     * Klik na tab za arhivalije podatke 
+     * @returns {undefined}
+     */
+    UprizoritevEditView.prototype.onUmetniskeEkipe = function () {
+        this.deselectTab();
+        this.$('.pnl-umetniskeEkipe').addClass('active');
+        this.$('.tab-umetniskeEkipe').addClass('active');
+    };
+    /**
+     * Klik na tab za arhivalije podatke 
+     * @returns {undefined}
+     */
+    UprizoritevEditView.prototype.onNastopajoci = function () {
+        this.deselectTab();
+        this.$('.pnl-nastopajoci').addClass('active');
+        this.$('.tab-nastopajoci').addClass('active');
+    };
+    /**
+     * Klik na tab za arhivalije podatke 
+     * @returns {undefined}
+     */
+    UprizoritevEditView.prototype.onOstaliSodelujoci = function () {
+        this.deselectTab();
+        this.$('.pnl-ostaliSodelujoci').addClass('active');
+        this.$('.tab-ostaliSodelujoci').addClass('active');
     };
     /**
      * Klik na tab za kontaktne podatke 
@@ -106,6 +139,39 @@ define([
                 dokument: self.model
             });
             self.regionArhivalije.show(view);
+            return view;
+        });
+    };
+    UprizoritevEditView.prototype.renderUmetniskeEkipe = function () {
+        var self = this;
+        require(['app/produkcija/View/UmetniskaEkipaView'], function (View) {
+            var view = new View({
+                collection: self.model.umetniskeEkipeCollection,
+                dokument: self.model
+            });
+            self.regionUmetniskeEkipe.show(view);
+            return view;
+        });
+    };
+    UprizoritevEditView.prototype.renderNastopajoci = function () {
+        var self = this;
+        require(['app/produkcija/View/NastopajociView'], function (View) {
+            var view = new View({
+                collection: self.model.nastopajociCollection,
+                dokument: self.model
+            });
+            self.regionNastopajoci.show(view);
+            return view;
+        });
+    };
+    UprizoritevEditView.prototype.renderOstaliSodelujoci = function () {
+        var self = this;
+        require(['app/produkcija/View/OstaliSodelujociView'], function (View) {
+            var view = new View({
+                collection: self.model.ostaliSodelujociCollection,
+                dokument: self.model
+            });
+            self.regionOstaliSodelujoci.show(view);
             return view;
         });
     };

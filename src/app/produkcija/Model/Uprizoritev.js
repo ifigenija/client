@@ -14,6 +14,15 @@ define([
     var UprizoritevOseba = Dokument.Postavka.extend({
         urlRoot: '/rest/oseba'
     });
+    var UprizoritevUmetniskaEkipa = Dokument.Postavka.extend({
+        urlRoot: '/rest/funkcija'
+    });
+    var UprizoritevNastopajoci = Dokument.Postavka.extend({
+        urlRoot: '/rest/funkcija'
+    });
+    var UprizoritevOstaliSodelujoci = Dokument.Postavka.extend({
+        urlRoot: '/rest/funkcija'
+    });
     
     var UprizoritevArhivalijaCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevArhivalija,
@@ -26,12 +35,30 @@ define([
         url: '/rest/oseba',
         index: 'pozicija'
     });
+    var UprizoritevUmetniskaEkipaCollection = Dokument.PostavkaCollection.extend({
+        model: UprizoritevUmetniskaEkipa,
+        url: '/rest/funkcija',
+        index: 'pozicija'
+    });
+    var UprizoritevNastopajocuCollection = Dokument.PostavkaCollection.extend({
+        model: UprizoritevNastopajoci,
+        url: '/rest/funkcija',
+        index: 'pozicija'
+    });
+    var UprizoritevOstaliSodelujociCollection = Dokument.PostavkaCollection.extend({
+        model: UprizoritevOstaliSodelujoci,
+        url: '/rest/funkcija',
+        index: 'pozicija'
+    });
     
     var UprizoritevModel = Dokument.Model.extend({
         urlRoot: '/rest/uprizoritev',
         nestedCollections: {
             arhivalije: {collection: UprizoritevArhivalijaCollection, mappedBy: 'arhivalije', filterBy: 'uprizoritev'},
-            osebe: {collection: UprizoritevOsebaCollection, mappedBy: 'osebe', filterBy: 'uprizoritev'}
+            osebe: {collection: UprizoritevOsebaCollection, mappedBy: 'osebe', filterBy: 'uprizoritev'},
+            umetniskeEkipe: {collection: UprizoritevUmetniskaEkipaCollection, mappedBy: 'umetniskeEkipe', filterBy: 'uprizoritev'},
+            nastopajoci: {collection: UprizoritevNastopajocuCollection, mappedBy: 'nastopajoci', filterBy: 'uprizoritev'},
+            OstaliSodelujoci: {collection: UprizoritevOstaliSodelujociCollection, mappedBy: 'ostaliSodelujoci', filterBy: 'uprizoritev'}
         },
         dodajPostavko: function (nested) {
 
@@ -47,6 +74,21 @@ define([
                     break;
                 case 'osebe':
                     postavka = new UprizoritevOseba({
+                        uprizoritev: this.id
+                    });
+                    break;
+                case 'umetniskeEkipe':
+                    postavka = new UprizoritevUmetniskaEkipa({
+                        uprizoritev: this.id
+                    });
+                    break;
+                case 'nastopajoci':
+                    postavka = new UprizoritevNastopajoci({
+                        uprizoritev: this.id
+                    });
+                    break;
+                case 'OstaliSodelujoci':
+                    postavka = new UprizoritevOstaliSodelujoci({
                         uprizoritev: this.id
                     });
                     break;

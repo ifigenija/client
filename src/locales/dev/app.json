@@ -80,7 +80,10 @@
                 "delovniNaslov": "Delovni naslov",
                 "faza": "Faza",
                 "datumPremiere": "Datum premiere",
-                "nova": "Nova uprizoritev"
+                "nova": "Nova uprizoritev",
+                "umetniskeEkipe": "Umetniska Ekipa",
+                "nastopajoci": "Nastopajoci",
+                "ostaliSodelujoci": "Ostali sodelujoci"
             },
             "arhivalija" : {
                 "title": "Arhivalija",
