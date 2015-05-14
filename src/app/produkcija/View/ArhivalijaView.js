@@ -3,8 +3,8 @@
  */
 define([
     'app/Dokument/View/PostavkeView',
-    'template!../tpl/trr-form.tpl',
-    'formSchema!trr',
+    'template!../tpl/arhivalija-form.tpl',
+    'formSchema!arhivalija',
     'i18next'
 ], function (
         PostavkeView,
@@ -13,40 +13,40 @@ define([
         i18next
         ) {
 
-    var TrrView = PostavkeView.extend({
+    var ArhivalijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Trr',
-        detailName: 'trrji',
-        dodaj: i18next.t('seznami.view.trr.dodaj'),
-        formTitle: i18next.t('seznami.view.trr.title'),
+        name: 'Arhivalija',
+        detailName: 'arhivalije',
+        dodaj: i18next.t('produkcija.view.arhivalija.dodaj'),
+        formTitle: i18next.t('produkcija.view.arhivalija.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.banka'),
-                name: 'banka',
+                label: i18next.t('produkcija.view.arhivalija.naslov'),
+                name: 'naslov',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.stevilka'),
-                name: 'stevilka',
+                label: i18next.t('produkcija.view.arhivalija.lokacijaOriginala'),
+                name: 'lokacijaOriginala',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.swift'),
-                name: 'swift',
+                label: i18next.t('produkcija.view.arhivalija.objavljeno'),
+                name: 'objavljeno',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.bic'),
-                name: 'bic',
+                label: i18next.t('produkcija.view.arhivalija.datum'),
+                name: 'datum',
                 sortable: false
             },
             {
@@ -61,5 +61,5 @@ define([
         ]
     });
 
-    return TrrView;
+    return ArhivalijaView;
 });

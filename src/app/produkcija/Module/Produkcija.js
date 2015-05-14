@@ -3,24 +3,36 @@
  */
 define([
     'marionette',
+    'radio',
     'require',
     'backbone',
-    './nav'
+    './nav',
+    'i18next'
 
 ], function (
         Marionette,
+        Radio,
         require,
         Backbone,
-        moduleNav
+        moduleNav,
+        i18next
         ) {
 
 
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
+        var ch = Radio.channel('layout');
 
-
-      
         mod.uprizoritve = function () {
-
+            require(['../View/Uprizoritev/UprizoritevView'], function (UprizoritevView) {
+                var view = new UprizoritevView();
+                ch.command('open', view, i18next.t('produkcija.view.uprizoritev.title'));
+            });
+        };
+        mod.osebe = function () {
+            require(['../View/Oseba/OsebaView'], function (OsebaView) {
+                var view = new OsebaView();
+                ch.command('open', view, i18next.t('produkcija.view.oseba.title'));
+            });
         };
 
         /**
@@ -33,7 +45,8 @@ define([
             new Marionette.AppRouter({
                 controller: mod,
                 appRoutes: {
-                    'uprizoritve': 'uprizoritve',                    
+                    'pro/uprizoritev': 'uprizoritve',
+                    'pro/oseba': 'osebe',
                 }
             });
         });

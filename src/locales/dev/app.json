@@ -56,7 +56,41 @@
     },
     "produkcija": {
         "nav": {
-            "label": "Produkcija"
+            "label": "Produkcija",
+            "oseba": "Osebe",
+            "uprizoritev": "Uprizoritve"
+        },
+        "view": {
+            "zaposlitev": {
+                "zaposlitve": "Zaposlitve",
+                "dodaj": "zaposlitev",
+                "title": "Zaposlitve",
+                "nova": "Nova zaposlitev",
+                "status": "Status",
+                "zacetek": "Zacetek",
+                "konec": "Konec",
+                "tip": "Tip"
+            },
+            "uprizoritev" :{
+                "title": "Uprizoritev",
+                "osebe": "Osebe",
+                "arhivalije": "Arhivalije",
+                "dodaj": "uprizoritev",
+                "naslov": "Naslov",
+                "delovniNaslov": "Delovni naslov",
+                "faza": "Faza",
+                "datumPremiere": "Datum premiere",
+                "nova": "Nova uprizoritev"
+            },
+            "arhivalija" : {
+                "title": "Arhivalija",
+                "dodaj": "arhivalijo",
+                "nova": "Nova arhivalija",
+                "naslov": "Naslov",
+                "lokacijaOriginala": "Lokacija originala",
+                "objavljeno": "Objavljeno",
+                "datum": "Datum"
+            }
         }
     },
     "seznami": {
@@ -82,7 +116,7 @@
             "opis": "Opis",
             "oseba": {
                 "title": "Osebe",
-                "dodaj" : "osebo",
+                "dodaj": "osebo",
                 "nova": "Nova oseba",
                 "kontakti": "Kontakti",
                 "racuni": "Računi",
@@ -98,7 +132,7 @@
                 "url": "Spletna stran",
                 "kontakti": "Kontakti",
                 "racuni": "Računi",
-                "dodaj" : "poslovnega partnerja",                
+                "dodaj": "poslovnega partnerja",
                 "osebe": "Osebe"
             },
             "uporabnik": {
@@ -106,72 +140,72 @@
                 "nova": "Nov uporabnik",
                 "vloge": "Vloge",
                 "veljavnost": "Poteče veljavnost",
-                "dodaj" : "uporabnika",
+                "dodaj": "uporabnika",
                 "privzetaStran": "Privzeta stran"
             },
             "vloga": {
                 "title": "Vloge",
                 "nova": "Nova Vloga",
-                "dodaj" : "vlogo",
+                "dodaj": "vlogo",
                 "dovoljenja": "Dovoljenja"
             },
             "drzava": {
                 "title": "Države",
                 "nova": "Nova država",
                 "isoNum": "Iso Num",
-                "dodaj" : "državo",
+                "dodaj": "državo",
                 "isoNaziv": "Iso naziv"
             },
             "posta": {
                 "title": "Pošte",
-                "dodaj" : "pošto",
+                "dodaj": "pošto",
                 "nova": "Nova pošta"
             },
             "zvrstSurs": {
                 "title": "Zvrsti SURS",
                 "nova": "Nova zvrst SURS",
                 "isoSifra": "Iso šifra",
-                "dodaj" : "zvrst SURS",
+                "dodaj": "zvrst SURS",
                 "isoNaziv": "Iso naziv"
             },
             "tipFunkcije": {
                 "nova": "Nov tip funkcije",
                 "title": "Tipi funkcij",
                 "dovoliPrekrivanje": "Dovoli Prekrivanje",
-                "dodaj" : "tip funkcije",
+                "dodaj": "tip funkcije",
                 "nastopajoc": "Nastopajoc"
             },
             "zvrstUprizoritve": {
                 "nova": "Nova zvrst uprizoritve",
-                "dodaj" : "zvrst uprizoritve",
+                "dodaj": "zvrst uprizoritve",
                 "title": "Zvrsti uprizoritev"
-            },            
-            "postniNaslov":{
+            },
+            "postniNaslov": {
                 "title": "Naslovi",
                 "naziv": "Naziv",
                 "ulica": "Ulica",
                 "posta": "Posta",
-                "dodaj" : "poštni naslov",
+                "dodaj": "poštni naslov",
                 "drzava": "Država"
-                
+
             },
-            "telefonska":{
+            "telefonska": {
                 "title": "Telefonske",
                 "vrsta": "Vrsta",
                 "stevilka": "Stevilka",
-                "dodaj" : "telefonsko",
+                "dodaj": "telefonsko",
                 "privzeta": "Privzeta"
-                
+
             },
-            "trr":{
+            "trr": {
                 "title": "TRR",
                 "banka": "Banka",
                 "stevilka": "Stevilka",
                 "swift": "Swift",
-                "dodaj" : "TRR",
-                "bic": "Bic"                
+                "dodaj": "TRR",
+                "bic": "Bic"
             }
-            
+
         }
     },
     "flashManager": {

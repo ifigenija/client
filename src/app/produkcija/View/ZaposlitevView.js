@@ -3,8 +3,8 @@
  */
 define([
     'app/Dokument/View/PostavkeView',
-    'template!../tpl/trr-form.tpl',
-    'formSchema!trr',
+    'template!../tpl/zaposlitev-form.tpl',
+    'formSchema!zaposlitev',
     'i18next'
 ], function (
         PostavkeView,
@@ -13,40 +13,40 @@ define([
         i18next
         ) {
 
-    var TrrView = PostavkeView.extend({
+    var ZaposlitevView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Trr',
-        detailName: 'trrji',
-        dodaj: i18next.t('seznami.view.trr.dodaj'),
-        formTitle: i18next.t('seznami.view.trr.title'),
+        name: 'Zaposlitev',
+        detailName: 'zaposlitve',
+        dodaj: i18next.t('produkcija.view.zaposlitev.dodaj'),
+        formTitle: i18next.t('produkcija.view.zaposlitev.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.banka'),
-                name: 'banka',
+                label: i18next.t('produkcija.view.zaposlitev.status'),
+                name: 'status',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.stevilka'),
-                name: 'stevilka',
+                label: i18next.t('produkcija.view.zaposlitev.zacetek'),
+                name: 'zacetek',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.swift'),
-                name: 'swift',
+                label: i18next.t('produkcija.view.zaposlitev.konec'),
+                name: 'konec',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.bic'),
-                name: 'bic',
+                label: i18next.t('produkcija.view.zaposlitev.tip'),
+                name: 'tip',
                 sortable: false
             },
             {
@@ -61,5 +61,5 @@ define([
         ]
     });
 
-    return TrrView;
+    return ZaposlitevView;
 });
