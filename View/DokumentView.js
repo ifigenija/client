@@ -148,6 +148,7 @@ define([
                     var tb = self.getToolbarModel();
                     var but = tb.getButton('doc-shrani');
                     but.set('disabled', true);
+                    self.triggerMethod("save:success", model);
                 },
                 error: function (model, xhr) {                    
                     Radio.channel('error').command('xhr',model, xhr);
