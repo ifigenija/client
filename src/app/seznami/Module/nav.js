@@ -35,6 +35,14 @@ define(['i18next'], function (i18n) {
                 {
                     label: i18n.t("seznami.nav.zvrstSurs"),
                     uri: "#zvrstSurs"
+                },
+                {
+                    label: i18n.t("seznami.nav.besedilo"),
+                    uri: "#besedilo"
+                },
+                {
+                    label: i18n.t("seznami.nav.abonma"),
+                    uri: "#abonma"
                 }
             ]
         }

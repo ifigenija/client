@@ -7,10 +7,10 @@ define([
         Dokument,
         _
         ) {    
-    var ZvrstSursModel = Dokument.Model.extend({
-        urlRoot: '/rest/zvrstSurs'
+    var AbonmaModel = Dokument.Model.extend({
+        urlRoot: '/rest/abonma'
     });
     return {
-        Model: ZvrstSursModel
+        Model: AbonmaModel
     };
 });

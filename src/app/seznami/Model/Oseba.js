@@ -17,6 +17,9 @@ define([
     var OsebaTelefon = Dokument.Postavka.extend({
         urlRoot: '/rest/telefonska'
     });    
+    var OsebaZaposlitev = Dokument.Postavka.extend({
+        urlRoot: '/rest/zaposlitev'
+    });    
     
     var OsebaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTelefon,
@@ -29,11 +32,16 @@ define([
         url: '/rest/trr',
         index: 'pozicija'
     });
-
     
     var OsebaNaslovCollection = Dokument.PostavkaCollection.extend({
         model: OsebaNaslov,
         url: '/rest/postniNaslov',
+        index: 'pozicija'
+    });
+    
+    var OsebaZaposlitevCollection = Dokument.PostavkaCollection.extend({
+        model: OsebaZaposlitev,
+        url: '/rest/zaposlitev',
         index: 'pozicija'
     });
     
@@ -43,6 +51,7 @@ define([
             trrji: {collection: OsebaTrrCollection, mappedBy: 'trrji', filterBy: 'oseba'},
             telefonske: {collection: OsebaTelefonCollection, mappedBy: 'telefonske', filterBy: 'oseba'},
             naslovi: {collection: OsebaNaslovCollection, mappedBy: 'naslovi', filterBy: 'oseba'},
+            zaposlitve: {collection: OsebaZaposlitevCollection, mappedBy: 'zaposlitve', filterBy: 'oseba'}
         },
         dodajPostavko: function (nested) {
 
@@ -63,6 +72,11 @@ define([
                     break;
                 case 'telefonske':
                     postavka = new OsebaTelefon({
+                        oseba: this.id
+                    });
+                    break;
+                case 'zaposlitve':
+                    postavka = new OsebaZaposlitev({
                         oseba: this.id
                     });
                     break;

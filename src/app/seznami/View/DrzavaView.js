@@ -3,12 +3,14 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    './DrzavaEditView',
-    '../../Model/Drzava',
+    'template!../tpl/drzava-form.tpl',
+    'formSchema!drzava',
+    '../Model/Drzava',
     'i18next'
 ], function (
         SeznamiView,
-        DrzavaEditView,
+        formTpl,
+        schema,
         Drzava,
         i18next
         ) {
@@ -16,6 +18,8 @@ define([
     var DrzavaView = SeznamiView.extend({
         url: '/rest/drzava',
         name: 'Drzava',
+        schema: schema,
+        formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.drzava.dodaj'),
         columns: [
             {
@@ -57,18 +61,10 @@ define([
             }
         ]
     });
-    
-    DrzavaView.prototype.getFormView = function (model) {
-        var editModel = new Drzava.Model({id: model.get('id')});
-        editModel.fetch();
-        return new DrzavaEditView({model: editModel});
 
-    };    
-    
     DrzavaView.prototype.onDodaj = function () {
         var model = new Drzava.Model();
-        //this.collection.add(model);
-        this.formR.show(new DrzavaEditView({model: model}));
+        this.onSelected(model);
     };
 
     return DrzavaView;

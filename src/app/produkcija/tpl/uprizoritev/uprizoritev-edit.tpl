@@ -9,7 +9,6 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs uprizoritev-tabs" role="tablist">
         <li role="presentation" class="tab-splosno active"><a href="javascript:void(0)">{{t 'seznami.view.splosno'}}</a></li>
-        <li role="presentation" class="tab-osebe"><a href="javascript:void(0)" >{{t 'produkcija.view.uprizoritev.osebe'}}</a></li>
         <li role="presentation" class="tab-umetniskeEkipe"><a href="javascript:void(0)" >{{t 'produkcija.view.uprizoritev.umetniskeEkipe'}}</a></li>
         <li role="presentation" class="tab-nastopajoci"><a href="javascript:void(0)" >{{t 'produkcija.view.uprizoritev.nastopajoci'}}</a></li>
         <li role="presentation" class="tab-ostaliSodelujoci"><a href="javascript:void(0)" >{{t 'produkcija.view.uprizoritev.ostaliSodelujoci'}}</a></li>
@@ -24,15 +23,6 @@
             <div class="region-form">
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane pnl-osebe">
-            <div class="row">
-                <div class="region-naslovi col-md-6">
-                </div>
-                <div class="region-telefonske col-md-6">
-                </div>
-            </div>
-        </div>
-        <div role="tabpanel" class="tab-pane pnl-osebe region-osebe"></div>
         <div role="tabpanel" class="tab-pane pnl-umetniskeEkipe region-umetniskeEkipe"></div>
         <div role="tabpanel" class="tab-pane pnl-nastopajoci region-nastopajoci"></div>
         <div role="tabpanel" class="tab-pane pnl-ostaliSodelujoci region-ostaliSodelujoci"></div>

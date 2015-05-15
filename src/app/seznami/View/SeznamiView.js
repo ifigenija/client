@@ -93,6 +93,10 @@ define([
         var form = this.getFormView(model);
         this.formR.show(form);
         this.listenTo(form, 'preklici', this.preklici);
+        this.listenTo(form, 'save:success', this.osveziSeznam);
+    };
+    SeznamiView.prototype.osveziSeznam = function () {
+        this.collection.fetch();
     };
     SeznamiView.prototype.preklici = function () {
         this.formR.empty();
@@ -133,7 +137,7 @@ define([
             model: model
         });
 
-    }
+    };
 
     return SeznamiView;
 });

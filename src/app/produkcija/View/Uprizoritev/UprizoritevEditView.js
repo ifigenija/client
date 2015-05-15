@@ -21,20 +21,24 @@ define([
         schema: shema.toFormSchema().schema,
         triggers: {
             'click .tab-splosno': 'splosni',
-            'click .tab-osebe': 'osebe',
-            'click .tab-arhivalije': 'arhivalije'
+            'click .tab-arhivalije': 'arhivalije',
+            'click .tab-umetniskeEkipe': 'umetniskeEkipe',
+            'click .tab-nastopajoci': 'nastopajoci',
+            'click .tab-ostaliSodelujoci': 'ostaliSodelujoci'
         },
         regions: {
             regionArhivalije: '.region-arhivalije',
-            regionOsebe: '.region-osebe'
+            regionUmetniskeEkipe: '.region-umetniskeEkipe',
+            regionNastopajoci: '.region-nastopajoci',
+            regionOstaliSodelujoci: '.region-ostaliSodelujoci'
         }
     });
 
     UprizoritevEditView.prototype.getNaslovUprizoritve = function () {
         var naslovT = this.model.get('naslov');
-        
+
         var naslov = naslovT ? naslovT : i18next.t('produkcija.view.uprizoritev.naslov');
-        
+
         return naslov;
     };
 
@@ -42,8 +46,8 @@ define([
         return this.isNew() ?
                 i18next.t('produkcija.view.uprizoritev.nova') : this.getNaslovUprizoritve();
     };
-    
-    UprizoritevEditView.prototype.onBeforeRender = function(){
+
+    UprizoritevEditView.prototype.onBeforeRender = function () {
         var self = this;
         this.listenTo(this.model, 'sync', function (coll) {
             self.render();
@@ -53,17 +57,15 @@ define([
 
     UprizoritevEditView.prototype.onRender = function () {
 //        if (this.isNew()) {
-//            this.$('.tab-osebe a').prop('disabled', 'disabled');
 //            this.$('.tab-arhivalije a').prop('disabled', 'disabled');
 //            this.$('.tab-ostaliSodelujoci a').prop('disabled', 'disabled');
 //            this.$('.tab-nastopajoci a').prop('disabled', 'disabled');
 //            this.$('.tab-umetniskeEkipe a').prop('disabled', 'disabled');
 //        } else {
-            this.renderOsebe();
-            this.renderArhivalije();
-            this.renderUmetniskeEkipe();
-            this.renderNastopajoci();
-            this.renderOstaliSodelujoci();
+        this.renderArhivalije();
+        this.renderUmetniskeEkipe();
+        this.renderNastopajoci();
+        this.renderOstaliSodelujoci();
 //        }
     };
     /**
@@ -74,16 +76,7 @@ define([
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
         this.$('.tab-splosno').addClass('active');
-        
-    };
-    /**
-     * Klik na tab za kontaktne podatke 
-     * @returns {undefined}
-     */
-    UprizoritevEditView.prototype.onOsebe = function () {
-        this.deselectTab();
-        this.$('.pnl-osebe').addClass('active');
-        this.$('.tab-osebe').addClass('active');
+
     };
     /**
      * Klik na tab za arhivalije podatke 
@@ -133,7 +126,7 @@ define([
 
     UprizoritevEditView.prototype.renderArhivalije = function () {
         var self = this;
-        require(['app/produkcija/View/ArhivalijaView'], function (View) {
+        require(['app/produkcija/View/Uprizoritev/ArhivalijaView'], function (View) {
             var view = new View({
                 collection: self.model.arhivalijeCollection,
                 dokument: self.model
@@ -144,7 +137,7 @@ define([
     };
     UprizoritevEditView.prototype.renderUmetniskeEkipe = function () {
         var self = this;
-        require(['app/produkcija/View/UmetniskaEkipaView'], function (View) {
+        require(['app/produkcija/View/Uprizoritev/UmetniskaEkipaView'], function (View) {
             var view = new View({
                 collection: self.model.umetniskeEkipeCollection,
                 dokument: self.model
@@ -155,7 +148,7 @@ define([
     };
     UprizoritevEditView.prototype.renderNastopajoci = function () {
         var self = this;
-        require(['app/produkcija/View/NastopajociView'], function (View) {
+        require(['app/produkcija/View/Uprizoritev/NastopajociView'], function (View) {
             var view = new View({
                 collection: self.model.nastopajociCollection,
                 dokument: self.model
@@ -166,7 +159,7 @@ define([
     };
     UprizoritevEditView.prototype.renderOstaliSodelujoci = function () {
         var self = this;
-        require(['app/produkcija/View/OstaliSodelujociView'], function (View) {
+        require(['app/produkcija/View/Uprizoritev/OstaliSodelujociView'], function (View) {
             var view = new View({
                 collection: self.model.ostaliSodelujociCollection,
                 dokument: self.model
@@ -174,18 +167,6 @@ define([
             self.regionOstaliSodelujoci.show(view);
             return view;
         });
-    };
-
-    UprizoritevEditView.prototype.renderOsebe = function () {
-//        var self = this;
-//        require(['app/produkcija/View/Oseba/OsebaView'], function (View) {
-//            var view = new View({
-//                collection: self.model.osebeCollection,
-//                dokument: self.model
-//            });
-//            self.regionOsebe.show(view);
-//            return view;
-//        });
     };
 
     return UprizoritevEditView;

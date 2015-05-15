@@ -73,8 +73,13 @@ define([
     };
     OsebaView.prototype.onDodaj = function () {
         var model = new Oseba.Model();
-        //this.collection.add(model);
-        this.formR.show(new OsebaEditView({model: model}));
+        var view = new OsebaEditView({model: model});        
+        this.listenTo(view, "save:success", this.dodajVcollection);
+        this.formR.show(view);
+    };
+
+    OsebaView.prototype.dodajVcollection = function () {
+        this.collection.fetch();
     };
 
     return OsebaView;

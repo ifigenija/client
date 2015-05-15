@@ -22,12 +22,14 @@ define([
         triggers: {
             'click .tab-splosno': 'splosni',
             'click .tab-kontakti': 'kontakti',
-            'click .tab-trrji': 'trrji'
+            'click .tab-trrji': 'trrji',
+            'click .tab-zaposlitve': 'zaposlitve'
         },
         regions: {
             regionTrrji: '.region-trrji',
             regionNaslovi: '.region-naslovi',
-            regionTelefonske: '.region-telefonske'
+            regionTelefonske: '.region-telefonske',
+            regionZaposlitve: '.region-zaposlitve'
         }
     });
 
@@ -60,10 +62,12 @@ define([
         if (this.isNew()) {
             this.$('.tab-kontakti a').prop('disabled', 'disabled');
             this.$('.tab-trriji a').prop('disabled', 'disabled');
+            this.$('.tab-zaposlitve a').prop('disabled', 'disabled');
         } else {
             this.renderNaslovi();
             this.renderTrrji();
             this.renderTelefonske();
+            this.renderZaposlitve();
         }
     };
     /**
@@ -86,13 +90,22 @@ define([
         this.$('.tab-kontakti').addClass('active');
     };
     /**
-     * Klik na tab za kontaktne podatke 
+     * Klik na tab za trr podatke 
      * @returns {undefined}
      */
     OsebaEditView.prototype.onTrrji = function () {
         this.deselectTab();
         this.$('.pnl-trrji').addClass('active');
         this.$('.tab-trrji').addClass('active');
+    };
+    /**
+     * Klik na tab za zaposlitvene podatke 
+     * @returns {undefined}
+     */
+    OsebaEditView.prototype.onZaposlitve = function () {
+        this.deselectTab();
+        this.$('.pnl-zaposlitve').addClass('active');
+        this.$('.tab-zaposlitve').addClass('active');
     };
     /**
      * Klik na tab za kontaktne podatke 
@@ -135,6 +148,18 @@ define([
                 dokument: self.model
             });
             self.regionNaslovi.show(view);
+            return view;
+        });
+    };
+    
+    OsebaEditView.prototype.renderZaposlitve = function () {
+        var self = this;
+        require(['app/seznami/View/Oseba/ZaposlitevView'], function (View) {
+            var view = new View({
+                collection: self.model.zaposlitveCollection,
+                dokument: self.model
+            });
+            self.regionZaposlitve.show(view);
             return view;
         });
     };

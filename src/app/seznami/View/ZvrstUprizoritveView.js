@@ -3,12 +3,14 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    './ZvrstUprizoritveEditView',
-    '../../Model/ZvrstUprizoritve',
+    'template!../tpl/zvrstUprizoritve-form.tpl',
+    'formSchema!zvrstUprizoritve',
+    '../Model/ZvrstUprizoritve',
     'i18next'
 ], function (
         SeznamiView,
-        ZvrstUprizoritveEditView,
+        formTpl,
+        schema,
         ZvrstUprizoritve,
         i18next
         ) {
@@ -16,6 +18,8 @@ define([
     var ZvrstUprizoritveView = SeznamiView.extend({
         url: '/rest/zvrstUprizoritve',
         name: 'ZvrstUprizoritve',
+        schema: schema,
+        formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.zvrstUprizoritve.dodaj'),
         columns: [
             {
@@ -44,17 +48,9 @@ define([
         ]
     });
     
-    ZvrstUprizoritveView.prototype.getFormView = function (model) {
-        var editModel = new ZvrstUprizoritve.Model({id: model.get('id')});
-        editModel.fetch();
-        return new ZvrstUprizoritveEditView({model: editModel});
-
-    };    
-    
     ZvrstUprizoritveView.prototype.onDodaj = function () {
         var model = new ZvrstUprizoritve.Model();
-        //this.collection.add(model);
-        this.formR.show(new ZvrstUprizoritveEditView({model: model}));
+        this.onSelected(model);
     };
 
     return ZvrstUprizoritveView;

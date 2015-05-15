@@ -3,8 +3,8 @@
  */
 define([
     'app/Dokument/View/PostavkeView',
-    'template!../tpl/zaposlitev-form.tpl',
-    'formSchema!zaposlitev',
+    'template!../../tpl/uprizoritev/arhivalija-form.tpl',
+    'formSchema!arhivalija',
     'i18next'
 ], function (
         PostavkeView,
@@ -13,40 +13,40 @@ define([
         i18next
         ) {
 
-    var ZaposlitevView = PostavkeView.extend({
+    var ArhivalijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Zaposlitev',
-        detailName: 'zaposlitve',
-        dodaj: i18next.t('produkcija.view.zaposlitev.dodaj'),
-        formTitle: i18next.t('produkcija.view.zaposlitev.title'),
+        name: 'Arhivalija',
+        detailName: 'arhivalije',
+        dodaj: i18next.t('produkcija.view.arhivalija.dodaj'),
+        formTitle: i18next.t('produkcija.view.arhivalija.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.zaposlitev.status'),
-                name: 'status',
+                label: i18next.t('produkcija.view.arhivalija.naslov'),
+                name: 'naslov',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.zaposlitev.zacetek'),
-                name: 'zacetek',
+                label: i18next.t('produkcija.view.arhivalija.lokacijaOriginala'),
+                name: 'lokacijaOriginala',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.zaposlitev.konec'),
-                name: 'konec',
+                label: i18next.t('produkcija.view.arhivalija.objavljeno'),
+                name: 'objavljeno',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.zaposlitev.tip'),
-                name: 'tip',
+                label: i18next.t('produkcija.view.arhivalija.datum'),
+                name: 'datum',
                 sortable: false
             },
             {
@@ -61,5 +61,5 @@ define([
         ]
     });
 
-    return ZaposlitevView;
+    return ArhivalijaView;
 });

@@ -23,20 +23,20 @@ define([
         var ch = Radio.channel('layout');
 
         model.tipFunkcije = function () {
-            require(['../View/TipFunkcije/TipFunkcijeView'], function (TipFunkcijeView) {
+            require(['../View/TipFunkcijeView'], function (TipFunkcijeView) {
                 var view = new TipFunkcijeView();
                 ch.command('open', view, i18next.t('seznami.view.tipFunkcije.title'));
             });
 
         };
         model.zvrstUprizoritve = function () {
-            require(['../View/ZvrstUprizoritve/ZvrstUprizoritveView'], function (ZvrstUprizoritveView) {
+            require(['../View/ZvrstUprizoritveView'], function (ZvrstUprizoritveView) {
                 var view = new ZvrstUprizoritveView();
                 ch.command('open', view, i18next.t('seznami.view.zvrstUprizoritve.title'));
             });
         };
         model.drzava = function () {
-            require(['../View/Drzava/DrzavaView'], function (DrzavaView) {
+            require(['../View/DrzavaView'], function (DrzavaView) {
                 var view = new DrzavaView();
                 ch.command('open', view, i18next.t('seznami.view.drzava.title'));
             });
@@ -48,7 +48,7 @@ define([
             });
         };
         model.posta = function () {
-            require(['../View/Posta/PostaView'], function (PostaView) {
+            require(['../View/PostaView'], function (PostaView) {
                 var view = new PostaView();
                 ch.command('open', view, i18next.t('seznami.view.posta.title'));
             });
@@ -60,9 +60,21 @@ define([
             });
         };
         model.zvrstSurs = function () {
-            require(['../View/ZvrstSurs/ZvrstSursView'], function (ZvrstSursView) {
+            require(['../View/ZvrstSursView'], function (ZvrstSursView) {
                 var view = new ZvrstSursView();
                 ch.command('open', view, i18next.t('seznami.view.zvrstSurs.title'));
+            });
+        };
+        model.besedilo = function () {
+            require(['../View/BesediloView'], function (BesediloView) {
+                var view = new BesediloView();
+                ch.command('open', view, i18next.t('seznami.view.besedilo.title'));
+            });
+        };
+        model.abonma = function () {
+            require(['../View/AbonmaView'], function (AbonmaView) {
+                var view = new AbonmaView();
+                ch.command('open', view, i18next.t('seznami.view.abonma.title'));
             });
         };
 
@@ -82,7 +94,9 @@ define([
                     'drzava': 'drzava',
                     'oseba': 'oseba',
                     'posta': 'posta',
-                    'popa': 'popa'
+                    'popa': 'popa',
+                    'besedilo': 'besedilo',
+                    'abonma': 'abonma'
                 }
             });
         });

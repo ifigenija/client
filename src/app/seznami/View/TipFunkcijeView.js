@@ -3,12 +3,14 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    './TipFunkcijeEditView',
-    '../../Model/TipFunkcije',
+    'template!../tpl/tipFunkcije-form.tpl',
+    'formSchema!tipFunkcije',
+    '../Model/TipFunkcije',
     'i18next'
 ], function (
         SeznamiView,
-        TipFunkcijeEditView,
+        formTpl,
+        schema,
         TipFunkcije,
         i18next
         ) {
@@ -16,6 +18,8 @@ define([
     var TipFunkcijeView = SeznamiView.extend({
         url: '/rest/tipFunkcije',
         name: 'TipFunkcije',
+        schema: schema,
+        formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.tipFunkcije.dodaj'),
         columns: [
             {
@@ -56,19 +60,11 @@ define([
                 ]
             }
         ]
-    });
-    
-    TipFunkcijeView.prototype.getFormView = function (model) {
-        var editModel = new TipFunkcije.Model({id: model.get('id')});
-        editModel.fetch();
-        return new TipFunkcijeEditView({model: editModel});
-
-    };    
+    });   
     
     TipFunkcijeView.prototype.onDodaj = function () {
         var model = new TipFunkcije.Model();
-        //this.collection.add(model);
-        this.formR.show(new TipFunkcijeEditView({model: model}));
+        this.onSelected(model);
     };
 
     return TipFunkcijeView;

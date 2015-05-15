@@ -58,7 +58,7 @@ define([
             osebe: {collection: UprizoritevOsebaCollection, mappedBy: 'osebe', filterBy: 'uprizoritev'},
             umetniskeEkipe: {collection: UprizoritevUmetniskaEkipaCollection, mappedBy: 'umetniskeEkipe', filterBy: 'uprizoritev'},
             nastopajoci: {collection: UprizoritevNastopajocuCollection, mappedBy: 'nastopajoci', filterBy: 'uprizoritev'},
-            OstaliSodelujoci: {collection: UprizoritevOstaliSodelujociCollection, mappedBy: 'ostaliSodelujoci', filterBy: 'uprizoritev'}
+            ostaliSodelujoci: {collection: UprizoritevOstaliSodelujociCollection, mappedBy: 'ostaliSodelujoci', filterBy: 'uprizoritev'}
         },
         dodajPostavko: function (nested) {
 
@@ -87,7 +87,7 @@ define([
                         uprizoritev: this.id
                     });
                     break;
-                case 'OstaliSodelujoci':
+                case 'ostaliSodelujoci':
                     postavka = new UprizoritevOstaliSodelujoci({
                         uprizoritev: this.id
                     });

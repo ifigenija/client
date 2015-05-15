@@ -73,7 +73,7 @@
             },
             "uprizoritev" :{
                 "title": "Uprizoritev",
-                "osebe": "Osebe",
+                "funkcije": "Funkcije",
                 "arhivalije": "Arhivalije",
                 "dodaj": "uprizoritev",
                 "naslov": "Naslov",
@@ -93,6 +93,15 @@
                 "lokacijaOriginala": "Lokacija originala",
                 "objavljeno": "Objavljeno",
                 "datum": "Datum"
+            },
+            "funkcija" : {
+                "title": "Funkcija",
+                "dodaj": "funkcijo",
+                "nova": "Nova funkcija",
+                "podrocje": "Podrocje",
+                "naziv": "Naziv",
+                "velikost": "Velikost",
+                "pomembna": "Pomembna"
             }
         }
     },
@@ -106,7 +115,9 @@
             "tipFunkcije": "Tipi funkcij",
             "zvrstUprizoritve": "Zvrsti uprizoritev",
             "zvrstSurs": "Zvrsti SURS",
-            "tipUprizoritev": "Tip uprizoritev"
+            "tipUprizoritev": "Tip uprizoritev",
+            "besedilo": "Besedila",
+            "abonma": "Abonmaji"
         },
         "view": {
             "brisi": "Briši",
@@ -207,6 +218,25 @@
                 "swift": "Swift",
                 "dodaj": "TRR",
                 "bic": "Bic"
+            },
+            "besedilo": {
+                "title": "Besedila",
+                "nova": "Novo besedilo",
+                "dodaj": "besedilo",
+                "naslov": "Naslov",
+                "avtor": "Avtor",
+                "naslovIzvirnika": "Naslov Izvirnika",
+                "prevajalec": "Prevajalec"
+            },
+            "abonma": {
+                "title": "Abonmaji",
+                "nova": "Nov Abonma",
+                "dodaj": "abonma",
+                "ime": "Ime",
+                "stPredstav": "St. predstav",
+                "stKuponov": "St. kuponov",
+                "kapaciteta": "Kapaciteta",
+                "opis": "Opis"
             }
 
         }

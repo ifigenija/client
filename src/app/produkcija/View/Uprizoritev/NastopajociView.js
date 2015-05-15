@@ -3,8 +3,8 @@
  */
 define([
     'app/Dokument/View/PostavkeView',
-    'template!../tpl/arhivalija-form.tpl',
-    'formSchema!arhivalija',
+    'template!../../tpl/uprizoritev/nastopajoci-form.tpl',
+    'formSchema!funkcija',
     'i18next'
 ], function (
         PostavkeView,
@@ -13,40 +13,40 @@ define([
         i18next
         ) {
 
-    var ArhivalijaView = PostavkeView.extend({
+    var FunkcijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Arhivalija',
-        detailName: 'arhivalije',
-        dodaj: i18next.t('produkcija.view.arhivalija.dodaj'),
-        formTitle: i18next.t('produkcija.view.arhivalija.title'),
+        name: 'Funkcija',
+        detailName: 'nastopajoci',
+        dodaj: i18next.t('produkcija.view.funkcija.dodaj'),
+        formTitle: i18next.t('produkcija.view.funkcija.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.arhivalija.naslov'),
-                name: 'naslov',
+                label: i18next.t('produkcija.view.funkcija.podrocje'),
+                name: 'podrocje',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.arhivalija.lokacijaOriginala'),
-                name: 'lokacijaOriginala',
+                label: i18next.t('produkcija.view.funkcija.naziv'),
+                name: 'naziv',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.arhivalija.objavljeno'),
-                name: 'objavljeno',
+                label: i18next.t('produkcija.view.funkcija.velikost'),
+                name: 'velikost',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.arhivalija.datum'),
-                name: 'datum',
+                label: i18next.t('produkcija.view.funkcija.pomembna'),
+                name: 'pomembna',
                 sortable: false
             },
             {
@@ -61,5 +61,5 @@ define([
         ]
     });
 
-    return ArhivalijaView;
+    return FunkcijaView;
 });

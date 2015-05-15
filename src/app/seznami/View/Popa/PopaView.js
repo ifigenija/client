@@ -71,10 +71,16 @@ define([
         return new PopaEditView({model: editModel});
 
     };
+    
     PopaView.prototype.onDodaj = function () {
         var model = new Popa.Model();
-        //this.collection.add(model);
-        this.formR.show(new PopaEditView({model: model}));
+        var view = new PopaEditView({model: model});        
+        this.listenTo(view, "save:success", this.dodajVcollection);
+        this.formR.show(view);
+    };
+
+    PopaView.prototype.dodajVcollection = function () {
+        this.collection.fetch();
     };
 
     return PopaView;

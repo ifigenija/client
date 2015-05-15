@@ -60,7 +60,6 @@ define([
             }
         ],
         getFormView: function (model) {
-
             var editModel = new Uporabnik.Model({id: model.get('id')});
             editModel.fetch();
             return new UporabnikEditView({model: editModel});
@@ -70,8 +69,6 @@ define([
             var model = new Uporabnik.Model();
             this.collection.add(model);
             this.formR.show(new UporabnikEditView({model: model}));
-
-
         }
     });
 

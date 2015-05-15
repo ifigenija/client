@@ -3,12 +3,14 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    './PostaEditView',
-    '../../Model/Posta',
+    'template!../tpl/posta-form.tpl',
+    'formSchema!posta',
+    '../Model/Posta',
     'i18next'
 ], function (
         SeznamiView,
-        PostaEditView,
+        formTpl,
+        schema,
         Posta,
         i18next
         ) {
@@ -16,6 +18,8 @@ define([
     var PostaView = SeznamiView.extend({
         url: '/rest/posta',
         name: 'Posta',
+        schema: schema,
+        formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.posta.dodaj'),
         columns: [
             {
@@ -28,7 +32,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.naziv'),
+                label: i18next.t('seznami.view.naziv'),
                 name: 'naziv',
                 sortable: false
             },
@@ -44,17 +48,9 @@ define([
         ]
     });
 
-    PostaView.prototype.getFormView = function (model) {
-        var editModel = new Posta.Model({id: model.get('id')});
-        editModel.fetch();
-        return new PostaEditView({model: editModel});
-
-    };
-
     PostaView.prototype.onDodaj = function () {
         var model = new Posta.Model();
-        //this.collection.add(model);
-        this.formR.show(new PostaEditView({model: model}));
+        this.onSelected(model);
     };
 
     return PostaView;

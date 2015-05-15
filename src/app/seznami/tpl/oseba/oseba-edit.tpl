@@ -11,6 +11,7 @@
         <li role="presentation" class="tab-splosno active"><a href="javascript:void(0)">{{t 'seznami.view.splosno'}}</a></li>
         <li role="presentation" class="tab-kontakti"><a href="javascript:void(0)" >{{t 'seznami.view.oseba.kontakti'}}</a></li>
         <li role="presentation" class="tab-trrji"><a href="javascript:void(0)" >{{t 'seznami.view.oseba.racuni'}}</a></li>
+        <li role="presentation" class="tab-zaposlitve"><a href="javascript:void(0)" >{{t 'produkcija.view.zaposlitev.zaposlitve'}}</a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -29,9 +30,9 @@
                 </div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane pnl-osebe region-osebe">
-        </div>
         <div role="tabpanel" class="tab-pane pnl-trrji region-trrji">
+        </div>
+        <div role="tabpanel" class="tab-pane pnl-zaposlitve region-zaposlitve">
         </div>
     </div>
 </div>

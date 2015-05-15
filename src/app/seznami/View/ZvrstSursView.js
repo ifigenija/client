@@ -3,12 +3,14 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    './ZvrstSursEditView',
-    '../../Model/ZvrstSurs',
+    'template!../tpl/zvrstSurs-form.tpl',
+    'formSchema!zvrstSurs',
+    '../Model/ZvrstSurs',
     'i18next'
 ], function (
         SeznamiView,
-        ZvrstSursEditView,
+        formTpl,
+        schema,
         ZvrstSurs,
         i18next
         ) {
@@ -16,6 +18,8 @@ define([
     var ZvrstSursView = SeznamiView.extend({
         url: '/rest/zvrstSurs',
         name: 'ZvrstSurs',
+        schema: schema,
+        formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.zvrstSurs.dodaj'),
         columns: [
             {
@@ -44,18 +48,11 @@ define([
         ]
     });
     
-    ZvrstSursView.prototype.getFormView = function (model) {
-        var editModel = new ZvrstSurs.Model({id: model.get('id')});
-        editModel.fetch();
-        return new ZvrstSursEditView({model: editModel});
-
-    };    
-    
     ZvrstSursView.prototype.onDodaj = function () {
         var model = new ZvrstSurs.Model();
-        //this.collection.add(model);
-        this.formR.show(new ZvrstSursEditView({model: model}));
+        this.onSelected(model);
     };
+
 
     return ZvrstSursView;
 });

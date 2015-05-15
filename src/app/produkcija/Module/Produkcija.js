@@ -29,7 +29,7 @@ define([
             });
         };
         mod.osebe = function () {
-            require(['../View/Oseba/OsebaView'], function (OsebaView) {
+            require(['../../seznami/View/Oseba/OsebaView'], function (OsebaView) {
                 var view = new OsebaView();
                 ch.command('open', view, i18next.t('produkcija.view.oseba.title'));
             });
