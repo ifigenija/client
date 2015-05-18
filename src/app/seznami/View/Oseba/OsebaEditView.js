@@ -6,31 +6,46 @@ define([
     'template!../../tpl/oseba/oseba-edit.tpl',
     'template!../../tpl/oseba/oseba-form.tpl',
     'formSchema!oseba',
-    'i18next'
+    'i18next',
+    'app/Max/View/TabControl'
 ], function (
         DokumentView,
         tpl,
         formTpl,
         shema,
-        i18next
+        i18next,
+        TabControl
         ) {
 
     var OsebaEditView = DokumentView.extend({
         template: tpl,
         formTemplate: formTpl,
         schema: shema.toFormSchema().schema,
-        triggers: {
-            'click .tab-splosno': 'splosni',
-            'click .tab-kontakti': 'kontakti',
-            'click .tab-trrji': 'trrji',
-            'click .tab-zaposlitve': 'zaposlitve'
-        },
         regions: {
             regionTrrji: '.region-trrji',
             regionNaslovi: '.region-naslovi',
             regionTelefonske: '.region-telefonske',
-            regionZaposlitve: '.region-zaposlitve'
-        }
+            regionZaposlitve: '.region-zaposlitve',
+            regionTabs: '.oseba-tabs'
+        },
+        tabs: [{
+                name: i18next.t('seznami.view.splosno'),
+                event: 'splosni'
+            },
+            {
+                name: i18next.t('seznami.view.oseba.kontakti'),
+                event: 'kontakti'
+            },
+            {
+                id: i18next.t('produkcija.view.zaposlitev.zaposlitve'),
+                name: i18next.t('produkcija.view.zaposlitev.zaposlitve'),
+                event: 'zaposlitve'
+            },
+            {
+                id: i18next.t('seznami.view.oseba.racuni'),
+                name: i18next.t('seznami.view.oseba.racuni'),
+                event: 'trrji'
+            }]
     });
 
     OsebaEditView.prototype.getImePriimek = function () {
@@ -59,6 +74,8 @@ define([
 
 
     OsebaEditView.prototype.onRender = function () {
+        this.renderTabs();
+        
         if (this.isNew()) {
             this.$('.tab-kontakti a').prop('disabled', 'disabled');
             this.$('.tab-trriji a').prop('disabled', 'disabled');
@@ -77,7 +94,6 @@ define([
     OsebaEditView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
-        this.$('.tab-splosno').addClass('active');
         
     };
     /**
@@ -87,7 +103,6 @@ define([
     OsebaEditView.prototype.onKontakti = function () {
         this.deselectTab();
         this.$('.pnl-kontakti').addClass('active');
-        this.$('.tab-kontakti').addClass('active');
     };
     /**
      * Klik na tab za trr podatke 
@@ -96,7 +111,6 @@ define([
     OsebaEditView.prototype.onTrrji = function () {
         this.deselectTab();
         this.$('.pnl-trrji').addClass('active');
-        this.$('.tab-trrji').addClass('active');
     };
     /**
      * Klik na tab za zaposlitvene podatke 
@@ -105,17 +119,20 @@ define([
     OsebaEditView.prototype.onZaposlitve = function () {
         this.deselectTab();
         this.$('.pnl-zaposlitve').addClass('active');
-        this.$('.tab-zaposlitve').addClass('active');
     };
     /**
      * Klik na tab za kontaktne podatke 
      * @returns {undefined}
      */
     OsebaEditView.prototype.deselectTab = function () {
-        this.$('.oseba-tabs li').removeClass('active');
         this.$('.oseba-panels .tab-pane').removeClass('active');
     };
 
+    OsebaEditView.prototype.renderTabs = function () {
+        this.tabControl = new TabControl({tabs: this.tabs, listener: this});
+        this.regionTabs.show(this.tabControl);
+        return this.tabControl;
+    };
 
     OsebaEditView.prototype.renderTrrji = function () {
         var self = this;

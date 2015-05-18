@@ -4,11 +4,13 @@
 define([
     'app/seznami/View/SeznamiView',
     './OsebaEditView',
+    './OsebaKontaktnaEditView',
     '../../Model/Oseba',
     'i18next'
 ], function (
         SeznamiView,
         OsebaEditView,
+        OsebaKontaktnaEditView,
         Oseba,
         i18next
         ) {
@@ -68,12 +70,19 @@ define([
     OsebaView.prototype.getFormView = function (model) {
         var editModel = new Oseba.Model({id: model.get('id')});
         editModel.fetch();
+        
+        if (this.options.pogled === 'kontaktnaOseba') {
+            return new OsebaKontaktnaEditView({model: editModel});
+        } else {
+            return new OsebaEditView({model: editModel});
+        }
+        
         return new OsebaEditView({model: editModel});
 
     };
     OsebaView.prototype.onDodaj = function () {
         var model = new Oseba.Model();
-        var view = new OsebaEditView({model: model});        
+        var view = new OsebaEditView({model: model});
         this.listenTo(view, "save:success", this.dodajVcollection);
         this.formR.show(view);
     };

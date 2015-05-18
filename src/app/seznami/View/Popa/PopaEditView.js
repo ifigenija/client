@@ -6,13 +6,15 @@ define([
     'template!../../tpl/popa/popa-edit.tpl',
     'template!../../tpl/popa/popa-form.tpl',
     'formSchema!popa',
-    'i18next'
+    'i18next',
+    'app/Max/View/TabControl'
 ], function (
         DokumentView,
-tpl, 
-formTpl, 
-shema,
-i18next
+        tpl,
+        formTpl,
+        shema,
+        i18next,
+        TabControl
         ) {
 
 
@@ -20,29 +22,41 @@ i18next
         template: tpl,
         formTemplate: formTpl,
         schema: shema.toFormSchema().schema,
-        triggers: {
-            'click .tab-splosno': 'splosni',
-            'click .tab-kontakti': 'kontakti',
-            'click .tab-osebe': 'osebe',
-            'click .tab-trrji': 'trrji'
-        },
         regions: {
             regionOsebe: '.region-osebe',
             regionTrrji: '.region-trrji',
             regionNaslovi: '.region-naslovi',
-            regionTelefonske: '.region-telefonske'
-        }
+            regionTelefonske: '.region-telefonske',
+            regionTabs: '.popa-tabs'
+        },
+        tabs: [{
+                name: i18next.t('seznami.view.splosno'),
+                event: 'splosni'
+            },
+            {
+                name: i18next.t('seznami.view.popa.kontakti'),
+                event: 'kontakti'
+            },
+            {
+                name: i18next.t('seznami.view.popa.osebe'),
+                event: 'osebe'
+            },
+            {
+                name: i18next.t('seznami.view.popa.racuni'),
+                event: 'trrji'
+            }]
     });
     PopaEditView.prototype.getNaziv = function () {
         var naziv = this.model.get('naziv');
-        return naziv ? naziv : i18next.t('seznami.view.popa.naziv');        
+        return naziv ? naziv : i18next.t('seznami.view.popa.naziv');
     };
-    
+
     PopaEditView.prototype.getNaslov = function () {
         return this.isNew() ?
                 i18next.t('seznami.view.popa.nova') : this.getNaziv();
     };
-    PopaEditView.prototype.onBeforeRender = function(){
+
+    PopaEditView.prototype.onBeforeRender = function () {
         var self = this;
         this.listenTo(this.model, 'sync', function () {
             self.render();
@@ -50,6 +64,8 @@ i18next
     };
 
     PopaEditView.prototype.onRender = function () {
+        this.renderTabs();
+
         if (this.isNew()) {
             this.$('.tab-osebe').prop('disabled', 'disabled');
             this.$('.tab-kontakti').prop('disabled', 'disabled');
@@ -68,7 +84,6 @@ i18next
     PopaEditView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
-        this.$('.tab-splosno').addClass('active');
     };
     /**
      * Klik na tab za kontaktne podatke 
@@ -77,7 +92,6 @@ i18next
     PopaEditView.prototype.onKontakti = function () {
         this.deselectTab();
         this.$('.pnl-kontakti').addClass('active');
-        this.$('.tab-kontakti').addClass('active');
     };
     /**
      * Klik na tab za kontaktne podatke 
@@ -86,7 +100,6 @@ i18next
     PopaEditView.prototype.onTrrji = function () {
         this.deselectTab();
         this.$('.pnl-trrji').addClass('active');
-        this.$('.tab-trrji').addClass('active');
     };
     /**
      * Klik na tab za kontaktne podatke 
@@ -95,18 +108,21 @@ i18next
     PopaEditView.prototype.onOsebe = function () {
         this.deselectTab();
         this.$('.pnl-osebe').addClass('active');
-        this.$('.tab-osebe').addClass('active');
     };
     /**
      * Klik na tab za kontaktne podatke 
      * @returns {undefined}
      */
     PopaEditView.prototype.deselectTab = function () {
-        this.$('.popa-tabs li').removeClass('active');
         this.$('.popa-panels .tab-pane').removeClass('active');
     };
-    
-    
+
+    PopaEditView.prototype.renderTabs = function () {
+        this.tabControl = new TabControl({tabs: this.tabs, listener: this});
+        this.regionTabs.show(this.tabControl);
+        return this.tabControl;
+    };
+
     PopaEditView.prototype.renderTrrji = function () {
         var self = this;
         require(['app/seznami/View/TrrView'], function (View) {
@@ -131,6 +147,17 @@ i18next
     };
 
     PopaEditView.prototype.renderOsebe = function () {
+
+        var self = this;
+        require(['app/seznami/View/Oseba/OsebaView'], function (View) {
+            var view = new View({
+                collection: self.model.osebeCollection,
+                dokument: self.model,
+                pogled: 'kontaktnaOseba'
+            });
+            self.regionOsebe.show(view);
+            return view;
+        });
     };
 
 
@@ -145,6 +172,6 @@ i18next
             return view;
         });
     };
-    
+
     return PopaEditView;
 });

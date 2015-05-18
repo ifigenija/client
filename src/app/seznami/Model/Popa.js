@@ -19,11 +19,12 @@ define([
     });
 
     var PopaOseba = Dokument.Postavka.extend({
-        initialize: function(options) {
-            if (options.popa) {
-                this.urlRoot = '/rest/popa/' + options.popa.get('id') + '/osebe';
-            }
-        }
+//        initialize: function(options) {
+//            if (options.popa) {
+//                this.urlRoot = '/rest/popa/' + options.popa.get('id') + '/osebe';
+//            }
+//        }
+        urlRoot:'/rest/oseba'
     });
     
     
@@ -48,9 +49,10 @@ define([
     
     var PopaOsebaCollection = Dokument.PostavkaCollection.extend({
         model: PopaOseba,
-        url: function() {
-            return '/rest/popa/' + this.parent.id + '/osebe' ;
-        },
+//        url: function() {
+//            return '/rest/popa/' + this.parent.id + '/osebe' ;
+//        },
+        url:'/rest/oseba',
         index: 'pozicija'
     });
     

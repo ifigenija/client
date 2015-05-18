@@ -7,12 +7,7 @@
 <div role="tabpanel">
 
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs oseba-tabs" role="tablist">
-        <li role="presentation" class="tab-splosno active"><a href="javascript:void(0)">{{t 'seznami.view.splosno'}}</a></li>
-        <li role="presentation" class="tab-kontakti"><a href="javascript:void(0)" >{{t 'seznami.view.oseba.kontakti'}}</a></li>
-        <li role="presentation" class="tab-trrji"><a href="javascript:void(0)" >{{t 'seznami.view.oseba.racuni'}}</a></li>
-        <li role="presentation" class="tab-zaposlitve"><a href="javascript:void(0)" >{{t 'produkcija.view.zaposlitev.zaposlitve'}}</a></li>
-    </ul>
+    <div class="nav nav-tabs oseba-tabs"></div>
 
     <!-- Tab panes -->
     <div class="tab-content oseba-panels">
