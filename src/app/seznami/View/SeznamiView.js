@@ -84,7 +84,12 @@ define([
         this.triggerMethod(action, model);
     };
     SeznamiView.prototype.onBrisi = function (model) {
-        console.log('Brisi');
+        this.collection.sync("delete", model,{
+            success: function(){
+                console.log("uspesno zbrisano");
+            }
+        });
+        this.collection.remove(model);
     };
     SeznamiView.prototype.onUredi = function (model) {
         this.onSelected(model);

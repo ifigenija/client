@@ -25,8 +25,6 @@ define([
             }
         });
 
-
-
         var Layout = Marionette.LayoutView.extend({
             template: Handlebars.compile(layoutTpl),
             regions: {
@@ -37,7 +35,7 @@ define([
         });
 
         Layout.prototype.initialize = function (options) {
-            
+
         };
 
         Layout.prototype.onRender = function () {
@@ -52,9 +50,9 @@ define([
 
             ovv.obvestilaR.show(application.flashManager.manager);
             application.flashManager.createSporocilaView();
-            
-            
-            
+
+
+
             var menu = new SidebarMenu({
                 model: application.nav.navigation
             });
@@ -64,13 +62,17 @@ define([
 
         Layout.prototype.open = function (view, name, route) {
             name = name || view.cid;
-            this.contentR.show(view/*, { preventDestroy: true }*/);
+            this.contentR.show(view);
             if (name) {
                 module.setTitle(name);
             }
             if (route) {
                 module.replaceUrl(route);
             }
+        };
+
+        Layout.prototype.replaceUrl = function (view, name, route) {
+            console.log("zamenjaj URL");
         };
 
         module.refreshActiveTab = function (url) {
