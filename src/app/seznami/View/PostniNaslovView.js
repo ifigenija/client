@@ -46,7 +46,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('seznami.view.postniNaslov.drzava'),
-                name: 'drzava',
+                name: 'drzava.label',
                 sortable: false
             },
             {
