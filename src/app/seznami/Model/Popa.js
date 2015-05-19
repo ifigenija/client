@@ -17,16 +17,6 @@ define([
     var PopaTelefon = Dokument.Postavka.extend({
         urlRoot: '/rest/telefonska'
     });
-
-    var PopaOseba = Dokument.Postavka.extend({
-//        initialize: function(options) {
-//            if (options.popa) {
-//                this.urlRoot = '/rest/popa/' + options.popa.get('id') + '/osebe';
-//            }
-//        }
-        urlRoot:'/rest/oseba'
-    });
-    
     
     var PopaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: PopaTelefon,
@@ -47,22 +37,12 @@ define([
         index: 'pozicija'
     });
     
-    var PopaOsebaCollection = Dokument.PostavkaCollection.extend({
-        model: PopaOseba,
-//        url: function() {
-//            return '/rest/popa/' + this.parent.id + '/osebe' ;
-//        },
-        url:'/rest/oseba',
-        index: 'pozicija'
-    });
-    
     var PopaModel = Dokument.Model.extend({
         urlRoot: '/rest/popa',
-        nestedCollections: {
-            osebe: {collection: PopaOsebaCollection, mappedBy: 'osebe'},
+        nestedCollections: {          
             trrji: {collection: PopaTrrCollection, mappedBy: 'trrji', filterBy: 'popa'},
             telefonske: {collection: PopaTelefonCollection, mappedBy: 'telefonske', filterBy: 'popa'},
-            naslovi: {collection: PopaNaslovCollection, mappedBy: 'naslovi', filterBy: 'popa'},
+            naslovi: {collection: PopaNaslovCollection, mappedBy: 'naslovi', filterBy: 'popa'}
         },
         dodajPostavko: function (nested) {
 
@@ -71,11 +51,6 @@ define([
             }
             var postavka;
             switch (nested) {
-                case 'osebe':
-                    postavka = new PopaOseba({
-                        popa: this.id
-                    });
-                    break;
                 case 'trrji':
                     postavka = new PopaTrr({
                         popa: this.id
@@ -97,6 +72,6 @@ define([
         }
     });
     return {
-        Model: PopaModel,
+        Model: PopaModel
     };
 });

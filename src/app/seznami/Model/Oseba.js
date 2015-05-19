@@ -86,6 +86,6 @@ define([
         }
     });
     return {
-        Model: OsebaModel,
+        Model: OsebaModel
     };
 });

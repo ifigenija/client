@@ -5,14 +5,12 @@ define([
     'app/seznami/View/SeznamiView',
     './OsebaEditView',
     './OsebaKontaktnaEditView',
-    './OsebaNovaEditView',
     '../../Model/Oseba',
     'i18next'
 ], function (
         SeznamiView,
         OsebaEditView,
         OsebaKontaktnaEditView,
-        OsebaNovaEditView,
         Oseba,
         i18next
         ) {
@@ -70,25 +68,47 @@ define([
     });
 
     OsebaView.prototype.getFormView = function (model) {
-        var editModel = new Oseba.Model({id: model.get('id')});
-        editModel.fetch();
-
-        if (this.options.pogled === 'kontaktnaOseba') {
-            return new OsebaKontaktnaEditView({model: editModel});
-        }
-
-        return new OsebaEditView({model: editModel});
-
+        return this.ObstojecVnos(model);
     };
     OsebaView.prototype.onDodaj = function () {
         var model = new Oseba.Model();
-        var view = new OsebaNovaEditView({model: model});
+        var view = new OsebaEditView({model: model});
         this.listenTo(view, "save:success", this.dodajVcollection);
         this.formR.show(view);
     };
+    
+    OsebaView.prototype.ObstojecVnos = function (model) {
+        var editModel = new Oseba.Model({id: model.get('id')});
+        editModel.fetch();
 
-    OsebaView.prototype.dodajVcollection = function () {
+        return this.pogled(editModel);
+    };
+
+    OsebaView.prototype.pogled = function (model) {
+        if (this.options.pogled === 'kontaktnaOseba') {
+            return new OsebaKontaktnaEditView({model: model});
+        }
+
+        return new OsebaEditView({model: model});
+    };
+
+    OsebaView.prototype.dodajVcollection = function (model) {
         this.collection.fetch();
+        return this.ObstojecVnos(model);
+
+//        if (this.options.pogled === 'kontaktnaOseba') {
+//            $.ajax({
+//                url:  '../rest/popa/'  + this.model.get('popa') + '/osebe/'  + this.model.get('oseba'),
+//                method: 'PUT',
+//                mimeType: 'application/json',
+//                success: function (data, textStatus, jqXHR) {
+//                    
+//                },
+//                error: function (jqXHR, textStatus, errorThrown) {
+//                    console.log(errorThrown);
+//                }
+//            });
+//        }
     };
 
     return OsebaView;

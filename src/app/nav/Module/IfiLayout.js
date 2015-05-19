@@ -114,7 +114,7 @@ define([
             channel.comply('open', module.open);
             channel.comply('refresh', module.refreshActiveTab);
             channel.comply('close', module.closeActiveTab);
-            channel.comply('setTitle', module.setTabTitle);
+            channel.comply('setTitle', module.setTitle);
             channel.comply('replaceUrl', module.replaceUrl);
 
 

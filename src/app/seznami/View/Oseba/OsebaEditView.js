@@ -48,24 +48,27 @@ define([
             }]
     });
 
+    OsebaEditView.prototype.initialize = function () {
+        var perm = JSON.parse(sessionStorage.getItem('ifi.user.data'));
+        console.log(perm['permissions']);
+    };
     OsebaEditView.prototype.getImePriimek = function () {
         var imeT = this.model.get('ime');
         var priimekT = this.model.get('priimek');
-        
+
         var ime = imeT ? imeT : i18next.t('seznami.view.oseba.ime');
         var priimek = priimekT ? priimekT : i18next.t('seznami.view.oseba.priimek');
-        
+
         var imePriimek = ime + ' ' + priimek;
 
         return imePriimek;
     };
 
     OsebaEditView.prototype.getNaslov = function () {
-        return this.isNew() ?
-                i18next.t('seznami.view.oseba.nova') : this.getImePriimek();
+        return this.isNew() ? i18next.t('seznami.view.oseba.nova') : this.getImePriimek();
     };
-    
-    OsebaEditView.prototype.onBeforeRender = function(){
+
+    OsebaEditView.prototype.onBeforeRender = function () {
         var self = this;
         this.listenTo(this.model, 'sync', function (coll) {
             self.render();
@@ -74,18 +77,16 @@ define([
 
 
     OsebaEditView.prototype.onRender = function () {
-        this.renderTabs();
-        
         if (this.isNew()) {
-            this.$('.tab-kontakti a').prop('disabled', 'disabled');
-            this.$('.tab-trriji a').prop('disabled', 'disabled');
-            this.$('.tab-zaposlitve a').prop('disabled', 'disabled');
+            this.tabs = null;
         } else {
             this.renderNaslovi();
             this.renderTrrji();
             this.renderTelefonske();
             this.renderZaposlitve();
         }
+
+        this.renderTabs();
     };
     /**
      * Klik na splošni tab
@@ -94,7 +95,7 @@ define([
     OsebaEditView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
-        
+
     };
     /**
      * Klik na tab za kontaktne podatke 
@@ -168,7 +169,7 @@ define([
             return view;
         });
     };
-    
+
     OsebaEditView.prototype.renderZaposlitve = function () {
         var self = this;
         require(['app/seznami/View/Oseba/ZaposlitevView'], function (View) {

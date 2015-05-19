@@ -34,9 +34,16 @@ define([
     });
 
     SeznamiView.prototype.initialize = function (options) {
+        
+        this.url = options.url || this.url;
+        
         if (!this.collection) {
             this.collection = this.getCollection();
         }
+        
+        this.listenTo(this.collection, 'selectValue', this.onSelected);
+        this.listenTo(this.collection, 'deselect', this.onSelected);
+        this.listenTo(this.collection, 'backgrid:action', this.onGridAction);
     };
 
     SeznamiView.prototype.getCollection = function () {
@@ -75,9 +82,6 @@ define([
         
         this.gridR.show(this.grid);
         this.collection.fetch();
-        this.listenTo(this.collection, 'selectValue', this.onSelected);
-        this.listenTo(this.collection, 'deselect', this.onSelected);
-        this.listenTo(this.collection, 'backgrid:action', this.onGridAction);
     };
 
     SeznamiView.prototype.onGridAction = function (model, action) {
@@ -87,6 +91,9 @@ define([
         this.collection.sync("delete", model,{
             success: function(){
                 console.log("uspesno zbrisano");
+            },
+            error: function(){
+                console.log("napaka pri brisanju iz seznama");
             }
         });
         this.collection.remove(model);

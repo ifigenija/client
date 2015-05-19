@@ -64,18 +64,16 @@ define([
     };
 
     PopaEditView.prototype.onRender = function () {
-        this.renderTabs();
-
         if (this.isNew()) {
-            this.$('.tab-osebe').prop('disabled', 'disabled');
-            this.$('.tab-kontakti').prop('disabled', 'disabled');
-            this.$('.tab-trriji').prop('disabled', 'disabled');
+            this.tabs = null;
         } else {
             this.renderNaslovi();
             this.renderTelefonske();
             this.renderTrrji();
             this.renderOsebe();
         }
+        
+        this.renderTabs();
     };
     /**
      * Klik na splošni tab
@@ -151,8 +149,7 @@ define([
         var self = this;
         require(['app/seznami/View/Oseba/OsebaView'], function (View) {
             var view = new View({
-                collection: self.model.osebeCollection,
-                dokument: self.model,
+                url: "/rest/oseba",
                 pogled: 'kontaktnaOseba'
             });
             self.regionOsebe.show(view);
