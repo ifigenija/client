@@ -92,7 +92,7 @@ define([
     PostavkeView.prototype.render = function () {
         FormView.prototype.render.apply(this, arguments);
         this.renderList();
-        this.triggerMethod('after:render:postavke');
+        this.triggerMethod('after:render:list');
         return this;
     };
 
@@ -183,7 +183,8 @@ define([
     PostavkeView.prototype.onShrani = function () {
         var self = this;
         if (this.commit()) {
-            this.shrani(this.model, {success: function () {
+            this.shrani(this.model, {success: function (model) {
+                    self.triggerMethod('save:success', model);
                     self.model = null;
                     var tb = self.getToolbarModel();
                     var but = tb.getButton('doc-postavka-shrani');
