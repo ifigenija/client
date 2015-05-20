@@ -20,7 +20,7 @@ require.config({
         'pageable': 'lib/backbone.paginator/lib/backbone.paginator',
         'backbone-forms': 'lib/backbone-forms/distribution.amd/backbone-forms',
         'deep-model': 'lib/backbone-deep-model/distribution/deep-model',
-        'backbone-modal': 'lib/backbone.bootstrap-modal/src/backbone.bootstrap-modal',
+        'backbone-modal': 'app/Max/View/Modal',
         'moment': 'lib/moment/moment',
         'handlebars': 'lib/handlebars/handlebars.amd',
         'i18next-actual': 'lib/i18next/i18next.amd.withJQuery',
@@ -65,12 +65,7 @@ require.config({
         'backbone-modal': ['jquery', 'backbone'],
         'bootstrap': ['jquery'],
         'jquery.jsonrpc': ['jquery'],
-        'lib/bootstrap-datepicker': ['jquery', 'bootstrap'],
-        'lib/dx.chartjs': ['jquery', 'lib/globalize.sl'],
-        'lib/globalize.sl': ['lib/globalize'],
-        'lib/globalize': {
-            exports: 'Globalize'
-        },
+        'lib/bootstrap-datepicker': ['jquery', 'bootstrap']
     },
     noGlobal: true
 });
