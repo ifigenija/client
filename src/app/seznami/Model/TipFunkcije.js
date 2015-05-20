@@ -10,7 +10,7 @@ define([
         baseUrl
         ) {    
     var TipFunkcijeModel = Dokument.Model.extend({
-        urlRoot: '/rest/tipFunkcije'
+        urlRoot: baseUrl + '/rest/tipFunkcije'
     });
     return {
         Model: TipFunkcijeModel

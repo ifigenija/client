@@ -10,7 +10,7 @@ define([
         baseUrl
         ) {    
     var PostaModel = Dokument.Model.extend({
-        urlRoot: '/rest/posta'
+        urlRoot: baseUrl + '/rest/posta'
     });
     return {
         Model: PostaModel

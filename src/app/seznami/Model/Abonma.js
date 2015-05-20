@@ -10,7 +10,7 @@ define([
         baseUrl
         ) {    
     var AbonmaModel = Dokument.Model.extend({
-        urlRoot: '/rest/abonma'
+        urlRoot: baseUrl + '/rest/abonma'
     });
     return {
         Model: AbonmaModel

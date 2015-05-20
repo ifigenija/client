@@ -10,7 +10,7 @@ define([
         baseUrl
         ) {    
     var ZvrstUprizoritveModel = Dokument.Model.extend({
-        urlRoot: '/rest/zvrstUprizoritve'
+        urlRoot: baseUrl + '/rest/zvrstUprizoritve'
     });
     return {
         Model: ZvrstUprizoritveModel

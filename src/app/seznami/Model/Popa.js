@@ -11,36 +11,36 @@ define([
         ) {
 
     var PopaTrr = Dokument.Postavka.extend({
-        urlRoot: '/rest/trr'
+        urlRoot: baseUrl + '/rest/trr'
     });
     var PopaNaslov = Dokument.Postavka.extend({
-        urlRoot: '/rest/postniNaslov'
+        urlRoot: baseUrl + '/rest/postniNaslov'
     });
     var PopaTelefon = Dokument.Postavka.extend({
-        urlRoot: '/rest/telefonska'
+        urlRoot: baseUrl + '/rest/telefonska'
     });
     
     var PopaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: PopaTelefon,
-        url: '/rest/telefonska',
+        url: baseUrl + '/rest/telefonska',
         index: 'pozicija'
     });
     
     var PopaTrrCollection = Dokument.PostavkaCollection.extend({
         model: PopaTrr,
-        url: '/rest/trr',
+        url: baseUrl + '/rest/trr',
         index: 'pozicija'
     });
 
     
     var PopaNaslovCollection = Dokument.PostavkaCollection.extend({
         model: PopaNaslov,
-        url: '/rest/postniNaslov',
+        url: baseUrl + '/rest/postniNaslov',
         index: 'pozicija'
     });
     
     var PopaModel = Dokument.Model.extend({
-        urlRoot: '/rest/popa',
+        urlRoot: baseUrl + '/rest/popa',
         nestedCollections: {          
             trrji: {collection: PopaTrrCollection, mappedBy: 'trrji', filterBy: 'popa'},
             telefonske: {collection: PopaTelefonCollection, mappedBy: 'telefonske', filterBy: 'popa'},

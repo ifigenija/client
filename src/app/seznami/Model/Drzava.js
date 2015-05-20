@@ -10,7 +10,7 @@ define([
         baseUrl
         ) {    
     var DrzavaModel = Dokument.Model.extend({
-        urlRoot: '/rest/drzava'
+        urlRoot: baseUrl + '/rest/drzava'
     });
     return {
         Model: DrzavaModel

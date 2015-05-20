@@ -11,17 +11,17 @@ define([
         ) {
 
     var UporabnikVloge = Dokument.Postavka.extend({
-        urlRoot: '/rest/role'
+        urlRoot: baseUrl + '/rest/role'
     });
     
     var UporabnikVlogeCollection = Dokument.PostavkaCollection.extend({
         model: UporabnikVloge,
-        url: '/rest/role',
+        url: baseUrl + '/rest/role',
         index: 'pozicija'
     });
     
     var UporabnikModel = Dokument.Model.extend({
-        urlRoot: '/rest/user',
+        urlRoot: baseUrl + '/rest/user',
         nestedCollections: {
             vloge: {collection: UporabnikVlogeCollection, mappedBy: 'vloge', filterBy: 'user'}
         },

@@ -18,7 +18,7 @@ define([
         ) {
 
     var BesediloView = SeznamiView.extend({
-        url: '/rest/besedilo',
+        url: baseUrl + '/rest/besedilo',
         name: 'Besedilo',
         schema: schema,
         formTemplate: formTpl,

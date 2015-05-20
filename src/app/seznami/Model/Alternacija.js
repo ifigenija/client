@@ -10,7 +10,7 @@ define([
         baseUrl
         ) {    
     var AlternacijaModel = Dokument.Model.extend({
-        urlRoot: '/rest/alternacija'
+        urlRoot: baseUrl + '/rest/alternacija'
     });
     return {
         Model: AlternacijaModel

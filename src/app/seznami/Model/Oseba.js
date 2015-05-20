@@ -11,52 +11,52 @@ define([
         ) {
 
     var OsebaOsebniPodatki = Dokument.Postavka.extend({
-        urlRoot: '/rest/oseba'
+        urlRoot: baseUrl + '/rest/oseba'
     });
     var OsebaTrr = Dokument.Postavka.extend({
-        urlRoot: '/rest/trr'
+        urlRoot: baseUrl + '/rest/trr'
     });
     var OsebaNaslov = Dokument.Postavka.extend({
-        urlRoot: '/rest/postniNaslov'
+        urlRoot: baseUrl + '/rest/postniNaslov'
     });
     var OsebaTelefon = Dokument.Postavka.extend({
-        urlRoot: '/rest/telefonska'
+        urlRoot: baseUrl + '/rest/telefonska'
     });    
     var OsebaZaposlitev = Dokument.Postavka.extend({
-        urlRoot: '/rest/zaposlitev'
+        urlRoot: baseUrl + '/rest/zaposlitev'
     });    
     
     var OsebaOsebniPodatkiCollection = Dokument.PostavkaCollection.extend({
         model: OsebaOsebniPodatki,
-        url: '/rest/oseba',
+        url: baseUrl + '/rest/oseba',
         index: 'pozicija'
     });
     var OsebaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTelefon,
-        url: '/rest/telefonska',
+        url: baseUrl + '/rest/telefonska',
         index: 'pozicija'
     });
     
     var OsebaTrrCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTrr,
-        url: '/rest/trr',
+        url: baseUrl + '/rest/trr',
         index: 'pozicija'
     });
     
     var OsebaNaslovCollection = Dokument.PostavkaCollection.extend({
         model: OsebaNaslov,
-        url: '/rest/postniNaslov',
+        url: baseUrl + '/rest/postniNaslov',
         index: 'pozicija'
     });
     
     var OsebaZaposlitevCollection = Dokument.PostavkaCollection.extend({
         model: OsebaZaposlitev,
-        url: '/rest/zaposlitev',
+        url: baseUrl + '/rest/zaposlitev',
         index: 'pozicija'
     });
     
     var OsebaModel = Dokument.Model.extend({
-        urlRoot: '/rest/oseba',
+        urlRoot: baseUrl + '/rest/oseba',
         nestedCollections: {
             osebniPodatki: {collection: OsebaOsebniPodatkiCollection, mappedBy: 'osebniPodatki', filterBy: 'oseba'},
             trrji: {collection: OsebaTrrCollection, mappedBy: 'trrji', filterBy: 'oseba'},

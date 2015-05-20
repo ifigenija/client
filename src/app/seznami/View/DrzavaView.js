@@ -18,7 +18,7 @@ define([
         ) {
 
     var DrzavaView = SeznamiView.extend({
-        url: '/rest/drzava',
+        url: baseUrl + '/rest/drzava',
         name: 'Drzava',
         schema: schema,
         formTemplate: formTpl,

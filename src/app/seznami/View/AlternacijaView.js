@@ -18,7 +18,7 @@ define([
         ) {
 
     var AlternacijaView = SeznamiView.extend({
-        url: '/rest/alternacija',
+        url: baseUrl + '/rest/alternacija',
         name: 'Alternacija',
         schema: schema,
         formTemplate: formTpl,

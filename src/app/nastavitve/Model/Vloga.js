@@ -11,17 +11,17 @@ define([
         ) {
 
     var VlogaDovoljenja = Dokument.Postavka.extend({
-        urlRoot: '/rest/permission'
+        urlRoot: baseUrl + '/rest/permission'
     });
     
     var VlogaDovoljenjaCollection = Dokument.PostavkaCollection.extend({
         model: VlogaDovoljenja,
-        url: '/rest/permission',
+        url: baseUrl + '/rest/permission',
         index: 'pozicija'
     });
     
     var VlogaModel = Dokument.Model.extend({
-        urlRoot: '/rest/role',
+        urlRoot: baseUrl + '/rest/role',
         nestedCollections: {
             vloge: {collection: VlogaDovoljenjaCollection, mappedBy: 'dovoljenja', filterBy: 'role'}
         },

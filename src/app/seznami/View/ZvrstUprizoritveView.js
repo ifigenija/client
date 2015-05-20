@@ -18,7 +18,7 @@ define([
         ) {
 
     var ZvrstUprizoritveView = SeznamiView.extend({
-        url: '/rest/zvrstUprizoritve',
+        url: baseUrl + '/rest/zvrstUprizoritve',
         name: 'ZvrstUprizoritve',
         schema: schema,
         formTemplate: formTpl,

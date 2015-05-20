@@ -9,7 +9,7 @@ define([
         _
         ) {    
     var ZvrstSursModel = Dokument.Model.extend({
-        urlRoot: '/rest/zvrstSurs'
+        urlRoot: baseUrl + '/rest/zvrstSurs'
     });
     return {
         Model: ZvrstSursModel

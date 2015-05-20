@@ -18,7 +18,7 @@ define([
         ) {
 
     var VlogaView = SeznamiView.extend({
-        url: '/rest/role',
+        url: baseUrl + '/rest/role',
         formTemplate: formTpl,
         name: 'Vloga',
         dodaj: i18next.t('seznami.view.vloga.dodaj'),

@@ -11,58 +11,58 @@ define([
         ) {
 
     var UprizoritevStroskovnik = Dokument.Postavka.extend({
-        urlRoot: '/rest/stroskovnik'
+        urlRoot: baseUrl + '/rest/stroskovnik'
     });
     var UprizoritevArhivalija = Dokument.Postavka.extend({
-        urlRoot: '/rest/arhivalija'
+        urlRoot: baseUrl + '/rest/arhivalija'
     });
     var UprizoritevOseba = Dokument.Postavka.extend({
-        urlRoot: '/rest/oseba'
+        urlRoot: baseUrl + '/rest/oseba'
     });
     var UprizoritevUmetniskaEkipa = Dokument.Postavka.extend({
-        urlRoot: '/rest/funkcija'
+        urlRoot: baseUrl + '/rest/funkcija'
     });
     var UprizoritevNastopajoci = Dokument.Postavka.extend({
-        urlRoot: '/rest/funkcija'
+        urlRoot: baseUrl + '/rest/funkcija'
     });
     var UprizoritevOstaliSodelujoci = Dokument.Postavka.extend({
-        urlRoot: '/rest/funkcija'
+        urlRoot: baseUrl + '/rest/funkcija'
     });
     
     var UprizoritevStroskovnikCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevStroskovnik,
-        url: '/rest/arhivalija',
+        url: baseUrl + '/rest/arhivalija',
         index: 'pozicija'
     });
     var UprizoritevArhivalijaCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevArhivalija,
-        url: '/rest/arhivalija',
+        url: baseUrl + '/rest/arhivalija',
         index: 'pozicija'
     });
     
     var UprizoritevOsebaCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevOseba,
-        url: '/rest/oseba',
+        url: baseUrl + '/rest/oseba',
         index: 'pozicija'
     });
     var UprizoritevUmetniskaEkipaCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevUmetniskaEkipa,
-        url: '/rest/funkcija',
+        url: baseUrl + '/rest/funkcija',
         index: 'pozicija'
     });
     var UprizoritevNastopajocuCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevNastopajoci,
-        url: '/rest/funkcija',
+        url: baseUrl + '/rest/funkcija',
         index: 'pozicija'
     });
     var UprizoritevOstaliSodelujociCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevOstaliSodelujoci,
-        url: '/rest/funkcija',
+        url: baseUrl + '/rest/funkcija',
         index: 'pozicija'
     });
     
     var UprizoritevModel = Dokument.Model.extend({
-        urlRoot: '/rest/uprizoritev',
+        urlRoot: baseUrl + '/rest/uprizoritev',
         nestedCollections: {
             stroskovniki: {collection: UprizoritevStroskovnikCollection, mappedBy: 'stroskovniki', filterBy: 'uprizoritev'},
             arhivalije: {collection: UprizoritevArhivalijaCollection, mappedBy: 'arhivalije', filterBy: 'uprizoritev'},

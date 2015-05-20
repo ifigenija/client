@@ -18,7 +18,7 @@ define([
         ) {
 
     var AbonmaView = SeznamiView.extend({
-        url: '/rest/abonma',
+        url: baseUrl + '/rest/abonma',
         name: 'Abonma',
         schema: schema,
         formTemplate: formTpl,

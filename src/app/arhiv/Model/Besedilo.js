@@ -10,7 +10,7 @@ define([
         baseUrl
         ) {    
     var BesediloModel = Dokument.Model.extend({
-        urlRoot: baseUrl + '/rest/besedilo'
+        urlRoot: baseUrl + baseUrl + '/rest/besedilo'
     });
     return {
         Model: BesediloModel

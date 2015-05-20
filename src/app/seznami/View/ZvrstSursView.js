@@ -18,7 +18,7 @@ define([
         ) {
 
     var ZvrstSursView = SeznamiView.extend({
-        url: '/rest/zvrstSurs',
+        url: baseUrl + '/rest/zvrstSurs',
         name: 'ZvrstSurs',
         schema: schema,
         formTemplate: formTpl,

@@ -18,7 +18,7 @@ define([
         ) {
 
     var TipFunkcijeView = SeznamiView.extend({
-        url: '/rest/tipFunkcije',
+        url: baseUrl + '/rest/tipFunkcije',
         name: 'TipFunkcije',
         schema: schema,
         formTemplate: formTpl,

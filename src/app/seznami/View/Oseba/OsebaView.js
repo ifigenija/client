@@ -16,7 +16,7 @@ define([
         ) {
 
     var OsebaView = SeznamiView.extend({
-        url: '/rest/oseba',
+        url: baseUrl + '/rest/oseba',
         name: 'Oseba',
         dodaj: i18next.t('seznami.view.oseba.dodaj'),
         columns: [

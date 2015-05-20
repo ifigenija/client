@@ -18,7 +18,7 @@ define([
         ) {
 
     var PostaView = SeznamiView.extend({
-        url: '/rest/posta',
+        url: baseUrl + '/rest/posta',
         name: 'Posta',
         schema: schema,
         formTemplate: formTpl,
