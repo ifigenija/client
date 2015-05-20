@@ -4,15 +4,15 @@
 define([
     'app/seznami/View/SeznamiView',
     './OsebaEditView',
-    './OsebaKontaktnaEditView',
     '../../Model/Oseba',
-    'i18next'
+    'i18next',
+    'baseUrl'
 ], function (
         SeznamiView,
         OsebaEditView,
-        OsebaKontaktnaEditView,
         Oseba,
-        i18next
+        i18next,
+        baseUrl
         ) {
 
     var OsebaView = SeznamiView.extend({
@@ -60,8 +60,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
+                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
                 ]
             }
         ],
@@ -76,20 +75,16 @@ define([
         this.listenTo(view, "save:success", this.dodajVcollection);
         this.formR.show(view);
     };
-    
+
     OsebaView.prototype.ObstojecVnos = function (model) {
         var editModel = new Oseba.Model({id: model.get('id')});
         editModel.fetch();
 
-        return this.pogled(editModel);
-    };
-
-    OsebaView.prototype.pogled = function (model) {
-        if (this.options.pogled === 'kontaktnaOseba') {
-            return new OsebaKontaktnaEditView({model: model});
-        }
-
-        return new OsebaEditView({model: model});
+        return new OsebaEditView(
+                {
+                    model: editModel,
+                    pogled: this.options.pogled
+                });
     };
 
     OsebaView.prototype.dodajVcollection = function (model) {

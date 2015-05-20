@@ -5,12 +5,14 @@ define([
     'app/seznami/View/SeznamiView',
     './UprizoritevEditView',
     '../../Model/Uprizoritev',
-    'i18next'
+    'i18next',
+    'baseUrl'
 ], function (
         SeznamiView,
         UprizoritevEditView,
         Uprizoritev,
-        i18next
+        i18next,
+        baseUrl
         ) {
 
     var UprizoritevView = SeznamiView.extend({
@@ -21,15 +23,15 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.uprizoritev.naslov'),
-                name: 'naslov',
+                label: i18next.t('produkcija.view.uprizoritev.faza'),
+                name: 'faza',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.uprizoritev.faza'),
-                name: 'faza',
+                label: i18next.t('produkcija.view.uprizoritev.naslov'),
+                name: 'naslov',
                 sortable: false
             },
             {

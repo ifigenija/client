@@ -150,7 +150,7 @@ define([
         require(['app/seznami/View/Oseba/OsebaView'], function (View) {
             var view = new View({
                 url: "/rest/oseba",
-                pogled: 'kontaktnaOseba'
+                pogled: 'kontaktna'
             });
             self.regionOsebe.show(view);
             return view;

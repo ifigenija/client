@@ -6,13 +6,15 @@ define([
     'template!../tpl/vloga-edit.tpl',
     'template!../tpl/vloga-form.tpl',
     'formSchema!role',
-    'i18next'
+    'i18next',
+    'baseUrl'
 ], function (
         DokumentView,
         tpl,
         formTpl,
         shema,
-        i18next
+        i18next,
+        baseUrl
         ) {
 
     var VlogaEditView = DokumentView.extend({

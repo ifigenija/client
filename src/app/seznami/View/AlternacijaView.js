@@ -3,53 +3,60 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    'template!../tpl/drzava-form.tpl',
-    'formSchema!drzava',
-    '../Model/Drzava',
+    'template!../tpl/alternacija-form.tpl',
+    'formSchema!alternacija',
+    '../Model/Alternacija',
     'i18next',
     'baseUrl'
 ], function (
         SeznamiView,
         formTpl,
         schema,
-        Drzava,
+        Alternacija,
         i18next,
         baseUrl
         ) {
 
-    var DrzavaView = SeznamiView.extend({
-        url: '/rest/drzava',
-        name: 'Drzava',
+    var AlternacijaView = SeznamiView.extend({
+        url: '/rest/alternacija',
+        name: 'Alternacija',
         schema: schema,
         formTemplate: formTpl,
-        dodaj: i18next.t('seznami.view.drzava.dodaj'),
+        dodaj: i18next.t('seznami.view.alternacija.dodaj'),
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.sifra'),
-                name: 'sifra',
+                label: i18next.t('seznami.view.alternacija.ime'),
+                name: 'ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.naziv'),
-                name: 'naziv',
+                label: i18next.t('seznami.view.alternacija.stPredstav'),
+                name: 'stPredstav',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.drzava.isoNum'),
-                name: 'isoNum',
+                label: i18next.t('seznami.view.alternacija.stKuponov'),
+                name: 'stKuponov',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.drzava.isoNaziv'),
-                name: 'isoNaziv',
+                label: i18next.t('seznami.view.alternacija.kapaciteta'),
+                name: 'kapaciteta',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('seznami.view.alternacija.opis'),
+                name: 'opis',
                 sortable: true
             },
             {
@@ -63,10 +70,10 @@ define([
         ]
     });
 
-    DrzavaView.prototype.onDodaj = function () {
-        var model = new Drzava.Model();
+    AlternacijaView.prototype.onDodaj = function () {
+        var model = new Alternacija.Model();
         this.onSelected(model);
     };
 
-    return DrzavaView;
+    return AlternacijaView;
 });

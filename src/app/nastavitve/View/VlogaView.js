@@ -6,13 +6,15 @@ define([
     'template!../tpl/vloga-form.tpl',
     './VlogaEditView',
     '../Model/Vloga',
-    'i18next'
+    'i18next',
+    'baseUrl'
 ], function (
         SeznamiView,
         formTpl,
         VlogaEditView,
         Vloga,
-        i18next
+        i18next,
+        baseUrl
         ) {
 
     var VlogaView = SeznamiView.extend({

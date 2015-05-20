@@ -82,8 +82,8 @@
                 "datumPremiere": "Datum premiere",
                 "nova": "Nova uprizoritev",
                 "umetniskeEkipe": "Umetniska Ekipa",
-                "nastopajoci": "Nastopajoci",
-                "ostaliSodelujoci": "Ostali sodelujoci"
+                "nastopajoci": "Nastopajoči",
+                "ostaliSodelujoci": "Ostali sodelujoči"
             },
             "arhivalija" : {
                 "title": "Arhivalija",
@@ -134,6 +134,7 @@
                 "nova": "Nova oseba",
                 "kontakti": "Kontakti",
                 "racuni": "Računi",
+                "osebniPodatki": "Osebni podatki",
                 "ime": "Ime",
                 "priimek": "Priimek",
                 "psevdonim": "Psevdonim",

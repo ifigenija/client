@@ -6,13 +6,15 @@ define([
     'template!../tpl/uporabnik-form.tpl',
     './UporabnikEditView',
     '../Model/Uporabnik',
-    'i18next'
+    'i18next',
+    'baseUrl'
 ], function (
         SeznamiView,
         formTpl,
         UporabnikEditView,
         Uporabnik,
-        i18next
+        i18next,
+        baseUrl
         ) {
 
     var UporabnikView = SeznamiView.extend({
@@ -54,8 +56,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title:  i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title:  i18next.t('seznami.view.uredi')},
+                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
                 ]
             }
         ],

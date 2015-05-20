@@ -65,16 +65,16 @@ define([
                 ch.command('open', view, i18next.t('seznami.view.zvrstSurs.title'));
             });
         };
-        model.besedilo = function () {
-            require(['../View/BesediloView'], function (BesediloView) {
-                var view = new BesediloView();
-                ch.command('open', view, i18next.t('seznami.view.besedilo.title'));
-            });
-        };
         model.abonma = function () {
             require(['../View/AbonmaView'], function (AbonmaView) {
                 var view = new AbonmaView();
                 ch.command('open', view, i18next.t('seznami.view.abonma.title'));
+            });
+        };
+        model.alternacija = function () {
+            require(['../View/AlternacijaView'], function (AlternacijaView) {
+                var view = new AlternacijaView();
+                ch.command('open', view, i18next.t('seznami.view.alternacijaView.title'));
             });
         };
 
@@ -95,8 +95,8 @@ define([
                     'oseba': 'oseba',
                     'posta': 'posta',
                     'popa': 'popa',
-                    'besedilo': 'besedilo',
-                    'abonma': 'abonma'
+                    'abonma': 'abonma',
+                    'alternacija' : 'alternacija'
                 }
             });
         });

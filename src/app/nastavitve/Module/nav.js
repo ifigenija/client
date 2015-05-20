@@ -7,7 +7,29 @@ define(['i18next'], function (i18n) {
         {
             label: i18n.t("nastavitve.nav.label"),
             icon: 'fa-cog',
-            uri: '#nastavitve'
+            pages: [
+                {
+                    label: i18n.t("nastavitve.nav.moznosti"),
+                    uri: "#aaa/moznosti"
+                },
+                {
+                    divider: true
+                },
+                {
+                    label: i18n.t("aaa.nav.addUser"),
+                    icon: "fa-user-plus",
+                    uri: "#aaa/user/dodaj"
+                },
+                {
+                    label: i18n.t("aaa.nav.users"),
+                    icon: "fa-user-plus",
+                    uri: "#aaa/users"
+                },
+                {
+                    label: i18n.t("aaa.nav.roles"),
+                    uri: "#aaa/roles"
+                }
+            ]
         }
     ];
 });

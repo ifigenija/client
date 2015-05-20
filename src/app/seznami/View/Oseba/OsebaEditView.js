@@ -17,41 +17,60 @@ define([
         TabControl
         ) {
 
+    var tabSplosno =
+            [
+                {
+                    name: i18next.t('seznami.view.splosno'),
+                    event: 'splosni'
+                },
+                {
+                    name: i18next.t('seznami.view.oseba.osebniPodatki'),
+                    event: 'osebniPodatki'
+                },
+                {
+                    name: i18next.t('seznami.view.oseba.kontakti'),
+                    event: 'kontakti'
+                },
+                {
+                    name: i18next.t('produkcija.view.zaposlitev.zaposlitve'),
+                    event: 'zaposlitve'
+                },
+                {
+                    name: i18next.t('seznami.view.oseba.racuni'),
+                    event: 'trrji'
+                }
+            ];
+
+    var tabKontaktna =
+            [
+                {
+                    name: i18next.t('seznami.view.splosno'),
+                    event: 'splosni'
+                },
+                {
+                    name: i18next.t('seznami.view.oseba.kontakti'),
+                    event: 'kontakti'
+                }
+            ];
+
     var OsebaEditView = DokumentView.extend({
         template: tpl,
         formTemplate: formTpl,
         schema: shema.toFormSchema().schema,
         regions: {
+            regionOsebniPodatki: '.region-osebniPodatki',
             regionTrrji: '.region-trrji',
             regionNaslovi: '.region-naslovi',
             regionTelefonske: '.region-telefonske',
             regionZaposlitve: '.region-zaposlitve',
             regionTabs: '.oseba-tabs'
-        },
-        tabs: [{
-                name: i18next.t('seznami.view.splosno'),
-                event: 'splosni'
-            },
-            {
-                name: i18next.t('seznami.view.oseba.kontakti'),
-                event: 'kontakti'
-            },
-            {
-                id: i18next.t('produkcija.view.zaposlitev.zaposlitve'),
-                name: i18next.t('produkcija.view.zaposlitev.zaposlitve'),
-                event: 'zaposlitve'
-            },
-            {
-                id: i18next.t('seznami.view.oseba.racuni'),
-                name: i18next.t('seznami.view.oseba.racuni'),
-                event: 'trrji'
-            }]
+        }
     });
 
-    OsebaEditView.prototype.initialize = function () {
-        var perm = JSON.parse(sessionStorage.getItem('ifi.user.data'));
-        console.log(perm['permissions']);
-    };
+    /*OsebaEditView.prototype.initialize = function () {
+     var perm = JSON.parse(sessionStorage.getItem('ifi.user.data'));
+     console.log(perm['permissions']);
+     };*/
     OsebaEditView.prototype.getImePriimek = function () {
         var imeT = this.model.get('ime');
         var priimekT = this.model.get('priimek');
@@ -77,16 +96,26 @@ define([
 
 
     OsebaEditView.prototype.onRender = function () {
-        if (this.isNew()) {
-            this.tabs = null;
+
+        var tabs = null;
+
+        if (this.options.pogled === "kontaktna") {
+            tabs = tabKontaktna;
+        } else if (this.options.pogled === "splosno") {
+            tabs = tabSplosno;
         } else {
+            tabs = tabSplosno;
+        }
+
+        if (!this.isNew()) {
             this.renderNaslovi();
             this.renderTrrji();
             this.renderTelefonske();
             this.renderZaposlitve();
         }
 
-        this.renderTabs();
+
+        this.renderTabs(tabs);
     };
     /**
      * Klik na splošni tab
@@ -95,6 +124,15 @@ define([
     OsebaEditView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
+
+    };
+    /**
+     * Klik na osebni podatki tab
+     * @returns {undefined}
+     */
+    OsebaEditView.prototype.onOsebniPodatki = function () {
+        this.deselectTab();
+        this.$('.pnl-osebniPodatki').addClass('active');
 
     };
     /**
@@ -129,12 +167,35 @@ define([
         this.$('.oseba-panels .tab-pane').removeClass('active');
     };
 
-    OsebaEditView.prototype.renderTabs = function () {
-        this.tabControl = new TabControl({tabs: this.tabs, listener: this});
+    /**
+     * Izris tabov
+     * @returns {OsebaEditView_L11.TabControl}
+     */
+    OsebaEditView.prototype.renderTabs = function (tabs) {
+        this.tabControl = new TabControl({tabs: tabs, listener: this});
         this.regionTabs.show(this.tabControl);
         return this.tabControl;
     };
 
+    /**
+     * Izris Osebnih podakov
+     * @returns {undefined}
+     */
+    OsebaEditView.prototype.renderOsebniPodatki = function () {
+        var self = this;
+        require(['app/seznami/View/OsebniPodatkiView'], function (View) {
+            var view = new View({
+                collection: self.model.osebniPodatkiCollection,
+                dokument: self.model
+            });
+            self.regionOsebniPodatki.show(view);
+            return view;
+        });
+    };
+    /**
+     * Izris TRR
+     * @returns {undefined}
+     */
     OsebaEditView.prototype.renderTrrji = function () {
         var self = this;
         require(['app/seznami/View/TrrView'], function (View) {
@@ -146,6 +207,10 @@ define([
             return view;
         });
     };
+    /**
+     * Izris telefonskih
+     * @returns {undefined}
+     */
     OsebaEditView.prototype.renderTelefonske = function () {
         var self = this;
         require(['app/seznami/View/TelefonskaView'], function (View) {
@@ -158,6 +223,10 @@ define([
         });
     };
 
+    /**
+     * Izris naslovov
+     * @returns {undefined}
+     */
     OsebaEditView.prototype.renderNaslovi = function () {
         var self = this;
         require(['app/seznami/View/PostniNaslovView'], function (View) {
@@ -170,6 +239,10 @@ define([
         });
     };
 
+    /**
+     * Izris zaposlitev
+     * @returns {undefined}
+     */
     OsebaEditView.prototype.renderZaposlitve = function () {
         var self = this;
         require(['app/seznami/View/Oseba/ZaposlitevView'], function (View) {

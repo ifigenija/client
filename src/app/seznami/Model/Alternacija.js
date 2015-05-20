@@ -6,12 +6,13 @@ define([
 ], function (
         baseUrl,
         Dokument,
-        _
+        _,
+        baseUrl
         ) {    
-    var ZvrstSursModel = Dokument.Model.extend({
-        urlRoot: '/rest/zvrstSurs'
+    var AlternacijaModel = Dokument.Model.extend({
+        urlRoot: '/rest/alternacija'
     });
     return {
-        Model: ZvrstSursModel
+        Model: AlternacijaModel
     };
 });

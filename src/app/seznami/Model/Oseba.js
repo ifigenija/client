@@ -1,13 +1,18 @@
 define([
     'baseUrl',
     'app/Dokument/Model/Dokument',
-    'underscore'
+    'underscore',
+    'baseUrl'
 ], function (
         baseUrl,
         Dokument,
-        _
+        _,
+        baseUrl
         ) {
 
+    var OsebaOsebniPodatki = Dokument.Postavka.extend({
+        urlRoot: '/rest/oseba'
+    });
     var OsebaTrr = Dokument.Postavka.extend({
         urlRoot: '/rest/trr'
     });
@@ -21,6 +26,11 @@ define([
         urlRoot: '/rest/zaposlitev'
     });    
     
+    var OsebaOsebniPodatkiCollection = Dokument.PostavkaCollection.extend({
+        model: OsebaOsebniPodatki,
+        url: '/rest/oseba',
+        index: 'pozicija'
+    });
     var OsebaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTelefon,
         url: '/rest/telefonska',
@@ -48,6 +58,7 @@ define([
     var OsebaModel = Dokument.Model.extend({
         urlRoot: '/rest/oseba',
         nestedCollections: {
+            osebniPodatki: {collection: OsebaOsebniPodatkiCollection, mappedBy: 'osebniPodatki', filterBy: 'oseba'},
             trrji: {collection: OsebaTrrCollection, mappedBy: 'trrji', filterBy: 'oseba'},
             telefonske: {collection: OsebaTelefonCollection, mappedBy: 'telefonske', filterBy: 'oseba'},
             naslovi: {collection: OsebaNaslovCollection, mappedBy: 'naslovi', filterBy: 'oseba'},
@@ -60,6 +71,11 @@ define([
             }
             var postavka;
             switch (nested) {
+                case 'osebniPodatki':
+                    postavka = new OsebaOsebniPodatki({
+                        oseba: this.id
+                    });
+                    break;
                 case 'trrji':
                     postavka = new OsebaTrr({
                         oseba: this.id

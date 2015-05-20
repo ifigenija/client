@@ -6,13 +6,15 @@ define([
     'template!../tpl/abonma-form.tpl',
     'formSchema!abonma',
     '../Model/Abonma',
-    'i18next'
+    'i18next',
+    'baseUrl'
 ], function (
         SeznamiView,
         formTpl,
         schema,
         Abonma,
-        i18next
+        i18next,
+        baseUrl
         ) {
 
     var AbonmaView = SeznamiView.extend({
@@ -62,8 +64,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
+                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
                 ]
             }
         ]

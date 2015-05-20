@@ -46,7 +46,7 @@ define([
                 controller: mod,
                 appRoutes: {
                     'pro/uprizoritev': 'uprizoritve',
-                    'pro/oseba': 'osebe',
+                    'pro/oseba': 'osebe'
                 }
             });
         });

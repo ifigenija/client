@@ -5,12 +5,14 @@ define([
     'app/seznami/View/SeznamiView',
     './PopaEditView',
     '../../Model/Popa',
-    'i18next'
+    'i18next',
+    'baseUrl'
 ], function (
         SeznamiView,
         PopaEditView,
         Popa,
-        i18next
+        i18next,
+        baseUrl
         ) {
 
     var PopaView = SeznamiView.extend({
@@ -58,8 +60,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
+                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
                 ]
             }
         ]

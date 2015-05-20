@@ -6,13 +6,15 @@ define([
     'template!../tpl/uporabnik-edit.tpl',
     'template!../tpl/uporabnik-form.tpl',
     'formSchema!user',
-    'i18next'
+    'i18next',
+    'baseUrl'
 ], function (
         DokumentView,
         tpl,
         formTpl,
         shema,
-        i18next
+        i18next,
+        baseUrl
         ) {
 
     var UporabnikEditView = DokumentView.extend({

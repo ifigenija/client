@@ -5,35 +5,47 @@ define([
     'marionette',
     'require',
     'backbone',
-    './nav'
+    './nav',
+    'radio',
+    'i18next'
 
 ], function (
         Marionette,
         require,
         Backbone,
-        moduleNav
+        moduleNav,
+        Radio,
+        i18next
         ) {
 
 
-    var modInit = function (mod, App, Backbone, Marionette, $, _) {
+    var modelInit = function (model, App, Backbone, Marionette, $, _) {
 
-
+        var ch = Radio.channel('layout');
      
-        mod.dogodki = function () {
+        model.dogodki = function () {
 
+        };
+        
+        model.besedila = function () {
+            require(['../View/BesediloView'], function (BesediloView) {
+                var view = new BesediloView();
+                ch.command('open', view, i18next.t('seznami.view.besedilo.title'));
+            });
         };
 
         /**
          * 
          * Routing za javni pogled 
          */
-        mod.addInitializer(function (options) {
+        model.addInitializer(function (options) {
             App.nav.registerNav(moduleNav);
 
             new Marionette.AppRouter({
-                controller: mod,
+                controller: model,
                 appRoutes: {
                     'arhiv/dodaj': 'dogodki',
+                    'arhiv/besedila' : 'besedila'
                     
                 }
             });
@@ -41,5 +53,5 @@ define([
 
     };
 
-    return modInit;
+    return modelInit;
 });

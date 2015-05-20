@@ -1,11 +1,13 @@
 define([
     'baseUrl',
     'app/Dokument/Model/Dokument',
-    'underscore'
+    'underscore',
+    'baseUrl'
 ], function (
         baseUrl,
         Dokument,
-        _
+        _,
+        baseUrl
         ) {    
     var TipFunkcijeModel = Dokument.Model.extend({
         urlRoot: '/rest/tipFunkcije'

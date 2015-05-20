@@ -20,7 +20,7 @@ define(['i18next'], function (i18n) {
                 },                
                 {
                     label: i18n.t("arhiv.nav.besedila"),
-                    uri: "#koledar/dogodki"
+                    uri: "#arhiv/besedila"
                 }
             ]
         }

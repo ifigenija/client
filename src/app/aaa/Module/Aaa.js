@@ -22,22 +22,8 @@ define([
     var modInit = function (model, App, Backbone, Marionette, $, _) {
         var ch = Radio.channel('layout');
 
-        model.addUser = function () {
-            App.nav.crumbs.addCrumb("tralla", "#trallaa");
-        };
-
-        model.manageUsers = function () {
-            require(['../View/UporabnikView'], function (UporabnikView) {
-                var view = new UporabnikView();
-                ch.command('open', view, i18next.t('aaa.uporabnik.title'));
-            });
-        };
-
-        model.roles = function () {
-            require(['../View/VlogaView'], function (VlogaView) {
-                var view = new VlogaView();
-                ch.command('open', view, i18next.t('aaa.vloga.title'));
-            });
+        model.page = function () {
+            console.log("Page");
         };
 
         /**
@@ -50,9 +36,7 @@ define([
             new Marionette.AppRouter({
                 controller: model,
                 appRoutes: {
-                    'aaa/user/dodaj': 'addUser',
-                    'aaa/users': 'manageUsers',
-                    'aaa/roles': 'roles'
+                    'aaa': 'page'
                 }
             });
         });

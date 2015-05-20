@@ -6,13 +6,15 @@ define([
     'template!../tpl/tipFunkcije-form.tpl',
     'formSchema!tipFunkcije',
     '../Model/TipFunkcije',
-    'i18next'
+    'i18next',
+    'baseUrl'
 ], function (
         SeznamiView,
         formTpl,
         schema,
         TipFunkcije,
-        i18next
+        i18next,
+        baseUrl
         ) {
 
     var TipFunkcijeView = SeznamiView.extend({
@@ -55,8 +57,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
+                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
                 ]
             }
         ]

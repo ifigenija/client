@@ -37,12 +37,12 @@ define(['i18next'], function (i18n) {
                     uri: "#zvrstSurs"
                 },
                 {
-                    label: i18n.t("seznami.nav.besedilo"),
-                    uri: "#besedilo"
-                },
-                {
                     label: i18n.t("seznami.nav.abonma"),
                     uri: "#abonma"
+                },
+                {
+                    label: i18n.t("seznami.nav.alternacija"),
+                    uri: "#alternacija"
                 }
             ]
         }

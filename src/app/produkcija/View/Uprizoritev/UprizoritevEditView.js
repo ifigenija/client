@@ -115,6 +115,15 @@ define([
         this.$('.tab-ostaliSodelujoci').addClass('active');
     };
     /**
+     * Klik na tab za stroskovnik podatke 
+     * @returns {undefined}
+     */
+    UprizoritevEditView.prototype.onStroskovnik = function () {
+        this.deselectTab();
+        this.$('.pnl-ostaliSodelujoci').addClass('active');
+        this.$('.tab-ostaliSodelujoci').addClass('active');
+    };
+    /**
      * Klik na tab za kontaktne podatke 
      * @returns {undefined}
      */
@@ -162,6 +171,17 @@ define([
         require(['app/produkcija/View/Uprizoritev/OstaliSodelujociView'], function (View) {
             var view = new View({
                 collection: self.model.ostaliSodelujociCollection,
+                dokument: self.model
+            });
+            self.regionOstaliSodelujoci.show(view);
+            return view;
+        });
+    };
+    UprizoritevEditView.prototype.renderStroskovnik = function () {
+        var self = this;
+        require(['app/produkcija/View/Uprizoritev/StroskovnikView'], function (View) {
+            var view = new View({
+                collection: self.model.ostaliStroskovnikCollection,
                 dokument: self.model
             });
             self.regionOstaliSodelujoci.show(view);

@@ -1,13 +1,18 @@
 define([
     'baseUrl',
     'app/Dokument/Model/Dokument',
-    'underscore'
+    'underscore',
+    'baseUrl'
 ], function (
         baseUrl,
         Dokument,
-        _
+        _,
+        baseUrl
         ) {
 
+    var UprizoritevStroskovnik = Dokument.Postavka.extend({
+        urlRoot: '/rest/stroskovnik'
+    });
     var UprizoritevArhivalija = Dokument.Postavka.extend({
         urlRoot: '/rest/arhivalija'
     });
@@ -24,6 +29,11 @@ define([
         urlRoot: '/rest/funkcija'
     });
     
+    var UprizoritevStroskovnikCollection = Dokument.PostavkaCollection.extend({
+        model: UprizoritevStroskovnik,
+        url: '/rest/arhivalija',
+        index: 'pozicija'
+    });
     var UprizoritevArhivalijaCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevArhivalija,
         url: '/rest/arhivalija',
@@ -54,6 +64,7 @@ define([
     var UprizoritevModel = Dokument.Model.extend({
         urlRoot: '/rest/uprizoritev',
         nestedCollections: {
+            stroskovniki: {collection: UprizoritevStroskovnikCollection, mappedBy: 'stroskovniki', filterBy: 'uprizoritev'},
             arhivalije: {collection: UprizoritevArhivalijaCollection, mappedBy: 'arhivalije', filterBy: 'uprizoritev'},
             osebe: {collection: UprizoritevOsebaCollection, mappedBy: 'osebe', filterBy: 'uprizoritev'},
             umetniskeEkipe: {collection: UprizoritevUmetniskaEkipaCollection, mappedBy: 'umetniskeEkipe', filterBy: 'uprizoritev'},
@@ -67,6 +78,11 @@ define([
             }
             var postavka;
             switch (nested) {
+                case 'stroskovniki':
+                    postavka = new UprizoritevStroskovnik({
+                        uprizoritev: this.id
+                    });
+                    break;
                 case 'arhivalije':
                     postavka = new UprizoritevArhivalija({
                         uprizoritev: this.id

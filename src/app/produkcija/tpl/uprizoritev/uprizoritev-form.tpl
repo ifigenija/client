@@ -1,5 +1,6 @@
 <div class="row">
-    <div class="col-sm-4" data-fields="naslov,podnaslov,delovniNaslov,kratkiNaslov,faza,datumPremiere"></div>
-    <div class="col-sm-4" data-fields="trajanje,stOdmorov,datumZakljucka,avtor,besedilo,sloAvtor"></div>
-    <div class="col-sm-4" data-fields="gostujoca,arhIdent,arhOpomba,zvrstUprizoritve,zvrstSurs,opis"></div>
+    <div class="col-sm-4" data-fields="faza,naslov,podnaslov,delovniNaslov,kratkiNaslov"></div>
+    <div class="col-sm-4" data-fields="avtor,sloAvtor,besedilo,zvrstUprizoritve,zvrstSurs"></div>
+    <div class="col-sm-4" data-fields="datumPremiere,trajanje,stOdmorov,gostujoca,opis"></div>
+    <!--datumZakljucka,arhIdent,arhOpomba,-->
 </div>
