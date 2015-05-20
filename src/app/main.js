@@ -15,6 +15,7 @@ define([
     'app/seznami/Module/Seznami',
     'app/nastavitve/Module/Nastavitve',
     'app/aaa/Module/Aaa',
+    'app/Max/View/Buttons',
     'bootstrap'
 ], function (
         Marionette,
@@ -29,12 +30,11 @@ define([
         arhivInit,
         seznamiInit,
         nastavitveInit,
-        aaaInit
-
+        aaaInit,
+        buttons
         ) {
 
     var app = new Marionette.Application();
-
 
     app.module('nav', navInit);
     app.module('flashManager', fmInit);
@@ -52,6 +52,12 @@ define([
      * Regije in navigacija  
      */
     app.on('start', function (options) {
+
+        // to je tukaj zato, da su gumbi lahko razširljivi, da jih lahko vsaka aplikacija posebej dodaja 
+        // ne da bi se spreminjali osvnovni gumbi v Buttons.js
+        Radio.channel('global').reply('buttons', function () {
+            return buttons;
+        });
 
         var layout = this.ifiLayout.layout = new this.ifiLayout.Layout({
             el: $("body"),
