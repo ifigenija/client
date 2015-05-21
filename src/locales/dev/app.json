@@ -67,7 +67,7 @@
                 "title": "Zaposlitve",
                 "nova": "Nova zaposlitev",
                 "status": "Status",
-                "zacetek": "Zacetek",
+                "zacetek": "Začetek",
                 "konec": "Konec",
                 "tip": "Tip"
             },
@@ -81,7 +81,7 @@
                 "faza": "Faza",
                 "datumPremiere": "Datum premiere",
                 "nova": "Nova uprizoritev",
-                "umetniskeEkipe": "Umetniska Ekipa",
+                "umetniskeEkipe": "Umetniška Ekipa",
                 "nastopajoci": "Nastopajoči",
                 "ostaliSodelujoci": "Ostali sodelujoči",
                 "stroskovniki":"Stroškovniki"
@@ -189,7 +189,7 @@
                 "title": "Tipi funkcij",
                 "dovoliPrekrivanje": "Dovoli Prekrivanje",
                 "dodaj": "tip funkcije",
-                "nastopajoc": "Nastopajoc"
+                "nastopajoc": "Nastopajoč"
             },
             "zvrstUprizoritve": {
                 "nova": "Nova zvrst uprizoritve",
@@ -200,7 +200,7 @@
                 "title": "Naslovi",
                 "naziv": "Naziv",
                 "ulica": "Ulica",
-                "posta": "Posta",
+                "posta": "Pošta",
                 "dodaj": "poštni naslov",
                 "drzava": "Država"
 
@@ -208,7 +208,7 @@
             "telefonska": {
                 "title": "Telefonske",
                 "vrsta": "Vrsta",
-                "stevilka": "Stevilka",
+                "stevilka": "Številka",
                 "dodaj": "telefonsko",
                 "privzeta": "Privzeta"
 
@@ -216,7 +216,7 @@
             "trr": {
                 "title": "TRR",
                 "banka": "Banka",
-                "stevilka": "Stevilka",
+                "stevilka": "Številka",
                 "swift": "Swift",
                 "dodaj": "TRR",
                 "bic": "Bic"
@@ -235,8 +235,8 @@
                 "nova": "Nov Abonma",
                 "dodaj": "abonma",
                 "ime": "Ime",
-                "stPredstav": "St. predstav",
-                "stKuponov": "St. kuponov",
+                "stPredstav": "Št. predstav",
+                "stKuponov": "Št. kuponov",
                 "kapaciteta": "Kapaciteta",
                 "opis": "Opis"
             }

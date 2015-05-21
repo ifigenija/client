@@ -56,6 +56,17 @@ define([
                     event: 'kontakti'
                 }
             ];
+    var tabNovi =
+            [
+                {
+                    name: i18next.t('seznami.view.splosno'),
+                    event: 'splosni'
+                },
+                {
+                    name: i18next.t('seznami.view.oseba.osebniPodatki'),
+                    event: 'osebniPodatki'
+                }
+            ];
 
     var OsebaEditView = DokumentView.extend({
         template: tpl,
@@ -108,7 +119,7 @@ define([
         } else if (this.options.pogled === "splosno") {
             tabs = tabSplosno;
         } else {
-            tabs = null;
+            tabs = tabNovi;
         }
 
         if (!this.isNew()) {
