@@ -83,7 +83,8 @@
                 "nova": "Nova uprizoritev",
                 "umetniskeEkipe": "Umetniska Ekipa",
                 "nastopajoci": "Nastopajoči",
-                "ostaliSodelujoci": "Ostali sodelujoči"
+                "ostaliSodelujoci": "Ostali sodelujoči",
+                "stroskovniki":"Stroškovniki"
             },
             "arhivalija" : {
                 "title": "Arhivalija",

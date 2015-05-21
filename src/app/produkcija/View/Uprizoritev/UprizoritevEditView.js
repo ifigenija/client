@@ -16,7 +16,7 @@ define([
         i18next,
         TabControl
         ) {
-    
+
     var tabSplosno =
             [
                 {
@@ -66,7 +66,8 @@ define([
             regionUmetniskeEkipe: '.region-umetniskeEkipe',
             regionNastopajoci: '.region-nastopajoci',
             regionOstaliSodelujoci: '.region-ostaliSodelujoci',
-            regionStroskovniki: '.region-stroskovniki'
+            regionStroskovniki: '.region-stroskovniki',
+            regionTabs: '.uprizoritev-tabs'
         }
     });
 
@@ -90,20 +91,26 @@ define([
         });
     };
 
-
     UprizoritevEditView.prototype.onRender = function () {
-//        if (this.isNew()) {
-//            this.$('.tab-arhivalije a').prop('disabled', 'disabled');
-//            this.$('.tab-ostaliSodelujoci a').prop('disabled', 'disabled');
-//            this.$('.tab-nastopajoci a').prop('disabled', 'disabled');
-//            this.$('.tab-umetniskeEkipe a').prop('disabled', 'disabled');
-//        } else {
-        this.renderArhivalije();
-        this.renderUmetniskeEkipe();
-        this.renderNastopajoci();
-        this.renderOstaliSodelujoci();
-        this.renderStroskovniki();
-//        }
+        var tabs = null;
+
+        if (this.options.pogled === "kontaktna") {
+            tabs = tabPogled2;
+        } else if (this.options.pogled === "splosno") {
+            tabs = tabSplosno;
+        } else {
+            tabs = tabSplosno;
+        }
+        
+        //if (!this.isNew()) {
+            this.renderArhivalije();
+            this.renderUmetniskeEkipe();
+            this.renderNastopajoci();
+            this.renderOstaliSodelujoci();
+            this.renderStroskovniki();
+        //}
+        
+        this.renderTabs(tabs);
     };
     /**
      * Klik na splošni tab
@@ -163,6 +170,15 @@ define([
         this.$('.uprizoritev-panels .tab-pane').removeClass('active');
     };
 
+    /**
+     * Izris tabov
+     * @returns {OsebaEditView_L11.TabControl}
+     */
+    UprizoritevEditView.prototype.renderTabs = function (tabs) {
+        this.tabControl = new TabControl({tabs: tabs, listener: this});
+        this.regionTabs.show(this.tabControl);
+        return this.tabControl;
+    };
 
     UprizoritevEditView.prototype.renderArhivalije = function () {
         var self = this;

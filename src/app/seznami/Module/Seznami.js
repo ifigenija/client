@@ -43,7 +43,7 @@ define([
         };
         model.oseba = function () {
             require(['../View/Oseba/OsebaView'], function (OsebaView) {
-                var view = new OsebaView();
+                var view = new OsebaView({pogled: 'splosno'});
                 ch.command('open', view, i18next.t('seznami.view.oseba.title'));
             });
         };

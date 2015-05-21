@@ -108,7 +108,7 @@ define([
         } else if (this.options.pogled === "splosno") {
             tabs = tabSplosno;
         } else {
-            tabs = tabSplosno;
+            tabs = null;
         }
 
         if (!this.isNew()) {
@@ -118,7 +118,6 @@ define([
             this.renderZaposlitve();
             this.renderOsebniPodatki();
         }
-
 
         this.renderTabs(tabs);
     };
