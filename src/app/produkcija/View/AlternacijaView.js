@@ -2,28 +2,25 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/Dokument/View/PostavkeView',
     'template!../tpl/alternacija-form.tpl',
     'formSchema!alternacija',
-    '../Model/Alternacija',
-    'i18next',
-    'baseUrl'
+    'i18next'
 ], function (
-        SeznamiView,
+        PostavkeView,
         formTpl,
         schema,
-        Alternacija,
-        i18next,
-        baseUrl
+        i18next
         ) {
 
-    var AlternacijaView = SeznamiView.extend({
-        url: baseUrl + '/rest/alternacija',
-        name: 'Alternacija',
-        schema: schema,
+    var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
+        schema: schema.toFormSchema().schema,
+        name: 'Alternacija',
+        detailName: 'alternacije',
         dodaj: i18next.t('seznami.view.alternacija.dodaj'),
-        columns: [
+        formTitle: i18next.t('seznami.view.alternacija.title'),
+        gridMeta: [
             {
                 cell: 'string',
                 editable: false,
@@ -69,11 +66,6 @@ define([
             }
         ]
     });
-
-    AlternacijaView.prototype.onDodaj = function () {
-        var model = new Alternacija.Model();
-        this.onSelected(model);
-    };
 
     return AlternacijaView;
 });

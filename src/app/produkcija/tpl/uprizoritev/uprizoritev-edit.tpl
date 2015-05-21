@@ -8,13 +8,6 @@
 
     <!-- Nav tabs -->
     <div class="nav nav-tabs uprizoritev-tabs"></div>
-    <!--<ul class="nav nav-tabs uprizoritev-tabs" role="tablist">
-        <li role="presentation" class="tab-splosno active"><a href="javascript:void(0)">{{t 'seznami.view.splosno'}}</a></li>
-        <li role="presentation" class="tab-umetniskeEkipe"><a href="javascript:void(0)" >{{t 'produkcija.view.uprizoritev.umetniskeEkipe'}}</a></li>
-        <li role="presentation" class="tab-nastopajoci"><a href="javascript:void(0)" >{{t 'produkcija.view.uprizoritev.nastopajoci'}}</a></li>
-        <li role="presentation" class="tab-ostaliSodelujoci"><a href="javascript:void(0)" >{{t 'produkcija.view.uprizoritev.ostaliSodelujoci'}}</a></li>
-        <li role="presentation" class="tab-arhivalije"><a href="javascript:void(0)" >{{t 'produkcija.view.uprizoritev.arhivalije'}}</a></li>
-    </ul>-->
 
     <!-- Tab panes -->
     <div class="tab-content uprizoritev-panels">

@@ -53,7 +53,7 @@ define([
                 },
                 {
                     name: i18next.t('seznami.view.oseba.kontakti'),
-                    event: 'kontakti'
+                    event: 'osebniPodatki'
                 }
             ];
     var tabNovi =
@@ -118,8 +118,10 @@ define([
             tabs = tabKontaktna;
         } else if (this.options.pogled === "splosno") {
             tabs = tabSplosno;
-        } else {
+        } else if(this.isNew()){
             tabs = tabNovi;
+        } else{
+            tabs = tabSplosno;
         }
 
         if (!this.isNew()) {
@@ -127,6 +129,8 @@ define([
             this.renderTrrji();
             this.renderTelefonske();
             this.renderZaposlitve();
+            this.renderOsebniPodatki();
+        } else {
             this.renderOsebniPodatki();
         }
 
@@ -198,7 +202,7 @@ define([
      */
     OsebaEditView.prototype.renderOsebniPodatki = function () {
         var self = this;
-
+        
         var Fv = FormView.extend({
             formTitle: this.name + self.model.get('naziv'),
             buttons: {
@@ -232,6 +236,8 @@ define([
         var view = new Fv({
             model: self.model
         });
+        
+        console.log(view);
         self.regionOsebniPodatki.show(view);
         return view;
     };

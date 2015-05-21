@@ -17,7 +17,7 @@
             <div class="region-form">
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane active pnl-osebniPodatki region-osebniPodatki">
+        <div role="tabpanel" class="tab-pane pnl-osebniPodatki region-osebniPodatki">
         </div>
         <div role="tabpanel" class="tab-pane pnl-kontakti">
             <div class="row">
