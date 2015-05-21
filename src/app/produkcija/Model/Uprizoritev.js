@@ -31,15 +31,14 @@ define([
     
     var UprizoritevStroskovnikCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevStroskovnik,
-        url: baseUrl + '/rest/arhivalija',
+        url: baseUrl + '/rest/stroskovnik',
         index: 'pozicija'
     });
     var UprizoritevArhivalijaCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevArhivalija,
         url: baseUrl + '/rest/arhivalija',
         index: 'pozicija'
-    });
-    
+    });    
     var UprizoritevOsebaCollection = Dokument.PostavkaCollection.extend({
         model: UprizoritevOseba,
         url: baseUrl + '/rest/oseba',
@@ -114,6 +113,6 @@ define([
         }
     });
     return {
-        Model: UprizoritevModel,
+        Model: UprizoritevModel
     };
 });

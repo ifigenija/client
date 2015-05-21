@@ -5,16 +5,20 @@ define([
     'app/Dokument/View/DokumentView',
     'template!../../tpl/oseba/oseba-edit.tpl',
     'template!../../tpl/oseba/oseba-form.tpl',
+    'template!../../tpl/oseba/osebaOsebniPodatki-form.tpl',
     'formSchema!oseba',
     'i18next',
-    'app/Max/View/TabControl'
+    'app/Max/View/TabControl',
+    'app/Dokument/View/FormView'
 ], function (
         DokumentView,
         tpl,
         formTpl,
-        shema,
+        osebaOsebniTpl,
+        schema,
         i18next,
-        TabControl
+        TabControl,
+        FormView
         ) {
 
     var tabSplosno =
@@ -56,7 +60,7 @@ define([
     var OsebaEditView = DokumentView.extend({
         template: tpl,
         formTemplate: formTpl,
-        schema: shema.toFormSchema().schema,
+        schema: schema.toFormSchema().schema,
         regions: {
             regionOsebniPodatki: '.region-osebniPodatki',
             regionTrrji: '.region-trrji',
@@ -112,6 +116,7 @@ define([
             this.renderTrrji();
             this.renderTelefonske();
             this.renderZaposlitve();
+            this.renderOsebniPodatki();
         }
 
 
@@ -183,14 +188,42 @@ define([
      */
     OsebaEditView.prototype.renderOsebniPodatki = function () {
         var self = this;
-        require(['app/seznami/View/OsebniPodatkiView'], function (View) {
-            var view = new View({
-                collection: self.model.osebniPodatkiCollection,
-                dokument: self.model
-            });
-            self.regionOsebniPodatki.show(view);
-            return view;
+
+        var Fv = FormView.extend({
+            formTitle: this.name + self.model.get('naziv'),
+            buttons: {
+                shrani: {
+                    id: 'doc-shrani',
+                    label: 'Shrani',
+                    element: 'button-trigger',
+                    trigger: 'shrani',
+                    disabled: true
+                },
+                preklici: {
+                    id: 'doc-preklici',
+                    label: 'Prekliči',
+                    element: 'button-trigger',
+                    trigger: 'preklici'
+                }
+            },
+            schema: schema.toFormSchema().schema,
+            formTemplate: osebaOsebniTpl,
+            onFormChange: function (form) {
+                var tb = this.getToolbarModel();
+                var but = tb.getButton('doc-shrani');
+                if (but.get('disabled')) {
+                    but.set({
+                        disabled: false
+                    });
+                }
+            }
         });
+
+        var view = new Fv({
+            model: self.model
+        });
+        self.regionOsebniPodatki.show(view);
+        return view;
     };
     /**
      * Izris TRR

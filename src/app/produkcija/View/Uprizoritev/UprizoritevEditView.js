@@ -6,31 +6,67 @@ define([
     'template!../../tpl/uprizoritev/uprizoritev-edit.tpl',
     'template!../../tpl/uprizoritev/uprizoritev-form.tpl',
     'formSchema!uprizoritev',
-    'i18next'
+    'i18next',
+    'app/Max/View/TabControl'
 ], function (
         DokumentView,
         tpl,
         formTpl,
         shema,
-        i18next
+        i18next,
+        TabControl
         ) {
+    
+    var tabSplosno =
+            [
+                {
+                    name: i18next.t('seznami.view.splosno'),
+                    event: 'splosni'
+                },
+                {
+                    name: i18next.t('produkcija.view.uprizoritev.umetniskeEkipe'),
+                    event: 'umetniskeEkipe'
+                },
+                {
+                    name: i18next.t('produkcija.view.uprizoritev.nastopajoci'),
+                    event: 'nastopajoci'
+                },
+                {
+                    name: i18next.t('produkcija.view.uprizoritev.ostaliSodelujoci'),
+                    event: 'ostaliSodelujoci'
+                },
+                {
+                    name: i18next.t('produkcija.view.uprizoritev.arhivalije'),
+                    event: 'arhivalije'
+                },
+                {
+                    name: i18next.t('produkcija.view.uprizoritev.stroskovniki'),
+                    event: 'stroskovniki'
+                }
+            ];
+
+    var tabPogled2 =
+            [
+                {
+                    name: i18next.t('seznami.view.splosno'),
+                    event: 'splosni'
+                },
+                {
+                    name: i18next.t('produkcija.view.uprizoritev.umetniskeEkipe'),
+                    event: 'umetniskeEkipe'
+                }
+            ];
 
     var UprizoritevEditView = DokumentView.extend({
         template: tpl,
         formTemplate: formTpl,
         schema: shema.toFormSchema().schema,
-        triggers: {
-            'click .tab-splosno': 'splosni',
-            'click .tab-arhivalije': 'arhivalije',
-            'click .tab-umetniskeEkipe': 'umetniskeEkipe',
-            'click .tab-nastopajoci': 'nastopajoci',
-            'click .tab-ostaliSodelujoci': 'ostaliSodelujoci'
-        },
         regions: {
             regionArhivalije: '.region-arhivalije',
             regionUmetniskeEkipe: '.region-umetniskeEkipe',
             regionNastopajoci: '.region-nastopajoci',
-            regionOstaliSodelujoci: '.region-ostaliSodelujoci'
+            regionOstaliSodelujoci: '.region-ostaliSodelujoci',
+            regionStroskovniki: '.region-stroskovniki'
         }
     });
 
@@ -66,6 +102,7 @@ define([
         this.renderUmetniskeEkipe();
         this.renderNastopajoci();
         this.renderOstaliSodelujoci();
+        this.renderStroskovniki();
 //        }
     };
     /**
@@ -75,7 +112,6 @@ define([
     UprizoritevEditView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
-        this.$('.tab-splosno').addClass('active');
 
     };
     /**
@@ -85,7 +121,6 @@ define([
     UprizoritevEditView.prototype.onArhivalije = function () {
         this.deselectTab();
         this.$('.pnl-arhivalije').addClass('active');
-        this.$('.tab-arhivalije').addClass('active');
     };
     /**
      * Klik na tab za arhivalije podatke 
@@ -94,7 +129,6 @@ define([
     UprizoritevEditView.prototype.onUmetniskeEkipe = function () {
         this.deselectTab();
         this.$('.pnl-umetniskeEkipe').addClass('active');
-        this.$('.tab-umetniskeEkipe').addClass('active');
     };
     /**
      * Klik na tab za arhivalije podatke 
@@ -103,7 +137,6 @@ define([
     UprizoritevEditView.prototype.onNastopajoci = function () {
         this.deselectTab();
         this.$('.pnl-nastopajoci').addClass('active');
-        this.$('.tab-nastopajoci').addClass('active');
     };
     /**
      * Klik na tab za arhivalije podatke 
@@ -112,16 +145,14 @@ define([
     UprizoritevEditView.prototype.onOstaliSodelujoci = function () {
         this.deselectTab();
         this.$('.pnl-ostaliSodelujoci').addClass('active');
-        this.$('.tab-ostaliSodelujoci').addClass('active');
     };
     /**
      * Klik na tab za stroskovnik podatke 
      * @returns {undefined}
      */
-    UprizoritevEditView.prototype.onStroskovnik = function () {
+    UprizoritevEditView.prototype.onStroskovniki = function () {
         this.deselectTab();
         this.$('.pnl-ostaliSodelujoci').addClass('active');
-        this.$('.tab-ostaliSodelujoci').addClass('active');
     };
     /**
      * Klik na tab za kontaktne podatke 
@@ -177,7 +208,7 @@ define([
             return view;
         });
     };
-    UprizoritevEditView.prototype.renderStroskovnik = function () {
+    UprizoritevEditView.prototype.renderStroskovniki = function () {
         var self = this;
         require(['app/produkcija/View/Uprizoritev/StroskovnikView'], function (View) {
             var view = new View({

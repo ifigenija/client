@@ -6,13 +6,15 @@ define([
     './OsebaEditView',
     '../../Model/Oseba',
     'i18next',
-    'baseUrl'
+    'baseUrl',
+    'radio'
 ], function (
         SeznamiView,
         OsebaEditView,
         Oseba,
         i18next,
-        baseUrl
+        baseUrl,
+        Radio
         ) {
 
     var OsebaView = SeznamiView.extend({
@@ -79,6 +81,10 @@ define([
     OsebaView.prototype.ObstojecVnos = function (model) {
         var editModel = new Oseba.Model({id: model.get('id')});
         editModel.fetch();
+        
+//        var chLovro = Radio.channel('global');
+//        var response = chLovro.request('isGranted', "halo");
+//        console.log("Oseba "+ response);
 
         return new OsebaEditView(
                 {

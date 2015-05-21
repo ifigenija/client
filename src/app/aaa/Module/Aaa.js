@@ -21,6 +21,21 @@ define([
 
     var modInit = function (model, App, Backbone, Marionette, $, _) {
         var ch = Radio.channel('layout');
+        var chGlobal = Radio.channel('global');
+        chGlobal.reply('isGranted',
+                function (dovoljenje) {
+//                    var data = JSON.parse(sessionStorage.getItem('ifi.user.data'));
+//                    if (data['permissions']) {
+//                        var permissions = data['permissions'];
+//                        for (var perm in permissions) {
+//                            if (perm === dovoljenje) {
+//                                return true;
+//                            }
+//                        }
+//                        return false;
+//                    }
+                }
+        );
 
         model.page = function () {
             console.log("Page");
