@@ -108,6 +108,8 @@ define([
             trigger: 'pokazi'
         });
     };
+    
+    
     DokumentView.prototype.onPokazi = function () {
 
         this.$('.glava-panel')
@@ -121,6 +123,8 @@ define([
             trigger: 'skrij'
         });
     };
+    
+    
     DokumentView.prototype.onShrani = function (options) {
         options = options || {};
         var isNew = this.isNew();
