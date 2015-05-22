@@ -16,7 +16,7 @@ define([
         ) {
 
     var UprizoritevView = SeznamiView.extend({
-        url: baseUrl + '/rest/uprizoritev',
+        url: baseUrl + '/rest/uprizoritev/vse',
         name: 'Uprizoritev',
         dodaj: i18next.t('produkcija.view.uprizoritev.dodaj'),
         columns: [

@@ -2,17 +2,15 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
-    './UmetniskaEkipaEditView',
-    '../../Model/Funkcija',
+    'app/Dokument/View/PostavkeView',
     'i18next',
-    'baseUrl'
+    'formSchema!funkcija',
+    'template!../../tpl/uprizoritev/funkcija-form.tpl'
 ], function (
-        SeznamiView,
-        UmetniskaEkipaEditView,
-        UmetniskaEkipa,
+        PostavkeView,
         i18next,
-        baseUrl
+        schema,
+        formTpl  
         ) {
 
     var FunkcijaView = PostavkeView.extend({
@@ -63,31 +61,6 @@ define([
         ]
     });
 
-    UmetniskaEkipaView.prototype.getFormView = function (model) {
-        return this.ObstojecVnos(model);
-    };
-    UmetniskaEkipaView.prototype.onDodaj = function () {
-        var model = new UmetniskaEkipa.Model();
-        var view = new UmetniskaEkipaEditView({model: model});
-        this.listenTo(view, "save:success", this.dodajVcollection);
-        this.formR.show(view);
-    };
 
-    UmetniskaEkipaView.prototype.ObstojecVnos = function (model) {
-        var editModel = new UmetniskaEkipa.Model({id: model.get('id')});
-        editModel.fetch();
-
-        return new UmetniskaEkipaEditView(
-                {
-                    model: editModel,
-                    pogled: this.options.pogled
-                });
-    };
-
-    UmetniskaEkipaView.prototype.dodajVcollection = function (model) {
-        this.collection.fetch();
-        return this.ObstojecVnos(model);
-    };
-
-    return UmetniskaEkipaView;
+    return FunkcijaView;
 });

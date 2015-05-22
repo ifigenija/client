@@ -4,6 +4,7 @@
 define([
     'app/Dokument/View/DokumentView',
     '../../Model/Uprizoritev',
+    './FunkcijeView',
     'template!../../tpl/uprizoritev/uprizoritev-edit.tpl',
     'template!../../tpl/uprizoritev/uprizoritev-form.tpl',
     'formSchema!uprizoritev',
@@ -12,6 +13,7 @@ define([
 ], function (
         DokumentView,
         Uprizoritev,
+        FunkcijeView,
         tpl,
         formTpl,
         shema,
@@ -41,23 +43,19 @@ define([
         },
         {
             name: i18next.t('produkcija.view.uprizoritev.umetniskeEkipe'),
-            event: 'umetniskaEkipa'
+            event: 'umetniki'
         },
         {
             name: i18next.t('produkcija.view.uprizoritev.nastopajoci'),
-            event: 'nastopajoci'
+            event: 'igralci'
         },
         {
             name: i18next.t('produkcija.view.uprizoritev.ostaliSodelujoci'),
-            event: 'ostaliSodelujoci'
-        },
-        {
-            name: i18next.t('produkcija.view.uprizoritev.arhivalije'),
-            event: 'arhivalije'
+            event: 'tehniki'
         },
         {
             name: i18next.t('produkcija.view.uprizoritev.stroskovniki'),
-            event: 'stroskovniki'
+            event: 'stroskovnik'
         }
     ];
 
@@ -72,7 +70,7 @@ define([
         formTemplate: formTpl,
         schema: shema.toFormSchema().schema,
         regions: {
-            regionDetail: '.region-stroskovniki',
+            regionDetail: '.region-detail',
             regionTabs: '.uprizoritev-tabs'
         }
     });
@@ -114,7 +112,7 @@ define([
      * @returns {undefined}
      */
     UprizoritevEditView.prototype.onSplosni = function () {
-        this.$('.pnl-detail').removeClassClass('active');
+        this.$('.pnl-detail').removeClass('active');
         this.$('.pnl-splosno').addClass('active');
     };
 
@@ -174,8 +172,7 @@ define([
         this.regionTabs.show(this.tabControl);
         return this.tabControl;
     };
-
-
+    
     /**
      * Nariše view za funkcije  - se uporabi za umetnike, igralce in tehnike
      * @param {String} name

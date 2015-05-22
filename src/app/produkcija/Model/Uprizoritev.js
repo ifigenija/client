@@ -42,7 +42,7 @@ define([
             stroskovnik: {collection: StroskovnikCollection, mappedBy: 'uprizoritev'},
             umetniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'umentik'}},
             igralci: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'igralec'}},
-            ostali: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'tehnika'}}
+            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'tehnik'}}
         },
         dodajPostavko: function (nested) {
 
@@ -71,7 +71,7 @@ define([
                 case 'ostali':
                     postavka = new FunkcijaModel({
                         uprizoritev: this.get('id'),
-                        podrocje: 'tehnika'
+                        podrocje: 'tehnik'
                     });
                     break;
             }
