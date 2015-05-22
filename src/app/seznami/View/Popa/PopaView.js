@@ -70,7 +70,7 @@ define([
      * 
      */
     PopaView.prototype.getFormView = function (model) {
-        if (!model.isNew()) {
+        if (!model.get('id')) {
             var editModel = new Popa.Model({id: model.get('id')});
             editModel.fetch();
         } else {
