@@ -58,7 +58,7 @@ define([
     };
 
     SeznamiView.prototype.onRender = function () {
-        
+
         this.$('.seznam-naslov').text(this.title);
 
         var fv = new Backgrid.Extension.ServerSideFilter({
@@ -72,14 +72,14 @@ define([
         });
 
         this.renderToolbar();
-       
+
 
         this.gridR.show(this.grid);
         this.collection.fetch();
     };
 
     SeznamiView.prototype.renderToolbar = function () {
-         var tool = [[
+        var tool = [[
                 {
                     id: 'doc-dodaj',
                     label: 'Dodaj' + ' ' + this.dodaj,
@@ -132,8 +132,16 @@ define([
     SeznamiView.prototype.onUredi = function (model) {
 
         this.onSelected(model);
-      
-        
+
+
+    };
+
+    SeznamiView.prototype.spremeniTitleForme = function (model, prevod) {
+        if(!model.get('id')){
+            this.$('.glava-title').text(this.getNaziv(model));
+        }else{
+            this.$('.glava-title').text(i18next.t(prevod));
+        }        
     };
 
     /**
@@ -142,13 +150,13 @@ define([
      * @returns {undefined}
      */
     SeznamiView.prototype.onSelected = function (model) {
-        
-        
+
+
         var form = this.getFormView(model);
         this.formR.show(form);
-        
-        this.$('.glava-title').text(form.formTitle);
-        
+
+        this.spremeniTitleForme(model, "Naziv");
+
         this.toolbarR.empty();
         this.listenTo(form, 'preklici', this.preklici);
         this.listenTo(form, 'save:success', this.osveziSeznam);
@@ -173,13 +181,13 @@ define([
         this.formR.empty();
         this.renderToolbar();
     };
-    
+
     SeznamiView.prototype.getNaziv = function (model) {
         var text = model.get('naziv') || "Naziv";
         return text;
     };
-    
-    
+
+
     /**
      * Privzrti pogled na formo za urejanje 
      * 
