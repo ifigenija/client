@@ -65,23 +65,31 @@ define([
             }
         ]
     });
-    
+
+    /**
+     * 
+     */
     PopaView.prototype.getFormView = function (model) {
-        var editModel = new Popa.Model({id: model.get('id')});
-        editModel.fetch();
+        if (!model.isNew()) {
+            var editModel = new Popa.Model({id: model.get('id')});
+            editModel.fetch();
+        } else {
+            editModel = model;
+        }
         return new PopaEditView({model: editModel});
 
     };
-    
+
     PopaView.prototype.onDodaj = function () {
         var model = new Popa.Model();
-        var view = new PopaEditView({model: model});        
-        this.listenTo(view, "save:success", this.dodajVcollection);
-        this.formR.show(view);
+        this.onSelected(model);
     };
 
-    PopaView.prototype.dodajVcollection = function () {
-        this.collection.fetch();
+
+    PopaView.prototype.dodajVcollection = function (model) {
+
+        this.collection.add(model);
+
     };
 
     return PopaView;

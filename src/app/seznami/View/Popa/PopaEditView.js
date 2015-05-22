@@ -63,6 +63,9 @@ define([
         });
     };
 
+    PopaEditView.prototype.onSkrij = function () {
+        console.log('xxxx');
+    };
     PopaEditView.prototype.onRender = function () {
         if (this.isNew()) {
             this.tabs = null;

@@ -60,29 +60,25 @@ define([
         ],
     });
     UprizoritevView.prototype.getFormView = function (model) {
-        return this.ObstojecVnos(model);
+        if (!model.isNew()) {
+            var editModel = new Uprizoritev.Model({id: model.get('id')});
+            editModel.fetch();
+
+        } else {
+            editModel = model;
+        }
+
+
+        return new UprizoritevEditView({
+            model: editModel
+        });
     };
 
-    UprizoritevView.prototype.ObstojecVnos = function (model) {
-        var editModel = new Uprizoritev.Model({id: model.get('id')});
-        editModel.fetch();
 
-        return new UprizoritevEditView(
-                {
-                    model: editModel,
-                    pogled: this.options.pogled
-                });
-    };
+
     UprizoritevView.prototype.onDodaj = function () {
         var model = new Uprizoritev.Model();
-        var view = new UprizoritevEditView({model: model});
-        this.listenTo(view, "save:success", this.dodajVcollection);
-        this.formR.show(view);
-    };
-
-    UprizoritevView.prototype.dodajVcollection = function (model) {
-        this.collection.fetch();
-        return this.ObstojecVnos(model);
+        this.onSelected(model);
     };
 
     return UprizoritevView;

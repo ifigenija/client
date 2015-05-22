@@ -2,51 +2,57 @@
  * Licenca GPLv3
  */
 define([
+    'i18next',
     'app/Dokument/View/PostavkeView',
-    'template!../../tpl/uprizoritev/arhivalija-form.tpl',
-    'formSchema!arhivalija',
+    'template!../../tpl/uprizoritev/strosek-form.tpl',
+    'formSchema!planStrosek',
     'i18next'
 ], function (
+        i18next,
         PostavkeView,
         formTpl,
         schema,
         i18next
         ) {
 
-    var ArhivalijaView = PostavkeView.extend({
+    /**
+     * 
+     * @type @exp;PostavkeView@call;extend
+     */
+    var StroskovnikView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Arhivalija',
-        detailName: 'arhivalije',
-        dodaj: i18next.t('produkcija.view.arhivalija.dodaj'),
-        formTitle: i18next.t('produkcija.view.arhivalija.title'),
+        name: i18next.t('uprizoritve.view.stroskovnik'),
+        detailName: 'stroski',
+        dodaj: i18next.t('produkcija.view.funkcija.dodaj'),
+        formTitle: i18next.t('produkcija.view.funkcija.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.arhivalija.naslov'),
-                name: 'naslov',
+                label: i18next.t('produkcija.view.funkcija.podrocje'),
+                name: 'podrocje',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.arhivalija.lokacijaOriginala'),
-                name: 'lokacijaOriginala',
+                label: i18next.t('produkcija.view.funkcija.naziv'),
+                name: 'naziv',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.arhivalija.objavljeno'),
-                name: 'objavljeno',
+                label: i18next.t('produkcija.view.funkcija.velikost'),
+                name: 'velikost',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.arhivalija.datum'),
-                name: 'datum',
+                label: i18next.t('produkcija.view.funkcija.pomembna'),
+                name: 'pomembna',
                 sortable: false
             },
             {
@@ -61,5 +67,5 @@ define([
         ]
     });
 
-    return ArhivalijaView;
+    return StroskovnikView;
 });

@@ -3,6 +3,8 @@
  */
 define([
     'marionette',
+    'radio',
+    'i18next',
     'app/Dokument/View/FormView',
     'app/Max/View/PaginatedGrid',
     'app/Max/Module/Backgrid',
@@ -11,6 +13,8 @@ define([
     'app/Max/View/Toolbar'
 ], function (
         Marionette,
+        Radio,
+        i18next,
         FormView,
         PaginatedGrid,
         Backgrid,
@@ -34,13 +38,13 @@ define([
     });
 
     SeznamiView.prototype.initialize = function (options) {
-        
+
         this.url = options.url || this.url;
-        
+
         if (!this.collection) {
             this.collection = this.getCollection();
         }
-        
+
         this.listenTo(this.collection, 'selectValue', this.onSelected);
         this.listenTo(this.collection, 'deselect', this.onSelected);
         this.listenTo(this.collection, 'backgrid:action', this.onGridAction);
@@ -51,7 +55,7 @@ define([
         coll.url = this.url;
         return coll;
     };
-    
+
     SeznamiView.prototype.onRender = function () {
 
         var fv = new Backgrid.Extension.ServerSideFilter({
@@ -63,57 +67,111 @@ define([
             columns: this.columns,
             filterView: fv
         });
-        
-        var tool = [[
-           {
-                id: 'doc-dodaj',
-                label: 'Dodaj' + ' ' + this.dodaj,
-                element: 'button-trigger',
-                trigger: 'dodaj'
-            }
-        ]];
+
+        this.renderToolbar();
+       
+
+        this.gridR.show(this.grid);
+        this.collection.fetch();
+    };
+
+    SeznamiView.prototype.renderToolbar = function () {
+         var tool = [[
+                {
+                    id: 'doc-dodaj',
+                    label: 'Dodaj' + ' ' + this.dodaj,
+                    element: 'button-trigger',
+                    trigger: 'dodaj'
+                }
+            ]];
 
         var tb = new Toolbar({
             buttonGroups: tool,
             listener: this
         });
-        
-        this.toolbarR.show(tb);
-        
-        this.gridR.show(this.grid);
-        this.collection.fetch();
-    };
 
+        this.toolbarR.show(tb);
+    }
+    /**
+     * Proxy za trigger metode 
+     * 
+     */
     SeznamiView.prototype.onGridAction = function (model, action) {
         this.triggerMethod(action, model);
     };
+
+
+    /**
+     * 
+     * @param {type} model
+     * @returns {undefined}
+     */
     SeznamiView.prototype.onBrisi = function (model) {
-        this.collection.sync("delete", model,{
-            success: function(){
-                console.log("uspesno zbrisano");
-            },
-            error: function(){
-                console.log("napaka pri brisanju iz seznama");
-            }
-        });
-        this.collection.remove(model);
-    };
-    SeznamiView.prototype.onUredi = function (model) {
-        this.onSelected(model);
-    };
-    SeznamiView.prototype.onSelected = function (model) {
-        var form = this.getFormView(model);
-        this.formR.show(form);
-        this.listenTo(form, 'preklici', this.preklici);
-        this.listenTo(form, 'save:success', this.osveziSeznam);
-    };
-    SeznamiView.prototype.osveziSeznam = function () {
-        this.collection.fetch();
-    };
-    SeznamiView.prototype.preklici = function () {
-        this.formR.empty();
+
+        if (confirm(i18next.t('confirm.delete'))) {
+            model.destroy({
+                success: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t('std.messages.success'),
+                        severity: 'success'
+                    });
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        }
     };
 
+    /**
+     * Kaj se zgodi, ko kliknemo uredi 
+     * @param {type} model
+     * @returns {undefined}
+     */
+    SeznamiView.prototype.onUredi = function (model) {
+
+        this.onSelected(model);
+      
+        
+    };
+
+    /**
+     * Kaj se zgodi, ko izberemo model v tabeli 
+     * @param {type} model
+     * @returns {undefined}
+     */
+    SeznamiView.prototype.onSelected = function (model) {
+        
+       
+        var form = this.getFormView(model);
+        this.formR.show(form);
+        this.toolbarR.empty();
+        this.listenTo(form, 'preklici', this.preklici);
+        this.listenTo(form, 'save:success', this.osveziSeznam);
+        this.listenTo(form, 'skrij', this.preklici);
+    };
+
+    /**
+     * 
+     * 
+     * @param {type} model
+     * @returns {undefined}
+     */
+    SeznamiView.prototype.osveziSeznam = function (model) {
+        this.collection.fetch();
+    };
+
+    /** 
+     * kaj se zgodi, ko 
+     * 
+     */
+    SeznamiView.prototype.preklici = function () {
+        this.formR.empty();
+        this.renderToolbar();
+    };
+
+    /**
+     * Privzrti pogled na formo za urejanje 
+     * 
+     */
     SeznamiView.prototype.getFormView = function (model) {
         var Fv = FormView.extend({
             formTitle: this.name + model.get('naziv'),
