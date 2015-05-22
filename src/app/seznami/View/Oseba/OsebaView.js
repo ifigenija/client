@@ -39,6 +39,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('seznami.view.oseba.funkcija'),
+                name: 'funkcija',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('seznami.view.oseba.psevdonim'),
                 name: 'psevdonim',
                 sortable: false
@@ -48,13 +55,6 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.ePosta'),
                 name: 'email',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('seznami.view.oseba.uporabnik'),
-                name: 'user',
                 sortable: false
             },
             {
