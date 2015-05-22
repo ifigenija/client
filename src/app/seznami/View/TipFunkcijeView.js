@@ -19,7 +19,7 @@ define([
 
     var TipFunkcijeView = SeznamiView.extend({
         url: baseUrl + '/rest/tipFunkcije',
-        name: 'TipFunkcije',
+        title: i18next.t('seznami.view.tipFunkcije.title'),
         schema: schema,
         formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.tipFunkcije.dodaj'),
@@ -61,7 +61,12 @@ define([
                 ]
             }
         ]
-    });   
+    });
+    
+    TipFunkcijeView.prototype.getNaziv = function (model) {
+        var text = model.get('ime') || "Ime";
+        return text;
+    };
     
     TipFunkcijeView.prototype.onDodaj = function () {
         var model = new TipFunkcije.Model();

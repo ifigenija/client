@@ -55,7 +55,7 @@ define([
         };
         model.popa = function () {
             require(['../View/Popa/PopaView'], function (PopaView) {
-                var view = new PopaView();
+                var view = new PopaView({pogled: 'splosno'});
                 ch.command('open', view, i18next.t('seznami.view.popa.title'));
             });
         };

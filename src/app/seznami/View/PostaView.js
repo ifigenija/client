@@ -19,7 +19,7 @@ define([
 
     var PostaView = SeznamiView.extend({
         url: baseUrl + '/rest/posta',
-        name: 'Posta',
+        title: i18next.t('seznami.view.posta.title'),
         schema: schema,
         formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.posta.dodaj'),

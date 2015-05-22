@@ -19,7 +19,7 @@ define([
 
     var OsebaView = SeznamiView.extend({
         url: baseUrl + '/rest/oseba',
-        name: 'Oseba',
+        title: i18next.t('seznami.view.oseba.title'),
         dodaj: i18next.t('seznami.view.oseba.dodaj'),
         columns: [
             {
@@ -67,36 +67,34 @@ define([
             }
         ],
     });
-
-    OsebaView.prototype.getFormView = function (model) {
-        return this.ObstojecVnos(model);
-    };
-    OsebaView.prototype.onDodaj = function () {
-        var model = new Oseba.Model();
-        var view = new OsebaEditView({model: model});
-        this.listenTo(view, "save:success", this.dodajVcollection);
-        this.formR.show(view);
-    };
-
-    OsebaView.prototype.ObstojecVnos = function (model) {
-        var editModel = new Oseba.Model({id: model.get('id')});
-        editModel.fetch();
-        
+    
 //        var chLovro = Radio.channel('global');
 //        var response = chLovro.request('isGranted', "halo");
 //        console.log("Oseba "+ response);
 
-        return new OsebaEditView(
-                {
-                    model: editModel,
-                    pogled: this.options.pogled
-                });
+    OsebaView.prototype.getFormView = function (model) {
+        if (!model.get('id')) {
+            var editModel = new Oseba.Model({id: model.get('id')});
+            editModel.fetch();
+        } else {
+            editModel = model;
+        }
+        return new OsebaEditView({
+            model: editModel,
+            pogled: this.options.pogled
+        });
+
+    };
+
+    OsebaView.prototype.onDodaj = function () {
+        var model = new Oseba.Model();
+        this.onSelected(model);
     };
 
     OsebaView.prototype.dodajVcollection = function (model) {
-        this.collection.fetch();
-        return this.ObstojecVnos(model);
 
+        this.collection.add(model);
+        
 //        if (this.options.pogled === 'kontaktnaOseba') {
 //            $.ajax({
 //                url:  '../rest/popa/'  + this.model.get('popa') + '/osebe/'  + this.model.get('oseba'),
@@ -110,6 +108,7 @@ define([
 //                }
 //            });
 //        }
+
     };
 
     return OsebaView;

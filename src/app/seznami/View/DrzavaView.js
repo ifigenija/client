@@ -19,7 +19,7 @@ define([
 
     var DrzavaView = SeznamiView.extend({
         url: baseUrl + '/rest/drzava',
-        name: 'Drzava',
+        title: i18next.t('seznami.view.drzava.title'),
         schema: schema,
         formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.drzava.dodaj'),

@@ -29,11 +29,12 @@ define([
         columns: null,
         formTemplate: null,
         schema: null,
-        name: null,
+        title: null,
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
-            toolbarR: '.seznam-toolbar'
+            toolbarR: '.seznam-toolbar',
+            naslovR: '.seznam-naslov'
         }
     });
 
@@ -57,6 +58,8 @@ define([
     };
 
     SeznamiView.prototype.onRender = function () {
+        
+        this.$('.seznam-naslov').text(this.title);
 
         var fv = new Backgrid.Extension.ServerSideFilter({
             collection: this.collection
@@ -140,9 +143,12 @@ define([
      */
     SeznamiView.prototype.onSelected = function (model) {
         
-       
+        
         var form = this.getFormView(model);
         this.formR.show(form);
+        
+        this.$('.glava-title').text(form.formTitle);
+        
         this.toolbarR.empty();
         this.listenTo(form, 'preklici', this.preklici);
         this.listenTo(form, 'save:success', this.osveziSeznam);
@@ -167,14 +173,20 @@ define([
         this.formR.empty();
         this.renderToolbar();
     };
-
+    
+    SeznamiView.prototype.getNaziv = function (model) {
+        var text = model.get('naziv') || "Naziv";
+        return text;
+    };
+    
+    
     /**
      * Privzrti pogled na formo za urejanje 
      * 
      */
     SeznamiView.prototype.getFormView = function (model) {
         var Fv = FormView.extend({
-            formTitle: this.name + model.get('naziv'),
+            formTitle: this.getNaziv(model),
             buttons: {
                 shrani: {
                     id: 'doc-shrani',

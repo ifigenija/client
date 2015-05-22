@@ -17,7 +17,7 @@ define([
 
     var PopaView = SeznamiView.extend({
         url: baseUrl + '/rest/popa',
-        name: 'Poslovni partner',
+        title: i18next.t('seznami.view.popa.title'),
         dodaj: i18next.t('seznami.view.popa.dodaj'),
         columns: [
             {
@@ -76,7 +76,10 @@ define([
         } else {
             editModel = model;
         }
-        return new PopaEditView({model: editModel});
+        return new PopaEditView({
+            model: editModel,
+            pogled: this.options.pogled
+        });
 
     };
 

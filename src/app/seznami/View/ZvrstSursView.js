@@ -19,7 +19,7 @@ define([
 
     var ZvrstSursView = SeznamiView.extend({
         url: baseUrl + '/rest/zvrstSurs',
-        name: 'ZvrstSurs',
+        title: i18next.t('seznami.view.zvrstSurs.title'),
         schema: schema,
         formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.zvrstSurs.dodaj'),
@@ -48,6 +48,11 @@ define([
             }
         ]
     });
+    
+    ZvrstSursView.prototype.getNaziv = function (model) {
+        var text = model.get('ime') || "Ime";
+        return text;
+    };
     
     ZvrstSursView.prototype.onDodaj = function () {
         var model = new ZvrstSurs.Model();

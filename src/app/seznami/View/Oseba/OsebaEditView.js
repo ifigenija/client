@@ -118,10 +118,12 @@ define([
             tabs = tabKontaktna;
         } else if (this.options.pogled === "splosno") {
             tabs = tabSplosno;
-        } else if(this.isNew()){
-            tabs = tabNovi;
         } else{
             tabs = tabSplosno;
+        }
+        
+        if(this.isNew()){
+            tabs = tabNovi;
         }
 
         if (!this.isNew()) {
@@ -204,7 +206,7 @@ define([
         var self = this;
         
         var Fv = FormView.extend({
-            formTitle: this.name + self.model.get('naziv'),
+            formTitle: self.model.get('ime'),
             buttons: {
                 shrani: {
                     id: 'doc-shrani',
@@ -237,7 +239,6 @@ define([
             model: self.model
         });
         
-        console.log(view);
         self.regionOsebniPodatki.show(view);
         return view;
     };

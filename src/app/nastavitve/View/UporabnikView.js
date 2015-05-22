@@ -20,7 +20,7 @@ define([
     var UporabnikView = SeznamiView.extend({
         url: baseUrl + '/rest/user',
         formTemplate: formTpl,
-        name: 'Uporabnik',
+        title: i18next.t('seznami.view.uporabnik.title'),
         dodaj: i18next.t('seznami.view.uporabnik.dodaj'),
         columns: [
             {

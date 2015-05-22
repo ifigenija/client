@@ -163,7 +163,7 @@
             "drzava": {
                 "title": "Države",
                 "nova": "Nova država",
-                "isoNum": "Iso Num",
+                "isoNum": "Številčna koda",
                 "dodaj": "državo",
                 "isoNaziv": "Iso naziv"
             },

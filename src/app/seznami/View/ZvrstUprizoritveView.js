@@ -19,7 +19,7 @@ define([
 
     var ZvrstUprizoritveView = SeznamiView.extend({
         url: baseUrl + '/rest/zvrstUprizoritve',
-        name: 'ZvrstUprizoritve',
+        title: i18next.t('seznami.view.zvrstUprizoritve.title'),
         schema: schema,
         formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.zvrstUprizoritve.dodaj'),
@@ -48,6 +48,11 @@ define([
             }
         ]
     });
+    
+    ZvrstUprizoritveView.prototype.getNaziv = function (model) {
+        var text = model.get('ime') || "Ime";
+        return text;
+    };
     
     ZvrstUprizoritveView.prototype.onDodaj = function () {
         var model = new ZvrstUprizoritve.Model();

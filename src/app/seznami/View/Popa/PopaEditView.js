@@ -17,6 +17,53 @@ define([
         TabControl
         ) {
 
+    var tabsSplosno =
+            [
+                {
+                    name: i18next.t('seznami.view.splosno'),
+                    event: 'splosni'
+                },
+                {
+                    name: i18next.t('seznami.view.popa.kontakti'),
+                    event: 'kontakti'
+                },
+                {
+                    name: i18next.t('seznami.view.popa.osebe'),
+                    event: 'osebe'
+                },
+                {
+                    name: i18next.t('seznami.view.popa.racuni'),
+                    event: 'trrji'
+                }
+            ];
+
+    var gumbi = {
+        'doc-Koproducent': {
+            id: 'doc-koproducent',
+            label: 'Koproducent',
+            element: 'button-trigger',
+            trigger: 'koproducent'
+        },
+        'doc-kupec': {
+            id: 'doc-kupec',
+            label: 'Kupec',
+            element: 'button-trigger',
+            trigger: 'kupec'
+        },
+        'doc-shrani': {
+            id: 'doc-shrani',
+            label: 'Shrani',
+            element: 'button-trigger',
+            trigger: 'shrani',
+            disabled: true
+        },
+        'doc-skrij': {
+            id: 'doc-skrij',
+            label: 'Skrij',
+            element: 'button-trigger',
+            trigger: 'skrij'
+        }
+    };
 
     var PopaEditView = DokumentView.extend({
         template: tpl,
@@ -29,22 +76,7 @@ define([
             regionTelefonske: '.region-telefonske',
             regionTabs: '.popa-tabs'
         },
-        tabs: [{
-                name: i18next.t('seznami.view.splosno'),
-                event: 'splosni'
-            },
-            {
-                name: i18next.t('seznami.view.popa.kontakti'),
-                event: 'kontakti'
-            },
-            {
-                name: i18next.t('seznami.view.popa.osebe'),
-                event: 'osebe'
-            },
-            {
-                name: i18next.t('seznami.view.popa.racuni'),
-                event: 'trrji'
-            }]
+        buttons: gumbi,
     });
     PopaEditView.prototype.getNaziv = function () {
         var naziv = this.model.get('naziv');
@@ -66,17 +98,36 @@ define([
     PopaEditView.prototype.onSkrij = function () {
         console.log('xxxx');
     };
+    PopaEditView.prototype.onKupec = function () {
+        console.log('Kupec');
+    };
+    PopaEditView.prototype.onKoproducent = function () {
+        console.log('Koproducent');
+    };
     PopaEditView.prototype.onRender = function () {
-        if (this.isNew()) {
-            this.tabs = null;
+
+        var tabs = null;
+
+        if (this.options.pogled === "splosno") {
+            tabs = tabsSplosno;
+        } else if (this.isNew()) {
+            tabs = null;
         } else {
+            tabs = tabsSplosno;
+        }
+
+        if (this.isNew()) {
+            tabs = null;
+        }
+
+        if (!this.isNew()) {
             this.renderNaslovi();
             this.renderTelefonske();
             this.renderTrrji();
             this.renderOsebe();
         }
-        
-        this.renderTabs();
+
+        this.renderTabs(tabs);
     };
     /**
      * Klik na splošni tab
@@ -118,8 +169,8 @@ define([
         this.$('.popa-panels .tab-pane').removeClass('active');
     };
 
-    PopaEditView.prototype.renderTabs = function () {
-        this.tabControl = new TabControl({tabs: this.tabs, listener: this});
+    PopaEditView.prototype.renderTabs = function (tabs) {
+        this.tabControl = new TabControl({tabs: tabs, listener: this});
         this.regionTabs.show(this.tabControl);
         return this.tabControl;
     };
