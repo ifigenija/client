@@ -68,7 +68,7 @@ define([
                         podrocje: 'igralec'
                     });
                     break;
-                case 'ostali':
+                case 'tehniki':
                     postavka = new FunkcijaModel({
                         uprizoritev: this.get('id'),
                         podrocje: 'tehnik'

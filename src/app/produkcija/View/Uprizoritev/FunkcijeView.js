@@ -18,7 +18,6 @@ define([
         schema: schema.toFormSchema().schema,
         name: '',
         detailName: '',
-        dodaj: i18next.t('produkcija.view.funkcija.dodaj'),
         formTitle: i18next.t('produkcija.view.funkcija.title'),
         gridMeta: [
             {
