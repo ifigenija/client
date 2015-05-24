@@ -49,6 +49,15 @@ define([
         ]
     });
 
+    PostaView.prototype.getTitle = function (model) {
+        var text = i18next.t("seznami.view.posta.nova");
+
+        if (model.get('id')) {
+            text = model.get('naziv') || "Naziv";
+        }
+        return text;
+    };
+
     PostaView.prototype.onDodaj = function () {
         var model = new Posta.Model();
         this.onSelected(model);

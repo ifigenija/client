@@ -19,7 +19,7 @@ define([
 
     var AbonmaView = SeznamiView.extend({
         url: baseUrl + '/rest/abonma',
-        name: 'Abonma',
+        title: i18next.t('seznami.view.abonma.title'),
         schema: schema,
         formTemplate: formTpl,
         dodaj: i18next.t('seznami.view.abonma.dodaj'),
@@ -69,6 +69,15 @@ define([
             }
         ]
     });
+    
+    AbonmaView.prototype.getTitle = function (model) {
+        var text = i18next.t("seznami.view.abonma.nova");
+
+        if (model.get('id')) {
+            text = model.get('ime') || "Ime";
+        }
+        return text;
+    };
 
     AbonmaView.prototype.onDodaj = function () {
         var model = new Abonma.Model();

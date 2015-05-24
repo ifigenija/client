@@ -136,14 +136,6 @@ define([
 
     };
 
-    SeznamiView.prototype.spremeniTitleForme = function (model, prevod) {
-        if(!model.get('id')){
-            this.$('.glava-title').text(this.getNaziv(model));
-        }else{
-            this.$('.glava-title').text(i18next.t(prevod));
-        }        
-    };
-
     /**
      * Kaj se zgodi, ko izberemo model v tabeli 
      * @param {type} model
@@ -155,7 +147,7 @@ define([
         var form = this.getFormView(model);
         this.formR.show(form);
 
-        this.spremeniTitleForme(model, "Naziv");
+        this.$('.glava-title').text(form.formTitle);
 
         this.toolbarR.empty();
         this.listenTo(form, 'preklici', this.preklici);
@@ -182,7 +174,7 @@ define([
         this.renderToolbar();
     };
 
-    SeznamiView.prototype.getNaziv = function (model) {
+    SeznamiView.prototype.getTitle = function (model) {
         var text = model.get('naziv') || "Naziv";
         return text;
     };
@@ -194,7 +186,7 @@ define([
      */
     SeznamiView.prototype.getFormView = function (model) {
         var Fv = FormView.extend({
-            formTitle: this.getNaziv(model),
+            formTitle: this.getTitle(model),
             buttons: {
                 shrani: {
                     id: 'doc-shrani',

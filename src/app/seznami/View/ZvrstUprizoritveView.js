@@ -49,8 +49,12 @@ define([
         ]
     });
     
-    ZvrstUprizoritveView.prototype.getNaziv = function (model) {
-        var text = model.get('ime') || "Ime";
+    ZvrstUprizoritveView.prototype.getTitle = function (model) {
+        var text = i18next.t("seznami.view.zvrstUprizoritve.nova");
+
+        if (model.get('id')) {
+            text = model.get('ime') || "Ime";
+        }
         return text;
     };
     

@@ -62,6 +62,15 @@ define([
             }
         ]
     });
+    
+    BesediloView.prototype.getTitle = function (model) {
+        var text = i18next.t("seznami.view.besedilo.nova");
+
+        if (model.get('id')) {
+            text = model.get('ime') || "Ime";
+        }
+        return text;
+    };
 
     BesediloView.prototype.onDodaj = function () {
         var model = new Besedilo.Model();

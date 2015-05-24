@@ -63,8 +63,12 @@ define([
         ]
     });
     
-    TipFunkcijeView.prototype.getNaziv = function (model) {
-        var text = model.get('ime') || "Ime";
+    TipFunkcijeView.prototype.getTitle = function (model) {
+        var text = i18next.t("seznami.view.tipFunkcije.nova");
+
+        if (model.get('id')) {
+            text = model.get('ime') || "Ime";
+        }
         return text;
     };
     
