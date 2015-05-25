@@ -94,7 +94,7 @@ define([
         });
 
         this.toolbarR.show(tb);
-    }
+    };
     /**
      * Proxy za trigger metode 
      * 
@@ -147,7 +147,7 @@ define([
         var form = this.getFormView(model);
         this.formR.show(form);
 
-        this.$('.glava-title').text(form.formTitle);
+        this.$('.glava-title').text(this.getTitle(model));
 
         this.toolbarR.empty();
         this.listenTo(form, 'preklici', this.preklici);
@@ -162,6 +162,7 @@ define([
      * @returns {undefined}
      */
     SeznamiView.prototype.osveziSeznam = function (model) {
+        this.$('.glava-title').text(this.getTitle(model));
         this.collection.fetch();
     };
 

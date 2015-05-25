@@ -67,7 +67,7 @@ define([
         var text = i18next.t("seznami.view.besedilo.nova");
 
         if (model.get('id')) {
-            text = model.get('ime') || "Ime";
+            text = model.get('naslov') || "Naslov";
         }
         return text;
     };
