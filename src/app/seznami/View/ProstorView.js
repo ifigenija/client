@@ -3,59 +3,59 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    'template!../tpl/abonma-form.tpl',
-    'formSchema!abonma',
-    '../Model/Abonma',
+    'template!../tpl/prostor-form.tpl',
+    'formSchema!prostor',
+    '../Model/Prostor',
     'i18next',
     'baseUrl'
 ], function (
         SeznamiView,
         formTpl,
         schema,
-        Abonma,
+        Prostor,
         i18next,
         baseUrl
         ) {
 
-    var AbonmaView = SeznamiView.extend({
-        url: baseUrl + '/rest/abonma',
-        name: 'Abonma',
+    var ProstorView = SeznamiView.extend({
+        url: baseUrl + '/rest/prostor',
+        name: 'Prostor',
         schema: schema,
         formTemplate: formTpl,
-        dodaj: i18next.t('seznami.view.abonma.dodaj'),
+        dodaj: i18next.t('seznami.view.prostor.dodaj'),
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.abonma.ime'),
-                name: 'ime',
+                label: i18next.t('seznami.view.prostor.sifra'),
+                name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.abonma.stPredstav'),
-                name: 'stPredstav',
+                label: i18next.t('seznami.view.prostor.naziv'),
+                name: 'naziv',
                 sortable: true
             },
             {
-                cell: 'string',
+                cell: 'boolean',
                 editable: false,
-                label: i18next.t('seznami.view.abonma.stKuponov'),
-                name: 'stKuponov',
+                label: i18next.t('seznami.view.prostor.jePrizorisce'),
+                name: 'jePrizorisce',
                 sortable: true
             },
             {
-                cell: 'string',
+                cell: 'number',
                 editable: false,
-                label: i18next.t('seznami.view.abonma.kapaciteta'),
+                label: i18next.t('seznami.view.prostor.kapaciteta'),
                 name: 'kapaciteta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.abonma.opis'),
+                label: i18next.t('seznami.view.prostor.opis'),
                 name: 'opis',
                 sortable: true
             },
@@ -70,10 +70,10 @@ define([
         ]
     });
 
-    AbonmaView.prototype.onDodaj = function () {
-        var model = new Abonma.Model();
+    ProstorView.prototype.onDodaj = function () {
+        var model = new Prostor.Model();
         this.onSelected(model);
     };
 
-    return AbonmaView;
+    return ProstorView;
 });

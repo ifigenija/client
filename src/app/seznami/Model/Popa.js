@@ -42,9 +42,9 @@ define([
     var PopaModel = Dokument.Model.extend({
         urlRoot: baseUrl + '/rest/popa',
         nestedCollections: {          
-            trrji: {collection: PopaTrrCollection, mappedBy: 'trrji', filterBy: 'popa'},
-            telefonske: {collection: PopaTelefonCollection, mappedBy: 'telefonske', filterBy: 'popa'},
-            naslovi: {collection: PopaNaslovCollection, mappedBy: 'naslovi', filterBy: 'popa'}
+            trrji: {collection: PopaTrrCollection, mappedBy: 'popa'},
+            telefonske: {collection: PopaTelefonCollection, mappedBy: 'popa'},
+            naslovi: {collection: PopaNaslovCollection, mappedBy: 'popa'}
         },
         dodajPostavko: function (nested) {
 

@@ -9,10 +9,10 @@ define([
         _,
         baseUrl
         ) {    
-    var AbonmaModel = Dokument.Model.extend({
-        urlRoot: baseUrl + '/rest/abonma'
+    var ProstorModel = Dokument.Model.extend({
+        urlRoot: baseUrl + '/rest/prostor'
     });
     return {
-        Model: AbonmaModel
+        Model: ProstorModel
     };
 });
