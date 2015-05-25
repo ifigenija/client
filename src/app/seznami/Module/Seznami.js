@@ -71,6 +71,12 @@ define([
                 ch.command('open', view, i18next.t('seznami.view.abonma.title'));
             });
         };
+        model.prostor = function () {
+            require(['../View/ProstorView'], function (AbonmaView) {
+                var view = new AbonmaView();
+                ch.command('open', view, i18next.t('seznami.view.prostor.title'));
+            });
+        };        
         model.alternacija = function () {
             require(['../View/AlternacijaView'], function (AlternacijaView) {
                 var view = new AlternacijaView();
@@ -96,6 +102,7 @@ define([
                     'posta': 'posta',
                     'popa': 'popa',
                     'abonma': 'abonma',
+                    'prostor': 'prostor',
                     'alternacija' : 'alternacija'
                 }
             });

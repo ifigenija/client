@@ -18,8 +18,6 @@ define(['marionette',
 
     var app = new Marionette.Application();
 
-    // aplikacijo skranimo za globalni dostop
-    window.app = app;
     app.module('public', publicInit);
 
     app.on('start', function (options) {

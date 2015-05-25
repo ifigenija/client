@@ -10,20 +10,21 @@ define([
         baseUrl
         ) {
 
-    var FunkcijaAlternacija = Dokument.Postavka.extend({
+
+    var AlternacijaModel = Dokument.Postavka.extend({
         urlRoot: baseUrl + '/rest/alternacija'
     });
-    
-    var FunkcijaAlternacijaCollection = Dokument.PostavkaCollection.extend({
-        model: FunkcijaAlternacija,
+
+    var AlternacijaCollection = Dokument.PostavkaCollection.extend({
+        model: AlternacijaModel,
         url: baseUrl + '/rest/alternacija',
         index: 'pozicija'
     });
-    
+
     var FunkcijaModel = Dokument.Model.extend({
         urlRoot: baseUrl + '/rest/funkcija',
         nestedCollections: {
-            alternacije: {collection: FunkcijaAlternacijaCollection, mappedBy: 'alternacije', filterBy: 'funkcija'}
+            alternacije: {collection: AlternacijaCollection, mappedBy: 'funkcija'}
         },
         dodajPostavko: function (nested) {
 
@@ -35,6 +36,7 @@ define([
                 case 'alternacije':
                     postavka = new FunkcijaAlternacija({
                         funkcija: this.id
+                        
                     });
                     break;
             }
@@ -42,7 +44,5 @@ define([
             return postavka;
         }
     });
-    return {
-        Model: FunkcijaModel
-    };
+
 });

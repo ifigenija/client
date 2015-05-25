@@ -11,21 +11,37 @@ define([
         ) {
 
 
-    var StrosekModel = Dokument.Postavka.extend({
+    var KoprodukcijaModel = Dokument.Postavka.extend({
         urlRoot: baseUrl + '/rest/strosek'
     });
 
-    var FunkcijaModel = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/funkcija'
+
+    
+
+    var KoprodukcijaCollection = Dokument.PostavkaCollection.extend({
+        model: KoprodukcijaModel,
+        url: baseUrl + '/rest/koprodukcija',
+        index: 'sort',
+        mode: 'client'
     });
-
-
-    var StroskovnikCollection = Dokument.PostavkaCollection.extend({
-        model: StrosekModel,
-        url: baseUrl + '/rest/strosek',
-        index: 'sort'
+    
+    var AlternacijaModel = Dokument.Model.extend({
+        
+        urlRoot: baseUrl + '/rest/alternacija'
+         
     });
+    
+    var AlternacijaCollection = Dokument.PostavkaCollection.extend({
+        model: KoprodukcijaModel,
+        url: baseUrl + '/rest/alternacija',
+        index: 'sort',
+        mode: 'client'
+    });
+    
 
+    var FunkcijaModel = Dokument.Model.extend({
+        url: baseUrl + '/rest/funkcija'        
+    });
     /**
      * Kolekcija za funkcije 
      */
@@ -39,10 +55,11 @@ define([
     var UprizoritevModel = Dokument.Model.extend({
         urlRoot: baseUrl + '/rest/uprizoritev',
         nestedCollections: {
-            stroskovnik: {collection: StroskovnikCollection, mappedBy: 'uprizoritev'},
-            umetniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'umentik'}},
+            umetniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'umetnik'}},
             igralci: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'igralec'}},
-            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'tehnik'}}
+            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'tehnik'}},
+            koprodukcije: {collection: ZasedbaCollection, mappedBy: 'uprizoritev'}
+
         },
         dodajPostavko: function (nested) {
 
@@ -51,11 +68,12 @@ define([
             }
             var postavka;
             switch (nested) {
-                case 'stroskovnik':
-                    postavka = new StrosekModel({
+                case 'koprodukcije':
+                    postavka = new Model({
                         uprizoritev: this.get('id')
                     });
                     break;
+
                 case 'umetniki':
                     postavka = new FunkcijaModel({
                         uprizoritev: this.get('id'),
@@ -79,12 +97,14 @@ define([
             return postavka;
         }
     });
-    
+
     return {
         Model: UprizoritevModel,
         ZasedbaCollection: ZasedbaCollection,
         FunkcijaModel: FunkcijaModel,
-        StrosekModel: StrosekModel,
-        StroskovnikCollection: StroskovnikCollection,
+        AlternacijaModel: AlternacijaModel,
+        AlternacijaCollection: AlternacijaCollection,
+        KodprodukcijaModel: KoprodukcijaModel,
+        KoprodukcijaCollection: KoprodukcijaCollection,
     };
 });

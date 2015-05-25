@@ -10,9 +10,7 @@ define([
         baseUrl
         ) {
 
-    var OsebaOsebniPodatki = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/oseba'
-    });
+
     var OsebaTrr = Dokument.Postavka.extend({
         urlRoot: baseUrl + '/rest/trr'
     });
@@ -26,11 +24,7 @@ define([
         urlRoot: baseUrl + '/rest/zaposlitev'
     });    
     
-    var OsebaOsebniPodatkiCollection = Dokument.PostavkaCollection.extend({
-        model: OsebaOsebniPodatki,
-        url: baseUrl + '/rest/oseba',
-        index: 'pozicija'
-    });
+
     var OsebaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTelefon,
         url: baseUrl + '/rest/telefonska',
@@ -58,11 +52,10 @@ define([
     var OsebaModel = Dokument.Model.extend({
         urlRoot: baseUrl + '/rest/oseba',
         nestedCollections: {
-            osebniPodatki: {collection: OsebaOsebniPodatkiCollection, mappedBy: 'osebniPodatki', filterBy: 'oseba'},
-            trrji: {collection: OsebaTrrCollection, mappedBy: 'trrji', filterBy: 'oseba'},
-            telefonske: {collection: OsebaTelefonCollection, mappedBy: 'telefonske', filterBy: 'oseba'},
-            naslovi: {collection: OsebaNaslovCollection, mappedBy: 'naslovi', filterBy: 'oseba'},
-            zaposlitve: {collection: OsebaZaposlitevCollection, mappedBy: 'zaposlitve', filterBy: 'oseba'}
+            trrji: {collection: OsebaTrrCollection, mappedBy: 'oseba'},
+            telefonske: {collection: OsebaTelefonCollection, mappedBy: 'oseba'},
+            naslovi: {collection: OsebaNaslovCollection, mappedBy: 'oseba'},
+            zaposlitve: {collection: OsebaZaposlitevCollection, mappedBy: 'oseba'}
         },
         dodajPostavko: function (nested) {
 
@@ -71,11 +64,6 @@ define([
             }
             var postavka;
             switch (nested) {
-                case 'osebniPodatki':
-                    postavka = new OsebaOsebniPodatki({
-                        oseba: this.id
-                    });
-                    break;
                 case 'trrji':
                     postavka = new OsebaTrr({
                         oseba: this.id

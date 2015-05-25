@@ -111,7 +111,7 @@ define([
             authService.call(
                     'checkLogin', [],
                     function (result) {
-                        if (result.roles && result.email) {
+                        if (result.roles && result.username) {
                             self.redirectToMain(result);
                         } else {
                             login();

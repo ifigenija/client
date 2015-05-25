@@ -22,6 +22,7 @@ require.config({
         'deep-model': 'lib/backbone-deep-model/distribution/deep-model',
         'backbone-modal': 'app/Max/View/Modal',
         'moment': 'lib/moment/moment',
+        'moment/locale': 'lib/moment/locale',
         'handlebars': 'lib/handlebars/handlebars.amd',
         'i18next-actual': 'lib/i18next/i18next.amd.withJQuery',
         'i18next': 'app/Max/i18next-wrapper',

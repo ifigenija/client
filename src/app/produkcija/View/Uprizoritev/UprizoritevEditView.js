@@ -75,7 +75,7 @@ define([
         }
     });
 
-    
+
     UprizoritevEditView.prototype.getNaslovUprizoritve = function () {
         var naslovT = this.model.get('naslov');
         var naslov = naslovT || i18next.t('produkcija.view.uprizoritev.naslov');
@@ -97,7 +97,7 @@ define([
     UprizoritevEditView.prototype.onRender = function () {
         var tabs = null;
 
-        if (this.model.isNew()) {
+        if (!this.model.get('id')) {
             tabs = tabSplosno;
         } else {
             tabs = tabVsi;
@@ -172,16 +172,16 @@ define([
         this.regionTabs.show(this.tabControl);
         return this.tabControl;
     };
-    
+
     /**
      * Nariše view za funkcije  - se uporabi za umetnike, igralce in tehnike
      * @param {String} name
      * @param {String} detailName
      * @returns {undefined}
      */
-    UprizoritevEditView.prototype.renderFunkcije = function (name, detailName) {
+    UprizoritevEditView.prototype.renderFunkcije = function (coll, name, detailName) {
         var view = new FunkcijeView({
-            collection: this.model.igralciCollection,
+            collection: coll,
             dokument: this.model
         });
         view.detailName = detailName;
@@ -195,12 +195,12 @@ define([
      * @returns {undefined}
      */
     UprizoritevEditView.prototype.renderUmetniki = function () {
-        var self = this;
 
-        if (self.model.umetnikiCollection.length === 0) {
-            self.model.umetnikiCollection.fetch();
+        var c = this.model.umetnikiCollection;
+        if (c.length === 0) {
+            c.fetch();
         }
-        this.renderFunkcije('uprizoritev.view.umetniki', 'umetniki');
+        this.renderFunkcije(c, 'uprizoritev.view.umetniki', 'umetniki');
 
     };
 
@@ -209,11 +209,11 @@ define([
      * @returns {undefined}
      */
     UprizoritevEditView.prototype.renderIgralci = function () {
-        var self = this;
-        if (self.model.igralciCollection.length === 0) {
-            self.model.igralciCollection.fetch();
+        var c = this.model.igralciCollection;
+        if (c.length === 0) {
+            c.fetch();
         }
-        this.renderFunkcije('uprizoritev.view.igralci', 'igralci');
+        this.renderFunkcije(c, 'uprizoritev.view.igralci', 'igralci');
     };
 
     /**
@@ -223,11 +223,11 @@ define([
      * @returns {undefined}
      */
     UprizoritevEditView.prototype.renderTehniki = function () {
-        var self = this;
-        if (self.model.tehnikiCollection.length === 0) {
-            self.model.tehnikiCollection.fetch();
+        var c = this.model.tehnikiCollection;
+        if (c.length === 0) {
+            c.fetch();
         }
-        this.renderFunkcije('uprizoritev.view.tehniki', 'tehniki');
+        this.renderFunkcije(c,'uprizoritev.view.tehniki', 'tehniki');
     };
 
     /**

@@ -27,8 +27,8 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.besedilo.naslov'),
-                name: 'naslov',
+                label: i18next.t('seznami.view.besedilo.stevilka'),
+                name: 'stevilka',
                 sortable: true
             },
             {
@@ -50,6 +50,13 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.besedilo.prevajalec'),
                 name: 'prevajalec',
+                sortable: true
+            },
+            {
+                cell: 'date',
+                editable: false,
+                label: i18next.t('seznami.view.besedilo.datumPrejema'),
+                name: 'datumPrejema',
                 sortable: true
             },
             {

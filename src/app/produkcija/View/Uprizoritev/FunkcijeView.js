@@ -4,29 +4,34 @@
 define([
     'app/Dokument/View/PostavkeView',
     'i18next',
+    'underscore',
     'formSchema!funkcija',
     'template!../../tpl/uprizoritev/funkcija-form.tpl'
 ], function (
         PostavkeView,
         i18next,
+        _,
         schema,
-        formTpl  
+        formTpl
         ) {
 
+    // odstranim področje iz sheme, ker 
+    //  je nastavljeno implicitno glede na to, kje se 
+    // funkcija ureja 
+    var sch = _.omit(schema.toFormSchema().schema, 'podrocje');
+console.log(sch);
+    /**
+     * 
+     * 
+     * @type @exp;PostavkeView@call;extend
+     */
     var FunkcijaView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: schema.toFormSchema().schema,
+        schema: sch,
         name: '',
         detailName: '',
         formTitle: i18next.t('produkcija.view.funkcija.title'),
         gridMeta: [
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('produkcija.view.funkcija.podrocje'),
-                name: 'podrocje',
-                sortable: false
-            },
             {
                 cell: 'string',
                 editable: false,
