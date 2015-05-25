@@ -22,7 +22,6 @@ define([
         title: i18next.t('seznami.view.tipFunkcije.title'),
         schema: schema,
         formTemplate: formTpl,
-        dodaj: i18next.t('seznami.view.tipFunkcije.dodaj'),
         columns: [
             {
                 cell: 'string',

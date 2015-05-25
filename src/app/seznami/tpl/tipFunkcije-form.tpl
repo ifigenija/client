@@ -1,5 +1,10 @@
-<div class="row">
-    <div class="col-sm-4" data-fields="ime,imeZenski,nastopajoc"></div>
-    <div class="col-sm-4" data-fields="dovoliPrekrivanje,maxPrekrivanj,podrocje"></div>
-    <div class="col-sm-4" data-fields="pomembnost,opis"></div>
+<div>
+    <div class="row">
+        <div class="col-sm-6 col-lg-4" data-fields="ime"></div>
+        <div class="col-sm-6 col-lg-4" data-fields="imeZenski"></div>
+        <div class="col-sm-6 col-lg-4" data-fields="podrocje"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-offset-3" data-fields="opis"></div>
+    </div>
 </div>

@@ -20,7 +20,6 @@ define([
     var OsebaView = SeznamiView.extend({
         url: baseUrl + '/rest/oseba',
         title: i18next.t('seznami.view.oseba.title'),
-        dodaj: i18next.t('seznami.view.oseba.dodaj'),
         columns: [
             {
                 cell: 'string',

@@ -19,10 +19,9 @@ define([
 
     var ProstorView = SeznamiView.extend({
         url: baseUrl + '/rest/prostor',
-        name: 'Prostor',
+        title: i18next.t('seznami.view.prostor.title'),
         schema: schema,
         formTemplate: formTpl,
-        dodaj: i18next.t('seznami.view.prostor.dodaj'),
         columns: [
             {
                 cell: 'string',

@@ -21,7 +21,6 @@ define([
         url: baseUrl + '/rest/role',
         formTemplate: formTpl,
         name: 'Vloga',
-        dodaj: i18next.t('seznami.view.vloga.dodaj'),
         columns: [
             {
                 cell: 'string',

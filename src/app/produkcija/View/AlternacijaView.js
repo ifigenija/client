@@ -16,9 +16,8 @@ define([
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Alternacija',
+        title: i18next.t('seznami.view.alternacija.title'),
         detailName: 'alternacije',
-        dodaj: i18next.t('seznami.view.alternacija.dodaj'),
         formTitle: i18next.t('seznami.view.alternacija.title'),
         gridMeta: [
             {

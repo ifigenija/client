@@ -21,7 +21,6 @@ define([
         url: baseUrl + '/rest/user',
         formTemplate: formTpl,
         title: i18next.t('seznami.view.uporabnik.title'),
-        dodaj: i18next.t('seznami.view.uporabnik.dodaj'),
         columns: [
             {
                 cell: 'string',

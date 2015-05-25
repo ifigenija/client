@@ -177,7 +177,7 @@ define([
 
     PopaEditView.prototype.renderTrrji = function () {
         var self = this;
-        require(['./TrrView'], function (View) {
+        require(['app/seznami/View/TrrView'], function (View) {
             var view = new View({
                 collection: self.model.trrjiCollection,
                 dokument: self.model
@@ -188,7 +188,7 @@ define([
     };
     PopaEditView.prototype.renderTelefonske = function () {
         var self = this;
-        require(['./TelefonskaView'], function (View) {
+        require(['app/seznami/View/TelefonskaView'], function (View) {
             var view = new View({
                 collection: self.model.telefonskeCollection,
                 dokument: self.model

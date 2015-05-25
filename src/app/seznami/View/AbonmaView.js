@@ -22,7 +22,6 @@ define([
         title: i18next.t('seznami.view.abonma.title'),
         schema: schema,
         formTemplate: formTpl,
-        dodaj: i18next.t('seznami.view.abonma.dodaj'),
         columns: [
             {
                 cell: 'string',

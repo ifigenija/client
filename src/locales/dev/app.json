@@ -57,7 +57,6 @@
         "view": {
             "zaposlitev": {
                 "zaposlitve": "Zaposlitve",
-                "dodaj": "zaposlitev",
                 "title": "Zaposlitve",
                 "nova": "Nova zaposlitev",
                 "status": "Status",
@@ -69,7 +68,6 @@
                 "title": "Uprizoritev",
                 "funkcije": "Funkcije",
                 "arhivalije": "Arhivalije",
-                "dodaj": "uprizoritev",
                 "naslov": "Naslov",
                 "delovniNaslov": "Delovni naslov",
                 "faza": "Faza",
@@ -82,7 +80,6 @@
             },
             "arhivalija" : {
                 "title": "Arhivalija",
-                "dodaj": "arhivalijo",
                 "nova": "Nova arhivalija",
                 "naslov": "Naslov",
                 "lokacijaOriginala": "Lokacija originala",
@@ -91,7 +88,6 @@
             },
             "funkcija" : {
                 "title": "Funkcija",
-                "dodaj": "funkcijo",
                 "nova": "Nova funkcija",
                 "podrocje": "Podrocje",
                 "naziv": "Naziv",
@@ -105,6 +101,7 @@
             "label": "Seznami",
             "oseba": "Osebe",
             "posta": "Pošta",
+            "prostori": "Prostori",
             "popa": "Poslovni partnerji",
             "drzava": "Države",
             "tipFunkcije": "Tipi funkcij",
@@ -123,9 +120,11 @@
             "sifra": "Šifra",
             "ime": "Ime",
             "opis": "Opis",
+            "std": {
+                "dodaj" : "Dodaj"
+            },
             "oseba": {
                 "title": "Osebe",
-                "dodaj": "osebo",
                 "nova": "Nova oseba",
                 "kontakti": "Kontakti",
                 "racuni": "Računi",
@@ -143,7 +142,6 @@
                 "url": "Spletna stran",
                 "kontakti": "Kontakti",
                 "racuni": "Računi",
-                "dodaj": "poslovnega partnerja",
                 "osebe": "Kontaktne osebe"
             },
             "uporabnik": {
@@ -151,44 +149,37 @@
                 "nova": "Nov uporabnik",
                 "vloge": "Vloge",
                 "veljavnost": "Poteče veljavnost",
-                "dodaj": "uporabnika",
                 "privzetaStran": "Privzeta stran"
             },
             "vloga": {
                 "title": "Vloge",
                 "nova": "Nova Vloga",
-                "dodaj": "vlogo",
                 "dovoljenja": "Dovoljenja"
             },
             "drzava": {
                 "title": "Države",
                 "nova": "Nova država",
                 "isoNum": "Številčna koda",
-                "dodaj": "državo",
                 "isoNaziv": "Iso naziv"
             },
             "posta": {
                 "title": "Pošte",
-                "dodaj": "pošto",
                 "nova": "Nova pošta"
             },
             "zvrstSurs": {
                 "title": "Zvrsti SURS",
                 "nova": "Nova zvrst SURS",
                 "isoSifra": "Iso šifra",
-                "dodaj": "zvrst SURS",
                 "isoNaziv": "Iso naziv"
             },
             "tipFunkcije": {
                 "nova": "Nov tip funkcije",
                 "title": "Tipi funkcij",
                 "dovoliPrekrivanje": "Dovoli Prekrivanje",
-                "dodaj": "tip funkcije",
                 "nastopajoc": "Nastopajoč"
             },
             "zvrstUprizoritve": {
                 "nova": "Nova zvrst uprizoritve",
-                "dodaj": "zvrst uprizoritve",
                 "title": "Zvrsti uprizoritev"
             },
             "postniNaslov": {
@@ -196,7 +187,6 @@
                 "naziv": "Naziv",
                 "ulica": "Ulica",
                 "posta": "Pošta",
-                "dodaj": "poštni naslov",
                 "drzava": "Država"
 
             },
@@ -204,7 +194,6 @@
                 "title": "Telefonske",
                 "vrsta": "Vrsta",
                 "stevilka": "Številka",
-                "dodaj": "telefonsko",
                 "privzeta": "Privzeta"
 
             },
@@ -213,25 +202,33 @@
                 "banka": "Banka",
                 "stevilka": "Številka",
                 "swift": "Swift",
-                "dodaj": "TRR",
                 "bic": "Bic"
             },
             "besedilo": {
                 "title": "Besedila",
                 "nova": "Novo besedilo",
-                "dodaj": "besedilo",
                 "naslov": "Naslov",
                 "avtor": "Avtor",
                 "naslovIzvirnika": "Naslov Izvirnika",
-                "prevajalec": "Prevajalec"
+                "prevajalec": "Prevajalec",
+                "stevilka": "Številka",
+                "datumPrejema": "Datum prejema"
             },
             "abonma": {
                 "title": "Abonmaji",
                 "nova": "Nov Abonma",
-                "dodaj": "abonma",
                 "ime": "Ime",
                 "stPredstav": "Št. predstav",
                 "stKuponov": "Št. kuponov",
+                "kapaciteta": "Kapaciteta",
+                "opis": "Opis"
+            },
+            "prostor": {
+                "title": "Prostori",
+                "nova": "Nov Prostor",
+                "sifra": "Šifra",
+                "naziv": "Naziv",
+                "jePrizorisce": "Je prizorišče",
                 "kapaciteta": "Kapaciteta",
                 "opis": "Opis"
             }

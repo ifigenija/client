@@ -10,7 +10,8 @@ define([
     'app/Max/Module/Backgrid',
     'template!../tpl/seznam.html',
     'app/Max/Model/MaxPageableCollection',
-    'app/Max/View/Toolbar'
+    'app/Max/View/Toolbar',
+    'i18next'
 ], function (
         Marionette,
         Radio,
@@ -20,7 +21,8 @@ define([
         Backgrid,
         seznamTpl,
         Coll,
-        Toolbar
+        Toolbar,
+        i18next
         ) {
 
     var SeznamiView = Marionette.LayoutView.extend({
@@ -82,7 +84,7 @@ define([
         var tool = [[
                 {
                     id: 'doc-dodaj',
-                    label: 'Dodaj' + ' ' + this.dodaj,
+                    label: i18next.t('seznami.view.std.dodaj'),
                     element: 'button-trigger',
                     trigger: 'dodaj'
                 }

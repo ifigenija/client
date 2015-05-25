@@ -19,10 +19,9 @@ define([
 
     var BesediloView = SeznamiView.extend({
         url: baseUrl + '/rest/besedilo',
-        name: 'Besedilo',
+        title: i18next.t('seznami.view.besedilo.title'),
         schema: schema,
         formTemplate: formTpl,
-        dodaj: i18next.t('seznami.view.besedilo.dodaj'),
         columns: [
             {
                 cell: 'string',

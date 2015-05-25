@@ -22,7 +22,6 @@ define([
         title: i18next.t('seznami.view.posta.title'),
         schema: schema,
         formTemplate: formTpl,
-        dodaj: i18next.t('seznami.view.posta.dodaj'),
         columns: [
             {
                 cell: 'string',

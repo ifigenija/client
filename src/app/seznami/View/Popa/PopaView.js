@@ -18,7 +18,6 @@ define([
     var PopaView = SeznamiView.extend({
         url: baseUrl + '/rest/popa',
         title: i18next.t('seznami.view.popa.title'),
-        dodaj: i18next.t('seznami.view.popa.dodaj'),
         columns: [
             {
                 cell: 'string',

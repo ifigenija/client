@@ -22,7 +22,6 @@ define([
         title: i18next.t('seznami.view.zvrstSurs.title'),
         schema: schema,
         formTemplate: formTpl,
-        dodaj: i18next.t('seznami.view.zvrstSurs.dodaj'),
         columns: [
             {
                 cell: 'string',
