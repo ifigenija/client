@@ -28,23 +28,32 @@ define([
         };
         
         model.addUser = function () {
-            console.log("Dodaj uporabnika");
+            model.manageUsers('dodaj');
         };
 
-        model.manageUsers = function () {
+        model.manageUsers = function (akcija) {
             require(['../View/UporabnikView'], function (UporabnikView) {
                 var view = new UporabnikView();
-                ch.command('open', view, i18next.t('aaa.uporabnik.title'));
+                ch.command('open', view, i18next.t('aaa.user.title'));
+                if (akcija) {
+                    view.triggerMethod(akcija);
+                }
             });
         };
 
         model.roles = function () {
-            require(['../View/VlogaView'], function (VlogaView) {
-                var view = new VlogaView();
-                ch.command('open', view, i18next.t('aaa.vloga.title'));
+            require(['../View/RoleView'], function (RoleView) {
+                var view = new RoleView();
+                ch.command('open', view, i18next.t('aaa.roles.title'));
             });
         };
 
+        model.permission = function () {
+            require(['../View/PermissionView'], function (PermissionView) {
+                var view = new PermissionView();
+                ch.command('open', view, i18next.t('aaa.permission.title'));
+            });
+        };
         /**
          * 
          * Routing za modelule
@@ -58,7 +67,8 @@ define([
                     'aaa/moznosti': 'moznosti',
                     'aaa/user/dodaj': 'addUser',
                     'aaa/users': 'manageUsers',
-                    'aaa/roles': 'roles'
+                    'aaa/roles': 'roles',
+                    'aaa/permissions': 'permission'
                 }
             });
         });

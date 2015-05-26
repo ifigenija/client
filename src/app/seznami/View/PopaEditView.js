@@ -124,7 +124,7 @@ define([
             this.renderNaslovi();
             this.renderTelefonske();
             this.renderTrrji();
-            this.renderOsebe();
+            this.renderKontaktne();
         }
 
         this.renderTabs(tabs);
@@ -198,13 +198,13 @@ define([
         });
     };
 
-    PopaEditView.prototype.renderOsebe = function () {
 
+    PopaEditView.prototype.renderKontaktne = function () {
         var self = this;
         require(['app/seznami/View/OsebaView'], function (View) {
             var view = new View({
-                url: "/rest/oseba",
-                pogled: 'kontaktna'
+                collection: self.model.telefonskeCollection,
+                dokument: self.model
             });
             self.regionOsebe.show(view);
             return view;

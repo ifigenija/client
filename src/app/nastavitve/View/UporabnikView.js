@@ -4,15 +4,19 @@
 define([
     'app/seznami/View/SeznamiView',
     'template!../tpl/uporabnik-form.tpl',
-    './UporabnikEditView',
+    'template!../tpl/perm.tpl',
+    './RelationView',
     '../Model/Uporabnik',
+    'formSchema!user',
     'i18next',
     'baseUrl'
 ], function (
         SeznamiView,
         formTpl,
-        UporabnikEditView,
+        permTpl,
+        RelationView,
         Uporabnik,
+        schema,
         i18next,
         baseUrl
         ) {
@@ -20,6 +24,15 @@ define([
     var UporabnikView = SeznamiView.extend({
         url: baseUrl + '/rest/user',
         formTemplate: formTpl,
+        template: permTpl,
+        schema: schema,
+        regions: {
+            formR: '.seznam-forma',
+            gridR: '.seznam-tabela',
+            toolbarR: '.seznam-toolbar',
+            naslovR: '.seznam-naslov',
+            relationR: '.seznam-relation'
+        },
         title: i18next.t('seznami.view.uporabnik.title'),
         columns: [
             {
@@ -37,10 +50,17 @@ define([
                 sortable: false
             },
             {
-                cell: 'string',
+                cell: 'date',
                 editable: false,
                 label: i18next.t('seznami.view.uporabnik.veljavnost'),
                 name: 'expires',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('seznami.view.uporabnik.privzetaStran'),
+                name: 'defaultRoute',
                 sortable: false
             },
             {
@@ -60,18 +80,38 @@ define([
                 ]
             }
         ],
-        getFormView: function (model) {
-            var editModel = new Uporabnik.Model({id: model.get('id')});
-            editModel.fetch();
-            return new UporabnikEditView({model: editModel});
-
-        },
         onDodaj: function () {
             var model = new Uporabnik.Model();
-            this.collection.add(model);
-            this.formR.show(new UporabnikEditView({model: model}));
+            this.onSelected(model);
         }
     });
+
+
+    /**
+     * Kaj se zgodi, ko izberemo model v tabeli 
+     * @param {type} model
+     * @returns {undefined}
+     */
+    UporabnikView.prototype.onSelected = function (model) {
+
+        SeznamiView.prototype.onSelected.apply(this, arguments);
+        if (model.get('id')) {
+            this.renderVloge(model);
+        }
+    };
+
+
+    UporabnikView.prototype.renderVloge = function (model) {
+
+        var rv = new RelationView({
+            owner: 'user',
+            ownerId: model.get('id'),
+            relation: 'roles',
+            lookup: 'role'
+        });
+        this.relationR.show(rv);
+    };
+
 
     return UporabnikView;
 });

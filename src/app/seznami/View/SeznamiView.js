@@ -37,7 +37,22 @@ define([
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
             naslovR: '.seznam-naslov'
-        }
+        },
+        defaultButtons: {
+            shrani: {
+                id: 'doc-shrani',
+                label: 'Shrani',
+                element: 'button-trigger',
+                trigger: 'shrani',
+                disabled: true
+            },
+            preklici: {
+                id: 'doc-preklici',
+                label: 'Prekliči',
+                element: 'button-trigger',
+                trigger: 'preklici'
+            }
+        },
     });
 
     SeznamiView.prototype.initialize = function (options) {
@@ -49,7 +64,6 @@ define([
         }
 
         this.listenTo(this.collection, 'selectValue', this.onSelected);
-        this.listenTo(this.collection, 'deselect', this.onSelected);
         this.listenTo(this.collection, 'backgrid:action', this.onGridAction);
     };
 
@@ -146,7 +160,9 @@ define([
     SeznamiView.prototype.onSelected = function (model) {
 
 
+      
         var form = this.getFormView(model);
+        
         this.formR.show(form);
 
         this.$('.glava-title').text(this.getTitle(model));
@@ -190,21 +206,7 @@ define([
     SeznamiView.prototype.getFormView = function (model) {
         var Fv = FormView.extend({
             formTitle: this.getTitle(model),
-            buttons: {
-                shrani: {
-                    id: 'doc-shrani',
-                    label: 'Shrani',
-                    element: 'button-trigger',
-                    trigger: 'shrani',
-                    disabled: true
-                },
-                preklici: {
-                    id: 'doc-preklici',
-                    label: 'Prekliči',
-                    element: 'button-trigger',
-                    trigger: 'preklici'
-                }
-            },
+            buttons: this.defaultButtons,
             schema: this.schema.toFormSchema().schema,
             formTemplate: this.formTemplate,
             onFormChange: function (form) {

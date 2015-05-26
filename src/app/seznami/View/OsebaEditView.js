@@ -36,10 +36,6 @@ define([
                     event: 'kontakti'
                 },
                 {
-                    name: i18next.t('produkcija.view.zaposlitev.zaposlitve'),
-                    event: 'zaposlitve'
-                },
-                {
                     name: i18next.t('seznami.view.oseba.racuni'),
                     event: 'trrji'
                 }
@@ -118,11 +114,11 @@ define([
             tabs = tabKontaktna;
         } else if (this.options.pogled === "splosno") {
             tabs = tabSplosno;
-        } else{
+        } else {
             tabs = tabSplosno;
         }
-        
-        if(this.isNew()){
+
+        if (this.isNew()) {
             tabs = tabNovi;
         }
 
@@ -130,11 +126,9 @@ define([
             this.renderNaslovi();
             this.renderTrrji();
             this.renderTelefonske();
-            this.renderZaposlitve();
-            this.renderOsebniPodatki();
-        } else {
-            this.renderOsebniPodatki();
         }
+        
+        this.renderOsebniPodatki();
 
         this.renderTabs(tabs);
     };
@@ -203,10 +197,9 @@ define([
      * @returns {undefined}
      */
     OsebaEditView.prototype.renderOsebniPodatki = function () {
-        var self = this;
-        
+      
         var Fv = FormView.extend({
-            formTitle: self.model.get('ime'),
+            formTitle: this.model.get('ime'),
             buttons: {
                 shrani: {
                     id: 'doc-shrani',
@@ -236,10 +229,10 @@ define([
         });
 
         var view = new Fv({
-            model: self.model
+            model: this.model
         });
-        
-        self.regionOsebniPodatki.show(view);
+
+        this.regionOsebniPodatki.show(view);
         return view;
     };
     /**
@@ -285,22 +278,6 @@ define([
                 dokument: self.model
             });
             self.regionNaslovi.show(view);
-            return view;
-        });
-    };
-
-    /**
-     * Izris zaposlitev
-     * @returns {undefined}
-     */
-    OsebaEditView.prototype.renderZaposlitve = function () {
-        var self = this;
-        require(['app/seznami/View/ZaposlitevView'], function (View) {
-            var view = new View({
-                collection: self.model.zaposlitveCollection,
-                dokument: self.model
-            });
-            self.regionZaposlitve.show(view);
             return view;
         });
     };

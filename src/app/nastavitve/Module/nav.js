@@ -16,19 +16,24 @@ define(['i18next'], function (i18n) {
                     divider: true
                 },
                 {
-                    label: i18n.t("nastavitve.nav.addUser"),
+                    label: i18n.t("admin.nav.addUser"),
                     icon: "fa-user-plus",
                     uri: "#aaa/user/dodaj"
                 },
                 {
-                    label: i18n.t("nastavitve.nav.users"),
+                    label: i18n.t("admin.nav.users"),
                     icon: "fa-user-plus",
                     uri: "#aaa/users"
                 },
                 {
-                    label: i18n.t("nastavitve.nav.roles"),
+                    label: i18n.t("admin.nav.roles"),
                     uri: "#aaa/roles"
+                },
+                                {
+                    label: i18n.t("admin.nav.permission"),
+                    uri: "#aaa/permissions"
                 }
+                
             ]
         }
     ];
