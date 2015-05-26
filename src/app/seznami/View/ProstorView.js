@@ -68,6 +68,15 @@ define([
             }
         ]
     });
+    
+    ProstorView.prototype.getTitle = function (model) {
+        var text = i18next.t("seznami.view.prostor.nova");
+
+        if (model.get('id')) {
+            text = model.get('naziv') || "Naziv";
+        }
+        return text;
+    };
 
     ProstorView.prototype.onDodaj = function () {
         var model = new Prostor.Model();

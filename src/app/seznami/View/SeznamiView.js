@@ -169,7 +169,7 @@ define([
 
         this.toolbarR.empty();
         this.listenTo(form, 'preklici', this.preklici);
-        this.listenTo(form, 'save:success', this.osveziSeznam);
+        this.listenTo(form, 'save:success', this.poShranitvi);
         this.listenTo(form, 'skrij', this.preklici);
     };
 
@@ -179,7 +179,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    SeznamiView.prototype.osveziSeznam = function (model) {
+    SeznamiView.prototype.poShranitvi = function (model) {
         this.$('.glava-title').text(this.getTitle(model));
         this.collection.fetch();
     };

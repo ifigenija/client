@@ -88,9 +88,6 @@ define([
         this.onSelected(model);
     };
 
-
-
-
     /**
      * Kaj se zgodi, ko izberemo model v tabeli 
      * @param {type} model
@@ -99,8 +96,19 @@ define([
     PermissionView.prototype.onSelected = function (model) {
 
         SeznamiView.prototype.onSelected.apply(this, arguments);
-        this.renderVloge(model);
+        if (model.get('id')) {
+            this.renderVloge(model);
+        }
     };
+    
+    PermissionView.prototype.poShranitvi = function (model) {
+
+        SeznamiView.prototype.poShranitvi.apply(this, arguments);
+        if (model.get('id')) {
+            this.renderVloge(model);
+        }
+    };
+    
     /**
      * Kaj se zgodi, ko prekličemo vnos/pogled
      * @param {type} model
@@ -112,18 +120,17 @@ define([
         this.rolesR.empty();
     };
 
-
     PermissionView.prototype.renderVloge = function (model) {
 
         var rv = new RelationView({
             owner: 'permission',
             ownerId: model.get('id'),
             relation: 'roles',
-            lookup: 'role'
+            lookup: 'role',
+            title: i18next.t("admin.view.role.title")
         });
         this.rolesR.show(rv);
     };
-
 
     return PermissionView;
 });

@@ -6,12 +6,14 @@ define([
     'marionette',
     'app/Max/Model/RelationCollection',
     'app/Max/Module/Form',
+    'template!../tpl/relation.tpl',
     'app/bars',
     'i18next'
 ], function (
         Marionette,
         RelationColl,
         Form,
+        relationTpl,
         Handlebars,
         i18next
         ) {
@@ -23,8 +25,8 @@ define([
 
     var MemberView = Marionette.ItemView.extend({
         tagName: 'a',
-        className: 'list-group-item',
-        template: Handlebars.compile('<span class="badge"><span class="fa fa-trash"></span></span>{{ name }}'),
+        className: 'list-group-item col-sm-6',
+        template: Handlebars.compile('{{ name }}<span class="badge"><span class="fa fa-trash"></span></span>'),
         triggers: {
             'click .fa-trash': 'delete'
         }
@@ -45,10 +47,10 @@ define([
 
 
     var RelationView = Marionette.LayoutView.extend({
-        template: Handlebars.compile('<div class="izbor"></div><button class="dodaj" type="button">Dodaj</button><div class="seznam"></div>'),
+        template: relationTpl,
         regions: {
-            izborR: '.izbor',
-            seznamR: '.seznam'
+            izborR: '.relation-izbor',
+            seznamR: '.relation-seznam'
         },
         events: {
             'click .dodaj': 'dodaj'
@@ -71,6 +73,8 @@ define([
                 id: {type: 'LookupSelect', targetEntity: this.options.lookup, editorAttrs: {class: 'btn'}}
             }
         });
+        
+        this.$('.relation-title').text(this.options.title);
 
         this.izborR.show(this.formIzberi);
 

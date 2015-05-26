@@ -98,10 +98,19 @@ define([
     RoleView.prototype.onSelected = function (model) {
 
         SeznamiView.prototype.onSelected.apply(this, arguments);
-        //if (model.get('id')) {
+        if (model.get('id')) {
             this.renderVloge(model);
             this.renderUporabniki(model);
-        //}
+        }
+    };
+    
+    RoleView.prototype.poShranitvi = function (model) {
+
+        SeznamiView.prototype.poShranitvi.apply(this, arguments);
+        if (model.get('id')) {
+            this.renderVloge(model);
+            this.renderUporabniki(model);
+        }
     };
     
     /**
@@ -123,7 +132,8 @@ define([
             owner: 'role',
             ownerId: model.get('id'),
             relation: 'permissions',
-            lookup: 'permission'
+            lookup: 'permission',
+            title: i18next.t("admin.view.permission.title")
         });
         this.permsR.show(rv);
     };
@@ -136,7 +146,8 @@ define([
             owner: 'role',
             ownerId: model.get('id'),
             relation: 'users',
-            lookup: 'user'
+            lookup: 'user',
+            title: i18next.t("admin.view.user.title")
         });
         this.usersR.show(rv);
     };

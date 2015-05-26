@@ -22,17 +22,6 @@ define([
         ) {
 
     /**
-     * Ko dodajamo novo uprizoritev
-     * @type Array
-     */
-    var tabSplosno = [
-        {
-            name: i18next.t('seznami.view.splosno'),
-            event: 'splosni'
-        }
-    ];
-
-    /**
      * Ko urejamo že obstječo uprizoritev
      * @type Array
      */
@@ -98,7 +87,7 @@ define([
         var tabs = null;
 
         if (!this.model.get('id')) {
-            tabs = tabSplosno;
+            tabs = null;
         } else {
             tabs = tabVsi;
         }

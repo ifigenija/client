@@ -98,7 +98,17 @@ define([
     UserView.prototype.onSelected = function (model) {
 
         SeznamiView.prototype.onSelected.apply(this, arguments);
-        this.renderVloge(model);
+        if (model.get('id')) {
+            this.renderVloge(model);
+        }
+    };
+    
+    UserView.prototype.poShranitvi = function (model) {
+
+        SeznamiView.prototype.poShranitvi.apply(this, arguments);
+        if (model.get('id')) {
+            this.renderVloge(model);
+        }
     };
 
     UserView.prototype.preklici = function (model) {
@@ -115,7 +125,8 @@ define([
             owner: 'user',
             ownerId: model.get('id'),
             relation: 'roles',
-            lookup: 'role'
+            lookup: 'role',
+            title: i18next.t("admin.view.role.title")
         });
         this.rolesR.show(rv);
     };
