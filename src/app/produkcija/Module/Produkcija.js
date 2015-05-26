@@ -23,13 +23,13 @@ define([
         var ch = Radio.channel('layout');
 
         mod.uprizoritve = function () {
-            require(['../View/Uprizoritev/UprizoritevView'], function (UprizoritevView) {
+            require(['../View/UprizoritevView'], function (UprizoritevView) {
                 var view = new UprizoritevView();
                 ch.command('open', view, i18next.t('produkcija.view.uprizoritev.title'));
             });
         };
         mod.osebe = function () {
-            require(['../../seznami/View/Oseba/OsebaView'], function (OsebaView) {
+            require(['../../seznami/View/OsebaView'], function (OsebaView) {
                 var view = new OsebaView();
                 ch.command('open', view, i18next.t('produkcija.view.oseba.title'));
             });

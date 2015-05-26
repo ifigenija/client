@@ -3,9 +3,9 @@
  */
 define([
     'app/Dokument/View/DokumentView',
-    'template!../../tpl/oseba/oseba-edit.tpl',
-    'template!../../tpl/oseba/oseba-form.tpl',
-    'template!../../tpl/oseba/osebaOsebniPodatki-form.tpl',
+    'template!../tpl/oseba-edit.tpl',
+    'template!../tpl/oseba-form.tpl',
+    'template!../tpl/osebaOsebniPodatki-form.tpl',
     'formSchema!oseba',
     'i18next',
     'app/Max/View/TabControl',
@@ -295,7 +295,7 @@ define([
      */
     OsebaEditView.prototype.renderZaposlitve = function () {
         var self = this;
-        require(['app/seznami/View/Oseba/ZaposlitevView'], function (View) {
+        require(['app/seznami/View/ZaposlitevView'], function (View) {
             var view = new View({
                 collection: self.model.zaposlitveCollection,
                 dokument: self.model

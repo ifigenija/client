@@ -3,8 +3,8 @@
  */
 define([
     'app/Dokument/View/DokumentView',
-    'template!../../tpl/popa/popa-edit.tpl',
-    'template!../../tpl/popa/popa-form.tpl',
+    'template!../tpl/popa-edit.tpl',
+    'template!../tpl/popa-form.tpl',
     'formSchema!popa',
     'i18next',
     'app/Max/View/TabControl'
@@ -201,7 +201,7 @@ define([
     PopaEditView.prototype.renderOsebe = function () {
 
         var self = this;
-        require(['app/seznami/View/Oseba/OsebaView'], function (View) {
+        require(['app/seznami/View/OsebaView'], function (View) {
             var view = new View({
                 url: "/rest/oseba",
                 pogled: 'kontaktna'

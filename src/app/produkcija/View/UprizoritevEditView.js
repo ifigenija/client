@@ -3,10 +3,10 @@
  */
 define([
     'app/Dokument/View/DokumentView',
-    '../../Model/Uprizoritev',
+    '../Model/Uprizoritev',
     './FunkcijeView',
-    'template!../../tpl/uprizoritev/uprizoritev-edit.tpl',
-    'template!../../tpl/uprizoritev/uprizoritev-form.tpl',
+    'template!../tpl/uprizoritev-edit.tpl',
+    'template!../tpl/uprizoritev-form.tpl',
     'formSchema!uprizoritev',
     'i18next',
     'app/Max/View/TabControl'
@@ -54,7 +54,7 @@ define([
             event: 'tehniki'
         },
         {
-            name: i18next.t('produkcija.view.uprizoritev.stroskovniki'),
+            name: i18next.t('produkcija.view.uprizoritev.stroskovnik'),
             event: 'stroskovnik'
         }
     ];
@@ -235,7 +235,7 @@ define([
      * Pripravi in nariše view za stroškovnik 
      * @returns {undefined}
      */
-    UprizoritevEditView.prototype.renderStroskovniki = function () {
+    UprizoritevEditView.prototype.renderStroskovnik = function () {
         var self = this;
         require(['./StroskovnikView'], function (View) {
             var view = new View({

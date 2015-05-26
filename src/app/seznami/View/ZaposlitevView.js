@@ -3,7 +3,7 @@
  */
 define([
     'app/Dokument/View/PostavkeView',
-    'template!../../tpl/oseba/zaposlitev-form.tpl',
+    'template!../tpl/zaposlitev-form.tpl',
     'formSchema!zaposlitev',
     'i18next'
 ], function (

@@ -42,7 +42,7 @@ define([
             });
         };
         model.oseba = function () {
-            require(['../View/Oseba/OsebaView'], function (OsebaView) {
+            require(['../View/OsebaView'], function (OsebaView) {
                 var view = new OsebaView({pogled: 'splosno'});
                 ch.command('open', view, i18next.t('seznami.view.oseba.title'));
             });
@@ -54,7 +54,7 @@ define([
             });
         };
         model.popa = function () {
-            require(['../View/Popa/PopaView'], function (PopaView) {
+            require(['../View/PopaView'], function (PopaView) {
                 var view = new PopaView({pogled: 'splosno'});
                 ch.command('open', view, i18next.t('seznami.view.popa.title'));
             });

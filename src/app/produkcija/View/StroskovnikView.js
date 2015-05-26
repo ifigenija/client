@@ -2,36 +2,38 @@
  * Licenca GPLv3
  */
 define([
-    'app/Dokument/View/PostavkeView',
     'i18next',
-    'underscore',
-    'formSchema!funkcija',
-    'template!../../tpl/uprizoritev/funkcija-form.tpl'
+    'app/Dokument/View/PostavkeView',
+    'template!../tpl/strosek-form.tpl',
+    'formSchema!planStrosek',
+    'i18next'
 ], function (
-        PostavkeView,
         i18next,
-        _,
+        PostavkeView,
+        formTpl,
         schema,
-        formTpl
+        i18next
         ) {
 
-    // odstranim področje iz sheme, ker 
-    //  je nastavljeno implicitno glede na to, kje se 
-    // funkcija ureja 
-    var sch = _.omit(schema.toFormSchema().schema, 'podrocje');
-console.log(sch);
     /**
-     * 
      * 
      * @type @exp;PostavkeView@call;extend
      */
-    var FunkcijaView = PostavkeView.extend({
+    var StroskovnikView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: sch,
-        name: '',
-        detailName: '',
+        schema: schema.toFormSchema().schema,
+        name: i18next.t('uprizoritve.view.stroskovnik'),
+        detailName: 'stroski',
+        dodaj: i18next.t('produkcija.view.funkcija.dodaj'),
         formTitle: i18next.t('produkcija.view.funkcija.title'),
         gridMeta: [
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('produkcija.view.funkcija.podrocje'),
+                name: 'podrocje',
+                sortable: false
+            },
             {
                 cell: 'string',
                 editable: false,
@@ -59,12 +61,11 @@ console.log(sch);
                 sortable: false,
                 actions: [
                     {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')}
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
                 ]
             }
         ]
     });
 
-
-    return FunkcijaView;
+    return StroskovnikView;
 });

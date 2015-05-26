@@ -4,7 +4,7 @@
 define([
     'app/seznami/View/SeznamiView',
     './UprizoritevEditView',
-    '../../Model/Uprizoritev',
+    '../Model/Uprizoritev',
     'i18next',
     'baseUrl'
 ], function (

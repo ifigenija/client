@@ -4,7 +4,7 @@
 define([
     'app/seznami/View/SeznamiView',
     './OsebaEditView',
-    '../../Model/Oseba',
+    '../Model/Oseba',
     'i18next',
     'baseUrl',
     'radio'
@@ -72,7 +72,7 @@ define([
 //        console.log("Oseba "+ response);
 
     OsebaView.prototype.getFormView = function (model) {
-        if (!model.get('id')) {
+        if (model.get('id')) {
             var editModel = new Oseba.Model({id: model.get('id')});
             editModel.fetch();
         } else {

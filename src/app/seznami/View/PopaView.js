@@ -4,7 +4,7 @@
 define([
     'app/seznami/View/SeznamiView',
     './PopaEditView',
-    '../../Model/Popa',
+    '../Model/Popa',
     'i18next',
     'baseUrl'
 ], function (
@@ -69,7 +69,7 @@ define([
      * 
      */
     PopaView.prototype.getFormView = function (model) {
-        if (!model.get('id')) {
+        if (model.get('id')) {
             var editModel = new Popa.Model({id: model.get('id')});
             editModel.fetch();
         } else {
