@@ -87,7 +87,6 @@ define([
                 disabled: false
             });
         }
-
     };
     PostavkeView.prototype.render = function () {
         FormView.prototype.render.apply(this, arguments);
