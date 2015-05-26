@@ -8,7 +8,7 @@ define([
     'underscore',
     'app/seznami/View/SeznamiView',
     'template!../tpl/perm-form.tpl',
-    'template!../tpl/perm.tpl',
+    'template!../tpl/role.tpl',
     'formSchema!role',
     'i18next',
     'baseUrl'
@@ -39,7 +39,7 @@ define([
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
             naslovR: '.seznam-naslov',
-            relationR: '.seznam-perms',
+            permsR: '.seznam-perms',
             usersR: '.seznam-users'
         },
         dodaj: i18next.t('admin.view.role.dodaj'),
@@ -47,7 +47,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.view.name'),
+                label: i18next.t('admin.view.role.name'),
                 name: 'name',
                 sortable: true
             },
@@ -98,10 +98,22 @@ define([
     RoleView.prototype.onSelected = function (model) {
 
         SeznamiView.prototype.onSelected.apply(this, arguments);
-        if (model.get('id')) {
+        //if (model.get('id')) {
             this.renderVloge(model);
             this.renderUporabniki(model);
-        }
+        //}
+    };
+    
+    /**
+     * Kaj se zgodi, ko prekličemo vnos/pogled
+     * @param {type} model
+     * @returns {undefined}
+     */
+    RoleView.prototype.preklici = function (model) {
+
+        SeznamiView.prototype.preklici.apply(this, arguments);
+        this.usersR.empty();
+        this.permsR.empty();
     };
 
 
@@ -113,7 +125,7 @@ define([
             relation: 'permissions',
             lookup: 'permission'
         });
-        this.relationR.show(rv);
+        this.permsR.show(rv);
     };
 
 

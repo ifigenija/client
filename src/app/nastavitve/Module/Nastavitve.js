@@ -32,9 +32,9 @@ define([
         };
 
         model.manageUsers = function (akcija) {
-            require(['../View/UporabnikView'], function (UporabnikView) {
+            require(['../View/UserView'], function (UporabnikView) {
                 var view = new UporabnikView();
-                ch.command('open', view, i18next.t('aaa.user.title'));
+                ch.command('open', view, i18next.t('admin.view.user.title'));
                 if (akcija) {
                     view.triggerMethod(akcija);
                 }
@@ -44,14 +44,14 @@ define([
         model.roles = function () {
             require(['../View/RoleView'], function (RoleView) {
                 var view = new RoleView();
-                ch.command('open', view, i18next.t('aaa.roles.title'));
+                ch.command('open', view, i18next.t('admin.view.role.title'));
             });
         };
 
         model.permission = function () {
             require(['../View/PermissionView'], function (PermissionView) {
                 var view = new PermissionView();
-                ch.command('open', view, i18next.t('aaa.permission.title'));
+                ch.command('open', view, i18next.t('admin.view.permission.title'));
             });
         };
         /**

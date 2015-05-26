@@ -27,7 +27,7 @@ define([
         template: Handlebars.compile('<span class="badge"><span class="fa fa-trash"></span></span>{{ name }}'),
         triggers: {
             'click .fa-trash': 'delete'
-        },
+        }
     });
 
     /**
@@ -38,18 +38,20 @@ define([
     var MembersView = Marionette.CollectionView.extend({
         className: 'list-group',
         childView: MemberView,
-        onChildviewDeleteVloge: function (view) {
+        onChildviewDelete: function (view) {
             this.collection.dissociate(view.model);
         }
     });
 
 
     var RelationView = Marionette.LayoutView.extend({
-        template: Handlebars.compile('<div class="izbor"></div>\n\
-    <div class="seznam"></div>'),
+        template: Handlebars.compile('<div class="izbor"></div><button class="dodaj" type="button">Dodaj</button><div class="seznam"></div>'),
         regions: {
             izborR: '.izbor',
             seznamR: '.seznam'
+        },
+        events: {
+            'click .dodaj': 'dodaj'
         },
         onRender: function () {
             this.renderIzbor();
@@ -61,20 +63,12 @@ define([
      * @returns {undefined}
      */
     RelationView.prototype.renderIzbor = function () {
-        var self = this;
-
-        var dodaj = function () {
-            self.dodaj(this.getValue());
-        };
 
         this.formIzberi = new Form({
             template: Handlebars.compile('<div><form><div data-editors="id"></div></form>'),
             className: 'form-inline',
             schema: {
                 id: {type: 'LookupSelect', targetEntity: this.options.lookup, editorAttrs: {class: 'btn'}}
-            },
-            events: {
-                'click .dodaj': dodaj
             }
         });
 
@@ -87,7 +81,7 @@ define([
         if (val.id) {
             this.collection.associate(val.id);
         }
-    }
+    };
 
     /**
      * Nariše vloge view in sproži nalaganje kolekcije

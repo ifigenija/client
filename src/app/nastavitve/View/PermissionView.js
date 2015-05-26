@@ -39,14 +39,13 @@ define([
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
             naslovR: '.seznam-naslov',
-            relationR: '.seznam-relation'
+            rolesR: '.seznam-roles'
         },
-        dodaj: i18next.t('admin.view.permission.dodaj'),
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.view.name'),
+                label: i18next.t('admin.view.permission.name'),
                 name: 'name',
                 sortable: true
             },
@@ -88,10 +87,10 @@ define([
         var model = new PermissionModel();
         this.onSelected(model);
     };
-    
-    
-    
-    
+
+
+
+
     /**
      * Kaj se zgodi, ko izberemo model v tabeli 
      * @param {type} model
@@ -100,9 +99,17 @@ define([
     PermissionView.prototype.onSelected = function (model) {
 
         SeznamiView.prototype.onSelected.apply(this, arguments);
-        if (model.get('id')) {
-            this.renderVloge(model);
-        }
+        this.renderVloge(model);
+    };
+    /**
+     * Kaj se zgodi, ko prekličemo vnos/pogled
+     * @param {type} model
+     * @returns {undefined}
+     */
+    PermissionView.prototype.preklici = function (model) {
+
+        SeznamiView.prototype.preklici.apply(this, arguments);
+        this.rolesR.empty();
     };
 
 
@@ -114,7 +121,7 @@ define([
             relation: 'roles',
             lookup: 'role'
         });
-        this.relationR.show(rv);
+        this.rolesR.show(rv);
     };
 
 

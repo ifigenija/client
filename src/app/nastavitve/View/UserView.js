@@ -3,10 +3,10 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    'template!../tpl/uporabnik-form.tpl',
-    'template!../tpl/perm.tpl',
+    'template!../tpl/user-form.tpl',
+    'template!../tpl/user.tpl',
     './RelationView',
-    '../Model/Uporabnik',
+    '../Model/User',
     'formSchema!user',
     'i18next',
     'baseUrl'
@@ -15,13 +15,13 @@ define([
         formTpl,
         permTpl,
         RelationView,
-        Uporabnik,
+        User,
         schema,
         i18next,
         baseUrl
         ) {
 
-    var UporabnikView = SeznamiView.extend({
+    var UserView = SeznamiView.extend({
         url: baseUrl + '/rest/user',
         formTemplate: formTpl,
         template: permTpl,
@@ -31,42 +31,35 @@ define([
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
             naslovR: '.seznam-naslov',
-            relationR: '.seznam-relation'
+            rolesR: '.seznam-roles'
         },
-        title: i18next.t('seznami.view.uporabnik.title'),
+        title: i18next.t('admin.view.user.title'),
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.naziv'),
+                label: i18next.t('admin.view.user.naziv'),
                 name: 'name',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.ePosta'),
+                label: i18next.t('admin.view.user.ePosta'),
                 name: 'email',
                 sortable: false
             },
             {
                 cell: 'date',
                 editable: false,
-                label: i18next.t('seznami.view.uporabnik.veljavnost'),
+                label: i18next.t('admin.view.user.veljavnost'),
                 name: 'expires',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.uporabnik.privzetaStran'),
-                name: 'defaultRoute',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('seznami.view.uporabnik.privzetaStran'),
+                label: i18next.t('admin.view.user.privzetaStran'),
                 name: 'defaultRoute',
                 sortable: false
             },
@@ -75,16 +68,26 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
+                    {event: 'brisi', title: i18next.t('std.view.brisi')},
+                    {event: 'uredi', title: i18next.t('std.view.uredi')},
                 ]
             }
-        ],
-        onDodaj: function () {
-            var model = new Uporabnik.Model();
-            this.onSelected(model);
-        }
+        ]
     });
+
+    UserView.prototype.onDodaj = function () {
+        var model = new User.Model();
+        this.onSelected(model);
+    };
+
+    UserView.prototype.getTitle = function (model) {
+        var text = i18next.t("admin.view.role.nova");
+
+        if (model.get('id')) {
+            text = model.get('name') || i18next.t("xx.Dovoljenje");
+        }
+        return text;
+    };
 
 
     /**
@@ -92,16 +95,21 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    UporabnikView.prototype.onSelected = function (model) {
+    UserView.prototype.onSelected = function (model) {
 
         SeznamiView.prototype.onSelected.apply(this, arguments);
-        if (model.get('id')) {
-            this.renderVloge(model);
-        }
+        this.renderVloge(model);
+    };
+
+    UserView.prototype.preklici = function (model) {
+
+        SeznamiView.prototype.preklici.apply(this, arguments);
+        this.rolesR.empty();
     };
 
 
-    UporabnikView.prototype.renderVloge = function (model) {
+
+    UserView.prototype.renderVloge = function (model) {
 
         var rv = new RelationView({
             owner: 'user',
@@ -109,9 +117,9 @@ define([
             relation: 'roles',
             lookup: 'role'
         });
-        this.relationR.show(rv);
+        this.rolesR.show(rv);
     };
 
 
-    return UporabnikView;
+    return UserView;
 });
