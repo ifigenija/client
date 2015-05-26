@@ -147,6 +147,7 @@ define([
             ownerId: model.get('id'),
             relation: 'users',
             lookup: 'user',
+            type: 'lookup',
             title: i18next.t("admin.view.user.title")
         });
         this.usersR.show(rv);

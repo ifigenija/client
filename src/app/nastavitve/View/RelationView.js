@@ -53,7 +53,7 @@ define([
             seznamR: '.relation-seznam'
         },
         events: {
-            'click .dodaj': 'dodaj'
+            'click .relation-gumb': 'dodaj'
         },
         onRender: function () {
             this.renderIzbor();
@@ -66,14 +66,22 @@ define([
      */
     RelationView.prototype.renderIzbor = function () {
 
+
+        var sch;
+
+        if (!this.options.type) {
+            sch = {type: 'LookupSelect', targetEntity: this.options.lookup, editorAttrs: {class: 'form-control relation-select'}};
+        } else if (this.options.type === 'lookup') {
+            sch = {type: 'Toone', targetEntity: this.options.lookup, editorAttrs: {class: 'form-control relation-select'}};
+        }
+
         this.formIzberi = new Form({
-            template: Handlebars.compile('<div><form><div data-editors="id"></div></form>'),
+            template: Handlebars.compile('<form><div data-editors="id"></div></form>'),
             className: 'form-inline',
             schema: {
-                id: {type: 'LookupSelect', targetEntity: this.options.lookup, editorAttrs: {class: 'btn'}}
+                id: sch
             }
         });
-        
         this.$('.relation-title').text(this.options.title);
 
         this.izborR.show(this.formIzberi);
@@ -82,8 +90,15 @@ define([
 
     RelationView.prototype.dodaj = function () {
         var val = this.formIzberi.getValue();
+        var id;
         if (val.id) {
-            this.collection.associate(val.id);
+
+            if (!this.options.type) {
+                id = val.id;
+            } else if (this.options.type === 'lookup') {
+                id = val.id.id;
+            }
+            this.collection.associate(id);
         }
     };
 
@@ -108,5 +123,4 @@ define([
     };
 
     return RelationView;
-
 });

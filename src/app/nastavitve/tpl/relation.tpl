@@ -1,10 +1,14 @@
 <div class="panel panel-default">
-    <div class="row panel-heading">
-        <div class="col-xs-3 relation-title"></div>
-        <div class="col-xs-6 relation-izbor"></div>
-        <a class="col-xs-3 btn btn-default dodaj">{{t "seznami.view.std.dodaj"}}</a>
+    <div class="panel-heading relation-title">
     </div>
+
     <div class="panel-body">
-        <div class="row relation-seznam"></div>
+        <div style="width: 100%; display: table;">
+            <div style="display: table-row">
+                <div class="relation-izbor" >  </div>
+                <div class="relation-dodaj" > <a class="btn btn-default relation-gumb">{{t "seznami.view.std.dodaj"}}</a> </div>
+            </div>
+        </div>
+            <div class="relation-seznam"></div>
     </div>
 </div>
