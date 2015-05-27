@@ -24,7 +24,6 @@ define([
         buttons: {},
         constructor: function (options) {
 
-
             this.schema = options.schema || this.schema ;
 
             if (!this.schema) {
@@ -49,12 +48,8 @@ define([
 
     FormView.prototype.renderFormAndToolbar = function () {
         this.toolbarView = this.renderToolbar();
-
         var self = this;
-
         self.form = this.model ? this.renderForm() : null;
-
-
     };
 
     FormView.prototype.onShrani = function () {
