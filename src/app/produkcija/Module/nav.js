@@ -17,8 +17,8 @@ define(['i18next'], function (i18n) {
                     uri: "#pro/oseba"
                 },
                 {
-                    label: i18n.t("produkcija.nav.stroskovnik"),
-                    uri: "#pro/Stroskovnik"
+                    label: i18n.t("produkcija.nav.strosek"),
+                    uri: "#pro/strosek"
                 }
             ]
         }

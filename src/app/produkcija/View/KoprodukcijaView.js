@@ -4,7 +4,7 @@
 define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/koprodukcija-form.tpl',
-    'formSchema!produkcijadelitev',
+    'formSchema!produkcijaDelitev',
     'i18next'
 ], function (
         PostavkeView,

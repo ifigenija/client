@@ -75,7 +75,7 @@
             "label": "Produkcija",
             "oseba": "Osebe",
             "uprizoritev": "Uprizoritve",
-            "stroskovnik" : "Stroškovnik"
+            "strosek" : "Stroškovnik"
         },
         "view": {
             "zaposlitev": {
@@ -198,8 +198,8 @@
             "tipFunkcije": {
                 "nova": "Nov tip funkcije",
                 "title": "Tipi funkcij",
-                "dovoliPrekrivanje": "Dovoli Prekrivanje",
-                "nastopajoc": "Nastopajoč"
+                "imeZenski": "Ženska oblika",
+                "podrocje": "Področje"
             },
             "zvrstUprizoritve": {
                 "nova": "Nova zvrst uprizoritve",

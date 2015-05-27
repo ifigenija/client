@@ -9,32 +9,7 @@ define([
         _,
         baseUrl
         ) {
-
-
-    var KoprodukcijaModel = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/koprodukcija'
-    });
-
-    var KoprodukcijaCollection = Dokument.PostavkaCollection.extend({
-        model: KoprodukcijaModel,
-        url: baseUrl + '/rest/koprodukcija',
-        index: 'sort',
-        mode: 'client'
-    });
-
-    var AlternacijaModel = Dokument.Model.extend({
-        urlRoot: baseUrl + '/rest/alternacija'
-
-    });
-
-    var AlternacijaCollection = Dokument.PostavkaCollection.extend({
-        model: KoprodukcijaModel,
-        url: baseUrl + '/rest/alternacija',
-        index: 'sort',
-        mode: 'client'
-    });
-
-
+    
     var FunkcijaModel = Dokument.Model.extend({
         url: baseUrl + '/rest/funkcija'
     });
@@ -63,12 +38,6 @@ define([
             }
             var postavka;
             switch (nested) {
-                case 'koprodukcije':
-                    postavka = new Model({
-                        uprizoritev: this.get('id')
-                    });
-                    break;
-
                 case 'umetniki':
                     postavka = new FunkcijaModel({
                         uprizoritev: this.get('id'),
@@ -96,10 +65,6 @@ define([
     return {
         Model: UprizoritevModel,
         ZasedbaCollection: ZasedbaCollection,
-        FunkcijaModel: FunkcijaModel,
-        AlternacijaModel: AlternacijaModel,
-        AlternacijaCollection: AlternacijaCollection,
-        KodprodukcijaModel: KoprodukcijaModel,
-        KoprodukcijaCollection: KoprodukcijaCollection
+        FunkcijaModel: FunkcijaModel
     };
 });

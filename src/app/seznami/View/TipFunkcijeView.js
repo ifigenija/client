@@ -33,6 +33,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('seznami.view.tipFunkcije.imeZenski'),
+                name: 'imeZenski',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('seznami.view.opis'),
                 name: 'opis',
                 sortable: true
@@ -40,15 +47,8 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.tipFunkcije.dovoliPrekrivanje'),
-                name: 'dovoliPrekrivanje',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('seznami.view.tipFunkcije.nastopajoc'),
-                name: 'nastopajoc',
+                label: i18next.t('seznami.view.tipFunkcije.podrocje'),
+                name: 'podrocje',
                 sortable: false
             },
             {
