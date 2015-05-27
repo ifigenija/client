@@ -36,8 +36,8 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.uprizoritev.delovniNaslov'),
-                name: 'delovniNaslov',
+                label: i18next.t('produkcija.view.uprizoritev.zvrst'),
+                name: 'zvrstUprizoritve.ime',
                 sortable: true
             },
             {
@@ -45,6 +45,13 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.uprizoritev.datumPremiere'),
                 name: 'datumPremiere',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('produkcija.view.uprizoritev.faza'),
+                name: 'faza',
                 sortable: true
             },
             {
@@ -58,7 +65,7 @@ define([
             }
         ],
     });
-    
+
     UprizoritevView.prototype.getFormView = function (model) {
         if (model.get('id')) {
             var editModel = new Uprizoritev.Model({id: model.get('id')});
@@ -71,7 +78,7 @@ define([
             model: editModel
         });
     };
-    
+
     UprizoritevView.prototype.onDodaj = function () {
         var model = new Uprizoritev.Model();
         this.onSelected(model);

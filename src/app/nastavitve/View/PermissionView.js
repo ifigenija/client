@@ -101,6 +101,7 @@ define([
         }
     };
     
+    
     PermissionView.prototype.poShranitvi = function (model) {
 
         SeznamiView.prototype.poShranitvi.apply(this, arguments);

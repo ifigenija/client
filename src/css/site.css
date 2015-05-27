@@ -671,4 +671,16 @@ span.stevilka-na-veliko {
 .form-control.relation-select {
   width: 100%;
 }
+.alter-izbor {
+  width: 70%;
+  display: table-cell;
+  overflow-x: hidden;
+}
+.alter-dodaj {
+  display: table-cell;
+  padding-left: 5px;
+}
+.alter-gumb {
+  width: 100%;
+}
 /*# sourceMappingURL=site.css.map */
