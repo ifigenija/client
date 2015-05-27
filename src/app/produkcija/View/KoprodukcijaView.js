@@ -3,53 +3,52 @@
  */
 define([
     'app/Dokument/View/PostavkeView',
-    'i18next',
-    'underscore',
-    'formSchema!funkcija',
-    'template!../tpl/funkcija-form.tpl'
+    'template!../tpl/koprodukcija-form.tpl',
+    'formSchema!produkcijadelitev',
+    'i18next'
 ], function (
         PostavkeView,
-        i18next,
-        _,
+        formTpl,
         schema,
-        formTpl
+        i18next
         ) {
 
-    // odstranim področje iz sheme, ker 
-    //  je nastavljeno implicitno glede na to, kje se 
-    // funkcija ureja 
-    var sch = _.omit(schema.toFormSchema().schema, 'podrocje');
-console.log(sch);
     /**
-     * 
      * 
      * @type @exp;PostavkeView@call;extend
      */
-    var FunkcijaView = PostavkeView.extend({
+    var KoprodukcijaView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: sch,
-        name: '',
-        detailName: '',
-        formTitle: i18next.t('produkcija.view.funkcija.title'),
+        schema: schema.toFormSchema().schema,
+        name: i18next.t('uprizoritve.view.koprodukcija'),
+        detailName: 'koprodukcije',
+        formTitle: i18next.t('produkcija.view.koprodukcija.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.funkcija.naziv'),
+                label: i18next.t('produkcija.view.koprodukcija.podrocje'),
+                name: 'podrocje',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('produkcija.view.koprodukcija.naziv'),
                 name: 'naziv',
-                sortable: true
+                sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.funkcija.velikost'),
+                label: i18next.t('produkcija.view.koprodukcija.velikost'),
                 name: 'velikost',
-                sortable: true
+                sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.funkcija.pomembna'),
+                label: i18next.t('produkcija.view.koprodukcija.pomembna'),
                 name: 'pomembna',
                 sortable: false
             },
@@ -65,6 +64,5 @@ console.log(sch);
         ]
     });
 
-
-    return FunkcijaView;
+    return KoprodukcijaView;
 });

@@ -41,10 +41,6 @@ define([
         {
             name: i18next.t('produkcija.view.uprizoritev.ostaliSodelujoci'),
             event: 'tehniki'
-        },
-        {
-            name: i18next.t('produkcija.view.uprizoritev.stroskovnik'),
-            event: 'stroskovnik'
         }
     ];
 
@@ -144,12 +140,12 @@ define([
     };
 
     /**
-     * Klik na tab za stroskovnik podatke 
+     * Klik na tab za koprodukcija podatke 
      * @returns {undefined}
      */
-    UprizoritevEditView.prototype.onStroskovnik = function () {
+    UprizoritevEditView.prototype.onKoprodukcija = function () {
         this.skrijSplosni();
-        this.renderStroskovnik();
+        this.renderKoprodukcija();
     };
 
     /**
@@ -217,23 +213,6 @@ define([
             c.fetch();
         }
         this.renderFunkcije(c,'uprizoritev.view.tehniki', 'tehniki');
-    };
-
-    /**
-     *  
-     * Pripravi in nariše view za stroškovnik 
-     * @returns {undefined}
-     */
-    UprizoritevEditView.prototype.renderStroskovnik = function () {
-        var self = this;
-        require(['./StroskovnikView'], function (View) {
-            var view = new View({
-                collection: self.model.stroskovnikCollection,
-                dokument: self.model
-            });
-            self.regionDetail.show(view);
-            return view;
-        });
     };
 
     return UprizoritevEditView;

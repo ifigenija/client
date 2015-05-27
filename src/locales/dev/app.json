@@ -26,7 +26,7 @@
         },
         "view": {
             "description": "Opis",
-            "builtin": "Builtin",
+            "builtin": "Vgrajena",
             "role": {
                 "title": "Vloga",
                 "nova": "Nova vloga",
@@ -41,7 +41,7 @@
                 "title": "Uporabniki",
                 "nova": "Nov uporabnik",
                 "naziv": "Naziv",
-                "ePosta": "E-pošta",
+                "email": "E-pošta",
                 "veljavnost": "Poteče veljavnost",
                 "privzetaStran": "Privzeta stran"
             }
@@ -74,7 +74,8 @@
         "nav": {
             "label": "Produkcija",
             "oseba": "Osebe",
-            "uprizoritev": "Uprizoritve"
+            "uprizoritev": "Uprizoritve",
+            "stroskovnik" : "Stroškovnik"
         },
         "view": {
             "zaposlitev": {
@@ -98,7 +99,7 @@
                 "umetniskeEkipe": "Umetniška Ekipa",
                 "nastopajoci": "Nastopajoči",
                 "ostaliSodelujoci": "Ostali sodelujoči",
-                "stroskovnik": "Stroškovnik"
+                "koprodukcija": "Koprodukcija"
             },
             "arhivalija": {
                 "title": "Arhivalija",
@@ -137,7 +138,7 @@
             "brisi": "Briši",
             "uredi": "Uredi",
             "splosno": "Splošno",
-            "ePosta": "E-Pošta",
+            "email": "E-Pošta",
             "naziv": "Naziv",
             "sifra": "Šifra",
             "ime": "Ime",
@@ -247,9 +248,18 @@
             },
             "prostor": {
                 "title": "Prostori",
-                "nova": "Nov Prostor",
+                "nova": "Nov prostor",
                 "sifra": "Šifra",
                 "naziv": "Naziv",
+                "jePrizorisce": "Je prizorišče",
+                "kapaciteta": "Kapaciteta",
+                "opis": "Opis"
+            },
+            "kontaktna": {
+                "title": "Kontaktne osebe",
+                "nova": "Nova kontaktna oseba",
+                "funkcija": "Funkcija",
+                "status": "Status",
                 "jePrizorisce": "Je prizorišče",
                 "kapaciteta": "Kapaciteta",
                 "opis": "Opis"

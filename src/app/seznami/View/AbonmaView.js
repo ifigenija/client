@@ -56,7 +56,7 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.abonma.opis'),
                 name: 'opis',
-                sortable: true
+                sortable: false
             },
             {
                 cell: 'action',

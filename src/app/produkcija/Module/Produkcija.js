@@ -34,6 +34,12 @@ define([
                 ch.command('open', view, i18next.t('produkcija.view.oseba.title'));
             });
         };
+        mod.stroskovnik = function () {
+            require(['../View/StroskovnikView'], function (OsebaView) {
+                var view = new OsebaView();
+                ch.command('open', view, i18next.t('produkcija.view.oseba.title'));
+            });
+        };
 
         /**
          * 
@@ -46,7 +52,8 @@ define([
                 controller: mod,
                 appRoutes: {
                     'pro/uprizoritev': 'uprizoritve',
-                    'pro/oseba': 'osebe'
+                    'pro/oseba': 'osebe',
+                    "pro/stroskovnik": "stroskovnik"
                 }
             });
         });

@@ -5,7 +5,7 @@ define([
     'i18next',
     'app/Dokument/View/PostavkeView',
     'template!../tpl/strosek-form.tpl',
-    'formSchema!planStrosek',
+    'formSchema!strosek',
     'i18next'
 ], function (
         i18next,
@@ -61,7 +61,7 @@ define([
                 sortable: false,
                 actions: [
                     {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')}
                 ]
             }
         ]

@@ -77,11 +77,7 @@ define([
             regionTabs: '.oseba-tabs'
         }
     });
-
-    /*OsebaEditView.prototype.initialize = function () {
-     var perm = JSON.parse(sessionStorage.getItem('ifi.user.data'));
-     console.log(perm['permissions']);
-     };*/
+    
     OsebaEditView.prototype.getImePriimek = function () {
         var imeT = this.model.get('ime');
         var priimekT = this.model.get('priimek');

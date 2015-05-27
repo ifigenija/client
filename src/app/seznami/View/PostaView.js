@@ -28,14 +28,14 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.sifra'),
                 name: 'sifra',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('seznami.view.naziv'),
                 name: 'naziv',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'action',

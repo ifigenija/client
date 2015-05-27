@@ -25,14 +25,14 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.trr.banka'),
                 name: 'banka',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('seznami.view.trr.stevilka'),
                 name: 'stevilka',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
@@ -54,7 +54,7 @@ define([
                 sortable: false,
                 actions: [
                     {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')}
                 ]
             }
         ]

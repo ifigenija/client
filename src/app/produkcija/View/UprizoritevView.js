@@ -24,28 +24,28 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.view.uprizoritev.faza'),
                 name: 'faza',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('produkcija.view.uprizoritev.naslov'),
                 name: 'naslov',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('produkcija.view.uprizoritev.delovniNaslov'),
                 name: 'delovniNaslov',
-                sortable: false
+                sortable: true
             },
             {
-                cell: 'string',
+                cell: 'date',
                 editable: false,
                 label: i18next.t('produkcija.view.uprizoritev.datumPremiere'),
                 name: 'datumPremiere',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'action',
@@ -71,9 +71,7 @@ define([
             model: editModel
         });
     };
-
-
-
+    
     UprizoritevView.prototype.onDodaj = function () {
         var model = new Uprizoritev.Model();
         this.onSelected(model);

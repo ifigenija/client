@@ -24,26 +24,19 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.sifra'),
                 name: 'sifra',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('seznami.view.naziv'),
                 name: 'naziv',
-                sortable: false
-            },
+                sortable: true
+            },            
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.popa.panoga'),
-                name: 'panoga',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('seznami.view.ePosta'),
+                label: i18next.t('seznami.view.email'),
                 name: 'email',
                 sortable: false
             },
@@ -52,6 +45,13 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.popa.url'),
                 name: 'url',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('seznami.view.popa.panoga'),
+                name: 'panoga',
                 sortable: false
             },
             {

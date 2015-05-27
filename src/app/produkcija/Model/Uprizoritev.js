@@ -12,11 +12,8 @@ define([
 
 
     var KoprodukcijaModel = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/strosek'
+        urlRoot: baseUrl + '/rest/koprodukcija'
     });
-
-
-    
 
     var KoprodukcijaCollection = Dokument.PostavkaCollection.extend({
         model: KoprodukcijaModel,
@@ -24,23 +21,22 @@ define([
         index: 'sort',
         mode: 'client'
     });
-    
+
     var AlternacijaModel = Dokument.Model.extend({
-        
         urlRoot: baseUrl + '/rest/alternacija'
-         
+
     });
-    
+
     var AlternacijaCollection = Dokument.PostavkaCollection.extend({
         model: KoprodukcijaModel,
         url: baseUrl + '/rest/alternacija',
         index: 'sort',
         mode: 'client'
     });
-    
+
 
     var FunkcijaModel = Dokument.Model.extend({
-        url: baseUrl + '/rest/funkcija'        
+        url: baseUrl + '/rest/funkcija'
     });
     /**
      * Kolekcija za funkcije 
@@ -57,8 +53,7 @@ define([
         nestedCollections: {
             umetniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'umetnik'}},
             igralci: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'igralec'}},
-            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'tehnik'}},
-            koprodukcije: {collection: ZasedbaCollection, mappedBy: 'uprizoritev'}
+            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': 'tehnik'}}
 
         },
         dodajPostavko: function (nested) {
@@ -105,6 +100,6 @@ define([
         AlternacijaModel: AlternacijaModel,
         AlternacijaCollection: AlternacijaCollection,
         KodprodukcijaModel: KoprodukcijaModel,
-        KoprodukcijaCollection: KoprodukcijaCollection,
+        KoprodukcijaCollection: KoprodukcijaCollection
     };
 });

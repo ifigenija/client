@@ -24,23 +24,30 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('seznami.view.oseba.sifra'),
+                name: 'sifra',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('seznami.view.oseba.ime'),
                 name: 'ime',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('seznami.view.oseba.priimek'),
                 name: 'priimek',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.funkcija'),
-                name: 'funkcija',
-                sortable: false
+                label: i18next.t('seznami.view.email'),
+                name: 'email',
+                sortable: true
             },
             {
                 cell: 'string',
@@ -52,8 +59,8 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.ePosta'),
-                name: 'email',
+                label: i18next.t('seznami.view.oseba.funkcija'),
+                name: 'funkcija',
                 sortable: false
             },
             {
@@ -64,7 +71,7 @@ define([
                     {event: 'brisi', title: i18next.t('seznami.view.brisi')}
                 ]
             }
-        ],
+        ]
     });
     
 //        var chLovro = Radio.channel('global');
@@ -93,21 +100,6 @@ define([
     OsebaView.prototype.dodajVcollection = function (model) {
 
         this.collection.add(model);
-        
-//        if (this.options.pogled === 'kontaktnaOseba') {
-//            $.ajax({
-//                url:  '../rest/popa/'  + this.model.get('popa') + '/osebe/'  + this.model.get('oseba'),
-//                method: 'PUT',
-//                mimeType: 'application/json',
-//                success: function (data, textStatus, jqXHR) {
-//                    
-//                },
-//                error: function (jqXHR, textStatus, errorThrown) {
-//                    console.log(errorThrown);
-//                }
-//            });
-//        }
-
     };
 
     return OsebaView;

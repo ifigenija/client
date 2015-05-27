@@ -17,7 +17,7 @@ define([
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'telefonske',
-        name: 'Telefonska',
+        name: i18next.t('uprizoritve.view.telefonska'),
         formTitle: i18next.t('seznami.view.telefonska.title'),
         gridMeta: [
             {
@@ -25,7 +25,7 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.telefonska.vrsta'),
                 name: 'vrsta',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
@@ -39,7 +39,7 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.telefonska.privzeta'),
                 name: 'privzeta',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'action',
@@ -47,7 +47,7 @@ define([
                 sortable: false,
                 actions: [
                     {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')}
                 ]
             }
         ]

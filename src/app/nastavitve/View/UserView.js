@@ -45,9 +45,9 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.view.user.ePosta'),
+                label: i18next.t('admin.view.email'),
                 name: 'email',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'date',
@@ -57,10 +57,10 @@ define([
                 sortable: false
             },
             {
-                cell: 'string',
+                cell: 'boolean',
                 editable: false,
-                label: i18next.t('admin.view.user.privzetaStran'),
-                name: 'defaultRoute',
+                label: i18next.t('admin.view.user.aktiven'),
+                name: 'enabled',
                 sortable: false
             },
             {
@@ -68,8 +68,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.view.brisi')},
-                    {event: 'uredi', title: i18next.t('std.view.uredi')},
+                    {event: 'brisi', title: i18next.t('std.view.brisi')}
                 ]
             }
         ]
@@ -81,7 +80,7 @@ define([
     };
 
     UserView.prototype.getTitle = function (model) {
-        var text = i18next.t("admin.view.role.nova");
+        var text = i18next.t("admin.view.user.nova");
 
         if (model.get('id')) {
             text = model.get('name') || i18next.t("xx.Dovoljenje");

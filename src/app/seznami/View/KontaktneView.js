@@ -18,7 +18,7 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'kontaktne',
         dodaj: i18next.t('seznami.view.dodaj'),
-        formTitle: i18next.t('seznami.view.kontaktne.title'),
+        formTitle: i18next.t('seznami.view.kontaktna.title'),
         gridMeta: [
             {
                 cell: 'string',
@@ -51,7 +51,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.email'),
+                label: i18next.t('seznami.view.email'),
                 name: 'oseba.email',
                 sortable: true
             },

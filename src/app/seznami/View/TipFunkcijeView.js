@@ -42,14 +42,14 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.tipFunkcije.dovoliPrekrivanje'),
                 name: 'dovoliPrekrivanje',
-                sortable: true
+                sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('seznami.view.tipFunkcije.nastopajoc'),
                 name: 'nastopajoc',
-                sortable: true
+                sortable: false
             },
             {
                 cell: 'action',

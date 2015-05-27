@@ -25,7 +25,7 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.postniNaslov.naziv'),
                 name: 'naziv',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
@@ -39,14 +39,14 @@ define([
                 editable: false,
                 label: i18next.t('seznami.view.postniNaslov.posta'),
                 name: 'posta',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('seznami.view.postniNaslov.drzava'),
                 name: 'drzava.label',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'action',
@@ -54,7 +54,7 @@ define([
                 sortable: false,
                 actions: [
                     {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
+                    {event: 'uredi', title: i18next.t('seznami.view.uredi')}
                 ]
             }
         ]
