@@ -4,7 +4,7 @@
 define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/kontaktna-form.tpl',
-    'formSchema!trr',
+    'formSchema!kontaktnaoseba',
     'i18next'
 ], function (
         PostavkeView,
@@ -13,10 +13,10 @@ define([
         i18next
         ) {
 
-    var TrrView = PostavkeView.extend({
+    var KontaktneView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        detailName: 'kontaktneOsebe',
+        detailName: 'kontaktne',
         dodaj: i18next.t('seznami.view.dodaj'),
         formTitle: i18next.t('seznami.view.kontaktne.title'),
         gridMeta: [
@@ -24,7 +24,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('seznami.view.kontaktna.funkcija'),
-                name: 'banka',
+                name: 'funkcija',
                 sortable: true
             },
             {
@@ -71,5 +71,5 @@ define([
     
     
 
-    return TrrView;
+    return KontaktneView;
 });

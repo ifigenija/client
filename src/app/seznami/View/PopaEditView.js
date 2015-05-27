@@ -38,7 +38,7 @@ define([
             ];
 
     var gumbi = {
-        'doc-Koproducent': {
+        'doc-koproducent': {
             id: 'doc-koproducent',
             label: 'Koproducent',
             element: 'button-trigger',
@@ -201,9 +201,13 @@ define([
 
     PopaEditView.prototype.renderKontaktne = function () {
         var self = this;
-        require(['app/seznami/View/OsebaView'], function (View) {
+        var coll =  self.model.kontaktneCollection;
+        if (coll.length === 0 ) {
+            coll.fetch();
+        }
+        require(['app/seznami/View/KontaktneView'], function (View) {
             var view = new View({
-                collection: self.model.telefonskeCollection,
+                collection: coll,
                 dokument: self.model
             });
             self.regionOsebe.show(view);

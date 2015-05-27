@@ -55,7 +55,7 @@ define([
             trrji: {collection: PopaTrrCollection, mappedBy: 'popa'},
             telefonske: {collection: PopaTelefonCollection, mappedBy: 'popa'},
             naslovi: {collection: PopaNaslovCollection, mappedBy: 'popa'},
-            kontaktneOsebe: {collection: KontaktneCollection, mappedBy: 'popa'}
+            kontaktne: {collection: KontaktneCollection, mappedBy: 'popa'}
         },
         dodajPostavko: function (nested) {
 
@@ -79,7 +79,7 @@ define([
                         popa: this.id
                     });
                     break;
-                case 'kontaktneOsebe':
+                case 'kontaktne':
                     postavka = new Kontaktna({
                         popa: this.id
                     });
