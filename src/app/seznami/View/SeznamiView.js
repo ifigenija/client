@@ -146,10 +146,7 @@ define([
      * @returns {undefined}
      */
     SeznamiView.prototype.onUredi = function (model) {
-
         this.onSelected(model);
-
-
     };
 
     /**
