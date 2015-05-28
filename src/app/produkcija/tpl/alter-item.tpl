@@ -8,4 +8,5 @@
     <h4 class="media-heading">{{ oseba.label }} </h4>
     {{#if pogodba}} <span class="fa fa-money"></span> {{/if}}
     {{#if aktivna}} <span class="fa fa-file"></span> {{/if}}
+     <span class="fa fa-trash"></span> 
 </div>

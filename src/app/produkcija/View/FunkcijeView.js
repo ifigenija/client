@@ -32,6 +32,7 @@ define([
     // funkcija ureja 
     var sch = _.omit(schema.toFormSchema().schema, 'podrocje');
 
+    var opts = schema.getOptionValues('tipFunkcije');
     /**
      * 
      * 
@@ -70,10 +71,11 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                cell: 'select',
                 editable: false,
                 label: i18next.t('produkcija.funkcija.tipFunkcije'),
                 name: 'tipFunkcije',
+                optionValues: opts,
                 sortable: true
             },
             {
@@ -181,7 +183,8 @@ define([
 
         model.save({
             oseba: oseba,
-            funkcija: this.model.get('id')
+            funkcija: this.model.get('id'),
+            altivna: true            
         }, {
             success: function (model, x, xhr) {
                 self.alters.add(model);
