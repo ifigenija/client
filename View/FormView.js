@@ -21,10 +21,25 @@ define([
         form: null,
         schema: null,
         formTemplate: null,
+        defaultButtons: {
+            shrani: {
+                id: 'doc-shrani',
+                label: 'Shrani',
+                element: 'button-trigger',
+                trigger: 'shrani',
+                disabled: true
+            },
+            preklici: {
+                id: 'doc-preklici',
+                label: 'Prekliči',
+                element: 'button-trigger',
+                trigger: 'preklici'
+            }
+        },
         buttons: {},
         constructor: function (options) {
 
-            this.schema = options.schema || this.schema ;
+            this.schema = options.schema || this.schema;
 
             if (!this.schema) {
                 var entity = (options.collection || options.model).entity;
@@ -58,7 +73,7 @@ define([
             this.model.save(null, {
                 success: function (model) {
                     self.triggerMethod('save:success', model);
-                    Radio.channel('error').command('flash', {message:'Uspešno shranjeno', code: 0, severity:'success'});
+                    Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
                 },
                 error: Radio.channel('error').request('handler', 'xhr')
             });
@@ -75,7 +90,7 @@ define([
 
         var groups = this.prepareToolbar();
 
-        var toolbar = new Toolbar( {
+        var toolbar = new Toolbar({
             buttonGroups: groups,
             listener: this,
             size: 'md'
