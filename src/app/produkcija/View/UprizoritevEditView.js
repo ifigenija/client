@@ -27,7 +27,7 @@ define([
      */
     var tabVsi = [
         {
-            name: i18next.t('seznami.splosno'),
+            name: i18next.t('produkcija.std.splosno'),
             event: 'splosni'
         },
         {

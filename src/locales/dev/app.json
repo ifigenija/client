@@ -77,6 +77,9 @@
             "uprizoritev": "Uprizoritve",
             "strosek": "Stroškovnik"
         },
+        "std": {
+            "splosno": "Splošno"
+        },
         "zaposlitev": {
             "zaposlitve": "Zaposlitve",
             "title": "Zaposlitve",
@@ -134,8 +137,6 @@
         },
         "std": {
             "dodaj": "Dodaj",
-            "brisi": "Briši",
-            "uredi": "Uredi",
             "splosno": "Splošno",
             "email": "E-Pošta",
             "naziv": "Naziv",
@@ -265,5 +266,9 @@
             "users": "Uporabniki",
             "roles": "Vloge"
         }
+    },
+    "std": {
+        "brisi": "Briši",
+        "uredi": "Uredi"
     }
 }

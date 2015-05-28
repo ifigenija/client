@@ -23,7 +23,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.kontaktna.funkcija'),
+                label: i18next.t('seznami.std.funkcija'),
                 name: 'funkcija',
                 sortable: true
             },
@@ -51,7 +51,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.email'),
+                label: i18next.t('seznami.std.email'),
                 name: 'oseba.email',
                 sortable: true
             },
@@ -61,9 +61,9 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.uredi')},
-                    {event: 'oseba', title: i18next.t('seznami.oseba'), icon: 'fa-user'},
+                    {event: 'brisi', title: i18next.t('std.brisi')},
+                    {event: 'uredi', title: i18next.t('std.uredi')},
+                    {event: 'oseba', title: i18next.t('seznami.oseba'), icon: 'fa-user'}
                 ]
             }
         ]

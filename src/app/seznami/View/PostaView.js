@@ -42,7 +42,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.brisi')}
+                    {event: 'brisi', title: i18next.t('std.brisi')}
                 ]
             }
         ]
