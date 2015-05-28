@@ -5,7 +5,6 @@ define([
     'app/Dokument/View/DokumentView',
     'template!../tpl/oseba-edit.tpl',
     'template!../tpl/oseba-form.tpl',
-    'template!../tpl/osebaOsebniPodatki-form.tpl',
     'formSchema!oseba',
     'i18next',
     'app/Max/View/TabControl',
@@ -14,55 +13,30 @@ define([
         DokumentView,
         tpl,
         formTpl,
-        osebaOsebniTpl,
         schema,
         i18next,
         TabControl,
         FormView
         ) {
 
-    var tabSplosno =
-            [
-                {
-                    name: i18next.t('seznami.std.splosno'),
-                    event: 'splosni'
-                },
-                {
-                    name: i18next.t('seznami.oseba.osebniPodatki'),
-                    event: 'osebniPodatki'
-                },
-                {
-                    name: i18next.t('seznami.std.kontakti'),
-                    event: 'kontakti'
-                },
-                {
-                    name: i18next.t('seznami.oseba.racuni'),
-                    event: 'trrji'
-                }
-            ];
+    var tabSplosno = [
+        {name: i18next.t('seznami.std.splosno'), event: 'splosni'},
+        {name: i18next.t('seznami.oseba.osebniPodatki'), event: 'osebniPodatki'},
+        {name: i18next.t('seznami.std.kontakti'), event: 'kontakti'},
+        {name: i18next.t('seznami.oseba.racuni'), event: 'trrji'}
+    ];
 
-    var tabKontaktna =
-            [
-                {
-                    name: i18next.t('seznami.splosno'),
-                    event: 'splosni'
-                },
-                {
-                    name: i18next.t('seznami.oseba.kontakti'),
-                    event: 'osebniPodatki'
-                }
-            ];
-    var tabNovi =
-            [
-                {
-                    name: i18next.t('seznami.splosno'),
-                    event: 'splosni'
-                },
-                {
-                    name: i18next.t('seznami.oseba.osebniPodatki'),
-                    event: 'osebniPodatki'
-                }
-            ];
+    var tabKontaktna = [
+        {name: i18next.t('seznami.splosno'), event: 'splosni'},
+        {name: i18next.t('seznami.oseba.kontakti'), event: 'osebniPodatki'}
+    ];
+
+    var tabNovi = [
+        {name: i18next.t('seznami.splosno'), event: 'splosni'},
+        {name: i18next.t('seznami.oseba.osebniPodatki'), event: 'osebniPodatki'}
+    ];
+
+
 
     var OsebaEditView = DokumentView.extend({
         template: tpl,
@@ -77,7 +51,7 @@ define([
             regionTabs: '.oseba-tabs'
         }
     });
-    
+
     OsebaEditView.prototype.getImePriimek = function () {
         var imeT = this.model.get('ime');
         var priimekT = this.model.get('priimek');
@@ -114,19 +88,19 @@ define([
             tabs = tabSplosno;
         }
 
+
+
         if (this.isNew()) {
             tabs = tabNovi;
         }
+        this.renderTabs(tabs);
 
         if (!this.isNew()) {
             this.renderNaslovi();
-            this.renderTrrji();
             this.renderTelefonske();
         }
-        
-        this.renderOsebniPodatki();
 
-        this.renderTabs(tabs);
+
     };
     /**
      * Klik na splošni tab
@@ -144,6 +118,7 @@ define([
     OsebaEditView.prototype.onOsebniPodatki = function () {
         this.deselectTab();
         this.$('.pnl-osebniPodatki').addClass('active');
+        this.renderOsebniPodatki();
 
     };
     /**
@@ -193,44 +168,17 @@ define([
      * @returns {undefined}
      */
     OsebaEditView.prototype.renderOsebniPodatki = function () {
-      
-        var Fv = FormView.extend({
-            formTitle: this.model.get('ime'),
-            buttons: {
-                shrani: {
-                    id: 'doc-shrani',
-                    label: 'Shrani',
-                    element: 'button-trigger',
-                    trigger: 'shrani',
-                    disabled: true
-                },
-                preklici: {
-                    id: 'doc-preklici',
-                    label: 'Prekliči',
-                    element: 'button-trigger',
-                    trigger: 'preklici'
-                }
-            },
-            schema: schema.toFormSchema().schema,
-            formTemplate: osebaOsebniTpl,
-            onFormChange: function (form) {
-                var tb = this.getToolbarModel();
-                var but = tb.getButton('doc-shrani');
-                if (but.get('disabled')) {
-                    but.set({
-                        disabled: false
-                    });
-                }
-            }
-        });
 
-        var view = new Fv({
-            model: this.model
+        this.osebniModel = new OsebniPodatkiModel({id: this.model.get('id')});
+        var self = this;
+        require(['app/seznami/View/OsebniPodatkiView'], function (OsebniView) {            
+            var o = new OsebniView({
+                model: self.osebniModel
+            });
+            self.regionOsebniPodatki.show(o);
         });
-
-        this.regionOsebniPodatki.show(view);
-        return view;
     };
+    
     /**
      * Izris TRR
      * @returns {undefined}

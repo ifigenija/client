@@ -11,33 +11,33 @@ define([
         ) {
 
 
-    var OsebaNaslov = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/postniNaslov'
+    var OsebaTrr = Dokument.Postavka.extend({
+        urlRoot: baseUrl + '/rest/trr'
     });
-    var OsebaTelefon = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/telefonska'
-    });
-   
+    
+    var OsebaZaposlitev = Dokument.Postavka.extend({
+        urlRoot: baseUrl + '/rest/zaposlitev'
+    });    
+    
 
-    var OsebaTelefonCollection = Dokument.PostavkaCollection.extend({
-        model: OsebaTelefon,
-        url: baseUrl + '/rest/telefonska',
+    
+    var OsebaTrrCollection = Dokument.PostavkaCollection.extend({
+        model: OsebaTrr,
+        url: baseUrl + '/rest/trr',
         index: 'pozicija'
     });
-
-
-    var OsebaNaslovCollection = Dokument.PostavkaCollection.extend({
-        model: OsebaNaslov,
-        url: baseUrl + '/rest/postniNaslov',
+    
+    var OsebaZaposlitevCollection = Dokument.PostavkaCollection.extend({
+        model: OsebaZaposlitev,
+        url: baseUrl + '/rest/zaposlitev',
         index: 'pozicija'
     });
-
-
+    
     var OsebaModel = Dokument.Model.extend({
-        urlRoot: baseUrl + '/rest/oseba',
+        urlRoot: baseUrl + '/rest/oseba/osebni',
         nestedCollections: {
-            telefonske: {collection: OsebaTelefonCollection, mappedBy: 'oseba'},
-            naslovi: {collection: OsebaNaslovCollection, mappedBy: 'oseba'},
+            trrji: {collection: OsebaTrrCollection, mappedBy: 'oseba'},
+            zaposlitve: {collection: OsebaZaposlitevCollection, mappedBy: 'oseba'}
         },
         dodajPostavko: function (nested) {
 
@@ -46,13 +46,13 @@ define([
             }
             var postavka;
             switch (nested) {
-                case 'naslovi':
-                    postavka = new OsebaNaslov({
+                case 'trrji':
+                    postavka = new OsebaTrr({
                         oseba: this.id
                     });
                     break;
-                case 'telefonske':
-                    postavka = new OsebaTelefon({
+                case 'zaposlitve':
+                    postavka = new OsebaZaposlitev({
                         oseba: this.id
                     });
                     break;

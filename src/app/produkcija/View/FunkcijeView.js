@@ -7,6 +7,7 @@ define([
     './AlterSelectView',
     'app/Max/Model/MaxPageableCollection',
     'backbone',
+    'app/Max/Module/Backgrid',
     'i18next',
     'underscore',
     'formSchema!funkcija',
@@ -19,6 +20,7 @@ define([
         AlterSelectView,
         MaxPageable,
         Backbone,
+        Backgrid,
         i18next,
         _,
         schema,
@@ -33,12 +35,13 @@ define([
     var sch = _.omit(schema.toFormSchema().schema, 'podrocje');
     //console.log(sch);
     var opts = schema.getOptionValues('tipFunkcije');
+    
     /**
      * 
      * 
      * @type @exp;PostavkeView@call;extend
      */
-    var FunkcijaView = PostavkeView.extend({
+    var FunkcijeView = PostavkeView.extend({
         formTemplate: formTpl,
         template: tpl,
         schema: sch,
@@ -50,7 +53,7 @@ define([
         },
         gridMeta: [
             {
-                cell: 'number',
+                cell: 'integer',
                 editable: false,
                 label: i18next.t('produkcija.funkcija.sort'),
                 name: 'sort',
@@ -71,12 +74,14 @@ define([
                 sortable: true
             },
             {
-                cell: 'select',
+                cell: Backgrid.SelectCell.extend({
+                    optionValues: opts
+                }),
                 editable: false,
                 label: i18next.t('produkcija.funkcija.tipFunkcije'),
                 name: 'tipFunkcije',
                 optionValues: opts,
-                sortable: true
+                sortable: false
             },
             {
                 cell: 'boolean',
@@ -109,33 +114,39 @@ define([
      * 
      * @returns {undefined}
      */
-    FunkcijaView.prototype.onRenderForm = function () {
+    FunkcijeView.prototype.onRenderForm = function () {
 
-        if (this.model) {
+        if (this.model.get('id')) {
             this.renderAlternacije(this.model);
+            this.on('preklici', function () {
+                this.alterR.empty();
+            }, this);            
+            this.on('save:success', function () {
+                this.alterR.empty();
+            }, this);            
         }
 
-
     };
-
-
+    
+    
+    
 
     /**
      * 
      * @param {type} model
      * @returns {undefined}
      */
-    FunkcijaView.prototype.renderAlternacije = function (model) {
+    FunkcijeView.prototype.renderAlternacije = function (model) {
 
         this.AlterModel = Backbone.DeepModel.extend({
             urlRoot: baseUrl + '/rest/alternacija'
         });
-        var c = this.alters = new MaxPageable({
+        var c = this.alters = new MaxPageable([],{
             model: this.AlterModel,
             state: {
                 perPage: 50
             },
-        });
+        });        
         c.url = baseUrl + '/rest/alternacija';
 
         c.queryParams.funkcija = model.get('id');
@@ -153,13 +164,14 @@ define([
         this.alterR.show(rv);
     };
 
+    
 
     /**
      * 
      * @param {type} model
      * @returns {undefined}
      */
-    FunkcijaView.prototype.brisiAlter = function (alter) {
+    FunkcijeView.prototype.brisiAlter = function (alter) {
 
         var self = this;
         var o = this.alters.findWhere({id: alter});
@@ -177,7 +189,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    FunkcijaView.prototype.dodajAlter = function (oseba) {
+    FunkcijeView.prototype.dodajAlter = function (oseba) {
         var self = this;
         var model = new this.AlterModel();
 
@@ -196,5 +208,5 @@ define([
 
 
 
-    return FunkcijaView;
+    return FunkcijeView;
 });

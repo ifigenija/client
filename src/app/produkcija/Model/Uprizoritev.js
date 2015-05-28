@@ -11,7 +11,7 @@ define([
         ) {
     
     var FunkcijaModel = Dokument.Model.extend({
-        url: baseUrl + '/rest/funkcija'
+        urlRoot: baseUrl + '/rest/funkcija'
     });
     /**
      * Kolekcija za funkcije 

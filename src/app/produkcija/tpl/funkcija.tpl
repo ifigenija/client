@@ -7,8 +7,8 @@
     </div>
     <div class="panel-body">
         <div class="raw">
-            <div class="col-sm-8 region-postavke-form"></div>
-            <div class="col-sm-4 region-alternacije"></div>
+            <div class="col-sm-6 col-md-8 region-postavke-form"></div>
+            <div class="col-sm-6 col-md-4 region-alternacije"></div>
         </div>
         <div class="region-postavke-list"></div>
     </div>
