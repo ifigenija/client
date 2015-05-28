@@ -34,9 +34,9 @@ define([
                 ch.command('open', view, i18next.t('produkcija.oseba.title'));
             });
         };
-        mod.strosek = function () {
-            require(['../View/UprizoritevStrosekView'], function (UprizoritevStrosekView) {
-                var view = new UprizoritevStrosekView();
+        mod.stroskovnik = function () {
+            require(['../View/StroskovnikView'], function (StroskovnikView) {
+                var view = new StroskovnikView();
                 ch.command('open', view, i18next.t('produkcija.strosek.title'));
             });
         };
@@ -53,7 +53,7 @@ define([
                 appRoutes: {
                     'pro/uprizoritev': 'uprizoritve',
                     'pro/oseba': 'osebe',
-                    "pro/strosek": "strosek"
+                    "pro/stroskovnik": "stroskovnik"
                 }
             });
         });

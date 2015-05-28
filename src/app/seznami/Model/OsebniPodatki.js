@@ -61,7 +61,6 @@ define([
             return postavka;
         }
     });
-    return {
-        Model: OsebaModel
-    };
+    return  OsebaModel;
+   
 });

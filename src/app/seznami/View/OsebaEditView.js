@@ -19,14 +19,13 @@ define([
         FormView
         ) {
 
-    var tabSplosno = [
+    var tabVse = [
         {name: i18next.t('seznami.std.splosno'), event: 'splosni'},
-        {name: i18next.t('seznami.oseba.osebniPodatki'), event: 'osebniPodatki'},
         {name: i18next.t('seznami.std.kontakti'), event: 'kontakti'},
-        {name: i18next.t('seznami.oseba.racuni'), event: 'trrji'}
+        {name: i18next.t('seznami.oseba.osebniPodatki'), event: 'osebniPodatki'},
     ];
 
-    var tabKontaktna = [
+    var tabSplosno = [
         {name: i18next.t('seznami.splosno'), event: 'splosni'},
         {name: i18next.t('seznami.oseba.kontakti'), event: 'osebniPodatki'}
     ];
@@ -44,10 +43,8 @@ define([
         schema: schema.toFormSchema().schema,
         regions: {
             regionOsebniPodatki: '.region-osebniPodatki',
-            regionTrrji: '.region-trrji',
             regionNaslovi: '.region-naslovi',
             regionTelefonske: '.region-telefonske',
-            regionZaposlitve: '.region-zaposlitve',
             regionTabs: '.oseba-tabs'
         }
     });
@@ -81,9 +78,9 @@ define([
         var tabs = null;
 
         if (this.options.pogled === "kontaktna") {
-            tabs = tabKontaktna;
-        } else if (this.options.pogled === "splosno") {
             tabs = tabSplosno;
+        } else if (this.options.pogled === "vse") {
+            tabs = tabVse;
         } else {
             tabs = tabSplosno;
         }
@@ -129,22 +126,7 @@ define([
         this.deselectTab();
         this.$('.pnl-kontakti').addClass('active');
     };
-    /**
-     * Klik na tab za trr podatke 
-     * @returns {undefined}
-     */
-    OsebaEditView.prototype.onTrrji = function () {
-        this.deselectTab();
-        this.$('.pnl-trrji').addClass('active');
-    };
-    /**
-     * Klik na tab za zaposlitvene podatke 
-     * @returns {undefined}
-     */
-    OsebaEditView.prototype.onZaposlitve = function () {
-        this.deselectTab();
-        this.$('.pnl-zaposlitve').addClass('active');
-    };
+
     /**
      * Klik na tab za kontaktne podatke 
      * @returns {undefined}
@@ -169,31 +151,21 @@ define([
      */
     OsebaEditView.prototype.renderOsebniPodatki = function () {
 
-        this.osebniModel = new OsebniPodatkiModel({id: this.model.get('id')});
         var self = this;
-        require(['app/seznami/View/OsebniPodatkiView'], function (OsebniView) {            
+        require(['app/seznami/View/OsebniPodatkiView', 'app/seznami/Model/OsebniPodatki'], function (OsebniView, Model) {
+
+            if (!self.osebniModel) {
+                self.osebniModel = new Model({id: self.model.get('id')});
+                self.osebniModel.fetch();
+            }
+
             var o = new OsebniView({
                 model: self.osebniModel
             });
             self.regionOsebniPodatki.show(o);
         });
     };
-    
-    /**
-     * Izris TRR
-     * @returns {undefined}
-     */
-    OsebaEditView.prototype.renderTrrji = function () {
-        var self = this;
-        require(['app/seznami/View/TrrView'], function (View) {
-            var view = new View({
-                collection: self.model.trrjiCollection,
-                dokument: self.model
-            });
-            self.regionTrrji.show(view);
-            return view;
-        });
-    };
+
     /**
      * Izris telefonskih
      * @returns {undefined}

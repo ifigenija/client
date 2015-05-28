@@ -80,7 +80,7 @@ define([
                 i18next.t('produkcija.uprizoritev.nova') : this.getNaslovUprizoritve();
     };
 
-    UprizoritevStrosekEditView.prototype.onBeforeRender = function () {
+    UprizoritevStrosekEditView.prototype.initialize = function (options) {
         var self = this;
         this.listenTo(this.model, 'sync', function (coll) {
             self.render();
@@ -88,15 +88,7 @@ define([
     };
 
     UprizoritevStrosekEditView.prototype.onRender = function () {
-        var tabs = null;
-
-        if (!this.model.get('id')) {
-            tabs = null;
-        } else {
-            tabs = tabVsi;
-        }
-
-        this.renderTabs(tabs);
+        this.renderTabs(tabVsi);
     };
 
     /**
