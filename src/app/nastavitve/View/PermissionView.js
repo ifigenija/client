@@ -102,9 +102,9 @@ define([
     };
     
     
-    PermissionView.prototype.poShranitvi = function (model) {
+    PermissionView.prototype.saveSuccess = function (model) {
 
-        SeznamiView.prototype.poShranitvi.apply(this, arguments);
+        SeznamiView.prototype.saveSuccess.apply(this, arguments);
         if (model.get('id')) {
             this.renderVloge(model);
         }

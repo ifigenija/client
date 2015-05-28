@@ -102,9 +102,9 @@ define([
         }
     };
     
-    UserView.prototype.poShranitvi = function (model) {
+    UserView.prototype.saveSuccess = function (model) {
 
-        SeznamiView.prototype.poShranitvi.apply(this, arguments);
+        SeznamiView.prototype.saveSuccess.apply(this, arguments);
         if (model.get('id')) {
             this.renderVloge(model);
         }

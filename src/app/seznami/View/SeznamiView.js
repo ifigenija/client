@@ -36,7 +36,8 @@ define([
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
-            naslovR: '.seznam-naslov'
+            naslovR: '.seznam-naslov',
+            lookupR: '.seznam-lookup'
         },
         defaultButtons: {
             shrani: {
@@ -166,7 +167,7 @@ define([
 
         this.toolbarR.empty();
         this.listenTo(form, 'preklici', this.preklici);
-        this.listenTo(form, 'save:success', this.poShranitvi);
+        this.listenTo(form, 'save:success', this.saveSuccess);
         this.listenTo(form, 'skrij', this.preklici);
     };
 
@@ -176,7 +177,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    SeznamiView.prototype.poShranitvi = function (model) {
+    SeznamiView.prototype.saveSuccess = function (model) {
         this.$('.glava-title').text(this.getTitle(model));
         this.collection.fetch();
     };

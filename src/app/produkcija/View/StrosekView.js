@@ -53,14 +53,15 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.strosek.opis'),
                 name: 'opis',
-                sortable: true
+                sortable: false
             },
             {
                 cell: 'action',
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('std.brisi')},
+                    {event: 'uredi', title: i18next.t('std.uredi')}
                 ]
             }
         ]

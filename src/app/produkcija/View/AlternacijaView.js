@@ -24,14 +24,14 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('produkcija.alternacija.oseba'),
-                name: 'oseba',
+                name: 'oseba.label',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('produkcija.alternacija.funkcija'),
-                name: 'funkcija',
+                name: 'funkcija.label',
                 sortable: true
             },
             {
@@ -53,7 +53,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('produkcija.brisi')}
+                    {event: 'brisi', title: i18next.t('std.brisi')},
+                    {event: 'uredi', title: i18next.t('std.uredi')}
                 ]
             }
         ]

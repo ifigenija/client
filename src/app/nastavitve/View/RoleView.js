@@ -104,9 +104,9 @@ define([
         }
     };
     
-    RoleView.prototype.poShranitvi = function (model) {
+    RoleView.prototype.saveSuccess = function (model) {
 
-        SeznamiView.prototype.poShranitvi.apply(this, arguments);
+        SeznamiView.prototype.saveSuccess.apply(this, arguments);
         if (model.get('id')) {
             this.renderVloge(model);
             this.renderUporabniki(model);

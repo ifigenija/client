@@ -88,8 +88,8 @@
             "stroski":"Stroški",
             "title":"Stroški uprizoritve",
             "naziv":"Naziv",
-            "vrednostDo":"Vrednost do",
-            "vrednostNa":"Vrednost na",
+            "vrednostDo":"Vrednost do premiere",
+            "vrednostNa":"Vrednost na ponovitev",
             "opis":"Opis",
             "popa":"Poslovni partner"
         },
