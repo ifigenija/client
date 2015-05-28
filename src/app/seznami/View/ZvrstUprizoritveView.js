@@ -19,21 +19,21 @@ define([
 
     var ZvrstUprizoritveView = SeznamiView.extend({
         url: baseUrl + '/rest/zvrstUprizoritve',
-        title: i18next.t('seznami.view.zvrstUprizoritve.title'),
+        title: i18next.t('seznami.zvrstUprizoritve.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.ime'),
+                label: i18next.t('seznami.std.ime'),
                 name: 'ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.opis'),
+                label: i18next.t('seznami.std.opis'),
                 name: 'opis',
                 sortable: true
             },
@@ -42,14 +42,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')}
                 ]
             }
         ]
     });
     
     ZvrstUprizoritveView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.view.zvrstUprizoritve.nova");
+        var text = i18next.t("seznami.zvrstUprizoritve.nova");
 
         if (model.get('id')) {
             text = model.get('ime') || "Ime";

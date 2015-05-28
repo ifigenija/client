@@ -16,42 +16,42 @@ define([
     var StrosekView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        title: i18next.t('seznami.view.strosek.title'),
-        detailName: 'alternacije',
-        formTitle: i18next.t('seznami.view.strosek.title'),
+        title: i18next.t('seznami.strosek.title'),
+        detailName: 'stroski',
+        formTitle: i18next.t('seznami.strosek.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.strosek.ime'),
+                label: i18next.t('seznami.strosek.ime'),
                 name: 'ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.strosek.stPredstav'),
+                label: i18next.t('seznami.strosek.stPredstav'),
                 name: 'stPredstav',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.strosek.stKuponov'),
+                label: i18next.t('seznami.strosek.stKuponov'),
                 name: 'stKuponov',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.strosek.kapaciteta'),
+                label: i18next.t('seznami.strosek.kapaciteta'),
                 name: 'kapaciteta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.strosek.opis'),
+                label: i18next.t('seznami.strosek.opis'),
                 name: 'opis',
                 sortable: true
             },
@@ -60,7 +60,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')}
                 ]
             }
         ]

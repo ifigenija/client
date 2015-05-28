@@ -31,23 +31,23 @@ define([
      */
     var tabVsi = [
         {
-            name: i18next.t('seznami.view.splosno'),
+            name: i18next.t('seznami.splosno'),
             event: 'splosni'
         },
         {
-            name: i18next.t('produkcija.view.uprizoritev.alternacije'),
+            name: i18next.t('produkcija.uprizoritev.alternacije'),
             event: 'alternacije'
         },
         {
-            name: i18next.t('produkcija.view.uprizoritev.pogodbe'),
+            name: i18next.t('produkcija.uprizoritev.pogodbe'),
             event: 'pogodbe'
         },
         {
-            name: i18next.t('produkcija.view.uprizoritev.koprodukcije'),
+            name: i18next.t('produkcija.uprizoritev.koprodukcije'),
             event: 'koprodukcije'
         },
         {
-            name: i18next.t('produkcija.view.uprizoritev.stroski'),
+            name: i18next.t('produkcija.uprizoritev.stroski'),
             event: 'stroski'
         }
     ];
@@ -71,13 +71,13 @@ define([
 
     UprizoritevStrosekEditView.prototype.getNaslovUprizoritve = function () {
         var naslovT = this.model.get('naslov');
-        var naslov = naslovT || i18next.t('produkcija.view.uprizoritev.naslov');
+        var naslov = naslovT || i18next.t('produkcija.uprizoritev.naslov');
         return naslov;
     };
 
     UprizoritevStrosekEditView.prototype.getNaslov = function () {
         return this.isNew() ?
-                i18next.t('produkcija.view.uprizoritev.nova') : this.getNaslovUprizoritve();
+                i18next.t('produkcija.uprizoritev.nova') : this.getNaslovUprizoritve();
     };
 
     UprizoritevStrosekEditView.prototype.onBeforeRender = function () {
@@ -174,12 +174,12 @@ define([
             c.fetch();
         }
         
-        var view = new AlternacijaView()({
+        var view = new AlternacijaView({
             collection: c,
             dokument: this.model
         });
         view.detailName = 'alternacije';
-        view.name = i18next.t('uprizoritev.view.alternacije');
+        view.name = i18next.t('uprizoritev.alternacije');
         
         this.regionDetail.show(view);
     };
@@ -194,12 +194,12 @@ define([
             c.fetch();
         }
         
-        var view = new PogodbaView()({
+        var view = new PogodbaView({
             collection: c,
             dokument: this.model
         });
         view.detailName = 'pogodbe';
-        view.name = i18next.t('uprizoritev.view.pogodbe');
+        view.name = i18next.t('uprizoritev.pogodbe');
         
         this.regionDetail.show(view);
     };
@@ -216,12 +216,12 @@ define([
             c.fetch();
         }
         
-        var view = new KoprodukcijaView()({
+        var view = new KoprodukcijaView({
             collection: c,
             dokument: this.model
         });
         view.detailName = 'koprodukcije';
-        view.name = i18next.t('uprizoritev.view.koprodukcije');
+        view.name = i18next.t('uprizoritev.koprodukcije');
         
         this.regionDetail.show(view);
     };
@@ -237,12 +237,12 @@ define([
             c.fetch();
         }
         
-        var view = new StrosekView()({
+        var view = new StrosekView({
             collection: c,
             dokument: this.model
         });
         view.detailName = 'stroski';
-        view.name = i18next.t('uprizoritev.view.stroski');
+        view.name = i18next.t('uprizoritev.stroski');
         
         this.regionDetail.show(view);
     };

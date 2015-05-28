@@ -30,7 +30,7 @@ define([
         model.besedila = function () {
             require(['../View/BesediloView'], function (BesediloView) {
                 var view = new BesediloView();
-                ch.command('open', view, i18next.t('seznami.view.besedilo.title'));
+                ch.command('open', view, i18next.t('seznami.besedilo.title'));
             });
         };
 

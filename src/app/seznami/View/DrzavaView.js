@@ -19,35 +19,35 @@ define([
 
     var DrzavaView = SeznamiView.extend({
         url: baseUrl + '/rest/drzava',
-        title: i18next.t('seznami.view.drzava.title'),
+        title: i18next.t('seznami.drzava.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.sifra'),
+                label: i18next.t('seznami.std.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.naziv'),
+                label: i18next.t('seznami.std.naziv'),
                 name: 'naziv',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.drzava.isoNum'),
+                label: i18next.t('seznami.drzava.isoNum'),
                 name: 'isoNum',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.drzava.isoNaziv'),
+                label: i18next.t('seznami.drzava.isoNaziv'),
                 name: 'isoNaziv',
                 sortable: true
             },
@@ -56,14 +56,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')}
                 ]
             }
         ]
     });
     
     DrzavaView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.view.drzava.nova");
+        var text = i18next.t("seznami.drzava.nova");
 
         if (model.get('id')) {
             text = model.get('naziv') || "Naziv";

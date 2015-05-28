@@ -17,41 +17,41 @@ define([
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'kontaktne',
-        dodaj: i18next.t('seznami.view.dodaj'),
-        formTitle: i18next.t('seznami.view.kontaktna.title'),
+        dodaj: i18next.t('seznami.dodaj'),
+        formTitle: i18next.t('seznami.kontaktna.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.kontaktna.funkcija'),
+                label: i18next.t('seznami.kontaktna.funkcija'),
                 name: 'funkcija',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.kontaktna.status'),
+                label: i18next.t('seznami.kontaktna.status'),
                 name: 'stevilka',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.ime'),
+                label: i18next.t('seznami.oseba.ime'),
                 name: 'oseba.ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.priimek'),
+                label: i18next.t('seznami.oseba.priimek'),
                 name: 'oseba.priimek',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.email'),
+                label: i18next.t('seznami.email'),
                 name: 'oseba.email',
                 sortable: true
             },
@@ -61,9 +61,9 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')},
-                    {event: 'oseba', title: i18next.t('seznami.view.oseba'), icon: 'fa-user'},
+                    {event: 'brisi', title: i18next.t('seznami.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.uredi')},
+                    {event: 'oseba', title: i18next.t('seznami.oseba'), icon: 'fa-user'},
                 ]
             }
         ]

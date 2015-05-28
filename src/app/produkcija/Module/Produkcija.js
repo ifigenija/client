@@ -25,19 +25,19 @@ define([
         mod.uprizoritve = function () {
             require(['../View/UprizoritevView'], function (UprizoritevView) {
                 var view = new UprizoritevView();
-                ch.command('open', view, i18next.t('produkcija.view.uprizoritev.title'));
+                ch.command('open', view, i18next.t('produkcija.uprizoritev.title'));
             });
         };
         mod.osebe = function () {
             require(['../../seznami/View/OsebaView'], function (OsebaView) {
                 var view = new OsebaView();
-                ch.command('open', view, i18next.t('produkcija.view.oseba.title'));
+                ch.command('open', view, i18next.t('produkcija.oseba.title'));
             });
         };
         mod.strosek = function () {
             require(['../View/UprizoritevStrosekView'], function (UprizoritevStrosekView) {
                 var view = new UprizoritevStrosekView();
-                ch.command('open', view, i18next.t('produkcija.view.strosek.title'));
+                ch.command('open', view, i18next.t('produkcija.strosek.title'));
             });
         };
 

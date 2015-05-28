@@ -19,42 +19,42 @@ define([
 
     var BesediloView = SeznamiView.extend({
         url: baseUrl + '/rest/besedilo',
-        title: i18next.t('seznami.view.besedilo.title'),
+        title: i18next.t('seznami.besedilo.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.besedilo.stevilka'),
+                label: i18next.t('seznami.besedilo.stevilka'),
                 name: 'stevilka',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.besedilo.avtor'),
+                label: i18next.t('seznami.besedilo.avtor'),
                 name: 'avtor',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.besedilo.naslovIzvirnika'),
+                label: i18next.t('seznami.besedilo.naslovIzvirnika'),
                 name: 'naslovIzvirnika',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.besedilo.prevajalec'),
+                label: i18next.t('seznami.besedilo.prevajalec'),
                 name: 'prevajalec',
                 sortable: true
             },
             {
                 cell: 'date',
                 editable: false,
-                label: i18next.t('seznami.view.besedilo.datumPrejema'),
+                label: i18next.t('seznami.besedilo.datumPrejema'),
                 name: 'datumPrejema',
                 sortable: true
             },
@@ -63,14 +63,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')}
                 ]
             }
         ]
     });
     
     BesediloView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.view.besedilo.nova");
+        var text = i18next.t("seznami.besedilo.nova");
 
         if (model.get('id')) {
             text = model.get('naslov') || "Naslov";

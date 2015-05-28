@@ -30,7 +30,7 @@ define([
 
     var PermissionView = SeznamiView.extend({
         url: baseUrl + '/rest/permission',
-        title: i18next.t('admin.view.permission.title'),
+        title: i18next.t('admin.permission.title'),
         schema: schema,
         formTemplate: formTpl,
         template: permTpl,
@@ -45,21 +45,21 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.view.permission.name'),
+                label: i18next.t('admin.permission.name'),
                 name: 'name',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.view.description'),
+                label: i18next.t('admin.description'),
                 name: 'description',
                 sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('admin.view.builtin'),
+                label: i18next.t('admin.builtin'),
                 name: 'builtIn',
                 sortable: true
             },
@@ -68,14 +68,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('admin.view.brisi')}
+                    {event: 'brisi', title: i18next.t('admin.brisi')}
                 ]
             }
         ]
     });
 
     PermissionView.prototype.getTitle = function (model) {
-        var text = i18next.t("admin.view.permission.nova");
+        var text = i18next.t("admin.permission.nova");
 
         if (model.get('id')) {
             text = model.get('name') || i18next.t("xx.Dovoljenje");
@@ -127,7 +127,7 @@ define([
             ownerId: model.get('id'),
             relation: 'roles',
             lookup: 'role',
-            title: i18next.t("admin.view.role.title")
+            title: i18next.t("admin.role.title")
         });
         this.rolesR.show(rv);
     };

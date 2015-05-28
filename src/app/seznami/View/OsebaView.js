@@ -19,47 +19,47 @@ define([
 
     var OsebaView = SeznamiView.extend({
         url: baseUrl + '/rest/oseba',
-        title: i18next.t('seznami.view.oseba.title'),
+        title: i18next.t('seznami.oseba.title'),
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.sifra'),
+                label: i18next.t('seznami.std.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.ime'),
+                label: i18next.t('seznami.std.ime'),
                 name: 'ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.priimek'),
+                label: i18next.t('seznami.oseba.priimek'),
                 name: 'priimek',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.email'),
+                label: i18next.t('seznami.std.email'),
                 name: 'email',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.psevdonim'),
+                label: i18next.t('seznami.oseba.psevdonim'),
                 name: 'psevdonim',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.oseba.funkcija'),
+                label: i18next.t('seznami.std.funkcija'),
                 name: 'funkcija',
                 sortable: false
             },
@@ -68,7 +68,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')}
                 ]
             }
         ]

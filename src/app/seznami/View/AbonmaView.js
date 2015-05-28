@@ -19,42 +19,42 @@ define([
 
     var AbonmaView = SeznamiView.extend({
         url: baseUrl + '/rest/abonma',
-        title: i18next.t('seznami.view.abonma.title'),
+        title: i18next.t('seznami.abonma.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.abonma.ime'),
+                label: i18next.t('seznami.std.ime'),
                 name: 'ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.abonma.stPredstav'),
+                label: i18next.t('seznami.abonma.stPredstav'),
                 name: 'stPredstav',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.abonma.stKuponov'),
+                label: i18next.t('seznami.abonma.stKuponov'),
                 name: 'stKuponov',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.abonma.kapaciteta'),
+                label: i18next.t('seznami.abonma.kapaciteta'),
                 name: 'kapaciteta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.abonma.opis'),
+                label: i18next.t('seznami.std.opis'),
                 name: 'opis',
                 sortable: false
             },
@@ -63,14 +63,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')}
                 ]
             }
         ]
     });
     
     AbonmaView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.view.abonma.nova");
+        var text = i18next.t("seznami.abonma.nova");
 
         if (model.get('id')) {
             text = model.get('ime') || "Ime";

@@ -17,40 +17,40 @@ define([
 
     var PopaView = SeznamiView.extend({
         url: baseUrl + '/rest/popa',
-        title: i18next.t('seznami.view.popa.title'),
+        title: i18next.t('seznami.popa.title'),
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.sifra'),
+                label: i18next.t('seznami.std.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.naziv'),
+                label: i18next.t('seznami.std.naziv'),
                 name: 'naziv',
                 sortable: true
             },            
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.email'),
+                label: i18next.t('seznami.std.email'),
                 name: 'email',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.popa.url'),
+                label: i18next.t('seznami.popa.url'),
                 name: 'url',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.popa.panoga'),
+                label: i18next.t('seznami.popa.panoga'),
                 name: 'panoga',
                 sortable: false
             },
@@ -59,7 +59,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')}
                 ]
             }
         ]

@@ -19,21 +19,21 @@ define([
 
     var PostaView = SeznamiView.extend({
         url: baseUrl + '/rest/posta',
-        title: i18next.t('seznami.view.posta.title'),
+        title: i18next.t('seznami.posta.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.sifra'),
+                label: i18next.t('seznami.std.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.naziv'),
+                label: i18next.t('seznami.std.naziv'),
                 name: 'naziv',
                 sortable: true
             },
@@ -42,14 +42,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')}
                 ]
             }
         ]
     });
 
     PostaView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.view.posta.nova");
+        var text = i18next.t("seznami.posta.nova");
 
         if (model.get('id')) {
             text = model.get('naziv') || "Naziv";

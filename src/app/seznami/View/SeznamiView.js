@@ -98,7 +98,7 @@ define([
         var tool = [[
                 {
                     id: 'doc-dodaj',
-                    label: i18next.t('seznami.view.std.dodaj'),
+                    label: i18next.t('seznami.std.dodaj'),
                     element: 'button-trigger',
                     trigger: 'dodaj'
                 }

@@ -27,19 +27,19 @@ define([
      */
     var tabVsi = [
         {
-            name: i18next.t('seznami.view.splosno'),
+            name: i18next.t('seznami.splosno'),
             event: 'splosni'
         },
         {
-            name: i18next.t('produkcija.view.uprizoritev.umetniskeEkipe'),
+            name: i18next.t('produkcija.uprizoritev.umetniskeEkipe'),
             event: 'umetniki'
         },
         {
-            name: i18next.t('produkcija.view.uprizoritev.nastopajoci'),
+            name: i18next.t('produkcija.uprizoritev.nastopajoci'),
             event: 'igralci'
         },
         {
-            name: i18next.t('produkcija.view.uprizoritev.ostaliSodelujoci'),
+            name: i18next.t('produkcija.uprizoritev.ostaliSodelujoci'),
             event: 'tehniki'
         }
     ];
@@ -63,13 +63,13 @@ define([
 
     UprizoritevEditView.prototype.getNaslovUprizoritve = function () {
         var naslovT = this.model.get('naslov');
-        var naslov = naslovT || i18next.t('produkcija.view.uprizoritev.naslov');
+        var naslov = naslovT || i18next.t('produkcija.uprizoritev.naslov');
         return naslov;
     };
 
     UprizoritevEditView.prototype.getNaslov = function () {
         return this.isNew() ?
-                i18next.t('produkcija.view.uprizoritev.nova') : this.getNaslovUprizoritve();
+                i18next.t('produkcija.uprizoritev.nova') : this.getNaslovUprizoritve();
     };
 
     UprizoritevEditView.prototype.onBeforeRender = function () {
@@ -185,7 +185,7 @@ define([
         if (c.length === 0) {
             c.fetch();
         }
-        this.renderFunkcije(c, 'uprizoritev.view.umetniki', 'umetniki');
+        this.renderFunkcije(c, 'uprizoritev.umetniki', 'umetniki');
 
     };
 
@@ -198,7 +198,7 @@ define([
         if (c.length === 0) {
             c.fetch();
         }
-        this.renderFunkcije(c, 'uprizoritev.view.igralci', 'igralci');
+        this.renderFunkcije(c, 'uprizoritev.igralci', 'igralci');
     };
 
     /**
@@ -212,7 +212,7 @@ define([
         if (c.length === 0) {
             c.fetch();
         }
-        this.renderFunkcije(c,'uprizoritev.view.tehniki', 'tehniki');
+        this.renderFunkcije(c,'uprizoritev.tehniki', 'tehniki');
     };
 
     return UprizoritevEditView;

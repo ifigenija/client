@@ -30,26 +30,26 @@ console.log(sch);
         schema: sch,
         name: '',
         detailName: '',
-        formTitle: i18next.t('produkcija.view.funkcija.title'),
+        formTitle: i18next.t('produkcija.funkcija.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.funkcija.naziv'),
+                label: i18next.t('produkcija.funkcija.naziv'),
                 name: 'naziv',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.funkcija.velikost'),
+                label: i18next.t('produkcija.funkcija.velikost'),
                 name: 'velikost',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.funkcija.pomembna'),
+                label: i18next.t('produkcija.funkcija.pomembna'),
                 name: 'pomembna',
                 sortable: false
             },
@@ -58,8 +58,8 @@ console.log(sch);
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.uredi')}
                 ]
             }
         ]

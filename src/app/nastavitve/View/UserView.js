@@ -33,33 +33,33 @@ define([
             naslovR: '.seznam-naslov',
             rolesR: '.seznam-roles'
         },
-        title: i18next.t('admin.view.user.title'),
+        title: i18next.t('admin.user.title'),
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.view.user.naziv'),
+                label: i18next.t('admin.user.naziv'),
                 name: 'name',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.view.email'),
+                label: i18next.t('admin.email'),
                 name: 'email',
                 sortable: true
             },
             {
                 cell: 'date',
                 editable: false,
-                label: i18next.t('admin.view.user.veljavnost'),
+                label: i18next.t('admin.user.veljavnost'),
                 name: 'expires',
                 sortable: false
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('admin.view.user.aktiven'),
+                label: i18next.t('admin.user.aktiven'),
                 name: 'enabled',
                 sortable: false
             },
@@ -68,7 +68,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.view.brisi')}
+                    {event: 'brisi', title: i18next.t('std.brisi')}
                 ]
             }
         ]
@@ -80,7 +80,7 @@ define([
     };
 
     UserView.prototype.getTitle = function (model) {
-        var text = i18next.t("admin.view.user.nova");
+        var text = i18next.t("admin.user.nova");
 
         if (model.get('id')) {
             text = model.get('name') || i18next.t("xx.Dovoljenje");
@@ -125,7 +125,7 @@ define([
             ownerId: model.get('id'),
             relation: 'roles',
             lookup: 'role',
-            title: i18next.t("admin.view.role.title")
+            title: i18next.t("admin.role.title")
         });
         this.rolesR.show(rv);
     };

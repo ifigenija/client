@@ -24,27 +24,27 @@
             "roles": "Vloge",
             "permission": "Dovoljenja"
         },
-        "view": {
+        "std": {
             "description": "Opis",
-            "builtin": "Vgrajena",
-            "role": {
-                "title": "Vloga",
-                "nova": "Nova vloga",
-                "name": "Vloga"
-            },
-            "permission": {
-                "title": "Dovoljenja",
-                "nova": "Novo dovoljenje",
-                "name": "Dovoljenje"
-            },
-            "user": {
-                "title": "Uporabniki",
-                "nova": "Nov uporabnik",
-                "naziv": "Naziv",
-                "email": "E-pošta",
-                "veljavnost": "Poteče veljavnost",
-                "privzetaStran": "Privzeta stran"
-            }
+            "builtin": "Vgrajena"
+        },
+        "role": {
+            "title": "Vloga",
+            "nova": "Nova vloga",
+            "name": "Vloga"
+        },
+        "permission": {
+            "title": "Dovoljenja",
+            "nova": "Novo dovoljenje",
+            "name": "Dovoljenje"
+        },
+        "user": {
+            "title": "Uporabniki",
+            "nova": "Nov uporabnik",
+            "naziv": "Naziv",
+            "email": "E-pošta",
+            "veljavnost": "Poteče veljavnost",
+            "privzetaStran": "Privzeta stran"
         }
     },
     "koledar": {
@@ -75,48 +75,46 @@
             "label": "Produkcija",
             "oseba": "Osebe",
             "uprizoritev": "Uprizoritve",
-            "strosek" : "Stroškovnik"
+            "strosek": "Stroškovnik"
         },
-        "view": {
-            "zaposlitev": {
-                "zaposlitve": "Zaposlitve",
-                "title": "Zaposlitve",
-                "nova": "Nova zaposlitev",
-                "status": "Status",
-                "zacetek": "Začetek",
-                "konec": "Konec",
-                "tip": "Tip"
-            },
-            "uprizoritev": {
-                "title": "Uprizoritev",
-                "funkcije": "Funkcije",
-                "arhivalije": "Arhivalije",
-                "naslov": "Naslov",
-                "delovniNaslov": "Delovni naslov",
-                "faza": "Faza",
-                "datumPremiere": "Datum premiere",
-                "nova": "Nova uprizoritev",
-                "umetniskeEkipe": "Umetniška Ekipa",
-                "nastopajoci": "Nastopajoči",
-                "ostaliSodelujoci": "Ostali sodelujoči",
-                "koprodukcija": "Koprodukcija"
-            },
-            "arhivalija": {
-                "title": "Arhivalija",
-                "nova": "Nova arhivalija",
-                "naslov": "Naslov",
-                "lokacijaOriginala": "Lokacija originala",
-                "objavljeno": "Objavljeno",
-                "datum": "Datum"
-            },
-            "funkcija": {
-                "title": "Funkcija",
-                "nova": "Nova funkcija",
-                "podrocje": "Podrocje",
-                "naziv": "Naziv",
-                "velikost": "Velikost",
-                "pomembna": "Pomembna"
-            }
+        "zaposlitev": {
+            "zaposlitve": "Zaposlitve",
+            "title": "Zaposlitve",
+            "nova": "Nova zaposlitev",
+            "status": "Status",
+            "zacetek": "Začetek",
+            "konec": "Konec",
+            "tip": "Tip"
+        },
+        "uprizoritev": {
+            "title": "Uprizoritev",
+            "funkcije": "Funkcije",
+            "arhivalije": "Arhivalije",
+            "naslov": "Naslov",
+            "delovniNaslov": "Delovni naslov",
+            "faza": "Faza",
+            "datumPremiere": "Datum premiere",
+            "nova": "Nova uprizoritev",
+            "umetniskeEkipe": "Umetniška Ekipa",
+            "nastopajoci": "Nastopajoči",
+            "ostaliSodelujoci": "Ostali sodelujoči",
+            "koprodukcija": "Koprodukcija"
+        },
+        "arhivalija": {
+            "title": "Arhivalija",
+            "nova": "Nova arhivalija",
+            "naslov": "Naslov",
+            "lokacijaOriginala": "Lokacija originala",
+            "objavljeno": "Objavljeno",
+            "datum": "Datum"
+        },
+        "funkcija": {
+            "title": "Funkcija",
+            "nova": "Nova funkcija",
+            "podrocje": "Podrocje",
+            "naziv": "Naziv",
+            "velikost": "Velikost",
+            "pomembna": "Pomembna"
         }
     },
     "seznami": {
@@ -134,7 +132,8 @@
             "besedilo": "Besedila",
             "abonma": "Abonmaji"
         },
-        "view": {
+        "std": {
+            "dodaj": "Dodaj",
             "brisi": "Briši",
             "uredi": "Uredi",
             "splosno": "Splošno",
@@ -143,129 +142,117 @@
             "sifra": "Šifra",
             "ime": "Ime",
             "opis": "Opis",
-            "std": {
-                "dodaj": "Dodaj"
-            },
-            "oseba": {
-                "title": "Osebe",
-                "nova": "Nova oseba",
-                "kontakti": "Kontakti",
-                "racuni": "Računi",
-                "osebniPodatki": "Osebni podatki",
-                "ime": "Ime",
-                "funkcija": "Funkcija",
-                "priimek": "Priimek",
-                "psevdonim": "Psevdonim",
-                "uporabnik": "Uporabnik"
-            },
-            "popa": {
-                "title": "Poslovni partnerji",
-                "nova": "Nov poslovni partner",
-                "panoga": "Panoga",
-                "url": "Spletna stran",
-                "kontakti": "Kontakti",
-                "racuni": "Računi",
-                "osebe": "Kontaktne osebe"
-            },
-            "uporabnik": {
-                "title": "Uporabniki",
-                "nova": "Nov uporabnik",
-                "vloge": "Vloge",
-                "veljavnost": "Poteče veljavnost",
-                "privzetaStran": "Privzeta stran"
-            },
-            "vloga": {
-                "title": "Vloge",
-                "nova": "Nova Vloga",
-                "dovoljenja": "Dovoljenja"
-            },
-            "drzava": {
-                "title": "Države",
-                "nova": "Nova država",
-                "isoNum": "Številčna koda",
-                "isoNaziv": "Iso naziv"
-            },
-            "posta": {
-                "title": "Pošte",
-                "nova": "Nova pošta"
-            },
-            "zvrstSurs": {
-                "title": "Zvrsti SURS",
-                "nova": "Nova zvrst SURS",
-                "isoSifra": "Iso šifra",
-                "isoNaziv": "Iso naziv"
-            },
-            "tipFunkcije": {
-                "nova": "Nov tip funkcije",
-                "title": "Tipi funkcij",
-                "imeZenski": "Ženska oblika",
-                "podrocje": "Področje"
-            },
-            "zvrstUprizoritve": {
-                "nova": "Nova zvrst uprizoritve",
-                "title": "Zvrsti uprizoritev"
-            },
-            "postniNaslov": {
-                "title": "Naslovi",
-                "naziv": "Naziv",
-                "ulica": "Ulica",
-                "posta": "Pošta",
-                "drzava": "Država"
+            "kontakti": "Kontakti",
+            "funkcija": "Funkcija"
+        },
+        "oseba": {
+            "title": "Osebe",
+            "nova": "Nova oseba",
+            "racuni": "Računi",
+            "osebniPodatki": "Osebni podatki",
+            "priimek": "Priimek",
+            "psevdonim": "Psevdonim",
+            "uporabnik": "Uporabnik"
+        },
+        "popa": {
+            "title": "Poslovni partnerji",
+            "nova": "Nov poslovni partner",
+            "panoga": "Panoga",
+            "url": "Spletna stran",
+            "racuni": "Računi",
+            "osebe": "Kontaktne osebe"
+        },
+        "uporabnik": {
+            "title": "Uporabniki",
+            "nova": "Nov uporabnik",
+            "vloge": "Vloge",
+            "veljavnost": "Poteče veljavnost",
+            "privzetaStran": "Privzeta stran"
+        },
+        "vloga": {
+            "title": "Vloge",
+            "nova": "Nova Vloga",
+            "dovoljenja": "Dovoljenja"
+        },
+        "drzava": {
+            "title": "Države",
+            "nova": "Nova država",
+            "isoNum": "Številčna koda",
+            "isoNaziv": "Iso naziv"
+        },
+        "posta": {
+            "title": "Pošte",
+            "nova": "Nova pošta"
+        },
+        "zvrstSurs": {
+            "title": "Zvrsti SURS",
+            "nova": "Nova zvrst SURS",
+            "isoSifra": "Iso šifra",
+            "isoNaziv": "Iso naziv"
+        },
+        "tipFunkcije": {
+            "nova": "Nov tip funkcije",
+            "title": "Tipi funkcij",
+            "imeZenski": "Ženska oblika",
+            "podrocje": "Področje"
+        },
+        "zvrstUprizoritve": {
+            "nova": "Nova zvrst uprizoritve",
+            "title": "Zvrsti uprizoritev"
+        },
+        "postniNaslov": {
+            "title": "Naslovi",
+            "naziv": "Naziv",
+            "ulica": "Ulica",
+            "posta": "Pošta",
+            "drzava": "Država"
 
-            },
-            "telefonska": {
-                "title": "Telefonske",
-                "vrsta": "Vrsta",
-                "stevilka": "Številka",
-                "privzeta": "Privzeta"
+        },
+        "telefonska": {
+            "title": "Telefonske",
+            "vrsta": "Vrsta",
+            "stevilka": "Številka",
+            "privzeta": "Privzeta"
 
-            },
-            "trr": {
-                "title": "TRR",
-                "banka": "Banka",
-                "stevilka": "Številka",
-                "swift": "Swift",
-                "bic": "Bic"
-            },
-            "besedilo": {
-                "title": "Besedila",
-                "nova": "Novo besedilo",
-                "naslov": "Naslov",
-                "avtor": "Avtor",
-                "naslovIzvirnika": "Naslov Izvirnika",
-                "prevajalec": "Prevajalec",
-                "stevilka": "Številka",
-                "datumPrejema": "Datum prejema"
-            },
-            "abonma": {
-                "title": "Abonmaji",
-                "nova": "Nov Abonma",
-                "ime": "Ime",
-                "stPredstav": "Št. predstav",
-                "stKuponov": "Št. kuponov",
-                "kapaciteta": "Kapaciteta",
-                "opis": "Opis"
-            },
-            "prostor": {
-                "title": "Prostori",
-                "nova": "Nov prostor",
-                "sifra": "Šifra",
-                "naziv": "Naziv",
-                "jePrizorisce": "Je prizorišče",
-                "kapaciteta": "Kapaciteta",
-                "opis": "Opis"
-            },
-            "kontaktna": {
-                "title": "Kontaktne osebe",
-                "nova": "Nova kontaktna oseba",
-                "funkcija": "Funkcija",
-                "status": "Status",
-                "jePrizorisce": "Je prizorišče",
-                "kapaciteta": "Kapaciteta",
-                "opis": "Opis"
-            }
-
+        },
+        "trr": {
+            "title": "TRR",
+            "banka": "Banka",
+            "stevilka": "Številka",
+            "swift": "Swift",
+            "bic": "Bic"
+        },
+        "besedilo": {
+            "title": "Besedila",
+            "nova": "Novo besedilo",
+            "naslov": "Naslov",
+            "avtor": "Avtor",
+            "naslovIzvirnika": "Naslov Izvirnika",
+            "prevajalec": "Prevajalec",
+            "stevilka": "Številka",
+            "datumPrejema": "Datum prejema"
+        },
+        "abonma": {
+            "title": "Abonmaji",
+            "nova": "Nov Abonma",
+            "stPredstav": "Št. predstav",
+            "stKuponov": "Št. kuponov",
+            "kapaciteta": "Kapaciteta"
+        },
+        "prostor": {
+            "title": "Prostori",
+            "nova": "Nov prostor",
+            "jePrizorisce": "Je prizorišče",
+            "kapaciteta": "Kapaciteta"
+        },
+        "kontaktna": {
+            "title": "Kontaktne osebe",
+            "nova": "Nova kontaktna oseba",
+            "status": "Status",
+            "jePrizorisce": "Je prizorišče",
+            "kapaciteta": "Kapaciteta"
         }
+
     },
     "flashManager": {
         "messages": "Obvestila"

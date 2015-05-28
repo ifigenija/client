@@ -18,33 +18,33 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'naslovi',
         name: 'PostniNaslov',
-        formTitle: i18next.t('seznami.view.postniNaslov.title'),
+        formTitle: i18next.t('seznami.postniNaslov.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.postniNaslov.naziv'),
+                label: i18next.t('seznami.postniNaslov.naziv'),
                 name: 'naziv',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.postniNaslov.ulica'),
+                label: i18next.t('seznami.postniNaslov.ulica'),
                 name: 'ulica',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.postniNaslov.posta'),
+                label: i18next.t('seznami.postniNaslov.posta'),
                 name: 'posta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.postniNaslov.drzava'),
+                label: i18next.t('seznami.postniNaslov.drzava'),
                 name: 'drzava.label',
                 sortable: true
             },
@@ -53,8 +53,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.uredi')}
                 ]
             }
         ]

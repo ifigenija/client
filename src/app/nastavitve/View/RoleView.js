@@ -30,7 +30,7 @@ define([
 
     var RoleView = SeznamiView.extend({
         url: baseUrl + '/rest/role',
-        title: i18next.t('admin.view.role.title'),
+        title: i18next.t('admin.role.title'),
         schema: schema,
         formTemplate: formTpl,
         template: permTpl,
@@ -42,26 +42,26 @@ define([
             permsR: '.seznam-perms',
             usersR: '.seznam-users'
         },
-        dodaj: i18next.t('admin.view.role.dodaj'),
+        dodaj: i18next.t('admin.role.dodaj'),
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.view.role.name'),
+                label: i18next.t('admin.role.name'),
                 name: 'name',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.view.description'),
+                label: i18next.t('admin.description'),
                 name: 'description',
                 sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('admin.view.builtin'),
+                label: i18next.t('admin.builtin'),
                 name: 'builtIn',
                 sortable: true
             },
@@ -70,14 +70,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('admin.view.brisi')}
+                    {event: 'brisi', title: i18next.t('admin.brisi')}
                 ]
             }
         ]
     });
 
     RoleView.prototype.getTitle = function (model) {
-        var text = i18next.t("admin.view.role.nova");
+        var text = i18next.t("admin.role.nova");
 
         if (model.get('id')) {
             text = model.get('name') || i18next.t("xx.Dovoljenje");
@@ -133,7 +133,7 @@ define([
             ownerId: model.get('id'),
             relation: 'permissions',
             lookup: 'permission',
-            title: i18next.t("admin.view.permission.title")
+            title: i18next.t("admin.permission.title")
         });
         this.permsR.show(rv);
     };
@@ -148,7 +148,7 @@ define([
             relation: 'users',
             lookup: 'user',
             type: 'lookup',
-            title: i18next.t("admin.view.user.title")
+            title: i18next.t("admin.user.title")
         });
         this.usersR.show(rv);
     };

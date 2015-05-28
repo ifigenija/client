@@ -19,35 +19,35 @@ define([
 
     var TipFunkcijeView = SeznamiView.extend({
         url: baseUrl + '/rest/tipFunkcije',
-        title: i18next.t('seznami.view.tipFunkcije.title'),
+        title: i18next.t('seznami.tipFunkcije.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.ime'),
+                label: i18next.t('seznami.std.ime'),
                 name: 'ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.tipFunkcije.imeZenski'),
+                label: i18next.t('seznami.tipFunkcije.imeZenski'),
                 name: 'imeZenski',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.opis'),
+                label: i18next.t('seznami.std.opis'),
                 name: 'opis',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.tipFunkcije.podrocje'),
+                label: i18next.t('seznami.tipFunkcije.podrocje'),
                 name: 'podrocje',
                 sortable: false
             },
@@ -56,14 +56,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')}
                 ]
             }
         ]
     });
     
     TipFunkcijeView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.view.tipFunkcije.nova");
+        var text = i18next.t("seznami.tipFunkcije.nova");
 
         if (model.get('id')) {
             text = model.get('ime') || "Ime";

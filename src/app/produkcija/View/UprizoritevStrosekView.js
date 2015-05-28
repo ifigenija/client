@@ -17,33 +17,33 @@ define([
 
     var UprizoritevStrosekView = SeznamiView.extend({
         url: baseUrl + '/rest/uprizoritev/vse',
-        title: i18next.t('produkcija.view.uprizoritev.title'),
+        title: i18next.t('produkcija.uprizoritev.title'),
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.uprizoritev.faza'),
+                label: i18next.t('produkcija.uprizoritev.faza'),
                 name: 'faza',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.uprizoritev.naslov'),
+                label: i18next.t('produkcija.uprizoritev.naslov'),
                 name: 'naslov',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.uprizoritev.delovniNaslov'),
+                label: i18next.t('produkcija.uprizoritev.delovniNaslov'),
                 name: 'delovniNaslov',
                 sortable: true
             },
             {
                 cell: 'date',
                 editable: false,
-                label: i18next.t('produkcija.view.uprizoritev.datumPremiere'),
+                label: i18next.t('produkcija.uprizoritev.datumPremiere'),
                 name: 'datumPremiere',
                 sortable: true
             },
@@ -52,8 +52,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.uredi')}
                 ]
             }
         ]

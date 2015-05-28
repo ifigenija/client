@@ -18,33 +18,33 @@ define([
         schema: schema.toFormSchema().schema,
         name: 'Trr',
         detailName: 'trrji',
-        formTitle: i18next.t('seznami.view.trr.title'),
+        formTitle: i18next.t('seznami.trr.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.banka'),
+                label: i18next.t('seznami.trr.banka'),
                 name: 'banka',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.stevilka'),
+                label: i18next.t('seznami.trr.stevilka'),
                 name: 'stevilka',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.swift'),
+                label: i18next.t('seznami.trr.swift'),
                 name: 'swift',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.trr.bic'),
+                label: i18next.t('seznami.trr.bic'),
                 name: 'bic',
                 sortable: false
             },
@@ -53,8 +53,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.uredi')}
                 ]
             }
         ]

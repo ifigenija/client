@@ -16,42 +16,42 @@ define([
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        title: i18next.t('seznami.view.alternacija.title'),
+        title: i18next.t('seznami.alternacija.title'),
         detailName: 'alternacije',
-        formTitle: i18next.t('seznami.view.alternacija.title'),
+        formTitle: i18next.t('seznami.alternacija.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.alternacija.ime'),
+                label: i18next.t('seznami.alternacija.ime'),
                 name: 'ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.alternacija.stPredstav'),
+                label: i18next.t('seznami.alternacija.stPredstav'),
                 name: 'stPredstav',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.alternacija.stKuponov'),
+                label: i18next.t('seznami.alternacija.stKuponov'),
                 name: 'stKuponov',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.alternacija.kapaciteta'),
+                label: i18next.t('seznami.alternacija.kapaciteta'),
                 name: 'kapaciteta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.view.alternacija.opis'),
+                label: i18next.t('seznami.alternacija.opis'),
                 name: 'opis',
                 sortable: true
             },
@@ -60,7 +60,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')}
                 ]
             }
         ]

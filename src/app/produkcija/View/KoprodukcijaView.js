@@ -20,35 +20,35 @@ define([
     var KoprodukcijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: i18next.t('uprizoritve.view.koprodukcija'),
+        name: i18next.t('uprizoritve.koprodukcija'),
         detailName: 'koprodukcije',
-        formTitle: i18next.t('produkcija.view.koprodukcija.title'),
+        formTitle: i18next.t('produkcija.koprodukcija.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.koprodukcija.podrocje'),
+                label: i18next.t('produkcija.koprodukcija.podrocje'),
                 name: 'podrocje',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.koprodukcija.naziv'),
+                label: i18next.t('produkcija.koprodukcija.naziv'),
                 name: 'naziv',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.koprodukcija.velikost'),
+                label: i18next.t('produkcija.koprodukcija.velikost'),
                 name: 'velikost',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.koprodukcija.pomembna'),
+                label: i18next.t('produkcija.koprodukcija.pomembna'),
                 name: 'pomembna',
                 sortable: false
             },
@@ -57,8 +57,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('seznami.view.brisi')},
-                    {event: 'uredi', title: i18next.t('seznami.view.uredi')}
+                    {event: 'brisi', title: i18next.t('seznami.brisi')},
+                    {event: 'uredi', title: i18next.t('seznami.uredi')}
                 ]
             }
         ]
