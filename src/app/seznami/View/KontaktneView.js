@@ -37,7 +37,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.oseba.ime'),
+                label: i18next.t('seznami.std.ime'),
                 name: 'oseba.ime',
                 sortable: true
             },

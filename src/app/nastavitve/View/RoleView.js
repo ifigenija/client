@@ -54,14 +54,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.description'),
+                label: i18next.t('admin.std.description'),
                 name: 'description',
                 sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('admin.builtin'),
+                label: i18next.t('admin.std.builtin'),
                 name: 'builtIn',
                 sortable: true
             },

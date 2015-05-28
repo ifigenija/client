@@ -16,42 +16,42 @@ define([
     var StrosekView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        title: i18next.t('seznami.strosek.title'),
+        title: i18next.t('produkcija.strosek.title'),
         detailName: 'stroski',
-        formTitle: i18next.t('seznami.strosek.title'),
+        formTitle: i18next.t('produkcija.strosek.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.strosek.ime'),
-                name: 'ime',
+                label: i18next.t('produkcija.strosek.naziv'),
+                name: 'naziv',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.strosek.stPredstav'),
-                name: 'stPredstav',
+                label: i18next.t('produkcija.strosek.vrednostDo'),
+                name: 'vrednostDo',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.strosek.stKuponov'),
-                name: 'stKuponov',
+                label: i18next.t('produkcija.strosek.vrednostNa'),
+                name: 'vrednostNa',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.strosek.kapaciteta'),
-                name: 'kapaciteta',
+                label: i18next.t('produkcija.strosek.popa'),
+                name: 'popa',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.strosek.opis'),
+                label: i18next.t('produkcija.strosek.opis'),
                 name: 'opis',
                 sortable: true
             },

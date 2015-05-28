@@ -44,7 +44,8 @@
             "naziv": "Naziv",
             "email": "E-pošta",
             "veljavnost": "Poteče veljavnost",
-            "privzetaStran": "Privzeta stran"
+            "privzetaStran": "Privzeta stran",
+            "aktiven": "Aktiven"
         }
     },
     "koledar": {
@@ -80,6 +81,18 @@
         "std": {
             "splosno": "Splošno"
         },
+        "strosek":{
+            "alternacije":"Alternacije",
+            "pogodbe":"Pogodbe",
+            "koprodukcije":"Koprodukcije",
+            "stroski":"Stroški",
+            "title":"Stroški uprizoritve",
+            "naziv":"Naziv",
+            "vrednostDo":"Vrednost do",
+            "vrednostNa":"Vrednost na",
+            "opis":"Opis",
+            "popa":"Poslovni partner"
+        },
         "zaposlitev": {
             "zaposlitve": "Zaposlitve",
             "title": "Zaposlitve",
@@ -101,7 +114,8 @@
             "umetniskeEkipe": "Umetniška Ekipa",
             "nastopajoci": "Nastopajoči",
             "ostaliSodelujoci": "Ostali sodelujoči",
-            "koprodukcija": "Koprodukcija"
+            "koprodukcija": "Koprodukcija",
+            "zvrst": "Zvrst"
         },
         "arhivalija": {
             "title": "Arhivalija",
@@ -117,7 +131,48 @@
             "podrocje": "Podrocje",
             "naziv": "Naziv",
             "velikost": "Velikost",
-            "pomembna": "Pomembna"
+            "pomembna": "Pomembna",
+            "sort": "Sort",
+            "tipFunkcije": "Tip funkcije",
+            "sePlanira": "Se planira"
+        },
+        "funkcija": {
+            "title": "Funkcija",
+            "nova": "Nova funkcija",
+            "podrocje": "Podrocje",
+            "naziv": "Naziv",
+            "velikost": "Velikost",
+            "pomembna": "Pomembna",
+            "sort": "Sort",
+            "tipFunkcije": "Tip funkcije",
+            "sePlanira": "Se planira"
+        },
+        "alternacija": {
+            "title": "Alternacija",
+            "nova": "Nova alternacija",
+            "oseba": "Oseba",
+            "funkcija": "Funkcija",
+            "zaposlen": "Zaposlen",
+            "pogodba": "Pogodba"
+            
+        },
+        "pogodba": {
+            "title": "Pogodba",
+            "nova": "Nova pogodba",
+            "sifra": "Šifra",
+            "vrednostVaje": "Vrednost vaje",
+            "vrednostPredstave": "Vrednost predstave",
+            "vrednostUre": "Vrednost ure",
+            "opis": "Opis"
+            
+        },
+        "koprodukcija": {
+            "title": "Koprodukcija",
+            "koproducent": "Koproducent",
+            "avtorski": "Avtorski",
+            "tantieme": "Tantieme",
+            "lastnaSredstva": "Lastna sredstva",
+            "skupniStrosek": "Skupni strosek"
         }
     },
     "seznami": {

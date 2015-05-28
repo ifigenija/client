@@ -16,44 +16,44 @@ define([
     var PogodbaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        title: i18next.t('seznami.pogodba.title'),
+        title: i18next.t('produkcija.pogodba.title'),
         detailName: 'alternacije',
-        formTitle: i18next.t('seznami.pogodba.title'),
+        formTitle: i18next.t('produkcija.pogodba.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.pogodba.ime'),
-                name: 'ime',
+                label: i18next.t('produkcija.pogodba.sifra'),
+                name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.pogodba.stPredstav'),
-                name: 'stPredstav',
+                label: i18next.t('produkcija.pogodba.vrednostVaje'),
+                name: 'vrednostVaje',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.pogodba.stKuponov'),
-                name: 'stKuponov',
+                label: i18next.t('produkcija.pogodba.vrednostPredstave'),
+                name: 'vrednostPredstave',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.pogodba.kapaciteta'),
-                name: 'kapaciteta',
+                label: i18next.t('produkcija.pogodba.vrednostUre'),
+                name: 'vrednostUre',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.pogodba.opis'),
+                label: i18next.t('produkcija.pogodba.opis'),
                 name: 'opis',
-                sortable: true
+                sortable: false
             },
             {
                 cell: 'action',

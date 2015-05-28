@@ -36,7 +36,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.uprizoritev.zvrst'),
+                label: i18next.t('produkcija.uprizoritev.zvrst'),
                 name: 'zvrstUprizoritve.ime',
                 sortable: true
             },
@@ -50,7 +50,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.view.uprizoritev.faza'),
+                label: i18next.t('produkcija.uprizoritev.faza'),
                 name: 'faza',
                 sortable: true
             },

@@ -45,7 +45,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.email'),
+                label: i18next.t('admin.user.email'),
                 name: 'email',
                 sortable: true
             },

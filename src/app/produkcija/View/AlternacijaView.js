@@ -23,37 +23,30 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.alternacija.ime'),
-                name: 'ime',
+                label: i18next.t('produkcija.alternacija.oseba'),
+                name: 'oseba',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.alternacija.stPredstav'),
-                name: 'stPredstav',
+                label: i18next.t('produkcija.alternacija.funkcija'),
+                name: 'funkcija',
                 sortable: true
+            },
+            {
+                cell: 'boolean',
+                editable: false,
+                label: i18next.t('produkcija.alternacija.zaposlen'),
+                name: 'zaposlen',
+                sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.alternacija.stKuponov'),
-                name: 'stKuponov',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('produkcija.alternacija.kapaciteta'),
-                name: 'kapaciteta',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('produkcija.alternacija.opis'),
-                name: 'opis',
-                sortable: true
+                label: i18next.t('produkcija.alternacija.pogodba'),
+                name: 'pogodba',
+                sortable: false
             },
             {
                 cell: 'action',

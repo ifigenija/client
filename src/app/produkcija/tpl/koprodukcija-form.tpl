@@ -1,7 +1,8 @@
 <form>
     <div class="row">
-        <div class="col-sm-4" data-fields="odstotekFinanciranja,uprizoritev,koproducent"></div>
-        <div class="col-sm-4" data-fields="avtorskih,tantiemi,skupniStrosek,zaprosenProcent"></div>
-        <div class="col-sm-4" data-fields="nasStrosek,lastnaSredstva,zaproseno,drugiJavni"></div>
+        <div class="col-sm-6 col-lg-4" data-fields="koproducent,odstotekFinanciranja,zaprosenProcent,zaproseno"></div>
+        <div class="col-sm-6 col-lg-4" data-fields="lastnaSredstva,drugiJavni,skupniStrosek"></div>
+        <div class="col-sm-6 col-lg-4" data-fields="avtorskih,tantiemi,nasStrosek"></div>
+
     </div>
 </form>

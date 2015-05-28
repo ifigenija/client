@@ -52,7 +52,7 @@ define([
             {
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.view.funkcija.sort'),
+                label: i18next.t('produkcija.funkcija.sort'),
                 name: 'sort',
                 sortable: true
             },
@@ -143,7 +143,7 @@ define([
         var rv = new AlterSelectView({
             collection: c,
             funkcija: this.model,
-            title: i18next.t("produkcija.view.funkcija.title"),
+            title: i18next.t("produkcija.funkcija.title"),
             type: "lookup",
             lookup: "oseba"
 

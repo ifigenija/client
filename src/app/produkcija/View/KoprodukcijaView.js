@@ -27,30 +27,37 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.podrocje'),
-                name: 'podrocje',
-                sortable: false
+                label: i18next.t('produkcija.koprodukcija.koproducent'),
+                name: 'koproducent',
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.naziv'),
-                name: 'naziv',
-                sortable: false
+                label: i18next.t('produkcija.koprodukcija.avtorski'),
+                name: 'avtorski',
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.velikost'),
-                name: 'velikost',
-                sortable: false
+                label: i18next.t('produkcija.koprodukcija.tantieme'),
+                name: 'tantieme',
+                sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.pomembna'),
-                name: 'pomembna',
-                sortable: false
+                label: i18next.t('produkcija.koprodukcija.lastnaSredstva'),
+                name: 'lastnaSredstva',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('produkcija.koprodukcija.skupniStrosek'),
+                name: 'skupniStrosek',
+                sortable: true
             },
             {
                 cell: 'action',

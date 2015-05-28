@@ -35,19 +35,19 @@ define([
             event: 'splosni'
         },
         {
-            name: i18next.t('produkcija.uprizoritev.alternacije'),
+            name: i18next.t('produkcija.strosek.alternacije'),
             event: 'alternacije'
         },
         {
-            name: i18next.t('produkcija.uprizoritev.pogodbe'),
+            name: i18next.t('produkcija.strosek.pogodbe'),
             event: 'pogodbe'
         },
         {
-            name: i18next.t('produkcija.uprizoritev.koprodukcije'),
+            name: i18next.t('produkcija.strosek.koprodukcije'),
             event: 'koprodukcije'
         },
         {
-            name: i18next.t('produkcija.uprizoritev.stroski'),
+            name: i18next.t('produkcija.strosek.stroski'),
             event: 'stroski'
         }
     ];
