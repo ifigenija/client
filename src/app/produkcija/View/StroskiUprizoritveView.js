@@ -74,7 +74,7 @@ define([
 
     UprizoritevStrosekEditView.prototype.initialize = function (options) {
         var self = this;
-        this.listenTo(this.model, 'sync', function (coll) {
+        this.listenTo(this.model, 'sync', function () {
             self.render();
         });
     };

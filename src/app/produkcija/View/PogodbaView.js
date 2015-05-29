@@ -17,7 +17,7 @@ define([
 
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
-    });
+    });    
 
     var PogodbaView = PostavkeView.extend({
         formTemplate: formTpl,
@@ -34,12 +34,27 @@ define([
                 sortable: true
             },
             {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('produkcija.pogodba.popa'),
+                name: 'popa',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('produkcija.pogodba.oseba'),
+                name: 'oseba',
+                sortable: true
+            },
+            {
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
                 label: i18next.t('produkcija.pogodba.vrednostVaje'),
                 name: 'vrednostVaje',
-                sortable: true
+                sortable: true,
+                total: 'sum'
             },
             {
                 headerCell: hc,
@@ -47,7 +62,9 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.pogodba.vrednostPredstave'),
                 name: 'vrednostPredstave',
-                sortable: true
+                sortable: true,
+                total: 'sum'
+                
             },
             {
                 headerCell: hc,
@@ -55,7 +72,9 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.pogodba.vrednostUre'),
                 name: 'vrednostUre',
-                sortable: true
+                sortable: true,
+                total: 'sum'
+                
             },
             {
                 cell: 'string',

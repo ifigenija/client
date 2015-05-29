@@ -36,7 +36,8 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.koprodukcija.skupniStrosek'),
                 name: 'skupniStrosek',
-                sortable: true
+                sortable: true,
+                total: 'sum'
             },
             {
                 headerCell: hc,
@@ -44,7 +45,8 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.koprodukcija.zaproseno'),
                 name: 'zaproseno',
-                sortable: true
+                sortable: true,
+                total: 'sum'
             },
             {
                 headerCell: hc,
@@ -60,7 +62,8 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.koprodukcija.lastnaSredstva'),
                 name: 'lastnaSredstva',
-                sortable: true
+                sortable: true,
+                total: 'sum'
             },
             {
                 headerCell: hc,
@@ -68,7 +71,8 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.koprodukcija.drugiJavni'),
                 name: 'drugijavni',
-                sortable: true
+                sortable: true,
+                total: 'sum'
             },
             {
                 headerCell: hc,
@@ -76,7 +80,8 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.koprodukcija.avtorski'),
                 name: 'avtorski',
-                sortable: true
+                sortable: true,
+                total: 'sum'
             },
             {
                 headerCell: hc,
@@ -84,7 +89,8 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.koprodukcija.tantieme'),
                 name: 'tantieme',
-                sortable: true
+                sortable: true,
+                total: 'sum'
             },
             {
                 cell: 'action',

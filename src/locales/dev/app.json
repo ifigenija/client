@@ -166,7 +166,9 @@
             "vrednostVaje": "Vrednost vaje",
             "vrednostPredstave": "Vrednost predstave",
             "vrednostUre": "Vrednost ure",
-            "opis": "Opis"
+            "opis": "Opis",
+            "popa": "Poslovni partner",
+            "oseba": "Oseba"
             
         },
         "koprodukcija": {
