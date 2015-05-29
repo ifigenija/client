@@ -10,6 +10,7 @@ define([
     'app/Max/Module/Backgrid',
     'template!../tpl/seznam.html',
     'app/Max/Model/MaxPageableCollection',
+    'backbone',
     'app/Max/View/Toolbar',
     'i18next'
 ], function (
@@ -21,6 +22,7 @@ define([
         Backgrid,
         seznamTpl,
         Coll,
+        Backbone,
         Toolbar,
         i18next
         ) {
@@ -69,7 +71,8 @@ define([
     };
 
     SeznamiView.prototype.getCollection = function () {
-        var coll = new Coll();
+        var C = Coll.extend({model: Backbone.DeepModel});
+        var coll = new C();
         coll.url = this.url;
         return coll;
     };

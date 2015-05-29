@@ -6,7 +6,7 @@ define([
     'template!../tpl/pogodba-form.tpl',
     'formSchema!pogodba',
     'i18next',
-    'backgrid'
+    'app/Max/Module/Backgrid'
 ], function (
         PostavkeView,
         formTpl,
@@ -14,10 +14,10 @@ define([
         i18next,
         Backgrid
         ) {
-    
+
     var hc = Backgrid.HeaderCell.extend({
-            className: 'backgrid-kolona-stevilk'
-        });
+        className: 'backgrid-kolona-stevilk'
+    });
 
     var PogodbaView = PostavkeView.extend({
         formTemplate: formTpl,

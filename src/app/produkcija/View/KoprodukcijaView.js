@@ -6,7 +6,7 @@ define([
     'template!../tpl/koprodukcija-form.tpl',
     'formSchema!produkcijaDelitev',
     'i18next',
-    'backgrid'
+    'app/Max/Module/Backgrid'
 ], function (
         PostavkeView,
         formTpl,
@@ -16,8 +16,8 @@ define([
         ) {
     
     var hc = Backgrid.HeaderCell.extend({
-            className: 'backgrid-kolona-stevilk'
-        });
+        className: 'backgrid-kolona-stevilk'
+    });
 
     /**
      * 

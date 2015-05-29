@@ -8,7 +8,7 @@ define([
     '../Model/Abonma',
     'i18next',
     'baseUrl',
-    'backgrid'
+    'app/Max/Module/Backgrid'
 ], function (
         SeznamiView,
         formTpl,

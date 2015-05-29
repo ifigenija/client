@@ -9,7 +9,8 @@ define([
     '../Model/User',
     'formSchema!user',
     'i18next',
-    'baseUrl'
+    'baseUrl',
+    'app/Max/Module/Backgrid'
 ], function (
         SeznamiView,
         formTpl,
@@ -18,8 +19,13 @@ define([
         User,
         schema,
         i18next,
-        baseUrl
+        baseUrl,
+        Backgrid
         ) {
+
+    var hc = Backgrid.HeaderCell.extend({
+        className: 'backgrid-kolona-stevilk'
+    });
 
     var UserView = SeznamiView.extend({
         url: baseUrl + '/rest/user',
@@ -50,6 +56,7 @@ define([
                 sortable: true
             },
             {
+                headerCell: hc,
                 cell: 'date',
                 editable: false,
                 label: i18next.t('admin.user.veljavnost'),
@@ -101,7 +108,7 @@ define([
             this.renderVloge(model);
         }
     };
-    
+
     UserView.prototype.saveSuccess = function (model) {
 
         SeznamiView.prototype.saveSuccess.apply(this, arguments);

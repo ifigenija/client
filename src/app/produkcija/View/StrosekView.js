@@ -6,7 +6,7 @@ define([
     'template!../tpl/strosek-form.tpl',
     'formSchema!strosekUprizoritve',
     'i18next',
-    'backgrid'
+    'app/Max/Module/Backgrid'
 ], function (
         PostavkeView,
         formTpl,
@@ -26,6 +26,13 @@ define([
         detailName: 'stroski',
         formTitle: i18next.t('produkcija.strosek.title'),
         gridMeta: [
+            {
+                cell: 'integer',
+                editable: false,
+                label: i18next.t('produkcija.std.sort'),
+                name: 'sort',
+                sortable: true
+            },
             {
                 cell: 'string',
                 editable: false,

@@ -6,14 +6,20 @@ define([
     './UprizoritevEditView',
     '../Model/Uprizoritev',
     'i18next',
-    'baseUrl'
+    'baseUrl',
+    'app/Max/Module/Backgrid'
 ], function (
         SeznamiView,
         UprizoritevEditView,
         Uprizoritev,
         i18next,
-        baseUrl
+        baseUrl,
+        Backgrid
         ) {
+
+    var hc = Backgrid.HeaderCell.extend({
+        className: 'backgrid-kolona-stevilk'
+    });
 
     var UprizoritevView = SeznamiView.extend({
         url: baseUrl + '/rest/uprizoritev/vse',
@@ -41,6 +47,7 @@ define([
                 sortable: true
             },
             {
+                headerCell: hc,
                 cell: 'date',
                 editable: false,
                 label: i18next.t('produkcija.uprizoritev.datumPremiere'),

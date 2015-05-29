@@ -21,17 +21,17 @@ define([
 
     var tabVse = [
         {name: i18next.t('seznami.std.splosno'), event: 'splosni'},
-        {name: i18next.t('seznami.std.kontakti'), event: 'kontakti'},
         {name: i18next.t('seznami.oseba.osebniPodatki'), event: 'osebniPodatki'},
+        {name: i18next.t('seznami.std.kontakti'), event: 'kontakti'}
     ];
 
     var tabSplosno = [
-        {name: i18next.t('seznami.splosno'), event: 'splosni'},
-        {name: i18next.t('seznami.oseba.kontakti'), event: 'osebniPodatki'}
+        {name: i18next.t('seznami.std.splosno'), event: 'splosni'},
+        {name: i18next.t('seznami.oseba.osebniPodatki'), event: 'osebniPodatki'}
     ];
 
     var tabNovi = [
-        {name: i18next.t('seznami.splosno'), event: 'splosni'},
+        {name: i18next.t('seznami.std.splosno'), event: 'splosni'},
         {name: i18next.t('seznami.oseba.osebniPodatki'), event: 'osebniPodatki'}
     ];
 
@@ -82,7 +82,7 @@ define([
         } else if (this.options.pogled === "vse") {
             tabs = tabVse;
         } else {
-            tabs = tabSplosno;
+            tabs = tabVse;
         }
 
 

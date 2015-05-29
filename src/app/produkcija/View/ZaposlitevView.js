@@ -3,9 +3,9 @@
  */
 define([
     'app/seznami/View/SeznamiView',
-    'template!../tpl/besedilo-form.tpl',
-    'formSchema!besedilo',
-    '../Model/Besedilo',
+    'template!../tpl/zaposlitev-form.tpl',
+    'formSchema!zaposlitev',
+    '../Model/Zaposlitev',
     'i18next',
     'baseUrl',
     'app/Max/Module/Backgrid'
@@ -13,56 +13,58 @@ define([
         SeznamiView,
         formTpl,
         schema,
-        Besedilo,
+        Zaposlitev,
         i18next,
         baseUrl,
         Backgrid
         ) {
-    
+
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
 
-    var BesediloView = SeznamiView.extend({
-        url: baseUrl + '/rest/besedilo',
-        title: i18next.t('seznami.besedilo.title'),
+    var ZaposlitevView = SeznamiView.extend({
+        url: baseUrl + '/rest/zaposlitev/vse',
+        title: i18next.t('produkcija.zaposlitev.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.besedilo.stevilka'),
-                name: 'stevilka',
+                label: i18next.t('produkcija.zaposlitev.oseba'),
+                name: 'oseba.label',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.besedilo.avtor'),
-                name: 'avtor',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('seznami.besedilo.naslovIzvirnika'),
-                name: 'naslovIzvirnika',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('seznami.besedilo.prevajalec'),
-                name: 'prevajalec',
+                label: i18next.t('produkcija.zaposlitev.status'),
+                name: 'status',
                 sortable: true
             },
             {
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
-                label: i18next.t('seznami.besedilo.datumPrejema'),
-                name: 'datumPrejema',
+                label: i18next.t('produkcija.zaposlitev.zacetek'),
+                name: 'zacetek',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'date',
+                editable: false,
+                label: i18next.t('produkcija.zaposlitev.konec'),
+                name: 'konec',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'integer',
+                editable: false,
+                label: i18next.t('produkcija.zaposlitev.tip'),
+                name: 'tip',
                 sortable: true
             },
             {
@@ -75,20 +77,20 @@ define([
             }
         ]
     });
-    
-    BesediloView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.besedilo.nova");
+
+    ZaposlitevView.prototype.getTitle = function (model) {
+        var text = i18next.t("produkcija.zaposlitev.nova");
 
         if (model.get('id')) {
-            text = model.get('naslov') || "Naslov";
+            text = model.get('oseba').label || "Oseba";
         }
         return text;
     };
 
-    BesediloView.prototype.onDodaj = function () {
-        var model = new Besedilo.Model();
+    ZaposlitevView.prototype.onDodaj = function () {
+        var model = new Zaposlitev.Model();
         this.onSelected(model);
     };
 
-    return BesediloView;
+    return ZaposlitevView;
 });

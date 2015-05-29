@@ -3,10 +3,6 @@
  */
 define([
     'app/Dokument/View/DokumentView',
-    './AlternacijaView',
-    './PogodbaView',
-    './KoprodukcijaView',
-    './StrosekView',
     'template!../tpl/uprizoritev-edit.tpl',
     'template!../tpl/uprizoritev-form.tpl',
     'formSchema!uprizoritev',
@@ -14,10 +10,6 @@ define([
     'app/Max/View/TabControl'
 ], function (
         DokumentView,
-        AlternacijaView,
-        PogodbaView,
-        KoprodukcijaView,
-        StrosekView,
         tpl,
         formTpl,
         shema,
@@ -166,14 +158,18 @@ define([
             c.fetch();
         }
         
-        var view = new AlternacijaView({
-            collection: c,
-            dokument: this.model
-        });
-        view.detailName = 'alternacije';
-        view.name = i18next.t('uprizoritev.alternacije');
+        var self = this;
         
-        this.regionDetail.show(view);
+        require(['app/produkcija/View/AlternacijaView'], function (AlternacijaView) {
+            var view = new AlternacijaView({
+                collection: c,
+                dokument: self.model
+            });
+            view.detailName = 'alternacije';
+            view.name = i18next.t('uprizoritev.alternacije');
+
+            self.regionDetail.show(view);
+        });
     };
 
     /**
@@ -181,19 +177,24 @@ define([
      * @returns {undefined}
      */
     UprizoritevStrosekEditView.prototype.renderPogodbe = function () {
+
         var c = this.model.pogodbeCollection;
         if (c.length === 0) {
             c.fetch();
         }
+
+        var self = this;
         
-        var view = new PogodbaView({
-            collection: c,
-            dokument: this.model
+        require(['app/produkcija/View/PogodbaView'], function (PogodbaView) {
+            var view = new PogodbaView({
+                collection: c,
+                dokument: self.model
+            });
+            view.detailName = 'pogodbe';
+            view.name = i18next.t('uprizoritev.pogodbe');
+
+            self.regionDetail.show(view);
         });
-        view.detailName = 'pogodbe';
-        view.name = i18next.t('uprizoritev.pogodbe');
-        
-        this.regionDetail.show(view);
     };
 
     /**
@@ -208,14 +209,18 @@ define([
             c.fetch();
         }
         
-        var view = new KoprodukcijaView({
-            collection: c,
-            dokument: this.model
-        });
-        view.detailName = 'koprodukcije';
-        view.name = i18next.t('uprizoritev.koprodukcije');
+        var self = this;
         
-        this.regionDetail.show(view);
+        require(['app/produkcija/View/KoprodukcijaView'], function (KoprodukcijaView) {
+            var view = new KoprodukcijaView({
+                collection: c,
+                dokument: self.model
+            });
+            view.detailName = 'koprodukcije';
+            view.name = i18next.t('uprizoritev.koprodukcije');
+
+            self.regionDetail.show(view);
+        });
     };
     /**
      * 
@@ -229,14 +234,18 @@ define([
             c.fetch();
         }
         
-        var view = new StrosekView({
-            collection: c,
-            dokument: this.model
+        var self = this;
+
+        require(['app/produkcija/View/StrosekView'], function (StrosekView) {
+            var view = new StrosekView({
+                collection: c,
+                dokument: self.model
+            });
+            view.detailName = 'stroski';
+            view.name = i18next.t('uprizoritev.stroski');
+
+            self.regionDetail.show(view);
         });
-        view.detailName = 'stroski';
-        view.name = i18next.t('uprizoritev.stroski');
-        
-        this.regionDetail.show(view);
     };
 
     return UprizoritevStrosekEditView;

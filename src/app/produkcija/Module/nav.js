@@ -13,12 +13,15 @@ define(['i18next'], function (i18n) {
                     uri: "#pro/uprizoritev"
                 },
                 {
-                    label: i18n.t("produkcija.nav.oseba"),
-                    uri: "#pro/oseba"
-                },
-                {
                     label: i18n.t("produkcija.nav.strosek"),
                     uri: "#pro/stroskovnik"
+                },
+                {
+                    divider: true
+                },
+                {
+                    label: i18n.t("produkcija.nav.zaposlitev"),
+                    uri: "#pro/zaposlitev"
                 }
             ]
         }
