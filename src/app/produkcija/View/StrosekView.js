@@ -5,13 +5,19 @@ define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/strosek-form.tpl',
     'formSchema!strosekUprizoritve',
-    'i18next'
+    'i18next',
+    'backgrid'
 ], function (
         PostavkeView,
         formTpl,
         schema,
-        i18next
+        i18next,
+        Backgrid
         ) {
+    
+    var hc = Backgrid.HeaderCell.extend({
+            className: 'backgrid-kolona-stevilk'
+        });
 
     var StrosekView = PostavkeView.extend({
         formTemplate: formTpl,
@@ -28,14 +34,16 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
                 label: i18next.t('produkcija.strosek.vrednostDo'),
                 name: 'vrednostDo',
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
                 label: i18next.t('produkcija.strosek.vrednostNa'),
                 name: 'vrednostNa',

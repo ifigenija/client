@@ -172,7 +172,11 @@
             "avtorski": "Avtorski",
             "tantieme": "Tantieme",
             "lastnaSredstva": "Lastna sredstva",
-            "skupniStrosek": "Skupni strosek"
+            "skupniStrosek": "Skupni strosek",
+            "zaproseno": "Zaproseno",
+            "zaprosenProcent": "Zaprosen procent",
+            "drugiJavni": "Drugi javni viri financiranja"
+            
         }
     },
     "seznami": {

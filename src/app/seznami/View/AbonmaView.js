@@ -7,15 +7,21 @@ define([
     'formSchema!abonma',
     '../Model/Abonma',
     'i18next',
-    'baseUrl'
+    'baseUrl',
+    'backgrid'
 ], function (
         SeznamiView,
         formTpl,
         schema,
         Abonma,
         i18next,
-        baseUrl
+        baseUrl,
+        Backgrid
         ) {
+    
+    var hc = Backgrid.HeaderCell.extend({
+            className: 'backgrid-kolona-stevilk'
+        });
 
     var AbonmaView = SeznamiView.extend({
         url: baseUrl + '/rest/abonma',
@@ -31,21 +37,24 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'integer',
                 editable: false,
                 label: i18next.t('seznami.abonma.stPredstav'),
                 name: 'stPredstav',
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'integer',
                 editable: false,
                 label: i18next.t('seznami.abonma.stKuponov'),
                 name: 'stKuponov',
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'integer',
                 editable: false,
                 label: i18next.t('seznami.abonma.kapaciteta'),
                 name: 'kapaciteta',

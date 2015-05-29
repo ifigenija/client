@@ -5,19 +5,25 @@ define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/pogodba-form.tpl',
     'formSchema!pogodba',
-    'i18next'
+    'i18next',
+    'backgrid'
 ], function (
         PostavkeView,
         formTpl,
         schema,
-        i18next
+        i18next,
+        Backgrid
         ) {
+    
+    var hc = Backgrid.HeaderCell.extend({
+            className: 'backgrid-kolona-stevilk'
+        });
 
     var PogodbaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         title: i18next.t('produkcija.pogodba.title'),
-        detailName: 'alternacije',
+        detailName: 'pogodbe',
         formTitle: i18next.t('produkcija.pogodba.title'),
         gridMeta: [
             {
@@ -28,21 +34,24 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
                 label: i18next.t('produkcija.pogodba.vrednostVaje'),
                 name: 'vrednostVaje',
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
                 label: i18next.t('produkcija.pogodba.vrednostPredstave'),
                 name: 'vrednostPredstave',
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
                 label: i18next.t('produkcija.pogodba.vrednostUre'),
                 name: 'vrednostUre',

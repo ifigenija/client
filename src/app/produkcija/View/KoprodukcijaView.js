@@ -5,13 +5,19 @@ define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/koprodukcija-form.tpl',
     'formSchema!produkcijaDelitev',
-    'i18next'
+    'i18next',
+    'backgrid'
 ], function (
         PostavkeView,
         formTpl,
         schema,
-        i18next
+        i18next,
+        Backgrid
         ) {
+    
+    var hc = Backgrid.HeaderCell.extend({
+            className: 'backgrid-kolona-stevilk'
+        });
 
     /**
      * 
@@ -25,38 +31,59 @@ define([
         formTitle: i18next.t('produkcija.koprodukcija.title'),
         gridMeta: [
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.koproducent'),
-                name: 'koproducent',
+                label: i18next.t('produkcija.koprodukcija.skupniStrosek'),
+                name: 'skupniStrosek',
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.avtorski'),
-                name: 'avtorski',
+                label: i18next.t('produkcija.koprodukcija.zaproseno'),
+                name: 'zaproseno',
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.tantieme'),
-                name: 'tantieme',
+                label: i18next.t('produkcija.koprodukcija.zaprosenProcent'),
+                name: 'zaprosenProcent',
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
                 label: i18next.t('produkcija.koprodukcija.lastnaSredstva'),
                 name: 'lastnaSredstva',
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.skupniStrosek'),
-                name: 'skupniStrosek',
+                label: i18next.t('produkcija.koprodukcija.drugiJavni'),
+                name: 'drugijavni',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('produkcija.koprodukcija.avtorski'),
+                name: 'avtorski',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('produkcija.koprodukcija.tantieme'),
+                name: 'tantieme',
                 sortable: true
             },
             {

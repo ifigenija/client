@@ -15,7 +15,18 @@ define([
 
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: schema.toFormSchema().schema,
+        schema: schema.toFormSchema({
+            oseba: {
+                editorAttrs: {
+                    disabled: true
+                }
+            },
+            funkcija: {
+                editorAttrs: {
+                    disabled: true
+                }
+            }
+        }).schema,
         title: i18next.t('produkcija.alternacija.title'),
         detailName: 'alternacije',
         formTitle: i18next.t('produkcija.alternacija.title'),

@@ -71,7 +71,7 @@ define([
 
     UprizoritevStrosekEditView.prototype.getNaslovUprizoritve = function () {
         var naslovT = this.model.get('naslov');
-        var naslov = naslovT || i18next.t('produkcija.uprizoritev.naslov');
+        var naslov = naslovT || i18next.t('produkcija.strosek.title');
         return naslov;
     };
 
