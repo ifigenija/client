@@ -167,6 +167,8 @@ define([
             });
             view.detailName = 'alternacije';
             view.name = i18next.t('uprizoritev.alternacije');
+            
+            view.listenTo(view, "save:success", function(){self.renderList();});
 
             self.regionDetail.show(view);
         });
@@ -193,6 +195,8 @@ define([
             view.detailName = 'pogodbe';
             view.name = i18next.t('uprizoritev.pogodbe');
 
+            view.listenTo(view, "save:success", function(){view.renderList();});
+
             self.regionDetail.show(view);
         });
     };
@@ -218,6 +222,8 @@ define([
             });
             view.detailName = 'koprodukcije';
             view.name = i18next.t('uprizoritev.koprodukcije');
+            
+            view.listenTo(view, "save:success", function(){self.renderList();});
 
             self.regionDetail.show(view);
         });
@@ -243,6 +249,8 @@ define([
             });
             view.detailName = 'stroski';
             view.name = i18next.t('uprizoritev.stroski');
+            
+            view.listenTo(view, "save:success", function(){self.renderList();});
 
             self.regionDetail.show(view);
         });
