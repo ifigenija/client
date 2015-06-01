@@ -31,7 +31,6 @@ define([
         formTitle: i18next.t('produkcija.koprodukcija.title'),
         gridMeta: [
             {
-                headerCell: hc,
                 cell: 'string',
                 editable: false,
                 label: i18next.t('produkcija.koprodukcija.koproducent'),
