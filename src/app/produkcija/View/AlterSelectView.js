@@ -6,27 +6,72 @@ define([
     'radio',
     'marionette',
     'app/bars',
+    'app/Max/View/Toolbar',
     'underscore',
     'app/Max/Module/Form',
+    'i18next',
     'template!../tpl/alter-select.tpl',
     'template!../tpl/alter-item.tpl'
 ], function (
         Radio,
         Marionette,
         Handlebars,
+        Toolbar,
         _,
         Form,
+        i18next,
         tpl,
         itemTpl                
         ) {
 
-
-    var AlterItemView = Marionette.ItemView.extend({
+    /**
+     * gumb za drop down menu na vsaki alternaciji posebej
+     * @type Array
+     */
+    var alterItemButtons = [[
+            {
+                id: 'podrobno',
+                label: '',
+                title: 'podrobno',
+                icon: 'fa fa-ellipsis-v',
+                element: 'button-dropdown',
+                dropdown: [
+                    {
+                        label: i18next.t('alter.brisi'),
+                        trigger: 'brisi'
+                    },
+                    {
+                        type: '',
+                        label: i18next.t('alter.privzeto'),
+                        trigger: 'dovoljenja'
+                    },
+                    {
+                        label: i18next.t('alter.deaktiviraj'),
+                        trigger: 'nalozi'
+                    },
+                    {
+                        type: "divider"
+                    },
+                    {
+                        label: i18next.t('alter.deaktiviraj'),
+                        trigger: 'nalozi'
+                    }
+                ]
+            }
+        ]];
+    var AlterItemView = Marionette.LayoutView.extend({
         tagName: 'div',
-        className: 'media',
+        className: 'media alter-listitem',
         template: itemTpl,
-        triggers: {
-            'click .fa-trash': 'brisi'
+        regions: {
+            regionButton: '.alter-toolbar'
+        },
+        onRender: function () {
+            this.regionButton.show(new Toolbar({
+                listener: this,
+                buttonGroups: alterItemButtons
+            }));
+            
         }
     });
 
@@ -36,7 +81,7 @@ define([
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
     var AltersList = Marionette.CollectionView.extend({
-        className: 'list-group',
+        className: 'alter-list',
         childView: AlterItemView,
         onChildviewBrisi: function (view) {
             this.triggerMethod('brisi', view.model);

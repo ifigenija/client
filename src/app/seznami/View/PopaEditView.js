@@ -2,6 +2,9 @@
  * Licenca GPLv3
  */
 define([
+    'backbone',
+    'baseUrl',
+    'radio',
     'app/Dokument/View/DokumentView',
     'template!../tpl/popa-edit.tpl',
     'template!../tpl/popa-form.tpl',
@@ -9,6 +12,9 @@ define([
     'i18next',
     'app/Max/View/TabControl'
 ], function (
+        Backbone,
+        baseUrl,
+        Radio,
         DokumentView,
         tpl,
         formTpl,
@@ -17,38 +23,39 @@ define([
         TabControl
         ) {
 
-    var tabsSplosno =
-            [
-                {
-                    name: i18next.t('seznami.std.splosno'),
-                    event: 'splosni'
-                },
-                {
-                    name: i18next.t('seznami.std.kontakti'),
-                    event: 'kontakti'
-                },
-                {
-                    name: i18next.t('seznami.popa.osebe'),
-                    event: 'osebe'
-                },
-                {
-                    name: i18next.t('seznami.popa.racuni'),
-                    event: 'trrji'
-                }
-            ];
+    var tabsSplosno = [
+        {
+            name: i18next.t('seznami.std.splosno'),
+            event: 'splosni'
+        },
+        {
+            name: i18next.t('seznami.std.kontakti'),
+            event: 'kontakti'
+        },
+        {
+            name: i18next.t('seznami.popa.osebe'),
+            event: 'osebe'
+        },
+        {
+            name: i18next.t('seznami.popa.racuni'),
+            event: 'trrji'
+        }
+    ];
 
     var gumbi = {
         'doc-koproducent': {
             id: 'doc-koproducent',
             label: 'Koproducent',
             element: 'button-trigger',
-            trigger: 'koproducent'
+            trigger: 'koproducent',
+            hidden: true
         },
         'doc-kupec': {
             id: 'doc-kupec',
             label: 'Kupec',
             element: 'button-trigger',
-            trigger: 'kupec'
+            trigger: 'kupec',
+            hidden: true
         },
         'doc-shrani': {
             id: 'doc-shrani',
@@ -98,12 +105,52 @@ define([
     PopaEditView.prototype.onSkrij = function () {
         console.log('xxxx');
     };
+
+    /**
+     * Ko označimo poslovnega partnerja za kupca 
+     * @returns {undefined}
+     */
     PopaEditView.prototype.onKupec = function () {
-        console.log('Kupec');
+        var B = Backbone.Model.extend({
+            url: baseUrl + '/rest/kupec'
+        });
+
+        var kup = new B();
+        var self = this;
+
+        kup.save({
+            popa: this.model.get('id')
+        }, {
+            success: function (model) {
+                self.toolbarView.hideButtons(['doc-kupec']);
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
     };
+
+    /**
+     * registrira poslovnega partnerja kot produkcijsko hišo. 
+     * @returns {undefined}
+     */
     PopaEditView.prototype.onKoproducent = function () {
-        console.log('Koproducent');
+        var B = Backbone.Model.extend({
+            url: baseUrl + '/rest/produkcijskahisa'
+        });
+
+        var kup = new B();
+        var self = this;
+
+        kup.save({
+            popa: this.model.get('id')
+        }, {
+            success: function (model) {
+                self.toolbarView.hideButtons(['doc-producent']);
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
+
     };
+
     PopaEditView.prototype.onRender = function () {
 
         var tabs = null;
@@ -126,8 +173,17 @@ define([
             this.renderTrrji();
             this.renderKontaktne();
         }
-
         this.renderTabs(tabs);
+    };
+
+    PopaEditView.prototype.onRenderForm = function () {
+        if (!this.model.get('producent')) {
+            this.toolbarView.showButtons(['doc-koproducent']);
+        }
+
+        if (!this.model.get('kupec')) {
+            this.toolbarView.showButtons(['doc-kupec']);
+        }
     };
     /**
      * Klik na splošni tab
@@ -201,8 +257,8 @@ define([
 
     PopaEditView.prototype.renderKontaktne = function () {
         var self = this;
-        var coll =  self.model.kontaktneCollection;
-        if (coll.length === 0 ) {
+        var coll = self.model.kontaktneCollection;
+        if (coll.length === 0) {
             coll.fetch();
         }
         require(['app/seznami/View/KontaktneView'], function (View) {

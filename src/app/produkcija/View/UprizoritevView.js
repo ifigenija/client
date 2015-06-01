@@ -1,3 +1,4 @@
+
 /* 
  * Licenca GPLv3
  */
@@ -7,14 +8,16 @@ define([
     '../Model/Uprizoritev',
     'i18next',
     'baseUrl',
-    'app/Max/Module/Backgrid'
+    'app/Max/Module/Backgrid',
+    'formSchema!uprizoritev'
 ], function (
         SeznamiView,
         UprizoritevEditView,
         Uprizoritev,
         i18next,
         baseUrl,
-        Backgrid
+        Backgrid,
+        schema
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -26,7 +29,9 @@ define([
         title: i18next.t('produkcija.uprizoritev.title'),
         columns: [
             {
-                cell: 'string',
+                cell: Backgrid.SelectCell.extend({
+                    optionValues: schema.getOptionValues('faza')
+                }),
                 editable: false,
                 label: i18next.t('produkcija.uprizoritev.faza'),
                 name: 'faza',
@@ -42,8 +47,17 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('pro.avtor'),
+                name: 'avtor',
+                sortable: true
+            },            
+            {
+                cell:  Backgrid.SelectCell.extend({
+                    optionValues: schema.getOptionValues('zvrstUprizoritve')
+                }),
+                editable: false,
                 label: i18next.t('produkcija.uprizoritev.zvrst'),
-                name: 'zvrstUprizoritve.ime',
+                name: 'zvrstUprizoritve',
                 sortable: true
             },
             {
@@ -55,12 +69,12 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                cell: 'boolean',
                 editable: false,
-                label: i18next.t('produkcija.uprizoritev.faza'),
-                name: 'faza',
+                label: i18next.t('pro.gostujoca'),
+                name: 'gostujoca',
                 sortable: true
-            },
+            },            
             {
                 cell: 'action',
                 name: '...',

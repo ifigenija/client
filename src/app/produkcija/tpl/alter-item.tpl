@@ -5,8 +5,6 @@
     </a>
 </div>
 <div class="media-body">
+    <div class="pull-right alter-toolbar"></div>
     <h4 class="media-heading">{{ oseba.label }} </h4>
-    {{#if pogodba}} <span class="fa fa-money"></span> {{/if}}
-    {{#if aktivna}} <span class="fa fa-file"></span> {{/if}}
-     <span class="fa fa-trash"></span> 
 </div>

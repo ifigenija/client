@@ -683,4 +683,10 @@ span.stevilka-na-veliko {
 .alter-gumb {
   width: 100%;
 }
+.media.alter-listitem {
+  overflow: visible;
+}
+.alter-listitem > .media-body {
+  overflow: visible;
+}
 /*# sourceMappingURL=site.css.map */

@@ -71,5 +71,12 @@ define([
         ]
     });
 
+
+    AlternacijaView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [[this.buttons.shrani, this.buttons.preklici]] : [[]];
+
+    };
+
     return AlternacijaView;
 });

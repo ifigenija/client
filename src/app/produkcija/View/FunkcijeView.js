@@ -35,7 +35,7 @@ define([
     var sch = _.omit(schema.toFormSchema().schema, 'podrocje');
     //console.log(sch);
     var opts = schema.getOptionValues('tipFunkcije');
-    
+
     /**
      * 
      * 
@@ -54,9 +54,19 @@ define([
         gridMeta: [
             {
                 cell: 'integer',
+                headerCell: Backgrid.HeaderCell.extend({
+                    className: 'backgrid-kolona-stevilk'
+                }),
                 editable: false,
                 label: i18next.t('produkcija.funkcija.sort'),
                 name: 'sort',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('pro.imena'),
+                name: 'imena',
                 sortable: true
             },
             {
@@ -120,16 +130,16 @@ define([
             this.renderAlternacije(this.model);
             this.on('preklici', function () {
                 this.alterR.empty();
-            }, this);            
+            }, this);
             this.on('save:success', function () {
                 this.alterR.empty();
-            }, this);            
+            }, this);
         }
 
     };
-    
-    
-    
+
+
+
 
     /**
      * 
@@ -141,12 +151,12 @@ define([
         this.AlterModel = Backbone.DeepModel.extend({
             urlRoot: baseUrl + '/rest/alternacija'
         });
-        var c = this.alters = new MaxPageable([],{
+        var c = this.alters = new MaxPageable([], {
             model: this.AlterModel,
             state: {
                 perPage: 50
             },
-        });        
+        });
         c.url = baseUrl + '/rest/alternacija';
 
         c.queryParams.funkcija = model.get('id');
@@ -164,7 +174,7 @@ define([
         this.alterR.show(rv);
     };
 
-    
+
 
     /**
      * 
@@ -196,7 +206,7 @@ define([
         model.save({
             oseba: oseba,
             funkcija: this.model.get('id'),
-            altivna: true            
+            altivna: true
         }, {
             success: function (model, x, xhr) {
                 self.alters.add(model);

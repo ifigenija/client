@@ -14,7 +14,7 @@ define([
         i18next,
         Backgrid
         ) {
-    
+
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
@@ -30,6 +30,15 @@ define([
         detailName: 'koprodukcije',
         formTitle: i18next.t('produkcija.koprodukcija.title'),
         gridMeta: [
+            {
+                headerCell: hc,
+                cell: 'string',
+                editable: false,
+                label: i18next.t('produkcija.koprodukcija.producent'),
+                name: '.label',
+                sortable: true,
+                total: 'sum'
+            },
             {
                 headerCell: hc,
                 cell: 'number',

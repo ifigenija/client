@@ -3,15 +3,18 @@
  */
 define([
     'app/Dokument/View/PostavkeView',
+    'app/Max/Module/Backgrid',
     'template!../tpl/kontaktna-form.tpl',
     'formSchema!kontaktnaoseba',
     'i18next'
 ], function (
         PostavkeView,
+        Backgrid,
         formTpl,
         schema,
         i18next
         ) {
+
 
     var KontaktneView = PostavkeView.extend({
         formTemplate: formTpl,
@@ -28,10 +31,12 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                cell: Backgrid.SelectCell.extend({
+                    optionValues: schema.getOptionValues('status')
+                }),
                 editable: false,
                 label: i18next.t('seznami.kontaktna.status'),
-                name: 'stevilka',
+                name: 'status',
                 sortable: true
             },
             {
@@ -55,7 +60,6 @@ define([
                 name: 'oseba.email',
                 sortable: true
             },
-                        
             {
                 cell: 'action',
                 name: '...',
@@ -68,8 +72,8 @@ define([
             }
         ]
     });
-    
-    
+
+
 
     return KontaktneView;
 });
