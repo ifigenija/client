@@ -32,6 +32,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('produkcija.std.sifra'),
+                name: 'sifra',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('produkcija.zaposlitev.oseba'),
                 name: 'oseba.label',
                 sortable: true

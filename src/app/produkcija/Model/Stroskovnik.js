@@ -27,7 +27,7 @@ define([
 
     var KoprodukcijaCollection = Dokument.PostavkaCollection.extend({
         model: KoprodukcijaModel,
-        url: baseUrl + '/rest/produkcijaDelitev/vse',
+        url: baseUrl + '/rest/produkcijaDelitev',
         index: 'koproducent',
         mode: 'client'
     });

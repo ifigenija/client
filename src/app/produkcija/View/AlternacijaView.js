@@ -38,6 +38,14 @@ define([
         formTitle: i18next.t('produkcija.alternacija.title'),
         gridMeta: [
             {
+                headerCell: hc,
+                cell: 'integer',
+                editable: false,
+                label: i18next.t('produkcija.std.sort'),
+                name: 'sort',
+                sortable: true
+            },
+            {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('produkcija.std.sifra'),
@@ -55,7 +63,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('produkcija.alternacija.funkcija'),
-                name: 'funkcija',
+                name: 'funkcija.label',
                 sortable: true
             },
             {
@@ -69,16 +77,8 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('produkcija.alternacija.pogodba'),
-                name: 'pogodba',
+                name: 'pogodba.label',
                 sortable: false
-            },
-            {
-                headerCell: hc,
-                cell: 'integer',
-                editable: false,
-                label: i18next.t('produkcija.std.sort'),
-                name: 'sort',
-                sortable: true
             },
             {
                 cell: 'action',

@@ -5,7 +5,7 @@ define([
     'marionette',
     'template!../tpl/stroskovnik.tpl',
     './StroskiUprizoritveView',
-    '../Model/UprizoritevStrosek',
+    '../Model/Stroskovnik',
     'i18next',
     'baseUrl',
     'app/bars',
@@ -14,7 +14,7 @@ define([
         Marionette,
         tpl,
         StrosekUprizoritveView,
-        UprizoritevStrosek,
+        Stroskovnik,
         i18next,
         baseUrl,
         Handlebars,
@@ -47,7 +47,7 @@ define([
     };
     
     StroskovnikView.prototype.renderEditor = function (upziroritevId) {
-        var editModel = new UprizoritevStrosek.Model({id: upziroritevId});
+        var editModel = new Stroskovnik.Model({id: upziroritevId});
         editModel.fetch();
         this.regionEditor.show(new StrosekUprizoritveView({
             model: editModel

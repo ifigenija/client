@@ -27,6 +27,7 @@ define([
         formTitle: i18next.t('produkcija.strosek.title'),
         gridMeta: [
             {
+                headerCell: hc,
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('produkcija.std.sort'),
@@ -46,7 +47,8 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.strosek.vrednostDo'),
                 name: 'vrednostDo',
-                sortable: true
+                sortable: true,
+                total: 'sum'
             },
             {
                 headerCell: hc,
@@ -54,13 +56,14 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.strosek.vrednostNa'),
                 name: 'vrednostNa',
-                sortable: true
+                sortable: true,
+                total: 'sum'
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('produkcija.strosek.popa'),
-                name: 'popa',
+                name: 'popa.label',
                 sortable: true
             },
             {
