@@ -18,7 +18,7 @@ define([
     var AlternacijaCollection = Dokument.PostavkaCollection.extend({
         model: AlternacijaModel,
         url: baseUrl + '/rest/alternacija',
-        index: 'pozicija'
+        index: 'sort'
     });
 
     var FunkcijaModel = Dokument.Model.extend({

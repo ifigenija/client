@@ -23,7 +23,7 @@ define([
     var PopaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: PopaTelefon,
         url: baseUrl + '/rest/telefonska',
-        index: 'sort'
+        index: 'vrsta'
     });
 
     var Kontaktna = Dokument.Postavka.extend({
@@ -33,20 +33,20 @@ define([
     var KontaktneCollection = Dokument.PostavkaCollection.extend({
         model: Kontaktna,
         url: baseUrl + '/rest/kontaktnaoseba',
-        index: 'sort'
+        index: 'funkcija'
     });
     
     var PopaTrrCollection = Dokument.PostavkaCollection.extend({
         model: PopaTrr,
         url: baseUrl + '/rest/trr',
-        index: 'sort'
+        index: 'banka'
     });
 
     
     var PopaNaslovCollection = Dokument.PostavkaCollection.extend({
         model: PopaNaslov,
         url: baseUrl + '/rest/postniNaslov',
-        index: 'pozicija'
+        index: 'naziv'
     });
     
     var PopaModel = Dokument.Model.extend({

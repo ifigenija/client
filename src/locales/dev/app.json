@@ -81,7 +81,8 @@
         },
         "std": {
             "splosno": "Splošno",
-            "sort": "Sort"
+            "sort": "Sort",
+            "sifra": "Šifra"
         },
         "strosek":{
             "alternacije":"Alternacije",
@@ -118,7 +119,9 @@
             "nastopajoci": "Nastopajoči",
             "ostaliSodelujoci": "Ostali sodelujoči",
             "koprodukcija": "Koprodukcija",
-            "zvrst": "Zvrst"
+            "zvrst": "Zvrst",
+            "avtor": "Avtor",
+            "gostujoca": "Gostujoča"
         },
         "arhivalija": {
             "title": "Arhivalija",
@@ -137,18 +140,8 @@
             "pomembna": "Pomembna",
             "sort": "Sort",
             "tipFunkcije": "Tip funkcije",
-            "sePlanira": "Se planira"
-        },
-        "funkcija": {
-            "title": "Funkcija",
-            "nova": "Nova funkcija",
-            "podrocje": "Podrocje",
-            "naziv": "Naziv",
-            "velikost": "Velikost",
-            "pomembna": "Pomembna",
-            "sort": "Sort",
-            "tipFunkcije": "Tip funkcije",
-            "sePlanira": "Se planira"
+            "sePlanira": "Se planira",
+            "imena": "Alternacije"
         },
         "alternacija": {
             "title": "Alternacija",
@@ -174,14 +167,14 @@
         "koprodukcija": {
             "title": "Koprodukcija",
             "koproducent": "Koproducent",
-            "avtorski": "Avtorski",
-            "tantieme": "Tantieme",
+            "avtorskih": "Avtorski",
+            "tantiemi": "Tantieme",
             "lastnaSredstva": "Lastna sredstva",
             "skupniStrosek": "Skupni strosek",
             "zaproseno": "Zaproseno",
             "zaprosenProcent": "Zaprosen procent",
-            "drugiJavni": "Drugi javni viri financiranja"
-            
+            "drugiJavni": "Drugi javni viri",
+            "odstotekFinanciranja": "Odstotek financiranja"
         }
     },
     "seznami": {

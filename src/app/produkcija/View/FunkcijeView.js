@@ -65,7 +65,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('pro.imena'),
+                label: i18next.t('produkcija.funkcija.imena'),
                 name: 'imena',
                 sortable: true
             },

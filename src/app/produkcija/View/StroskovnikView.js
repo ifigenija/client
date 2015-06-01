@@ -33,7 +33,7 @@ define([
 
     StroskovnikView.prototype.onRender = function () {
         this.$('.naslov-uprizoritve').text(this.title);
-        this.renderToolbar();
+        
         var sch = {type: 'Toone', targetEntity: 'uprizoritev', editorAttrs: {class: 'form-control'}};
         this.formIzberi = new Form({
             template: Handlebars.compile('<form><div data-editors="id"></div></form>'),
@@ -45,12 +45,10 @@ define([
         this.formIzberi.fields.id.editor.on('changed', this.renderEditor, this);
         this.regionLookup.show(this.formIzberi);
     };
-
-    StroskovnikView.prototype.renderToolbar = function (model) {
-
-    };
+    
     StroskovnikView.prototype.renderEditor = function (upziroritevId) {
         var editModel = new UprizoritevStrosek.Model({id: upziroritevId});
+        editModel.fetch();
         this.regionEditor.show(new StrosekUprizoritveView({
             model: editModel
         }));

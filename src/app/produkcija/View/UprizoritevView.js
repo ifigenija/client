@@ -29,6 +29,13 @@ define([
         title: i18next.t('produkcija.uprizoritev.title'),
         columns: [
             {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('produkcija.std.sifra'),
+                name: 'sifra',
+                sortable: true
+            },
+            {
                 cell: Backgrid.SelectCell.extend({
                     optionValues: schema.getOptionValues('faza')
                 }),
@@ -47,7 +54,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('pro.avtor'),
+                label: i18next.t('produkcija.uprizoritev.avtor'),
                 name: 'avtor',
                 sortable: true
             },            
@@ -71,7 +78,7 @@ define([
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('pro.gostujoca'),
+                label: i18next.t('produkcija.uprizoritev.gostujoca'),
                 name: 'gostujoca',
                 sortable: true
             },            

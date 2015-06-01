@@ -17,7 +17,7 @@ define([
     var PogodbaCollection = Dokument.PostavkaCollection.extend({
         model: PogodbaModel,
         url: baseUrl + '/rest/pogodba/vse',
-        index: 'sort',
+        index: 'sifra',
         mode: 'client'
     });
 
@@ -28,7 +28,7 @@ define([
     var KoprodukcijaCollection = Dokument.PostavkaCollection.extend({
         model: KoprodukcijaModel,
         url: baseUrl + '/rest/produkcijaDelitev/vse',
-        index: 'sort',
+        index: 'koproducent',
         mode: 'client'
     });
 
@@ -40,7 +40,7 @@ define([
     var AlternacijaCollection = Dokument.PostavkaCollection.extend({
         model: AlternacijaModel,
         url: baseUrl + '/rest/alternacija/vse',
-        index: 'sort',
+        index: 'sifra',
         mode: 'client'
     });
 

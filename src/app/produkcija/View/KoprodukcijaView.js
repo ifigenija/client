@@ -34,10 +34,9 @@ define([
                 headerCell: hc,
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.producent'),
-                name: '.label',
-                sortable: true,
-                total: 'sum'
+                label: i18next.t('produkcija.koprodukcija.koproducent'),
+                name: 'koproducent.label',
+                sortable: true
             },
             {
                 headerCell: hc,
@@ -45,6 +44,15 @@ define([
                 editable: false,
                 label: i18next.t('produkcija.koprodukcija.skupniStrosek'),
                 name: 'skupniStrosek',
+                sortable: true,
+                total: 'sum'
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('produkcija.koprodukcija.odstotekFinanciranja'),
+                name: 'odstotekFinanciranja',
                 sortable: true,
                 total: 'sum'
             },
@@ -79,7 +87,7 @@ define([
                 cell: 'number',
                 editable: false,
                 label: i18next.t('produkcija.koprodukcija.drugiJavni'),
-                name: 'drugijavni',
+                name: 'drugiJavni',
                 sortable: true,
                 total: 'sum'
             },
@@ -87,8 +95,8 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.avtorski'),
-                name: 'avtorski',
+                label: i18next.t('produkcija.koprodukcija.avtorskih'),
+                name: 'avtorskih',
                 sortable: true,
                 total: 'sum'
             },
@@ -96,8 +104,8 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.tantieme'),
-                name: 'tantieme',
+                label: i18next.t('produkcija.koprodukcija.tantiemi'),
+                name: 'tantiemi',
                 sortable: true,
                 total: 'sum'
             },

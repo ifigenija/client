@@ -5,13 +5,19 @@ define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/alternacija-form.tpl',
     'formSchema!alternacija',
-    'i18next'
+    'i18next',
+    'app/Max/Module/Backgrid'
 ], function (
         PostavkeView,
         formTpl,
         schema,
-        i18next
+        i18next,
+        Backgrid
         ) {
+    
+    var hc = Backgrid.HeaderCell.extend({
+        className: 'backgrid-kolona-stevilk'
+    }); 
 
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
@@ -34,6 +40,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('produkcija.std.sifra'),
+                name: 'sifra',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('produkcija.alternacija.oseba'),
                 name: 'oseba.label',
                 sortable: true
@@ -42,7 +55,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('produkcija.alternacija.funkcija'),
-                name: 'funkcija.label',
+                name: 'funkcija',
                 sortable: true
             },
             {
@@ -58,6 +71,14 @@ define([
                 label: i18next.t('produkcija.alternacija.pogodba'),
                 name: 'pogodba',
                 sortable: false
+            },
+            {
+                headerCell: hc,
+                cell: 'integer',
+                editable: false,
+                label: i18next.t('produkcija.std.sort'),
+                name: 'sort',
+                sortable: true
             },
             {
                 cell: 'action',

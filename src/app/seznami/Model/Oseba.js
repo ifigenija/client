@@ -22,14 +22,14 @@ define([
     var OsebaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTelefon,
         url: baseUrl + '/rest/telefonska',
-        index: 'pozicija'
+        index: 'naziv'
     });
 
 
     var OsebaNaslovCollection = Dokument.PostavkaCollection.extend({
         model: OsebaNaslov,
         url: baseUrl + '/rest/postniNaslov',
-        index: 'pozicija'
+        index: 'vrsta'
     });
 
 

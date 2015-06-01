@@ -157,18 +157,19 @@ define([
         if (c.length === 0) {
             c.fetch();
         }
-        
+
         var self = this;
-        
+
         require(['app/produkcija/View/AlternacijaView'], function (AlternacijaView) {
+
             var view = new AlternacijaView({
                 collection: c,
                 dokument: self.model
             });
-            view.detailName = 'alternacije';
-            view.name = i18next.t('uprizoritev.alternacije');
-            
-            view.listenTo(view, "save:success", function(){self.renderList();});
+
+            view.listenTo(view, "save:success", function () {
+                view.renderList();
+            });
 
             self.regionDetail.show(view);
         });
@@ -186,16 +187,16 @@ define([
         }
 
         var self = this;
-        
+
         require(['app/produkcija/View/PogodbaView'], function (PogodbaView) {
             var view = new PogodbaView({
                 collection: c,
                 dokument: self.model
             });
-            view.detailName = 'pogodbe';
-            view.name = i18next.t('uprizoritev.pogodbe');
 
-            view.listenTo(view, "save:success", function(){view.renderList();});
+            view.listenTo(view, "save:success", function () {
+                view.renderList();
+            });
 
             self.regionDetail.show(view);
         });
@@ -209,21 +210,21 @@ define([
      */
     UprizoritevStrosekEditView.prototype.renderKoprodukcije = function () {
         var c = this.model.koprodukcijeCollection;
-        if (c.length === 0) {
+//        if (c.length === 0) {
             c.fetch();
-        }
-        
+//        }
+
         var self = this;
-        
+
         require(['app/produkcija/View/KoprodukcijaView'], function (KoprodukcijaView) {
             var view = new KoprodukcijaView({
                 collection: c,
                 dokument: self.model
             });
-            view.detailName = 'koprodukcije';
-            view.name = i18next.t('uprizoritev.koprodukcije');
-            
-            view.listenTo(view, "save:success", function(){self.renderList();});
+
+            view.listenTo(view, "save:success", function () {
+                view.renderList();
+            });
 
             self.regionDetail.show(view);
         });
@@ -239,7 +240,7 @@ define([
         if (c.length === 0) {
             c.fetch();
         }
-        
+
         var self = this;
 
         require(['app/produkcija/View/StrosekView'], function (StrosekView) {
@@ -247,10 +248,10 @@ define([
                 collection: c,
                 dokument: self.model
             });
-            view.detailName = 'stroski';
-            view.name = i18next.t('uprizoritev.stroski');
-            
-            view.listenTo(view, "save:success", function(){self.renderList();});
+
+            view.listenTo(view, "save:success", function () {
+                view.renderList();
+            });
 
             self.regionDetail.show(view);
         });

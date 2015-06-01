@@ -24,7 +24,7 @@ define([
     var OsebaTrrCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTrr,
         url: baseUrl + '/rest/trr',
-        index: 'pozicija'
+        index: 'banka'
     });
     
     var OsebaZaposlitevCollection = Dokument.PostavkaCollection.extend({
