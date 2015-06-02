@@ -61,7 +61,7 @@ define([
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('entiteta.builtin'),
+                label: i18next.t('entiteta.builtIn'),
                 name: 'builtIn',
                 sortable: true
             },
