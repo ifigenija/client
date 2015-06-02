@@ -333,7 +333,10 @@
         "opis" : "Opis",
         "naziv" : "Naziv",
         "sifra" : "Šifra",
-        "kapaciteta": "Kapaciteta"
+        "kapaciteta": "Kapaciteta",
+        "opomba": "Opomba",
+        "email": "E-pošta",
+        "stevilka": "Številka"
     },
     "abonma": {
         "stPredstav": "Število predstav",
@@ -341,5 +344,66 @@
     },
     "prostor": {
         "jePrizorisce": "Prizorišče"
+    },
+    "tipFunkcije": {
+        "zenskoIme": "Žensko ime",
+        "podrocje": "Področje",
+        "nastopajoc": "Nastopajoč"
+    },
+    "drzava": {
+        "sifra": "Koda države",
+        "sifraDolg": "Trimestna koda",
+        "isoNum": "Številčna koda",
+        "isoNaziv": "Iso Naziv"
+    },
+    "posta": {
+        "sifra": "Poštna številka"
+    },
+    "oseba": {
+        "priimek": "Priimek",
+        "funkcija": "Funkcija",
+        "srednjeIme": "Srednje ime",
+        "polnoIme": "Polno ime",
+        "psevdonim": "Psevdonim",
+        "datumRojstva": "Datum rojstva",
+        "emso": "EMŠO",
+        "davcna": "Davčna",
+        "spol": "Spol",
+        "opombe": "Opomba",
+        "drzavljanstvo": "Državljanstvo",
+        "drzavaRojstva": "Država rojstva",
+        "krajRojstva": "Kraj rojstva"
+    },
+    "trr": {
+        "swift": "Swift",
+        "bic": "Bic",
+        "banka": "Banka"
+    },
+    "postniNaslov": {
+        "nazivDva": "Dodatni naziv",
+        "ulica": "Ulica",
+        "ulicaDva": "Dodatna ulica",
+        "posta": "Poštna številka",
+        "postaNaziv": "Poštna",
+        "pokrajina": "Pokrajina",
+        "drzava": "Država",
+        "jeeu": "Iz EU",
+        "privzeti": "Privzeti naslov"
+    },
+    "tel": {
+        "vrsta": "Vrsta tel. številke",
+        "privzeta": "Privzeta"
+    },
+    "besedilo": {
+        "naslov": "Naslov",
+        "avtor": "Avtor",
+        "podnaslov": "Podnaslov",
+        "jezik": "Jezik",
+        "naslovIzvirnika": "Naslov izvirnika",
+        "datumPrejema": "Datum prejema",
+        "moskeVloge": "Moške vloge",
+        "zenskeVloge": "Ženske vloge",
+        "prevajalec": "Prevajalec",
+        "povzetekVsebine": "povzetek vsebine"
     }
 }
