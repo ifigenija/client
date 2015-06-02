@@ -2,13 +2,14 @@ define([
     'radio',
     'app/bars',
     'backbone',
-    
+    'underscore',
     'app/Dokument/View/FormView',
     'text!app/Dokument/tpl/dokument.tpl'
 ], function (
         Radio,
         Handlebars,
         Backbone,
+        _,
         FormView,
         tpl
         ) {
