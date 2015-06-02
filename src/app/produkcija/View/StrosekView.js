@@ -30,14 +30,14 @@ define([
                 headerCell: hc,
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('produkcija.std.sort'),
+                label: i18next.t('entiteta.sort'),
                 name: 'sort',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.strosek.naziv'),
+                label: i18next.t('entiteta.naziv'),
                 name: 'naziv',
                 sortable: true
             },
@@ -45,7 +45,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.strosek.vrednostDo'),
+                label: i18next.t('strupr.vrednostDo'),
                 name: 'vrednostDo',
                 sortable: true,
                 total: 'sum'
@@ -54,7 +54,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.strosek.vrednostNa'),
+                label: i18next.t('strupr.vrednostNa'),
                 name: 'vrednostNa',
                 sortable: true,
                 total: 'sum'
@@ -62,14 +62,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.strosek.popa'),
+                label: i18next.t('strupr.popa'),
                 name: 'popa.label',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.strosek.opis'),
+                label: i18next.t('entiteta.opis'),
                 name: 'opis',
                 sortable: false
             },

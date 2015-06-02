@@ -31,7 +31,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.std.sifra'),
+                label: i18next.t('entiteta.sifra'),
                 name: 'sifra',
                 sortable: true
             },
@@ -40,21 +40,21 @@ define([
                     optionValues: schema.getOptionValues('faza')
                 }),
                 editable: false,
-                label: i18next.t('produkcija.uprizoritev.faza'),
+                label: i18next.t('uprizoritev.faza'),
                 name: 'faza',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.uprizoritev.naslov'),
+                label: i18next.t('entiteta.naslov'),
                 name: 'naslov',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.uprizoritev.avtor'),
+                label: i18next.t('entiteta.avtor'),
                 name: 'avtor',
                 sortable: true
             },            
@@ -71,14 +71,14 @@ define([
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
-                label: i18next.t('produkcija.uprizoritev.datumPremiere'),
+                label: i18next.t('uprizoritev.datumPremiere'),
                 name: 'datumPremiere',
                 sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('produkcija.uprizoritev.gostujoca'),
+                label: i18next.t('uprizoritev.gostujoca'),
                 name: 'gostujoca',
                 sortable: true
             },            

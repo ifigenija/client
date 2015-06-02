@@ -32,7 +32,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.ime'),
+                label: i18next.t('entiteta.ime'),
                 name: 'ime',
                 sortable: true
             },
@@ -40,7 +40,7 @@ define([
                 headerCell: hc,
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('seznami.abonma.stPredstav'),
+                label: i18next.t('abonma.stPredstav'),
                 name: 'stPredstav',
                 sortable: true
             },
@@ -48,7 +48,7 @@ define([
                 headerCell: hc,
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('seznami.abonma.stKuponov'),
+                label: i18next.t('abonma.stKuponov'),
                 name: 'stKuponov',
                 sortable: true
             },
@@ -56,14 +56,14 @@ define([
                 headerCell: hc,
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('seznami.abonma.kapaciteta'),
+                label: i18next.t('entiteta.kapaciteta'),
                 name: 'kapaciteta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.opis'),
+                label: i18next.t('entiteta.opis'),
                 name: 'opis',
                 sortable: false
             },

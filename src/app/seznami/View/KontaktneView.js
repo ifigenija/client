@@ -26,7 +26,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.funkcija'),
+                label: i18next.t('kontaktnaOseba.funkcija'),
                 name: 'funkcija',
                 sortable: true
             },
@@ -35,28 +35,28 @@ define([
                     optionValues: schema.getOptionValues('status')
                 }),
                 editable: false,
-                label: i18next.t('seznami.kontaktna.status'),
+                label: i18next.t('entiteta.status'),
                 name: 'status',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.ime'),
+                label: i18next.t('entiteta.ime'),
                 name: 'oseba.ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.oseba.priimek'),
+                label: i18next.t('oseba.priimek'),
                 name: 'oseba.priimek',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.email'),
+                label: i18next.t('entiteta.email'),
                 name: 'oseba.email',
                 sortable: true
             },

@@ -26,28 +26,28 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.sifra'),
+                label: i18next.t('entiteta.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.naziv'),
+                label: i18next.t('entiteta.naziv'),
                 name: 'naziv',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.drzava.isoNum'),
+                label: i18next.t('drzava.isoNum'),
                 name: 'isoNum',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.drzava.isoNaziv'),
+                label: i18next.t('drzava.isoNaziv'),
                 name: 'isoNaziv',
                 sortable: true
             },

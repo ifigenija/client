@@ -33,7 +33,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.koproducent'),
+                label: i18next.t('prodel.koproducent'),
                 name: 'koproducent.label',
                 sortable: true
             },
@@ -41,7 +41,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.skupniStrosek'),
+                label: i18next.t('prodel.skupniStrosek'),
                 name: 'skupniStrosek',
                 sortable: true,
                 total: 'sum'
@@ -50,7 +50,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.odstotekFinanciranja'),
+                label: i18next.t('prodel.odstotekFinanciranja'),
                 name: 'odstotekFinanciranja',
                 sortable: true,
                 total: 'sum'
@@ -59,7 +59,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.zaproseno'),
+                label: i18next.t('prodel.zaproseno'),
                 name: 'zaproseno',
                 sortable: true,
                 total: 'sum'
@@ -68,7 +68,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.zaprosenProcent'),
+                label: i18next.t('prodel.zaprosenProcent'),
                 name: 'zaprosenProcent',
                 sortable: true
             },
@@ -76,7 +76,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.lastnaSredstva'),
+                label: i18next.t('prodel.lastnaSredstva'),
                 name: 'lastnaSredstva',
                 sortable: true,
                 total: 'sum'
@@ -85,7 +85,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.drugiJavni'),
+                label: i18next.t('prodel.drugiJavni'),
                 name: 'drugiJavni',
                 sortable: true,
                 total: 'sum'
@@ -94,7 +94,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.avtorskih'),
+                label: i18next.t('prodel.avtorskih'),
                 name: 'avtorskih',
                 sortable: true,
                 total: 'sum'
@@ -103,7 +103,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.koprodukcija.tantiemi'),
+                label: i18next.t('prodel.tantiemi'),
                 name: 'tantiemi',
                 sortable: true,
                 total: 'sum'

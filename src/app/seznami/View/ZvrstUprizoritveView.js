@@ -26,14 +26,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.ime'),
+                label: i18next.t('entiteta.ime'),
                 name: 'ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.opis'),
+                label: i18next.t('entiteta.opis'),
                 name: 'opis',
                 sortable: true
             },

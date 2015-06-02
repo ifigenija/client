@@ -26,14 +26,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.sifra'),
+                label: i18next.t('entiteta.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.naziv'),
+                label: i18next.t('entiteta.naziv'),
                 name: 'naziv',
                 sortable: true
             },

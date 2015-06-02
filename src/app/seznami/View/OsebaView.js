@@ -24,42 +24,42 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.sifra'),
+                label: i18next.t('entiteta.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.ime'),
+                label: i18next.t('entiteta.ime'),
                 name: 'ime',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.oseba.priimek'),
+                label: i18next.t('oseba.priimek'),
                 name: 'priimek',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.email'),
+                label: i18next.t('entiteta.email'),
                 name: 'email',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.oseba.psevdonim'),
+                label: i18next.t('oseba.psevdonim'),
                 name: 'psevdonim',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.funkcija'),
+                label: i18next.t('oseba.funkcija'),
                 name: 'funkcija',
                 sortable: false
             },

@@ -22,35 +22,35 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.sifra'),
+                label: i18next.t('entiteta.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.naziv'),
+                label: i18next.t('entiteta.naziv'),
                 name: 'naziv',
                 sortable: true
             },            
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.email'),
+                label: i18next.t('entiteta.email'),
                 name: 'email',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.popa.url'),
+                label: i18next.t('popa.url'),
                 name: 'url',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.popa.panoga'),
+                label: i18next.t('popa.panoga'),
                 name: 'panoga',
                 sortable: false
             },

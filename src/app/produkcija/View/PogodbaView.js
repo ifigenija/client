@@ -29,21 +29,21 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.pogodba.sifra'),
+                label: i18next.t('entiteta.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.pogodba.popa'),
+                label: i18next.t('pogodba.popa'),
                 name: 'popa',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.pogodba.oseba'),
+                label: i18next.t('entiteta.oseba'),
                 name: 'oseba',
                 sortable: true
             },
@@ -51,7 +51,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.pogodba.vrednostVaje'),
+                label: i18next.t('pogodba.vrednostVaje'),
                 name: 'vrednostVaje',
                 sortable: true,
                 total: 'sum'
@@ -60,7 +60,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.pogodba.vrednostPredstave'),
+                label: i18next.t('pogodba.vrednostPredstave'),
                 name: 'vrednostPredstave',
                 sortable: true,
                 total: 'sum'
@@ -70,7 +70,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('produkcija.pogodba.vrednostUre'),
+                label: i18next.t('pogodba.vrednostUre'),
                 name: 'vrednostUre',
                 sortable: true,
                 total: 'sum'
@@ -79,7 +79,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.pogodba.opis'),
+                label: i18next.t('entiteta.opis'),
                 name: 'opis',
                 sortable: false
             },

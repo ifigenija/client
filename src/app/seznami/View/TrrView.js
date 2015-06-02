@@ -23,28 +23,28 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.trr.banka'),
+                label: i18next.t('trr.banka'),
                 name: 'banka',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.trr.stevilka'),
+                label: i18next.t('entiteta.stevilka'),
                 name: 'stevilka',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.trr.swift'),
+                label: i18next.t('trr.swift'),
                 name: 'swift',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.trr.bic'),
+                label: i18next.t('trr.bic'),
                 name: 'bic',
                 sortable: false
             },

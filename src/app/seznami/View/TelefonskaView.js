@@ -23,21 +23,21 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.telefonska.vrsta'),
+                label: i18next.t('tel.vrsta'),
                 name: 'vrsta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.telefonska.stevilka'),
+                label: i18next.t('entiteta.stevilka'),
                 name: 'stevilka',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.telefonska.privzeta'),
+                label: i18next.t('tel.privzeta'),
                 name: 'privzeta',
                 sortable: true
             },

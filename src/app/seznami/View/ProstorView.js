@@ -26,35 +26,35 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.sifra'),
+                label: i18next.t('entiteta.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.naziv'),
+                label: i18next.t('entiteta.naziv'),
                 name: 'naziv',
                 sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('seznami.prostor.jePrizorisce'),
+                label: i18next.t('prostor.jePrizorisce'),
                 name: 'jePrizorisce',
                 sortable: true
             },
             {
                 cell: 'number',
                 editable: false,
-                label: i18next.t('seznami.prostor.kapaciteta'),
+                label: i18next.t('entiteta.kapaciteta'),
                 name: 'kapaciteta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.std.opis'),
+                label: i18next.t('entiteta.opis'),
                 name: 'opis',
                 sortable: false
             },

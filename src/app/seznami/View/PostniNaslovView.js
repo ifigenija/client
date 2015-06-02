@@ -23,28 +23,28 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.postniNaslov.naziv'),
+                label: i18next.t('entiteta.naziv'),
                 name: 'naziv',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.postniNaslov.ulica'),
+                label: i18next.t('postniNaslov.ulica'),
                 name: 'ulica',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.postniNaslov.posta'),
+                label: i18next.t('postniNaslov.posta'),
                 name: 'posta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.postniNaslov.drzava'),
+                label: i18next.t('entiteta.drzava'),
                 name: 'drzava.label',
                 sortable: true
             },

@@ -32,28 +32,28 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.besedilo.stevilka'),
+                label: i18next.t('entiteta.stevilka'),
                 name: 'stevilka',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.besedilo.avtor'),
+                label: i18next.t('entiteta.avtor'),
                 name: 'avtor',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.besedilo.naslovIzvirnika'),
+                label: i18next.t('besedilo.naslovIzvirnika'),
                 name: 'naslovIzvirnika',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('seznami.besedilo.prevajalec'),
+                label: i18next.t('besedilo.prevajalec'),
                 name: 'prevajalec',
                 sortable: true
             },
@@ -61,7 +61,7 @@ define([
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
-                label: i18next.t('seznami.besedilo.datumPrejema'),
+                label: i18next.t('besedilo.datumPrejema'),
                 name: 'datumPrejema',
                 sortable: true
             },

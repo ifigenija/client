@@ -44,14 +44,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.user.naziv'),
+                label: i18next.t('user.name'),
                 name: 'name',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.user.email'),
+                label: i18next.t('entiteta.email'),
                 name: 'email',
                 sortable: true
             },
@@ -59,14 +59,14 @@ define([
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
-                label: i18next.t('admin.user.veljavnost'),
+                label: i18next.t('user.expires'),
                 name: 'expires',
                 sortable: false
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('admin.user.aktiven'),
+                label: i18next.t('user.enabled'),
                 name: 'enabled',
                 sortable: false
             },

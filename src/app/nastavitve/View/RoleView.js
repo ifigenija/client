@@ -47,21 +47,21 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.role.name'),
+                label: i18next.t('entiteta.name'),
                 name: 'name',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('admin.std.description'),
+                label: i18next.t('entiteta.description'),
                 name: 'description',
                 sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('admin.std.builtin'),
+                label: i18next.t('entiteta.builtin'),
                 name: 'builtIn',
                 sortable: true
             },

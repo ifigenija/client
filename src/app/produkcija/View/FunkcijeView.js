@@ -58,7 +58,7 @@ define([
                     className: 'backgrid-kolona-stevilk'
                 }),
                 editable: false,
-                label: i18next.t('produkcija.funkcija.sort'),
+                label: i18next.t('entiteta.sort'),
                 name: 'sort',
                 sortable: true
             },
@@ -72,14 +72,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.funkcija.naziv'),
+                label: i18next.t('entiteta.naziv'),
                 name: 'naziv',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.funkcija.velikost'),
+                label: i18next.t('funkcija.velikost'),
                 name: 'velikost',
                 sortable: true
             },
@@ -88,7 +88,7 @@ define([
                     optionValues: opts
                 }),
                 editable: false,
-                label: i18next.t('produkcija.funkcija.tipFunkcije'),
+                label: i18next.t('funkcija.tipFunkcije'),
                 name: 'tipFunkcije',
                 optionValues: opts,
                 sortable: false
@@ -96,14 +96,14 @@ define([
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('produkcija.funkcija.pomembna'),
+                label: i18next.t('funkcija.pomembna'),
                 name: 'pomembna',
                 sortable: false
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('produkcija.funkcija.sePlanira'),
+                label: i18next.t('funkcija.sePlanira'),
                 name: 'sePlanira',
                 sortable: false
             },
