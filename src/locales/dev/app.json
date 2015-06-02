@@ -421,7 +421,7 @@
         "popa": "Klient"
     },
     "kontaktnaOseba": {
-        "funkcija": "funkcija",
+        "funkcija": "Funkcija",
         "popa": "Poslovni partner"
     },
     "besedilo": {
@@ -472,7 +472,7 @@
         "aktivna": "Aktivna",
         "funkcija": "funkcije",
         "sodelovanje": "Sodelovanje",
-        "koprodukcija": "koprodukcija",
+        "koprodukcija": "Koprodukcija",
         "pogodba": "Pogodba"
     },
     "prodel": {
@@ -505,7 +505,7 @@
         "name": "Polno ime",
         "password": "Geslo",
         "enabled": "Aktiven",
-        "expires": "Velja do",
+        "expires": "Veljavno do",
         "defaultRoute": "Privzeta pot ob prijavi",
         "defaultRouteParams": "Parametri za pot"
     },
