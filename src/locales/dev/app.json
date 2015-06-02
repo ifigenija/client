@@ -84,17 +84,17 @@
             "sort": "Sort",
             "sifra": "Šifra"
         },
-        "strosek":{
-            "alternacije":"Alternacije",
-            "pogodbe":"Pogodbe",
-            "koprodukcije":"Koprodukcije",
-            "stroski":"Stroški",
-            "title":"Stroški uprizoritve",
-            "naziv":"Naziv",
-            "vrednostDo":"Vrednost do premiere",
-            "vrednostNa":"Vrednost na ponovitev",
-            "opis":"Opis",
-            "popa":"Poslovni partner"
+        "strosek": {
+            "alternacije": "Alternacije",
+            "pogodbe": "Pogodbe",
+            "koprodukcije": "Koprodukcije",
+            "stroski": "Stroški",
+            "title": "Stroški uprizoritve",
+            "naziv": "Naziv",
+            "vrednostDo": "Vrednost do premiere",
+            "vrednostNa": "Vrednost na ponovitev",
+            "opis": "Opis",
+            "popa": "Poslovni partner"
         },
         "zaposlitev": {
             "zaposlitve": "Zaposlitve",
@@ -150,7 +150,7 @@
             "funkcija": "Funkcija",
             "zaposlen": "Zaposlen",
             "pogodba": "Pogodba"
-            
+
         },
         "pogodba": {
             "title": "Pogodba",
@@ -162,7 +162,7 @@
             "opis": "Opis",
             "popa": "Poslovni partner",
             "oseba": "Oseba"
-            
+
         },
         "koprodukcija": {
             "title": "Koprodukcija",
@@ -328,15 +328,30 @@
         "brisi": "Briši",
         "uredi": "Uredi"
     },
-    "entiteta":{
-        "ime" : "Ime",
-        "opis" : "Opis",
-        "naziv" : "Naziv",
-        "sifra" : "Šifra",
+    "entiteta": {
+        "ime": "Ime",
+        "opis": "Opis",
+        "naziv": "Naziv",
+        "sifra": "Šifra",
         "kapaciteta": "Kapaciteta",
         "opomba": "Opomba",
         "email": "E-pošta",
-        "stevilka": "Številka"
+        "stevilka": "Številka",
+        "naslov": "Naslov",
+        "podnaslov": "Podnaslov",
+        "avtor": "Avtor",
+        "drzava": "Država",
+        "jeeu": "Iz EU",
+        "podrocje": "Področje",
+        "sort": "Sort",
+        "uprizoritev": "Uprizoritev",
+        "status": "Status",
+        "zacetek": "Začetek",
+        "konec": "Konec",
+        "oseba": "Oseba",
+        "name": "Naziv",
+        "description": "Opis",
+        "builtIn": "Vgrajeno"
     },
     "abonma": {
         "stPredstav": "Število predstav",
@@ -347,7 +362,6 @@
     },
     "tipFunkcije": {
         "zenskoIme": "Žensko ime",
-        "podrocje": "Področje",
         "nastopajoc": "Nastopajoč"
     },
     "drzava": {
@@ -359,6 +373,19 @@
     "posta": {
         "sifra": "Poštna številka"
     },
+    "popa": {
+        "tipkli": "Tip klienta",
+        "stakli": "Status klienta",
+        "naziv1": "Dodatni naziv",
+        "panoga": "Panoga",
+        "url": "Spletna stran",
+        "idddv": "ID za DDV",
+        "maticna": "Matična številka",
+        "zavezanec": "Zavezanec za DDV",
+        "datZav": "Zavezanec za DDV od",
+        "datnZav": "Zavezanec za DDV do",
+        "zamejstvo": "Iz zamejstva"
+    },
     "oseba": {
         "priimek": "Priimek",
         "funkcija": "Funkcija",
@@ -367,7 +394,7 @@
         "psevdonim": "Psevdonim",
         "datumRojstva": "Datum rojstva",
         "emso": "EMŠO",
-        "davcna": "Davčna",
+        "davcna": "Davčna številka",
         "spol": "Spol",
         "opombe": "Opomba",
         "drzavljanstvo": "Državljanstvo",
@@ -384,19 +411,21 @@
         "ulica": "Ulica",
         "ulicaDva": "Dodatna ulica",
         "posta": "Poštna številka",
-        "postaNaziv": "Poštna",
+        "postaNaziv": "Pošta",
         "pokrajina": "Pokrajina",
-        "drzava": "Država",
-        "jeeu": "Iz EU",
         "privzeti": "Privzeti naslov"
     },
     "tel": {
         "vrsta": "Vrsta tel. številke",
-        "privzeta": "Privzeta"
+        "privzeta": "Privzeta",
+        "popa": "Klient"
+    },
+    "kontaktnaOseba": {
+        "funkcija": "funkcija",
+        "popa": "Poslovni partner"
     },
     "besedilo": {
         "naslov": "Naslov",
-        "avtor": "Avtor",
         "podnaslov": "Podnaslov",
         "jezik": "Jezik",
         "naslovIzvirnika": "Naslov izvirnika",
@@ -404,6 +433,89 @@
         "moskeVloge": "Moške vloge",
         "zenskeVloge": "Ženske vloge",
         "prevajalec": "Prevajalec",
-        "povzetekVsebine": "povzetek vsebine"
+        "povzetekVsebine": "Povzetek vsebine"
+    },
+    "uprizoritev": {
+        "faza": "Faza",
+        "delovniNaslov": "Delovni naslov",
+        "datumZacStudija": "Datum začetka študije",
+        "stevilovaj": "Število vaj",
+        "datumPremiere": "Datum premiere",
+        "maticniOder": "Matični oder",
+        "stOdmorov": "Število odmorov",
+        "gostujoca": "Gostujoča",
+        "trajanje": "Trajanje",
+        "arhOpomba": "Opomba za arhiv",
+        "datumZakljucka": "Datum Zaključka",
+        "arhIdent": "Šifra arhiva",
+        "sloAvtor": "Slovenski avtor",
+        "kratkiNaslov": "Kratki naslov",
+        "besedilo": "Besedilo",
+        "zvrstUprizoritve": "Zvrst uprizoritve",
+        "zvrstSurs": "Zvrst SURS"
+
+    },
+    "funkcija": {
+        "vodjaEkipe": "Vodja področja",
+        "komentar": "Komentar",
+        "velikost": "Velikost",
+        "pomembna": "Pomembna",
+        "sePlanira": "Funkcija se planira",
+        "dovoliPrekrivanje": "Dovoli prekrivanje",
+        "maxPrekrivanje": "Maximalno prekrivanje",
+        "privzeti": "Privzeta alternacija",
+        "tipFunkcije": "Tip funkcije"
+    },
+    "alternacija": {
+        "zaposlen": "Zaposlen",
+        "privzeti": "Privzeti",
+        "aktivna": "Aktivna",
+        "funkcija": "funkcije",
+        "sodelovanje": "Sodelovanje",
+        "koprodukcija": "koprodukcija",
+        "pogodba": "Pogodba"
+    },
+    "prodel": {
+        "odstotekFinanciranja": "Odstotek financiranja",
+        "nasStrosek": "Naš Strošek",
+        "lastnaSredstva": "Lastna sredstva",
+        "zaproseno": "Zaprošeno",
+        "drugiJavni": "Drugi javni viri",
+        "avtorskih": "Avtorski honorarji",
+        "tantiemi": "Tantieme",
+        "skupniStrosek": "Skupni strošek",
+        "zaprosenProcent": "Zaprošen procent",
+        "koproducent": "Koproducent"
+    },
+    "strupr": {
+        "vrednostDo": "Vrednost do premiere",
+        "vrednostNa": "Vrednost na ponovitev",
+        "popa": "Poslovni partner"
+    },
+    "zaposlitev": {
+        "tip": "Tip",
+        "delovnaObveza": "Delovna obveza",
+        "malica": "Malica",
+        "izmenskoDelo": "Izmensko delo",
+        "individualnaPogodba": "Individualna pogodba",
+        "jeZaposlenVdrugemjz": "Zaposlen v drugem JZ",
+        "jeNastopajoci": "Nastopajoči"
+    },
+    "user": {
+        "name": "Polno ime",
+        "password": "Geslo",
+        "enabled": "Aktiven",
+        "expires": "Velja do",
+        "defaultRoute": "Privzeta pot ob prijavi",
+        "defaultRouteParams": "Parametri za pot"
+    },
+    "pogodba": {
+        "vrednostVaje": "Vrednost vaje",
+        "vrednostPredstave": "Vrednost predstave",
+        "vrednostUre": "Vrednost ure",
+        "aktivna": "Vrednost vaje",
+        "vrednostDo": "Vrednost do",
+        "popa": "Klient",
+        "trr": "TRR"
     }
 }
