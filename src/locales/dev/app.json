@@ -327,5 +327,19 @@
     "std": {
         "brisi": "Briši",
         "uredi": "Uredi"
+    },
+    "entiteta":{
+        "ime" : "Ime",
+        "opis" : "Opis",
+        "naziv" : "Naziv",
+        "sifra" : "Šifra",
+        "kapaciteta": "Kapaciteta"
+    },
+    "abonma": {
+        "stPredstav": "Število predstav",
+        "stKuponov": "Število kuponov"
+    },
+    "prostor": {
+        "jePrizorisce": "Prizorišče"
     }
 }
