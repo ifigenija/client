@@ -43,8 +43,8 @@ define([
     ];
 
     var gumbi = {
-        'doc-koproducent': {
-            id: 'doc-koproducent',
+        'doc-producent': {
+            id: 'doc-producent',
             label: 'Koproducent',
             element: 'button-trigger',
             trigger: 'koproducent',
@@ -178,7 +178,7 @@ define([
 
     PopaEditView.prototype.onRenderForm = function () {
         if (!this.model.get('producent')) {
-            this.toolbarView.showButtons(['doc-koproducent']);
+            this.toolbarView.showButtons(['doc-producent']);
         }
 
         if (!this.model.get('kupec')) {

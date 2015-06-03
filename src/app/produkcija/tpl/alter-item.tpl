@@ -1,7 +1,7 @@
 
 <div class="media-left">
     <a href="#">
-        <span class="fa fa-user-secret fa-4x"></span>
+        <span class="fa fa-user-secret fa-3x"></span>
     </a>
 </div>
 <div class="media-body">

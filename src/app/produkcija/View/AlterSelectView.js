@@ -69,7 +69,8 @@ define([
         onRender: function () {
             this.regionButton.show(new Toolbar({
                 listener: this,
-                buttonGroups: alterItemButtons
+                buttonGroups: alterItemButtons,
+                groupClass: 'btn-group btn-tripikice'
             }));
             
         }

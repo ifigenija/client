@@ -48,8 +48,10 @@ define([
 
             this.orodnaR.show(ovv);
 
-            ovv.obvestilaR.show(application.flashManager.manager);
-            application.flashManager.createSporocilaView();
+            var fm = application.flashManager;
+            ovv.obvestilaR.show(fm.manager);
+            fm.manager.$el.prop('id', 'flashMessagesManager');
+            fm.createSporocilaView("#sporocila-ifi");
 
 
 
