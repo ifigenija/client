@@ -76,8 +76,7 @@
             "pogodbe": "Pogodbe",
             "koprodukcije": "Koprodukcije",
             "stroski": "Stroški",
-            "title": "Stroški uprizoritve",
-            "popa": "Poslovni partner"
+            "title": "Stroški uprizoritve"
         },
         "zaposlitev": {
             "title": "Zaposlitve",
@@ -237,7 +236,9 @@
         "oseba": "Oseba",
         "name": "Naziv",
         "description": "Opis",
-        "builtIn": "Vgrajeno"
+        "builtIn": "Vgrajeno",
+        "funkcija": "Funkcija",
+        "aktivna": "Aktivna"
     },
     "abonma": {
         "stPredstav": "Število predstav",
@@ -274,7 +275,6 @@
     },
     "oseba": {
         "priimek": "Priimek",
-        "funkcija": "Funkcija",
         "srednjeIme": "Srednje ime",
         "polnoIme": "Polno ime",
         "psevdonim": "Psevdonim",
@@ -307,7 +307,6 @@
         "popa": "Klient"
     },
     "kontaktnaOseba": {
-        "funkcija": "Funkcija",
         "popa": "Poslovni partner"
     },
     "besedilo": {
@@ -355,8 +354,6 @@
     "alternacija": {
         "zaposlen": "Zaposlen",
         "privzeti": "Privzeti",
-        "aktivna": "Aktivna",
-        "funkcija": "funkcija",
         "sodelovanje": "Sodelovanje",
         "koprodukcija": "Koprodukcija",
         "pogodba": "Pogodba"
@@ -399,7 +396,6 @@
         "vrednostVaje": "Vrednost vaje",
         "vrednostPredstave": "Vrednost predstave",
         "vrednostUre": "Vrednost ure",
-        "aktivna": "Vrednost vaje",
         "vrednostDo": "Vrednost do",
         "popa": "Klient",
         "trr": "TRR"
