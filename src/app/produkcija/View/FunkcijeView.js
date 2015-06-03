@@ -47,7 +47,7 @@ define([
         schema: sch,
         name: '',
         detailName: '',
-        formTitle: i18next.t('produkcija.funkcija.title'),
+        formTitle: i18next.t('funkcija.title'),
         regions: {
             alterR: ".region-alternacije"
         },
@@ -65,7 +65,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('produkcija.funkcija.imena'),
+                label: i18next.t('funkcija.imena'),
                 name: 'imena',
                 sortable: true
             },
@@ -112,8 +112,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')},
+                    {event: 'uredi', title: i18next.t('entiteta.uredi')}
                 ]
             }
         ]
@@ -164,7 +164,7 @@ define([
         var rv = new AlterSelectView({
             collection: c,
             funkcija: this.model,
-            title: i18next.t("produkcija.funkcija.title"),
+            title: i18next.t("funkcija.title"),
             type: "lookup",
             lookup: "oseba"
 

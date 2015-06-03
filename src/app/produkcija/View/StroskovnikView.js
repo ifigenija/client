@@ -23,7 +23,7 @@ define([
 
     var StroskovnikView = Marionette.LayoutView.extend({
         template: tpl,
-        title: i18next.t('produkcija.strosek.title'),
+        title: i18next.t('strupr.title'),
         regions: {
             regionLookup: '.region-lookup',
             regionToolbar: '.region-toolbar',

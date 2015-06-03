@@ -25,7 +25,7 @@ define([
 
     var BesediloView = SeznamiView.extend({
         url: baseUrl + '/rest/besedilo',
-        title: i18next.t('seznami.besedilo.title'),
+        title: i18next.t('besedilo.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
@@ -70,14 +70,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]
     });
     
     BesediloView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.besedilo.nova");
+        var text = i18next.t("besedilo.nova");
 
         if (model.get('id')) {
             text = model.get('naslov') || "Naslov";

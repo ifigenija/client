@@ -19,7 +19,7 @@ define([
 
     var OsebaView = SeznamiView.extend({
         url: baseUrl + '/rest/oseba',
-        title: i18next.t('seznami.oseba.title'),
+        title: i18next.t('oseba.title'),
         columns: [
             {
                 cell: 'string',
@@ -59,7 +59,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('oseba.funkcija'),
+                label: i18next.t('entiteta.funkcija'),
                 name: 'funkcija',
                 sortable: false
             },
@@ -68,7 +68,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]

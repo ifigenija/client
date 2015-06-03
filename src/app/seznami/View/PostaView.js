@@ -19,7 +19,7 @@ define([
 
     var PostaView = SeznamiView.extend({
         url: baseUrl + '/rest/posta',
-        title: i18next.t('seznami.posta.title'),
+        title: i18next.t('posta.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
@@ -42,14 +42,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]
     });
 
     PostaView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.posta.nova");
+        var text = i18next.t("posta.nova");
 
         if (model.get('id')) {
             text = model.get('naziv') || "Naziv";

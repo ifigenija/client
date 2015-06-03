@@ -19,7 +19,7 @@ define([
 
     var TipFunkcijeView = SeznamiView.extend({
         url: baseUrl + '/rest/tipFunkcije',
-        title: i18next.t('seznami.tipFunkcije.title'),
+        title: i18next.t('tipFunkcije.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
@@ -56,14 +56,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]
     });
     
     TipFunkcijeView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.tipFunkcije.nova");
+        var text = i18next.t("tipFunkcije.nova");
 
         if (model.get('id')) {
             text = model.get('ime') || "Ime";

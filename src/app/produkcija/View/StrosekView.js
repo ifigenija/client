@@ -22,9 +22,9 @@ define([
     var StrosekView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        title: i18next.t('produkcija.strosek.title'),
+        title: i18next.t('strupr.title'),
         detailName: 'stroski',
-        formTitle: i18next.t('produkcija.strosek.title'),
+        formTitle: i18next.t('strupr.title'),
         gridMeta: [
             {
                 headerCell: hc,
@@ -78,8 +78,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')},
+                    {event: 'uredi', title: i18next.t('entiteta.uredi')}
                 ]
             }
         ]

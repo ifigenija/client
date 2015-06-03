@@ -30,7 +30,7 @@ define([
 
     var RoleView = SeznamiView.extend({
         url: baseUrl + '/rest/role',
-        title: i18next.t('admin.role.title'),
+        title: i18next.t('role.title'),
         schema: schema,
         formTemplate: formTpl,
         template: permTpl,
@@ -42,7 +42,7 @@ define([
             permsR: '.seznam-perms',
             usersR: '.seznam-users'
         },
-        dodaj: i18next.t('admin.role.dodaj'),
+        dodaj: i18next.t('role.dodaj'),
         columns: [
             {
                 cell: 'string',
@@ -70,14 +70,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('admin.brisi')}
+                    {event: 'brisi', title: i18next.t('brisi')}
                 ]
             }
         ]
     });
 
     RoleView.prototype.getTitle = function (model) {
-        var text = i18next.t("admin.role.nova");
+        var text = i18next.t("role.nova");
 
         if (model.get('id')) {
             text = model.get('name') || i18next.t("xx.Dovoljenje");
@@ -133,7 +133,7 @@ define([
             ownerId: model.get('id'),
             relation: 'permissions',
             lookup: 'permission',
-            title: i18next.t("admin.permission.title")
+            title: i18next.t("permission.title")
         });
         this.permsR.show(rv);
     };
@@ -148,7 +148,7 @@ define([
             relation: 'users',
             lookup: 'user',
             type: 'lookup',
-            title: i18next.t("admin.user.title")
+            title: i18next.t("user.title")
         });
         this.usersR.show(rv);
     };

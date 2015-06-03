@@ -25,19 +25,19 @@ define([
 
     var tabsSplosno = [
         {
-            name: i18next.t('seznami.std.splosno'),
+            name: i18next.t('entiteta.splosno'),
             event: 'splosni'
         },
         {
-            name: i18next.t('seznami.std.kontakti'),
+            name: i18next.t('entiteta.kontakti'),
             event: 'kontakti'
         },
         {
-            name: i18next.t('seznami.popa.osebe'),
+            name: i18next.t('popa.osebe'),
             event: 'osebe'
         },
         {
-            name: i18next.t('seznami.popa.racuni'),
+            name: i18next.t('popa.racuni'),
             event: 'trrji'
         }
     ];
@@ -87,12 +87,12 @@ define([
     });
     PopaEditView.prototype.getNaziv = function () {
         var naziv = this.model.get('naziv');
-        return naziv ? naziv : i18next.t('seznami.popa.naziv');
+        return naziv ? naziv : i18next.t('popa.naziv');
     };
 
     PopaEditView.prototype.getNaslov = function () {
         return this.isNew() ?
-                i18next.t('seznami.popa.nova') : this.getNaziv();
+                i18next.t('popa.nova') : this.getNaziv();
     };
 
     PopaEditView.prototype.onBeforeRender = function () {

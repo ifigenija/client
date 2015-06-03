@@ -26,7 +26,7 @@ define([
 
     var UprizoritevView = SeznamiView.extend({
         url: baseUrl + '/rest/uprizoritev/vse',
-        title: i18next.t('produkcija.uprizoritev.title'),
+        title: i18next.t('uprizoritev.title'),
         columns: [
             {
                 cell: 'string',
@@ -63,7 +63,7 @@ define([
                     optionValues: schema.getOptionValues('zvrstUprizoritve')
                 }),
                 editable: false,
-                label: i18next.t('produkcija.uprizoritev.zvrst'),
+                label: i18next.t('uprizoritev.zvrst'),
                 name: 'zvrstUprizoritve',
                 sortable: true
             },
@@ -87,7 +87,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]

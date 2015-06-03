@@ -20,19 +20,19 @@ define([
         ) {
 
     var tabVse = [
-        {name: i18next.t('seznami.std.splosno'), event: 'splosni'},
-        {name: i18next.t('seznami.oseba.osebniPodatki'), event: 'osebniPodatki'},
-        {name: i18next.t('seznami.std.kontakti'), event: 'kontakti'}
+        {name: i18next.t('entiteta.splosno'), event: 'splosni'},
+        {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'},
+        {name: i18next.t('entiteta.kontakti'), event: 'kontakti'}
     ];
 
     var tabSplosno = [
-        {name: i18next.t('seznami.std.splosno'), event: 'splosni'},
-        {name: i18next.t('seznami.oseba.osebniPodatki'), event: 'osebniPodatki'}
+        {name: i18next.t('entiteta.splosno'), event: 'splosni'},
+        {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'}
     ];
 
     var tabNovi = [
-        {name: i18next.t('seznami.std.splosno'), event: 'splosni'},
-        {name: i18next.t('seznami.oseba.osebniPodatki'), event: 'osebniPodatki'}
+        {name: i18next.t('entiteta.splosno'), event: 'splosni'},
+        {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'}
     ];
 
 
@@ -53,8 +53,8 @@ define([
         var imeT = this.model.get('ime');
         var priimekT = this.model.get('priimek');
 
-        var ime = imeT ? imeT : i18next.t('seznami.oseba.ime');
-        var priimek = priimekT ? priimekT : i18next.t('seznami.oseba.priimek');
+        var ime = imeT ? imeT : i18next.t('oseba.ime');
+        var priimek = priimekT ? priimekT : i18next.t('oseba.priimek');
 
         var imePriimek = ime + ' ' + priimek;
 
@@ -62,7 +62,7 @@ define([
     };
 
     OsebaEditView.prototype.getNaslov = function () {
-        return this.isNew() ? i18next.t('seznami.oseba.nova') : this.getImePriimek();
+        return this.isNew() ? i18next.t('oseba.nova') : this.getImePriimek();
     };
 
     OsebaEditView.prototype.onBeforeRender = function () {

@@ -25,7 +25,7 @@ define([
 
     var ZaposlitevView = SeznamiView.extend({
         url: baseUrl + '/rest/zaposlitev/vse',
-        title: i18next.t('produkcija.zaposlitev.title'),
+        title: i18next.t('zaposlitev.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
@@ -79,14 +79,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]
     });
 
     ZaposlitevView.prototype.getTitle = function (model) {
-        var text = i18next.t("produkcija.zaposlitev.nova");
+        var text = i18next.t("zaposlitev.nova");
 
         if (model.get('id')) {
             text = model.get('oseba').label || "Oseba";

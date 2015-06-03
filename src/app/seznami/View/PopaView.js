@@ -17,7 +17,7 @@ define([
 
     var PopaView = SeznamiView.extend({
         url: baseUrl + '/rest/popa',
-        title: i18next.t('seznami.popa.title'),
+        title: i18next.t('popa.title'),
         columns: [
             {
                 cell: 'string',
@@ -59,7 +59,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]

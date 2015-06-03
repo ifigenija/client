@@ -22,9 +22,9 @@ define([
     var PogodbaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        title: i18next.t('produkcija.pogodba.title'),
+        title: i18next.t('pogodba.title'),
         detailName: 'pogodbe',
-        formTitle: i18next.t('produkcija.pogodba.title'),
+        formTitle: i18next.t('pogodba.title'),
         gridMeta: [
             {
                 cell: 'string',
@@ -88,8 +88,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')},
+                    {event: 'uredi', title: i18next.t('entiteta.uredi')}
                 ]
             }
         ]

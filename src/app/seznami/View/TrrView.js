@@ -18,7 +18,7 @@ define([
         schema: schema.toFormSchema().schema,
         name: 'Trr',
         detailName: 'trrji',
-        formTitle: i18next.t('seznami.trr.title'),
+        formTitle: i18next.t('trr.title'),
         gridMeta: [
             {
                 cell: 'string',
@@ -53,8 +53,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')},
+                    {event: 'uredi', title: i18next.t('entiteta.uredi')}
                 ]
             }
         ]

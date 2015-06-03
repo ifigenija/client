@@ -25,7 +25,7 @@ define([
 
     var AbonmaView = SeznamiView.extend({
         url: baseUrl + '/rest/abonma',
-        title: i18next.t('seznami.abonma.title'),
+        title: i18next.t('abonma.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
@@ -72,14 +72,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]
     });
     
     AbonmaView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.abonma.nova");
+        var text = i18next.t("abonma.nova");
 
         if (model.get('id')) {
             text = model.get('ime') || "Ime";

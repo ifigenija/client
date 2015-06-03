@@ -19,7 +19,7 @@ define([
 
     var ProstorView = SeznamiView.extend({
         url: baseUrl + '/rest/prostor',
-        title: i18next.t('seznami.prostor.title'),
+        title: i18next.t('prostor.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
@@ -63,14 +63,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]
     });
     
     ProstorView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.prostor.nova");
+        var text = i18next.t("prostor.nova");
 
         if (model.get('id')) {
             text = model.get('naziv') || "Naziv";

@@ -30,7 +30,7 @@ define([
 
     var PermissionView = SeznamiView.extend({
         url: baseUrl + '/rest/permission',
-        title: i18next.t('admin.permission.title'),
+        title: i18next.t('permission.title'),
         schema: schema,
         formTemplate: formTpl,
         template: permTpl,
@@ -68,14 +68,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('admin.brisi')}
+                    {event: 'brisi', title: i18next.t('brisi')}
                 ]
             }
         ]
     });
 
     PermissionView.prototype.getTitle = function (model) {
-        var text = i18next.t("admin.permission.nova");
+        var text = i18next.t("permission.nova");
 
         if (model.get('id')) {
             text = model.get('name') || i18next.t("xx.Dovoljenje");
@@ -128,7 +128,7 @@ define([
             ownerId: model.get('id'),
             relation: 'roles',
             lookup: 'role',
-            title: i18next.t("admin.role.title")
+            title: i18next.t("role.title")
         });
         this.rolesR.show(rv);
     };

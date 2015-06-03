@@ -25,19 +25,19 @@ define([
         mod.uprizoritve = function () {
             require(['../View/UprizoritevView'], function (UprizoritevView) {
                 var view = new UprizoritevView();
-                ch.command('open', view, i18next.t('produkcija.uprizoritev.title'));
+                ch.command('open', view, i18next.t('uprizoritev.title'));
             });
         };
         mod.stroskovnik = function () {
             require(['../View/StroskovnikView'], function (StroskovnikView) {
                 var view = new StroskovnikView();
-                ch.command('open', view, i18next.t('produkcija.strosek.title'));
+                ch.command('open', view, i18next.t('strupr.title'));
             });
         };
         mod.zaposlitev = function () {
             require(['../View/ZaposlitevView'], function (ZaposlitevView) {
                 var view = new ZaposlitevView();
-                ch.command('open', view, i18next.t('produkcija.strosek.title'));
+                ch.command('open', view, i18next.t('zaposlitev.title'));
             });
         };
 

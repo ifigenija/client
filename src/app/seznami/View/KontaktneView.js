@@ -20,13 +20,13 @@ define([
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'kontaktne',
-        dodaj: i18next.t('seznami.dodaj'),
-        formTitle: i18next.t('seznami.kontaktna.title'),
+        dodaj: i18next.t('dodaj'),
+        formTitle: i18next.t('kontaktnaOseba.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('kontaktnaOseba.funkcija'),
+                label: i18next.t('entiteta.funkcija'),
                 name: 'funkcija',
                 sortable: true
             },
@@ -65,9 +65,9 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')},
-                    {event: 'oseba', title: i18next.t('seznami.oseba'), icon: 'fa-user'}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')},
+                    {event: 'uredi', title: i18next.t('entiteta.uredi')},
+                    {event: 'oseba', title: i18next.t('oseba'), icon: 'fa-user'}
                 ]
             }
         ]

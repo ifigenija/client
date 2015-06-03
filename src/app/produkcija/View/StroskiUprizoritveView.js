@@ -23,23 +23,23 @@ define([
      */
     var tabVsi = [
         {
-            name: i18next.t('produkcija.std.splosno'),
+            name: i18next.t('entiteta.splosno'),
             event: 'splosni'
         },
         {
-            name: i18next.t('produkcija.strosek.alternacije'),
+            name: i18next.t('strupr.alternacije'),
             event: 'alternacije'
         },
         {
-            name: i18next.t('produkcija.strosek.pogodbe'),
+            name: i18next.t('strupr.pogodbe'),
             event: 'pogodbe'
         },
         {
-            name: i18next.t('produkcija.strosek.koprodukcije'),
+            name: i18next.t('strupr.koprodukcije'),
             event: 'koprodukcije'
         },
         {
-            name: i18next.t('produkcija.strosek.stroski'),
+            name: i18next.t('strupr.stroski'),
             event: 'stroski'
         }
     ];
@@ -63,13 +63,13 @@ define([
 
     UprizoritevStrosekEditView.prototype.getNaslovUprizoritve = function () {
         var naslovT = this.model.get('naslov');
-        var naslov = naslovT || i18next.t('produkcija.strosek.title');
+        var naslov = naslovT || i18next.t('strupr.title');
         return naslov;
     };
 
     UprizoritevStrosekEditView.prototype.getNaslov = function () {
         return this.isNew() ?
-                i18next.t('produkcija.uprizoritev.nova') : this.getNaslovUprizoritve();
+                i18next.t('uprizoritev.nova') : this.getNaslovUprizoritve();
     };
 
     UprizoritevStrosekEditView.prototype.initialize = function (options) {

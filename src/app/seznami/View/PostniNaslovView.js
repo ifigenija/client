@@ -18,7 +18,7 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'naslovi',
         name: 'PostniNaslov',
-        formTitle: i18next.t('seznami.postniNaslov.title'),
+        formTitle: i18next.t('postniNaslov.title'),
         gridMeta: [
             {
                 cell: 'string',
@@ -53,8 +53,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')},
+                    {event: 'uredi', title: i18next.t('entiteta.uredi')}
                 ]
             }
         ]

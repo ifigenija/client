@@ -19,7 +19,7 @@ define([
 
     var ZvrstSursView = SeznamiView.extend({
         url: baseUrl + '/rest/zvrstSurs',
-        title: i18next.t('seznami.zvrstSurs.title'),
+        title: i18next.t('zvrstSurs.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
@@ -42,14 +42,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]
     });
     
     ZvrstSursView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.zvrstSurs.nova");
+        var text = i18next.t("zvrstSurs.nova");
 
         if (model.get('id')) {
             text = model.get('ime') || "Ime";

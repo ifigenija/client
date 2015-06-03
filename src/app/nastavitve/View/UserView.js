@@ -39,7 +39,7 @@ define([
             naslovR: '.seznam-naslov',
             rolesR: '.seznam-roles'
         },
-        title: i18next.t('admin.user.title'),
+        title: i18next.t('user.title'),
         columns: [
             {
                 cell: 'string',
@@ -75,7 +75,7 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]
@@ -87,7 +87,7 @@ define([
     };
 
     UserView.prototype.getTitle = function (model) {
-        var text = i18next.t("admin.user.nova");
+        var text = i18next.t("user.nova");
 
         if (model.get('id')) {
             text = model.get('name') || i18next.t("xx.Dovoljenje");
@@ -132,7 +132,7 @@ define([
             ownerId: model.get('id'),
             relation: 'roles',
             lookup: 'role',
-            title: i18next.t("admin.role.title")
+            title: i18next.t("role.title")
         });
         this.rolesR.show(rv);
     };

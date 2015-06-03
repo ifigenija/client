@@ -33,9 +33,9 @@ define([
                 }
             }
         }).schema,
-        title: i18next.t('produkcija.alternacija.title'),
+        title: i18next.t('alternacija.title'),
         detailName: 'alternacije',
-        formTitle: i18next.t('produkcija.alternacija.title'),
+        formTitle: i18next.t('alternacija.title'),
         gridMeta: [
             {
                 headerCell: hc,
@@ -62,7 +62,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('alternacija.funkcija'),
+                label: i18next.t('entiteta.funkcija'),
                 name: 'funkcija.label',
                 sortable: true
             },
@@ -85,8 +85,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')},
+                    {event: 'uredi', title: i18next.t('entiteta.uredi')}
                 ]
             }
         ]

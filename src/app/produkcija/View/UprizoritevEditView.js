@@ -27,19 +27,19 @@ define([
      */
     var tabVsi = [
         {
-            name: i18next.t('produkcija.std.splosno'),
+            name: i18next.t('entiteta.splosno'),
             event: 'splosni'
         },
         {
-            name: i18next.t('produkcija.uprizoritev.umetniskeEkipe'),
+            name: i18next.t('uprizoritev.umetniskeEkipe'),
             event: 'umetniki'
         },
         {
-            name: i18next.t('produkcija.uprizoritev.nastopajoci'),
+            name: i18next.t('uprizoritev.nastopajoci'),
             event: 'igralci'
         },
         {
-            name: i18next.t('produkcija.uprizoritev.ostaliSodelujoci'),
+            name: i18next.t('uprizoritev.ostaliSodelujoci'),
             event: 'tehniki'
         }
     ];
@@ -63,13 +63,13 @@ define([
 
     UprizoritevEditView.prototype.getNaslovUprizoritve = function () {
         var naslovT = this.model.get('naslov');
-        var naslov = naslovT || i18next.t('produkcija.uprizoritev.naslov');
+        var naslov = naslovT || i18next.t('uprizoritev.naslov');
         return naslov;
     };
 
     UprizoritevEditView.prototype.getNaslov = function () {
         return this.isNew() ?
-                i18next.t('produkcija.uprizoritev.nova') : this.getNaslovUprizoritve();
+                i18next.t('uprizoritev.nova') : this.getNaslovUprizoritve();
     };
 
     UprizoritevEditView.prototype.onBeforeRender = function () {

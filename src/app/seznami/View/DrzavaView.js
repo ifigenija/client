@@ -19,7 +19,7 @@ define([
 
     var DrzavaView = SeznamiView.extend({
         url: baseUrl + '/rest/drzava',
-        title: i18next.t('seznami.drzava.title'),
+        title: i18next.t('drzava.title'),
         schema: schema,
         formTemplate: formTpl,
         columns: [
@@ -56,14 +56,14 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')}
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')}
                 ]
             }
         ]
     });
     
     DrzavaView.prototype.getTitle = function (model) {
-        var text = i18next.t("seznami.drzava.nova");
+        var text = i18next.t("drzava.nova");
 
         if (model.get('id')) {
             text = model.get('naziv') || "Naziv";
