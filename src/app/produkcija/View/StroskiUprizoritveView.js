@@ -223,6 +223,7 @@ define([
             });
 
             view.listenTo(view, "save:success", function () {
+                c.fetch();
                 view.renderList();
             });
 

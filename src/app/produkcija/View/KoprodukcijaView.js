@@ -28,7 +28,7 @@ define([
         schema: schema.toFormSchema().schema,
         name: i18next.t('uprizoritve.koprodukcija'),
         detailName: 'koprodukcije',
-        formTitle: i18next.t('kotitle'),
+        formTitle: i18next.t('prodel.title'),
         gridMeta: [
             {
                 cell: 'string',
