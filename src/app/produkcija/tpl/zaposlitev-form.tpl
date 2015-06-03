@@ -1,6 +1,7 @@
 <form>
     <div class="row">
-        <div class="col-sm-6" data-fields="oseba,status,zacetek,konec,tip"></div>
-        <div class="col-sm-6" data-fields="delovnaObveza,malica,izmenskoDelo,individualnaPogodba,jeZaposlenVdrugemJz,jeNastopajoci"></div>
+        <div class="col-sm-6 col-md-4" data-fields="oseba,status,tip,delovnaObveza"></div>
+        <div class="col-sm-6 col-md-4" data-fields="zacetek,konec,malica"></div>
+        <div class="col-sm-6 col-md-4" data-fields="izmenskoDelo,individualnaPogodba,jeZaposlenVdrugemJz,jeNastopajoci"></div>
     </div>
 </form>

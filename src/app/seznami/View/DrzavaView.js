@@ -26,7 +26,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.sifra'),
+                label: i18next.t('drzava.sifra'),
                 name: 'sifra',
                 sortable: true
             },
