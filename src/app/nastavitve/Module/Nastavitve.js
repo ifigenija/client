@@ -32,8 +32,8 @@ define([
         };
 
         model.manageUsers = function (akcija) {
-            require(['../View/UserView'], function (UporabnikView) {
-                var view = new UporabnikView();
+            require(['../View/UserView'], function (UserView) {
+                var view = new UserView();
                 ch.command('open', view, i18next.t('user.title'));
                 if (akcija) {
                     view.triggerMethod(akcija);

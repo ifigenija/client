@@ -18,7 +18,7 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'telefonske',
         name: i18next.t('uprizoritve.telefonska'),
-        formTitle: i18next.t('telefonska.title'),
+        formTitle: i18next.t('tel.title'),
         gridMeta: [
             {
                 cell: 'string',
