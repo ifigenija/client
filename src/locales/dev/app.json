@@ -66,8 +66,8 @@
             "popa": "Poslovni partnerji",
             "drzava": "Države",
             "tipFunkcije": "Tipi funkcij",
-            "zvrstUprizoritve": "Zvrsti uprizoritev",
-            "zvrstSurs": "Zvrsti SURS",
+            "zvrstUprizoritve": "Vrste uprizoritev",
+            "zvrstSurs": "Zvrsti po SURS",
             "tipUprizoritev": "Tip uprizoritev",
             "besedilo": "Besedila",
             "abonma": "Abonmaji"
@@ -132,12 +132,12 @@
         "jePrizorisce": "Prizorišče"
     },
     "zvrstSurs": {
-        "title": "Zvrsti SURS",
-        "nova": "Nova zvrst SURS"
+        "title": "Zvrsti po SURS",
+        "nova": "Nova zvrst po SURS"
     },
     "zvrstUprizoritve": {
-        "title": "Zvrsti uprizoritev",
-        "nova": "Nova zvrst uprizoritve"
+        "title": "Vrste uprizoritev",
+        "nova": "Nova vrsta uprizoritve"
     },
     "tipFunkcije": {
         "title": "Tipi funkcij",
@@ -237,7 +237,7 @@
         "umetniskeEkipe": "Umetniška Ekipa",
         "nastopajoci": "Nastopajoči",
         "ostaliSodelujoci": "Ostali sodelujoči",
-        "zvrst": "Zvrst",
+        "zvrst": "Vrsta",
         "faza": "Faza",
         "delovniNaslov": "Delovni naslov",
         "datumZacStudija": "Datum začetka študije",
@@ -253,8 +253,8 @@
         "sloAvtor": "Slovenski avtor",
         "kratkiNaslov": "Kratki naslov",
         "besedilo": "Besedilo",
-        "zvrstUprizoritve": "Zvrst uprizoritve",
-        "zvrstSurs": "Zvrst SURS"
+        "zvrstUprizoritve": "Vrsta uprizoritve",
+        "zvrstSurs": "Zvrst po SURS"
 
     },
     "funkcija": {
@@ -263,7 +263,7 @@
         "vodjaEkipe": "Vodja področja",
         "komentar": "Komentar",
         "velikost": "Velikost",
-        "pomembna": "Pomembna",
+        "pomembna": "Izpostavljena",
         "sePlanira": "Funkcija se planira",
         "dovoliPrekrivanje": "Dovoli prekrivanje",
         "maxPrekrivanj": "Max. prekrivanj",

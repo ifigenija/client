@@ -76,11 +76,17 @@ define([
                 var view = new AbonmaView();
                 ch.command('open', view, i18next.t('prostor.title'));
             });
-        };        
+        };
         model.alternacija = function () {
             require(['../View/AlternacijaView'], function (AlternacijaView) {
                 var view = new AlternacijaView();
                 ch.command('open', view, i18next.t('alternacija.title'));
+            });
+        };
+        model.modal = function () {
+            require(['../View/OsebaModalView'], function (OsebaModalView) {
+                var view = new OsebaModalView();
+                ch.command('open', view, i18next.t('osebamodal.title'));
             });
         };
 
@@ -103,7 +109,8 @@ define([
                     'popa': 'popa',
                     'abonma': 'abonma',
                     'prostor': 'prostor',
-                    'alternacija' : 'alternacija'
+                    'alternacija': 'alternacija',
+                    'modal': 'modal'
                 }
             });
         });
