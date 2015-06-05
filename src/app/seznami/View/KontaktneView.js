@@ -2,12 +2,14 @@
  * Licenca GPLv3
  */
 define([
+    'radio',
     'app/Dokument/View/PostavkeView',
     'app/Max/Module/Backgrid',
     'template!../tpl/kontaktna-form.tpl',
     'formSchema!kontaktnaoseba',
     'i18next'
 ], function (
+        Radio,
         PostavkeView,
         Backgrid,
         formTpl,
@@ -92,22 +94,20 @@ define([
             var modal = new Modal({
                 content: view,
                 animate: true,
-                okText: "Shrani",
-                cancelText: "Prekliči"
-            }).open(function () {
-                view.onShrani();
-            });
+                okText: i18next.t("std.izberi"),
+                cancelText: i18next.t("std.preklici")
+            }).open();
 
             modal.listenTo(modal, 'ok', function () {
-                modal.preventClose();
+                if(!view.model.get('id')){
+                    Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove osebe', code: 0, severity: 'error'});
+                    modal.preventClose();
+                }
+                else{
+                    self.form.fields.oseba.editor.setValue(view.model.get('id'));
+                    modal.close();
+                }
             });
-            modal.listenTo(view, 'save:success', function (model) {
-                modal.close();
-            });
-            self.listenTo(view, 'save:success',
-                    function (model) {
-                        this.form.fields.oseba.editor.setValue(model.get('id'));
-                    });
         });
     };
 

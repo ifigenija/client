@@ -152,16 +152,30 @@ define([
     };
 
     /**
+     * 
+     * @param {type} model
+     * @returns {undefined}
+     */
+    SeznamiView.prototype.zamenjajUrl = function (model) {
+        var fragment = Backbone.history.getFragment().split("/")[0];
+        var newUrl = fragment + '/' + model.get('id');
+
+        console.log(newUrl);
+
+        Radio.channel('layout').command('replaceUrl', newUrl);
+    };
+
+    /**
      * Kaj se zgodi, ko izberemo model v tabeli 
      * @param {type} model
      * @returns {undefined}
      */
     SeznamiView.prototype.onSelected = function (model) {
 
+        this.zamenjajUrl(model);
 
-      
         var form = this.getFormView(model);
-        
+
         this.formR.show(form);
 
         this.$('.glava-title').text(this.getTitle(model));
@@ -184,12 +198,15 @@ define([
     };
 
     /** 
-     * kaj se zgodi, ko 
+     * kaj se zgodi, ko pritisnemo skrij/preklici
      * 
      */
     SeznamiView.prototype.preklici = function () {
         this.formR.empty();
         this.renderToolbar();
+
+        var fragment = Backbone.history.getFragment().split("/")[0];
+        Radio.channel('layout').command('replaceUrl', fragment);
     };
 
     SeznamiView.prototype.getTitle = function (model) {

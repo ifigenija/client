@@ -89,7 +89,9 @@
     "std": {
         "brisi": "Briši",
         "uredi": "Uredi",
-        "potrdiIzbris": "Ali res želite izbrisati podatek"
+        "potrdiIzbris": "Ali res želite izbrisati podatek",
+        "izberi": "Izberi",
+        "preklici": "Prekliči"
     },
     "entiteta": {
         "dodaj": "Dodaj",

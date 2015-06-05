@@ -73,8 +73,8 @@ define([
             }
         };
 
-        Layout.prototype.replaceUrl = function (view, name, route) {
-            console.log("zamenjaj URL");
+        Layout.prototype.replaceUrl = function (url) {
+            Backbone.history.navigate(url);
         };
 
         module.refreshActiveTab = function (url) {

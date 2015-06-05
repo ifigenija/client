@@ -78,6 +78,11 @@ define([
 //        var response = chLovro.request('isGranted', "halo");
 //        console.log("Oseba "+ response);
 
+    /**
+     * Overridana funkcija iz seznamaView
+     * @param {type} model
+     * @returns {OsebaView_L11.OsebaEditView}
+     */
     OsebaView.prototype.getFormView = function (model) {
         var editModel = model;
         

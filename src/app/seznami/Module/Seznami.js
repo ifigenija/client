@@ -83,10 +83,54 @@ define([
                 ch.command('open', view, i18next.t('alternacija.title'));
             });
         };
-        model.modal = function () {
-            require(['../View/OsebaModalView'], function (OsebaModalView) {
-                var view = new OsebaModalView();
-                ch.command('open', view, i18next.t('osebamodal.title'));
+
+        /**
+         * Dostop direktno do podatkov osebe
+         * @param {type} id
+         * @returns {undefined}
+         */
+        model.osebaOdpri = function (id) {
+            require(['../Model/Oseba', '../View/OsebaView'], function (Model, View) {
+                var view = new View({pogled: 'splosno'});
+                ch.command('open', view, i18next.t('oseba.title'));
+                
+                var model = new Model.Model({id: id});
+                model.fetch();
+                
+                view.triggerMethod('selected', model);
+            });
+        };
+        
+        /**
+         * Dostop direktno do podatkov pope
+         * @param {type} id
+         * @returns {undefined}
+         */
+        model.popaOdpri = function (id) {
+            require(['../Model/Popa', '../View/PopaView'], function (Model, View) {
+                var view = new View({pogled: 'splosno'});
+                ch.command('open', view, i18next.t('popa.title'));
+                
+                var model = new Model.Model({id: id});
+                model.fetch();
+                
+                view.triggerMethod('selected', model);
+            });
+        };
+        /**
+         * Dostop direktno do podatkov poste
+         * @param {type} id
+         * @returns {undefined}
+         */
+        model.postaOdpri = function (id) {
+            require(['../Model/Posta', '../View/PostaView'], function (Model, View) {
+                var view = new View();
+                ch.command('open', view, i18next.t('posta.title'));
+                
+                var model = new Model.Model({id: id});
+                model.fetch();
+                
+                view.triggerMethod('selected', model);
             });
         };
 
@@ -110,7 +154,17 @@ define([
                     'abonma': 'abonma',
                     'prostor': 'prostor',
                     'alternacija': 'alternacija',
-                    'modal': 'modal'
+                    
+//                    'tipFunkcije/:id': 'tipFunkcijeOdpri',
+//                    'zvrstUprizoritve/:id': 'zvrstUprizoritveOdpri',
+//                    'zvrstSurs/:id': 'zvrstSursOdpri',
+//                    'drzava/:id': 'drzavaOdpri',
+                    'oseba/:id': 'osebaOdpri',
+                    'posta/:id': 'postaOdpri',
+                    'popa/:id': 'popaOdpri',
+//                    'abonma/:id': 'abonmaOdpri',
+//                    'prostor/:id': 'prostorOdpri',
+//                    'alternacija/:id': 'alternacijaOdpri'
                 }
             });
         });
