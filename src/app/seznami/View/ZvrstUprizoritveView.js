@@ -26,8 +26,15 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.ime'),
-                name: 'ime',
+                label: i18next.t('entiteta.sifra'),
+                name: 'sifra',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('entiteta.naziv'),
+                name: 'naziv',
                 sortable: true
             },
             {
