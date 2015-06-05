@@ -31,7 +31,7 @@ define([
         registerNav: function (navData) {
             var pages = this.get('pages');
             navData.forEach(function (page) {
-                var attrs = _.pick(page, "label", "icon", "uri", "trigger")
+                var attrs = _.pick(page, "label", "icon", "uri", "trigger");
                 var sp = new Backbone.Model(attrs);
 
                 if (page.pages) {

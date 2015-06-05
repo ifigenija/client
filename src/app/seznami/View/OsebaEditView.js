@@ -31,8 +31,7 @@ define([
     ];
 
     var tabNovi = [
-        {name: i18next.t('entiteta.splosno'), event: 'splosni'},
-        {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'}
+        {name: i18next.t('entiteta.splosno'), event: 'splosni'}
     ];
 
 

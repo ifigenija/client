@@ -14,7 +14,7 @@ define([
      * @param {type} callback
      * @returns {undefined}
      */
-    return checkLoginStatus = function (next) {
+    return function (next) {
         var authService = new $.JsonRpcClient({ajaxUrl: '/rpc/aaa/auth'});
         var self = this;
         authService.call(

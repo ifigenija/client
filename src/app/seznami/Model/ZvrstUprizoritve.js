@@ -1,13 +1,11 @@
 define([
     'baseUrl',
     'app/Dokument/Model/Dokument',
-    'underscore',
-    'baseUrl'
+    'underscore'
 ], function (
         baseUrl,
         Dokument,
-        _,
-        baseUrl
+        _
         ) {    
     var ZvrstUprizoritveModel = Dokument.Model.extend({
         urlRoot: baseUrl + '/rest/zvrstUprizoritve'

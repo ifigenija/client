@@ -1,13 +1,11 @@
 define([
     'baseUrl',
     'app/Dokument/Model/Dokument',
-    'underscore',
-    'baseUrl'
+    'underscore'
 ], function (
         baseUrl,
         Dokument,
-        _,
-        baseUrl
+        _
         ) {
 
 
@@ -34,7 +32,7 @@ define([
             var postavka;
             switch (nested) {
                 case 'alternacije':
-                    postavka = new FunkcijaAlternacija({
+                    postavka = new AlternacijaModel({
                         funkcija: this.id
                         
                     });

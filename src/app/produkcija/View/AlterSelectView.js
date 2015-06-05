@@ -146,10 +146,10 @@ define([
      * @returns {undefined}
      */
     AlterSelectView.prototype.renderSeznam = function () {
-        var c = this.collection 
+        var c = this.collection;
 
         var vloge = new AltersList({
-            collection: c,
+            collection: c
             
         });
         

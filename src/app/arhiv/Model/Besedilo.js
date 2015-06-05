@@ -1,13 +1,11 @@
 define([
     'baseUrl',
     'app/Dokument/Model/Dokument',
-    'underscore',
-    'baseUrl'
+    'underscore'
 ], function (
         baseUrl,
         Dokument,
-        _,
-        baseUrl
+        _
         ) {    
     var BesediloModel = Dokument.Model.extend({
         urlRoot: baseUrl + baseUrl + '/rest/besedilo'

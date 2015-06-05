@@ -79,11 +79,11 @@ define([
 //        console.log("Oseba "+ response);
 
     OsebaView.prototype.getFormView = function (model) {
+        var editModel = model;
+        
         if (model.get('id')) {
-            var editModel = new Oseba.Model({id: model.get('id')});
+            editModel = new Oseba.Model({id: model.get('id')});
             editModel.fetch();
-        } else {
-            editModel = model;
         }
         return new OsebaEditView({
             model: editModel,

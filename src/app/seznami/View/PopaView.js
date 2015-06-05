@@ -69,11 +69,11 @@ define([
      * 
      */
     PopaView.prototype.getFormView = function (model) {
+        var editModel = model;
+        
         if (model.get('id')) {
-            var editModel = new Popa.Model({id: model.get('id')});
+            editModel = new Popa.Model({id: model.get('id')});
             editModel.fetch();
-        } else {
-            editModel = model;
         }
         return new PopaEditView({
             model: editModel,

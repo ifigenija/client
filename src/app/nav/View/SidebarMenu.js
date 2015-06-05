@@ -95,17 +95,17 @@ define([
      * @returns {undefined}
      */
     var htmlbodyHeightUpdate = function (height2) {
-        var height3 = $(window).height();
-        var height1 = $('.nav').height() + 50;
-        height2 = $('.main').height();
+        var height3 = this.$(window).height();
+        var height1 = this.$('.nav').height() + 50;
+        height2 = this.$('.main').height();
         if (height2 > height3) {
-            $('html').height(Math.max(height1, height3, height2) + 10);
-            $('body').height(Math.max(height1, height3, height2) + 10);
+            this.$('html').height(Math.max(height1, height3, height2) + 10);
+            this.$('body').height(Math.max(height1, height3, height2) + 10);
         }
         else
         {
-            $('html').height(Math.max(height1, height3, height2));
-            $('body').height(Math.max(height1, height3, height2));
+            this.$('html').height(Math.max(height1, height3, height2));
+            this.$('body').height(Math.max(height1, height3, height2));
         }
     };
 

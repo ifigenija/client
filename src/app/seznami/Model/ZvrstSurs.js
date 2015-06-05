@@ -1,8 +1,7 @@
 define([
     'baseUrl',
     'app/Dokument/Model/Dokument',
-    'underscore',
-    'baseUrl'
+    'underscore'
 ], function (
         baseUrl,
         Dokument,

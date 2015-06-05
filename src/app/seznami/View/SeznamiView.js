@@ -11,8 +11,7 @@ define([
     'template!../tpl/seznam.html',
     'app/Max/Model/MaxPageableCollection',
     'backbone',
-    'app/Max/View/Toolbar',
-    'i18next'
+    'app/Max/View/Toolbar'
 ], function (
         Marionette,
         Radio,
@@ -23,8 +22,7 @@ define([
         seznamTpl,
         Coll,
         Backbone,
-        Toolbar,
-        i18next
+        Toolbar
         ) {
 
     var SeznamiView = Marionette.LayoutView.extend({
@@ -131,7 +129,7 @@ define([
      */
     SeznamiView.prototype.onBrisi = function (model) {
 
-        if (confirm(i18next.t('confirm.delete'))) {
+        if (window.confirm(i18next.t('std.potrdiIzbris'))) {
             model.destroy({
                 success: function () {
                     Radio.channel('error').command('flash', {

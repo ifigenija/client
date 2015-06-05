@@ -22,6 +22,9 @@ define([
         detailName: 'kontaktne',
         dodaj: i18next.t('dodaj'),
         formTitle: i18next.t('kontaktnaOseba.title'),
+        triggers: {
+            'click .dodaj-osebo': 'dodajOsebo'
+        },
         gridMeta: [
             {
                 cell: 'string',
@@ -72,8 +75,41 @@ define([
             }
         ]
     });
+    /**
+     * Odpre modal za dodajanje osebe
+     * @returns {undefined}
+     */
+    KontaktneView.prototype.onDodajOsebo = function () {
+        var self = this;
+        require(['app/seznami/Model/Oseba', 'backbone-modal', 'app/seznami/View/OsebaEditView'], function (Model, Modal, OsebaEditView) {
+            var editModel = new Model.Model();
 
+            var view = new OsebaEditView({
+                model: editModel,
+                pogled: 'kontaktna'
+            });
 
+            var modal = new Modal({
+                content: view,
+                animate: true,
+                okText: "Shrani",
+                cancelText: "Prekliči"
+            }).open(function () {
+                view.onShrani();
+            });
+
+            modal.listenTo(modal, 'ok', function () {
+                modal.preventClose();
+            });
+            modal.listenTo(view, 'save:success', function (model) {
+                modal.close();
+            });
+            self.listenTo(view, 'save:success',
+                    function (model) {
+                        this.form.fields.oseba.editor.setValue(model.get('id'));
+                    });
+        });
+    };
 
     return KontaktneView;
 });

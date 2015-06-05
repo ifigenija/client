@@ -2,14 +2,12 @@ define([
     'baseUrl',
     'backbone',
     'underscore',
-    'app/Max/Model/RelationCollection',
-    'baseUrl'
+    'app/Max/Model/RelationCollection'
 ], function (
         baseUrl,
         Backbone,
         _,
-        RelationColl,
-        baseUrl
+        RelationColl
         ) {
 
     var UporabnikModel = Backbone.Model.extend({

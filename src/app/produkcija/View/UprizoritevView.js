@@ -94,11 +94,11 @@ define([
     });
 
     UprizoritevView.prototype.getFormView = function (model) {
+        var editModel = model;
+        
         if (model.get('id')) {
-            var editModel = new Uprizoritev.Model({id: model.get('id')});
+            editModel = new Uprizoritev.Model({id: model.get('id')});
             editModel.fetch();
-        } else {
-            editModel = model;
         }
 
         return new UprizoritevEditView({
