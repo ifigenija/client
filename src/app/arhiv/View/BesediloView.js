@@ -61,6 +61,14 @@ define([
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
+                label: i18next.t('besedilo.letoIzida'),
+                name: 'letoIzida',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'date',
+                editable: false,
                 label: i18next.t('besedilo.datumPrejema'),
                 name: 'datumPrejema',
                 sortable: true

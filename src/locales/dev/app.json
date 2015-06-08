@@ -232,7 +232,11 @@
         "moskeVloge": "Moške vloge",
         "zenskeVloge": "Ženske vloge",
         "prevajalec": "Prevajalec",
-        "povzetekVsebine": "Povzetek vsebine"
+        "povzetekVsebine": "Povzetek vsebine",
+        "letoIzida": "Leto izida",
+        "krajIzida": "kraj izida",
+        "zaloznik": "Založnik",
+        "internacionalniNaslov": "Internacionalni naslov"
     },
     "uprizoritev": {
         "title": "Uprizoritev",
@@ -257,7 +261,9 @@
         "kratkiNaslov": "Kratki naslov",
         "besedilo": "Besedilo",
         "zvrstUprizoritve": "Vrsta uprizoritve",
-        "zvrstSurs": "Zvrst po SURS"
+        "zvrstSurs": "Zvrst po SURS",
+        "steviloVaj": "Število vaj",
+        "planiranoSteviloVaj": "Planirano število vaj"
 
     },
     "funkcija": {
