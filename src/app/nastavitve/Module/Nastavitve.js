@@ -22,18 +22,40 @@ define([
     var modelInit = function (model, App, Backbone, Marionette, $, _) {
 
         var ch = Radio.channel('layout');
-      
+
+        var odpri = function (View, title, pogled) {
+            var view = new View();
+            if (pogled) {
+                view = new View({pogled: pogled});
+            }
+            ch.command('open', view, i18next.t(title));
+        };
+        var odpriModel = function (Model, View, id, title, pogled) {
+            var odpriView = function () {
+                var view = new View();
+                if (pogled) {
+                    view = new View({pogled: pogled});
+                }
+                ch.command('open', view, i18next.t(title));
+                view.triggerMethod('selected', model);
+            };
+
+            var model = new Model.Model({id: id});
+            model.once('sync', odpriView);
+            model.fetch();
+        };        
+
         model.moznosti = function () {
 
         };
-        
+
         model.addUser = function () {
             model.manageUsers('dodaj');
         };
 
         model.manageUsers = function (akcija) {
-            require(['../View/UserView'], function (UserView) {
-                var view = new UserView();
+            require(['../View/UserView'], function (View) {
+                var view = new View();
                 ch.command('open', view, i18next.t('user.title'));
                 if (akcija) {
                     view.triggerMethod(akcija);
@@ -42,21 +64,47 @@ define([
         };
 
         model.roles = function () {
-            require(['../View/RoleView'], function (RoleView) {
-                var view = new RoleView();
-                ch.command('open', view, i18next.t('role.title'));
+            require(['../View/RoleView'], function (View) {
+                odpri(View, 'role.title');
             });
         };
 
         model.permission = function () {
-            require(['../View/PermissionView'], function (PermissionView) {
-                var view = new PermissionView();
-                ch.command('open', view, i18next.t('permission.title'));
+            require(['../View/PermissionView'], function (View) {
+                odpri(View, 'permission.title');
+            });
+        };
+        
+        /**
+         * Neposredni dostop do dovoljenja
+         * @returns {undefined}
+         */
+        model.permissionOdpri = function (id) {
+            require(['../Model/Permission', '../View/PermissionView'], function (Model, View) {
+                odpriModel(Model, View, id, 'permission.title');
             });
         };
         /**
-         * 
+         * Neposredni dostop do vloge
+         * @returns {undefined}
+         */
+        model.roleOdpri = function (id) {
+            require(['../Model/Role', '../View/RoleView'], function (Model, View) {
+                odpriModel(Model, View, id, 'role.title');
+            });
+        };
+        /**
+         * Neposredni dostop do uporabnika
+         * @returns {undefined}
+         */
+        model.userOdpri = function (id) {
+            require(['../Model/User', '../View/UserView'], function (Model, View) {
+                odpriModel(Model, View, id, 'user.title');
+            });
+        };
+        /**
          * Routing za modelule
+         * 
          */
         model.addInitializer(function (options) {
             App.nav.registerNav(moduleNav);
@@ -68,7 +116,10 @@ define([
                     'aaa/user/dodaj': 'addUser',
                     'aaa/users': 'manageUsers',
                     'aaa/roles': 'roles',
-                    'aaa/permissions': 'permission'
+                    'aaa/permissions': 'permission',
+                    'aaa/users/:id': 'userOdpri',
+                    'aaa/roles/:id': 'roleOdpri',
+                    'aaa/permissions/:id': 'permissionOdpri'
                 }
             });
         });

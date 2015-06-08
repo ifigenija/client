@@ -22,65 +22,78 @@ define([
     var modInit = function (model, App, Backbone, Marionette, $, _) {
         var ch = Radio.channel('layout');
 
+        var odpri = function (View, title, pogled) {
+            var view = new View();
+            if (pogled) {
+                view = new View({pogled: pogled});
+            }
+            ch.command('open', view, i18next.t(title));
+        };
+
+        var odpriModel = function (Model, View, id, title, pogled) {
+            var odpriView = function () {
+                var view = new View();
+                if (pogled) {
+                    view = new View({pogled: pogled});
+                }
+                ch.command('open', view, i18next.t(title));
+                view.triggerMethod('selected', model);
+            };
+
+            var model = new Model.Model({id: id});
+            model.once('sync', odpriView);
+            model.fetch();
+        };
+
         model.tipFunkcije = function () {
-            require(['../View/TipFunkcijeView'], function (TipFunkcijeView) {
-                var view = new TipFunkcijeView();
-                ch.command('open', view, i18next.t('tipFunkcije.title'));
+            require(['../View/TipFunkcijeView'], function (View) {
+                odpri(View, 'tipFunkcije.title');
             });
 
         };
         model.zvrstUprizoritve = function () {
-            require(['../View/ZvrstUprizoritveView'], function (ZvrstUprizoritveView) {
-                var view = new ZvrstUprizoritveView();
-                ch.command('open', view, i18next.t('zvrstUprizoritve.title'));
+            require(['../View/ZvrstUprizoritveView'], function (View) {
+                odpri(View, 'zvrstUprizoritve.title');
             });
         };
         model.drzava = function () {
-            require(['../View/DrzavaView'], function (DrzavaView) {
-                var view = new DrzavaView();
-                ch.command('open', view, i18next.t('drzava.title'));
+            require(['../View/DrzavaView'], function (View) {
+                odpri(View, 'drzava.title');
             });
         };
         model.oseba = function () {
-            require(['../View/OsebaView'], function (OsebaView) {
-                var view = new OsebaView({pogled: 'splosno'});
-                ch.command('open', view, i18next.t('oseba.title'));
+            require(['../View/OsebaView'], function (View) {
+                odpri(View, 'oseba.title', 'splosno');
             });
         };
         model.posta = function () {
-            require(['../View/PostaView'], function (PostaView) {
-                var view = new PostaView();
-                ch.command('open', view, i18next.t('posta.title'));
+            require(['../View/PostaView'], function (View) {
+                odpri(View, 'posta.title');
             });
         };
         model.popa = function () {
-            require(['../View/PopaView'], function (PopaView) {
-                var view = new PopaView({pogled: 'splosno'});
-                ch.command('open', view, i18next.t('popa.title'));
+            require(['../View/PopaView'], function (View) {
+                odpri(View, 'popa.title', 'splosno');
             });
         };
         model.zvrstSurs = function () {
-            require(['../View/ZvrstSursView'], function (ZvrstSursView) {
-                var view = new ZvrstSursView();
-                ch.command('open', view, i18next.t('zvrstSurs.title'));
+            require(['../View/ZvrstSursView'], function (View) {
+                odpri(View, 'zvrstSurs.title');
             });
         };
         model.abonma = function () {
-            require(['../View/AbonmaView'], function (AbonmaView) {
-                var view = new AbonmaView();
-                ch.command('open', view, i18next.t('abonma.title'));
+            require(['../View/AbonmaView'], function (View) {
+                odpri(View, 'abonma.title');
             });
         };
         model.prostor = function () {
-            require(['../View/ProstorView'], function (AbonmaView) {
-                var view = new AbonmaView();
-                ch.command('open', view, i18next.t('prostor.title'));
+            require(['../View/ProstorView'], function (View) {
+                odpri(View, 'prostor.title');
             });
         };
         model.alternacija = function () {
-            require(['../View/AlternacijaView'], function (AlternacijaView) {
-                var view = new AlternacijaView();
-                ch.command('open', view, i18next.t('alternacija.title'));
+            require(['../View/AlternacijaView'], function (View) {
+                odpri(View, 'alternacija.title');
             });
         };
 
@@ -91,16 +104,10 @@ define([
          */
         model.osebaOdpri = function (id) {
             require(['../Model/Oseba', '../View/OsebaView'], function (Model, View) {
-                var view = new View({pogled: 'splosno'});
-                ch.command('open', view, i18next.t('oseba.title'));
-                
-                var model = new Model.Model({id: id});
-                model.fetch();
-                
-                view.triggerMethod('selected', model);
+                odpriModel(Model, View, id, 'oseba.title', 'splosno');
             });
         };
-        
+
         /**
          * Dostop direktno do podatkov pope
          * @param {type} id
@@ -108,15 +115,10 @@ define([
          */
         model.popaOdpri = function (id) {
             require(['../Model/Popa', '../View/PopaView'], function (Model, View) {
-                var view = new View({pogled: 'splosno'});
-                ch.command('open', view, i18next.t('popa.title'));
-                
-                var model = new Model.Model({id: id});
-                model.fetch();
-                
-                view.triggerMethod('selected', model);
+                odpriModel(Model, View, id, 'popa.title', 'splosno');
             });
         };
+
         /**
          * Dostop direktno do podatkov poste
          * @param {type} id
@@ -124,13 +126,73 @@ define([
          */
         model.postaOdpri = function (id) {
             require(['../Model/Posta', '../View/PostaView'], function (Model, View) {
-                var view = new View();
-                ch.command('open', view, i18next.t('posta.title'));
-                
-                var model = new Model.Model({id: id});
-                model.fetch();
-                
-                view.triggerMethod('selected', model);
+                odpriModel(Model, View, id, 'posta.title');
+            });
+        };
+
+        /**
+         * Neposreden pogled podatkov drzave
+         * @param {type} id
+         * @returns {undefined}
+         */
+        model.drzavaOdpri = function (id) {
+            require(['../Model/Drzava', '../View/DrzavaView'], function (Model, View) {
+                odpriModel(Model, View, id, 'drzava.title');
+            });
+        };
+
+        /**
+         * Neposreden pogled podatkov tipafunkcije
+         * @param {type} id
+         * @returns {undefined}
+         */
+        model.tipFunkcijeOdpri = function (id) {
+            require(['../Model/TipFunkcije', '../View/TipFunkcijeView'], function (Model, View) {
+                odpriModel(Model, View, id, 'tipFunkcije.title');
+            });
+        };
+
+        /**
+         * Neposreden pogled podatkov zvrsti uprizoritve
+         * @param {type} id
+         * @returns {undefined}
+         */
+        model.zvrstUprizoritveOdpri = function (id) {
+            require(['../Model/ZvrstUprizoritve', '../View/ZvrstUprizoritveView'], function (Model, View) {
+                odpriModel(Model, View, id, 'zvrstUprizoritve.title');
+            });
+        };
+
+        /**
+         * Neposreden pogled podatkov zvrsti SURS
+         * @param {type} id
+         * @returns {undefined}
+         */
+        model.zvrstSursOdpri = function (id) {
+            require(['../Model/ZvrstSurs', '../View/ZvrstSursView'], function (Model, View) {
+                odpriModel(Model, View, id, 'zvrstSurs.title');
+            });
+        };
+
+        /**
+         * Neposreden pogled podatkov abonmaja
+         * @param {type} id
+         * @returns {undefined}
+         */
+        model.abonmaOdpri = function (id) {
+            require(['../Model/Abonma', '../View/AbonmaView'], function (Model, View) {
+                odpriModel(Model, View, id, 'abonma.title');
+            });
+        };
+
+        /**
+         * Neposreden pogled podatkov prostora
+         * @param {type} id
+         * @returns {undefined}
+         */
+        model.prostorOdpri = function (id) {
+            require(['../Model/Prostor', '../View/ProstorView'], function (Model, View) {
+                odpriModel(Model, View, id, 'prostor.title');
             });
         };
 
@@ -154,17 +216,15 @@ define([
                     'abonma': 'abonma',
                     'prostor': 'prostor',
                     'alternacija': 'alternacija',
-                    
-//                    'tipFunkcije/:id': 'tipFunkcijeOdpri',
-//                    'zvrstUprizoritve/:id': 'zvrstUprizoritveOdpri',
-//                    'zvrstSurs/:id': 'zvrstSursOdpri',
-//                    'drzava/:id': 'drzavaOdpri',
+                    'tipFunkcije/:id': 'tipFunkcijeOdpri',
+                    'zvrstUprizoritve/:id': 'zvrstUprizoritveOdpri',
+                    'zvrstSurs/:id': 'zvrstSursOdpri',
+                    'drzava/:id': 'drzavaOdpri',
                     'oseba/:id': 'osebaOdpri',
                     'posta/:id': 'postaOdpri',
                     'popa/:id': 'popaOdpri',
-//                    'abonma/:id': 'abonmaOdpri',
-//                    'prostor/:id': 'prostorOdpri',
-//                    'alternacija/:id': 'alternacijaOdpri'
+                    'abonma/:id': 'abonmaOdpri',
+                    'prostor/:id': 'prostorOdpri'
                 }
             });
         });

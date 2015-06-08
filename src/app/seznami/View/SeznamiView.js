@@ -53,7 +53,7 @@ define([
                 element: 'button-trigger',
                 trigger: 'preklici'
             }
-        },
+        }
     });
 
     SeznamiView.prototype.initialize = function (options) {
@@ -115,7 +115,9 @@ define([
     };
     /**
      * Proxy za trigger metode 
-     * 
+     * @param {type} model
+     * @param {type} action
+     * @returns {undefined}
      */
     SeznamiView.prototype.onGridAction = function (model, action) {
         this.triggerMethod(action, model);
@@ -157,10 +159,14 @@ define([
      * @returns {undefined}
      */
     SeznamiView.prototype.zamenjajUrl = function (model) {
-        var fragment = Backbone.history.getFragment().split("/")[0];
-        var newUrl = fragment + '/' + model.get('id');
+        var fragment = Backbone.history.getFragment();
 
-        console.log(newUrl);
+        fragment = fragment.replace(/\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/, '');
+
+        var newUrl = fragment;
+        if (model) {
+            newUrl = fragment + '/' + model.get('id');
+        }
 
         Radio.channel('layout').command('replaceUrl', newUrl);
     };
@@ -172,7 +178,9 @@ define([
      */
     SeznamiView.prototype.onSelected = function (model) {
 
-        this.zamenjajUrl(model);
+        if (model.get('id')) {
+            this.zamenjajUrl(model);
+        }
 
         var form = this.getFormView(model);
 
@@ -194,6 +202,7 @@ define([
      */
     SeznamiView.prototype.saveSuccess = function (model) {
         this.$('.glava-title').text(this.getTitle(model));
+        this.zamenjajUrl(model);
         this.collection.fetch();
     };
 
@@ -204,9 +213,7 @@ define([
     SeznamiView.prototype.preklici = function () {
         this.formR.empty();
         this.renderToolbar();
-
-        var fragment = Backbone.history.getFragment().split("/")[0];
-        Radio.channel('layout').command('replaceUrl', fragment);
+        this.zamenjajUrl();
     };
 
     SeznamiView.prototype.getTitle = function (model) {
@@ -217,7 +224,8 @@ define([
 
     /**
      * Privzrti pogled na formo za urejanje 
-     * 
+     * @param {type} model
+     * @returns {SeznamiView_L15.SeznamiView.prototype.getFormView.Fv}
      */
     SeznamiView.prototype.getFormView = function (model) {
         var Fv = FormView.extend({

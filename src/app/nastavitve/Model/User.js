@@ -10,11 +10,11 @@ define([
         RelationColl
         ) {
 
-    var UporabnikModel = Backbone.Model.extend({
+    var Uporabnik = Backbone.Model.extend({
         urlRoot: baseUrl + '/rest/user'      
     });
     
     return {
-        Model: UporabnikModel
+        Model: Uporabnik
     };
 });

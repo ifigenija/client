@@ -3,6 +3,8 @@
  */
 define([
     'marionette',
+    'backbone',
+    'radio',
     'template!../tpl/stroskovnik.tpl',
     './StroskiUprizoritveView',
     '../Model/Stroskovnik',
@@ -12,6 +14,8 @@ define([
     'app/Max/Module/Form'
 ], function (
         Marionette,
+        Backbone,
+        Radio,
         tpl,
         StrosekUprizoritveView,
         Stroskovnik,
@@ -33,7 +37,7 @@ define([
 
     StroskovnikView.prototype.onRender = function () {
         this.$('.naslov-uprizoritve').text(this.title);
-        
+
         var sch = {type: 'Toone', targetEntity: 'uprizoritev', editorAttrs: {class: 'form-control'}};
         this.formIzberi = new Form({
             template: Handlebars.compile('<form><div data-editors="id"></div></form>'),
@@ -45,10 +49,25 @@ define([
         this.formIzberi.fields.id.editor.on('changed', this.renderEditor, this);
         this.regionLookup.show(this.formIzberi);
     };
-    
+
+    StroskovnikView.prototype.zamenjajUrl = function (model) {
+        var fragment = Backbone.history.getFragment();
+
+        fragment = fragment.replace(/\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/, '');
+
+        var newUrl = fragment;
+        if (model) {
+            newUrl = fragment + '/' + model.get('id');
+        }
+
+        Radio.channel('layout').command('replaceUrl', newUrl);
+    };
+
     StroskovnikView.prototype.renderEditor = function (upziroritevId) {
         var editModel = new Stroskovnik.Model({id: upziroritevId});
         editModel.fetch();
+        
+        this.zamenjajUrl(editModel);
         this.regionEditor.show(new StrosekUprizoritveView({
             model: editModel
         }));
