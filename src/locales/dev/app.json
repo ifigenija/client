@@ -121,7 +121,8 @@
         "description": "Opis",
         "builtIn": "Vgrajeno",
         "funkcija": "Funkcija",
-        "aktivna": "Aktivna"
+        "aktivna": "Aktivna",
+        "internacionalniNaslov": "Internacionalni naslov"
     },
     "abonma": {
         "title": "Abonmaji",
@@ -235,8 +236,7 @@
         "povzetekVsebine": "Povzetek vsebine",
         "letoIzida": "Leto izida",
         "krajIzida": "kraj izida",
-        "zaloznik": "Založnik",
-        "internacionalniNaslov": "Internacionalni naslov"
+        "zaloznik": "Založnik"
     },
     "uprizoritev": {
         "title": "Uprizoritev",
@@ -285,7 +285,8 @@
         "privzeti": "Privzeti",
         "sodelovanje": "Sodelovanje",
         "koprodukcija": "Koprodukcija",
-        "pogodba": "Pogodba"
+        "pogodba": "Pogodba",
+        "zaposlitev": "Zaposlitev"
     },
     "prodel": {
         "title": "Koprodukcije",
@@ -347,5 +348,13 @@
         "vrednostDo": "Vrednost do",
         "popa": "Klient",
         "trr": "TRR"
+    },
+    "programDela": {
+        "nav": {
+            "label": "Program dela"
+        },
+        "title": "Programi dela",
+        "ustvariPD": "Ustvari program dela",
+        "urediPD": "Uredi program dela"
     }
 }

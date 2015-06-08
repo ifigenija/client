@@ -10,6 +10,7 @@ define([
     'app/nav/Module/IfiLayout',
     'app/produkcija/Module/Produkcija',
     'app/poziv/Module/Poziv',
+    'app/programDela/Module/ProgramDela',
     'app/koledar/Module/Koledar',
     'app/arhiv/Module/Arhiv',
     'app/seznami/Module/Seznami',
@@ -26,6 +27,7 @@ define([
         ifiLayoutInit,
         produkcijaInit,
         pozivInit,
+        programDelaInit,
         koledarInit,
         arhivInit,
         seznamiInit,
@@ -43,6 +45,7 @@ define([
     app.module('koledar', koledarInit);
     app.module('arhiv', arhivInit);
     app.module('poziv', pozivInit);
+    app.module('programDela', programDelaInit);
     app.module('seznami', seznamiInit);
     app.module('nastavitve', nastavitveInit);
     app.module('aaa', aaaInit);
