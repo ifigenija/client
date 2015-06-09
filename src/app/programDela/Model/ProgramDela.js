@@ -10,25 +10,18 @@ define([
         PageableCollection
         ) {
 
-    var model = Backbone.Model.extend({
+    var Model = Backbone.Model.extend({
         urlRoot: baseUrl + '/rest/programDela'
-//        getObdobjaOptions: function(leto) {
-//            var select = [{id: "leto", oznaka: "Skupaj"}];
-//           _.each(this.get('obdobja'), function(o) {
-//               select.push(_.pick(o,"id", "oznaka"));
-//           });
-//           return select; 
-//        }
     });
 
-    var collection = PageableCollection.extend({
-        url: baseUrl + 'rest/programDela',
-        model: model
+    var Collection = PageableCollection.extend({
+        url: baseUrl + '/rest/programDela',
+        model: Model
     });
 
     return {
-        model: model,
-        collection: collection
+        Model: Model,
+        Collection: Collection
     };
 
 });

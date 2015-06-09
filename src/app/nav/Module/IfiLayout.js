@@ -4,7 +4,7 @@ define([
     '../View/OrodnaVrsticaView',
     '../Model/Crumbs',
     'app/bars',
-    'text!../tpl/ifi-layout.html',
+    'text!../tpl/ifi-layout.html'
 ], function (
         Radio,
         SidebarMenu,
@@ -31,7 +31,7 @@ define([
                 contentR: '#main',
                 orodnaR: '#orodna-vrstica',
                 navR: '#side-nav'
-            },
+            }
         });
 
         Layout.prototype.initialize = function (options) {
@@ -76,10 +76,7 @@ define([
         Layout.prototype.replaceUrl = function (url) {
             Backbone.history.navigate(url);
         };
-
-        module.refreshActiveTab = function (url) {
-            module.layout.refresh(url);
-        };
+        
         module.open = function (view, name, route) {
             module.layout.open(view, name, route);
         };
@@ -92,17 +89,9 @@ define([
             module.layout.replaceUrl(url);
         };
 
-        module.getActiveTab = function () {
-            return module.layout.tabs.findWhere({selected: true});
-        };
-
-        module.closeActiveTab = function () {
-            module.layout.tabs.remove(module.getActiveTab());
-        };
-
         module.addInitializer(function (options) {
             this.Layout = Layout;
-            var ruter = new Marionette.AppRouter({
+            var router = new Marionette.AppRouter({
                 controller: this
 
             });
@@ -110,15 +99,9 @@ define([
             this.crumbsColl = new Crumbs();
 
             var channel = Radio.channel('layout');
-            channel.reply('activeTab', module.getActiveTab);
-            channel.comply('openTab', module.open);
-            channel.comply('sameTab', module.open);
             channel.comply('open', module.open);
-            channel.comply('refresh', module.refreshActiveTab);
-            channel.comply('close', module.closeActiveTab);
             channel.comply('setTitle', module.setTitle);
             channel.comply('replaceUrl', module.replaceUrl);
-
 
         });
 

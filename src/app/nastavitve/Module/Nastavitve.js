@@ -29,14 +29,25 @@ define([
                 view = new View({pogled: pogled});
             }
             ch.command('open', view, i18next.t(title));
+            
+            return view;
         };
+        /**
+         * Direktno odpremo podatke iz tabele
+         * preko url direkno pridemo do željenih podatkov
+         * 
+         * @param {type} Model
+         * @param {type} View
+         * @param {type} id
+         * @param {type} title
+         * @param {type} pogled
+         * @returns {undefined}
+         */
         var odpriModel = function (Model, View, id, title, pogled) {
             var odpriView = function () {
-                var view = new View();
-                if (pogled) {
-                    view = new View({pogled: pogled});
-                }
+                var view = odpri(View, title, pogled);
                 ch.command('open', view, i18next.t(title));
+                //model gre tu not ker se odpre novi view s tem modelom
                 view.triggerMethod('selected', model);
             };
 

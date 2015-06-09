@@ -3,7 +3,7 @@
     <div class="col-xs-12 com-md-2 col-lg-2 region-toolbar"></div>
     
 </div>
-<h2 clas="naslov-uprizoritve"></h2>
+<h2 class="naslov-uprizoritve"></h2>
 <div class="region-editor">
     
 </div>

@@ -30,13 +30,27 @@ define([
             }
             ch.command('open', view, i18next.t(title));
         };
+        
+        var odpriModel = function (Model, View, id, title, pogled) {
+            var odpriView = function () {
+                var view = new View({model:model});
+                if (pogled) {
+                    view = new View({pogled: pogled});
+                }
+                ch.command('open', view, i18next.t(title));
+            };
+
+            var model = new Model.Model({id: id});
+            model.once('sync', odpriView);
+            model.fetch();
+        };
 
         /**
          * Odpre se stran za izbiro akcije
          * @returns {undefined}
          */
         mod.programDela = function () {
-            require(['../View/pdPrvaView'], function (View) {
+            require(['../View/PdView'], function (View) {
                 odpri(View, 'programDela.title');
             });
         };
@@ -44,8 +58,8 @@ define([
          * Odpre se Stran za ustvarjanje programa dela
          * @returns {undefined}
          */
-        mod.programDelaUstvari = function () {
-            require(['../View/pdUstvariView'], function (View) {
+        mod.programDelaDodaj = function () {
+            require(['../View/PdDodajView'], function (View) {
                 odpri(View, 'programDela.title');
             });
         };
@@ -53,9 +67,9 @@ define([
          * Odpre se stran za urejanje programa dela
          * @returns {undefined}
          */
-        mod.programDelaUredi = function () {
-            require(['../View/pdUrediView'], function (View) {
-                odpri(View, 'programDela.title');
+        mod.programDelaUredi = function (id) {
+            require(['../Model/ProgramDela', '../View/PdUrediView'], function (Model, View) {
+                odpriModel(Model, View, id, 'programDela.title');
             });
         };
 
@@ -70,8 +84,8 @@ define([
                 controller: mod,
                 appRoutes: {
                     'programDela': 'programDela',
-                    'programDela/ustvari': 'programDelaUstvari',
-                    'programDela/uredi/:id': 'programDelaUredi'
+                    'programDela/dodaj': 'programDelaDodaj',
+                    'programDela/:id': 'programDelaUredi'
 
                 }
             });
