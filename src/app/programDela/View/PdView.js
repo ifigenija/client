@@ -10,7 +10,7 @@ define([
     'template!../tpl/pd.tpl',
     'template!../tpl/pd-item.tpl',
     '../Model/ProgramDela',
-    './PdDodajView',
+    '../Model/PdDokument',
     './PdUrediView',
     'app/Max/View/PaginatorControl'
 ], function (
@@ -22,7 +22,7 @@ define([
         tpl,
         itemTpl,
         PdModel,
-        DodajView,
+        PdDokument,
         UrediView,
         PaginatorControl
         ) {
@@ -33,15 +33,21 @@ define([
         template: itemTpl,
         triggers: {
             "click .panel": "urediPD"
-        }        
+        }
     });
 
     ProgramDelaItem.prototype.onUrediPD = function () {
         var newUrl = 'programDela/' + this.model.get('id');
         ch.command('replaceUrl', newUrl);
 
-        var view = new UrediView({model: this.model});
-        ch.command('open', view, i18next.t("programDela.title"));
+        var testiranje = function () {
+            var view = new UrediView({model: pdModel});
+            ch.command('open', view, i18next.t("programDela.title"));
+        };
+
+        var pdModel = new PdDokument.Model({id: this.model.get('id')});
+        pdModel.once('sync', testiranje);
+        pdModel.fetch();
     };
 
     var ProgramDelaView = Marionette.CompositeView.extend({
@@ -72,7 +78,9 @@ define([
         var newUrl = 'programDela/dodaj';
         ch.command('replaceUrl', newUrl);
 
-        var view = new DodajView();
+        var pdModel = new PdDokument.Model();
+
+        var view = new UrediView({model: pdModel});
         ch.command('open', view, i18next.t("programDela.title"));
     };
 

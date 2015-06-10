@@ -30,10 +30,10 @@ define([
             }
             ch.command('open', view, i18next.t(title));
         };
-        
+
         var odpriModel = function (Model, View, id, title, pogled) {
             var odpriView = function () {
-                var view = new View({model:model});
+                var view = new View({model: model});
                 if (pogled) {
                     view = new View({pogled: pogled});
                 }
@@ -59,8 +59,8 @@ define([
          * @returns {undefined}
          */
         mod.programDelaDodaj = function () {
-            require(['../View/PdDodajView'], function (View) {
-                odpri(View, 'programDela.title');
+            require(['../Model/PdDokument', '../View/PdUrediView'], function (Model, View) {
+                odpriModel(Model, View, null, 'programDela.title');
             });
         };
         /**
@@ -68,7 +68,7 @@ define([
          * @returns {undefined}
          */
         mod.programDelaUredi = function (id) {
-            require(['../Model/ProgramDela', '../View/PdUrediView'], function (Model, View) {
+            require(['../Model/PdDokument', '../View/PdUrediView'], function (Model, View) {
                 odpriModel(Model, View, id, 'programDela.title');
             });
         };

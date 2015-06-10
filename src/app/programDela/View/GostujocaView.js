@@ -6,7 +6,7 @@ define([
     'i18next',
     'app/Dokument/View/PostavkeView',
     'template!../tpl/Ep-form.tpl',
-    'formSchema!programPremiera'
+    'formSchema!programGostujoca'
 ], function (
         Backgrid,
         i18next,
@@ -18,12 +18,12 @@ define([
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
-    var PremieraView = PostavkeView.extend({
+    var GostujocaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Premiera',
-        detailName: 'premiere',
-        formTitle: i18next.t('premiera.title'),
+        name: 'Gostujoca',
+        detailName: 'gostujoci',
+        formTitle: i18next.t('gostujoca.title'),
         gridMeta: [
             {
                 headerCell: hc,
@@ -63,5 +63,5 @@ define([
             }
         ]
     });
-    return PremieraView;
+    return GostujocaView;
 });

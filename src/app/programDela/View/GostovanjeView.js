@@ -5,8 +5,8 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/Dokument/View/PostavkeView',
-    'template!../tpl/Ep-form.tpl',
-    'formSchema!programPremiera'
+    'template!../tpl/gostovanje-form.tpl',
+    'formSchema!programGostovanje'
 ], function (
         Backgrid,
         i18next,
@@ -18,19 +18,25 @@ define([
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
-    var PremieraView = PostavkeView.extend({
+    var GostovanjeView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Premiera',
-        detailName: 'premiere',
-        formTitle: i18next.t('premiera.title'),
+        name: 'Gostovanje',
+        detailName: 'gostovanja',
+        formTitle: i18next.t('gostovanje.title'),
         gridMeta: [
             {
+                editable: false,
+                label: i18next.t('programDela.gostitelj'),
+                name: 'gostitelj',
+                sortable: true
+            },
+            {
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('programDela.celotnaVrednost'),
-                name: 'banka',
+                label: i18next.t('programDela.transportniStroski'),
+                name: 'transportniStroski',
                 total: 'sum',
                 sortable: true
             },
@@ -38,17 +44,8 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('programDela.zaproseno'),
-                name: 'zaproseno',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
-                label: i18next.t('programDela.lastnaSredstva'),
-                name: 'lastnaSredstva',
+                label: i18next.t('programDela.odkup'),
+                name: 'odkup',
                 total: 'sum',
                 sortable: true
             },
@@ -63,5 +60,5 @@ define([
             }
         ]
     });
-    return PremieraView;
+    return GostovanjeView;
 });

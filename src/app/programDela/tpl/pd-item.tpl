@@ -17,9 +17,9 @@
             <p style="margin-bottom: 0;">
                 <i class="fa fa-calendar"></i> {{sezona}}
                 <br />
-                <i class="fa fa-clock-o"></i> Začetek {{zacetek}}
+                <i class="fa fa-clock-o"></i> Začetek {{u "date" zacetek}}
                 <br />
-                <i class="fa fa-clock-o"></i> Konec {{konec}}
+                <i class="fa fa-clock-o"></i> Konec {{u "date" konec}}
                 <br />
             </p>
         </div>

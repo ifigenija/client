@@ -88,32 +88,32 @@ define([
             switch (nested) {
                 case 'gostovanja':
                     postavka = new PdGostovanje({
-                        programDela: this.id
+                        dokument: this.id
                     });
                     break;
                 case 'gostujoci':
                     postavka = new PdGostujoca({
-                        programDela: this.id
+                        dokument: this.id
                     });
                     break;
                 case 'izjemni':
                     postavka = new PdIzjemni({
-                        programDela: this.id
+                        dokument: this.id
                     });
                     break;
                 case 'ponovitve':
                     postavka = new PdPonovitve({
-                        programDela: this.id
+                        dokument: this.id
                     });
                     break;
                 case 'premiere':
                     postavka = new PdPremiere({
-                        programDela: this.id
+                        dokument: this.id
                     });
                     break;
                 case 'festivali':
                     postavka = new PdGostovanje({
-                        programDela: this.id
+                        dokument: this.id
                     });
                     break;
             }
