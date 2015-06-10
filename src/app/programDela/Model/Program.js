@@ -11,11 +11,11 @@ define([
         ) {
 
     var Model = Backbone.Model.extend({
-        urlRoot: baseUrl + '/rest/programDela'
+        urlRoot: baseUrl + '/rest/programDela/seznam'
     });
 
     var Collection = PageableCollection.extend({
-        url: baseUrl + '/rest/programDela',
+        url: baseUrl + '/rest/programDela/seznam',
         model: Model
     });
 

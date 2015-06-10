@@ -7,11 +7,11 @@ define([
     'radio',
     'i18next',
     'baseUrl',
-    'template!../tpl/pd.tpl',
-    'template!../tpl/pd-item.tpl',
-    '../Model/ProgramDela',
-    '../Model/PdDokument',
-    './PdUrediView',
+    'template!../tpl/program.tpl',
+    'template!../tpl/program-item.tpl',
+    '../Model/Program',
+    '../Model/ProgramDokument',
+    './ProgramDokView',
     'app/Max/View/PaginatorControl'
 ], function (
         Marionette,
@@ -21,9 +21,9 @@ define([
         baseUrl,
         tpl,
         itemTpl,
-        PdModel,
-        PdDokument,
-        UrediView,
+        ProgramModel,
+        ProgramDokument,
+        ProgramDokView,
         PaginatorControl
         ) {
 
@@ -40,13 +40,13 @@ define([
         var newUrl = 'programDela/' + this.model.get('id');
         ch.command('replaceUrl', newUrl);
 
-        var testiranje = function () {
-            var view = new UrediView({model: pdModel});
+        var odpri = function (model) {
+            var view = new ProgramDokView({model: model});
             ch.command('open', view, i18next.t("programDela.title"));
         };
 
-        var pdModel = new PdDokument.Model({id: this.model.get('id')});
-        pdModel.once('sync', testiranje);
+        var pdModel = new ProgramDokument.Model({id: this.model.get('id')});
+        pdModel.once('sync', odpri);
         pdModel.fetch();
     };
 
@@ -62,7 +62,7 @@ define([
     });
 
     ProgramDelaView.prototype.initialize = function () {
-        this.collection = new PdModel.Collection();
+        this.collection = new ProgramModel.Collection();
         this.collection.state.perPage = 9;
         this.paginatorControll = new PaginatorControl({
             collection: this.collection
@@ -78,9 +78,9 @@ define([
         var newUrl = 'programDela/dodaj';
         ch.command('replaceUrl', newUrl);
 
-        var pdModel = new PdDokument.Model();
+        var pdModel = new ProgramDokument.Model();
 
-        var view = new UrediView({model: pdModel});
+        var view = new ProgramDokView({model: pdModel});
         ch.command('open', view, i18next.t("programDela.title"));
     };
 

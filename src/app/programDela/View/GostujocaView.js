@@ -5,7 +5,7 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/Dokument/View/PostavkeView',
-    'template!../tpl/Ep-form.tpl',
+    'template!../tpl/gostujoca-form.tpl',
     'formSchema!programGostujoca'
 ], function (
         Backgrid,
@@ -26,10 +26,17 @@ define([
         formTitle: i18next.t('gostujoca.title'),
         gridMeta: [
             {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('ep.uprizoritev'),
+                name: 'uprizoritev',
+                sortable: true
+            },
+            {
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('programDela.celotnaVrednost'),
+                label: i18next.t('ep.celotnaVrednost'),
                 name: 'banka',
                 total: 'sum',
                 sortable: true
@@ -38,7 +45,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('programDela.zaproseno'),
+                label: i18next.t('ep.zaproseno'),
                 name: 'zaproseno',
                 total: 'sum',
                 sortable: true
@@ -47,8 +54,44 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('programDela.lastnaSredstva'),
+                label: i18next.t('ep.lastnaSredstva'),
                 name: 'lastnaSredstva',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.avtorskiHonorarji'),
+                name: 'avtorskiHonorarji',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.tantieme'),
+                name: 'tantieme',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.drugiViri'),
+                name: 'drugiViri',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.drugiJavni'),
+                name: 'drugiJavni',
                 total: 'sum',
                 sortable: true
             },

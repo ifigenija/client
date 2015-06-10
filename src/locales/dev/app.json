@@ -54,7 +54,8 @@
             "oseba": "Osebe",
             "uprizoritev": "Uprizoritve",
             "strosek": "Stroškovnik",
-            "zaposlitev": "Kadri"
+            "zaposlitev": "Kadri",
+            "sezona": "Sezone"
         }
     },
     "seznami": {
@@ -354,7 +355,57 @@
             "label": "Program dela"
         },
         "title": "Programi dela",
-        "ustvariPD": "Ustvari program dela",
-        "urediPD": "Uredi program dela"
+        "nova": "Nov program dela",
+        "dodajPD": "Dodaj program dela",
+        "sezona": "Sezona",
+        "potrjenProgram": "Potrjen program"
+    },
+    "ep": {
+        "celotnaVrednost":"Celotna vrednost",
+        "zaproseno":"Zaprošeno",
+        "lastnaSredstva":"Latna sredstva",
+        "avtorskiHonorarji":"Avtorski honorarji",
+        "tantieme":"Tantieme",
+        "drugiViri":"Drugi viri",
+        "drugiJavni":"Drugi javni viri",
+        "obiskDoma":"Obisk doma",
+        "obiskGost":"Obisk Gost",
+        "obiskZamejo":"Obisk Zamejstvo",
+        "obiskInt":"Obisk",
+        "ponoviDoma":"Št. ponovitev doma",
+        "ponoviZamejo":"Št. ponovitev zamejstvo",
+        "ponoviGost":"Št. ponovitev gostovanje",
+        "ponoviInt":"Št. ponovitev",
+        "utemeljitev":"Utemeljitev",
+        "tipProgramskeEnote":"Tip programske Enote",
+        "tip":"Tip"
+    },
+    "gostovanje": {
+        "title": "Gostovanje",
+        "transportniStroski": "Transportni stroški",
+        "odkup": "Odkup",
+        "gostitelj": "Gostitelj"
+    },
+    "festival": {
+        "title": "Festival"
+    },
+    "premiera": {
+        "title": "Premiera"
+    },
+    "ponovitevPremiere": {
+        "title": "Ponovitev premiere"
+    },
+    "ponovitevPrejsnjih": {
+        "title": "Ponovitev prejšnjih"
+    },
+    "gostujoca": {
+        "title": "Gostujoča"
+    },
+    "izjemni": {
+        "title": "Izjemni"
+    },
+    "sezona": {
+        "title": "Sezone",
+        "imeSezone": "Ime sezone"
     }
 }

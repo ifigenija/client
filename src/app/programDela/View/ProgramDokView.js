@@ -8,8 +8,8 @@ define([
     'i18next',
     'baseUrl',
     'app/Dokument/View/DokumentView',
-    'template!../tpl/pd-dokument.tpl',
-    'template!../tpl/pd-form.tpl',
+    'template!../tpl/program-dokument.tpl',
+    'template!../tpl/program-form.tpl',
     'formSchema!programDela'
 ], function (
         Marionette,
@@ -25,36 +25,50 @@ define([
 
     var ch = Radio.channel('layout');
 
-    var PdDokumentView = DokumentView.extend({
+    var ProgramDokView = DokumentView.extend({
         template: dokumentTpl,
         formTemplate: formTpl,
         schema: formSchema.toFormSchema().schema,
         regions: {
             premiereR: '.region-premiere',
-            ponovitveR: '.region-ponovitve',
+            ponovitvePremierR: '.region-ponovitvePremier',
+            ponovitvePrejsnjihR: '.region-ponovitvePrejsnjih',
             gostovanjaR: '.region-gostovanja',
             gostujociR: '.region-gostujoci',
             izjemniR: '.region-izjemni',
-            festivaliR: '.region-festivali'
+            festivaliR: '.region-festivali',
+            razniR: '.region-razni'
         }
     });
 
-    PdDokumentView.prototype.onRender = function () {
+    ProgramDokView.prototype.onRender = function () {
         if (this.model.get('id')) {
             this.onPremiera();
-            this.onPonovitev();
+            this.onPonovitevPremiere();
+            this.onPonovitevPrejsnje();
             this.onGostovanje();
             this.onGostujoca();
-            this.onIzjemna();
+            this.onIzjemni();
             this.onFestival();
+            this.onRazno();
         }
     };
+    
+    ProgramDokView.prototype.getNaslov = function () {
+        return this.isNew() ?
+                i18next.t('programDela.nova') : this.model.get('naziv');
+    };
+    
+    ProgramDokView.prototype.onSkrij = function () {
+        console.log("skrij");
+    };
+    
 
     /**
      * Izris premier
      * @returns {undefined}
      */
-    PdDokumentView.prototype.onPremiera = function () {
+    ProgramDokView.prototype.onPremiera = function () {
         var self = this;
         require(['app/programDela/View/PremieraView'], function (View) {
             var view = new View({
@@ -66,17 +80,32 @@ define([
         });
     };
     /**
-     * Izris ponovitev
+     * Izris ponovitev premiere
      * @returns {undefined}
      */
-    PdDokumentView.prototype.onPonovitev = function () {
+    ProgramDokView.prototype.onPonovitevPremiere = function () {
         var self = this;
-        require(['app/programDela/View/PonovitevView'], function (View) {
+        require(['app/programDela/View/PonovitevPremiereView'], function (View) {
             var view = new View({
-                collection: self.model.ponovitveCollection,
+                collection: self.model.ponovitvePremierCollection,
                 dokument: self.model
             });
-            self.ponovitveR.show(view);
+            self.ponovitvePremierR.show(view);
+            return view;
+        });
+    };
+    /**
+     * Izris ponovitev prejsnjih
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onPonovitevPrejsnje = function () {
+        var self = this;
+        require(['app/programDela/View/PonovitevPrejsnjeView'], function (View) {
+            var view = new View({
+                collection: self.model.ponovitvePrejsnjihCollection,
+                dokument: self.model
+            });
+            self.ponovitvePrejsnjihR.show(view);
             return view;
         });
     };
@@ -84,7 +113,7 @@ define([
      * Izris gostovanj
      * @returns {undefined}
      */
-    PdDokumentView.prototype.onGostovanje = function () {
+    ProgramDokView.prototype.onGostovanje = function () {
         var self = this;
         require(['app/programDela/View/GostovanjeView'], function (View) {
             var view = new View({
@@ -99,7 +128,7 @@ define([
      * Izris gostujoci
      * @returns {undefined}
      */
-    PdDokumentView.prototype.onGostujoca = function () {
+    ProgramDokView.prototype.onGostujoca = function () {
         var self = this;
         require(['app/programDela/View/GostujocaView'], function (View) {
             var view = new View({
@@ -114,9 +143,9 @@ define([
      * Izris izjemnih uprizoritev
      * @returns {undefined}
      */
-    PdDokumentView.prototype.onIzjemna = function () {
+    ProgramDokView.prototype.onIzjemni = function () {
         var self = this;
-        require(['app/programDela/View/IzjemnaView'], function (View) {
+        require(['app/programDela/View/IzjemniView'], function (View) {
             var view = new View({
                 collection: self.model.izjemniCollection,
                 dokument: self.model
@@ -129,7 +158,7 @@ define([
      * Izris izjemnih uprizoritev
      * @returns {undefined}
      */
-    PdDokumentView.prototype.onFestival = function () {
+    ProgramDokView.prototype.onFestival = function () {
         var self = this;
         require(['app/programDela/View/FestivalView'], function (View) {
             var view = new View({
@@ -140,6 +169,21 @@ define([
             return view;
         });
     };
+    /**
+     * Izris razno
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onRazno = function () {
+        var self = this;
+        require(['app/programDela/View/RaznoView'], function (View) {
+            var view = new View({
+                collection: self.model.razniCollection,
+                dokument: self.model
+            });
+            self.razniR.show(view);
+            return view;
+        });
+    };
 
-    return PdDokumentView;
+    return ProgramDokView;
 });

@@ -22,6 +22,10 @@ define(['i18next'], function (i18n) {
                 {
                     label: i18n.t("produkcija.nav.zaposlitev"),
                     uri: "#pro/zaposlitev"
+                },
+                {
+                    label: i18n.t("produkcija.nav.sezona"),
+                    uri: "#pro/sezona"
                 }
             ]
         }

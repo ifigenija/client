@@ -26,8 +26,9 @@ define([
         formTitle: i18next.t('gostovanje.title'),
         gridMeta: [
             {
+                cell: 'string',
                 editable: false,
-                label: i18next.t('programDela.gostitelj'),
+                label: i18next.t('gostovanje.gostitelj'),
                 name: 'gostitelj',
                 sortable: true
             },
@@ -35,7 +36,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('programDela.transportniStroski'),
+                label: i18next.t('gostovanje.transportniStroski'),
                 name: 'transportniStroski',
                 total: 'sum',
                 sortable: true
@@ -44,7 +45,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('programDela.odkup'),
+                label: i18next.t('gostovanje.odkup'),
                 name: 'odkup',
                 total: 'sum',
                 sortable: true

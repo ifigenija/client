@@ -59,6 +59,11 @@ define([
                 odpri(View, 'zaposlitev.title');
             });
         };
+        mod.sezona = function () {
+            require(['../View/SezonaView'], function (View) {
+                odpri(View, 'sezona.title');
+            });
+        };
         /**
          * neposredni dostop do podatkov zaposlitve
          * @returns {undefined}
@@ -94,6 +99,15 @@ define([
                 odpriModel(Model, View, id, 'uprizoritev.title');
             });
         };
+        /**
+         * neposredni dostop do podatkov uprizoritve
+         * @returns {undefined}
+         */
+        mod.sezonaOdpri = function (id) {
+            require(['../Model/Sezona', '../View/SezonaView'], function (Model, View) {
+                odpriModel(Model, View, id, 'sezona.title');
+            });
+        };
 
         /**
          * 
@@ -108,9 +122,11 @@ define([
                     'pro/uprizoritev': "uprizoritev",
                     "pro/stroskovnik": "stroskovnik",
                     "pro/zaposlitev": "zaposlitev",
+                    "pro/sezona": "sezona",
                     "pro/uprizoritev/:id": 'uprizoritevOdpri',
                     "pro/stroskovnik/:id": "stroskovnikOdpri",
-                    "pro/zaposlitev/:id": "zaposlitevOdpri"
+                    "pro/zaposlitev/:id": "zaposlitevOdpri",
+                    "pro/sezona/:id": "sezonaOdpri"
                 }
             });
         });

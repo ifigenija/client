@@ -5,8 +5,8 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/Dokument/View/PostavkeView',
-    'template!../tpl/premiera-form.tpl',
-    'formSchema!programPremiera'
+    'template!../tpl/ponovitevPremiere-form.tpl',
+    'formSchema!programPonovitevPremiere'
 ], function (
         Backgrid,
         i18next,
@@ -18,12 +18,12 @@ define([
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
-    var PremieraView = PostavkeView.extend({
+    var PonovitevView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Premiera',
-        detailName: 'premiere',
-        formTitle: i18next.t('premiera.title'),
+        name: 'Ponovitev premiere',
+        detailName: 'ponovitvePremier',
+        formTitle: i18next.t('ponovitevPremiere.title'),
         gridMeta: [
             {
                 cell: 'string',
@@ -106,5 +106,5 @@ define([
             }
         ]
     });
-    return PremieraView;
+    return PonovitevView;
 });

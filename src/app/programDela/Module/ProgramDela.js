@@ -50,7 +50,7 @@ define([
          * @returns {undefined}
          */
         mod.programDela = function () {
-            require(['../View/PdView'], function (View) {
+            require(['../View/ProgramView'], function (View) {
                 odpri(View, 'programDela.title');
             });
         };
@@ -59,16 +59,14 @@ define([
          * @returns {undefined}
          */
         mod.programDelaDodaj = function () {
-            require(['../Model/PdDokument', '../View/PdUrediView'], function (Model, View) {
-                odpriModel(Model, View, null, 'programDela.title');
-            });
+            this.programDelaUredi(null);
         };
         /**
          * Odpre se stran za urejanje programa dela
          * @returns {undefined}
          */
         mod.programDelaUredi = function (id) {
-            require(['../Model/PdDokument', '../View/PdUrediView'], function (Model, View) {
+            require(['../Model/ProgramDokument', '../View/ProgramDokView'], function (Model, View) {
                 odpriModel(Model, View, id, 'programDela.title');
             });
         };
