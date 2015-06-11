@@ -90,14 +90,14 @@ define([
     var ProgramDelaModel = Dokument.Model.extend({
         urlRoot: baseUrl + '/rest/programDela',
         nestedCollections: {
-            gostovanja: {collection: GostovanjeCollection, mappedBy: 'programDela'},
-            gostujoci: {collection: GostujocaCollection, mappedBy: 'programDela'},
-            izjemni: {collection: IzjemniCollection, mappedBy: 'programDela'},
-            ponovitvePremier: {collection: PonovitvePremierCollection, mappedBy: 'programDela'},
-            ponovitvePrejsnjih: {collection: PonovitvePrejsnjihCollection, mappedBy: 'programDela'},
-            premiere: {collection: PremiereCollection, mappedBy: 'programDela'},
-            festivali: {collection: FestivaliCollection, mappedBy: 'programDela'},
-            razni: {collection: RazniCollection, mappedBy: 'programDela'}
+            gostovanja: {collection: GostovanjeCollection, mappedBy: 'dokument'},
+            gostujoci: {collection: GostujocaCollection, mappedBy: 'dokument'},
+            izjemni: {collection: IzjemniCollection, mappedBy: 'dokument'},
+            ponovitvePremier: {collection: PonovitvePremierCollection, mappedBy: 'dokument'},
+            ponovitvePrejsnjih: {collection: PonovitvePrejsnjihCollection, mappedBy: 'dokument'},
+            premiere: {collection: PremiereCollection, mappedBy: 'dokument'},
+            festivali: {collection: FestivaliCollection, mappedBy: 'dokument'},
+            razni: {collection: RazniCollection, mappedBy: 'dokument'}
         },
         dodajPostavko: function (nested) {
 

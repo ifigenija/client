@@ -29,7 +29,16 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('ep.uprizoritev'),
-                name: 'uprizoritev',
+                name: 'uprizoritev.label',
+                sortable: true
+            },
+            {
+                cell: Backgrid.SelectCell.extend({
+                    optionValues: schema.getOptionValues('tipProgramskeEnote')
+                }),
+                editable: false,
+                label: i18next.t('ep.tipProgramskeEnote'),
+                name: 'tipProgramskeEnote',
                 sortable: true
             },
             {
@@ -37,7 +46,7 @@ define([
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.celotnaVrednost'),
-                name: 'banka',
+                name: 'celotnaVrednost',
                 total: 'sum',
                 sortable: true
             },

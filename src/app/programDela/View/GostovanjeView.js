@@ -29,7 +29,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('gostovanje.gostitelj'),
-                name: 'gostitelj',
+                name: 'gostitelj.label',
                 sortable: true
             },
             {

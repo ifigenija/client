@@ -53,16 +53,11 @@ define([
             this.onRazno();
         }
     };
-    
+
     ProgramDokView.prototype.getNaslov = function () {
         return this.isNew() ?
                 i18next.t('programDela.nova') : this.model.get('naziv');
     };
-    
-    ProgramDokView.prototype.onSkrij = function () {
-        console.log("skrij");
-    };
-    
 
     /**
      * Izris premier

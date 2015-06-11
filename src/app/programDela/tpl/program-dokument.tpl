@@ -18,15 +18,31 @@
 
 <div class="row">
     <div class="col-sm-12  region-postavke">
-        <div class="region-toolbar pull-right"></div>
-        <div class="region-form"></div>
-        <div class="region-premiere"></div>
-        <div class="region-ponovitvePremier"></div>
-        <div class="region-ponovitvePrejsnjih"></div>
-        <div class="region-gostovanja"></div>
-        <div class="region-gostujoci"></div>
-        <div class="region-izjemni"></div>
-        <div class="region-festivali"></div>
-        <div class="region-razni"></div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="clearfix">
+                    <h4 class="glava-title">Uprizoritvena umetnost – Programski sklop I</h4>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="region-premiere"></div>
+                <div class="region-ponovitvePremier"></div>
+                <div class="region-ponovitvePrejsnjih"></div>
+                <div class="region-gostujoci"></div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="clearfix">
+                    <h4 class="glava-title">Uprizoritvena umetnost – Programski sklop II</h4>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="region-gostovanja"></div>
+                <div class="region-festivali"></div>
+                <div class="region-razni"></div>
+                <div class="region-izjemni"></div>
+            </div>      
     </div>
 </div>
