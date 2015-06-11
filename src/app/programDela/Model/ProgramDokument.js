@@ -93,11 +93,11 @@ define([
             gostovanja: {collection: GostovanjeCollection, mappedBy: 'dokument'},
             gostujoci: {collection: GostujocaCollection, mappedBy: 'dokument'},
             izjemni: {collection: IzjemniCollection, mappedBy: 'dokument'},
-            ponovitvePremier: {collection: PonovitvePremierCollection, mappedBy: 'dokument'},
+            ponovitvePremiere: {collection: PonovitvePremierCollection, mappedBy: 'dokument'},
             ponovitvePrejsnjih: {collection: PonovitvePrejsnjihCollection, mappedBy: 'dokument'},
             premiere: {collection: PremiereCollection, mappedBy: 'dokument'},
             festivali: {collection: FestivaliCollection, mappedBy: 'dokument'},
-            razni: {collection: RazniCollection, mappedBy: 'dokument'}
+            programiRazno: {collection: RazniCollection, mappedBy: 'dokument'}
         },
         dodajPostavko: function (nested) {
 
@@ -121,7 +121,7 @@ define([
                         dokument: this.id
                     });
                     break;
-                case 'ponovitvePremier':
+                case 'ponovitvePremiere':
                     postavka = new PonovitevPremiere({
                         dokument: this.id
                     });
@@ -141,7 +141,7 @@ define([
                         dokument: this.id
                     });
                     break;
-                case 'razni':
+                case 'programiRazno':
                     postavka = new Razno({
                         dokument: this.id
                     });

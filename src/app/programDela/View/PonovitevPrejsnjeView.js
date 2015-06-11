@@ -22,7 +22,7 @@ define([
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         name: 'Ponovitev prejsnjih',
-        detailName: 'ponovitvePremier',
+        detailName: 'ponovitvePrejsnjih',
         formTitle: i18next.t('ponovitevPrejsnjih.title'),
         gridMeta: [
             {

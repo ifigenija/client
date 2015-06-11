@@ -82,7 +82,7 @@ define([
         var self = this;
         require(['app/programDela/View/PonovitevPremiereView'], function (View) {
             var view = new View({
-                collection: self.model.ponovitvePremierCollection,
+                collection: self.model.ponovitvePremiereCollection,
                 dokument: self.model
             });
             self.ponovitvePremierR.show(view);
@@ -172,7 +172,7 @@ define([
         var self = this;
         require(['app/programDela/View/RaznoView'], function (View) {
             var view = new View({
-                collection: self.model.razniCollection,
+                collection: self.model.programiRaznoCollection,
                 dokument: self.model
             });
             self.razniR.show(view);

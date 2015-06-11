@@ -22,7 +22,7 @@ define([
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         name: 'Razno',
-        detailName: 'razni',
+        detailName: 'programiRazno',
         formTitle: i18next.t('razno.title'),
         gridMeta: [
             {
