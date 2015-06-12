@@ -25,42 +25,67 @@ define([
         detailName: 'festivali',
         formTitle: i18next.t('festival.title'),
         gridMeta: [
-//            {
-//                headerCell: hc,
-//                cell: 'number',
-//                editable: false,
-//                label: i18next.t('programDela.celotnaVrednost'),
-//                name: 'banka',
-//                total: 'sum',
-//                sortable: true
-//            },
-//            {
-//                headerCell: hc,
-//                cell: 'number',
-//                editable: false,
-//                label: i18next.t('programDela.zaproseno'),
-//                name: 'zaproseno',
-//                total: 'sum',
-//                sortable: true
-//            },
-//            {
-//                headerCell: hc,
-//                cell: 'number',
-//                editable: false,
-//                label: i18next.t('programDela.lastnaSredstva'),
-//                name: 'lastnaSredstva',
-//                total: 'sum',
-//                sortable: true
-//            },
-//            {
-//                cell: 'action',
-//                name: '...',
-//                sortable: false,
-//                actions: [
-//                    {event: 'brisi', title: i18next.t('entiteta.brisi')},
-//                    {event: 'uredi', title: i18next.t('entiteta.uredi')}
-//                ]
-//            }
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('festival.naziv'),
+                name: 'naziv',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.celotnaVrednost'),
+                name: 'celotnaVrednost',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.zaproseno'),
+                name: 'zaproseno',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.lastnaSredstva'),
+                name: 'lastnaSredstva',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.vlozekKoproducenta'),
+                name: 'vlozekKoproducenta',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.drugiJavni'),
+                name: 'drugiJavni',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                cell: 'action',
+                name: '...',
+                sortable: false,
+                actions: [
+                    {event: 'brisi', title: i18next.t('entiteta.brisi')},
+                    {event: 'uredi', title: i18next.t('entiteta.uredi')}
+                ]
+            }
         ]
     });
     return FestivalView;
