@@ -43,33 +43,39 @@ define([
     ];
 
     var gumbi = {
-        'doc-producent': {
+        producent: {
             id: 'doc-producent',
             label: 'Koproducent',
             element: 'button-trigger',
             trigger: 'koproducent',
             hidden: true
         },
-        'doc-kupec': {
+        kupec: {
             id: 'doc-kupec',
             label: 'Kupec',
             element: 'button-trigger',
             trigger: 'kupec',
             hidden: true
         },
-        'doc-shrani': {
+        shrani: {
             id: 'doc-shrani',
             label: 'Shrani',
             element: 'button-trigger',
             trigger: 'shrani',
             disabled: true
         },
-        'doc-skrij': {
+        skrij: {
             id: 'doc-skrij',
             label: 'Skrij',
             element: 'button-trigger',
             trigger: 'skrij'
-        }
+        },
+            nasvet: {
+                id: 'doc-nasvet',
+                label: '<i class="fa fa-info"></i>',
+                element: 'button-trigger',
+                trigger: 'nasvet'
+            }
     };
 
     var PopaEditView = DokumentView.extend({

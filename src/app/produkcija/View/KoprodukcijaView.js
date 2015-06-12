@@ -76,7 +76,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('prodel.lastnaSredstva'),
+                label: i18next.t('prodel.t.lastnaSredstva'),
                 name: 'lastnaSredstva',
                 sortable: true,
                 total: 'sum'
@@ -85,7 +85,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('prodel.drugiJavni'),
+                label: i18next.t('prodel.t.drugiJavni'),
                 name: 'drugiJavni',
                 sortable: true,
                 total: 'sum'
@@ -94,7 +94,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('prodel.avtorskih'),
+                label: i18next.t('prodel.t.avtorskih'),
                 name: 'avtorskih',
                 sortable: true,
                 total: 'sum'

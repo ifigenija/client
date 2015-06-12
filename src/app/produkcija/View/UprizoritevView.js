@@ -71,7 +71,7 @@ define([
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
-                label: i18next.t('uprizoritev.datumPremiere'),
+                label: i18next.t('uprizoritev.t.datumPremiere'),
                 name: 'datumPremiere',
                 sortable: true
             },
