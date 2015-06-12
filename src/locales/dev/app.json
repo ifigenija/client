@@ -43,11 +43,6 @@
             "besedila": "Arhiv besedil"
         }
     },
-    "poziv": {
-        "nav": {
-            "label": "Poziv"
-        }
-    },
     "produkcija": {
         "nav": {
             "label": "Produkcija",
@@ -264,7 +259,10 @@
         "zvrstUprizoritve": "Vrsta uprizoritve",
         "zvrstSurs": "Zvrst po SURS",
         "steviloVaj": "Število vaj",
-        "planiranoSteviloVaj": "Planirano število vaj"
+        "planiranoSteviloVaj": "Planirano število vaj",
+        "t": {
+            "datumPremiere": "Premiera"
+        }
 
     },
     "funkcija": {
@@ -300,7 +298,12 @@
         "tantiemi": "Tantieme",
         "skupniStrosek": "Skupni strošek",
         "zaprosenProcent": "Zaprošen procent",
-        "koproducent": "Koproducent"
+        "koproducent": "Koproducent",
+        "t": {
+            "lastnaSredstva": "Sredstva",
+            "drugiJavni": "Viri",
+            "avtorskih": "Honorarji"
+        }
     },
     "strupr": {
         "title": "Stroški uprizoritve",
@@ -361,24 +364,32 @@
         "potrjenProgram": "Potrjen program"
     },
     "ep": {
-        "celotnaVrednost":"Celotna vrednost",
-        "zaproseno":"Zaprošeno",
-        "lastnaSredstva":"Latna sredstva",
-        "avtorskiHonorarji":"Avtorski honorarji",
-        "tantieme":"Tantieme",
-        "drugiViri":"Drugi viri",
-        "drugiJavni":"Drugi javni viri",
-        "obiskDoma":"Obisk doma",
-        "obiskGost":"Obisk Gost",
-        "obiskZamejo":"Obisk Zamejstvo",
-        "obiskInt":"Obisk",
-        "ponoviDoma":"Št. ponovitev doma",
-        "ponoviZamejo":"Št. ponovitev zamejstvo",
-        "ponoviGost":"Št. ponovitev gostovanje",
-        "ponoviInt":"Št. ponovitev",
-        "utemeljitev":"Utemeljitev",
-        "tipProgramskeEnote":"Tip programske Enote",
-        "tip":"Tip"
+        "celotnaVrednost": "Celotna vrednost",
+        "zaproseno": "Zaprošeno",
+        "lastnaSredstva": "Lastna sredstva",
+        "avtorskiHonorarji": "Avtorski honorarji",
+        "tantieme": "Tantieme",
+        "drugiViri": "Drugi viri",
+        "drugiJavni": "Drugi javni viri",
+        "obiskDoma": "Obisk doma",
+        "obiskGost": "Obisk Gost",
+        "obiskZamejo": "Obisk Zamejstvo",
+        "obiskInt": "Obisk",
+        "ponoviDoma": "Št. ponovitev doma",
+        "ponoviZamejo": "Št. ponovitev zamejstvo",
+        "ponoviGost": "Št. ponovitev gostovanje",
+        "ponoviInt": "Št. ponovitev",
+        "utemeljitev": "Utemeljitev",
+        "tipProgramskeEnote": "Tip programske Enote",
+        "tip": "Tip",
+        "t": {
+            "celotnaVrednost": "Vrednost",
+            "lastnaSredstva": "Sredstva",
+            "avtorskiHonorarji": "Honorarji",
+            "drugiViri": "Viri",
+            "drugiJavni": "Javni viri",
+            "tipProgramskeEnote": "Tip"
+        }
     },
     "gostovanje": {
         "title": "Gostovanje",

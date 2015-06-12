@@ -52,6 +52,12 @@ define([
                 label: 'Prekliči',
                 element: 'button-trigger',
                 trigger: 'preklici'
+            },
+            nasvet: {
+                id: 'doc-nasvet',
+                label: '<i class="fa fa-info"></i>',
+                element: 'button-trigger',
+                trigger: 'nasvet'
             }
         }
     });

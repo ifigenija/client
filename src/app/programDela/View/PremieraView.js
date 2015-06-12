@@ -37,7 +37,7 @@ define([
                     optionValues: schema.getOptionValues('tipProgramskeEnote')
                 }),
                 editable: false,
-                label: i18next.t('ep.tipProgramskeEnote'),
+                label: i18next.t('ep.t.tipProgramskeEnote'),
                 name: 'tipProgramskeEnote',
                 sortable: true
             },
@@ -45,7 +45,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.celotnaVrednost'),
+                label: i18next.t('ep.t.celotnaVrednost'),
                 name: 'celotnaVrednost',
                 total: 'sum',
                 sortable: true
@@ -63,7 +63,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.lastnaSredstva'),
+                label: i18next.t('ep.t.lastnaSredstva'),
                 name: 'lastnaSredstva',
                 total: 'sum',
                 sortable: true
@@ -72,7 +72,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.avtorskiHonorarji'),
+                label: i18next.t('ep.t.avtorskiHonorarji'),
                 name: 'avtorskiHonorarji',
                 total: 'sum',
                 sortable: true
@@ -90,7 +90,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.drugiViri'),
+                label: i18next.t('ep.t.drugiViri'),
                 name: 'drugiViri',
                 total: 'sum',
                 sortable: true
@@ -99,7 +99,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.drugiJavni'),
+                label: i18next.t('ep.t.drugiJavni'),
                 name: 'drugiJavni',
                 total: 'sum',
                 sortable: true
