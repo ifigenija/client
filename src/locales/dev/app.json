@@ -119,7 +119,11 @@
         "interNaslov": "Internacionalni naslov",
         "d": {
             "sifra": "Enolična oznaka",
-            "jeeu": "Je iz EU ali ne"
+            "jeeu": "Je iz EU ali ne",
+            "zacetek": "Začetni datum",
+            "konec": "Končni datum",
+            "aktivna": "Ali je pogodba aktivna",
+            "zaposlenVDrJz": "Ali je oseba zaposlena v drugem javnem zavodu"
         }
     },
     "abonma": {
@@ -349,7 +353,11 @@
         "dovoliPrekrivanje": "Dovoli prekrivanje",
         "maxPrekrivanj": "Max. prekrivanj",
         "privzeti": "Privzeta alternacija",
-        "tipFunkcije": "Tip funkcije"
+        "tipFunkcije": "Tip funkcije",
+        "d":{
+            "vodjaEkipe": "Ali je vodja področja",
+            "pomembna": "Ali je funkcija pomembna"
+        }
     },
     "alternacija": {
         "title": "Alternacije",
@@ -358,7 +366,11 @@
         "sodelovanje": "Sodelovanje",
         "koprodukcija": "Koprodukcija",
         "pogodba": "Pogodba",
-        "zaposlitev": "Zaposlitev"
+        "zaposlitev": "Zaposlitev",
+        "d":{
+            "zaposlen" :"Ali je zaposlen",
+            "privzeti" :"Ali je privzeti"
+        }
     },
     "prodel": {
         "title": "Koprodukcije",
@@ -376,6 +388,12 @@
             "lastnaSredstva": "Sredstva",
             "drugiJavni": "Viri",
             "avtorskih": "Honorarji"
+        },
+        "d":{
+            "nasStrosek" : "Ali je naš strošek",
+            "avtorskih" : "Strošek avtorskih honorarjev",
+            "tantiemi" : "Stroški tantiem",
+            "uprizoritev" : "Uprizoritev oz. projekt, za katerega je strošek"
         }
     },
     "strupr": {
@@ -482,7 +500,7 @@
         "drugiJavni": "Drugi javni viri",
         "obiskDoma": "Obisk doma",
         "obiskGost": "Obisk gostovanje",
-        "obiskZamejo": "Obisk Zamejstvo",
+        "obiskZamejo": "Obisk zamejstvo",
         "obiskInt": "Obisk internacionalno",
         "ponoviDoma": "Št. ponovitev doma",
         "ponoviZamejo": "Št. ponovitev zamejstvo",
