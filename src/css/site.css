@@ -690,14 +690,6 @@ span.stevilka-na-veliko {
 .media.alter-listitem {
   overflow: visible;
 }
-.btn-tripikice > ul.dropdown-menu {
-  right: 0;
-  left: auto;
-}
-.btn-tripikice > button {
-  border: 0px;
-  border-style: none;
-}
 .alter-listitem > .media-body {
   overflow: visible;
 }

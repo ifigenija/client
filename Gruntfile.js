@@ -7,7 +7,6 @@ module.exports = function (grunt) {
         }
         return  '../../vendor/bin/classmap_generator.php';
     };
-
 // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -37,7 +36,12 @@ module.exports = function (grunt) {
 
                 }
             }
-        },    
+        },
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js'
+            }
+        },
         cssmin: {
             combine: {
                 files: {
@@ -48,16 +52,11 @@ module.exports = function (grunt) {
 
             }
         },
-        exec: {
-        }
 
     });
-
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-
+    grunt.loadNpmTasks('grunt-karma');
 // Default task(s).
-    grunt.registerTask('default', ['cssmin', 'jshint']);
-
+    grunt.registerTask('default', ['karma']);
 };

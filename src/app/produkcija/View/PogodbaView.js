@@ -37,14 +37,14 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('pogodba.popa'),
-                name: 'popa',
+                name: 'popa.label',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('entiteta.oseba'),
-                name: 'oseba',
+                name: 'oseba.label',
                 sortable: true
             },
             {
