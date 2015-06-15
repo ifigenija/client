@@ -113,27 +113,41 @@
         "zacetek": "Začetek",
         "konec": "Konec",
         "oseba": "Oseba",
-        "name": "Naziv",
-        "description": "Opis",
         "builtIn": "Vgrajeno",
         "funkcija": "Funkcija",
         "aktivna": "Aktivna",
-        "internacionalniNaslov": "Internacionalni naslov"
+        "interNaslov": "Internacionalni naslov",
+        "d": {
+            "sifra": "Enolična oznaka",
+            "jeeu": "Je iz EU ali ne"
+        }
     },
     "abonma": {
         "title": "Abonmaji",
         "nova": "Nov Abonma",
         "stPredstav": "Število predstav",
-        "stKuponov": "Število kuponov"
+        "stKuponov": "Število kuponov",
+        "d": {
+            "stPredstav": "Število predstav abonmaja",
+            "stKuponov": "Število kuponov abonmaja"
+        }
     },
     "prostor": {
         "title": "Prostori",
         "nova": "Nov prostor",
-        "jePrizorisce": "Prizorišče"
+        "jePrizorisce": "Prizorišče",
+        "d": {
+            "jePrizorisce": "Ali je prostor prizorišče.",
+            "kapaciteta": "Število mest v prostoru."
+        }
     },
     "zvrstSurs": {
         "title": "Zvrsti po SURS",
-        "nova": "Nova zvrst po SURS"
+        "nova": "Nova zvrst po SURS",
+        "d": {
+            "sifra": "Šifra zvrsti po SURS-u",
+            "naziv": "Naziv zvrsti po SURS-u"
+        }
     },
     "zvrstUprizoritve": {
         "title": "Vrste uprizoritev",
@@ -143,7 +157,12 @@
         "title": "Tipi funkcij",
         "nova": "Nov tip funkcije",
         "zenskoIme": "Žensko ime",
-        "nastopajoc": "Nastopajoč"
+        "nastopajoc": "Nastopajoč",
+        "d": {
+            "ime": "Moška oblika funkcije",
+            "zenskoIme": "Ženska oblika funkcije",
+            "nastopajoc": "Ali bo oseba s to funkcijo nastopala"
+        }
     },
     "drzava": {
         "title": "Države",
@@ -151,12 +170,21 @@
         "sifra": "Koda države",
         "sifraDolg": "Trimestna koda",
         "isoNum": "Številčna koda",
-        "isoNaziv": "Iso Naziv"
+        "isoNaziv": "Iso Naziv",
+        "d": {
+            "sifra": "ISO koda države",
+            "sifraDolg": "Trimestna ISO koda države",
+            "isoNum": "Trimestna ISO številčna koda države",
+            "isoNaziv": "ISO Naziv države"
+        }
     },
     "posta": {
         "title": "Pošte",
         "nova": "Nova pošta",
-        "sifra": "Poštna številka"
+        "sifra": "Poštna številka",
+        "d": {
+            "sifra": "Poštna številka"
+        }
     },
     "popa": {
         "title": "Poslovni partnerji",
@@ -173,7 +201,18 @@
         "zavezanec": "Zavezanec za DDV",
         "datZav": "Zavezanec za DDV od",
         "datnZav": "Zavezanec za DDV do",
-        "zamejstvo": "Iz zamejstva"
+        "zamejstvo": "Iz zamejstva",
+        "d": {
+            "tipkli": "Tip klienta (kupec, dobavitelj, koproducent, )",
+            "stakli": "AK-aktiven, NA-neaktiven",
+            "naziv1": "Dodatni naziv za klienta",
+            "url": "URL naslov spletne strani",
+            "idddv": "Davčna številka",
+            "zavezanec": "Je klient zavezanec za DDV",
+            "datZav": "Zavezanec za DDV od dne",
+            "datnZav": "Zavezanec za DDV do dne",
+            "zamejstvo": "Je poslovni partner iz zamejstva"
+        }
     },
     "oseba": {
         "title": "Osebe",
@@ -190,13 +229,23 @@
         "opombe": "Opomba",
         "drzavljanstvo": "Državljanstvo",
         "drzavaRojstva": "Država rojstva",
-        "krajRojstva": "Kraj rojstva"
+        "krajRojstva": "Kraj rojstva",
+        "d": {
+            "naziv": "Naziv osebe  (g., dr., ga, prof.dr.)",
+            "emso": "Enotna matična številka občana"
+        }
     },
     "trr": {
         "title": "TRR",
         "swift": "Swift",
         "bic": "Bic",
-        "banka": "Banka"
+        "banka": "Banka",
+        "d": {
+            "swift": "Swift številka računa",
+            "bic": "Bic številka računa",
+            "banka": "Naziv banke",
+            "stevilka": "Številka bančnega računa"
+        }
     },
     "postniNaslov": {
         "title": "Naslovi",
@@ -206,17 +255,33 @@
         "posta": "Poštna številka",
         "postaNaziv": "Pošta",
         "pokrajina": "Pokrajina",
-        "privzeti": "Privzeti naslov"
+        "privzeti": "Privzeti naslov",
+        "d": {
+            "popa": "Poslovni partner, ki je lastnik naslova",
+            "oseba": "Oseba",
+            "nazivDva": "Oseba",
+            "pokrajina": "Pokrajina v kateri je ta naslov",
+            "privzeti": "A je to privzeti naslov za poslovnega partnerja"
+        }
     },
     "tel": {
         "title": "Telefonske",
         "vrsta": "Vrsta tel. številke",
         "privzeta": "Privzeta",
-        "popa": "Klient"
+        "popa": "Klient",
+        "d": {
+            "stevilka": "Telefonska številka",
+            "privzeta": "Ali je privzeta telefonska številka",
+            "popa": "Poslovni partner, ki je ima to telefosnko številko",
+            "oseba": "Oseba, ki je ima to telefosnko številko"
+        }
     },
-    "kontaktnaOseba": {
+    "kontaktna": {
         "title": "Kontaktne osebe",
-        "popa": "Poslovni partner"
+        "popa": "Poslovni partner",
+        "d": {
+            "status": "AK-aktiven, NA-neaktiven"
+        }
     },
     "besedilo": {
         "title": "Besedila",
@@ -226,13 +291,16 @@
         "jezik": "Jezik",
         "naslovIzvirnika": "Naslov izvirnika",
         "datumPrejema": "Datum prejema",
-        "moskeVloge": "Moške vloge",
-        "zenskeVloge": "Ženske vloge",
+        "moskeVloge": "Število moških vlog",
+        "zenskeVloge": "Število ženskih vlog",
         "prevajalec": "Prevajalec",
         "povzetekVsebine": "Povzetek vsebine",
         "letoIzida": "Leto izida",
         "krajIzida": "kraj izida",
-        "zaloznik": "Založnik"
+        "zaloznik": "Založnik",
+        "d":{
+            "naslovIzvirnika":"Naslov izvirnika besedila"
+        }
     },
     "uprizoritev": {
         "title": "Uprizoritev",
@@ -328,11 +396,17 @@
     },
     "role": {
         "title": "Vloga",
-        "nova": "Nova vloga"
+        "nova": "Nova vloga",
+        "d":{
+            "builtIn":"Vloga, ki pride z namestitvijo sistema"
+        }
     },
     "permission": {
         "title": "Dovoljenja",
-        "nova": "Novo dovoljenje"
+        "nova": "Novo dovoljenje",
+        "d":{
+            "builtIn": "Dovoljene, ki pride z namestitvijo sistema"
+        }
     },
     "user": {
         "title": "Uporabniki",
@@ -342,7 +416,16 @@
         "enabled": "Aktiven",
         "expires": "Veljavno do",
         "defaultRoute": "Privzeta pot ob prijavi",
-        "defaultRouteParams": "Parametri za pot"
+        "defaultRouteParams": "Parametri za pot",
+        "lastLogon": "Čas zadnje priajve",
+        "d": {
+            "name": "Polno ime uporabnika. Ime in priimek oz. opis",
+            "enabled": "Ali je uporabnik omogočen ali onemogočen",
+            "expires": "Po tem datumu se uporabnik ne more prijaviti",
+            "defaultRoute": "Privzeta pot v aplikaciji po prijavi",
+            "defaultRouteParams": "Parametri za privzeto pot v aplikaciji po prijavi",
+            "email": "Elektronski naslov, ki služi za prijavo uporabnika"
+        }
     },
     "pogodba": {
         "title": "Pogodbe",

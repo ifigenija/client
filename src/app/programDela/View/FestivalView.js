@@ -4,12 +4,18 @@
 define([
     'app/Max/Module/Backgrid',
     'i18next',
+    'marionette',
+    'radio',
+    'app/bars',
     'app/Dokument/View/PostavkeView',
     'template!../tpl/festival-form.tpl',
     'formSchema!programFestival'
 ], function (
         Backgrid,
         i18next,
+        Marionette,
+        Radio,
+        Handlebars,
         PostavkeView,
         formTpl,
         schema
@@ -24,6 +30,9 @@ define([
         name: 'Festival',
         detailName: 'festivali',
         formTitle: i18next.t('festival.title'),
+        triggers: {
+            'click .utemelji': 'utemelji'
+        },
         gridMeta: [
             {
                 cell: 'string',
@@ -88,5 +97,43 @@ define([
             }
         ]
     });
+
+    /**
+     * Odpre modal za utemeljitev
+     * @returns {undefined}
+     */
+    FestivalView.prototype.onUtemelji = function () {
+        var self = this;
+        require(['backbone-modal'], function (Modal) {
+
+            var View = Marionette.LayoutView.extend({
+                template: Handlebars.compile('<form><textarea type="TextArea" class="utemeljitev form-control"></textarea></form>'),
+                title: i18next.t('Utemeljitev')
+            });
+
+            var view = new View({});
+
+            var modal = new Modal({
+                content: view,
+                animate: true,
+                okText: i18next.t("std.shrani"),
+                cancelText: i18next.t("std.preklici"),
+                title: view.title
+            }).open(function () {
+                var text = this.$('.utemeljitev').val();
+                if (text) {
+                    self.form.fields.opredelitevDrugiDogodki.editor.setValue(text);
+                }
+            });
+
+//            modal.listenTo(modal, 'ok', function () {
+//                var text = this.$('.utemeljitev').val();
+//                if(text){
+//                    var text = this.$('.utemeljitev').val();
+//                    self.form.fields.opredelitevDrugiDogodki.editor.setValue(text);
+//                }
+//            });
+        });
+    };
     return FestivalView;
 });

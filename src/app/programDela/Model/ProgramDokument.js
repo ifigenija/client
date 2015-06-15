@@ -68,11 +68,11 @@ define([
     
     
     var Festival = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/programFestivali'
+        urlRoot: baseUrl + '/rest/programFestival'
     });    
     var FestivaliCollection = Dokument.PostavkaCollection.extend({
         model: Festival,
-        url: baseUrl + '/rest/programFestivali',
+        url: baseUrl + '/rest/programFestival',
         index: 'toBeDetermined'
     });
     

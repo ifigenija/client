@@ -17,7 +17,8 @@
                         <div class="col-sm-6 col-md-4" data-fields="stObisk,casPriprave,casIzvedbe,prizorisca"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-lg-offset-3" data-fields="opredelitevDrugiDogodki"></div>
+                        <a class="btn btn-default utemelji">Utemeljitev</a>
+                        <!--<div class="col-md-6 col-lg-offset-3" data-fields="opredelitevDrugiDogodki"></div>-->
                     </div>
                 </form>
             </div>
