@@ -298,8 +298,8 @@
         "letoIzida": "Leto izida",
         "krajIzida": "kraj izida",
         "zaloznik": "Založnik",
-        "d":{
-            "naslovIzvirnika":"Naslov izvirnika besedila"
+        "d": {
+            "naslovIzvirnika": "Naslov izvirnika besedila"
         }
     },
     "uprizoritev": {
@@ -330,6 +330,11 @@
         "planiranoSteviloVaj": "Planirano število vaj",
         "t": {
             "datumPremiere": "Premiera"
+        },
+        "d": {
+            "maticniOder": "Matični oder / privzeto prizorišče uprizoritve",
+            "gostujoca": "Ali je uprizoritev gostujoča",
+            "sloAvtor": "Ali je slovenski avtor uprizoritve"
         }
 
     },
@@ -391,20 +396,25 @@
         "malica": "Malica",
         "izmenskoDelo": "Izmensko delo",
         "individualnaPogodba": "Individualna pogodba",
-        "jeZaposlenVdrugemjz": "Zaposlen v drugem JZ",
-        "jeNastopajoci": "Nastopajoči"
+        "jeZaposlenVdrugemJZ": "Zaposlen v drugem JZ",
+        "jeNastopajoci": "Nastopajoči",
+        "d": {
+            "individualnaPogodba": "Zaposlitev z individualno pogodbo",
+            "jeZaposlenVdrugemJZ": "Ali je zaposlen v drugem javnem zavodu",
+            "jeNastopajoci": "Ali je nastopajoči"
+        }
     },
     "role": {
         "title": "Vloga",
         "nova": "Nova vloga",
-        "d":{
-            "builtIn":"Vloga, ki pride z namestitvijo sistema"
+        "d": {
+            "builtIn": "Vloga, ki pride z namestitvijo sistema"
         }
     },
     "permission": {
         "title": "Dovoljenja",
         "nova": "Novo dovoljenje",
-        "d":{
+        "d": {
             "builtIn": "Dovoljene, ki pride z namestitvijo sistema"
         }
     },
@@ -444,7 +454,23 @@
         "nova": "Nov program dela",
         "dodajPD": "Dodaj program dela",
         "sezona": "Sezona",
-        "potrjenProgram": "Potrjen program"
+        "potrjenProgram": "Potrjen program",
+        "avgZasedDvoran": "Povprečna zasedenost lastnih dvoran",
+        "avgCenaVstopnice": "Povprečna cena vstopnice",
+        "stProdVstopnic": "Število prodanih vstopnic",
+        "stZaposlenih": "Število vseh zaposlenih v javnem zavodu",
+        "stZaposIgralcev": "Število zaposlenih igralcev",
+        "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev",
+        "stHonorarnih": "Načrtovano število honorarnih zunanjih sodelavcev",
+        "stHonorarnihIgr": "Načrtovano število honorarnih igralcev",
+        "stHonorarnihIgrTujJZ": "Načrtovano število honorarnih zunanjih sodelavcev",
+        "sredstvaInt": "Višina sredstev iz mednarodnih virov",
+        "d": {
+            "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev (popvprečno št. nastopov v letu)",
+            "stHonorarnih": "Načrtovano število honorarnih zunanjih sodelavcev",
+            "stHonorarnihIgr": "Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev",
+            "stHonorarnihIgrTujJZ": "Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev - od tega igralcev, zaposlenih v drugih JZ"
+        }
     },
     "ep": {
         "celotnaVrednost": "Celotna vrednost",
@@ -455,18 +481,20 @@
         "drugiViri": "Drugi viri",
         "drugiJavni": "Drugi javni viri",
         "obiskDoma": "Obisk doma",
-        "obiskGost": "Obisk Gost",
+        "obiskGost": "Obisk gostovanje",
         "obiskZamejo": "Obisk Zamejstvo",
-        "obiskInt": "Obisk",
+        "obiskInt": "Obisk internacionalno",
         "ponoviDoma": "Št. ponovitev doma",
         "ponoviZamejo": "Št. ponovitev zamejstvo",
         "ponoviGost": "Št. ponovitev gostovanje",
-        "ponoviInt": "Št. ponovitev",
+        "ponoviInt": "Št. ponovitev internacionalno",
         "utemeljitev": "Utemeljitev",
         "tipProgramskeEnote": "Tip programske Enote",
         "tip": "Tip",
         "d": {
-            "sort": "Sort programske enote"
+            "sort": "Sort programske enote",
+            "zaproseno": "Zaprošena sredstva Ministrstva za kulturo",
+            "drugiJavni": "Vir druga ministrstva in lokalna skupnost"
         },
         "t": {
             "celotnaVrednost": "Vrednost",
@@ -481,10 +509,51 @@
         "title": "Gostovanje",
         "transportniStroski": "Transportni stroški",
         "odkup": "Odkup",
-        "gostitelj": "Gostitelj"
+        "gostitelj": "Gostitelj",
+        "ustanova": "Ustanova",
+        "datumGostovanja": "Datum gostovanja",
+        "stPonovitev": "Število ponovitev",
+        "stGledalcev": "Število gledalcev",
+        "stroskiAvtorZun": "Stroški avtorskih honorarjev zunanjih sodelavcev",
+        "krajGostovanja": "Kraj gostovanja",
+        "viriDMinLok": "Vir druga ministrstva in lokalna skupnost",
+        "d":{
+            "ustanova":"Ustanova, v kateri se gostuje (nazv ustanove, festival ...)",
+            "odkup":"Odkup (vložek gostitelja)",
+            "stPonovitev":"Število ponovitev v okviru gostovanja",
+            "stGledalcev":"Načrtovano število gledalcev",
+            "transportniStroski":"Transportni stroški opreme ter stroški prevozov ansambla in tehnike",
+            "viriDMinLok":"Viri druga ministrstva in lokalna skupnost",
+            "gostitelj":"Organizator (gostitelj)"
+        }
     },
     "festival": {
-        "title": "Festival"
+        "title": "Festival",
+        "stProdukcij": "Število produkcij",
+        "stPredstav": "Število predstav",
+        "stPredavanj": "Število predavanj",
+        "stPredstavitev": "Število predstavitev",
+        "stDelavnic": "Število delavnic",
+        "stDrugiDogodki": "število drugih dogodkov",
+        "opredelitevDrugiDogodki": "Opredelitev drugih dogodkov",
+        "stObisk": "Pričakovano število obiskovalcev",
+        "casPriprave": "Čas priprave",
+        "casIzvedbe": "Čas izvedbe",
+        "prizorisca": "Prizorišča",
+        "umetVodja": "Umetniški vodja",
+        "programskoTelo": "Programsko telo",
+        "soorganizatorji": "Soorganizatorji",
+        "stTujihSelektorjev": "ŠĐtevilo tujih selektorjev",
+        "stZaposlenih": "Število zaposlenih",
+        "stHonorarnih": "Število honorarnih sodelavcev",
+        "opredelitevDrugiViri": "Opredelitev drugih virov",
+        "vlozekKoproducenta": "Vložek producenta",
+        "d":{
+            "stProdukcij": "Skupno število festivalskih produkcij",
+            "stTujihSelektorjev": "Predvideno število tujih selektorjev-gostov",
+            "stZaposlenih": "Število zaposlenih, ki sodelujejo pri izvedbi festivala",
+            "stHonorarnih": "Število vseh, ki sodelujejo honorarno pri izvedbi festivala in jim honorar izplačuje JZ"
+        }
     },
     "premiera": {
         "title": "Premiera"
@@ -503,6 +572,9 @@
     },
     "sezona": {
         "title": "Sezone",
-        "imeSezone": "Ime sezone"
+        "imeSezone": "Ime sezone",
+        "d": {
+            "aktivna": "Ali je sezona aktivna"
+        }
     }
 }
