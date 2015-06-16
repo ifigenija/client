@@ -354,7 +354,7 @@
         "maxPrekrivanj": "Max. prekrivanj",
         "privzeti": "Privzeta alternacija",
         "tipFunkcije": "Tip funkcije",
-        "d":{
+        "d": {
             "vodjaEkipe": "Ali je vodja področja",
             "pomembna": "Ali je funkcija pomembna"
         }
@@ -367,9 +367,9 @@
         "koprodukcija": "Koprodukcija",
         "pogodba": "Pogodba",
         "zaposlitev": "Zaposlitev",
-        "d":{
-            "zaposlen" :"Ali je zaposlen",
-            "privzeti" :"Ali je privzeti"
+        "d": {
+            "zaposlen": "Ali je zaposlen",
+            "privzeti": "Ali je privzeti"
         }
     },
     "prodel": {
@@ -389,11 +389,11 @@
             "drugiJavni": "Viri",
             "avtorskih": "Honorarji"
         },
-        "d":{
-            "nasStrosek" : "Ali je naš strošek",
-            "avtorskih" : "Strošek avtorskih honorarjev",
-            "tantiemi" : "Stroški tantiem",
-            "uprizoritev" : "Uprizoritev oz. projekt, za katerega je strošek"
+        "d": {
+            "nasStrosek": "Ali je naš strošek",
+            "avtorskih": "Strošek avtorskih honorarjev",
+            "tantiemi": "Stroški tantiem",
+            "uprizoritev": "Uprizoritev oz. projekt, za katerega je strošek"
         }
     },
     "strupr": {
@@ -497,6 +497,9 @@
         "avtorskiHonorarji": "Avtorski honorarji",
         "tantieme": "Tantieme",
         "drugiViri": "Drugi viri",
+        "opredelitevDrugiViri": "Opredelitev",
+        "vlozekGostitelja": "Vl. g.",
+        "vlozekKoproducenta": "Vl. kop.",
         "drugiJavni": "Drugi javni viri",
         "obiskDoma": "Obisk doma",
         "obiskGost": "Obisk gostovanje",
@@ -519,6 +522,9 @@
             "sort": "Sort programske enote",
             "zaproseno": "Zaprošena sredstva Ministrstva za kulturo",
             "drugiJavni": "Vir druga ministrstva in lokalna skupnost",
+            "opredelitevDrugiViri": "Opredelitev drugih virov",
+            "vlozekGostitelja": "Vložek gostitelja",
+            "vlozekKoproducenta": "Vložek koproducenta(-ov)",
             "stZaposlenih": "Število zaposlenih, ki sodelujejo pri izvedbi projekta",
             "stDrugih": "ep.d.stDrugih",
             "stHonorarnih": "ep.d.stHonorarnih",
@@ -546,14 +552,14 @@
         "stroskiAvtorZun": "Stroški avtorskih honorarjev zunanjih sodelavcev",
         "krajGostovanja": "Kraj gostovanja",
         "viriDMinLok": "Vir druga ministrstva in lokalna skupnost",
-        "d":{
-            "ustanova":"Ustanova, v kateri se gostuje (nazv ustanove, festival ...)",
-            "odkup":"Odkup (vložek gostitelja)",
-            "stPonovitev":"Število ponovitev v okviru gostovanja",
-            "stGledalcev":"Načrtovano število gledalcev",
-            "transportniStroski":"Transportni stroški opreme ter stroški prevozov ansambla in tehnike",
-            "viriDMinLok":"Viri druga ministrstva in lokalna skupnost",
-            "gostitelj":"Organizator (gostitelj)"
+        "d": {
+            "ustanova": "Ustanova, v kateri se gostuje (nazv ustanove, festival ...)",
+            "odkup": "Odkup (vložek gostitelja)",
+            "stPonovitev": "Število ponovitev v okviru gostovanja",
+            "stGledalcev": "Načrtovano število gledalcev",
+            "transportniStroski": "Transportni stroški opreme ter stroški prevozov ansambla in tehnike",
+            "viriDMinLok": "Viri druga ministrstva in lokalna skupnost",
+            "gostitelj": "Organizator (gostitelj)"
         }
     },
     "festival": {
@@ -577,7 +583,7 @@
         "stHonorarnih": "Število honorarnih sodelavcev",
         "opredelitevDrugiViri": "Opredelitev drugih virov",
         "vlozekKoproducenta": "Vložek producenta",
-        "d":{
+        "d": {
             "stProdukcij": "Skupno število festivalskih produkcij",
             "stTujihSelektorjev": "Predvideno število tujih selektorjev-gostov",
             "stZaposlenih": "Število zaposlenih, ki sodelujejo pri izvedbi festivala",
