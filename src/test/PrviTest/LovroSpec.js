@@ -21,23 +21,13 @@ define(['jquery', 'app/Max/Module/Form'], function ($, Form) {
                     .be.a("string").and
                     .equal("Hello world!");
         });
-
-        it("calls spy wrapper on function", function () {
-            var divide = function (a, b) {
-                return a / b;
-            },
-                    divAndSpy = sinon.spy(divide);
-
-            // Call wrapped function and verify result.
-            expect(divAndSpy(4, 2)).to.equal(2);
-
-            // Now, verify spy properties.
-            sinon.assert.calledOnce(divAndSpy);
-            sinon.assert.calledWith(divAndSpy, 4, 2);
-
-            // Sinon.JS doesn't have assert for returned.
-            expect(divAndSpy.returned(2)).to.be.true;
+        
+        var stevilo = function(ena,dva){
+            return ena+dva;
+        };
+        
+        it("should return expected function result", function () {            
+            expect(stevilo(1,3)).to.be.equal(4);
         });
     });
-
 });
