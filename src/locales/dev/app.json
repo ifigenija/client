@@ -382,8 +382,19 @@
         "utemeljitev": "Utemeljitev",
         "tipProgramskeEnote": "Tip programske Enote",
         "tip": "Tip",
+        "sort": "Sort",
+        "stZaposlenih": "Št. zap., ki sodelujejo pri izvedbi projekta",
+        "stDrugih": "Št dr.",
+        "stHonorarnih": "Št. hon.",
+        "stHonorarnihIgr": "Št. hon. igr.",
+        "stHonorarnihIgrTujJZ": "Št. hon. igr. tuj Jz",
         "d": {
-            "sort": "Sort programske enote"
+            "sort": "Sort programske enote",
+            "stZaposlenih": "Število zaposlenih, ki sodelujejo pri izvedbi projekta",
+            "stDrugih": "ep.d.stDrugih",
+            "stHonorarnih": "ep.d.stHonorarnih",
+            "stHonorarnihIgr": "ep.d.stHonorarnihIgr",
+            "stHonorarnihIgrTujJZ": "ep.d.stHonorarnihIgrTujJZ"
         },
         "t": {
             "celotnaVrednost": "Vrednost",
