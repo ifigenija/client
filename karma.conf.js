@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['requirejs','mocha' ,'chai'],
+    frameworks: ['requirejs','mocha' ,'chai-sinon'],
 
 
     // list of files / patterns to load in the browser
@@ -18,8 +18,8 @@ module.exports = function(config) {
       'test/test-main.js',
       {pattern: 'test/**/*Spec.js', included: false},
       {pattern: 'app/**/*.*', included: false},
-      {pattern: 'locale/*.json', included: false},
-      {pattern: 'locale/**/*.json', included: false},
+      {pattern: 'locales/*.json', included: false},
+      {pattern: 'locales/**/*.json', included: false},
       {pattern: 'lib/**/*.js', included: false}
     ],
 
@@ -28,8 +28,8 @@ module.exports = function(config) {
     exclude: [
         'requireconfig.js',
         'app/main.js',
-        'app/public.js',
 	'lib/**/*spec.js',
+        'app/public.js',
 	'lib/**/*test.js'
     ],
 
@@ -65,8 +65,14 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Chrome_without_security'],
 
+    customLaunchers: {
+      Chrome_without_security: {
+        base: 'Chrome',
+        flags: ['--disable-web-security']
+      }
+    },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

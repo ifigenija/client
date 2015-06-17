@@ -25,6 +25,7 @@
     "karma-requirejs": "^0.2.2",
     "mocha": "^2.2.5",
     "requirejs": "^2.1.18",
-    "karma-chrome-launcher": "~0.1.12"
+    "karma-chrome-launcher": "~0.1.12",
+    "karma-chai-sinon": "~0.1.5"
   }
 }
