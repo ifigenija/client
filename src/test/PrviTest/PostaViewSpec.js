@@ -31,14 +31,16 @@ define(['jquery',
             this.serverF.restore();
         });
 
-        it("vrne pricakovano stevilo", function () {
+        it("vrne pricakovano stevilo", sinon.test(function () {
 
-            this.serverF.respondWith("GET", "/some/article/comments.json",
+            this.serverF.respondWith("OPTIONS", "/rest/posta",
                     [200, {"Content-Type": "application/json"},
                         '[{ "id": 12, "comment": "Hey there" }]']);
             var view = new View();
             var selectSpy = sinon.spy();
             var model = new Model.Model();
+            
+            console.log(model.attributes);
 
             $('<div></div>').append(view.render().el);
 
@@ -47,6 +49,6 @@ define(['jquery',
             view.collection.trigger('selectValue', model);
 
             expect(selectSpy).to.have.been.calledOnce;
-        });
+        }));
     });
 });
