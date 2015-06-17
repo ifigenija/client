@@ -86,4 +86,4 @@ require.config({
     },
 });
 
-define('baseUrl', 'http://localhost:8010');
+define('baseUrl', 'http://localhost:8888');
