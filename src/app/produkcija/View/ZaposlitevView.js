@@ -2,7 +2,7 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     'template!../tpl/zaposlitev-form.tpl',
     'formSchema!zaposlitev',
     '../Model/Zaposlitev',
@@ -10,7 +10,7 @@ define([
     'baseUrl',
     'app/Max/Module/Backgrid'
 ], function (
-        SeznamiView,
+        SeznamView,
         formTpl,
         schema,
         Zaposlitev,
@@ -23,7 +23,7 @@ define([
         className: 'backgrid-kolona-stevilk'
     });
 
-    var ZaposlitevView = SeznamiView.extend({
+    var ZaposlitevView = SeznamView.extend({
         url: baseUrl + '/rest/zaposlitev/vse',
         title: i18next.t('zaposlitev.title'),
         schema: schema,

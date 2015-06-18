@@ -2,7 +2,7 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     'template!../tpl/abonma-form.tpl',
     'formSchema!abonma',
     '../Model/Abonma',
@@ -10,7 +10,7 @@ define([
     'baseUrl',
     'app/Max/Module/Backgrid'
 ], function (
-        SeznamiView,
+        SeznamView,
         formTpl,
         schema,
         Abonma,
@@ -23,7 +23,7 @@ define([
             className: 'backgrid-kolona-stevilk'
         });
 
-    var AbonmaView = SeznamiView.extend({
+    var AbonmaView = SeznamView.extend({
         url: baseUrl + '/rest/abonma',
         title: i18next.t('abonma.title'),
         schema: schema,

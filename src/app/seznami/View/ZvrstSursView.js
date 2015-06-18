@@ -2,14 +2,14 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     'template!../tpl/zvrstSurs-form.tpl',
     'formSchema!zvrstSurs',
     '../Model/ZvrstSurs',
     'i18next',
     'baseUrl'
 ], function (
-        SeznamiView,
+        SeznamView,
         formTpl,
         schema,
         ZvrstSurs,
@@ -17,7 +17,7 @@ define([
         baseUrl
         ) {
 
-    var ZvrstSursView = SeznamiView.extend({
+    var ZvrstSursView = SeznamView.extend({
         url: baseUrl + '/rest/zvrstSurs',
         title: i18next.t('zvrstSurs.title'),
         schema: schema,

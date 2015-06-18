@@ -2,7 +2,7 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     'template!../tpl/sezona-form.tpl',
     'formSchema!sezona',
     '../Model/Sezona',
@@ -10,7 +10,7 @@ define([
     'baseUrl',
     'app/Max/Module/Backgrid'
 ], function (
-        SeznamiView,
+        SeznamView,
         formTpl,
         schema,
         Sezona,
@@ -23,7 +23,7 @@ define([
         className: 'backgrid-kolona-stevilk'
     });
 
-    var SezonaView = SeznamiView.extend({
+    var SezonaView = SeznamView.extend({
         url: baseUrl + '/rest/sezona',
         title: i18next.t('sezona.title'),
         schema: schema,

@@ -2,20 +2,20 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     './PopaEditView',
     '../Model/Popa',
     'i18next',
     'baseUrl'
 ], function (
-        SeznamiView,
+        SeznamView,
         PopaEditView,
         Popa,
         i18next,
         baseUrl
         ) {
 
-    var PopaView = SeznamiView.extend({
+    var PopaView = SeznamView.extend({
         url: baseUrl + '/rest/popa',
         title: i18next.t('popa.title'),
         columns: [

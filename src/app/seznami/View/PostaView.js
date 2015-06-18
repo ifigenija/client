@@ -2,14 +2,14 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     'template!../tpl/posta-form.tpl',
     'formSchema!posta',
     '../Model/Posta',
     'i18next',
     'baseUrl'
 ], function (
-        SeznamiView,
+        SeznamView,
         formTpl,
         schema,
         Posta,
@@ -17,7 +17,7 @@ define([
         baseUrl
         ) {
 
-    var PostaView = SeznamiView.extend({
+    var PostaView = SeznamView.extend({
         url: baseUrl + '/rest/posta',
         title: i18next.t('posta.title'),
         schema: schema,

@@ -3,7 +3,7 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     './UprizoritevEditView',
     '../Model/Uprizoritev',
     'i18next',
@@ -11,7 +11,7 @@ define([
     'app/Max/Module/Backgrid',
     'formSchema!uprizoritev'
 ], function (
-        SeznamiView,
+        SeznamView,
         UprizoritevEditView,
         Uprizoritev,
         i18next,
@@ -24,7 +24,7 @@ define([
         className: 'backgrid-kolona-stevilk'
     });
 
-    var UprizoritevView = SeznamiView.extend({
+    var UprizoritevView = SeznamView.extend({
         url: baseUrl + '/rest/uprizoritev/vse',
         title: i18next.t('uprizoritev.title'),
         columns: [

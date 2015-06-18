@@ -2,14 +2,14 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     './OsebaEditView',
     '../Model/Oseba',
     'i18next',
     'baseUrl',
     'radio'
 ], function (
-        SeznamiView,
+        SeznamView,
         OsebaEditView,
         Oseba,
         i18next,
@@ -17,7 +17,7 @@ define([
         Radio
         ) {
 
-    var OsebaView = SeznamiView.extend({
+    var OsebaView = SeznamView.extend({
         url: baseUrl + '/rest/oseba',
         title: i18next.t('oseba.title'),
         columns: [

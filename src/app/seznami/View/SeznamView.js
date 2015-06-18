@@ -25,7 +25,7 @@ define([
         Toolbar
         ) {
 
-    var SeznamiView = Marionette.LayoutView.extend({
+    var SeznamView = Marionette.LayoutView.extend({
         template: seznamTpl,
         url: null,
         columns: null,
@@ -62,9 +62,13 @@ define([
         }
     });
 
-    SeznamiView.prototype.initialize = function (options) {
+    SeznamView.prototype.initialize = function (options) {
 
         this.url = options.url || this.url;
+        this.formTemplate = options.formTemplate || this.formTemplate;
+        this.schema = options.schema || this.schema;
+        this.title = options.title || this.title;
+        this.columns = options.columns || this.columns;
 
         if (!this.collection) {
             this.collection = this.getCollection();
@@ -74,14 +78,14 @@ define([
         this.listenTo(this.collection, 'backgrid:action', this.onGridAction);
     };
 
-    SeznamiView.prototype.getCollection = function () {
+    SeznamView.prototype.getCollection = function () {
         var C = Coll.extend({model: Backbone.DeepModel});
         var coll = new C();
         coll.url = this.url;
         return coll;
     };
 
-    SeznamiView.prototype.onRender = function () {
+    SeznamView.prototype.onRender = function () {
 
         this.$('.seznam-naslov').text(this.title);
 
@@ -102,7 +106,7 @@ define([
         this.collection.fetch();
     };
 
-    SeznamiView.prototype.renderToolbar = function () {
+    SeznamView.prototype.renderToolbar = function () {
         var tool = [[
                 {
                     id: 'doc-dodaj',
@@ -125,7 +129,7 @@ define([
      * @param {type} action
      * @returns {undefined}
      */
-    SeznamiView.prototype.onGridAction = function (model, action) {
+    SeznamView.prototype.onGridAction = function (model, action) {
         this.triggerMethod(action, model);
     };
 
@@ -135,7 +139,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    SeznamiView.prototype.onBrisi = function (model) {
+    SeznamView.prototype.onBrisi = function (model) {
 
         if (window.confirm(i18next.t('std.potrdiIzbris'))) {
             model.destroy({
@@ -155,7 +159,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    SeznamiView.prototype.onUredi = function (model) {
+    SeznamView.prototype.onUredi = function (model) {
         this.onSelected(model);
     };
 
@@ -164,7 +168,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    SeznamiView.prototype.zamenjajUrl = function (model) {
+    SeznamView.prototype.zamenjajUrl = function (model) {
         var fragment = Backbone.history.getFragment();
 
         fragment = fragment.replace(/\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/, '');
@@ -182,7 +186,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    SeznamiView.prototype.onSelected = function (model) {
+    SeznamView.prototype.onSelected = function (model) {
 
         if (model.get('id')) {
             this.zamenjajUrl(model);
@@ -206,7 +210,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    SeznamiView.prototype.saveSuccess = function (model) {
+    SeznamView.prototype.saveSuccess = function (model) {
         this.$('.glava-title').text(this.getTitle(model));
         this.zamenjajUrl(model);
         this.collection.fetch();
@@ -216,13 +220,13 @@ define([
      * kaj se zgodi, ko pritisnemo skrij/preklici
      * 
      */
-    SeznamiView.prototype.preklici = function () {
+    SeznamView.prototype.preklici = function () {
         this.formR.empty();
         this.renderToolbar();
         this.zamenjajUrl();
     };
 
-    SeznamiView.prototype.getTitle = function (model) {
+    SeznamView.prototype.getTitle = function (model) {
         var text = model.get('naziv') || "Naziv";
         return text;
     };
@@ -231,9 +235,9 @@ define([
     /**
      * Privzrti pogled na formo za urejanje 
      * @param {type} model
-     * @returns {SeznamiView_L15.SeznamiView.prototype.getFormView.Fv}
+     * @returns {SeznamView_L15.SeznamView.prototype.getFormView.Fv}
      */
-    SeznamiView.prototype.getFormView = function (model) {
+    SeznamView.prototype.getFormView = function (model) {
         var Fv = FormView.extend({
             formTitle: this.getTitle(model),
             buttons: this.defaultButtons,
@@ -256,5 +260,5 @@ define([
 
     };
 
-    return SeznamiView;
+    return SeznamView;
 });

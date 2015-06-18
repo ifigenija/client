@@ -2,7 +2,7 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     'template!../tpl/besedilo-form.tpl',
     'formSchema!besedilo',
     '../Model/Besedilo',
@@ -10,7 +10,7 @@ define([
     'baseUrl',
     'app/Max/Module/Backgrid'
 ], function (
-        SeznamiView,
+        SeznamView,
         formTpl,
         schema,
         Besedilo,
@@ -23,7 +23,7 @@ define([
         className: 'backgrid-kolona-stevilk'
     });
 
-    var BesediloView = SeznamiView.extend({
+    var BesediloView = SeznamView.extend({
         url: baseUrl + '/rest/besedilo',
         title: i18next.t('besedilo.title'),
         schema: schema,

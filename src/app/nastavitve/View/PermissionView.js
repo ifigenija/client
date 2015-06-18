@@ -6,7 +6,7 @@ define([
     'app/Dokument/Model/Dokument',
     './RelationView',
     'underscore',
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     'template!../tpl/perm-form.tpl',
     'template!../tpl/perm.tpl',
     'formSchema!permission',
@@ -16,7 +16,7 @@ define([
         Dokument,
         RelationView,
         _,
-        SeznamiView,
+        SeznamView,
         formTpl,
         permTpl,
         schema,
@@ -28,7 +28,7 @@ define([
         urlRoot: baseUrl + '/rest/permission'
     });
 
-    var PermissionView = SeznamiView.extend({
+    var PermissionView = SeznamView.extend({
         url: baseUrl + '/rest/permission',
         title: i18next.t('permission.title'),
         schema: schema,
@@ -95,7 +95,7 @@ define([
      */
     PermissionView.prototype.onSelected = function (model) {
 
-        SeznamiView.prototype.onSelected.apply(this, arguments);
+        SeznamView.prototype.onSelected.apply(this, arguments);
         if (model.get('id')) {
             this.renderVloge(model);
         }
@@ -104,7 +104,7 @@ define([
     
     PermissionView.prototype.saveSuccess = function (model) {
 
-        SeznamiView.prototype.saveSuccess.apply(this, arguments);
+        SeznamView.prototype.saveSuccess.apply(this, arguments);
         if (model.get('id')) {
             this.renderVloge(model);
         }
@@ -117,7 +117,7 @@ define([
      */
     PermissionView.prototype.preklici = function (model) {
 
-        SeznamiView.prototype.preklici.apply(this, arguments);
+        SeznamView.prototype.preklici.apply(this, arguments);
         this.rolesR.empty();
     };
 

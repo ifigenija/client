@@ -2,14 +2,14 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     'template!../tpl/prostor-form.tpl',
     'formSchema!prostor',
     '../Model/Prostor',
     'i18next',
     'baseUrl'
 ], function (
-        SeznamiView,
+        SeznamView,
         formTpl,
         schema,
         Prostor,
@@ -17,7 +17,7 @@ define([
         baseUrl
         ) {
 
-    var ProstorView = SeznamiView.extend({
+    var ProstorView = SeznamView.extend({
         url: baseUrl + '/rest/prostor',
         title: i18next.t('prostor.title'),
         schema: schema,

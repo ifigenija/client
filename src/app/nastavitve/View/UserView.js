@@ -2,7 +2,7 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamiView',
+    'app/seznami/View/SeznamView',
     'template!../tpl/user-form.tpl',
     'template!../tpl/user.tpl',
     './RelationView',
@@ -12,7 +12,7 @@ define([
     'baseUrl',
     'app/Max/Module/Backgrid'
 ], function (
-        SeznamiView,
+        SeznamView,
         formTpl,
         permTpl,
         RelationView,
@@ -27,7 +27,7 @@ define([
         className: 'backgrid-kolona-stevilk'
     });
 
-    var UserView = SeznamiView.extend({
+    var UserView = SeznamView.extend({
         url: baseUrl + '/rest/user',
         formTemplate: formTpl,
         template: permTpl,
@@ -103,7 +103,7 @@ define([
      */
     UserView.prototype.onSelected = function (model) {
 
-        SeznamiView.prototype.onSelected.apply(this, arguments);
+        SeznamView.prototype.onSelected.apply(this, arguments);
         if (model.get('id')) {
             this.renderVloge(model);
         }
@@ -111,7 +111,7 @@ define([
 
     UserView.prototype.saveSuccess = function (model) {
 
-        SeznamiView.prototype.saveSuccess.apply(this, arguments);
+        SeznamView.prototype.saveSuccess.apply(this, arguments);
         if (model.get('id')) {
             this.renderVloge(model);
         }
@@ -119,7 +119,7 @@ define([
 
     UserView.prototype.preklici = function (model) {
 
-        SeznamiView.prototype.preklici.apply(this, arguments);
+        SeznamView.prototype.preklici.apply(this, arguments);
         this.rolesR.empty();
     };
 
