@@ -35,9 +35,7 @@ define([
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
-            toolbarR: '.seznam-toolbar',
-            naslovR: '.seznam-naslov',
-            lookupR: '.seznam-lookup'
+            toolbarR: '.seznam-toolbar'
         },
         defaultButtons: {
             shrani: {

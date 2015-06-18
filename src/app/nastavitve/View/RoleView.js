@@ -38,7 +38,6 @@ define([
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
-            naslovR: '.seznam-naslov',
             permsR: '.seznam-perms',
             usersR: '.seznam-users'
         },

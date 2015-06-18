@@ -36,7 +36,6 @@ define([
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
-            naslovR: '.seznam-naslov',
             rolesR: '.seznam-roles'
         },
         title: i18next.t('user.title'),

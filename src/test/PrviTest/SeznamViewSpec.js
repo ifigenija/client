@@ -54,7 +54,7 @@ define([
 
     /**
      * Inicializacija SeznamView:
-     * brez option
+     * brez options
      * z options
      */
     describe("SeznamView inicializacija", function () {
@@ -110,7 +110,14 @@ define([
      */
     describe("SeznamView regije", function () {
         it("obstajajo vse regije v DOM", function () {
-            throw new Error();
+            var obstaja = $('.seznam-forma');            
+            expect(obstaja).to.have.property('length', 1);
+            obstaja = $('.seznam-tabela');            
+            expect(obstaja).to.have.property('length', 1);
+            obstaja = $('.seznam-toolbar');            
+            expect(obstaja).to.have.property('length', 1);
+            obstaja = $('.seznam-naslov');            
+            expect(obstaja).to.have.property('length', 1);
         });
         it("izris v toolBar region", function () {
             throw new Error();
