@@ -3,71 +3,29 @@
         "name": "sifra",
         "validators": [],
         "type": "Text",
-        "help": "prostor.d.sifra",
+        "help": "posta.d.sifra",
         "editorAttrs": {
             "type": "sifra",
             "class": "sifra-polje form-control",
             "name": "sifra",
             "required": false,
-            "maxlength": 255,
-            "prependIcon": "fa fa-barcode"
+            "maxlength": 20
         },
         "group": "default",
-        "title": "entiteta.sifra"
+        "title": "posta.sifra"
     },
     "naziv": {
         "name": "naziv",
-        "validators": ["required"],
+        "validators": [],
         "type": "Text",
-        "help": "entiteta.d.naziv",
+        "help": "entiteta.naziv",
         "editorAttrs": {
             "type": "naziv",
             "class": "naziv-polje form-control",
             "name": "naziv",
-            "maxlength": 255,
-            "required": "required"
+            "maxlength": 40
         },
         "group": "default",
         "title": "entiteta.naziv"
-    },
-    "jePrizorisce": {
-        "name": "jePrizorisce",
-        "validators": [],
-        "type": "Checkbox",
-        "help": "prostor.d.jePrizorisce",
-        "editorAttrs": {
-            "type": "boolcheckbox",
-            "name": "jePrizorisce",
-            "class": ""
-        },
-        "group": "default",
-        "title": "prostor.jePrizorisce"
-    },
-    "kapaciteta": {
-        "name": "kapaciteta",
-        "validators": [],
-        "type": "Number",
-        "help": "prostor.d.kapaciteta",
-        "editorAttrs": {
-            "type": "integer",
-            "class": "integer-polje form-control",
-            "name": "kapaciteta",
-            "data-attach": "spinner",
-            "step": 1
-        },
-        "decimals": 0,
-        "title": "entiteta.kapaciteta"
-    },
-    "opis": {
-        "name": "opis",
-        "validators": [],
-        "type": "TextArea",
-        "help": "entiteta.opis",
-        "editorAttrs": {
-            "type": "TextArea",
-            "name": "opis",
-            "class": " form-control"
-        },
-        "title": "entiteta.opis"
     }
 }

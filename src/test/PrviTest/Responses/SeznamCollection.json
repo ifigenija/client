@@ -1,26 +1,19 @@
 {
-    "state":
-            {
-                "sortKey": "sifra",
-                "order": "asc",
-                "currentPage": 1,
-                "totalRecords": 2,
-                "lastPage": 1,
-                "pageSize": 15
-            },
+    "state": {
+        "sortKey": "sifra",
+        "order": "asc",
+        "currentPage": 1,
+        "totalRecords": 478,
+        "lastPage": 32,
+        "pageSize": 2
+    },
     "data": [{
-            "id": "00220000-5581-7246-13b8-159fe23e3ede",
-            "sifra": "0004",
-            "naziv": "Mali oder",
-            "jePrizorisce": true,
-            "kapaciteta": 24,
-            "opis": "Mali oder "
+            "id": "00050000-5582-9fca-3c15-9c6a67c65b2e",
+            "sifra": "1000",
+            "naziv": "Ljubljana "
         }, {
-            "id": "00220000-5581-7246-d532-343a7b8d5636",
-            "sifra": "0005",
-            "naziv": "Komorni oder",
-            "jePrizorisce": true,
-            "kapaciteta": 15,
-            "opis": "Komorni oder"
+            "id": "00050000-5582-9fca-a5e8-8000027bed21",
+            "sifra": "1001",
+            "naziv": "Ljubljana - po\u0161tni predali"
         }]
 }
