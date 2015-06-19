@@ -380,7 +380,7 @@
         "zaproseno": "Zaprošeno",
         "drugiJavni": "Drugi javni viri",
         "avtorskih": "Avtorski honorarji",
-        "tantiemi": "Tantieme",
+        "tantieme": "Tantieme",
         "skupniStrosek": "Skupni strošek",
         "zaprosenProcent": "Zaprošen procent",
         "koproducent": "Koproducent",
@@ -392,7 +392,7 @@
         "d": {
             "nasStrosek": "Ali je naš strošek",
             "avtorskih": "Strošek avtorskih honorarjev",
-            "tantiemi": "Stroški tantiem",
+            "tantieme": "Stroški tantiem",
             "uprizoritev": "Uprizoritev oz. projekt, za katerega je strošek"
         }
     },
@@ -610,6 +610,13 @@
         "imeSezone": "Ime sezone",
         "d": {
             "aktivna": "Ali je sezona aktivna"
+        }
+    },
+    "strosekuprizoritve": {
+        "title": "Strošek uprizoritve",
+        "tipstroska": "Tip stroška",
+        "d": {
+            "tipstroska": "Tip stroška projekta/uprizoritve"
         }
     }
 }
