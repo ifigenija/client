@@ -43,9 +43,8 @@ define([
     'radio',
     'i18next',
     'app/Max/View/Buttons',
-    'app/seznami/View/PostaView',
+    'app/seznami/View/SeznamView',
     'formSchema!posta',
-    'template!app/seznami/tpl/posta-form.tpl',
     'text!./Responses/SeznamSchema.json',
     'text!./Responses/SeznamCollection.json'
 ], function (
@@ -57,35 +56,10 @@ define([
         buttons,
         View,
         schema,
-        formTpl,
         textSch,
         textColl
         ) {
 
-    var columns = [
-        {
-            cell: 'string',
-            editable: false,
-            label: i18next.t('posta.sifra'),
-            name: 'sifra',
-            sortable: true
-        },
-        {
-            cell: 'string',
-            editable: false,
-            label: i18next.t('entiteta.naziv'),
-            name: 'naziv',
-            sortable: true
-        },
-        {
-            cell: 'action',
-            name: '...',
-            sortable: false,
-            actions: [
-                {event: 'brisi', title: i18next.t('entiteta.brisi')}
-            ]
-        }
-    ];
     /**
      * Inicializacija SeznamView:
      * brez options
@@ -123,13 +97,6 @@ define([
                 {"Content-Type": "application/json"},
                 textColl
             ]);
-
-            //z GET na podan url se odzove podanim odzivom
-            this.server.respondWith("GET", baseUrl + "/rest/seznam?page=1&per_page=2", [
-                200,
-                {"Content-Type": "application/json"},
-                textColl
-            ]);
             //z OPTIONS na podan url se odzove podanim odzivom
             this.server.respondWith("OPTIONS", baseUrl + "/rest/seznam", [
                 200,
@@ -153,36 +120,8 @@ define([
             $('.seznamView').remove();
         });
 
-        /**
-         * Preveri če je podan element v DOM-u
-         * @param {string} text element ki ga iščemo
-         * @param {type} stevilo šrevilo ponovitev
-         * @returns {undefined}
-         */
-        var vDOM = function (text, stevilo) {
+        var vDOM = function(text, stevilo) {
             expect($(text)).to.have.length(stevilo);
-        };
-
-        /**
-         * Odpremo formo in preverimo če se je vse izrisalo
-         * @returns {undefined}
-         */
-        var odpriFormo = function () {
-            var dodajSpy = sinon.spy(View.prototype, 'onDodaj');
-            var query = '.seznam-toolbar button:contains("Dodaj")';
-            vDOM(query, 1);
-
-            $(query).click();
-
-            expect(dodajSpy).to.have.been.calledOnce;
-
-            vDOM('input.sifra-polje', 1);
-            vDOM('input.naziv-polje', 1);
-
-            vDOM('label[for*="sifra"]', 1);
-            vDOM('label[for*="naziv"]', 1);
-
-            View.prototype.onDodaj.restore();
         };
 
         describe("Inicializacija objekta", function () {
@@ -190,11 +129,11 @@ define([
             it("brez options", function () {
                 var view = new View();
 
-                expect(view).to.have.property('formTemplate', formTpl);
-                expect(view).to.have.property('schema', schema);
-                expect(view).to.have.property('url', baseUrl + '/rest/posta');
-                //expect(view).to.have.property('columns', columns);
-                expect(view).to.have.property('title', i18next.t('posta.title'));
+                expect(view).to.have.property('formTemplate', null);
+                expect(view).to.have.property('schema', null);
+                expect(view).to.have.property('url', null);
+                expect(view).to.have.property('columns', null);
+                expect(view).to.have.property('title', null);
             });
             it("z options", function () {
                 var view = new View({
@@ -247,12 +186,25 @@ define([
 
             it("izris seznama/tabela", function () {
                 vDOM('.seznam-tabela .paginated-grid', 1);
-                vDOM('th.sifra', 1);
-                vDOM('th.naziv', 1);
             });
 
             it("izris forme", function () {
-                odpriFormo();
+                var selectSpy = sinon.spy();
+                var Model = Backbone.Model.extend({
+                    urlRoot: baseUrl + '/rest/seznam'
+                });
+                var model = new Model();
+
+                //klic in preverjanje ali se je klic izvedo
+                this.view.listenTo(this.view.collection, 'selectValue', selectSpy);
+                this.view.collection.trigger('selectValue', model);
+                expect(selectSpy).to.have.been.calledOnce;
+
+                //preverimo ali se je narisal formView
+                vDOM('.seznam-forma .glava-panel', 1);
+                vDOM('.panel-body.region-form form', 1);
+                vDOM('input[name=sifra]', 1);
+                vDOM('input[name=naziv]', 1);
             });
         });
 
@@ -268,41 +220,24 @@ define([
                 $('.seznamView').append(this.view.render().el);
             });
 
-            it("saveSuccess", function () {
-                odpriFormo();
+            it("saveSuccess");
+            it("onPreklici", function () {
 
-                var shraniSpy = sinon.spy(View.prototype, 'saveSuccess');
+                var dodajSpy = sinon.spy(View.prototype, 'onDodaj');
+                var dodaj = '.seznam-toolbar button:contains("Dodaj")';
+                vDOM(dodaj, 1);
 
-                var query = '.region-toolbar button:contains("Shrani")';
-                vDOM(query, 1);
+                $(dodaj).click();
 
-                $(query).removeAttr('disabled');
-                $(query).click();
-
-                expect(shraniSpy).to.have.been.calledOnce;
-                View.prototype.saveSuccess.restore();
-            });
-
-            it("preklici", function () {
-                odpriFormo();
-
-                var urlStub = sinon.stub(View.prototype, 'zamenjajUrl').returns(true);
+                expect(dodajSpy).to.have.been.calledOnce;
 
                 var prekliciSpy = sinon.spy(View.prototype, 'preklici');
-                var query1 = '.region-toolbar button:contains("Prekliči")';
-                vDOM(query1, 1);
+                var preklici = '.seznam-toolbar button:contains("Prekliči")';
+                vDOM(preklici, 1);
 
-                $(query1).click();
-                //preverjanje ne dela se slučajno da kdaj v spremenljivko
+                $(preklici).click();
+
                 expect(prekliciSpy).to.have.been.calledOnce;
-
-                vDOM('.seznam-forma input.sifra-polje', 0);
-                vDOM('.seznam-forma input.naziv-polje', 0);
-
-                vDOM('.seznam-forma label[for*="sifra"]', 0);
-                vDOM('.seznam-forma label[for*="naziv"]', 0);
-
-                View.prototype.preklici.restore();
             });
 
             /**
@@ -316,7 +251,10 @@ define([
          */
         describe("SeznamView collection triggerji", function () {
             beforeEach(function () {
-                this.view = new View();
+                this.view = new View({
+                    url: '/rest/seznam',
+                    schema: schema
+                });
                 $('.seznamView').append(this.view.render().el);
 
                 this.Model = Backbone.Model.extend({
@@ -325,38 +263,39 @@ define([
                 this.model = new this.Model();
             });
 
-            it("onUredi");//, function () {
+            it("onUredi", function () {
+                var urediSpy = sinon.spy(this.view, 'onUredi');
+                var self = this;
 
-//                vDOM('tbody > tr', 1);
-//                //klic in preverjanje ali se je klic izvedo
-//                this.view.collection.trigger(
-//                        'backgrid:action',
-//                        self.model,
-//                        'uredi'
-//                        );
-//                expect(urediSpy).to.be.calledOnce;
-//
-//                //preverimo ali se je narisal formView
-//                vDOM('.seznam-forma .glava-panel', 1);
-//                vDOM('.panel-body.region-form form', 1);
-//            });
-            it("onBrisi");//, function () {
-//                //potrebno je model iz collectiona in ne tako kot zdaj, vsi klici se izvajajo
-//                var conStub = sinon.stub(window, 'confirm').returns(true);
-//
-//                expect(this.view.collection).to.be.ok;
-//                expect(this.view.collection).to.have.length(0);
-//                var brisiSpy = sinon.spy(this.view, 'onBrisi');
-//                var self = this;
-//                //klic in preverjanje ali se je klic izvedo
-//                this.view.collection.trigger(
-//                        'backgrid:action',
-//                        self.model,
-//                        'brisi'
-//                        );
-//                expect(brisiSpy).to.be.calledOnce;
-//                expect(window.confirm).to.have.been.calledOnce;
-//            });
+                //klic in preverjanje ali se je klic izvedo
+                this.view.collection.trigger(
+                        'backgrid:action',
+                        self.model,
+                        'uredi'
+                        );
+                expect(urediSpy).to.be.calledOnce;
+
+                //preverimo ali se je narisal formView
+                vDOM('.seznam-forma .glava-panel', 1);
+                vDOM('.panel-body.region-form form', 1);
+            });
+            it("onBrisi", function () {
+                //potrebno je model iz collectiona in ne tako kot zdaj, vsi klici se izvajajo
+                var conStub = sinon.stub(window, 'confirm').returns(true);
+
+                expect(this.view.collection).to.be.ok;
+                expect(this.view.collection).to.have.length(0);
+                var brisiSpy = sinon.spy(this.view, 'onBrisi');
+                var self = this;
+                //klic in preverjanje ali se je klic izvedo
+                this.view.collection.trigger(
+                        'backgrid:action',
+                        self.model,
+                        'brisi'
+                        );
+                expect(brisiSpy).to.be.calledOnce;
+                expect(window.confirm).to.have.been.calledOnce;
+            });
         });
 
         /**
@@ -373,7 +312,13 @@ define([
             });
 
             it("onDodaj", function () {
-                odpriFormo();
+                var dodajSpy = sinon.spy(View.prototype, 'onDodaj');
+                var query = '.seznam-toolbar button:contains("Dodaj")';
+                vDOM(query, 1);
+
+                $(query).click();
+
+                expect(dodajSpy).to.have.been.calledOnce;
             });
         });
     });

@@ -200,6 +200,7 @@ define([
         this.listenTo(form, 'preklici', this.preklici);
         this.listenTo(form, 'save:success', this.saveSuccess);
         this.listenTo(form, 'skrij', this.preklici);
+        this.listenTo(form, 'dodaj', this.onDodaj);
     };
 
     /**
@@ -222,11 +223,16 @@ define([
         this.formR.empty();
         this.renderToolbar();
         this.zamenjajUrl();
+        console.log("test");
     };
 
     SeznamView.prototype.getTitle = function (model) {
         var text = model.get('naziv') || "Naziv";
         return text;
+    };
+    
+    SeznamView.prototype.onDodaj = function () {
+        console.log("Potrebno je overridat funkcijo onDodaj");
     };
 
 
