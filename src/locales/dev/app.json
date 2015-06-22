@@ -206,6 +206,7 @@
         "datZav": "Zavezanec za DDV od",
         "datnZav": "Zavezanec za DDV do",
         "zamejstvo": "Iz zamejstva",
+        "nvo": "NVO",
         "d": {
             "tipkli": "Tip klienta (kupec, dobavitelj, koproducent, )",
             "stakli": "AK-aktiven, NA-neaktiven",
@@ -215,6 +216,7 @@
             "zavezanec": "Je klient zavezanec za DDV",
             "datZav": "Zavezanec za DDV od dne",
             "datnZav": "Zavezanec za DDV do dne",
+            "nvo": "Nevladna organizacija",
             "zamejstvo": "Je poslovni partner iz zamejstva"
         }
     },
