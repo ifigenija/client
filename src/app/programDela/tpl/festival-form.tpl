@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-sm-6 col-md-4" data-fields="naziv,zvrst,stPredstav,stPredavanj"></div>
                         <div class="col-sm-6 col-md-4" data-fields="stPredstavitev,stDelavnic,stDrugiDogodki,stProdukcij"></div>
-                        <div class="col-sm-6 col-md-4" data-fields="stObisk,casPriprave,casIzvedbe,prizorisca"></div>
+                        <div class="col-sm-6 col-md-4" data-fields="obiskDoma,casPriprave,casIzvedbe,prizorisca,sort"></div>
                     </div>
                     <div class="row">
                         <a class="btn btn-default utemelji">Utemeljitev</a>
@@ -58,7 +58,7 @@
                 <form>
                     <div class="row">
                         <div class="col-sm-6" data-fields="zaproseno,celotnaVrednost,lastnaSredstva"></div>
-                        <div class="col-sm-6" data-fields="vlozekKoproducenta,drugiJavni"></div>
+                        <div class="col-sm-6" data-fields="drugiViri,vlozekKoproducenta,drugiJavni"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-lg-offset-3" data-fields="opredelitevDrugiViri"></div>

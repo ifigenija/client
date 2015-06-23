@@ -26,19 +26,18 @@ define([
         formTitle: i18next.t('izjemni.title'),
         gridMeta: [
             {
-                cell: 'string',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
-                label: i18next.t('ep.uprizoritev'),
-                name: 'uprizoritev.label',
+                label: i18next.t('entiteta.sort'),
+                name: 'sort',
                 sortable: true
             },
             {
-                cell: Backgrid.SelectCell.extend({
-                    optionValues: schema.getOptionValues('tipProgramskeEnote')
-                }),
+                cell: 'string',
                 editable: false,
-                label: i18next.t('ep.t.tipProgramskeEnote'),
-                name: 'tipProgramskeEnote',
+                label: i18next.t('entiteta.naziv'),
+                name: 'naziv',
                 sortable: true
             },
             {

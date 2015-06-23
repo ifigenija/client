@@ -117,6 +117,7 @@
         "funkcija": "Funkcija",
         "aktivna": "Aktivna",
         "interNaslov": "Internacionalni naslov",
+        "zvrst": "Vrsta uprizoritve",
         "d": {
             "sifra": "Enolična oznaka",
             "jeeu": "Je iz EU ali ne",
@@ -606,6 +607,25 @@
     },
     "izjemni": {
         "title": "Izjemni"
+    },
+    "programRazno": {
+        "title": "Razno",
+        "naslovPE": "Naslov",
+        "avtorPE": "Avtor",
+        "obsegPE": "Obseg",
+        "mesecPE": "Mesec",
+        "vrednostPE": "Vrednost",
+        "stPE": "Število programskih enot",
+        "soorganizator": "Soorganizator",
+        "d": {
+            "naslovPE": "Naslov programske enote",
+            "avtorPE": "Avtor programske enote",
+            "obsegPE": "Obseg programske enote",
+            "mesecPE": "Mesec programske enote",
+            "vrednostPE": "Vrednost programske enote",
+            "stPE": "Število programskih enot",
+            "soorganizator": "Soorganizator oz. koproducent"
+        }
     },
     "sezona": {
         "title": "Sezone",

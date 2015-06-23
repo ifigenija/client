@@ -4,16 +4,68 @@
         "order": "asc",
         "currentPage": 1,
         "totalRecords": 478,
-        "lastPage": 239,
-        "pageSize": 2
+        "lastPage": 32,
+        "pageSize": 15
     },
     "data": [{
-            "id": "00050000-5582-9fca-3c15-9c6a67c65b2e",
+            "id": "00050000-5588-eeb0-fd05-ae42552457f2",
             "sifra": "1000",
             "naziv": "Ljubljana "
         }, {
-            "id": "00050000-5582-9fca-a5e8-8000027bed21",
+            "id": "00050000-5588-eeb0-b1d8-1cf491a9e105",
             "sifra": "1001",
             "naziv": "Ljubljana - po\u0161tni predali"
+        }, {
+            "id": "00050000-5588-eeb0-ad7f-823e9939b671",
+            "sifra": "1210",
+            "naziv": "Ljubljana - \u0160entvid"
+        }, {
+            "id": "00050000-5588-eeb0-fc35-8d235818b3e7",
+            "sifra": "1211",
+            "naziv": "Ljubljana - \u0160martno"
+        }, {
+            "id": "00050000-5588-eeb0-2840-44414f32f36c",
+            "sifra": "1215",
+            "naziv": "Medvode"
+        }, {
+            "id": "00050000-5588-eeb0-a345-4093899d1901",
+            "sifra": "1216",
+            "naziv": "Smlednik"
+        }, {
+            "id": "00050000-5588-eeb1-6243-f1fb9b701c25",
+            "sifra": "1217",
+            "naziv": "Vodice"
+        }, {
+            "id": "00050000-5588-eeb0-8db0-7fa6dc2433dd",
+            "sifra": "1218",
+            "naziv": "Komenda"
+        }, {
+            "id": "00050000-5588-eeb0-a7cf-802d781a7c98",
+            "sifra": "1219",
+            "naziv": "Laze v Tuhinju"
+        }, {
+            "id": "00050000-5588-eeb0-d128-7419caa79bc7",
+            "sifra": "1221",
+            "naziv": "Motnik"
+        }, {
+            "id": "00050000-5588-eeb1-16cb-09c57df70cc0",
+            "sifra": "1222",
+            "naziv": "Trojane"
+        }, {
+            "id": "00050000-5588-eeb0-e59c-70eebabfbb84",
+            "sifra": "1223",
+            "naziv": "Blagovica"
+        }, {
+            "id": "00050000-5588-eeb0-9fb3-8ee2e44d7680",
+            "sifra": "1225",
+            "naziv": "Lukovica"
+        }, {
+            "id": "00050000-5588-eeb0-14ce-018a57d92724",
+            "sifra": "1230",
+            "naziv": "Dom\u017eale"
+        }, {
+            "id": "00050000-5588-eeb0-41e6-c66592c929ad",
+            "sifra": "1231",
+            "naziv": "Ljubljana - \u010crnu\u010de"
         }]
 }

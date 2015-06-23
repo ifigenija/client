@@ -28,7 +28,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ep.uprizoritev'),
+                label: i18next.t('entiteta.uprizoritev'),
                 name: 'uprizoritev.label',
                 sortable: true
             },

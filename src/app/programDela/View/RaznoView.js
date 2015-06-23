@@ -23,26 +23,41 @@ define([
         schema: schema.toFormSchema().schema,
         name: 'Razno',
         detailName: 'programiRazno',
-        formTitle: i18next.t('razno.title'),
+        formTitle: i18next.t('programRazno.title'),
         gridMeta: [
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('entiteta.sort'),
+                name: 'sort',
+                sortable: true
+            },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ep.naslovPE'),
+                label: i18next.t('entiteta.naziv'),
+                name: 'naziv',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('programRazno.naslovPE'),
                 name: 'naslovPE',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ep.avtorPE'),
+                label: i18next.t('programRazno.avtorPE'),
                 name: 'avtorPE',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ep.soorganizator'),
+                label: i18next.t('programRazno.soorganizator'),
                 name: 'soorganizator.label',
                 sortable: true
             },
@@ -50,7 +65,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.vrednostPE'),
+                label: i18next.t('programRazno.vrednostPE'),
                 name: 'vrednostPE',
                 total: 'sum',
                 sortable: true
@@ -59,7 +74,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.celotnaVrednost'),
+                label: i18next.t('ep.t.celotnaVrednost'),
                 name: 'banka',
                 total: 'sum',
                 sortable: true
@@ -77,7 +92,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.lastnaSredstva'),
+                label: i18next.t('ep.t.lastnaSredstva'),
                 name: 'lastnaSredstva',
                 total: 'sum',
                 sortable: true
@@ -86,7 +101,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.stHonoranih'),
+                label: i18next.t('ep.stHonorarnih'),
                 name: 'stHonoranih',
                 total: 'count',
                 sortable: true
@@ -104,7 +119,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.drugiViri'),
+                label: i18next.t('ep.t.drugiViri'),
                 name: 'drugiViri',
                 total: 'sum',
                 sortable: true
@@ -113,7 +128,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.viriDMinLok'),
+                label: i18next.t('ep.t.drugiJavni'),
                 name: 'viriDMinLok',
                 total: 'sum',
                 sortable: true

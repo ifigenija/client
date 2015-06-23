@@ -120,20 +120,20 @@ define([
             //z GET na podan url se odzove podanim odzivom
             this.server.respondWith("GET", baseUrl + "/rest/seznam", [
                 200,
-                {"Content-Type": "application/json"},
+                {"Content-Type":"application/json; charset=UTF-8"},
                 textColl
             ]);
 
             //z GET na podan url se odzove podanim odzivom
-            this.server.respondWith("GET", baseUrl + "/rest/seznam?page=1&per_page=2", [
+            this.server.respondWith("GET", baseUrl + "/rest/seznam?page=1&per_page=15", [
                 200,
-                {"Content-Type": "application/json"},
+                {"Content-Type":"application/json; charset=UTF-8"},
                 textColl
             ]);
             //z OPTIONS na podan url se odzove podanim odzivom
             this.server.respondWith("OPTIONS", baseUrl + "/rest/seznam", [
                 200,
-                {"Content-Type": "application/json"},
+                {"Content-Type":"application/json; charset=UTF-8"},
                 textSch
             ]);
         });
@@ -151,6 +151,7 @@ define([
          */
         after(function () {
             $('.seznamView').remove();
+            this.server.restore();
         });
 
         /**
@@ -213,7 +214,9 @@ define([
             });
 
             it("ga lahko izrišemo", function () {
-                var view = new View({url: '/rest/seznam'});
+                var view = new View({
+                    url: '/rest/seznam'
+                });
                 $('.seznamView').append(view.render().el);
 
                 vDOM('.seznam-forma', 1);
@@ -229,9 +232,9 @@ define([
         describe("SeznamView regije", function () {
             beforeEach(function () {
                 this.view = new View({
-                    url: '/rest/seznam',
-                    schema: schema
+                    url: '/rest/seznam'
                 });
+                this.server.respond();
                 $('.seznamView').append(this.view.render().el);
             });
 
@@ -249,6 +252,9 @@ define([
                 vDOM('.seznam-tabela .paginated-grid', 1);
                 vDOM('th.sifra', 1);
                 vDOM('th.naziv', 1);
+                vDOM('tbody', 1);
+                //vtbody ni tabele :/
+                vDOM('tbody tr', 1);
             });
 
             it("izris forme", function () {
@@ -262,8 +268,7 @@ define([
         describe("SeznamView form triggerji", function () {
             beforeEach(function () {
                 this.view = new View({
-                    url: '/rest/seznam',
-                    schema: schema
+                    url: '/rest/seznam'
                 });
                 $('.seznamView').append(this.view.render().el);
             });
@@ -327,7 +332,9 @@ define([
          */
         describe("SeznamView collection triggerji", function () {
             beforeEach(function () {
-                this.view = new View();
+                this.view = new View({
+                    url: '/rest/seznam'
+                });
                 $('.seznamView').append(this.view.render().el);
 
                 this.Model = Backbone.Model.extend({
@@ -377,8 +384,7 @@ define([
 
             before(function () {
                 this.view = new View({
-                    url: '/rest/seznam',
-                    schema: schema
+                    url: '/rest/seznam'
                 });
                 $('.seznamView').append(this.view.render().el);
             });

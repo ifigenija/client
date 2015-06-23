@@ -26,10 +26,79 @@ define([
         formTitle: i18next.t('gostovanje.title'),
         gridMeta: [
             {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('entiteta.sort'),
+                name: 'sort',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('entiteta.uprizoritev'),
+                name: 'uprizoritev',
+                sortable: true
+            },
+            {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('gostovanje.gostitelj'),
                 name: 'gostitelj.label',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.t.celotnaVrednost'),
+                name: 'celotnaVrednost',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.zaproseno'),
+                name: 'zaproseno',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.t.lastnaSredstva'),
+                name: 'lastnaSredstva',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.t.avtorskiHonorarji'),
+                name: 'avtorskiHonorarji',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.t.drugiViri'),
+                name: 'drugiViri',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('ep.t.drugiJavni'),
+                name: 'drugiJavni',
+                total: 'sum',
                 sortable: true
             },
             {

@@ -35,9 +35,17 @@ define([
         },
         gridMeta: [
             {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('entiteta.sort'),
+                name: 'sort',
+                sortable: true
+            },
+            {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('festival.naziv'),
+                label: i18next.t('entiteta.naziv'),
                 name: 'naziv',
                 sortable: true
             },
