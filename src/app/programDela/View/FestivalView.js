@@ -116,7 +116,8 @@ define([
         require(['backbone-modal'], function (Modal) {
 
             var View = Marionette.LayoutView.extend({
-                template: Handlebars.compile('<form><textarea type="TextArea" class="utemeljitev form-control"></textarea></form>'),
+                model: self.model,
+                template: Handlebars.compile('<form><textarea type="TextArea" class="utemeljitev form-control">{{opredelitevDrugiDogodki}}</textarea></form>'),
                 title: i18next.t('Utemeljitev')
             });
 
