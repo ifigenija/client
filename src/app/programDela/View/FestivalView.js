@@ -112,6 +112,7 @@ define([
      */
     FestivalView.prototype.onUtemelji = function () {
         var self = this;
+        
         require(['backbone-modal'], function (Modal) {
 
             var View = Marionette.LayoutView.extend({
@@ -132,10 +133,12 @@ define([
             modal.listenTo(modal, 'ok', function () {
                 var text = this.$('.utemeljitev').val();
                 if (text) {
-                    self.form.setValue({"opredelitevDrugiDogodki": text});
+                    self.$('a.btn.utemelji').append(' <i class="fa fa-check"></i>');
+                    self.model.set("opredelitevDrugiDogodki", text);
                 }
             });
         });
     };
+    
     return FestivalView;
 });
