@@ -10,7 +10,8 @@ define([
     'app/Dokument/View/DokumentView',
     'template!../tpl/program-dokument.tpl',
     'template!../tpl/program-form.tpl',
-    'formSchema!programDela'
+    'formSchema!programDela',
+    'app/Max/View/TabControl'
 ], function (
         Marionette,
         Backbone,
@@ -20,10 +21,28 @@ define([
         DokumentView,
         dokumentTpl,
         formTpl,
-        formSchema
+        formSchema,
+        TabControl
         ) {
 
     var ch = Radio.channel('layout');
+    
+    var tabVse = [
+        {name: i18next.t('entiteta.splosno'), event: 'splosni'},
+        {name: i18next.t('premiera.title'), event: 'premiere'},
+        {name: i18next.t('ponovitevPremiere.title'), event: 'ponovitvePremier'},
+        {name: i18next.t('ponovitevPrejsnjih.title'), event: 'ponovitvePrejsnjih'},
+        {name: i18next.t('gostujoca.title'), event: 'gostujoci'},
+        {name: i18next.t('gostovanje.title'), event: 'gostovanja'},
+        {name: i18next.t('festival.title'), event: 'festivali'},
+        {name: i18next.t('programRazno.title'), event: 'razni'},
+        {name: i18next.t('izjemni.title'), event: 'izjemni'},
+        {name: i18next.t('kazalniki.title'), event: 'kazalniki'}
+    ];
+
+    var tabNovi = [
+        {name: i18next.t('entiteta.splosno'), event: 'splosni'}
+    ];
 
     var ProgramDokView = DokumentView.extend({
         template: dokumentTpl,
@@ -37,33 +56,64 @@ define([
             gostujociR: '.region-gostujoci',
             izjemniR: '.region-izjemni',
             festivaliR: '.region-festivali',
-            razniR: '.region-razni'
+            razniR: '.region-razni',
+            kazalnikiR: '.region-kazalniki',
+            tabsR: '.programDela-tabs'
         }
     });
+    
+    /**
+     * Izris tabov
+     * @returns {OsebaEditView_L11.TabControl}
+     */
+    ProgramDokView.prototype.renderTabs = function (tabs) {
+        this.tabControl = new TabControl({tabs: tabs, listener: this});
+        this.tabsR.show(this.tabControl);
+        return this.tabControl;
+    };
 
     ProgramDokView.prototype.onRender = function () {
-        if (this.model.get('id')) {
-            this.onPremiera();
-            this.onPonovitevPremiere();
-            this.onPonovitevPrejsnje();
-            this.onGostovanje();
-            this.onGostujoca();
-            this.onIzjemni();
-            this.onFestival();
-            this.onRazno();
+        
+        var tabs = tabVse;
+
+        if (this.isNew()) {
+            tabs = tabNovi;
         }
+        
+        this.renderTabs(tabs);
     };
 
     ProgramDokView.prototype.getNaslov = function () {
         return this.isNew() ?
                 i18next.t('programDela.nova') : this.model.get('naziv');
     };
+    
+    /**
+     * Klik na drug tab se izvede deselect
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.deselectTab = function () {
+        this.$('.programDela-panels .tab-pane').removeClass('active');
+    };
+    
+    /**
+     * Klik na splošni tab
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onSplosni = function () {
+        this.deselectTab();
+        this.$('.pnl-splosno').addClass('active');
+
+    };
 
     /**
      * Izris premier
      * @returns {undefined}
      */
-    ProgramDokView.prototype.onPremiera = function () {
+    ProgramDokView.prototype.onPremiere = function () {
+        this.deselectTab();
+        this.$('.pnl-premiere').addClass('active');
+        
         var self = this;
         require(['app/programDela/View/PremieraView'], function (View) {
             var view = new View({
@@ -78,7 +128,10 @@ define([
      * Izris ponovitev premiere
      * @returns {undefined}
      */
-    ProgramDokView.prototype.onPonovitevPremiere = function () {
+    ProgramDokView.prototype.onPonovitvePremier = function () {
+        this.deselectTab();
+        this.$('.pnl-ponovitvePremier').addClass('active');
+        
         var self = this;
         require(['app/programDela/View/PonovitevPremiereView'], function (View) {
             var view = new View({
@@ -93,7 +146,10 @@ define([
      * Izris ponovitev prejsnjih
      * @returns {undefined}
      */
-    ProgramDokView.prototype.onPonovitevPrejsnje = function () {
+    ProgramDokView.prototype.onPonovitvePrejsnjih = function () {
+        this.deselectTab();
+        this.$('.pnl-ponovitvePrejsnjih').addClass('active');
+        
         var self = this;
         require(['app/programDela/View/PonovitevPrejsnjeView'], function (View) {
             var view = new View({
@@ -108,7 +164,10 @@ define([
      * Izris gostovanj
      * @returns {undefined}
      */
-    ProgramDokView.prototype.onGostovanje = function () {
+    ProgramDokView.prototype.onGostovanja = function () {
+        this.deselectTab();
+        this.$('.pnl-gostovanja').addClass('active');
+        
         var self = this;
         require(['app/programDela/View/GostovanjeView'], function (View) {
             var view = new View({
@@ -123,7 +182,10 @@ define([
      * Izris gostujoci
      * @returns {undefined}
      */
-    ProgramDokView.prototype.onGostujoca = function () {
+    ProgramDokView.prototype.onGostujoci = function () {
+        this.deselectTab();
+        this.$('.pnl-gostujoci').addClass('active');
+        
         var self = this;
         require(['app/programDela/View/GostujocaView'], function (View) {
             var view = new View({
@@ -139,6 +201,9 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onIzjemni = function () {
+        this.deselectTab();
+        this.$('.pnl-izjemni').addClass('active');
+        
         var self = this;
         require(['app/programDela/View/IzjemniView'], function (View) {
             var view = new View({
@@ -153,7 +218,10 @@ define([
      * Izris izjemnih uprizoritev
      * @returns {undefined}
      */
-    ProgramDokView.prototype.onFestival = function () {
+    ProgramDokView.prototype.onFestivali = function () {
+        this.deselectTab();
+        this.$('.pnl-festivali').addClass('active');
+        
         var self = this;
         require(['app/programDela/View/FestivalView'], function (View) {
             var view = new View({
@@ -168,7 +236,10 @@ define([
      * Izris razno
      * @returns {undefined}
      */
-    ProgramDokView.prototype.onRazno = function () {
+    ProgramDokView.prototype.onRazni = function () {
+        this.deselectTab();
+        this.$('.pnl-razni').addClass('active');
+        
         var self = this;
         require(['app/programDela/View/RaznoView'], function (View) {
             var view = new View({

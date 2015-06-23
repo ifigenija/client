@@ -18,7 +18,7 @@
                     </div>
                     <div class="row">
                         <a class="btn btn-default utemelji">Utemeljitev</a>
-                        <!--<div class="col-md-6 col-lg-offset-3" data-fields="opredelitevDrugiDogodki"></div>-->
+                        <div class="col-md-6 col-lg-offset-3" data-fields="opredelitevDrugiDogodki"></div>
                     </div>
                 </form>
             </div>

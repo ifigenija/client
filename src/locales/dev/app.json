@@ -87,7 +87,8 @@
         "uredi": "Uredi",
         "potrdiIzbris": "Ali res želite izbrisati podatek",
         "izberi": "Izberi",
-        "preklici": "Prekliči"
+        "preklici": "Prekliči",
+        "shrani": "Shrani"
     },
     "entiteta": {
         "dodaj": "Dodaj",
@@ -566,7 +567,7 @@
         }
     },
     "festival": {
-        "title": "Festival",
+        "title": "Festivali",
         "stProdukcij": "Število produkcij",
         "stPredstav": "Število predstav",
         "stPredavanj": "Število predavanj",
@@ -594,22 +595,25 @@
         }
     },
     "premiera": {
-        "title": "Premiera"
+        "title": "Premiere"
     },
     "ponovitevPremiere": {
-        "title": "Ponovitev premiere"
+        "title": "Ponovitve premier"
     },
     "ponovitevPrejsnjih": {
-        "title": "Ponovitev prejšnjih"
+        "title": "Ponovitve prejšnjih"
     },
     "gostujoca": {
-        "title": "Gostujoča"
+        "title": "Gostujoče"
     },
     "izjemni": {
-        "title": "Izjemni"
+        "title": "Izjemni programi"
+    },
+    "kazalniki": {
+        "title": "Kazalniki"
     },
     "programRazno": {
-        "title": "Razno",
+        "title": "Razni programi",
         "naslovPE": "Naslov",
         "avtorPE": "Avtor",
         "obsegPE": "Obseg",

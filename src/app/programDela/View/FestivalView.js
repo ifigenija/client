@@ -127,20 +127,14 @@ define([
                 okText: i18next.t("std.shrani"),
                 cancelText: i18next.t("std.preklici"),
                 title: view.title
-            }).open(function () {
+            }).open();
+
+            modal.listenTo(modal, 'ok', function () {
                 var text = this.$('.utemeljitev').val();
                 if (text) {
-                    self.form.fields.opredelitevDrugiDogodki.editor.setValue(text);
+                    self.form.setValue({"opredelitevDrugiDogodki": text});
                 }
             });
-
-//            modal.listenTo(modal, 'ok', function () {
-//                var text = this.$('.utemeljitev').val();
-//                if(text){
-//                    var text = this.$('.utemeljitev').val();
-//                    self.form.fields.opredelitevDrugiDogodki.editor.setValue(text);
-//                }
-//            });
         });
     };
     return FestivalView;

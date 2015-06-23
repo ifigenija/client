@@ -3,46 +3,29 @@
     <h2>{{ docNaslov }}</h2>
 </div>
 
-<div class="panel panel-default panel-form glava-panel paginated-grid">
-    <div class="panel-heading">
-        <div class="clearfix">
+
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <div class="nav nav-tabs programDela-tabs"></div>
+
+    <!-- Tab panes -->
+    <div class="tab-content programDela-panels">
+        <div role="tabpanel" class="tab-pane active pnl-splosno">
             <div class="region-toolbar pull-right"></div>
-            <h4 class="glava-title">{{ formTitle }} </h4>
-
+            <div class="clearfix"></div>
+            <div class="region-form">
+            </div>
         </div>
-    </div>
-    <div class="panel-body region-form">
-
+        <div role="tabpanel" class="tab-pane pnl-premiere region-premiere"></div>
+        <div role="tabpanel" class="tab-pane pnl-ponovitvePremier region-ponovitvePremier"></div>
+        <div role="tabpanel" class="tab-pane pnl-ponovitvePrejsnjih region-ponovitvePrejsnjih"></div>
+        <div role="tabpanel" class="tab-pane pnl-gostujoci region-gostujoci"></div>
+        <div role="tabpanel" class="tab-pane pnl-gostovanja region-gostovanja"></div>
+        <div role="tabpanel" class="tab-pane pnl-festivali region-festivali"></div>
+        <div role="tabpanel" class="tab-pane pnl-razni region-razni"></div>
+        <div role="tabpanel" class="tab-pane pnl-izjemni region-izjemni"></div>
+        <div role="tabpanel" class="tab-pane pnl-kazalniki region-kazalniki"></div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-sm-12  region-postavke">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="clearfix">
-                    <h4 class="glava-title">Uprizoritvena umetnost – Programski sklop I</h4>
-                </div>
-            </div>
-            <div class="panel-body">
-                <div class="region-premiere"></div>
-                <div class="region-ponovitvePremier"></div>
-                <div class="region-ponovitvePrejsnjih"></div>
-                <div class="region-gostujoci"></div>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="clearfix">
-                    <h4 class="glava-title">Uprizoritvena umetnost – Programski sklop II</h4>
-                </div>
-            </div>
-            <div class="panel-body">
-                <div class="region-gostovanja"></div>
-                <div class="region-festivali"></div>
-                <div class="region-razni"></div>
-                <div class="region-izjemni"></div>
-            </div>      
-    </div>
-</div>
