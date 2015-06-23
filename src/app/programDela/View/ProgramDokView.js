@@ -32,11 +32,12 @@ define([
         {name: i18next.t('premiera.title'), event: 'premiere'},
         {name: i18next.t('ponovitevPremiere.title'), event: 'ponovitvePremier'},
         {name: i18next.t('ponovitevPrejsnjih.title'), event: 'ponovitvePrejsnjih'},
-        {name: i18next.t('gostujoca.title'), event: 'gostujoci'},
-        {name: i18next.t('gostovanje.title'), event: 'gostovanja'},
-        {name: i18next.t('festival.title'), event: 'festivali'},
-        {name: i18next.t('programRazno.title'), event: 'razni'},
-        {name: i18next.t('izjemni.title'), event: 'izjemni'},
+        {name: i18next.t('Ostali'), event: 'ostali'},
+//        {name: i18next.t('gostujoca.title'), event: 'gostujoci'},
+//        {name: i18next.t('gostovanje.title'), event: 'gostovanja'},
+//        {name: i18next.t('festival.title'), event: 'festivali'},
+//        {name: i18next.t('programRazno.title'), event: 'razni'},
+//        {name: i18next.t('izjemni.title'), event: 'izjemni'},
         {name: i18next.t('kazalniki.title'), event: 'kazalniki'}
     ];
 
@@ -160,13 +161,23 @@ define([
             return view;
         });
     };
+    ProgramDokView.prototype.onOstali = function () {
+        this.deselectTab();
+        this.$('.pnl-ostali').addClass('active');
+
+        this.onFestivali();
+        this.onGostovanja();
+        this.onGostujoci();
+        this.onIzjemni();
+        this.onRazni();
+    };
     /**
      * Izris gostovanj
      * @returns {undefined}
      */
     ProgramDokView.prototype.onGostovanja = function () {
-        this.deselectTab();
-        this.$('.pnl-gostovanja').addClass('active');
+//        this.deselectTab();
+//        this.$('.pnl-gostovanja').addClass('active');
         
         var self = this;
         require(['app/programDela/View/GostovanjeView'], function (View) {
@@ -183,8 +194,8 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onGostujoci = function () {
-        this.deselectTab();
-        this.$('.pnl-gostujoci').addClass('active');
+//        this.deselectTab();
+//        this.$('.pnl-gostujoci').addClass('active');
         
         var self = this;
         require(['app/programDela/View/GostujocaView'], function (View) {
@@ -201,8 +212,8 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onIzjemni = function () {
-        this.deselectTab();
-        this.$('.pnl-izjemni').addClass('active');
+//        this.deselectTab();
+//        this.$('.pnl-izjemni').addClass('active');
         
         var self = this;
         require(['app/programDela/View/IzjemniView'], function (View) {
@@ -219,8 +230,8 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onFestivali = function () {
-        this.deselectTab();
-        this.$('.pnl-festivali').addClass('active');
+//        this.deselectTab();
+//        this.$('.pnl-festivali').addClass('active');
         
         var self = this;
         require(['app/programDela/View/FestivalView'], function (View) {
@@ -237,8 +248,8 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onRazni = function () {
-        this.deselectTab();
-        this.$('.pnl-razni').addClass('active');
+//        this.deselectTab();
+//        this.$('.pnl-razni').addClass('active');
         
         var self = this;
         require(['app/programDela/View/RaznoView'], function (View) {
