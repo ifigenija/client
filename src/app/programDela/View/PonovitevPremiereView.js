@@ -26,6 +26,14 @@ define([
         formTitle: i18next.t('ponovitevPremiere.title'),
         gridMeta: [
             {
+                headerCell: hc,
+                cell: 'number',
+                editable: false,
+                label: i18next.t('entiteta.sort'),
+                name: 'sort',
+                sortable: true
+            },
+            {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('entiteta.uprizoritev'),
