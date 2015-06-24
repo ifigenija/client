@@ -27,11 +27,6 @@
             <div class="region-razni"></div>
             <div class="region-izjemni"></div>
         </div>
-        <!--<div role="tabpanel" class="tab-pane pnl-gostujoci region-gostujoci"></div>
-        <div role="tabpanel" class="tab-pane pnl-gostovanja region-gostovanja"></div>
-        <div role="tabpanel" class="tab-pane pnl-festivali region-festivali"></div>
-        <div role="tabpanel" class="tab-pane pnl-razni region-razni"></div>
-        <div role="tabpanel" class="tab-pane pnl-izjemni region-izjemni"></div>-->
         <div role="tabpanel" class="tab-pane pnl-kazalniki region-kazalniki"></div>
     </div>
 </div>

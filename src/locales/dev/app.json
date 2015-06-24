@@ -500,8 +500,6 @@
         "lastnaSredstva": "Lastna sredstva",
         "avtorskiHonorarji": "Avtorski honorarji",
         "tantieme": "Tantieme",
-        "drugiViri": "Drugi viri",
-        "opredelitevDrugiViri": "Opredelitev",
         "vlozekGostitelja": "Vložek gostitelja",
         "vlozekKoproducenta": "Vložek koproducenta",
         "drugiJavni": "Drugi javni viri",
@@ -526,7 +524,6 @@
             "sort": "Sort programske enote",
             "zaproseno": "Zaprošena sredstva Ministrstva za kulturo",
             "drugiJavni": "Vir druga ministrstva in lokalna skupnost",
-            "opredelitevDrugiViri": "Opredelitev drugih virov",
             "vlozekGostitelja": "Vložek gostitelja",
             "vlozekKoproducenta": "Vložek koproducenta(-ov)",
             "stZaposlenih": "Število zaposlenih, ki sodelujejo pri izvedbi projekta",
@@ -539,7 +536,6 @@
             "celotnaVrednost": "Vrednost",
             "lastnaSredstva": "Sredstva",
             "avtorskiHonorarji": "Honorarji",
-            "drugiViri": "Viri",
             "drugiJavni": "Javni viri",
             "tipProgramskeEnote": "Tip"
         }

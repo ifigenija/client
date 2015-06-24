@@ -12,4 +12,6 @@
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-offset-3" data-fields="utemeljitev"></div>
     </div>
+    <div class="row region-drugiViri">
+    </div>
 </form>

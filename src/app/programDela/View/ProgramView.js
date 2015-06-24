@@ -3,10 +3,8 @@
  */
 define([
     'marionette',
-    'backbone',
     'radio',
     'i18next',
-    'baseUrl',
     'template!../tpl/program.tpl',
     'template!../tpl/program-item.tpl',
     '../Model/Program',
@@ -15,10 +13,8 @@ define([
     'app/Max/View/PaginatorControl'
 ], function (
         Marionette,
-        Backbone,
         Radio,
         i18next,
-        baseUrl,
         tpl,
         itemTpl,
         ProgramModel,

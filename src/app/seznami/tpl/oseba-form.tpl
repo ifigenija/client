@@ -2,7 +2,7 @@
     <div class="row">
         <div class="row col-sm-6">
             <div class="col-sm-12 col-lg-6" data-fields="sifra,email"></div>
-            <div class="col-sm-12 col-lg-6" data-fields="ime,priimek"></div>
+            <div class="col-sm-12 col-lg-6" data-fields="ime,priimek,spol"></div>
         </div>
         <div class="row col-sm-6">
             <div class="col-sm-12 col-lg-6" data-fields="srednjeIme,naziv"></div>

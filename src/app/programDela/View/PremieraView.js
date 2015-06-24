@@ -5,14 +5,18 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/Dokument/View/PostavkeView',
+    'app/programDela/View/DrugiVirView',
     'template!../tpl/premiera-form.tpl',
-    'formSchema!programPremiera'
+    'formSchema!programPremiera',
+    'app/programDela/Model/DrugiVir'
 ], function (
         Backgrid,
         i18next,
         PostavkeView,
+        DrugiVirView,
         formTpl,
-        schema
+        schema,
+        DrugiVir
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -24,6 +28,9 @@ define([
         name: 'Premiera',
         detailName: 'premiere',
         formTitle: i18next.t('premiera.title'),
+        regions: {
+            drugiViriR: '.region-drugiViri'
+        },
         gridMeta: [
             {
                 headerCell: hc,
@@ -98,15 +105,6 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.t.drugiViri'),
-                name: 'drugiViri',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
                 label: i18next.t('ep.t.drugiJavni'),
                 name: 'drugiJavni',
                 total: 'sum',
@@ -123,5 +121,32 @@ define([
             }
         ]
     });
+
+    PremieraView.prototype.onRenderForm = function (form) {
+        if (!this.isNew()) {
+            this.renderDrugiViri();
+        }
+    };
+
+    PremieraView.prototype.renderDrugiViri = function () {
+
+//        var coll = new DrugiVir.Collection();
+//        var self = this;
+//        coll.fetch({
+//            success: function () {
+//                var drugiVirView = new DrugiVirView({
+//                    collection: coll,
+//                    dokument: self.model
+//                });
+//                self.drugiViriR.show(drugiVirView);
+//            }
+//        });
+        var drugiVirView = new DrugiVirView({
+            collection: this.drugiViriCollection,
+            dokument: this
+        });
+        this.drugiViriR.show(drugiVirView);
+    };
+
     return PremieraView;
 });
