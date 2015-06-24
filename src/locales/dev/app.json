@@ -612,6 +612,14 @@
     "kazalniki": {
         "title": "Kazalniki"
     },
+    "drugiVir": {
+        "znesek": "Znesek",
+        "mednarodni": "Mednarodni viri",
+        "d": {
+            "znesek": "drugiVir.znesek",
+            "mednarodni": "drugiVir.mednarodni"
+        }
+    },
     "programRazno": {
         "title": "Razni programi",
         "naslovPE": "Naslov",

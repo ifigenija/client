@@ -6,7 +6,7 @@
         </div>
         <div class="row col-sm-6">
             <div class="col-sm-12 col-lg-6" data-fields="obiskDoma,stZaposlenih,stHonorarnih,zaproseno"></div>
-            <div class="col-sm-12 col-lg-6" data-fields="celotnaVrednost,lastnaSredstva,drugiViri,drugiJavni,sort"></div>
+            <div class="col-sm-12 col-lg-6" data-fields="celotnaVrednost,lastnaSredstva,drugiJavni,sort"></div>
         </div>
     </div>
 </form>
