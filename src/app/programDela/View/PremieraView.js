@@ -34,7 +34,7 @@ define([
         gridMeta: [
             {
                 headerCell: hc,
-                cell: 'number',
+                cell: 'integer',
                 editable: false,
                 label: i18next.t('entiteta.sort'),
                 name: 'sort',
@@ -116,7 +116,9 @@ define([
                 sortable: false,
                 actions: [
                     {event: 'brisi', title: i18next.t('entiteta.brisi')},
-                    {event: 'uredi', title: i18next.t('entiteta.uredi')}
+                    {event: 'uredi', title: i18next.t('entiteta.uredi')},
+                    {event: 'premakniGor', title: i18next.t('entiteta.uredi')},
+                    {event: 'premakniDol', title: i18next.t('entiteta.uredi')}
                 ]
             }
         ]
@@ -129,22 +131,11 @@ define([
     };
 
     PremieraView.prototype.renderDrugiViri = function () {
-
-//        var coll = new DrugiVir.Collection();
-//        var self = this;
-//        coll.fetch({
-//            success: function () {
-//                var drugiVirView = new DrugiVirView({
-//                    collection: coll,
-//                    dokument: self.model
-//                });
-//                self.drugiViriR.show(drugiVirView);
-//            }
-//        });
         var drugiVirView = new DrugiVirView({
-            collection: this.drugiViriCollection,
-            dokument: this
+            collection: this.model.drugiViriCollection,
+            dokument: this.model
         });
+        
         this.drugiViriR.show(drugiVirView);
     };
 

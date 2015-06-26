@@ -27,7 +27,7 @@ define([
         gridMeta: [
             {
                 headerCell: hc,
-                cell: 'number',
+                cell: 'integer',
                 editable: false,
                 label: i18next.t('entiteta.sort'),
                 name: 'sort',

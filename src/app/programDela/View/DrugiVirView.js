@@ -31,6 +31,7 @@ define([
                 editable: false,
                 label: i18next.t('drugiVir.znesek'),
                 name: 'znesek',
+                total: 'sum',
                 sortable: true
             },
             {

@@ -20,14 +20,29 @@ define([
         ) {
 
     var ch = Radio.channel('layout');
-    
+
     var tabVse = [
-        {name: i18next.t('entiteta.splosno'), event: 'splosni'},
+        {
+            title: i18next.t('entiteta.d.splosno'),
+            name: i18next.t('entiteta.splosno'),
+            event: 'splosni'
+        },
+        {name: i18next.t('programDela.sklopEna'), event: 'sklopEna'},
+        {name: i18next.t('programDela.sklopDva'), event: 'sklopDva'},
+        {name: i18next.t('kazalniki.title'), event: 'kazalniki'}
+    ];
+    var tabSklopDva = [
+        {name: i18next.t('gostovanje.title'), event: 'gostovanja'},
+        {name: i18next.t('festival.title'), event: 'festivali'},
+        {name: i18next.t('programRazno.title'), event: 'razni'},
+        {name: i18next.t('izjemni.title'), event: 'izjemni'}
+    ];
+
+    var tabSklopEna = [
         {name: i18next.t('premiera.title'), event: 'premiere'},
         {name: i18next.t('ponovitevPremiere.title'), event: 'ponovitvePremier'},
         {name: i18next.t('ponovitevPrejsnjih.title'), event: 'ponovitvePrejsnjih'},
-        {name: i18next.t('Ostali'), event: 'ostali'},
-        {name: i18next.t('kazalniki.title'), event: 'kazalniki'}
+        {name: i18next.t('gostujoca.title'), event: 'gostujoci'}
     ];
 
     var tabNovi = [
@@ -48,10 +63,12 @@ define([
             festivaliR: '.region-festivali',
             razniR: '.region-razni',
             kazalnikiR: '.region-kazalniki',
-            tabsR: '.programDela-tabs'
+            tabsR: '.programDela-tabs',
+            sklopEnaR: '.sklopEna-tabs',
+            sklopDvaR: '.sklopDva-tabs'
         }
     });
-    
+
     /**
      * Izris tabov
      * @returns {OsebaEditView_L11.TabControl}
@@ -63,13 +80,13 @@ define([
     };
 
     ProgramDokView.prototype.onRender = function () {
-        
+
         var tabs = tabVse;
 
         if (this.isNew()) {
             tabs = tabNovi;
         }
-        
+
         this.renderTabs(tabs);
     };
 
@@ -77,7 +94,7 @@ define([
         return this.isNew() ?
                 i18next.t('programDela.nova') : this.model.get('naziv');
     };
-    
+
     /**
      * Klik na drug tab se izvede deselect
      * @returns {undefined}
@@ -85,7 +102,21 @@ define([
     ProgramDokView.prototype.deselectTab = function () {
         this.$('.programDela-panels .tab-pane').removeClass('active');
     };
-    
+    /**
+     * Klik deselekt vtabcontrol sklopa ena
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.deselectTabEna = function () {
+        this.$('.sklopEna-panels .tab-pane').removeClass('active');
+    };
+    /**
+     * Klik deselekt vtabcontrol sklopa dva
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.deselectTabDva = function () {
+        this.$('.sklopDva-panels .tab-pane').removeClass('active');
+    };
+
     /**
      * Klik na splošni tab
      * @returns {undefined}
@@ -93,7 +124,29 @@ define([
     ProgramDokView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
+    };
 
+    /**
+     * Izris tabov sklopaena
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onSklopEna = function () {
+        this.deselectTab();
+        this.$('.pnl-sklopEna').addClass('active');
+
+        this.tabControlSklopEna = new TabControl({tabs: tabSklopEna, listener: this});
+        this.sklopEnaR.show(this.tabControlSklopEna);
+    };
+    /**
+     * Izris tabov sklopaena
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onSklopDva = function () {
+        this.deselectTab();
+        this.$('.pnl-sklopDva').addClass('active');
+
+        this.tabControlSklopDva = new TabControl({justified: false, tabs: tabSklopDva, listener: this});
+        this.sklopDvaR.show(this.tabControlSklopDva);
     };
 
     /**
@@ -101,9 +154,9 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onPremiere = function () {
-        this.deselectTab();
+        this.deselectTabEna();
         this.$('.pnl-premiere').addClass('active');
-        
+
         var self = this;
         require(['app/programDela/View/PremieraView'], function (View) {
             var view = new View({
@@ -119,9 +172,9 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onPonovitvePremier = function () {
-        this.deselectTab();
+        this.deselectTabEna();
         this.$('.pnl-ponovitvePremier').addClass('active');
-        
+
         var self = this;
         require(['app/programDela/View/PonovitevPremiereView'], function (View) {
             var view = new View({
@@ -137,9 +190,9 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onPonovitvePrejsnjih = function () {
-        this.deselectTab();
+        this.deselectTabEna();
         this.$('.pnl-ponovitvePrejsnjih').addClass('active');
-        
+
         var self = this;
         require(['app/programDela/View/PonovitevPrejsnjeView'], function (View) {
             var view = new View({
@@ -150,21 +203,14 @@ define([
             return view;
         });
     };
-    ProgramDokView.prototype.onOstali = function () {
-        this.deselectTab();
-        this.$('.pnl-ostali').addClass('active');
-
-        this.onFestivali();
-        this.onGostovanja();
-        this.onGostujoci();
-        this.onIzjemni();
-        this.onRazni();
-    };
     /**
      * Izris gostovanj
      * @returns {undefined}
      */
-    ProgramDokView.prototype.onGostovanja = function () { 
+    ProgramDokView.prototype.onGostovanja = function () {
+        this.deselectTabDva();
+        this.$('.pnl-gostovanja').addClass('active');
+
         var self = this;
         require(['app/programDela/View/GostovanjeView'], function (View) {
             var view = new View({
@@ -179,7 +225,10 @@ define([
      * Izris gostujoci
      * @returns {undefined}
      */
-    ProgramDokView.prototype.onGostujoci = function () {   
+    ProgramDokView.prototype.onGostujoci = function () {
+        this.deselectTabEna();
+        this.$('.pnl-gostujoci').addClass('active');
+
         var self = this;
         require(['app/programDela/View/GostujocaView'], function (View) {
             var view = new View({
@@ -195,6 +244,9 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onIzjemni = function () {
+        this.deselectTabDva();
+        this.$('.pnl-izjemni').addClass('active');
+
         var self = this;
         require(['app/programDela/View/IzjemniView'], function (View) {
             var view = new View({
@@ -210,6 +262,9 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onFestivali = function () {
+        this.deselectTabDva();
+        this.$('.pnl-festivali').addClass('active');
+
         var self = this;
         require(['app/programDela/View/FestivalView'], function (View) {
             var view = new View({
@@ -225,6 +280,9 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onRazni = function () {
+        this.deselectTabDva();
+        this.$('.pnl-razni').addClass('active');
+
         var self = this;
         require(['app/programDela/View/RaznoView'], function (View) {
             var view = new View({

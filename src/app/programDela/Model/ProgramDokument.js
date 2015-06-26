@@ -14,14 +14,14 @@ define([
         nestedCollections: {
             drugiViri: {collection: DrugiVir.Collection, mappedBy: 'enotaPrograma'}
         },
-        urlRoot: baseUrl + '/rest/drugiVir',
+        urlRoot: baseUrl + '/rest/programpremiera',
         dodajPostavko: function (nested) {
 
             nested = nested || 'drugiViri';
             var postavka = new DrugiVir.Model({
                 enotaPrograma: this.id
             });
-            postavka.enotaPrograma = this;
+            postavka.dokument = this;
             return postavka;
         }
     });
@@ -32,7 +32,7 @@ define([
     var GostovanjeCollection = Dokument.PostavkaCollection.extend({
         model: Gostovanje,
         url: baseUrl + '/rest/programGostovanje',
-        index: 'toBeDetermined'
+        index: 'sort'
     });
 
 
@@ -42,7 +42,7 @@ define([
     var GostujocaCollection = Dokument.PostavkaCollection.extend({
         model: Gostujoca,
         url: baseUrl + '/rest/programGostujoca',
-        index: 'toBeDetermined'
+        index: 'sort'
     });
 
 
@@ -52,7 +52,7 @@ define([
     var IzjemniCollection = Dokument.PostavkaCollection.extend({
         model: Izjemni,
         url: baseUrl + '/rest/programIzjemni',
-        index: 'toBeDetermined'
+        index: 'sort'
     });
 
 
@@ -62,7 +62,7 @@ define([
     var PonovitvePremierCollection = Dokument.PostavkaCollection.extend({
         model: PonovitevPremiere,
         url: baseUrl + '/rest/programPonovitevPremiere',
-        index: 'toBeDetermined'
+        index: 'sort'
     });
 
     var PonovitevPrejsnje = Dokument.Postavka.extend({
@@ -71,7 +71,7 @@ define([
     var PonovitvePrejsnjihCollection = Dokument.PostavkaCollection.extend({
         model: PonovitevPrejsnje,
         url: baseUrl + '/rest/programPonovitevPrejsnjih',
-        index: 'toBeDetermined'
+        index: 'sort'
     });
 
 
@@ -79,9 +79,9 @@ define([
         urlRoot: baseUrl + '/rest/programPremiera'
     });
     var PremiereCollection = Dokument.PostavkaCollection.extend({
-        model: Premiera,
+        model: DrugiVirPostavka,
         url: baseUrl + '/rest/programPremiera',
-        index: 'toBeDetermined'
+        index: 'sort'
     });
 
 
@@ -91,7 +91,7 @@ define([
     var FestivaliCollection = Dokument.PostavkaCollection.extend({
         model: Festival,
         url: baseUrl + '/rest/programFestival',
-        index: 'toBeDetermined'
+        index: 'sort'
     });
 
     var Razno = Dokument.Postavka.extend({
@@ -100,7 +100,7 @@ define([
     var RazniCollection = Dokument.PostavkaCollection.extend({
         model: Razno,
         url: baseUrl + '/rest/programRazno',
-        index: 'toBeDetermined'
+        index: 'sort'
     });
 
 
