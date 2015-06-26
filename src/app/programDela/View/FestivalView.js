@@ -9,7 +9,8 @@ define([
     'app/bars',
     'app/Dokument/View/PostavkeView',
     'template!../tpl/festival-form.tpl',
-    'formSchema!programFestival'
+    'formSchema!programFestival',
+    'underscore',
 ], function (
         Backgrid,
         i18next,
@@ -18,7 +19,8 @@ define([
         Handlebars,
         PostavkeView,
         formTpl,
-        schema
+        schema,
+        _
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -112,7 +114,7 @@ define([
      */
     FestivalView.prototype.onUtemelji = function () {
         var self = this;
-        
+
         require(['backbone-modal'], function (Modal) {
 
             var View = Marionette.LayoutView.extend({
@@ -140,6 +142,31 @@ define([
             });
         });
     };
-    
+    /**
+     * Odpre modal za utemeljitev
+     * @returns {undefined}
+     */
+    FestivalView.prototype.onDodaj = function () {
+        PostavkeView.prototype.onDodaj.apply(this, arguments);
+        this.zapSortSt();
+    };
+
+    FestivalView.prototype.zapSortSt = function () {
+        var collection = this.collection.fullCollection || this.collection;
+        var min = -100;
+        _.each(collection.models, function (e) {
+            var sort = e.get('sort');
+            if (sort >= min) {
+                min = sort;
+            }
+        });
+
+        if (min >= 0) {
+            //this.model.set({sort: min});
+            this.form.fields.sort.editor.setValue(min + 1);
+        }
+    };
+
+
     return FestivalView;
 });

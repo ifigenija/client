@@ -70,12 +70,12 @@ define([
             element: 'button-trigger',
             trigger: 'skrij'
         },
-            nasvet: {
-                id: 'doc-nasvet',
-                label: '<i class="fa fa-info"></i>',
-                element: 'button-trigger',
-                trigger: 'nasvet'
-            }
+        nasvet: {
+            id: 'doc-nasvet',
+            label: '<i class="fa fa-info"></i>',
+            element: 'button-trigger',
+            trigger: 'nasvet'
+        }
     };
 
     var PopaEditView = DokumentView.extend({

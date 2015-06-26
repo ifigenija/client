@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-sm-6 col-md-4" data-fields="naziv,zvrst,stPredstav,stPredavanj"></div>
                         <div class="col-sm-6 col-md-4" data-fields="stPredstavitev,stDelavnic,stDrugiDogodki,stProdukcij"></div>
-                        <div class="col-sm-6 col-md-4" data-fields="obiskDoma,casPriprave,casIzvedbe,prizorisca,sort"></div>
+                        <div class="col-sm-6 col-md-4" data-fields="obiskDoma,casPriprave,casIzvedbe,prizorisca"></div>
                     </div>
                     <div class="row">
                         <a class="btn btn-default utemelji">Utemeljitev</a>

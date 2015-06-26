@@ -27,9 +27,21 @@ define([
             name: i18next.t('entiteta.splosno'),
             event: 'splosni'
         },
-        {name: i18next.t('programDela.sklopEna'), event: 'sklopEna'},
-        {name: i18next.t('programDela.sklopDva'), event: 'sklopDva'},
-        {name: i18next.t('kazalniki.title'), event: 'kazalniki'}
+        {
+            title: i18next.t('programDela.d.sklopEna'),
+            name: i18next.t('programDela.sklopEna'),
+            event: 'sklopEna'
+        },
+        {
+            title: i18next.t('programDela.d.sklopDva'),
+            name: i18next.t('programDela.sklopDva'),
+            event: 'sklopDva'
+        },
+        {
+            title: i18next.t('kazalnik.d.kazalniki'),
+            name: i18next.t('kazalnik.title'),
+            event: 'kazalniki'
+        }
     ];
     var tabSklopDva = [
         {name: i18next.t('gostovanje.title'), event: 'gostovanja'},
