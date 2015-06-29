@@ -13,7 +13,7 @@ define([
         SeznamView,
         formTpl,
         schema,
-        Besedilo,
+        Model,
         i18next,
         baseUrl,
         Backgrid
@@ -94,7 +94,7 @@ define([
     };
 
     BesediloView.prototype.onDodaj = function () {
-        var model = new Besedilo.Model();
+        var model = new Model.Model();
         this.onSelected(model);
     };
 

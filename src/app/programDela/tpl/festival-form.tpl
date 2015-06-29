@@ -17,7 +17,7 @@
                         <div class="col-sm-6 col-md-4" data-fields="obiskDoma,casPriprave,casIzvedbe,prizorisca"></div>
                     </div>
                     <div class="row">
-                        <a class="btn btn-default utemelji">Utemeljitev</a>
+                        <a class="btn btn-default utemelji">{{t "gumb.Utemeljitev"}} <span class="vrednost fa"></span></a>
                     </div>
                 </form>
             </div>

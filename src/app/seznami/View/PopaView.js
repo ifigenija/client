@@ -10,7 +10,7 @@ define([
 ], function (
         SeznamView,
         PopaEditView,
-        Popa,
+        Model,
         i18next,
         baseUrl
         ) {
@@ -72,7 +72,7 @@ define([
         var editModel = model;
         
         if (model.get('id')) {
-            editModel = new Popa.Model({id: model.get('id')});
+            editModel = new Model.Model({id: model.get('id')});
             editModel.fetch();
         }
         return new PopaEditView({
@@ -83,15 +83,8 @@ define([
     };
 
     PopaView.prototype.onDodaj = function () {
-        var model = new Popa.Model();
+        var model = new Model.Model();
         this.onSelected(model);
-    };
-
-
-    PopaView.prototype.dodajVcollection = function (model) {
-
-        this.collection.add(model);
-
     };
 
     return PopaView;

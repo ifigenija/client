@@ -11,7 +11,7 @@ define([
 ], function (
         SeznamView,
         OsebaEditView,
-        Oseba,
+        Model,
         i18next,
         baseUrl,
         Radio
@@ -87,7 +87,7 @@ define([
         var editModel = model;
         
         if (model.get('id')) {
-            editModel = new Oseba.Model({id: model.get('id')});
+            editModel = new Model.Model({id: model.get('id')});
             editModel.fetch();
         }
         return new OsebaEditView({
@@ -98,13 +98,8 @@ define([
     };
 
     OsebaView.prototype.onDodaj = function () {
-        var model = new Oseba.Model();
+        var model = new Model.Model();
         this.onSelected(model);
-    };
-
-    OsebaView.prototype.dodajVcollection = function (model) {
-
-        this.collection.add(model);
     };
 
     return OsebaView;

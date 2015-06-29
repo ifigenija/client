@@ -11,6 +11,7 @@ define([
     'template!../tpl/festival-form.tpl',
     'formSchema!programFestival',
     'underscore',
+    'app/Max/View/ModalTextArea'
 ], function (
         Backgrid,
         i18next,
@@ -20,7 +21,8 @@ define([
         PostavkeView,
         formTpl,
         schema,
-        _
+        _,
+        modalTextArea
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -113,33 +115,11 @@ define([
      * @returns {undefined}
      */
     FestivalView.prototype.onUtemelji = function () {
-        var self = this;
 
-        require(['backbone-modal'], function (Modal) {
-
-            var View = Marionette.LayoutView.extend({
-                model: self.model,
-                template: Handlebars.compile('<form><textarea type="TextArea" class="utemeljitev form-control">{{opredelitevDrugiDogodki}}</textarea></form>'),
-                title: i18next.t('Utemeljitev')
-            });
-
-            var view = new View({});
-
-            var modal = new Modal({
-                content: view,
-                animate: true,
-                okText: i18next.t("std.shrani"),
-                cancelText: i18next.t("std.preklici"),
-                title: view.title
-            }).open();
-
-            modal.listenTo(modal, 'ok', function () {
-                var text = this.$('.utemeljitev').val();
-                if (text) {
-                    self.$('a.btn.utemelji').append(' <i class="fa fa-check"></i>');
-                    self.model.set("opredelitevDrugiDogodki", text);
-                }
-            });
+        modalTextArea({title: i18next.t('Utemeljitev')},
+        function (vrednost) {
+            this.model.set({opredelitevDrugiDogodki: vrednost});
+            this.$('.vrednost.fa').toggleClass('fa-check');
         });
     };
     /**
@@ -148,21 +128,20 @@ define([
      */
     FestivalView.prototype.onDodaj = function () {
         PostavkeView.prototype.onDodaj.apply(this, arguments);
-        this.zapSortSt();
+        this.zapSortSt(this.collection, 'sort');
     };
 
-    FestivalView.prototype.zapSortSt = function () {
-        var collection = this.collection.fullCollection || this.collection;
+    FestivalView.prototype.zapSortSt = function (collection, attrSort) {
         var min = -100;
         _.each(collection.models, function (e) {
-            var sort = e.get('sort');
+            var sort = e.get(attrSort);
             if (sort >= min) {
                 min = sort;
             }
         });
 
         if (min >= 0) {
-            //this.model.set({sort: min});
+            this.model.set({sort: min + 1});
             this.form.fields.sort.editor.setValue(min + 1);
         }
     };
