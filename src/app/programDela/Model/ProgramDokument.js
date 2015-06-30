@@ -1,104 +1,133 @@
 define([
     'baseUrl',
     'app/Dokument/Model/Dokument',
-    'underscore',
-    'app/programDela/Model/DrugiVir'
+    'underscore'
 ], function (
         baseUrl,
         Dokument,
-        _,
-        DrugiVir
+        _
         ) {
 
-    var DrugiVirPostavka = Dokument.Postavka.extend({
-        nestedCollections: {
-            drugiViri: {collection: DrugiVir.Collection, mappedBy: 'enotaPrograma'}
-        },
-        urlRoot: baseUrl + '/rest/programpremiera',
-        dodajPostavko: function (nested) {
+    var DrugiVirModel = Dokument.Postavka.extend({
+        urlRoot: baseUrl + '/rest/drugiVir'
+    });
 
-            nested = nested || 'drugiViri';
-            var postavka = new DrugiVir.Model({
-                enotaPrograma: this.id
-            });
+    var DrugiViriCollection = Dokument.PostavkaCollection.extend({
+        model: DrugiVirModel,
+        url: baseUrl + '/rest/drugiVir'
+    });
+
+    var KoprodukcijaModel = Dokument.Postavka.extend({
+        urlRoot: baseUrl + '/rest/produkcijaDelitev'
+    });
+
+    var KoprodukcijeCollection = Dokument.PostavkaCollection.extend({
+        model: KoprodukcijaModel,
+        url: baseUrl + '/rest/produkcijaDelitev'
+    });
+
+    var EnotaProgramaPostavka = Dokument.Postavka.extend({
+        nestedCollections: {
+            drugiViri: {collection: DrugiViriCollection, mappedBy: 'enotaPrograma'},
+            koprodukcije: {collection: KoprodukcijeCollection, mappedBy: 'enotaPrograma'}
+        },
+        dodajPostavko: function (nested) {
+            if (!_.contains(_.keys(this.nestedCollections), nested)) {
+                console.log('napačni dodaj', nested);
+            }
+            var postavka;
+            switch (nested) {
+                case 'drugiViri':
+                    postavka = new DrugiVirModel({
+                        enotaPrograma: this.id
+                    });
+                    break;
+                case 'koprodukcije':
+                    postavka = new KoprodukcijaModel({
+                        enotaPrograma: this.id
+                    });
+                    break;
+            }
             postavka.dokument = this;
             return postavka;
         }
     });
-
-    var Gostovanje = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/programGostovanje'
-    });
-    var GostovanjeCollection = Dokument.PostavkaCollection.extend({
-        model: Gostovanje,
-        url: baseUrl + '/rest/programGostovanje',
-        index: 'sort'
-    });
-
-
-    var Gostujoca = Dokument.Postavka.extend({
+    
+    var GostujocaModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programGostujoca'
     });
     var GostujocaCollection = Dokument.PostavkaCollection.extend({
-        model: Gostujoca,
+        model: GostujocaModel,
         url: baseUrl + '/rest/programGostujoca',
         index: 'sort'
     });
 
 
-    var Izjemni = Dokument.Postavka.extend({
+    var IzjemniModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programIzjemni'
     });
     var IzjemniCollection = Dokument.PostavkaCollection.extend({
-        model: Izjemni,
+        model: IzjemniModel,
         url: baseUrl + '/rest/programIzjemni',
         index: 'sort'
     });
+    
 
-
-    var PonovitevPremiere = Dokument.Postavka.extend({
+    var PonovitevPremiereModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programPonovitevPremiere'
     });
     var PonovitvePremierCollection = Dokument.PostavkaCollection.extend({
-        model: PonovitevPremiere,
+        model: PonovitevPremiereModel,
         url: baseUrl + '/rest/programPonovitevPremiere',
         index: 'sort'
     });
+    
 
-    var PonovitevPrejsnje = Dokument.Postavka.extend({
+    var PonovitevPrejsnjeModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programPonovitevPrejsnjih'
     });
     var PonovitvePrejsnjihCollection = Dokument.PostavkaCollection.extend({
-        model: PonovitevPrejsnje,
+        model: PonovitevPrejsnjeModel,
         url: baseUrl + '/rest/programPonovitevPrejsnjih',
         index: 'sort'
     });
 
 
-    var Premiera = Dokument.Postavka.extend({
+    var PremieraModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programPremiera'
     });
     var PremiereCollection = Dokument.PostavkaCollection.extend({
-        model: DrugiVirPostavka,
+        model: PremieraModel,
         url: baseUrl + '/rest/programPremiera',
         index: 'sort'
     });
+    
+    
+    var GostovanjeModel = EnotaProgramaPostavka.extend({
+        urlRoot: baseUrl + '/rest/programGostovanje'
+    });
+    var GostovanjeCollection = Dokument.PostavkaCollection.extend({
+        model: GostovanjeModel,
+        url: baseUrl + '/rest/programGostovanje',
+        index: 'sort'
+    });
+    
 
-
-    var Festival = Dokument.Postavka.extend({
+    var FestivalModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programFestival'
     });
     var FestivaliCollection = Dokument.PostavkaCollection.extend({
-        model: Festival,
+        model: FestivalModel,
         url: baseUrl + '/rest/programFestival',
         index: 'sort'
     });
+    
 
-    var Razno = Dokument.Postavka.extend({
+    var RaznoModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programRazno'
     });
     var RazniCollection = Dokument.PostavkaCollection.extend({
-        model: Razno,
+        model: RaznoModel,
         url: baseUrl + '/rest/programRazno',
         index: 'sort'
     });
@@ -125,42 +154,42 @@ define([
             var postavka;
             switch (nested) {
                 case 'gostovanja':
-                    postavka = new Gostovanje({
+                    postavka = new GostovanjeModel({
                         dokument: this.id
                     });
                     break;
                 case 'gostujoci':
-                    postavka = new Gostujoca({
+                    postavka = new GostujocaModel({
                         dokument: this.id
                     });
                     break;
                 case 'izjemni':
-                    postavka = new Izjemni({
+                    postavka = new IzjemniModel({
                         dokument: this.id
                     });
                     break;
                 case 'ponovitvePremiere':
-                    postavka = new PonovitevPremiere({
+                    postavka = new PonovitevPremiereModel({
                         dokument: this.id
                     });
                     break;
                 case 'ponovitvePrejsnjih':
-                    postavka = new PonovitevPrejsnje({
+                    postavka = new PonovitevPrejsnjeModel({
                         dokument: this.id
                     });
                     break;
                 case 'premiere':
-                    postavka = new Premiera({
+                    postavka = new PremieraModel({
                         dokument: this.id
                     });
                     break;
                 case 'festivali':
-                    postavka = new Festival({
+                    postavka = new FestivalModel({
                         dokument: this.id
                     });
                     break;
                 case 'programiRazno':
-                    postavka = new Razno({
+                    postavka = new RaznoModel({
                         dokument: this.id
                     });
                     break;
@@ -171,6 +200,6 @@ define([
     });
     return {
         Model: ProgramDelaModel,
-        Postavka : DrugiVirPostavka
+        Postavka: PremieraModel
     };
 });

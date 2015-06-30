@@ -100,6 +100,7 @@ define([
     OsebaView.prototype.onDodaj = function () {
         var model = new Model.Model();
         this.onSelected(model);
+        this.zapSortSt(this.collection, 'sort');
     };
 
     return OsebaView;

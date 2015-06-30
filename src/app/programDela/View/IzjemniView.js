@@ -4,13 +4,13 @@
 define([
     'app/Max/Module/Backgrid',
     'i18next',
-    'app/Dokument/View/PostavkeView',
+    'app/programDela/View/EnotaProgramaView',
     'template!../tpl/izjemni-form.tpl',
     'formSchema!programIzjemni'
 ], function (
         Backgrid,
         i18next,
-        PostavkeView,
+        EnotaProgramaView,
         formTpl,
         schema
         ) {
@@ -18,7 +18,7 @@ define([
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
-    var IzjemniView = PostavkeView.extend({
+    var IzjemniView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         name: 'Izjemni',

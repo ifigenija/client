@@ -11,7 +11,8 @@ define([
     'template!../tpl/seznam.html',
     'app/Max/Model/MaxPageableCollection',
     'backbone',
-    'app/Max/View/Toolbar'
+    'app/Max/View/Toolbar',
+    'underscore'
 ], function (
         Marionette,
         Radio,
@@ -22,7 +23,8 @@ define([
         seznamTpl,
         Coll,
         Backbone,
-        Toolbar
+        Toolbar,
+        _
         ) {
 
     var SeznamView = Marionette.LayoutView.extend({
@@ -223,7 +225,6 @@ define([
         this.formR.empty();
         this.renderToolbar();
         this.zamenjajUrl();
-        console.log("test");
     };
 
     SeznamView.prototype.getTitle = function (model) {
@@ -232,7 +233,7 @@ define([
     };
     
     SeznamView.prototype.onDodaj = function () {
-        console.log("Potrebno je overridat funkcijo onDodaj");
+        this.zapSortSt(this.collection, 'sort');
     };
 
 
@@ -262,6 +263,21 @@ define([
             model: model
         });
 
+    };
+    
+    SeznamView.prototype.zapSortSt = function (collection, attrSort) {
+        var min = -100;
+        _.each(collection.models, function (e) {
+            var sort = e.get(attrSort);
+            if (sort >= min) {
+                min = sort;
+            }
+        });
+
+        if (min >= 0) {
+            this.model.set({sort: min + 1});
+            this.form.fields.sort.editor.setValue(min + 1);
+        }
     };
 
     return SeznamView;

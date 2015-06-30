@@ -17,7 +17,7 @@
                         <div class="col-sm-6 col-md-4" data-fields="obiskDoma,casPriprave,casIzvedbe,prizorisca"></div>
                     </div>
                     <div class="row">
-                        <a class="btn btn-default utemelji">{{t "gumb.Utemeljitev"}} <span class="vrednost fa"></span></a>
+                        <div class="col-sm-6 col-md-offset-3" data-fields="opredelitevDrugiDogodki"></div>
                     </div>
                 </form>
             </div>
@@ -58,6 +58,9 @@
                     <div class="row">
                         <div class="col-sm-6" data-fields="zaproseno,celotnaVrednost,lastnaSredstva"></div>
                         <div class="col-sm-6" data-fields="vlozekKoproducenta,drugiJavni"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-offset-3" data-fields="opredelitevDrugiViri"></div>
                     </div>
                 </form>
             </div>

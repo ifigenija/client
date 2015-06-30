@@ -51,15 +51,6 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('pogodba.vrednostVaje'),
-                name: 'vrednostVaje',
-                sortable: true,
-                total: 'sum'
-            },
-            {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
                 label: i18next.t('pogodba.vrednostPredstave'),
                 name: 'vrednostPredstave',
                 sortable: true,

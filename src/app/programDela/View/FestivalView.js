@@ -7,36 +7,31 @@ define([
     'marionette',
     'radio',
     'app/bars',
-    'app/Dokument/View/PostavkeView',
+    'app/programDela/View/EnotaProgramaView',
     'template!../tpl/festival-form.tpl',
     'formSchema!programFestival',
-    'underscore',
-    'app/Max/View/ModalTextArea'
+    'underscore'
 ], function (
         Backgrid,
         i18next,
         Marionette,
         Radio,
         Handlebars,
-        PostavkeView,
+        EnotaProgramaView,
         formTpl,
         schema,
-        _,
-        modalTextArea
+        _
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
-    var FestivalView = PostavkeView.extend({
+    var FestivalView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         name: 'Festival',
         detailName: 'festivali',
         formTitle: i18next.t('festival.title'),
-        triggers: {
-            'click .utemelji': 'utemelji'
-        },
         gridMeta: [
             {
                 headerCell: hc,
@@ -109,43 +104,5 @@ define([
             }
         ]
     });
-
-    /**
-     * Odpre modal za utemeljitev
-     * @returns {undefined}
-     */
-    FestivalView.prototype.onUtemelji = function () {
-
-        modalTextArea({title: i18next.t('Utemeljitev')},
-        function (vrednost) {
-            this.model.set({opredelitevDrugiDogodki: vrednost});
-            this.$('.vrednost.fa').toggleClass('fa-check');
-        });
-    };
-    /**
-     * Odpre modal za utemeljitev
-     * @returns {undefined}
-     */
-    FestivalView.prototype.onDodaj = function () {
-        PostavkeView.prototype.onDodaj.apply(this, arguments);
-        this.zapSortSt(this.collection, 'sort');
-    };
-
-    FestivalView.prototype.zapSortSt = function (collection, attrSort) {
-        var min = -100;
-        _.each(collection.models, function (e) {
-            var sort = e.get(attrSort);
-            if (sort >= min) {
-                min = sort;
-            }
-        });
-
-        if (min >= 0) {
-            this.model.set({sort: min + 1});
-            this.form.fields.sort.editor.setValue(min + 1);
-        }
-    };
-
-
     return FestivalView;
 });

@@ -15,43 +15,27 @@ define([
     var PogodbaCollection = Dokument.PostavkaCollection.extend({
         model: PogodbaModel,
         url: baseUrl + '/rest/pogodba/vse',
-        index: 'sifra',
-        mode: 'client'
+        index: 'sifra'
     });
 
-    var KoprodukcijaModel = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/produkcijaDelitev'
-    });
-
-    var KoprodukcijaCollection = Dokument.PostavkaCollection.extend({
-        model: KoprodukcijaModel,
-        url: baseUrl + '/rest/produkcijaDelitev',
-        index: 'koproducent',
-        mode: 'client'
-    });
-
-    var AlternacijaModel = Dokument.Model.extend({
+    var AlternacijaModel = Dokument.Postavka.extend({
         urlRoot: baseUrl + '/rest/alternacija'
-
     });
 
     var AlternacijaCollection = Dokument.PostavkaCollection.extend({
         model: AlternacijaModel,
         url: baseUrl + '/rest/alternacija/vse',
-        index: 'sifra',
-        mode: 'client'
+        index: 'sort'
     });
 
-    var StrosekModel = Dokument.Model.extend({
+    var StrosekModel = Dokument.Postavka.extend({
         urlRoot: baseUrl + '/rest/strosekUprizoritve'
-
     });
 
     var StrosekCollection = Dokument.PostavkaCollection.extend({
         model: StrosekModel,
         url: baseUrl + '/rest/strosekUprizoritve/vse',
-        index: 'sort',
-        mode: 'client'
+        index: 'sort'
     });
 
     var UprizoritevStrosekModel = Dokument.Model.extend({
@@ -59,7 +43,6 @@ define([
         nestedCollections: {
             alternacije: {collection: AlternacijaCollection, mappedBy: 'uprizoritev'},
             pogodbe: {collection: PogodbaCollection, mappedBy: 'uprizoritev'},
-            koprodukcije: {collection: KoprodukcijaCollection, mappedBy: 'uprizoritev'},
             stroski: {collection: StrosekCollection, mappedBy: 'uprizoritev'}
         },
         dodajPostavko: function (nested) {
@@ -69,11 +52,6 @@ define([
             }
             var postavka;
             switch (nested) {
-                case 'koprodukcije':
-                    postavka = new KoprodukcijaModel({
-                        uprizoritev: this.get('id')
-                    });
-                    break;
                 case 'alternacije':
                     postavka = new AlternacijaModel({
                         uprizoritev: this.get('id')

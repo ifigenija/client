@@ -5,8 +5,8 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/Dokument/View/PostavkeView',
-    'template!../tpl/drugiVir-form.tpl',
-    'formSchema!DrugiVir'
+    'template!../tpl/koprodukcija-form.tpl',
+    'formSchema!produkcijaDelitev'
 ], function (
         Backgrid,
         i18next,
@@ -21,31 +21,33 @@ define([
     var DrugiVirView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'DrugiVir',
-        detailName: 'drugiViri',
-        formTitle: i18next.t('drugiVir.title'),
+        name: 'Koprodukcije',
+        detailName: 'koprodukcije',
+        formTitle: i18next.t('koprodukcija.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.opis'),
-                name: 'opis',
+                label: i18next.t('entiteta.koproducent'),
+                name: 'naziv',
                 sortable: true
             },
             {
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('drugiVir.znesek'),
-                name: 'znesek',
+                label: i18next.t('koprodukcija.zaprosenProcent'),
+                name: 'zaprosenProcent',
                 total: 'sum',
                 sortable: true
             },
             {
-                cell: 'boolean',
+                headerCell: hc,
+                cell: 'number',
                 editable: false,
-                label: i18next.t('drugiVir.mednarodni'),
-                name: 'mednarodni',
+                label: i18next.t('koprodukcija.odstotekFinanciranja'),
+                name: 'odstotekFinanciranja',
+                total: 'sum',
                 sortable: true
             },
             {

@@ -4,33 +4,26 @@
 define([
     'app/Max/Module/Backgrid',
     'i18next',
-    'app/Dokument/View/PostavkeView',
-    'app/programDela/View/DrugiVirView',
+    'app/programDela/View/EnotaProgramaView',
     'template!../tpl/premiera-form.tpl',
-    'formSchema!programPremiera',
-    'app/programDela/Model/DrugiVir'
+    'formSchema!programPremiera'
 ], function (
         Backgrid,
         i18next,
-        PostavkeView,
-        DrugiVirView,
+        EnotaProgramaView,
         formTpl,
-        schema,
-        DrugiVir
+        schema
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
-    var PremieraView = PostavkeView.extend({
+    var PremieraView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         name: 'Premiera',
         detailName: 'premiere',
         formTitle: i18next.t('premiera.title'),
-        regions: {
-            drugiViriR: '.region-drugiViri'
-        },
         gridMeta: [
             {
                 headerCell: hc,
@@ -123,21 +116,6 @@ define([
             }
         ]
     });
-
-    PremieraView.prototype.onRenderForm = function (form) {
-        if (!this.isNew()) {
-            this.renderDrugiViri();
-        }
-    };
-
-    PremieraView.prototype.renderDrugiViri = function () {
-        var drugiVirView = new DrugiVirView({
-            collection: this.model.drugiViriCollection,
-            dokument: this.model
-        });
-        
-        this.drugiViriR.show(drugiVirView);
-    };
 
     return PremieraView;
 });

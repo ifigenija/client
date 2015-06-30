@@ -35,10 +35,6 @@ define([
             event: 'pogodbe'
         },
         {
-            name: i18next.t('strupr.koprodukcije'),
-            event: 'koprodukcije'
-        },
-        {
             name: i18next.t('strupr.stroski'),
             event: 'stroski'
         }
@@ -109,15 +105,6 @@ define([
     UprizoritevStrosekEditView.prototype.onAlternacije = function () {
         this.skrijSplosni();
         this.renderAlternacije();
-    };
-
-    /**
-     * Klik na tab za koprodukcija podatke 
-     * @returns {undefined}
-     */
-    UprizoritevStrosekEditView.prototype.onKoprodukcije = function () {
-        this.skrijSplosni();
-        this.renderKoprodukcije();
     };
     /**
      * Klik na tab za pogodbe podatke 
@@ -195,35 +182,6 @@ define([
             });
 
             view.listenTo(view, "save:success", function () {
-                view.renderList();
-            });
-
-            self.regionDetail.show(view);
-        });
-    };
-
-    /**
-     * 
-     * Render pogleda za ostale sodelujoče
-     * 
-     * @returns {undefined}
-     */
-    UprizoritevStrosekEditView.prototype.renderKoprodukcije = function () {
-        var c = this.model.koprodukcijeCollection;
-//        if (c.length === 0) {
-            c.fetch();
-//        }
-
-        var self = this;
-
-        require(['app/produkcija/View/KoprodukcijaView'], function (KoprodukcijaView) {
-            var view = new KoprodukcijaView({
-                collection: c,
-                dokument: self.model
-            });
-
-            view.listenTo(view, "save:success", function () {
-                c.fetch();
                 view.renderList();
             });
 
