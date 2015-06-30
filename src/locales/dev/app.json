@@ -334,13 +334,15 @@
         "zvrstSurs": "Zvrst po SURS",
         "steviloVaj": "Število vaj",
         "planiranoSteviloVaj": "Planirano število vaj",
+        "skupniStrosek": "Skupni strošek",
         "t": {
             "datumPremiere": "Premiera"
         },
         "d": {
             "maticniOder": "Matični oder / privzeto prizorišče uprizoritve",
             "gostujoca": "Ali je uprizoritev gostujoča",
-            "sloAvtor": "Ali je slovenski avtor uprizoritve"
+            "sloAvtor": "Ali je slovenski avtor uprizoritve",
+            "skupniStrosek": "Planiran skupni strošek projekta"
         }
 
     },
@@ -358,7 +360,7 @@
         "tipFunkcije": "Tip funkcije",
         "d": {
             "vodjaEkipe": "Ali je vodja področja",
-            "pomembna": "Ali je funkcija pomembna"
+            "pomembna": "Ali je funkcija izpostavljena"
         }
     },
     "alternacija": {
@@ -369,9 +371,11 @@
         "koprodukcija": "Koprodukcija",
         "pogodba": "Pogodba",
         "zaposlitev": "Zaposlitev",
+        "pomembna": "Pomembna",
         "d": {
             "zaposlen": "Ali je zaposlen",
-            "privzeti": "Ali je privzeti"
+            "privzeti": "Ali je privzeti",
+            "pomembna": "Ali je alternacija pomembna in se jo prikaže v programu dela?"
         }
     },
     "prodel": {
@@ -386,6 +390,7 @@
         "skupniStrosek": "Skupni strošek",
         "zaprosenProcent": "Zaprošen procent",
         "koproducent": "Koproducent",
+        "maticniKop": "Matični",
         "t": {
             "lastnaSredstva": "Sredstva",
             "drugiJavni": "Viri",
@@ -395,6 +400,7 @@
             "nasStrosek": "Ali je naš strošek",
             "avtorskih": "Strošek avtorskih honorarjev",
             "tantieme": "Stroški tantiem",
+            "maticniKop": "Ali je koproducent lastno gledališče",
             "uprizoritev": "Uprizoritev oz. projekt, za katerega je strošek"
         }
     },
@@ -459,12 +465,15 @@
     },
     "pogodba": {
         "title": "Pogodbe",
-        "vrednostVaje": "Vrednost vaje",
+        "vrednostVaj": "Vrednost vaj",
         "vrednostPredstave": "Vrednost predstave",
         "vrednostUre": "Vrednost ure",
         "vrednostDo": "Vrednost do",
         "popa": "Klient",
-        "trr": "TRR"
+        "trr": "TRR",
+        "d": {
+            "vrednostVaj": "Pavšalna vrednost za vse vaje"
+        }
     },
     "programDela": {
         "nav": {
@@ -474,10 +483,38 @@
         "nova": "Nov program dela",
         "dodajPD": "Dodaj program dela",
         "sezona": "Sezona",
+        "stPremier": "Št. prem.",
+        "stPonPrej": "Št. prej.",
+        "stPonPrejVelikih": "Št. prej. vel.",
+        "stPonPrejMalih": "Št. prej. malih",
+        "stPonPrejMalihKopr": "Št. prej. malih kopr.",
+        "stPonPrejSredKopr": "Št. prej. sred. kopr.",
+        "stPonPrejVelikihKopr": "Št. prej. vel. kopr.",
+        "vrPS1": "Vr. PS1",
+        "vrPS1Do": "Vr. do prem.",
+        "vrPS1Mat": "Vr. na mat.",
+        "vrPS1GostovSZ": "Vr. gost Slo zam.",
+        "stNekomerc": "Št. nekom.",
+        "stIzvPonPrem": "Št. pon. prem.",
+        "stIzvPrej": "Št. prej. ",
+        "stIzvGostuj": "Št. gostuj.",
+        "stIzvOstalihNek": "Št. ostalih",
+        "stGostovanjSlo": "Št. gost. Slo",
+        "stGostovanjZam": "Št. gpst. zam",
+        "stGostovanjInt": "Št. gost. int.",
+        "stObiskNekom": "Št. obisk. nekom.",
+        "stObiskNekomMat": "Št. obisk. mat.",
+        "stObiskNekomGostSlo": "Št. obisk. gost. Slo. ",
+        "stObiskNekomGostZam": "Št. obisk. gost. zam.",
+        "stObiskNekomGostInt": "Št. obisk. gost. int. ",
+        "avgObiskPrired": "Povpr. št. obisk.",
         "potrjenProgram": "Potrjen program",
         "avgZasedDvoran": "Povprečna zasedenost lastnih dvoran",
         "avgCenaVstopnice": "Povprečna cena vstopnice",
         "stProdVstopnic": "Število prodanih vstopnic",
+        "stKoprodukcij": "Št. kopr.",
+        "stKoprodukcijInt": "Št. medn. kopr.",
+        "stKoprodukcijNVO": "Št kopr. z NVO",
         "stZaposlenih": "Število vseh zaposlenih v javnem zavodu",
         "stZaposIgralcev": "Število zaposlenih igralcev",
         "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev",
@@ -485,11 +522,41 @@
         "stHonorarnihIgr": "Načrtovano število honorarnih igralcev",
         "stHonorarnihIgrTujJZ": "Načrtovano število honorarnih zunanjih sodelavcev",
         "sredstvaInt": "Višina sredstev iz mednarodnih virov",
+        "sredstvaAvt": "Sredstva avt.",
         "d": {
+            "stPremier": "Število premier",
+            "stPonPrej": "Število ponovitev premier prejšnjih sezon",
+            "stPonPrejVelikih": "Število velikih predstav ponovitev premier prejšnjih sezon",
+            "stPonPrejMalih": "Število malih predstav ponovitev premier prejšnjih sezon",
+            "stPonPrejMalihKopr": "Število malih koprodukcij ponovitev premier prejšnjih sezon",
+            "stPonPrejSredKopr": "Število srednjih koprodukcij ponovitev premier prejšnjih sezon",
+            "stPonPrejVelikihKopr": "Število velikih koprodukcij ponovitev premier prejšnjih sezon",
+            "vrPS1": "Celotna vrednost lastne produkcije in postprodukcije (ponovitev) - programski sklop 1",
+            "vrPS1Do": "Vrednost produkcije do premiere",
+            "vrPS1Mat": "Vrednost ponovitev na matičnem odru",
+            "vrPS1GostovSZ": "Vrednost ponovitev na gostovanjih po SLO in zamejstvu",
+            "stNekomerc": "Št. vseh javnih nekomercialnih prireditev skupaj",
+            "stIzvPonPrem": "Št. izvedb premiernih produkcij",
+            "stIzvPrej": "Št. izvedb ponovitev iz prejšnjih sezon",
+            "stIzvGostuj": "Št. izvedb gostujočih predstav",
+            "stIzvOstalihNek": "Št. ostalih javnih nekomercialnih prireditev",
+            "stGostovanjSlo": "Št. gostovanj po Sloveniji",
+            "stGostovanjZam": "Št. gostovanj v zamejstvu",
+            "stGostovanjInt": "Št. mednarodnih gostovanj (brez zamejstva)",
+            "stObiskNekom": "Št. obiskovalcev vseh nekomercialnih prireditev",
+            "stObiskNekomMat": "V lastnih dvoranah ali matičnih prizoriščih",
+            "stObiskNekomGostSlo": "Na gostovanjih po Sloveniji",
+            "stObiskNekomGostZam": "Na gostovanjih v zamejstvu",
+            "stObiskNekomGostInt": "Na mednarodnih gostovanjih (brez zamejstva)",
+            "avgObiskPrired": "Povprečno število obiskovalcev na prireditev",
+            "stKoprodukcij": "Št. koprodukcij",
+            "stKoprodukcijInt": "Št. koprodukcij z mednarodnimi koproducenti",
+            "stKoprodukcijNVO": "Št. koprodukcij s slovenskimi NVO",
             "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev (popvprečno št. nastopov v letu)",
             "stHonorarnih": "Načrtovano število honorarnih zunanjih sodelavcev",
             "stHonorarnihIgr": "Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev",
-            "stHonorarnihIgrTujJZ": "Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev - od tega igralcev, zaposlenih v drugih JZ"
+            "stHonorarnihIgrTujJZ": "Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev - od tega igralcev, zaposlenih v drugih JZ",
+            "sredstvaAvt": "Višina sredstev, namenjenih avtorskim honorarjem"
         }
     },
     "ep": {
@@ -619,6 +686,19 @@
         "tipstroska": "Tip stroška",
         "d": {
             "tipstroska": "Tip stroška projekta/uprizoritve"
+        }
+    },
+    "drugivir": {
+        "title": "Drugi vir",
+        "znesek": "Znesek",
+        "opis": "Opis",
+        "enotaPrograma": "enota pr.",
+        "mednarodni": "medn.",
+        "d": {
+            "znesek": "Znesek drugega vira",
+            "opis": "Opis drugega vira",
+            "enotaPrograma": "Enota programa drugega vira",
+            "mednarodni": "Ali je drugi vir mednarodni"
         }
     }
 }
