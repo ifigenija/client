@@ -85,6 +85,12 @@ define([
             }
         ]
     });
+    
+    PogodbaView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [[this.buttons.shrani, this.buttons.preklici, this.buttons.nasvet]] : [[]];
+
+    };
 
     return PogodbaView;
 });

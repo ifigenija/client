@@ -7,7 +7,7 @@ define([
     'i18next',
     'template!../tpl/program.tpl',
     'template!../tpl/program-item.tpl',
-    '../Model/Program',
+    '../Model/ProgramSeznam',
     '../Model/ProgramDokument',
     './ProgramDokView',
     'app/Max/View/PaginatorControl'
@@ -17,7 +17,7 @@ define([
         i18next,
         tpl,
         itemTpl,
-        ProgramModel,
+        ProgramSeznamModel,
         ProgramDokument,
         ProgramDokView,
         PaginatorControl
@@ -58,7 +58,7 @@ define([
     });
 
     ProgramDelaView.prototype.initialize = function () {
-        this.collection = new ProgramModel.Collection();
+        this.collection = new ProgramSeznamModel.Collection();
         this.collection.state.perPage = 9;
         this.paginatorControll = new PaginatorControl({
             collection: this.collection

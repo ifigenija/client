@@ -7,16 +7,20 @@ define([
     'app/Dokument/View/DokumentView',
     'template!../tpl/program-dokument.tpl',
     'template!../tpl/program-form.tpl',
+    'template!../tpl/kazalniki-tabel.tpl',
     'formSchema!programDela',
-    'app/Max/View/TabControl'
+    'app/Max/View/TabControl',
+    'marionette'
 ], function (
         Radio,
         i18next,
         DokumentView,
         dokumentTpl,
         formTpl,
+        kazalnikiTabelaTpl,
         formSchema,
-        TabControl
+        TabControl,
+        Marionette
         ) {
 
     var ch = Radio.channel('layout');
@@ -39,7 +43,7 @@ define([
         },
         {
             title: i18next.t('kazalnik.d.kazalniki'),
-            name: i18next.t('kazalnik.title'),
+            name: i18next.t('programDela.kazalniki'),
             event: 'kazalniki'
         }
     ];
@@ -304,6 +308,24 @@ define([
             self.razniR.show(view);
             return view;
         });
+    };
+    /**
+     * Izris kazalnikov
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onKazalniki = function () {
+        this.deselectTab();
+        this.$('.pnl-kazalniki').addClass('active');
+        
+        var View = Marionette.ItemView.extend({
+           template: kazalnikiTabelaTpl
+        });
+        
+        var view = new View({
+            model: this.model
+        });
+        
+        this.kazalnikiR.show(view);
     };
 
     return ProgramDokView;

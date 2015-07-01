@@ -517,16 +517,20 @@
         "stKoprodukcij": "Št. kopr.",
         "stKoprodukcijInt": "Št. medn. kopr.",
         "stKoprodukcijNVO": "Št kopr. z NVO",
-        "stZaposlenih": "Število vseh zaposlenih v javnem zavodu",
-        "stZaposIgralcev": "Število zaposlenih igralcev",
-        "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev",
-        "stHonorarnih": "Načrtovano število honorarnih zunanjih sodelavcev",
-        "stHonorarnihIgr": "Načrtovano število honorarnih igralcev",
-        "stHonorarnihIgrTujJZ": "Načrtovano število honorarnih zunanjih sodelavcev",
+        
+        "stZaposlenih": "Št. zap. v JZ",
+        "stZaposIgralcev": "Št. zap. igr.",
+        "avgStNastopovIgr": "Povprečna zasedenost zap. igr.",
+        "stHonorarnih": "Načrtovano št. hon. sod.",
+        "stHonorarnihIgr": "Načrtovano št. hon. igr.",
+        "stHonorarnihIgrTujJZ": "Načrtovano št. hon. zunanjih sod.",
         "sredstvaInt": "Višina sredstev iz mednarodnih virov",
+        
         "sklopEna": "Programski sklop I.",
         "sklopDva": "Programski sklop II.",
         "sredstvaAvt": "Sredstva avt.",
+        "kazalniki": "Kazalniki",
+        "nacrtovano": "Načtrovano",
         "d": {
             "stPremier": "Število premier",
             "stPonPrej": "Število ponovitev premier prejšnjih sezon",
@@ -557,10 +561,17 @@
             "stKoprodukcijInt": "Št. koprodukcij z mednarodnimi koproducenti",
             "stKoprodukcijNVO": "Št. koprodukcij s slovenskimi NVO",
             "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev (popvprečno št. nastopov v letu)",
-            "stHonorarnih": "Načrtovano število honorarnih zunanjih sodelavcev",
+            "stHonorarnih": "Načrtovano število honorarnih sodelavcev",
             "stHonorarnihIgr": "Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev",
             "stHonorarnihIgrTujJZ": "Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev - od tega igralcev, zaposlenih v drugih JZ",
-            "sredstvaAvt": "Višina sredstev, namenjenih avtorskim honorarjem"
+            "sredstvaAvt": "Višina sredstev, namenjenih avtorskim honorarjem",
+            "stZaposlenih": "Število vseh zaposlenih v javnem zavodu",
+            "stZaposIgralcev": "Število zaposlenih igralcev",
+            "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev",
+            "stHonorarnih": "Načrtovano število honorarnih sodelavcev",
+            "stHonorarnihIgr": "Načrtovano število honorarnih igralcev",
+            "stHonorarnihIgrTujJZ": "Načrtovano število honorarnih zunanjih sodelavcev",
+            "sredstvaInt": "Višina sredstev iz mednarodnih virov"
         }
     },
     "ep": {
@@ -673,9 +684,6 @@
     },
     "izjemni": {
         "title": "Izjemni programi"
-    },
-    "kazalniki": {
-        "title": "Kazalniki"
     },
     "drugiVir": {
         "znesek": "Znesek",

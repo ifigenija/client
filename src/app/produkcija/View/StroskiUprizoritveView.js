@@ -150,7 +150,7 @@ define([
         require(['app/produkcija/View/AlternacijaView'], function (AlternacijaView) {
 
             var view = new AlternacijaView({
-                collection: c,
+                collection: self.model.alternacijeCollection,
                 dokument: self.model
             });
 
@@ -177,7 +177,7 @@ define([
 
         require(['app/produkcija/View/PogodbaView'], function (PogodbaView) {
             var view = new PogodbaView({
-                collection: c,
+                collection: self.model.pogodbeCollection,
                 dokument: self.model
             });
 
@@ -195,23 +195,12 @@ define([
      * @returns {undefined}
      */
     UprizoritevStrosekEditView.prototype.renderStroski = function () {
-        var c = this.model.stroskiCollection;
-        if (c.length === 0) {
-            c.fetch();
-        }
-
         var self = this;
-
         require(['app/produkcija/View/StrosekView'], function (StrosekView) {
             var view = new StrosekView({
-                collection: c,
+                collection: self.model.stroskiCollection,
                 dokument: self.model
             });
-
-            view.listenTo(view, "save:success", function () {
-                view.renderList();
-            });
-
             self.regionDetail.show(view);
         });
     };

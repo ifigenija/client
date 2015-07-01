@@ -63,7 +63,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('strupr.popa'),
-                name: 'popa.label',
+                name: 'popa.naziv',
                 sortable: true
             },
             {

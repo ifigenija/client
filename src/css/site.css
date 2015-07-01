@@ -693,7 +693,14 @@ span.stevilka-na-veliko {
 .alter-listitem > .media-body {
   overflow: visible;
 }
+/*stile za modal*/
 .modal-dialog {
   width: 80%;
+}
+/*stil za tabelo kazalnikov
+    odmiki od levega roba
+*/
+.table > tbody > tr > td.kazalnik-padleft {
+  padding-left: 7%;
 }
 /*# sourceMappingURL=site.css.map */

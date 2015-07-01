@@ -14,7 +14,7 @@ define([
 
     var PogodbaCollection = Dokument.PostavkaCollection.extend({
         model: PogodbaModel,
-        url: baseUrl + '/rest/pogodba/vse',
+        url: baseUrl + '/rest/pogodba',
         index: 'sifra'
     });
 
@@ -24,7 +24,7 @@ define([
 
     var AlternacijaCollection = Dokument.PostavkaCollection.extend({
         model: AlternacijaModel,
-        url: baseUrl + '/rest/alternacija/vse',
+        url: baseUrl + '/rest/alternacija',
         index: 'sort'
     });
 
@@ -34,7 +34,7 @@ define([
 
     var StrosekCollection = Dokument.PostavkaCollection.extend({
         model: StrosekModel,
-        url: baseUrl + '/rest/strosekUprizoritve/vse',
+        url: baseUrl + '/rest/strosekUprizoritve',
         index: 'sort'
     });
 

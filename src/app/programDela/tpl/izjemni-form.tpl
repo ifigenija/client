@@ -5,7 +5,7 @@
             <div class="col-sm-12 col-lg-6" data-fields="lastnaSredstva,drugiJavni,stZaposlenih"></div>
         </div>
         <div class="row col-sm-4">
-            <div class="col-sm-12" data-fields="obiskDoma,ponoviDoma,sort"></div>
+            <div class="col-sm-12" data-fields="obiskDoma,ponoviDoma"></div>
         </div>
     </div>
     <div class="row">

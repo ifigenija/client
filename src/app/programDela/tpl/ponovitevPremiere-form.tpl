@@ -1,7 +1,7 @@
 <form>
     <div class="row">
         <div class="row col-sm-8">
-            <div class="col-sm-12 col-lg-6" data-fields="sort,uprizoritev,tipProgramskeEnote,celotnaVrednost,vlozekGostitelja,vlozekKoproducenta"></div>
+            <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,celotnaVrednost,vlozekGostitelja,vlozekKoproducenta"></div>
             <div class="col-sm-12 col-lg-6" data-fields="zaproseno,lastnaSredstva,avtorskiHonorarji,tantieme,drugiJavni"></div>
         </div>
         <div class="row col-sm-4">
