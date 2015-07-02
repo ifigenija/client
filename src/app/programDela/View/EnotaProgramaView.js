@@ -5,18 +5,18 @@
  * Licenca GPLv3
  */
 define([
-    'app/Dokument/View/PostavkeView',
+    'app/programDela/View/IfiPostavkaView',
     'app/programDela/View/DrugiVirView',
     'app/programDela/View/KoprodukcijaView',
     'underscore'
 ], function (
-        PostavkeView,
+        IfiPostavkaView,
         DrugiVirView,
         KoprodukcijaView,
         _
         ) {
 
-    var EnotaProgramaView = PostavkeView.extend({
+    var EnotaProgramaView = IfiPostavkaView.extend({
         buttons: {
             dodaj: {
                 id: 'doc-postavka-dodaj',
@@ -107,53 +107,6 @@ define([
         });
 
         this.koprodukcijeR.show(view);
-    };
-
-    /**
-     * Izračun vrednosti atributa po katerem sortiramo v podani kolekciji
-     * @param {type} collection
-     * @param {type} attrSort
-     * @returns {undefined}
-     */
-    EnotaProgramaView.prototype.zapSortSt = function (collection, attrSort) {
-        var min = -100;
-        _.each(collection.models, function (e) {
-            var sort = e.get(attrSort);
-            if (sort >= min) {
-                min = sort;
-            }
-        });
-
-        if (min >= 0) {
-            this.model.set({sort: min + 1});
-            this.form.fields.sort.editor.setValue(min + 1);
-        }
-    };
-
-    PostavkeView.prototype.onShrani = function () {
-        var self = this;
-        if (this.commit()) {
-            this.shrani(this.model, {
-                success: function (model) {
-                    self.triggerMethod('save:success', model);
-                    var tb = self.getToolbarModel();
-                    var but = tb.getButton('doc-postavka-shrani');
-                    if (but) {
-                        but.set('disabled', true);
-                    }
-                }
-            });
-        }
-        return false;
-    };
-
-    /**
-     * Ob kliku na gumb dodaj preračunamo dodatno vrednost po kateri sortiramo
-     * @returns {undefined}
-     */
-    EnotaProgramaView.prototype.onDodaj = function () {
-        PostavkeView.prototype.onDodaj.apply(this, arguments);
-        this.zapSortSt(this.collection, 'sort');
     };
 
     /**

@@ -2,13 +2,13 @@
  * Licenca GPLv3
  */
 define([
-    'app/Dokument/View/PostavkeView',
+    'app/programDela/View/IfiPostavkaView',
     'template!../tpl/alternacija-form.tpl',
     'formSchema!alternacija',
     'i18next',
     'app/Max/Module/Backgrid'
 ], function (
-        PostavkeView,
+        IfiPostavkaView,
         formTpl,
         schema,
         i18next,
@@ -19,7 +19,7 @@ define([
         className: 'backgrid-kolona-stevilk'
     });
 
-    var AlternacijaView = PostavkeView.extend({
+    var AlternacijaView = IfiPostavkaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema({
             oseba: {

@@ -3,7 +3,7 @@
  */
 define([
     'baseUrl',
-    'app/Dokument/View/PostavkeView',
+    'app/programDela/View/IfiPostavkaView',
     './AlterSelectView',
     'app/Max/Model/MaxPageableCollection',
     'backbone',
@@ -16,7 +16,7 @@ define([
     'radio'
 ], function (
         baseUrl,
-        PostavkeView,
+        IfiPostavkaView,
         AlterSelectView,
         MaxPageable,
         Backbone,
@@ -41,7 +41,7 @@ define([
      * 
      * @type @exp;PostavkeView@call;extend
      */
-    var FunkcijeView = PostavkeView.extend({
+    var FunkcijeView = IfiPostavkaView.extend({
         formTemplate: formTpl,
         template: tpl,
         schema: sch,
