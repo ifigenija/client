@@ -14,10 +14,10 @@ define([
         i18next,
         Backgrid
         ) {
-    
+
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
-    }); 
+    });
 
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
@@ -36,6 +36,9 @@ define([
         title: i18next.t('alternacija.title'),
         detailName: 'alternacije',
         formTitle: i18next.t('alternacija.title'),
+        triggers: {
+            "click .pogodba-dodaj": "dodaj:pogodbo"
+        },
         gridMeta: [
             {
                 headerCell: hc,
@@ -92,11 +95,72 @@ define([
         ]
     });
 
-
     AlternacijaView.prototype.prepareToolbar = function () {
         return  this.model ?
                 [[this.buttons.shrani, this.buttons.preklici, this.buttons.nasvet]] : [[]];
 
+    };
+
+    AlternacijaView.prototype.onDodajPogodbo = function () {
+        var self = this;
+        require(['backbone-modal',
+            'app/Dokument/View/FormView',
+            'formSchema!pogodba',
+            'template!app/produkcija/tpl/pogodba-form.tpl',
+            'baseUrl',
+            'backbone',
+            'radio'
+        ], function (
+                Modal,
+                FormView,
+                schemaPogodba,
+                formPogodbaTpl,
+                baseUrl,
+                Backbone,
+                Radio
+                ) {
+            var Fv = FormView.extend({
+                formTitle: "naslov",
+                buttons: FormView.prototype.defaultButtons,
+                schema: schemaPogodba.toFormSchema().schema,
+                formTemplate: formPogodbaTpl,
+                onFormChange: function (form) {
+                    var tb = this.getToolbarModel();
+                    var but = tb.getButton('doc-shrani');
+                    if (but.get('disabled')) {
+                        but.set({
+                            disabled: false
+                        });
+                    }
+                }
+            });
+
+            var Model = Backbone.Model.extend({
+                urlRoot: baseUrl + '/rest/pogodba'
+            });
+
+            var model = new Model();
+
+            var view = new Fv({
+                model: model
+            });
+
+            var modal = new Modal({
+                content: view,
+                animate: true,
+                okText: i18next.t("std.izberi"),
+                cancelText: i18next.t("std.preklici")
+            }).open(function () {
+                if (!view.model.get('id')) {
+                    Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove pogodbe', code: 2000001, severity: 'error'});
+                    modal.preventClose();
+                }
+                else {
+                    self.form.fields.pogodba.editor.setValue(view.model.get('id'));
+                    modal.close();
+                }
+            });
+        });
     };
 
     return AlternacijaView;

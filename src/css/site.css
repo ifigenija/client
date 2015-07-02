@@ -701,6 +701,6 @@ span.stevilka-na-veliko {
     odmiki od levega roba
 */
 .table > tbody > tr > td.kazalnik-padleft {
-  padding-left: 7%;
+  padding-left: 50px;
 }
 /*# sourceMappingURL=site.css.map */

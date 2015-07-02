@@ -161,7 +161,7 @@ define([
         this.deselectTab();
         this.$('.pnl-sklopDva').addClass('active');
 
-        this.tabControlSklopDva = new TabControl({justified: false, tabs: tabSklopDva, listener: this});
+        this.tabControlSklopDva = new TabControl({tabs: tabSklopDva, listener: this});
         this.sklopDvaR.show(this.tabControlSklopDva);
     };
 
@@ -320,6 +320,8 @@ define([
         var View = Marionette.ItemView.extend({
            template: kazalnikiTabelaTpl
         });
+        
+        this.model.fetch();
         
         var view = new View({
             model: this.model

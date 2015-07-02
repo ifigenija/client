@@ -23,7 +23,7 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'kontaktne',
         dodaj: i18next.t('dodaj'),
-        formTitle: i18next.t('kontaktnaOseba.title'),
+        formTitle: i18next.t('kontaktna.title'),
         triggers: {
             'click .dodaj-osebo': 'dodajOsebo'
         },
@@ -100,7 +100,7 @@ define([
 
             modal.listenTo(modal, 'ok', function () {
                 if(!view.model.get('id')){
-                    Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove osebe', code: 0, severity: 'error'});
+                    Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove osebe', code: 2000000, severity: 'error'});
                     modal.preventClose();
                 }
                 else{

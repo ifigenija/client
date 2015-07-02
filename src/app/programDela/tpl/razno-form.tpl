@@ -9,4 +9,6 @@
             <div class="col-sm-12 col-lg-6" data-fields="celotnaVrednost,lastnaSredstva,drugiJavni"></div>
         </div>
     </div>
+    <div class="row region-drugiViri"></div>
+    <div class="row region-koprodukcije"></div>
 </form>
