@@ -83,7 +83,7 @@ require.config({
         'bootstrap': ['jquery'],
         'jquery.jsonrpc': ['jquery'],
         'lib/bootstrap-datepicker': ['jquery', 'bootstrap']
-    },
+    }
 });
 
 define('baseUrl', 'http://localhost:8888');

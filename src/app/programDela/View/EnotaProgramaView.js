@@ -8,15 +8,18 @@ define([
     'app/programDela/View/IfiPostavkaView',
     'app/programDela/View/DrugiVirView',
     'app/programDela/View/KoprodukcijaView',
-    'underscore'
+    'underscore',
+    'template!../tpl/enota-programa.tpl'
 ], function (
         IfiPostavkaView,
         DrugiVirView,
         KoprodukcijaView,
-        _
+        _,
+        enotaTpl
         ) {
 
     var EnotaProgramaView = IfiPostavkaView.extend({
+        template: enotaTpl,
         buttons: {
             dodaj: {
                 id: 'doc-postavka-dodaj',
@@ -56,6 +59,20 @@ define([
         }
     });
 
+    /**
+     * 
+     * Obesim se na event prekliči, da spraznim enoto programa in 
+     * druge vire, ko se forma zapre. 
+     * 
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.initialize = function () {
+        this.on('preklici', function () {
+            this.drugiViriR.empty();
+            this.koprodukcijeR.empty();
+        }, this);
+
+    };
     /**
      * prikaz gumbov v toolbaru
      * @returns {Array}
@@ -108,6 +125,7 @@ define([
 
         this.koprodukcijeR.show(view);
     };
+
 
     /**
      * Ob kliku na izpolni se bo prikazal modal za prepis podatkov

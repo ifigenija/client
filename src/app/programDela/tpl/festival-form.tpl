@@ -66,6 +66,4 @@
             </div>
         </div>
     </div>
-    <div class="row region-drugiViri"></div>
-    <div class="row region-koprodukcije"></div>
 </div>
