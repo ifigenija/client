@@ -7,15 +7,30 @@
 define([
     'app/Dokument/View/PostavkeView',
     'underscore',
-    'radio'
+    'i18next'
 ], function (
         PostavkeView,
         _,
-        Radio
+        i18next
         ) {
 
     var IfiPostavkaView = PostavkeView.extend({});
 
+    /**
+     * ob kliku na izbris
+     * @param {type} model
+     * @returns {undefined}
+     */
+    IfiPostavkaView.prototype.onBrisi = function (model) {
+        if (confirm(i18next.t('std.potrdiIzbris'))) {
+            PostavkeView.prototype.onBrisi.apply(this, arguments);
+        }
+    };
+
+    /**
+     * ob kliku shrani
+     * @returns {Boolean}
+     */
     IfiPostavkaView.prototype.onShrani = function () {
         this.zapSortSt();
 
@@ -35,7 +50,7 @@ define([
         }
         return false;
     };
-        /**
+    /**
      * Izračun vrednosti atributa po katerem sortiramo v podani kolekciji
      * @param {type} collection
      * @param {type} attrSort

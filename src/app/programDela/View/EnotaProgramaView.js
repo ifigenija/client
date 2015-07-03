@@ -33,7 +33,7 @@ define([
             },
             preklici: {
                 id: 'docedit-skrij-postavko',
-                label: 'Prekliči',
+                label: 'Skrij',
                 element: 'button-trigger',
                 trigger: 'preklici'
             },

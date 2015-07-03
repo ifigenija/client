@@ -2,13 +2,13 @@
  * Licenca GPLv3
  */
 define([
-    'app/Dokument/View/PostavkeView',
+    'app/programDela/View/IfiPostavkaView',
     'template!../tpl/pogodba-form.tpl',
     'formSchema!pogodba',
     'i18next',
     'app/Max/Module/Backgrid'
 ], function (
-        PostavkeView,
+        IfiPostavkaView,
         formTpl,
         schema,
         i18next,
@@ -19,7 +19,7 @@ define([
         className: 'backgrid-kolona-stevilk'
     });    
 
-    var PogodbaView = PostavkeView.extend({
+    var PogodbaView = IfiPostavkaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         title: i18next.t('pogodba.title'),

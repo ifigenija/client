@@ -18,7 +18,7 @@ define([
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
-    var DrugiVirView = PostavkeView.extend({
+    var KoprodukcijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         name: 'Koprodukcije',
@@ -61,5 +61,5 @@ define([
             }
         ]
     });
-    return DrugiVirView;
+    return KoprodukcijaView;
 });

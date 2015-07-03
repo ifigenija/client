@@ -31,6 +31,11 @@ define([
                 editorAttrs: {
                     disabled: true
                 }
+            },
+            pogodba: {
+                editorAttrs: {
+                    disabled: true
+                }
             }
         }).schema,
         title: i18next.t('alternacija.title'),
@@ -121,7 +126,21 @@ define([
                 ) {
             var Fv = FormView.extend({
                 formTitle: "naslov",
-                buttons: FormView.prototype.defaultButtons,
+                buttons: {
+                    shrani: {
+                        id: 'doc-shrani',
+                        label: 'Shrani',
+                        element: 'button-trigger',
+                        trigger: 'shrani',
+                        disabled: true
+                    },
+                    nasvet: {
+                        id: 'doc-nasvet',
+                        label: '<i class="fa fa-info"></i>',
+                        element: 'button-trigger',
+                        trigger: 'nasvet'
+                    }
+                },
                 schema: schemaPogodba.toFormSchema().schema,
                 formTemplate: formPogodbaTpl,
                 onFormChange: function (form) {

@@ -3,14 +3,14 @@
  */
 define([
     'radio',
-    'app/Dokument/View/PostavkeView',
+    'app/programDela/View/IfiPostavkaView',
     'app/Max/Module/Backgrid',
     'template!../tpl/kontaktna-form.tpl',
     'formSchema!kontaktnaoseba',
     'i18next'
 ], function (
         Radio,
-        PostavkeView,
+        IfiPostavkaView,
         Backgrid,
         formTpl,
         schema,
@@ -18,7 +18,7 @@ define([
         ) {
 
 
-    var KontaktneView = PostavkeView.extend({
+    var KontaktneView = IfiPostavkaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'kontaktne',
