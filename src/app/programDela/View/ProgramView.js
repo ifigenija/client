@@ -25,6 +25,7 @@ define([
 
     var ch = Radio.channel('layout');
 
+    
     var ProgramDelaItem = Marionette.ItemView.extend({
         template: itemTpl,
         triggers: {
@@ -46,6 +47,7 @@ define([
         pdModel.fetch();
     };
 
+
     var ProgramDelaView = Marionette.CompositeView.extend({
         template: tpl,
         title: i18next.t('programDela.title'),
@@ -57,17 +59,22 @@ define([
         }
     });
 
+
     ProgramDelaView.prototype.initialize = function () {
         this.collection = new ProgramSeznamModel.Collection();
-        this.collection.state.perPage = 12;
+        this.collection.state.perPage = 9;
+        this.collection.fetch();
         this.paginatorControll = new PaginatorControl({
             collection: this.collection
         });
     };
 
     ProgramDelaView.prototype.onRender = function () {
-        this.collection.fetch();
         this.$('.paginator-control').html(this.paginatorControll.render().el);
+    };
+    
+    ProgramDelaView.prototype.onDestroy = function () {
+        this.paginatorControll.destroy();
     };
 
     ProgramDelaView.prototype.onDodajPD = function () {

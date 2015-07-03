@@ -23,35 +23,14 @@ define([
 
         var ch = Radio.channel('layout');
 
-        var odpri = function (View, title, pogled) {
-            var view = new View();
-            if (pogled) {
-                view = new View({pogled: pogled});
-            }
-            ch.command('open', view, i18next.t(title));
-        };
-
-        var odpriModel = function (Model, View, id, title, pogled) {
-            var odpriView = function () {
-                var view = new View({model: model});
-                if (pogled) {
-                    view = new View({pogled: pogled});
-                }
-                ch.command('open', view, i18next.t(title));
-            };
-
-            var model = new Model.Model({id: id});
-            model.once('sync', odpriView);
-            model.fetch();
-        };
-
         /**
          * Odpre se stran za izbiro akcije
          * @returns {undefined}
          */
         mod.programDela = function () {
             require(['../View/ProgramView'], function (View) {
-                odpri(View, 'programDela.title');
+                var view = new View();
+                ch.command('open', view, i18next.t('programDela.title'));
             });
         };
         /**
@@ -61,13 +40,21 @@ define([
         mod.programDelaDodaj = function () {
             this.programDelaUredi(null);
         };
+
         /**
          * Odpre se stran za urejanje programa dela
+         * @param {string} id
          * @returns {undefined}
          */
         mod.programDelaUredi = function (id) {
             require(['../Model/ProgramDokument', '../View/ProgramDokView'], function (Model, View) {
-                odpriModel(Model, View, id, 'programDela.title');
+                var model = new Model.Model({id: id});
+                var odpriView = function () {
+                    var view = new View({model: model});
+                    ch.command('open', view, i18next.t('programDela.title'));
+                };
+                model.once('sync', odpriView);
+                model.fetch();
             });
         };
 
@@ -77,14 +64,12 @@ define([
          */
         mod.addInitializer(function (options) {
             App.nav.registerNav(moduleNav);
-
             new Marionette.AppRouter({
                 controller: mod,
                 appRoutes: {
                     'programDela': 'programDela',
                     'programDela/dodaj': 'programDelaDodaj',
                     'programDela/:id': 'programDelaUredi'
-
                 }
             });
         });
