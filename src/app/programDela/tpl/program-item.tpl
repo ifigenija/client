@@ -6,8 +6,12 @@
                     <div class="clearfix">
                         <div class="panel-name">{{naziv}}</div>
                         <div class="panel-status pull-right">
-                            <span class="panel-status-label"><i class="fa fa-check-circle"></i> {{potrjenProgram}} </span>
-                            <span class="panel-status-hide" style="display: none;"><i class="fa fa-remove"></i> Arhiviraj</span>
+                            <span class="panel-status-label">
+                                {{#if potrjenProgram}}
+                                {{t "programDela.potrjen"}} <i class="fa fa-check-circle"></i>
+                                {{else}}
+                                {{t "programDela.nePotrjen"}} <i class="fa fa-times-circle"></i>
+                                {{/if}} </span>
                         </div>
                     </div>
                 </h3>
@@ -15,11 +19,13 @@
         </div>
         <div style="padding-top: 8px; padding-bottom: 8px" class="panel-body  mouse-hand">
             <p style="margin-bottom: 0;">
-                <i class="fa fa-calendar"></i> {{sezona}}
+                <i class="fa fa-calendar"></i> {{t "programDela.sezona"}} : {{sezona}}
                 <br />
-                <i class="fa fa-clock-o"></i> Začetek {{u "date" zacetek}}
+                <i class="fa fa-clock-o"></i> {{t "entiteta.zacetek"}} : {{u "date" zacetek}}
                 <br />
-                <i class="fa fa-clock-o"></i> Konec {{u "date" konec}}
+                <i class="fa fa-clock-o"></i> {{t "entiteta.konec"}} : {{u "date" konec}}
+                <br />
+                <i class="fa fa-money"></i> {{t "programDela.vrednostPs1"}} : {{vrPS1}}
                 <br />
             </p>
         </div>

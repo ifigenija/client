@@ -90,7 +90,7 @@ define([
      * @returns {OsebaEditView_L11.TabControl}
      */
     ProgramDokView.prototype.renderTabs = function (tabs) {
-        this.tabControl = new TabControl({tabs: tabs, listener: this});
+        this.tabControl = new TabControl({justified: false, tabs: tabs, listener: this});
         this.tabsR.show(this.tabControl);
         return this.tabControl;
     };
@@ -150,7 +150,7 @@ define([
         this.deselectTab();
         this.$('.pnl-sklopEna').addClass('active');
 
-        this.tabControlSklopEna = new TabControl({tabs: tabSklopEna, listener: this});
+        this.tabControlSklopEna = new TabControl({justified: false, tabs: tabSklopEna, listener: this});
         this.sklopEnaR.show(this.tabControlSklopEna);
     };
     /**
@@ -161,7 +161,7 @@ define([
         this.deselectTab();
         this.$('.pnl-sklopDva').addClass('active');
 
-        this.tabControlSklopDva = new TabControl({tabs: tabSklopDva, listener: this});
+        this.tabControlSklopDva = new TabControl({justified: false, tabs: tabSklopDva, listener: this});
         this.sklopDvaR.show(this.tabControlSklopDva);
     };
 

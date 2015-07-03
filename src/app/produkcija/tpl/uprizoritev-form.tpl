@@ -1,11 +1,16 @@
 <form>
     <div class="row">
-        <div class="row col-sm-6 col-lg-8">
-            <div class="col-sm-12 col-lg-6" data-fields="sifra,faza,naslov,podnaslov,internacionalniNaslov,delovniNaslov,kratkiNaslov"></div>
-            <div class="col-sm-12 col-lg-6" data-fields="avtor,besedilo,zvrstUprizoritve,zvrstSurs,maticniOder,datumZacStudija,datumPremiere"></div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-12 col-md-6" data-fields="sifra,faza,naslov,podnaslov,internacionalniNaslov"></div>
+                <div class="col-sm-12 col-md-6" data-fields="delovniNaslov,kratkiNaslov,avtor,besedilo,zvrstUprizoritve"></div>
+            </div>
         </div>
-        <div class="row col-sm-6 col-lg-4">
-            <div class="col-sm-12" data-fields="trajanje,stOdmorov,steviloVaj,planiranoSteviloVaj,gostujoca,sloAvtor"></div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-12 col-md-6" data-fields="zvrstSurs,maticniOder,datumZacStudija,datumPremiere,trajanje"></div>
+                <div class="col-sm-12 col-md-6" data-fields="stOdmorov,steviloVaj,planiranoSteviloVaj,gostujoca,sloAvtor"></div>
+            </div>
         </div>
     </div>
     <div class="row">

@@ -6,13 +6,17 @@ define([
     'template!../tpl/alternacija-form.tpl',
     'formSchema!alternacija',
     'i18next',
-    'app/Max/Module/Backgrid'
+    'app/Max/Module/Backgrid',
+    'radio',
+    'backbone'
 ], function (
         IfiPostavkaView,
         formTpl,
         schema,
         i18next,
-        Backgrid
+        Backgrid,
+        Radio,
+        Backbone
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -42,7 +46,8 @@ define([
         detailName: 'alternacije',
         formTitle: i18next.t('alternacija.title'),
         triggers: {
-            "click .pogodba-dodaj": "dodaj:pogodbo"
+            "click .pogodba-dodaj": "dodaj:pogodbo",
+            "click .pogodba-click": "uredi:pogodbo"
         },
         gridMeta: [
             {
@@ -104,6 +109,25 @@ define([
         return  this.model ?
                 [[this.buttons.shrani, this.buttons.preklici, this.buttons.nasvet]] : [[]];
 
+    };
+
+    AlternacijaView.prototype.onUrediPogodbo = function () {
+        var vrednosti = this.form.fields.pogodba.editor.getValue();
+        if (vrednosti) {
+            var id = vrednosti['id'];
+            if (id) {
+//                var fragment = Backbone.history.getFragment();
+//                var url = fragment + '/pogodba/'+ id;
+//                Radio.channel('layout').command('open', view, 'pogodba.title', url);
+            }
+        }
+        else {
+            Radio.channel('error').command('flash', {
+                message: 'Pogodbe ni v vnosnem polju',
+                code: 9000002,
+                severity: 'success'
+            });
+        }
     };
 
     AlternacijaView.prototype.onDodajPogodbo = function () {
@@ -171,7 +195,7 @@ define([
                 cancelText: i18next.t("std.preklici")
             }).open(function () {
                 if (!view.model.get('id')) {
-                    Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove pogodbe', code: 2000001, severity: 'error'});
+                    Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove pogodbe', code: 9000001, severity: 'error'});
                     modal.preventClose();
                 }
                 else {

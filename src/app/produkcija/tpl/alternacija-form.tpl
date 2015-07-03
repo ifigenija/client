@@ -1,14 +1,14 @@
 <form>
     <div class="row">
-        <div class="col-sm-6 col-md-4" data-fields="sifra,funkcija,oseba"></div>
-        <div class="col-sm-6 col-md-4" style="display: table;">
-            <div style="display: table-row">
+        <div class="col-sm-6" style="display: table;">
+            <div data-fields="sifra,funkcija,oseba"></div>
+            <div class="pogodba-click" style="display: table-row">
                 <div class="col-sm-9" data-fields="pogodba"></div>
                 <a class="col-sm-3 btn btn-default pogodba-dodaj">{{t "entiteta.dodaj"}}</a>
             </div>
-            <div data-fields="zacetek,konec,privzeti"></div>
         </div>
-        <div class="col-sm-6 col-md-4" data-fields="aktivna,zaposlen,zaposlitev,sort"></div>
+        <div class="col-sm-6"data-fields="zacetek,konec,privzeti,aktivna,zaposlen,zaposlitev"></div>
+        </div>
     </div>
 
     <div class="row">

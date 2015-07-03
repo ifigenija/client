@@ -3,7 +3,7 @@
         <div class="panel-heading" role="tab" id="headingOne">
             <div class="clearfix">
                 <h4 class="glava-title" data-toggle="collapse" data-parent="#accordion" href="#podatki" aria-expanded="true" aria-controls="podatki">
-                    Osnovni podatki
+                    {{t "festival.oFestivalu"}}
                 </h4>
 
             </div>
@@ -12,9 +12,10 @@
             <div class="panel-body">
                 <form>
                     <div class="row">
-                        <div class="col-sm-6 col-md-4" data-fields="naziv,zvrst,stPredstav,stPredavanj"></div>
-                        <div class="col-sm-6 col-md-4" data-fields="stPredstavitev,stDelavnic,stDrugiDogodki,stProdukcij"></div>
-                        <div class="col-sm-6 col-md-4" data-fields="obiskDoma,casPriprave,casIzvedbe,prizorisca"></div>
+                        <div class="col-sm-6 col-md-3" data-fields="naziv,zvrst,stPredstav"></div>
+                        <div class="col-sm-6 col-md-3" data-fields="stPredavanj,stPredstavitev,stDelavnic"></div>
+                        <div class="col-sm-6 col-md-3" data-fields="stDrugiDogodki,stProdukcij,obiskDoma"></div>
+                        <div class="col-sm-6 col-md-3" data-fields="casPriprave,casIzvedbe,prizorisca"></div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6 col-md-offset-3" data-fields="opredelitevDrugiDogodki"></div>
@@ -27,7 +28,7 @@
         <div class="panel-heading">
             <div class="clearfix">
                 <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#koprodukcija" aria-expanded="false" aria-controls="koprodukcija">
-                    Koprodukcijski podatki
+                    {{t "festival.koprodukcija"}}
                 </h4>
 
             </div>
@@ -47,7 +48,7 @@
         <div class="panel-heading">
             <div class="clearfix">
                 <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#finance" aria-expanded="false" aria-controls="finance">
-                    Finančni podatki
+                    {{t "festival.finance"}}
                 </h4>
 
             </div>
@@ -56,16 +57,11 @@
             <div class="panel-body">
                 <form>
                     <div class="row">
-                        <div class="col-sm-6" data-fields="zaproseno,celotnaVrednost,lastnaSredstva"></div>
-                        <div class="col-sm-6" data-fields="vlozekKoproducenta,drugiJavni"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-offset-3" data-fields="opredelitevDrugiViri"></div>
+                        <div class="col-sm-6" data-fields="zaproseno,celotnaVrednost"></div>
+                        <div class="col-sm-6" data-fields="lastnaSredstva,vlozekKoproducenta"></div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="row region-drugiViri"></div>
-    <div class="row region-koprodukcije"></div>
 </div>

@@ -45,6 +45,9 @@ define([
                         but.set('disabled', true);
                     }
                     this.renderFormAndToolbar();
+                },
+                error: function(model){
+                    //potrebno dodati da se ne shrane v collecijo napačna vrednost 901
                 }
             });
         }

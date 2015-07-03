@@ -59,7 +59,7 @@ define([
 
     ProgramDelaView.prototype.initialize = function () {
         this.collection = new ProgramSeznamModel.Collection();
-        this.collection.state.perPage = 9;
+        this.collection.state.perPage = 12;
         this.paginatorControll = new PaginatorControl({
             collection: this.collection
         });
