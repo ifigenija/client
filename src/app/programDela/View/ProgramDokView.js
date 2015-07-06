@@ -220,24 +220,6 @@ define([
         });
     };
     /**
-     * Izris gostovanj
-     * @returns {undefined}
-     */
-    ProgramDokView.prototype.onGostovanja = function () {
-        this.deselectTabDva();
-        this.$('.pnl-gostovanja').addClass('active');
-
-        var self = this;
-        require(['app/programDela/View/GostovanjeView'], function (View) {
-            var view = new View({
-                collection: self.model.gostovanjaCollection,
-                dokument: self.model
-            });
-            self.gostovanjaR.show(view);
-            return view;
-        });
-    };
-    /**
      * Izris gostujoci
      * @returns {undefined}
      */
@@ -252,6 +234,24 @@ define([
                 dokument: self.model
             });
             self.gostujociR.show(view);
+            return view;
+        });
+    };
+    /**
+     * Izris gostovanj
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onGostovanja = function () {
+        this.deselectTabDva();
+        this.$('.pnl-gostovanja').addClass('active');
+
+        var self = this;
+        require(['app/programDela/View/GostovanjeView'], function (View) {
+            var view = new View({
+                collection: self.model.gostovanjaCollection,
+                dokument: self.model
+            });
+            self.gostovanjaR.show(view);
             return view;
         });
     };

@@ -4,9 +4,6 @@
 define([
     'app/Max/Module/Backgrid',
     'i18next',
-    'marionette',
-    'radio',
-    'app/bars',
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/festival-form.tpl',
     'formSchema!programFestival',
@@ -14,9 +11,6 @@ define([
 ], function (
         Backgrid,
         i18next,
-        Marionette,
-        Radio,
-        Handlebars,
         EnotaProgramaView,
         formTpl,
         schema,
