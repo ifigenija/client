@@ -26,6 +26,45 @@ define([
         name: 'Festival',
         detailName: 'festivali',
         formTitle: i18next.t('festival.title'),
+        buttons: {
+            dodaj: {
+                id: 'doc-postavka-dodaj',
+                label: 'Dodaj',
+                element: 'button-trigger',
+                trigger: 'dodaj'
+            },
+            shrani: {
+                id: 'doc-postavka-shrani',
+                label: 'Shrani',
+                element: 'button-trigger',
+                trigger: 'shrani',
+                disabled: true
+            },
+            preklici: {
+                id: 'docedit-preklici-postavko',
+                label: 'Prekliči',
+                element: 'button-trigger',
+                trigger: 'preklici'
+            },
+            izpolni: {
+                id: 'doc-postavka-izpolni',
+                label: 'Izpolni',
+                element: 'button-trigger',
+                trigger: 'izpolni'
+            },
+            nasvet: {
+                id: 'doc-postavka-nasvet',
+                label: '<i class="fa fa-info"></i>',
+                element: 'button-trigger',
+                trigger: 'nasvet'
+            },
+            prikaziVse: {
+                id: 'doc-postavka-prikaziVse',
+                label: 'Prikaži vse',
+                element: 'button-trigger',
+                trigger: 'prikaziVse'
+            }
+        },
         gridMeta: [
             {
                 headerCell: hc,
@@ -89,5 +128,46 @@ define([
             }
         ]
     });
+    /**
+     * prikaz gumbov v toolbaru
+     * @returns {Array}
+     */
+    EnotaProgramaView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [
+                    [
+                        this.buttons.shrani,
+                        this.buttons.preklici,
+                        this.buttons.prikaziVse,
+                        this.buttons.izpolni,
+                        this.buttons.nasvet
+                    ]
+                ] : [[this.buttons.dodaj]];
+
+    };
+    /**
+     * klik prikaži vse
+     * @returns {Array}
+     */
+    EnotaProgramaView.prototype.onPrikaziVse = function () {
+        var self = this;
+        var tb = this.getToolbarModel();
+        var but = tb.getButton('doc-postavka-prikaziVse');
+
+        var label = but.get('label');
+        if (label === 'Prikaži vse') {
+            but.set({
+                label: 'Zapri vse'
+            });
+            self.$('.collapse').collapse('show');
+            
+        } else {
+            but.set({
+                label: 'Prikaži vse'
+            });            
+            self.$('.collapse').collapse('hide');
+        }
+    };
+
     return FestivalView;
 });
