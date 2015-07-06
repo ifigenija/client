@@ -48,7 +48,7 @@ define([
             error: function () {
                 Radio.channel('error').command('flash', {
                     message: i18next.t("napaka.fetch") + ' ' + '(ProgramDokument)',
-                    code: '9000014',
+                    code: '9000103',
                     severity: 'error'
                 });
             }
@@ -75,7 +75,7 @@ define([
             error: function () {
                 Radio.channel('error').command('flash', {
                     message: i18next.t("napaka.fetch") + ' ' + '(ProgramSeznam)',
-                    code: '9000015',
+                    code: '9000104',
                     severity: 'error'
                 });
             }

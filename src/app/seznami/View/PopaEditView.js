@@ -265,7 +265,15 @@ define([
         var self = this;
         var coll = self.model.kontaktneCollection;
         if (coll.length === 0) {
-            coll.fetch();
+            coll.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' (Kontaktne)',
+                        code: '9000203',
+                        severity: 'error'
+                    });
+                }
+            });
         }
         require(['app/seznami/View/KontaktneView'], function (View) {
             var view = new View({

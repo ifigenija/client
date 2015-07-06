@@ -6,13 +6,15 @@ define([
     './PopaEditView',
     '../Model/Popa',
     'i18next',
-    'baseUrl'
+    'baseUrl',
+    'radio'
 ], function (
         SeznamView,
         PopaEditView,
         Model,
         i18next,
-        baseUrl
+        baseUrl,
+        Radio
         ) {
 
     var PopaView = SeznamView.extend({
@@ -32,7 +34,7 @@ define([
                 label: i18next.t('entiteta.naziv'),
                 name: 'naziv',
                 sortable: true
-            },            
+            },
             {
                 cell: 'string',
                 editable: false,
@@ -70,10 +72,18 @@ define([
      */
     PopaView.prototype.getFormView = function (model) {
         var editModel = model;
-        
+
         if (model.get('id')) {
             editModel = new Model.Model({id: model.get('id')});
-            editModel.fetch();
+            editModel.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' (Popa)',
+                        code: '9000204',
+                        severity: 'error'
+                    });
+                }
+            });
         }
         return new PopaEditView({
             model: editModel,

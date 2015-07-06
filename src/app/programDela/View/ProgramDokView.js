@@ -325,7 +325,7 @@ define([
             error: function () {
                 Radio.channel('error').command('flash', {
                     message: i18next.t("napaka.fetch") + ' ' + '(Kazalniki)',
-                    code: '9000013',
+                    code: '9000102',
                     severity: 'error'
                 });
             }

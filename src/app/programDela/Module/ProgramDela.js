@@ -58,7 +58,7 @@ define([
                 error: function () {
                     Radio.channel('error').command('flash', {
                         message: i18next.t("napaka.fetch") + ' ' + '(ProgramDela)',
-                        code:'9000012',
+                        code:'9000100',
                         severity: 'error'
                     });
                 }

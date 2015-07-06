@@ -73,7 +73,7 @@ define([
             }
         ]
     });
-    
+
 //        var chLovro = Radio.channel('global');
 //        var response = chLovro.request('isGranted', "halo");
 //        console.log("Oseba "+ response);
@@ -85,10 +85,18 @@ define([
      */
     OsebaView.prototype.getFormView = function (model) {
         var editModel = model;
-        
+
         if (model.get('id')) {
             editModel = new Model.Model({id: model.get('id')});
-            editModel.fetch();
+            editModel.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' (Oseba)',
+                        code: '9000202',
+                        severity: 'error'
+                    });
+                }
+            });
         }
         return new OsebaEditView({
             model: editModel,

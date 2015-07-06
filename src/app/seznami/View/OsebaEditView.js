@@ -8,7 +8,7 @@ define([
     'formSchema!oseba',
     'i18next',
     'app/Max/View/TabControl',
-    'app/Dokument/View/FormView'
+    'radio'
 ], function (
         DokumentView,
         tpl,
@@ -16,7 +16,7 @@ define([
         schema,
         i18next,
         TabControl,
-        FormView
+        Radio
         ) {
 
     var tabVse = [
@@ -155,7 +155,15 @@ define([
 
             if (!self.osebniModel) {
                 self.osebniModel = new Model({id: self.model.get('id')});
-                self.osebniModel.fetch();
+                self.osebniModel.fetch({
+                    error: function () {
+                        Radio.channel('error').command('flash', {
+                            message: i18next.t("napaka.fetch") + ' (OsebniPodatki)',
+                            code: '9000201',
+                            severity: 'error'
+                        });
+                    }
+                });
             }
 
             var o = new OsebniView({

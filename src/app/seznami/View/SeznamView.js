@@ -103,7 +103,15 @@ define([
 
 
         this.gridR.show(this.grid);
-        this.collection.fetch();
+        this.collection.fetch({
+            error: function () {
+                Radio.channel('error').command('flash', {
+                    message: i18next.t("napaka.fetch") + ' (Seznam)',
+                    code: '9000205',
+                    severity: 'error'
+                });
+            }
+        });
     };
 
     SeznamView.prototype.renderToolbar = function () {
@@ -231,7 +239,7 @@ define([
         var text = model.get('naziv') || "Naziv";
         return text;
     };
-    
+
     SeznamView.prototype.onDodaj = function () {
         this.zapSortSt(this.collection, 'sort');
     };
@@ -264,7 +272,7 @@ define([
         });
 
     };
-    
+
     SeznamView.prototype.zapSortSt = function (collection, attrSort) {
         var min = -100;
         _.each(collection.models, function (e) {
