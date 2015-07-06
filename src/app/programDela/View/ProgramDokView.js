@@ -316,17 +316,25 @@ define([
     ProgramDokView.prototype.onKazalniki = function () {
         this.deselectTab();
         this.$('.pnl-kazalniki').addClass('active');
-        
+
         var View = Marionette.ItemView.extend({
-           template: kazalnikiTabelaTpl
+            template: kazalnikiTabelaTpl
         });
-        
-        this.model.fetch();
-        
+
+        this.model.fetch({
+            error: function () {
+                Radio.channel('error').command('flash', {
+                    message: i18next.t("napaka.fetch") + ' ' + '(Kazalniki)',
+                    code: '9000013',
+                    severity: 'error'
+                });
+            }
+        });
+
         var view = new View({
             model: this.model
         });
-        
+
         this.kazalnikiR.show(view);
     };
 

@@ -710,5 +710,8 @@
             "enotaPrograma": "Enota programa drugega vira",
             "mednarodni": "Ali je drugi vir mednarodni"
         }
+    },
+    "napaka":{
+        "fetch": "Napaka pri pridobivanju podatkov"
     }
 }

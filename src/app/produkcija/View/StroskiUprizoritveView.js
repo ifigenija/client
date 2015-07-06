@@ -7,14 +7,16 @@ define([
     'template!../tpl/uprizoritev-form.tpl',
     'formSchema!uprizoritev',
     'i18next',
-    'app/Max/View/TabControl'
+    'app/Max/View/TabControl',
+    'radio'
 ], function (
         DokumentView,
         tpl,
         formTpl,
         shema,
         i18next,
-        TabControl
+        TabControl,
+        Radio
         ) {
 
     /**
@@ -142,7 +144,15 @@ define([
 
         var c = this.model.alternacijeCollection;
         if (c.length === 0) {
-            c.fetch();
+            c.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + '(Alternacije)',
+                        code:'9000005',
+                        severity: 'error'
+                    });
+                }
+            });
         }
 
         var self = this;
@@ -170,7 +180,15 @@ define([
 
         var c = this.model.pogodbeCollection;
         if (c.length === 0) {
-            c.fetch();
+            c.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + '(Pogodbe)',
+                        code:'9000006',
+                        severity: 'error'
+                    });
+                }
+            });
         }
 
         var self = this;

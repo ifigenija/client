@@ -41,7 +41,15 @@ define([
 
             var model = new Model.Model({id: id});
             model.once('sync', odpriView);
-            model.fetch();
+            model.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + title + ')',
+                        code:'9000003',
+                        severity: 'error'
+                    });
+                }
+            });
         };
 
         mod.uprizoritev = function () {
@@ -87,7 +95,15 @@ define([
 
                 var model = new Model.Model({id: id});
                 model.once('sync', odpriView);
-                model.fetch();
+                model.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + '(Stroškovnik)',
+                        code:'9000004',
+                        severity: 'error'
+                    });
+                }
+            });
             });
         };
         /**

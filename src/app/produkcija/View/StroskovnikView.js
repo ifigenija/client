@@ -65,7 +65,15 @@ define([
 
     StroskovnikView.prototype.renderEditor = function (upziroritevId) {
         var editModel = new Stroskovnik.Model({id: upziroritevId});
-        editModel.fetch();
+        editModel.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + '(Stroskovnik)',
+                        code:'9000007',
+                        severity: 'error'
+                    });
+                }
+            });
         
         this.zamenjajUrl(editModel);
         this.regionEditor.show(new StrosekUprizoritveView({

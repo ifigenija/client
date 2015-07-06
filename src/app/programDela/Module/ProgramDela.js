@@ -54,7 +54,15 @@ define([
                     ch.command('open', view, i18next.t('programDela.title'));
                 };
                 model.once('sync', odpriView);
-                model.fetch();
+                model.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + '(ProgramDela)',
+                        code:'9000012',
+                        severity: 'error'
+                    });
+                }
+            });
             });
         };
 

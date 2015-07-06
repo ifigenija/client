@@ -9,7 +9,8 @@ define([
     'i18next',
     'baseUrl',
     'app/Max/Module/Backgrid',
-    'formSchema!uprizoritev'
+    'formSchema!uprizoritev',
+    'radio'
 ], function (
         SeznamView,
         UprizoritevEditView,
@@ -17,7 +18,8 @@ define([
         i18next,
         baseUrl,
         Backgrid,
-        schema
+        schema,
+        Radio
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -98,7 +100,15 @@ define([
         
         if (model.get('id')) {
             editModel = new Uprizoritev.Model({id: model.get('id')});
-            editModel.fetch();
+            editModel.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + '(Uprizoritev)',
+                        code:'9000011',
+                        severity: 'error'
+                    });
+                }
+            });
         }
 
         return new UprizoritevEditView({

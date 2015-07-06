@@ -9,7 +9,8 @@ define([
     'template!../tpl/uprizoritev-form.tpl',
     'formSchema!uprizoritev',
     'i18next',
-    'app/Max/View/TabControl'
+    'app/Max/View/TabControl',
+    'radio'
 ], function (
         DokumentView,
         Uprizoritev,
@@ -18,7 +19,8 @@ define([
         formTpl,
         shema,
         i18next,
-        TabControl
+        TabControl,
+        Radio
         ) {
 
     /**
@@ -183,7 +185,15 @@ define([
 
         var c = this.model.umetnikiCollection;
         if (c.length === 0) {
-            c.fetch();
+            c.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + '(Umetniki)',
+                        code:'9000008',
+                        severity: 'error'
+                    });
+                }
+            });
         }
         this.renderFunkcije(c, 'uprizoritev.umetniki', 'umetniki');
 
@@ -196,7 +206,15 @@ define([
     UprizoritevEditView.prototype.renderIgralci = function () {
         var c = this.model.igralciCollection;
         if (c.length === 0) {
-            c.fetch();
+            c.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + '(Igralci)',
+                        code:'9000009',
+                        severity: 'error'
+                    });
+                }
+            });
         }
         this.renderFunkcije(c, 'uprizoritev.igralci', 'igralci');
     };
@@ -210,7 +228,15 @@ define([
     UprizoritevEditView.prototype.renderTehniki = function () {
         var c = this.model.tehnikiCollection;
         if (c.length === 0) {
-            c.fetch();
+            c.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + '(Tehniki)',
+                        code:'90000010',
+                        severity: 'error'
+                    });
+                }
+            });
         }
         this.renderFunkcije(c,'uprizoritev.tehniki', 'tehniki');
     };
