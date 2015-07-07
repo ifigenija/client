@@ -114,7 +114,6 @@ define([
         ]
     });
 
-
     /**
      * Priprava toolbara
      * @returns {Array}

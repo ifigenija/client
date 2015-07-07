@@ -144,7 +144,6 @@ define([
             });
 
             var view = new View({
-                //model ni pravi rabimo model uprizoritve s vsemi podatki fuknkcije->alternacije->pogodbe
                 model: self.model
             });
 
