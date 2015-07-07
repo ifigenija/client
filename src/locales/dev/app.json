@@ -398,6 +398,7 @@
         "zaprosenProcent": "Zaprošen procent",
         "koproducent": "Koproducent",
         "maticniKop": "Matični",
+        "zakljuceno": "Zaključeno",
         "t": {
             "lastnaSredstva": "Sredstva",
             "drugiJavni": "Viri",
@@ -408,6 +409,7 @@
             "avtorskih": "Strošek avtorskih honorarjev",
             "tantieme": "Stroški tantiem",
             "maticniKop": "Ali je koproducent lastno gledališče",
+            "zakljuceno": "Ali je program dela zaključen in se naj zaklene?",
             "uprizoritev": "Uprizoritev oz. projekt, za katerega je strošek"
         }
     },
@@ -720,7 +722,7 @@
             "mednarodni": "Ali je drugi vir mednarodni"
         }
     },
-    "napaka":{
+    "napaka": {
         "fetch": "Napaka pri pridobivanju podatkov"
     }
 }
