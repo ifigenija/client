@@ -45,6 +45,19 @@ define([
             pogodbe: {collection: PogodbaCollection, mappedBy: 'uprizoritev'},
             stroski: {collection: StrosekCollection, mappedBy: 'uprizoritev'}
         },
+        dodajPogodbo: function (alternacija) {
+
+            if (alternacija) {
+                var pogodba = new PogodbaModel({
+                    alternacije: alternacija.get('id'),
+                    oseba: alternacija.get('oseba')
+                });
+            }else{
+                var pogodba = new PogodbaModel();
+            }
+            pogodba.dokument = this;
+            return pogodba;
+        },
         dodajPostavko: function (nested) {
 
             if (!_.contains(_.keys(this.nestedCollections), nested)) {
@@ -52,16 +65,6 @@ define([
             }
             var postavka;
             switch (nested) {
-                case 'alternacije':
-                    postavka = new AlternacijaModel({
-                        uprizoritev: this.get('id')
-                    });
-                    break;
-                case 'pogodbe':
-                    postavka = new PogodbaModel({
-                        uprizoritev: this.get('id')
-                    });
-                    break;
                 case 'stroski':
                     postavka = new StrosekModel({
                         uprizoritev: this.get('id')

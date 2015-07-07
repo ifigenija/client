@@ -2,28 +2,38 @@
  * Licenca GPLv3
  */
 define([
-    'app/programDela/View/IfiPostavkaView',
+    'app/Dokument/View/PostavkeView',
+    'app/Dokument/View/FormView',
     'template!../tpl/alternacija-form.tpl',
+    'template!../tpl/pogodbaAlt-form.tpl',
+    'template!../tpl/pogodbaAlt-modal.tpl',
     'formSchema!alternacija',
+    'formSchema!pogodba',
     'i18next',
     'app/Max/Module/Backgrid',
     'radio',
-    'backbone'
+    'backbone',
+    'backbone-modal'
 ], function (
-        IfiPostavkaView,
+        PostavkeView,
+        FormView,
         formTpl,
+        formPogodbaTpl,
+        formPogAltTpl,
         schema,
+        schemaPogodba,
         i18next,
         Backgrid,
         Radio,
-        Backbone
+        Backbone,
+        Modal
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
 
-    var AlternacijaView = IfiPostavkaView.extend({
+    var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema({
             oseba: {
@@ -46,8 +56,7 @@ define([
         detailName: 'alternacije',
         formTitle: i18next.t('alternacija.title'),
         triggers: {
-            "click .pogodba-dodaj": "dodaj:pogodbo",
-            "click .pogodba-click": "uredi:pogodbo"
+            "click .pogodba-dodaj": "dodaj:pogodbo"
         },
         gridMeta: [
             {
@@ -105,105 +114,100 @@ define([
         ]
     });
 
+
+    /**
+     * Priprava toolbara
+     * @returns {Array}
+     */
     AlternacijaView.prototype.prepareToolbar = function () {
         return  this.model ?
                 [[this.buttons.shrani, this.buttons.preklici, this.buttons.nasvet]] : [[]];
 
     };
+    /**
+     * Odpremo modal z določenim modelom
+     * @param {type} pogodba
+     * @returns {undefined}
+     */
+    AlternacijaView.prototype.pogodbaModal = function (pogodba) {
+        var self = this;
+        var Fv = FormView.extend({
+            formTitle: "naslov",
+            buttons: {
+                nasvet: {
+                    id: 'doc-nasvet',
+                    label: '<i class="fa fa-info"></i>',
+                    element: 'button-trigger',
+                    trigger: 'nasvet'
+                }
+            },
+            schema: schemaPogodba.toFormSchema().schema,
+            formTemplate: formPogodbaTpl,
+            template: formPogAltTpl
+        });
 
-    AlternacijaView.prototype.onUrediPogodbo = function () {
-        var vrednosti = this.form.fields.pogodba.editor.getValue();
-        if (vrednosti) {
-            var id = vrednosti['id'];
-            if (id) {
-//                var fragment = Backbone.history.getFragment();
-//                var url = fragment + '/pogodba/'+ id;
-//                Radio.channel('layout').command('open', view, 'pogodba.title', url);
+        var view = new Fv({
+            model: pogodba
+        });
+
+        var modal = new Modal({
+            content: view,
+            animate: true,
+            okText: i18next.t("std.izberi"),
+            cancelText: i18next.t("std.preklici"),
+            title: i18next.t("AltPogodba.title") + ' ' + this.model.get('oseba')['label']
+        });
+
+        var shraniSpremembe = function () {
+            if (!view.model.get('id')) {
+                view.listenTo(view, 'save:success', function () {
+                    self.dokument.pogodbeCollection.fetch({
+                        success: function () {
+                            self.dokument.pogodbeCollection.add(pogodba);
+                        }
+                    });
+                    self.form.fields.pogodba.editor.setValue(view.model.get('id'));
+                });
+                view.triggerMethod('shrani');
             }
-        }
-        else {
-            Radio.channel('error').command('flash', {
-                message: 'Pogodbe ni v vnosnem polju',
-                code: 9000002,
-                severity: 'success'
-            });
-        }
-    };
+        };
 
+        modal.open(function () {
+            shraniSpremembe();
+        });
+    };
+    /**
+     * Dodamo novo pogodbo
+     * ALI
+     * Uredimo že obstoječo pogodbo
+     * @returns {undefined}
+     */
     AlternacijaView.prototype.onDodajPogodbo = function () {
         var self = this;
-        require(['backbone-modal',
-            'app/Dokument/View/FormView',
-            'formSchema!pogodba',
-            'template!app/produkcija/tpl/pogodba-form.tpl',
-            'baseUrl',
-            'backbone',
-            'radio'
-        ], function (
-                Modal,
-                FormView,
-                schemaPogodba,
-                formPogodbaTpl,
-                baseUrl,
-                Backbone,
-                Radio
-                ) {
-            var Fv = FormView.extend({
-                formTitle: "naslov",
-                buttons: {
-                    shrani: {
-                        id: 'doc-shrani',
-                        label: 'Shrani',
-                        element: 'button-trigger',
-                        trigger: 'shrani',
-                        disabled: true
-                    },
-                    nasvet: {
-                        id: 'doc-nasvet',
-                        label: '<i class="fa fa-info"></i>',
-                        element: 'button-trigger',
-                        trigger: 'nasvet'
-                    }
-                },
-                schema: schemaPogodba.toFormSchema().schema,
-                formTemplate: formPogodbaTpl,
-                onFormChange: function (form) {
-                    var tb = this.getToolbarModel();
-                    var but = tb.getButton('doc-shrani');
-                    if (but.get('disabled')) {
-                        but.set({
-                            disabled: false
-                        });
+        var pogodba = null;
+        var toggle = this.$('.pogodba-dodaj');
+
+        if (toggle.hasClass('dodaj')) {
+            pogodba = this.dokument.dodajPogodbo(this.model);
+            toggle.toggleClass('dodaj');
+            this.pogodbaModal(pogodba);
+
+        } else {
+            var pogodbe = self.dokument.pogodbeCollection;
+            pogodbe.fetch({
+                success: function () {
+                    var vrednosti = self.form.fields.pogodba.editor.getValue();
+                    if (vrednosti) {
+                        var id = vrednosti['id'];
+                        if (id) {
+                            pogodba = pogodbe.get(id);
+                            toggle.toggleClass('dodaj');
+                            self.pogodbaModal(pogodba);
+                        }
                     }
                 }
             });
-
-            var Model = Backbone.Model.extend({
-                urlRoot: baseUrl + '/rest/pogodba'
-            });
-
-            var model = new Model();
-
-            var view = new Fv({
-                model: model
-            });
-
-            var modal = new Modal({
-                content: view,
-                animate: true,
-                okText: i18next.t("std.izberi"),
-                cancelText: i18next.t("std.preklici")
-            }).open(function () {
-                if (!view.model.get('id')) {
-                    Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove pogodbe', code: 9000001, severity: 'error'});
-                    modal.preventClose();
-                }
-                else {
-                    self.form.fields.pogodba.editor.setValue(view.model.get('id'));
-                    modal.close();
-                }
-            });
-        });
+        }
     };
 
     return AlternacijaView;

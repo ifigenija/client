@@ -42,14 +42,14 @@ define([
         defaultButtons: {
             shrani: {
                 id: 'doc-shrani',
-                label: 'Shrani',
+                label: i18next.t('std.shrani'),
                 element: 'button-trigger',
                 trigger: 'shrani',
                 disabled: true
             },
             preklici: {
                 id: 'doc-preklici',
-                label: 'Prekliči',
+                label: i18next.t('std.preklici'),
                 element: 'button-trigger',
                 trigger: 'preklici'
             },

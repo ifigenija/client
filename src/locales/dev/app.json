@@ -90,7 +90,9 @@
         "preklici": "Prekliči",
         "shrani": "Shrani",
         "premakniGor": "Premakni Gor",
-        "premakniDol": "Premakni Dol"
+        "premakniDol": "Premakni Dol",
+        "dodaj": "Dodaj",
+        "skrij": "Skrij"
     },
     "entiteta": {
         "dodaj": "Dodaj",
@@ -211,6 +213,8 @@
         "datnZav": "Zavezanec za DDV do",
         "zamejstvo": "Iz zamejstva",
         "nvo": "NVO",
+        "koproducent": "Koproducent",
+        "kupec": "Kupec",
         "d": {
             "tipkli": "Tip klienta (kupec, dobavitelj, koproducent, )",
             "stakli": "AK-aktiven, NA-neaktiven",

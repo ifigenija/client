@@ -29,20 +29,20 @@ define([
         buttons: {
             dodaj: {
                 id: 'doc-postavka-dodaj',
-                label: 'Dodaj',
+                label: i18next.t('std.dodaj'),
                 element: 'button-trigger',
                 trigger: 'dodaj'
             },
             shrani: {
                 id: 'doc-postavka-shrani',
-                label: 'Shrani',
+                label: i18next.t('std.shrani'),
                 element: 'button-trigger',
                 trigger: 'shrani',
                 disabled: true
             },
             preklici: {
                 id: 'docedit-preklici-postavko',
-                label: 'Prekliči',
+                label: i18next.t('std.preklici'),
                 element: 'button-trigger',
                 trigger: 'preklici'
             },

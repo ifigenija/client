@@ -177,7 +177,9 @@ define([
         require(['app/programDela/View/PremieraView'], function (View) {
             var view = new View({
                 collection: self.model.premiereCollection,
-                dokument: self.model
+                dokument: self.model,
+                odprtaForma: true,
+                potrdiIzbris: true
             });
             self.premiereR.show(view);
             return view;
@@ -195,7 +197,9 @@ define([
         require(['app/programDela/View/PonovitevPremiereView'], function (View) {
             var view = new View({
                 collection: self.model.ponovitvePremiereCollection,
-                dokument: self.model
+                dokument: self.model,
+                odprtaForma: true,
+                potrdiIzbris: true
             });
             self.ponovitvePremierR.show(view);
             return view;
@@ -213,7 +217,9 @@ define([
         require(['app/programDela/View/PonovitevPrejsnjeView'], function (View) {
             var view = new View({
                 collection: self.model.ponovitvePrejsnjihCollection,
-                dokument: self.model
+                dokument: self.model,
+                odprtaForma: true,
+                potrdiIzbris: true
             });
             self.ponovitvePrejsnjihR.show(view);
             return view;
@@ -231,7 +237,9 @@ define([
         require(['app/programDela/View/GostujocaView'], function (View) {
             var view = new View({
                 collection: self.model.gostujociCollection,
-                dokument: self.model
+                dokument: self.model,
+                odprtaForma: true,
+                potrdiIzbris: true
             });
             self.gostujociR.show(view);
             return view;
@@ -249,7 +257,9 @@ define([
         require(['app/programDela/View/GostovanjeView'], function (View) {
             var view = new View({
                 collection: self.model.gostovanjaCollection,
-                dokument: self.model
+                dokument: self.model,
+                odprtaForma: true,
+                potrdiIzbris: true
             });
             self.gostovanjaR.show(view);
             return view;
@@ -267,7 +277,9 @@ define([
         require(['app/programDela/View/IzjemniView'], function (View) {
             var view = new View({
                 collection: self.model.izjemniCollection,
-                dokument: self.model
+                dokument: self.model,
+                odprtaForma: true,
+                potrdiIzbris: true
             });
             self.izjemniR.show(view);
             return view;
@@ -285,7 +297,9 @@ define([
         require(['app/programDela/View/FestivalView'], function (View) {
             var view = new View({
                 collection: self.model.festivaliCollection,
-                dokument: self.model
+                dokument: self.model,
+                odprtaForma: true,
+                potrdiIzbris: true
             });
             self.festivaliR.show(view);
             return view;
@@ -303,7 +317,9 @@ define([
         require(['app/programDela/View/RaznoView'], function (View) {
             var view = new View({
                 collection: self.model.programiRaznoCollection,
-                dokument: self.model
+                dokument: self.model,
+                odprtaForma: true,
+                potrdiIzbris: true
             });
             self.razniR.show(view);
             return view;

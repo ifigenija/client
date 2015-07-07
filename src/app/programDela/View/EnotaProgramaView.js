@@ -5,38 +5,38 @@
  * Licenca GPLv3
  */
 define([
-    'app/programDela/View/IfiPostavkaView',
+    'app/Dokument/View/PostavkeView',
     'app/programDela/View/DrugiVirView',
     'app/programDela/View/KoprodukcijaView',
-    'underscore',
+    'i18next',
     'template!../tpl/enota-programa.tpl'
 ], function (
-        IfiPostavkaView,
+        PostavkeView,
         DrugiVirView,
         KoprodukcijaView,
-        _,
+        i18next,
         enotaTpl
         ) {
 
-    var EnotaProgramaView = IfiPostavkaView.extend({
+    var EnotaProgramaView = PostavkeView.extend({
         template: enotaTpl,
         buttons: {
             dodaj: {
                 id: 'doc-postavka-dodaj',
-                label: 'Dodaj',
+                label: i18next.t('std.dodaj'),
                 element: 'button-trigger',
                 trigger: 'dodaj'
             },
             shrani: {
                 id: 'doc-postavka-shrani',
-                label: 'Shrani',
+                label: i18next.t('std.shrani'),
                 element: 'button-trigger',
                 trigger: 'shrani',
                 disabled: true
             },
             preklici: {
                 id: 'docedit-preklici-postavko',
-                label: 'Prekliči',
+                label: i18next.t('std.preklici'),
                 element: 'button-trigger',
                 trigger: 'preklici'
             },

@@ -8,7 +8,9 @@ define([
     'formSchema!uprizoritev',
     'i18next',
     'app/Max/View/TabControl',
-    'radio'
+    'radio',
+    'backbone',
+    'baseUrl'
 ], function (
         DokumentView,
         tpl,
@@ -16,7 +18,9 @@ define([
         shema,
         i18next,
         TabControl,
-        Radio
+        Radio,
+        Backbone,
+        baseUrl
         ) {
 
     /**
@@ -148,7 +152,7 @@ define([
                 error: function () {
                     Radio.channel('error').command('flash', {
                         message: i18next.t("napaka.fetch") + ' ' + '(Alternacije)',
-                        code:'9000005',
+                        code: '9000005',
                         severity: 'error'
                     });
                 }
@@ -167,6 +171,9 @@ define([
             view.listenTo(view, "save:success", function () {
                 view.renderList();
             });
+            self.listenTo(view, "odpri:pogodbo", function (id) {
+                self.onPogodbe();
+            });
 
             self.regionDetail.show(view);
         });
@@ -176,15 +183,14 @@ define([
      * Urejanje igralcev
      * @returns {undefined}
      */
-    UprizoritevStrosekEditView.prototype.renderPogodbe = function () {
-
+    UprizoritevStrosekEditView.prototype.renderPogodbe = function () {        
         var c = this.model.pogodbeCollection;
         if (c.length === 0) {
             c.fetch({
                 error: function () {
                     Radio.channel('error').command('flash', {
                         message: i18next.t("napaka.fetch") + ' ' + '(Pogodbe)',
-                        code:'9000006',
+                        code: '9000006',
                         severity: 'error'
                     });
                 }

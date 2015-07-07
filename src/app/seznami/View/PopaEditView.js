@@ -45,28 +45,28 @@ define([
     var gumbi = {
         producent: {
             id: 'doc-producent',
-            label: 'Koproducent',
+            label: i18next.t('popa.koproducent'),
             element: 'button-trigger',
             trigger: 'koproducent',
             hidden: true
         },
         kupec: {
             id: 'doc-kupec',
-            label: 'Kupec',
+            label: i18next.t('popa.kupec'),
             element: 'button-trigger',
             trigger: 'kupec',
             hidden: true
         },
         shrani: {
             id: 'doc-shrani',
-            label: 'Shrani',
+            label: i18next.t('std.shrani'),
             element: 'button-trigger',
             trigger: 'shrani',
             disabled: true
         },
         skrij: {
             id: 'doc-skrij',
-            label: 'Skrij',
+            label: i18next.t('std.skrij'),
             element: 'button-trigger',
             trigger: 'skrij'
         },

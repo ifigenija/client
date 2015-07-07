@@ -2,13 +2,13 @@
  * Licenca GPLv3
  */
 define([
-    'app/programDela/View/IfiPostavkaView',
+    'app/Dokument/View/PostavkeView',
     'template!../tpl/strosek-form.tpl',
     'formSchema!strosekUprizoritve',
     'i18next',
     'app/Max/Module/Backgrid'
 ], function (
-        IfiPostavkaView,
+        PostavkeView,
         formTpl,
         schema,
         i18next,
@@ -19,7 +19,7 @@ define([
             className: 'backgrid-kolona-stevilk'
         });
 
-    var StrosekView = IfiPostavkaView.extend({
+    var StrosekView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         title: i18next.t('strupr.title'),

@@ -7,7 +7,8 @@ define([
     'backbone',
     'radio',
     'i18next',
-    './nav'
+    './nav',
+    'baseUrl'
 
 ], function (
         Marionette,
@@ -15,7 +16,8 @@ define([
         Backbone,
         Radio,
         i18next,
-        moduleNav
+        moduleNav,
+        baseUrl
         ) {
 
 
@@ -55,15 +57,65 @@ define([
                 };
                 model.once('sync', odpriView);
                 model.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' ' + '(ProgramDela)',
-                        code:'9000100',
-                        severity: 'error'
+                    error: function () {
+                        Radio.channel('error').command('flash', {
+                            message: i18next.t("napaka.fetch") + ' ' + '(ProgramDela)',
+                            code: '9000100',
+                            severity: 'error'
+                        });
+                    }
+                });
+            });
+        };
+
+        var prikaz = function (id, idd, akcije) {
+            require(['../Model/ProgramDokument', '../View/ProgramDokView'], function (Model, View) {
+                var model = new Model.Model({id: id});
+                var odpriView = function () {
+                    var view = new View({model: model});
+                    ch.command('open', view, i18next.t('programDela.title'));
+                    _.each(akcije, function (akcija) {
+                        view.triggerMethod(akcija);
                     });
-                }
+                };
+                model.once('sync', odpriView);
+                model.fetch();
             });
-            });
+        };
+
+
+        /**
+         * odpre stran za urejanje Ponovitve premiere
+         * @param {string} id
+         * @returns {undefined}
+         */
+        mod.sklopEna = function (id, idd) {
+            prikaz(id, idd, [
+                'sklopEna',
+                'premiere'
+            ]);
+        };
+
+        /**
+         * odpre stran za urejanje festivali
+         * @param {string} id
+         * @returns {undefined}
+         */
+        mod.sklopDva = function (id, idd) {
+            prikaz(id, idd, [
+                'sklopDva',
+                'gostovanje'
+            ]);
+        };
+        /**
+         * odpre stran za urejanje kazalniki
+         * @param {string} id
+         * @returns {undefined}
+         */
+        mod.kazalniki = function (id, idd) {
+            prikaz(id, idd, [
+                'kazalniki'
+            ]);
         };
 
         /**
@@ -77,7 +129,10 @@ define([
                 appRoutes: {
                     'programDela': 'programDela',
                     'programDela/dodaj': 'programDelaDodaj',
-                    'programDela/:id': 'programDelaUredi'
+                    'programDela/:id': 'programDelaUredi',
+                    'programDela/:id/sklopEna': 'sklopEna',
+                    'programDela/:id/sklopDva': 'sklopDva',
+                    'programDela/:id/kazalniki': 'kazalniki'
                 }
             });
         });
