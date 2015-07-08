@@ -47,13 +47,14 @@ define([
         },
         dodajPogodbo: function (alternacija) {
 
+            var pogodba;
             if (alternacija) {
-                var pogodba = new PogodbaModel({
+                pogodba = new PogodbaModel({
                     alternacije: alternacija.get('id'),
                     oseba: alternacija.get('oseba')
                 });
-            }else{
-                var pogodba = new PogodbaModel();
+            } else {
+                pogodba = new PogodbaModel();
             }
             pogodba.dokument = this;
             return pogodba;

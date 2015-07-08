@@ -377,13 +377,14 @@
     },
     "alternacija": {
         "title": "Alternacije",
-        "zaposlen": "Zaposlen",
+        "zaposlen": "Je zaposlen",
         "privzeti": "Privzeti",
         "sodelovanje": "Sodelovanje",
         "koprodukcija": "Koprodukcija",
         "pogodba": "Pogodba",
         "zaposlitev": "Zaposlitev",
         "pomembna": "Pomembna",
+        "imaPogodbo": "Ima pogodbo",
         "d": {
             "zaposlen": "Ali je zaposlen",
             "privzeti": "Ali je privzeti",
@@ -484,7 +485,10 @@
         "vrednostUre": "Vrednost ure",
         "vrednostDo": "Vrednost do",
         "popa": "Klient",
+        "vrednostDoPremiere": "Vrednost do premiere",
+        "zaposlenVDrJz": "Zaposlen v drugem javnem zavodu",
         "trr": "TRR",
+        "naslov": "Pogodba za osebo: ",
         "d": {
             "vrednostVaj": "Pavšalna vrednost za vse vaje"
         }
@@ -555,9 +559,9 @@
     },
     "ep": {
         "celotnaVrednost": "Celotna vrednost",
-        "celotnaVrednostMat": "Celotna vr. na mat.odru",
-        "nasDelez": "Naš delež c.v",
-        "celotnaVrednostGostovSZ": "Celotna vrednost na gostovanju Slo in zam.",
+        "celotnaVrednostMat": "Celotna vred. na matičnem odru",
+        "nasDelez": "Naš delež celotne vrednosti",
+        "celotnaVrednostGostovSZ": "Celotna vred. na gost. Slo in zam.",
         "zaproseno": "Zaprošeno",
         "lastnaSredstva": "Lastna sredstva",
         "avtorskiHonorarji": "Avtorski honorarji",
@@ -577,8 +581,8 @@
         "tipProgramskeEnote": "Tip programske Enote",
         "tip": "Tip",
         "sort": "Sort",
-        "stZaposlenih": "Število zap., ki sodelujejo pri izvedbi projekta",
-        "stZaposUmet": "Število zaposlenih članov umetniškega ansambla",
+        "stZaposlenih": "Število zaposlenih na projektu",
+        "stZaposUmet": "Število zap. članov umet. ansambla",
         "stZaposDrug": "Število drugih",
         "stHonorarnih": "Število honorarnih",
         "stHonorarnihIgr": "Število honorarnih igralcev",

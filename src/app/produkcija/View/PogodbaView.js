@@ -98,25 +98,10 @@ define([
 
     };
 
-    PostavkeView.prototype.onDodaj = function () {
+    PogodbaView.prototype.onDodaj = function () {
         this.model = this.dokument.dodajPogodbo();
         this.triggerMethod('get:defaults', this.model);
         this.renderFormAndToolbar();
-    };
-
-    PogodbaView.prototype.initialize = function () {
-        var self = this;
-        Radio.channel('layout').comply('odpriModel', function (id) {
-            var PogodbaModel = Backbone.Model.extend({
-                urlRoot: baseUrl + '/rest/pogodba'
-            });
-
-            var model = new PogodbaModel({id: id});
-            model.once('sync', function () {
-                self.triggerMethod('uredi', model);
-            });
-            model.fetch();
-        });
     };
 
     return PogodbaView;

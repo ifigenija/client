@@ -9,13 +9,17 @@ define([
     'app/programDela/View/DrugiVirView',
     'app/programDela/View/KoprodukcijaView',
     'i18next',
-    'template!../tpl/enota-programa.tpl'
+    'template!../tpl/enota-programa.tpl',
+    'backbone-modal',
+    'marionette'
 ], function (
         PostavkeView,
         DrugiVirView,
         KoprodukcijaView,
         i18next,
-        enotaTpl
+        enotaTpl,
+        Modal,
+        Marionette
         ) {
 
     var EnotaProgramaView = PostavkeView.extend({
@@ -66,12 +70,11 @@ define([
      * 
      * @returns {undefined}
      */
-    EnotaProgramaView.prototype.initialize = function () {
+    EnotaProgramaView.prototype.initialize = function (options) {
         this.on('preklici', function () {
             this.drugiViriR.empty();
             this.koprodukcijeR.empty();
         }, this);
-
     };
     /**
      * prikaz gumbov v toolbaru
@@ -132,30 +135,22 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.onIzpolni = function () {
-        var self = this;
-        require(['backbone-modal', 'marionette', 'template!app/programDela/tpl/premiera-izpolni.tpl', 'i18next'], function (Modal, Marionette, izpolniTpl, i18next) {
-            var View = Marionette.ItemView.extend({
-                template: izpolniTpl,
-                serializeData: function () {
-                    return {
-                        novaCelVred: "some value"
-                    };
-                }
-            });
-
-            var view = new View({
-                model: self.model
-            });
-
-            var modal = new Modal({
-                content: view,
-                animate: true,
-                okText: i18next.t("std.izberi"),
-                cancelText: i18next.t("std.preklici")
-            });
-
-            modal.open();
+        var View = Marionette.ItemView.extend({
+            template: this.izpolniTpl
         });
+
+        var view = new View({
+            model: this.model
+        });
+
+        var modal = new Modal({
+            content: view,
+            animate: true,
+            okText: i18next.t("std.izberi"),
+            cancelText: i18next.t("std.preklici")
+        });
+
+        modal.open();
     };
 
     return EnotaProgramaView;

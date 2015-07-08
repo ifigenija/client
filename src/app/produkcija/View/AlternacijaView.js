@@ -96,10 +96,10 @@ define([
                 sortable: false
             },
             {
-                cell: 'string',
+                cell: 'boolean',
                 editable: false,
-                label: i18next.t('alternacija.pogodba'),
-                name: 'pogodba.label',
+                label: i18next.t('alternacija.imaPogodbo'),
+                name: 'imaPogodbo',
                 sortable: false
             },
             {
@@ -154,7 +154,7 @@ define([
             animate: true,
             okText: i18next.t("std.izberi"),
             cancelText: i18next.t("std.preklici"),
-            title: i18next.t("AltPogodba.title") + ' ' + this.model.get('oseba')['label']
+            title: i18next.t("pogodba.naslov") + ' ' + this.model.get('oseba')['label']
         });
 
         var shraniSpremembe = function () {
@@ -184,11 +184,9 @@ define([
     AlternacijaView.prototype.onDodajPogodbo = function () {
         var self = this;
         var pogodba = null;
-        var toggle = this.$('.pogodba-dodaj');
 
-        if (toggle.hasClass('dodaj')) {
+        if (!self.model.get('pogodba')) {
             pogodba = this.dokument.dodajPogodbo(this.model);
-            toggle.toggleClass('dodaj');
             this.pogodbaModal(pogodba);
 
         } else {
@@ -200,7 +198,6 @@ define([
                         var id = vrednosti['id'];
                         if (id) {
                             pogodba = pogodbe.get(id);
-                            toggle.toggleClass('dodaj');
                             self.pogodbaModal(pogodba);
                         }
                     }
