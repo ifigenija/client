@@ -123,6 +123,7 @@
         "aktivna": "Aktivna",
         "interNaslov": "Internacionalni naslov",
         "zvrst": "Vrsta uprizoritve",
+        "koproducent": "Koproducent",
         "d": {
             "sifra": "Enolična oznaka",
             "jeeu": "Je iz EU ali ne",
@@ -556,7 +557,7 @@
         "celotnaVrednost": "Celotna vrednost",
         "celotnaVrednostMat": "Celotna vr. na mat.odru",
         "nasDelez": "Naš delež c.v",
-        "celotnaVrednostGostovSZ": "Celotna vr. na gost. Slo in zam.",
+        "celotnaVrednostGostovSZ": "Celotna vrednost na gostovanju Slo in zam.",
         "zaproseno": "Zaprošeno",
         "lastnaSredstva": "Lastna sredstva",
         "avtorskiHonorarji": "Avtorski honorarji",
@@ -576,12 +577,12 @@
         "tipProgramskeEnote": "Tip programske Enote",
         "tip": "Tip",
         "sort": "Sort",
-        "stZaposlenih": "Št. zap., ki sodelujejo pri izvedbi projekta",
-        "stZaposUmet": "Št, zap. čl. umet.",
+        "stZaposlenih": "Število zap., ki sodelujejo pri izvedbi projekta",
+        "stZaposUmet": "Število zaposlenih članov umetniškega ansambla",
         "stZaposDrug": "Število drugih",
-        "stHonorarnih": "Št. hon.",
-        "stHonorarnihIgr": "Št. hon. igr.",
-        "stHonorarnihIgrTujJZ": "Št. hon. igr. tuj Jz",
+        "stHonorarnih": "Število honorarnih",
+        "stHonorarnihIgr": "Število honorarnih igralcev",
+        "stHonorarnihIgrTujJZ": "Število honorarnih igralcev iz tujih JZ",
         "d": {
             "celotnaVrednost": "Celotna vrednost",
             "nasDelez": "Naš delež celotne vrednosti",
@@ -672,14 +673,6 @@
     "izjemni": {
         "title": "Izjemni programi"
     },
-    "drugiVir": {
-        "znesek": "Znesek",
-        "mednarodni": "Mednarodni viri",
-        "d": {
-            "znesek": "drugiVir.znesek",
-            "mednarodni": "drugiVir.mednarodni"
-        }
-    },
     "programRazno": {
         "title": "Razni programi",
         "naslovPE": "Naslov",
@@ -713,12 +706,12 @@
             "tipstroska": "Tip stroška projekta/uprizoritve"
         }
     },
-    "drugivir": {
+    "drugiVir": {
         "title": "Drugi vir",
         "znesek": "Znesek",
         "opis": "Opis",
-        "enotaPrograma": "enota pr.",
-        "mednarodni": "medn.",
+        "enotaPrograma": "Enota programa",
+        "mednarodni": "Mednarodni viri",
         "d": {
             "znesek": "Znesek drugega vira",
             "opis": "Opis drugega vira",

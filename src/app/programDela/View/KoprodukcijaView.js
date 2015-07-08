@@ -23,7 +23,7 @@ define([
         schema: schema.toFormSchema().schema,
         name: 'Koprodukcije',
         detailName: 'koprodukcije',
-        formTitle: i18next.t('koprodukcija.title'),
+        formTitle: i18next.t('prodel.title'),
         gridMeta: [
             {
                 cell: 'string',
@@ -36,7 +36,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('koprodukcija.zaprosenProcent'),
+                label: i18next.t('prodel.zaprosenProcent'),
                 name: 'zaprosenProcent',
                 total: 'sum',
                 sortable: true
@@ -45,7 +45,7 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('koprodukcija.odstotekFinanciranja'),
+                label: i18next.t('prodel.odstotekFinanciranja'),
                 name: 'odstotekFinanciranja',
                 total: 'sum',
                 sortable: true
