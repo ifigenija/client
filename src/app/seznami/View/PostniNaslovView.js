@@ -17,7 +17,6 @@ define([
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'naslovi',
-        name: 'PostniNaslov',
         formTitle: i18next.t('postniNaslov.title'),
         gridMeta: [
             {

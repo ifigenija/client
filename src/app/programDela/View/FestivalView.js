@@ -23,7 +23,6 @@ define([
     var FestivalView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Festival',
         detailName: 'festivali',
         formTitle: i18next.t('festival.title'),
         buttons: {

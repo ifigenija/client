@@ -21,7 +21,6 @@ define([
     var KoprodukcijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Koprodukcije',
         detailName: 'koprodukcije',
         formTitle: i18next.t('prodel.title'),
         gridMeta: [

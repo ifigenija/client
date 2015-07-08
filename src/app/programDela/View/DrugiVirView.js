@@ -21,7 +21,6 @@ define([
     var DrugiVirView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'DrugiVir',
         detailName: 'drugiViri',
         formTitle: i18next.t('drugiVir.title'),
         gridMeta: [

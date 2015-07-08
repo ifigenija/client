@@ -1,8 +1,8 @@
 <form>
     <div class="col-sm-6">
         <div class="row">
-            <div class="col-sm-12 col-md-6" data-fields="sifra,oseba,popa,vrednostVaj"></div>
-            <div class="col-sm-12 col-md-6" data-fields="vrednostPredstave,vrednostUre,trr"></div>
+            <div class="col-sm-12 col-md-6" data-fields="sifra,oseba,popa,trr"></div>
+            <div class="col-sm-12 col-md-6" data-fields="vrednostVaj,vrednostPredstave,vrednostUre"></div>
         </div>
     </div>
     <div class="col-sm-6">

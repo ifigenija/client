@@ -16,7 +16,6 @@ define([
     var TrrView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Trr',
         detailName: 'trrji',
         formTitle: i18next.t('trr.title'),
         gridMeta: [

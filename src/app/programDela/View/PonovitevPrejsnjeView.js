@@ -21,7 +21,6 @@ define([
     var PonovitevView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Ponovitev prejsnjih',
         detailName: 'ponovitvePrejsnjih',
         formTitle: i18next.t('ponovitevPrejsnjih.title'),
         gridMeta: [

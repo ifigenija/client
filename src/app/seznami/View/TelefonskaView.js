@@ -17,7 +17,6 @@ define([
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'telefonske',
-        name: i18next.t('uprizoritve.telefonska'),
         formTitle: i18next.t('tel.title'),
         gridMeta: [
             {

@@ -21,7 +21,6 @@ define([
     var GostovanjeView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Gostovanje',
         detailName: 'gostovanja',
         formTitle: i18next.t('gostovanje.title'),
         gridMeta: [

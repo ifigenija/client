@@ -21,7 +21,6 @@ define([
     var IzjemniView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Izjemni',
         detailName: 'izjemni',
         formTitle: i18next.t('izjemni.title'),
         gridMeta: [

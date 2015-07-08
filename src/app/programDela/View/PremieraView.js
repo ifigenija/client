@@ -21,7 +21,6 @@ define([
     var PremieraView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Premiera',
         detailName: 'premiere',
         formTitle: i18next.t('premiera.title'),
         gridMeta: [

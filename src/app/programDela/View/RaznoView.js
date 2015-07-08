@@ -21,7 +21,6 @@ define([
     var RaznoView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        name: 'Razno',
         detailName: 'programiRazno',
         formTitle: i18next.t('programRazno.title'),
         gridMeta: [

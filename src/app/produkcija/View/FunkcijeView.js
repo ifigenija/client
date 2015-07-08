@@ -45,7 +45,6 @@ define([
         formTemplate: formTpl,
         template: tpl,
         schema: sch,
-        name: '',
         detailName: '',
         formTitle: i18next.t('funkcija.title'),
         regions: {
