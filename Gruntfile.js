@@ -45,7 +45,7 @@ module.exports = function (grunt) {
         requirejs: {
             compile: {
                 options: {
-                    baseUrl: 'src',
+                    baseUrl: 'src/js',
                     paths: {
                         'underscore': 'lib/underscore/underscore',
                         'bootstrap': 'lib/bootstrap/dist/js/bootstrap.min',
@@ -201,21 +201,30 @@ module.exports = function (grunt) {
             minifyYeti: {
                 src: 'src/css/yeti.css',
                 dest: 'src/dist/css/yeti.css'
+            },
+            minifySite: {
+                src: 'src/css/site.css',
+                dest: 'src/dist/css/site.css'
+            },
+            minifyBackgrid: {
+                src: 'src/css/backgrid.css',
+                dest: 'src/dist/css/backgrid.css'
+            },
+            minifyLayout: {
+                src: 'src/css/Layout.css',
+                dest: 'src/dist/css/Layout.css'
             }
         },
         copy: {
             fonts: {
-                expand: true,
                 src: 'src/lib/bootstrap/fonts/*',
-                dest: 'src/css'
+                dest: 'src/css/'
             },
             fontsDist: {
-                expand: true,
                 src: 'src/lib/bootstrap/fonts/*',
-                dest: 'src/css/dist'
+                dest: 'src/dist/css/'
             }
-
-        },
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -231,7 +240,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['karma']);
 
     // CSS distribution task.
-    grunt.registerTask('less-compile', ['less:compileCore', 'less:compileTheme']);
+    grunt.registerTask('less-compile', ['less:compilePublic', 'less:compileTheme', 'less:compilePublic', 'less:compileLayout', 'less:compileBackgrid', 'less:compileSite']);
     grunt.registerTask('dist-css', ['less-compile', 'cssmin', 'copy']);
 
     // Full distribution task.

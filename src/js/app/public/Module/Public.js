@@ -87,7 +87,7 @@ define([
         mod.redirectToMain = function (userData) {
 
             // shranim podatke, ki smo jih dobili iz strežnika v session storage 
-            var url = 'main.html';
+            var url = 'main.php';
             sessionStorage.setItem('ifi.user.data', JSON.stringify(userData));
 
             if (userData.defaultRoute) {
