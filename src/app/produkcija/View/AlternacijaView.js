@@ -145,35 +145,36 @@ define([
             template: formPogAltTpl
         });
 
-        var view = new Fv({
+        var formView = new Fv({
             model: pogodba
         });
 
         var modal = new Modal({
-            content: view,
+            content: formView,
             animate: true,
             okText: i18next.t("std.izberi"),
             cancelText: i18next.t("std.preklici"),
             title: i18next.t("pogodba.naslov") + ' ' + this.model.get('oseba')['label']
         });
 
+        modal.open(function () {
+            shraniSpremembe();
+        });
+        
         var shraniSpremembe = function () {
-            if (!view.model.get('id')) {
-                view.listenTo(view, 'save:success', function () {
+            if (!formView.model.get('id')) {
+                formView.listenTo(formView, 'save:success', function () {
                     self.dokument.pogodbeCollection.fetch({
                         success: function () {
                             self.dokument.pogodbeCollection.add(pogodba);
                         }
                     });
-                    self.form.fields.pogodba.editor.setValue(view.model.get('id'));
                 });
-                view.triggerMethod('shrani');
+                
+                formView.triggerMethod('shrani');
             }
         };
-
-        modal.open(function () {
-            shraniSpremembe();
-        });
+        
     };
     /**
      * Dodamo novo pogodbo
@@ -185,7 +186,7 @@ define([
         var self = this;
         var pogodba = null;
 
-        if (!self.model.get('pogodba')) {
+        if (!self.model.get('imaPogodbo')) {
             pogodba = this.dokument.dodajPogodbo(this.model);
             this.pogodbaModal(pogodba);
 

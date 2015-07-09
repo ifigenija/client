@@ -18,9 +18,11 @@ define([
         baseUrl,
         Backgrid
         ) {
+    
     var hc = Backgrid.HeaderCell.extend({
         className: 'backgrid-kolona-stevilk'
     });
+    
     var ProstorView = SeznamView.extend({
         url: baseUrl + '/rest/prostor',
         title: i18next.t('prostor.title'),
@@ -54,7 +56,6 @@ define([
                 editable: false,
                 label: i18next.t('entiteta.kapaciteta'),
                 name: 'kapaciteta',
-                total: 'sum',
                 sortable: true
             },
             {

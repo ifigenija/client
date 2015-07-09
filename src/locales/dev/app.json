@@ -486,9 +486,12 @@
         "vrednostDo": "Vrednost do",
         "popa": "Klient",
         "vrednostDoPremiere": "Vrednost do premiere",
-        "zaposlenVDrJz": "Zaposlen v drugem javnem zavodu",
+        "zaposlenVDrJz": "Zaposlen v drugem JZ",
         "trr": "TRR",
         "naslov": "Pogodba za osebo: ",
+        "placiloNaVajo": "Plačilo na vajo",
+        "vrednostVaje": "Vrednost vaje",
+        "planiranoSteviloVaj": "Načrtovano število vaj",
         "d": {
             "vrednostVaj": "Pavšalna vrednost za vse vaje"
         }

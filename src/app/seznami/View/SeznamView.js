@@ -67,7 +67,7 @@ define([
                 element: 'button-trigger',
                 trigger: 'nasvet'
             }
-        },
+        }
     });
 
     /**

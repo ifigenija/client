@@ -89,7 +89,7 @@ define([
             regionTelefonske: '.region-telefonske',
             regionTabs: '.popa-tabs'
         },
-        buttons: gumbi,
+        buttons: gumbi
     });
     PopaEditView.prototype.getNaziv = function () {
         var naziv = this.model.get('naziv');

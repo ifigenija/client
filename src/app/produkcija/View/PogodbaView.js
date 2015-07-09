@@ -6,19 +6,13 @@ define([
     'template!../tpl/pogodba-form.tpl',
     'formSchema!pogodba',
     'i18next',
-    'app/Max/Module/Backgrid',
-    'radio',
-    'baseUrl',
-    'backbone'
+    'app/Max/Module/Backgrid'
 ], function (
         PostavkeView,
         formTpl,
         schema,
         i18next,
-        Backgrid,
-        Radio,
-        baseUrl,
-        Backbone
+        Backgrid
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -51,6 +45,13 @@ define([
                 editable: false,
                 label: i18next.t('entiteta.oseba'),
                 name: 'oseba.label',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('pogodba.alternacija'),
+                name: 'alternacija.label',
                 sortable: true
             },
             {
@@ -94,7 +95,13 @@ define([
 
     PogodbaView.prototype.prepareToolbar = function () {
         return  this.model ?
-                [[this.buttons.shrani, this.buttons.preklici, this.buttons.nasvet]] : [[]];
+                [
+                    [
+                        this.buttons.shrani,
+                        this.buttons.preklici,
+                        this.buttons.nasvet
+                    ]
+                ] : [[]];
 
     };
 

@@ -50,7 +50,7 @@ define([
             var pogodba;
             if (alternacija) {
                 pogodba = new PogodbaModel({
-                    alternacije: alternacija.get('id'),
+                    alternacija: alternacija,
                     oseba: alternacija.get('oseba')
                 });
             } else {
