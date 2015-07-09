@@ -9,10 +9,12 @@ define([
     'app/Max/View/PaginatedGrid',
     'app/Max/Module/Backgrid',
     'template!../tpl/seznam.html',
+    'template!../tpl/seznam-grid.tpl',
     'app/Max/Model/MaxPageableCollection',
     'backbone',
     'app/Max/View/Toolbar',
-    'underscore'
+    'underscore',
+    'app/Max/View/BackgridFooter'
 ], function (
         Marionette,
         Radio,
@@ -21,12 +23,18 @@ define([
         PaginatedGrid,
         Backgrid,
         seznamTpl,
+        gridTpl,
         Coll,
         Backbone,
         Toolbar,
-        _
+        _,
+        BackgridFooter
         ) {
-
+    /**
+     * Ko uporabimo SeznamView, ga je potrebno extendat in overridat 
+     * vse atribute z vrednostjo null.
+     * @type @exp;Marionette@pro;LayoutView@call;extend
+     */
     var SeznamView = Marionette.LayoutView.extend({
         template: seznamTpl,
         url: null,
@@ -59,9 +67,14 @@ define([
                 element: 'button-trigger',
                 trigger: 'nasvet'
             }
-        }
+        },
     });
 
+    /**
+     * Inicializacija seznamaView
+     * @param {type} options
+     * @returns {undefined}
+     */
     SeznamView.prototype.initialize = function (options) {
 
         this.url = options.url || this.url;
@@ -78,13 +91,20 @@ define([
         this.listenTo(this.collection, 'backgrid:action', this.onGridAction);
     };
 
+    /**
+     * Pridobimo kolekcijo
+     * @returns {Marionette.LayoutView@call;extend.prototype.getCollection.coll|SeznamView_L16.SeznamView.prototype.getCollection.coll}
+     */
     SeznamView.prototype.getCollection = function () {
         var C = Coll.extend({model: Backbone.DeepModel});
         var coll = new C();
         coll.url = this.url;
         return coll;
     };
-
+    /**
+     * Izris seznamaView
+     * @returns {undefined}
+     */
     SeznamView.prototype.onRender = function () {
 
         this.$('.seznam-naslov').text(this.title);
@@ -93,9 +113,12 @@ define([
             collection: this.collection
         });
         this.grid = new PaginatedGrid({
+            template: gridTpl,
+            gridContainerClass: 'seznam-grid',
             collection: this.collection,
             row: Backgrid.ClickableRow,
             columns: this.columns,
+            footer: BackgridFooter.extend({columns: this.columns}),
             filterView: fv
         });
 
@@ -113,7 +136,10 @@ define([
             }
         });
     };
-
+    /**
+     * Izris toolbara
+     * @returns {undefined}
+     */
     SeznamView.prototype.renderToolbar = function () {
         var tool = [[
                 {
@@ -143,7 +169,7 @@ define([
 
 
     /**
-     * 
+     * Ob kliku briši
      * @param {type} model
      * @returns {undefined}
      */
@@ -172,7 +198,8 @@ define([
     };
 
     /**
-     * 
+     * Ko preklapljamo med modeli v določenem Seznamu view se sestavi nov url,
+     * ki bo zamenjal starega
      * @param {type} model
      * @returns {undefined}
      */
@@ -214,8 +241,7 @@ define([
     };
 
     /**
-     * 
-     * 
+     * Ob uspečno shranjenem modelu se izvede ta funkcija 
      * @param {type} model
      * @returns {undefined}
      */
@@ -225,21 +251,28 @@ define([
         this.collection.fetch();
     };
 
-    /** 
-     * kaj se zgodi, ko pritisnemo skrij/preklici
-     * 
+    /**
+     * Ob kliku prekliči
+     * @returns {undefined}
      */
     SeznamView.prototype.preklici = function () {
         this.formR.empty();
         this.renderToolbar();
         this.zamenjajUrl();
     };
-
+    /**
+     * Pridobi naslov forme
+     * @param {type} model
+     * @returns {Marionette.LayoutView@call;extend.prototype.getTitle.text|String}
+     */
     SeznamView.prototype.getTitle = function (model) {
         var text = model.get('naziv') || "Naziv";
         return text;
     };
-
+    /**
+     * Ob kliku dodaj
+     * @returns {undefined}
+     */
     SeznamView.prototype.onDodaj = function () {
         this.zapSortSt(this.collection, 'sort');
     };
@@ -272,7 +305,12 @@ define([
         });
 
     };
-
+    /**
+     * Funkcija pridobi vrednost za atribut, ki smo ga izbrali
+     * @param {type} collection
+     * @param {type} attrSort
+     * @returns {undefined}
+     */
     SeznamView.prototype.zapSortSt = function (collection, attrSort) {
         var min = -100;
         _.each(collection.models, function (e) {

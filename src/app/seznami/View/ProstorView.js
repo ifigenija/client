@@ -7,16 +7,20 @@ define([
     'formSchema!prostor',
     '../Model/Prostor',
     'i18next',
-    'baseUrl'
+    'baseUrl',
+    'app/Max/Module/Backgrid'
 ], function (
         SeznamView,
         formTpl,
         schema,
         Prostor,
         i18next,
-        baseUrl
+        baseUrl,
+        Backgrid
         ) {
-
+    var hc = Backgrid.HeaderCell.extend({
+        className: 'backgrid-kolona-stevilk'
+    });
     var ProstorView = SeznamView.extend({
         url: baseUrl + '/rest/prostor',
         title: i18next.t('prostor.title'),
@@ -45,10 +49,12 @@ define([
                 sortable: true
             },
             {
+                headerCell: hc,
                 cell: 'number',
                 editable: false,
                 label: i18next.t('entiteta.kapaciteta'),
                 name: 'kapaciteta',
+                total: 'sum',
                 sortable: true
             },
             {
@@ -68,7 +74,7 @@ define([
             }
         ]
     });
-    
+
     ProstorView.prototype.getTitle = function (model) {
         var text = i18next.t("prostor.nova");
 

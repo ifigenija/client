@@ -77,7 +77,7 @@ define([
         }, this);
     };
     /**
-     * prikaz gumbov v toolbaru
+     * Vsi gumbi, ki so navoljo toolbaru za izrisS
      * @returns {Array}
      */
     EnotaProgramaView.prototype.prepareToolbar = function () {

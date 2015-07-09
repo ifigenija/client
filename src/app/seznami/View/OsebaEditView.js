@@ -18,7 +18,11 @@ define([
         TabControl,
         Radio
         ) {
-
+    /**
+     * Različni možni pogledi osebeedit view.
+     * Vsak pogled prikaže samo določene podatke/tabe
+     * @type Array
+     */
     var tabVse = [
         {name: i18next.t('entiteta.splosno'), event: 'splosni'},
         {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'},
@@ -64,6 +68,10 @@ define([
         return this.isNew() ? i18next.t('oseba.nova') : this.getImePriimek();
     };
 
+    /**
+     * kaj se zgodi predno se view vstavi v DOM
+     * @returns {undefined}
+     */
     OsebaEditView.prototype.onBeforeRender = function () {
         var self = this;
         this.listenTo(this.model, 'sync', function (coll) {
@@ -71,7 +79,10 @@ define([
         });
     };
 
-
+    /**
+     * Kaj se zgodi ko se je view že vstavil v DOM
+     * @returns {undefined}
+     */
     OsebaEditView.prototype.onRender = function () {
 
         var tabs = null;

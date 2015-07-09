@@ -57,7 +57,7 @@ define([
     };
 
     /**
-     * Izris TRR
+     * Izris forme
      * @returns {undefined}
      */
     OsebniPodatkiView.prototype.renderForm = function () {

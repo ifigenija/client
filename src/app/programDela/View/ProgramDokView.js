@@ -25,6 +25,10 @@ define([
 
     var ch = Radio.channel('layout');
 
+    /**
+     * Različni pogledi na program dokument view
+     * @type Array
+     */
     var tabVse = [
         {
             title: i18next.t('entiteta.d.splosno'),
@@ -47,6 +51,15 @@ define([
             event: 'kazalniki'
         }
     ];
+
+    var tabNovi = [
+        {name: i18next.t('entiteta.splosno'), event: 'splosni'}
+    ];
+
+    /**
+     * tabi posameznih sklopov
+     * @type Array
+     */
     var tabSklopDva = [
         {name: i18next.t('gostovanje.title'), event: 'gostovanja'},
         {name: i18next.t('festival.title'), event: 'festivali'},
@@ -59,10 +72,6 @@ define([
         {name: i18next.t('ponovitevPremiere.title'), event: 'ponovitvePremier'},
         {name: i18next.t('ponovitevPrejsnjih.title'), event: 'ponovitvePrejsnjih'},
         {name: i18next.t('gostujoca.title'), event: 'gostujoci'}
-    ];
-
-    var tabNovi = [
-        {name: i18next.t('entiteta.splosno'), event: 'splosni'}
     ];
 
     var ProgramDokView = DokumentView.extend({
@@ -119,14 +128,14 @@ define([
         this.$('.programDela-panels .tab-pane').removeClass('active');
     };
     /**
-     * Klik deselekt vtabcontrol sklopa ena
+     * Klik deselect v tabcontrol sklopa ena
      * @returns {undefined}
      */
     ProgramDokView.prototype.deselectTabEna = function () {
         this.$('.sklopEna-panels .tab-pane').removeClass('active');
     };
     /**
-     * Klik deselekt vtabcontrol sklopa dva
+     * Klik deselect v tabcontrol sklopa dva
      * @returns {undefined}
      */
     ProgramDokView.prototype.deselectTabDva = function () {
@@ -143,7 +152,7 @@ define([
     };
 
     /**
-     * Izris tabov sklopaena
+     * Izris tabov sklopa ena
      * @returns {undefined}
      */
     ProgramDokView.prototype.onSklopEna = function () {
@@ -154,7 +163,7 @@ define([
         this.sklopEnaR.show(this.tabControlSklopEna);
     };
     /**
-     * Izris tabov sklopaena
+     * Izris tabov sklopa ena
      * @returns {undefined}
      */
     ProgramDokView.prototype.onSklopDva = function () {

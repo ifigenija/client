@@ -15,9 +15,8 @@ define([
     
     var OsebaZaposlitev = Dokument.Postavka.extend({
         urlRoot: baseUrl + '/rest/zaposlitev'
-    });    
+    });
     
-
     
     var OsebaTrrCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTrr,
@@ -30,6 +29,7 @@ define([
         url: baseUrl + '/rest/zaposlitev',
         index: 'pozicija'
     });
+    
     
     var OsebaModel = Dokument.Model.extend({
         urlRoot: baseUrl + '/rest/oseba/osebni',
