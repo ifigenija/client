@@ -133,7 +133,7 @@ define([
      * prikaz gumbov v toolbaru
      * @returns {Array}
      */
-    EnotaProgramaView.prototype.prepareToolbar = function () {
+    FestivalView.prototype.prepareToolbar = function () {
         return  this.model ?
                 [
                     [
@@ -150,8 +150,7 @@ define([
      * klik prikaži vse
      * @returns {Array}
      */
-    EnotaProgramaView.prototype.onPrikaziVse = function () {
-        var self = this;
+    FestivalView.prototype.onPrikaziVse = function () {
         var tb = this.getToolbarModel();
         var but = tb.getButton('doc-postavka-prikaziVse');
 
@@ -160,13 +159,13 @@ define([
             but.set({
                 label: 'Zapri vse'
             });
-            self.$('.collapse').collapse('show');
-            
+            this.$('.panel-collapse:not(".in")').collapse('show');
+
         } else {
             but.set({
                 label: 'Prikaži vse'
-            });            
-            self.$('.collapse').collapse('hide');
+            });
+            this.$('.panel-collapse.in').collapse('hide');
         }
     };
 

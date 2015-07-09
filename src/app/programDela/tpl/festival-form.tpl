@@ -1,14 +1,14 @@
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion" role="tablist">
     <div class="panel panel-default panel-form glava-panel paginated-grid">
-        <div class="panel-heading" role="tab" id="headingOne">
+        <div class="panel-heading" role="tab">
             <div class="clearfix">
-                <h4 class="glava-title" data-toggle="collapse" data-parent="#accordion" href="#podatki" aria-expanded="true" aria-controls="podatki">
+                <h4 class="glava-title" data-toggle="collapse" data-parent="#accordion" href="#podatki">
                     {{t "festival.oFestivalu"}}
                 </h4>
 
             </div>
         </div>
-        <div id="podatki" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div id="podatki" class="panel-collapse collapse in" role="tabpanel">
             <div class="panel-body">
                 <form>
                     <div class="row">
@@ -27,13 +27,13 @@
     <div class="panel panel-default panel-form glava-panel paginated-grid">
         <div class="panel-heading">
             <div class="clearfix">
-                <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#koprodukcija" aria-expanded="false" aria-controls="koprodukcija">
+                <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#koprodukcija">
                     {{t "festival.koprodukcija"}}
                 </h4>
 
             </div>
         </div>
-        <div id="koprodukcija" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div id="koprodukcija" class="panel-collapse collapse" role="tabpanel">
             <div class="panel-body">
                 <form>
                     <div class="row">
@@ -47,13 +47,13 @@
     <div class="panel panel-default panel-form glava-panel paginated-grid">
         <div class="panel-heading">
             <div class="clearfix">
-                <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#finance" aria-expanded="false" aria-controls="finance">
+                <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#finance">
                     {{t "festival.finance"}}
                 </h4>
 
             </div>
         </div>
-        <div id="finance" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+        <div id="finance" class="panel-collapse collapse" role="tabpanel">
             <div class="panel-body">
                 <form>
                     <div class="row">

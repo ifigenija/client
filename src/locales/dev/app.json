@@ -348,7 +348,7 @@
         "planiranoSteviloVaj": "Planirano število vaj",
         "skupniStrosek": "Skupni strošek",
         "t": {
-            "datumPremiere": "Premiera"
+            "datumPremiere": "Datum premiere"
         },
         "d": {
             "maticniOder": "Matični oder / privzeto prizorišče uprizoritve",
@@ -406,8 +406,8 @@
         "maticniKop": "Matični",
         "zakljuceno": "Zaključeno",
         "t": {
-            "lastnaSredstva": "Sredstva",
-            "drugiJavni": "Viri",
+            "lastnaSredstva": "Lastna sredstva",
+            "drugiJavni": "Javni viri",
             "avtorskih": "Honorarji"
         },
         "d": {
@@ -609,7 +609,7 @@
         },
         "t": {
             "celotnaVrednost": "Vrednost",
-            "lastnaSredstva": "Sredstva",
+            "lastnaSredstva": "Lastna Sredstva",
             "avtorskiHonorarji": "Honorarji",
             "drugiJavni": "Javni viri",
             "tipProgramskeEnote": "Tip"

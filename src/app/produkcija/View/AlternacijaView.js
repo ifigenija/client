@@ -145,6 +145,23 @@ define([
             template: formPogAltTpl
         });
 
+        Fv.prototype.onFormChange = function (form) {
+            var vrednost = this.model.get('placiloNaVajo');
+            if(vrednost){
+                this.$("input[name='vrednostVaj']").attr("disabled", "disabled");
+                this.$("input[name='vrednostVaje']").removeAttr("disabled");
+            }else{
+                this.$("input[name='vrednostVaje']").attr("disabled", "disabled");
+                this.$("input[name='vrednostVaj']").removeAttr("disabled");
+            }
+        };
+
+        Fv.prototype.onRender = function () {
+            this.listenTo(this, 'render', function () {
+                this.$("input[name='vrednostVaje']").attr("disabled", "disabled");
+            });
+        };
+
         var formView = new Fv({
             model: pogodba
         });
@@ -160,7 +177,7 @@ define([
         modal.open(function () {
             shraniSpremembe();
         });
-        
+
         var shraniSpremembe = function () {
             if (!formView.model.get('id')) {
                 formView.listenTo(formView, 'save:success', function () {
@@ -170,11 +187,10 @@ define([
                         }
                     });
                 });
-                
-                formView.triggerMethod('shrani');
             }
+            formView.triggerMethod('shrani');
         };
-        
+
     };
     /**
      * Dodamo novo pogodbo
@@ -194,7 +210,7 @@ define([
             var pogodbe = self.dokument.pogodbeCollection;
             pogodbe.fetch({
                 success: function () {
-                    var vrednosti = self.form.fields.pogodba.editor.getValue();
+                    var vrednosti = self.model.get('pogodba');
                     if (vrednosti) {
                         var id = vrednosti['id'];
                         if (id) {
