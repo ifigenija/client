@@ -28,9 +28,9 @@ define([
         var Layout = Marionette.LayoutView.extend({
             template: Handlebars.compile(layoutTpl),
             regions: {
-                contentR: '#main',
-                orodnaR: '#orodna-vrstica',
-                navR: '#side-nav'
+                contentR: '.main',
+                orodnaR: '.orodna-vrstica',
+                navR: '.side-nav'
             }
         });
 

@@ -148,7 +148,34 @@ module.exports = function (grunt) {
                 },
                 src: 'src/less/yeti/build.less',
                 dest: 'src/css/yeti.css'
-            }
+            },
+            compileSite: {
+                options: {
+                    strictMath: true,
+                    sourceMap: false,
+                    outputSourceFiles: true
+                },
+                src: 'src/less/site.less',
+                dest: 'src/css/site.css'
+            },
+            compileBackgrid: {
+                options: {
+                    strictMath: true,
+                    sourceMap: false,
+                    outputSourceFiles: true
+                },
+                src: 'src/less/backgrid.less',
+                dest: 'src/css/backgrid.css'
+            },
+            compileLayout: {
+                options: {
+                    strictMath: true,
+                    sourceMap: false,
+                    outputSourceFiles: true
+                },
+                src: 'src/less/layout.less',
+                dest: 'src/css/layout.css'
+            } 
         },
         csslint: {
             options: {
