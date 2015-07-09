@@ -616,7 +616,7 @@
         }
     },
     "gostovanje": {
-        "title": "Gostovanje",
+        "title": "Gostovanja",
         "transportniStroski": "Transportni stroški",
         "odkup": "Odkup",
         "gostitelj": "Gostitelj",
@@ -658,6 +658,9 @@
         "stHonorarnih": "Število honorarnih sodelavcev",
         "opredelitevDrugiViri": "Opredelitev drugih virov",
         "vlozekKoproducenta": "Vložek producenta",
+        "oFestivalu": "O festivalu",
+        "koprodukcija": "O koprodukciji",
+        "sredstva": "O sredstvih",
         "d": {
             "stProdukcij": "Skupno število festivalskih produkcij",
             "stTujihSelektorjev": "Predvideno število tujih selektorjev-gostov",

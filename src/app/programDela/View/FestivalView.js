@@ -127,7 +127,12 @@ define([
                     {event: 'premakniDol', title: i18next.t('std.premakniDol')}
                 ]
             }
-        ]
+        ],
+        triggers: {
+            'click .podatki': 'podatki',
+            'click .koprodukcija': 'koprodukcija',
+            'click .sredstva': 'sredstva'
+        }
     });
     /**
      * prikaz gumbov v toolbaru
@@ -167,6 +172,39 @@ define([
             });
             this.$('.panel-collapse.in').collapse('hide');
         }
+    };
+
+    FestivalView.prototype.preimenujGumb = function () {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton('doc-postavka-prikaziVse');
+
+        var label = but.get('label');
+        if (label === 'Zapri vse') {
+            but.set({
+                label: 'Prikaži vse'
+            });
+        }
+    };
+
+    FestivalView.prototype.onPodatki = function () {
+        this.$('#podatki').collapse('show');
+        this.$('#koprodukcija').collapse('hide');
+        this.$('#sredstva').collapse('hide');
+        this.preimenujGumb();
+    };
+
+    FestivalView.prototype.onKoprodukcija = function () {
+        this.$('#podatki').collapse('hide');
+        this.$('#koprodukcija').collapse('show');
+        this.$('#sredstva').collapse('hide');
+        this.preimenujGumb();
+    };
+
+    FestivalView.prototype.onSredstva = function () {
+        this.$('#podatki').collapse('hide');
+        this.$('#koprodukcija').collapse('hide');
+        this.$('#sredstva').collapse('show');
+        this.preimenujGumb();
     };
 
     return FestivalView;
