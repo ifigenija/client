@@ -42,21 +42,173 @@ module.exports = function (grunt) {
                 configFile: 'karma.conf.js'
             }
         },
-        cssmin: {
-            combine: {
-                files: {
-                    "build/css/site.min.css": [
-                        'public/css/default.css',
-                    ]
+        requirejs: {
+            compile: {
+                options: {
+                    baseUrl: 'src',
+                    paths: {
+                        'underscore': 'lib/underscore/underscore',
+                        'bootstrap': 'lib/bootstrap/dist/js/bootstrap.min',
+                        'jquery': 'lib/jquery/dist/jquery',
+                        'jquery.fileupload': 'lib/jquery-file-upload/js/jquery.fileupload',
+                        'jquery.ui.widget': 'lib/jquery-file-upload/js/vendor/jquery.ui.widget',
+                        'jquery.jsonrpc': 'lib/jquery-jsonrpcclient/jquery.jsonrpcclient',
+                        'backbone': 'lib/backbone/backbone',
+                        'text': 'lib/requirejs-text/text',
+                        'marionette': 'lib/marionette/lib/backbone.marionette',
+                        'backgrid': 'lib/backgrid/lib/backgrid',
+                        'backgrid-filter': 'lib/backgrid-filter/backgrid-filter',
+                        'backgrid-moment-cell': 'lib/backgrid-moment-cell/backgrid-moment-cell',
+                        'backgrid-select-all': 'lib/backgrid-select-all/backgrid-select-all',
+                        'pageable': 'lib/backbone.paginator/lib/backbone.paginator',
+                        'backbone-forms': 'lib/backbone-forms/distribution.amd/backbone-forms',
+                        'deep-model': 'lib/backbone-deep-model/distribution/deep-model',
+                        'backbone-modal': 'app/Max/View/Modal',
+                        'moment': 'lib/moment/moment',
+                        'moment/locale': 'lib/moment/locale',
+                        'handlebars': 'lib/handlebars/handlebars.amd',
+                        'i18next-actual': 'lib/i18next/i18next.amd.withJQuery',
+                        'i18next': 'app/Max/i18next-wrapper',
+                        'app/bars': 'app/Max/handlebars-wrapper',
+                        'ckeditor': 'lib/ckeditor/ckeditor',
+                        'radio': 'lib/backbone.radio/build/backbone.radio',
+                        'bootstrap-datepicker': 'lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
+                        'formSchema': 'app/Max/Loader/formSchema',
+                        'formMeta': 'app/Max/Loader/formMeta',
+                        'template': 'app/Max/Loader/template'
+                    },
+                    shim: {
+                        underscore: {
+                            exports: '_'
+                        },
+                        backbone: {
+                            deps: ['jquery', 'underscore'],
+                            exports: 'Backbone'
+                        },
+                        marionette: {
+                            deps: ['jquery', 'underscore', 'backbone'],
+                            exports: 'Marionette'
+                        },
+                        backgrid: {
+                            deps: ['jquery', 'backbone', 'underscore'],
+                            exports: 'Backgrid'
+                        },
+                        ckeditor: {
+                            exports: 'CKEDITOR'
+                        },
+                        "backgrid-filter": {
+                            deps: ["backbone", "backgrid"]
+                        },
+                        'backgrid-moment-cell': {
+                            deps: ["backbone", "backgrid"]
+                        },
+                        'backgrid-select-all': {
+                            deps: ["backbone", "backgrid"]
+                        },
+                        'deep-model': ['backbone', 'underscore'],
+                        'backbone-modal': ['jquery', 'backbone'],
+                        'bootstrap': ['jquery'],
+                        'jquery.jsonrpc': ['jquery'],
+                        'lib/bootstrap-datepicker': ['jquery', 'bootstrap']
+                    },
+                    dir: 'src/dist/js',
+                    removeCombined: true,
+                    preserveLicenseComments: false,
+                    fileExclusionRegExp: /^\./,
+                    uglify: {
+                        toplevel: true,
+                        ascii_only: true,
+                        max_line_length: 1000,
+                        mangle: true
+                    },
+                    optimizeAllPluginResources: false,
+                    noGlobal: true
                 }
-
             }
         },
+        clean: {
+            distJs: 'src/dist/js',
+            distCss: 'src/dist/css'
+        },
+        less: {
+            compilePublic: {
+                options: {
+                    strictMath: true,
+                    sourceMap: false,
+                    outputSourceFiles: true,
+                },
+                src: 'src/less/public/build.less',
+                dest: 'src/css/public.css'
+            },
+            compileTheme: {
+                options: {
+                    strictMath: true,
+                    sourceMap: false,
+                    outputSourceFiles: true
+                },
+                src: 'src/less/yeti/build.less',
+                dest: 'src/css/yeti.css'
+            }
+        },
+        csslint: {
+            options: {
+                csslintrc: 'src/lib/bootstrap/less/.csslintrc'
+            },
+            dist: [
+                'src/css/yeti.css',
+                'src/css/public.css'
+            ]
+        },
+        cssmin: {
+            options: {
+                // TODO: disable `zeroUnits` optimization once clean-css 3.2 is released
+                //    and then simplify the fix for https://github.com/twbs/bootstrap/issues/14837 accordingly
+                compatibility: 'ie8',
+                keepSpecialComments: '*',
+                advanced: false
+            },
+            minifyPublic: {
+                src: 'src/css/public.css',
+                dest: 'src/dist/css/public.css'
+            },
+            minifyYeti: {
+                src: 'src/css/yeti.css',
+                dest: 'src/dist/css/yeti.css'
+            }
+        },
+        copy: {
+            fonts: {
+                expand: true,
+                src: 'src/lib/bootstrap/fonts/*',
+                dest: 'src/css'
+            },
+            fontsDist: {
+                expand: true,
+                src: 'src/lib/bootstrap/fonts/*',
+                dest: 'src/css/dist'
+            }
 
+        },
     });
+
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-karma');
-// Default task(s).
+    grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    // Default task(s).
     grunt.registerTask('default', ['karma']);
+
+    // CSS distribution task.
+    grunt.registerTask('less-compile', ['less:compileCore', 'less:compileTheme']);
+    grunt.registerTask('dist-css', ['less-compile', 'cssmin', 'copy']);
+
+    // Full distribution task.
+    grunt.registerTask('dist', ['clean', 'dist-css', 'requirejs']);
+
+
 };
