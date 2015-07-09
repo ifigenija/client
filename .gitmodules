@@ -1,0 +1,6 @@
+[submodule "src/js/app/Max"]
+	path = src/js/app/Max
+	url = http://git.max.si/tip2/maxjs
+[submodule "src/js/app/Dokument"]
+	path = src/js/app/Dokument
+	url = http://git.max.si/tip2/dokumentjs
