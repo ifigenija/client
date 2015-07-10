@@ -175,7 +175,7 @@ define([
         var modal = new Modal({
             content: formView,
             animate: true,
-            okText: i18next.t("std.izberi"),
+            okText: i18next.t("std.shrani"),
             cancelText: i18next.t("std.preklici"),
             title: i18next.t("pogodba.naslov") + ' ' + this.model.get('oseba')['label']
         });

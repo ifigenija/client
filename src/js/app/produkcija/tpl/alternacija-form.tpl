@@ -11,9 +11,9 @@
                 {{/if}}
                 <a class="pull-right btn btn-default pogodba-dodaj">
                     {{#if imaPogodbo}}
-                    {{t "std.uredi"}} {{t "alternacija.pogodba"}}
+                    {{t "std.uredi"}}
                     {{else}}
-                    {{t "std.dodaj"}} {{t "alternacija.pogodba"}}
+                    {{t "std.dodaj"}}
                     {{/if}}
                 </a>
             </div>
