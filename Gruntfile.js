@@ -47,32 +47,32 @@ module.exports = function (grunt) {
                 options: {
                     baseUrl: 'src/js',
                     paths: {
-                        'underscore': 'lib/underscore/underscore',
-                        'bootstrap': 'lib/bootstrap/dist/js/bootstrap.min',
-                        'jquery': 'lib/jquery/dist/jquery',
-                        'jquery.fileupload': 'lib/jquery-file-upload/js/jquery.fileupload',
-                        'jquery.ui.widget': 'lib/jquery-file-upload/js/vendor/jquery.ui.widget',
-                        'jquery.jsonrpc': 'lib/jquery-jsonrpcclient/jquery.jsonrpcclient',
-                        'backbone': 'lib/backbone/backbone',
-                        'text': 'lib/requirejs-text/text',
-                        'marionette': 'lib/marionette/lib/backbone.marionette',
-                        'backgrid': 'lib/backgrid/lib/backgrid',
-                        'backgrid-filter': 'lib/backgrid-filter/backgrid-filter',
-                        'backgrid-moment-cell': 'lib/backgrid-moment-cell/backgrid-moment-cell',
-                        'backgrid-select-all': 'lib/backgrid-select-all/backgrid-select-all',
-                        'pageable': 'lib/backbone.paginator/lib/backbone.paginator',
-                        'backbone-forms': 'lib/backbone-forms/distribution.amd/backbone-forms',
-                        'deep-model': 'lib/backbone-deep-model/distribution/deep-model',
+                        'underscore': '../lib/underscore/underscore',
+                        'bootstrap': '../lib/bootstrap/dist/js/bootstrap.min',
+                        'jquery': '../lib/jquery/dist/jquery',
+                        'jquery.fileupload': '../lib/jquery-file-upload/js/jquery.fileupload',
+                        'jquery.ui.widget': '../lib/jquery-file-upload/js/vendor/jquery.ui.widget',
+                        'jquery.jsonrpc': '../lib/jquery-jsonrpcclient/jquery.jsonrpcclient',
+                        'backbone': '../lib/backbone/backbone',
+                        'text': '../lib/requirejs-text/text',
+                        'marionette': '../lib/marionette/lib/backbone.marionette',
+                        'backgrid': '../lib/backgrid/lib/backgrid',
+                        'backgrid-filter': '../lib/backgrid-filter/backgrid-filter',
+                        'backgrid-moment-cell': '../lib/backgrid-moment-cell/backgrid-moment-cell',
+                        'backgrid-select-all': '../lib/backgrid-select-all/backgrid-select-all',
+                        'pageable': '../lib/backbone.paginator/lib/backbone.paginator',
+                        'backbone-forms': '../lib/backbone-forms/distribution.amd/backbone-forms',
+                        'deep-model': '../lib/backbone-deep-model/distribution/deep-model',
                         'backbone-modal': 'app/Max/View/Modal',
-                        'moment': 'lib/moment/moment',
-                        'moment/locale': 'lib/moment/locale',
-                        'handlebars': 'lib/handlebars/handlebars.amd',
-                        'i18next-actual': 'lib/i18next/i18next.amd.withJQuery',
+                        'moment': '../lib/moment/moment',
+                        'moment/locale': '../lib/moment/locale',
+                        'handlebars': '../lib/handlebars/handlebars.amd',
+                        'i18next-actual': '../lib/i18next/i18next.amd.withJQuery',
                         'i18next': 'app/Max/i18next-wrapper',
                         'app/bars': 'app/Max/handlebars-wrapper',
-                        'ckeditor': 'lib/ckeditor/ckeditor',
-                        'radio': 'lib/backbone.radio/build/backbone.radio',
-                        'bootstrap-datepicker': 'lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
+                        'ckeditor': '../lib/ckeditor/ckeditor',
+                        'radio': '../lib/backbone.radio/build/backbone.radio',
+                        'bootstrap-datepicker': '../lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
                         'formSchema': 'app/Max/Loader/formSchema',
                         'formMeta': 'app/Max/Loader/formMeta',
                         'template': 'app/Max/Loader/template'
@@ -109,7 +109,7 @@ module.exports = function (grunt) {
                         'backbone-modal': ['jquery', 'backbone'],
                         'bootstrap': ['jquery'],
                         'jquery.jsonrpc': ['jquery'],
-                        'lib/bootstrap-datepicker': ['jquery', 'bootstrap']
+                        'bootstrap-datepicker': ['jquery', 'bootstrap']
                     },
                     dir: 'src/dist/js',
                     removeCombined: true,
@@ -118,7 +118,7 @@ module.exports = function (grunt) {
                     uglify: {
                         toplevel: true,
                         ascii_only: true,
-                        max_line_length: 1000,
+                        max_line_length: 500,
                         mangle: true
                     },
                     optimizeAllPluginResources: false,
@@ -128,14 +128,15 @@ module.exports = function (grunt) {
         },
         clean: {
             distJs: 'src/dist/js',
-            distCss: 'src/dist/css'
+            distCss: 'src/dist/css',
+            distFonts: 'src/dist/fonts'
         },
         less: {
             compilePublic: {
                 options: {
                     strictMath: true,
                     sourceMap: false,
-                    outputSourceFiles: true,
+                    outputSourceFiles: true
                 },
                 src: 'src/less/public/build.less',
                 dest: 'src/css/public.css'
@@ -216,13 +217,17 @@ module.exports = function (grunt) {
             }
         },
         copy: {
-            fonts: {
-                src: 'src/lib/bootstrap/fonts/*',
-                dest: 'src/css/'
+            fonts: {                
+                cwd: 'src/lib/bootstrap/fonts/',
+                src: '*',
+                dest: 'src/fonts/',
+                expand: true
             },
             fontsDist: {
-                src: 'src/lib/bootstrap/fonts/*',
-                dest: 'src/dist/css/'
+                cwd: 'src/lib/bootstrap/fonts/',
+                src: '*',
+                dest: 'src/dist/fonts/',
+                expand: true
             }
         }
     });
