@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,celotnaVrednost,nasDelez"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="zaproseno,lastnaSredstva,avtorskiHonorarji,tantieme"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,nasDelez"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="lastnaSredstva,avtorskiHonorarji,tantieme"></div>
             </div>
         </div>
         <div class="col-sm-6">

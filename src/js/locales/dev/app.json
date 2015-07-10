@@ -97,7 +97,7 @@
         "privzeto": "Privzeto",
         "deaktiviraj": "Deaktiviraj"
     },
-    "entiteta": {
+    "ent": {
         "dodaj": "Dodaj",
         "splosno": "Splošno",
         "kontakti": "Kontakti",
@@ -141,9 +141,16 @@
     "abonma": {
         "title": "Abonmaji",
         "nova": "Nov Abonma",
+        "ime": "$t(ent.naziv)",
+        "opis": "$t(ent.opis)",
+        "kapaciteta": "$t(ent.kapaciteta)",
+        "nova": "Nov Abonma",
         "stPredstav": "Število predstav",
         "stKuponov": "Število kuponov",
         "d": {
+            "ime": "",
+            "opis": "",
+            "kapaciteta": "",
             "stPredstav": "Število predstav abonmaja",
             "stKuponov": "Število kuponov abonmaja"
         }
@@ -151,8 +158,15 @@
     "prostor": {
         "title": "Prostori",
         "nova": "Nov prostor",
+        "sifra": "$t(ent.sifra)",
+        "kapaciteta": "$t(ent.kapaciteta)",
+        "opis": "$t(ent.opis)",
+        "naziv": "$t(ent.naziv)",
         "jePrizorisce": "Prizorišče",
         "d": {
+            "sifra": "$t(ent.d.sifra)",
+            "opis": "",
+            "naziv": "",
             "jePrizorisce": "Ali je prostor prizorišče.",
             "kapaciteta": "Število mest v prostoru."
         }
@@ -160,24 +174,41 @@
     "zvrstSurs": {
         "title": "Zvrsti po SURS",
         "nova": "Nova zvrst po SURS",
+        "sifra": "$t(ent.sifra)",
+        "naziv": "$t(ent.naziv)",
+        "opis": "$t(ent.opis)",
         "d": {
+            "opis": "",
             "sifra": "Šifra zvrsti po SURS-u",
             "naziv": "Naziv zvrsti po SURS-u"
         }
     },
     "zvrstUprizoritve": {
         "title": "Vrste uprizoritev",
-        "nova": "Nova vrsta uprizoritve"
+        "nova": "Nova vrsta uprizoritve",
+        "sifra": "$t(ent.sifra)",
+        "naziv": "$t(ent.naziv)",
+        "opis": "$t(ent.opis)",
+        "d": {
+            "opis": "",
+            "sifra": "",
+            "naziv": ""
+        }
     },
     "tipFunkcije": {
         "title": "Tipi funkcij",
         "nova": "Nov tip funkcije",
         "zenskoIme": "Žensko ime",
+        "ime": "Ime",
         "nastopajoc": "Nastopajoč",
+        "podrocje": "$t(ent.podrocje)",
+        "opis": "$t(ent.opis)",
         "d": {
             "ime": "Moška oblika funkcije",
             "zenskoIme": "Ženska oblika funkcije",
-            "nastopajoc": "Ali bo oseba s to funkcijo nastopala"
+            "nastopajoc": "Ali bo oseba s to funkcijo nastopala",
+            "podrocje": "",
+            "opis": ""
         }
     },
     "drzava": {
@@ -187,24 +218,35 @@
         "sifraDolg": "Trimestna koda",
         "isoNum": "Številčna koda",
         "isoNaziv": "Iso Naziv",
+        "naziv": "$t(ent.naziv)",
+        "opomba": "$t(ent.opomba)",
         "d": {
             "sifra": "ISO koda države",
             "sifraDolg": "Trimestna ISO koda države",
             "isoNum": "Trimestna ISO številčna koda države",
-            "isoNaziv": "ISO Naziv države"
+            "isoNaziv": "ISO Naziv države",
+            "naziv": "",
+            "opomba": ""
         }
     },
     "posta": {
         "title": "Pošte",
         "nova": "Nova pošta",
         "sifra": "Poštna številka",
+        "naziv": "$t(ent.naziv)",
         "d": {
-            "sifra": "Poštna številka"
+            "sifra": "Poštna številka",
+            "naziv": ""
         }
     },
     "popa": {
         "title": "Poslovni partnerji",
         "nova": "Nov poslovni partner",
+        "sifra": "$t(ent.sifra)",
+        "naziv": "$t(ent.naziv)",
+        "email": "$t(ent.email)",
+        "opomba": "$t(ent.opomba)",
+        "drzava": "$t(ent.drzava)",
         "racuni": "Računi",
         "osebe": "Kontaktne osebe",
         "tipkli": "Tip klienta",
@@ -222,6 +264,13 @@
         "koproducent": "Koproducent",
         "kupec": "Kupec",
         "d": {
+            "sifra": "",
+            "naziv": "",
+            "email": "",
+            "opomba": "",
+            "drzava": "",
+            "panoga": "",
+            "maticna": "",
             "tipkli": "Tip klienta (kupec, dobavitelj, koproducent, )",
             "stakli": "AK-aktiven, NA-neaktiven",
             "naziv1": "Dodatni naziv za klienta",
@@ -237,6 +286,11 @@
     "oseba": {
         "title": "Osebe",
         "nova": "Nova oseba",
+        "sifra": "$t(ent.sifra)",
+        "email": "$t(ent.email)",
+        "ime": "$t(ent.ime)",
+        "naziv": "$t(ent.naziv)",
+        "funkcija": "$t(ent.funkcija)",
         "osebniPodatki": "Osebni podatki",
         "priimek": "Priimek",
         "srednjeIme": "Srednje ime",
@@ -251,6 +305,21 @@
         "drzavaRojstva": "Država rojstva",
         "krajRojstva": "Kraj rojstva",
         "d": {
+            "sifra": "",
+            "email": "$t(ent.email)",
+            "ime": "",
+            "priimek": "",
+            "srednjeIme": "",
+            "psevdonim": "",
+            "funkcija": "",
+            "opombe": "",
+            "spol": "",
+            "krajRojstva": "",
+            "drzavaRojstva": "",
+            "davcna": "",
+            "spol": "",
+            "datumRojstva": "",
+            "drzavljanstvo": "",
             "naziv": "Naziv osebe  (g., dr., ga, prof.dr.)",
             "emso": "Enotna matična številka občana"
         }
@@ -260,6 +329,7 @@
         "swift": "Swift",
         "bic": "Bic",
         "banka": "Banka",
+        "stevilka": "$t(ent.stevilka)",
         "d": {
             "swift": "Swift številka računa",
             "bic": "Bic številka računa",
@@ -269,7 +339,9 @@
     },
     "postniNaslov": {
         "title": "Naslovi",
-        "nazivDva": "Dodatni naziv",
+        "drzava": "$t(ent.drzava)",
+        "jeeu": "$t(ent.jeeu)",
+        "naziv": "$t(ent.naziv)",
         "ulica": "Ulica",
         "ulicaDva": "Dodatna ulica",
         "posta": "Poštna številka",
@@ -277,9 +349,14 @@
         "pokrajina": "Pokrajina",
         "privzeti": "Privzeti naslov",
         "d": {
+            "drzava": "",
+            "jeeu": "$t(ent.d.jeeu)",
+            "naziv": "",
             "popa": "Poslovni partner, ki je lastnik naslova",
-            "oseba": "Oseba",
-            "nazivDva": "Oseba",
+            "ulica": "",
+            "ulicaDva": "",
+            "posta": "",
+            "postaNaziv": "",
             "pokrajina": "Pokrajina v kateri je ta naslov",
             "privzeti": "A je to privzeti naslov za poslovnega partnerja"
         }
@@ -290,6 +367,7 @@
         "privzeta": "Privzeta",
         "popa": "Klient",
         "d": {
+            "vrsta": "Vrsta telefonske številke",
             "stevilka": "Telefonska številka",
             "privzeta": "Ali je privzeta telefonska številka",
             "popa": "Poslovni partner, ki je ima to telefosnko številko",
@@ -299,7 +377,14 @@
     "kontaktna": {
         "title": "Kontaktne osebe",
         "popa": "Poslovni partner",
+        "funkcija": "$t(ent.funkcija)",
+        "status": "$t(ent.status)",
+        "opis": "$t(ent.opis)",
+        "oseba": "$t(ent.oseba)",
         "d": {
+            "funkcija": "Funkcija, ki jo oseba opravlja",
+            "opis": "",
+            "oseba": "",
             "status": "AK-aktiven, NA-neaktiven"
         }
     },
@@ -309,8 +394,10 @@
     "besedilo": {
         "title": "Besedila",
         "nova": "Novo besedilo",
-        "naslov": "Naslov",
-        "podnaslov": "Podnaslov",
+        "avtor": "$t(ent.avtor)",
+        "naslov": "$t(ent.naslov)",
+        "podnaslov": "$t(ent.podnaslov)",
+        "interNaslov": "$t(ent.interNaslov)",
         "jezik": "Jezik",
         "naslovIzvirnika": "Naslov izvirnika",
         "datumPrejema": "Datum prejema",
@@ -319,13 +406,32 @@
         "prevajalec": "Prevajalec",
         "povzetekVsebine": "Povzetek vsebine",
         "letoIzida": "Leto izida",
-        "krajIzida": "kraj izida",
+        "krajIzida": "Kraj izida",
         "zaloznik": "Založnik",
         "d": {
+            "avtor": "",
+            "naslov": "",
+            "podnaslov": "",
+            "interNaslov": "",
+            "jezik": "",
+            "naslovIzvirnika": "",
+            "datumPrejema": "",
+            "moskeVloge": "",
+            "zenskeVloge": "",
+            "prevajalec": "",
+            "povzetekVsebine": "",
+            "letoIzida": "",
+            "krajIzida": "",
+            "zaloznik": "",
             "naslovIzvirnika": "Naslov izvirnika besedila"
         }
     },
     "uprizoritev": {
+        "sifra": "$t(ent.sifra)",
+        "naslov": "$t(ent.naslov)",
+        "podnaslov": "$t(ent.podnaslov)",
+        "interNaslov": "$t(ent.interNaslov)",
+        "avtor": "$t(ent.avtor)",
         "title": "Uprizoritev",
         "nova": "Nova uprizoritev",
         "umetniskeEkipe": "Umetniška Ekipa",
@@ -357,6 +463,24 @@
             "datumPremiere": "Datum premiere"
         },
         "d": {
+            "sifra": "",
+            "faza": "",
+            "naslov": "",
+            "podnaslov": "",
+            "interNaslov": "",
+            "delovniNaslov": "",
+            "kratkiNaslov": "",
+            "avtor": "",
+            "besedilo": "",
+            "zvrst": "",
+            "zvrstSurs": "",
+            "zvrstUprizoritve": "",
+            "producent": "",
+            "datumZacStudija": "",
+            "datumPremiere": "",
+            "trajanje": "Trajanje uprizoritve",
+            "stOdmorov": "Število odmorov med uprizoritvijo",
+            "planiranoSteviloVaj": "Načrtovano število vaj",
             "maticniOder": "Matični oder / privzeto prizorišče uprizoritve",
             "gostujoca": "Ali je uprizoritev gostujoča",
             "sloAvtor": "Ali je slovenski avtor uprizoritve",
@@ -377,22 +501,39 @@
         "privzeti": "Privzeta alternacija",
         "tipFunkcije": "Tip funkcije",
         "d": {
+            "naziv": "",
+            "komentar": "Dodatne opombe, predlogi, komentarji",
+            "tipFunkcije": "",
+            "velikost": "",
+            "sePlanira": "Ali se funkcija planira ali je določena",
+            "dovoliPrekrivanje": "Ali je dovoljeno prekrivanje",
             "vodjaEkipe": "Ali je vodja področja",
             "pomembna": "Ali je funkcija izpostavljena"
         }
     },
     "alternacija": {
         "title": "Alternacije",
-        "zaposlen": "Je zaposlen",
+        "sifra": "$t(ent.sifra)",
+        "funkcija": "$t(ent.funkcija)",
+        "oseba": "$t(ent.oseba)",
+        "zacetek": "$t(ent.zacetek)",
+        "konec": "$t(ent.konec)",
+        "aktivna": "$t(ent.aktivna)",
+        "opomba": "$t(ent.opomba)",
         "privzeti": "Privzeti",
         "sodelovanje": "Sodelovanje",
         "koprodukcija": "Koprodukcija",
         "pogodba": "Pogodba",
         "zaposlitev": "Zaposlitev",
         "pomembna": "Pomembna",
-        "imaPogodbo": "Ima pogodbo",
         "d": {
-            "zaposlen": "Ali je zaposlen",
+            "sifra": "$t(ent.d.sifra)",
+            "funkcija": "",
+            "oseba": "",
+            "zacetek": "$t(ent.d.zacetek)",
+            "konec": "$t(ent.d.konec)",
+            "opomba": "",
+            "zaposlitev": "",
             "privzeti": "Ali je privzeti",
             "pomembna": "Ali je alternacija pomembna in se jo prikaže v programu dela?"
         }
@@ -427,17 +568,32 @@
     },
     "strupr": {
         "title": "Stroški uprizoritve",
-        "alternacije": "Alternacije",
         "pogodbe": "Pogodbe",
         "koprodukcije": "Koprodukcije",
         "stroski": "Stroški",
+        "naziv": "$t(ent.naziv)",
+        "tipstroska": "Tip Stroška",
+        "opis": "$t(ent.opis)",
+        "alternacije": "Alternacije",
         "vrednostDo": "Vrednost do premiere",
         "vrednostNa": "Vrednost na ponovitev",
-        "popa": "Poslovni partner"
+        "popa": "Poslovni partner",
+        "d": {
+            "naziv": "",
+            "tipstroska": "",
+            "opis": "",
+            "vrednostDo": "",
+            "vrednostNa": "",
+            "popa": ""
+        }
     },
     "zaposlitev": {
         "title": "Zaposlitve",
         "nova": "Nova zaposlitev",
+        "oseba": "$t(ent.oseba)",
+        "status": "$t(ent.status)",
+        "zacetek": "$t(ent.zacetek)",
+        "konec": "$t(ent.konec)",
         "tip": "Tip",
         "delovnaObveza": "Delovna obveza",
         "malica": "Malica",
@@ -446,6 +602,13 @@
         "jeZaposlenVdrugemJZ": "Zaposlen v drugem JZ",
         "jeNastopajoci": "Nastopajoči",
         "d": {
+            "oseba": "",
+            "status": "",
+            "zacetek": "$t(ent.d.zacetek) zaposlitve",
+            "konec": "$t(ent.d.konec) zaposlitve",
+            "tip": "",
+            "delovnaObveza": "",
+            "malica": "",
             "individualnaPogodba": "Zaposlitev z individualno pogodbo",
             "jeZaposlenVdrugemJZ": "Ali je zaposlen v drugem javnem zavodu",
             "jeNastopajoci": "Ali je nastopajoči"
@@ -486,10 +649,13 @@
     },
     "pogodba": {
         "title": "Pogodbe",
+        "sifra": "$t(ent.sifra)",
+        "aktivna": "$t(ent.aktivna)",
+        "zacetek": "$t(ent.zacetek)",
+        "konec": "$t(ent.konec)",
+        "opis": "$t(ent.opis)",
         "vrednostVaj": "Vrednost vaj",
         "vrednostPredstave": "Vrednost predstave",
-        "vrednostUre": "Vrednost ure",
-        "vrednostDo": "Vrednost do",
         "popa": "Klient",
         "vrednostDoPremiere": "Vrednost do premiere",
         "zaposlenVDrJz": "Zaposlen v drugem JZ",
@@ -497,11 +663,24 @@
         "naslov": "Pogodba za osebo: ",
         "placiloNaVajo": "Plačilo na vajo",
         "vrednostVaje": "Vrednost vaje",
-        "planiranoSteviloVaj": "Načrtovano število vaj",
+        "planiranoSteviloVaj": "Planirano število vaj",
         "alternacija": "Alternacija",
         "oseba": "Oseba",
         "d": {
-            "vrednostVaj": "Pavšalna vrednost za vse vaje"
+            "sifra": "",
+            "aktivna": "",
+            "zacetek": "$t(ent.d.zacetek) pogodbe",
+            "konec": "$t(ent.d.konec) pogodbe",
+            "opis": "$t(ent.d.opis)",
+            "vrednostVaj": "Pavšalna vrednost za vse vaje",
+            "vrednostVaje": "Pavšalna vrednost ene vaje",
+            "vrednostPredstave": "",
+            "popa": "",
+            "vrednostDoPremiere": "",
+            "zaposlenVDrJz": "Ali je oseba zaposlena v drugen javnem zavodu",
+            "trr": "",
+            "placiloNaVajo": "Ali je oseba plačana na vajo ali ne",
+            "planiranoSteviloVaj": "Načrtovano število vaj"
         }
     },
     "programDela": {
@@ -745,9 +924,15 @@
     },
     "sezona": {
         "title": "Sezone",
-        "imeSezone": "Ime sezone",
+        "ime": "Ime sezone",
+        "aktivna": "$t(ent.aktivna)",
+        "zacetek": "$t(ent.zacetek)",
+        "konec": "$t(ent.konec)",
         "d": {
-            "aktivna": "Ali je sezona aktivna"
+            "ime": "Ime sezone",
+            "aktivna": "Ali je sezona aktivna",
+            "zacetek": "$t(ent.d.zacetek) sezone",
+            "konec": "$t(ent.d.konec) sezone"
         }
     },
     "strosekuprizoritve": {
