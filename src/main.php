@@ -17,7 +17,7 @@ $dist = $config['useDist'] ? 'dist/': '';
             define('baseUrl', function () {
                 return "";
             });
-            require(['<?= $config['useDist'] ? 'requireconfig' : 'requiredist' ?>'], function () {
+            require(['<?= $config['useDist'] ? 'requiredist' : 'requireconfig' ?>'], function () {
                 require(['app/main', 'backbone', 'jquery', 'app/aaa/checkauth'], function (app, Backbone, $, auth) {
                     auth(function (user) {
                         app.start({user: user});

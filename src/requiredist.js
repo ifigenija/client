@@ -2,7 +2,7 @@
  * Licenca GPLv3
  */
 require.config({
-    baseUrl: 'dist',
+    baseUrl: 'dist/js',
     paths: {
         'backbone-modal': 'app/Max/View/Modal',
         'i18next': 'app/Max/i18next-wrapper',
