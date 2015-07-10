@@ -7,7 +7,7 @@ require.config({
         'backbone-modal': 'app/Max/View/Modal',
         'i18next': 'app/Max/i18next-wrapper',
         'app/bars': 'app/Max/handlebars-wrapper',
-        'ckeditor': '../lib/ckeditor/ckeditor',
+        'ckeditor': '../../lib/ckeditor/ckeditor',
         'formSchema': 'app/Max/Loader/formSchema',
         'formMeta': 'app/Max/Loader/formMeta',
         'template': 'app/Max/Loader/template'
