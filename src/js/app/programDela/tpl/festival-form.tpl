@@ -57,8 +57,8 @@
             <div class="panel-body">
                 <form>
                     <div class="row">
-                        <div class="col-sm-6" data-fields="zaproseno,celotnaVrednost,nasDelez"></div>
-                        <div class="col-sm-6" data-fields="lastnaSredstva,vlozekKoproducenta,drugiJavni"></div>
+                        <div class="col-sm-6" data-fields="nasDelez,lastnaSredstva"></div>
+                        <div class="col-sm-6" data-fields="vlozekKoproducenta,drugiJavni"></div>
                     </div>
                 </form>
             </div>

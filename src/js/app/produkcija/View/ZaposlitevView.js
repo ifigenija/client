@@ -32,21 +32,21 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.sifra'),
+                label: i18next.t('ent.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.oseba'),
+                label: i18next.t('ent.oseba'),
                 name: 'oseba.label',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.status'),
+                label: i18next.t('ent.status'),
                 name: 'status',
                 sortable: true
             },
@@ -54,7 +54,7 @@ define([
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
-                label: i18next.t('entiteta.zacetek'),
+                label: i18next.t('ent.zacetek'),
                 name: 'zacetek',
                 sortable: true
             },
@@ -62,7 +62,7 @@ define([
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
-                label: i18next.t('entiteta.konec'),
+                label: i18next.t('ent.konec'),
                 name: 'konec',
                 sortable: true
             },

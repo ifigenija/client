@@ -26,7 +26,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.ime'),
+                label: i18next.t('ent.ime'),
                 name: 'ime',
                 sortable: true
             },
@@ -40,14 +40,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.opis'),
+                label: i18next.t('ent.opis'),
                 name: 'opis',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.podrocje'),
+                label: i18next.t('ent.podrocje'),
                 name: 'podrocje',
                 sortable: false
             },

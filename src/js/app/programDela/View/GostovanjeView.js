@@ -28,14 +28,14 @@ define([
                 headerCell: hc,
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('entiteta.sort'),
+                label: i18next.t('ent.sort'),
                 name: 'sort',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.uprizoritev'),
+                label: i18next.t('ent.uprizoritev'),
                 name: 'uprizoritev',
                 sortable: true
             },

@@ -32,7 +32,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.ime'),
+                label: i18next.t('ent.ime'),
                 name: 'ime',
                 sortable: true
             },
@@ -56,14 +56,14 @@ define([
                 headerCell: hc,
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('entiteta.kapaciteta'),
+                label: i18next.t('ent.kapaciteta'),
                 name: 'kapaciteta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.opis'),
+                label: i18next.t('ent.opis'),
                 name: 'opis',
                 sortable: false
             },

@@ -25,11 +25,11 @@ define([
 
     var tabsSplosno = [
         {
-            name: i18next.t('entiteta.splosno'),
+            name: i18next.t('ent.splosno'),
             event: 'splosni'
         },
         {
-            name: i18next.t('entiteta.kontakti'),
+            name: i18next.t('ent.kontakti'),
             event: 'kontakti'
         },
         {

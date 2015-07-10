@@ -44,21 +44,21 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.name'),
+                label: i18next.t('ent.name'),
                 name: 'name',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.description'),
+                label: i18next.t('ent.description'),
                 name: 'description',
                 sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('entiteta.builtIn'),
+                label: i18next.t('ent.builtIn'),
                 name: 'builtIn',
                 sortable: true
             },

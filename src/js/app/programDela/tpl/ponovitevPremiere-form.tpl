@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,celotnaVrednost,nasDelez,celotnaVrednostMat,celotnaVrednostGostovSZ"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="vlozekGostitelja,vlozekKoproducenta,zaproseno,lastnaSredstva,avtorskiHonorarji"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,nasDelez,celotnaVrednostMat,celotnaVrednostGostovSZ"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="vlozekGostitelja,vlozekKoproducenta,lastnaSredstva,avtorskiHonorarji"></div>
             </div>
         </div>
         <div class="col-sm-6">

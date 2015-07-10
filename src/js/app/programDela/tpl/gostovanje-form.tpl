@@ -8,8 +8,8 @@
         </div>
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="celotnaVrednost,lastnaSredstva,zaproseno,nasDelez"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="odkup,avtorskiHonorarji,transportniStroski,drugiJavni"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="lastnaSredstva,nasDelez,odkup"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="avtorskiHonorarji,transportniStroski,drugiJavni"></div>
             </div>
         </div>
     </div>

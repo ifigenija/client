@@ -6,7 +6,7 @@
         <div style="width: 100%; display: table;">
             <div style="display: table-row">
                 <div class="relation-izbor" >  </div>
-                <div class="relation-dodaj" > <a class="btn btn-default relation-gumb">{{t "entiteta.dodaj"}}</a> </div>
+                <div class="relation-dodaj" > <a class="btn btn-default relation-gumb">{{t "std.dodaj"}}</a> </div>
             </div>
         </div>
             <div class="relation-seznam"></div>

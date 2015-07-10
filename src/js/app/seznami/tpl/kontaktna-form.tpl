@@ -9,7 +9,7 @@
         <div class="col-sm-6 col-lg-4">
             <div class="row">
                 <div class="col-sm-12" >
-                    <div class="pull-right"> <a class="btn btn-default dodaj-osebo">{{t "entiteta.dodaj"}} osebo</a>
+                    <div class="pull-right"> <a class="btn btn-default dodaj-osebo">{{t "std.dodaj"}} osebo</a>
                     </div>
                     <div data-fields="oseba"></div>
                 </div>

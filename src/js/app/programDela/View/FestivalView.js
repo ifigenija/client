@@ -69,14 +69,14 @@ define([
                 headerCell: hc,
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('entiteta.sort'),
+                label: i18next.t('ent.sort'),
                 name: 'sort',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.naziv'),
+                label: i18next.t('ent.naziv'),
                 name: 'naziv',
                 sortable: true
             },

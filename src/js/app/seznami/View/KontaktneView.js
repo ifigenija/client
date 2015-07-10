@@ -31,7 +31,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.funkcija'),
+                label: i18next.t('ent.funkcija'),
                 name: 'funkcija',
                 sortable: true
             },
@@ -40,14 +40,14 @@ define([
                     optionValues: schema.getOptionValues('status')
                 }),
                 editable: false,
-                label: i18next.t('entiteta.status'),
+                label: i18next.t('ent.status'),
                 name: 'status',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.ime'),
+                label: i18next.t('ent.ime'),
                 name: 'oseba.ime',
                 sortable: true
             },
@@ -61,7 +61,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.email'),
+                label: i18next.t('ent.email'),
                 name: 'oseba.email',
                 sortable: true
             },

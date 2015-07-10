@@ -50,7 +50,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.email'),
+                label: i18next.t('ent.email'),
                 name: 'email',
                 sortable: true
             },

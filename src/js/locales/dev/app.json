@@ -558,6 +558,9 @@
             "avtorskih": "Honorarji"
         },
         "d": {
+            "zaprosenProcent": "",
+            "koproducent": "",
+            "zaproseno": "",
             "nasStrosek": "Ali je naš strošek",
             "avtorskih": "Strošek avtorskih honorarjev",
             "tantieme": "Stroški tantiem",

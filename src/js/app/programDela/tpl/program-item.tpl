@@ -21,9 +21,9 @@
             <p style="margin-bottom: 0;">
                 <i class="fa fa-calendar"></i> {{t "programDela.sezona"}} : {{sezona}}
                 <br />
-                <i class="fa fa-clock-o"></i> {{t "entiteta.zacetek"}} : {{u "date" zacetek}}
+                <i class="fa fa-clock-o"></i> {{t "ent.zacetek"}} : {{u "date" zacetek}}
                 <br />
-                <i class="fa fa-clock-o"></i> {{t "entiteta.konec"}} : {{u "date" konec}}
+                <i class="fa fa-clock-o"></i> {{t "ent.konec"}} : {{u "date" konec}}
                 <br />
                 <i class="fa fa-money"></i> {{t "programDela.vrednostPs1"}} : {{vrPS1}}
                 <br />

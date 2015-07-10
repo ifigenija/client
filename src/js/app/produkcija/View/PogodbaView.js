@@ -29,7 +29,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.stevilka'),
+                label: i18next.t('ent.stevilka'),
                 name: 'sifra',
                 sortable: true
             },
@@ -43,7 +43,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.oseba'),
+                label: i18next.t('ent.oseba'),
                 name: 'oseba.label',
                 sortable: true
             },
@@ -77,7 +77,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.opis'),
+                label: i18next.t('ent.opis'),
                 name: 'opis',
                 sortable: false
             },

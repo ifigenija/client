@@ -144,7 +144,7 @@ define([
         var tool = [[
                 {
                     id: 'doc-dodaj',
-                    label: i18next.t('entiteta.dodaj'),
+                    label: i18next.t('std.dodaj'),
                     element: 'button-trigger',
                     trigger: 'dodaj'
                 }

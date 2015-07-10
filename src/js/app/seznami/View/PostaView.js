@@ -33,7 +33,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.naziv'),
+                label: i18next.t('ent.naziv'),
                 name: 'naziv',
                 sortable: true
             },

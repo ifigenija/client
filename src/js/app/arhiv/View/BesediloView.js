@@ -32,14 +32,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.stevilka'),
+                label: i18next.t('ent.stevilka'),
                 name: 'stevilka',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('entiteta.avtor'),
+                label: i18next.t('ent.avtor'),
                 name: 'avtor',
                 sortable: true
             },
