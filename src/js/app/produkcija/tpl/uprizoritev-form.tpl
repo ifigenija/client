@@ -8,8 +8,8 @@
         </div>
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-md-6" data-fields="zvrstSurs,maticniOder,datumZacStudija,datumPremiere,trajanje"></div>
-                <div class="col-sm-12 col-md-6" data-fields="stOdmorov,steviloVaj,planiranoSteviloVaj,gostujoca,sloAvtor"></div>
+                <div class="col-sm-12 col-md-6" data-fields="zvrstSurs,maticniOder,producent,datumZacStudija,datumPremiere"></div>
+                <div class="col-sm-12 col-md-6" data-fields="trajanje,stOdmorov,planiranoSteviloVaj,gostujoca,sloAvtor"></div>
             </div>
         </div>
     </div>

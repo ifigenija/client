@@ -37,23 +37,23 @@ define([
                 element: 'button-dropdown',
                 dropdown: [
                     {
-                        label: i18next.t('alter.brisi'),
+                        label: i18next.t('std.brisi'),
                         trigger: 'brisi'
                     },
                     {
                         type: '',
-                        label: i18next.t('alter.privzeto'),
+                        label: i18next.t('std.privzeto'),
                         trigger: 'dovoljenja'
                     },
                     {
-                        label: i18next.t('alter.deaktiviraj'),
+                        label: i18next.t('std.deaktiviraj'),
                         trigger: 'nalozi'
                     },
                     {
                         type: "divider"
                     },
                     {
-                        label: i18next.t('alter.deaktiviraj'),
+                        label: i18next.t('std.deaktiviraj'),
                         trigger: 'nalozi'
                     }
                 ]

@@ -92,7 +92,10 @@
         "premakniGor": "Premakni Gor",
         "premakniDol": "Premakni Dol",
         "dodaj": "Dodaj",
-        "skrij": "Skrij"
+        "skrij": "Skrij",
+        "prazno": "Prazno",
+        "privzeto": "Privzeto",
+        "deaktiviraj": "Deaktiviraj"
     },
     "entiteta": {
         "dodaj": "Dodaj",
@@ -125,7 +128,7 @@
         "zvrst": "Vrsta uprizoritve",
         "koproducent": "Koproducent",
         "d": {
-            "naziv" : "Naziv",
+            "naziv": "Naziv",
             "uprizoritev": "Uprizoritev na katero se nanaša",
             "sifra": "Enolična oznaka",
             "jeeu": "Je iz EU ali ne",
@@ -331,7 +334,7 @@
         "zvrst": "Vrsta",
         "faza": "Faza",
         "delovniNaslov": "Delovni naslov",
-        "datumZacStudija": "Datum začetka študije",
+        "datumZacStudija": "Datum začetka študija",
         "stevilovaj": "Število vaj",
         "datumPremiere": "Datum premiere",
         "maticniOder": "Matični oder",
@@ -349,6 +352,7 @@
         "steviloVaj": "Število vaj",
         "planiranoSteviloVaj": "Planirano število vaj",
         "skupniStrosek": "Skupni strošek",
+        "producent": "Producent",
         "t": {
             "datumPremiere": "Datum premiere"
         },
@@ -494,6 +498,8 @@
         "placiloNaVajo": "Plačilo na vajo",
         "vrednostVaje": "Vrednost vaje",
         "planiranoSteviloVaj": "Načrtovano število vaj",
+        "alternacija": "Alternacija",
+        "oseba": "Oseba",
         "d": {
             "vrednostVaj": "Pavšalna vrednost za vse vaje"
         }

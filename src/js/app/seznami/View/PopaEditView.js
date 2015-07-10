@@ -108,10 +108,6 @@ define([
         });
     };
 
-    PopaEditView.prototype.onSkrij = function () {
-        console.log('xxxx');
-    };
-
     /**
      * Ko označimo poslovnega partnerja za kupca 
      * @returns {undefined}

@@ -93,6 +93,21 @@ define([
         ]
     });
 
+    PogodbaView.prototype.onFormChange = function (form) {
+        var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
+        var vrednostVaje = form.fields.vrednostVaje.editor.$el;
+        var vrednostVaj = form.fields.vrednostVaj.editor.$el;
+
+        if (!placiloNaVajo) {
+            vrednostVaj.attr("disabled", "disabled");
+            vrednostVaje.removeAttr("disabled");
+        } else {
+            vrednostVaj.removeAttr("disabled");
+            vrednostVaje.attr("disabled", "disabled");
+
+        }
+    };
+
     PogodbaView.prototype.prepareToolbar = function () {
         return  this.model ?
                 [

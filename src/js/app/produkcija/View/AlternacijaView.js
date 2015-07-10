@@ -11,8 +11,6 @@ define([
     'formSchema!pogodba',
     'i18next',
     'app/Max/Module/Backgrid',
-    'radio',
-    'backbone',
     'backbone-modal'
 ], function (
         PostavkeView,
@@ -24,8 +22,6 @@ define([
         schemaPogodba,
         i18next,
         Backgrid,
-        Radio,
-        Backbone,
         Modal
         ) {
 
@@ -146,19 +142,29 @@ define([
         });
 
         Fv.prototype.onFormChange = function (form) {
-            var vrednost = this.model.get('placiloNaVajo');
-            if(vrednost){
-                this.$("input[name='vrednostVaj']").attr("disabled", "disabled");
-                this.$("input[name='vrednostVaje']").removeAttr("disabled");
-            }else{
-                this.$("input[name='vrednostVaje']").attr("disabled", "disabled");
-                this.$("input[name='vrednostVaj']").removeAttr("disabled");
+            var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
+            var vrednostVaje = form.fields.vrednostVaje.editor.$el;
+            var vrednostVaj = form.fields.vrednostVaj.editor.$el;
+
+            if (!placiloNaVajo) {
+                vrednostVaj.attr("disabled", "disabled");
+                vrednostVaje.removeAttr("disabled");
+            } else {
+                vrednostVaj.removeAttr("disabled");
+                vrednostVaje.attr("disabled", "disabled");
+
             }
         };
 
         Fv.prototype.onRender = function () {
+            var self = this;
             this.listenTo(this, 'render', function () {
-                this.$("input[name='vrednostVaje']").attr("disabled", "disabled");
+                var placiloNaVajo = self.form.fields.placiloNaVajo.editor.getValue();
+                if (placiloNaVajo) {
+                    self.form.fields.vrednostVaje.editor.$el.attr("disabled", "disabled");
+                } else {
+                    self.form.fields.vrednostVaj.editor.$el.attr("disabled", "disabled");
+                }
             });
         };
 
@@ -181,9 +187,10 @@ define([
         var shraniSpremembe = function () {
             if (!formView.model.get('id')) {
                 formView.listenTo(formView, 'save:success', function () {
-                    self.dokument.pogodbeCollection.fetch({
+                    self.dokument.alternacijeCollection.fetch({
                         success: function () {
-                            self.dokument.pogodbeCollection.add(pogodba);
+                            self.renderList();
+                            self.renderFormAndToolbar();
                         }
                     });
                 });
@@ -222,6 +229,5 @@ define([
             });
         }
     };
-
     return AlternacijaView;
 });

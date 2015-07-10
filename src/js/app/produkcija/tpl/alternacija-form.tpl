@@ -3,7 +3,19 @@
         <div class="col-sm-6" style="display: table;">
             <div data-fields="sifra,funkcija,oseba"></div>
             <div style="display: table-row">
-                {{pogodba}} <a class="col-sm-3 btn btn-default pogodba-dodaj">{{t "std.dodaj"}} {{t "alternacija.pogodba"}}</a>
+                {{t "alternacija.pogodba"}}: 
+                {{#if imaPogodbo}}
+                {{ pogodba.ident }}
+                {{else}}
+                {{t "std.prazno"}}
+                {{/if}}
+                <a class="pull-right btn btn-default pogodba-dodaj">
+                    {{#if imaPogodbo}}
+                    {{t "std.uredi"}} {{t "alternacija.pogodba"}}
+                    {{else}}
+                    {{t "std.dodaj"}} {{t "alternacija.pogodba"}}
+                    {{/if}}
+                </a>
             </div>
         </div>
         <div class="col-sm-6"data-fields="zacetek,konec,zaposlitev,pomembna,privzeti,aktivna"></div>
