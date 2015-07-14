@@ -479,11 +479,13 @@
     "pogodba": {
         "title": "Pogodbe",
         "vrednostVaj": "Vrednost vaj",
+        "planiranoSteviloVaj": "Planirano število vaj",
         "vrednostPredstave": "Vrednost predstave",
         "vrednostUre": "Vrednost ure",
         "vrednostDo": "Vrednost do",
         "popa": "Klient",
         "trr": "TRR",
+        "alternacija": "Alternacija",
         "d": {
             "vrednostVaj": "Pavšalna vrednost za vse vaje"
         }
@@ -557,6 +559,7 @@
         "celotnaVrednostMat": "Celotna vr. na mat.odru",
         "nasDelez": "Naš delež c.v",
         "celotnaVrednostGostovSZ": "Celotna vr. na gost. Slo in zam.",
+        "zaprosenProcent": "Zaprošen procent",
         "zaproseno": "Zaprošeno",
         "lastnaSredstva": "Lastna sredstva",
         "avtorskiHonorarji": "Avtorski honorarji",
