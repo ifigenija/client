@@ -35,10 +35,10 @@
     "backbone.radio": "~0.9.0",
     "backgrid-filter": "~0.3.5",
     "backgrid-moment-cell": "~0.3.5",
-    "backgrid-select-all": "~0.3.5"
+    "backgrid-select-all": "~0.3.5",
+    "fullcalendar": "~2.3.2"
   },
   "resolutions": {
     "underscore": "1.4.4 - 1.6.0"
   }
 }
-

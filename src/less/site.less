@@ -10,11 +10,6 @@ Licenca GPLv3
  Bootstrap override
 */
 
-
-.main {
-    margin-right: 10px;
-    margin-left: 10px;
-}
 .modal-body {
     padding:  10px;
 }
@@ -525,22 +520,25 @@ div.pagination-container {
  * FORM PANEL
  * Panel, ki ima naslov, toolbar in v telesu form
  */
+/*
+ * FORM PANEL
+ * Panel, ki ima naslov, toolbar in v telesu form
+ */
 .panel-form {
     margin-bottom: 8px;
 }
 .panel-form .panel-heading {
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding: 4px;
+    
 }
 .panel-form .panel-footer {
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding: 4px;
 }
 .panel-form > .panel-body {
-    padding-bottom: 0px;
+    padding: 0;
 }
-.panel-form.paginated-grid > .panel-body form {
-    padding: 15px 15px 0 15px;
+.panel-form > .panel-body form {
+    padding: @panel-body-padding @panel-body-padding 0 @panel-body-padding;
 }
 .panel-form h4 {
     margin-top: 6px;

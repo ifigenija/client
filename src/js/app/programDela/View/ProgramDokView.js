@@ -188,7 +188,7 @@ define([
                 collection: self.model.premiereCollection,
                 dokument: self.model,
                 odprtaForma: true,
-                potrdiIzbris: true
+                potrdiBrisanje: true
             });
             self.premiereR.show(view);
             return view;
@@ -208,7 +208,7 @@ define([
                 collection: self.model.ponovitvePremiereCollection,
                 dokument: self.model,
                 odprtaForma: true,
-                potrdiIzbris: true
+                potrdiBrisanje: true
             });
             self.ponovitvePremierR.show(view);
             return view;
@@ -228,7 +228,7 @@ define([
                 collection: self.model.ponovitvePrejsnjihCollection,
                 dokument: self.model,
                 odprtaForma: true,
-                potrdiIzbris: true
+                potrdiBrisanje: true
             });
             self.ponovitvePrejsnjihR.show(view);
             return view;
@@ -248,7 +248,7 @@ define([
                 collection: self.model.gostujociCollection,
                 dokument: self.model,
                 odprtaForma: true,
-                potrdiIzbris: true
+                potrdiBrisanje: true
             });
             self.gostujociR.show(view);
             return view;
@@ -268,7 +268,7 @@ define([
                 collection: self.model.gostovanjaCollection,
                 dokument: self.model,
                 odprtaForma: true,
-                potrdiIzbris: true
+                potrdiBrisanje: true
             });
             self.gostovanjaR.show(view);
             return view;
@@ -288,7 +288,7 @@ define([
                 collection: self.model.izjemniCollection,
                 dokument: self.model,
                 odprtaForma: true,
-                potrdiIzbris: true
+                potrdiBrisanje: true
             });
             self.izjemniR.show(view);
             return view;
@@ -308,7 +308,7 @@ define([
                 collection: self.model.festivaliCollection,
                 dokument: self.model,
                 odprtaForma: true,
-                potrdiIzbris: true
+                potrdiBrisanje: true
             });
             self.festivaliR.show(view);
             return view;
@@ -328,7 +328,7 @@ define([
                 collection: self.model.programiRaznoCollection,
                 dokument: self.model,
                 odprtaForma: true,
-                potrdiIzbris: true
+                potrdiBrisanje: true
             });
             self.razniR.show(view);
             return view;

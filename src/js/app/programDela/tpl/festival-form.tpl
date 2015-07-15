@@ -1,5 +1,5 @@
 <div class="panel-group" id="accordion" role="tablist">
-    <div class="panel panel-default panel-form glava-panel paginated-grid">
+    <div class="panel panel-default panel-form glava-panel">
         <div class="panel-heading podatki" role="tab">
             <div class="clearfix">
                 <h4 class="glava-title" data-toggle="collapse" data-parent="#accordion" href="#podatki">
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default panel-form glava-panel paginated-grid">
+    <div class="panel panel-default panel-form glava-panel">
         <div class="panel-heading koprodukcija">
             <div class="clearfix">
                 <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#koprodukcija">
@@ -44,7 +44,7 @@
             </form>
         </div>
     </div>
-    <div class="panel panel-default panel-form glava-panel paginated-grid">
+    <div class="panel panel-default panel-form glava-panel">
         <div class="panel-heading sredstva">
             <div class="clearfix">
                 <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#sredstva">

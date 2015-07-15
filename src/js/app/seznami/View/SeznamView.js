@@ -5,6 +5,7 @@ define([
     'marionette',
     'radio',
     'i18next',
+    'app/Max/View/Confirm',
     'app/Dokument/View/FormView',
     'app/Max/View/PaginatedGrid',
     'app/Max/Module/Backgrid',
@@ -19,6 +20,7 @@ define([
         Marionette,
         Radio,
         i18next,
+        confirm,
         FormView,
         PaginatedGrid,
         Backgrid,
@@ -37,6 +39,7 @@ define([
      */
     var SeznamView = Marionette.LayoutView.extend({
         template: seznamTpl,
+        potrdiBrisanje: true,
         url: null,
         columns: null,
         formTemplate: null,
@@ -175,8 +178,9 @@ define([
      */
     SeznamView.prototype.onBrisi = function (model) {
 
-        if (window.confirm(i18next.t('std.potrdiIzbris'))) {
+        var brisi = function () {
             model.destroy({
+                wait: true,
                 success: function () {
                     Radio.channel('error').command('flash', {
                         message: i18next.t('std.messages.success'),
@@ -185,7 +189,21 @@ define([
                 },
                 error: Radio.channel('error').request('handler', 'xhr')
             });
+        };
+        if (this.potrdiBrisanje) {
+            confirm({
+                text: i18next.t('std.potrdiIzbris'),
+                modalOptions: {
+                    title: i18next.t("std.brisi"),
+                    okText: i18next.t("std.brisi")
+                },
+                ok: brisi
+            });
+        } else {
+            brisi();
         }
+
+
     };
 
     /**

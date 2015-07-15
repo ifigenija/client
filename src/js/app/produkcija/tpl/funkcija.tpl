@@ -1,4 +1,4 @@
-<div class="panel panel-default panel-form paginated-grid">
+<div class="panel panel-default panel-form">
     <div class="panel-heading">
         <div class="clearfix">
             <h4 class="postavke-title pull-left"> {{ formTitle }}</h4>

@@ -42,6 +42,14 @@ module.exports = function (grunt) {
                 configFile: 'karma.conf.js'
             }
         },
+        uglify: {
+            options: {
+            },
+            build: {
+                src: 'src/lib/require.js',
+                dest: 'dist/js/require.js'
+            }
+        },
         requirejs: {
             compile: {
                 options: {
@@ -156,7 +164,7 @@ module.exports = function (grunt) {
                     sourceMap: false,
                     outputSourceFiles: true
                 },
-                src: 'src/less/site.less',
+                src: 'src/less/yeti/site.less',
                 dest: 'src/css/site.css'
             },
             compileBackgrid: {
@@ -176,7 +184,7 @@ module.exports = function (grunt) {
                 },
                 src: 'src/less/layout.less',
                 dest: 'src/css/layout.css'
-            } 
+            }
         },
         csslint: {
             options: {
@@ -217,7 +225,7 @@ module.exports = function (grunt) {
             }
         },
         copy: {
-            fonts: {                
+            fonts: {
                 cwd: 'src/lib/bootstrap/fonts/',
                 src: '*',
                 dest: 'src/fonts/',
@@ -249,7 +257,7 @@ module.exports = function (grunt) {
     grunt.registerTask('dist-css', ['less-compile', 'cssmin', 'copy']);
 
     // Full distribution task.
-    grunt.registerTask('dist', ['clean', 'dist-css', 'requirejs']);
+    grunt.registerTask('dist', ['clean', 'dist-css', 'requirejs', 'uglify']);
 
 
 };

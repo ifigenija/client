@@ -12,7 +12,7 @@ $dist = $config['useDist'] ? 'dist/': '';
         <link rel="stylesheet" href="<?= $dist ?>css/backgrid.css">
         <link rel="stylesheet" href="<?= $dist ?>css/site.css">
         <link rel="stylesheet" href="lib/font-awsome/css/font-awesome.css">
-        <script type="text/javascript" src="lib/requirejs/require.js"></script>   
+        <script type="text/javascript" src="<?= empty($dist) ? "lib/requirejs" : "dist/js" ?>/require.js"></script>   
         <script type="text/javascript">
             define('baseUrl', function () {
                 return "";

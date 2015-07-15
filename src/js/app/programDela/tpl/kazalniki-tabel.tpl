@@ -1,5 +1,5 @@
 
-<table class="table table-striped">
+<table class="table table-striped table-condensed">
     <thead>
         <tr>
             <th class="col-sm-9">{{t "programDela.kazalniki"}}</th>

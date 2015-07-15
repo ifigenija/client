@@ -249,7 +249,7 @@ define([
             });
 
             it("izris seznama/tabela", function () {
-                vDOM('.seznam-tabela .paginated-grid', 1);
+                vDOM('.seznam-tabela', 1);
                 vDOM('th.sifra', 1);
                 vDOM('th.naziv', 1);
                 vDOM('tbody', 1);

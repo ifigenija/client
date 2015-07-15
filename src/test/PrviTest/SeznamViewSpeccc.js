@@ -185,7 +185,7 @@ define([
             });
 
             it("izris seznama/tabela", function () {
-                vDOM('.seznam-tabela .paginated-grid', 1);
+                vDOM('.seznam-tabela', 1);
             });
 
             it("izris forme", function () {

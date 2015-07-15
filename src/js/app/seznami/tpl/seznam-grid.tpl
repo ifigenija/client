@@ -1,4 +1,4 @@
-<div class="panel panel-default paginated-grid">
+<div class="panel panel-default panel-form">
     <div class="panel-heading">
         <div class ="pull-left grid-paginator"></div>
         <div class="{{ gridFilterClass }} grid-filter"></div>

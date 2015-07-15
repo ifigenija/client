@@ -115,7 +115,7 @@ define([
      * @type Marionette.ItemView
      */
     var SidebarMenu = Marionette.ItemView.extend({
-        className: "navbar navbar-default",
+        className: "navbar navbar-inverse",
         tagName: "nav",
         template: Handlebars.compile(sidebarTpl),
         onRender: function () {
