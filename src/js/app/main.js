@@ -15,6 +15,7 @@ define([
     'app/seznami/Module/Seznami',
     'app/nastavitve/Module/Nastavitve',
     'app/aaa/Module/Aaa',
+    'app/Zapisi/Module/Filemanager',
     'app/Max/View/Buttons',
     'bootstrap'
 ], function (
@@ -31,6 +32,7 @@ define([
         seznamiInit,
         nastavitveInit,
         aaaInit,
+        zapisiInit,
         buttons
         ) {
 
@@ -46,6 +48,7 @@ define([
     app.module('seznami', seznamiInit);
     app.module('nastavitve', nastavitveInit);
     app.module('aaa', aaaInit);
+    app.module('zapisi', zapisiInit);
 
 
     /**

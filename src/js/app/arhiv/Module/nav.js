@@ -19,6 +19,11 @@ define(['i18next'], function (i18n) {
                     uri: "#arhiv/dodaj"
                 },                
                 {
+                    label: i18n.t("arhiv.nav.manager"),
+                    icon: "fa-user-plus",
+                    uri: "#fs/manager"
+                },                
+                {
                     label: i18n.t("arhiv.nav.besedila"),
                     uri: "#arhiv/besedila"
                 }
