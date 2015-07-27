@@ -72,7 +72,7 @@ define([
         },
         nasvet: {
             id: 'doc-nasvet',
-            label: '<i class="fa fa-info"></i>',
+            icon: 'fa fa-info',
             element: 'button-trigger',
             trigger: 'nasvet'
         }

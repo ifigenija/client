@@ -52,7 +52,7 @@ define([
             },
             nasvet: {
                 id: 'doc-postavka-nasvet',
-                label: '<i class="fa fa-info"></i>',
+                icon: 'fa fa-info',
                 element: 'button-trigger',
                 trigger: 'nasvet'
             }

@@ -43,6 +43,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('postniNaslov.postaNaziv'),
+                name: 'postaNaziv',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('ent.drzava'),
                 name: 'drzava.label',
                 sortable: true

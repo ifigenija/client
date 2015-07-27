@@ -363,9 +363,10 @@
     },
     "tel": {
         "title": "Telefonske",
-        "vrsta": "Vrsta tel. številke",
+        "vrsta": "Vrsta",
         "privzeta": "Privzeta",
         "popa": "Klient",
+        "stevilka": "Telefonska številka",
         "d": {
             "vrsta": "Vrsta telefonske številke",
             "stevilka": "Telefonska številka",
@@ -432,6 +433,7 @@
         "podnaslov": "$t(ent.podnaslov)",
         "interNaslov": "$t(ent.interNaslov)",
         "avtor": "$t(ent.avtor)",
+        "opis": "$t(ent.opis)",
         "title": "Uprizoritev",
         "nova": "Nova uprizoritev",
         "umetniskeEkipe": "Umetniška Ekipa",
@@ -500,6 +502,8 @@
         "maxPrekrivanj": "Max. prekrivanj",
         "privzeti": "Privzeta alternacija",
         "tipFunkcije": "Tip funkcije",
+        "naziv": "$t(ent.naziv)",
+        "sort": "$t(ent.sort)",
         "d": {
             "naziv": "",
             "komentar": "Dodatne opombe, predlogi, komentarji",
@@ -526,6 +530,8 @@
         "pogodba": "Pogodba",
         "zaposlitev": "Zaposlitev",
         "pomembna": "Pomembna",
+        "zaposlen": "Zaposlen",
+        "imaPogodbo": "Ima pogodbo",
         "d": {
             "sifra": "$t(ent.d.sifra)",
             "funkcija": "",
@@ -620,6 +626,9 @@
     "role": {
         "title": "Vloga",
         "nova": "Nova vloga",
+        "naziv": "$t(ent.naziv)",
+        "opis": "$t(ent.opis)",
+        "builtIn": "$t(ent.builtIn)",
         "d": {
             "builtIn": "Vloga, ki pride z namestitvijo sistema"
         }
@@ -627,6 +636,9 @@
     "permission": {
         "title": "Dovoljenja",
         "nova": "Novo dovoljenje",
+        "naziv": "$t(ent.naziv)",
+        "opis": "$t(ent.opis)",
+        "builtIn": "$t(ent.builtIn)",
         "d": {
             "builtIn": "Dovoljene, ki pride z namestitvijo sistema"
         }
@@ -634,6 +646,7 @@
     "user": {
         "title": "Uporabniki",
         "nova": "Nov uporabnik",
+        "email": "$t(ent.email)",
         "name": "Polno ime",
         "password": "Geslo",
         "enabled": "Aktiven",
@@ -658,6 +671,7 @@
         "konec": "$t(ent.konec)",
         "opis": "$t(ent.opis)",
         "vrednostVaj": "Vrednost vaj",
+        "vrednostUre": "Vrednost ure",
         "planiranoSteviloVaj": "Planirano število vaj",
         "vrednostPredstave": "Vrednost predstave",
         "popa": "Klient",
@@ -766,6 +780,7 @@
     },
     "ep": {
         "uprizoritev": "$t(ent.uprizoritev)",
+        "naziv": "$t(ent.naziv)",
         "celotnaVrednost": "Celotna vrednost",
         "celotnaVrednostMat": "Celotna vred. na matičnem odru",
         "celotnaVrednostGostovSZ": "Celotna vred. na gost. Slo in zam.",
@@ -881,6 +896,7 @@
         "oFestivalu": "O festivalu",
         "koprodukcija": "O koprodukciji",
         "sredstva": "O sredstvih",
+        "zvrst": "Zvrst",
         "d": {
             "stProdukcij": "Skupno število festivalskih produkcij",
             "stPredstav": "Skupno število predstav",

@@ -99,12 +99,21 @@ define([
                 sortable: false
             },
             {
+                cell: 'boolean',
+                editable: false,
+                label: i18next.t('alternacija.aktivna'),
+                name: 'aktivna',
+                sortable: false
+            },
+            {
                 cell: 'action',
                 name: '...',
                 sortable: false,
                 actions: [
                     {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')}
+                    {event: 'uredi', title: i18next.t('std.uredi')},
+                    {event: 'premakniGor', title: i18next.t('std.premakniGor')},
+                    {event: 'premakniDol', title: i18next.t('std.premakniDol')}
                 ]
             }
         ]
@@ -131,7 +140,7 @@ define([
             buttons: {
                 nasvet: {
                     id: 'doc-nasvet',
-                    label: '<i class="fa fa-info"></i>',
+                    icon: 'fa fa-info',
                     element: 'button-trigger',
                     trigger: 'nasvet'
                 }

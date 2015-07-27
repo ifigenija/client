@@ -25,13 +25,13 @@ define([
      */
     var tabVse = [
         {name: i18next.t('ent.splosno'), event: 'splosni'},
-        {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'},
-        {name: i18next.t('ent.kontakti'), event: 'kontakti'}
+        {name: i18next.t('ent.kontakti'), event: 'kontakti'},
+        {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'}
     ];
 
     var tabSplosno = [
         {name: i18next.t('ent.splosno'), event: 'splosni'},
-        {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'}
+        {name: i18next.t('ent.kontakti'), event: 'kontakti'}
     ];
 
     var tabNovi = [

@@ -13,7 +13,7 @@
                 <form>
                     <div class="row">
                         <div class="col-sm-6 col-md-3" data-fields="naziv,zvrst,stPredstav"></div>
-                        <div class="col-sm-6 col-md-3" data-fields="stPredavanj,stPredstavitev,stDelavnic"></div>
+                        <div class="col-sm-6 col-md-3" data-fields="stPredstavitev,stDelavnic"></div>
                         <div class="col-sm-6 col-md-3" data-fields="stDrugiDogodki,stProdukcij,obiskDoma"></div>
                         <div class="col-sm-6 col-md-3" data-fields="casPriprave,casIzvedbe,prizorisca"></div>
                     </div>
@@ -58,7 +58,7 @@
                 <form>
                     <div class="row">
                         <div class="col-sm-6" data-fields="nasDelez,lastnaSredstva"></div>
-                        <div class="col-sm-6" data-fields="vlozekKoproducenta,drugiJavni"></div>
+                        <div class="col-sm-6" data-fields="drugiJavni"></div>
                     </div>
                 </form>
             </div>

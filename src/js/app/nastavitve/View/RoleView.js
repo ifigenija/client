@@ -46,21 +46,21 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.name'),
+                label: i18next.t('role.naziv'),
                 name: 'name',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.description'),
+                label: i18next.t('role.opis'),
                 name: 'description',
                 sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('ent.builtIn'),
+                label: i18next.t('role.builtIn'),
                 name: 'builtIn',
                 sortable: true
             },
