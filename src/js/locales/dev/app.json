@@ -778,8 +778,8 @@
             "avgZasedDvoran": "Povprečna zasedenost lastnih dvoran",
             "avgCenaVstopnice": "",
             "stProdVstopnic": "",
-            "stZaposlenih": "",
-            "stZaposIgralcev": "",
+            "stZaposlenih": "Število vseh zaposlenih v javnem zavodu",
+            "stZaposIgralcev": "Število zaposlenih igralcev",
             "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev (popvprečno št. nastopov v letu)"
         }
     },

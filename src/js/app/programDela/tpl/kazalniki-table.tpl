@@ -118,10 +118,26 @@
         <tr>
             <td>{{t "programDela.d.stKoprodukcijNVO"}}</td>
             <td class="col-numbers">{{u "formatNumber" stKoprodukcijNVO 0}}</td>
+        </tr>        
+        <tr>
+            <td>{{t "programDela.d.stZaposlenih"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stZaposlenih 0}}</td>
+        </tr>
+        <tr>
+            <td>{{t "programDela.d.stZaposIgralcev"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stZaposIgralcev 0}}</td>
+        </tr>
+        <tr>
+            <td>{{t "programDela.d.avgStNastopovIgr"}}</td>
+            <td class="col-numbers">{{u "formatNumber" avgStNastopovIgr}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.stHonorarnih"}}</td>
             <td class="col-numbers">{{u "formatNumber" stHonorarnih 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "programDela.d.statSamoz"}}</td>
+            <td class="col-numbers">{{u "formatNumber" statSamoz}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stHonorarnihIgr"}}</td>
@@ -138,6 +154,10 @@
         <tr>
             <td>{{t "programDela.d.sredstvaAvt"}}</td>
             <td class="col-numbers">{{u "formatNumber" sredstvaAvt}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "programDela.d.statusSamoz"}}</td>
+            <td class="col-numbers">{{u "formatNumber" statusSamozs}}</td>
         </tr>
     </tbody>
 </table>

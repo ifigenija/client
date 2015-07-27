@@ -7,7 +7,7 @@ define([
     'app/Dokument/View/DokumentView',
     'template!../tpl/program-dokument.tpl',
     'template!../tpl/program-form.tpl',
-    'template!../tpl/kazalniki-tabel.tpl',
+    'template!../tpl/kazalniki-table.tpl',
     'formSchema!programDela',
     'app/Max/View/TabControl',
     'marionette'
