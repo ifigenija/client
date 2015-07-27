@@ -9,31 +9,31 @@
     <tbody>
         <tr>
             <td>{{t "programDela.d.stPremier"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stPremier}}</td>
+            <td class="col-numbers">{{u "formatNumber" stPremier 0}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.stPonPrej"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stPonPrej}}</td>
+            <td class="col-numbers">{{u "formatNumber" stPonPrej 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stPonPrejVelikih"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stPonPrejVelikih}}</td>
+            <td class="col-numbers">{{u "formatNumber" stPonPrejVelikih 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stPonPrejMalih"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stPonPrejMalih}}</td>
+            <td class="col-numbers">{{u "formatNumber" stPonPrejMalih 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stPonPrejMalihKopr"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stPonPrejMalihKopr}}</td>
+            <td class="col-numbers">{{u "formatNumber" stPonPrejMalihKopr 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stPonPrejSredKopr"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stPonPrejSredKopr}}</td>
+            <td class="col-numbers">{{u "formatNumber" stPonPrejSredKopr 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stPonPrejVelikihKopr"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stPonPrejVelikihKopr}}</td>
+            <td class="col-numbers">{{u "formatNumber" stPonPrejVelikihKopr 0}}</td>
         </tr>
         <tr><!--možna decimalna števila-->
             <td>{{t "programDela.d.vrPS1"}}</td>
@@ -53,55 +53,55 @@
         </tr>
         <tr>
             <td>{{t "programDela.d.stNekomerc"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stNekomerc}}</td>
+            <td class="col-numbers">{{u "formatNumber" stNekomerc 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stIzvPonPrem"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stIzvPonPrem}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPrem 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stIzvPrej"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stIzvPrej}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPrej 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stIzvGostuj"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stIzvGostuj}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvGostuj 0}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.stIzvOstalihNek"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stIzvOstalihNek}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvOstalihNek 0}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.stGostovanjSlo"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stGostovanjSlo}}</td>
+            <td class="col-numbers">{{u "formatNumber" stGostovanjSlo 0}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.stGostovanjZam"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stGostovanjZam}}</td>
+            <td class="col-numbers">{{u "formatNumber" stGostovanjZam 0}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.stGostovanjInt"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stGostovanjInt}}</td>
+            <td class="col-numbers">{{u "formatNumber" stGostovanjInt 0}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.stObiskNekom"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stObiskNekom}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskNekom 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stObiskNekomMat"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stObiskNekomMat}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskNekomMat 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stObiskNekomGostSlo"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stObiskNekomGostSlo}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskNekomGostSlo 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stObiskNekomGostZam"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stObiskNekomGostZam}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskNekomGostZam 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stObiskNekomGostInt"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stObiskNekomGostInt}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskNekomGostInt 0}}</td>
         </tr>
         <tr><!--povprecje-->
             <td>{{t "programDela.d.avgObiskPrired"}}</td>
@@ -109,27 +109,27 @@
         </tr>
         <tr>
             <td>{{t "programDela.d.stKoprodukcij"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stKoprodukcij}}</td>
+            <td class="col-numbers">{{u "formatNumber" stKoprodukcij 0}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.stKoprodukcijInt"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stKoprodukcijInt}}</td>
+            <td class="col-numbers">{{u "formatNumber" stKoprodukcijInt 0}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.stKoprodukcijNVO"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stKoprodukcijNVO}}</td>
+            <td class="col-numbers">{{u "formatNumber" stKoprodukcijNVO 0}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.stHonorarnih"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stHonorarnih}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnih 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stHonorarnihIgr"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgr}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgr 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "programDela.d.stHonorarnihIgrTujJZ"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrTujJZ}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrTujJZ 0}}</td>
         </tr>
         <tr>
             <td>{{t "programDela.d.sredstvaInt"}}</td>
