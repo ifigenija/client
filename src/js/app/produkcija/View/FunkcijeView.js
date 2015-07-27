@@ -57,7 +57,7 @@ define([
                     className: 'backgrid-kolona-stevilk'
                 }),
                 editable: false,
-                label: i18next.t('ent.sort'),
+                label: i18next.t('funkcija.sort'),
                 name: 'sort',
                 sortable: true
             },
@@ -71,7 +71,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.naziv'),
+                label: i18next.t('funkcija.naziv'),
                 name: 'naziv',
                 sortable: true
             },

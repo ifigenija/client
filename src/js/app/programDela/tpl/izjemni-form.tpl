@@ -2,14 +2,14 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-md-6" data-fields="naziv,nasDelez"></div>
-                <div class="col-sm-12 col-md-6" data-fields="lastnaSredstva"></div>
+                <div class="col-sm-12 col-md-6" data-fields="naziv,nasDelez,zaprosenProcent,lastnaSredstva,drugiJavni"></div>
+                <div class="col-sm-12 col-md-6" data-fields="stZaposlenih,avtorskiHonorarji,tantieme,avtorskePravice"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-md-6" data-fields="drugiJavni,stZaposlenih"></div>
-                <div class="col-sm-12 col-md-6" data-fields="obiskDoma,ponoviDoma"></div>
+                <div class="col-sm-12 col-md-6" data-fields="obiskDoma,obiskGost,obiskZamejo,obiskInt"></div>
+                <div class="col-sm-12 col-md-6" data-fields="ponoviDoma,ponoviZamejo,ponoviGost,ponoviInt"></div>
             </div>
         </div>
     </div>

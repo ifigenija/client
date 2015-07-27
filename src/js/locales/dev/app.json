@@ -395,6 +395,7 @@
     "besedilo": {
         "title": "Besedila",
         "nova": "Novo besedilo",
+        "stevilka": "$t(ent.stevilka)",
         "avtor": "$t(ent.avtor)",
         "naslov": "$t(ent.naslov)",
         "podnaslov": "$t(ent.podnaslov)",
@@ -524,6 +525,7 @@
         "konec": "$t(ent.konec)",
         "aktivna": "$t(ent.aktivna)",
         "opomba": "$t(ent.opomba)",
+        "sort": "$t(ent.sort)",
         "privzeti": "Privzeta",
         "sodelovanje": "Sodelovanje",
         "koprodukcija": "Koprodukcija",
@@ -581,6 +583,7 @@
         "koprodukcije": "Koprodukcije",
         "stroski": "Stroški",
         "naziv": "$t(ent.naziv)",
+        "sort": "$t(ent.sort)",
         "tipstroska": "Tip Stroška",
         "opis": "$t(ent.opis)",
         "alternacije": "Alternacije",
@@ -599,6 +602,7 @@
     "zaposlitev": {
         "title": "Zaposlitve",
         "nova": "Nova zaposlitev",
+        "sifra": "$t(ent.sifra)",
         "oseba": "$t(ent.oseba)",
         "status": "$t(ent.status)",
         "zacetek": "$t(ent.zacetek)",
@@ -769,7 +773,8 @@
             "stHonorarnih": "Načrtovano število honorarnih sodelavcev",
             "stHonorarnihIgr": "Načrtovano število honorarnih igralcev",
             "stHonorarnihIgrTujJZ": "Načrtovano število honorarnih zunanjih sodelavcev",
-            "sredstvaInt": "Višina sredstev iz mednarodnih virov",
+            "stHonorarnihIgrSamoz": "Načrtovano število sodelavcev s statusom samozaposlenega v kulturi",
+            "sredstvaInt": "Višina sredstev iz mednarodnih virov - z razpisi pridobljena sredstva",
             "avgZasedDvoran": "Povprečna zasedenost lastnih dvoran",
             "avgCenaVstopnice": "",
             "stProdVstopnic": "",
@@ -781,6 +786,7 @@
     "ep": {
         "uprizoritev": "$t(ent.uprizoritev)",
         "naziv": "$t(ent.naziv)",
+        "sort": "$t(ent.sort)",
         "celotnaVrednost": "Celotna vrednost",
         "celotnaVrednostMat": "Celotna vred. na matičnem odru",
         "celotnaVrednostGostovSZ": "Celotna vred. na gost. Slo in zam.",
@@ -802,7 +808,7 @@
         "ponoviGost": "Število ponovitev na gostovanjih",
         "ponoviInt": "Število ponovitev na med. gostovanjih",
         "utemeljitev": "Utemeljitev",
-        "tipProgramskeEnote": "Tip programske Enote",
+        "tipProgramskeEnote": "Tip programske enote",
         "stZaposlenih": "Število zaposlenih na projektu",
         "stZaposUmet": "Število zap. članov umet. ansambla",
         "stZaposDrug": "Število drugih",
@@ -811,6 +817,8 @@
         "stHonorarnihIgrTujJZ": "Število honorarnih igralcev iz tujih JZ",
         "stZaposUmet": "Število zaposlenih članov umet. ansambla",
         "stZaposlenih": "Število zaposlenih",
+        "avtorskePravice": "Avtorske pravice",
+        "stHonorarnihIgrSamoz": "Število samozaposlenih igralcev",
         "d": {
             "uprizoritev": "",
             "celotnaVrednost": "Celotna vrednost projekta",
@@ -839,7 +847,8 @@
             "stZaposDrug": "Število drugih zaposlevnih, ki sodelujejo pri uprizoritvi",
             "stHonorarnih": "Število vseh, ki sodelujejo honorarno",
             "stHonorarnihIgr": "Št. vseh, ki sodelujejo honorarno od tega igralcev",
-            "stHonorarnihIgrTujJZ": "Št. vseh, ki sodelujejo honorarno od tega igralcev, zaposlenih v drugih javnih zavodih"
+            "stHonorarnihIgrTujJZ": "Št. vseh, ki sodelujejo honorarno od tega igralcev, zaposlenih v drugih javnih zavodih",
+            "stHonorarnihIgrSamoz": "Število igralcev s statusom samozaposlenega v kulturi"
         },
         "t": {
             "celotnaVrednost": "Vrednost",
@@ -936,19 +945,9 @@
     },
     "programRazno": {
         "title": "Razni programi",
-        "naslovPE": "Naslov",
-        "avtorPE": "Avtor",
-        "obsegPE": "Obseg",
-        "mesecPE": "Mesec",
-        "vrednostPE": "Vrednost",
         "stPE": "Število programskih enot",
         "soorganizator": "Soorganizator",
         "d": {
-            "naslovPE": "Naslov programske enote",
-            "avtorPE": "Avtor programske enote",
-            "obsegPE": "Obseg programske enote",
-            "mesecPE": "Mesec programske enote",
-            "vrednostPE": "Vrednost programske enote",
             "stPE": "Število programskih enot",
             "soorganizator": "Soorganizator oz. koproducent"
         }
@@ -956,6 +955,7 @@
     "sezona": {
         "title": "Sezone",
         "ime": "Ime sezone",
+        "imeSezone": "Ime sezone",
         "aktivna": "$t(ent.aktivna)",
         "zacetek": "$t(ent.zacetek)",
         "konec": "$t(ent.konec)",

@@ -59,28 +59,28 @@ define([
                 headerCell: hc,
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('ent.sort'),
+                label: i18next.t('alternacija.sort'),
                 name: 'sort',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.sifra'),
+                label: i18next.t('alternacija.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.oseba'),
+                label: i18next.t('alternacija.oseba'),
                 name: 'oseba.label',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.funkcija'),
+                label: i18next.t('alternacija.funkcija'),
                 name: 'funkcija.label',
                 sortable: true
             },

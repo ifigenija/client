@@ -40,7 +40,7 @@ define([
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
-                label: i18next.t('ent.zacetek'),
+                label: i18next.t('sezona.zacetek'),
                 name: 'zacetek',
                 sortable: true
             },
@@ -48,14 +48,14 @@ define([
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
-                label: i18next.t('ent.konec'),
+                label: i18next.t('sezona.konec'),
                 name: 'konec',
                 sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('ent.aktivna'),
+                label: i18next.t('sezona.aktivna'),
                 name: 'aktivna',
                 sortable: true
             },

@@ -28,14 +28,14 @@ define([
                 headerCell: hc,
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('ent.sort'),
+                label: i18next.t('ep.sort'),
                 name: 'sort',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.uprizoritev'),
+                label: i18next.t('ep.uprizoritev'),
                 name: 'uprizoritev',
                 sortable: true
             },
@@ -88,15 +88,6 @@ define([
                 editable: false,
                 label: i18next.t('gostovanje.transportniStroski'),
                 name: 'transportniStroski',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
-                label: i18next.t('gostovanje.odkup'),
-                name: 'odkup',
                 total: 'sum',
                 sortable: true
             },

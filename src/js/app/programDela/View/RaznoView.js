@@ -28,29 +28,15 @@ define([
                 headerCell: hc,
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('ent.sort'),
+                label: i18next.t('ep.sort'),
                 name: 'sort',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.naziv'),
+                label: i18next.t('ep.naziv'),
                 name: 'naziv',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('programRazno.naslovPE'),
-                name: 'naslovPE',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('programRazno.avtorPE'),
-                name: 'avtorPE',
                 sortable: true
             },
             {
@@ -58,15 +44,6 @@ define([
                 editable: false,
                 label: i18next.t('programRazno.soorganizator'),
                 name: 'soorganizator.label',
-                sortable: true
-            },
-            {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
-                label: i18next.t('programRazno.vrednostPE'),
-                name: 'vrednostPE',
-                total: 'sum',
                 sortable: true
             },
             {

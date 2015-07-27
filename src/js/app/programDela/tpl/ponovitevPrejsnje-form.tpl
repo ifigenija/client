@@ -2,14 +2,14 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,nasDelez,celotnaVrednostMat,celotnaVrednostGostovSZ,vlozekGostitelja"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="vlozekKoproducenta,lastnaSredstva,avtorskiHonorarji,tantieme,drugiJavni"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,zaprosenProcent,nasDelez,celotnaVrednostMat,celotnaVrednostGostovSZ"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="vlozekGostitelja,lastnaSredstva,avtorskiHonorarji,tantieme,avtorskePravice,drugiJavni"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-12 col-lg-6" data-fields="obiskDoma,obiskGost,obiskZamejo,obiskInt,ponoviDoma,ponoviZamejo"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="ponoviGost,stZaposUmet,stZaposDrug,stHonorarnih,stHonorarnihIgr,stHonorarnihIgrTujJZ"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="ponoviGost,stZaposUmet,stZaposDrug,stHonorarnih,stHonorarnihIgr,stHonorarnihIgrTujJZ,stHonorarnihIgrSamoz"></div>
             </div>
         </div>
     </div>
