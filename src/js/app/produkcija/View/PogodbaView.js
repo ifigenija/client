@@ -75,6 +75,22 @@ define([
 
             },
             {
+                cell: 'boolean',
+                editable: false,
+                label: i18next.t('pogodba.samozaposlen'),
+                name: 'samozaposlen',
+                sortable: true
+
+            },
+            {
+                cell: 'boolean',
+                editable: false,
+                label: i18next.t('pogodba.igralec'),
+                name: 'igralec',
+                sortable: true
+
+            },
+            {
                 cell: 'action',
                 name: '...',
                 sortable: false,

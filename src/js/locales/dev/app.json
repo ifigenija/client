@@ -688,6 +688,8 @@
         "planiranoSteviloVaj": "Planirano število vaj",
         "alternacija": "Alternacija",
         "oseba": "Oseba",
+        "samozaposlen": "Samozaposlen",
+        "igralec": "Igralec",
         "d": {
             "sifra": "",
             "aktivna": "",
@@ -702,7 +704,9 @@
             "zaposlenVDrJz": "Ali je oseba zaposlena v drugen javnem zavodu",
             "trr": "",
             "placiloNaVajo": "Ali je oseba plačana na vajo ali ne",
-            "planiranoSteviloVaj": "Načrtovano število vaj"
+            "planiranoSteviloVaj": "Načrtovano število vaj",
+            "samozaposlen": "",
+            "igralec": "je igralec ali študent"
         }
     },
     "programDela": {
