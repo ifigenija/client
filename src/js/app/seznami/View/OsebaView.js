@@ -24,14 +24,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.sifra'),
+                label: i18next.t('oseba.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.ime'),
+                label: i18next.t('oseba.ime'),
                 name: 'ime',
                 sortable: true
             },
@@ -45,7 +45,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.email'),
+                label: i18next.t('oseba.email'),
                 name: 'email',
                 sortable: true
             },
@@ -59,7 +59,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.funkcija'),
+                label: i18next.t('oseba.funkcija'),
                 name: 'funkcija',
                 sortable: false
             },

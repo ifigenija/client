@@ -26,7 +26,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.ime'),
+                label: i18next.t('tipFunkcije.ime'),
                 name: 'ime',
                 sortable: true
             },
@@ -40,14 +40,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.opis'),
+                label: i18next.t('tipFunkcije.opis'),
                 name: 'opis',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.podrocje'),
+                label: i18next.t('tipFunkcije.podrocje'),
                 name: 'podrocje',
                 sortable: false
             },

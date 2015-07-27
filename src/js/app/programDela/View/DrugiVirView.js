@@ -27,7 +27,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.opis'),
+                label: i18next.t('drugiVir.opis'),
                 name: 'opis',
                 sortable: true
             },

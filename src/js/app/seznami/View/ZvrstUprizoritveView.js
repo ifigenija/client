@@ -26,21 +26,21 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.sifra'),
+                label: i18next.t('zvrstUprizoritve.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.naziv'),
+                label: i18next.t('zvrstUprizoritve.naziv'),
                 name: 'naziv',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.opis'),
+                label: i18next.t('zvrstUprizoritve.opis'),
                 name: 'opis',
                 sortable: true
             },

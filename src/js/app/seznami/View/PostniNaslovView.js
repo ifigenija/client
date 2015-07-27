@@ -22,7 +22,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.naziv'),
+                label: i18next.t('postniNaslov.naziv'),
                 name: 'naziv',
                 sortable: true
             },
@@ -50,7 +50,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.drzava'),
+                label: i18next.t('postniNaslov.drzava'),
                 name: 'drzava.label',
                 sortable: true
             },

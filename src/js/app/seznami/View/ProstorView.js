@@ -32,14 +32,14 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.sifra'),
+                label: i18next.t('prostor.sifra'),
                 name: 'sifra',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.naziv'),
+                label: i18next.t('prostor.naziv'),
                 name: 'naziv',
                 sortable: true
             },
@@ -54,14 +54,14 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ent.kapaciteta'),
+                label: i18next.t('prostor.kapaciteta'),
                 name: 'kapaciteta',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.opis'),
+                label: i18next.t('prostor.opis'),
                 name: 'opis',
                 sortable: false
             },

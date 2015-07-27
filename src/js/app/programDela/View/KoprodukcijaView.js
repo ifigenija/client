@@ -27,7 +27,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.koproducent'),
+                label: i18next.t('prodel.koproducent'),
                 name: 'naziv',
                 sortable: true
             },

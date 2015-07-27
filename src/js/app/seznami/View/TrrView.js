@@ -29,7 +29,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('ent.stevilka'),
+                label: i18next.t('trr.stevilka'),
                 name: 'stevilka',
                 sortable: true
             },
