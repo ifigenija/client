@@ -1,4 +1,3 @@
-
 /* 
  * Licenca GPLv3
  */
@@ -65,7 +64,6 @@ define([
      * @returns {undefined}
      */
     RelationView.prototype.renderIzbor = function () {
-
 
         var sch;
 

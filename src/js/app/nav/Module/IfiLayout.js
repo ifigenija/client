@@ -100,6 +100,7 @@ define([
 
             var channel = Radio.channel('layout');
             channel.comply('open', module.open);
+            channel.comply('openTab', module.open);
             channel.comply('setTitle', module.setTitle);
             channel.comply('replaceUrl', module.replaceUrl);
 

@@ -4,3 +4,6 @@
 [submodule "src/js/app/Dokument"]
 	path = src/js/app/Dokument
 	url = http://git.max.si/tip2/dokumentjs
+[submodule "src/js/app/Zapisi"]
+	path = src/js/app/Zapisi
+	url = http://git.max.si/tip2/zapisijs
