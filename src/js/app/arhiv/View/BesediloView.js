@@ -46,6 +46,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('besedilo.naslov'),
+                name: 'naslov',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('besedilo.naslovIzvirnika'),
                 name: 'naslovIzvirnika',
                 sortable: true

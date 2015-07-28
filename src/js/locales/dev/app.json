@@ -505,6 +505,7 @@
         "tipFunkcije": "Tip funkcije",
         "naziv": "$t(ent.naziv)",
         "sort": "$t(ent.sort)",
+        "funkcija": "$t(ent.funkcija)",
         "d": {
             "naziv": "",
             "komentar": "Dodatne opombe, predlogi, komentarji",
@@ -868,11 +869,11 @@
         "odkup": "Odkup",
         "gostitelj": "Gostitelj",
         "ustanova": "Ustanova",
-        "datumGostovanja": "Datum gostovanja",
+        "datumGostovanja": "Datum",
         "stPonovitev": "Število ponovitev",
         "stGledalcev": "Število gledalcev",
         "stroskiAvtorZun": "Stroški avtorskih honorarjev zunanjih sodelavcev",
-        "krajGostovanja": "Kraj gostovanja",
+        "krajGostovanja": "Kraj",
         "d": {
             "transportniStroski": "Transportni stroški opreme ter stroški prevozov ansambla in tehnike",
             "odkup": "Odkup (vložek gostitelja)",
@@ -957,6 +958,7 @@
         }
     },
     "sezona": {
+        "nova": "Nova sezone",
         "title": "Sezone",
         "ime": "Ime sezone",
         "imeSezone": "Ime sezone",

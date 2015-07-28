@@ -71,7 +71,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('funkcija.naziv'),
+                label: i18next.t('funkcija.funkcija'),
                 name: 'naziv',
                 sortable: true
             },

@@ -44,7 +44,9 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                cell: Backgrid.SelectCell.extend({
+                    optionValues: schema.getOptionValues('status')
+                }),
                 editable: false,
                 label: i18next.t('zaposlitev.status'),
                 name: 'status',
