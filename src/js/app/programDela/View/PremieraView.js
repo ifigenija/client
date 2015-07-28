@@ -106,22 +106,20 @@ define([
                     {event: 'premakniDol', title: i18next.t('std.premakniDol')}
                 ]
             }
-        ],
-        /**
-         * Overrride render priloge, da se nastavi pravi classLastnika
-         * @returns {undefined}
-         */
-        renderPriloge: function () {                       
-            var view = new ZapisiLayout({
-                lastnik: this.model.get('id'),
-                classLastnika: 'ProgramPremiera'
-            }) ;
-            this.prilogeR.show(view);
-        }
+        ]
     });
-    
-    
-    
+
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    PremieraView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'ProgramPremiera'
+        });
+        this.prilogeR.show(view);
+    };
 
     return PremieraView;
 });

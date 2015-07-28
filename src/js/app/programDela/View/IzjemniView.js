@@ -6,12 +6,14 @@ define([
     'i18next',
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/izjemni-form.tpl',
+    'app/Zapisi/View/ZapisiLayout',
     'formSchema!programIzjemni'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
         formTpl,
+        ZapisiLayout,
         schema
         ) {
 
@@ -97,5 +99,18 @@ define([
             }
         ]
     });
+    
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    IzjemniView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'ProgramIzjemni'
+        });
+        this.prilogeR.show(view);
+    };
+    
     return IzjemniView;
 });

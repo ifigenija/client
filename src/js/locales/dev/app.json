@@ -890,7 +890,7 @@
         "title": "Festivali",
         "stProdukcij": "Število produkcij",
         "stPredstav": "Število predstav",
-        "stPredavanj": "Število predavanj",
+        "stOkroglihMiz": "Število okroglih miz",
         "stPredstavitev": "Število predstavitev",
         "stDelavnic": "Število delavnic",
         "stDrugiDogodki": "Število drugih dogodkov",
@@ -914,7 +914,7 @@
         "d": {
             "stProdukcij": "Skupno število festivalskih produkcij",
             "stPredstav": "Skupno število predstav",
-            "stPredavanj": "Skupno število predavanj",
+            "stOkroglihMiz": "Skupno število okroglih miz",
             "stPredstavitev": "Skupno število predstavitev",
             "stDelavnic": "Skupno število delavnic",
             "stDrugiDogodki": "Skupno število drugih dogodkov",

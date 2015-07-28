@@ -10,6 +10,7 @@ define([
     'template!../tpl/kazalniki-table.tpl',
     'formSchema!programDela',
     'app/Max/View/TabControl',
+    'app/Zapisi/View/ZapisiLayout',
     'marionette'
 ], function (
         Radio,
@@ -20,6 +21,7 @@ define([
         kazalnikiTabelaTpl,
         formSchema,
         TabControl,
+        ZapisiLayout,
         Marionette
         ) {
 
@@ -90,7 +92,8 @@ define([
             kazalnikiR: '.region-kazalniki',
             tabsR: '.programDela-tabs',
             sklopEnaR: '.sklopEna-tabs',
-            sklopDvaR: '.sklopDva-tabs'
+            sklopDvaR: '.sklopDva-tabs',
+            prilogeR: '.region-priloge'
         }
     });
 
@@ -113,6 +116,18 @@ define([
         }
 
         this.renderTabs(tabs);
+    };
+    
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'ProgramDela'
+        });
+        this.prilogeR.show(view);
     };
 
     ProgramDokView.prototype.getNaslov = function () {
@@ -149,6 +164,7 @@ define([
     ProgramDokView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
+        this.renderPriloge();
     };
 
     /**

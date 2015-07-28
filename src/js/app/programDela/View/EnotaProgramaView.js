@@ -75,6 +75,7 @@ define([
         this.on('preklici', function () {
             this.drugiViriR.empty();
             this.koprodukcijeR.empty();
+            this.prilogeR.empty();
         }, this);
     };
     /**
@@ -105,7 +106,7 @@ define([
             this.renderKoprodukcije();
         }
     };
-    
+
     /**
      * Izris prilog - privzeto se ne izriše nič. 
      * Overrirde funkcionalnosti v izvedenih objektih
@@ -113,7 +114,7 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.renderPriloge = function () {
-        
+
     };
 
     /**

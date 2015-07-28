@@ -11,10 +11,6 @@
                 <div class="col-sm-12 col-lg-6" data-fields="drugiJavni,tantieme,avtorskePravice,stHonorarnih,obiskDoma,obiskGost"></div>
                 <div class="col-sm-12 col-lg-6" data-fields="obiskZamejo,obiskInt,ponoviDoma,ponoviZamejo,ponoviGost"></div>
             </div>
-            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-lg-offset-3" data-fields="utemeljitev"></div>
     </div>
 </form>

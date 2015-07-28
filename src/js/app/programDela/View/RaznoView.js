@@ -6,12 +6,14 @@ define([
     'i18next',
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/razno-form.tpl',
+    'app/Zapisi/View/ZapisiLayout',
     'formSchema!programRazno'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
         formTpl,
+        ZapisiLayout,
         schema
         ) {
 
@@ -104,5 +106,18 @@ define([
             }
         ]
     });
+    
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    RaznoView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'ProgramRazno'
+        });
+        this.prilogeR.show(view);
+    };
+    
     return RaznoView;
 });

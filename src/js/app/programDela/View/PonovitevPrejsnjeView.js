@@ -6,12 +6,14 @@ define([
     'i18next',
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/ponovitevPrejsnje-form.tpl',
+    'app/Zapisi/View/ZapisiLayout',
     'formSchema!programPonovitevPrejsnjih'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
         formTpl,
+        ZapisiLayout,
         schema
         ) {
 
@@ -106,5 +108,18 @@ define([
             }
         ]
     });
+
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    PonovitevView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'ProgramPonovitevPrejsnjih'
+        });
+        this.prilogeR.show(view);
+    };
+    
     return PonovitevView;
 });

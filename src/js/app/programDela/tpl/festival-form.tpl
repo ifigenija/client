@@ -17,9 +17,6 @@
                         <div class="col-sm-6 col-md-3" data-fields="stDrugiDogodki,stProdukcij,obiskDoma"></div>
                         <div class="col-sm-6 col-md-3" data-fields="casPriprave,casIzvedbe,prizorisca"></div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-offset-3" data-fields="opredelitevDrugiDogodki"></div>
-                    </div>
                 </form>
             </div>
         </div>

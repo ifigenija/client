@@ -6,12 +6,14 @@ define([
     'i18next',
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/gostujoca-form.tpl',
+    'app/Zapisi/View/ZapisiLayout',
     'formSchema!programGostujoca'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
         formTpl,
+        ZapisiLayout,
         schema
         ) {
 
@@ -97,5 +99,18 @@ define([
             }
         ]
     });
+    
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    GostujocaView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'ProgramGostujoca'
+        });
+        this.prilogeR.show(view);
+    };
+    
     return GostujocaView;
 });

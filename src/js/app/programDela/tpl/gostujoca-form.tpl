@@ -11,9 +11,5 @@
                 <div class="col-sm-12" data-fields="obiskDoma,ponoviDoma"></div>
             </div>
         </div>
-
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-lg-offset-3" data-fields="utemeljitev"></div>
     </div>
 </form>

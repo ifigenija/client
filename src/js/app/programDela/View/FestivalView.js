@@ -6,6 +6,7 @@ define([
     'i18next',
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/festival-form.tpl',
+    'app/Zapisi/View/ZapisiLayout',
     'formSchema!programFestival',
     'underscore'
 ], function (
@@ -13,6 +14,7 @@ define([
         i18next,
         EnotaProgramaView,
         formTpl,
+        ZapisiLayout,
         schema,
         _
         ) {
@@ -174,7 +176,12 @@ define([
         }
     };
 
-    FestivalView.prototype.preimenujGumb = function () {
+    /**
+     * Ko kliknemo na Prikaži vse/Zapri vse
+     * Odpre/zapre vse panele
+     * @returns {undefined}
+     */
+    FestivalView.prototype.prikaziGumb = function () {
         var tb = this.getToolbarModel();
         var but = tb.getButton('doc-postavka-prikaziVse');
 
@@ -186,25 +193,49 @@ define([
         }
     };
 
+    /**
+     * Ob kliku na na panel/tab osnovni podatki
+     * @returns {undefined}
+     */
     FestivalView.prototype.onPodatki = function () {
         this.$('#podatki').collapse('show');
         this.$('#koprodukcija').collapse('hide');
         this.$('#sredstva').collapse('hide');
-        this.preimenujGumb();
+        this.prikaziGumb();
     };
 
+    /**
+     * Ob kliku na na panel/tab koprodukcijski podatki
+     * @returns {undefined}
+     */
     FestivalView.prototype.onKoprodukcija = function () {
         this.$('#podatki').collapse('hide');
         this.$('#koprodukcija').collapse('show');
         this.$('#sredstva').collapse('hide');
-        this.preimenujGumb();
+        this.prikaziGumb();
     };
 
+    /**
+     * Ob kliku na na panel/tab sredstva
+     * @returns {undefined}
+     */
     FestivalView.prototype.onSredstva = function () {
         this.$('#podatki').collapse('hide');
         this.$('#koprodukcija').collapse('hide');
         this.$('#sredstva').collapse('show');
-        this.preimenujGumb();
+        this.prikaziGumb();
+    };
+
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    FestivalView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'ProgramFestival'
+        });
+        this.prilogeR.show(view);
     };
 
     return FestivalView;
