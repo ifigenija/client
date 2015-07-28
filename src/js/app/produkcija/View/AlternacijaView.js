@@ -17,7 +17,7 @@ define([
         FormView,
         formTpl,
         formPogodbaTpl,
-        formPogAltTpl,
+        formModalTpl,
         schema,
         schemaPogodba,
         i18next,
@@ -147,7 +147,7 @@ define([
             },
             schema: schemaPogodba.toFormSchema().schema,
             formTemplate: formPogodbaTpl,
-            template: formPogAltTpl
+            template: formModalTpl
         });
 
         Fv.prototype.onFormChange = function (form) {

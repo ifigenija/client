@@ -13,7 +13,4 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 col-lg-offset-3" data-fields="opomba"></div>
-    </div>
 </form>
