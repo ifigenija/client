@@ -3,22 +3,22 @@
  */
 define([
     'app/Dokument/View/DokumentView',
-    '../Model/Uprizoritev',
     './FunkcijeView',
     'template!../tpl/uprizoritev-edit.tpl',
     'template!../tpl/uprizoritev-form.tpl',
     'formSchema!uprizoritev',
     'i18next',
+    'app/Zapisi/View/ZapisiLayout',
     'app/Max/View/TabControl',
     'radio'
 ], function (
         DokumentView,
-        Uprizoritev,
         FunkcijeView,
         tpl,
         formTpl,
         shema,
         i18next,
+        ZapisiLayout,
         TabControl,
         Radio
         ) {
@@ -58,7 +58,8 @@ define([
         schema: shema.toFormSchema().schema,
         regions: {
             regionDetail: '.region-detail',
-            regionTabs: '.uprizoritev-tabs'
+            regionTabs: '.uprizoritev-tabs',
+            prilogeR: '.region-priloge'
         }
     });
 
@@ -92,7 +93,18 @@ define([
 
         this.renderTabs(tabs);
     };
-
+    
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    UprizoritevEditView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'Uprizoritev'
+        });
+        this.prilogeR.show(view);
+    };
 
     /**
      * Klik na splošni tab
@@ -101,6 +113,7 @@ define([
     UprizoritevEditView.prototype.onSplosni = function () {
         this.$('.pnl-detail').removeClass('active');
         this.$('.pnl-splosno').addClass('active');
+        this.renderPriloge();
     };
 
     /**

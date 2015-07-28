@@ -38,7 +38,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('ep.uprizoritev'),
-                name: 'uprizoritev',
+                name: 'uprizoritev.label',
                 sortable: true
             },
             {

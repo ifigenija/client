@@ -10,7 +10,8 @@ define([
     'template!../tpl/popa-form.tpl',
     'formSchema!popa',
     'i18next',
-    'app/Max/View/TabControl'
+    'app/Max/View/TabControl',
+    'app/Zapisi/View/ZapisiLayout'
 ], function (
         Backbone,
         baseUrl,
@@ -20,7 +21,8 @@ define([
         formTpl,
         shema,
         i18next,
-        TabControl
+        TabControl,
+        ZapisiLayout
         ) {
 
     var tabsSplosno = [
@@ -87,7 +89,8 @@ define([
             regionTrrji: '.region-trrji',
             regionNaslovi: '.region-naslovi',
             regionTelefonske: '.region-telefonske',
-            regionTabs: '.popa-tabs'
+            regionTabs: '.popa-tabs',
+            prilogeR: '.region-priloge'
         },
         buttons: gumbi
     });
@@ -106,6 +109,18 @@ define([
         this.listenTo(this.model, 'sync', function () {
             self.render();
         });
+    };
+    
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    PopaEditView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'Popa'
+        });
+        this.prilogeR.show(view);
     };
 
     /**
@@ -194,6 +209,7 @@ define([
     PopaEditView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
+        this.renderPriloge();
     };
     /**
      * Klik na tab za kontaktne podatke 

@@ -8,7 +8,8 @@ define([
     'formSchema!oseba',
     'i18next',
     'app/Max/View/TabControl',
-    'radio'
+    'radio',
+    'app/Zapisi/View/ZapisiLayout'
 ], function (
         DokumentView,
         tpl,
@@ -16,7 +17,8 @@ define([
         schema,
         i18next,
         TabControl,
-        Radio
+        Radio,
+        ZapisiLayout
         ) {
     /**
      * Različni možni pogledi osebeedit view.
@@ -48,7 +50,8 @@ define([
             regionOsebniPodatki: '.region-osebniPodatki',
             regionNaslovi: '.region-naslovi',
             regionTelefonske: '.region-telefonske',
-            regionTabs: '.oseba-tabs'
+            regionTabs: '.oseba-tabs',
+            prilogeR: '.region-priloge'
         }
     });
 
@@ -109,6 +112,19 @@ define([
 
 
     };
+
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    OsebaEditView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'Oseba'
+        });
+        this.prilogeR.show(view);
+    };
+
     /**
      * Klik na splošni tab
      * @returns {undefined}
@@ -116,7 +132,7 @@ define([
     OsebaEditView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
-
+        this.renderPriloge();
     };
     /**
      * Klik na osebni podatki tab

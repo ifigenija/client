@@ -992,6 +992,26 @@
             "mednarodni": "Ali je drugi vir mednarodni"
         }
     },
+    "zapis": {
+        "nalozi": "Nalozi datoteko",
+        "komentar": "Komentar",
+        "oznaka": "Oznaka",
+        "naziv": "Naziv",
+        "ikona": "Ikona",
+        "aktiven": "Aktiven",
+        "zakleni": "Zakleni",
+        "odkleni": "Odkleni",
+        "uredi": "Uredi",
+        "brisi": "Brisi",
+        "vMapo": "Daj v mapo",
+        "premik": "Premik v mapo",
+        "odstrani": "Odstrani"
+    },
+    "dat": {
+        "meta": "Podatki o datoteki",
+        "novaVer": "Nova verzija",
+        "download": "Prenesi datoteko"
+    },
     "napaka": {
         "fetch": "Napaka pri pridobivanju podatkov"
     }
