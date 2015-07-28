@@ -6,12 +6,14 @@ define([
     'i18next',
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/premiera-form.tpl',
+    'app/Zapisi/View/ZapisiLayout',
     'formSchema!programPremiera'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
         formTpl,
+        ZapisiLayout,
         schema
         ) {
 
@@ -104,8 +106,22 @@ define([
                     {event: 'premakniDol', title: i18next.t('std.premakniDol')}
                 ]
             }
-        ]
+        ],
+        /**
+         * Overrride render priloge, da se nastavi pravi classLastnika
+         * @returns {undefined}
+         */
+        renderPriloge: function () {                       
+            var view = new ZapisiLayout({
+                lastnik: this.model.get('id'),
+                classLastnika: 'ProgramPremiera'
+            }) ;
+            this.prilogeR.show(view);
+        }
     });
+    
+    
+    
 
     return PremieraView;
 });

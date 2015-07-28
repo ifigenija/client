@@ -715,3 +715,69 @@ span.stevilka-na-veliko {
 .table > tbody > tr > td.kazalnik-padleft {
     padding-left: 50px;
 }
+
+
+
+.zapisi-list {
+    padding: 0;
+    & .zapis-meta {
+        margin-left: 8px;
+        font-size: 10px;
+        color: @text-muted;
+    }
+    &container {
+        padding: 0;
+    }
+    & .zapis-description {
+        max-height: 0;
+        overflow: scroll;
+        transition: max-height 0.8s;
+    }
+    & .zapis-description.active {
+        max-height: 300px;
+        transition: max-height 0.8s;
+    }
+    & .zapisi-list .zapis-item {
+        margin-left: 30px;
+        & .region-toolbar {
+            margin-top: 0px;
+        }
+        & h4 {
+            font-size: 12px;
+        }
+
+    }
+    & .zapis-item {
+        padding: @padding-xs-vertical 4px;
+        list-style: none;
+        & .thumb {
+            padding: 0 @padding-xs-horizontal;
+        }
+        & h4 {
+            margin-top: 0;
+            margin-bottom: 6px;
+        }
+
+        &:nth-child(even) {
+            background-color: @table-bg-accent;
+        }
+        & .region-toolbar {
+            margin-top: 0px;
+        }
+    }
+
+}
+
+
+
+.mapa-list {
+    &item {
+        list-style: none;
+        max-height:  100px;
+        float: left;
+    }
+    .multi & &item {
+        width: 25%;
+        float: none;
+    }
+}

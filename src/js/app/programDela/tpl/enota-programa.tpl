@@ -7,6 +7,7 @@
     </div>
     <div class="panel-body">
         <div class="region-postavke-form"></div>
+        <div class="region-priloge"></div>
         <div class="region-drugiViri"></div>
         <div class="region-koprodukcije"></div>        
         <div class="region-postavke-list"></div>

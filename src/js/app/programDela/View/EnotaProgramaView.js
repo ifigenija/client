@@ -59,7 +59,8 @@ define([
         },
         regions: {
             drugiViriR: '.region-drugiViri',
-            koprodukcijeR: '.region-koprodukcije'
+            koprodukcijeR: '.region-koprodukcije',
+            prilogeR: '.region-priloge'
         }
     });
 
@@ -99,9 +100,20 @@ define([
      */
     EnotaProgramaView.prototype.onRenderForm = function () {
         if (!this.model.isNew()) {
+            this.renderPriloge();
             this.renderDrugiViri();
             this.renderKoprodukcije();
         }
+    };
+    
+    /**
+     * Izris prilog - privzeto se ne izriše nič. 
+     * Overrirde funkcionalnosti v izvedenih objektih
+     * 
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.renderPriloge = function () {
+        
     };
 
     /**

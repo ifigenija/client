@@ -1,0 +1,85 @@
+/* Sidebar in filtri */
+.tip-tab-sidebar {
+  position: relative;
+  float: left;
+  height: 0;
+}
+.tip-tab-sidebar-toggle {
+  margin-left: -20px;
+  float: left;
+}
+.tip-tab-sidebar-toggle > button {
+  padding-right: 6px;
+}
+.tip-tab-maincontent.tip-sidebar-hidden {
+  margin-left: 16px;
+}
+.tip-tab-toolbar {
+  z-index: 180;
+}
+.filter-action {
+  margin-bottom: 7px;
+}
+.filter-form .form-group ul {
+  list-style: none;
+  padding-left: 0;
+  height: auto;
+  padding-top: 2px;
+}
+.filter-form .form-group li {
+  margin-left: 10px;
+}
+.filter-form .form-group li label {
+  margin-left: 4px;
+  margin-bottom: 0;
+}
+@media (max-width: 768px) {
+  .tip-tab-maincontent {
+    margin-left: 16px;
+  }
+  .tip-tab-maincontent-sidebar.tip-sidebar-visible {
+    margin-left: 200px;
+  }
+}
+@media (min-width: 768px) {
+  .tip-tab-sidebar {
+    width: 202px;
+  }
+  .tip-tab-maincontent-sidebar {
+    margin-left: 202px;
+  }
+}
+@media (max-width: 992px) {
+  .tip-tab-sidebar {
+    width: 194px;
+  }
+  .filter-form .form-group > div {
+    width: 100%;
+  }
+  .filter-form .form-group > label {
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .tip-tab-sidebar {
+    width: 254px;
+  }
+  .tip-tab-maincontent-sidebar {
+    margin-left: 262px;
+  }
+}
+/* Modal confirm */
+.modal-confirm .modal-header {
+  padding: 15px;
+}
+.modal-confirm .modal-header > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.modal-confirm .modal-body {
+  padding: 15px;
+}
+.modal-confirm .modal-footer {
+  margin-top: 0;
+  padding: 15px;
+}
