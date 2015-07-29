@@ -6,6 +6,7 @@ define([
     'i18next',
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/razno-form.tpl',
+    'template!../tpl/razno.tpl',
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!programRazno'
 ], function (
@@ -13,6 +14,7 @@ define([
         i18next,
         EnotaProgramaView,
         formTpl,
+        tpl,
         ZapisiLayout,
         schema
         ) {
@@ -21,6 +23,7 @@ define([
         className: 'backgrid-kolona-stevilk'
     });
     var RaznoView = EnotaProgramaView.extend({
+        template: tpl,
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'programiRazno',
@@ -106,6 +109,16 @@ define([
             }
         ]
     });
+    
+    RaznoView.prototype.onDodaj = function () {
+        var self = this;
+        require(['app/programDela/Model/Razno', 'app/programDela/View/RaznoDokView'], function (Model, View) {
+            var model = new Model.Model();
+            var view = new View({model: model});
+            self.regionForm.show(view);
+            return view;
+        });
+    };
     
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
