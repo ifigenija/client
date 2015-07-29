@@ -53,6 +53,48 @@ define([
         }
     });
 
+    var PESklopaModel = Dokument.Postavka.extend({
+        urlRoot: baseUrl + '/rest/programskaEnotaSklopa'
+    });
+    var PESklopiCollection = Dokument.PostavkaCollection.extend({
+        model: PESklopaModel,
+        url: baseUrl + '/rest/programskaEnotaSklopa'
+    });
+
+    var RaznoPostavka = EnotaProgramaPostavka.extend({
+        nestedCollections: {
+            drugiViri: {collection: DrugiViriCollection, mappedBy: 'enotaPrograma'},
+            koprodukcije: {collection: KoprodukcijeCollection, mappedBy: 'enotaPrograma'},
+            peSklopi: {collection: PESklopiCollection, mappedBy: 'programRazno'}
+        },
+        dodajPostavko: function (nested) {
+            if (!_.contains(_.keys(this.nestedCollections), nested)) {
+                console.log('napačni dodaj', nested);
+            }
+            var postavka;
+            switch (nested) {
+                case 'drugiViri':
+                    postavka = new DrugiVirModel({
+                        enotaPrograma: this.id
+                    });
+                    break;
+                case 'koprodukcije':
+                    postavka = new KoprodukcijaModel({
+                        enotaPrograma: this.id
+                    });
+                    break;
+                case 'peSklopa':
+                    postavka = new PESklopaModel({
+                        programRazno: this.id
+                    });
+                    break;
+            }
+            postavka.dokument = this;
+            return postavka;
+        }
+    });
+
+
     var GostujocaModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programGostujoca'
     });
@@ -123,7 +165,7 @@ define([
     });
 
 
-    var RaznoModel = EnotaProgramaPostavka.extend({
+    var RaznoModel = RaznoPostavka.extend({
         urlRoot: baseUrl + '/rest/programRazno'
     });
     var RazniCollection = Dokument.PostavkaCollection.extend({

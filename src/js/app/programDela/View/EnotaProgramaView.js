@@ -102,11 +102,21 @@ define([
     EnotaProgramaView.prototype.onRenderForm = function () {
         if (!this.model.isNew()) {
             this.renderPriloge();
+            this.renderPES();
             this.renderDrugiViri();
             this.renderKoprodukcije();
         }
     };
 
+    /**
+     * Izris programskeenotesklopa - privzeto se ne izriše nič. 
+     * Overrirde funkcionalnosti v izvedenih objektih
+     * 
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.renderPES = function () {
+
+    };
     /**
      * Izris prilog - privzeto se ne izriše nič. 
      * Overrirde funkcionalnosti v izvedenih objektih

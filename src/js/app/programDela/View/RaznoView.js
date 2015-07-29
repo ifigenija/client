@@ -5,6 +5,7 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/programDela/View/EnotaProgramaView',
+    'app/programDela/View/PESklopaView',
     'template!../tpl/razno-form.tpl',
     'template!../tpl/razno.tpl',
     'app/Zapisi/View/ZapisiLayout',
@@ -13,6 +14,7 @@ define([
         Backgrid,
         i18next,
         EnotaProgramaView,
+        PESView,
         formTpl,
         tpl,
         ZapisiLayout,
@@ -28,6 +30,12 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'programiRazno',
         formTitle: i18next.t('programRazno.title'),
+        regions: {
+            drugiViriR: '.region-drugiViri',
+            koprodukcijeR: '.region-koprodukcije',
+            prilogeR: '.region-priloge',
+            pesR: '.region-pes'
+        },
         gridMeta: [
             {
                 headerCell: hc,
@@ -110,16 +118,18 @@ define([
         ]
     });
     
-    RaznoView.prototype.onDodaj = function () {
-        var self = this;
-        require(['app/programDela/Model/Razno', 'app/programDela/View/RaznoDokView'], function (Model, View) {
-            var model = new Model.Model();
-            var view = new View({model: model});
-            self.regionForm.show(view);
-            return view;
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    RaznoView.prototype.renderPES = function () {
+        var view = new PESView({
+            collection: this.model.peSklopiCollection,
+            dokument: this.model
         });
+
+        this.pesR.show(view);
     };
-    
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}

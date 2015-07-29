@@ -362,14 +362,6 @@ define([
             self.razniR.show(view);
             return view;
         });
-
-//        var self = this;
-//        require(['app/programDela/Model/Razno', 'app/programDela/View/RaznoDokView'], function (Model, View) {
-//            var model = new Model.Model();
-//            var view = new View({model: model});
-//            self.razniR.show(view);
-//            return view;
-//        });
     };
     /**
      * Izris kazalnikov
