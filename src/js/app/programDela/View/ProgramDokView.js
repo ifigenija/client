@@ -117,7 +117,7 @@ define([
 
         this.renderTabs(tabs);
     };
-    
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -317,14 +317,14 @@ define([
     ProgramDokView.prototype.onFestivali = function () {
         this.deselectTabDva();
         this.$('.pnl-festivali').addClass('active');
-        
+
         var coll = this.model.festivaliCollection;
         if (coll.length === 0) {
             coll.fetch({
                 error: function () {
                     Radio.channel('error').command('flash', {
                         message: i18next.t("napaka.fetch") + ' ' + '(festivalColl)',
-                        code:'9000301',
+                        code: '9000301',
                         severity: 'error'
                     });
                 }
@@ -362,6 +362,14 @@ define([
             self.razniR.show(view);
             return view;
         });
+
+//        var self = this;
+//        require(['app/programDela/Model/Razno', 'app/programDela/View/RaznoDokView'], function (Model, View) {
+//            var model = new Model.Model();
+//            var view = new View({model: model});
+//            self.razniR.show(view);
+//            return view;
+//        });
     };
     /**
      * Izris kazalnikov
