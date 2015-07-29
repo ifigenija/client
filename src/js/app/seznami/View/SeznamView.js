@@ -112,7 +112,7 @@ define([
      * 
      * @returns {undefined}
      */
-    SeznamView.prototype.renderPriloge = function () {
+    SeznamView.prototype.renderPriloge = function (model) {
 
     };
     
@@ -260,7 +260,7 @@ define([
         var form = this.getFormView(model);
 
         this.formR.show(form);
-        this.renderPriloge();
+        this.renderPriloge(model);
 
         this.$('.glava-title').text(this.getTitle(model));
 
@@ -288,6 +288,7 @@ define([
      */
     SeznamView.prototype.preklici = function () {
         this.formR.empty();
+        this.prilogeR.empty();
         this.renderToolbar();
         this.zamenjajUrl();
     };

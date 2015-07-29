@@ -8,7 +8,8 @@ define([
     '../Model/Besedilo',
     'i18next',
     'baseUrl',
-    'app/Max/Module/Backgrid'
+    'app/Max/Module/Backgrid',
+    'app/Zapisi/View/ZapisiLayout'
 ], function (
         SeznamView,
         formTpl,
@@ -16,7 +17,8 @@ define([
         Model,
         i18next,
         baseUrl,
-        Backgrid
+        Backgrid,
+        ZapisiLayout
         ) {
     
     var hc = Backgrid.HeaderCell.extend({
@@ -103,6 +105,18 @@ define([
     BesediloView.prototype.onDodaj = function () {
         var model = new Model.Model();
         this.onSelected(model);
+    };
+    
+    /**
+     * Render priloga, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    BesediloView.prototype.renderPriloge = function (model) {
+        var view = new ZapisiLayout({
+            lastnik: model.get('id'),
+            classLastnika: 'Besedilo'
+        });
+        this.prilogeR.show(view);
     };
 
     return BesediloView;
