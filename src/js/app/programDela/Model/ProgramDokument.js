@@ -52,7 +52,7 @@ define([
             return postavka;
         }
     });
-    
+
     var GostujocaModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programGostujoca'
     });
@@ -71,7 +71,7 @@ define([
         url: baseUrl + '/rest/programIzjemni',
         index: 'sort'
     });
-    
+
 
     var PonovitevPremiereModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programPonovitevPremiere'
@@ -81,7 +81,7 @@ define([
         url: baseUrl + '/rest/programPonovitevPremiere',
         index: 'sort'
     });
-    
+
 
     var PonovitevPrejsnjeModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programPonovitevPrejsnjih'
@@ -101,8 +101,8 @@ define([
         url: baseUrl + '/rest/programPremiera',
         index: 'sort'
     });
-    
-    
+
+
     var GostovanjeModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programGostovanje'
     });
@@ -111,7 +111,7 @@ define([
         url: baseUrl + '/rest/programGostovanje',
         index: 'sort'
     });
-    
+
 
     var FestivalModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programFestival'
@@ -121,7 +121,7 @@ define([
         url: baseUrl + '/rest/programFestival',
         index: 'sort'
     });
-    
+
 
     var RaznoModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programRazno'
@@ -143,7 +143,7 @@ define([
             ponovitvePremiere: {collection: PonovitvePremierCollection, mappedBy: 'dokument'},
             ponovitvePrejsnjih: {collection: PonovitvePrejsnjihCollection, mappedBy: 'dokument'},
             premiere: {collection: PremiereCollection, mappedBy: 'dokument'},
-            festivali: {collection: FestivaliCollection, mappedBy: 'dokument'},
+            festivali: {collection: FestivaliCollection, mappedBy: 'programDela'},
             programiRazno: {collection: RazniCollection, mappedBy: 'dokument'}
         },
         dodajPostavko: function (nested) {
@@ -185,8 +185,9 @@ define([
                     break;
                 case 'festivali':
                     postavka = new FestivalModel({
-                        dokument: this.id
+                        programDela: this.id
                     });
+                    postavka.programDela = this;
                     break;
                 case 'programiRazno':
                     postavka = new RaznoModel({

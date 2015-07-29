@@ -317,11 +317,24 @@ define([
     ProgramDokView.prototype.onFestivali = function () {
         this.deselectTabDva();
         this.$('.pnl-festivali').addClass('active');
+        
+        var coll = this.model.festivaliCollection;
+        if (coll.length === 0) {
+            coll.fetch({
+                error: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t("napaka.fetch") + ' ' + '(festivalColl)',
+                        code:'9000301',
+                        severity: 'error'
+                    });
+                }
+            });
+        }
 
         var self = this;
         require(['app/programDela/View/FestivalView'], function (View) {
             var view = new View({
-                collection: self.model.festivaliCollection,
+                collection: coll,
                 dokument: self.model,
                 odprtaForma: true,
                 potrdiBrisanje: true

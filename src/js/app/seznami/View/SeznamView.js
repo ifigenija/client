@@ -48,7 +48,8 @@ define([
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
-            toolbarR: '.seznam-toolbar'
+            toolbarR: '.seznam-toolbar',
+            prilogeR: '.region-priloge'
         },
         defaultButtons: {
             shrani: {
@@ -104,6 +105,17 @@ define([
         coll.url = this.url;
         return coll;
     };
+    
+    /**
+     * Izris prilog - privzeto se ne izriše nič. 
+     * Overrirde funkcionalnosti v izvedenih objektih
+     * 
+     * @returns {undefined}
+     */
+    SeznamView.prototype.renderPriloge = function () {
+
+    };
+    
     /**
      * Izris seznamaView
      * @returns {undefined}
@@ -248,6 +260,7 @@ define([
         var form = this.getFormView(model);
 
         this.formR.show(form);
+        this.renderPriloge();
 
         this.$('.glava-title').text(this.getTitle(model));
 
