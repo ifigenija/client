@@ -16,19 +16,32 @@ define([
     var IzracunajView = Marionette.ItemView.extend({
         template: izracunajTpl,
         tanF: 0.0,
-        avtHonF: 0.0,
+        avtHonF: 0.0,        
         serializeData: function () {
-            var tantiemeI = this.model.get('tantieme') * this.tanF;
-            var avtorskiHonorarjiI = this.model.get('avtorskiHonorarji') * this.avtHonF;
-            var vsota = tantiemeI + avtorskiHonorarjiI;
-
+            var self = this;
             return _.extend(this.model.attributes, {
-                tantiemeI: tantiemeI,
-                avtorskiHonorarjiI: avtorskiHonorarjiI,
-                vsota: vsota
+                tantiemeI: self.getTantiemeI(),
+                avtorskiHonorarjiI: self.getAvtorskiHonorarjiI(),
+                vsota: self.getVsota()
             });
         }
     });
+    
+    IzracunajView.prototype.getTantiemeI = function(){
+        var tantieme = this.model.get('tantieme');
+        
+        return tantieme ? tantieme * this.tanF : 0;
+    };
+    
+    IzracunajView.prototype.getAvtorskiHonorarjiI = function(){
+        var avtorskiHonorarji = this.model.get('avtorskiHonorarji');
+        
+        return avtorskiHonorarji ? avtorskiHonorarji * this.avtHonF : 0;
+    };
+    
+    IzracunajView.prototype.getVsota = function(){        
+        return this.getTantiemeI() + this.getAvtorskiHonorarjiI();
+    };
 
     return IzracunajView;
 });
