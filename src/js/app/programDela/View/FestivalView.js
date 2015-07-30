@@ -47,12 +47,6 @@ define([
                 element: 'button-trigger',
                 trigger: 'preklici'
             },
-            izpolni: {
-                id: 'doc-postavka-izpolni',
-                label: 'Izpolni',
-                element: 'button-trigger',
-                trigger: 'izpolni'
-            },
             nasvet: {
                 id: 'doc-postavka-nasvet',
                 icon: 'fa fa-info',
@@ -147,7 +141,6 @@ define([
                         this.buttons.shrani,
                         this.buttons.preklici,
                         this.buttons.prikaziVse,
-                        this.buttons.izpolni,
                         this.buttons.nasvet
                     ]
                 ] : [[this.buttons.dodaj]];

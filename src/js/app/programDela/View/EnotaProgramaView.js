@@ -8,18 +8,18 @@ define([
     'app/Dokument/View/PostavkeView',
     'app/programDela/View/DrugiVirView',
     'app/programDela/View/KoprodukcijaView',
+    'app/programDela/View/IzracunajView',
     'i18next',
     'template!../tpl/enota-programa.tpl',
-    'backbone-modal',
-    'marionette'
+    'backbone-modal'
 ], function (
         PostavkeView,
         DrugiVirView,
         KoprodukcijaView,
+        IzracunajView,
         i18next,
         enotaTpl,
-        Modal,
-        Marionette
+        Modal
         ) {
 
     var EnotaProgramaView = PostavkeView.extend({
@@ -44,11 +44,11 @@ define([
                 element: 'button-trigger',
                 trigger: 'preklici'
             },
-            izpolni: {
-                id: 'doc-postavka-izpolni',
-                label: 'Izpolni',
+            izracunaj: {
+                id: 'doc-postavka-izracunaj',
+                label: i18next.t('std.izracunaj'),
                 element: 'button-trigger',
-                trigger: 'izpolni'
+                trigger: 'izracunaj'
             },
             nasvet: {
                 id: 'doc-postavka-nasvet',
@@ -88,7 +88,7 @@ define([
                     [
                         this.buttons.shrani,
                         this.buttons.preklici,
-                        this.buttons.izpolni,
+                        this.buttons.izracunaj,
                         this.buttons.nasvet
                     ]
                 ] : [[this.buttons.dodaj]];
@@ -157,10 +157,41 @@ define([
      * Ob kliku na izpolni se bo prikazal modal za prepis podatkov
      * @returns {undefined}
      */
-    EnotaProgramaView.prototype.onIzpolni = function () {
-        var View = Marionette.ItemView.extend({
-            template: this.izpolniTpl
-        });
+//    EnotaProgramaView.prototype.onIzpolni = function () {
+//        var View = Marionette.ItemView.extend({
+//            template: this.izpolniTpl
+//        });
+//
+//        var view = new View({
+//            model: this.model
+//        });
+//
+//        var modal = new Modal({
+//            content: view,
+//            animate: true,
+//            okText: i18next.t("std.izberi"),
+//            cancelText: i18next.t("std.preklici")
+//        });
+//
+//        modal.open();
+//    };
+
+    /**
+     * Vsaka enota programa mora overridat to metodo z istim viewjem ampak drugimi faktorji
+     * @returns {PostavkeView@call;extend.prototype.getIzracunajView.View}
+     */
+    EnotaProgramaView.prototype.getIzracunajView = function () {
+        var View = IzracunajView.extend();
+        return View;
+    };
+    /**
+     * ob kliku izracunaj 
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.onIzracunaj = function () {
+        var self = this;
+        //po potrebi daj itemView v lastno mapo in extendaj samo faktorje
+        var View = this.getIzracunajView();
 
         var view = new View({
             model: this.model
@@ -169,11 +200,17 @@ define([
         var modal = new Modal({
             content: view,
             animate: true,
-            okText: i18next.t("std.izberi"),
+            okText: i18next.t("std.prepisi"),
             cancelText: i18next.t("std.preklici")
         });
 
-        modal.open();
+        modal.open(function () {
+            prepisi();
+        });
+
+        var prepisi = function () {
+            self.form.fields.zaprosenProcent.editor.setValue(view.model.get('vsota'));
+        };
     };
 
     return EnotaProgramaView;

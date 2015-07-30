@@ -7,14 +7,16 @@ define([
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/premiera-form.tpl',
     'app/Zapisi/View/ZapisiLayout',
-    'formSchema!programPremiera'
+    'formSchema!programPremiera',
+    'app/programDela/View/IzracunajView'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
         formTpl,
         ZapisiLayout,
-        schema
+        schema,
+        IzracunajView
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -108,6 +110,18 @@ define([
             }
         ]
     });
+    /**
+     * overridana metoda iz enoteprograma
+     * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
+     */
+    PremieraView.prototype.getIzracunajView = function () {
+        var View = IzracunajView.extend({
+            tanF: 0.6,
+            avtHonF: 0.6
+        });
+
+        return View;
+    };
 
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
