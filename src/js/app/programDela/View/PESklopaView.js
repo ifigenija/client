@@ -22,26 +22,26 @@ define([
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'peSklopa',
-        formTitle: i18next.t('drugiVir.title'),
+        formTitle: i18next.t('peSklopa.title'),
         gridMeta: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('drugiVir.naslovPE'),
+                label: i18next.t('peSklopa.naslovPE'),
                 name: 'naslovPE',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('drugiVir.avtorPE'),
+                label: i18next.t('peSklopa.avtorPE'),
                 name: 'avtorPE',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('drugiVir.obsegPE'),
+                label: i18next.t('peSklopa.obsegPE'),
                 name: 'obsegPE',
                 sortable: true
             },
@@ -49,7 +49,7 @@ define([
                 headerCell: hc,
                 cell: 'date',
                 editable: false,
-                label: i18next.t('drugiVir.mesecPE'),
+                label: i18next.t('peSklopa.mesecPE'),
                 name: 'mesecPE',
                 sortable: true
             },
@@ -57,8 +57,9 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('drugiVir.vrednostPE'),
+                label: i18next.t('peSklopa.vrednostPE'),
                 name: 'vrednostPE',
+                total: 'sum',
                 sortable: true
             },
             {

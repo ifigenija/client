@@ -117,7 +117,21 @@ define([
             }
         ]
     });
-    
+
+    /**
+     * 
+     * Obesim se na event prekliči, da spraznim enoto programa in 
+     * druge vire, ko se forma zapre. 
+     * 
+     * @returns {undefined}
+     */
+    RaznoView.prototype.initialize = function (options) {
+        EnotaProgramaView.prototype.initialize.apply(this, arguments);
+        this.on('preklici', function () {
+            this.pesR.empty();
+        }, this);
+    };
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -141,6 +155,6 @@ define([
         });
         this.prilogeR.show(view);
     };
-    
+
     return RaznoView;
 });

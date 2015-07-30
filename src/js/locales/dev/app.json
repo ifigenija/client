@@ -992,6 +992,21 @@
             "mednarodni": "Ali je drugi vir mednarodni"
         }
     },
+    "peSklopa": {
+        "title": "Programske enote sklopa",
+        "naslovPE": "Naslov",
+        "avtorPE": "Avtor",
+        "obsegPE": "Obseg",
+        "mesecPE": "Mesec",
+        "vrednostPE": "Vrednost",
+        "d": {
+            "naslovPE": "",
+            "avtorPE": "",
+            "obsegPE": "",
+            "mesecPE": "",
+            "vrednostPE": ""
+        }
+    },
     "zapis": {
         "nalozi": "Nalozi datoteko",
         "komentar": "Komentar",
