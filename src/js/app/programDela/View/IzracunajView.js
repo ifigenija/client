@@ -22,7 +22,9 @@ define([
             return _.extend(this.model.attributes, {
                 tantiemeI: self.getTantiemeI(),
                 avtorskiHonorarjiI: self.getAvtorskiHonorarjiI(),
-                vsota: self.getVsota()
+                vsota: self.getVsota(),
+                tanF: self.tanF,
+                avtHonF: self.avtHonF
             });
         }
     });

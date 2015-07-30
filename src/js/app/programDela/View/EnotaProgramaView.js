@@ -44,12 +44,6 @@ define([
                 element: 'button-trigger',
                 trigger: 'preklici'
             },
-            izracunaj: {
-                id: 'doc-postavka-izracunaj',
-                label: i18next.t('std.izracunaj'),
-                element: 'button-trigger',
-                trigger: 'izracunaj'
-            },
             nasvet: {
                 id: 'doc-postavka-nasvet',
                 icon: 'fa fa-info',
@@ -61,6 +55,9 @@ define([
             drugiViriR: '.region-drugiViri',
             koprodukcijeR: '.region-koprodukcije',
             prilogeR: '.region-priloge'
+        },
+        triggers: {
+            'click .izracunaj': 'izracunaj'
         }
     });
 
@@ -88,7 +85,6 @@ define([
                     [
                         this.buttons.shrani,
                         this.buttons.preklici,
-                        this.buttons.izracunaj,
                         this.buttons.nasvet
                     ]
                 ] : [[this.buttons.dodaj]];
