@@ -56,15 +56,6 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.t.celotnaVrednost'),
-                name: 'celotnaVrednost',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
                 label: i18next.t('ep.zaproseno'),
                 name: 'zaproseno',
                 total: 'sum',
