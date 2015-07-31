@@ -3,7 +3,7 @@
  */
 require.config({
     baseUrl: 'js',
-    paths: {        
+    paths: {
         'underscore': '../lib/underscore/underscore',
         'bootstrap': '../lib/bootstrap/dist/js/bootstrap.min',
         'jquery': '../lib/jquery/dist/jquery',
@@ -14,8 +14,8 @@ require.config({
         'text': '../lib/requirejs-text/text',
         'marionette': '../lib/marionette/lib/backbone.marionette',
         'backgrid': '../lib/backgrid/lib/backgrid',
-        'backgrid-filter': '../lib/backgrid-filter/backgrid-filter', 
-       'backgrid-moment-cell': '../lib/backgrid-moment-cell/backgrid-moment-cell',
+        'backgrid-filter': '../lib/backgrid-filter/backgrid-filter',
+        'backgrid-moment-cell': '../lib/backgrid-moment-cell/backgrid-moment-cell',
         'backgrid-select-all': '../lib/backgrid-select-all/backgrid-select-all',
         'pageable': '../lib/backbone.paginator/lib/backbone.paginator',
         'backbone-forms': '../lib/backbone-forms/distribution.amd/backbone-forms',

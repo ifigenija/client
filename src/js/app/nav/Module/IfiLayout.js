@@ -1,15 +1,11 @@
 define([
     'radio',
     '../View/SidebarMenu',
-    '../View/OrodnaVrsticaView',
-    '../Model/Crumbs',
     'app/bars',
     'text!../tpl/ifi-layout.html'
 ], function (
         Radio,
         SidebarMenu,
-        OrodnaVrsticaView,
-        Crumbs,
         Handlebars,
         layoutTpl
         ) {
@@ -29,7 +25,6 @@ define([
             template: Handlebars.compile(layoutTpl),
             regions: {
                 contentR: '.main',
-                orodnaR: '.orodna-vrstica',
                 navR: '.side-nav'
             }
         });
@@ -41,15 +36,7 @@ define([
         Layout.prototype.onRender = function () {
 //            this.tabsR.show(this.tabControl);
 
-            var ovv = new OrodnaVrsticaView({
-                crumbsColl: module.crumbsColl,
-                user: this.options.user
-            });
-
-            this.orodnaR.show(ovv);
-
             var fm = application.flashManager;
-            ovv.obvestilaR.show(fm.manager);
             fm.manager.$el.prop('id', 'flashMessagesManager');
             fm.createSporocilaView("#sporocila-ifi");
 
@@ -95,8 +82,6 @@ define([
                 controller: this
 
             });
-
-            this.crumbsColl = new Crumbs();
 
             var channel = Radio.channel('layout');
             channel.comply('open', module.open);

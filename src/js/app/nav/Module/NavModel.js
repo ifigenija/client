@@ -1,14 +1,11 @@
 define([
     'i18next',
     'underscore',
-    'backbone',
-    '../Model/Crumbs'
+    'backbone'
 ], function (
         i18n,
         _,
-        Backbone,
-        Crumbs
-                
+        Backbone                
         ) {
 
 
@@ -59,7 +56,6 @@ define([
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
 
         mod.navigation = {};
-        mod.crumbs = new Crumbs();
         
         mod.registerNav = function (navData) {
             this.navigation.registerNav(navData);
