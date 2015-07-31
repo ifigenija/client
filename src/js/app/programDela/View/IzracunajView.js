@@ -16,7 +16,13 @@ define([
     var IzracunajView = Marionette.ItemView.extend({
         template: izracunajTpl,
         tanF: 0.0,
-        avtHonF: 0.0,        
+        avtHonF: 0.0,
+        matF: 0.0,
+        odkupAPF: 0.0,
+        odkupPF: 0.0,
+        transStrF: 0.0,//mednarodno gostovanje
+        dnevPZF: 0.0,//mednarodno gostovanje
+        dnevF: 0.0,//mednarodno gostovanje
         serializeData: function () {
             var self = this;
             return _.extend(this.model.attributes, {

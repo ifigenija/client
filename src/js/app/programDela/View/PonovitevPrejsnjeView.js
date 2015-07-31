@@ -5,7 +5,7 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/programDela/View/EnotaProgramaView',
-    'template!../tpl/ponovitevPrejsnje-form.tpl',
+    'template!../tpl/ponovitevPrejsnje-form4.tpl',
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!programPonovitevPrejsnjih'
 ], function (

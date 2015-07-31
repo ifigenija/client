@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Panel heading without title</div>
+    <div class="panel-heading">{{t "izracunaj.title"}}</div>
     <div class="panel-body">
 
         <table class="table table-striped table-condensed">

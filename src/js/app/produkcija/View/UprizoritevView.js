@@ -70,6 +70,15 @@ define([
                 sortable: true
             },
             {
+                cell:  Backgrid.SelectCell.extend({
+                    optionValues: schema.getOptionValues('maticniOder')
+                }),
+                editable: false,
+                label: i18next.t('uprizoritev.maticniOder'),
+                name: 'maticniOder',
+                sortable: true
+            },
+            {
                 headerCell: hc,
                 cell: 'date',
                 editable: false,

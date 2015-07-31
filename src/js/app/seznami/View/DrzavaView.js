@@ -26,6 +26,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('drzava.isoNum'),
+                name: 'isoNum',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('drzava.sifra'),
                 name: 'sifra',
                 sortable: true
@@ -35,13 +42,6 @@ define([
                 editable: false,
                 label: i18next.t('drzava.naziv'),
                 name: 'naziv',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('drzava.isoNum'),
-                name: 'isoNum',
                 sortable: true
             },
             {

@@ -38,13 +38,6 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('zvrstUprizoritve.opis'),
-                name: 'opis',
-                sortable: true
-            },
-            {
                 cell: 'action',
                 name: '...',
                 sortable: false,

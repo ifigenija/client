@@ -40,13 +40,6 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('tipFunkcije.opis'),
-                name: 'opis',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
                 label: i18next.t('tipFunkcije.podrocje'),
                 name: 'podrocje',
                 sortable: false
