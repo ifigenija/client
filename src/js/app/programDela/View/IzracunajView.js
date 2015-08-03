@@ -35,18 +35,30 @@ define([
         }
     });
     
+    /**
+     * Pridobimo vrednost za koliko lahko zaprosimo
+     * @returns {Number}
+     */
     IzracunajView.prototype.getTantiemeI = function(){
         var tantieme = this.model.get('tantieme');
         
         return tantieme ? tantieme * this.tanF : 0;
     };
     
+    /**
+     * Pridobimo vrednost za koliko lahko zaprosimo
+     * @returns {Number}
+     */
     IzracunajView.prototype.getAvtorskiHonorarjiI = function(){
         var avtorskiHonorarji = this.model.get('avtorskiHonorarji');
         
         return avtorskiHonorarji ? avtorskiHonorarji * this.avtHonF : 0;
     };
     
+    /**
+     * Pridobimo vrednost za koliko lahko zaprosimo
+     * @returns {Number}
+     */
     IzracunajView.prototype.getVsota = function(){        
         return this.getTantiemeI() + this.getAvtorskiHonorarjiI();
     };

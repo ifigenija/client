@@ -11,7 +11,9 @@ define([
     'app/programDela/View/IzracunajView',
     'i18next',
     'template!../tpl/enota-programa.tpl',
-    'backbone-modal'
+    'backbone-modal',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         PostavkeView,
         DrugiVirView,
@@ -19,7 +21,8 @@ define([
         IzracunajView,
         i18next,
         enotaTpl,
-        Modal
+        Modal,
+        $
         ) {
 
     var EnotaProgramaView = PostavkeView.extend({
@@ -44,6 +47,13 @@ define([
                 element: 'button-trigger',
                 trigger: 'preklici'
             },
+            prenesi: {
+                id: 'doc-postavka-prenesi',
+                label: 'Prenesi',
+                element: 'button-trigger',
+                trigger: 'prenesi',
+                disabled: true
+            },
             nasvet: {
                 id: 'doc-postavka-nasvet',
                 icon: 'fa fa-info',
@@ -61,6 +71,11 @@ define([
         }
     });
 
+    EnotaProgramaView.prototype.toISO8601 = function (podatek) {
+        var pozicija = podatek.length - 2;
+        return [podatek.slice(0, pozicija), ":", podatek.slice(pozicija)].join('');
+    };
+
     /**
      * 
      * Obesim se na event prekliči, da spraznim enoto programa in 
@@ -74,6 +89,34 @@ define([
             this.koprodukcijeR.empty();
             this.prilogeR.empty();
         }, this);
+
+        var self = this;
+        this.listenTo(this, 'prenesi', function () {
+
+            //zaradi tega ker pridobimo drugačen format kot pa ISO8601
+            var temp = self.dokument.get('zacetek');
+            var zacetek = this.toISO8601(temp);
+
+            var temp = self.dokument.get('konec');
+            var konec = this.toISO8601(temp);
+
+            var foo = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
+            foo.call(
+                    'podatkiUprizoritve',
+                    {
+                        'uprizoritevId': self.model.get('uprizoritev')['id'],
+                        'zacetek': zacetek,
+                        'konec': konec
+                    },
+            function (podatki) {
+                //success
+                self.prenesiPodatke(podatki);
+            },
+                    function (error) {
+                        //error
+                    }
+            );
+        });
     };
     /**
      * Vsi gumbi, ki so navoljo toolbaru za izrisS
@@ -85,6 +128,7 @@ define([
                     [
                         this.buttons.shrani,
                         this.buttons.preklici,
+                        this.buttons.prenesi,
                         this.buttons.nasvet
                     ]
                 ] : [[this.buttons.dodaj]];
@@ -92,10 +136,40 @@ define([
     };
 
     /**
+     * Metoda omogoče ali onemogoči gumb
+     * Kot parametre prejme ime gumba in ali naj gumb omogoči ali onemogoči
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.toggleGumb = function (gumb, jeOnemogocen) {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton(gumb);
+        if (but) {
+            but.set({
+                disabled: jeOnemogocen
+            });
+        }
+    };
+
+    /**
      * ob izrisu forme se izvede še izris postavk
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.onRenderForm = function () {
+        var podatek = this.form.fields.uprizoritev.editor.getValue();
+        if (podatek) {
+            this.toggleGumb('doc-postavka-prenesi', false);
+        }
+
+        this.listenTo(this.form, 'uprizoritev:change', function () {
+            var podatek = this.form.fields.uprizoritev.editor.getValue();
+            if (!podatek) {
+                this.toggleGumb('doc-postavka-prenesi', true);
+            }
+            else {
+                this.toggleGumb('doc-postavka-prenesi', false);
+            }
+        });
+
         if (!this.model.isNew()) {
             this.renderPriloge();
             this.renderPES();
@@ -147,30 +221,14 @@ define([
 
         this.koprodukcijeR.show(view);
     };
-
-
+    
     /**
-     * Ob kliku na izpolni se bo prikazal modal za prepis podatkov
+     * Ob kliku na prenesi se bo prikazal modal za prepis podatkov
      * @returns {undefined}
      */
-//    EnotaProgramaView.prototype.onIzpolni = function () {
-//        var View = Marionette.ItemView.extend({
-//            template: this.izpolniTpl
-//        });
-//
-//        var view = new View({
-//            model: this.model
-//        });
-//
-//        var modal = new Modal({
-//            content: view,
-//            animate: true,
-//            okText: i18next.t("std.izberi"),
-//            cancelText: i18next.t("std.preklici")
-//        });
-//
-//        modal.open();
-//    };
+    EnotaProgramaView.prototype.prenesiPodatke = function () {
+
+    };
 
     /**
      * Vsaka enota programa mora overridat to metodo z istim viewjem ampak drugimi faktorji

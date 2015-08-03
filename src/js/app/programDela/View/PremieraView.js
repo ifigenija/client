@@ -8,7 +8,12 @@ define([
     'template!../tpl/premiera-form.tpl',
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!programPremiera',
-    'app/programDela/View/IzracunajView'
+    'app/programDela/View/IzracunajView',
+    'template!../tpl/premiera-izpolni.tpl',
+    'marionette',
+    'underscore',
+    'app/programDela/View/PrenesiModal',
+    'jquery'
 ], function (
         Backgrid,
         i18next,
@@ -16,7 +21,12 @@ define([
         formTpl,
         ZapisiLayout,
         schema,
-        IzracunajView
+        IzracunajView,
+        prenesiTpl,
+        Marionette,
+        _,
+        Modal,
+        $
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -112,6 +122,37 @@ define([
         });
 
         return View;
+    };
+    /**
+     * overridana metoda iz enoteprograma
+     * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
+     */
+    PremieraView.prototype.prenesiPodatke = function (data) {
+        var view = new Modal.View({
+            template: prenesiTpl,
+            podatki: data,
+            model: this.model
+        });
+
+        var Mod = Modal.Modal.extend({});
+
+        var self = this;
+        Mod.prototype.prenesi = function () {
+            if ($('.stHonorarnih').is(':checked')) {
+                self.form.fields.stHonorarnih.editor.setValue(view.model.get('rpc')['stHonorarnih']);
+            }
+            if ($('.stHonorarnihIgr').is(':checked')) {
+                self.form.fields.stHonorarnihIgr.editor.setValue(view.model.get('rpc')['stHonorarnihIgr']);
+            }
+
+            self.triggerMethod('form:change', self.form);
+        };
+        
+        var modal = new Mod({
+            content: view
+        });
+
+        modal.open(modal.prenesi());
     };
 
     /**

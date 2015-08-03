@@ -1,31 +1,42 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Panel heading without title</div>
+    <div class="panel-heading">{{t "prenesi.title"}}</div>
     <div class="panel-body">
-        <form>
-            <div class="row">
-                <div class="col-sm-offset-1 col-sm-3">
-                        <input class="celotnaVrednost" type="checkbox"> {{t "ep.celotnaVrednost"}}
-                </div>
-                <div class="col-sm-3">test</div>
-                <div class="col-sm-1"> <-</div>
-                <div class="nova-celotnaVrednost col-sm-3">{{novaCelVred}}</div>
-            </div>
-            <div class="row">
-                <div class="col-sm-offset-1 col-sm-3">
-                        <input class="avtorskiHonorarji" type="checkbox"> {{t "ep.avtorskiHonorarji"}}
-                </div>
-                <div class="stara-avtorskiHonorarji col-sm-3">{{dokument}}</div>
-                <div class="col-sm-1"> <-</div>
-                <div class="nova-avtorskiHonorarji col-sm-3">{{novaCelVred}}</div>
-            </div>
-            <div class="row">
-                <div class="col-sm-offset-1 col-sm-3">
-                        <input class="tantieme" type="checkbox"> {{t "ep.tantieme"}}
-                </div>
-                <div class="stara-tantieme col-sm-3">{{dokument}}</div>
-                <div class="col-sm-1"> <-</div>
-                <div class="nova-tantieme col-sm-3">{{novaCelVred}}</div>
-            </div>
-        </form>
+
+        <table class="table table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th class="col-sm-1">{{t "prenesi.checkbox"}}</th>
+                    <th class="col-sm-5">{{t "prenesi.atributi"}}</th>
+                    <th class="col-sm-3 col-numbers">{{t "prenesi.vrednostStara"}}</th>
+                    <th class="col-sm-3 col-numbers">{{t "prenesi.vrednostNova"}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input class="stZaposDrug" type="checkbox">
+                    </td>
+                    <td>{{t "ep.stZaposDrug"}}</td>
+                    <td class="col-numbers">{{stZaposDrug}}</td>
+                    <td class="col-numbers">{{rpc.stZaposDrug}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="stHonorarnih" type="checkbox">
+                    </td>
+                    <td>{{t "ep.stHonorarnih"}}</td>
+                    <td class="col-numbers">{{stHonorarnih}}</td>
+                    <td class="col-numbers">{{rpc.stHonorarnih}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="stHonorarnihIgr" type="checkbox">
+                    </td>
+                    <td>{{t "ep.stHonorarnihIgr"}}</td>
+                    <td class="col-numbers">{{stHonorarnihIgr}}</td>
+                    <td class="col-numbers">{{rpc.stHonorarnihIgr}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
