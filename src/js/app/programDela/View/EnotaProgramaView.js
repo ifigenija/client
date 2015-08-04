@@ -12,6 +12,7 @@ define([
     'i18next',
     'template!../tpl/enota-programa.tpl',
     'backbone-modal',
+    'marionette',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -22,6 +23,7 @@ define([
         i18next,
         enotaTpl,
         Modal,
+        Marionette,
         $
         ) {
 
@@ -101,21 +103,18 @@ define([
             var konec = this.toISO8601(temp);
 
             var foo = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
-            foo.call(
-                    'podatkiUprizoritve',
-                    {
-                        'uprizoritevId': self.model.get('uprizoritev')['id'],
-                        'zacetek': zacetek,
-                        'konec': konec
-                    },
-            function (podatki) {
+            foo.call('podatkiUprizoritve', {
+                'uprizoritevId': self.model.get('uprizoritev')['id'],
+                'zacetek': zacetek,
+                'konec': konec
+            }, function (podatki) {
                 //success
-                self.prenesiPodatke(podatki);
-            },
-                    function (error) {
-                        //error
-                    }
-            );
+                self.podatkiRPC = podatki;
+                self.prenesiPodatke();
+            }, function (error) {
+                //error
+
+            });
         });
     };
     /**
@@ -221,13 +220,47 @@ define([
 
         this.koprodukcijeR.show(view);
     };
-    
+
+    /**
+     * Metodo je potrebno overridat v ostalih programih dela
+     * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
+     */
+    EnotaProgramaView.prototype.getPrenesiView = function () {
+    };
+
+    /**
+     * Metodo je potrebno overridat v ostalih programih dela
+     * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
+     */
+    EnotaProgramaView.prototype.prenesi = function (modal) {
+    };
     /**
      * Ob kliku na prenesi se bo prikazal modal za prepis podatkov
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.prenesiPodatke = function () {
+        var self = this;
+        var View = this.getPrenesiView();
 
+        var error = this.form.commit();
+
+        if (!error) {
+            var view = new View({
+                model: this.model
+            });
+
+            var modal = new Modal({
+                content: view,
+                animate: true,
+                okText: i18next.t("std.izberi"),
+                cancelText: i18next.t("std.preklici"),
+                title: i18next.t('prenesi.title')
+            });
+
+            modal.open(function () {
+                self.prenesi(this);
+            });
+        }
     };
 
     /**
@@ -263,7 +296,7 @@ define([
         });
 
         var prepisi = function () {
-            self.form.fields.zaprosenProcent.editor.setValue(view.model.get('vsota'));
+            self.form.fields.zaproseno.editor.setValue(view.model.get('vsota'));
         };
     };
 

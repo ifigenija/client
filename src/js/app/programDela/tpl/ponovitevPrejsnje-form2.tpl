@@ -5,7 +5,7 @@
             <div class="col-sm-6">
                 <div class="row">
                     <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,celotnaVrednostGostovSZ"></div>
-                    <div class="col-sm-12 col-lg-6" data-fields="celotnaVrednostMat,obiskDoma,obiskGost"></div>
+                    <div class="col-sm-12 col-lg-6" data-fields="obiskDoma,obiskGost"></div>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -54,14 +54,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="row">
-                    <div class="col-sm-12 col-lg-6" data-fields="zaprosenProcent,nasDelez"></div>
+                    <div class="col-sm-12 col-lg-6" data-fields="zaproseno,nasDelez"></div>
                     <div class="col-sm-12 col-lg-6" data-fields="drugiJavni"></div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="row">
                     <div class="col-sm-12 col-lg-6" data-fields="vlozekGostitelja"></div>
-                    <div class="col-sm-12 col-lg-6" data-fields="lastnaSredstva"></div>
                 </div>
             </div>
         </div>

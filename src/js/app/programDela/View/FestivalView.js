@@ -89,15 +89,6 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.lastnaSredstva'),
-                name: 'lastnaSredstva',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
                 label: i18next.t('ep.vlozekKoproducenta'),
                 name: 'vlozekKoproducenta',
                 total: 'sum',

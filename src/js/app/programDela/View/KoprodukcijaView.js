@@ -35,8 +35,8 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('prodel.zaprosenProcent'),
-                name: 'zaprosenProcent',
+                label: i18next.t('prodel.zaproseno'),
+                name: 'zaproseno',
                 total: 'sum',
                 sortable: true
             },
@@ -44,8 +44,8 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('prodel.odstotekFinanciranja'),
-                name: 'odstotekFinanciranja',
+                label: i18next.t('prodel.delez'),
+                name: 'delez',
                 total: 'sum',
                 sortable: true
             },

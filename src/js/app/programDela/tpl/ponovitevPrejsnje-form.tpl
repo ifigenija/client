@@ -44,14 +44,14 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="col-sm-12 col-lg-6" data-fields="zaprosenProcent,nasDelez"></div>
-                                <div class="col-sm-12 col-lg-6" data-fields="celotnaVrednostMat,drugiJavni"></div>
+                                <div class="col-sm-12 col-lg-6" data-fields="zaproseno,nasDelez"></div>
+                                <div class="col-sm-12 col-lg-6" data-fields="drugiJavni"></div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="col-sm-12 col-lg-6" data-fields="celotnaVrednostGostovSZ,vlozekGostitelja"></div>
-                                <div class="col-sm-12 col-lg-6" data-fields="lastnaSredstva"></div>
+                                <div class="col-sm-12 col-lg-6" data-fields="celotnaVrednostGostovSZ"></div>
+                                <div class="col-sm-12 col-lg-6" data-fields="vlozekGostitelja"></div>
                             </div>
                         </div>
                     </div>

@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="naziv,soorganizator,lastnaSredstva"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="drugiJavni,zaprosenProcent"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="naziv,soorganizator"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="drugiJavni,zaproseno"></div>
             </div>
         </div>
         <div class="col-sm-6">

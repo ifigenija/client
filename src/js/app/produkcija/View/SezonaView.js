@@ -32,8 +32,8 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('sezona.imeSezone'),
-                name: 'imeSezone',
+                label: i18next.t('sezona.ime'),
+                name: 'ime',
                 sortable: true
             },
             {

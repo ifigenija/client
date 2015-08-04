@@ -9,11 +9,9 @@ define([
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!programPremiera',
     'app/programDela/View/IzracunajView',
-    'template!../tpl/premiera-izpolni.tpl',
+    'template!../tpl/premiera-prenesi.tpl',
     'marionette',
-    'underscore',
-    'app/programDela/View/PrenesiModal',
-    'jquery'
+    'underscore'
 ], function (
         Backgrid,
         i18next,
@@ -24,9 +22,7 @@ define([
         IzracunajView,
         prenesiTpl,
         Marionette,
-        _,
-        Modal,
-        $
+        _
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -75,15 +71,6 @@ define([
                 headerCell: hc,
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.t.lastnaSredstva'),
-                name: 'lastnaSredstva',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
                 label: i18next.t('ep.t.avtorskiHonorarji'),
                 name: 'avtorskiHonorarji',
                 total: 'sum',
@@ -111,6 +98,41 @@ define([
             }
         ]
     });
+
+    /**
+     * Ko se forma nariše priklopimo dogodke za preračun in za nastavitve naziva in EM
+     * 
+     * @returns {undefined}
+     */
+    PremieraView.prototype.onRenderForm = function () {
+        EnotaProgramaView.prototype.onRenderForm.apply(this, arguments);
+
+        if (this.model) {
+            this.listenTo(this.form, 'nasDelez:change', this.preveriDelez);
+            this.listenTo(this.form, 'tantieme:change', this.preveritantieme);
+            //this.listenTo(this.form, 'avtorskePravice:change', this.preveriAvtPra);
+            //this.listenTo(this.form, 'avtorskiHonorarji:change', this.preveriAvtHon);
+            //this.listenTo(this.form, 'tantieme:change', this.preveritantieme);
+        }
+    };
+
+    PremieraView.prototype.preveritantieme = function (editor) {
+        console.log('tantiema');
+    };
+    PremieraView.prototype.preveriDelez = function () {
+        console.log('ne delam');
+        var polja = this.form.fields;
+        var tan = polja.tantieme.editor.getValue();
+        var avtPra = polja.avtorskePravice.editor.getValue();
+        var avtHon = polja.avtorskiHonorarji.editor.getValue();
+        var nasDel = polja.nasDelez.editor.getValue();
+        if (tan + avtPra + avtHon > nasDel) {
+            polja.nasDelez.setError('Naš Delež mora biti večji ali enak vsoti avtorski honorarjev, avtorskih pravic an Tantiem');
+        } else {
+            polja.nasDelez.clearError();
+        }
+    };
+
     /**
      * overridana metoda iz enoteprograma
      * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
@@ -123,36 +145,70 @@ define([
 
         return View;
     };
+
+    /**
+     * metoda je overridana iz enotePrograma
+     * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
+     */
+    PremieraView.prototype.prenesi = function (modal) {
+        var rpc = modal.options.content.model.get('rpc');
+        var view = modal.options.content;
+        var model = this.model;
+        
+        if (view.$('.nasDelez').is(':checked')) {
+            model.set('nasDelez', rpc.Do.nasDelez);
+        }
+        if (view.$('.avtorskiHonorarji').is(':checked')) {
+            model.set('avtorskiHonorarji', rpc.Do.avtorskiHonorarji);
+        }
+        if (view.$('.tantieme').is(':checked')) {
+            model.set('tantieme', rpc.Do.tantieme);
+        }
+        if (view.$('.avtorskePravice').is(':checked')) {
+            model.set('tantieme', rpc.Do.tantieme);
+        }
+        if (view.$('.stHonorarnih').is(':checked')) {
+            model.set('stHonorarnih', rpc.stHonorarnih);
+        }
+        if (view.$('.stHonorarnihIgr').is(':checked')) {
+            model.set('stHonorarnihIgr', rpc.stHonorarnihIgr);
+        }
+        if (view.$('.stHonorarnihIgrTujJZ').is(':checked')) {
+            model.set('stHonorarnihIgrTujJZ', rpc.stHonorarnihIgrTujJZ);
+        }
+        if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
+            model.set('stHonorarnihIgrSamoz', rpc.stHonorarnihIgrSamoz);
+        }
+        if (view.$('.stZaposUmet').is(':checked')) {
+            model.set('stZaposUmet', rpc.stZaposUmet);
+        }
+        if (view.$('.datumZacStudija').is(':checked')) {
+            model.set('datumZacStudija', rpc.datumZacStudija);
+        }
+        if (view.$('.datumPremiere').is(':checked')) {
+            model.set('stHonorarnihIgr', rpc.stHonorarnihIgr);
+        }
+        
+        this.renderForm();
+        this.triggerMethod('form:change', this.form);
+    };
+
     /**
      * overridana metoda iz enoteprograma
      * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
      */
-    PremieraView.prototype.prenesiPodatke = function (data) {
-        var view = new Modal.View({
-            template: prenesiTpl,
-            podatki: data,
-            model: this.model
-        });
-
-        var Mod = Modal.Modal.extend({});
-
+    PremieraView.prototype.getPrenesiView = function () {
         var self = this;
-        Mod.prototype.prenesi = function () {
-            if ($('.stHonorarnih').is(':checked')) {
-                self.form.fields.stHonorarnih.editor.setValue(view.model.get('rpc')['stHonorarnih']);
+        var View = Marionette.ItemView.extend({
+            tagName: 'table',
+            className: 'table table-striped table-condensed',
+            template: prenesiTpl,
+            serializeData: function () {
+                return _.extend(this.model.attributes, {rpc: self.podatkiRPC});
             }
-            if ($('.stHonorarnihIgr').is(':checked')) {
-                self.form.fields.stHonorarnihIgr.editor.setValue(view.model.get('rpc')['stHonorarnihIgr']);
-            }
-
-            self.triggerMethod('form:change', self.form);
-        };
-        
-        var modal = new Mod({
-            content: view
         });
 
-        modal.open(modal.prenesi());
+        return View;
     };
 
     /**

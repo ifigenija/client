@@ -54,8 +54,8 @@
             <div class="panel-body">
                 <form>
                     <div class="row">
-                        <div class="col-sm-6" data-fields="nasDelez,zaprosenProcent"></div>
-                        <div class="col-sm-6" data-fields="lastnaSredstva,drugiJavni"></div>
+                        <div class="col-sm-6" data-fields="nasDelez,zaproseno"></div>
+                        <div class="col-sm-6" data-fields="drugiJavni"></div>
                     </div>
                 </form>
             </div>
