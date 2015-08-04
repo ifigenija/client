@@ -102,8 +102,8 @@ define([
             var temp = self.dokument.get('konec');
             var konec = this.toISO8601(temp);
 
-            var foo = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
-            foo.call('podatkiUprizoritve', {
+            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
+            rpc.call('podatkiUprizoritve', {
                 'uprizoritevId': self.model.get('uprizoritev')['id'],
                 'zacetek': zacetek,
                 'konec': konec
@@ -223,6 +223,7 @@ define([
 
     /**
      * Metodo je potrebno overridat v ostalih programih dela
+     * V metodi implementiramo view, ki se bo uporabil v modalu za prenos vrednosti
      * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
      */
     EnotaProgramaView.prototype.getPrenesiView = function () {
@@ -230,6 +231,8 @@ define([
 
     /**
      * Metodo je potrebno overridat v ostalih programih dela
+     * Metoda se izvede ko kliknemo ok v modalu
+     * Trenutno pričakujemo logiko kere vrednosti se prenesejo v formo
      * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
      */
     EnotaProgramaView.prototype.prenesi = function (modal) {

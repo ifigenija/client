@@ -109,23 +109,21 @@ define([
 
         if (this.model) {
             this.listenTo(this.form, 'nasDelez:change', this.preveriDelez);
-            this.listenTo(this.form, 'tantieme:change', this.preveritantieme);
-            //this.listenTo(this.form, 'avtorskePravice:change', this.preveriAvtPra);
-            //this.listenTo(this.form, 'avtorskiHonorarji:change', this.preveriAvtHon);
-            //this.listenTo(this.form, 'tantieme:change', this.preveritantieme);
+            this.listenTo(this.form, 'tantieme:change', this.preveriDelez);
+            this.listenTo(this.form, 'avtorskePravice:change', this.preveriDelez);
+            this.listenTo(this.form, 'avtorskiHonorarji:change', this.preveriDelez);
+            this.listenTo(this.form, 'tantieme:change', this.preveriDelez);
         }
     };
-
-    PremieraView.prototype.preveritantieme = function (editor) {
-        console.log('tantiema');
-    };
+    
     PremieraView.prototype.preveriDelez = function () {
-        console.log('ne delam');
         var polja = this.form.fields;
+        
         var tan = polja.tantieme.editor.getValue();
         var avtPra = polja.avtorskePravice.editor.getValue();
         var avtHon = polja.avtorskiHonorarji.editor.getValue();
         var nasDel = polja.nasDelez.editor.getValue();
+        
         if (tan + avtPra + avtHon > nasDel) {
             polja.nasDelez.setError('Naš Delež mora biti večji ali enak vsoti avtorski honorarjev, avtorskih pravic an Tantiem');
         } else {
