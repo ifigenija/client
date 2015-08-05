@@ -56,6 +56,12 @@ define([
                 trigger: 'prenesi',
                 disabled: true
             },
+            izracunaj: {
+                id: 'doc-postavka-izracunaj',
+                label: i18next.t('std.izracunaj'),
+                element: 'button-trigger',
+                trigger: 'izracunaj'
+            },
             nasvet: {
                 id: 'doc-postavka-nasvet',
                 icon: 'fa fa-info',
@@ -67,16 +73,8 @@ define([
             drugiViriR: '.region-drugiViri',
             koprodukcijeR: '.region-koprodukcije',
             prilogeR: '.region-priloge'
-        },
-        triggers: {
-            'click .izracunaj': 'izracunaj'
         }
     });
-
-    EnotaProgramaView.prototype.toISO8601 = function (podatek) {
-        var pozicija = podatek.length - 2;
-        return [podatek.slice(0, pozicija), ":", podatek.slice(pozicija)].join('');
-    };
 
     /**
      * 
@@ -95,12 +93,8 @@ define([
         var self = this;
         this.listenTo(this, 'prenesi', function () {
 
-            //zaradi tega ker pridobimo drugačen format kot pa ISO8601
-            var temp = self.dokument.get('zacetek');
-            var zacetek = this.toISO8601(temp);
-
-            var temp = self.dokument.get('konec');
-            var konec = this.toISO8601(temp);
+            var zacetek = self.dokument.get('zacetek');
+            var konec = self.dokument.get('konec');
 
             var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
             rpc.call('podatkiUprizoritve', {
@@ -127,6 +121,7 @@ define([
                     [
                         this.buttons.shrani,
                         this.buttons.preklici,
+                        this.buttons.izracunaj,
                         this.buttons.prenesi,
                         this.buttons.nasvet
                     ]
@@ -159,7 +154,7 @@ define([
             this.toggleGumb('doc-postavka-prenesi', false);
         }
 
-        this.listenTo(this.form, 'uprizoritev:change', function () {
+        var toggleEnabled = function () {
             var podatek = this.form.fields.uprizoritev.editor.getValue();
             if (!podatek) {
                 this.toggleGumb('doc-postavka-prenesi', true);
@@ -167,7 +162,10 @@ define([
             else {
                 this.toggleGumb('doc-postavka-prenesi', false);
             }
-        });
+        };
+        
+        this.form.off('uprizoritev:change', toggleEnabled, this);
+        this.form.on('uprizoritev:change', toggleEnabled, this);
 
         if (!this.model.isNew()) {
             this.renderPriloge();
@@ -245,9 +243,7 @@ define([
         var self = this;
         var View = this.getPrenesiView();
 
-        var error = this.form.commit();
-
-        if (!error) {
+        if (!this.form.commit()) {
             var view = new View({
                 model: this.model
             });
@@ -265,41 +261,36 @@ define([
             });
         }
     };
-
-    /**
-     * Vsaka enota programa mora overridat to metodo z istim viewjem ampak drugimi faktorji
-     * @returns {PostavkeView@call;extend.prototype.getIzracunajView.View}
-     */
-    EnotaProgramaView.prototype.getIzracunajView = function () {
-        var View = IzracunajView.extend();
-        return View;
-    };
     /**
      * ob kliku izracunaj 
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.onIzracunaj = function () {
         var self = this;
-        //po potrebi daj itemView v lastno mapo in extendaj samo faktorje
-        var View = this.getIzracunajView();
-
-        var view = new View({
+        var view = new IzracunajView({
+            tagName: 'table',
+            className: 'table table-striped table-condensed',
             model: this.model
         });
 
-        var modal = new Modal({
-            content: view,
-            animate: true,
-            okText: i18next.t("std.prepisi"),
-            cancelText: i18next.t("std.preklici")
-        });
+        if (!this.form.commit()) {
+            var modal = new Modal({
+                content: view,
+                animate: true,
+                okText: i18next.t("std.prepisi"),
+                cancelText: i18next.t("std.preklici"),
+                title: i18next.t('izracunaj.title')
+            });
 
-        modal.open(function () {
-            prepisi();
-        });
+            modal.open(function () {
+                prepisi(this);
+            });
+        }
 
-        var prepisi = function () {
-            self.form.fields.zaproseno.editor.setValue(view.model.get('vsota'));
+        var prepisi = function (modal) {
+            self.model.set('zaproseno', modal.options.content.model.get('vsota'));
+            self.renderForm();
+            self.triggerMethod('form:change', self.form);
         };
     };
 

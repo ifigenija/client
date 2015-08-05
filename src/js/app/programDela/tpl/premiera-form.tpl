@@ -19,15 +19,7 @@
                 <div class="col-sm-12 col-lg-6">{{t "ep.datumZacStudija"}}: {{datumZacStudija}}</div>
                 <div class="col-sm-12 col-lg-6">{{t "ep.datumPremiere"}}: {{datumPremiere}}</div>
                 <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,avtorskiHonorarji,tantieme"></div>
-                <div class="col-sm-12 col-lg-6">
-                    <div data-fields="avtorskePravice,nasDelez"></div>
-                    <div style="display: table;">
-                        <div style="display: table-row;">
-                            <div data-fields="zaproseno"></div>
-                            <a class="pull-right btn btn-default izracunaj">{{t "std.izracunaj"}}</a>
-                        </div>
-                    </div>
-                </div>
+                <div class="col-sm-12 col-lg-6" data-fields="avtorskePravice,nasDelez,zaproseno">            </div>
             </div>
         </div>
         <div class="col-sm-6">

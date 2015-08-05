@@ -95,7 +95,9 @@
         "skrij": "Skrij",
         "prazno": "Prazno",
         "privzeto": "Privzeto",
-        "deaktiviraj": "Deaktiviraj"
+        "deaktiviraj": "Deaktiviraj",
+        "izracunaj": "Zaprošeno",
+        "prepisi": "Prepiši"
     },
     "ent": {
         "dodaj": "Dodaj",
@@ -963,6 +965,7 @@
     "sezona": {
         "nova": "Nova sezone",
         "title": "Sezone",
+        "sifra": "$t(ent.sifra)",
         "ime": "Ime sezone",
         "aktivna": "$t(ent.aktivna)",
         "zacetek": "$t(ent.zacetek)",
@@ -1031,5 +1034,20 @@
     },
     "napaka": {
         "fetch": "Napaka pri pridobivanju podatkov"
+    },
+    "prenesi": {
+        "title": "Prenost vrednosti iz uprizoritve",
+        "oznaci": "Označi",
+        "atributi": "Polja",
+        "vrednostStara": "Trenutna vrednost",
+        "vrednostNova": "Nova vrednost"
+    },
+    "izracunaj": {
+        "title": "Preračun vrednosti zaprošeno",
+        "atributi": "Polja",
+        "vrednost": "Vrednost",
+        "faktor": "Faktor",
+        "izracun": "Izračun",
+        "vsota": "Vsota"
     }
 }

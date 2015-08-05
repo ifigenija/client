@@ -1,6 +1,6 @@
 <thead>
     <tr>
-        <th class="col-sm-1">{{t "prenesi.checkbox"}}</th>
+        <th class="col-sm-1">{{t "prenesi.oznaci"}}</th>
         <th class="col-sm-5">{{t "prenesi.atributi"}}</th>
         <th class="col-sm-3 col-numbers">{{t "prenesi.vrednostStara"}}</th>
         <th class="col-sm-3 col-numbers">{{t "prenesi.vrednostNova"}}</th>

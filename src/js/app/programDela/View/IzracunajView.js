@@ -5,63 +5,18 @@
  */
 define([
     'template!../tpl/izracunaj-form.tpl',
-    'marionette',
-    'underscore'
+    'marionette'
 ], function (
         izracunajTpl,
-        Marionette,
-        _
+        Marionette
         ) {
 
     var IzracunajView = Marionette.ItemView.extend({
         template: izracunajTpl,
-        tanF: 0.0,
-        avtHonF: 0.0,
-        matF: 0.0,
-        odkupAPF: 0.0,
-        odkupPF: 0.0,
-        transStrF: 0.0,//mednarodno gostovanje
-        dnevPZF: 0.0,//mednarodno gostovanje
-        dnevF: 0.0,//mednarodno gostovanje
-        serializeData: function () {
-            var self = this;
-            return _.extend(this.model.attributes, {
-                tantiemeI: self.getTantiemeI(),
-                avtorskiHonorarjiI: self.getAvtorskiHonorarjiI(),
-                vsota: self.getVsota(),
-                tanF: self.tanF,
-                avtHonF: self.avtHonF
-            });
+        initialize: function () {
+            this.model.preracunaj();
         }
     });
-    
-    /**
-     * Pridobimo vrednost za koliko lahko zaprosimo
-     * @returns {Number}
-     */
-    IzracunajView.prototype.getTantiemeI = function(){
-        var tantieme = this.model.get('tantieme');
-        
-        return tantieme ? tantieme * this.tanF : 0;
-    };
-    
-    /**
-     * Pridobimo vrednost za koliko lahko zaprosimo
-     * @returns {Number}
-     */
-    IzracunajView.prototype.getAvtorskiHonorarjiI = function(){
-        var avtorskiHonorarji = this.model.get('avtorskiHonorarji');
-        
-        return avtorskiHonorarji ? avtorskiHonorarji * this.avtHonF : 0;
-    };
-    
-    /**
-     * Pridobimo vrednost za koliko lahko zaprosimo
-     * @returns {Number}
-     */
-    IzracunajView.prototype.getVsota = function(){        
-        return this.getTantiemeI() + this.getAvtorskiHonorarjiI();
-    };
-
+  
     return IzracunajView;
 });

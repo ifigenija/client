@@ -27,6 +27,17 @@ define([
     });
 
     var EnotaProgramaPostavka = Dokument.Postavka.extend({
+        defaults: {
+            tanF: 0.0,
+            avtHonF: 0.0,
+            matF: 0.0,
+            odkupAPF: 0.0,
+            odkupPF: 0.0,
+            transStrF: 0.0, //mednarodno gostovanje
+            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevF: 0.0, //mednarodno gostovanje
+            nasDelezF: 0.0
+        },
         nestedCollections: {
             drugiViri: {collection: DrugiViriCollection, mappedBy: 'enotaPrograma'},
             koprodukcije: {collection: KoprodukcijeCollection, mappedBy: 'enotaPrograma'}
@@ -50,6 +61,93 @@ define([
             }
             postavka.dokument = this;
             return postavka;
+        },
+        preracunaj: function () {
+
+            var vsota = 0;
+            var produkt = 0;
+            var faktor = this.get('nasDelezF');
+            if (faktor) {
+                produkt = this.get('nasDelez') * faktor;
+                if (produkt) {
+                    vsota += produkt;
+                }
+                this.set('nasDelezI', produkt);
+            }
+
+            faktor = this.get('tanF');
+            if (faktor) {
+                produkt = this.get('tantieme') * faktor;
+                if (produkt) {
+                    vsota += produkt;
+                }
+                this.set('tantiemeI', produkt);
+            }
+
+            faktor = this.get('avtHonF');
+            if (faktor) {
+                produkt = this.get('avtorskiHonorarji') * faktor;
+                if (produkt) {
+                    vsota += produkt;
+                }
+                this.set('avtorskiHonorarjiI', produkt);
+            }
+
+            faktor = this.get('matF');
+            if (faktor) {
+                produkt = this.get('materialni') * faktor;
+                if (produkt) {
+                    vsota += produkt;
+                }
+                this.set('materialniI', produkt);
+            }
+
+            faktor = this.get('odkupAPF');
+            if (faktor) {
+                produkt = this.get('avtorskePravice') * faktor;
+                if (produkt) {
+                    vsota += produkt;
+                }
+                this.set('avtorskePraviceI', produkt);
+            }
+
+            faktor = this.get('odkupPF');
+            if (faktor) {
+                produkt = this.get('odkupPredstave') * faktor;
+                if (produkt) {
+                    vsota += produkt;
+                }
+                this.set('odkupPredstaveI', produkt);
+            }
+
+            faktor = this.get('transStrF');
+            if (faktor) {
+                produkt = this.get('transportniStroski') * faktor;
+                if (produkt) {
+                    vsota += produkt;
+                }
+                this.set('transportniStroskiI', produkt);
+            }
+
+            faktor = this.get('dnevPZF');
+            if (faktor) {
+                produkt = this.get('dnevnicePZ') * faktor;
+                if (produkt) {
+                    vsota += produkt;
+                }
+                this.set('dnevnicePZI', produkt);
+            }
+
+            faktor = this.get('dnevF');
+            if (faktor) {
+                produkt = this.get('dnevnice') * faktor;
+                if (produkt) {
+                    vsota += produkt;
+                }
+                this.set('dnevniceI', produkt);
+            }
+
+            this.set('vsota', vsota);
         }
     });
 
@@ -62,6 +160,17 @@ define([
     });
 
     var RaznoPostavka = EnotaProgramaPostavka.extend({
+        defaults: {
+            tanF: 0.0,
+            avtHonF: 0.0,
+            matF: 0.0,
+            odkupAPF: 0.0,
+            odkupPF: 0.0,
+            transStrF: 0.0, //mednarodno gostovanje
+            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevF: 0.0, //mednarodno gostovanje
+            nasDelezF: 0.7
+        },
         nestedCollections: {
             drugiViri: {collection: DrugiViriCollection, mappedBy: 'enotaPrograma'},
             koprodukcije: {collection: KoprodukcijeCollection, mappedBy: 'enotaPrograma'},
@@ -96,7 +205,18 @@ define([
 
 
     var GostujocaModel = EnotaProgramaPostavka.extend({
-        urlRoot: baseUrl + '/rest/programGostujoca'
+        urlRoot: baseUrl + '/rest/programGostujoca',
+        defaults: {
+            tanF: 0.0,
+            avtHonF: 0.0,
+            matF: 0.0,
+            odkupAPF: 0.0,
+            odkupPF: 0.5,
+            transStrF: 0.0, //mednarodno gostovanje
+            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevF: 0.0, //mednarodno gostovanje
+            nasDelezF: 0.0
+        }
     });
     var GostujocaCollection = Dokument.PostavkaCollection.extend({
         model: GostujocaModel,
@@ -106,7 +226,18 @@ define([
 
 
     var IzjemniModel = EnotaProgramaPostavka.extend({
-        urlRoot: baseUrl + '/rest/programIzjemni'
+        urlRoot: baseUrl + '/rest/programIzjemni',
+        defaults: {
+            tanF: 0.0,
+            avtHonF: 0.0,
+            matF: 0.0,
+            odkupAPF: 0.0,
+            odkupPF: 0.0,
+            transStrF: 0.0, //mednarodno gostovanje
+            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevF: 0.0, //mednarodno gostovanje
+            nasDelezF: 0.0
+        }
     });
     var IzjemniCollection = Dokument.PostavkaCollection.extend({
         model: IzjemniModel,
@@ -116,7 +247,18 @@ define([
 
 
     var PonovitevPremiereModel = EnotaProgramaPostavka.extend({
-        urlRoot: baseUrl + '/rest/programPonovitevPremiere'
+        urlRoot: baseUrl + '/rest/programPonovitevPremiere',
+        defaults: {
+            tanF: 0.7,
+            avtHonF: 0.7,
+            matF: 0.0,
+            odkupAPF: 0.0,
+            odkupPF: 0.0,
+            transStrF: 0.0, //mednarodno gostovanje
+            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevF: 0.0, //mednarodno gostovanje
+            nasDelezF: 0.0
+        }
     });
     var PonovitvePremierCollection = Dokument.PostavkaCollection.extend({
         model: PonovitevPremiereModel,
@@ -126,7 +268,18 @@ define([
 
 
     var PonovitevPrejsnjeModel = EnotaProgramaPostavka.extend({
-        urlRoot: baseUrl + '/rest/programPonovitevPrejsnjih'
+        urlRoot: baseUrl + '/rest/programPonovitevPrejsnjih',
+        defaults: {
+            tanF: 0.6,
+            avtHonF: 0.6,
+            matF: 0.0,
+            odkupAPF: 0.0,
+            odkupPF: 0.0,
+            transStrF: 0.0, //mednarodno gostovanje
+            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevF: 0.0, //mednarodno gostovanje
+            nasDelezF: 0.0
+        }
     });
     var PonovitvePrejsnjihCollection = Dokument.PostavkaCollection.extend({
         model: PonovitevPrejsnjeModel,
@@ -136,7 +289,18 @@ define([
 
 
     var PremieraModel = EnotaProgramaPostavka.extend({
-        urlRoot: baseUrl + '/rest/programPremiera'
+        urlRoot: baseUrl + '/rest/programPremiera',
+        defaults: {
+            tanF: 0.7,
+            avtHonF: 0.7,
+            matF: 0.7,
+            odkupAPF: 0.7,
+            odkupPF: 0.0,
+            transStrF: 0.0, //mednarodno gostovanje
+            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevF: 0.0, //mednarodno gostovanje
+            nasDelezF: 0.0
+        }
     });
     var PremiereCollection = Dokument.PostavkaCollection.extend({
         model: PremieraModel,
@@ -146,7 +310,18 @@ define([
 
 
     var GostovanjeModel = EnotaProgramaPostavka.extend({
-        urlRoot: baseUrl + '/rest/programGostovanje'
+        urlRoot: baseUrl + '/rest/programGostovanje',
+        defaults: {
+            tanF: 0.6,
+            avtHonF: 0.6,
+            matF: 0.0,
+            odkupAPF: 0.7,
+            odkupPF: 0.0,
+            transStrF: 1.0, //mednarodno gostovanje
+            dnevPZF: 1.0, //mednarodno gostovanje
+            dnevF: 0.0, //mednarodno gostovanje
+            nasDelezF: 0.0
+        }
     });
     var GostovanjeCollection = Dokument.PostavkaCollection.extend({
         model: GostovanjeModel,
@@ -156,7 +331,18 @@ define([
 
 
     var FestivalModel = EnotaProgramaPostavka.extend({
-        urlRoot: baseUrl + '/rest/programFestival'
+        urlRoot: baseUrl + '/rest/programFestival',
+        defaults: {
+            tanF: 0.0,
+            avtHonF: 0.0,
+            matF: 0.0,
+            odkupAPF: 0.0,
+            odkupPF: 0.0,
+            transStrF: 0.0, //mednarodno gostovanje
+            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevF: 0.0, //mednarodno gostovanje
+            nasDelezF: 0.7
+        }
     });
     var FestivaliCollection = Dokument.PostavkaCollection.extend({
         model: FestivalModel,
@@ -166,15 +352,24 @@ define([
 
 
     var RaznoModel = RaznoPostavka.extend({
-        urlRoot: baseUrl + '/rest/programRazno'
+        urlRoot: baseUrl + '/rest/programRazno',
+        defaults: {
+            tanF: 0.0,
+            avtHonF: 0.0,
+            matF: 0.0,
+            odkupAPF: 0.0,
+            odkupPF: 0.0,
+            transStrF: 0.0, //mednarodno gostovanje
+            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevF: 0.0, //mednarodno gostovanje
+            nasDelezF: 0.7
+        }
     });
     var RazniCollection = Dokument.PostavkaCollection.extend({
         model: RaznoModel,
         url: baseUrl + '/rest/programRazno',
         index: 'sort'
     });
-
-
 
     var ProgramDelaModel = Dokument.Model.extend({
         urlRoot: baseUrl + '/rest/programDela',

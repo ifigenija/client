@@ -98,7 +98,7 @@ define([
             }
         ]
     });
-
+    
     /**
      * Ko se forma nariše priklopimo dogodke za preračun in za nastavitve naziva in EM
      * 
@@ -108,11 +108,16 @@ define([
         EnotaProgramaView.prototype.onRenderForm.apply(this, arguments);
 
         if (this.model) {
-            this.listenTo(this.form, 'nasDelez:change', this.preveriDelez);
-            this.listenTo(this.form, 'tantieme:change', this.preveriDelez);
-            this.listenTo(this.form, 'avtorskePravice:change', this.preveriDelez);
-            this.listenTo(this.form, 'avtorskiHonorarji:change', this.preveriDelez);
-            this.listenTo(this.form, 'tantieme:change', this.preveriDelez);
+            
+            this.form.off('avtorskiHonorarji:change', this.preveriDelez, this);
+            this.form.off('tantieme:change', this.preveriDelez, this);
+            this.form.off('avtorskePravice:change', this.preveriDelez, this);
+            this.form.off('nasDelez:change', this.preveriDelez, this);
+            
+            this.form.on('avtorskiHonorarji:change', this.preveriDelez, this);
+            this.form.on('tantieme:change', this.preveriDelez, this);
+            this.form.on('avtorskePravice:change', this.preveriDelez, this);
+            this.form.on('nasDelez:change', this.preveriDelez, this);
         }
     };
     
@@ -129,19 +134,6 @@ define([
         } else {
             polja.nasDelez.clearError();
         }
-    };
-
-    /**
-     * overridana metoda iz enoteprograma
-     * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
-     */
-    PremieraView.prototype.getIzracunajView = function () {
-        var View = IzracunajView.extend({
-            tanF: 0.6,
-            avtHonF: 0.6
-        });
-
-        return View;
     };
 
     /**

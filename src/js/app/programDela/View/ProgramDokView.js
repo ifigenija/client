@@ -11,7 +11,9 @@ define([
     'formSchema!programDela',
     'app/Max/View/TabControl',
     'app/Zapisi/View/ZapisiLayout',
-    'marionette'
+    'marionette',
+    'app/Dokument/View/FormView',
+    'app/produkcija/Model/Sezona'
 ], function (
         Radio,
         i18next,
@@ -22,7 +24,9 @@ define([
         formSchema,
         TabControl,
         ZapisiLayout,
-        Marionette
+        Marionette,
+        FormView,
+        SezonaModel
         ) {
 
     var ch = Radio.channel('layout');
@@ -114,8 +118,30 @@ define([
         if (this.isNew()) {
             tabs = tabNovi;
         }
-
+        
         this.renderTabs(tabs);
+    };
+    
+    ProgramDokView.prototype.onRenderForm = function () {
+        var self = this;
+        
+        var prenosDatumov = function(form, editor){
+            var model = new SezonaModel.Model({id : editor.model.attributes.id});
+            
+            var prenesiDatum = function(){
+                
+                self.model.set('sezona', model.get('id'));
+                self.model.set('zacetek', model.get('zacetek'));
+                self.model.set('konec', model.get('konec'));
+                
+                self.renderForm();                
+            };
+            
+            model.fetch({success: prenesiDatum});
+        };
+        
+        this.form.off('sezona:change',prenosDatumov,this);
+        this.form.on('sezona:change',prenosDatumov,this);
     };
 
     /**
