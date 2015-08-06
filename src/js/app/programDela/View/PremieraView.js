@@ -177,7 +177,7 @@ define([
             if (!this.form.commit()) {
                 this.model.preracunaj();
                 var polja = this.form.fields;
-                
+
                 if (this.model.get('vsota') < polja.zaproseno.getValue()) {
                     polja.zaproseno.setError('Zaprošeno ne sme biti več kot ' + this.model.get('vsota'));
                 } else {
@@ -196,12 +196,11 @@ define([
         var tan = polja.tantieme.editor.getValue();
         var avtPra = polja.avtorskePravice.editor.getValue();
         var avtHon = polja.avtorskiHonorarji.editor.getValue();
-        var nasDel = polja.nasDelez.editor.getValue();
+        var mat = polja.materialni.editor.getValue();
 
-        if (tan + avtPra + avtHon > nasDel) {
-            polja.nasDelez.setError('Naš Delež mora biti večji ali enak vsoti avtorski honorarjev, avtorskih pravic an Tantiem');
-        } else {
-            polja.nasDelez.clearError();
+        if (!this.form.commit()) {
+            this.model.set('nasDelez', tan + avtPra + avtHon + mat);
+            //this.renderForm();
         }
     };
 
@@ -215,12 +214,12 @@ define([
 
         if (this.model) {
 
-            this.form.off('avtorskiHonorarji:change', this.preveriDelez, this);
+            this.form.off('avtorskiHonorarji:focus', this.preveriDelez, this);
             this.form.off('tantieme:change', this.preveriDelez, this);
             this.form.off('avtorskePravice:change', this.preveriDelez, this);
             this.form.off('nasDelez:change', this.preveriDelez, this);
 
-            this.form.on('avtorskiHonorarji:change', this.preveriDelez, this);
+            this.form.on('avtorskiHonorarji:focus', this.preveriDelez, this);
             this.form.on('tantieme:change', this.preveriDelez, this);
             this.form.on('avtorskePravice:change', this.preveriDelez, this);
             this.form.on('nasDelez:change', this.preveriDelez, this);

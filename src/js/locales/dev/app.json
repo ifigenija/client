@@ -799,6 +799,8 @@
         "celotnaVrednost": "Celotna vrednost",
         "celotnaVrednostMat": "Celotna vred. na matičnem odru",
         "celotnaVrednostGostovSZ": "Celotna vred. na gost. Slo in zam.",
+        "datumZacStudija": "$t(uprizoritev.datumZacStudija)",
+        "datumPremiere": "$t(uprizoritev.datumPremiere)",
         "nasDelez": "Naš delež",
         "zaprosenProcent": "Zaprošen procent",
         "zaproseno": "Zaprošeno",
