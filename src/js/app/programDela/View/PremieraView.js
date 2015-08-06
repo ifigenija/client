@@ -8,7 +8,7 @@ define([
     'template!../tpl/premiera-form.tpl',
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!programPremiera',
-    'app/programDela/View/IzracunajView',
+    'app/programDela/Model/TipProgramskeEnote',
     'template!../tpl/premiera-prenesi.tpl',
     'marionette',
     'underscore'
@@ -19,7 +19,7 @@ define([
         formTpl,
         ZapisiLayout,
         schema,
-        IzracunajView,
+        TipProEnoModel,
         prenesiTpl,
         Marionette,
         _
@@ -98,7 +98,113 @@ define([
             }
         ]
     });
-    
+
+    /**
+     * Metoda omogoče ali onemogoči gumb
+     * Kot parametre prejme ime gumba in ali naj gumb omogoči ali onemogoči
+     * @returns {undefined}
+     */
+    PremieraView.prototype.toggleGumb = function (gumb, jeOnemogocen) {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton(gumb);
+        if (but) {
+            but.set({
+                disabled: jeOnemogocen
+            });
+        }
+    };
+
+    /**
+     * Obesimo se na uprizoritev change event, ki ga proži forma
+     * omogočimo ali onemogočimo gumb prenesi
+     * @returns {undefined}
+     */
+    PremieraView.prototype.uprizoritevChange = function () {
+        var podatek = this.form.fields.uprizoritev.editor.getValue('uprizoritev');
+        if (podatek) {
+            this.toggleGumb('doc-postavka-prenesi', false);
+        }
+
+        var toggleEnabled = function (form, editor) {
+            var podatek = editor.getValue('uprizoritev');
+            if (!podatek) {
+                this.toggleGumb('doc-postavka-prenesi', true);
+            }
+            else {
+                this.toggleGumb('doc-postavka-prenesi', false);
+            }
+        };
+
+        this.form.off('uprizoritev:change', toggleEnabled, this);
+        this.form.on('uprizoritev:change', toggleEnabled, this);
+    };
+
+    /**
+     * funkcija poskrbi da se koprodukcije izrišejo samo če so koprodukcije označene
+     * @returns {undefined}
+     */
+    PremieraView.prototype.tipProEnoChange = function () {
+        var self = this;
+        var toggleKoprodukcija = function (form, editor) {
+            var model = new TipProEnoModel({id: editor.getValue('tipProgramskeEnote')});
+
+            var izrisKoprodukcije = function () {
+                if (model.get('koprodukcija')) {
+                    self.renderKoprodukcije();
+                } else {
+                    self.koprodukcijeR.empty();
+                }
+            };
+
+            model.fetch({success: izrisKoprodukcije});
+        };
+
+        if (this.model.get('tipProgramskeEnote')) {
+            toggleKoprodukcija(null, this.form.fields.tipProgramskeEnote.editor);
+        }
+
+        this.form.off('tipProgramskeEnote:change', toggleKoprodukcija, this);
+        this.form.on('tipProgramskeEnote:change', toggleKoprodukcija, this);
+    };
+
+    /**
+     * 
+     * @returns {undefined}
+     */
+    PremieraView.prototype.zaprosenoChange = function () {
+
+        var funkcija = function () {
+            if (!this.form.commit()) {
+                this.model.preracunaj();
+                var polja = this.form.fields;
+                
+                if (this.model.get('vsota') < polja.zaproseno.getValue()) {
+                    polja.zaproseno.setError('Zaprošeno ne sme biti več kot ' + this.model.get('vsota'));
+                } else {
+                    polja.zaproseno.clearError();
+                }
+            }
+        };
+
+        this.form.off('zaproseno:change', funkcija, this);
+        this.form.on('zaproseno:change', funkcija, this);
+    };
+
+    PremieraView.prototype.preveriDelez = function () {
+        var polja = this.form.fields;
+
+        var tan = polja.tantieme.editor.getValue();
+        var avtPra = polja.avtorskePravice.editor.getValue();
+        var avtHon = polja.avtorskiHonorarji.editor.getValue();
+        var nasDel = polja.nasDelez.editor.getValue();
+
+        if (tan + avtPra + avtHon > nasDel) {
+            polja.nasDelez.setError('Naš Delež mora biti večji ali enak vsoti avtorski honorarjev, avtorskih pravic an Tantiem');
+        } else {
+            polja.nasDelez.clearError();
+        }
+    };
+
     /**
      * Ko se forma nariše priklopimo dogodke za preračun in za nastavitve naziva in EM
      * 
@@ -108,31 +214,20 @@ define([
         EnotaProgramaView.prototype.onRenderForm.apply(this, arguments);
 
         if (this.model) {
-            
+
             this.form.off('avtorskiHonorarji:change', this.preveriDelez, this);
             this.form.off('tantieme:change', this.preveriDelez, this);
             this.form.off('avtorskePravice:change', this.preveriDelez, this);
             this.form.off('nasDelez:change', this.preveriDelez, this);
-            
+
             this.form.on('avtorskiHonorarji:change', this.preveriDelez, this);
             this.form.on('tantieme:change', this.preveriDelez, this);
             this.form.on('avtorskePravice:change', this.preveriDelez, this);
             this.form.on('nasDelez:change', this.preveriDelez, this);
-        }
-    };
-    
-    PremieraView.prototype.preveriDelez = function () {
-        var polja = this.form.fields;
-        
-        var tan = polja.tantieme.editor.getValue();
-        var avtPra = polja.avtorskePravice.editor.getValue();
-        var avtHon = polja.avtorskiHonorarji.editor.getValue();
-        var nasDel = polja.nasDelez.editor.getValue();
-        
-        if (tan + avtPra + avtHon > nasDel) {
-            polja.nasDelez.setError('Naš Delež mora biti večji ali enak vsoti avtorski honorarjev, avtorskih pravic an Tantiem');
-        } else {
-            polja.nasDelez.clearError();
+
+            this.uprizoritevChange();
+            this.tipProEnoChange();
+            this.zaprosenoChange();
         }
     };
 
@@ -144,7 +239,7 @@ define([
         var rpc = modal.options.content.model.get('rpc');
         var view = modal.options.content;
         var model = this.model;
-        
+
         if (view.$('.nasDelez').is(':checked')) {
             model.set('nasDelez', rpc.Do.nasDelez);
         }
@@ -153,6 +248,9 @@ define([
         }
         if (view.$('.tantieme').is(':checked')) {
             model.set('tantieme', rpc.Do.tantieme);
+        }
+        if (view.$('.materialni').is(':checked')) {
+            model.set('materialni', rpc.Do.materialni);
         }
         if (view.$('.avtorskePravice').is(':checked')) {
             model.set('tantieme', rpc.Do.tantieme);
@@ -176,9 +274,9 @@ define([
             model.set('datumZacStudija', rpc.datumZacStudija);
         }
         if (view.$('.datumPremiere').is(':checked')) {
-            model.set('stHonorarnihIgr', rpc.stHonorarnihIgr);
+            model.set('datumPremiere', rpc.datumPremiere);
         }
-        
+
         this.renderForm();
         this.triggerMethod('form:change', this.form);
     };

@@ -2,24 +2,23 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <!--<div class="col-sm-12 col-lg-6">
-                    <div class="input-group">
-                        <label>{{t "ep.lastnaSredstva"}}</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
                 <div class="col-sm-12 col-lg-6">
-                    <div class="input-group">
-                        <label>{{t "ep.celotnaVrednost"}}</label>
-                        <input type="text" class="form-control">
+                    <div class="form-group">
+                        <label>{{t "ep.lastnaSredstva"}}</label>
+                        <input type="text" class="form-control" value="{{u "formatNumber" lastnaSredstva}}" disabled="disabled">
                     </div>
-                </div>-->
-                <div class="col-sm-12 col-lg-6">{{t "ep.lastnaSredstva"}}: {{lastnaSredstva}}</div>
-                <div class="col-sm-12 col-lg-6">{{t "ep.celotnaVrednost"}}: {{celotnaVrednost}}</div>
-                <div class="col-sm-12 col-lg-6">{{t "ep.datumZacStudija"}}: {{datumZacStudija}}</div>
-                <div class="col-sm-12 col-lg-6">{{t "ep.datumPremiere"}}: {{datumPremiere}}</div>
+                    <div class="form-group">
+                        <label>{{t "ep.celotnaVrednost"}}</label>
+                        <input type="text" class="form-control" value="{{u "formatNumber" celotnaVrednost}}" disabled="disabled">
+                    </div>
+                    <div class="form-group">
+                        <label>{{t "ep.datumZacStudija"}}</label>
+                        <input type="text" class="form-control" value="{{u "date" datumZacStudija}}" disabled="disabled">
+                    </div>
+                    <div class="col-sm-12 col-lg-6">{{t "ep.datumPremiere"}}: {{u "date" datumPremiere}}</div>
+                </div>
                 <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,avtorskiHonorarji,tantieme"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="avtorskePravice,nasDelez,zaproseno">            </div>
+                <div class="col-sm-12 col-lg-6" data-fields="avtorskePravice,materialni,nasDelez,zaproseno">            </div>
             </div>
         </div>
         <div class="col-sm-6">

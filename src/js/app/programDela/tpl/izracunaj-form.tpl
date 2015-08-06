@@ -32,6 +32,14 @@
         <td class="col-numbers">{{u "formatNumber" tantiemeI}}</td>
     </tr>
     {{/if}}
+    {{#if matF}}
+    <tr>
+        <td>{{t "ep.materialni"}}</td>
+        <td class="col-numbers">{{u "formatNumber" materialni}}</td>
+        <td class="col-numbers">{{u "formatNumber" matF}}</td>
+        <td class="col-numbers">{{u "formatNumber" materialniI}}</td>
+    </tr>
+    {{/if}}
     {{#if odkupAPF}}
     <tr>
         <td>{{t "ep.avtorskePravice"}}</td>

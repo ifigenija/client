@@ -12,7 +12,6 @@ define([
     'i18next',
     'template!../tpl/enota-programa.tpl',
     'backbone-modal',
-    'marionette',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -23,7 +22,6 @@ define([
         i18next,
         enotaTpl,
         Modal,
-        Marionette,
         $
         ) {
 
@@ -90,26 +88,34 @@ define([
             this.prilogeR.empty();
         }, this);
 
-        var self = this;
-        this.listenTo(this, 'prenesi', function () {
+        //var self = this;
 
-            var zacetek = self.dokument.get('zacetek');
-            var konec = self.dokument.get('konec');
+        var uprizoritevRPC = function () {
+            var self = this;
 
-            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
-            rpc.call('podatkiUprizoritve', {
-                'uprizoritevId': self.model.get('uprizoritev')['id'],
-                'zacetek': zacetek,
-                'konec': konec
-            }, function (podatki) {
-                //success
+            var success = function (podatki) {
                 self.podatkiRPC = podatki;
                 self.prenesiPodatke();
-            }, function (error) {
-                //error
+            };
 
-            });
-        });
+            var error = function (error) {
+                //error
+            };
+
+            if (!this.form.commit()) {
+                var zacetek = self.dokument.get('zacetek');
+                var konec = self.dokument.get('konec');
+
+                var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
+                rpc.call('podatkiUprizoritve', {
+                    'uprizoritevId': self.model.get('uprizoritev')['id'],
+                    'zacetek': zacetek,
+                    'konec': konec
+                }, success, error);
+            }
+        };
+
+        this.on('prenesi', uprizoritevRPC, this);
     };
     /**
      * Vsi gumbi, ki so navoljo toolbaru za izrisS
@@ -130,53 +136,19 @@ define([
     };
 
     /**
-     * Metoda omogoče ali onemogoči gumb
-     * Kot parametre prejme ime gumba in ali naj gumb omogoči ali onemogoči
-     * @returns {undefined}
-     */
-    EnotaProgramaView.prototype.toggleGumb = function (gumb, jeOnemogocen) {
-        var tb = this.getToolbarModel();
-        var but = tb.getButton(gumb);
-        if (but) {
-            but.set({
-                disabled: jeOnemogocen
-            });
-        }
-    };
-
-    /**
      * ob izrisu forme se izvede še izris postavk
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.onRenderForm = function () {
-        var podatek = this.form.fields.uprizoritev.editor.getValue();
-        if (podatek) {
-            this.toggleGumb('doc-postavka-prenesi', false);
-        }
-
-        var toggleEnabled = function () {
-            var podatek = this.form.fields.uprizoritev.editor.getValue();
-            if (!podatek) {
-                this.toggleGumb('doc-postavka-prenesi', true);
-            }
-            else {
-                this.toggleGumb('doc-postavka-prenesi', false);
-            }
-        };
-        
-        this.form.off('uprizoritev:change', toggleEnabled, this);
-        this.form.on('uprizoritev:change', toggleEnabled, this);
-
         if (!this.model.isNew()) {
             this.renderPriloge();
             this.renderPES();
             this.renderDrugiViri();
-            this.renderKoprodukcije();
         }
     };
 
     /**
-     * Izris programskeenotesklopa - privzeto se ne izriše nič. 
+     * Izris programskeEnoteSklopa - privzeto se ne izriše nič. 
      * Overrirde funkcionalnosti v izvedenih objektih
      * 
      * @returns {undefined}
@@ -194,6 +166,22 @@ define([
 
     };
 
+    EnotaProgramaView.prototype.ponovenIzris = function (view) {
+        var izris = function () {
+            var self = this;
+            if (!this.form.commit()) {
+                this.model.fetch({
+                    success: function () {
+                        self.renderForm();
+                    }
+                });
+            }
+        };
+
+        view.on('save:success', izris, this);
+        view.on('destroy:success', izris, this);
+    };
+
     /**
      * izris postavke drugi viri
      * @returns {undefined}
@@ -203,6 +191,8 @@ define([
             collection: this.model.drugiViriCollection,
             dokument: this.model
         });
+
+        this.ponovenIzris(view);
 
         this.drugiViriR.show(view);
     };
@@ -215,6 +205,8 @@ define([
             collection: this.model.koprodukcijeCollection,
             dokument: this.model
         });
+
+        this.ponovenIzris(view);
 
         this.koprodukcijeR.show(view);
     };
@@ -251,7 +243,7 @@ define([
             var modal = new Modal({
                 content: view,
                 animate: true,
-                okText: i18next.t("std.izberi"),
+                okText: i18next.t("std.prenesi"),
                 cancelText: i18next.t("std.preklici"),
                 title: i18next.t('prenesi.title')
             });
@@ -267,13 +259,15 @@ define([
      */
     EnotaProgramaView.prototype.onIzracunaj = function () {
         var self = this;
-        var view = new IzracunajView({
-            tagName: 'table',
-            className: 'table table-striped table-condensed',
-            model: this.model
-        });
 
         if (!this.form.commit()) {
+
+            var view = new IzracunajView({
+                tagName: 'table',
+                className: 'table table-striped table-condensed',
+                model: this.model
+            });
+
             var modal = new Modal({
                 content: view,
                 animate: true,

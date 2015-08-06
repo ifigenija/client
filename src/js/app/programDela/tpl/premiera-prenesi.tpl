@@ -33,6 +33,14 @@
     </tr>
     <tr>
         <td>
+            <input class="materialni" type="checkbox">
+        </td>
+        <td>{{t "ep.materialni"}}</td>
+        <td class="col-numbers">{{u "formatNumber" materialni}}</td>
+        <td class="col-numbers">{{u "formatNumber" rpc.Do.materialni}}</td>
+    </tr>
+    <tr>
+        <td>
             <input class="avtorskePravice" type="checkbox">
         </td>
         <td>{{t "ep.avtorskePravice"}}</td>

@@ -7,6 +7,7 @@ define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/koprodukcija-form.tpl',
     'formSchema!produkcijaDelitev',
+    'underscore',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -15,6 +16,7 @@ define([
         PostavkeView,
         formTpl,
         schema,
+        _,
         $
         ) {
 
@@ -68,19 +70,18 @@ define([
         var self = this;
 
         var success = function () {
-
+            PostavkeView.prototype.onShrani.apply(self, arguments);
         };
 
         var error = function () {
-
+            console.log('error');
         };
-
+        
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
         rpc.call('novaMaticnaKoprodukcija', {
-            'enotaProgramaId': self.model.id
+            'enotaProgramaId': self.model.get('enotaPrograma')
         }, success
                 , error);
-        PostavkeView.prototype.onShrani.apply(this.argument);
     };
 
     return KoprodukcijaView;
