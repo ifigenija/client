@@ -236,14 +236,10 @@ define([
                 celotnaVrednost: model.get('celotnaVrednost')
             };
 
-            var template = Handlebars.compile('{{u "formatNumber" nasDelez}}');
-            this.$('.nasDelez').html(template(podatki));
-
-            template = Handlebars.compile('{{u "formatNumber" lastnaSredstva}}');
-            this.$('.lastnaSredstva').html(template(podatki));
-
-            template = Handlebars.compile('{{u "formatNumber" celotnaVrednost}}');
-            this.$('.celotnaVrednost').html(template(podatki));
+            var u = Handlebars.helpers.u;
+            this.$('.nasDelez').html(u('formatNumber',model.get('nasDelez'),2,[]));
+            this.$('.lastnaSredstva').html(u('formatNumber',model.get('lastnaSredstva'),2,[]));
+            this.$('.celotnaVrednost').html(u('formatNumber',model.get('lastnaSredstva'),2,[]));
         }
     };
 
