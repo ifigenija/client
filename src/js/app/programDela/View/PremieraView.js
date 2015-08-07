@@ -232,7 +232,8 @@ define([
                 'avtorskePravice',
                 'nasDelez',
                 'materialni',
-                'drugiJavni'
+                'drugiJavni',
+                'zaproseno'
             ];
 
             vnosnaPolja.forEach(function (i) {
