@@ -53,10 +53,10 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                cell: 'boolean',
                 editable: false,
-                label: i18next.t('programRazno.soorganizator'),
-                name: 'soorganizator.label',
+                label: i18next.t('ep.imaKoprodukcije'),
+                name: 'imaKoprodukcije',
                 sortable: true
             },
             {

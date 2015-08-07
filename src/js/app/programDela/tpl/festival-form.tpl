@@ -27,14 +27,13 @@
                 <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#koprodukcija">
                     {{t "festival.koprodukcija"}}
                 </h4>
-
             </div>
         </div>
         <div id="koprodukcija" class="panel-collapse collapse" role="tabpanel">
             <div class="panel-body">
                 <form>
                     <div class="row">
-                        <div class="col-sm-6" data-fields="umetVodja,programskoTelo,soorganizatorji"></div>
+                        <div class="col-sm-6" data-fields="umetVodja,programskoTelo,imaKoprodukcije"></div>
                         <div class="col-sm-6" data-fields="stTujihSelektorjev,stZaposlenih,stHonorarnih"></div>
                     </div>
             </div>

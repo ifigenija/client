@@ -12,7 +12,6 @@ define([
     'app/Max/View/TabControl',
     'app/Zapisi/View/ZapisiLayout',
     'marionette',
-    'app/Dokument/View/FormView',
     'app/produkcija/Model/Sezona'
 ], function (
         Radio,
@@ -25,7 +24,6 @@ define([
         TabControl,
         ZapisiLayout,
         Marionette,
-        FormView,
         SezonaModel
         ) {
 

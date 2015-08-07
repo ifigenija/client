@@ -11,9 +11,7 @@ define([
     'app/programDela/View/IzracunajView',
     'i18next',
     'template!../tpl/enota-programa.tpl',
-    'backbone-modal',
-    'jquery',
-    'jquery.jsonrpc'
+    'backbone-modal'
 ], function (
         PostavkeView,
         DrugiVirView,
@@ -21,8 +19,7 @@ define([
         IzracunajView,
         i18next,
         enotaTpl,
-        Modal,
-        $
+        Modal
         ) {
 
     var EnotaProgramaView = PostavkeView.extend({
@@ -73,7 +70,11 @@ define([
             prilogeR: '.region-priloge'
         }
     });
-
+    
+    EnotaProgramaView.prototype.pridobiPodatke = function () {
+    
+    };
+    
     /**
      * 
      * Obesim se na event prekliči, da spraznim enoto programa in 
@@ -88,34 +89,7 @@ define([
             this.prilogeR.empty();
         }, this);
 
-        //var self = this;
-
-        var uprizoritevRPC = function () {
-            var self = this;
-
-            var success = function (podatki) {
-                self.podatkiRPC = podatki;
-                self.prenesiPodatke();
-            };
-
-            var error = function (error) {
-                //error
-            };
-
-            if (!this.form.commit()) {
-                var zacetek = self.dokument.get('zacetek');
-                var konec = self.dokument.get('konec');
-
-                var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
-                rpc.call('podatkiUprizoritve', {
-                    'uprizoritevId': self.model.get('uprizoritev')['id'],
-                    'zacetek': zacetek,
-                    'konec': konec
-                }, success, error);
-            }
-        };
-
-        this.on('prenesi', uprizoritevRPC, this);
+        this.on('prenesi', this.pridobiPodatke, this);
     };
     /**
      * Vsi gumbi, ki so navoljo toolbaru za izrisS
@@ -225,7 +199,7 @@ define([
      * Trenutno pričakujemo logiko kere vrednosti se prenesejo v formo
      * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
      */
-    EnotaProgramaView.prototype.prenesi = function (modal) {
+    EnotaProgramaView.prototype.obPrenesu = function (modal) {
     };
     /**
      * Ob kliku na prenesi se bo prikazal modal za prepis podatkov
@@ -249,9 +223,15 @@ define([
             });
 
             modal.open(function () {
-                self.prenesi(this);
+                self.obPrenesu(this);
             });
         }
+    };
+
+    EnotaProgramaView.prototype.prepisi = function (modal) {
+        this.model.set('zaproseno', modal.options.content.model.get('vsota'));
+        this.renderForm();
+        this.triggerMethod('form:change', this.form);
     };
     /**
      * ob kliku izracunaj 
@@ -277,15 +257,9 @@ define([
             });
 
             modal.open(function () {
-                prepisi(this);
+                self.prepisi(this);
             });
         }
-
-        var prepisi = function (modal) {
-            self.model.set('zaproseno', modal.options.content.model.get('vsota'));
-            self.renderForm();
-            self.triggerMethod('form:change', self.form);
-        };
     };
 
     return EnotaProgramaView;

@@ -10,8 +10,8 @@
             </div>
             <div class="col-sm-6">
                 <div class="row">
-                    <div class="col-sm-12 col-lg-6" data-fields="obiskInt,ponoviDoma"></div>
-                    <div class="col-sm-12 col-lg-6" data-fields="ponoviZamejo,ponoviGost"></div>
+                    <div class="col-sm-12 col-lg-6" data-fields="ponoviDoma,ponoviZamejo"></div>
+                    <div class="col-sm-12 col-lg-6" data-fields="ponoviGost"></div>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="row">
-                    <div class="col-sm-12 col-lg-6" data-fields="zaproseno,nasDelez"></div>
+                    <div class="col-sm-12 col-lg-6" data-fields="zaproseno"></div>
                     <div class="col-sm-12 col-lg-6" data-fields="drugiJavni"></div>
                 </div>
             </div>

@@ -12,7 +12,9 @@ define([
     'template!../tpl/premiera-prenesi.tpl',
     'marionette',
     'underscore',
-    'app/bars'
+    'app/bars',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         Backgrid,
         i18next,
@@ -24,7 +26,8 @@ define([
         prenesiTpl,
         Marionette,
         _,
-        Handlebars
+        Handlebars,
+        $
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -101,6 +104,31 @@ define([
         ]
     });
 
+    PremieraView.prototype.pridobiPodatke = function () {
+        var self = this;
+
+        var success = function (podatki) {
+            self.podatkiRPC = podatki;
+            self.prenesiPodatke();
+        };
+
+        var error = function (error) {
+            //error
+        };
+
+        if (!this.form.commit()) {
+            var zacetek = self.dokument.get('zacetek');
+            var konec = self.dokument.get('konec');
+
+            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
+            rpc.call('podatkiUprizoritve', {
+                'uprizoritevId': self.model.get('uprizoritev')['id'],
+                'zacetek': zacetek,
+                'konec': konec
+            }, success, error);
+        }
+    };
+
     /**
      * Metoda omogoče ali onemogoči gumb
      * Kot parametre prejme ime gumba in ali naj gumb omogoči ali onemogoči
@@ -170,7 +198,7 @@ define([
     };
 
     /**
-     * 
+     * poskrbimo da se ob spremembi vrednosti pojavi napaka, če je ta potrebna
      * @returns {undefined}
      */
     PremieraView.prototype.zaprosenoChange = function () {
@@ -192,12 +220,16 @@ define([
         this.form.on('zaproseno:change', funkcija, this);
     };
 
-    PremieraView.prototype.preveriPodatke = function (form, editor) {
+    /**
+     * prikažemo in preračunamo vse prikazne vrednosti
+     * @returns {undefined}
+     */
+    PremieraView.prototype.prikaziPodatke = function () {
         if (!this.form.commit()) {
             var model = this.model;
 
             model.preracunajInfo();
-            
+
             var podatki = {
                 nasDelez: model.get('nasDelez'),
                 lastnaSredstva: model.get('lastnaSredstva'),
@@ -206,10 +238,10 @@ define([
 
             var template = Handlebars.compile('{{u "formatNumber" nasDelez}}');
             this.$('.nasDelez').html(template(podatki));
-            
+
             template = Handlebars.compile('{{u "formatNumber" lastnaSredstva}}');
             this.$('.lastnaSredstva').html(template(podatki));
-            
+
             template = Handlebars.compile('{{u "formatNumber" celotnaVrednost}}');
             this.$('.celotnaVrednost').html(template(podatki));
         }
@@ -237,11 +269,11 @@ define([
             ];
 
             vnosnaPolja.forEach(function (i) {
-                self.form.off(i + ':change', self.preveriPodatke, self);
+                self.form.off(i + ':change', self.prikaziPodatke, self);
             });
 
             vnosnaPolja.forEach(function (i) {
-                self.form.on(i + ':change', self.preveriPodatke, self);
+                self.form.on(i + ':change', self.prikaziPodatke, self);
             });
 
             this.uprizoritevChange();
@@ -254,7 +286,7 @@ define([
      * metoda je overridana iz enotePrograma
      * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
      */
-    PremieraView.prototype.prenesi = function (modal) {
+    PremieraView.prototype.obPrenesu = function (modal) {
         var rpc = modal.options.content.model.get('rpc');
         var view = modal.options.content;
         var model = this.model;
@@ -299,6 +331,11 @@ define([
         this.renderForm();
         this.triggerMethod('form:change', this.form);
     };
+    
+    
+    PremieraView.prototype.oznaciCheckboxe = function(){
+        //pri vrednostih, ki se razlikujejo, označi checkbox
+    };
 
     /**
      * overridana metoda iz enoteprograma
@@ -312,7 +349,8 @@ define([
             template: prenesiTpl,
             serializeData: function () {
                 return _.extend(this.model.attributes, {rpc: self.podatkiRPC});
-            }
+            },
+            initialize: self.oznaciCheckboxe
         });
 
         return View;
