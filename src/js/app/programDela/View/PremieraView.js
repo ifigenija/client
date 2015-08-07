@@ -11,7 +11,8 @@ define([
     'app/programDela/Model/TipProgramskeEnote',
     'template!../tpl/premiera-prenesi.tpl',
     'marionette',
-    'underscore'
+    'underscore',
+    'app/bars'
 ], function (
         Backgrid,
         i18next,
@@ -22,7 +23,8 @@ define([
         TipProEnoModel,
         prenesiTpl,
         Marionette,
-        _
+        _,
+        Handlebars
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -175,7 +177,7 @@ define([
 
         var funkcija = function () {
             if (!this.form.commit()) {
-                this.model.preracunaj();
+                this.model.preracunajZaproseno();
                 var polja = this.form.fields;
 
                 if (this.model.get('vsota') < polja.zaproseno.getValue()) {
@@ -190,17 +192,26 @@ define([
         this.form.on('zaproseno:change', funkcija, this);
     };
 
-    PremieraView.prototype.preveriDelez = function () {
-        var polja = this.form.fields;
-
-        var tan = polja.tantieme.editor.getValue();
-        var avtPra = polja.avtorskePravice.editor.getValue();
-        var avtHon = polja.avtorskiHonorarji.editor.getValue();
-        var mat = polja.materialni.editor.getValue();
-
+    PremieraView.prototype.preveriPodatke = function (form, editor) {
         if (!this.form.commit()) {
-            this.model.set('nasDelez', tan + avtPra + avtHon + mat);
-            //this.renderForm();
+            var model = this.model;
+
+            model.preracunajInfo();
+            
+            var podatki = {
+                nasDelez: model.get('nasDelez'),
+                lastnaSredstva: model.get('lastnaSredstva'),
+                celotnaVrednost: model.get('celotnaVrednost')
+            };
+
+            var template = Handlebars.compile('{{u "formatNumber" nasDelez}}');
+            this.$('.nasDelez').html(template(podatki));
+            
+            template = Handlebars.compile('{{u "formatNumber" lastnaSredstva}}');
+            this.$('.lastnaSredstva').html(template(podatki));
+            
+            template = Handlebars.compile('{{u "formatNumber" celotnaVrednost}}');
+            this.$('.celotnaVrednost').html(template(podatki));
         }
     };
 
@@ -214,15 +225,23 @@ define([
 
         if (this.model) {
 
-            this.form.off('avtorskiHonorarji:focus', this.preveriDelez, this);
-            this.form.off('tantieme:change', this.preveriDelez, this);
-            this.form.off('avtorskePravice:change', this.preveriDelez, this);
-            this.form.off('nasDelez:change', this.preveriDelez, this);
+            var self = this;
+            var vnosnaPolja = [
+                'avtorskiHonorarji',
+                'tantieme',
+                'avtorskePravice',
+                'nasDelez',
+                'materialni',
+                'drugiJavni'
+            ];
 
-            this.form.on('avtorskiHonorarji:focus', this.preveriDelez, this);
-            this.form.on('tantieme:change', this.preveriDelez, this);
-            this.form.on('avtorskePravice:change', this.preveriDelez, this);
-            this.form.on('nasDelez:change', this.preveriDelez, this);
+            vnosnaPolja.forEach(function (i) {
+                self.form.off(i + ':change', self.preveriPodatke, self);
+            });
+
+            vnosnaPolja.forEach(function (i) {
+                self.form.on(i + ':change', self.preveriPodatke, self);
+            });
 
             this.uprizoritevChange();
             this.tipProEnoChange();

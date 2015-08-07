@@ -62,7 +62,44 @@ define([
             postavka.dokument = this;
             return postavka;
         },
-        preracunaj: function () {
+        preracunajInfo: function () {
+
+            var tan = this.get('tantieme');
+            var avtPra = this.get('avtorskePravice');
+            var avtHon = this.get('avtorskiHonorarji');
+            var mat = this.get('materialni');
+            var javni = this.get('drugiJavni');
+            var zap = this.get('zaproseno');
+
+            this.set('nasDelez', tan + avtPra + avtHon + mat);
+
+            var viri = this.drugiViriCollection;
+            var kopro = this.koprodukcijeCollection;
+
+            var viriVsota = 0;
+            viri.each(function (vir) {
+                viriVsota += vir.attributes.znesek;
+            });
+
+            var koproVsota = 0;
+            var stevec = 0;
+            kopro.each(function (produkcija) {
+                if (stevec !== 0) {
+                    koproVsota += produkcija.attributes.delez;
+                }
+                stevec++;
+            });
+            
+            var nasD = this.get('nasDelez');
+            
+            var lastSred = nasD - (javni + zap + viriVsota);
+            var celVred = nasD + koproVsota;
+            
+            this.set('lastnaSredstva', lastSred);
+            this.set('celotnaVrednost', celVred);
+
+        },
+        preracunajZaproseno: function () {
 
             var vsota = 0;
             var produkt = 0;

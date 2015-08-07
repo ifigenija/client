@@ -14,7 +14,7 @@ define([
     var IzracunajView = Marionette.ItemView.extend({
         template: izracunajTpl,
         initialize: function () {
-            this.model.preracunaj();
+            this.model.preracunajZaproseno();
         }
     });
   

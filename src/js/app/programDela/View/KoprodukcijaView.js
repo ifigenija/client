@@ -6,18 +6,13 @@ define([
     'i18next',
     'app/Dokument/View/PostavkeView',
     'template!../tpl/koprodukcija-form.tpl',
-    'formSchema!produkcijaDelitev',
-    'underscore',
-    'jquery',
-    'jquery.jsonrpc'
+    'formSchema!produkcijaDelitev'
 ], function (
         Backgrid,
         i18next,
         PostavkeView,
         formTpl,
-        schema,
-        _,
-        $
+        schema
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -65,24 +60,6 @@ define([
             }
         ]
     });
-
-    KoprodukcijaView.prototype.onShrani = function () {
-        var self = this;
-
-        var success = function () {
-            PostavkeView.prototype.onShrani.apply(self, arguments);
-        };
-
-        var error = function () {
-            console.log('error');
-        };
-        
-        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
-        rpc.call('novaMaticnaKoprodukcija', {
-            'enotaProgramaId': self.model.get('enotaPrograma')
-        }, success
-                , error);
-    };
 
     return KoprodukcijaView;
 });
