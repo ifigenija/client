@@ -80,7 +80,7 @@ define([
         var self = this;
 
         var success = function (podatki) {
-            self.podatkiRPC = podatki;
+            self.podatkiUprizoritve = podatki;
             self.prenesiPodatke();
         };
 

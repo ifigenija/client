@@ -121,45 +121,45 @@ define([
      * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
      */
     PremieraView.prototype.obPrenesu = function (modal) {
-        var rpc = modal.options.content.model.get('rpc');
+        var uprizoritev = this.podatkiUprizoritve;
         var view = modal.options.content;
         var model = this.model;
 
         if (view.$('.nasDelez').is(':checked')) {
-            model.set('nasDelez', rpc.Do.nasDelez);
+            model.set('nasDelez', uprizoritev.Do.nasDelez);
         }
         if (view.$('.avtorskiHonorarji').is(':checked')) {
-            model.set('avtorskiHonorarji', rpc.Do.avtorskiHonorarji);
+            model.set('avtorskiHonorarji', uprizoritev.Do.avtorskiHonorarji);
         }
         if (view.$('.tantieme').is(':checked')) {
-            model.set('tantieme', rpc.Do.tantieme);
+            model.set('tantieme', uprizoritev.Do.tantieme);
         }
         if (view.$('.materialni').is(':checked')) {
-            model.set('materialni', rpc.Do.materialni);
+            model.set('materialni', uprizoritev.Do.materialni);
         }
         if (view.$('.avtorskePravice').is(':checked')) {
-            model.set('tantieme', rpc.Do.tantieme);
+            model.set('avtorskePravice', uprizoritev.Do.avtorskePravice);
         }
         if (view.$('.stHonorarnih').is(':checked')) {
-            model.set('stHonorarnih', rpc.stHonorarnih);
+            model.set('stHonorarnih', uprizoritev.stHonorarnih);
         }
         if (view.$('.stHonorarnihIgr').is(':checked')) {
-            model.set('stHonorarnihIgr', rpc.stHonorarnihIgr);
+            model.set('stHonorarnihIgr', uprizoritev.stHonorarnihIgr);
         }
         if (view.$('.stHonorarnihIgrTujJZ').is(':checked')) {
-            model.set('stHonorarnihIgrTujJZ', rpc.stHonorarnihIgrTujJZ);
+            model.set('stHonorarnihIgrTujJZ', uprizoritev.stHonorarnihIgrTujJZ);
         }
         if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
-            model.set('stHonorarnihIgrSamoz', rpc.stHonorarnihIgrSamoz);
+            model.set('stHonorarnihIgrSamoz', uprizoritev.stHonorarnihIgrSamoz);
         }
         if (view.$('.stZaposUmet').is(':checked')) {
-            model.set('stZaposUmet', rpc.stZaposUmet);
+            model.set('stZaposUmet', uprizoritev.stZaposUmet);
         }
         if (view.$('.datumZacStudija').is(':checked')) {
-            model.set('datumZacStudija', rpc.datumZacStudija);
+            model.set('datumZacStudija', uprizoritev.datumZacStudija);
         }
         if (view.$('.datumPremiere').is(':checked')) {
-            model.set('datumPremiere', rpc.datumPremiere);
+            model.set('datumPremiere', uprizoritev.datumPremiere);
         }
 
         this.renderForm();
@@ -183,7 +183,7 @@ define([
             template: prenesiTpl,
             serializeData: function () {
                 return _.extend(this.model.toJSON(), {
-                    rpc: self.podatkiRPC
+                    uprizoritevData: self.podatkiUprizoritve
                 });
             },
             initialize: self.oznaciCheckboxe
