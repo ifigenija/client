@@ -11,7 +11,10 @@ define([
     'app/programDela/View/IzracunajView',
     'i18next',
     'template!../tpl/enota-programa.tpl',
-    'backbone-modal'
+    'app/programDela/Model/TipProgramskeEnote',
+    'backbone-modal',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         PostavkeView,
         DrugiVirView,
@@ -19,7 +22,9 @@ define([
         IzracunajView,
         i18next,
         enotaTpl,
-        Modal
+        TipProEnoModel,
+        Modal,
+        $
         ) {
 
     var EnotaProgramaView = PostavkeView.extend({
@@ -70,11 +75,35 @@ define([
             prilogeR: '.region-priloge'
         }
     });
-    
+
     EnotaProgramaView.prototype.pridobiPodatke = function () {
-    
+        var self = this;
+
+        var success = function (podatki) {
+            self.podatkiRPC = podatki;
+            self.prenesiPodatke();
+        };
+
+        var error = function (error) {
+            //error
+        };
+
+        if (!this.form.commit()) {
+            var uprizoritev = self.model.get('uprizoritev');
+            if (uprizoritev) {
+                var zacetek = self.dokument.get('zacetek');
+                var konec = self.dokument.get('konec');
+
+                var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
+                rpc.call('podatkiUprizoritve', {
+                    'uprizoritevId': uprizoritev.id,
+                    'zacetek': zacetek,
+                    'konec': konec
+                }, success, error);
+            }
+        }
     };
-    
+
     /**
      * 
      * Obesim se na event prekliči, da spraznim enoto programa in 
@@ -259,6 +288,129 @@ define([
             modal.open(function () {
                 self.prepisi(this);
             });
+        }
+    };
+
+    /**
+     * Metoda omogoče ali onemogoči gumb
+     * Kot parametre prejme ime gumba in ali naj gumb omogoči ali onemogoči
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.toggleGumb = function (gumb, jeOnemogocen) {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton(gumb);
+        if (but) {
+            but.set({
+                disabled: jeOnemogocen
+            });
+        }
+    };
+
+    /**
+     * Obesimo se na uprizoritev change event, ki ga proži forma
+     * omogočimo ali onemogočimo gumb prenesi
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.uprizoritevChange = function () {
+        var podatek = this.form.fields.uprizoritev.editor.getValue('uprizoritev');
+        if (podatek) {
+            this.toggleGumb('doc-postavka-prenesi', false);
+        }
+
+        var toggleEnabled = function (form, editor) {
+            var podatek = editor.getValue('uprizoritev');
+            if (!podatek) {
+                this.toggleGumb('doc-postavka-prenesi', true);
+            }
+            else {
+                this.toggleGumb('doc-postavka-prenesi', false);
+            }
+        };
+
+        this.form.off('uprizoritev:change', toggleEnabled, this);
+        this.form.on('uprizoritev:change', toggleEnabled, this);
+    };
+
+    /**
+     * poskrbimo da se ob spremembi vrednosti pojavi napaka, če je ta potrebna
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.zaprosenoChange = function () {
+
+        var funkcija = function () {
+            if (!this.form.commit()) {
+                this.model.preracunajZaproseno();
+                var polja = this.form.fields;
+
+                if (this.model.get('vsota') < polja.zaproseno.getValue()) {
+                    polja.zaproseno.setError('Zaprošeno ne sme biti več kot ' + this.model.get('vsota'));
+                } else {
+                    polja.zaproseno.clearError();
+                }
+            }
+        };
+
+        this.form.off('zaproseno:change', funkcija, this);
+        this.form.on('zaproseno:change', funkcija, this);
+    };
+    
+     /**
+     * funkcija poskrbi da se koprodukcije izrišejo samo če so koprodukcije označene
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.tipProEnoChange = function () {
+        var self = this;
+        var toggleKoprodukcija = function (form, editor) {
+            var model = new TipProEnoModel({id: editor.getValue('tipProgramskeEnote')});
+
+            var izrisKoprodukcije = function () {
+                if (model.get('koprodukcija')) {
+                    self.renderKoprodukcije();
+                } else {
+                    self.koprodukcijeR.empty();
+                }
+            };
+
+            model.fetch({success: izrisKoprodukcije});
+        };
+
+        if (this.model.get('tipProgramskeEnote')) {
+            toggleKoprodukcija(null, this.form.fields.tipProgramskeEnote.editor);
+        }
+
+        this.form.off('tipProgramskeEnote:change', toggleKoprodukcija, this);
+        this.form.on('tipProgramskeEnote:change', toggleKoprodukcija, this);
+    };
+
+    /**
+     * ob kliku izracunaj 
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.dodatniFormEventi = function () {
+        if (this.model) {
+
+            var self = this;
+            var vnosnaPolja = [
+                'avtorskiHonorarji',
+                'tantieme',
+                'avtorskePravice',
+                'nasDelez',
+                'materialni',
+                'drugiJavni',
+                'zaproseno'
+            ];
+
+            vnosnaPolja.forEach(function (i) {
+                self.form.off(i + ':change', self.prikaziPodatke, self);
+            });
+
+            vnosnaPolja.forEach(function (i) {
+                self.form.on(i + ':change', self.prikaziPodatke, self);
+            });
+
+            this.uprizoritevChange();
+            this.zaprosenoChange();
+            this.tipProEnoChange();
         }
     };
 
