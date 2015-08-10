@@ -8,9 +8,6 @@ define([
     'template!../tpl/premiera-form.tpl',
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!programPremiera',
-    'template!../tpl/premiera-prenesi.tpl',
-    'marionette',
-    'underscore',
     'app/bars'
 ], function (
         Backgrid,
@@ -19,9 +16,6 @@ define([
         formTpl,
         ZapisiLayout,
         schema,
-        prenesiTpl,
-        Marionette,
-        _,
         Handlebars
         ) {
 
@@ -107,89 +101,14 @@ define([
         if (!this.form.commit()) {
             var model = this.model;
 
-            model.preracunajInfo();
+            model.preracunajInfo();            
+            this.zaprosenoChange();
 
             var f = Handlebars.formatNumber;
             this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
             this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
             this.$('.celotnaVrednost').html(f(model.get('lastnaSredstva'), 2));
         }
-    };
-
-    /**
-     * metoda je overridana iz enotePrograma
-     * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
-     */
-    PremieraView.prototype.obPrenesu = function (modal) {
-        var uprizoritev = this.podatkiUprizoritve;
-        var view = modal.options.content;
-        var model = this.model;
-
-        if (view.$('.nasDelez').is(':checked')) {
-            model.set('nasDelez', uprizoritev.Do.nasDelez);
-        }
-        if (view.$('.avtorskiHonorarji').is(':checked')) {
-            model.set('avtorskiHonorarji', uprizoritev.Do.avtorskiHonorarji);
-        }
-        if (view.$('.tantieme').is(':checked')) {
-            model.set('tantieme', uprizoritev.Do.tantieme);
-        }
-        if (view.$('.materialni').is(':checked')) {
-            model.set('materialni', uprizoritev.Do.materialni);
-        }
-        if (view.$('.avtorskePravice').is(':checked')) {
-            model.set('avtorskePravice', uprizoritev.Do.avtorskePravice);
-        }
-        if (view.$('.stHonorarnih').is(':checked')) {
-            model.set('stHonorarnih', uprizoritev.stHonorarnih);
-        }
-        if (view.$('.stHonorarnihIgr').is(':checked')) {
-            model.set('stHonorarnihIgr', uprizoritev.stHonorarnihIgr);
-        }
-        if (view.$('.stHonorarnihIgrTujJZ').is(':checked')) {
-            model.set('stHonorarnihIgrTujJZ', uprizoritev.stHonorarnihIgrTujJZ);
-        }
-        if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
-            model.set('stHonorarnihIgrSamoz', uprizoritev.stHonorarnihIgrSamoz);
-        }
-        if (view.$('.stZaposUmet').is(':checked')) {
-            model.set('stZaposUmet', uprizoritev.stZaposUmet);
-        }
-        if (view.$('.datumZacStudija').is(':checked')) {
-            model.set('datumZacStudija', uprizoritev.datumZacStudija);
-        }
-        if (view.$('.datumPremiere').is(':checked')) {
-            model.set('datumPremiere', uprizoritev.datumPremiere);
-        }
-
-        this.renderForm();
-        this.triggerMethod('form:change', this.form);
-    };
-
-
-    PremieraView.prototype.oznaciCheckboxe = function () {
-        //pri vrednostih, ki se razlikujejo, označi checkbox
-    };
-
-    /**
-     * overridana metoda iz enoteprograma
-     * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
-     */
-    PremieraView.prototype.getPrenesiView = function () {
-        var self = this;
-        var View = Marionette.ItemView.extend({
-            tagName: 'table',
-            className: 'table table-striped table-condensed',
-            template: prenesiTpl,
-            serializeData: function () {
-                return _.extend(this.model.toJSON(), {
-                    uprizoritevData: self.podatkiUprizoritve
-                });
-            },
-            initialize: self.oznaciCheckboxe
-        });
-
-        return View;
     };
 
     /**

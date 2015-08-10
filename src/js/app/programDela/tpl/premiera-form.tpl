@@ -2,13 +2,13 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,avtorskiHonorarji,avtorskiHonorarjiSamoz"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="tantieme,avtorskePravice,materialni,zaproseno"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,avtorskiHonorarji,tantieme"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="avtorskePravice,materialni,zaproseno,drugiJavni"></div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="drugiJavni,obiskDoma,stZaposUmet,stZaposDrug"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="avtorskiHonorarjiSamoz,obiskDoma,stZaposUmet,stZaposDrug"></div>
                 <div class="col-sm-12 col-lg-6" data-fields="stHonorarnih,stHonorarnihIgr,stHonorarnihIgrTujJZ,stHonorarnihIgrSamoz"></div>
                 <div class="col-sm-12 col-lg-6 col-lg-offset-6">
                     <dl class="pull-right">
@@ -19,9 +19,9 @@
                         <dt>{{t "ep.nasDelez"}}: </dt>
                         <dd class="nasDelez">{{u "formatNumber" nasDelez}}</dd>
                         <dt>{{t "ep.datumZacStudija"}}: </dt>
-                        <dd>{{u "formatNumber" datumZacStudija}}</dd>
+                        <dd>{{u "date" datumZacStudija}}</dd>
                         <dt>{{t "ep.datumPremiere"}}: </dt>
-                        <dd>{{u "formatNumber" datumPremiere}}</dd>                        
+                        <dd>{{u "date" datumPremiere}}</dd>                        
                     </dl>
                 </div>
             </div>

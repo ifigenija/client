@@ -82,6 +82,10 @@ define([
         ]
     });
     
+    GostujocaView.prototype.uprizoritevChange = function () {
+    
+    };
+    
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}

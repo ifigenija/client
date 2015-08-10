@@ -7,14 +7,22 @@ define([
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/ponovitevPrejsnje-form3.tpl',
     'app/Zapisi/View/ZapisiLayout',
-    'formSchema!programPonovitevPrejsnjih'
+    'formSchema!programPonovitevPrejsnjih',
+    'app/bars',
+    'template!../tpl/prenesi-form.tpl',
+    'marionette',
+    'underscore'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
         formTpl,
         ZapisiLayout,
-        schema
+        schema,
+        Handlebars,
+        prenesiTpl,
+        Marionette,
+        _
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -92,6 +100,66 @@ define([
     });
 
     /**
+     * prikažemo in preračunamo vse prikazne vrednosti
+     * @returns {undefined}
+     */
+    PonovitevView.prototype.prikaziPodatke = function () {
+        if (!this.form.commit()) {
+            var model = this.model;
+
+            model.preracunajInfo();
+            this.zaprosenoChange();
+
+            var f = Handlebars.formatNumber;
+            this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
+            this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
+            this.$('.celotnaVrednost').html(f(model.get('lastnaSredstva'), 2));
+        }
+    };
+
+    /**
+     * pridobimo view ki se uporabi pri prenosu podatkov iz uprizoritve v enotoprograma
+     * preračunamo v viewju ker ni vseh podatkov v modelu in ker ni nujno da se bodo vrednosti prepisale
+     * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
+     */
+    EnotaProgramaView.prototype.getPrenesiView = function () {
+        var self = this;
+        var View = Marionette.ItemView.extend({
+            tagName: 'div',
+            className: 'prenesi-table',
+            template: prenesiTpl,
+            serializeData: function () {
+                var model = this.model;
+                var vsotaPonovitev = model.get('ponoviDoma') + model.get('ponoviZamejo') + model.get('ponoviGost') + model.get('ponoviInt');
+                var na = self.podatkiUprizoritve.Na;
+
+                self.podatkiUprizoritve.NaDo = {
+                    avtorskiHonorarji: na.avtorskiHonorarji * vsotaPonovitev,
+                    avtorskiHonorarjiSamoz: na.avtorskiHonorarjiSamoz * vsotaPonovitev,
+                    tantieme: na.tantieme * vsotaPonovitev,
+                    avtorskePravice: na.avtorskePravice * vsotaPonovitev,
+                    materialni: na.materialni * vsotaPonovitev
+                };
+
+                var naDo = self.podatkiUprizoritve.NaDo;
+                naDo.nasDelez = naDo.avtorskiHonorarji + naDo.tantieme + naDo.avtorskePravice + naDo.materialni;
+                return _.extend(this.model.toJSON(), {
+                    uprizoritevData: self.podatkiUprizoritve
+                });
+            },
+            initialize: self.oznaciCheckboxe,
+            triggers: {
+                'click .izberi-check': 'izberi:vse'
+            },
+            onIzberiVse: function () {
+                this.$('input').click();
+            }
+        });
+
+        return View;
+    };
+
+    /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
      */
@@ -102,6 +170,6 @@ define([
         });
         this.prilogeR.show(view);
     };
-    
+
     return PonovitevView;
 });

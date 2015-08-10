@@ -265,10 +265,10 @@ define([
     var IzjemniModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programIzjemni',
         defaults: {
-            tanF: 0.0,
-            avtHonF: 0.0,
-            matF: 0.0,
-            odkupAPF: 0.0,
+            tanF: 1.0,
+            avtHonF: 1.0,
+            matF: 1.0,
+            odkupAPF: 1.0,
             odkupPF: 0.0,
             transStrF: 0.0, //mednarodno gostovanje
             dnevPZF: 0.0, //mednarodno gostovanje

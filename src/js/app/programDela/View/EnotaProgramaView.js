@@ -13,6 +13,9 @@ define([
     'template!../tpl/enota-programa.tpl',
     'app/programDela/Model/TipProgramskeEnote',
     'backbone-modal',
+    'template!../tpl/prenesi-form.tpl',
+    'marionette',
+    'underscore',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -24,6 +27,9 @@ define([
         enotaTpl,
         TipProEnoModel,
         Modal,
+        prenesiTpl,
+        Marionette,
+        _,
         $
         ) {
 
@@ -214,21 +220,89 @@ define([
         this.koprodukcijeR.show(view);
     };
 
-    /**
-     * Metodo je potrebno overridat v ostalih programih dela
-     * V metodi implementiramo view, ki se bo uporabil v modalu za prenos vrednosti
-     * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
-     */
-    EnotaProgramaView.prototype.getPrenesiView = function () {
+    EnotaProgramaView.prototype.oznaciCheckboxe = function () {
+        //pri vrednostih, ki se razlikujejo, označi checkbox
     };
 
     /**
-     * Metodo je potrebno overridat v ostalih programih dela
+     * pridobimo view ki se uporabi pri prenosu podatkov iz uprizoritve v enotoprograma
+     * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
+     */
+    EnotaProgramaView.prototype.getPrenesiView = function () {
+        var self = this;
+        var View = Marionette.ItemView.extend({
+            tagName: 'div',
+            className: 'prenesi-table',
+            template: prenesiTpl,
+            serializeData: function () {
+
+                self.podatkiUprizoritve.NaDo = self.podatkiUprizoritve.Do;
+
+                return _.extend(this.model.toJSON(), {
+                    uprizoritevData: self.podatkiUprizoritve
+                });
+            },
+            triggers: {
+                'click .izberi-check': 'izberi:vse'
+            },
+            onIzberiVse: function () {
+                this.$('input').click();
+            },
+            initialize: self.oznaciCheckboxe
+        });
+
+        return View;
+    };
+
+    /**
      * Metoda se izvede ko kliknemo ok v modalu
      * Trenutno pričakujemo logiko kere vrednosti se prenesejo v formo
      * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
      */
-    EnotaProgramaView.prototype.obPrenesu = function (modal) {
+    EnotaProgramaView.prototype.obPrenosu = function (modal) {
+        var uprizoritev = this.podatkiUprizoritve;
+        var view = modal.options.content;
+        var model = this.model;
+
+        if (view.$('.nasDelez').is(':checked')) {
+            model.set('nasDelez', uprizoritev.NaDo.nasDelez);
+        }
+        if (view.$('.avtorskiHonorarji').is(':checked')) {
+            model.set('avtorskiHonorarji', uprizoritev.NaDo.avtorskiHonorarji);
+        }
+        if (view.$('.tantieme').is(':checked')) {
+            model.set('tantieme', uprizoritev.NaDo.tantieme);
+        }
+        if (view.$('.materialni').is(':checked')) {
+            model.set('materialni', uprizoritev.NaDo.materialni);
+        }
+        if (view.$('.avtorskePravice').is(':checked')) {
+            model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
+        }
+        if (view.$('.stHonorarnih').is(':checked')) {
+            model.set('stHonorarnih', uprizoritev.stHonorarnih);
+        }
+        if (view.$('.stHonorarnihIgr').is(':checked')) {
+            model.set('stHonorarnihIgr', uprizoritev.stHonorarnihIgr);
+        }
+        if (view.$('.stHonorarnihIgrTujJZ').is(':checked')) {
+            model.set('stHonorarnihIgrTujJZ', uprizoritev.stHonorarnihIgrTujJZ);
+        }
+        if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
+            model.set('stHonorarnihIgrSamoz', uprizoritev.stHonorarnihIgrSamoz);
+        }
+        if (view.$('.stZaposUmet').is(':checked')) {
+            model.set('stZaposUmet', uprizoritev.stZaposUmet);
+        }
+        if (view.$('.datumZacStudija').is(':checked')) {
+            model.set('datumZacStudija', uprizoritev.datumZacStudija);
+        }
+        if (view.$('.datumPremiere').is(':checked')) {
+            model.set('datumPremiere', uprizoritev.datumPremiere);
+        }
+
+        this.renderForm();
+        this.triggerMethod('form:change', this.form);
     };
     /**
      * Ob kliku na prenesi se bo prikazal modal za prepis podatkov
@@ -252,7 +326,7 @@ define([
             });
 
             modal.open(function () {
-                self.obPrenesu(this);
+                self.obPrenosu(this);
             });
         }
     };
@@ -261,6 +335,7 @@ define([
         this.model.set('zaproseno', modal.options.content.model.get('vsota'));
         this.renderForm();
         this.triggerMethod('form:change', this.form);
+        this.triggerMethod('zaproseno:change', this.form);
     };
     /**
      * ob kliku izracunaj 
@@ -327,7 +402,6 @@ define([
             }
         };
 
-        this.form.off('uprizoritev:change', toggleEnabled, this);
         this.form.on('uprizoritev:change', toggleEnabled, this);
     };
 
@@ -350,11 +424,10 @@ define([
             }
         };
 
-        this.form.off('zaproseno:change', funkcija, this);
         this.form.on('zaproseno:change', funkcija, this);
     };
-    
-     /**
+
+    /**
      * funkcija poskrbi da se koprodukcije izrišejo samo če so koprodukcije označene
      * @returns {undefined}
      */
@@ -378,12 +451,12 @@ define([
             toggleKoprodukcija(null, this.form.fields.tipProgramskeEnote.editor);
         }
 
-        this.form.off('tipProgramskeEnote:change', toggleKoprodukcija, this);
         this.form.on('tipProgramskeEnote:change', toggleKoprodukcija, this);
     };
 
     /**
-     * ob kliku izracunaj 
+     * metoda je overridana
+     * klic metode se izvede v metodi renderform v formview 
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.dodatniFormEventi = function () {
@@ -399,10 +472,6 @@ define([
                 'drugiJavni',
                 'zaproseno'
             ];
-
-            vnosnaPolja.forEach(function (i) {
-                self.form.off(i + ':change', self.prikaziPodatke, self);
-            });
 
             vnosnaPolja.forEach(function (i) {
                 self.form.on(i + ':change', self.prikaziPodatke, self);
