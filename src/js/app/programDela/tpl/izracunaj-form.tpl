@@ -1,4 +1,3 @@
-
 <thead>
     <tr>
         <th class="col-sm-6">{{t "izracunaj.atributi"}}</th>
