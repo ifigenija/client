@@ -130,7 +130,7 @@ define([
             template: prenesiTpl,
             serializeData: function () {
                 var model = this.model;
-                var vsotaPonovitev = model.get('ponoviDoma') + model.get('ponoviZamejo') + model.get('ponoviGost') + model.get('ponoviInt');
+                var vsotaPonovitev = model.get('ponoviDoma') + model.get('ponoviZamejo') + model.get('ponoviGost');
                 var na = self.podatkiUprizoritve.Na;
 
                 self.podatkiUprizoritve.NaDo = {
