@@ -7,19 +7,18 @@ define([
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/gostujoca-form.tpl',
     'app/Zapisi/View/ZapisiLayout',
-    'formSchema!programGostujoca'
+    'formSchema!programGostujoca',
+    'app/bars'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
         formTpl,
         ZapisiLayout,
-        schema
+        schema,
+        Handlebars
         ) {
-
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
+    
     var GostujocaView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -27,7 +26,7 @@ define([
         formTitle: i18next.t('gostujoca.title'),
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('ep.sort'),
@@ -42,7 +41,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.zaproseno'),
@@ -51,7 +50,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.t.avtorskiHonorarji'),
@@ -60,7 +59,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.tantieme'),
@@ -82,8 +81,29 @@ define([
         ]
     });
     
+    /**
+     * Uprizoritev ima samo kot informacijo. Se ne prenašajo podatki
+     * Zato smo overridali s prazno metodo
+     * @returns {undefined}
+     */
     GostujocaView.prototype.uprizoritevChange = function () {
     
+    };
+    
+    GostujocaView.prototype.dodatniFormEventi = function () {
+        if (this.model) {
+
+            var self = this;
+            var vnosnaPolja = [
+                'nasDelez',
+                'drugiJavni',
+                'zaproseno'
+            ];
+
+            vnosnaPolja.forEach(function (i) {
+                self.form.on(i + ':change', self.prikaziPodatke, self);
+            });
+        }
     };
     
     /**

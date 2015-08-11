@@ -1050,5 +1050,8 @@
         "faktor": "Faktor",
         "izracun": "Izračun",
         "vsota": "Vsota"
+    },
+    "info": {
+        "shraniEnotoPrograma": "Prosim shranite enoto programa predno nadaljujete"
     }
 }

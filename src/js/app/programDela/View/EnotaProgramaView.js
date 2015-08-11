@@ -5,35 +5,35 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
+    'i18next',
+    'backbone-modal',
+    'marionette',
+    'app/bars',
     'app/Dokument/View/FormView',
     'app/Dokument/View/PostavkeView',
     'app/programDela/View/DrugiVirView',
     'app/programDela/View/KoprodukcijaView',
-    'app/programDela/View/IzracunajView',
-    'i18next',
-    'template!../tpl/enota-programa.tpl',
+    'app/programDela/View/PrenesiView',
     'app/programDela/Model/TipProgramskeEnote',
-    'backbone-modal',
-    'template!../tpl/prenesi-form.tpl',
-    'marionette',
-    'underscore',
+    'template!../tpl/enota-programa.tpl',
+    'template!../tpl/prenesi-vse.tpl',
+    'template!../tpl/izracunaj-form.tpl',
     'jquery',
     'jquery.jsonrpc'
 ], function (
-        Radio,
+        i18next,
+        Modal,
+        Marionette,
+        Handlebars,
         FormView,
         PostavkeView,
         DrugiVirView,
         KoprodukcijaView,
-        IzracunajView,
-        i18next,
-        enotaTpl,
+        PrenesiView,
         TipProEnoModel,
-        Modal,
+        enotaTpl,
         prenesiTpl,
-        Marionette,
-        _,
+        izracunajTpl,
         $
         ) {
 
@@ -86,12 +86,12 @@ define([
         }
     });
 
-    EnotaProgramaView.prototype.pridobiPodatke = function () {
+    EnotaProgramaView.prototype.onPrenesi = function () {
         var self = this;
 
         var success = function (podatki) {
             self.podatkiUprizoritve = podatki;
-            self.prenesiPodatke();
+            self.prenesiModal();
         };
 
         var error = function (error) {
@@ -127,8 +127,6 @@ define([
             this.koprodukcijeR.empty();
             this.prilogeR.empty();
         }, this);
-
-        this.on('prenesi', this.pridobiPodatke, this);
     };
     /**
      * Vsi gumbi, ki so navoljo toolbaru za izrisS
@@ -145,7 +143,6 @@ define([
                         this.buttons.nasvet
                     ]
                 ] : [[this.buttons.dodaj]];
-
     };
 
     /**
@@ -155,19 +152,8 @@ define([
     EnotaProgramaView.prototype.onRenderForm = function () {
         if (!this.model.isNew()) {
             this.renderPriloge();
-            this.renderPES();
             this.renderDrugiViri();
         }
-    };
-
-    /**
-     * Izris programskeEnoteSklopa - privzeto se ne izriše nič. 
-     * Overrirde funkcionalnosti v izvedenih objektih
-     * 
-     * @returns {undefined}
-     */
-    EnotaProgramaView.prototype.renderPES = function () {
-
     };
     /**
      * Izris prilog - privzeto se ne izriše nič. 
@@ -179,20 +165,15 @@ define([
 
     };
 
-    EnotaProgramaView.prototype.ponovenIzris = function (view) {
-        var izris = function () {
-            var self = this;
-            if (!this.form.commit()) {
-                this.model.fetch({
-                    success: function () {
-                        self.renderForm();
-                    }
-                });
-            }
-        };
-
-        view.on('save:success', izris, this);
-        view.on('destroy:success', izris, this);
+    EnotaProgramaView.prototype.ponovenIzris = function () {
+        var self = this;
+        if (!this.form.commit()) {
+            this.model.fetch({
+                success: function () {
+                    self.renderForm();
+                }
+            });
+        }
     };
 
     /**
@@ -200,12 +181,13 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.renderDrugiViri = function () {
-        var view = new DrugiVirView({
+        var view = this.drugiViri = new DrugiVirView({
             collection: this.model.drugiViriCollection,
             dokument: this.model
         });
 
-        this.ponovenIzris(view);
+        view.on('save:success', this.ponovenIzris, this);
+        view.on('destroy:success', this.ponovenIzris, this);
 
         this.drugiViriR.show(view);
     };
@@ -214,45 +196,54 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.renderKoprodukcije = function () {
-        var view = new KoprodukcijaView({
+        var view = this.koprodukcije = new KoprodukcijaView({
             collection: this.model.koprodukcijeCollection,
             dokument: this.model
         });
 
-        this.ponovenIzris(view);
+        view.on('save:success', this.ponovenIzris, this);
+        view.on('destroy:success', this.ponovenIzris, this);
 
         this.koprodukcijeR.show(view);
     };
 
-    EnotaProgramaView.prototype.oznaciCheckboxe = function () {
-        //pri vrednostih, ki se razlikujejo, označi checkbox
+    /**
+     * Ob kliku na prenesi se bo prikazal modal za prepis podatkov
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.prenesiModal = function () {
+        var self = this;
+        if (!this.form.commit()) {
+            var View = this.getPrenesiView();
+
+            var view = new View({
+                model: this.model
+            });
+
+            var modal = new Modal({
+                content: view,
+                animate: true,
+                okText: i18next.t("std.prenesi"),
+                cancelText: i18next.t("std.preklici"),
+                title: i18next.t('prenesi.title')
+            });
+
+            modal.open(function () {
+                self.prenesiPodatke(this);
+            });
+        }
     };
 
     /**
+     * Overridamo v enotah programa
      * pridobimo view ki se uporabi pri prenosu podatkov iz uprizoritve v enotoprograma
      * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
      */
     EnotaProgramaView.prototype.getPrenesiView = function () {
-        var self = this;
-        var View = Marionette.ItemView.extend({
-            tagName: 'div',
-            className: 'prenesi-table',
+        var View = PrenesiView.extend({
             template: prenesiTpl,
-            serializeData: function () {
-
-                self.podatkiUprizoritve.NaDo = self.podatkiUprizoritve.Do;
-
-                return _.extend(this.model.toJSON(), {
-                    uprizoritevData: self.podatkiUprizoritve
-                });
-            },
-            triggers: {
-                'click .izberi-check': 'izberi:vse'
-            },
-            onIzberiVse: function () {
-                this.$('input').click();
-            },
-            initialize: self.oznaciCheckboxe
+            podatkiUprizoritve: this.podatkiUprizoritve,
+            jeNa: false
         });
 
         return View;
@@ -263,11 +254,46 @@ define([
      * Trenutno pričakujemo logiko kere vrednosti se prenesejo v formo
      * @returns {PostavkeView@call;extend.prototype.getPrenesiView.View}
      */
-    EnotaProgramaView.prototype.obPrenosu = function (modal) {
+    EnotaProgramaView.prototype.prenesiPodatke = function (modal) {
         var uprizoritev = this.podatkiUprizoritve;
         var view = modal.options.content;
         var model = this.model;
 
+        this.prenesiVrednosti(view, model, uprizoritev);
+
+        this.renderForm();
+        this.prikaziPodatke();
+        this.triggerMethod('form:change', this.form);
+    };
+
+    /**
+     * prikažemo in preračunamo vse prikazne vrednosti
+     * v nekaterih programskih enotah bo potrebno overridat(festival, gostujoča, razno)
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.prikaziPodatke = function () {
+        if (!this.form.commit()) {
+            var model = this.model;
+
+            model.preracunajInfo();
+            this.zaprosenoChange();
+
+            var f = Handlebars.formatNumber;
+            this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
+            this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
+            this.$('.celotnaVrednost').html(f(model.get('celotnaVrednost'), 2));
+        }
+    };
+
+    /**
+     * Overridamo jih v posameznih enotah programa, če je to potrebno
+     * Metoda je namenjena logiki prepisovanja vrednosti v modelu z vrednostmi, ki smo jih označili v modalu
+     * @param {type} view
+     * @param {type} model
+     * @param {type} uprizoritev
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.prenesiVrednosti = function (view, model, uprizoritev) {
         if (view.$('.nasDelez').is(':checked')) {
             model.set('nasDelez', uprizoritev.NaDo.nasDelez);
         }
@@ -304,51 +330,23 @@ define([
         if (view.$('.datumPremiere').is(':checked')) {
             model.set('datumPremiere', uprizoritev.datumPremiere);
         }
-
-        this.renderForm();
-        this.triggerMethod('form:change', this.form);
     };
+
     /**
-     * Ob kliku na prenesi se bo prikazal modal za prepis podatkov
-     * @returns {undefined}
-     */
-    EnotaProgramaView.prototype.prenesiPodatke = function () {
-        var self = this;
-        if (!this.form.commit()) {
-            var View = this.getPrenesiView();
-            
-            var view = new View({
-                model: this.model
-            });
-
-            var modal = new Modal({
-                content: view,
-                animate: true,
-                okText: i18next.t("std.prenesi"),
-                cancelText: i18next.t("std.preklici"),
-                title: i18next.t('prenesi.title')
-            });
-
-            modal.open(function () {
-                self.obPrenosu(this);
-            });
-        }
-    };
-
-    EnotaProgramaView.prototype.prepisi = function (modal) {
-        this.model.set('zaproseno', modal.options.content.model.get('vsota'));
-        this.renderForm();
-        this.triggerMethod('form:change', this.form);
-        this.triggerMethod('zaproseno:change', this.form);
-    };
-    /**
-     * ob kliku izracunaj 
+     * ob kliku izracunaj/zaprošeno
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.onIzracunaj = function () {
         var self = this;
 
         if (!this.form.commit()) {
+
+            var IzracunajView = Marionette.ItemView.extend({
+                template: izracunajTpl,
+                initialize: function () {
+                    this.model.preracunajZaproseno();
+                }
+            });
 
             var view = new IzracunajView({
                 tagName: 'table',
@@ -368,6 +366,17 @@ define([
                 self.prepisi(this);
             });
         }
+    };
+    /**
+     * Prepisemo zaproseno vrednost
+     * @param {type} modal
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.prepisi = function (modal) {
+        this.model.set('zaproseno', modal.options.content.model.get('vsota'));
+        this.renderForm();
+        this.triggerMethod('form:change', this.form);
+        this.triggerMethod('zaproseno:change', this.form);
     };
 
     /**
@@ -444,7 +453,7 @@ define([
             var model = new TipProEnoModel({id: editor.getValue('tipProgramskeEnote')});
 
             var izrisKoprodukcije = function () {
-                if (model.get('koprodukcija')) {
+                if (model.get('koprodukcija') && self.model.get('id')) {
                     self.renderKoprodukcije();
                     self.disableGumbe();
                 } else {
@@ -499,16 +508,17 @@ define([
         var tb = this.getToolbarModel();
         var but = tb.getButton('doc-postavka-shrani');
         if (but) {
-            if (but.get('disabled')) {
-                this.$('.region-postavke').find('*').attr('disabled', false);
-            } else {
-                this.$('.region-postavke').find('*').attr('disabled', true);
+            if (!but.get('disabled') && this.model.get('id')) {
+                this.drugiViri.disabled = true;
+                if (this.koprodukcije) {
+                    this.koprodukcije.disabled = true;
+                }
             }
         }
     };
 
     /**
-     * Overridamo formChange
+     * dodatno onemogočimo gumbe na drugih virih in koprodukcijah
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.formChange = function () {
@@ -518,7 +528,7 @@ define([
     };
 
     /**
-     * Overridamo formChange
+     * na on save success fetchamo in prikažemo nove podatke
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.onSaveSuccess = function (model) {
@@ -531,7 +541,6 @@ define([
             });
         }
     };
-
 
     return EnotaProgramaView;
 });

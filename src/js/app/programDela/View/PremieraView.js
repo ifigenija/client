@@ -5,23 +5,22 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/programDela/View/EnotaProgramaView',
+    'app/programDela/View/PrenesiView',
     'template!../tpl/premiera-form.tpl',
+    'template!../tpl/premiera-prenesi.tpl',
     'app/Zapisi/View/ZapisiLayout',
-    'formSchema!programPremiera',
-    'app/bars'
+    'formSchema!programPremiera'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
+        PrenesiView,
         formTpl,
+        prenesiTpl,
         ZapisiLayout,
-        schema,
-        Handlebars
+        schema
         ) {
 
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
     var PremieraView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -29,7 +28,7 @@ define([
         formTitle: i18next.t('premiera.title'),
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('ep.sort'),
@@ -53,7 +52,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.zaproseno'),
@@ -62,7 +61,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.t.avtorskiHonorarji'),
@@ -71,7 +70,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.tantieme'),
@@ -94,20 +93,48 @@ define([
     });
 
     /**
-     * prikažemo in preračunamo vse prikazne vrednosti
+     * overridana metoda
+     * @returns {EnotaProgramaView@call;extend.prototype.getPrenesiView.View}
+     */
+    PremieraView.prototype.getPrenesiView = function () {
+        var View = PrenesiView.extend({
+            template: prenesiTpl,
+            podatkiUprizoritve: this.podatkiUprizoritve,
+            jeNa: true
+        });
+
+        return View;
+    };
+
+    /**
+     * overridana metoda
+     * @param {type} view
+     * @param {type} model
+     * @param {type} uprizoritev
      * @returns {undefined}
      */
-    PremieraView.prototype.prikaziPodatke = function () {
-        if (!this.form.commit()) {
-            var model = this.model;
+    PremieraView.prototype.prenesiVrednosti = function (view, model, uprizoritev) {
 
-            model.preracunajInfo();            
-            this.zaprosenoChange();
-
-            var f = Handlebars.formatNumber;
-            this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
-            this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
-            this.$('.celotnaVrednost').html(f(model.get('celotnaVrednost'), 2));
+        if (view.$('.avtorskiHonorarji').is(':checked')) {
+            model.set('avtorskiHonorarji', uprizoritev.NaDo.avtorskiHonorarji);
+        }
+        if (view.$('.tantieme').is(':checked')) {
+            model.set('tantieme', uprizoritev.NaDo.tantieme);
+        }
+        if (view.$('.materialni').is(':checked')) {
+            model.set('materialni', uprizoritev.NaDo.materialni);
+        }
+        if (view.$('.avtorskePravice').is(':checked')) {
+            model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
+        }
+        if (view.$('.stHonorarnih').is(':checked')) {
+            model.set('stHonorarnih', uprizoritev.stHonorarnih);
+        }
+        if (view.$('.datumZacStudija').is(':checked')) {
+            model.set('datumZacStudija', uprizoritev.datumZacStudija);
+        }
+        if (view.$('.datumPremiere').is(':checked')) {
+            model.set('datumPremiere', uprizoritev.datumPremiere);
         }
     };
 

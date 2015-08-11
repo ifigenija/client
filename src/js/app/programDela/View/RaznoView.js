@@ -20,10 +20,7 @@ define([
         ZapisiLayout,
         schema
         ) {
-
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
+    
     var RaznoView = EnotaProgramaView.extend({
         template: tpl,
         formTemplate: formTpl,
@@ -38,7 +35,7 @@ define([
         },
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('ep.sort'),
@@ -60,7 +57,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.zaproseno'),
@@ -69,7 +66,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.stHonorarnih'),
@@ -78,7 +75,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.tantieme'),
@@ -112,6 +109,17 @@ define([
         this.on('preklici', function () {
             this.pesR.empty();
         }, this);
+    };
+
+    /**
+     * ob izrisu forme se izvede še izris postavk
+     * @returns {undefined}
+     */
+    RaznoView.prototype.onRenderForm = function () {
+        EnotaProgramaView.prototype.onRenderForm.apply(this, arguments);
+        if (!this.model.isNew()) {
+            this.renderPES();
+        }
     };
 
     /**

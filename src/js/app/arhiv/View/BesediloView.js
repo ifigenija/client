@@ -20,10 +20,6 @@ define([
         Backgrid,
         ZapisiLayout
         ) {
-    
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
 
     var BesediloView = SeznamView.extend({
         url: baseUrl + '/rest/besedilo',
@@ -67,7 +63,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('besedilo.letoIzida'),
@@ -75,7 +71,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('besedilo.datumPrejema'),

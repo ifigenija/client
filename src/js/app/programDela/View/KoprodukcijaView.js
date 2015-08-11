@@ -6,13 +6,15 @@ define([
     'i18next',
     'app/Dokument/View/PostavkeView',
     'template!../tpl/koprodukcija-form.tpl',
-    'formSchema!produkcijaDelitev'
+    'formSchema!produkcijaDelitev',
+    'radio'
 ], function (
         Backgrid,
         i18next,
         PostavkeView,
         formTpl,
-        schema
+        schema,
+        Radio
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -23,6 +25,7 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'koprodukcije',
         formTitle: i18next.t('prodel.title'),
+        disabled: false,
         gridMeta: [
             {
                 cell: 'string',
@@ -60,6 +63,31 @@ define([
             }
         ]
     });
+
+    KoprodukcijaView.prototype.onGridAction = function (model, action) {
+        if (!this.disabled) {
+            this.triggerMethod(action, model);
+        }
+        else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("info.shraniEnotoPrograma"),
+                code: '9000600',
+                severity: 'info'
+            });
+        }
+    };
+    
+    KoprodukcijaView.prototype.onDodaj = function () {
+        if (!this.disabled) {
+            PostavkeView.prototype.onDodaj.apply(this, arguments);
+        } else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("info.shraniEnotoPrograma"),
+                code: '9000600',
+                severity: 'info'
+            });
+        }
+    };
 
     return KoprodukcijaView;
 });

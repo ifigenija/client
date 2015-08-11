@@ -5,14 +5,18 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/programDela/View/EnotaProgramaView',
+    'app/programDela/View/PrenesiView',
     'template!../tpl/ponovitevPremiere-form.tpl',
+    'template!../tpl/ponovitevPremiere-prenesi.tpl',
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!programPonovitevPremiere'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
+        PrenesiView,
         formTpl,
+        prenesiTpl,
         ZapisiLayout,
         schema
         ) {
@@ -90,6 +94,40 @@ define([
             }
         ]
     });
+    
+    PonovitevView.prototype.getPrenesiView = function () {
+        var View = PrenesiView.extend({
+            template: prenesiTpl,
+            podatkiUprizoritve: this.podatkiUprizoritve,
+            jeNa: true
+        });
+
+        return View;
+    };
+    
+    PonovitevView.prototype.prenesiVrednosti = function (view, model, uprizoritev) {
+        if (view.$('.avtorskiHonorarji').is(':checked')) {
+            model.set('avtorskiHonorarji', uprizoritev.NaDo.avtorskiHonorarji);
+        }
+        if (view.$('.tantieme').is(':checked')) {
+            model.set('tantieme', uprizoritev.NaDo.tantieme);
+        }
+        if (view.$('.materialni').is(':checked')) {
+            model.set('materialni', uprizoritev.NaDo.materialni);
+        }
+        if (view.$('.avtorskePravice').is(':checked')) {
+            model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
+        }
+        if (view.$('.stHonorarnih').is(':checked')) {
+            model.set('stHonorarnih', uprizoritev.stHonorarnih);
+        }
+        if (view.$('.datumZacStudija').is(':checked')) {
+            model.set('datumZacStudija', uprizoritev.datumZacStudija);
+        }
+        if (view.$('.datumPremiere').is(':checked')) {
+            model.set('datumPremiere', uprizoritev.datumPremiere);
+        }
+    };
     
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika

@@ -5,24 +5,20 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/programDela/View/EnotaProgramaView',
+    'app/programDela/View/PrenesiView',
     'template!../tpl/ponovitevPrejsnje-form3.tpl',
+    'template!../tpl/ponovitevPrejsnje-prenesi.tpl',
     'app/Zapisi/View/ZapisiLayout',
-    'formSchema!programPonovitevPrejsnjih',
-    'app/bars',
-    'template!../tpl/prenesi-form.tpl',
-    'marionette',
-    'underscore'
+    'formSchema!programPonovitevPrejsnjih'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
+        PrenesiView,
         formTpl,
-        ZapisiLayout,
-        schema,
-        Handlebars,
         prenesiTpl,
-        Marionette,
-        _
+        ZapisiLayout,
+        schema
         ) {
 
     var hc = Backgrid.HeaderCell.extend({
@@ -100,63 +96,62 @@ define([
     });
 
     /**
-     * prikažemo in preračunamo vse prikazne vrednosti
-     * @returns {undefined}
-     */
-    PonovitevView.prototype.prikaziPodatke = function () {
-        if (!this.form.commit()) {
-            var model = this.model;
-
-            model.preracunajInfo();
-            this.zaprosenoChange();
-
-            var f = Handlebars.formatNumber;
-            this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
-            this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
-            this.$('.celotnaVrednost').html(f(model.get('lastnaSredstva'), 2));
-        }
-    };
-
-    /**
      * pridobimo view ki se uporabi pri prenosu podatkov iz uprizoritve v enotoprograma
      * preračunamo v viewju ker ni vseh podatkov v modelu in ker ni nujno da se bodo vrednosti prepisale
      * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
      */
-    EnotaProgramaView.prototype.getPrenesiView = function () {
-        var self = this;
-        var View = Marionette.ItemView.extend({
-            tagName: 'div',
-            className: 'prenesi-table',
+    PonovitevView.prototype.getPrenesiView = function () {
+    var View = PrenesiView.extend({
             template: prenesiTpl,
-            serializeData: function () {
-                var model = this.model;
-                var vsotaPonovitev = model.get('ponoviDoma') + model.get('ponoviZamejo') + model.get('ponoviGost');
-                var na = self.podatkiUprizoritve.Na;
-
-                self.podatkiUprizoritve.NaDo = {
-                    avtorskiHonorarji: na.avtorskiHonorarji * vsotaPonovitev,
-                    avtorskiHonorarjiSamoz: na.avtorskiHonorarjiSamoz * vsotaPonovitev,
-                    tantieme: na.tantieme * vsotaPonovitev,
-                    avtorskePravice: na.avtorskePravice * vsotaPonovitev,
-                    materialni: na.materialni * vsotaPonovitev
-                };
-
-                var naDo = self.podatkiUprizoritve.NaDo;
-                naDo.nasDelez = naDo.avtorskiHonorarji + naDo.tantieme + naDo.avtorskePravice + naDo.materialni;
-                return _.extend(this.model.toJSON(), {
-                    uprizoritevData: self.podatkiUprizoritve
-                });
-            },
-            initialize: self.oznaciCheckboxe,
-            triggers: {
-                'click .izberi-check': 'izberi:vse'
-            },
-            onIzberiVse: function () {
-                this.$('input').click();
-            }
+            podatkiUprizoritve: this.podatkiUprizoritve,
+            jeNa: true
         });
 
         return View;
+    };
+    
+    /**
+     * overridana metoda
+     * @param {type} view
+     * @param {type} model
+     * @param {type} uprizoritev
+     * @returns {undefined}
+     */
+    PonovitevView.prototype.prenesiVrednosti = function (view, model, uprizoritev) {
+
+        if (view.$('.avtorskiHonorarji').is(':checked')) {
+            model.set('avtorskiHonorarji', uprizoritev.NaDo.avtorskiHonorarji);
+        }
+        if (view.$('.tantieme').is(':checked')) {
+            model.set('tantieme', uprizoritev.NaDo.tantieme);
+        }
+        if (view.$('.materialni').is(':checked')) {
+            model.set('materialni', uprizoritev.NaDo.materialni);
+        }
+        if (view.$('.avtorskePravice').is(':checked')) {
+            model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
+        }
+        if (view.$('.stHonorarnih').is(':checked')) {
+            model.set('stHonorarnih', uprizoritev.stHonorarnih);
+        }
+        if (view.$('.stHonorarnihIgr').is(':checked')) {
+            model.set('stHonorarnihIgr', uprizoritev.stHonorarnihIgr);
+        }
+        if (view.$('.stHonorarnihIgrTujJZ').is(':checked')) {
+            model.set('stHonorarnihIgrTujJZ', uprizoritev.stHonorarnihIgrTujJZ);
+        }
+        if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
+            model.set('stHonorarnihIgrSamoz', uprizoritev.stHonorarnihIgrSamoz);
+        }
+        if (view.$('.stZaposUmet').is(':checked')) {
+            model.set('stZaposUmet', uprizoritev.stZaposUmet);
+        }
+        if (view.$('.datumZacStudija').is(':checked')) {
+            model.set('datumZacStudija', uprizoritev.datumZacStudija);
+        }
+        if (view.$('.datumPremiere').is(':checked')) {
+            model.set('datumPremiere', uprizoritev.datumPremiere);
+        }
     };
 
     /**
