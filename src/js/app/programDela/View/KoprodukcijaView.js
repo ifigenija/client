@@ -16,10 +16,7 @@ define([
         schema,
         Radio
         ) {
-
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
+    
     var KoprodukcijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -35,7 +32,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('prodel.zaproseno'),
@@ -44,7 +41,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('prodel.delez'),

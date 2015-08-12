@@ -24,11 +24,7 @@ define([
         Backgrid,
         Modal
         ) {
-
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
-
+    
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema({
@@ -56,7 +52,7 @@ define([
         },
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('alternacija.sort'),

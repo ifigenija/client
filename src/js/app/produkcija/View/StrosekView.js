@@ -14,10 +14,6 @@ define([
         i18next,
         Backgrid
         ) {
-    
-    var hc = Backgrid.HeaderCell.extend({
-            className: 'backgrid-kolona-stevilk'
-        });
 
     var StrosekView = PostavkeView.extend({
         formTemplate: formTpl,
@@ -27,7 +23,7 @@ define([
         formTitle: i18next.t('strupr.title'),
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('strupr.sort'),
@@ -51,7 +47,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('strupr.vrednostDo'),
@@ -60,7 +56,7 @@ define([
                 total: 'sum'
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('strupr.vrednostNa'),

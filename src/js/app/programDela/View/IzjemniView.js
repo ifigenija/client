@@ -17,9 +17,6 @@ define([
         schema
         ) {
 
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
     var IzjemniView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -27,7 +24,7 @@ define([
         formTitle: i18next.t('izjemni.title'),
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('ep.sort'),
@@ -42,7 +39,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.zaproseno'),
@@ -51,7 +48,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.t.avtorskiHonorarji'),
@@ -60,7 +57,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.tantieme'),

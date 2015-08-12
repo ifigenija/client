@@ -23,10 +23,6 @@ define([
         Backgrid
         ) {
 
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
-
     var UserView = SeznamView.extend({
         url: baseUrl + '/rest/user',
         formTemplate: formTpl,
@@ -55,7 +51,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('user.expires'),

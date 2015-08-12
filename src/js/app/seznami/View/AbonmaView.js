@@ -19,10 +19,6 @@ define([
         Backgrid
         ) {
     
-    var hc = Backgrid.HeaderCell.extend({
-            className: 'backgrid-kolona-stevilk'
-        });
-
     var AbonmaView = SeznamView.extend({
         url: baseUrl + '/rest/abonma',
         title: i18next.t('abonma.title'),
@@ -37,7 +33,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('abonma.stPredstav'),
@@ -45,7 +41,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('abonma.stKuponov'),
@@ -53,7 +49,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('abonma.kapaciteta'),
