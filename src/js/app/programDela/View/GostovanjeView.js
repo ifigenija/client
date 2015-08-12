@@ -89,6 +89,21 @@ define([
             }
         ]
     });
+    
+    GostovanjeView.prototype.bindEvents = function () {
+        EnotaProgramaView.prototype.bindEvents.apply(this, arguments);
+        
+        this.form.on('transportniStroski:change', this.prikaziPodatke, this);
+        this.form.on('dnevPrvZad:change', this.prikaziPodatke, this);
+    };
+    GostovanjeView.prototype.unBindEvents = function () {
+        EnotaProgramaView.prototype.unBindEvents.apply(this, arguments);
+        
+        this.form.off('transportniStroski:change', this.prikaziPodatke, this);
+        this.form.off('dnevPrvZad:change', this.prikaziPodatke, this);
+    };
+    
+    
     /**
      * overridana metoda
      * @returns {EnotaProgramaView@call;extend.prototype.getPrenesiView.View}

@@ -70,9 +70,13 @@ define([
             var mat = this.get('materialni');
             var javni = this.get('drugiJavni');
             var zap = this.get('zaproseno');
+            
+            var dnevPrvZad = this.get('dnevPrvZad');
+            
+            dnevPrvZad = dnevPrvZad ? dnevPrvZad : 0;
 
             if (nasDelez) {
-                this.set('nasDelez', tan + avtPra + avtHon + mat);
+                this.set('nasDelez', tan + avtPra + avtHon + mat + dnevPrvZad);
             }
 
             var viri = this.drugiViriCollection;
@@ -93,8 +97,13 @@ define([
             });
 
             var nasD = this.get('nasDelez');
+            
+            var transport = this.get('transportniStroski');
+            
+            transport = transport ? transport : 0;
+            
 
-            var lastSred = nasD - (javni + zap + viriVsota);
+            var lastSred = nasD - (javni + zap + viriVsota + transport);
             var celVred = nasD + koproVsota;
 
             this.set('lastnaSredstva', lastSred);

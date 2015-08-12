@@ -333,9 +333,8 @@ define([
 
         this.renderFormEvents();
         this.prikaziPodatke();
-        this.triggerMethod('form:change', this.form);
+        Marionette.triggerMethodOn(this.form, 'change');
     };
-    
     /**
      * razlika pri preračunavanju je ali se delež preračuna ali ne
      * @returns {undefined}
@@ -466,7 +465,7 @@ define([
     EnotaProgramaView.prototype.prepisi = function (modal) {
         this.model.set('zaproseno', modal.options.content.model.get('vsota'));
         this.renderFormEvents();
-        this.triggerMethod('form:change', this.form);
+        Marionette.triggerMethodOn(this.form, 'change');
         this.triggerMethod('zaproseno:change', this.form);
     };
 
