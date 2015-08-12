@@ -78,7 +78,28 @@ define([
             }
         ]
     });
-    
+
+    IzjemniView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [
+                    [
+                        this.buttons.shrani,
+                        this.buttons.preklici,
+                        this.buttons.izracunaj,
+                        this.buttons.nasvet
+                    ]
+                ] : [[this.buttons.dodaj]];
+    };
+
+
+    IzjemniView.prototype.imaKoprodukcijeChange = function (form, editor) {
+        var imaKop = false;
+        if (this.model.get('id')) {
+            imaKop = editor.getValue();
+        }
+        this.izrisKoprodukcije(imaKop);
+    };
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -90,6 +111,6 @@ define([
         });
         this.prilogeR.show(view);
     };
-    
+
     return IzjemniView;
 });

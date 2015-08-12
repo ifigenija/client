@@ -44,6 +44,12 @@ define([
                 element: 'button-trigger',
                 trigger: 'preklici'
             },
+            izracunaj: {
+                id: 'doc-postavka-izracunaj',
+                label: i18next.t('std.izracunaj'),
+                element: 'button-trigger',
+                trigger: 'izracunaj'
+            },
             nasvet: {
                 id: 'doc-postavka-nasvet',
                 icon: 'fa fa-info',
@@ -109,6 +115,20 @@ define([
             'click .sredstva': 'sredstva'
         }
     });
+    
+    FestivalView.prototype.izracunajPrikaznaPolja = function () {
+        var model = this.model;
+        model.preracunajInfo(false);
+    };
+    
+    FestivalView.prototype.imaKoprodukcijeChange = function (form, editor) {
+        var imaKop = false;
+        if (this.model.get('id')) {
+            imaKop = editor.getValue();
+        }
+        this.izrisKoprodukcije(imaKop);
+    };
+    
     /**
      * prikaz gumbov v toolbaru
      * @returns {Array}
@@ -120,6 +140,7 @@ define([
                         this.buttons.shrani,
                         this.buttons.preklici,
                         this.buttons.prikaziVse,
+                        this.buttons.izracunaj,
                         this.buttons.nasvet
                     ]
                 ] : [[this.buttons.dodaj]];

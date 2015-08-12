@@ -6,13 +6,15 @@ define([
     'i18next',
     'app/Dokument/View/PostavkeView',
     'template!../tpl/peSklopa-form.tpl',
-    'formSchema!programskaEnotaSklopa'
+    'formSchema!programskaEnotaSklopa',
+    'radio'
 ], function (
         Backgrid,
         i18next,
         PostavkeView,
         formTpl,
-        schema
+        schema,
+        Radio
         ) {
     
     var DrugiVirView = PostavkeView.extend({
@@ -70,5 +72,30 @@ define([
             }
         ]
     });
+    
+    DrugiVirView.prototype.onGridAction = function (model, action) {
+        if (!this.disabled) {
+            this.triggerMethod(action, model);
+        }
+        else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("info.shraniEnotoPrograma"),
+                code: '9000600',
+                severity: 'info'
+            });
+        }
+    };
+    
+    DrugiVirView.prototype.onDodaj = function () {
+        if (!this.disabled) {
+            PostavkeView.prototype.onDodaj.apply(this, arguments);
+        } else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("info.shraniEnotoPrograma"),
+                code: '9000600',
+                severity: 'info'
+            });
+        }
+    };
     return DrugiVirView;
 });

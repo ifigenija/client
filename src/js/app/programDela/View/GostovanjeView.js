@@ -20,7 +20,7 @@ define([
         ZapisiLayout,
         schema
         ) {
-    
+
     var GostovanjeView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -102,7 +102,7 @@ define([
 
         return View;
     };
-    
+
     /**
      * overridana metoda
      * @param {type} view
@@ -131,7 +131,15 @@ define([
             model.set('datumPremiere', uprizoritev.datumPremiere);
         }
     };
-    
+
+    GostovanjeView.prototype.imaKoprodukcijeChange = function (form, editor) {
+        var imaKop = false;
+        if (this.model.get('id')) {
+            imaKop = editor.getValue();
+        }
+        this.izrisKoprodukcije(imaKop);
+    };
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -143,6 +151,6 @@ define([
         });
         this.prilogeR.show(view);
     };
-    
+
     return GostovanjeView;
 });

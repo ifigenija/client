@@ -171,10 +171,14 @@ define([
             }
             this.form.on('uprizoritev:change', this.togglePrenesi, this);
         }
+        var imaKoprodukcije = this.form.fields.imaKoprodukcije;
 
         if (this.model.get('tipProgramskeEnote')) {
             this.izrisKoprodukcije(this.model.get('imaKoprodukcije'));
             this.form.on('tipProgramskeEnote:change', this.imaKoprodukcijeChange, this);
+        } else if (imaKoprodukcije) { //v primeru da imamo imaProdukcije v formi
+            this.imaKoprodukcijeChange(null, imaKoprodukcije.editor);
+            this.form.on('imaKoprodukcije:change', this.imaKoprodukcijeChange, this);
         }
     };
     EnotaProgramaView.prototype.unBindEvents = function () {
@@ -331,6 +335,15 @@ define([
         this.prikaziPodatke();
         this.triggerMethod('form:change', this.form);
     };
+    
+    /**
+     * razlika pri preračunavanju je ali se delež preračuna ali ne
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.izracunajPrikaznaPolja = function () {
+        var model = this.model;
+        model.preracunajInfo(true);
+    };
 
     /**
      * prikažemo in preračunamo vse prikazne vrednosti
@@ -341,7 +354,7 @@ define([
         if (!this.form.commit()) {
             var model = this.model;
 
-            model.preracunajInfo(true);
+            this.izracunajPrikaznaPolja();
             this.zaprosenoChange();
 
             var f = Handlebars.formatNumber;
@@ -544,6 +557,7 @@ define([
                 if (this.koprodukcije) {
                     this.koprodukcije.disabled = true;
                 }
+                //dodati se še mora za zapis
             }
         }
     };

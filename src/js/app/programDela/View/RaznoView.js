@@ -27,6 +27,7 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'programiRazno',
         formTitle: i18next.t('programRazno.title'),
+        disabled: false,
         regions: {
             drugiViriR: '.region-drugiViri',
             koprodukcijeR: '.region-koprodukcije',
@@ -96,6 +97,51 @@ define([
             }
         ]
     });
+    
+    RaznoView.prototype.izracunajPrikaznaPolja = function () {
+        var model = this.model;
+        model.preracunajInfo(false);
+    };
+    
+    RaznoView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [
+                    [
+                        this.buttons.shrani,
+                        this.buttons.preklici,
+                        this.buttons.izracunaj,
+                        this.buttons.nasvet
+                    ]
+                ] : [[this.buttons.dodaj]];
+    };
+
+
+    RaznoView.prototype.imaKoprodukcijeChange = function (form, editor) {
+        var imaKop = false;
+        if (this.model.get('id')) {
+            imaKop = editor.getValue();
+        }
+        this.izrisKoprodukcije(imaKop);
+    };
+    
+     /**
+     * disable/enable gumbe v drugihvirih, koprodukcijah in zapisih
+     * @returns {undefined}
+     */
+    RaznoView.prototype.disablePostavke = function () {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton('doc-postavka-shrani');
+        if (but) {
+            if (!but.get('disabled') && this.model.get('id')) {
+                this.drugiViri.disabled = true;
+                if (this.koprodukcije) {
+                    this.koprodukcije.disabled = true;
+                }
+                this.pes.disabled = true;
+                //dodati se še mora za zapis
+            }
+        }
+    };
 
     /**
      * 
@@ -127,7 +173,7 @@ define([
      * @returns {undefined}
      */
     RaznoView.prototype.renderPES = function () {
-        var view = new PESView({
+        var view = this.pes = new PESView({
             collection: this.model.peSklopiCollection,
             dokument: this.model
         });

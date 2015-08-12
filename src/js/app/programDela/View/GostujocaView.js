@@ -80,18 +80,28 @@ define([
             }
         ]
     });
-
+    
     /**
-     * Uprizoritev ima samo kot informacijo. Se ne prenašajo podatki
-     * Zato smo overridali s prazno metodo
-     * @returns {undefined}
+     * Vsi gumbi, ki so navoljo toolbaru za izrisS
+     * @returns {Array}
      */
-    GostujocaView.prototype.uprizoritevChange = function () {
-
+    GostujocaView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [
+                    [
+                        this.buttons.shrani,
+                        this.buttons.preklici,
+                        this.buttons.izracunaj,
+                        this.buttons.nasvet
+                    ]
+                ] : [[this.buttons.dodaj]];
     };
 
     GostujocaView.prototype.imaKoprodukcijeChange = function (form, editor) {
-        var imaKop = editor.getValue();
+        var imaKop = false;
+        if (this.model.get('id')) {
+            imaKop = editor.getValue();
+        }
         this.izrisKoprodukcije(imaKop);
     };
 
@@ -152,23 +162,9 @@ define([
         this.form.off('imaKoprodukcije:change', this.imaKoprodukcijeChange, this);
     };
 
-    /**
-     * prikažemo in preračunamo vse prikazne vrednosti
-     * v nekaterih programskih enotah bo potrebno overridat(festival, gostujoča, razno)
-     * @returns {undefined}
-     */
-    EnotaProgramaView.prototype.prikaziPodatke = function () {
-        if (!this.form.commit()) {
-            var model = this.model;
-
-            model.preracunajInfo(false);
-            this.zaprosenoChange();
-
-            var f = Handlebars.formatNumber;
-            this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
-            this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
-            this.$('.celotnaVrednost').html(f(model.get('celotnaVrednost'), 2));
-        }
+    GostujocaView.prototype.izracunajPrikaznaPolja = function () {
+        var model = this.model;
+        model.preracunajInfo(false);
     };
 
     /**
