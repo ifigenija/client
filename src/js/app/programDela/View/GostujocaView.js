@@ -18,7 +18,7 @@ define([
         schema,
         Handlebars
         ) {
-    
+
     var GostujocaView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -80,17 +80,56 @@ define([
             }
         ]
     });
-    
+
     /**
      * Uprizoritev ima samo kot informacijo. Se ne prenašajo podatki
      * Zato smo overridali s prazno metodo
      * @returns {undefined}
      */
     GostujocaView.prototype.uprizoritevChange = function () {
-    
+
     };
-    
-    GostujocaView.prototype.dodatniFormEventi = function () {
+
+    GostujocaView.prototype.imaKoprodukcijeChange = function () {
+        var self = this;
+        var izrisKoprodukcije = function (form, editor) {
+            var imaKop = editor.getValue();
+
+            if (imaKop && self.model.get('id')) {
+                self.renderKoprodukcije();
+                self.disableGumbe();
+            } else {
+                self.koprodukcijeR.empty();
+            }
+        };
+
+        if (this.model.get('imaKoprodukcije')) {
+            izrisKoprodukcije(null, this.form.fields.imaKoprodukcije.editor);
+        }
+
+        this.form.on('imaKoprodukcije:change', izrisKoprodukcije, this);
+    };
+
+    GostujocaView.prototype.strosekOdkPred = function () {
+        if (!this.form.commit()) {
+            var model = this.model;
+            var polja = this.form.fields;
+            var nasDelez = model.get('nasDelez');
+
+            if (model.get('strosekOdkPred') > nasDelez) {
+                polja.strosekOdkPred.setError('Strošek odkupa predstave ne sme biti večji kot ' + nasDelez);
+            } else {
+                polja.strosekOdkPred.clearError();
+            }
+        }
+    };
+
+    GostujocaView.prototype.onRenderForm = function () {
+        if (!this.model.isNew()) {
+            this.renderPriloge();
+            this.renderDrugiViri();
+        }
+        
         if (this.model) {
 
             var self = this;
@@ -103,9 +142,33 @@ define([
             vnosnaPolja.forEach(function (i) {
                 self.form.on(i + ':change', self.prikaziPodatke, self);
             });
+
+            this.zaprosenoChange();
+            this.imaKoprodukcijeChange();
+            this.form.on('strosekOdkPred:change', this.strosekOdkPred, this);
+            this.form.on('nasDelez:change', this.strosekOdkPred, this);
         }
     };
-    
+
+    /**
+     * prikažemo in preračunamo vse prikazne vrednosti
+     * v nekaterih programskih enotah bo potrebno overridat(festival, gostujoča, razno)
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.prikaziPodatke = function () {
+        if (!this.form.commit()) {
+            var model = this.model;
+
+            model.preracunajInfo(false);
+            this.zaprosenoChange();
+
+            var f = Handlebars.formatNumber;
+            this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
+            this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
+            this.$('.celotnaVrednost').html(f(model.get('celotnaVrednost'), 2));
+        }
+    };
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -117,6 +180,6 @@ define([
         });
         this.prilogeR.show(view);
     };
-    
+
     return GostujocaView;
 });

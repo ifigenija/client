@@ -32,9 +32,9 @@ define([
             avtHonF: 0.0,
             matF: 0.0,
             odkupAPF: 0.0,
-            odkupPF: 0.0,
+            strosekOdkPredF: 0.0,
             transStrF: 0.0, //mednarodno gostovanje
-            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.0
         },
@@ -62,7 +62,7 @@ define([
             postavka.dokument = this;
             return postavka;
         },
-        preracunajInfo: function () {
+        preracunajInfo: function (nasDelez) {
 
             var tan = this.get('tantieme');
             var avtPra = this.get('avtorskePravice');
@@ -71,7 +71,9 @@ define([
             var javni = this.get('drugiJavni');
             var zap = this.get('zaproseno');
 
-            this.set('nasDelez', tan + avtPra + avtHon + mat);
+            if (nasDelez) {
+                this.set('nasDelez', tan + avtPra + avtHon + mat);
+            }
 
             var viri = this.drugiViriCollection;
             var kopro = this.koprodukcijeCollection;
@@ -89,12 +91,12 @@ define([
                 }
                 stevec++;
             });
-            
+
             var nasD = this.get('nasDelez');
-            
+
             var lastSred = nasD - (javni + zap + viriVsota);
             var celVred = nasD + koproVsota;
-            
+
             this.set('lastnaSredstva', lastSred);
             this.set('celotnaVrednost', celVred);
 
@@ -148,13 +150,13 @@ define([
                 this.set('avtorskePraviceI', produkt);
             }
 
-            faktor = this.get('odkupPF');
+            faktor = this.get('strosekOdkPredF');
             if (faktor) {
-                produkt = this.get('odkupPredstave') * faktor;
+                produkt = this.get('strosekOdkPred') * faktor;
                 if (produkt) {
                     vsota += produkt;
                 }
-                this.set('odkupPredstaveI', produkt);
+                this.set('strosekOdkPredI', produkt);
             }
 
             faktor = this.get('transStrF');
@@ -166,22 +168,22 @@ define([
                 this.set('transportniStroskiI', produkt);
             }
 
-            faktor = this.get('dnevPZF');
+            faktor = this.get('dnevPrvZadF');
             if (faktor) {
-                produkt = this.get('dnevnicePZ') * faktor;
+                produkt = this.get('dnevPrvZad') * faktor;
                 if (produkt) {
                     vsota += produkt;
                 }
-                this.set('dnevnicePZI', produkt);
+                this.set('dnevPrvZadI', produkt);
             }
 
             faktor = this.get('dnevF');
             if (faktor) {
-                produkt = this.get('dnevnice') * faktor;
+                produkt = this.get('dnev') * faktor;
                 if (produkt) {
                     vsota += produkt;
                 }
-                this.set('dnevniceI', produkt);
+                this.set('dnevI', produkt);
             }
 
             this.set('vsota', vsota);
@@ -202,9 +204,9 @@ define([
             avtHonF: 0.0,
             matF: 0.0,
             odkupAPF: 0.0,
-            odkupPF: 0.0,
+            strosekOdkPredF: 0.0,
             transStrF: 0.0, //mednarodno gostovanje
-            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.7
         },
@@ -248,9 +250,9 @@ define([
             avtHonF: 0.0,
             matF: 0.0,
             odkupAPF: 0.0,
-            odkupPF: 0.5,
+            strosekOdkPredF: 0.5,
             transStrF: 0.0, //mednarodno gostovanje
-            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.0
         }
@@ -269,9 +271,9 @@ define([
             avtHonF: 1.0,
             matF: 1.0,
             odkupAPF: 1.0,
-            odkupPF: 0.0,
+            strosekOdkPredF: 0.0,
             transStrF: 0.0, //mednarodno gostovanje
-            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.0
         }
@@ -290,9 +292,9 @@ define([
             avtHonF: 0.7,
             matF: 0.0,
             odkupAPF: 0.0,
-            odkupPF: 0.0,
+            strosekOdkPredF: 0.0,
             transStrF: 0.0, //mednarodno gostovanje
-            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.0
         }
@@ -311,9 +313,9 @@ define([
             avtHonF: 0.6,
             matF: 0.0,
             odkupAPF: 0.0,
-            odkupPF: 0.0,
+            strosekOdkPredF: 0.0,
             transStrF: 0.0, //mednarodno gostovanje
-            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.0
         }
@@ -332,9 +334,9 @@ define([
             avtHonF: 0.7,
             matF: 0.7,
             odkupAPF: 0.7,
-            odkupPF: 0.0,
+            strosekOdkPredF: 0.0,
             transStrF: 0.0, //mednarodno gostovanje
-            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.0
         }
@@ -353,9 +355,9 @@ define([
             avtHonF: 0.6,
             matF: 0.0,
             odkupAPF: 0.7,
-            odkupPF: 0.0,
+            strosekOdkPredF: 0.0,
             transStrF: 1.0, //mednarodno gostovanje
-            dnevPZF: 1.0, //mednarodno gostovanje
+            dnevPrvZadF: 1.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.0
         }
@@ -374,9 +376,9 @@ define([
             avtHonF: 0.0,
             matF: 0.0,
             odkupAPF: 0.0,
-            odkupPF: 0.0,
+            strosekOdkPredF: 0.0,
             transStrF: 0.0, //mednarodno gostovanje
-            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.7
         }
@@ -395,9 +397,9 @@ define([
             avtHonF: 0.0,
             matF: 0.0,
             odkupAPF: 0.0,
-            odkupPF: 0.0,
+            strosekOdkPredF: 0.0,
             transStrF: 0.0, //mednarodno gostovanje
-            dnevPZF: 0.0, //mednarodno gostovanje
+            dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.7
         }

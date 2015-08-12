@@ -47,20 +47,28 @@
         <td class="col-numbers">{{u "formatNumber" avtorskePraviceI}}</td>
     </tr>
     {{/if}}
+    {{#if strosekOdkPredF}}
+    <tr>
+        <td>{{t "ep.odkupPredstave"}}</td>
+        <td class="col-numbers">{{u "formatNumber" strosekOdkPred}}</td>
+        <td class="col-numbers">{{u "formatNumber" strosekOdkPredF}}</td>
+        <td class="col-numbers">{{u "formatNumber" strosekOdkPredI}}</td>
+    </tr>
+    {{/if}}
     {{#if transStrF}}
     <tr>
         <td>{{t "ep.odkupPredstave"}}</td>
-        <td class="col-numbers">{{u "formatNumber" odkupPredstave}}</td>
+        <td class="col-numbers">{{u "formatNumber" transportniStroski}}</td>
         <td class="col-numbers">{{u "formatNumber" transStrF}}</td>
-        <td class="col-numbers">{{u "formatNumber" odkupPredstaveI}}</td>
+        <td class="col-numbers">{{u "formatNumber" transportniStroskiI}}</td>
     </tr>
     {{/if}}
     {{#if dnevPZF}}
     <tr>
         <td>{{t "ep.dnevnicePZ"}}</td>
-        <td class="col-numbers">{{u "formatNumber" dnevnicePZ}}</td>
-        <td class="col-numbers">{{u "formatNumber" dnevPZF}}</td>
-        <td class="col-numbers">{{u "formatNumber" dnevnicePZI}}</td>
+        <td class="col-numbers">{{u "formatNumber" dnevPrvZad}}</td>
+        <td class="col-numbers">{{u "formatNumber" dnevPrvZad}}</td>
+        <td class="col-numbers">{{u "formatNumber" dnevPrvZadI}}</td>
     </tr>
     {{/if}}
     {{#if dnevF}}
@@ -68,7 +76,7 @@
         <td>{{t "ep.dnevnice"}}</td>
         <td class="col-numbers">{{u "formatNumber" dnevnice}}</td>
         <td class="col-numbers">{{u "formatNumber" dnevF}}</td>
-        <td class="col-numbers">{{u "formatNumber" dnevnice}}</td>
+        <td class="col-numbers">{{u "formatNumber" dnev}}</td>
     </tr>
     {{/if}}
     <tr>

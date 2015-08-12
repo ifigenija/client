@@ -154,6 +154,28 @@ define([
             this.renderPriloge();
             this.renderDrugiViri();
         }
+        
+        if (this.model) {
+
+            var self = this;
+            var vnosnaPolja = [
+                'avtorskiHonorarji',
+                'tantieme',
+                'avtorskePravice',
+                'nasDelez',
+                'materialni',
+                'drugiJavni',
+                'zaproseno'
+            ];
+
+            vnosnaPolja.forEach(function (i) {
+                self.form.on(i + ':change', self.prikaziPodatke, self);
+            });
+
+            this.uprizoritevChange();
+            this.zaprosenoChange();
+            this.imaKoprodukcijeChange();
+        }
     };
     /**
      * Izris prilog - privzeto se ne izriše nič. 
@@ -275,7 +297,7 @@ define([
         if (!this.form.commit()) {
             var model = this.model;
 
-            model.preracunajInfo();
+            model.preracunajInfo(true);
             this.zaprosenoChange();
 
             var f = Handlebars.formatNumber;
@@ -333,6 +355,23 @@ define([
     };
 
     /**
+     * overridamo v enotah programa
+     * metoda vrne view, ki se uporabi v izračunaj/zaprošeno modal
+     * @returns {PostavkeView@call;extend.prototype.getIzracunajView.IzracunajView}
+     */
+    EnotaProgramaView.prototype.getIzracunajView = function () {
+
+        var IzracunajView = Marionette.ItemView.extend({
+            template: izracunajTpl,
+            initialize: function () {
+                this.model.preracunajZaproseno();
+            }
+        });
+
+        return IzracunajView;
+    };
+
+    /**
      * ob kliku izracunaj/zaprošeno
      * @returns {undefined}
      */
@@ -341,12 +380,7 @@ define([
 
         if (!this.form.commit()) {
 
-            var IzracunajView = Marionette.ItemView.extend({
-                template: izracunajTpl,
-                initialize: function () {
-                    this.model.preracunajZaproseno();
-                }
-            });
+            var IzracunajView = this.getIzracunajView();
 
             var view = new IzracunajView({
                 tagName: 'table',
@@ -447,7 +481,7 @@ define([
      * funkcija poskrbi da se koprodukcije izrišejo samo če so koprodukcije označene
      * @returns {undefined}
      */
-    EnotaProgramaView.prototype.tipProEnoChange = function () {
+    EnotaProgramaView.prototype.imaKoprodukcijeChange = function () {
         var self = this;
         var toggleKoprodukcija = function (form, editor) {
             var model = new TipProEnoModel({id: editor.getValue('tipProgramskeEnote')});
@@ -469,35 +503,6 @@ define([
         }
 
         this.form.on('tipProgramskeEnote:change', toggleKoprodukcija, this);
-    };
-
-    /**
-     * metoda je overridana
-     * klic metode se izvede v metodi renderform v formview 
-     * @returns {undefined}
-     */
-    EnotaProgramaView.prototype.dodatniFormEventi = function () {
-        if (this.model) {
-
-            var self = this;
-            var vnosnaPolja = [
-                'avtorskiHonorarji',
-                'tantieme',
-                'avtorskePravice',
-                'nasDelez',
-                'materialni',
-                'drugiJavni',
-                'zaproseno'
-            ];
-
-            vnosnaPolja.forEach(function (i) {
-                self.form.on(i + ':change', self.prikaziPodatke, self);
-            });
-
-            this.uprizoritevChange();
-            this.zaprosenoChange();
-            this.tipProEnoChange();
-        }
     };
 
     /**
@@ -532,14 +537,7 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.onSaveSuccess = function (model) {
-        var self = this;
-        if (!this.form.commit()) {
-            model.fetch({
-                success: function () {
-                    self.renderForm();
-                }
-            });
-        }
+        this.renderForm();
     };
 
     return EnotaProgramaView;
