@@ -100,7 +100,7 @@ define([
         var View = PrenesiView.extend({
             template: prenesiTpl,
             podatkiUprizoritve: this.podatkiUprizoritve,
-            jeNa: true
+            jeNa: false
         });
 
         return View;

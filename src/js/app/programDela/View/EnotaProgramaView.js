@@ -145,6 +145,70 @@ define([
                 ] : [[this.buttons.dodaj]];
     };
 
+    EnotaProgramaView.prototype.bindEvents = function () {
+        var self = this;
+        var vnosnaPolja = [
+            'avtorskiHonorarji',
+            'tantieme',
+            'avtorskePravice',
+            'nasDelez',
+            'materialni',
+            'drugiJavni',
+            'zaproseno'
+        ];
+
+        vnosnaPolja.forEach(function (i) {
+            self.form.on(i + ':change', self.prikaziPodatke, self);
+        });
+
+        this.form.on('zaproseno:change', this.zaprosenoChange, this);
+
+        var uprizoritev = this.form.fields.uprizoritev;
+        if (uprizoritev) {
+            var podatek = uprizoritev.editor.getValue('uprizoritev');
+            if (podatek) {
+                this.togglePrenesi('doc-postavka-prenesi', uprizoritev.editor);
+            }
+            this.form.on('uprizoritev:change', this.togglePrenesi, this);
+        }
+
+        if (this.model.get('tipProgramskeEnote')) {
+            this.izrisKoprodukcije(this.model.get('imaKoprodukcije'));
+            this.form.on('tipProgramskeEnote:change', this.imaKoprodukcijeChange, this);
+        }
+    };
+    EnotaProgramaView.prototype.unBindEvents = function () {
+        var self = this;
+        var vnosnaPolja = [
+            'avtorskiHonorarji',
+            'tantieme',
+            'avtorskePravice',
+            'nasDelez',
+            'materialni',
+            'drugiJavni',
+            'zaproseno'
+        ];
+
+        vnosnaPolja.forEach(function (i) {
+            self.form.off(i + ':change', self.prikaziPodatke, self);
+        });
+
+        this.form.off('uprizoritev:change', this.togglePrenesi, this);
+        this.form.off('zaproseno:change', this.zaprosenoChange, this);
+        this.form.off('tipProgramskeEnote:change', this.imaKoprodukcijeChange, this);
+    };
+
+    /**
+     * unbindamo evente od forme predno na novo renderamo formo 
+     * in se na novo bindajo eventi
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.renderFormEvents = function () {
+        this.unBindEvents();
+        this.renderForm();
+    };
+
+
     /**
      * ob izrisu forme se izvede še izris postavk
      * @returns {undefined}
@@ -154,28 +218,8 @@ define([
             this.renderPriloge();
             this.renderDrugiViri();
         }
-        
-        if (this.model) {
 
-            var self = this;
-            var vnosnaPolja = [
-                'avtorskiHonorarji',
-                'tantieme',
-                'avtorskePravice',
-                'nasDelez',
-                'materialni',
-                'drugiJavni',
-                'zaproseno'
-            ];
-
-            vnosnaPolja.forEach(function (i) {
-                self.form.on(i + ':change', self.prikaziPodatke, self);
-            });
-
-            this.uprizoritevChange();
-            this.zaprosenoChange();
-            this.imaKoprodukcijeChange();
-        }
+        this.bindEvents();
     };
     /**
      * Izris prilog - privzeto se ne izriše nič. 
@@ -192,7 +236,7 @@ define([
         if (!this.form.commit()) {
             this.model.fetch({
                 success: function () {
-                    self.renderForm();
+                    self.renderFormEvents();
                 }
             });
         }
@@ -283,7 +327,7 @@ define([
 
         this.prenesiVrednosti(view, model, uprizoritev);
 
-        this.renderForm();
+        this.renderFormEvents();
         this.prikaziPodatke();
         this.triggerMethod('form:change', this.form);
     };
@@ -408,7 +452,7 @@ define([
      */
     EnotaProgramaView.prototype.prepisi = function (modal) {
         this.model.set('zaproseno', modal.options.content.model.get('vsota'));
-        this.renderForm();
+        this.renderFormEvents();
         this.triggerMethod('form:change', this.form);
         this.triggerMethod('zaproseno:change', this.form);
     };
@@ -433,25 +477,13 @@ define([
      * omogočimo ali onemogočimo gumb prenesi
      * @returns {undefined}
      */
-    EnotaProgramaView.prototype.uprizoritevChange = function () {
-        var uprizoritev = this.form.fields.uprizoritev;
-        if (uprizoritev) {
-            var podatek = uprizoritev.editor.getValue('uprizoritev');
-            if (podatek) {
-                this.toggleGumb('doc-postavka-prenesi', false);
-            }
-
-            var toggleEnabled = function (form, editor) {
-                var podatek = editor.getValue('uprizoritev');
-                if (!podatek) {
-                    this.toggleGumb('doc-postavka-prenesi', true);
-                }
-                else {
-                    this.toggleGumb('doc-postavka-prenesi', false);
-                }
-            };
-
-            this.form.on('uprizoritev:change', toggleEnabled, this);
+    EnotaProgramaView.prototype.togglePrenesi = function (form, editor) {
+        var podatek = editor.getValue('uprizoritev');
+        if (!podatek) {
+            this.toggleGumb('doc-postavka-prenesi', true);
+        }
+        else {
+            this.toggleGumb('doc-postavka-prenesi', false);
         }
     };
 
@@ -460,56 +492,50 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.zaprosenoChange = function () {
+        if (!this.form.commit()) {
+            this.model.preracunajZaproseno();
+            var polja = this.form.fields;
 
-        var funkcija = function () {
-            if (!this.form.commit()) {
-                this.model.preracunajZaproseno();
-                var polja = this.form.fields;
-
-                if (this.model.get('vsota') < polja.zaproseno.getValue()) {
-                    polja.zaproseno.setError('Zaprošeno ne sme biti več kot ' + this.model.get('vsota'));
-                } else {
-                    polja.zaproseno.clearError();
-                }
+            if (this.model.get('vsota') < polja.zaproseno.getValue()) {
+                polja.zaproseno.setError('Zaprošeno ne sme biti več kot ' + this.model.get('vsota'));
+            } else {
+                polja.zaproseno.clearError();
             }
-        };
-
-        this.form.on('zaproseno:change', funkcija, this);
+        }
+    };
+    EnotaProgramaView.prototype.izrisKoprodukcije = function (imaKop) {
+        if (imaKop) {
+            this.renderKoprodukcije();
+            this.disablePostavke();
+        } else {
+            this.koprodukcijeR.empty();
+        }
     };
 
     /**
      * funkcija poskrbi da se koprodukcije izrišejo samo če so koprodukcije označene
      * @returns {undefined}
      */
-    EnotaProgramaView.prototype.imaKoprodukcijeChange = function () {
+    EnotaProgramaView.prototype.imaKoprodukcijeChange = function (form, editor) {
+        var model = new TipProEnoModel({id: editor.getValue('tipProgramskeEnote')});
         var self = this;
-        var toggleKoprodukcija = function (form, editor) {
-            var model = new TipProEnoModel({id: editor.getValue('tipProgramskeEnote')});
 
-            var izrisKoprodukcije = function () {
-                if (model.get('koprodukcija') && self.model.get('id')) {
-                    self.renderKoprodukcije();
-                    self.disableGumbe();
-                } else {
-                    self.koprodukcijeR.empty();
-                }
-            };
-
-            model.fetch({success: izrisKoprodukcije});
+        var izrisKoprodukcije = function () {
+            if (model.get('koprodukcija') && self.model.get('id')) {
+                self.izrisKoprodukcije(true);
+            } else {
+                self.izrisKoprodukcije(false);
+            }
         };
 
-        if (this.model.get('tipProgramskeEnote')) {
-            toggleKoprodukcija(null, this.form.fields.tipProgramskeEnote.editor);
-        }
-
-        this.form.on('tipProgramskeEnote:change', toggleKoprodukcija, this);
+        model.fetch({success: izrisKoprodukcije});
     };
 
     /**
      * disable/enable gumbe v drugihvirih, koprodukcijah in zapisih
      * @returns {undefined}
      */
-    EnotaProgramaView.prototype.disableGumbe = function () {
+    EnotaProgramaView.prototype.disablePostavke = function () {
         var tb = this.getToolbarModel();
         var but = tb.getButton('doc-postavka-shrani');
         if (but) {
@@ -529,7 +555,7 @@ define([
     EnotaProgramaView.prototype.formChange = function () {
         FormView.prototype.formChange.apply(this, arguments);
 
-        this.disableGumbe();
+        this.disablePostavke();
     };
 
     /**
@@ -537,7 +563,14 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.onSaveSuccess = function (model) {
-        this.renderForm();
+        var self = this;
+        if (!this.form.commit()) {
+            model.fetch({
+                success: function () {
+                    self.renderFormEvents();
+                }
+            });
+        }
     };
 
     return EnotaProgramaView;

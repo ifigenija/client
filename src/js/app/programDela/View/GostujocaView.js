@@ -90,24 +90,9 @@ define([
 
     };
 
-    GostujocaView.prototype.imaKoprodukcijeChange = function () {
-        var self = this;
-        var izrisKoprodukcije = function (form, editor) {
-            var imaKop = editor.getValue();
-
-            if (imaKop && self.model.get('id')) {
-                self.renderKoprodukcije();
-                self.disableGumbe();
-            } else {
-                self.koprodukcijeR.empty();
-            }
-        };
-
-        if (this.model.get('imaKoprodukcije')) {
-            izrisKoprodukcije(null, this.form.fields.imaKoprodukcije.editor);
-        }
-
-        this.form.on('imaKoprodukcije:change', izrisKoprodukcije, this);
+    GostujocaView.prototype.imaKoprodukcijeChange = function (form, editor) {
+        var imaKop = editor.getValue();
+        this.izrisKoprodukcije(imaKop);
     };
 
     GostujocaView.prototype.strosekOdkPred = function () {
@@ -124,30 +109,47 @@ define([
         }
     };
 
-    GostujocaView.prototype.onRenderForm = function () {
-        if (!this.model.isNew()) {
-            this.renderPriloge();
-            this.renderDrugiViri();
+    GostujocaView.prototype.bindEvents = function () {
+
+        var self = this;
+        var vnosnaPolja = [
+            'nasDelez',
+            'drugiJavni',
+            'zaproseno'
+        ];
+
+        vnosnaPolja.forEach(function (i) {
+            self.form.on(i + ':change', self.prikaziPodatke, self);
+        });
+
+        this.form.on('zaproseno:change', this.zaprosenoChange, this);
+        this.form.on('strosekOdkPred:change', this.strosekOdkPred, this);
+        this.form.on('nasDelez:change', this.strosekOdkPred, this);
+
+        if (this.model.get('imaKoprodukcije')) {
+            this.imaKoprodukcijeChange(null, this.form.fields.imaKoprodukcije.editor);
         }
-        
-        if (this.model) {
 
-            var self = this;
-            var vnosnaPolja = [
-                'nasDelez',
-                'drugiJavni',
-                'zaproseno'
-            ];
+        this.form.on('imaKoprodukcije:change', this.imaKoprodukcijeChange, this);
+    };
+    
+    GostujocaView.prototype.unBindEvents = function () {
 
-            vnosnaPolja.forEach(function (i) {
-                self.form.on(i + ':change', self.prikaziPodatke, self);
-            });
+        var self = this;
+        var vnosnaPolja = [
+            'nasDelez',
+            'drugiJavni',
+            'zaproseno'
+        ];
 
-            this.zaprosenoChange();
-            this.imaKoprodukcijeChange();
-            this.form.on('strosekOdkPred:change', this.strosekOdkPred, this);
-            this.form.on('nasDelez:change', this.strosekOdkPred, this);
-        }
+        vnosnaPolja.forEach(function (i) {
+            self.form.off(i + ':change', self.prikaziPodatke, self);
+        });
+
+        this.form.off('zaproseno:change', this.zaprosenoChange, this);
+        this.form.off('strosekOdkPred:change', this.strosekOdkPred, this);
+        this.form.off('nasDelez:change', this.strosekOdkPred, this);
+        this.form.off('imaKoprodukcije:change', this.imaKoprodukcijeChange, this);
     };
 
     /**
