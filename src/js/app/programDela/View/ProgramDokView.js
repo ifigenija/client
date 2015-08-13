@@ -12,7 +12,10 @@ define([
     'app/Max/View/TabControl',
     'app/Zapisi/View/ZapisiLayout',
     'marionette',
-    'app/produkcija/Model/Sezona'
+    'app/produkcija/Model/Sezona',
+    'app/Max/View/Toolbar',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         Radio,
         i18next,
@@ -24,7 +27,9 @@ define([
         TabControl,
         ZapisiLayout,
         Marionette,
-        SezonaModel
+        SezonaModel,
+        Toolbar,
+        $
         ) {
 
     var ch = Radio.channel('layout');
@@ -95,9 +100,81 @@ define([
             tabsR: '.programDela-tabs',
             sklopEnaR: '.sklopEna-tabs',
             sklopDvaR: '.sklopDva-tabs',
-            prilogeR: '.region-priloge'
-        }
+            prilogeR: '.region-priloge',
+            toolbarR: '.region-doctoolbar'
+        },
+        buttons: [[
+                {
+                    id: 'doc-kloniraj',
+                    label: i18next.t('std.kloniraj'),
+                    element: 'button-trigger',
+                    trigger: 'kloniraj'
+                },
+                {
+                    id: 'doc-zakleni',
+                    label: i18next.t('std.zakleni'),
+                    element: 'button-trigger',
+                    trigger: 'zakleni'
+                }
+            ]]
     });
+
+    /**
+     * Ko kliknemo na gumb kloniraj v toolbaru programadela
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onKloniraj = function () {
+
+        var success = function () {
+            //lahko bi odprlo kloniran program dela
+        };
+
+        var error = function () {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("napaka.kloniranje"),
+                code: '9000700',
+                severity: 'error'
+            });
+        };
+
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
+        rpc.call('kloniraj', {
+            'programDelaId': this.model.get('id')},
+        success, error);
+    };
+    
+    /**
+     * Ko kliknemo na gumb zakleni v toolbaru programadela
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onZakleni = function () {
+
+        var success = function () {
+            //obpre se stran z vsemi programi dela (mogoče)!!!????
+        };
+
+        var error = function () {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("napaka.zakleni"),
+                code: '9000701',
+                severity: 'error'
+            });
+        };
+
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
+        rpc.call('zakleni', {
+            'programDelaId': this.model.get('id')},
+        success, error);
+    };
+
+    ProgramDokView.prototype.renderToolbar = function () {
+        var tb = new Toolbar({
+            buttonGroups: this.buttons,
+            listener: this
+        });
+
+        this.toolbarR.show(tb);
+    };
 
     /**
      * Izris tabov
@@ -406,7 +483,7 @@ define([
 
             self.kazalnikiR.show(view);
         };
-        
+
 
         this.model.fetch({
             error: function () {

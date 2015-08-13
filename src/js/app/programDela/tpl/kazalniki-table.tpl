@@ -55,6 +55,7 @@
             <td>{{t "kazalnik.stNekomerc"}}</td>
             <td class="col-numbers">{{u "formatNumber" stNekomerc 0}}</td>
         </tr>
+        <!--prištej stIzvPrem-->
         <tr>
             <td class="kazalnik-padleft">{{t "kazalnik.stIzvPonPrem"}}</td>
             <td class="col-numbers">{{u "formatNumber" stIzvPonPrem 0}}</td>
@@ -107,6 +108,18 @@
             <td>{{t "kazalnik.avgObiskPrired"}}</td>
             <td class="col-numbers">{{u "formatNumber" avgObiskPrired}}</td>
         </tr>
+        <tr><!--povprecje-->
+            <td>{{t "kazalnik.avgZasedDvoran"}}</td>
+            <td class="col-numbers">{{u "formatNumber" avgZasedDvoran}}</td>
+        </tr>
+        <tr><!--povprecje-->
+            <td>{{t "kazalnik.avgCenaVstopnice"}}</td>
+            <td class="col-numbers">{{u "formatNumber" avgCenaVstopnice}}</td>
+        </tr>
+        <tr>
+            <td>{{t "kazalnik.stProdVstopnic"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stProdVstopnic 0}}</td>
+        </tr>
         <tr>
             <td>{{t "kazalnik.stKoprodukcij"}}</td>
             <td class="col-numbers">{{u "formatNumber" stKoprodukcij 0}}</td>
@@ -136,8 +149,8 @@
             <td class="col-numbers">{{u "formatNumber" stHonorarnih 0}}</td>
         </tr>
         <tr>
-            <td class="kazalnik-padleft">{{t "kazalnik.statSamoz"}}</td>
-            <td class="col-numbers">{{u "formatNumber" statSamoz}}</td>
+            <td class="kazalnik-padleft">{{t "kazalnik.stHonorarnihIgrSamoz" 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrSamoz 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "kazalnik.stHonorarnihIgr"}}</td>
@@ -156,8 +169,8 @@
             <td class="col-numbers">{{u "formatNumber" sredstvaAvt}}</td>
         </tr>
         <tr>
-            <td class="kazalnik-padleft">{{t "kazalnik.statusSamoz"}}</td>
-            <td class="col-numbers">{{u "formatNumber" statusSamozs}}</td>
+            <td class="kazalnik-padleft">{{t "kazalnik.sredstvaAvtSamoz"}}</td>
+            <td class="col-numbers">{{u "formatNumber" sredstvaAvtSamoz}}</td>
         </tr>
     </tbody>
 </table>
