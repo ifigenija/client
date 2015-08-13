@@ -161,7 +161,7 @@ define([
             self.form.on(i + ':change', self.prikaziPodatke, self);
         });
 
-        this.form.on('zaproseno:change', this.zaprosenoChange, this);
+        //this.form.on('zaproseno:change', this.onZaprosenoChange, this);
 
         var uprizoritev = this.form.fields.uprizoritev;
         if (uprizoritev) {
@@ -198,7 +198,7 @@ define([
         });
 
         this.form.off('uprizoritev:change', this.togglePrenesi, this);
-        this.form.off('zaproseno:change', this.zaprosenoChange, this);
+        //this.form.off('zaproseno:change', this.onZaprosenoChange, this);
         this.form.off('tipProgramskeEnote:change', this.imaKoprodukcijeChange, this);
     };
 
@@ -354,7 +354,7 @@ define([
             var model = this.model;
 
             this.izracunajPrikaznaPolja();
-            this.zaprosenoChange();
+            this.onZaprosenoChange();
 
             var f = Handlebars.formatNumber;
             this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
@@ -465,8 +465,7 @@ define([
     EnotaProgramaView.prototype.prepisi = function (modal) {
         this.model.set('zaproseno', modal.options.content.model.get('vsota'));
         this.renderFormEvents();
-        Marionette.triggerMethodOn(this.form, 'change');
-        this.triggerMethod('zaproseno:change', this.form);
+        this.prikaziPodatke();
     };
 
     /**
@@ -503,7 +502,7 @@ define([
      * poskrbimo da se ob spremembi vrednosti pojavi napaka, če je ta potrebna
      * @returns {undefined}
      */
-    EnotaProgramaView.prototype.zaprosenoChange = function () {
+    EnotaProgramaView.prototype.onZaprosenoChange = function () {
         if (!this.form.commit()) {
             this.model.preracunajZaproseno();
             var polja = this.form.fields;

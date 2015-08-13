@@ -65,15 +65,28 @@ define([
         preracunajInfo: function (nasDelez) {
 
             var tan = this.get('tantieme');
+            tan = tan ? tan : 0;
+            
             var avtPra = this.get('avtorskePravice');
+            avtPra = avtPra ? avtPra : 0;
+            
             var avtHon = this.get('avtorskiHonorarji');
+            avtHon = avtHon ? avtHon : 0;
+            
             var mat = this.get('materialni');
+            mat = mat ? mat : 0;
+            
             var javni = this.get('drugiJavni');
+            javni = javni ? javni : 0;
+            
             var zap = this.get('zaproseno');
+            zap = zap ? zap : 0;
             
-            var dnevPrvZad = this.get('dnevPrvZad');
-            
+            var dnevPrvZad = this.get('dnevPrvZad');            
             dnevPrvZad = dnevPrvZad ? dnevPrvZad : 0;
+            
+            var transport = this.get('transportniStroski');            
+            transport = transport ? transport : 0;
 
             if (nasDelez) {
                 this.set('nasDelez', tan + avtPra + avtHon + mat + dnevPrvZad);
@@ -97,12 +110,9 @@ define([
             });
 
             var nasD = this.get('nasDelez');
+            nasD = nasD ? nasD : 0;
             
-            var transport = this.get('transportniStroski');
-            
-            transport = transport ? transport : 0;
-            
-
+            //celvredgsz(ali se prešteje našemu deležu) in vlozekgost(odsteje od našega deleža)
             var lastSred = nasD - (javni + zap + viriVsota + transport);
             var celVred = nasD + koproVsota;
 
@@ -244,6 +254,7 @@ define([
                     postavka = new PESklopaModel({
                         programRazno: this.id
                     });
+                    postavka.programRazno = this;
                     break;
             }
             postavka.dokument = this;

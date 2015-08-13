@@ -177,6 +177,9 @@ define([
             collection: this.model.peSklopiCollection,
             dokument: this.model
         });
+        
+        view.on('save:success', this.ponovenIzris, this);
+        view.on('destroy:success', this.ponovenIzris, this);        
 
         this.pesR.show(view);
     };

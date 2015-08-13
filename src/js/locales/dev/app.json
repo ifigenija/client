@@ -807,7 +807,7 @@
         "imaKoprodukcije": "Koprodukcije",
         "lastnaSredstva": "Lastna sredstva",
         "materialni": "Materialni stroški",
-        "nasDelez": "Naš delež",
+        "nasDelez": "Deleš matičnega JZ",
         "obiskDoma": "Število obiskovalcev na domačem odru",
         "obiskGost": "Število obiskovalcev na gostovanjih",
         "obiskZamejo": "Število obiskovalcev v zamejstvu",
@@ -837,7 +837,7 @@
             "uprizoritev": "",
             "celotnaVrednost": "Celotna vrednost projekta",
             "celotnaVrednostMat": "Celotna vrednost na matičnem odru",
-            "nasDelez": "Naš delež celotne vrednosti",
+            "nasDelez": "Delež matičnega javnega zavoda",
             "celotnaVrednostGostovSZ": "Celotna vrednost na gostovanjih po SLO in v zamejstvu",
             "zaproseno": "Zaprošena sredstva Ministrstva za kulturo",
             "lastnaSredstva": "Lastna sredstva, ki so na voljo",
@@ -986,7 +986,7 @@
         }
     },
     "drugiVir": {
-        "title": "Drugi vir",
+        "title": "Drugi viri",
         "znesek": "Znesek",
         "opis": "Opis",
         "enotaPrograma": "Enota programa",

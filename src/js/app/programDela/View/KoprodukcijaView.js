@@ -63,7 +63,7 @@ define([
 
     KoprodukcijaView.prototype.onGridAction = function (model, action) {
         if (!this.disabled) {
-            this.triggerMethod(action, model);
+            PostavkeView.prototype.onGridAction.apply(this, arguments);
         }
         else {
             Radio.channel('error').command('flash', {

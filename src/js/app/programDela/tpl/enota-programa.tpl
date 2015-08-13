@@ -11,8 +11,8 @@
              <div class="row">
                 <div class="col-sm-6">
                     <div class="row">
-                        <div class="col-sm-12 region-drugiViri"></div>
                         <div class="col-sm-12 region-koprodukcije"></div>
+                        <div class="col-sm-12 region-drugiViri"></div>                        
                     </div>
                 </div>
                 <div class="col-sm-6">

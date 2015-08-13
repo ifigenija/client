@@ -17,7 +17,7 @@ define([
         Radio
         ) {
     
-    var DrugiVirView = PostavkeView.extend({
+    var PESklopaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'peSklopa',
@@ -45,8 +45,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: 'number',
-                cell: 'date',
+                cell: 'string',
                 editable: false,
                 label: i18next.t('peSklopa.mesecPE'),
                 name: 'mesecPE',
@@ -73,9 +72,9 @@ define([
         ]
     });
     
-    DrugiVirView.prototype.onGridAction = function (model, action) {
+    PESklopaView.prototype.onGridAction = function (model, action) {
         if (!this.disabled) {
-            this.triggerMethod(action, model);
+            PostavkeView.prototype.onGridAction.apply(this, arguments);
         }
         else {
             Radio.channel('error').command('flash', {
@@ -86,7 +85,7 @@ define([
         }
     };
     
-    DrugiVirView.prototype.onDodaj = function () {
+    PESklopaView.prototype.onDodaj = function () {
         if (!this.disabled) {
             PostavkeView.prototype.onDodaj.apply(this, arguments);
         } else {
@@ -97,5 +96,5 @@ define([
             });
         }
     };
-    return DrugiVirView;
+    return PESklopaView;
 });
