@@ -6,7 +6,7 @@ define([
     'i18next',
     'app/programDela/View/EnotaProgramaView',
     'app/programDela/View/PrenesiView',
-    'template!../tpl/ponovitevPrejsnje-form3.tpl',
+    'template!../tpl/ponovitevPrejsnje-form.tpl',
     'template!../tpl/ponovitevPrejsnje-prenesi.tpl',
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!programPonovitevPrejsnjih'
@@ -95,7 +95,6 @@ define([
     /**
      * pridobimo view ki se uporabi pri prenosu podatkov iz uprizoritve v enotoprograma
      * preračunamo v viewju ker ni vseh podatkov v modelu in ker ni nujno da se bodo vrednosti prepisale
-     * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
      */
     PonovitevView.prototype.getPrenesiView = function () {
     var View = PrenesiView.extend({

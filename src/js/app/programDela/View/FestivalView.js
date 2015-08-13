@@ -70,6 +70,18 @@ define([
         ]
     });
     
+    FestivalView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [
+                    [
+                        this.buttons.shrani,
+                        this.buttons.preklici,
+                        this.buttons.izracunaj,
+                        this.buttons.nasvet
+                    ]
+                ] : [[this.buttons.dodaj]];
+    };
+    
     FestivalView.prototype.izracunajPrikaznaPolja = function () {
         var model = this.model;
         model.preracunajInfo(false);

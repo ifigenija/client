@@ -15,33 +15,43 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-md-2">
-            <dl>
-                <dt>{{t "ep.lastnaSredstva"}}: </dt>
-                <dd class="lastnaSredstva">{{u "formatNumber" lastnaSredstva}}</dd>
+            <dl class="prikazno-polje">
+                <dt class="prikazno-polje-naslov">{{t "ep.lastnaSredstva"}}: </dt>
+                <dd class="prikazno-polje-opis lastnaSredstva">
+                    <h3>{{u "formatNumber" lastnaSredstva}}</h3>
+                </dd>
             </dl>
         </div>
         <div class="col-xs-6 col-md-2">
-            <dl>
-                <dt>{{t "ep.celotnaVrednost"}}: </dt>
-                <dd class="celotnaVrednost">{{u "formatNumber" celotnaVrednost}}</dd>
+            <dl class="prikazno-polje">
+                <dt class="prikazno-polje-naslov">{{t "ep.celotnaVrednost"}}: </dt>
+                <dd class="prikazno-polje-opis celotnaVrednost">
+                    <h3>{{u "formatNumber" celotnaVrednost}}</h3>
+                </dd>
             </dl>
         </div>
         <div class="col-xs-6 col-md-2">
-            <dl>
-                <dt>{{t "ep.nasDelez"}}: </dt>
-                <dd class="nasDelez">{{u "formatNumber" nasDelez}}</dd>
+            <dl class="prikazno-polje">
+                <dt class="prikazno-polje-naslov">{{t "ep.nasDelez"}}: </dt>
+                <dd class="prikazno-polje-opis nasDelez">
+                    <h3>{{u "formatNumber" nasDelez}}</h3>
+                </dd>
             </dl>
         </div>
         <div class="col-xs-6 col-md-3">
-            <dl>
-                <dt>{{t "ep.datumZacStudija"}}: </dt>
-                <dd>{{u "date" datumZacStudija}}</dd>
+            <dl class="prikazno-polje">
+                <dt class="prikazno-polje-naslov">{{t "ep.datumZacStudija"}}: </dt>
+                <dd class="prikazno-polje-opis">
+                    <h3>{{u "date" datumZacStudija}}</h3>
+                </dd>
             </dl>
         </div>
         <div class="col-xs-6 col-md-3">
-            <dl>
-                <dt>{{t "ep.datumPremiere"}}: </dt>
-                <dd>{{u "date" datumPremiere}}</dd>
+            <dl class="prikazno-polje">
+                <dt class="prikazno-polje-naslov">{{t "ep.datumPremiere"}}: </dt>
+                <dd class="prikazno-polje-opis">
+                    <h3>{{u "date" datumPremiere}}</h3>
+                </dd>
             </dl>
         </div>
     </div>

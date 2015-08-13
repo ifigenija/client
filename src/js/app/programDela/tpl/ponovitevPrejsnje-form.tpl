@@ -1,92 +1,58 @@
-<div class="panel-group" id="accordion" role="tablist">
-    <div class="panel panel-default panel-form glava-panel">
-        <div class="panel-heading podatki" role="tab">
-            <div class="clearfix">
-                <h4 class="glava-title" data-toggle="collapse" data-parent="#accordion" href="#podatki">
-                    {{t "ponPrej.osnoviPodatki"}}
-                </h4>
-
+<form>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,avtorskiHonorarji,avtorskiHonorarjiSamoz,tantieme,avtorskePravice"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="materialni,zaproseno,drugiJavni,celotnaVrednostGostovSZ,vlozekGostitelja"></div>
             </div>
         </div>
-        <div id="podatki" class="panel-collapse collapse in" role="tabpanel">
-            <div class="panel-body">
-                <form>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12 col-lg-6" data-fields="uprizoritev,tipProgramskeEnote,obiskDoma"></div>
-                                <div class="col-sm-12 col-lg-6" data-fields="obiskGost,obiskZamejo"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12 col-lg-6" data-fields="ponoviDoma,ponoviZamejo"></div>
-                                <div class="col-sm-12 col-lg-6" data-fields="ponoviGost"></div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-12 col-lg-6" data-fields="obiskDoma,obiskGost,obiskZamejo,ponoviDoma,ponoviZamejo,ponoviGost"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="stZaposUmet,stZaposDrug,stHonorarnih,stHonorarnihIgr,stHonorarnihIgrTujJZ,stHonorarnihIgrSamoz"></div>
             </div>
         </div>
     </div>
-    <div class="panel panel-default panel-form glava-panel">
-        <div class="panel-heading koprodukcija">
-            <div class="clearfix">
-                <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#koprodukcija">
-                    {{t "ponPrej.sredstva"}}
-                </h4>
-
-            </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-2">
+            <dl class="prikazno-polje">
+                <dt class="prikazno-polje-naslov">{{t "ep.lastnaSredstva"}}: </dt>
+                <dd class="prikazno-polje-opis lastnaSredstva">
+                    <h3>{{u "formatNumber" lastnaSredstva}}</h3>
+                </dd>
+            </dl>
         </div>
-        <div id="koprodukcija" class="panel-collapse collapse" role="tabpanel">
-            <div class="panel-body">
-                <form>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12 col-lg-6" data-fields="zaproseno"></div>
-                                <div class="col-sm-12 col-lg-6" data-fields="drugiJavni"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12 col-lg-6" data-fields="celotnaVrednostGostovSZ"></div>
-                                <div class="col-sm-12 col-lg-6" data-fields="vlozekGostitelja"></div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+        <div class="col-xs-6 col-md-2">
+            <dl class="prikazno-polje">
+                <dt class="prikazno-polje-naslov">{{t "ep.celotnaVrednost"}}: </dt>
+                <dd class="prikazno-polje-opis celotnaVrednost">
+                    <h3>{{u "formatNumber" celotnaVrednost}}</h3>
+                </dd>
+            </dl>
         </div>
-    </div>
-    <div class="panel panel-default panel-form glava-panel">
-        <div class="panel-heading kadrovska">
-            <div class="clearfix">
-                <h4 class="glava-title collapsed" data-toggle="collapse" data-parent="#accordion" href="#kadrovska">
-                    {{t "ponPrej.kadrovska"}}
-                </h4>
-
-            </div>
+        <div class="col-xs-6 col-md-2">
+            <dl class="prikazno-polje">
+                <dt class="prikazno-polje-naslov">{{t "ep.nasDelez"}}: </dt>
+                <dd class="prikazno-polje-opis nasDelez">
+                    <h3>{{u "formatNumber" nasDelez}}</h3>
+                </dd>
+            </dl>
         </div>
-        <div id="kadrovska" class="panel-collapse collapse" role="tabpanel">
-            <div class="panel-body">
-                <form>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12 col-lg-6" data-fields="avtorskiHonorarji,tantieme,avtorskePravice"></div>
-                                <div class="col-sm-12 col-lg-6" data-fields="stZaposUmet,stZaposDrug"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12 col-lg-6" data-fields="stHonorarnih,stHonorarnihIgr"></div>
-                                <div class="col-sm-12 col-lg-6" data-fields="stHonorarnihIgrTujJZ,stHonorarnihIgrSamoz"></div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+        <div class="col-xs-6 col-md-3">
+            <dl class="prikazno-polje">
+                <dt class="prikazno-polje-naslov">{{t "ep.datumZacStudija"}}: </dt>
+                <dd class="prikazno-polje-opis">
+                    <h3>{{u "date" datumZacStudija}}</h3>
+                </dd>
+            </dl>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <dl class="prikazno-polje">
+                <dt class="prikazno-polje-naslov">{{t "ep.datumPremiere"}}: </dt>
+                <dd class="prikazno-polje-opis">
+                    <h3>{{u "date" datumPremiere}}</h3>
+                </dd>
+            </dl>
         </div>
     </div>
-</div>
+</form>

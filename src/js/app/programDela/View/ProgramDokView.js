@@ -51,7 +51,7 @@ define([
         },
         {
             title: i18next.t('kazalnik.d.kazalniki'),
-            name: i18next.t('programDela.kazalniki'),
+            name: i18next.t('kazalnik.naslov'),
             event: 'kazalniki'
         }
     ];
@@ -116,30 +116,30 @@ define([
         if (this.isNew()) {
             tabs = tabNovi;
         }
-        
+
         this.renderTabs(tabs);
     };
-    
+
     ProgramDokView.prototype.onRenderForm = function () {
         var self = this;
-        
-        var prenosDatumov = function(form, editor){
-            var model = new SezonaModel.Model({id : editor.model.attributes.id});
-            
-            var prenesiDatum = function(){
-                
+
+        var prenosDatumov = function (form, editor) {
+            var model = new SezonaModel.Model({id: editor.model.attributes.id});
+
+            var prenesiDatum = function () {
+
                 self.model.set('sezona', model.get('id'));
                 self.model.set('zacetek', model.get('zacetek'));
                 self.model.set('konec', model.get('konec'));
-                
-                self.renderForm();                
+
+                self.renderForm();
             };
-            
+
             model.fetch({success: prenesiDatum});
         };
-        
-        this.form.off('sezona:change',prenosDatumov,this);
-        this.form.on('sezona:change',prenosDatumov,this);
+
+        this.form.off('sezona:change', prenosDatumov, this);
+        this.form.on('sezona:change', prenosDatumov, this);
     };
 
     /**
@@ -398,6 +398,15 @@ define([
         var View = Marionette.ItemView.extend({
             template: kazalnikiTabelaTpl
         });
+        var self = this;
+        var prikaziKazalnike = function () {
+            var view = new View({
+                model: self.model
+            });
+
+            self.kazalnikiR.show(view);
+        };
+        
 
         this.model.fetch({
             error: function () {
@@ -406,14 +415,9 @@ define([
                     code: '9000102',
                     severity: 'error'
                 });
-            }
+            },
+            success: prikaziKazalnike
         });
-
-        var view = new View({
-            model: this.model
-        });
-
-        this.kazalnikiR.show(view);
     };
 
     return ProgramDokView;

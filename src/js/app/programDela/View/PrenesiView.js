@@ -15,7 +15,6 @@ define([
 
     /**
      * pridobimo view ki se uporabi pri prenosu podatkov iz uprizoritve v enotoprograma
-     * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
      */
     var PrenesiView = Marionette.ItemView.extend({
         tagName: 'div',
