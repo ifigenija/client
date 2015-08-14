@@ -101,9 +101,15 @@ define([
             sklopEnaR: '.sklopEna-tabs',
             sklopDvaR: '.sklopDva-tabs',
             prilogeR: '.region-priloge',
-            toolbarR: '.region-doctoolbar'
+            regionToolbar: '.region-doctoolbar'
         },
         buttons: [[
+                {
+                    id: 'doc-shrani',
+                    label: i18next.t('std.shrani'),
+                    element: 'button-trigger',
+                    trigger: 'shrani'
+                },
                 {
                     id: 'doc-kloniraj',
                     label: i18next.t('std.kloniraj'),
@@ -117,7 +123,7 @@ define([
                     trigger: 'zakleni'
                 }
             ]]
-    });
+    });    
 
     /**
      * Ko kliknemo na gumb kloniraj v toolbaru programadela
@@ -173,7 +179,7 @@ define([
             listener: this
         });
 
-        this.toolbarR.show(tb);
+        this.regionToolbar.show(tb);
     };
 
     /**
@@ -477,6 +483,9 @@ define([
         });
         var self = this;
         var prikaziKazalnike = function () {
+            
+            self.model.preracunajKazalnike();
+            
             var view = new View({
                 model: self.model
             });

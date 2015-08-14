@@ -66,26 +66,26 @@ define([
 
             var tan = this.get('tantieme');
             tan = tan ? tan : 0;
-            
+
             var avtPra = this.get('avtorskePravice');
             avtPra = avtPra ? avtPra : 0;
-            
+
             var avtHon = this.get('avtorskiHonorarji');
             avtHon = avtHon ? avtHon : 0;
-            
+
             var mat = this.get('materialni');
             mat = mat ? mat : 0;
-            
+
             var javni = this.get('drugiJavni');
             javni = javni ? javni : 0;
-            
+
             var zap = this.get('zaproseno');
             zap = zap ? zap : 0;
-            
-            var dnevPrvZad = this.get('dnevPrvZad');            
+
+            var dnevPrvZad = this.get('dnevPrvZad');
             dnevPrvZad = dnevPrvZad ? dnevPrvZad : 0;
-            
-            var transport = this.get('transportniStroski');            
+
+            var transport = this.get('transportniStroski');
             transport = transport ? transport : 0;
 
             if (nasDelez) {
@@ -111,7 +111,7 @@ define([
 
             var nasD = this.get('nasDelez');
             nasD = nasD ? nasD : 0;
-            
+
             //celvredgsz(ali se prešteje našemu deležu) in vlozekgost(odsteje od našega deleža)
             var lastSred = nasD - (javni + zap + viriVsota + transport);
             var celVred = nasD + koproVsota;
@@ -493,6 +493,156 @@ define([
             }
             postavka.dokument = this;
             return postavka;
+        },
+        /**
+         * pridobimo vrednost atributa, ki ga podamo kot parameter.
+         * V primeru da ne obstaja vrnemo 0
+         * @param {type} spremenljivka
+         * @returns {ProgramDokument_L5.ProgramDokumentAnonym$30.getVrednost@call;get|Number}
+         */
+        getVrednost: function (spremenljivka) {
+            var vrednost = this.get(spremenljivka);
+
+            return vrednost ? vrednost : 0;
+        },
+        /**
+         * Preračunamo vrednosti za tabelo kazalnikov
+         * @returns {undefined}
+         */
+        preracunajKazalnike: function () {
+
+            //kazalniki glavni dokument
+            var stIzvPrem = this.getVrednost('stIzvPrem');
+            var stIzvPonPrem = this.getVrednost('stIzvPonPrem');
+            var stIzvPonPrej = this.getVrednost('stIzvPonPrej');
+            var stIzvGostovanjInt = this.getVrednost('stIzvGostovanjInt');
+
+            var stVsehPredstav = stIzvPrem + stIzvPonPrem + stIzvPonPrej + stIzvGostovanjInt;
+            this.set('stVsehPredstav', stVsehPredstav);
+
+            //Programski sklop ena
+            //število enot
+            var stPremier = this.getVrednost('stPremier');
+            var stPonPrem = this.getVrednost('stPonPrem');
+            var stPonPrej = this.getVrednost('stPonPrej');
+            var stGostujo = this.getVrednost('stGostujo');
+
+            var stEnotSK1 = stPremier + stPonPrem + stPonPrej + stGostujo;
+            this.set('stEnotSK1', stEnotSK1);
+
+            //zaprošena sredstva MK
+            var sredZapPrem = this.getVrednost('sredstvaZaprosenoPrem');
+            var sredZapPonPrem = this.getVrednost('sredstvaZaprosenoPonPrem');
+            var sreZapPonPrej = this.getVrednost('sredstvaZaprosenoPonPrej');
+            var sredZapGostujo = this.getVrednost('sredstvaZaprosenoGostujo');
+
+            var mkViriSK1 = sredZapPrem + sredZapPonPrem + sreZapPonPrej + sredZapGostujo;
+            this.set('mkViriSK1', mkViriSK1);
+
+            //sredstva drugi javni viri in lokalne skupnosti
+            var sredDJPrem = this.getVrednost('sredstvaDrugiJavniPrem');
+            var sredDJPonPrem = this.getVrednost('sredstvaDrugiJavniPonPrem');
+            var sredDJPonPrej = this.getVrednost('sredstvaDrugiJavniPonPrej');
+            var sredDJGostujo = this.getVrednost('sredstvaDrugiJavniGostujo');
+
+            var dmlsViriSK1 = sredDJPrem + sredDJPonPrem + sredDJPonPrej + sredDJGostujo;
+            this.set('dmlsViriSK1', dmlsViriSK1);
+
+            // drugi viri
+            var sredDVPrem = this.getVrednost('sredstvaDrugiViriPrem');
+            var sredDVPonPrem = this.getVrednost('sredstvaDrugiViriPonPrem');
+            var sredDVPonPrej = this.getVrednost('sredstvaDrugiViriPonPrej');
+            var sredDVGostujo = this.getVrednost('sredstvaDrugiViriGostujo');
+
+            var drugiViriSK1 = sredDVPrem + sredDVPonPrem + sredDVPonPrej + sredDVGostujo;
+            this.set('drugiViriSK1', drugiViriSK1);
+
+            var premiereSredstva = sredZapPrem + sredDJPrem + sredDVPrem;
+            var ponovitvePremierSredstva = sredZapPonPrem + sredDJPonPrem + sredDVPonPrem;
+            var ponovitvePrejsnjihSredstva = sreZapPonPrej + sredDJPonPrej + sredDVPonPrej;
+            var gostujoceSredstva = sredZapGostujo + sredDJGostujo + sredDVGostujo;
+
+            this.set('premiereSredstva', premiereSredstva);
+            this.set('ponovitvePremierSredstva', ponovitvePremierSredstva);
+            this.set('ponovitvePrejsnjihSredstva', ponovitvePrejsnjihSredstva);
+            this.set('gostujoceSredstva', gostujoceSredstva);
+
+            this.set('sredstvaSkupajSK1',
+                    premiereSredstva +
+                    ponovitvePremierSredstva +
+                    ponovitvePrejsnjihSredstva +
+                    gostujoceSredstva
+                    );
+
+            //Programski sklop dva
+            //število enot
+            var stInt = this.getVrednost('stInt');
+            var stFest = this.getVrednost('stFest');
+            var stRazno = this.getVrednost('stRazno');
+            var stIzjem = this.getVrednost('stIzjem');
+
+            var stEnotSK2 = stInt + stFest + stRazno + stIzjem;
+            this.set('stEnotSK2', stEnotSK2);
+
+            //zaprošena sredstva MK
+            var sredZapInt = this.getVrednost('sredstvaZaprosenoInt');
+            var sredZapFest = this.getVrednost('sredstvaZaprosenoFest');
+            var sredZapRazno = this.getVrednost('sredstvaZaprosenoRazno');
+            var sredZapIzjem = this.getVrednost('sredstvaZaprosenoIzjem');
+
+            var mkViriSK2 = sredZapInt + sredZapFest + sredZapRazno + sredZapIzjem;
+            this.set('mkViriSK2', mkViriSK2);
+
+            //sredstva drugi javni viri in lokalne skupnosti
+            var sredDJInt = this.getVrednost('sredstvaDrugiJavniInt');
+            var sredDJFest = this.getVrednost('sredstvaDrugiJavniFest');
+            var sredDJRazno = this.getVrednost('sredstvaDrugiJavniRazno');
+            var sredDJIzjem = this.getVrednost('sredstvaDrugiJavniIzjem');
+
+            var dmlsViriSK2 = sredDJInt + sredDJFest + sredDJRazno + sredDJIzjem;
+            this.set('dmlsViriSK2', dmlsViriSK2);
+
+            // drugi viri
+            var sredDVInt = this.getVrednost('sredstvaDrugiViriInt');
+            var sredDVFest = this.getVrednost('sredstvaDrugiViriFest');
+            var sredDVRazno = this.getVrednost('sredstvaDrugiViriRazno');
+            var sredDVIzjem = this.getVrednost('sredstvaDrugiViriIzjem');
+
+            var drugiViriSK2 = sredDVInt + sredDVFest + sredDVRazno + sredDVIzjem;
+            this.set('drugiViriSK2', drugiViriSK2);
+
+            var gostovanjaSredstva = sredZapInt + sredDJInt + sredDVInt;
+            var festivaliSredstva = sredZapFest + sredDJFest + sredDVFest;
+            var raznoSredstva = sredZapRazno + sredDJRazno + sredDVRazno;
+            var izjemniSredstva = sredZapIzjem + sredDJIzjem + sredDVIzjem;
+
+            this.set('gostovanjaSredstva', gostovanjaSredstva);
+            this.set('festivaliSredstva', festivaliSredstva);
+            this.set('raznoSredstva', raznoSredstva);
+            this.set('izjemniSredstva', izjemniSredstva);
+
+            this.set('sredstvaSkupajSK2',
+                    gostovanjaSredstva +
+                    festivaliSredstva +
+                    raznoSredstva +
+                    izjemniSredstva
+                    );
+
+            //skupaj programski sklop ena in programski sklop dva
+            var stEnotSkupaj = stEnotSK1 + stEnotSK2;
+            var mkViriSkupaj = mkViriSK2 + mkViriSK2;
+            var dmlsViriSkupaj = dmlsViriSK2 + dmlsViriSK2;
+            var drugiViriSkupaj = drugiViriSK2 + drugiViriSK2;
+
+            this.set('stEnotSkupaj', stEnotSkupaj);
+            this.set('mkViriSkupaj', mkViriSkupaj);
+            this.set('dmlsViriSkupaj', dmlsViriSkupaj);
+            this.set('drugiViriSkupaj', drugiViriSkupaj);
+
+            this.set('skSkupaj', mkViriSkupaj + dmlsViriSkupaj + drugiViriSkupaj);
+
+            //kazalniki priloga 2
+            this.set('stIzvPremProd', stIzvPrem + stIzvPonPrem);
         }
     });
     return {
