@@ -232,7 +232,7 @@ define([
         nestedCollections: {
             drugiViri: {collection: DrugiViriCollection, mappedBy: 'enotaPrograma'},
             koprodukcije: {collection: KoprodukcijeCollection, mappedBy: 'enotaPrograma'},
-            peSklopi: {collection: PESklopiCollection, mappedBy: 'programRazno'}
+            programskeEnoteSklopa: {collection: PESklopiCollection, mappedBy: 'programRazno'}
         },
         dodajPostavko: function (nested) {
             if (!_.contains(_.keys(this.nestedCollections), nested)) {
@@ -250,7 +250,7 @@ define([
                         enotaPrograma: this.id
                     });
                     break;
-                case 'peSklopa':
+                case 'programskeEnoteSklopa':
                     postavka = new PESklopaModel({
                         programRazno: this.id
                     });

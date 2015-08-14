@@ -20,8 +20,9 @@ define([
     var PESklopaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        detailName: 'peSklopa',
+        detailName: 'peSklopi',
         formTitle: i18next.t('peSklopa.title'),
+        disabled: false,
         gridMeta: [
             {
                 cell: 'string',

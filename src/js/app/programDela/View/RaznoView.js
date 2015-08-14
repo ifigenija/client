@@ -174,7 +174,7 @@ define([
      */
     RaznoView.prototype.renderPES = function () {
         var view = this.pes = new PESView({
-            collection: this.model.peSklopiCollection,
+            collection: this.model.programskeEnoteSklopaCollection,
             dokument: this.model
         });
         

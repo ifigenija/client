@@ -1039,7 +1039,13 @@
     },
     "napaka": {
         "fetch": "Napaka pri pridobivanju podatkov",
-        "kloniranje": "Prišlo je do napake pri kloniranju programa dela."
+        "kloniranje": "Prišlo je do napake pri kloniranju programa dela.",
+        "zakleni": "Prišlo je do napake pri zaklepanju programa dela."
+    },
+    "uspeh": {
+        "fetch": "Napaka pri pridobivanju podatkov",
+        "kloniranje": "Uspešno kloniran program dela.",
+        "zakleni": "Uspešno zaklenjen program dela"
     },
     "prenesi": {
         "title": "Prenost vrednosti iz uprizoritve",

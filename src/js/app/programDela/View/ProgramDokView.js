@@ -103,27 +103,41 @@ define([
             prilogeR: '.region-priloge',
             regionToolbar: '.region-doctoolbar'
         },
-        buttons: [[
-                {
-                    id: 'doc-shrani',
-                    label: i18next.t('std.shrani'),
-                    element: 'button-trigger',
-                    trigger: 'shrani'
-                },
-                {
-                    id: 'doc-kloniraj',
-                    label: i18next.t('std.kloniraj'),
-                    element: 'button-trigger',
-                    trigger: 'kloniraj'
-                },
-                {
-                    id: 'doc-zakleni',
-                    label: i18next.t('std.zakleni'),
-                    element: 'button-trigger',
-                    trigger: 'zakleni'
-                }
-            ]]
-    });    
+        buttons: {
+            shrani: {
+                id: 'doc-shrani',
+                label: i18next.t('std.shrani'),
+                element: 'button-trigger',
+                trigger: 'shrani',
+                disabled: true
+            },
+            preklici: {
+                id: 'docedit-skrij',
+                label: i18next.t('std.preklici'),
+                element: 'button-trigger',
+                trigger: 'preklici'
+            },
+            nasvet: {
+                id: 'doc-nasvet',
+                icon: 'fa fa-info',
+                title: i18next.t('std.Pomoc'),
+                element: 'button-trigger',
+                trigger: 'nasvet'
+            },
+            kloniraj: {
+                id: 'doc-kloniraj',
+                label: i18next.t('std.kloniraj'),
+                element: 'button-trigger',
+                trigger: 'kloniraj'
+            },
+            zakleni: {
+                id: 'doc-zakleni',
+                label: i18next.t('std.zakleni'),
+                element: 'button-trigger',
+                trigger: 'zakleni'
+            }
+        }
+    });
 
     /**
      * Ko kliknemo na gumb kloniraj v toolbaru programadela
@@ -132,7 +146,11 @@ define([
     ProgramDokView.prototype.onKloniraj = function () {
 
         var success = function () {
-            //lahko bi odprlo kloniran program dela
+            Radio.channel('error').command('flash', {
+                message: i18next.t("uspeh.kloniranje"),
+                code: '9000702',
+                severity: 'success'
+            });
         };
 
         var error = function () {
@@ -148,7 +166,7 @@ define([
             'programDelaId': this.model.get('id')},
         success, error);
     };
-    
+
     /**
      * Ko kliknemo na gumb zakleni v toolbaru programadela
      * @returns {undefined}
@@ -156,7 +174,11 @@ define([
     ProgramDokView.prototype.onZakleni = function () {
 
         var success = function () {
-            //obpre se stran z vsemi programi dela (mogoče)!!!????
+            Radio.channel('error').command('flash', {
+                message: i18next.t("uspeh.zakleni"),
+                code: '9000703',
+                severity: 'success'
+            });
         };
 
         var error = function () {
@@ -173,13 +195,11 @@ define([
         success, error);
     };
 
-    ProgramDokView.prototype.renderToolbar = function () {
-        var tb = new Toolbar({
-            buttonGroups: this.buttons,
-            listener: this
-        });
+    ProgramDokView.prototype.prepareToolbar = function () {
+        return  this.model.get('id') ?
+                [[this.buttons.shrani, this.buttons.preklici, this.buttons.kloniraj, this.buttons.zakleni, this.buttons.nasvet]] :
+                [[this.buttons.shrani, this.buttons.preklici, this.buttons.nasvet]];
 
-        this.regionToolbar.show(tb);
     };
 
     /**
@@ -483,9 +503,9 @@ define([
         });
         var self = this;
         var prikaziKazalnike = function () {
-            
+
             self.model.preracunajKazalnike();
-            
+
             var view = new View({
                 model: self.model
             });

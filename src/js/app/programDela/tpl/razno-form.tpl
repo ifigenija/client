@@ -3,7 +3,7 @@
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-12 col-lg-6" data-fields="naziv,imaKoprodukcije"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="nasDelez,zaproseno"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="zaproseno"></div>
             </div>
         </div>
         <div class="col-sm-6">
