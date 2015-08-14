@@ -44,6 +44,7 @@ define([
 
                 var naDo = this.podatkiUprizoritve.NaDo;
                 naDo.nasDelez = naDo.avtorskiHonorarji + naDo.tantieme + naDo.avtorskePravice + naDo.materialni;
+                naDo.steviloPonovitev = vsotaPon;
             }
 
             return _.extend(this.model.toJSON(), {

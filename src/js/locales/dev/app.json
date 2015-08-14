@@ -100,7 +100,8 @@
         "prepisi": "Prepiši",
         "prenesi": "Prenesi",
         "kloniraj": "Kopiraj",
-        "zakleni": "Zakleni"
+        "zakleni": "Zakleni",
+        "oznaci": "Označi vse"
     },
     "ent": {
         "dodaj": "Dodaj",
@@ -1045,6 +1046,8 @@
         "oznaci": "Označi",
         "atributi": "Polja",
         "vrednostStara": "Trenutna vrednost",
+        "vrednostNa": "Vrednost na ponovitev",
+        "steviloPonovitev": "Število ponovitev",
         "vrednostNova": "Nova vrednost"
     },
     "izracunaj": {
