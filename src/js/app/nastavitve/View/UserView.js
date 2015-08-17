@@ -14,7 +14,7 @@ define([
 ], function (
         SeznamView,
         formTpl,
-        permTpl,
+        userTpl,
         RelationView,
         User,
         schema,
@@ -26,13 +26,14 @@ define([
     var UserView = SeznamView.extend({
         url: baseUrl + '/rest/user',
         formTemplate: formTpl,
-        template: permTpl,
+        template: userTpl,
         schema: schema,
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
-            rolesR: '.seznam-roles'
+            rolesR: '.seznam-roles',
+            prilogeR: '.seznam-priloge'
         },
         title: i18next.t('user.title'),
         columns: [

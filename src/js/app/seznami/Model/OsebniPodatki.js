@@ -20,14 +20,12 @@ define([
     
     var OsebaTrrCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTrr,
-        url: baseUrl + '/rest/trr',
-        index: 'banka'
+        url: baseUrl + '/rest/trr'
     });
     
     var OsebaZaposlitevCollection = Dokument.PostavkaCollection.extend({
         model: OsebaZaposlitev,
-        url: baseUrl + '/rest/zaposlitev',
-        index: 'pozicija'
+        url: baseUrl + '/rest/zaposlitev'
     });
     
     

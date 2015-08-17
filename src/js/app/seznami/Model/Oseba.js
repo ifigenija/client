@@ -19,15 +19,13 @@ define([
 
     var OsebaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: OsebaTelefon,
-        url: baseUrl + '/rest/telefonska',
-        index: 'naziv'
+        url: baseUrl + '/rest/telefonska'
     });
 
 
     var OsebaNaslovCollection = Dokument.PostavkaCollection.extend({
         model: OsebaNaslov,
-        url: baseUrl + '/rest/postniNaslov',
-        index: 'vrsta'
+        url: baseUrl + '/rest/postniNaslov'
     });
 
 

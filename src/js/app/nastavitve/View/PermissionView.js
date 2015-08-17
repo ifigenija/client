@@ -38,7 +38,8 @@ define([
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
-            rolesR: '.seznam-roles'
+            rolesR: '.seznam-roles',
+            prilogeR: '.seznam-priloge'
         },
         columns: [
             {
