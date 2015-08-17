@@ -37,11 +37,6 @@ define([
                 editorAttrs: {
                     disabled: true
                 }
-            },
-            pogodba: {
-                editorAttrs: {
-                    disabled: true
-                }
             }
         }).schema,
         title: i18next.t('alternacija.title'),
