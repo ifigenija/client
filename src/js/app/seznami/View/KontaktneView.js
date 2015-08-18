@@ -7,14 +7,16 @@ define([
     'app/Max/Module/Backgrid',
     'template!../tpl/kontaktna-form.tpl',
     'formSchema!kontaktnaoseba',
-    'i18next'
+    'i18next',
+    'app/seznami/Model/Oseba'
 ], function (
         Radio,
         PostavkeView,
         Backgrid,
         formTpl,
         schema,
-        i18next
+        i18next,
+        OsebaModel
         ) {
 
 
@@ -72,7 +74,7 @@ define([
                 actions: [
                     {event: 'brisi', title: i18next.t('std.brisi')},
                     {event: 'uredi', title: i18next.t('std.uredi')},
-                    {event: 'oseba', title: i18next.t('oseba'), icon: 'fa-user'}
+                    {event: 'oseba', title: i18next.t('ent.oseba'), icon: 'fa fa-user'}
                 ]
             }
         ]
@@ -82,32 +84,49 @@ define([
      * @returns {undefined}
      */
     KontaktneView.prototype.onDodajOsebo = function () {
-        var self = this;
-        require(['app/seznami/Model/Oseba', 'backbone-modal', 'app/seznami/View/OsebaEditView'], function (Model, Modal, OsebaEditView) {
-            var editModel = new Model.Model();
+        this.osebaModal(new OsebaModel.Model());
+    };
 
+    KontaktneView.prototype.osebaModal = function (editModel) {
+        var self = this;
+
+        require(['backbone-modal', 'app/seznami/View/OsebaEditView'], function (Modal, OsebaEditView) {
             var view = new OsebaEditView({
                 model: editModel,
                 pogled: 'kontaktna'
             });
+            
+            var izberi = function(){
+                if (!view.model.get('id')) {
+                    Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove osebe', code: 2000000, severity: 'error'});
+                    modal.preventClose();
+                }
+                else {
+                    self.form.fields.oseba.editor.setValue(view.model.get('id'));
+                    modal.close();
+                }
+            };
 
             var modal = new Modal({
                 content: view,
                 animate: true,
                 okText: i18next.t("std.izberi"),
                 cancelText: i18next.t("std.preklici")
-            }).open();
+            }).open(izberi);
+        });
+    };
 
-            modal.listenTo(modal, 'ok', function () {
-                if(!view.model.get('id')){
-                    Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove osebe', code: 2000000, severity: 'error'});
-                    modal.preventClose();
-                }
-                else{
-                    self.form.fields.oseba.editor.setValue(view.model.get('id'));
-                    modal.close();
-                }
-            });
+    /**
+     * Odpre modal za dodajanje osebe
+     * @returns {undefined}
+     */
+    KontaktneView.prototype.onOseba = function (model) {
+        var editModel = new OsebaModel.Model({id: model.get('oseba').id});
+        var self = this;
+        editModel.fetch({
+            success: function () {
+                self.osebaModal(editModel);
+            }
         });
     };
 
