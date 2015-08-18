@@ -9,6 +9,7 @@ define([
     'backbone-modal',
     'marionette',
     'app/bars',
+    'radio',
     'app/Dokument/View/FormView',
     'app/Dokument/View/PostavkeView',
     'app/programDela/View/DrugiVirView',
@@ -25,6 +26,7 @@ define([
         Modal,
         Marionette,
         Handlebars,
+        Radio,
         FormView,
         PostavkeView,
         DrugiVirView,
@@ -241,7 +243,8 @@ define([
             this.model.fetch({
                 success: function () {
                     self.renderFormEvents();
-                }
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
     };
@@ -539,7 +542,10 @@ define([
             }
         };
 
-        model.fetch({success: izrisKoprodukcije});
+        model.fetch({
+            success: izrisKoprodukcije,
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
     };
 
     /**
@@ -580,7 +586,8 @@ define([
             model.fetch({
                 success: function () {
                     self.renderFormEvents();
-                }
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
     };

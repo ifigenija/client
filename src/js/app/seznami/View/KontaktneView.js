@@ -95,8 +95,8 @@ define([
                 model: editModel,
                 pogled: 'kontaktna'
             });
-            
-            var izberi = function(){
+
+            var izberi = function () {
                 if (!view.model.get('id')) {
                     Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove osebe', code: 2000000, severity: 'error'});
                     modal.preventClose();
@@ -126,7 +126,8 @@ define([
         editModel.fetch({
             success: function () {
                 self.osebaModal(editModel);
-            }
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
         });
     };
 

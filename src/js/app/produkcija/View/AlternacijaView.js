@@ -11,7 +11,8 @@ define([
     'formSchema!pogodba',
     'i18next',
     'app/Max/Module/Backgrid',
-    'backbone-modal'
+    'backbone-modal',
+    'radio'
 ], function (
         PostavkeView,
         FormView,
@@ -22,7 +23,8 @@ define([
         schemaPogodba,
         i18next,
         Backgrid,
-        Modal
+        Modal,
+        Radio
         ) {
 
     var AlternacijaView = PostavkeView.extend({
@@ -114,7 +116,7 @@ define([
         this.form.on('pogodba:change', function (form, editor) {
             if (editor.getValue()) {
                 this.$('.pogodba-dodaj').html(i18next.t('std.uredi'));
-            } else{
+            } else {
                 this.$('.pogodba-dodaj').html(i18next.t('std.dodaj'));
             }
         });
@@ -207,7 +209,8 @@ define([
                     self.dokument.alternacijeCollection.fetch({
                         success: function () {
                             self.renderList();
-                        }
+                        },
+                        error: Radio.channel('error').request('handler', 'xhr')
                     });
                 });
             }
@@ -240,7 +243,8 @@ define([
                             self.pogodbaModal(pogodba);
                         }
                     }
-                }
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
     };

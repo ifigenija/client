@@ -238,7 +238,10 @@ define([
                 self.renderForm();
             };
 
-            model.fetch({success: prenesiDatum});
+            model.fetch({
+                success: prenesiDatum,
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
         };
 
         this.form.off('sezona:change', prenosDatumov, this);
