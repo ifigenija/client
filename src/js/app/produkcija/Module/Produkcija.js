@@ -90,7 +90,9 @@ define([
                 var odpriView = function () {
                     var view = new View();
                     ch.command('open', view, i18next.t('stroskovnik.title'));
-                    view.formIzberi.fields.id.editor.setValue(id);
+                    var editor = view.formIzberi.fields.id.editor;
+                    editor.setValue(id);
+                    editor.trigger('changed', id);
                 };
 
                 var model = new Model.Model({id: id});
