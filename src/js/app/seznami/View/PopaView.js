@@ -7,14 +7,18 @@ define([
     '../Model/Popa',
     'i18next',
     'baseUrl',
-    'radio'
+    'radio',
+    'formSchema!popa',
+    'app/Max/Module/Backgrid'
 ], function (
         SeznamView,
         PopaEditView,
         Model,
         i18next,
         baseUrl,
-        Radio
+        Radio,
+        schema,
+        Backgrid
         ) {
 
     var PopaView = SeznamView.extend({
@@ -34,6 +38,22 @@ define([
                 label: i18next.t('popa.naziv'),
                 name: 'naziv',
                 sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('popa.tipkli'),
+                name: 'tipkli',
+                sortable: false
+            },
+            {
+                cell: Backgrid.SelectCell.extend({
+                    optionValues: schema.getOptionValues('stakli')
+                }),
+                editable: false,
+                label: i18next.t('popa.stakli'),
+                name: 'stakli',
+                sortable: false
             },
             {
                 cell: 'string',

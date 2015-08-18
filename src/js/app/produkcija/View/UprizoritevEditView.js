@@ -93,7 +93,7 @@ define([
 
         this.renderTabs(tabs);
     };
-    
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -182,7 +182,9 @@ define([
     UprizoritevEditView.prototype.renderFunkcije = function (coll, name, detailName) {
         var view = new FunkcijeView({
             collection: coll,
-            dokument: this.model
+            dokument: this.model,
+            odprtaForma: true,
+            potrdiBrisanje: true
         });
         view.detailName = detailName;
         view.name = i18next.t(name);
@@ -202,7 +204,7 @@ define([
                 error: function () {
                     Radio.channel('error').command('flash', {
                         message: i18next.t("napaka.fetch") + ' ' + '(Umetniki)',
-                        code:'9000008',
+                        code: '9000008',
                         severity: 'error'
                     });
                 }
@@ -223,7 +225,7 @@ define([
                 error: function () {
                     Radio.channel('error').command('flash', {
                         message: i18next.t("napaka.fetch") + ' ' + '(Igralci)',
-                        code:'9000009',
+                        code: '9000009',
                         severity: 'error'
                     });
                 }
@@ -245,13 +247,13 @@ define([
                 error: function () {
                     Radio.channel('error').command('flash', {
                         message: i18next.t("napaka.fetch") + ' ' + '(Tehniki)',
-                        code:'90000010',
+                        code: '90000010',
                         severity: 'error'
                     });
                 }
             });
         }
-        this.renderFunkcije(c,'uprizoritev.tehniki', 'tehniki');
+        this.renderFunkcije(c, 'uprizoritev.tehniki', 'tehniki');
     };
 
     return UprizoritevEditView;

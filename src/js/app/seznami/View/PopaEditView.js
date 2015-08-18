@@ -45,6 +45,20 @@ define([
     ];
 
     var gumbi = {
+        producent: {
+            id: 'doc-producent',
+            label: i18next.t('popa.koproducent'),
+            element: 'button-trigger',
+            trigger: 'koproducent',
+            hidden: true
+        },
+        kupec: {
+            id: 'doc-kupec',
+            label: i18next.t('popa.kupec'),
+            element: 'button-trigger',
+            trigger: 'kupec',
+            hidden: true
+        },
         shrani: {
             id: 'doc-shrani',
             label: i18next.t('std.shrani'),
@@ -109,6 +123,53 @@ define([
         this.prilogeR.show(view);
     };
 
+    /**
+     * Ko označimo poslovnega partnerja za kupca 
+     * @returns {undefined}
+     */
+    PopaEditView.prototype.onKupec = function () {
+        var B = Backbone.Model.extend({
+            url: baseUrl + '/rest/kupec'
+        });
+
+        var kup = new B();
+        var self = this;
+
+        kup.save({
+            popa: this.model.get('id'),
+            status: this.model.get('stakli')
+        }, {
+            success: function (model) {
+                self.toolbarView.hideButtons(['doc-kupec']);
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
+    };
+
+    /**
+     * registrira poslovnega partnerja kot produkcijsko hišo. 
+     * @returns {undefined}
+     */
+    PopaEditView.prototype.onKoproducent = function () {
+        var B = Backbone.Model.extend({
+            url: baseUrl + '/rest/produkcijskahisa'
+        });
+
+        var kup = new B();
+        var self = this;
+
+        kup.save({
+            popa: this.model.get('id'),
+            status: this.model.get('stakli')
+        }, {
+            success: function (model) {
+                self.toolbarView.hideButtons(['doc-producent']);
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
+
+    };
+
     PopaEditView.prototype.onRender = function () {
 
         var tabs = null;
@@ -133,7 +194,16 @@ define([
         }
         this.renderTabs(tabs);
     };
-    
+
+    PopaEditView.prototype.onRenderForm = function () {
+        if (!this.model.get('producent')) {
+            this.toolbarView.showButtons(['doc-producent']);
+        }
+
+        if (!this.model.get('kupec')) {
+            this.toolbarView.showButtons(['doc-kupec']);
+        }
+    };
     /**
      * Klik na splošni tab
      * @returns {undefined}
