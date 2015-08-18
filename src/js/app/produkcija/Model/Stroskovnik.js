@@ -47,7 +47,7 @@ define([
             var pogodba;
             if (alternacija) {
                 pogodba = new PogodbaModel({
-                    alternacija: alternacija,
+                    alternacije: alternacija,
                     oseba: alternacija.get('oseba')
                 });
             } else {

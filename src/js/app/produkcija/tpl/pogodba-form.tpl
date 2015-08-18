@@ -5,7 +5,7 @@
                 <div class="col-sm-12 col-md-6">
                     <div style="display: table;">
                         <div style="display: table-row">
-                            {{t "pogodba.alternacija"}}: {{ alternacija.label }}
+                            {{t "pogodba.alternacija"}}: {{ alternacije.label }}
                         </div>
                         <div style="display: table-row">
                             {{t "pogodba.oseba"}}: {{ oseba.label }}

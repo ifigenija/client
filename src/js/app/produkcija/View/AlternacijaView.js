@@ -24,7 +24,7 @@ define([
         Backgrid,
         Modal
         ) {
-    
+
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema({
@@ -110,6 +110,16 @@ define([
         ]
     });
 
+    AlternacijaView.prototype.onRenderForm = function (options) {
+        this.form.on('pogodba:change', function (form, editor) {
+            if (editor.getValue()) {
+                this.$('.pogodba-dodaj').html(i18next.t('std.uredi'));
+            } else{
+                this.$('.pogodba-dodaj').html(i18next.t('std.dodaj'));
+            }
+        });
+    };
+
     /**
      * Priprava toolbara
      * @returns {Array}
@@ -185,19 +195,24 @@ define([
         });
 
         var shraniSpremembe = function () {
-            if (!formView.model.get('id')) {
-                formView.listenTo(formView, 'save:success', function () {
+            var model = modal.options.content.model;
+            var view = modal.options.content;
+            if (!model.get('id')) {
+                view.on('save:success', function (model) {
+                    var form = self.form;
+                    var editor = form.fields.pogodba.editor;
+                    editor.setValue(model.get('id'));
+                    form.trigger('change');
+                    form.trigger('pogodba:change', form, editor);
                     self.dokument.alternacijeCollection.fetch({
                         success: function () {
                             self.renderList();
-                            self.renderFormAndToolbar();
                         }
                     });
                 });
             }
-            formView.triggerMethod('shrani');
+            view.triggerMethod('shrani');
         };
-
     };
     /**
      * Dodamo novo pogodbo

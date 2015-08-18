@@ -47,7 +47,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('pogodba.alternacija'),
-                name: 'alternacija.label',
+                name: 'alternacije.label',
                 sortable: true
             },
             {
