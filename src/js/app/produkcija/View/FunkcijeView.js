@@ -209,6 +209,7 @@ define([
         }, {
             success: function (model, x, xhr) {
                 self.alters.add(model);
+                self.form.trigger('change');
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });

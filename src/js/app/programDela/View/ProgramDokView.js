@@ -223,30 +223,30 @@ define([
         this.renderTabs(tabs);
     };
 
-    ProgramDokView.prototype.onRenderForm = function () {
-        var self = this;
-
-        var prenosDatumov = function (form, editor) {
-            var model = new SezonaModel.Model({id: editor.model.attributes.id});
-
-            var prenesiDatum = function () {
-
-                self.model.set('sezona', model.get('id'));
-                self.model.set('zacetek', model.get('zacetek'));
-                self.model.set('konec', model.get('konec'));
-
-                self.renderForm();
-            };
-
-            model.fetch({
-                success: prenesiDatum,
-                error: Radio.channel('error').request('handler', 'xhr')
-            });
-        };
-
-        this.form.off('sezona:change', prenosDatumov, this);
-        this.form.on('sezona:change', prenosDatumov, this);
-    };
+//    ProgramDokView.prototype.onRenderForm = function () {
+//        var self = this;
+//
+//        var prenosDatumov = function (form, editor) {
+//            var model = new SezonaModel.Model({id: editor.model.attributes.id});
+//
+//            var prenesiDatum = function () {
+//
+//                //self.form.fields.sezona.editor.setValue(model.get('id'));
+//                self.form.fields.zacetek.editor.setValue(model.get('zacetek'));
+//                self.form.fields.konec.editor.setValue(model.get('konec'));
+//
+//                //self.renderForm();
+//            };
+//
+//            model.fetch({
+//                success: prenesiDatum,
+//                error: Radio.channel('error').request('handler', 'xhr')
+//            });
+//        };
+//
+//        this.form.off('sezona:change', prenosDatumov, this);
+//        this.form.on('sezona:change', prenosDatumov, this);
+//    };
 
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
