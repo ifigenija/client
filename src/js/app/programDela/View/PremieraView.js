@@ -130,12 +130,6 @@ define([
         if (view.$('.stHonorarnih').is(':checked')) {
             model.set('stHonorarnih', uprizoritev.stHonorarnih);
         }
-        if (view.$('.datumZacStudija').is(':checked')) {
-            model.set('datumZacStudija', uprizoritev.datumZacStudija);
-        }
-        if (view.$('.datumPremiere').is(':checked')) {
-            model.set('datumPremiere', uprizoritev.datumPremiere);
-        }
     };
 
     /**

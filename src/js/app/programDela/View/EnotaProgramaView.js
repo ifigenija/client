@@ -88,6 +88,24 @@ define([
         }
     });
 
+    EnotaProgramaView.prototype.pridobiPodatkeUprizoritve = function (options) {
+        var self = this;
+        if (!this.form.commit()) {
+            var uprizoritev = self.model.get('uprizoritev');
+            if (uprizoritev) {
+                var zacetek = self.dokument.get('zacetek');
+                var konec = self.dokument.get('konec');
+
+                var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
+                rpc.call('podatkiUprizoritve', {
+                    'uprizoritevId': uprizoritev.id,
+                    'zacetek': zacetek,
+                    'konec': konec
+                }, options.success, options.error);
+            }
+        }
+    };
+
     EnotaProgramaView.prototype.onPrenesi = function () {
         var self = this;
 
@@ -100,20 +118,10 @@ define([
             //error
         };
 
-        if (!this.form.commit()) {
-            var uprizoritev = self.model.get('uprizoritev');
-            if (uprizoritev) {
-                var zacetek = self.dokument.get('zacetek');
-                var konec = self.dokument.get('konec');
-
-                var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
-                rpc.call('podatkiUprizoritve', {
-                    'uprizoritevId': uprizoritev.id,
-                    'zacetek': zacetek,
-                    'konec': konec
-                }, success, error);
-            }
-        }
+        this.pridobiPodatkeUprizoritve({
+            success: success,
+            error: error
+        });
     };
 
     /**
@@ -492,6 +500,8 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.togglePrenesi = function (form, editor) {
+        var self = this;
+        
         var podatek = editor.getValue('uprizoritev');
         if (!podatek) {
             this.toggleGumb('doc-postavka-prenesi', true);

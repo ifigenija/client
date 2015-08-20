@@ -142,12 +142,6 @@ define([
         if (view.$('.stZaposUmet').is(':checked')) {
             model.set('stZaposUmet', uprizoritev.stZaposUmet);
         }
-        if (view.$('.datumZacStudija').is(':checked')) {
-            model.set('datumZacStudija', uprizoritev.datumZacStudija);
-        }
-        if (view.$('.datumPremiere').is(':checked')) {
-            model.set('datumPremiere', uprizoritev.datumPremiere);
-        }
     };
 
     /**

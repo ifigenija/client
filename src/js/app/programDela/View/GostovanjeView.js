@@ -139,12 +139,6 @@ define([
         if (view.$('.avtorskePravice').is(':checked')) {
             model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
         }
-        if (view.$('.datumZacStudija').is(':checked')) {
-            model.set('datumZacStudija', uprizoritev.datumZacStudija);
-        }
-        if (view.$('.datumPremiere').is(':checked')) {
-            model.set('datumPremiere', uprizoritev.datumPremiere);
-        }
     };
 
     GostovanjeView.prototype.imaKoprodukcijeChange = function (form, editor) {

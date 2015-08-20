@@ -51,25 +51,5 @@
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev 0}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.avtorskePravice}}</td>
         </tr>
-        <tr>
-            <td>
-                <input class="datumZacStudija" type="checkbox">
-            </td>
-            <td>{{t "ep.datumZacStudija"}}</td>
-            <td class="col-numbers">{{u "date" datumZacStudija}}</td>
-            <td class="col-numbers"></td>
-            <td class="col-numbers"></td>
-            <td class="col-numbers">{{u "date" uprizoritevData.datumZacStudija}}</td>
-        </tr>
-        <tr>
-            <td>
-                <input class="datumPremiere" type="checkbox">
-            </td>
-            <td>{{t "ep.datumPremiere"}}</td>
-            <td class="col-numbers">{{u "date" datumPremiere}}</td>
-            <td class="col-numbers"></td>
-            <td class="col-numbers"></td>
-            <td class="col-numbers">{{u "date" uprizoritevData.datumPremiere}}</td>
-        </tr>
     </tbody>
 </table>

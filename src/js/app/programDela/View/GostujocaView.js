@@ -132,6 +132,7 @@ define([
             self.form.on(i + ':change', self.prikaziPodatke, self);
         });
 
+        this.form.on('uprizoritev:change', this.togglePrenesi, this);
         this.form.on('zaproseno:change', this.zaprosenoChange, this);
         this.form.on('strosekOdkPred:change', this.strosekOdkPred, this);
         this.form.on('nasDelez:change', this.strosekOdkPred, this);
@@ -156,6 +157,7 @@ define([
             self.form.off(i + ':change', self.prikaziPodatke, self);
         });
 
+        this.form.off('uprizoritev:change', this.togglePrenesi, this);
         this.form.off('zaproseno:change', this.zaprosenoChange, this);
         this.form.off('strosekOdkPred:change', this.strosekOdkPred, this);
         this.form.off('nasDelez:change', this.strosekOdkPred, this);

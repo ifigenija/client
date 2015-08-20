@@ -89,7 +89,7 @@ define([
             transport = transport ? transport : 0;
 
             if (nasDelez) {
-                this.set('nasDelez', tan + avtPra + avtHon + mat + dnevPrvZad);
+                this.set('nasDelez', tan + avtPra + avtHon + mat + dnevPrvZad + transport);
             }
 
             var viri = this.drugiViriCollection;
@@ -113,7 +113,7 @@ define([
             nasD = nasD ? nasD : 0;
 
             //celvredgsz(ali se prešteje našemu deležu) in vlozekgost(odsteje od našega deleža)
-            var lastSred = nasD - (javni + zap + viriVsota + transport);
+            var lastSred = nasD - (javni + zap + viriVsota);
             var celVred = nasD + koproVsota;
 
             this.set('lastnaSredstva', lastSred);
