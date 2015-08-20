@@ -7,16 +7,19 @@ define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/koprodukcija-form.tpl',
     'formSchema!produkcijaDelitev',
-    'radio'
+    'radio',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         Backgrid,
         i18next,
         PostavkeView,
         formTpl,
         schema,
-        Radio
+        Radio,
+        $
         ) {
-    
+
     var KoprodukcijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -63,7 +66,15 @@ define([
 
     KoprodukcijaView.prototype.onGridAction = function (model, action) {
         if (!this.disabled) {
-            PostavkeView.prototype.onGridAction.apply(this, arguments);
+            if (!model.get('maticniKop')) {
+                PostavkeView.prototype.onGridAction.apply(this, arguments);
+            } else {
+                Radio.channel('error').command('flash', {
+                    message: i18next.t("info.maticniJZ"),
+                    code: '9000600',
+                    severity: 'info'
+                });
+            }
         }
         else {
             Radio.channel('error').command('flash', {
@@ -73,7 +84,7 @@ define([
             });
         }
     };
-    
+
     KoprodukcijaView.prototype.onDodaj = function () {
         if (!this.disabled) {
             PostavkeView.prototype.onDodaj.apply(this, arguments);

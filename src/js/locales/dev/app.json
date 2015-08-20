@@ -1072,7 +1072,8 @@
         "vsota": "Vsota"
     },
     "info": {
-        "shraniEnotoPrograma": "Prosim shranite enoto programa predno nadaljujete"
+        "shraniEnotoPrograma": "Prosim shranite enoto programa predno nadaljujete.",
+        "maticniJZ": "Maticnega javnega zavoda ne morate urejati."
     },
     "kazalnik": {
         "naslov": "Kazalniki",
