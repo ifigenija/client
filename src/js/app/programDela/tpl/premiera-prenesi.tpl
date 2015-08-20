@@ -49,5 +49,37 @@
             <td class="col-numbers">{{u "formatNumber" stHonorarnih 0}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnih 0}}</td>
         </tr>
+        <tr>
+            <td>
+                <input class="stHonorarnihIgr" type="checkbox">
+            </td>
+            <td>{{t "ep.stHonorarnihIgr"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgr 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnihIgr 0}}</td>
+        </tr>
+        <tr>
+            <td>
+                <input class="stHonorarnihIgrTujJZ" type="checkbox">
+            </td>
+            <td>{{t "ep.stHonorarnihIgrTujJZ"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrTujJZ 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnihIgrTujJZ 0}}</td>
+        </tr>
+        <tr>
+            <td>
+                <input class="stHonorarnihIgrSamoz" type="checkbox">
+            </td>
+            <td>{{t "ep.stHonorarnihIgrSamoz"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrSamoz 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnihIgrSamoz 0}}</td>
+        </tr>
+        <tr>
+            <td>
+                <input class="stZaposUmet" type="checkbox">
+            </td>
+            <td>{{t "ep.stZaposUmet"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stZaposUmet 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stZaposUmet 0}}</td>
+        </tr>
     </tbody>
 </table>
