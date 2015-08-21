@@ -164,21 +164,23 @@ define([
             'nasDelez',
             'materialni',
             'drugiJavni',
-            'zaproseno'
+            'zaproseno',
+            'strosekOdkPred',
+            'vlozekGostitelja'
         ];
 
         vnosnaPolja.forEach(function (i) {
             self.form.on(i + ':change', self.prikaziPodatke, self);
         });
 
-        //this.form.on('zaproseno:change', this.onZaprosenoChange, this);
+        this.form.on('ponoviDoma:change', this.togglePrenesi, this);
+        this.form.on('ponoviZamejo:change', this.togglePrenesi, this);
+        this.form.on('ponoviGost:change', this.togglePrenesi, this);
+        this.form.on('ponoviInt:change', this.togglePrenesi, this);
 
         var uprizoritev = this.form.fields.uprizoritev;
         if (uprizoritev) {
-            var podatek = uprizoritev.editor.getValue('uprizoritev');
-            if (podatek) {
-                this.togglePrenesi('doc-postavka-prenesi', uprizoritev.editor);
-            }
+            this.togglePrenesi(this.form, uprizoritev.editor);
             this.form.on('uprizoritev:change', this.togglePrenesi, this);
         }
         var imaKoprodukcije = this.form.fields.imaKoprodukcije;
@@ -200,12 +202,19 @@ define([
             'nasDelez',
             'materialni',
             'drugiJavni',
-            'zaproseno'
+            'zaproseno',
+            'strosekOdkPred',
+            'vlozekGostitelja'
         ];
 
         vnosnaPolja.forEach(function (i) {
             self.form.off(i + ':change', self.prikaziPodatke, self);
         });
+
+        this.form.off('ponoviDoma:change', this.togglePrenesi, this);
+        this.form.off('ponoviZamejo:change', this.togglePrenesi, this);
+        this.form.off('ponoviGost:change', this.togglePrenesi, this);
+        this.form.off('ponoviInt:change', this.togglePrenesi, this);
 
         this.form.off('uprizoritev:change', this.togglePrenesi, this);
         //this.form.off('zaproseno:change', this.onZaprosenoChange, this);
@@ -232,6 +241,8 @@ define([
             this.renderPriloge();
             this.renderDrugiViri();
         }
+        
+        this.prikaziPodatke();
 
         this.bindEvents();
     };
@@ -351,8 +362,7 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.izracunajPrikaznaPolja = function () {
-        var model = this.model;
-        model.preracunajInfo(true);
+        this.model.preracunajInfo(true);
     };
 
     /**
@@ -362,11 +372,10 @@ define([
      */
     EnotaProgramaView.prototype.prikaziPodatke = function () {
         if (!this.form.commit()) {
-            var model = this.model;
-
             this.izracunajPrikaznaPolja();
             this.onZaprosenoChange();
 
+            var model = this.model;
             var f = Handlebars.formatNumber;
             this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
             this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
@@ -493,6 +502,15 @@ define([
             });
         }
     };
+    /**
+     * Število ponovitev, pomembno pri entitetak kjer računamo na predstavo
+     * potrebno je overridat
+     * @param {type} form
+     * @returns {Number}
+     */
+    EnotaProgramaView.prototype.steviloPonovitev = function (form) {
+        return 1;
+    };
 
     /**
      * Obesimo se na uprizoritev change event, ki ga proži forma
@@ -500,14 +518,22 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.togglePrenesi = function (form, editor) {
-        var self = this;
         
-        var podatek = editor.getValue('uprizoritev');
-        if (!podatek) {
-            this.toggleGumb('doc-postavka-prenesi', true);
+        var uprizoritev = form.fields.uprizoritev;
+        uprizoritev = uprizoritev ? uprizoritev.getValue() : null;
+
+        var stPonovi = this.steviloPonovitev(form);        
+        
+        if (stPonovi > 0) {
+            if (!uprizoritev) {
+                this.toggleGumb('doc-postavka-prenesi', true);
+            }
+            else {
+                this.toggleGumb('doc-postavka-prenesi', false);
+            }
         }
         else {
-            this.toggleGumb('doc-postavka-prenesi', false);
+            this.toggleGumb('doc-postavka-prenesi', true);
         }
     };
 
@@ -521,7 +547,7 @@ define([
             var polja = this.form.fields;
 
             if (this.model.get('vsota') < polja.zaproseno.getValue()) {
-                polja.zaproseno.setError('Zaprošeno ne sme biti več kot ' + this.model.get('vsota'));
+                polja.zaproseno.setError(i18next.t("napaka.zaproseno1") + this.model.get('vsota') + i18next.t("napaka.zaproseno2"));
             } else {
                 polja.zaproseno.clearError();
             }

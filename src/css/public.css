@@ -7924,6 +7924,27 @@ span.stevilka-na-veliko {
   margin-top: 0px;
   margin-bottom: 0px;
 }
+.fieldset-viri {
+  background-color: #c8ffc8;
+}
+.fieldset-viri > legend {
+  background-color: #c8ffc8;
+}
+.fieldset-stroski {
+  background-color: #ffc8c8;
+}
+.fieldset-stroski > legend {
+  background-color: #ffc8c8;
+}
+.prikazno-polje > .nasDelez {
+  font-size: 20px;
+}
+.prikazno-polje > .celotnaVrednost {
+  font-size: 20px;
+}
+.prikazno-polje > .lastnaSredstva {
+  font-size: 20px;
+}
 /*!
  * Datetimepicker for Bootstrap 3
  * version : 4.15.35

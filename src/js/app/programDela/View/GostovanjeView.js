@@ -148,6 +148,15 @@ define([
         }
         this.izrisKoprodukcije(imaKop);
     };
+    
+    /**
+     * obstaja samo število ponovitev v tujini
+     * @param {type} form
+     * @returns {unresolved}
+     */
+    GostovanjeView.prototype.steviloPonovitev = function (form) {
+        return form.fields.ponoviInt.getValue();
+    };
 
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika

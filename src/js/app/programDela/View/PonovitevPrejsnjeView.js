@@ -143,6 +143,22 @@ define([
             model.set('stZaposUmet', uprizoritev.stZaposUmet);
         }
     };
+    /**
+     * overridana preračunamo število ponovitev
+     * @param {type} form
+     * @returns {EnotaProgramaView@call;extend.prototype.steviloPonovitev.ponoviDoma|EnotaProgramaView@call;extend.prototype.steviloPonovitev.ponoviZamejo|EnotaProgramaView@call;extend.prototype.steviloPonovitev.stPonovi|EnotaProgramaView@call;extend.prototype.steviloPonovitev.ponoviGost}
+     */
+    PonovitevView.prototype.steviloPonovitev = function (form) {
+        var polja = form.fields;
+        
+        var ponoviDoma = polja.ponoviDoma.getValue();
+        var ponoviZamejo = polja.ponoviZamejo.getValue();
+        var ponoviGost = polja.ponoviGost.getValue();
+
+        var stPonovi = ponoviDoma + ponoviZamejo + ponoviGost;
+        
+        return stPonovi;
+    };
 
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika

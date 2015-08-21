@@ -833,6 +833,8 @@
         "utemeljitev": "Utemeljitev",
         "vlozekGostitelja": "Vložek gostitelja",
         "vlozekKoproducenta": "Vložek koproducenta",
+        "viri": "Viri",
+        "stroski": "Stroški",
         "zaprosenProcent": "Zaprošen procent",
         "zaproseno": "Zaprošeno",
         "d": {
@@ -1047,7 +1049,11 @@
     "napaka": {
         "fetch": "Napaka pri pridobivanju podatkov",
         "kloniranje": "Prišlo je do napake pri kloniranju programa dela.",
-        "zakleni": "Prišlo je do napake pri zaklepanju programa dela."
+        "zakleni": "Prišlo je do napake pri zaklepanju programa dela.",
+        "zaproseno1": "Ministerstvo za kulturo sofinancira do ",
+        "zaproseno2": "€ upravičenih stroškov.",
+        "strosek1": "Strošek odkupa predstave ne sme biti večji kot ",
+        "strosek2": "€ deleža matočnega JZ"
     },
     "uspeh": {
         "fetch": "Napaka pri pridobivanju podatkov",

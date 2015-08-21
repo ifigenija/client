@@ -87,9 +87,15 @@ define([
 
             var transport = this.get('transportniStroski');
             transport = transport ? transport : 0;
+            
+            var strosekOdkPred = this.get('strosekOdkPred');
+            strosekOdkPred = strosekOdkPred ? strosekOdkPred : 0;
+            
+            var vlozekGostitelja = this.get('vlozekGostitelja');
+            vlozekGostitelja = vlozekGostitelja ? vlozekGostitelja : 0;
 
             if (nasDelez) {
-                this.set('nasDelez', tan + avtPra + avtHon + mat + dnevPrvZad + transport);
+                this.set('nasDelez', tan + avtPra + avtHon + mat + dnevPrvZad + transport + strosekOdkPred);
             }
 
             var viri = this.drugiViriCollection;
@@ -113,7 +119,7 @@ define([
             nasD = nasD ? nasD : 0;
 
             //celvredgsz(ali se prešteje našemu deležu) in vlozekgost(odsteje od našega deleža)
-            var lastSred = nasD - (javni + zap + viriVsota);
+            var lastSred = nasD - (javni + zap + viriVsota + vlozekGostitelja);
             var celVred = nasD + koproVsota;
 
             this.set('lastnaSredstva', lastSred);
