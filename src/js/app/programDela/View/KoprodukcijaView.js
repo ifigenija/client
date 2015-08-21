@@ -6,23 +6,26 @@ define([
     'i18next',
     'app/Dokument/View/PostavkeView',
     'template!../tpl/koprodukcija-form.tpl',
-    'formSchema!produkcijaDelitev'
+    'formSchema!produkcijaDelitev',
+    'radio',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         Backgrid,
         i18next,
         PostavkeView,
         formTpl,
-        schema
+        schema,
+        Radio,
+        $
         ) {
 
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
     var KoprodukcijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'koprodukcije',
         formTitle: i18next.t('prodel.title'),
+        disabled: false,
         gridMeta: [
             {
                 cell: 'string',
@@ -32,20 +35,20 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
-                label: i18next.t('prodel.zaprosenProcent'),
-                name: 'zaprosenProcent',
+                label: i18next.t('prodel.zaproseno'),
+                name: 'zaproseno',
                 total: 'sum',
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
-                label: i18next.t('prodel.odstotekFinanciranja'),
-                name: 'odstotekFinanciranja',
+                label: i18next.t('prodel.delez'),
+                name: 'delez',
                 total: 'sum',
                 sortable: true
             },
@@ -60,5 +63,39 @@ define([
             }
         ]
     });
+
+    KoprodukcijaView.prototype.onGridAction = function (model, action) {
+        if (!this.disabled) {
+            if (!model.get('maticniKop')) {
+                PostavkeView.prototype.onGridAction.apply(this, arguments);
+            } else {
+                Radio.channel('error').command('flash', {
+                    message: i18next.t("info.maticniJZ"),
+                    code: '9000600',
+                    severity: 'info'
+                });
+            }
+        }
+        else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("info.shraniEnotoPrograma"),
+                code: '9000600',
+                severity: 'info'
+            });
+        }
+    };
+
+    KoprodukcijaView.prototype.onDodaj = function () {
+        if (!this.disabled) {
+            PostavkeView.prototype.onDodaj.apply(this, arguments);
+        } else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("info.shraniEnotoPrograma"),
+                code: '9000600',
+                severity: 'info'
+            });
+        }
+    };
+
     return KoprodukcijaView;
 });

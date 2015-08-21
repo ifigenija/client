@@ -5,23 +5,22 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/programDela/View/EnotaProgramaView',
+    'app/programDela/View/PrenesiView',
     'template!../tpl/premiera-form.tpl',
+    'template!../tpl/premiera-prenesi.tpl',
     'app/Zapisi/View/ZapisiLayout',
-    'formSchema!programPremiera',
-    'app/programDela/View/IzracunajView'
+    'formSchema!programPremiera'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
+        PrenesiView,
         formTpl,
+        prenesiTpl,
         ZapisiLayout,
-        schema,
-        IzracunajView
+        schema
         ) {
 
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
     var PremieraView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -29,7 +28,7 @@ define([
         formTitle: i18next.t('premiera.title'),
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('ep.sort'),
@@ -53,7 +52,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.zaproseno'),
@@ -62,16 +61,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
-                label: i18next.t('ep.t.lastnaSredstva'),
-                name: 'lastnaSredstva',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.t.avtorskiHonorarji'),
@@ -80,7 +70,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.tantieme'),
@@ -101,17 +91,45 @@ define([
             }
         ]
     });
+
     /**
-     * overridana metoda iz enoteprograma
-     * @returns {EnotaProgramaView@call;extend.prototype.getIzracunajView.View}
+     * overridana metoda
+     * @returns {EnotaProgramaView@call;extend.prototype.getPrenesiView.View}
      */
-    PremieraView.prototype.getIzracunajView = function () {
-        var View = IzracunajView.extend({
-            tanF: 0.6,
-            avtHonF: 0.6
+    PremieraView.prototype.getPrenesiView = function () {
+        var View = PrenesiView.extend({
+            template: prenesiTpl,
+            podatkiUprizoritve: this.podatkiUprizoritve,
+            jeNa: false
         });
 
         return View;
+    };
+
+    /**
+     * overridana metoda
+     * @param {type} view
+     * @param {type} model
+     * @param {type} uprizoritev
+     * @returns {undefined}
+     */
+    PremieraView.prototype.prenesiVrednosti = function (view, model, uprizoritev) {
+
+        if (view.$('.avtorskiHonorarji').is(':checked')) {
+            model.set('avtorskiHonorarji', uprizoritev.NaDo.avtorskiHonorarji);
+        }
+        if (view.$('.tantieme').is(':checked')) {
+            model.set('tantieme', uprizoritev.NaDo.tantieme);
+        }
+        if (view.$('.materialni').is(':checked')) {
+            model.set('materialni', uprizoritev.NaDo.materialni);
+        }
+        if (view.$('.avtorskePravice').is(':checked')) {
+            model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
+        }
+        if (view.$('.stHonorarnih').is(':checked')) {
+            model.set('stHonorarnih', uprizoritev.stHonorarnih);
+        }
     };
 
     /**

@@ -7,19 +7,18 @@ define([
     'app/programDela/View/EnotaProgramaView',
     'template!../tpl/gostujoca-form.tpl',
     'app/Zapisi/View/ZapisiLayout',
-    'formSchema!programGostujoca'
+    'formSchema!programGostujoca',
+    'app/bars'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
         formTpl,
         ZapisiLayout,
-        schema
+        schema,
+        Handlebars
         ) {
 
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
     var GostujocaView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -27,7 +26,7 @@ define([
         formTitle: i18next.t('gostujoca.title'),
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('ep.sort'),
@@ -42,7 +41,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.zaproseno'),
@@ -51,16 +50,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
-                label: i18next.t('ep.t.lastnaSredstva'),
-                name: 'lastnaSredstva',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.t.avtorskiHonorarji'),
@@ -69,7 +59,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.tantieme'),
@@ -92,6 +82,30 @@ define([
     });
     
     /**
+     * Vsi gumbi, ki so navoljo toolbaru za izrisS
+     * @returns {Array}
+     */
+    GostujocaView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [
+                    [
+                        this.buttons.shrani,
+                        this.buttons.preklici,
+                        this.buttons.izracunaj,
+                        this.buttons.nasvet
+                    ]
+                ] : [[this.buttons.dodaj]];
+    };
+
+    GostujocaView.prototype.imaKoprodukcijeChange = function (form, editor) {
+        var imaKop = false;
+        if (this.model.get('id')) {
+            imaKop = editor.getValue();
+        }
+        this.izrisKoprodukcije(imaKop);
+    };
+
+    /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
      */
@@ -102,6 +116,6 @@ define([
         });
         this.prilogeR.show(view);
     };
-    
+
     return GostujocaView;
 });

@@ -18,7 +18,7 @@ define([
         _,
         SeznamView,
         formTpl,
-        permTpl,
+        roleTpl,
         schema,
         i18next,
         baseUrl
@@ -33,13 +33,14 @@ define([
         title: i18next.t('role.title'),
         schema: schema,
         formTemplate: formTpl,
-        template: permTpl,
+        template: roleTpl,
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
             permsR: '.seznam-perms',
-            usersR: '.seznam-users'
+            usersR: '.seznam-users',
+            prilogeR: '.seznam-priloge'
         },
         dodaj: i18next.t('role.dodaj'),
         columns: [
@@ -48,13 +49,6 @@ define([
                 editable: false,
                 label: i18next.t('role.naziv'),
                 name: 'name',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('role.opis'),
-                name: 'description',
                 sortable: true
             },
             {

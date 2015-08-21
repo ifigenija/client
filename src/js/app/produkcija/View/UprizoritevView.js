@@ -22,10 +22,6 @@ define([
         Radio
         ) {
 
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
-
     var UprizoritevView = SeznamView.extend({
         url: baseUrl + '/rest/uprizoritev/vse',
         title: i18next.t('uprizoritev.title'),
@@ -79,7 +75,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('uprizoritev.t.datumPremiere'),

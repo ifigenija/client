@@ -18,10 +18,6 @@ define([
         baseUrl,
         Backgrid
         ) {
-    
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
 
     var SezonaView = SeznamView.extend({
         url: baseUrl + '/rest/sezona',
@@ -32,12 +28,12 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('sezona.imeSezone'),
-                name: 'imeSezone',
+                label: i18next.t('sezona.ime'),
+                name: 'ime',
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('sezona.zacetek'),
@@ -45,7 +41,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('sezona.konec'),

@@ -11,7 +11,11 @@ define([
     'formSchema!programDela',
     'app/Max/View/TabControl',
     'app/Zapisi/View/ZapisiLayout',
-    'marionette'
+    'marionette',
+    'app/produkcija/Model/Sezona',
+    'app/Max/View/Toolbar',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         Radio,
         i18next,
@@ -22,7 +26,10 @@ define([
         formSchema,
         TabControl,
         ZapisiLayout,
-        Marionette
+        Marionette,
+        SezonaModel,
+        Toolbar,
+        $
         ) {
 
     var ch = Radio.channel('layout');
@@ -49,7 +56,7 @@ define([
         },
         {
             title: i18next.t('kazalnik.d.kazalniki'),
-            name: i18next.t('programDela.kazalniki'),
+            name: i18next.t('kazalnik.naslov'),
             event: 'kazalniki'
         }
     ];
@@ -93,9 +100,107 @@ define([
             tabsR: '.programDela-tabs',
             sklopEnaR: '.sklopEna-tabs',
             sklopDvaR: '.sklopDva-tabs',
-            prilogeR: '.region-priloge'
+            prilogeR: '.region-priloge',
+            regionToolbar: '.region-doctoolbar'
+        },
+        buttons: {
+            shrani: {
+                id: 'doc-shrani',
+                label: i18next.t('std.shrani'),
+                element: 'button-trigger',
+                trigger: 'shrani',
+                disabled: true
+            },
+            preklici: {
+                id: 'docedit-skrij',
+                label: i18next.t('std.preklici'),
+                element: 'button-trigger',
+                trigger: 'preklici'
+            },
+            nasvet: {
+                id: 'doc-nasvet',
+                icon: 'fa fa-info',
+                title: i18next.t('std.Pomoc'),
+                element: 'button-trigger',
+                trigger: 'nasvet'
+            },
+            kloniraj: {
+                id: 'doc-kloniraj',
+                label: i18next.t('std.kloniraj'),
+                element: 'button-trigger',
+                trigger: 'kloniraj'
+            },
+            zakleni: {
+                id: 'doc-zakleni',
+                label: i18next.t('std.zakleni'),
+                element: 'button-trigger',
+                trigger: 'zakleni'
+            }
         }
     });
+
+    /**
+     * Ko kliknemo na gumb kloniraj v toolbaru programadela
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onKloniraj = function () {
+
+        var success = function () {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("uspeh.kloniranje"),
+                code: '9000702',
+                severity: 'success'
+            });
+        };
+
+        var error = function () {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("napaka.kloniranje"),
+                code: '9000700',
+                severity: 'error'
+            });
+        };
+
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
+        rpc.call('kloniraj', {
+            'programDelaId': this.model.get('id')},
+        success, error);
+    };
+
+    /**
+     * Ko kliknemo na gumb zakleni v toolbaru programadela
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onZakleni = function () {
+
+        var success = function () {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("uspeh.zakleni"),
+                code: '9000703',
+                severity: 'success'
+            });
+        };
+
+        var error = function () {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("napaka.zakleni"),
+                code: '9000701',
+                severity: 'error'
+            });
+        };
+
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
+        rpc.call('zakleni', {
+            'programDelaId': this.model.get('id')},
+        success, error);
+    };
+
+    ProgramDokView.prototype.prepareToolbar = function () {
+        return  this.model.get('id') ?
+                [[this.buttons.shrani, this.buttons.preklici, this.buttons.kloniraj, this.buttons.zakleni, this.buttons.nasvet]] :
+                [[this.buttons.shrani, this.buttons.preklici, this.buttons.nasvet]];
+
+    };
 
     /**
      * Izris tabov
@@ -116,6 +221,29 @@ define([
         }
 
         this.renderTabs(tabs);
+    };
+
+    ProgramDokView.prototype.onRenderForm = function () {
+        var self = this;
+
+        var prenosDatumov = function (form, editor) {
+            var model = new SezonaModel.Model({id: editor.getValue().id});
+
+            var prenesiDatum = function () {
+                var polja = self.form.fields;
+                
+                polja.zacetek.setValue(model.get('zacetek'));
+                polja.konec.setValue(model.get('konec'));
+            };
+
+            model.fetch({
+                success: prenesiDatum,
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        };
+
+        this.form.off('sezona:change', prenosDatumov, this);
+        this.form.on('sezona:change', prenosDatumov, this);
     };
 
     /**
@@ -374,6 +502,18 @@ define([
         var View = Marionette.ItemView.extend({
             template: kazalnikiTabelaTpl
         });
+        var self = this;
+        var prikaziKazalnike = function () {
+
+            self.model.preracunajKazalnike();
+
+            var view = new View({
+                model: self.model
+            });
+
+            self.kazalnikiR.show(view);
+        };
+
 
         this.model.fetch({
             error: function () {
@@ -382,14 +522,9 @@ define([
                     code: '9000102',
                     severity: 'error'
                 });
-            }
+            },
+            success: prikaziKazalnike
         });
-
-        var view = new View({
-            model: this.model
-        });
-
-        this.kazalnikiR.show(view);
     };
 
     return ProgramDokView;

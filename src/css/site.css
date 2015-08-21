@@ -760,3 +760,43 @@ span.stevilka-na-veliko {
   width: 25%;
   float: none;
 }
+.prikazno-polje .prikazno-polje-naslov {
+  font-weight: normal;
+}
+.prikazno-polje .prikazno-polje-opis > h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.fieldset-viri {
+  background-color: #c8ffc8;
+}
+.fieldset-viri > legend {
+  background-color: #c8ffc8;
+}
+.fieldset-stroski {
+  background-color: #ffc8c8;
+}
+.fieldset-stroski > legend {
+  background-color: #ffc8c8;
+}
+.fieldset-vrednosti {
+  background-color: #ffff96;
+}
+.fieldset-vrednosti > legend {
+  background-color: #ffff96;
+}
+.fieldset-avtorski {
+  background-color: #ffafaf;
+}
+.fieldset-avtorski > legend {
+  background-color: #ffafaf;
+}
+.prikazno-polje > .nasDelez {
+  font-size: 20px;
+}
+.prikazno-polje > .celotnaVrednost {
+  font-size: 20px;
+}
+.prikazno-polje > .lastnaSredstva {
+  font-size: 20px;
+}

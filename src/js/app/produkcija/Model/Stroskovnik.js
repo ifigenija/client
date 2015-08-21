@@ -14,8 +14,7 @@ define([
 
     var PogodbaCollection = Dokument.PostavkaCollection.extend({
         model: PogodbaModel,
-        url: baseUrl + '/rest/pogodba',
-        index: 'sifra'
+        url: baseUrl + '/rest/pogodba'
     });
 
     var AlternacijaModel = Dokument.Postavka.extend({
@@ -24,8 +23,7 @@ define([
 
     var AlternacijaCollection = Dokument.PostavkaCollection.extend({
         model: AlternacijaModel,
-        url: baseUrl + '/rest/alternacija',
-        index: 'sort'
+        url: baseUrl + '/rest/alternacija'
     });
 
     var StrosekModel = Dokument.Postavka.extend({
@@ -34,8 +32,7 @@ define([
 
     var StrosekCollection = Dokument.PostavkaCollection.extend({
         model: StrosekModel,
-        url: baseUrl + '/rest/strosekUprizoritve',
-        index: 'sort'
+        url: baseUrl + '/rest/strosekUprizoritve'
     });
 
     var UprizoritevStrosekModel = Dokument.Model.extend({
@@ -50,7 +47,7 @@ define([
             var pogodba;
             if (alternacija) {
                 pogodba = new PogodbaModel({
-                    alternacija: alternacija,
+                    alternacije: alternacija,
                     oseba: alternacija.get('oseba')
                 });
             } else {

@@ -25,7 +25,8 @@ define([
             template: Handlebars.compile(layoutTpl),
             regions: {
                 contentR: '.main',
-                navR: '.side-nav'
+                navR: '.side-nav',
+                obvestilaR: '.obvestila'
             }
         });
 
@@ -37,6 +38,7 @@ define([
 //            this.tabsR.show(this.tabControl);
 
             var fm = application.flashManager;
+            this.obvestilaR.show(fm.manager);
             fm.manager.$el.prop('id', 'flashMessagesManager');
             fm.createSporocilaView("#sporocila-ifi");
 

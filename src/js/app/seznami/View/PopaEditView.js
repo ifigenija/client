@@ -136,7 +136,8 @@ define([
         var self = this;
 
         kup.save({
-            popa: this.model.get('id')
+            popa: this.model.get('id'),
+            status: this.model.get('stakli')
         }, {
             success: function (model) {
                 self.toolbarView.hideButtons(['doc-kupec']);
@@ -158,7 +159,8 @@ define([
         var self = this;
 
         kup.save({
-            popa: this.model.get('id')
+            popa: this.model.get('id'),
+            status: this.model.get('stakli')
         }, {
             success: function (model) {
                 self.toolbarView.hideButtons(['doc-producent']);

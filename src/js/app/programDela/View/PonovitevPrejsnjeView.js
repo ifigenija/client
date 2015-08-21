@@ -5,21 +5,22 @@ define([
     'app/Max/Module/Backgrid',
     'i18next',
     'app/programDela/View/EnotaProgramaView',
-    'template!../tpl/ponovitevPrejsnje-form4.tpl',
+    'app/programDela/View/PrenesiView',
+    'template!../tpl/ponovitevPrejsnje-form.tpl',
+    'template!../tpl/ponovitevPrejsnje-prenesi.tpl',
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!programPonovitevPrejsnjih'
 ], function (
         Backgrid,
         i18next,
         EnotaProgramaView,
+        PrenesiView,
         formTpl,
+        prenesiTpl,
         ZapisiLayout,
         schema
         ) {
-
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
+    
     var PonovitevView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -27,7 +28,7 @@ define([
         formTitle: i18next.t('ponovitevPrejsnjih.title'),
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('ep.sort'),
@@ -51,7 +52,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.zaproseno'),
@@ -60,16 +61,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
-                label: i18next.t('ep.t.lastnaSredstva'),
-                name: 'lastnaSredstva',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.t.avtorskiHonorarji'),
@@ -78,7 +70,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.tantieme'),
@@ -101,6 +93,74 @@ define([
     });
 
     /**
+     * pridobimo view ki se uporabi pri prenosu podatkov iz uprizoritve v enotoprograma
+     * preračunamo v viewju ker ni vseh podatkov v modelu in ker ni nujno da se bodo vrednosti prepisale
+     */
+    PonovitevView.prototype.getPrenesiView = function () {
+    var View = PrenesiView.extend({
+            template: prenesiTpl,
+            podatkiUprizoritve: this.podatkiUprizoritve,
+            jeNa: true
+        });
+
+        return View;
+    };
+    
+    /**
+     * overridana metoda
+     * @param {type} view
+     * @param {type} model
+     * @param {type} uprizoritev
+     * @returns {undefined}
+     */
+    PonovitevView.prototype.prenesiVrednosti = function (view, model, uprizoritev) {
+
+        if (view.$('.avtorskiHonorarji').is(':checked')) {
+            model.set('avtorskiHonorarji', uprizoritev.NaDo.avtorskiHonorarji);
+        }
+        if (view.$('.tantieme').is(':checked')) {
+            model.set('tantieme', uprizoritev.NaDo.tantieme);
+        }
+        if (view.$('.materialni').is(':checked')) {
+            model.set('materialni', uprizoritev.NaDo.materialni);
+        }
+        if (view.$('.avtorskePravice').is(':checked')) {
+            model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
+        }
+        if (view.$('.stHonorarnih').is(':checked')) {
+            model.set('stHonorarnih', uprizoritev.stHonorarnih);
+        }
+        if (view.$('.stHonorarnihIgr').is(':checked')) {
+            model.set('stHonorarnihIgr', uprizoritev.stHonorarnihIgr);
+        }
+        if (view.$('.stHonorarnihIgrTujJZ').is(':checked')) {
+            model.set('stHonorarnihIgrTujJZ', uprizoritev.stHonorarnihIgrTujJZ);
+        }
+        if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
+            model.set('stHonorarnihIgrSamoz', uprizoritev.stHonorarnihIgrSamoz);
+        }
+        if (view.$('.stZaposUmet').is(':checked')) {
+            model.set('stZaposUmet', uprizoritev.stZaposUmet);
+        }
+    };
+    /**
+     * overridana preračunamo število ponovitev
+     * @param {type} form
+     * @returns {EnotaProgramaView@call;extend.prototype.steviloPonovitev.ponoviDoma|EnotaProgramaView@call;extend.prototype.steviloPonovitev.ponoviZamejo|EnotaProgramaView@call;extend.prototype.steviloPonovitev.stPonovi|EnotaProgramaView@call;extend.prototype.steviloPonovitev.ponoviGost}
+     */
+    PonovitevView.prototype.steviloPonovitev = function (form) {
+        var polja = form.fields;
+        
+        var ponoviDoma = polja.ponoviDoma.getValue();
+        var ponoviZamejo = polja.ponoviZamejo.getValue();
+        var ponoviGost = polja.ponoviGost.getValue();
+
+        var stPonovi = ponoviDoma + ponoviZamejo + ponoviGost;
+        
+        return stPonovi;
+    };
+
+    /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
      */
@@ -111,6 +171,6 @@ define([
         });
         this.prilogeR.show(view);
     };
-    
+
     return PonovitevView;
 });

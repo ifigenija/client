@@ -6,23 +6,23 @@ define([
     'i18next',
     'app/Dokument/View/PostavkeView',
     'template!../tpl/drugiVir-form.tpl',
-    'formSchema!DrugiVir'
+    'formSchema!DrugiVir',
+    'radio'
 ], function (
         Backgrid,
         i18next,
         PostavkeView,
         formTpl,
-        schema
+        schema,
+        Radio
         ) {
-
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
+    
     var DrugiVirView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'drugiViri',
         formTitle: i18next.t('drugiVir.title'),
+        disabled: false,
         gridMeta: [
             {
                 cell: 'string',
@@ -32,7 +32,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('drugiVir.znesek'),
@@ -58,5 +58,31 @@ define([
             }
         ]
     });
+
+    DrugiVirView.prototype.onGridAction = function (model, action) {
+        if (!this.disabled) {
+            PostavkeView.prototype.onGridAction.apply(this, arguments);
+        }
+        else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("info.shraniEnotoPrograma"),
+                code: '9000600',
+                severity: 'info'
+            });
+        }
+    };
+    
+    DrugiVirView.prototype.onDodaj = function () {
+        if (!this.disabled) {
+            PostavkeView.prototype.onDodaj.apply(this, arguments);
+        } else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("info.shraniEnotoPrograma"),
+                code: '9000600',
+                severity: 'info'
+            });
+        }
+    };
+
     return DrugiVirView;
 });

@@ -11,7 +11,8 @@ define([
     'formSchema!pogodba',
     'i18next',
     'app/Max/Module/Backgrid',
-    'backbone-modal'
+    'backbone-modal',
+    'radio'
 ], function (
         PostavkeView,
         FormView,
@@ -22,12 +23,9 @@ define([
         schemaPogodba,
         i18next,
         Backgrid,
-        Modal
+        Modal,
+        Radio
         ) {
-
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
 
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
@@ -41,11 +39,6 @@ define([
                 editorAttrs: {
                     disabled: true
                 }
-            },
-            pogodba: {
-                editorAttrs: {
-                    disabled: true
-                }
             }
         }).schema,
         title: i18next.t('alternacija.title'),
@@ -56,7 +49,7 @@ define([
         },
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('alternacija.sort'),
@@ -118,6 +111,16 @@ define([
             }
         ]
     });
+
+    AlternacijaView.prototype.onRenderForm = function (options) {
+        this.form.on('pogodba:change', function (form, editor) {
+            if (editor.getValue()) {
+                this.$('.pogodba-dodaj').html(i18next.t('std.uredi'));
+            } else {
+                this.$('.pogodba-dodaj').html(i18next.t('std.dodaj'));
+            }
+        });
+    };
 
     /**
      * Priprava toolbara
@@ -194,19 +197,25 @@ define([
         });
 
         var shraniSpremembe = function () {
-            if (!formView.model.get('id')) {
-                formView.listenTo(formView, 'save:success', function () {
+            var model = modal.options.content.model;
+            var view = modal.options.content;
+            if (!model.get('id')) {
+                view.on('save:success', function (model) {
+                    var form = self.form;
+                    var editor = form.fields.pogodba.editor;
+                    editor.setValue(model.get('id'));
+                    form.trigger('change');
+                    form.trigger('pogodba:change', form, editor);
                     self.dokument.alternacijeCollection.fetch({
                         success: function () {
                             self.renderList();
-                            self.renderFormAndToolbar();
-                        }
+                        },
+                        error: Radio.channel('error').request('handler', 'xhr')
                     });
                 });
             }
-            formView.triggerMethod('shrani');
+            view.triggerMethod('shrani');
         };
-
     };
     /**
      * Dodamo novo pogodbo
@@ -234,7 +243,8 @@ define([
                             self.pogodbaModal(pogodba);
                         }
                     }
-                }
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
     };

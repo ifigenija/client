@@ -19,10 +19,6 @@ define([
         Backgrid
         ) {
 
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
-
     var ZaposlitevView = SeznamView.extend({
         url: baseUrl + '/rest/zaposlitev/vse',
         title: i18next.t('zaposlitev.title'),
@@ -53,7 +49,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('zaposlitev.zacetek'),
@@ -61,7 +57,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('zaposlitev.konec'),
@@ -69,7 +65,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('zaposlitev.tip'),

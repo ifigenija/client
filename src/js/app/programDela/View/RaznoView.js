@@ -20,16 +20,14 @@ define([
         ZapisiLayout,
         schema
         ) {
-
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
+    
     var RaznoView = EnotaProgramaView.extend({
         template: tpl,
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'programiRazno',
         formTitle: i18next.t('programRazno.title'),
+        disabled: false,
         regions: {
             drugiViriR: '.region-drugiViri',
             koprodukcijeR: '.region-koprodukcije',
@@ -38,7 +36,7 @@ define([
         },
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('ep.sort'),
@@ -53,14 +51,14 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                cell: 'boolean',
                 editable: false,
-                label: i18next.t('programRazno.soorganizator'),
-                name: 'soorganizator.label',
+                label: i18next.t('ep.imaKoprodukcije'),
+                name: 'imaKoprodukcije',
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.zaproseno'),
@@ -69,16 +67,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
-                label: i18next.t('ep.t.lastnaSredstva'),
-                name: 'lastnaSredstva',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.stHonorarnih'),
@@ -87,7 +76,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.tantieme'),
@@ -108,6 +97,51 @@ define([
             }
         ]
     });
+    
+    RaznoView.prototype.izracunajPrikaznaPolja = function () {
+        var model = this.model;
+        model.preracunajInfo(false);
+    };
+    
+    RaznoView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [
+                    [
+                        this.buttons.shrani,
+                        this.buttons.preklici,
+                        this.buttons.izracunaj,
+                        this.buttons.nasvet
+                    ]
+                ] : [[this.buttons.dodaj]];
+    };
+
+
+    RaznoView.prototype.imaKoprodukcijeChange = function (form, editor) {
+        var imaKop = false;
+        if (this.model.get('id')) {
+            imaKop = editor.getValue();
+        }
+        this.izrisKoprodukcije(imaKop);
+    };
+    
+     /**
+     * disable/enable gumbe v drugihvirih, koprodukcijah in zapisih
+     * @returns {undefined}
+     */
+    RaznoView.prototype.disablePostavke = function () {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton('doc-postavka-shrani');
+        if (but) {
+            if (!but.get('disabled') && this.model.get('id')) {
+                this.drugiViri.disabled = true;
+                if (this.koprodukcije) {
+                    this.koprodukcije.disabled = true;
+                }
+                this.pes.disabled = true;
+                //dodati se še mora za zapis
+            }
+        }
+    };
 
     /**
      * 
@@ -124,14 +158,28 @@ define([
     };
 
     /**
+     * ob izrisu forme se izvede še izris postavk
+     * @returns {undefined}
+     */
+    RaznoView.prototype.onRenderForm = function () {
+        EnotaProgramaView.prototype.onRenderForm.apply(this, arguments);
+        if (!this.model.isNew()) {
+            this.renderPES();
+        }
+    };
+
+    /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
      */
     RaznoView.prototype.renderPES = function () {
-        var view = new PESView({
-            collection: this.model.peSklopiCollection,
+        var view = this.pes = new PESView({
+            collection: this.model.programskeEnoteSklopaCollection,
             dokument: this.model
         });
+        
+        view.on('save:success', this.ponovenIzris, this);
+        view.on('destroy:success', this.ponovenIzris, this);        
 
         this.pesR.show(view);
     };

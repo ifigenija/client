@@ -17,9 +17,6 @@ define([
         schema
         ) {
 
-    var hc = Backgrid.HeaderCell.extend({
-        className: 'backgrid-kolona-stevilk'
-    });
     var IzjemniView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -27,7 +24,7 @@ define([
         formTitle: i18next.t('izjemni.title'),
         gridMeta: [
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'integer',
                 editable: false,
                 label: i18next.t('ep.sort'),
@@ -42,7 +39,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.zaproseno'),
@@ -51,16 +48,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
-                cell: 'number',
-                editable: false,
-                label: i18next.t('ep.t.lastnaSredstva'),
-                name: 'lastnaSredstva',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.t.avtorskiHonorarji'),
@@ -69,7 +57,7 @@ define([
                 sortable: true
             },
             {
-                headerCell: hc,
+                headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('ep.tantieme'),
@@ -90,7 +78,28 @@ define([
             }
         ]
     });
-    
+
+    IzjemniView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [
+                    [
+                        this.buttons.shrani,
+                        this.buttons.preklici,
+                        this.buttons.izracunaj,
+                        this.buttons.nasvet
+                    ]
+                ] : [[this.buttons.dodaj]];
+    };
+
+
+    IzjemniView.prototype.imaKoprodukcijeChange = function (form, editor) {
+        var imaKop = false;
+        if (this.model.get('id')) {
+            imaKop = editor.getValue();
+        }
+        this.izrisKoprodukcije(imaKop);
+    };
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -102,6 +111,6 @@ define([
         });
         this.prilogeR.show(view);
     };
-    
+
     return IzjemniView;
 });
