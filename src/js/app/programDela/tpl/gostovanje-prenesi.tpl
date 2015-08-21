@@ -27,7 +27,7 @@
             </td>
             <td>{{t "ep.tantieme"}}</td>
             <td class="col-numbers">{{u "formatNumber" tantieme}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.Na.tantieme}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.Na.avtorskePravice}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev 0}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.tantieme}}</td>
         </tr>
@@ -40,16 +40,6 @@
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.Na.materialni}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev 0}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.materialni}}</td>
-        </tr>
-        <tr>
-            <td>
-                <input class="avtorskePravice" type="checkbox">
-            </td>
-            <td>{{t "ep.avtorskePravice"}}</td>
-            <td class="col-numbers">{{u "formatNumber" avtorskePravice}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.Na.avtorskePravice}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.avtorskePravice}}</td>
         </tr>
     </tbody>
 </table>

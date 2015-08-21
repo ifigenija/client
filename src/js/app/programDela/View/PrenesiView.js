@@ -29,16 +29,18 @@ define([
         serializeData: function () {
 
             if (!this.jeNa) {
+                //tantieme so avtorske pravice na predstavo
+                this.podatkiUprizoritve.Do = _.extend({'tantieme': this.podatkiUprizoritve.Na.avtorskePravice}, this.podatkiUprizoritve.Do);
                 this.podatkiUprizoritve.NaDo = this.podatkiUprizoritve.Do;
             } else {
                 var vsotaPon = this.vsotaPonovitev(this.model);
                 var na = this.podatkiUprizoritve.Na;
 
+                //avtorskih pravic ni pri ponovitvah
                 this.podatkiUprizoritve.NaDo = {
                     avtorskiHonorarji: na.avtorskiHonorarji * vsotaPon,
                     avtorskiHonorarjiSamoz: na.avtorskiHonorarjiSamoz * vsotaPon,
-                    tantieme: na.tantieme * vsotaPon,
-                    avtorskePravice: na.avtorskePravice * vsotaPon,
+                    tantieme: na.avtorskePravice * vsotaPon,
                     materialni: na.materialni * vsotaPon
                 };
 
@@ -57,20 +59,20 @@ define([
         onIzberiVse: function () {
             this.$('input').click();
         },
-        vsotaPonovitev: function(model){
+        vsotaPonovitev: function (model) {
             var temp = model.get('ponoviDoma');
             var ponoviDoma = temp ? temp : 0;
-            
+
             temp = model.get('ponoviZamejo');
             var ponoviZamejo = temp ? temp : 0;
-            
+
             temp = model.get('ponoviGost');
             var ponoviGost = temp ? temp : 0;
-            
+
             temp = model.get('ponoviInt');
             var ponoviInt = temp ? temp : 0;
-            
-            
+
+
             return ponoviDoma + ponoviZamejo + ponoviGost + ponoviInt;
         }
     });

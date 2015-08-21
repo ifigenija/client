@@ -827,7 +827,6 @@
         "stZaposUmet": "Število zaposlenih članov umet. ansambla",
         "stZaposlenih": "Število zaposlenih",
         "stHonorarnihIgrSamoz": "Število samozaposlenih igralcev",
-        "strosekOdkPred": "Strošek odkupa predstave",
         "tipProgramskeEnote": "Tip programske enote",
         "tantieme": "Tantieme",
         "utemeljitev": "Utemeljitev",
@@ -838,7 +837,7 @@
         "zaprosenProcent": "Zaprošen procent",
         "zaproseno": "Zaprošeno",
         "d": {
-            "naziv":"",
+            "naziv": "",
             "uprizoritev": "",
             "avtorskePravice": "Stroški odkupa avtorskih pravic, vezanih na uprizoritev",
             "avtorskiHonorarjiSamoz": "",
@@ -851,7 +850,6 @@
             "avtorskiHonorarji": "Stroški avtorskih honorarjev",
             "tantieme": "Stroški tantiem, vezanih na uprizoritev",
             "vlozekGostitelja": "Prihodek od odkupa predstave v primeru gostovanja po Sloveniji in zamejstvu",
-            "strosekOdkPred": "Strošek odkupa predstave",
             "vlozekKoproducenta": "Vložek koproducenta(-ov)",
             "drugiJavni": "Vir druga ministrstva in lokalna skupnost",
             "materialni": "",
@@ -964,7 +962,13 @@
         "title": "Ponovitve uprizoritev iz prejšnjih sezon"
     },
     "gostujoca": {
-        "title": "Gostujoče uprizoritve"
+        "title": "Gostujoče uprizoritve",
+        "strosekOdkPred": "Strošek odkupa predstave",
+        "stroskiOstali": "Ostali stroški",
+        "d": {
+            "strosekOdkPred": "",
+            "stroskiOstali": ""
+        }
     },
     "izjemni": {
         "title": "Izjemni dogodki"
@@ -1051,9 +1055,7 @@
         "kloniranje": "Prišlo je do napake pri kloniranju programa dela.",
         "zakleni": "Prišlo je do napake pri zaklepanju programa dela.",
         "zaproseno1": "Ministerstvo za kulturo sofinancira do ",
-        "zaproseno2": "€ upravičenih stroškov.",
-        "strosek1": "Strošek odkupa predstave ne sme biti večji kot ",
-        "strosek2": "€ deleža matočnega JZ"
+        "zaproseno2": "€ (glede na trenutni delež matičnega JZ) upravičenih stroškov."
     },
     "uspeh": {
         "fetch": "Napaka pri pridobivanju podatkov",

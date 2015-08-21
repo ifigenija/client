@@ -7936,6 +7936,18 @@ span.stevilka-na-veliko {
 .fieldset-stroski > legend {
   background-color: #ffc8c8;
 }
+.fieldset-vrednosti {
+  background-color: #ffff96;
+}
+.fieldset-vrednosti > legend {
+  background-color: #ffff96;
+}
+.fieldset-avtorski {
+  background-color: #ffafaf;
+}
+.fieldset-avtorski > legend {
+  background-color: #ffafaf;
+}
 .prikazno-polje > .nasDelez {
   font-size: 20px;
 }

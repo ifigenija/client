@@ -91,11 +91,14 @@ define([
             var strosekOdkPred = this.get('strosekOdkPred');
             strosekOdkPred = strosekOdkPred ? strosekOdkPred : 0;
             
+            var stroskiOstali = this.get('stroskiOstali');
+            stroskiOstali = stroskiOstali ? stroskiOstali : 0;
+            
             var vlozekGostitelja = this.get('vlozekGostitelja');
             vlozekGostitelja = vlozekGostitelja ? vlozekGostitelja : 0;
 
             if (nasDelez) {
-                this.set('nasDelez', tan + avtPra + avtHon + mat + dnevPrvZad + transport + strosekOdkPred);
+                this.set('nasDelez', tan + avtPra + avtHon + mat + dnevPrvZad + transport + strosekOdkPred + stroskiOstali);
             }
 
             var viri = this.drugiViriCollection;

@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="avtorskePravice,materialni,transportniStroski,dnevPrvZad,zaproseno"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="materialni,transportniStroski,dnevPrvZad,zaproseno"></div>
                 <div class="col-sm-12 col-lg-6" data-fields="drugiJavni,vlozekGostitelja,avtorskiHonorarjiSamoz,obiskInt,imaKoprodukcije"></div>
             </div>
         </div>

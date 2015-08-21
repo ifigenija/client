@@ -166,7 +166,8 @@ define([
             'drugiJavni',
             'zaproseno',
             'strosekOdkPred',
-            'vlozekGostitelja'
+            'vlozekGostitelja',
+            'stroskiOstali'
         ];
 
         vnosnaPolja.forEach(function (i) {
@@ -204,7 +205,8 @@ define([
             'drugiJavni',
             'zaproseno',
             'strosekOdkPred',
-            'vlozekGostitelja'
+            'vlozekGostitelja',
+            'stroskiOstali'
         ];
 
         vnosnaPolja.forEach(function (i) {
