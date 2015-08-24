@@ -103,6 +103,9 @@
         "zakleni": "Zakleni",
         "oznaci": "Označi vse"
     },
+    "alter": {
+        "novaOseba":"Nova Oseba"
+    },
     "ent": {
         "dodaj": "Dodaj",
         "splosno": "Splošno",

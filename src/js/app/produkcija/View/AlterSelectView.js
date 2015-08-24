@@ -11,7 +11,9 @@ define([
     'app/Max/Module/Form',
     'i18next',
     'template!../tpl/alter-select.tpl',
-    'template!../tpl/alter-item.tpl'
+    'template!../tpl/alter-item.tpl',
+    'app/seznami/Model/Oseba',
+    'app/seznami/View/OsebaModal'
 ], function (
         Radio,
         Marionette,
@@ -21,7 +23,9 @@ define([
         Form,
         i18next,
         tpl,
-        itemTpl                
+        itemTpl,
+        OsebaModel,
+        OsebaModal
         ) {
 
     /**
@@ -102,7 +106,8 @@ define([
             seznamR: '.alter-seznam'
         },
         events: {
-            'click .alter-gumb': 'dodaj'
+            'click .alter-gumb': 'dodaj',
+            'click .alter-nova': 'novaOseba'
         },
         onRender: function () {
             this.renderIzbor();
@@ -139,6 +144,12 @@ define([
             id = val.id.id;
             this.triggerMethod('dodaj:alter', id);
         }
+    };
+    
+    AlterSelectView.prototype.novaOseba = function () {
+        var model = new OsebaModel.Model();
+        var editor = this.formIzberi.fields.id.editor;
+        this.modal = OsebaModal(model, editor);
     };
 
     /**

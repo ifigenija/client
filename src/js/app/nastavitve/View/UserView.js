@@ -106,7 +106,7 @@ define([
         
         if(text.length > 0 && text.length < 8){
             geslo.setError(i18next.t("napaka.gesloKratko"));
-        }else{
+        }else if(text.length >= 8){
             geslo.clearError();
             var maliText = text.toLowerCase();
             var velikiText = text.toUpperCase();
@@ -130,6 +130,8 @@ define([
             }else{
                 geslo.clearError();
             }
+        }else{
+            geslo.clearError();
         }
     };
 

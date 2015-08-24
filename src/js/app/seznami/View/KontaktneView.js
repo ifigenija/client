@@ -8,7 +8,8 @@ define([
     'template!../tpl/kontaktna-form.tpl',
     'formSchema!kontaktnaoseba',
     'i18next',
-    'app/seznami/Model/Oseba'
+    'app/seznami/Model/Oseba',
+    './OsebaModal'
 ], function (
         Radio,
         PostavkeView,
@@ -16,7 +17,8 @@ define([
         formTpl,
         schema,
         i18next,
-        OsebaModel
+        OsebaModel,
+        OsebaModal
         ) {
 
 
@@ -88,32 +90,8 @@ define([
     };
 
     KontaktneView.prototype.osebaModal = function (editModel) {
-        var self = this;
-
-        require(['backbone-modal', 'app/seznami/View/OsebaEditView'], function (Modal, OsebaEditView) {
-            var view = new OsebaEditView({
-                model: editModel,
-                pogled: 'kontaktna'
-            });
-
-            var izberi = function () {
-                if (!view.model.get('id')) {
-                    Radio.channel('error').command('flash', {message: 'Niste še ustvarili nove osebe', code: 2000000, severity: 'error'});
-                    modal.preventClose();
-                }
-                else {
-                    self.form.fields.oseba.editor.setValue(view.model.get('id'));
-                    modal.close();
-                }
-            };
-
-            var modal = new Modal({
-                content: view,
-                animate: true,
-                okText: i18next.t("std.izberi"),
-                cancelText: i18next.t("std.preklici")
-            }).open(izberi);
-        });
+        var editor = this.form.fields.oseba.editor;        
+        var modal = OsebaModal(editModel, editor);
     };
 
     /**

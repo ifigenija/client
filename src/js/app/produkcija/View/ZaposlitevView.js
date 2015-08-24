@@ -8,7 +8,9 @@ define([
     '../Model/Zaposlitev',
     'i18next',
     'baseUrl',
-    'app/Max/Module/Backgrid'
+    'app/Max/Module/Backgrid',
+    'app/seznami/Model/Oseba',
+    'app/seznami/View/OsebaModal'
 ], function (
         SeznamView,
         formTpl,
@@ -16,7 +18,9 @@ define([
         Zaposlitev,
         i18next,
         baseUrl,
-        Backgrid
+        Backgrid,
+        OsebaModel,
+        OsebaModal
         ) {
 
     var ZaposlitevView = SeznamView.extend({
@@ -24,6 +28,9 @@ define([
         title: i18next.t('zaposlitev.title'),
         schema: schema,
         formTemplate: formTpl,
+        events:{
+            'click oseba-dodaj': 'novaOseba'
+        },
         columns: [
             {
                 cell: 'string',
@@ -95,6 +102,12 @@ define([
     ZaposlitevView.prototype.onDodaj = function () {
         var model = new Zaposlitev.Model();
         this.onSelected(model);
+    };
+    
+    ZaposlitevView.prototype.novaOseba = function () {
+        var model = new OsebaModel.Model();
+        var editor = this.formIzberi.fields.id.editor;
+        this.modal = OsebaModal(model, editor);
     };
 
     return ZaposlitevView;
