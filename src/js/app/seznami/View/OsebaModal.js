@@ -13,12 +13,19 @@ define([
         OsebaEditView
         ) {
 
+    /**
+     * editModel je model osebe
+     * editor predstavlja vnosno polje, ki se bo po kreiranju osebe zapolnlo
+     * @param {type} editModel
+     * @param {type} editor
+     * @returns {unresolved}
+     */
     return function (editModel, editor) {
         var view = new OsebaEditView({
             model: editModel,
             pogled: 'kontaktna'
         });
-        
+
         var izberi = function () {
             var view = modal.options.content;
             if (!view.model.get('id')) {
@@ -37,7 +44,7 @@ define([
             okText: i18next.t("std.izberi"),
             cancelText: i18next.t("std.preklici")
         });
-        
+
         return modal.open(izberi);
     };
 });

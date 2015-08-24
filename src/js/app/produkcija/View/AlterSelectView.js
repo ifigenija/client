@@ -107,7 +107,7 @@ define([
         },
         events: {
             'click .alter-gumb': 'dodaj',
-            'click .alter-nova': 'novaOseba'
+            'click .oseba-nova': 'novaOseba'
         },
         onRender: function () {
             this.renderIzbor();
@@ -149,7 +149,7 @@ define([
     AlterSelectView.prototype.novaOseba = function () {
         var model = new OsebaModel.Model();
         var editor = this.formIzberi.fields.id.editor;
-        this.modal = OsebaModal(model, editor);
+        OsebaModal(model, editor);
     };
 
     /**

@@ -29,7 +29,7 @@ define([
         schema: schema,
         formTemplate: formTpl,
         events:{
-            'click oseba-dodaj': 'novaOseba'
+            'click .oseba-dodaj': 'novaOseba'
         },
         columns: [
             {
@@ -106,7 +106,7 @@ define([
     
     ZaposlitevView.prototype.novaOseba = function () {
         var model = new OsebaModel.Model();
-        var editor = this.formIzberi.fields.id.editor;
+        var editor = this.formView.form.fields.oseba.editor;
         this.modal = OsebaModal(model, editor);
     };
 
