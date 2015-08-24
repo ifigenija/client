@@ -14,6 +14,7 @@ define([
     'marionette',
     'app/produkcija/Model/Sezona',
     'app/Max/View/Toolbar',
+    'app/Max/View/Confirm',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -29,6 +30,7 @@ define([
         Marionette,
         SezonaModel,
         Toolbar,
+        confirm,
         $
         ) {
 
@@ -189,10 +191,21 @@ define([
             });
         };
 
-        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
-        rpc.call('zakleni', {
-            'programDelaId': this.model.get('id')},
-        success, error);
+        var zakleni = function () {
+            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
+            rpc.call('zakleni', {
+                'programDelaId': this.model.get('id')},
+            success, error);
+        };
+
+        confirm({
+            text: i18next.t('std.potrdiZaklep'),
+            modalOptions: {
+                title: i18next.t("std.zaklepPD"),
+                okText: i18next.t("std.zakleni")
+            },
+            ok: zakleni
+        });
     };
 
     ProgramDokView.prototype.prepareToolbar = function () {
@@ -231,7 +244,7 @@ define([
 
             var prenesiDatum = function () {
                 var polja = self.form.fields;
-                
+
                 polja.zacetek.setValue(model.get('zacetek'));
                 polja.konec.setValue(model.get('konec'));
             };

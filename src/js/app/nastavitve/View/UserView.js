@@ -6,28 +6,33 @@ define([
     'template!../tpl/user-form.tpl',
     'template!../tpl/user.tpl',
     './RelationView',
-    '../Model/User',
     'formSchema!user',
     'i18next',
     'baseUrl',
-    'app/Max/Module/Backgrid'
+    'app/Max/Module/Backgrid',
+    'app/Dokument/Model/Dokument'
 ], function (
         SeznamView,
         formTpl,
         userTpl,
         RelationView,
-        User,
         schema,
         i18next,
         baseUrl,
-        Backgrid
+        Backgrid,
+        Dokument
         ) {
+    
+    var UserModel = Dokument.Model.extend({
+        urlRoot: baseUrl + '/rest/user'
+    });
 
     var UserView = SeznamView.extend({
         url: baseUrl + '/rest/user',
         formTemplate: formTpl,
         template: userTpl,
         schema: schema,
+        odprtaForma: true,
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
@@ -78,7 +83,7 @@ define([
     });
 
     UserView.prototype.onDodaj = function () {
-        var model = new User.Model();
+        var model = new UserModel();
         this.onSelected(model);
     };
 
@@ -90,7 +95,43 @@ define([
         }
         return text;
     };
+    
+    UserView.prototype.onRenderForm = function () {
+        this.formView.form.on('password:change', this.onPasswordChange, this);
+    };
 
+    UserView.prototype.onPasswordChange = function (form, editor) {
+        var text = editor.getValue();
+        var geslo = form.fields.password;
+        
+        if(text.length > 0 && text.length < 8){
+            geslo.setError(i18next.t("napaka.gesloKratko"));
+        }else{
+            geslo.clearError();
+            var maliText = text.toLowerCase();
+            var velikiText = text.toUpperCase();
+            
+            var pogoji = 0;
+            if(text !== maliText){
+                pogoji++;
+            }
+            if(text !== velikiText){
+                pogoji++;
+            }
+            if(text.match(/\d/)){
+                pogoji++;
+            }
+            if(text.match(/\W/)){
+                pogoji++;
+            }
+            
+            if(pogoji < 3){
+                geslo.setError(i18next.t("napaka.gesloSibko"));
+            }else{
+                geslo.clearError();
+            }
+        }
+    };
 
     /**
      * Kaj se zgodi, ko izberemo model v tabeli 

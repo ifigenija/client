@@ -1,11 +1,9 @@
 define([
     'baseUrl',
-    'app/Dokument/Model/Dokument',
-    'underscore'
+    'app/Dokument/Model/Dokument'
 ], function (
         baseUrl,
-        Dokument,
-        _
+        Dokument
         ) {
     
     var Permission = Dokument.Model.extend({

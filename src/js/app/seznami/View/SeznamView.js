@@ -86,6 +86,7 @@ define([
         this.schema = options.schema || this.schema;
         this.title = options.title || this.title;
         this.columns = options.columns || this.columns;
+        this.odprtaForma = options.odprtaForma || this.odprtaForma || false;
 
         if (!this.collection) {
             this.collection = this.getCollection();
@@ -105,7 +106,7 @@ define([
         coll.url = this.url;
         return coll;
     };
-    
+
     /**
      * Izris prilog - privzeto se ne izriše nič. 
      * Overrirde funkcionalnosti v izvedenih objektih
@@ -115,7 +116,7 @@ define([
     SeznamView.prototype.renderPriloge = function (model) {
 
     };
-    
+
     /**
      * Izris seznamaView
      * @returns {undefined}
@@ -257,9 +258,11 @@ define([
             this.zamenjajUrl(model);
         }
 
-        var form = this.getFormView(model);
+        var form = this.formView = this.getFormView(model);
 
         this.formR.show(form);
+        this.formView.form.on('change', this.formChange, this);
+        this.triggerMethod('render:form', this.formView.form);
         this.renderPriloge(model);
 
         this.$('.glava-title').text(this.getTitle(model));
@@ -280,6 +283,12 @@ define([
         this.$('.glava-title').text(this.getTitle(model));
         this.zamenjajUrl(model);
         this.collection.fetch();
+
+        if (!this.odprtaForma) {
+            this.model = null;
+            this.formR.empty();
+            this.renderToolbar();
+        }
     };
 
     /**

@@ -1,19 +1,14 @@
 define([
     'baseUrl',
-    'backbone',
-    'underscore',
-    'app/Max/Model/RelationCollection'
+    'app/Dokument/Model/Dokument'
 ], function (
         baseUrl,
-        Backbone,
-        _,
-        RelationColl
+        Dokument
         ) {
-
-    var Uporabnik = Backbone.Model.extend({
-        urlRoot: baseUrl + '/rest/user'      
-    });
     
+    var Uporabnik = Dokument.Model.extend({
+        urlRoot: baseUrl + '/rest/user'
+    });
     return {
         Model: Uporabnik
     };
