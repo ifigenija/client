@@ -143,13 +143,7 @@ define([
 
         this.gridR.show(this.grid);
         this.collection.fetch({
-            error: function () {
-                Radio.channel('error').command('flash', {
-                    message: i18next.t("napaka.fetch") + ' (Seznam)',
-                    code: '9000205',
-                    severity: 'error'
-                });
-            }
+            error: Radio.channel('error').request('handler', 'xhr')
         });
     };
     /**
