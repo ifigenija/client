@@ -1,7 +1,5 @@
-<div class="page-header">
-    <div class="region-doctoolbar pull-right"></div>
-    <h2>{{ docNaslov }}</h2>
-</div>
+<div class="region-doctoolbar pull-right"></div>
+<h2>{{ docNaslov }}</h2>
 <div class="clearfix"></div>
 
 <div role="tabpanel">
