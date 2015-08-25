@@ -34,6 +34,7 @@ define([
         schema: schema,
         formTemplate: formTpl,
         template: permTpl,
+        odprtaForma: true,
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',

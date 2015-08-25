@@ -114,7 +114,7 @@ define([
                 disabled: true
             },
             preklici: {
-                id: 'docedit-skrij',
+                id: 'doc-preklici',
                 label: i18next.t('std.preklici'),
                 element: 'button-trigger',
                 trigger: 'preklici'

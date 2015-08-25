@@ -66,11 +66,11 @@ define([
             trigger: 'kupec',
             hidden: true
         },
-        skrij: {
-            id: 'doc-skrij',
-            label: i18next.t('std.skrij'),
+        preklici: {
+            id: 'doc-preklici',
+            label: i18next.t('std.preklici'),
             element: 'button-trigger',
-            trigger: 'skrij'
+            trigger: 'preklici'
         },
         nasvet: {
             id: 'doc-nasvet',
