@@ -218,16 +218,16 @@
             <td>{{t "kazalnik.vrPS1"}}</td>
             <td class="col-numbers">{{u "formatNumber" vrPS1}}</td>
         </tr>
-        <tr><!--možna decimalna števila-->
-            <td class="kazalnik-padleft">{{t "kazalnik.vrPS1Do"}}</td>
+        <tr>
+            <td class="">{{t "kazalnik.vrPS1Do"}}</td>
             <td class="col-numbers">{{u "formatNumber" vrPS1Do}}</td>
         </tr>
-        <tr><!--možna decimalna števila-->
-            <td class="kazalnik-padleft">{{t "kazalnik.vrPS1Mat"}}</td>
+        <tr>
+            <td class="">{{t "kazalnik.vrPS1Mat"}}</td>
             <td class="col-numbers">{{u "formatNumber" vrPS1Mat}}</td>
         </tr>
-        <tr><!--možna decimalna števila-->
-            <td class="kazalnik-padleft">{{t "kazalnik.vrPS1GostovSZ"}}</td>
+        <tr>
+            <td class="">{{t "kazalnik.vrPS1GostovSZ"}}</td>
             <td class="col-numbers">{{u "formatNumber" vrPS1GostovSZ}}</td>
         </tr>
         <tr>
@@ -235,12 +235,74 @@
             <td class="col-numbers">{{u "formatNumber" stIzvNekomerc 0}}</td>
         </tr>
         <tr>
-            <td class="kazalnik-padleft">{{t "kazalnik.stIzvPremProd"}}</td>
+            <td>{{t "kazalnik.stIzvPremProd"}}</td>
             <td class="col-numbers">{{u "formatNumber" stIzvPremProd 0}}</td>
         </tr>
         <tr>
-            <td class="kazalnik-padleft">{{t "kazalnik.stIzvPonPrej"}}</td>
+            <td class="kazalnik-padleft">{{t "kazalnik.oderDom"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPremDomaS 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.gostZam"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPremZamejo 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.gostSlo"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPremGost 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.gostTuj"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPremInt 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.oderSloZam"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPremKopr 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.oderKopTuj"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPremKoprInt 0}}</td>
+        </tr>
+        <tr>
+            <td>{{t "kazalnik.stIzvPonPrej"}}</td>
             <td class="col-numbers">{{u "formatNumber" stIzvPonPrej 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.oderDom"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPrejDoma 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.gostZam"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPrejZamejo 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.gostSlo"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPrejGost 0}}</td>
+        </tr><tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.gostTuj"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPrejInt 0}}</td>
+        </tr><tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.oderSloZam"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPrejKopr 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.oderKopTuj"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stIzvPonPrejKoprInt 0}}</td>
+        </tr>
+        <tr>
+            <td>{{t "kazalnik.stObiskPonPrem"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskPonPremS 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.oderDom"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskPonPremDoma 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.oderSloZam"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskPonPremKopr 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.oderKopTuj"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskPonPremKoprInt 0}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "kazalnik.stIzvGostuj"}}</td>
@@ -265,6 +327,10 @@
         <tr>
             <td>{{t "kazalnik.stObiskNekom"}}</td>
             <td class="col-numbers">{{u "formatNumber" stObiskNekom 0}}</td>
+        </tr>
+        <tr>
+            <td>{{t "kazalnik.obiskPov"}}</td>
+            <td class="col-numbers">{{u "formatNumber" obiskPov}}</td>
         </tr>
         <tr>
             <td class="kazalnik-padleft">{{t "kazalnik.stObiskNekomMat"}}</td>

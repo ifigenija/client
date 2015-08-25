@@ -652,6 +652,19 @@ define([
 
             //kazalniki priloga 2
             this.set('stIzvPremProd', stIzvPrem + stIzvPonPrem);
+            
+            var stIzvPonPrem = this.getVrednost('stIzvPonPremDoma');
+            this.set('stIzvPonPremDomaS', stIzvPrem + stIzvPonPrem);
+            
+            var stObiskPonPrem = this.getVrednost('stIzvPonPremDoma');
+            var stObiskPrem = this.getVrednost('stIzvPonPremDoma');
+            
+            this.set('stObiskPonPremS', stObiskPonPrem + stObiskPrem);
+            
+            var povprecje = (stObiskPonPrem + stObiskPrem)/(stIzvPonPrem + stIzvPrem);
+            povprecje = povprecje ? povprecje : 0;
+            this.set('obiskPov', povprecje);
+            
         }
     });
     return {
