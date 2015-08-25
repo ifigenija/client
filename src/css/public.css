@@ -7220,16 +7220,6 @@ body.stoposto {
 .mouse-hand {
   cursor: pointer;
 }
-/* koledar */
-.koledar {
-  width: 100%;
-  margin-bottom: 10px;
-  margin-left: -8px;
-  margin-top: -8px;
-  padding: 8px;
-  text-align: center;
-  background-color: whitesmoke;
-}
 /*
  Dodatki za vnosna polja
 */
@@ -7924,29 +7914,35 @@ span.stevilka-na-veliko {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-.fieldset-viri {
-  background-color: #c8ffc8;
+fieldset {
+  padding: 1px 5px;
+  background-color: #eeeeee;
 }
-.fieldset-viri > legend {
-  background-color: #c8ffc8;
+fieldset legend {
+  margin-bottom: 3px;
+  border-bottom: 0px;
 }
-.fieldset-stroski {
-  background-color: #ffc8c8;
+fieldset legend span {
+  background-color: #eeeeee;
+  padding: 1px 5px;
+  margin-left: 5px;
 }
-.fieldset-stroski > legend {
-  background-color: #ffc8c8;
+fieldset.pomemben {
+  background-color: #dedede;
 }
-.fieldset-vrednosti {
-  background-color: #ffff96;
+fieldset.pomemben legend span {
+  background-color: #dedede;
 }
-.fieldset-vrednosti > legend {
-  background-color: #ffff96;
+.region-form {
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
-.fieldset-avtorski {
-  background-color: #ffafaf;
+.izbor-uprizoritve-inline {
+  padding: 6px 12px;
 }
-.fieldset-avtorski > legend {
-  background-color: #ffafaf;
+.izbor-uprizoritve-inline h3 {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .prikazno-polje > .nasDelez {
   font-size: 20px;

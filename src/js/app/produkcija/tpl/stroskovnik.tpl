@@ -1,7 +1,8 @@
-<h2 class="naslov-uprizoritve"></h2>
-<div class="row">
-    <div class="col-xs-12 col-sm-8 com-md-5 col-lg-4 region-lookup"></div>
-    <div class="col-xs-12 com-md-2 col-lg-2 region-toolbar"></div>
-    
+<div class="izbor-uprizoritve-inline">    
+    <div class="pull-left"><h3>{{t "Uprizoritev"}}:</h3> </div>
+    <div class="pull-left region-lookup"></div>
+    <div class="pull-left region-toolbar"></div>
+
 </div>
+<div class="clearfix"></div>
 <div class="region-editor"></div>
