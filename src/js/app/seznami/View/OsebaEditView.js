@@ -132,7 +132,9 @@ define([
     OsebaEditView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
-        this.renderPriloge();
+        if (this.model.get('id')) {
+            this.renderPriloge();
+        }
     };
     /**
      * Klik na osebni podatki tab

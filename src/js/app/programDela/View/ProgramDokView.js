@@ -208,11 +208,22 @@ define([
         });
     };
 
+    /**
+     * Ko kliknemo na gumb preklici
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onPreklici = function () {
+        var ch = Radio.channel('layout');
+        require(['app/programDela/View/ProgramView'], function (View) {
+            var view = new View();
+            ch.command('open', view, i18next.t('programDela.title'));
+        });
+    };
+
     ProgramDokView.prototype.prepareToolbar = function () {
         return  this.model.get('id') ?
                 [[this.buttons.shrani, this.buttons.preklici, this.buttons.kloniraj, this.buttons.zakleni, this.buttons.nasvet]] :
                 [[this.buttons.shrani, this.buttons.preklici, this.buttons.nasvet]];
-
     };
 
     /**
@@ -305,7 +316,9 @@ define([
     ProgramDokView.prototype.onSplosni = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
-        this.renderPriloge();
+        if (this.model.get('id')) {
+            this.renderPriloge();
+        }
     };
 
     /**

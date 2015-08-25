@@ -7957,6 +7957,9 @@ span.stevilka-na-veliko {
 .prikazno-polje > .lastnaSredstva {
   font-size: 20px;
 }
+.vnosno-polje-gumb {
+  padding-top: 22px;
+}
 /*!
  * Datetimepicker for Bootstrap 3
  * version : 4.15.35
