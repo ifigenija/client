@@ -77,6 +77,13 @@ define([
         module.replaceUrl = function (url) {
             module.layout.replaceUrl(url);
         };
+        
+        
+        module.enableMenu = function (id) {
+            var nav = application.nav.navigation;
+            nav.deselect();
+            nav.enableById(id);
+        };
 
         module.addInitializer(function (options) {
             this.Layout = Layout;
@@ -90,6 +97,7 @@ define([
             channel.comply('openTab', module.open);
             channel.comply('setTitle', module.setTitle);
             channel.comply('replaceUrl', module.replaceUrl);
+            channel.comply('enableMenu', module.enableMenu);
 
         });
 

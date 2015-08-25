@@ -26,7 +26,25 @@ define([
                 return  ch.request('isGranted', this.get('permission'));
             }
             return true;
+        },
+        deselect: function () {
+            this.set('selected', false);
+            this.get('pages') && this.get('pages').each(function (m) {
+                m.deselect();
+            });
+
+        },
+        enableById: function (id) {
+            if (this.get('id') === id) {
+                this.set('selected', true);
+            }
+
+            this.get('pages') && this.get('pages').each(function (m) {
+                m.enableById(id);
+            });
+
         }
+
 
     });
 
@@ -44,7 +62,7 @@ define([
         var self = this;
         var pages = this.get('pages');
         navData.forEach(function (page) {
-            var attrs = _.pick(page, "label", "icon", "uri", "trigger", "permission", "role");
+            var attrs = _.pick(page, "id","label", "icon", "uri", "trigger", "permission", "role");
             var sp = new NavModel(attrs);
 
             if (page.pages) {
@@ -87,6 +105,8 @@ define([
                 app: App
             });
         });
+
+
 
     };
 

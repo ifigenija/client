@@ -7,6 +7,7 @@ define(['i18next'], function (i18n) {
         {
             label: i18n.t("seznami.nav.label"),
             icon: 'fa-list',
+            id: "seznami",
             pages: [                
                 {
                     label: i18n.t("seznami.nav.oseba"),

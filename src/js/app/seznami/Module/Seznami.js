@@ -28,6 +28,7 @@ define([
                 view = new View({pogled: pogled});
             }
             ch.command('open', view, i18next.t(title));
+            ch.command('enableMenu', 'seznami');
         };
 
         var odpriModel = function (Model, View, id, title, pogled) {
@@ -37,6 +38,7 @@ define([
                     view = new View({pogled: pogled});
                 }
                 ch.command('open', view, i18next.t(title));
+                ch.command('enableMenu', 'seznami');
                 view.triggerMethod('selected', model);
             };
 

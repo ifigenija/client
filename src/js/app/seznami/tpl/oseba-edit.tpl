@@ -18,13 +18,14 @@
                     <div class="region-form"></div>
                 </div>
                 <div class="col-md-6">
-                    <div class="row">
+                    <div class="row" style="margin-top: 15px">
                         <div class="region-telefonske col-sm-12"></div>
                         <div class="region-naslovi col-sm-12"></div>
+                        <div class="region-priloge col-sm-12"></div>
+
                     </div>
                 </div>
             </div>
-            <div class="region-priloge"></div>
         </div>
         <div role="tabpanel" class="tab-pane pnl-osebniPodatki region-osebniPodatki">
             <div class="row">

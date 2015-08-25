@@ -20,6 +20,7 @@ require.config({
         'pageable': '../lib/backbone.paginator/lib/backbone.paginator',
         'backbone-forms': '../lib/backbone-forms/distribution.amd/backbone-forms',
         'deep-model': '../lib/backbone-deep-model/distribution/deep-model',
+        'col-resizable': '../lib/col-resizable/source/colResizable-1.5.source',
         'backbone-modal': 'app/Max/View/Modal',
         'moment': '../lib/moment/moment',
         'moment/locale': '../lib/moment/locale',
@@ -52,6 +53,9 @@ require.config({
         },
         ckeditor: {
             exports: 'CKEDITOR'
+        },
+        "col-resizable": {
+            deps: ["jquery"]
         },
         "backgrid-filter": {
             deps: ["backbone", "backgrid"]

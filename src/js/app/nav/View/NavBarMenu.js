@@ -8,13 +8,11 @@ define([
     'marionette',
     'app/bars',
     'text!../tpl/sidebar.tpl',
-    'text!../tpl/menu-item.tpl',
     'text!../tpl/dropdown.tpl'
 ], function (
         Marionette,
         Handlebars,
         sidebarTpl,
-        menuTpl,
         dropDownTpl
         ) {
 
@@ -26,15 +24,23 @@ define([
      */
     var DropDownItem = Marionette.ItemView.extend({
         tagName: "li",
-        template: Handlebars.compile('<a href="{{ uri }}"><span class="fa"></span> {{ label }}</a>'),
+        template: Handlebars.compile('<a href="{{ uri }}"><span class="fa {{ icon }}"></span> {{ label }}</a>'),
+        modelEvents: {
+            change: "modelChanged"
+        },
+        modelChanged: function () {
+            this.render();
+        },
         onRender: function () {
             if (this.model.get('divider')) {
                 this.$el.html('');
                 this.$el.addClass('divider');
                 return;
             }
-            if (this.model.get('icon')) {
-                this.$(".fa").addClass(this.model.get('icon'));
+            if (this.model.get('selected')) {
+                this.$el.addClass('active');
+            } else {
+                this.$el.removeClass('active');
             }
         }
     });
@@ -55,6 +61,20 @@ define([
             if (child.isGranted()) {
                 Marionette.CompositeView.prototype.addChild.apply(this, arguments);
             }
+        },
+        initialize: function () {
+            this.model.on("change", this.modelChanged, this);
+        },
+        modelChanged: function () {
+            this.render();
+        },
+        onRender: function () {
+            if (this.model.get('selected')) {
+                this.$el.addClass('active');
+            } else {
+                this.$el.removeClass('active');
+
+            }
         }
     });
 
@@ -64,7 +84,21 @@ define([
      */
     var MenuItem = Marionette.ItemView.extend({
         tagName: 'li',
-        template: Handlebars.compile(menuTpl)
+        template: Handlebars.compile('<a href="{{ uri }}"> <span class="showopacity fa {{ icon }}">{{ label }}</span></a>'),
+        onRender: function () {
+            if (this.model.get('selected')) {
+                this.$el.addClass('active');
+            } else {
+                this.$el.removeClass('active');
+
+            }
+        },
+        modelEvents: {
+            change: "modelChanged"
+        },
+        modelChanged: function () {
+            this.render();
+        },
     });
 
     /**

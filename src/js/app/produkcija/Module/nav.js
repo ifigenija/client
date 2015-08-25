@@ -8,6 +8,7 @@ define(['i18next'], function (i18n) {
             label: i18n.t("produkcija.nav.label"),
             icon: 'fa-cubes',
             role: "uprizoritev-read",
+            id: "produkcija",
             pages: [              
                 {
                     label: i18n.t("produkcija.nav.uprizoritev"),

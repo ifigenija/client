@@ -29,7 +29,7 @@ define([
                 view = new View({pogled: pogled});
             }
             ch.command('open', view, i18next.t(title));
-            
+            ch.command('enableMenu', 'nastavitve');
             return view;
         };
         /**
@@ -47,6 +47,7 @@ define([
             var odpriView = function () {
                 var view = odpri(View, title, pogled);
                 ch.command('open', view, i18next.t(title));
+                ch.command('enableMenu', 'nastavitve');
                 //model gre tu not ker se odpre novi view s tem modelom
                 view.triggerMethod('selected', model);
             };
@@ -54,7 +55,7 @@ define([
             var model = new Model.Model({id: id});
             model.once('sync', odpriView);
             model.fetch();
-        };        
+        };
 
         model.moznosti = function () {
 
@@ -85,7 +86,7 @@ define([
                 odpri(View, 'permission.title');
             });
         };
-        
+
         /**
          * Neposredni dostop do dovoljenja
          * @returns {undefined}

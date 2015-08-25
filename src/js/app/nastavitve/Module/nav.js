@@ -8,6 +8,7 @@ define(['i18next'], function (i18n) {
             label: i18n.t("nastavitve.nav.label"),
             icon: 'fa-cog',
             permission: 'Options-write',
+            id: "nastavitve",
             pages: [
                 {
                     label: i18n.t("nastavitve.nav.moznosti"),

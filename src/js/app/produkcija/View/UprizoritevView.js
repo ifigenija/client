@@ -28,6 +28,7 @@ define([
         columns: [
             {
                 cell: 'string',
+                class: 'hidden-sm',
                 editable: false,
                 label: i18next.t('uprizoritev.sifra'),
                 name: 'sifra',

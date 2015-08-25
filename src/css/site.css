@@ -779,6 +779,21 @@ fieldset.pomemben {
 fieldset.pomemben legend span {
   background-color: #dedede;
 }
+.btn-tripikice {
+  position: relative;
+  right: 6px;
+}
+.btn-tripikice button {
+  background-color: #ffffff;
+  border: 0;
+  border-style: none;
+  padding-top: 0px;
+  margin-left: 5px;
+}
+.btn-tripikice ul.dropdown-menu {
+  right: 0;
+  left: auto;
+}
 .izbor-uprizoritve-inline {
   padding: 5px 12px;
 }

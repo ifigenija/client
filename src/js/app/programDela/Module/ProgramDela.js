@@ -33,6 +33,7 @@ define([
             require(['../View/ProgramView'], function (View) {
                 var view = new View();
                 ch.command('open', view, i18next.t('programDela.title'));
+                 ch.command('enableMenu', 'programdela');
             });
         };
         /**

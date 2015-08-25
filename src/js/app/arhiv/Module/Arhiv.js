@@ -2,17 +2,13 @@
  * Licenca GPLv3
  */
 define([
-    'marionette',
     'require',
-    'backbone',
     './nav',
     'radio',
     'i18next'
 
 ], function (
-        Marionette,
         require,
-        Backbone,
         moduleNav,
         Radio,
         i18next
@@ -22,13 +18,15 @@ define([
     var modelInit = function (model, App, Backbone, Marionette, $, _) {
 
         var ch = Radio.channel('layout');
-        
+
         var odpri = function (View, title, pogled) {
             var view = new View();
             if (pogled) {
                 view = new View({pogled: pogled});
             }
             ch.command('open', view, i18next.t(title));
+
+            ch.command('enableMenu', 'arhiv');
         };
 
         var odpriModel = function (Model, View, id, title, pogled) {
@@ -38,6 +36,8 @@ define([
                     view = new View({pogled: pogled});
                 }
                 ch.command('open', view, i18next.t(title));
+
+                ch.command('enableMenu', 'arhiv');
                 view.triggerMethod('selected', model);
             };
 
@@ -45,11 +45,8 @@ define([
             model.once('sync', odpriView);
             model.fetch();
         };
-     
-        model.dogodki = function () {
 
-        };
-        
+
         model.besedila = function () {
             require(['../View/BesediloView'], function (View) {
                 odpri(View, 'besedilo.title');
@@ -75,10 +72,9 @@ define([
             new Marionette.AppRouter({
                 controller: model,
                 appRoutes: {
-                    'arhiv/dodaj': 'dogodki',
-                    'arhiv/besedila' : 'besedila',
-                    'arhiv/besedila/:id' : 'besedilaOdpri'
-                    
+                    'arhiv/besedila': 'besedila',
+                    'arhiv/besedila/:id': 'besedilaOdpri'
+
                 }
             });
         });

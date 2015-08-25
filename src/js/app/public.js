@@ -6,13 +6,11 @@
 define(['marionette',
     'jquery',
     'app/public/Module/Public',
-    'app/public/View/Navbar',
     'jquery.jsonrpc'
 ], function (
         Marionette,
         $,
-        publicInit,
-        Navbar
+        publicInit
         ) {
 
 
@@ -25,8 +23,10 @@ define(['marionette',
             glavniContainer: '#glavni-container',
             navContainer: '#nav'
         });
-        var nav = new Navbar();
-        this.navContainer.show(nav);
+//        var nav = new Navbar();
+//        this.navContainer.show(nav);
+
+        this.submodules.public.login();
     });
 
     return app;

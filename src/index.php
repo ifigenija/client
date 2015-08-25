@@ -9,19 +9,13 @@ $dist = $config['useDist'] ? 'dist/' : '';
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="<?= $dist ?>css/public.css">
-        <link rel="stylesheet" href="<?= $dist ?>css/layout.css">
-        <link rel="stylesheet" href="<?= $dist ?>css/backgrid.css">
         <link rel="stylesheet" href="<?= $dist ?>css/site.css">        
         <link rel="stylesheet" href="lib/font-awsome/css/font-awesome.css">
         <script type="text/javascript" src="<?= empty($dist) ? "lib/requirejs" : "dist/js" ?>/require.js"></script>        
     </head>
     <body>
-        <div class="container">
-            <nav id="nav" class="navbar navbar-default"></nav>
-            <div id="glavni-container">
-
-            </div>
-        </div>        
+        <div id="glavni-container">
+        </div>
         <script type="text/javascript">
             define('baseUrl', function () {
                 return "/";

@@ -4,18 +4,19 @@
 define([
     'marionette',
     'require',
-    'backbone',
+  
     './nav'
 
 ], function (
         Marionette,
         require,
-        Backbone,
+        
         moduleNav
         ) {
 
 
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
+
 
 
         mod.dodajDogodek = function () {

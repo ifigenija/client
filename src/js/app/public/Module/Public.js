@@ -2,12 +2,10 @@
  * Licenca GPLv3
  */
 define([
-    'require',
-    'app/bars'
+    'require'
 
 ], function (
-        require,
-        Handlebars
+        require
         ) {
 
 
@@ -18,33 +16,6 @@ define([
          * @returns {undefined}
          */
         mod.program = function () {
-            require(["../View/ProgramView", "../Model/Program"], function (ProgramView, Program) {
-
-                var collection = new Backbone.Collection([
-                    {
-                        "id": 1,
-                        "naslov": "ena",
-                        "avtor": "lovro"
-                    },
-                    {
-                        "id": 2,
-                        "naslov": "dva",
-                        "avtor": "boris",
-                        "debela": "je"
-                    },
-                    {
-                        "id": 3,
-                        "naslov": "tri",
-                        "avtor": "ales"
-                    }
-                ]);
-                var view = new ProgramView({
-                    collection: collection
-                });
-
-                App.glavniContainer.show(view);
-                
-            });
         };
 
         /**
@@ -52,10 +23,6 @@ define([
          * @returns {undefined}
          */
         mod.uprizoritve = function () {
-            var xx = new Marionette.ItemView({
-                template: Handlebars.compile("<div>uprizoritve <a href=\"#uprizoritev/12\">dvanajsta</a></div>")
-            });
-            App.glavniContainer.show(xx);
 
         };
 
@@ -66,14 +33,6 @@ define([
          * @returns {undefined}
          */
         mod.uprizoritev = function (id) {
-            var model = new Backbone.Model({
-                stevilka: id
-            });
-            var xx = new Marionette.ItemView({
-                template: Handlebars.compile("<div>Uprizoritev št {{ stevilka }}.</div>"),
-                model: model
-            });
-            App.glavniContainer.show(xx);
         };
 
 
@@ -93,7 +52,7 @@ define([
             if (userData.defaultRoute) {
                 url = url + '#' + userData.defaultRoute;
             }
-            window.location.href = url;
+            window.top.location.href = url;
 
         };
 
@@ -143,8 +102,6 @@ define([
          * Routing za javni pogled 
          */
         mod.addInitializer(function (options) {
-
-
 
             new Marionette.AppRouter({
                 controller: mod,
