@@ -57,16 +57,6 @@ body.stoposto {
 .mouse-hand {
     cursor: pointer;
 }
-/* koledar */
-.koledar {
-    width: 100%;
-    margin-bottom: 10px;
-    margin-left: -8px;
-    margin-top: -8px;
-    padding: 8px;
-    text-align: center;
-    background-color: whitesmoke;
-}
 
 /*
  Dodatki za vnosna polja
@@ -794,31 +784,45 @@ span.stevilka-na-veliko {
     }
 }
 
-.fieldset-viri{
-    background-color: #c8ffc8;
-    > legend{
-        background-color: #c8ffc8;
+fieldset {
+
+    padding: @padding-xs-vertical @padding-xs-horizontal;
+
+    background-color: #eeeeee;
+    
+
+    &  legend{
+        span {
+            background-color: #eeeeee;
+            padding: @padding-xs-vertical @padding-xs-horizontal;
+            margin-left: @padding-xs-horizontal;
+        }
+        margin-bottom: 3px;
+        border-bottom: 0px;
     }
+
+    &.pomemben {
+        background-color: #dedede;
+        &  legend{
+            span {
+                background-color: #dedede;
+            }
+        }
+
+    }
+    
 }
 
-.fieldset-stroski{
-    background-color: #ffc8c8;
-    > legend{
-        background-color: #ffc8c8;
-    }
+.region-form {
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
-.fieldset-vrednosti{
-    background-color: #ffff96;
-    > legend{
-        background-color: #ffff96;
-    }
-}
-
-.fieldset-avtorski{
-    background-color: #ffafaf;
-    > legend{
-        background-color: #ffafaf;
+.izbor-uprizoritve-inline {
+    padding: @padding-base-vertical @padding-base-horizontal;
+    & h3 {
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
