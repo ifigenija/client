@@ -113,7 +113,9 @@ define([
     UprizoritevEditView.prototype.onSplosni = function () {
         this.$('.pnl-detail').removeClass('active');
         this.$('.pnl-splosno').addClass('active');
-        this.renderPriloge();
+        if (this.model.get('id')) {
+            this.renderPriloge();
+        }
     };
 
     /**
