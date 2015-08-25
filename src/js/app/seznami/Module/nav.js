@@ -10,11 +10,13 @@ define(['i18next'], function (i18n) {
             pages: [                
                 {
                     label: i18n.t("seznami.nav.oseba"),
-                    uri: "#oseba"
+                    uri: "#oseba",
+                    permission: "Oseba-read"
                 },                
                 {
                     label: i18n.t("seznami.nav.popa"),
-                    uri: "#popa"
+                    uri: "#popa",
+                    permission: "Popa-read",
                 },
                 {
                     label: i18n.t("seznami.nav.posta"),
@@ -38,11 +40,14 @@ define(['i18next'], function (i18n) {
                 },
                 {
                     label: i18n.t("seznami.nav.abonma"),
-                    uri: "#abonma"
+                    uri: "#abonma",
+                    permission: "Abonma-read"
                 },
                 {
                     label: i18n.t("seznami.nav.prostori"),
-                    uri: "#prostor"
+                    uri: "#prostor",
+                    permission: "Prostor-read"
+                    
                 }
             ]
         }

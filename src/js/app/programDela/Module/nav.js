@@ -7,7 +7,8 @@ define(['i18next'], function (i18n) {
         {
             label: i18n.t("programDela.nav.label"),
             icon: 'fa-bullhorn',
-            uri: '#programDela'
+            uri: '#programDela',
+            permission: 'ProgramDela-read'
         }
     ];
 });

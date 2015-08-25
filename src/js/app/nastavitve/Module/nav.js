@@ -7,6 +7,7 @@ define(['i18next'], function (i18n) {
         {
             label: i18n.t("nastavitve.nav.label"),
             icon: 'fa-cog',
+            permission: 'Options-write',
             pages: [
                 {
                     label: i18n.t("nastavitve.nav.moznosti"),
@@ -14,26 +15,27 @@ define(['i18next'], function (i18n) {
                 },
                 {
                     divider: true
-                },
-                {
+                }, {
                     label: i18n.t("admin.nav.addUser"),
                     icon: "fa-user-plus",
-                    uri: "#aaa/user/dodaj"
-                },
-                {
+                    uri: "#aaa/user/dodaj",
+                    role: "administrator-dostopov"
+                }, {
                     label: i18n.t("admin.nav.users"),
                     icon: "fa-user-plus",
-                    uri: "#aaa/users"
-                },
-                {
+                    uri: "#aaa/users",
+                    role: "administrator-dostopov"
+
+                }, {
                     label: i18n.t("admin.nav.roles"),
-                    uri: "#aaa/roles"
-                },
-                                {
+                    uri: "#aaa/roles",
+                    role: "administrator-dostopov"
+                }, {
                     label: i18n.t("admin.nav.permission"),
-                    uri: "#aaa/permissions"
+                    uri: "#aaa/permissions",
+                    role: "administrator-dostopov"
                 }
-                
+
             ]
         }
     ];

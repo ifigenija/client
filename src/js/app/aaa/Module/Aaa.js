@@ -2,41 +2,53 @@
  * Licenca GPLv3
  */
 define([
+    'underscore',
     'radio',
     'marionette',
     'require',
-    'backbone',
     'i18next',
     './nav'
-
 ], function (
+        _,
         Radio,
         Marionette,
         require,
-        Backbone,
         i18next,
         moduleNav
         ) {
 
 
+var userAcl = {};
     var modInit = function (model, App, Backbone, Marionette, $, _) {
-        var ch = Radio.channel('layout');
         var chGlobal = Radio.channel('global');
         chGlobal.reply('isGranted',
-                function (dovoljenje) {
-                    var data = JSON.parse(sessionStorage.getItem('ifi.user.data'));
-                    if (data['permissions']) {
-                        var permissions = data['permissions'];
-                        for (var perm in permissions) {
-                            if (perm === dovoljenje) {
-                                return true;
-                            }
+                function (perm) {
+                    if (userAcl.roles) {
+                        if (userAcl.roles.indexOf('ifi-all') >= 0) {
+                            return true;
                         }
-                        return false;
                     }
+                    if (userAcl.permissions) {
+                        return (userAcl.permissions.indexOf(perm) >= 0)
+                    }
+                    console.log('ne najdem dovoljenj v pravilni obliki');
+                    return false;
                 }
         );
-
+        chGlobal.reply('hasRole',
+                function (role) {
+                    if (userAcl.roles) {
+                        if (userAcl.roles.indexOf('ifi-all') >= 0) {
+                            return true;
+                        }
+                    }
+                    if (userAcl.roles) {
+                        return (userAcl.roles.indexOf(role) >= 0)
+                    }
+                    console.log('ne najdem dovoljenj v pravilni obliki');
+                    return false;
+                }
+        );
         model.page = function () {
             console.log("Page");
         };
@@ -46,7 +58,7 @@ define([
          * Routing za javni pogled 
          */
         model.addInitializer(function (options) {
-
+            userAcl = options.user;
             App.nav.registerNav(moduleNav);
             new Marionette.AppRouter({
                 controller: model,

@@ -1,11 +1,11 @@
 define([
     'radio',
-    '../View/SidebarMenu',
+    '../View/NavBarMenu',
     'app/bars',
     'text!../tpl/ifi-layout.html'
 ], function (
         Radio,
-        SidebarMenu,
+        NavBarMenu,
         Handlebars,
         layoutTpl
         ) {
@@ -44,7 +44,7 @@ define([
 
 
 
-            var menu = new SidebarMenu({
+            var menu = new NavBarMenu({
                 model: application.nav.navigation
             });
             this.navR.show(menu);

@@ -7,25 +7,30 @@ define(['i18next'], function (i18n) {
         {
             label: i18n.t("produkcija.nav.label"),
             icon: 'fa-cubes',
+            role: "uprizoritev-read",
             pages: [              
                 {
                     label: i18n.t("produkcija.nav.uprizoritev"),
-                    uri: "#pro/uprizoritev"
+                    uri: "#pro/uprizoritev",
+                    permission: "Uprizoritev-read",
                 },
                 {
                     label: i18n.t("produkcija.nav.strosek"),
-                    uri: "#pro/stroskovnik"
+                    uri: "#pro/stroskovnik",
+                    permission: "Strosek-read",
                 },
                 {
                     divider: true
                 },
                 {
                     label: i18n.t("produkcija.nav.zaposlitev"),
-                    uri: "#pro/zaposlitev"
+                    uri: "#pro/zaposlitev",
+                    permission: "Zaposlitev-read"
                 },
                 {
                     label: i18n.t("produkcija.nav.sezona"),
-                    uri: "#pro/sezona"
+                    uri: "#pro/sezona",
+                    
                 }
             ]
         }

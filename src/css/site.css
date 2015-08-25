@@ -758,7 +758,9 @@ span.stevilka-na-veliko {
   margin-bottom: 0px;
 }
 fieldset {
-  padding: 4px 6px;
+  margin-top: 12px;
+  padding: 5px 12px;
+  border-radius: 6px;
   background-color: #eeeeee;
 }
 fieldset legend {
@@ -769,6 +771,7 @@ fieldset legend span {
   background-color: #eeeeee;
   padding: 4px 6px;
   margin-left: 6px;
+  border-radius: 6px;
 }
 fieldset.pomemben {
   background-color: #dedede;
@@ -776,16 +779,13 @@ fieldset.pomemben {
 fieldset.pomemben legend span {
   background-color: #dedede;
 }
-.region-form {
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
 .izbor-uprizoritve-inline {
   padding: 5px 12px;
 }
 .izbor-uprizoritve-inline h3 {
   margin-top: 0;
   margin-bottom: 0;
+  margin-right: 15px;
 }
 .prikazno-polje > .nasDelez {
   font-size: 20px;

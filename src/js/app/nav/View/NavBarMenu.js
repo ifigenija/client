@@ -50,7 +50,12 @@ define([
         className: 'dropdown',
         template: Handlebars.compile(dropDownTpl),
         childView: DropDownItem,
-        childViewContainer: ".dropdown-menu"
+        childViewContainer: ".dropdown-menu",
+        addChild: function (child, ChildView, index) {
+            if (child.isGranted()) {
+                Marionette.CompositeView.prototype.addChild.apply(this, arguments);
+            }
+        }
     });
 
     /**
@@ -73,8 +78,8 @@ define([
         className: "nav navbar-nav",
         getChildView: function (item) {
             if (item.get('pages')) {
-           
-              return DropDownMenu;
+
+                return DropDownMenu;
             } else {
                 return MenuItem;
             }
@@ -84,6 +89,11 @@ define([
                 return {
                     collection: item.get('pages')
                 };
+            }
+        },
+        addChild: function (child, ChildView, index) {
+            if (child.isGranted()) {
+                Marionette.CollectionView.prototype.addChild.apply(this, arguments);
             }
         }
 
@@ -114,7 +124,7 @@ define([
      * 
      * @type Marionette.ItemView
      */
-    var SidebarMenu = Marionette.ItemView.extend({
+    var NavBarMenu = Marionette.ItemView.extend({
         className: "navbar navbar-inverse",
         tagName: "nav",
         template: Handlebars.compile(sidebarTpl),
@@ -128,11 +138,11 @@ define([
             menu.render();
             this.$el.prop('role', 'navigation');
 
-           
+
 
         }
     });
 
-    return SidebarMenu;
+    return NavBarMenu;
 
 });

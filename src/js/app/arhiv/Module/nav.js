@@ -11,11 +11,13 @@ define(['i18next'], function (i18n) {
                 {
                     label: i18n.t("arhiv.nav.isci"),
                     icon: "fa-user-plus",
-                    uri: "#arhiv/isci"
+                    uri: "#arhiv/isci",
+                    permission: "Mapa-read"
                 },
                 {
                     label: i18n.t("arhiv.nav.besedila"),
-                    uri: "#arhiv/besedila"
+                    uri: "#arhiv/besedila",
+                    permission: "Besedila-write"
                 },
                 {
                     label: i18n.t("arhiv.nav.arhiviraj"),

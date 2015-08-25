@@ -1177,7 +1177,7 @@
         "zaproseno1": "Ministerstvo za kulturo sofinancira do ",
         "zaproseno2": "€ (glede na trenutni delež matičnega JZ) upravičenih stroškov.",
         "gesloKratko": "Geslo je prekratko",
-        "gesloSibko": "Geslo mora vsebovati tri elemente, velike črke, male črke, številke in/ali posebne znake."
+        "gesloSibko": "Geslo mora vsebovati vsaj tri izmed štirih elementov: velike črke, male črke, številke in/ali posebne znake."
     },
     "uspeh": {
         "fetch": "Napaka pri pridobivanju podatkov",
