@@ -421,6 +421,9 @@ define([
         if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
             model.set('stHonorarnihIgrSamoz', uprizoritev.stHonorarnihIgrSamoz);
         }
+        if (view.$('.stZaposDrug').is(':checked')) {
+            model.set('stZaposDrug', uprizoritev.stZaposDrug);
+        }
         if (view.$('.stZaposUmet').is(':checked')) {
             model.set('stZaposUmet', uprizoritev.stZaposUmet);
         }

@@ -118,29 +118,6 @@ define([
         return View;
     };
 
-    /**
-     * overridana metoda
-     * @param {type} view
-     * @param {type} model
-     * @param {type} uprizoritev
-     * @returns {undefined}
-     */
-    GostovanjeView.prototype.prenesiVrednosti = function (view, model, uprizoritev) {
-
-        if (view.$('.avtorskiHonorarji').is(':checked')) {
-            model.set('avtorskiHonorarji', uprizoritev.NaDo.avtorskiHonorarji);
-        }
-        if (view.$('.tantieme').is(':checked')) {
-            model.set('tantieme', uprizoritev.NaDo.tantieme);
-        }
-        if (view.$('.materialni').is(':checked')) {
-            model.set('materialni', uprizoritev.NaDo.materialni);
-        }
-        if (view.$('.avtorskePravice').is(':checked')) {
-            model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
-        }
-    };
-
     GostovanjeView.prototype.imaKoprodukcijeChange = function (form, editor) {
         var imaKop = false;
         if (this.model.get('id')) {

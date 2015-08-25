@@ -102,24 +102,6 @@ define([
         return View;
     };
     
-    PonovitevView.prototype.prenesiVrednosti = function (view, model, uprizoritev) {
-        if (view.$('.avtorskiHonorarji').is(':checked')) {
-            model.set('avtorskiHonorarji', uprizoritev.NaDo.avtorskiHonorarji);
-        }
-        if (view.$('.tantieme').is(':checked')) {
-            model.set('tantieme', uprizoritev.NaDo.tantieme);
-        }
-        if (view.$('.materialni').is(':checked')) {
-            model.set('materialni', uprizoritev.NaDo.materialni);
-        }
-        if (view.$('.avtorskePravice').is(':checked')) {
-            model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
-        }
-        if (view.$('.stHonorarnih').is(':checked')) {
-            model.set('stHonorarnih', uprizoritev.stHonorarnih);
-        }
-    };
-    
     /**
      * preračun števila ponovitev
      * @param {type} form

@@ -3,11 +3,11 @@
         <div class="col-sm-6">
             <div data-fields="sifra,funkcija,oseba"></div>
             <div class="row">
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <div data-fields="pogodba"></div>
                 </div>
-                <div class="col-sm-2">
-                    <a class="pull-right btn btn-default pogodba-dodaj">
+                <div class="col-sm-3 vnosno-polje-gumb">
+                    <a class="btn btn-default pogodba-dodaj">
                         {{#if imaPogodbo}}
                         {{t "std.uredi"}}
                         {{else}}

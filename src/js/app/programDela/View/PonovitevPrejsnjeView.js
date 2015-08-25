@@ -107,43 +107,6 @@ define([
     };
     
     /**
-     * overridana metoda
-     * @param {type} view
-     * @param {type} model
-     * @param {type} uprizoritev
-     * @returns {undefined}
-     */
-    PonovitevView.prototype.prenesiVrednosti = function (view, model, uprizoritev) {
-
-        if (view.$('.avtorskiHonorarji').is(':checked')) {
-            model.set('avtorskiHonorarji', uprizoritev.NaDo.avtorskiHonorarji);
-        }
-        if (view.$('.tantieme').is(':checked')) {
-            model.set('tantieme', uprizoritev.NaDo.tantieme);
-        }
-        if (view.$('.materialni').is(':checked')) {
-            model.set('materialni', uprizoritev.NaDo.materialni);
-        }
-        if (view.$('.avtorskePravice').is(':checked')) {
-            model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
-        }
-        if (view.$('.stHonorarnih').is(':checked')) {
-            model.set('stHonorarnih', uprizoritev.stHonorarnih);
-        }
-        if (view.$('.stHonorarnihIgr').is(':checked')) {
-            model.set('stHonorarnihIgr', uprizoritev.stHonorarnihIgr);
-        }
-        if (view.$('.stHonorarnihIgrTujJZ').is(':checked')) {
-            model.set('stHonorarnihIgrTujJZ', uprizoritev.stHonorarnihIgrTujJZ);
-        }
-        if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
-            model.set('stHonorarnihIgrSamoz', uprizoritev.stHonorarnihIgrSamoz);
-        }
-        if (view.$('.stZaposUmet').is(':checked')) {
-            model.set('stZaposUmet', uprizoritev.stZaposUmet);
-        }
-    };
-    /**
      * overridana preračunamo število ponovitev
      * @param {type} form
      * @returns {EnotaProgramaView@call;extend.prototype.steviloPonovitev.ponoviDoma|EnotaProgramaView@call;extend.prototype.steviloPonovitev.ponoviZamejo|EnotaProgramaView@call;extend.prototype.steviloPonovitev.stPonovi|EnotaProgramaView@call;extend.prototype.steviloPonovitev.ponoviGost}

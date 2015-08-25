@@ -101,10 +101,8 @@
         "prenesi": "Prenesi",
         "kloniraj": "Kopiraj",
         "zakleni": "Zakleni",
-        "oznaci": "Označi vse"
-    },
-    "alter": {
-        "novaOseba":"Nova Oseba"
+        "oznaci": "Označi vse",
+        "novaOseba": "Nova Oseba"
     },
     "ent": {
         "dodaj": "Dodaj",
