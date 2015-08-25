@@ -282,13 +282,7 @@ define([
         var coll = self.model.kontaktneCollection;
         if (coll.length === 0) {
             coll.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' (Kontaktne)',
-                        code: '9000203',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
         require(['app/seznami/View/KontaktneView'], function (View) {

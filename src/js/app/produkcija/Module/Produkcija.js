@@ -42,13 +42,7 @@ define([
             var model = new Model.Model({id: id});
             model.once('sync', odpriView);
             model.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' ' + title + ')',
-                        code: '9000003',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         };
 

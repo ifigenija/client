@@ -89,13 +89,7 @@ define([
         if (model.get('id')) {
             editModel = new Model.Model({id: model.get('id')});
             editModel.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' (Popa)',
-                        code: '9000204',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
         return new PopaEditView({

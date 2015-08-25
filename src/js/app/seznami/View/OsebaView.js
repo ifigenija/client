@@ -74,9 +74,9 @@ define([
         ]
     });
 
-//        var chLovro = Radio.channel('global');
-//        var response = chLovro.request('isGranted', "halo");
-//        console.log("Oseba "+ response);
+    var chLovro = Radio.channel('global');
+    var dovoljeno = chLovro.request('isGranted', "oseba-read");
+    console.log("Oseba-read:" + dovoljeno);
 
     /**
      * Overridana funkcija iz seznamaView
@@ -89,13 +89,7 @@ define([
         if (model.get('id')) {
             editModel = new Model.Model({id: model.get('id')});
             editModel.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' (Oseba)',
-                        code: '9000202',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
         return new OsebaEditView({

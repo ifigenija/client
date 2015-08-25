@@ -185,13 +185,7 @@ define([
             if (!self.osebniModel) {
                 self.osebniModel = new Model({id: self.model.get('id')});
                 self.osebniModel.fetch({
-                    error: function () {
-                        Radio.channel('error').command('flash', {
-                            message: i18next.t("napaka.fetch") + ' (OsebniPodatki)',
-                            code: '9000201',
-                            severity: 'error'
-                        });
-                    }
+                    error: Radio.channel('error').request('handler', 'xhr')
                 });
             }
 
