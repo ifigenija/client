@@ -40,13 +40,6 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('popa.tipkli'),
-                name: 'tipkli',
-                sortable: false
-            },
-            {
                 cell: Backgrid.SelectCell.extend({
                     optionValues: schema.getOptionValues('stakli')
                 }),
@@ -72,8 +65,8 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('popa.panoga'),
-                name: 'panoga',
+                label: i18next.t('popa.idddv'),
+                name: 'idddv',
                 sortable: false
             },
             {
