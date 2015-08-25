@@ -45,13 +45,7 @@ define([
         var pdModel = new ProgramDokument.Model({id: this.model.get('id')});
         pdModel.once('sync', odpri);
         pdModel.fetch({
-            error: function () {
-                Radio.channel('error').command('flash', {
-                    message: i18next.t("napaka.fetch") + ' ' + '(ProgramDokument)',
-                    code: '9000103',
-                    severity: 'error'
-                });
-            }
+            error: Radio.channel('error').request('handler', 'xhr')
         });
     };
 
@@ -72,13 +66,7 @@ define([
         this.collection = new ProgramSeznamModel.Collection();
         this.collection.state.perPage = 12;
         this.collection.fetch({
-            error: function () {
-                Radio.channel('error').command('flash', {
-                    message: i18next.t("napaka.fetch") + ' ' + '(ProgramSeznam)',
-                    code: '9000104',
-                    severity: 'error'
-                });
-            }
+            error: Radio.channel('error').request('handler', 'xhr')
         });
         this.paginatorControll = new PaginatorControl({
             collection: this.collection

@@ -475,13 +475,7 @@ define([
         var coll = this.model.festivaliCollection;
         if (coll.length === 0) {
             coll.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' ' + '(festivalColl)',
-                        code: '9000301',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
 
@@ -542,13 +536,7 @@ define([
 
 
         this.model.fetch({
-            error: function () {
-                Radio.channel('error').command('flash', {
-                    message: i18next.t("napaka.fetch") + ' ' + '(Kazalniki)',
-                    code: '9000102',
-                    severity: 'error'
-                });
-            },
+            error: Radio.channel('error').request('handler', 'xhr'),
             success: prikaziKazalnike
         });
     };

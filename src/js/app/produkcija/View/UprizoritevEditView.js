@@ -201,13 +201,7 @@ define([
         var c = this.model.umetnikiCollection;
         if (c.length === 0) {
             c.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' ' + '(Umetniki)',
-                        code: '9000008',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
         this.renderFunkcije(c, 'uprizoritev.umetniki', 'umetniki');
@@ -222,13 +216,7 @@ define([
         var c = this.model.igralciCollection;
         if (c.length === 0) {
             c.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' ' + '(Igralci)',
-                        code: '9000009',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
         this.renderFunkcije(c, 'uprizoritev.igralci', 'igralci');
@@ -244,13 +232,7 @@ define([
         var c = this.model.tehnikiCollection;
         if (c.length === 0) {
             c.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' ' + '(Tehniki)',
-                        code: '90000010',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
         this.renderFunkcije(c, 'uprizoritev.tehniki', 'tehniki');

@@ -57,13 +57,7 @@ define([
                 };
                 model.once('sync', odpriView);
                 model.fetch({
-                    error: function () {
-                        Radio.channel('error').command('flash', {
-                            message: i18next.t("napaka.fetch") + ' ' + '(ProgramDela)',
-                            code: '9000100',
-                            severity: 'error'
-                        });
-                    }
+                    error: Radio.channel('error').request('handler', 'xhr')
                 });
             });
         };

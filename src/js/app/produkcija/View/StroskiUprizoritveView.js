@@ -149,13 +149,7 @@ define([
         var c = this.model.alternacijeCollection;
         if (c.length === 0) {
             c.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' ' + '(Alternacije)',
-                        code: '9000005',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
 
@@ -183,17 +177,11 @@ define([
      * Urejanje igralcev
      * @returns {undefined}
      */
-    UprizoritevStrosekEditView.prototype.renderPogodbe = function () {        
+    UprizoritevStrosekEditView.prototype.renderPogodbe = function () {
         var c = this.model.pogodbeCollection;
         if (c.length === 0) {
             c.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' ' + '(Pogodbe)',
-                        code: '9000006',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
 

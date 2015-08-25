@@ -55,9 +55,9 @@ define([
                 label: i18next.t('uprizoritev.avtor'),
                 name: 'avtor',
                 sortable: true
-            },            
+            },
             {
-                cell:  Backgrid.SelectCell.extend({
+                cell: Backgrid.SelectCell.extend({
                     optionValues: schema.getOptionValues('zvrstUprizoritve')
                 }),
                 editable: false,
@@ -66,7 +66,7 @@ define([
                 sortable: true
             },
             {
-                cell:  Backgrid.SelectCell.extend({
+                cell: Backgrid.SelectCell.extend({
                     optionValues: schema.getOptionValues('maticniOder')
                 }),
                 editable: false,
@@ -88,7 +88,7 @@ define([
                 label: i18next.t('uprizoritev.gostujoca'),
                 name: 'gostujoca',
                 sortable: true
-            },            
+            },
             {
                 cell: 'action',
                 name: '...',
@@ -102,17 +102,11 @@ define([
 
     UprizoritevView.prototype.getFormView = function (model) {
         var editModel = model;
-        
+
         if (model.get('id')) {
             editModel = new Uprizoritev.Model({id: model.get('id')});
             editModel.fetch({
-                error: function () {
-                    Radio.channel('error').command('flash', {
-                        message: i18next.t("napaka.fetch") + ' ' + '(Uprizoritev)',
-                        code:'9000011',
-                        severity: 'error'
-                    });
-                }
+                error: Radio.channel('error').request('handler', 'xhr')
             });
         }
 
