@@ -8,8 +8,7 @@
             </fieldset>
         </div>
         <div class="col-sm-12 col-md-6" >
-            <fieldset class="" data-fields="psevdonim,naziv,spol,sifra">
-            </fieldset>
+            <fieldset class="" data-fields="psevdonim,naziv,funkcija,spol,sifra"></fieldset>
         </div>
     </div>
 </form>
