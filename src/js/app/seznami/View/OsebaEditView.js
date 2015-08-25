@@ -80,6 +80,30 @@ define([
         });
     };
 
+    OsebaEditView.prototype.polnoIme = function () {
+        var polja = this.form.fields;
+        var ime = polja.ime.editor.getValue();
+        ime = ime ? ime : '';
+        
+        var srednjeIme = polja.srednjeIme.editor.getValue();
+        srednjeIme = srednjeIme ? srednjeIme.toUpperCase().charAt(0) + '.' : '';
+        
+        var priimek = polja.priimek.editor.getValue();
+        priimek = priimek ? priimek : '';
+        
+        var polnoIme = ime + ' ' + srednjeIme + ' ' + priimek;
+        
+        this.form.fields.polnoIme.setValue(polnoIme);
+        
+        return polnoIme;
+    };
+
+    OsebaEditView.prototype.onRenderForm = function () {
+        this.form.on('ime:change', this.polnoIme, this);
+        this.form.on('srednjeIme:change', this.polnoIme, this);
+        this.form.on('priimek:change', this.polnoIme, this);
+    };
+
     /**
      * Kaj se zgodi ko se je view že vstavil v DOM
      * @returns {undefined}

@@ -4,9 +4,6 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <fieldset class="pomembni" data-fields="naziv,naziv1,idddv,drzava">
-                        <legend>
-                            <span>Glavni podatki</span>
-                        </legend>
                     </fieldset>
                 </div>
                 <div class="col-sm-12 col-md-6">
