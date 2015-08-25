@@ -20,6 +20,7 @@ define([
     var OsebaView = SeznamView.extend({
         url: baseUrl + '/rest/oseba',
         title: i18next.t('oseba.title'),
+        odprtaForma: true,
         columns: [
             {
                 cell: 'string',

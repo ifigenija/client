@@ -13,23 +13,27 @@
         <div role="tabpanel" class="tab-pane active pnl-splosno">
             <div class="region-toolbar pull-right"></div>
             <div class="clearfix"></div>
-            <div class="region-form"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="region-form"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="region-telefonske col-sm-12"></div>
+                        <div class="region-naslovi col-sm-12"></div>
+                    </div>
+                </div>
+            </div>
             <div class="region-priloge"></div>
         </div>
         <div role="tabpanel" class="tab-pane pnl-osebniPodatki region-osebniPodatki">
-        </div>
-        <div role="tabpanel" class="tab-pane pnl-kontakti">
             <div class="row">
-                <div class="region-naslovi col-md-6">
-                </div>
-                <div class="region-telefonske col-md-6">
-                </div>
+                <div class="region-telefonske col-md-6"></div>
+                <div class="region-naslovi col-md-6"></div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane pnl-trrji region-trrji">
-        </div>
-        <div role="tabpanel" class="tab-pane pnl-zaposlitve region-zaposlitve">
-        </div>
+        <div role="tabpanel" class="tab-pane pnl-trrji region-trrji"></div>
+        <div role="tabpanel" class="tab-pane pnl-zaposlitve region-zaposlitve"></div>
     </div>
 </div>
 

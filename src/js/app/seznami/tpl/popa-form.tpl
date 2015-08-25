@@ -2,13 +2,29 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="naziv,naziv1,idddv,drzava"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="email,stakli,url,panoga"></div>
+                <div class="col-sm-12 col-md-6">
+                    <fieldset class="pomembni" data-fields="naziv,naziv1,idddv,drzava">
+                        <legend>
+                            <span>Glavni podatki</span>
+                        </legend>
+                    </fieldset>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <fieldset class="" data-fields="email,stakli,url">
+                    </fieldset>
+                </div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="maticna,datZav,sifra,zamejstvo,nvo"></div>
+                <div class="col-sm-12 col-md-6">
+                    <fieldset class="" data-fields="panoga,maticna,datZav">
+                    </fieldset>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <fieldset class="" data-fields="sifra,zamejstvo,nvo">
+                    </fieldset>
+                </div>
             </div>
         </div>
     </div>

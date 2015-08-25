@@ -45,6 +45,13 @@ define([
     ];
 
     var gumbi = {
+        shrani: {
+            id: 'doc-shrani',
+            label: i18next.t('std.shrani'),
+            element: 'button-trigger',
+            trigger: 'shrani',
+            disabled: true
+        },
         producent: {
             id: 'doc-producent',
             label: i18next.t('popa.koproducent'),
@@ -58,13 +65,6 @@ define([
             element: 'button-trigger',
             trigger: 'kupec',
             hidden: true
-        },
-        shrani: {
-            id: 'doc-shrani',
-            label: i18next.t('std.shrani'),
-            element: 'button-trigger',
-            trigger: 'shrani',
-            disabled: true
         },
         skrij: {
             id: 'doc-skrij',
@@ -110,7 +110,7 @@ define([
             self.render();
         });
     };
-    
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -196,11 +196,11 @@ define([
     };
 
     PopaEditView.prototype.onRenderForm = function () {
-        if (!this.model.get('producent')) {
+        if (!this.model.get('producent') && this.model.get('id')) {
             this.toolbarView.showButtons(['doc-producent']);
         }
 
-        if (!this.model.get('kupec')) {
+        if (!this.model.get('kupec') && this.model.get('id')) {
             this.toolbarView.showButtons(['doc-kupec']);
         }
     };

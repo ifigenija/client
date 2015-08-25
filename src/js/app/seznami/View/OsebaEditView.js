@@ -27,13 +27,11 @@ define([
      */
     var tabVse = [
         {name: i18next.t('ent.splosno'), event: 'splosni'},
-        {name: i18next.t('ent.kontakti'), event: 'kontakti'},
         {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'}
     ];
 
     var tabSplosno = [
-        {name: i18next.t('ent.splosno'), event: 'splosni'},
-        {name: i18next.t('ent.kontakti'), event: 'kontakti'}
+        {name: i18next.t('ent.splosno'), event: 'splosni'}
     ];
 
     var tabNovi = [
@@ -146,17 +144,9 @@ define([
         this.renderOsebniPodatki();
 
     };
-    /**
-     * Klik na tab za kontaktne podatke 
-     * @returns {undefined}
-     */
-    OsebaEditView.prototype.onKontakti = function () {
-        this.deselectTab();
-        this.$('.pnl-kontakti').addClass('active');
-    };
 
     /**
-     * Klik na tab za kontaktne podatke 
+     * deselect taba 
      * @returns {undefined}
      */
     OsebaEditView.prototype.deselectTab = function () {
