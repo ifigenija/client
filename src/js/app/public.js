@@ -20,8 +20,8 @@ define(['marionette',
 
     app.on('start', function (options) {
         this.addRegions({
-            glavniContainer: '#glavni-container',
-            navContainer: '#nav'
+            glavniContainer: '#glavni-container'
+            //navContainer: '#nav'
         });
 //        var nav = new Navbar();
 //        this.navContainer.show(nav);
