@@ -33,7 +33,7 @@ define([
         var view = new OEV({
             template: tpl,
             model: editModel,
-            pogled: 'kontaktna'
+            pogled: 'modal'
         });
 
         var izberi = function () {
@@ -47,6 +47,12 @@ define([
                 modal.close();
             }
         };
+        
+        var shrani = function(){
+            var view = modal.options.content;
+            view.triggerMethod('shrani');
+            modal.preventClose();
+        };
 
         var modal = new Modal({
             content: view,
@@ -55,7 +61,7 @@ define([
             cancelText: i18next.t("std.preklici")
         });
 
-        return modal.open(izberi);
+        return modal.open(shrani);
     };
 });
 

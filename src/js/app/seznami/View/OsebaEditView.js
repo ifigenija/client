@@ -111,10 +111,11 @@ define([
     OsebaEditView.prototype.onRender = function () {
 
         var tabs = null;
+        var pogled = this.options.pogled;
 
-        if (this.options.pogled === "kontaktna") {
+        if (pogled === "kontaktna" || pogled === "modal") {
             tabs = tabSplosno;
-        } else if (this.options.pogled === "vse") {
+        } else if (pogled === "vse") {
             tabs = tabVse;
         } else {
             tabs = tabVse;
@@ -122,13 +123,18 @@ define([
 
 
 
-        if (this.isNew()) {
+        if (this.isNew() && this.options.pogled === "modal") {
+            tabs = null;
+        } else if (this.isNew()) {
             tabs = tabNovi;
         }
-        this.renderTabs(tabs);
 
-        this.renderNaslovi();
-        this.renderTelefonske();
+        if (pogled !== "modal") {
+            this.renderTabs(tabs);
+
+            this.renderNaslovi();
+            this.renderTelefonske();
+        }
     };
 
     /**
