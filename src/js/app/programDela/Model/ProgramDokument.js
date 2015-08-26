@@ -381,9 +381,9 @@ define([
         urlRoot: baseUrl + '/rest/programGostovanje',
         defaults: {
             tanF: 0.6,
-            avtHonF: 0.6,
+            avtHonF: 0.0,
             matF: 0.0,
-            odkupAPF: 0.7,
+            odkupAPF: 0.0,
             strosekOdkPredF: 0.0,
             transStrF: 1.0, //mednarodno gostovanje
             dnevPrvZadF: 1.0, //mednarodno gostovanje
@@ -430,7 +430,8 @@ define([
             transStrF: 0.0, //mednarodno gostovanje
             dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
-            nasDelezF: 0.7
+            nasDelezF: 0.0,
+            vredProgEnotSklop: 0.7
         }
     });
     var RazniCollection = Dokument.PostavkaCollection.extend({

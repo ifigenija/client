@@ -373,16 +373,12 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.prikaziPodatke = function () {
-        if (!this.form.commit()) {
-            this.izracunajPrikaznaPolja();
-            this.onZaprosenoChange();
-
             var model = this.model;
+            model.preracunajInfo(true);
             var f = Handlebars.formatNumber;
             this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
             this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
             this.$('.celotnaVrednost').html(f(model.get('celotnaVrednost'), 2));
-        }
     };
 
     /**
