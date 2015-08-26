@@ -24,7 +24,6 @@
                     </fieldset>
                     <fieldset class="fieldset-vrednosti">
                         <legend>{{t "ep.delez"}}</legend>
-                        <div class="prikazno-polje">{{t "ep.nasDelez"}}: <div class="pull-right nasDelez">{{u "formatNumber" nasDelez}}</div></div>
                         <div data-fields="celotnaVrednostGostovSZ"></div>
                     </fieldset>
                     <div class="prikazno-polje">{{t "ep.celotnaVrednost"}}: <div class="pull-right celotnaVrednost">{{u "formatNumber" celotnaVrednost}}</div></div>

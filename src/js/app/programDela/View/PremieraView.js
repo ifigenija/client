@@ -116,22 +116,22 @@ define([
      * Izris postavke koproducent
      * @returns {undefined}
      */
-    PremieraView.prototype.renderKoprodukcije = function () {
-        var KopView = KoprodukcijaView.extend({
-            formTemplate: kopFormTpl,
-            schema: kopShema.toFormSchema().schema
-        });
-
-        var view = this.koprodukcije = new KopView({
-            collection: this.model.koprodukcijeCollection,
-            dokument: this.model
-        });
-
-        view.on('save:success', this.ponovenIzris, this);
-        view.on('destroy:success', this.ponovenIzris, this);
-
-        this.koprodukcijeR.show(view);
-    };
+//    PremieraView.prototype.renderKoprodukcije = function () {
+//        var KopView = KoprodukcijaView.extend({
+//            formTemplate: kopFormTpl,
+//            schema: kopShema.toFormSchema().schema
+//        });
+//
+//        var view = this.koprodukcije = new KopView({
+//            collection: this.model.koprodukcijeCollection,
+//            dokument: this.model
+//        });
+//
+//        view.on('save:success', this.ponovenIzris, this);
+//        view.on('destroy:success', this.ponovenIzris, this);
+//
+//        this.koprodukcijeR.show(view);
+//    };
 
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika

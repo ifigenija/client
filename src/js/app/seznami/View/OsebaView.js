@@ -58,13 +58,6 @@ define([
                 sortable: false
             },
             {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('oseba.funkcija'),
-                name: 'funkcija',
-                sortable: false
-            },
-            {
                 cell: 'action',
                 name: '...',
                 sortable: false,

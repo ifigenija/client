@@ -5,12 +5,14 @@ define([
     'radio',
     'i18next',
     'backbone-modal',
-    'app/seznami/View/OsebaEditView'
+    'app/seznami/View/OsebaEditView',
+    'template!../tpl/osebaModal-edit.tpl'
 ], function (
         Radio,
         i18next,
         Modal,
-        OsebaEditView
+        OsebaEditView,
+        tpl
         ) {
 
     /**
@@ -21,7 +23,15 @@ define([
      * @returns {unresolved}
      */
     return function (editModel, editor) {
-        var view = new OsebaEditView({
+        
+        var OEV = OsebaEditView.extend({});
+        
+        OEV.prototype.onSaveSuccess = function(){
+            izberi();
+        };
+        
+        var view = new OEV({
+            template: tpl,
             model: editModel,
             pogled: 'kontaktna'
         });

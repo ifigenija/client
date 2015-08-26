@@ -102,7 +102,9 @@
         "kloniraj": "Kopiraj",
         "zakleni": "Zakleni",
         "oznaci": "Označi vse",
-        "novaOseba": "Nova Oseba"
+        "title": {
+            "vnesiOseba" : "Vnesite podatke osebe"
+        }
     },
     "ent": {
         "dodaj": "Dodaj",
@@ -328,7 +330,8 @@
             "datumRojstva": "",
             "drzavljanstvo": "",
             "naziv": "Naziv osebe  (g., dr., ga, prof.dr.)",
-            "emso": "Enotna matična številka občana"
+            "emso": "Enotna matična številka občana",
+            "polnoIme": ""
         }
     },
     "trr": {
