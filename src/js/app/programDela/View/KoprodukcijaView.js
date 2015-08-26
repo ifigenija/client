@@ -38,15 +38,6 @@ define([
                 headerCell: 'number',
                 cell: 'number',
                 editable: false,
-                label: i18next.t('prodel.zaproseno'),
-                name: 'zaproseno',
-                total: 'sum',
-                sortable: true
-            },
-            {
-                headerCell: 'number',
-                cell: 'number',
-                editable: false,
                 label: i18next.t('prodel.delez'),
                 name: 'delez',
                 total: 'sum',
