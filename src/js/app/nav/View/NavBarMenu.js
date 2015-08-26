@@ -84,7 +84,7 @@ define([
      */
     var MenuItem = Marionette.ItemView.extend({
         tagName: 'li',
-        template: Handlebars.compile('<a href="{{ uri }}"> <span class="showopacity fa {{ icon }}">{{ label }}</span></a>'),
+        template: Handlebars.compile('<a href="{{ uri }}"> <span class="showopacity fa {{ icon }}"></span> {{ label }} </a>'),
         onRender: function () {
             if (this.model.get('selected')) {
                 this.$el.addClass('active');

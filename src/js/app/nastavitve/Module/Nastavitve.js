@@ -66,7 +66,7 @@ define([
         };
 
         model.manageUsers = function (akcija) {
-            require(['../View/UserView'], function (View) {
+            require(['app/aaa/View/UserView'], function (View) {
                 var view = new View();
                 ch.command('open', view, i18next.t('user.title'));
                 if (akcija) {
@@ -76,13 +76,13 @@ define([
         };
 
         model.roles = function () {
-            require(['../View/RoleView'], function (View) {
+            require(['app/aaa/View/RoleView'], function (View) {
                 odpri(View, 'role.title');
             });
         };
 
         model.permission = function () {
-            require(['../View/PermissionView'], function (View) {
+            require(['app/aaa/View/PermissionView'], function (View) {
                 odpri(View, 'permission.title');
             });
         };

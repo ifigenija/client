@@ -4,22 +4,20 @@
 define([
     'underscore',
     'radio',
-    'marionette',
     'require',
     'i18next',
     './nav'
 ], function (
         _,
         Radio,
-        Marionette,
         require,
         i18next,
         moduleNav
         ) {
 
 
-var userAcl = {};
-    var modInit = function (model, App, Backbone, Marionette, $, _) {
+    var userAcl = {};
+    var modInit = function (module, App, Backbone, Marionette, $, _) {
         var chGlobal = Radio.channel('global');
         chGlobal.reply('isGranted',
                 function (perm) {
@@ -49,21 +47,38 @@ var userAcl = {};
                     return false;
                 }
         );
-        model.page = function () {
+        module.page = function () {
             console.log("Page");
         };
+
+
+        module.logout = function () {
+            var authService = new $.JsonRpcClient({ajaxUrl: '/rpc/aaa/auth'});
+            var self = this;
+            authService.call(
+                    'logout', [],
+                    function (result) {
+                        window.location.href = "/";
+                    },
+                    function (error) {
+                        window.location.href = "/";
+                    }
+            );
+        };
+
 
         /**
          * 
          * Routing za javni pogled 
          */
-        model.addInitializer(function (options) {
+        module.addInitializer(function (options) {
             userAcl = options.user;
             App.nav.registerNav(moduleNav);
             new Marionette.AppRouter({
-                controller: model,
+                controller: module,
                 appRoutes: {
-                    'aaa': 'page'
+                    'aaa': 'page',
+                    'logout': 'logout'
                 }
             });
         });

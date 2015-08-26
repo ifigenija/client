@@ -101,8 +101,8 @@ define([
             this.renderVloge(model);
         }
     };
-    
-    
+
+
     PermissionView.prototype.saveSuccess = function (model) {
 
         SeznamView.prototype.saveSuccess.apply(this, arguments);
@@ -110,7 +110,7 @@ define([
             this.renderVloge(model);
         }
     };
-    
+
     /**
      * Kaj se zgodi, ko prekličemo vnos/pogled
      * @param {type} model

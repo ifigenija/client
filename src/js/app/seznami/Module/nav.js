@@ -21,33 +21,38 @@ define(['i18next'], function (i18n) {
                 },
                 {
                     label: i18n.t("seznami.nav.posta"),
-                    uri: "#posta"
+                    uri: "#posta",
+                    permission: "Posta-write"
                 },
                 {
                     label: i18n.t("seznami.nav.drzava"),
-                    uri: "#drzava"
+                    uri: "#drzava",
+                    permission: "Drzava-write"
                 },
                 {
                     label: i18n.t("seznami.nav.tipFunkcije"),
-                    uri: "#tipFunkcije"
+                    uri: "#tipFunkcije",
+                    permission: "TipFunkcije-write"
                 },
                 {
-                    label: i18n.t("seznami.nav.zvrstUprizoritve"),
-                    uri: "#zvrstUprizoritve"
+                    label: i18n.t("seznami.nav.zvrstUprizoritve"),                    
+                    uri: "#zvrstUprizoritve",
+                    permission: "ZvrstUprizoritve-write",
                 },
                 {
                     label: i18n.t("seznami.nav.zvrstSurs"),
-                    uri: "#zvrstSurs"
+                    uri: "#zvrstSurs",
+                    permission: "ZvrstSurs-write",
                 },
                 {
                     label: i18n.t("seznami.nav.abonma"),
                     uri: "#abonma",
-                    permission: "Abonma-read"
+                    permission: "Abonma-write"
                 },
                 {
                     label: i18n.t("seznami.nav.prostori"),
                     uri: "#prostor",
-                    permission: "Prostor-read"
+                    permission: "Prostor-write"
                     
                 }
             ]

@@ -1,12 +1,14 @@
 define([
     'radio',
     '../View/NavBarMenu',
-    'app/bars',
-    'text!../tpl/ifi-layout.html'
+    'backbone',
+    'template!../tpl/uporabnik.tpl',
+    'template!../tpl/ifi-layout.html'
 ], function (
         Radio,
         NavBarMenu,
-        Handlebars,
+        Backbone,
+        uporabnikTpl,
         layoutTpl
         ) {
 
@@ -14,41 +16,37 @@ define([
     var moduleInit = function (module, application, Backbone, Marionette, $, _) {
 
 
-        var EmptyView = Marionette.ItemView.extend({
-            template: Handlebars.compile('prazenView'),
-            onRender: function () {
-
-            }
-        });
-
         var Layout = Marionette.LayoutView.extend({
-            template: Handlebars.compile(layoutTpl),
+            template: layoutTpl,
             regions: {
                 contentR: '.main',
-                navR: '.side-nav',
+                navR: '.glavna-navigacija',
+                userR: '.user-links',
                 obvestilaR: '.obvestila'
             }
         });
 
         Layout.prototype.initialize = function (options) {
-
+            this.user = options.user;
         };
 
-        Layout.prototype.onRender = function () {
-//            this.tabsR.show(this.tabControl);
 
+        Layout.prototype.onRender = function () {
             var fm = application.flashManager;
             this.obvestilaR.show(fm.manager);
             fm.manager.$el.prop('id', 'flashMessagesManager');
             fm.createSporocilaView("#sporocila-ifi");
-
-
-
             var menu = new NavBarMenu({
                 model: application.nav.navigation
             });
             this.navR.show(menu);
-
+            var userView = new Marionette.ItemView({
+                template: uporabnikTpl,
+                model: new Backbone.Model(this.user)                
+            });
+            
+            this.userR.show(userView);
+            
         };
 
         Layout.prototype.open = function (view, name, route) {
@@ -65,7 +63,7 @@ define([
         Layout.prototype.replaceUrl = function (url) {
             Backbone.history.navigate(url);
         };
-        
+
         module.open = function (view, name, route) {
             module.layout.open(view, name, route);
         };
@@ -77,11 +75,23 @@ define([
         module.replaceUrl = function (url) {
             module.layout.replaceUrl(url);
         };
-        
-        
-        module.enableMenu = function (id) {
+
+        /**
+         * 
+         * Nastavi active na id v elementu menuja
+         * 
+         * @param {string} id
+         * @param {boolean} clear če === false, potem  se pokliče deselect
+         * @returns {undefined}
+         */
+        module.enableMenu = function (id, clear) {
+            if (typeof clear === 'undefined') {
+                clear = true;
+            }
             var nav = application.nav.navigation;
-            nav.deselect();
+            if (clear) {
+                nav.deselect();
+            }
             nav.enableById(id);
         };
 
@@ -104,8 +114,4 @@ define([
     };
     return moduleInit;
 });
-/* 
- * Licenca GPLv3
- */
-
 
