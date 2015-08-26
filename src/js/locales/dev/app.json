@@ -946,7 +946,7 @@
             "celotnaVrednostMat": "Celotna vrednost na matičnem odru",
             "nasDelez": "Delež matičnega javnega zavoda",
             "celotnaVrednostGostovSZ": "Celotna vrednost na gostovanjih po SLO in v zamejstvu",
-            "zaproseno": "Ministerstvo za kulturo sofinancira do X% upravičenih stroškov celotne vrednosti.",
+            "zaproseno": "Ministrstvo za kulturo sofinancira do X% upravičenih stroškov celotne vrednosti.",
             "lastnaSredstva": "Lastna sredstva, ki so na voljo",
             "avtorskiHonorarji": "Stroški avtorskih honorarjev zunanjih sodelavcev",
             "avtorskiHonorarjiSamoz": "Avtorski honorarji za sodelavce s statusom samozaposlenega v kulturi",
@@ -1205,7 +1205,7 @@
         "vsota": "Vsota"
     },
     "info": {
-        "shraniEnotoPrograma": "Prosim shranite enoto programa predno nadaljujete.",
+        "shraniEnotoPrograma": "Prosim shranite enoto programa preden nadaljujete.",
         "maticniJZ": "Maticnega javnega zavoda ne morate urejati."
     },
     "kazalnik": {
