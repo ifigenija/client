@@ -84,17 +84,17 @@ define([
         var polja = this.form.fields;
         var ime = polja.ime.editor.getValue();
         ime = ime ? ime : '';
-        
+
         var srednjeIme = polja.srednjeIme.editor.getValue();
         srednjeIme = srednjeIme ? srednjeIme.toUpperCase().charAt(0) + '.' : '';
-        
+
         var priimek = polja.priimek.editor.getValue();
         priimek = priimek ? priimek : '';
-        
+
         var polnoIme = ime + ' ' + srednjeIme + ' ' + priimek;
-        
+
         this.form.fields.polnoIme.setValue(polnoIme);
-        
+
         return polnoIme;
     };
 
@@ -127,12 +127,8 @@ define([
         }
         this.renderTabs(tabs);
 
-        if (!this.isNew()) {
-            this.renderNaslovi();
-            this.renderTelefonske();
-        }
-
-
+        this.renderNaslovi();
+        this.renderTelefonske();
     };
 
     /**
@@ -216,10 +212,16 @@ define([
      */
     OsebaEditView.prototype.renderTelefonske = function () {
         var self = this;
+        var jeOnemogoceno = false;
+
+        if (this.isNew()) {
+            jeOnemogoceno = true;
+        }
         require(['app/seznami/View/TelefonskaView'], function (View) {
             var view = new View({
                 collection: self.model.telefonskeCollection,
-                dokument: self.model
+                dokument: self.model,
+                disabled: jeOnemogoceno
             });
             self.regionTelefonske.show(view);
             return view;
@@ -232,10 +234,16 @@ define([
      */
     OsebaEditView.prototype.renderNaslovi = function () {
         var self = this;
+        var jeOnemogoceno = false;
+
+        if (this.isNew()) {
+            jeOnemogoceno = true;
+        }
         require(['app/seznami/View/PostniNaslovView'], function (View) {
             var view = new View({
                 collection: self.model.nasloviCollection,
-                dokument: self.model
+                dokument: self.model,
+                disabled: jeOnemogoceno
             });
             self.regionNaslovi.show(view);
             return view;

@@ -5,12 +5,14 @@ define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/postniNaslov-form.tpl',
     'formSchema!postniNaslov',
-    'i18next'
+    'i18next',
+    'radio'
 ], function (
         PostavkeView,
         formTpl,
         schema,
-        i18next
+        i18next,
+        Radio
         ) {
 
     var PostniNaslovView = PostavkeView.extend({
@@ -65,6 +67,22 @@ define([
             }
         ]
     });
+    
+    PostniNaslovView.prototype.initialize = function(options){
+        this.disabled = options.disabled || this.disabled;
+    };
+    
+    PostniNaslovView.prototype.onDodaj = function () {
+        if (!this.disabled) {
+            PostavkeView.prototype.onDodaj.apply(this, arguments);
+        } else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("info.shraniEnotoPrograma"),
+                code: '9000600',
+                severity: 'info'
+            });
+        }
+    };
 
     return PostniNaslovView;
 });
