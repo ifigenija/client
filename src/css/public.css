@@ -7959,13 +7959,7 @@ fieldset.pomemben legend span {
   margin-bottom: 0;
   margin-right: 15px;
 }
-.prikazno-polje > .nasDelez {
-  font-size: 20px;
-}
-.prikazno-polje > .celotnaVrednost {
-  font-size: 20px;
-}
-.prikazno-polje > .lastnaSredstva {
+.prikazno-polje > .vrednost {
   font-size: 20px;
 }
 .vnosno-polje-gumb {
