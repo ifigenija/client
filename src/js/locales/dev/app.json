@@ -103,7 +103,7 @@
         "zakleni": "Zakleni",
         "oznaci": "Označi vse",
         "title": {
-            "vnesiOseba" : "Vnesite podatke osebe"
+            "vnesiOseba": "Vnesite podatke osebe"
         }
     },
     "ent": {
@@ -480,6 +480,10 @@
         "produkcija": "Produkcija",
         "podatki": "Glavni podatki",
         "lastnosti": "Lastnosti",
+        "krstna": "Ali je čisto prva uprizoritev",
+        "prvaSlovenska": "Ali je to prva uprizorizev v Sloveniji",
+        "naslovIzvirnika": "Naslov izvirnika",
+        "podnaslovIzvirnika": "Podaslov izvirnika",
         "t": {
             "datumPremiere": "Datum premiere"
         },
@@ -505,6 +509,10 @@
             "maticniOder": "Matični oder / privzeto prizorišče uprizoritve",
             "gostujoca": "Ali je uprizoritev gostujoča",
             "sloAvtor": "Ali je slovenski avtor uprizoritve",
+            "krstna": "Ali je čisto prva uprizoritev",
+            "prvaSlovenska": "Ali je to prva uprizorizev v Sloveniji",
+            "naslovIzvirnika": "Naslov izvirnika",
+            "podnaslovIzvirnika": "Podaslov izvirnika",
             "skupniStrosek": "Planiran skupni strošek projekta"
         }
 
