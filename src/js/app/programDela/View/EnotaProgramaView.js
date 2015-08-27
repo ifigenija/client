@@ -40,6 +40,7 @@ define([
         ) {
 
     var EnotaProgramaView = PostavkeView.extend({
+        className: 'enota-programa',
         template: enotaTpl,
         buttons: {
             dodaj: {
@@ -403,6 +404,7 @@ define([
     EnotaProgramaView.prototype.prikaziPodatke = function () {
         if (!this.form.commit()) {
             var model = this.model;
+            this.onZaprosenoChange();
             this.izracunajPrikaznaPolja();
             var f = Handlebars.formatNumber;
             this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
