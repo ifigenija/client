@@ -758,8 +758,8 @@ span.stevilka-na-veliko {
   margin-bottom: 0px;
 }
 fieldset {
-  margin-top: 12px;
   padding: 5px 12px;
+  margin-bottom: 12px;
   border-radius: 6px;
   background-color: #eeeeee;
 }
@@ -778,6 +778,16 @@ fieldset.pomemben {
 }
 fieldset.pomemben legend span {
   background-color: #dedede;
+}
+@media (min-width: 1200px) {
+  .row.enota-postavke {
+    margin: 30px 5px 12px -15px;
+  }
+}
+@media (max-width: 1199px) {
+  .row.enota-postavke {
+    margin: 0px 5px 0px 5px;
+  }
 }
 .btn-tripikice {
   position: relative;

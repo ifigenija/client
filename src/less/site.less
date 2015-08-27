@@ -786,11 +786,11 @@ span.stevilka-na-veliko {
 
 fieldset {
 
-    margin-top: 12px;
     padding: @padding-base-vertical @padding-base-horizontal;
+    margin-bottom: 12px;
     border-radius: 6px;
     background-color: #eeeeee;
-    
+
 
     &  legend{
         span {
@@ -811,8 +811,22 @@ fieldset {
             }
         }
     }
-    
+
 }
+
+.row.enota-postavke {
+  @media (min-width: @screen-lg-min)  {
+    
+    margin: 30px 5px 12px -15px ;
+  }
+  @media (max-width: @screen-md-max) {
+
+    margin: 0px 5px 0px 5px; 
+  }
+
+}
+
+
 
 .btn-tripikice {
     position: relative;

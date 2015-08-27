@@ -36,7 +36,6 @@
                 <a href="http://ifigenija.si"><img src="/img/logo-200.png" ></a>
             </div>
         </div>
-
     </div>
     <div class="col-lg-4 col-md-6 col-sm-8">
         <div class="panel panel-profile">
