@@ -379,7 +379,7 @@ define([
     EnotaProgramaView.prototype.prikaziPodatke = function () {
         if (!this.form.commit()) {
             var model = this.model;
-            model.preracunajInfo(true);
+            this.izracunajPrikaznaPolja();
             var f = Handlebars.formatNumber;
             this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
             this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
@@ -561,6 +561,11 @@ define([
             }
         }
     };
+    /**
+     * Če smo izbrali koprodukcijo potem se izriše drugače ne
+     * @param {type} imaKop
+     * @returns {undefined}
+     */    
     EnotaProgramaView.prototype.izrisKoprodukcije = function (imaKop) {
         if (imaKop) {
             this.renderKoprodukcije();
@@ -605,7 +610,6 @@ define([
                 if (this.koprodukcije) {
                     this.koprodukcije.disabled = true;
                 }
-                //dodati se še mora za zapis
             }
         }
     };

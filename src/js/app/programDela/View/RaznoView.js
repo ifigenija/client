@@ -20,7 +20,7 @@ define([
         ZapisiLayout,
         schema
         ) {
-    
+
     var RaznoView = EnotaProgramaView.extend({
         template: tpl,
         formTemplate: formTpl,
@@ -97,12 +97,20 @@ define([
             }
         ]
     });
-    
+
+    /**
+     * Nadzorujemo lahko ali se naš delež preračuna ali ne
+     * @returns {undefined}
+     */
     RaznoView.prototype.izracunajPrikaznaPolja = function () {
         var model = this.model;
         model.preracunajInfo(false);
     };
-    
+
+    /**
+     * Kateri gumbi se uporabijo v toolbaru če model obstaja ali ne
+     * @returns {Array}
+     */
     RaznoView.prototype.prepareToolbar = function () {
         return  this.model ?
                 [
@@ -115,7 +123,13 @@ define([
                 ] : [[this.buttons.dodaj]];
     };
 
-
+    /**
+     * Preverimo ali checkbox imaKoprodukcije spremeni ali ne
+     * tako vemo ali se izrišejo postavke koprodukcije ali ne
+     * @param {type} form
+     * @param {type} editor
+     * @returns {undefined}
+     */
     RaznoView.prototype.imaKoprodukcijeChange = function (form, editor) {
         var imaKop = false;
         if (this.model.get('id')) {
@@ -123,8 +137,8 @@ define([
         }
         this.izrisKoprodukcije(imaKop);
     };
-    
-     /**
+
+    /**
      * disable/enable gumbe v drugihvirih, koprodukcijah in zapisih
      * @returns {undefined}
      */
@@ -177,9 +191,9 @@ define([
             collection: this.model.programskeEnoteSklopaCollection,
             dokument: this.model
         });
-        
+
         view.on('save:success', this.ponovenIzris, this);
-        view.on('destroy:success', this.ponovenIzris, this);        
+        view.on('destroy:success', this.ponovenIzris, this);
 
         this.pesR.show(view);
     };

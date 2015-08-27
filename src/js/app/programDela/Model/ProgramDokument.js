@@ -236,7 +236,8 @@ define([
             transStrF: 0.0, //mednarodno gostovanje
             dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
-            nasDelezF: 0.7
+            nasDelezF: 0.7,
+            vredProgEnotSklop: 0.7
         },
         nestedCollections: {
             drugiViri: {collection: DrugiViriCollection, mappedBy: 'enotaPrograma'},
@@ -270,20 +271,17 @@ define([
             return postavka;
         },
         preracunajInfo: function (nasDelez) {
-            EnotaProgramaPostavka.prototype.preracunajInfo.apply(this, arguments);
-            var nasD = this.get('nasDelez');
-            nasD = nasD ? nasD : 0;
+            var nasD = 0;
 
             var PESCollection = this.programskeEnoteSklopaCollection;
 
-            var vsotaPESklop = 0;
+            var faktor = this.get('vredProgEnotSklop');
             PESCollection.each(function (pes) {
-                vsotaPESklop += pes.attributes.vrednostPE;
+                nasD += pes.attributes.vrednostPE * faktor;
             });
 
-            var celVred = nasD + vsotaPESklop;
-
-            this.set('celotnaVrednost', celVred);
+            this.set('nasDelez', nasD);
+            EnotaProgramaPostavka.prototype.preracunajInfo.apply(this, arguments);
         }
     });
 
