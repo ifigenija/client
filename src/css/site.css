@@ -805,6 +805,13 @@ fieldset.pomemben legend span {
 .prikazno-polje > .vrednost {
   font-size: 20px;
 }
+.region-postavke {
+  margin: 5px;
+  margin-top: 15px;
+}
+.enota-programa .region-postavke-form {
+  margin-bottom: 5px;
+}
 .vnosno-polje-gumb {
   padding-top: 24px;
 }
