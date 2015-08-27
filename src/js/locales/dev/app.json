@@ -10,12 +10,20 @@
         "uporabnik": "Uporabnik"
     },
     "login": {
+        "oldPass": "Staro geslo",
+        "oldPass_holder": "Vpišite obstoječe geslo",
         "prompt": "Vpišite se",
         "email": "Email naslov",
         "password": "Geslo",
+        "password_holder": "Vnesite novo geslo",
+        "newpass": "NovoGeslo",
+        "newpass_holder": "Potrditev gesla",
+        "changePass": "Menjava gesla",
+        "changePara": "Tukaj lahko zamenjate svoje geslo. Vpisati morate svoje trenutno geslo in dvakrat novo geslo. Geslo mora biti dolgo najmanj 8 znakov in mora vsebovati vsaj male in velike črke ter številke. Priporočamo uporabo posebnih znakov",
         "remember": "Ostani prijavljen",
         "signIn": "Vpis",
-        "failed": "Vpis neuspešen."
+        "failed": "Vpis neuspešen.",
+        "changePassButt": "Zamenjaj geslo"
     },
     "admin": {
         "nav": {

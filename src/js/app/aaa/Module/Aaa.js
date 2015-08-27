@@ -47,9 +47,6 @@ define([
                     return false;
                 }
         );
-        module.page = function () {
-            console.log("Page");
-        };
 
 
         module.logout = function () {
@@ -67,6 +64,37 @@ define([
         };
 
 
+
+        module.changePassword = function (oldPass, newPass, next) {
+            var authService = new $.JsonRpcClient({ajaxUrl: '/rpc/aaa/auth'});
+            var self = this;
+            authService.call(
+                    'changePassword', {'oldPasword': oldPass, 'newPassword': newPass}, function (result) {
+                next();
+            },
+                    function (error) {
+                        Radio.channel('error').command('flash', error);
+                    }
+            );
+        };
+
+        /**
+         * Prikaz uporabnikovega profila
+         * 
+         * @returns {undefined}
+         */
+        module.userProfile = function (id) {
+            require(['../View/UserProfileView'], function (UserProfile) {
+                var view = new UserProfile({
+                    model: new Backbone.Model(userAcl),
+                    changePassFun: module.changePassword
+                });
+                Radio.channel('layout').command('open', view, i18next.t('Profil'));
+
+            });
+        };
+
+
         /**
          * 
          * Routing za javni pogled 
@@ -77,7 +105,7 @@ define([
             new Marionette.AppRouter({
                 controller: module,
                 appRoutes: {
-                    'aaa': 'page',
+                    'user/:id': 'userProfile',
                     'logout': 'logout'
                 }
             });

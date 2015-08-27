@@ -35,7 +35,7 @@ define([
             var fm = application.flashManager;
             this.obvestilaR.show(fm.manager);
             fm.manager.$el.prop('id', 'flashMessagesManager');
-            fm.createSporocilaView("#sporocila-ifi");
+            fm.createSporocilaView(".sporocila-ifi");
             var menu = new NavBarMenu({
                 model: application.nav.navigation
             });
