@@ -276,7 +276,9 @@ define([
     SeznamView.prototype.saveSuccess = function (model) {
         this.$('.glava-title').text(this.getTitle(model));
         this.zamenjajUrl(model);
-        this.collection.fetch();
+        this.collection.fetch({
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
 
         if (!this.odprtaForma) {
             this.model = null;

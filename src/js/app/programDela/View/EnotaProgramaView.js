@@ -179,7 +179,8 @@ define([
             'zaproseno',
             'strosekOdkPred',
             'vlozekGostitelja',
-            'stroskiOstali'
+            'stroskiOstali',
+            'celotnaVrednostGostovSZ'
         ];
 
         vnosnaPolja.forEach(function (i) {
@@ -223,7 +224,8 @@ define([
             'zaproseno',
             'strosekOdkPred',
             'vlozekGostitelja',
-            'stroskiOstali'
+            'stroskiOstali',
+            'celotnaVrednostGostovSZ'
         ];
 
         vnosnaPolja.forEach(function (i) {
@@ -264,6 +266,7 @@ define([
             this.$('.nasDelez').html(f(0, 2));
             this.$('.lastnaSredstva').html(f(0, 2));
             this.$('.celotnaVrednost').html(f(0, 2));
+            this.$('.celotnaVrednostMat').html(f(0, 2));
         }
 
         this.bindEvents();
@@ -405,6 +408,7 @@ define([
             this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
             this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
             this.$('.celotnaVrednost').html(f(model.get('celotnaVrednost'), 2));
+            this.$('.celotnaVrednostMat').html(f(model.get('celotnaVrednostMat'), 2));
         }
     };
 

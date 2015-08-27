@@ -62,40 +62,23 @@ define([
             postavka.dokument = this;
             return postavka;
         },
+        getVrednost: function (atribut) {
+            var vred = this.get(atribut);
+            return vred = vred ? vred : 0;
+        },
         preracunajInfo: function (nasDelez) {
 
-            var tan = this.get('tantieme');
-            tan = tan ? tan : 0;
-
-            var avtPra = this.get('avtorskePravice');
-            avtPra = avtPra ? avtPra : 0;
-
-            var avtHon = this.get('avtorskiHonorarji');
-            avtHon = avtHon ? avtHon : 0;
-
-            var mat = this.get('materialni');
-            mat = mat ? mat : 0;
-
-            var javni = this.get('drugiJavni');
-            javni = javni ? javni : 0;
-
-            var zap = this.get('zaproseno');
-            zap = zap ? zap : 0;
-
-            var dnevPrvZad = this.get('dnevPrvZad');
-            dnevPrvZad = dnevPrvZad ? dnevPrvZad : 0;
-
-            var transport = this.get('transportniStroski');
-            transport = transport ? transport : 0;
-
-            var strosekOdkPred = this.get('strosekOdkPred');
-            strosekOdkPred = strosekOdkPred ? strosekOdkPred : 0;
-
-            var stroskiOstali = this.get('stroskiOstali');
-            stroskiOstali = stroskiOstali ? stroskiOstali : 0;
-
-            var vlozekGostitelja = this.get('vlozekGostitelja');
-            vlozekGostitelja = vlozekGostitelja ? vlozekGostitelja : 0;
+            var tan = this.getVrednost('tantieme');
+            var avtPra = this.getVrednost('avtorskePravice');
+            var avtHon = this.getVrednost('avtorskiHonorarji');
+            var mat = this.getVrednost('materialni');
+            var javni = this.getVrednost('drugiJavni');
+            var zap = this.getVrednost('zaproseno');
+            var dnevPrvZad = this.getVrednost('dnevPrvZad');
+            var transport = this.getVrednost('transportniStroski');
+            var strosekOdkPred = this.getVrednost('strosekOdkPred');
+            var stroskiOstali = this.getVrednost('stroskiOstali');
+            var vlozekGostitelja = this.getVrednost('vlozekGostitelja');
 
             if (nasDelez) {
                 this.set('nasDelez', tan + avtPra + avtHon + mat + dnevPrvZad + transport + strosekOdkPred + stroskiOstali);
@@ -118,15 +101,18 @@ define([
                 stevec++;
             });
 
-            var nasD = this.get('nasDelez');
-            nasD = nasD ? nasD : 0;
+            var nasD = this.getVrednost('nasDelez');
 
-            //celvredgsz(ali se prešteje našemu deležu) in vlozekgost(odsteje od našega deleža)
             var lastSred = nasD - (javni + zap + viriVsota + vlozekGostitelja);
             var celVred = nasD + koproVsota;
 
+            var vredGostSZ = this.getVrednost('celotnaVrednostGostovSZ');
+
+            var vredMat = celVred - vredGostSZ;
+
             this.set('lastnaSredstva', lastSred);
             this.set('celotnaVrednost', celVred);
+            this.set('celotnaVrednostMat', vredMat);
 
         },
         preracunajZaproseno: function () {

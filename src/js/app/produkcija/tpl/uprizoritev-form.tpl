@@ -27,7 +27,6 @@
                     </legend>
                 </fieldset>
             </div>
-                
                 <div class="col-sm-12 col-md-6" >
                     <fieldset class="" data-fields="zvrstSurs,zvrstUprizoritve,trajanje,stOdmorov,sloAvtor">
                     <legend>

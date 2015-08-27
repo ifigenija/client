@@ -133,7 +133,7 @@
         "builtIn": "Vgrajeno",
         "funkcija": "Funkcija",
         "aktivna": "Aktivna",
-        "interNaslov": "Naslov izvirnika",
+        "interNaslov": "Angleški naslov",
         "zvrst": "Vrsta uprizoritve",
         "koproducent": "Koproducent",
         "d": {
@@ -943,6 +943,10 @@
         "stroski": "Stroški",
         "zaprosenProcent": "Zaprošen procent",
         "zaproseno": "Zaprošeno",
+        "podatki": "Glavni podatki",
+        "vrednost": "Vrednost",
+        "obiskovalci": "Obiskovalci",
+        "sodelavci": "Sodelavci",
         "d": {
             "naziv": "",
             "uprizoritev": "",
