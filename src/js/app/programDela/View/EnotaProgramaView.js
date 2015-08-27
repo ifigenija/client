@@ -242,9 +242,13 @@ define([
         if (!this.model.isNew()) {
             this.renderPriloge();
             this.renderDrugiViri();
+            this.prikaziPodatke();
+        } else {
+            var f = Handlebars.formatNumber;
+            this.$('.nasDelez').html(f(0, 2));
+            this.$('.lastnaSredstva').html(f(0, 2));
+            this.$('.celotnaVrednost').html(f(0, 2));
         }
-        
-        this.prikaziPodatke();
 
         this.bindEvents();
     };
@@ -373,12 +377,14 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.prikaziPodatke = function () {
+        if (!this.form.commit()) {
             var model = this.model;
             model.preracunajInfo(true);
             var f = Handlebars.formatNumber;
             this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
             this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
             this.$('.celotnaVrednost').html(f(model.get('celotnaVrednost'), 2));
+        }
     };
 
     /**
@@ -486,6 +492,7 @@ define([
     EnotaProgramaView.prototype.prepisi = function (modal) {
         this.model.set('zaproseno', modal.options.content.model.get('vsota'));
         this.renderFormEvents();
+
         this.prikaziPodatke();
     };
 
@@ -519,12 +526,12 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.togglePrenesi = function (form, editor) {
-        
+
         var uprizoritev = form.fields.uprizoritev;
         uprizoritev = uprizoritev ? uprizoritev.getValue() : null;
 
-        var stPonovi = this.steviloPonovitev(form);        
-        
+        var stPonovi = this.steviloPonovitev(form);
+
         if (stPonovi > 0) {
             if (!uprizoritev) {
                 this.toggleGumb('doc-postavka-prenesi', true);

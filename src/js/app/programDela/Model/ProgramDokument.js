@@ -268,6 +268,22 @@ define([
             }
             postavka.dokument = this;
             return postavka;
+        },
+        preracunajInfo: function (nasDelez) {
+            EnotaProgramaPostavka.prototype.preracunajInfo.apply(this, arguments);
+            var nasD = this.get('nasDelez');
+            nasD = nasD ? nasD : 0;
+
+            var PESCollection = this.programskeEnoteSklopaCollection;
+
+            var vsotaPESklop = 0;
+            PESCollection.each(function (pes) {
+                vsotaPESklop += pes.attributes.vrednostPE;
+            });
+
+            var celVred = nasD + vsotaPESklop;
+
+            this.set('celotnaVrednost', celVred);
         }
     });
 
