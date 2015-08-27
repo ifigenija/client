@@ -116,22 +116,58 @@ define([
      * Izris postavke koproducent
      * @returns {undefined}
      */
-//    PremieraView.prototype.renderKoprodukcije = function () {
-//        var KopView = KoprodukcijaView.extend({
-//            formTemplate: kopFormTpl,
-//            schema: kopShema.toFormSchema().schema
-//        });
-//
-//        var view = this.koprodukcije = new KopView({
-//            collection: this.model.koprodukcijeCollection,
-//            dokument: this.model
-//        });
-//
-//        view.on('save:success', this.ponovenIzris, this);
-//        view.on('destroy:success', this.ponovenIzris, this);
-//
-//        this.koprodukcijeR.show(view);
-//    };
+    PremieraView.prototype.renderKoprodukcije = function () {
+        var KopView = KoprodukcijaView.extend({
+            formTemplate: kopFormTpl,
+            schema: kopShema.toFormSchema().schema,
+            gridMeta: [
+                {
+                    cell: 'string',
+                    editable: false,
+                    label: i18next.t('prodel.koproducent'),
+                    name: 'naziv',
+                    sortable: true
+                },
+                {
+                    headerCell: 'number',
+                    cell: 'number',
+                    editable: false,
+                    label: i18next.t('prodel.delez'),
+                    name: 'delez',
+                    total: 'sum',
+                    sortable: true
+                },
+                {
+                    headerCell: 'number',
+                    cell: 'number',
+                    editable: false,
+                    label: i18next.t('prodel.t.kpe'),
+                    name: 'kpe',
+                    total: 'sum',
+                    sortable: true
+                },
+                {
+                    cell: 'action',
+                    name: '...',
+                    sortable: false,
+                    actions: [
+                        {event: 'brisi', title: i18next.t('std.brisi')},
+                        {event: 'uredi', title: i18next.t('std.uredi')}
+                    ]
+                }
+            ]
+        });
+
+        var view = this.koprodukcije = new KopView({
+            collection: this.model.koprodukcijeCollection,
+            dokument: this.model
+        });
+
+        view.on('save:success', this.ponovenIzris, this);
+        view.on('destroy:success', this.ponovenIzris, this);
+
+        this.koprodukcijeR.show(view);
+    };
 
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika

@@ -87,13 +87,13 @@ define([
 
             var transport = this.get('transportniStroski');
             transport = transport ? transport : 0;
-            
+
             var strosekOdkPred = this.get('strosekOdkPred');
             strosekOdkPred = strosekOdkPred ? strosekOdkPred : 0;
-            
+
             var stroskiOstali = this.get('stroskiOstali');
             stroskiOstali = stroskiOstali ? stroskiOstali : 0;
-            
+
             var vlozekGostitelja = this.get('vlozekGostitelja');
             vlozekGostitelja = vlozekGostitelja ? vlozekGostitelja : 0;
 
@@ -271,6 +271,42 @@ define([
         }
     });
 
+    var KoprodukcijaPremieraModel = Dokument.Postavka.extend({
+        urlRoot: baseUrl + '/rest/produkcijaDelitev/premiera'
+    });
+
+    var KoprodukcijePremiereCollection = Dokument.PostavkaCollection.extend({
+        model: KoprodukcijaPremieraModel,
+        url: baseUrl + '/rest/produkcijaDelitev/premiera'
+    });
+
+    var PremieraPostavka = EnotaProgramaPostavka.extend({
+        nestedCollections: {
+            drugiViri: {collection: DrugiViriCollection, mappedBy: 'enotaPrograma'},
+            koprodukcije: {collection: KoprodukcijePremiereCollection, mappedBy: 'enotaPrograma'}
+        },
+        dodajPostavko: function (nested) {
+            if (!_.contains(_.keys(this.nestedCollections), nested)) {
+                console.log('napačni dodaj', nested);
+            }
+            var postavka;
+            switch (nested) {
+                case 'drugiViri':
+                    postavka = new DrugiVirModel({
+                        enotaPrograma: this.id
+                    });
+                    break;
+                case 'koprodukcije':
+                    postavka = new KoprodukcijaPremieraModel({
+                        enotaPrograma: this.id
+                    });
+                    break;
+            }
+            postavka.dokument = this;
+            return postavka;
+        }
+    });
+
 
     var GostujocaModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programGostujoca',
@@ -356,7 +392,7 @@ define([
     });
 
 
-    var PremieraModel = EnotaProgramaPostavka.extend({
+    var PremieraModel = PremieraPostavka.extend({
         urlRoot: baseUrl + '/rest/programPremiera',
         defaults: {
             tanF: 0.7,
@@ -653,19 +689,19 @@ define([
 
             //kazalniki priloga 2
             this.set('stIzvPremProd', stIzvPrem + stIzvPonPrem);
-            
+
             var stIzvPonPrem = this.getVrednost('stIzvPonPremDoma');
             this.set('stIzvPonPremDomaS', stIzvPrem + stIzvPonPrem);
-            
+
             var stObiskPonPrem = this.getVrednost('stIzvPonPremDoma');
             var stObiskPrem = this.getVrednost('stIzvPonPremDoma');
-            
+
             this.set('stObiskPonPremS', stObiskPonPrem + stObiskPrem);
-            
-            var povprecje = (stObiskPonPrem + stObiskPrem)/(stIzvPonPrem + stIzvPrem);
+
+            var povprecje = (stObiskPonPrem + stObiskPrem) / (stIzvPonPrem + stIzvPrem);
             povprecje = povprecje ? povprecje : 0;
             this.set('obiskPov', povprecje);
-            
+
         }
     });
     return {

@@ -572,10 +572,12 @@
         "koproducent": "Koproducent",
         "maticniKop": "Matični",
         "zakljuceno": "Zaključeno",
+        "kpe": "Koeficient programske enote",
         "t": {
             "lastnaSredstva": "Lastna sredstva",
             "drugiJavni": "Javni viri",
-            "avtorskih": "Honorarji"
+            "avtorskih": "Honorarji",
+            "kpe": "Koeficient"
         },
         "d": {
             "zaprosenProcent": "",
