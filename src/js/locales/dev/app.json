@@ -168,11 +168,15 @@
         "kapaciteta": "$t(ent.kapaciteta)",
         "opis": "$t(ent.opis)",
         "naziv": "$t(ent.naziv)",
+        "popa": "Poslovni partner",
+        "naslov": "Naslov, kjer se nahaja prostor",
         "jePrizorisce": "Prizorišče",
         "d": {
             "sifra": "$t(ent.d.sifra)",
             "opis": "",
             "naziv": "",
+            "popa": "Poslovni partner",
+            "naslov": "Naslov, kjer se nahaja prostor",
             "jePrizorisce": "Ali je prostor prizorišče.",
             "kapaciteta": "Število mest v prostoru."
         }
@@ -568,6 +572,7 @@
         "koproducent": "Koproducent",
         "maticniKop": "Matični",
         "zakljuceno": "Zaključeno",
+        "kpe": "Koeficient programske enote",
         "t": {
             "lastnaSredstva": "Lastna sredstva",
             "drugiJavni": "Javni viri",
@@ -582,6 +587,7 @@
             "tantieme": "Stroški tantiem",
             "maticniKop": "Ali je koproducent lastno gledališče",
             "zakljuceno": "Ali je program dela zaključen in se naj zaklene?",
+            "kpe": "Koeficient programske enote",
             "uprizoritev": "Uprizoritev oz. projekt, za katerega je strošek"
         }
     },
@@ -593,6 +599,8 @@
         "naziv": "$t(ent.naziv)",
         "sort": "$t(ent.sort)",
         "tipstroska": "Tip Stroška",
+        "vrstaStroska": "Vrsta materialnega stroška",
+        "troska": "Tip Stroška",
         "opis": "$t(ent.opis)",
         "alternacije": "Alternacije",
         "vrednostDo": "Vrednost do premiere",
@@ -601,6 +609,7 @@
         "d": {
             "naziv": "",
             "tipstroska": "",
+            "vrstaStroska": "Vrsta materialnega stroška",
             "opis": "",
             "vrednostDo": "",
             "vrednostNa": "",
@@ -925,6 +934,7 @@
         "stZaposlenih": "Število zaposlenih",
         "stHonorarnihIgrSamoz": "Število samozaposlenih igralcev",
         "tipProgramskeEnote": "Tip programske enote",
+        "kpe": "Koeficient programske enote",
         "tantieme": "Tantieme",
         "utemeljitev": "Utemeljitev",
         "vlozekGostitelja": "Vložek gostitelja",
@@ -979,6 +989,7 @@
             "ponoviInt": "Načrtovano število vseh ponovitev na mednarodnih gostovanjih od prve reprize dalje",
             "utemeljitev": "Vsebinska utemeljitev predloga",
             "tipProgramskeEnote": "",
+            "kpe": "Koeficient programske enote",
             "stZaposlenih": "Število zaposlenih, ki sodelujejo pri izvedbi projekta",
             "stZaposUmet": "Vsi navedeni ustvarjalci, ki so zaposleni v tem JZ (razen inšpicienta in šepetalke)",
             "stZaposDrug": "Vsi, ki sodelujejo pri uprizoritvi in so zaposleni v Tehniki, inšpicient in šepetalka",
@@ -1273,5 +1284,18 @@
         "stZaposlenih": "Število vseh zaposlenih v javnem zavodu",
         "stZaposIgralcev": "Število zaposlenih igralcev",
         "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev (popvprečno število nastopov v letu)"
+    },
+    "vrstastroska": {
+        "title": "Vrsta materialnega stroška",
+        "skupina": "Skupina vrste mat. stroška",
+        "podskupina": "Podskupina vrste mat. stroška",
+        "naziv": "Naziv vrste mat. stroška",
+        "opis": "",
+        "d": {
+            "skupina": "Skupina vrste materialnega stroška",
+            "podskupina": "Podskupina vrste materialnega stroška",
+            "naziv": "Naziv vrste materialnega stroška",
+            "opis": "opis"
+        }
     }
 }
