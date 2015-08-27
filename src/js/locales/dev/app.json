@@ -133,7 +133,7 @@
         "builtIn": "Vgrajeno",
         "funkcija": "Funkcija",
         "aktivna": "Aktivna",
-        "interNaslov": "Angleški naslov",
+        "interNaslov": "Naslov izvirnika",
         "zvrst": "Vrsta uprizoritve",
         "koproducent": "Koproducent",
         "d": {
@@ -472,6 +472,10 @@
         "planiranoSteviloVaj": "Planirano število vaj",
         "skupniStrosek": "Skupni strošek",
         "producent": "Producent",
+        "naslovi": "Dodatni naslovi",
+        "produkcija": "Produkcija",
+        "podatki": "Glavni podatki",
+        "lastnosti": "Lastnosti",
         "t": {
             "datumPremiere": "Datum premiere"
         },

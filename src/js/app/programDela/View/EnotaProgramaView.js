@@ -88,6 +88,11 @@ define([
         }
     });
 
+    /**
+     * Iz serverja dobimo preko rpc klica podatke od uprizoritve
+     * @param {type} options
+     * @returns {undefined}
+     */
     EnotaProgramaView.prototype.pridobiPodatkeUprizoritve = function (options) {
         var self = this;
         if (!this.form.commit()) {
@@ -105,7 +110,10 @@ define([
             }
         }
     };
-
+    /**
+     * Ko pritisnemo gumb prenesi se pokliče funkcija za pridobivanje podatkov uprizoritve
+     * @returns {undefined}
+     */
     EnotaProgramaView.prototype.onPrenesi = function () {
         var self = this;
 
@@ -115,7 +123,7 @@ define([
         };
 
         var error = function (error) {
-            //error
+            Radio.channel('error').request('handler', 'xhr');
         };
 
         this.pridobiPodatkeUprizoritve({
@@ -155,6 +163,10 @@ define([
                 ] : [[this.buttons.dodaj]];
     };
 
+    /**
+     * Vežemo na kere evente se posluša
+     * @returns {undefined}
+     */
     EnotaProgramaView.prototype.bindEvents = function () {
         var self = this;
         var vnosnaPolja = [
@@ -194,6 +206,11 @@ define([
             this.form.on('imaKoprodukcije:change', this.imaKoprodukcijeChange, this);
         }
     };
+
+    /**
+     * Razvežemo na kere evente se ne posluša več
+     * @returns {undefined}
+     */
     EnotaProgramaView.prototype.unBindEvents = function () {
         var self = this;
         var vnosnaPolja = [
@@ -219,7 +236,6 @@ define([
         this.form.off('ponoviInt:change', this.togglePrenesi, this);
 
         this.form.off('uprizoritev:change', this.togglePrenesi, this);
-        //this.form.off('zaproseno:change', this.onZaprosenoChange, this);
         this.form.off('tipProgramskeEnote:change', this.imaKoprodukcijeChange, this);
     };
 
@@ -235,7 +251,7 @@ define([
 
 
     /**
-     * ob izrisu forme se izvede še izris postavk
+     * ob izrisu forme se izvede še izris postavk in prikaznih polj
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.onRenderForm = function () {
@@ -262,6 +278,11 @@ define([
 
     };
 
+    /**
+     * Metoda se uporablja, pri uspešnem brisanju in shranjevanju postavk.
+     * Po uspešnem brisanju in shranitvi se naj pokliče za nov izris forme
+     * @returns {undefined}
+     */
     EnotaProgramaView.prototype.ponovenIzris = function () {
         var self = this;
         if (!this.form.commit()) {
@@ -555,7 +576,9 @@ define([
             var polja = this.form.fields;
 
             if (this.model.get('vsota') < polja.zaproseno.getValue()) {
-                polja.zaproseno.setError(i18next.t("napaka.zaproseno1") + this.model.get('vsota') + i18next.t("napaka.zaproseno2"));
+                var f = Handlebars.formatNumber;
+                var vsota = f(this.model.get('vsota'), 2);
+                polja.zaproseno.setError(i18next.t("napaka.zaproseno1") + vsota + i18next.t("napaka.zaproseno2"));
             } else {
                 polja.zaproseno.clearError();
             }
@@ -565,7 +588,7 @@ define([
      * Če smo izbrali koprodukcijo potem se izriše drugače ne
      * @param {type} imaKop
      * @returns {undefined}
-     */    
+     */
     EnotaProgramaView.prototype.izrisKoprodukcije = function (imaKop) {
         if (imaKop) {
             this.renderKoprodukcije();
@@ -583,6 +606,7 @@ define([
         var model = new TipProEnoModel({id: editor.getValue('tipProgramskeEnote')});
         var self = this;
 
+        //v kolikor je izbrana koprodukcija se bo izrisala postavka
         var izrisKoprodukcije = function () {
             if (model.get('koprodukcija') && self.model.get('id')) {
                 self.izrisKoprodukcije(true);
