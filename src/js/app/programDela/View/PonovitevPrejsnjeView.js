@@ -117,9 +117,8 @@ define([
         var ponoviDoma = polja.ponoviDoma.getValue();
         var ponoviZamejo = polja.ponoviZamejo.getValue();
         var ponoviGost = polja.ponoviGost.getValue();
-        var ponoviKopr = polja.ponoviKopr.getValue();
 
-        var stPonovi = ponoviDoma + ponoviZamejo + ponoviGost + ponoviKopr;
+        var stPonovi = ponoviDoma + ponoviZamejo + ponoviGost;
         
         return stPonovi;
     };

@@ -190,7 +190,6 @@ define([
 
         this.form.on('ponoviDoma:change', this.togglePrenesi, this);
         this.form.on('ponoviZamejo:change', this.togglePrenesi, this);
-        this.form.on('ponoviKopr:change', this.togglePrenesi, this);
         this.form.on('ponoviGost:change', this.togglePrenesi, this);
         this.form.on('ponoviInt:change', this.togglePrenesi, this);
 
@@ -250,7 +249,6 @@ define([
 
         this.form.off('ponoviDoma:change', this.togglePrenesi, this);
         this.form.off('ponoviZamejo:change', this.togglePrenesi, this);
-        this.form.off('ponoviKopr:change', this.togglePrenesi, this);
         this.form.off('ponoviGost:change', this.togglePrenesi, this);
         this.form.off('ponoviInt:change', this.togglePrenesi, this);
 
