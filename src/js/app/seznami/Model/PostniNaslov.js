@@ -1,5 +1,0 @@
-/* 
- * Licenca GPLv3
- */
-
-
