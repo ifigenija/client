@@ -690,11 +690,11 @@ define([
             //kazalniki priloga 2
             this.set('stIzvPremProd', stIzvPrem + stIzvPonPrem);
 
-            var stIzvPonPrem = this.getVrednost('stIzvPonPremDoma');
-            this.set('stIzvPonPremDomaS', stIzvPrem + stIzvPonPrem);
+            var stIzvPonPremDoma = this.getVrednost('stIzvPonPremDoma');
+            this.set('stIzvPonPremDomaS', stIzvPrem + stIzvPonPremDoma);
 
-            var stObiskPonPrem = this.getVrednost('stIzvPonPremDoma');
-            var stObiskPrem = this.getVrednost('stIzvPonPremDoma');
+            var stObiskPonPrem = this.getVrednost('stObiskPonPrem');
+            var stObiskPrem = this.getVrednost('stObiskPrem');
 
             this.set('stObiskPonPremS', stObiskPonPrem + stObiskPrem);
 
