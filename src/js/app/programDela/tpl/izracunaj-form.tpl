@@ -57,7 +57,7 @@
     {{/if}}
     {{#if transStrF}}
     <tr>
-        <td>{{t "ep.odkupPredstave"}}</td>
+        <td>{{t "gostovanje.transportniStroski"}}</td>
         <td class="col-numbers">{{u "formatNumber" transportniStroski}}</td>
         <td class="col-numbers">{{u "formatNumber" transStrF}}</td>
         <td class="col-numbers">{{u "formatNumber" transportniStroskiI}}</td>

@@ -17,7 +17,7 @@ define([
     'app/programDela/View/PrenesiView',
     'app/programDela/Model/TipProgramskeEnote',
     'template!../tpl/enota-programa.tpl',
-    'template!../tpl/prenesi-vse.tpl',
+    'template!../tpl/prenesi.tpl',
     'template!../tpl/izracunaj-form.tpl',
     'jquery',
     'jquery.jsonrpc'

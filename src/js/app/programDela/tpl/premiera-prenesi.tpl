@@ -27,6 +27,14 @@
         </tr>
         <tr>
             <td>
+                <input class="avtorskePravice" type="checkbox">
+            </td>
+            <td>{{t "ep.avtorskePravice"}}</td>
+            <td class="col-numbers">{{u "formatNumber" avtorskePravice}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.avtorskePravice}}</td>
+        </tr>
+        <tr>
+            <td>
                 <input class="materialni" type="checkbox">
             </td>
             <td>{{t "ep.materialni"}}</td>
@@ -35,11 +43,19 @@
         </tr>
         <tr>
             <td>
-                <input class="avtorskePravice" type="checkbox">
+                <input class="stZaposUmet" type="checkbox">
             </td>
-            <td>{{t "ep.avtorskePravice"}}</td>
-            <td class="col-numbers">{{u "formatNumber" avtorskePravice}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.avtorskePravice}}</td>
+            <td>{{t "ep.stZaposUmet"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stZaposUmet 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stZaposUmet 0}}</td>
+        </tr>
+        <tr>
+            <td>
+                <input class="stZaposDrug" type="checkbox">
+            </td>
+            <td>{{t "ep.stZaposDrug"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stZaposDrug 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stZaposDrug 0}}</td>
         </tr>
         <tr>
             <td>
@@ -72,14 +88,6 @@
             <td>{{t "ep.stHonorarnihIgrSamoz"}}</td>
             <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrSamoz 0}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnihIgrSamoz 0}}</td>
-        </tr>
-        <tr>
-            <td>
-                <input class="stZaposUmet" type="checkbox">
-            </td>
-            <td>{{t "ep.stZaposUmet"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stZaposUmet 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stZaposUmet 0}}</td>
         </tr>
     </tbody>
 </table>
