@@ -20,7 +20,7 @@ define([
         ZapisiLayout,
         schema
         ) {
-    
+
     var PonovitevView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -91,7 +91,7 @@ define([
             }
         ]
     });
-    
+
     PonovitevView.prototype.getPrenesiView = function () {
         var View = PrenesiView.extend({
             template: prenesiTpl,
@@ -101,7 +101,7 @@ define([
 
         return View;
     };
-    
+
     /**
      * preračun števila ponovitev
      * @param {type} form
@@ -109,16 +109,17 @@ define([
      */
     PonovitevView.prototype.steviloPonovitev = function (form) {
         var polja = form.fields;
-        
+
         var ponoviDoma = polja.ponoviDoma.getValue();
         var ponoviZamejo = polja.ponoviZamejo.getValue();
         var ponoviGost = polja.ponoviGost.getValue();
+        var ponoviKopr = polja.ponoviKopr.getValue();
 
-        var stPonovi = ponoviDoma + ponoviZamejo + ponoviGost;
-        
+        var stPonovi = ponoviDoma + ponoviZamejo + ponoviGost + ponoviKopr;
+
         return stPonovi;
     };
-    
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -130,6 +131,6 @@ define([
         });
         this.prilogeR.show(view);
     };
-    
+
     return PonovitevView;
 });

@@ -92,6 +92,7 @@ define([
                 sortable: false
             },
             {
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('alternacija.zacetek'),
@@ -99,6 +100,7 @@ define([
                 sortable: false
             },
             {
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('alternacija.konec'),
