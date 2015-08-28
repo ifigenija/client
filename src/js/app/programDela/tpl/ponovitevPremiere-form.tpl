@@ -22,9 +22,9 @@
                         <legend>
                             <span>{{t "ep.viri"}}</span>
                         </legend>
-                        <div class="prikazno-polje">{{t "ep.nasDelez"}}: <div class="pull-right nasDelez vrednost">{{u "formatNumber" nasDelez}}</div></div>
                         <div data-fields="vlozekGostitelja,drugiJavni,zaproseno"></div>
-                        <div class="prikazno-polje">{{t "ep.lastnaSredstva"}}: <div class="pull-right lastnaSredstva vrednost">{{u "formatNumber" lastnaSredstva}}</div></div>
+                        <div class="prikazno-polje clearfix">{{t "ep.lastnaSredstva"}}: <div class="pull-right lastnaSredstva vrednost">{{u "formatNumber" lastnaSredstva}}</div></div>
+                        <div class="prikazno-polje clearfix">{{t "ep.nasDelez"}}: <div class="pull-right nasDelez vrednost">{{u "formatNumber" nasDelez}}</div></div>
                     </fieldset>
                     <fieldset class="fieldset-vrednosti">
                         <legend>
@@ -32,7 +32,12 @@
                         </legend>
                         <div data-fields="celotnaVrednostGostovSZ"></div>
                         <div class="prikazno-polje clearfix">{{t "ep.celotnaVrednostMat"}}: <div class="pull-right celotnaVrednostMat vrednost">{{u "formatNumber" celotnaVrednostMat}}</div></div>
-                        <div class="prikazno-polje clearfix">{{t "ep.celotnaVrednost"}}: <div class="pull-right celotnaVrednost vrednost">{{u "formatNumber" celotnaVrednost}}</div></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                            <span>{{t "ep.vrednostProjekta"}}</span>
+                        </legend>
+                        <div class="prikazno-polje clearfix"><div class="pull-right celotnaVrednost vrednost">{{u "formatNumber" celotnaVrednost}}</div></div>
                     </fieldset>
                 </div>
             </div>

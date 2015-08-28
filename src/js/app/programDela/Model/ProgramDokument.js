@@ -91,6 +91,8 @@ define([
             viri.each(function (vir) {
                 viriVsota += vir.attributes.znesek;
             });
+            
+            this.set('drugiViriVsota', viriVsota);
 
             var koproVsota = 0;
             var stevec = 0;

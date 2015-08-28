@@ -190,8 +190,11 @@ define([
 
         this.form.on('ponoviDoma:change', this.togglePrenesi, this);
         this.form.on('ponoviZamejo:change', this.togglePrenesi, this);
+        this.form.on('ponoviKopr:change', this.togglePrenesi, this);
+        this.form.on('ponoviKoprInt:change', this.togglePrenesi, this);
         this.form.on('ponoviGost:change', this.togglePrenesi, this);
         this.form.on('ponoviInt:change', this.togglePrenesi, this);
+        this.form.on('celotnaVrednostGostovSZ:change', this.preveriVrednost, this);
 
         var uprizoritev = this.form.fields.uprizoritev;
         if (uprizoritev) {
@@ -211,6 +214,12 @@ define([
         this.form.on('avtorskiHonorarjiSamoz:change', this.preveriAvtHonSamoZ, this);
     };
     
+    /**
+     * preverimo da ni avthonsamZ večji od avthon
+     * @param {type} form
+     * @param {type} editor
+     * @returns {undefined}
+     */
     EnotaProgramaView.prototype.preveriAvtHonSamoZ = function (form, editor) {
         var avtHonSamoZ = editor.getValue();
         var avtHon = form.fields.avtorskiHonorarji.editor.getValue();
@@ -220,6 +229,24 @@ define([
             polja.avtorskiHonorarjiSamoz.setError(i18next.t("napaka.avtHonSamoz"));
         } else {
             polja.avtorskiHonorarjiSamoz.clearError();
+        }
+    };
+    
+    /**
+     * preveri da ni vrednost v got po slo in zam večje od našega deleža
+     * @param {type} form
+     * @param {type} editor
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.preveriVrednost = function (form, editor) {
+        var vredGostZame = editor.getValue();
+        var nasDelez = this.model.get('nasDelez');
+        var polja = form.fields;
+
+        if (vredGostZame > nasDelez) {
+            polja.celotnaVrednostGostovSZ.setError(i18next.t("napaka.gostSZVrednost"));
+        } else {
+            polja.celotnaVrednostGostovSZ.clearError();
         }
     };
 
@@ -247,9 +274,12 @@ define([
             self.form.off(i + ':change', self.prikaziPodatke, self);
         });
 
+        this.form.off('celotnaVrednostGostovSZ:change', this.preveriVrednost, this);
         this.form.off('ponoviDoma:change', this.togglePrenesi, this);
         this.form.off('ponoviZamejo:change', this.togglePrenesi, this);
         this.form.off('ponoviGost:change', this.togglePrenesi, this);
+        this.form.off('ponoviKopr:change', this.togglePrenesi, this);
+        this.form.off('ponoviKoprInt:change', this.togglePrenesi, this);
         this.form.off('ponoviInt:change', this.togglePrenesi, this);
 
         this.form.off('uprizoritev:change', this.togglePrenesi, this);

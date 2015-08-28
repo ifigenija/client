@@ -967,7 +967,8 @@
         "zaprosenProcent": "Zaprošen procent",
         "zaproseno": "Zaprošeno",
         "podatki": "Glavni podatki",
-        "vrednost": "Vrednost",
+        "vrednost": "Vrednosti po lokaciji",
+        "vrednostProjekta": "Vrednost projekta",
         "obiskovalci": "Obiskovalci",
         "sodelavci": "Sodelavci",
         "dodatniPodatki": "Podrobno",
@@ -1218,7 +1219,8 @@
         "gesloKratko": "Geslo je prekratko",
         "gesloSibko": "Geslo mora vsebovati vsaj tri izmed štirih elementov: velike črke, male črke, številke in/ali posebne znake.",
         "datum": "Datum konca ne sme bit manjši ali enak datumu začetka.",
-        "avtHonSamoz": "Strošek avtorskih honorarjev s statusom samozaposlenih je del stroškov avtorskih honorarjev. Zato ne sme biti strošek večji od avtorskih honorarjev."
+        "avtHonSamoz": "Strošek avtorskih honorarjev s statusom samozaposlenih je del stroškov avtorskih honorarjev. Zato ne sme biti strošek večji od avtorskih honorarjev.",
+        "gostSZVrednost": "Vrednost gostovanja po Sloveniji in zamejstvu ne sme biti več, kot je delež matičnega JZ."
     },
     "uspeh": {
         "fetch": "Napaka pri pridobivanju podatkov",

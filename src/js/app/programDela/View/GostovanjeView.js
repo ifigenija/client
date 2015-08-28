@@ -132,7 +132,14 @@ define([
      * @returns {unresolved}
      */
     GostovanjeView.prototype.steviloPonovitev = function (form) {
-        return form.fields.ponoviInt.getValue();
+        var polja = form.fields;
+        
+        var ponoviInt = polja.ponoviInt.getValue();
+        var ponoviKoprInt = polja.ponoviKoprInt.getValue();
+
+        var stPonovi =  ponoviInt + ponoviKoprInt;
+        
+        return stPonovi;
     };
 
     /**
