@@ -312,6 +312,7 @@ define([
             this.$('.lastnaSredstva').html(f(0, 2));
             this.$('.celotnaVrednost').html(f(0, 2));
             this.$('.celotnaVrednostMat').html(f(0, 2));
+            this.$('.drugiViriVsota').html(f(0, 2));
         }
 
         this.bindEvents();
@@ -455,6 +456,7 @@ define([
             this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
             this.$('.celotnaVrednost').html(f(model.get('celotnaVrednost'), 2));
             this.$('.celotnaVrednostMat').html(f(model.get('celotnaVrednostMat'), 2));
+            this.$('.drugiViriVsota').html(f(model.get('drugiViriVsota'), 2));
         }
     };
 
