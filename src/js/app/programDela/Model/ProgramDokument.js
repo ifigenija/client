@@ -416,8 +416,8 @@ define([
     var GostovanjeModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programGostovanje',
         defaults: {
-            tanF: 0.6,
-            avtHonF: 0.0,
+            tanF: 0.0,
+            avtHonF: 0.6,
             matF: 0.0,
             odkupAPF: 0.0,
             strosekOdkPredF: 0.0,
