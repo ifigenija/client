@@ -63,19 +63,24 @@ define([
             );
         };
 
-
-
+        /**
+         * Zamenja password in javi napako ali uspeh.
+         * ob usehu pokliče next();
+         * 
+         * @param {type} oldPass
+         * @param {type} newPass
+         * @param {type} next
+         * @returns {undefined}
+         */
         module.changePassword = function (oldPass, newPass, next) {
             var authService = new $.JsonRpcClient({ajaxUrl: '/rpc/aaa/auth'});
             var self = this;
-            authService.call(
-                    'changePassword', {'oldPasword': oldPass, 'newPassword': newPass}, function (result) {
+            authService.call('changePassword', {'oldPassword': oldPass, 'newPassword': newPass}, function (result) {
+                Radio.channel('error').command('flash', {message: i18next.t('login.passSuccess'), severity: "success", code: 0});
                 next();
-            },
-                    function (error) {
-                        Radio.channel('error').command('flash', error);
-                    }
-            );
+            }, function (error) {
+                Radio.channel('error').command('flash', error);
+            });
         };
 
         /**

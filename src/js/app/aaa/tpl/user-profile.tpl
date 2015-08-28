@@ -42,23 +42,26 @@
             <div class="panel-body">
                 <h1> {{t "login.changePass" }}</h1>
                 <p> {{t "login.changePara" }}</p>
-            <form class="">
-                <div class="form-group">  
-                    <label for="oldPassword">{{t "login.oldPass"}}</label>                  
-                    <input type="password" class="form-control" id="oldPassword" placeholder="{{t "login.oldPass_holder" }}">
-                </div>
-                <div class="form-group">
-                    <label for="newPass1">{{t "login.password"}}</label>
-                    <input type="password" class="form-control" id="newPass1" placeholder="{{t "login.password_holder"}}">
-                </div>
-                <div class="form-group">
-                    <label for="newPass2">{{t "login.newpass" }}</label>
-                    <input type="password" class="form-control" id="newPass2" placeholder="{{t "login.newpass_holder"}}">
+                <form class="changePass">
+                    <div class="form-group">  
+                        <label for="oldPassword">{{t "login.oldPass"}}</label>                  
+                        <input type="password" autocomplete="off" class="form-control" id="oldPassword" placeholder="{{t "login.oldPass_holder" }}">
+                        <span class="old-not-complex"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPass1">{{t "login.password"}}</label>
+                        <input type="password" autocomplete="off" class="form-control" id="newPass1" placeholder="{{t "login.password_holder"}}">
+                        <span class="not-complex"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPass2">{{t "login.newpass" }}</label>
+                        <input type="password" class="form-control" autocomplete="off" id="newPass2" placeholder="{{t "login.newpass_holder"}}">
+                        <span class="not-equal"></span>
+                    </div>
+                    <button type="submit" disabled="disabled" class="btn btn-default">{{t "login.changePassButt"}}</button>
+                </form>
             </div>
-            <button type="submit" disabled="disabled" class="btn btn-default">{{t "login.changePassButt"}}</button>
-            </form>
         </div>
-    </div>
 
-</div>
+    </div>
 </div>
