@@ -1,4 +1,4 @@
-<button class="btn btn-default izberi-check">Označi</button>
+<button class="btn btn-default izberi-check">{{t "std.oznaci"}}</button>
 <table class="table table-striped table-condensed">
     <thead>
         <tr>

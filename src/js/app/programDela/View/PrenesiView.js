@@ -22,6 +22,7 @@ define([
         template: null,
         podatkiUprizoritve: null,
         jeNa: false,
+        jeOznaceno: false,
         /**
          * v posameznih enotah entitete bo potrebno overridat
          * @returns {unresolved}
@@ -57,7 +58,17 @@ define([
             'click .izberi-check': 'izberi:vse'
         },
         onIzberiVse: function () {
-            this.$('input').click();
+            if (this.jeOznaceno) {
+                this.$('input').each(function(){
+                    this.checked = false;
+                });
+                this.jeOznaceno = false;
+            }else{
+                this.$('input').each(function(){
+                    this.checked = true;
+                });
+                this.jeOznaceno = true;
+            }
         },
         vsotaPonovitev: function (model) {
             var temp = model.get('ponoviDoma');
