@@ -138,7 +138,7 @@ define([
         var ponoviKoprInt = polja.ponoviKoprInt.getValue();
 
         var stPonovi =  ponoviInt + ponoviKoprInt;
-
+        
         return stPonovi;
     };
 
