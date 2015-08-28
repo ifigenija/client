@@ -1,7 +1,7 @@
 <form>
     <div class="row">
         <div class="col-sm-6">
-            <div data-fields="sifra,funkcija,oseba"></div>
+            <div data-fields="funkcija,oseba"></div>
             <div class="row">
                 <div class="col-sm-9">
                     <div data-fields="pogodba"></div>
@@ -16,8 +16,9 @@
                     </a>
                 </div>
             </div>
+            <div data-fields="zaposlitev"></div>
         </div>
-        <div class="col-sm-6"data-fields="zacetek,konec,zaposlitev,pomembna,privzeti,aktivna"></div>
+        <div class="col-sm-6"data-fields="zacetek,konec,sifra,pomembna,privzeti,aktivna"></div>
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-offset-3" data-fields="opomba"></div>

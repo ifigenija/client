@@ -207,6 +207,20 @@ define([
             this.imaKoprodukcijeChange(null, imaKoprodukcije.editor);
             this.form.on('imaKoprodukcije:change', this.imaKoprodukcijeChange, this);
         }
+        
+        this.form.on('avtorskiHonorarjiSamoz:change', this.preveriAvtHonSamoZ, this);
+    };
+    
+    EnotaProgramaView.prototype.preveriAvtHonSamoZ = function (form, editor) {
+        var avtHonSamoZ = editor.getValue();
+        var avtHon = form.fields.avtorskiHonorarji.editor.getValue();
+        var polja = form.fields;
+
+        if (avtHonSamoZ > avtHon) {
+            polja.avtorskiHonorarjiSamoz.setError(i18next.t("napaka.avtHonSamoz"));
+        } else {
+            polja.avtorskiHonorarjiSamoz.clearError();
+        }
     };
 
     /**
