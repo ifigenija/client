@@ -210,10 +210,10 @@ define([
             this.imaKoprodukcijeChange(null, imaKoprodukcije.editor);
             this.form.on('imaKoprodukcije:change', this.imaKoprodukcijeChange, this);
         }
-        
+
         this.form.on('avtorskiHonorarjiSamoz:change', this.preveriAvtHonSamoZ, this);
     };
-    
+
     /**
      * preverimo da ni avthonsamZ večji od avthon
      * @param {type} form
@@ -231,7 +231,7 @@ define([
             polja.avtorskiHonorarjiSamoz.clearError();
         }
     };
-    
+
     /**
      * preveri da ni vrednost v got po slo in zam večje od našega deleža
      * @param {type} form
@@ -304,7 +304,6 @@ define([
     EnotaProgramaView.prototype.onRenderForm = function () {
         if (!this.model.isNew()) {
             this.renderPriloge();
-            this.renderDrugiViri();
             this.prikaziPodatke();
         } else {
             var f = Handlebars.formatNumber;
@@ -313,6 +312,12 @@ define([
             this.$('.celotnaVrednost').html(f(0, 2));
             this.$('.celotnaVrednostMat').html(f(0, 2));
             this.$('.drugiViriVsota').html(f(0, 2));
+        }
+
+        //onemogočimo druge vire če je nov model
+        this.renderDrugiViri();
+        if (this.model.isNew()) {
+            this.drugiViri.disabled = true;
         }
 
         this.bindEvents();

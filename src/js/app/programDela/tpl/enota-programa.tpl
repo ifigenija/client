@@ -10,11 +10,12 @@
             <div class="col-sm-12 col-md-12 col-lg-8 region-postavke-form"></div>
             <div class="col-sm-12 col-md-12 col-lg-4">
                 <div class="row enota-postavke">
-                        <div class="col-sm-12 col-md-6 col-lg-12 region-drugiViri"></div>
-                        <div class="col-sm-12 col-md-6 col-lg-12 region-koprodukcije"></div>
-                        <div class="col-sm-12 col-md-6 col-lg-12 region-priloge"></div>
-                    </div>            
+                    <div class="col-sm-12 col-md-6 col-lg-12 region-drugiViri"></div>
+                    <div class="col-sm-12 col-md-6 col-lg-12 region-koprodukcije"></div>
+                    <div class="col-sm-12 col-md-6 col-lg-12 region-priloge"></div>
+                </div>            
             </div>
         </div>
     </div>
-    <div class="region-postavke-list"></div>
+</div>
+<div class="region-postavke-list"></div>
