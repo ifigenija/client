@@ -84,6 +84,7 @@ define([
         }
     });
     return {
-        Model: PopaModel
+        Model: PopaModel,
+        PostniNaslovModel: PopaNaslov
     };
 });

@@ -293,19 +293,31 @@
             <td class="col-numbers">{{u "formatNumber" stObiskPonPremS 0}}</td>
         </tr>
         <tr>
-            <td class="kazalnik-padleft">{{t "kazalnik.oderDom"}}</td>
+            <td class="kazalnik-padleft">{{t "kazalnik.obiskDom"}}</td>
             <td class="col-numbers">{{u "formatNumber" stObiskPonPremDoma 0}}</td>
         </tr>
         <tr>
-            <td class="kazalnik-padleft">{{t "kazalnik.oderSloZam"}}</td>
+            <td class="kazalnik-padleft">{{t "kazalnik.obiskSloZam"}}</td>
             <td class="col-numbers">{{u "formatNumber" stObiskPonPremKopr 0}}</td>
         </tr>
         <tr>
-            <td class="kazalnik-padleft">{{t "kazalnik.oderKopTuj"}}</td>
+            <td class="kazalnik-padleft">{{t "kazalnik.obiskKopTuj"}}</td>
             <td class="col-numbers">{{u "formatNumber" stObiskPonPremKoprInt 0}}</td>
         </tr>
         <tr>
-            <td class="kazalnik-padleft">{{t "kazalnik.stIzvGostuj"}}</td>
+            <td class="kazalnik-padleft">{{t "kazalnik.obiskGostSlo"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskPonPremGost 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.obiskGostZam"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskPonPremZamejo 0}}</td>
+        </tr>
+        <tr>
+            <td class="kazalnik-padleft">{{t "kazalnik.obiskGostInt"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stObiskPonPremInt 0}}</td>
+        </tr>
+        <tr>
+            <td>{{t "kazalnik.stIzvGostuj"}}</td>
             <td class="col-numbers">{{u "formatNumber" stIzvGostuj 0}}</td>
         </tr>
         <tr>

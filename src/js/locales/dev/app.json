@@ -1340,7 +1340,13 @@
         "oderSloZam": "na odru slovenskega ali zamejskega koproducenta",
         "oderKopTuj": "na odru koproducenta v tujini",
         "stObiskPonPrem": "Število obiskovalcev vseh premiernih uprizoritev in njihovih ponovitev",
-        "obiskPov": "Povprečno število obiskovalcev na premierno uprizoritev in njene ponovitve"
+        "obiskPov": "Povprečno število obiskovalcev na premierno uprizoritev in njene ponovitve",
+        "obiskDom": "na domačem odru",
+        "obiskSloZam": "na odru slovenskega ali zamejskega koproducenta",
+        "obiskKopTuj": "na odru koproducenta iz tujine",
+        "obiskGostSlo": "na gostovanjih po Sloveniji",
+        "obiskGostZam": "na gostovanjih v zamejstvu",
+        "obiskGostInt": "na mednarodnih gostovanjih (brez zamejstva)"
     },
     "vrstastroska": {
         "title": "Vrsta materialnega stroška",

@@ -6,19 +6,29 @@ define([
     'template!../tpl/prostor-form.tpl',
     'formSchema!prostor',
     '../Model/Prostor',
+    '../Model/Popa',
     'i18next',
     'baseUrl',
-    'app/Max/Module/Backgrid'
+    'backbone-modal',
+    'app/Dokument/View/FormView',
+    'template!../tpl/postniNaslov-form.tpl',
+    'formSchema!postniNaslov',
+    'template!../tpl/postniNaslov-modal.tpl'
 ], function (
         SeznamView,
         formTpl,
         schema,
         Prostor,
+        Popa,
         i18next,
         baseUrl,
-        Backgrid
+        Modal,
+        FormView,
+        postniNaslovTpl,
+        postniNaslovSchema,
+        postniNaslovModalTpl
         ) {
-    
+
     var ProstorView = SeznamView.extend({
         url: baseUrl + '/rest/prostor',
         title: i18next.t('prostor.title'),
@@ -62,7 +72,10 @@ define([
                     {event: 'brisi', title: i18next.t('std.brisi')}
                 ]
             }
-        ]
+        ],
+        triggers: {
+            'click .prostor-dodaj-naslov': 'dodaj:naslov'
+        }
     });
 
     ProstorView.prototype.getTitle = function (model) {
@@ -77,6 +90,58 @@ define([
     ProstorView.prototype.onDodaj = function () {
         var model = new Prostor.Model();
         this.onSelected(model);
+    };
+
+    ProstorView.prototype.onDodajNaslov = function () {
+
+        var Fv = FormView.extend({
+            formTitle: "naslov",
+            buttons: {
+                nasvet: {
+                    id: 'doc-nasvet',
+                    icon: 'fa fa-info',
+                    element: 'button-trigger',
+                    trigger: 'nasvet'
+                }
+            },
+            schema: postniNaslovSchema.toFormSchema().schema,
+            formTemplate: postniNaslovTpl,
+            template: postniNaslovModalTpl
+        });
+
+        var PostniNaslovModel = Popa.PostniNaslovModel;
+
+        var postniNaslov = new PostniNaslovModel({
+            popa: this.formView.form.fields.popa.getValue().id
+        });
+
+        var view = new Fv({
+            model: postniNaslov
+        });
+
+        var self = this;
+        
+        var saveSuccess = function () {
+            var editor = self.formView.form.fields.naslov.editor;
+            
+            editor.setValue(view.model.get('id'));
+            modal.close();
+        };
+
+        var izberi = function () {
+            view.on('save:success', saveSuccess, this);
+            view.triggerMethod('shrani');
+            modal.preventClose();
+        };
+
+        var modal = new Modal({
+            content: view,
+            animate: true,
+            okText: i18next.t("std.izberi"),
+            cancelText: i18next.t("std.preklici")
+        });
+
+        modal.open(izberi);
     };
 
     return ProstorView;
