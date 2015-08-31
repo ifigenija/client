@@ -7,6 +7,7 @@ define(['i18next'], function (i18n) {
         {
             label: i18n.t("koledar.nav.label"),
             icon: 'fa-calendar',
+            uri: '#koledar/navigacija',
             id: "koledar"
            
         }

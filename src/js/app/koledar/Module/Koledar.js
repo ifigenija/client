@@ -3,14 +3,14 @@
  */
 define([
     'marionette',
+    'radio',
     'require',
-  
     './nav'
 
 ], function (
         Marionette,
+        Radio,
         require,
-        
         moduleNav
         ) {
 
@@ -18,10 +18,9 @@ define([
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
 
 
+        var ch = Radio.channel('layout');
 
-        mod.dodajDogodek = function () {
-
-        };
+     
 
         mod.ljudje = function () {
 
@@ -33,9 +32,32 @@ define([
         mod.zasedenost = function () {
 
         };
-        
-        mod.dogodki = function () {
 
+        mod.pregled = function () {
+            require(['../View/CalendarView', '../View/BasicFilter'], function (CalendarView, FilterView) {                
+                var calView = new CalendarView({
+                    filterView: new FilterView()                   
+                });
+                ch.command('open', calView, 'Kodelar');
+            });
+
+        };
+
+        mod.predstave = function () {
+
+        };
+
+        mod.vaje = function () {
+
+        };
+
+
+        mod.navigacija = function () {
+            require(['../View/Navigacija'], function (NaviView) {                
+                var view = new NaviView({
+                });
+                ch.command('open', view, 'Navigacija');
+            });
         };
 
         /**
@@ -48,11 +70,13 @@ define([
             new Marionette.AppRouter({
                 controller: mod,
                 appRoutes: {
-                    'koledar/dodaj': 'dodajDogodek',
-                    'koledar/dogodki': 'dogodki',
+                    'koledar/navigacija': 'navigacija',
+                    'koledar/pregled': 'pregled',
                     'koledar/ludje': 'ljudje',
                     'koledar/prostori': 'prostori',
-                    'koledar/zasedenost': 'zasedenost'
+                    'koledar/zasedenost': 'zasedenost',
+                    'koledar/vaje': 'vaje',
+                    'koledar/predstave': 'predstave'
                 }
             });
         });
