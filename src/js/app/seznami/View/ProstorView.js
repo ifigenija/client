@@ -78,6 +78,19 @@ define([
         }
     });
 
+    ProstorView.prototype.disableGumbNaslov = function (form, editor) {
+        var podatek = editor.getValue();
+        if (podatek) {
+            this.$('.prostor-dodaj-naslov').prop("disabled", false);
+        } else {
+            this.$('.prostor-dodaj-naslov').prop("disabled", true);
+        }
+    };
+
+    ProstorView.prototype.onRenderForm = function () {
+        this.formView.form.on('popa:change', this.disableGumbNaslov, this);
+    };
+
     ProstorView.prototype.getTitle = function (model) {
         var text = i18next.t("prostor.nova");
 
@@ -120,10 +133,10 @@ define([
         });
 
         var self = this;
-        
+
         var saveSuccess = function () {
             var editor = self.formView.form.fields.naslov.editor;
-            
+
             editor.setValue(view.model.get('id'));
             modal.close();
         };
