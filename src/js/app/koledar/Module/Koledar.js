@@ -20,40 +20,74 @@ define([
 
         var ch = Radio.channel('layout');
 
-     
+
 
         mod.ljudje = function () {
 
         };
 
+        /**
+         * Planer po prostorih
+         * 
+         * @returns {undefined}
+         */
         mod.prostori = function () {
+            require(['../View/PlanerView', '../Model/Resursi', '../View/BasicFilter'], function (PlanerView, resursi, FilterView) {
+                var calView = new PlanerView({
+                    resCollection: resursi.prostori,
+                    filterView: new FilterView(),
+                });
+                ch.command('open', calView, 'Planer');
+            });
 
         };
+
+        /**
+         * Koledar zasedenosti za po 
+         * @returns {undefined}
+         */
         mod.zasedenost = function () {
 
         };
 
+        /**
+         * Pregled koledarja za posamezni resource 
+         * 
+         * @returns {undefined}
+         */
         mod.pregled = function () {
-            require(['../View/CalendarView', '../View/BasicFilter'], function (CalendarView, FilterView) {                
+            require(['../View/CalendarView', '../View/BasicFilter'], function (CalendarView, FilterView) {
                 var calView = new CalendarView({
-                    filterView: new FilterView()                   
+                    filterView: new FilterView()
                 });
                 ch.command('open', calView, 'Kodelar');
             });
 
         };
 
+        /**
+         * Pregled predstav po uprizoritveh 
+         * @returns {undefined}
+         */
         mod.predstave = function () {
 
         };
 
+        /**
+         * Pregled vaj po uprizoritvah 
+         * 
+         * @returns {undefined}
+         */
         mod.vaje = function () {
 
         };
 
-
+        /**
+         * Navigacija med posameznimi pogledi v koledarju
+         * @returns {undefined}
+         */
         mod.navigacija = function () {
-            require(['../View/Navigacija'], function (NaviView) {                
+            require(['../View/Navigacija'], function (NaviView) {
                 var view = new NaviView({
                 });
                 ch.command('open', view, 'Navigacija');

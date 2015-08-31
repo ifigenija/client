@@ -30,7 +30,7 @@ require.config({
         'app/bars': 'app/Max/handlebars-wrapper',
         'ckeditor': '../lib/ckeditor/ckeditor',
         'fullcalendar': '../lib/fullcalendar/dist/fullcalendar',
-        'fullcalendar-schedule': '../lib/fullcalendar-scheduler/dist/scheduler.min',
+        'fc-schedule': '../lib/fullcalendar-scheduler/dist/scheduler.min',
         'radio': '../lib/backbone.radio/build/backbone.radio',
         'bootstrap-datepicker': '../lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
         'formSchema': 'app/Max/Loader/formSchema',
@@ -57,10 +57,10 @@ require.config({
             exports: 'CKEDITOR'
         },
         "fullcalendar": {
-            deps: ["jquery"]
+            deps: ['css!../lib/fullcalendar/dist/fullcalendar.min']
         },
-        "fullcalendar-schedule": {
-            deps: ["jquery","fullcalendar"]
+        "fc-schedule": {
+            deps: ["fullcalendar", 'css!../lib/fullcalendar-scheduler/dist/scheduler.min']
         },
         "backgrid-filter": {
             deps: ["backbone", "backgrid"]
@@ -79,7 +79,7 @@ require.config({
     },
     map: {
         '*': {
-            'css': 'require-css/css' // or whatever the path to require-css is
+            'css': '../lib/require-css/css' // or whatever the path to require-css is
         }
     },
     noGlobal: true
