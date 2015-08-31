@@ -1,4 +1,4 @@
-<a href="#uporabnik/{{ id }}" title="{{t "Prijavljen(a) kot"}}">
+<a href="#user/{{ id }}" title="{{t "Prijavljen(a) kot"}}">
     <span class="fa fa-user"></span> {{ name }}
 </a> 
 <a href="#logout" title="{{t "Odjava" }}"> 

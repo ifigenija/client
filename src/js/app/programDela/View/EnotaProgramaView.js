@@ -17,7 +17,7 @@ define([
     'app/programDela/View/PrenesiView',
     'app/programDela/Model/TipProgramskeEnote',
     'template!../tpl/enota-programa.tpl',
-    'template!../tpl/prenesi-vse.tpl',
+    'template!../tpl/prenesi.tpl',
     'template!../tpl/izracunaj-form.tpl',
     'jquery',
     'jquery.jsonrpc'
@@ -40,6 +40,7 @@ define([
         ) {
 
     var EnotaProgramaView = PostavkeView.extend({
+        className: 'enota-programa',
         template: enotaTpl,
         buttons: {
             dodaj: {
@@ -189,8 +190,11 @@ define([
 
         this.form.on('ponoviDoma:change', this.togglePrenesi, this);
         this.form.on('ponoviZamejo:change', this.togglePrenesi, this);
+        this.form.on('ponoviKopr:change', this.togglePrenesi, this);
+        this.form.on('ponoviKoprInt:change', this.togglePrenesi, this);
         this.form.on('ponoviGost:change', this.togglePrenesi, this);
         this.form.on('ponoviInt:change', this.togglePrenesi, this);
+        this.form.on('celotnaVrednostGostovSZ:change', this.preveriVrednost, this);
 
         var uprizoritev = this.form.fields.uprizoritev;
         if (uprizoritev) {
@@ -205,6 +209,44 @@ define([
         } else if (imaKoprodukcije) { //v primeru da imamo imaProdukcije v formi
             this.imaKoprodukcijeChange(null, imaKoprodukcije.editor);
             this.form.on('imaKoprodukcije:change', this.imaKoprodukcijeChange, this);
+        }
+
+        this.form.on('avtorskiHonorarjiSamoz:change', this.preveriAvtHonSamoZ, this);
+    };
+
+    /**
+     * preverimo da ni avthonsamZ večji od avthon
+     * @param {type} form
+     * @param {type} editor
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.preveriAvtHonSamoZ = function (form, editor) {
+        var avtHonSamoZ = editor.getValue();
+        var avtHon = form.fields.avtorskiHonorarji.editor.getValue();
+        var polja = form.fields;
+
+        if (avtHonSamoZ > avtHon) {
+            polja.avtorskiHonorarjiSamoz.setError(i18next.t("napaka.avtHonSamoz"));
+        } else {
+            polja.avtorskiHonorarjiSamoz.clearError();
+        }
+    };
+
+    /**
+     * preveri da ni vrednost v got po slo in zam večje od našega deleža
+     * @param {type} form
+     * @param {type} editor
+     * @returns {undefined}
+     */
+    EnotaProgramaView.prototype.preveriVrednost = function (form, editor) {
+        var vredGostZame = editor.getValue();
+        var nasDelez = this.model.get('nasDelez');
+        var polja = form.fields;
+
+        if (vredGostZame > nasDelez) {
+            polja.celotnaVrednostGostovSZ.setError(i18next.t("napaka.gostSZVrednost"));
+        } else {
+            polja.celotnaVrednostGostovSZ.clearError();
         }
     };
 
@@ -232,9 +274,12 @@ define([
             self.form.off(i + ':change', self.prikaziPodatke, self);
         });
 
+        this.form.off('celotnaVrednostGostovSZ:change', this.preveriVrednost, this);
         this.form.off('ponoviDoma:change', this.togglePrenesi, this);
         this.form.off('ponoviZamejo:change', this.togglePrenesi, this);
         this.form.off('ponoviGost:change', this.togglePrenesi, this);
+        this.form.off('ponoviKopr:change', this.togglePrenesi, this);
+        this.form.off('ponoviKoprInt:change', this.togglePrenesi, this);
         this.form.off('ponoviInt:change', this.togglePrenesi, this);
 
         this.form.off('uprizoritev:change', this.togglePrenesi, this);
@@ -259,7 +304,6 @@ define([
     EnotaProgramaView.prototype.onRenderForm = function () {
         if (!this.model.isNew()) {
             this.renderPriloge();
-            this.renderDrugiViri();
             this.prikaziPodatke();
         } else {
             var f = Handlebars.formatNumber;
@@ -267,6 +311,13 @@ define([
             this.$('.lastnaSredstva').html(f(0, 2));
             this.$('.celotnaVrednost').html(f(0, 2));
             this.$('.celotnaVrednostMat').html(f(0, 2));
+            this.$('.drugiViriVsota').html(f(0, 2));
+        }
+
+        //onemogočimo druge vire če je nov model
+        this.renderDrugiViri();
+        if (this.model.isNew()) {
+            this.drugiViri.disabled = true;
         }
 
         this.bindEvents();
@@ -403,12 +454,14 @@ define([
     EnotaProgramaView.prototype.prikaziPodatke = function () {
         if (!this.form.commit()) {
             var model = this.model;
+            this.onZaprosenoChange();
             this.izracunajPrikaznaPolja();
             var f = Handlebars.formatNumber;
             this.$('.nasDelez').html(f(model.get('nasDelez'), 2));
             this.$('.lastnaSredstva').html(f(model.get('lastnaSredstva'), 2));
             this.$('.celotnaVrednost').html(f(model.get('celotnaVrednost'), 2));
             this.$('.celotnaVrednostMat').html(f(model.get('celotnaVrednostMat'), 2));
+            this.$('.drugiViriVsota').html(f(model.get('drugiViriVsota'), 2));
         }
     };
 

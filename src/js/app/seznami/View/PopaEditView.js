@@ -203,6 +203,12 @@ define([
         if (!this.model.get('kupec') && this.model.get('id')) {
             this.toolbarView.showButtons(['doc-kupec']);
         }
+
+        if (this.isNew() || this.options.pogled === "modal") {
+            this.$('.nav.nav-tabs').addClass('hidden');
+        } else {
+            this.$('.nav.nav-tabs').removeClass('hidden');
+        }
     };
     /**
      * Klik na splošni tab

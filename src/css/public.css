@@ -7733,7 +7733,7 @@ div.pagination-container {
   margin-bottom: 0;
   padding: 7px 7px 0 7px;
 }
-#sporocila-ifi {
+.sporocila-ifi {
   position: fixed;
   width: 100%;
   top: 30px ;
@@ -7915,8 +7915,8 @@ span.stevilka-na-veliko {
   margin-bottom: 0px;
 }
 fieldset {
-  margin-top: 12px;
   padding: 6px 12px;
+  margin-bottom: 12px;
   border-radius: 6px;
   background-color: #eeeeee;
 }
@@ -7935,6 +7935,16 @@ fieldset.pomemben {
 }
 fieldset.pomemben legend span {
   background-color: #dedede;
+}
+@media (min-width: 1200px) {
+  .row.enota-postavke {
+    margin: 30px 5px 12px -15px;
+  }
+}
+@media (max-width: 1199px) {
+  .row.enota-postavke {
+    margin: 0px 5px 0px 5px;
+  }
 }
 .btn-tripikice {
   position: relative;
@@ -7961,6 +7971,13 @@ fieldset.pomemben legend span {
 }
 .prikazno-polje > .vrednost {
   font-size: 20px;
+}
+.region-postavke {
+  margin: 5px;
+  margin-top: 15px;
+}
+.enota-programa .region-postavke-form {
+  margin-bottom: 5px;
 }
 .vnosno-polje-gumb {
   padding-top: 24px;

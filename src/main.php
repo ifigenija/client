@@ -19,7 +19,7 @@ $dist = $config['useDist'] ? 'dist/': '';
             });
             require(['<?= $config['useDist'] ? 'requiredist' : 'requireconfig' ?>'], function () {
                 require(['app/main', 'backbone', 'jquery', 'app/aaa/checkauth'], function (app, Backbone, $, auth) {
-                    auth(function (user) {
+                    auth.check(function (user) {
                         app.start({user: user});
                         Backbone.history.start();
                     });

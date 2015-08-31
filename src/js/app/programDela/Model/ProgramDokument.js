@@ -91,6 +91,8 @@ define([
             viri.each(function (vir) {
                 viriVsota += vir.attributes.znesek;
             });
+            
+            this.set('drugiViriVsota', viriVsota);
 
             var koproVsota = 0;
             var stevec = 0;
@@ -416,8 +418,8 @@ define([
     var GostovanjeModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programGostovanje',
         defaults: {
-            tanF: 0.6,
-            avtHonF: 0.0,
+            tanF: 0.0,
+            avtHonF: 0.6,
             matF: 0.0,
             odkupAPF: 0.0,
             strosekOdkPredF: 0.0,
@@ -690,11 +692,11 @@ define([
             //kazalniki priloga 2
             this.set('stIzvPremProd', stIzvPrem + stIzvPonPrem);
 
-            var stIzvPonPrem = this.getVrednost('stIzvPonPremDoma');
-            this.set('stIzvPonPremDomaS', stIzvPrem + stIzvPonPrem);
+            var stIzvPonPremDoma = this.getVrednost('stIzvPonPremDoma');
+            this.set('stIzvPonPremDomaS', stIzvPrem + stIzvPonPremDoma);
 
-            var stObiskPonPrem = this.getVrednost('stIzvPonPremDoma');
-            var stObiskPrem = this.getVrednost('stIzvPonPremDoma');
+            var stObiskPonPrem = this.getVrednost('stObiskPonPrem');
+            var stObiskPrem = this.getVrednost('stObiskPrem');
 
             this.set('stObiskPonPremS', stObiskPonPrem + stObiskPrem);
 

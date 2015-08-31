@@ -102,6 +102,12 @@ define([
         this.form.on('ime:change', this.polnoIme, this);
         this.form.on('srednjeIme:change', this.polnoIme, this);
         this.form.on('priimek:change', this.polnoIme, this);
+        
+        if (this.isNew() || this.options.pogled === "modal") {
+            this.$('.nav.nav-tabs').addClass('hidden');
+        }else{
+            this.$('.nav.nav-tabs').removeClass('hidden');
+        }
     };
 
     /**
@@ -123,10 +129,8 @@ define([
 
 
 
-        if (this.isNew() && this.options.pogled === "modal") {
+        if (this.isNew() || this.options.pogled === "modal") {
             tabs = null;
-        } else if (this.isNew()) {
-            tabs = tabNovi;
         }
 
         if (pogled !== "modal") {

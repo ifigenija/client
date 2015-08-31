@@ -1,4 +1,4 @@
-<button class="btn btn-default izberi-check">Označi</button>
+<button class="btn btn-default izberi-check">{{t "std.oznaci"}}</button>
 <table class="table table-striped table-condensed">
     <thead>
         <tr>
@@ -51,6 +51,22 @@
         </tr>
         <tr>
             <td>
+                <input class="stZaposUmet" type="checkbox">
+            </td>
+            <td>{{t "ep.stZaposUmet"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stZaposUmet 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stZaposUmet 0}}</td>
+        </tr>
+        <tr>
+            <td>
+                <input class="stZaposDrug" type="checkbox">
+            </td>
+            <td>{{t "ep.stZaposDrug"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stZaposDrug 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stZaposDrug 0}}</td>
+        </tr>
+        <tr>
+            <td>
                 <input class="stHonorarnih" type="checkbox">
             </td>
             <td>{{t "ep.stHonorarnih"}}</td>
@@ -80,14 +96,6 @@
             <td>{{t "ep.stHonorarnihIgrSamoz"}}</td>
             <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrSamoz 0}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnihIgrSamoz 0}}</td>
-        </tr>
-        <tr>
-            <td>
-                <input class="stZaposUmet" type="checkbox">
-            </td>
-            <td>{{t "ep.stZaposUmet"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stZaposUmet 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stZaposUmet 0}}</td>
         </tr>
         <tr>
             <td>

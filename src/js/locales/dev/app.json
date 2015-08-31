@@ -10,12 +10,20 @@
         "uporabnik": "Uporabnik"
     },
     "login": {
+        "oldPass": "Staro geslo",
+        "oldPass_holder": "Vpišite obstoječe geslo",
         "prompt": "Vpišite se",
         "email": "Email naslov",
         "password": "Geslo",
+        "password_holder": "Vnesite novo geslo",
+        "newpass": "NovoGeslo",
+        "newpass_holder": "Potrditev gesla",
+        "changePass": "Menjava gesla",
+        "changePara": "Tukaj lahko zamenjate svoje geslo. Vpisati morate svoje trenutno geslo in dvakrat novo geslo. Geslo mora biti dolgo najmanj 8 znakov in mora vsebovati vsaj male in velike črke ter številke. Priporočamo uporabo posebnih znakov",
         "remember": "Ostani prijavljen",
         "signIn": "Vpis",
-        "failed": "Vpis neuspešen."
+        "failed": "Vpis neuspešen.",
+        "changePassButt": "Zamenjaj geslo"
     },
     "admin": {
         "nav": {
@@ -102,6 +110,7 @@
         "kloniraj": "Kopiraj",
         "zakleni": "Zakleni",
         "oznaci": "Označi vse",
+        "dodajSeznam": "Dodaj osebo v seznam",
         "title": {
             "vnesiOseba": "Vnesite podatke osebe"
         }
@@ -465,7 +474,7 @@
         "gostujoca": "Gostujoča",
         "trajanje": "Trajanje",
         "arhOpomba": "Opomba za arhiv",
-        "datumZakljucka": "Datum Zaključka",
+        "datumZakljucka": "Arhivirana",
         "arhIdent": "Šifra arhiva",
         "sloAvtor": "Slovenski avtor",
         "kratkiNaslov": "Kratki naslov",
@@ -473,23 +482,23 @@
         "zvrstUprizoritve": "Vrsta uprizoritve",
         "zvrstSurs": "Zvrst po SURS",
         "steviloVaj": "Število vaj",
-        "planiranoSteviloVaj": "Planirano število vaj",
+        "planiranoSteviloVaj": "Načtrovano število vaj",
         "skupniStrosek": "Skupni strošek",
         "producent": "Producent",
         "naslovi": "Dodatni naslovi",
         "produkcija": "Produkcija",
         "podatki": "Glavni podatki",
         "lastnosti": "Lastnosti",
-        "krstna": "Ali je čisto prva uprizoritev",
-        "prvaSlovenska": "Ali je to prva uprizorizev v Sloveniji",
+        "krstna": "Krstna uprizoritev, (praizvedba)",
+        "prvaSlovenska": "Prva slovenska uprizoritev",
         "naslovIzvirnika": "Naslov izvirnika",
-        "podnaslovIzvirnika": "Podaslov izvirnika",
+        "podnaslovIzvirnika": "Podnaslov izvirnika",
         "t": {
             "datumPremiere": "Datum premiere"
         },
         "d": {
             "sifra": "Številka uprizoritve enolično določa uprizoritev. Uprizoritev dobi številko samodejno, ko jo ustvarite.",
-            "faza": "'Življenski stadij' uprizoritve,  od plana do do arhiva in vsi stadiji vmes.",
+            "faza": "'Življenjski status', od dolgoročnega planiranja do arhiva in vsi vmes.",
             "naslov": "",
             "podnaslov": "",
             "interNaslov": "",
@@ -501,18 +510,19 @@
             "zvrstSurs": "Standardna klasifikacija uprizoritve po SURS",
             "zvrstUprizoritve": "",
             "producent": "",
-            "datumZacStudija": "Kdaj se prične študij uprizoritve. S tem dnem se začne zasedati termin v dolgoročnem planu",
+            "datumZacStudija": "Kdaj se prične študij uprizoritve. S tem dnem se začne zasedati termin v dolgoročnem planu.",
+            "datumZakljucka" : "Datum zadnje ponovitve",
             "datumPremiere": "",
-            "trajanje": "Trajanje uprizoritve",
+            "trajanje": "Trajanje uprizoritve v minutah",
             "stOdmorov": "Število odmorov med uprizoritvijo",
-            "planiranoSteviloVaj": "Načrtovano število vaj",
+            "planiranoSteviloVaj": "Predvideno število vaj do premiere.",
             "maticniOder": "Matični oder / privzeto prizorišče uprizoritve",
             "gostujoca": "Ali je uprizoritev gostujoča",
             "sloAvtor": "Ali je slovenski avtor uprizoritve",
             "krstna": "Ali je čisto prva uprizoritev",
             "prvaSlovenska": "Ali je to prva uprizorizev v Sloveniji",
-            "naslovIzvirnika": "Naslov izvirnika",
-            "podnaslovIzvirnika": "Podaslov izvirnika",
+            "naslovIzvirnika": "",
+            "podnaslovIzvirnika": "",
             "skupniStrosek": "Planiran skupni strošek projekta"
         }
 
@@ -528,14 +538,14 @@
         "dovoliPrekrivanje": "Dovoli prekrivanje",
         "maxPrekrivanj": "Max. prekrivanj",
         "privzeti": "Privzeta alternacija",
-        "tipFunkcije": "Tip funkcije",
-        "naziv": "$t(ent.naziv)",
+        "tipFunkcije": "Kategorija funkcije",
+        "naziv": "Naziv",
         "sort": "$t(ent.sort)",
         "funkcija": "$t(ent.funkcija)",
         "d": {
-            "naziv": "",
+            "naziv": "Naziv funkcije",
             "komentar": "Dodatne opombe, predlogi, komentarji",
-            "tipFunkcije": "",
+            "tipFunkcije": "Razporedite osebo v eno od ponujenih kategorij.",
             "velikost": "",
             "sePlanira": "Ali se funkcija planira ali je določena",
             "dovoliPrekrivanje": "Ali je dovoljeno prekrivanje",
@@ -965,9 +975,13 @@
         "zaprosenProcent": "Zaprošen procent",
         "zaproseno": "Zaprošeno",
         "podatki": "Glavni podatki",
-        "vrednost": "Vrednost",
+        "vrednost": "Vrednosti po lokaciji",
+        "vrednostProjekta": "Vrednost projekta",
         "obiskovalci": "Obiskovalci",
         "sodelavci": "Sodelavci",
+        "dodatniPodatki": "Podrobno",
+        "odkupPredstave": "Odkup predstave",
+        "drugiViri": "Drugi nejavni viri",
         "d": {
             "naziv": "",
             "uprizoritev": "",
@@ -1212,7 +1226,10 @@
         "zaproseno1": "Ministerstvo za kulturo sofinancira do ",
         "zaproseno2": "€ (glede na trenutni delež matičnega JZ) upravičenih stroškov.",
         "gesloKratko": "Geslo je prekratko",
-        "gesloSibko": "Geslo mora vsebovati vsaj tri izmed štirih elementov: velike črke, male črke, številke in/ali posebne znake."
+        "gesloSibko": "Geslo mora vsebovati vsaj tri izmed štirih elementov: velike črke, male črke, številke in/ali posebne znake.",
+        "datum": "Datum konca ne sme bit manjši ali enak datumu začetka.",
+        "avtHonSamoz": "Strošek avtorskih honorarjev s statusom samozaposlenih je del stroškov avtorskih honorarjev. Zato ne sme biti strošek večji od avtorskih honorarjev.",
+        "gostSZVrednost": "Vrednost gostovanja po Sloveniji in zamejstvu ne sme biti več, kot je delež matičnega JZ."
     },
     "uspeh": {
         "fetch": "Napaka pri pridobivanju podatkov",
@@ -1246,7 +1263,7 @@
         "sezona": "Program dela za sezono",
         "dokument": "Kazalniki glavni dokument",
         "kazalci": "Kazalci",
-        "stVsehPredstav": "število vseh predstav (izvedbe premier in ponovitev)",
+        "stVsehPredstav": "Število vseh predstav (izvedbe premier in ponovitev)",
         "stEnot": "Število enot",
         "virMK": "Vir Ministrstvo za kulturo",
         "virDMLS": "Vir druga ministrstva in lokalna skupnost",

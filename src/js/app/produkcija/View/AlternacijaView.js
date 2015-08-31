@@ -92,6 +92,7 @@ define([
                 sortable: false
             },
             {
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('alternacija.zacetek'),
@@ -99,6 +100,7 @@ define([
                 sortable: false
             },
             {
+                headerCell: 'number',
                 cell: 'date',
                 editable: false,
                 label: i18next.t('alternacija.konec'),
@@ -126,6 +128,18 @@ define([
         ]
     });
 
+    AlternacijaView.prototype.preveriDatum = function (form, editor) {
+        var konec = editor.getValue();
+        var zacetek = form.fields.zacetek.editor.getValue();
+        var polja = form.fields;
+
+        if (zacetek >= konec) {
+            polja.konec.setError(i18next.t("napaka.datum"));
+        } else {
+            polja.konec.clearError();
+        }
+    };
+
     AlternacijaView.prototype.onRenderForm = function (options) {
         this.form.on('pogodba:change', function (form, editor) {
             if (editor.getValue()) {
@@ -134,6 +148,8 @@ define([
                 this.$('.pogodba-dodaj').html(i18next.t('std.dodaj'));
             }
         });
+
+        this.form.on('konec:change', this.preveriDatum, this);
     };
 
     /**
