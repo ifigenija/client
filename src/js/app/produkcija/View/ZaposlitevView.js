@@ -28,7 +28,7 @@ define([
         title: i18next.t('zaposlitev.title'),
         schema: schema,
         formTemplate: formTpl,
-        events:{
+        events: {
             'click .oseba-dodaj': 'novaOseba'
         },
         columns: [
@@ -72,14 +72,6 @@ define([
                 sortable: true
             },
             {
-                headerCell: 'number',
-                cell: 'integer',
-                editable: false,
-                label: i18next.t('zaposlitev.tip'),
-                name: 'tip',
-                sortable: true
-            },
-            {
                 cell: 'action',
                 name: '...',
                 sortable: false,
@@ -103,11 +95,14 @@ define([
         var model = new Zaposlitev.Model();
         this.onSelected(model);
     };
-    
+
     ZaposlitevView.prototype.novaOseba = function () {
         var model = new OsebaModel.Model();
         var editor = this.formView.form.fields.oseba.editor;
-        this.modal = OsebaModal(model, editor);
+        this.modal = OsebaModal({
+            model: model,
+            editor: editor
+        });
     };
 
     return ZaposlitevView;

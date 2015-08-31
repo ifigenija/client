@@ -16,23 +16,23 @@ define([
         ) {
 
     /**
-     * editModel je model osebe
-     * editor predstavlja vnosno polje, ki se bo po kreiranju osebe zapolnlo
-     * @param {type} editModel
-     * @param {type} editor
+     * options.model je model osebe
+     * options.editor predstavlja vnosno polje, ki se bo po kreiranju osebe zapolnlo
+     * @param {type} options.model
+     * @param {type} options.editor
      * @returns {unresolved}
      */
-    return function (editModel, editor) {
-        
+    return function (options) {
+
         var OEV = OsebaEditView.extend({});
-        
-        OEV.prototype.onSaveSuccess = function(){
+
+        OEV.prototype.onSaveSuccess = function () {
             izberi();
         };
-        
+
         var view = new OEV({
             template: tpl,
-            model: editModel,
+            model: options.model,
             pogled: 'modal'
         });
 
@@ -43,12 +43,17 @@ define([
                 modal.preventClose();
             }
             else {
-                editor.setValue(view.model.get('id'));
+                if (options.editor) {
+                    options.editor.setValue(view.model.get('id'));
+                }
                 modal.close();
+                if (options.form && options.event) {
+                    options.form.trigger(options.event);
+                }
             }
         };
-        
-        var shrani = function(){
+
+        var shrani = function () {
             var view = modal.options.content;
             view.triggerMethod('shrani');
             modal.preventClose();

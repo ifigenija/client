@@ -47,18 +47,7 @@ define([
                     {
                         type: '',
                         label: i18next.t('std.privzeto'),
-                        trigger: 'dovoljenja'
-                    },
-                    {
-                        label: i18next.t('std.deaktiviraj'),
-                        trigger: 'nalozi'
-                    },
-                    {
-                        type: "divider"
-                    },
-                    {
-                        label: i18next.t('std.deaktiviraj'),
-                        trigger: 'nalozi'
+                        trigger: 'privzeto'
                     }
                 ]
             }
@@ -76,7 +65,7 @@ define([
                 buttonGroups: alterItemButtons,
                 groupClass: 'btn-group btn-tripikice'
             }));
-            
+
         }
     });
 
@@ -90,6 +79,9 @@ define([
         childView: AlterItemView,
         onChildviewBrisi: function (view) {
             this.triggerMethod('brisi', view.model);
+        },
+        onChildviewPrivzeto: function (view) {
+            this.triggerMethod('privzeto', view.model);
         }
     });
 
@@ -99,14 +91,13 @@ define([
      * 
      * @type @exp;Marionette@pro;LayoutView@call;extend
      */
-    var AlterSelectView = Marionette.LayoutView.extend({        
+    var AlterSelectView = Marionette.LayoutView.extend({
         template: tpl,
-       regions: {
+        regions: {
             izborR: '.alter-izbor',
             seznamR: '.alter-seznam'
         },
         events: {
-            'click .alter-gumb': 'dodaj',
             'click .oseba-nova': 'novaOseba'
         },
         onRender: function () {
@@ -120,7 +111,6 @@ define([
      */
     AlterSelectView.prototype.renderIzbor = function () {
 
-
         var sch;
         sch = {type: 'Toone', targetEntity: this.options.lookup, editorAttrs: {class: 'form-control relation-select'}};
 
@@ -132,9 +122,14 @@ define([
             }
         });
 
+        this.formIzberi.on('id:change', this.onIdChange, this);
 
         this.izborR.show(this.formIzberi);
 
+    };
+
+    AlterSelectView.prototype.onIdChange = function () {
+        this.dodaj();
     };
 
     AlterSelectView.prototype.dodaj = function () {
@@ -145,11 +140,16 @@ define([
             this.triggerMethod('dodaj:alter', id);
         }
     };
-    
+
     AlterSelectView.prototype.novaOseba = function () {
         var model = new OsebaModel.Model();
         var editor = this.formIzberi.fields.id.editor;
-        OsebaModal(model, editor);
+        OsebaModal({
+            model: model,
+            editor: editor,
+            form: this.formIzberi,
+            event: 'id:change'
+        });
     };
 
     /**
@@ -161,11 +161,14 @@ define([
 
         var vloge = new AltersList({
             collection: c
-            
+
         });
-        
+
         vloge.on('brisi', function (model) {
             this.triggerMethod('brisi:alter', model.get('id'));
+        }, this);
+        vloge.on('privzeto', function (model) {
+            this.triggerMethod('privzeto:alter', model.get('id'));
         }, this);
 
         c.fetch();

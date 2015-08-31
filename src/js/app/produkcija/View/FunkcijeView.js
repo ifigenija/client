@@ -71,15 +71,8 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('funkcija.funkcija'),
+                label: i18next.t('funkcija.naziv'),
                 name: 'naziv',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('funkcija.velikost'),
-                name: 'velikost',
                 sortable: true
             },
             {
@@ -93,17 +86,24 @@ define([
                 sortable: false
             },
             {
-                cell: 'boolean',
+                cell: 'string',
                 editable: false,
-                label: i18next.t('funkcija.pomembna'),
-                name: 'pomembna',
-                sortable: false
+                label: i18next.t('funkcija.velikost'),
+                name: 'velikost',
+                sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
                 label: i18next.t('funkcija.sePlanira'),
                 name: 'sePlanira',
+                sortable: false
+            },
+            {
+                cell: 'boolean',
+                editable: false,
+                label: i18next.t('funkcija.pomembna'),
+                name: 'pomembna',
                 sortable: false
             },
             {
@@ -117,7 +117,6 @@ define([
             }
         ]
     });
-
 
     /**
      * 
@@ -137,9 +136,6 @@ define([
 
     };
 
-
-
-
     /**
      * 
      * @param {type} model
@@ -154,7 +150,7 @@ define([
             model: this.AlterModel,
             state: {
                 perPage: 50
-            },
+            }
         });
         c.url = baseUrl + '/rest/alternacija';
 
@@ -170,10 +166,9 @@ define([
         });
         rv.on('dodaj:alter', this.dodajAlter, this);
         rv.on('brisi:alter', this.brisiAlter, this);
+        rv.on('privzeto:alter', this.privzetoAlter, this);
         this.alterR.show(rv);
     };
-
-
 
     /**
      * 
@@ -181,16 +176,27 @@ define([
      * @returns {undefined}
      */
     FunkcijeView.prototype.brisiAlter = function (alter) {
-
-        var self = this;
         var o = this.alters.findWhere({id: alter});
         if (o) {
             o.destroy({
-                error: Radio.channel('error').request('handler', 'xhr'),
+                error: Radio.channel('error').request('handler', 'xhr')
             });
-
         }
-
+    };
+    
+    /**
+     * Nastavimo alternacijo kot privzeto
+     * @param {type} alterID
+     * @returns {undefined}
+     */
+    FunkcijeView.prototype.privzetoAlter = function (alterID) {
+        var o = this.alters.findWhere({id: alterID});
+        if (o) {
+            o.set('privzeti', true);
+            o.save({
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        }
     };
 
     /**
@@ -205,7 +211,7 @@ define([
         model.save({
             oseba: oseba,
             funkcija: this.model.get('id'),
-            altivna: true
+            aktivna: true
         }, {
             success: function (model, x, xhr) {
                 self.alters.add(model);

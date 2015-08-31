@@ -111,6 +111,7 @@
         "zakleni": "Zakleni",
         "oznaci": "Označi vse",
         "dodajSeznam": "Dodaj osebo v seznam",
+        "pomoc": "Pomoč",
         "title": {
             "vnesiOseba": "Vnesite podatke osebe"
         }
@@ -285,6 +286,7 @@
         "nvo": "NVO",
         "koproducent": "Koproducent",
         "kupec": "Kupec",
+        "podatki": "Glavni podatki",
         "d": {
             "sifra": "",
             "naziv": "",
@@ -326,6 +328,8 @@
         "drzavljanstvo": "Državljanstvo",
         "drzavaRojstva": "Država rojstva",
         "krajRojstva": "Kraj rojstva",
+        "podatki": "Glavni podatki",
+        "dodatniPodatki": "Dodatni podatki",
         "d": {
             "sifra": "",
             "email": "$t(ent.email)",
@@ -474,7 +478,7 @@
         "gostujoca": "Gostujoča",
         "trajanje": "Trajanje",
         "arhOpomba": "Opomba za arhiv",
-        "datumZakljucka": "Arhivirana",
+        "datumZakljucka": "Datum zadnje ponovitve",
         "arhIdent": "Šifra arhiva",
         "sloAvtor": "Slovenski avtor",
         "kratkiNaslov": "Kratki naslov",
@@ -489,12 +493,13 @@
         "produkcija": "Produkcija",
         "podatki": "Glavni podatki",
         "lastnosti": "Lastnosti",
-        "krstna": "Krstna uprizoritev, (praizvedba)",
+        "krstna": "Krstna uprizoritev - praizvedba",
         "prvaSlovenska": "Prva slovenska uprizoritev",
         "naslovIzvirnika": "Naslov izvirnika",
         "podnaslovIzvirnika": "Podnaslov izvirnika",
         "t": {
-            "datumPremiere": "Datum premiere"
+            "datumPremiere": "Datum premiere",
+            "sifra": "Številka"
         },
         "d": {
             "sifra": "Številka uprizoritve enolično določa uprizoritev. Uprizoritev dobi številko samodejno, ko jo ustvarite.",
@@ -511,7 +516,7 @@
             "zvrstUprizoritve": "",
             "producent": "",
             "datumZacStudija": "Kdaj se prične študij uprizoritve. S tem dnem se začne zasedati termin v dolgoročnem planu.",
-            "datumZakljucka" : "Datum zadnje ponovitve",
+            "datumZakljucka" : "Datum kdaj je bila uprizoritev zadnje igrana.",
             "datumPremiere": "",
             "trajanje": "Trajanje uprizoritve v minutah",
             "stOdmorov": "Število odmorov med uprizoritvijo",

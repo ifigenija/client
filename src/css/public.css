@@ -7982,6 +7982,9 @@ fieldset.pomemben legend span {
 .vnosno-polje-gumb {
   padding-top: 24px;
 }
+.fieldset-brez-legend {
+  margin-top: 15px;
+}
 /*!
  * Datetimepicker for Bootstrap 3
  * version : 4.15.35

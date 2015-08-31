@@ -90,8 +90,9 @@ define([
     };
 
     KontaktneView.prototype.osebaModal = function (editModel) {
-        var editor = this.form.fields.oseba.editor;        
-        var modal = OsebaModal(editModel, editor);
+        var modal = OsebaModal({
+            model: editModel
+        });
     };
 
     /**

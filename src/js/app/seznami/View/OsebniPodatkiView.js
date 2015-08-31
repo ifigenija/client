@@ -39,7 +39,6 @@ define([
     });
 
     OsebniPodatkiView.prototype.onBeforeRender = function () {
-        var self = this;
         this.listenTo(this.model, 'sync', function (coll) {
             this.renderForm();
             this.renderTrrji();
@@ -61,7 +60,6 @@ define([
      * @returns {undefined}
      */
     OsebniPodatkiView.prototype.renderForm = function () {
-        var self = this;
         var Fv = FormView.extend({
             formTitle: this.model.get('polnoIme'),
             buttons: FormView.prototype.defaultButtons,
@@ -75,6 +73,11 @@ define([
                         disabled: false
                     });
                 }
+            },
+            prepareToolbar: function () {
+                return  this.model ?
+                        [[this.buttons.shrani, this.buttons.nasvet]] : [[]];
+
             }
         });
 

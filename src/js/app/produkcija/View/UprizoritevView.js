@@ -30,7 +30,7 @@ define([
                 cell: 'string',
                 class: 'hidden-sm',
                 editable: false,
-                label: i18next.t('uprizoritev.sifra'),
+                label: i18next.t('uprizoritev.t.sifra'),
                 name: 'sifra',
                 sortable: true
             },

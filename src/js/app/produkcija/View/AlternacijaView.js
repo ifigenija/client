@@ -135,8 +135,10 @@ define([
 
         if (zacetek >= konec) {
             polja.konec.setError(i18next.t("napaka.datum"));
+            return false;
         } else {
             polja.konec.clearError();
+            return true;
         }
     };
 
@@ -150,6 +152,12 @@ define([
         });
 
         this.form.on('konec:change', this.preveriDatum, this);
+    };
+    
+    AlternacijaView.prototype.onShrani = function () {
+        if(this.preveriDatum(this.form, this.form.fields.konec)){
+            PostavkeView.prototype.onShrani.apply(this, arguments);
+        }
     };
 
     /**
