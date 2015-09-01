@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-    <div class="pd-dodaj-pd col-sm-4 col-lg-3">
+    <div class="pd-dodaj-pd col-sm-6 col-md-4 col-lg-3">
         <div class="thumbnail mouse-hand">
             <center><i class="fa fa-plus-square fa fa-3x"></i></center>
             <div class="caption text-center">

@@ -5,9 +5,6 @@
                 <div class="col-sm-12 col-lg-6">
                     <div style="display: table;">
                         <div style="display: table-row">
-                            {{t "pogodba.alternacija"}}: {{ alternacije.label }}
-                        </div>
-                        <div style="display: table-row">
                             {{t "pogodba.oseba"}}: {{ oseba.label }}
                         </div>
                     </div>

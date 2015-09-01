@@ -679,6 +679,9 @@ span.stevilka-na-veliko {
 .alter-gumb {
   width: 100%;
 }
+.alter-seznam {
+  margin-top: 10px;
+}
 .media.alter-listitem {
   overflow: visible;
 }

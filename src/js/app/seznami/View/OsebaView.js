@@ -94,9 +94,18 @@ define([
     };
 
     OsebaView.prototype.onDodaj = function () {
+        var dovoljeno = chPermission.request('isGranted', "oseba-write");
+        if (dovoljeno) {
             var model = new Model.Model();
             this.onSelected(model);
             this.zapSortSt(this.collection, 'sort');
+        } else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t('nakapa.dovoljenje'),
+                code: 9001000,
+                severity: 'info'
+            });
+        }
     };
 
     return OsebaView;

@@ -7836,6 +7836,9 @@ span.stevilka-na-veliko {
 .alter-gumb {
   width: 100%;
 }
+.alter-seznam {
+  margin-top: 10px;
+}
 .media.alter-listitem {
   overflow: visible;
 }
@@ -7984,6 +7987,16 @@ fieldset.pomemben legend span {
 }
 .fieldset-brez-legend {
   margin-top: 15px;
+}
+/*
+Licenca GPLv3
+*/
+/* 
+    Created on : 30. avg. 2015, 15:23:13
+    Author     : boris
+*/
+.koledar-navigacija {
+  background-color: #dddddd;
 }
 /*!
  * Datetimepicker for Bootstrap 3

@@ -44,28 +44,11 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('pogodba.alternacija'),
-                name: 'alternacije.label',
-                sortable: true
-            },
-            {
                 headerCell: 'number',
                 cell: 'number',
                 editable: false,
                 label: i18next.t('pogodba.vrednostPredstave'),
                 name: 'vrednostPredstave',
-                sortable: true,
-                total: 'sum'
-
-            },
-            {
-                headerCell: 'number',
-                cell: 'number',
-                editable: false,
-                label: i18next.t('pogodba.vrednostUre'),
-                name: 'vrednostUre',
                 sortable: true,
                 total: 'sum'
 
@@ -97,8 +80,8 @@ define([
             }
         ]
     });
-
-    PogodbaView.prototype.onFormChange = function (form) {
+    
+    PogodbaView.prototype.placiloVaje = function (form) {
         var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
         var vrednostVaje = form.fields.vrednostVaje.editor.$el;
         var vrednostVaj = form.fields.vrednostVaj.editor.$el;
@@ -111,6 +94,14 @@ define([
             vrednostVaje.attr("disabled", "disabled");
 
         }
+    };
+    
+    PogodbaView.prototype.onRenderForm = function (form) {
+        this.placiloVaje(form);
+    };
+
+    PogodbaView.prototype.onFormChange = function (form) {
+        this.placiloVaje(form);
     };
 
     PogodbaView.prototype.prepareToolbar = function () {
