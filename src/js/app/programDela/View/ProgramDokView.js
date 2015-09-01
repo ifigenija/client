@@ -141,6 +141,27 @@ define([
         }
     });
 
+    ProgramDokView.prototype.render = function () {
+        var self = this;
+
+        if (this.model.get('zakljuceno')) {
+            self.buttons.zakleni = {
+                id: 'doc-zakleni',
+                label: i18next.t('std.odkleni'),
+                element: 'button-trigger',
+                trigger: 'odkleni'
+            };
+        } else {
+            self.buttons.zakleni = {
+                id: 'doc-zakleni',
+                label: i18next.t('std.zakleni'),
+                element: 'button-trigger',
+                trigger: 'zakleni'
+            };
+        }
+        DokumentView.prototype.render.apply(this, arguments);
+    };
+
     /**
      * Ko kliknemo na gumb kloniraj v toolbaru programadela
      * @returns {undefined}
@@ -179,7 +200,7 @@ define([
 
         if (dovoljeno) {
             var self = this;
-            
+
             var success = function () {
                 var tb = self.getToolbarModel();
                 var but = tb.getButton('doc-zakleni');
@@ -237,7 +258,7 @@ define([
 
         if (dovoljeno) {
             var self = this;
-            
+
             var success = function () {
                 var tb = self.getToolbarModel();
                 var but = tb.getButton('doc-zakleni');
