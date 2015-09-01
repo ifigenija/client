@@ -9,7 +9,8 @@ define([
     'formSchema!kontaktnaoseba',
     'i18next',
     'app/seznami/Model/Oseba',
-    './OsebaModal'
+    './OsebaModal',
+    'template!../tpl/osebaModal-vse.tpl'
 ], function (
         Radio,
         PostavkeView,
@@ -18,7 +19,8 @@ define([
         schema,
         i18next,
         OsebaModel,
-        OsebaModal
+        OsebaModal,
+        modalTpl
         ) {
 
 
@@ -92,7 +94,8 @@ define([
     KontaktneView.prototype.osebaModal = function (editModel) {
         var modal = OsebaModal({
             model: editModel,
-            pogled: 'kontaktna'
+            pogled: 'vse',
+            tpl: modalTpl
         });
     };
 

@@ -6,13 +6,13 @@ define([
     'i18next',
     'backbone-modal',
     'app/seznami/View/OsebaEditView',
-    'template!../tpl/osebaModal-edit.tpl'
+    'template!../tpl/osebaModal-modal.tpl'
 ], function (
         Radio,
         i18next,
         Modal,
         OsebaEditView,
-        tpl
+        ModalTpl
         ) {
 
     /**
@@ -30,8 +30,12 @@ define([
             izberi();
         };
 
+        /**
+         * določimo kakšni 
+         * @type OsebaModal_L11.OsebaModal_L27.OEV
+         */
         var view = new OEV({
-            template: tpl,
+            template: options.tpl ? options.tpl : ModalTpl,
             model: options.model,
             pogled: options.pogled ? options.pogled : 'modal'
         });

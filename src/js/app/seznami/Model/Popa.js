@@ -17,14 +17,6 @@ define([
     var PopaTelefon = Dokument.Postavka.extend({
         urlRoot: baseUrl + '/rest/telefonska'
     });
-    var PopaProstor = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/prostor'
-    });
-    
-    var PopaProstorCollection = Dokument.PostavkaCollection.extend({
-        model: PopaProstor,
-        url: baseUrl + '/rest/prostor'
-    });
     
     var PopaTelefonCollection = Dokument.PostavkaCollection.extend({
         model: PopaTelefon,
@@ -57,8 +49,7 @@ define([
             trrji: {collection: PopaTrrCollection, mappedBy: 'popa'},
             telefonske: {collection: PopaTelefonCollection, mappedBy: 'popa'},
             naslovi: {collection: PopaNaslovCollection, mappedBy: 'popa'},
-            kontaktne: {collection: KontaktneCollection, mappedBy: 'popa'},
-            prostori: {collection: PopaProstorCollection, mappedBy: 'popa'}
+            kontaktne: {collection: KontaktneCollection, mappedBy: 'popa'}
         },
         dodajPostavko: function (nested) {
 
@@ -84,11 +75,6 @@ define([
                     break;
                 case 'kontaktne':
                     postavka = new Kontaktna({
-                        popa: this.id
-                    });
-                    break;
-                case 'prostori':
-                    postavka = new PopaProstor({
                         popa: this.id
                     });
                     break;
