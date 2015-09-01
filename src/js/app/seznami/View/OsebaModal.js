@@ -33,7 +33,7 @@ define([
         var view = new OEV({
             template: tpl,
             model: options.model,
-            pogled: 'modal'
+            pogled: options.pogled ? options.pogled : 'modal'
         });
 
         var izberi = function () {

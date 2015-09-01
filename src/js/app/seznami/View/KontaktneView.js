@@ -91,7 +91,8 @@ define([
 
     KontaktneView.prototype.osebaModal = function (editModel) {
         var modal = OsebaModal({
-            model: editModel
+            model: editModel,
+            pogled: 'kontaktna'
         });
     };
 

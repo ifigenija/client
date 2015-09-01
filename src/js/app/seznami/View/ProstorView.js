@@ -77,18 +77,24 @@ define([
             'click .prostor-dodaj-naslov': 'dodaj:naslov'
         }
     });
-
+    
     ProstorView.prototype.disableGumbNaslov = function (form, editor) {
         var podatek = editor.getValue();
         if (podatek) {
+            this.$('.prostor-dodaj-naslov').attr("disabled", false);
             this.$('.prostor-dodaj-naslov').prop("disabled", false);
         } else {
+            this.$('.prostor-dodaj-naslov').attr("disabled", true);
             this.$('.prostor-dodaj-naslov').prop("disabled", true);
         }
     };
 
     ProstorView.prototype.onRenderForm = function () {
-        this.formView.form.on('popa:change', this.disableGumbNaslov, this);
+        var form =this.formView.form;
+        var editor =this.formView.form.fields.popa.editor;
+        
+        form.on('popa:change', this.disableGumbNaslov, this);
+        this.disableGumbNaslov(form, editor);
     };
 
     ProstorView.prototype.getTitle = function (model) {
