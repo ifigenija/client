@@ -112,6 +112,8 @@
         "oznaci": "Označi vse",
         "dodajSeznam": "Dodaj osebo v seznam",
         "pomoc": "Pomoč",
+        "zaklepPD": "Zaklepanje programa dela",
+        "potrdiZaklep": "Ali res želite zakleniti program dela?",
         "title": {
             "vnesiOseba": "Vnesite podatke osebe"
         }
@@ -833,6 +835,8 @@
         "stObiskPonPremGost": "Na gostovanjih po Sloveniji:",
         "stObiskPonPremZamejo": "Na gostovanjih v zamejstvu:",
         "stObiskPonPremInt": "Na mednarodnih gostovanjih (brez zamejstva):",
+        "vDelu": "V delu",
+        "poslanMzK": "Oddan na Mzk",
         "d": {
             "sifra": "",
             "naziv": "",

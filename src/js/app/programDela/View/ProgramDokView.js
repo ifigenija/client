@@ -190,11 +190,13 @@ define([
                 severity: 'error'
             });
         };
-
+        
+        var self = this;
+        
         var zakleni = function () {
             var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
             rpc.call('zakleni', {
-                'programDelaId': this.model.get('id')},
+                'programDelaId': self.model.get('id')},
             success, error);
         };
 

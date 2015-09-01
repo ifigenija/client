@@ -7,11 +7,16 @@
                         <div class="panel-name">{{naziv}}</div>
                         <div class="panel-status pull-right">
                             <span class="panel-status-label">
-                                {{#if potrjenProgram}}
-                                {{t "programDela.potrjen"}} <i class="fa fa-check-circle"></i>
+                                {{#if zakljuceno}}
+                                    {{#if potrjenProgram}}
+                                        {{t "programDela.potrjen"}}<i class="fa fa-check-circle"></i>
+                                    {{else}}
+                                        {{t "programDela.poslanMzK"}} <i class="fa fa-share-square"></i>
+                                    {{/if}}
                                 {{else}}
-                                {{t "programDela.nePotrjen"}} <i class="fa fa-times-circle"></i>
-                                {{/if}} </span>
+                                    {{t "programDela.vDelu"}} <i class="fa fa-briefcase"></i>                                    
+                                {{/if}}
+                            </span>
                         </div>
                     </div>
                 </h3>

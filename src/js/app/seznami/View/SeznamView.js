@@ -45,7 +45,6 @@ define([
         formTemplate: null,
         schema: null,
         title: null,
-        dovoljenje: null,
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
@@ -75,8 +74,6 @@ define([
         }
     });
 
-    var chPermission = Radio.channel('global');
-
     /**
      * Inicializacija seznamaView
      * @param {type} options
@@ -90,7 +87,6 @@ define([
         this.title = options.title || this.title;
         this.columns = options.columns || this.columns;
         this.odprtaForma = options.odprtaForma || this.odprtaForma || false;
-        this.dovoljenje = options.dovoljenje || this.dovoljenje || 'ifi';
 
         if (!this.collection) {
             this.collection = this.getCollection();
@@ -188,8 +184,7 @@ define([
      * @returns {undefined}
      */
     SeznamView.prototype.onBrisi = function (model) {
-        var dovoljeno = chPermission.request('isGranted', this.dovoljenje + "-write");
-        if (dovoljeno) {
+
             var brisi = function () {
                 model.destroy({
                     wait: true,
@@ -214,13 +209,6 @@ define([
             } else {
                 brisi();
             }
-        } else {
-            Radio.channel('error').command('flash', {
-                message: i18next.t('nakapa.dovoljenje'),
-                code: 9001000,
-                severity: 'info'
-            });
-        }
 
 
     };
@@ -231,16 +219,7 @@ define([
      * @returns {undefined}
      */
     SeznamView.prototype.onUredi = function (model) {
-        var dovoljeno = chPermission.request('isGranted', this.dovoljenje + "-write");
-        if (dovoljeno) {
             this.onSelected(model);
-        } else {
-            Radio.channel('error').command('flash', {
-                message: i18next.t('nakapa.dovoljenje'),
-                code: 9001000,
-                severity: 'info'
-            });
-        }
     };
 
     /**
@@ -268,9 +247,7 @@ define([
      * @returns {undefined}
      */
     SeznamView.prototype.onSelected = function (model) {
-        var dovoljenoWrite = chPermission.request('isGranted', this.dovoljenje + "-write");
-        var dovoljenoRead = chPermission.request('isGranted', this.dovoljenje + "-read");
-        if (dovoljenoWrite || dovoljenoRead) {
+
             if (model.get('id')) {
                 this.zamenjajUrl(model);
             }
@@ -289,14 +266,6 @@ define([
             this.listenTo(form, 'save:success', this.saveSuccess);
             this.listenTo(form, 'skrij', this.preklici);
             this.listenTo(form, 'dodaj', this.onDodaj);
-        } else {
-            Radio.channel('error').command('flash', {
-                message: i18next.t('nakapa.dovoljenje'),
-                code: 9001000,
-                severity: 'info'
-            });
-        }
-        
     };
 
     /**

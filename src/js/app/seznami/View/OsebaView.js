@@ -21,7 +21,6 @@ define([
         url: baseUrl + '/rest/oseba',
         title: i18next.t('oseba.title'),
         odprtaForma: true,
-        dovoljenje: 'oseba',
         columns: [
             {
                 cell: 'string',
@@ -70,6 +69,8 @@ define([
     });
 
     var chLovro = Radio.channel('global');
+    var dovoljeno = chLovro.request('isGranted', "oseba-read");
+    console.log("Oseba-read:" + dovoljeno);
 
     /**
      * Overridana funkcija iz seznamaView
@@ -93,19 +94,9 @@ define([
     };
 
     OsebaView.prototype.onDodaj = function () {
-        var dovoljeno = chLovro.request('isGranted', this.dovoljenje +"-write");
-        if (dovoljeno) {
             var model = new Model.Model();
             this.onSelected(model);
             this.zapSortSt(this.collection, 'sort');
-        }
-        else {
-            Radio.channel('error').command('flash', {
-                message: i18next.t('nakapa.dovoljenjeOseba'),
-                code: 9001000,
-                severity: 'info'
-            });
-        }
     };
 
     return OsebaView;
