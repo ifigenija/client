@@ -3,14 +3,14 @@
  */
 define([
     'marionette',
+    'radio',
     'require',
-  
     './nav'
 
 ], function (
         Marionette,
+        Radio,
         require,
-        
         moduleNav
         ) {
 
@@ -18,24 +18,80 @@ define([
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
 
 
+        var ch = Radio.channel('layout');
 
-        mod.dodajDogodek = function () {
 
-        };
 
         mod.ljudje = function () {
 
         };
 
+        /**
+         * Planer po prostorih
+         * 
+         * @returns {undefined}
+         */
         mod.prostori = function () {
+            require(['../View/PlanerView', '../Model/Resursi', '../View/BasicFilter'], function (PlanerView, resursi, FilterView) {
+                var calView = new PlanerView({
+                    resCollection: resursi.prostori,
+                    filterView: new FilterView(),
+                });
+                ch.command('open', calView, 'Planer');
+            });
 
         };
+
+        /**
+         * Koledar zasedenosti za po 
+         * @returns {undefined}
+         */
         mod.zasedenost = function () {
 
         };
-        
-        mod.dogodki = function () {
 
+        /**
+         * Pregled koledarja za posamezni resource 
+         * 
+         * @returns {undefined}
+         */
+        mod.pregled = function () {
+            require(['../View/CalendarView', '../View/BasicFilter'], function (CalendarView, FilterView) {
+                var calView = new CalendarView({
+                    filterView: new FilterView()
+                });
+                ch.command('open', calView, 'Kodelar');
+            });
+
+        };
+
+        /**
+         * Pregled predstav po uprizoritveh 
+         * @returns {undefined}
+         */
+        mod.predstave = function () {
+
+        };
+
+        /**
+         * Pregled vaj po uprizoritvah 
+         * 
+         * @returns {undefined}
+         */
+        mod.vaje = function () {
+
+        };
+
+        /**
+         * Navigacija med posameznimi pogledi v koledarju
+         * @returns {undefined}
+         */
+        mod.navigacija = function () {
+            require(['../View/Navigacija'], function (NaviView) {
+                var view = new NaviView({
+                });
+                ch.command('open', view, 'Navigacija');
+            });
         };
 
         /**
@@ -48,11 +104,13 @@ define([
             new Marionette.AppRouter({
                 controller: mod,
                 appRoutes: {
-                    'koledar/dodaj': 'dodajDogodek',
-                    'koledar/dogodki': 'dogodki',
+                    'koledar/navigacija': 'navigacija',
+                    'koledar/pregled': 'pregled',
                     'koledar/ludje': 'ljudje',
                     'koledar/prostori': 'prostori',
-                    'koledar/zasedenost': 'zasedenost'
+                    'koledar/zasedenost': 'zasedenost',
+                    'koledar/vaje': 'vaje',
+                    'koledar/predstave': 'predstave'
                 }
             });
         });

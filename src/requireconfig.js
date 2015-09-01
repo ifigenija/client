@@ -29,6 +29,8 @@ require.config({
         'i18next': 'app/Max/i18next-wrapper',
         'app/bars': 'app/Max/handlebars-wrapper',
         'ckeditor': '../lib/ckeditor/ckeditor',
+        'fullcalendar': '../lib/fullcalendar/dist/fullcalendar',
+        'fc-schedule': '../lib/fullcalendar-scheduler/dist/scheduler.min',
         'radio': '../lib/backbone.radio/build/backbone.radio',
         'bootstrap-datepicker': '../lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
         'formSchema': 'app/Max/Loader/formSchema',
@@ -54,8 +56,11 @@ require.config({
         ckeditor: {
             exports: 'CKEDITOR'
         },
-        "col-resizable": {
-            deps: ["jquery"]
+        "fullcalendar": {
+            deps: ['css!../lib/fullcalendar/dist/fullcalendar.min']
+        },
+        "fc-schedule": {
+            deps: ["fullcalendar", 'css!../lib/fullcalendar-scheduler/dist/scheduler.min']
         },
         "backgrid-filter": {
             deps: ["backbone", "backgrid"]
@@ -71,6 +76,11 @@ require.config({
         'bootstrap': ['jquery'],
         'jquery.jsonrpc': ['jquery'],
         'bootstrap-datepicker': ['jquery', 'bootstrap']
+    },
+    map: {
+        '*': {
+            'css': '../lib/require-css/css' // or whatever the path to require-css is
+        }
     },
     noGlobal: true
 });
