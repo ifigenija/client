@@ -174,40 +174,116 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onZakleni = function () {
+        var chLovro = Radio.channel('global');
+        var dovoljeno = chLovro.request('isGranted', "programDela-write");
 
-        var success = function () {
-            Radio.channel('error').command('flash', {
-                message: i18next.t("uspeh.zakleni"),
-                code: '9000703',
-                severity: 'success'
+        if (dovoljeno) {
+            var self = this;
+            
+            var success = function () {
+                var tb = self.getToolbarModel();
+                var but = tb.getButton('doc-zakleni');
+                but.set({
+                    disabled: false,
+                    label: i18next.t('std.odkleni'),
+                    trigger: 'odkleni'
+                });
+
+                Radio.channel('error').command('flash', {
+                    message: i18next.t("uspeh.zakleni"),
+                    code: '9000703',
+                    severity: 'success'
+                });
+            };
+
+            var error = function () {
+                Radio.channel('error').command('flash', {
+                    message: i18next.t("napaka.zakleni"),
+                    code: '9000701',
+                    severity: 'error'
+                });
+            };
+
+            var zakleni = function () {
+                var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
+                rpc.call('zakleni', {
+                    'programDelaId': self.model.get('id')},
+                success, error);
+            };
+
+            confirm({
+                text: i18next.t('std.potrdiZaklep'),
+                modalOptions: {
+                    title: i18next.t("std.zaklepPD"),
+                    okText: i18next.t("std.zakleni")
+                },
+                ok: zakleni
             });
-        };
-
-        var error = function () {
+        } else {
             Radio.channel('error').command('flash', {
-                message: i18next.t("napaka.zakleni"),
-                code: '9000701',
-                severity: 'error'
+                message: i18next.t('nakapa.dovoljenje'),
+                code: 9001000,
+                severity: 'info'
             });
-        };
-        
-        var self = this;
-        
-        var zakleni = function () {
-            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
-            rpc.call('zakleni', {
-                'programDelaId': self.model.get('id')},
-            success, error);
-        };
+        }
+    };
+    /**
+     * Ko kliknemo na gumb zakleni v toolbaru programadela
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onOdkleni = function () {
+        var chLovro = Radio.channel('global');
+        var dovoljeno = chLovro.request('isGranted', "programDela-write");
 
-        confirm({
-            text: i18next.t('std.potrdiZaklep'),
-            modalOptions: {
-                title: i18next.t("std.zaklepPD"),
-                okText: i18next.t("std.zakleni")
-            },
-            ok: zakleni
-        });
+        if (dovoljeno) {
+            var self = this;
+            
+            var success = function () {
+                var tb = self.getToolbarModel();
+                var but = tb.getButton('doc-zakleni');
+                but.set({
+                    disabled: false,
+                    label: i18next.t('std.zakleni'),
+                    trigger: 'zakleni'
+                });
+
+                Radio.channel('error').command('flash', {
+                    message: i18next.t("uspeh.odkleni"),
+                    code: '9000703',
+                    severity: 'success'
+                });
+            };
+
+            var error = function () {
+                Radio.channel('error').command('flash', {
+                    message: i18next.t("napaka.odkleni"),
+                    code: '9000701',
+                    severity: 'error'
+                });
+            };
+
+            var odkleni = function () {
+                var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
+                rpc.call('odkleni', {
+                    'programDelaId': self.model.get('id')},
+                success, error);
+            };
+
+            confirm({
+                text: i18next.t('std.potrdiOdklep'),
+                modalOptions: {
+                    title: i18next.t("std.odklepPD"),
+                    okText: i18next.t("std.odkleni")
+                },
+                ok: odkleni
+            });
+        } else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t('nakapa.dovoljenje'),
+                code: 9001000,
+                severity: 'info'
+            });
+        }
     };
 
     /**

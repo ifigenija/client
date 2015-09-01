@@ -114,6 +114,9 @@
         "pomoc": "Pomoč",
         "zaklepPD": "Zaklepanje programa dela",
         "potrdiZaklep": "Ali res želite zakleniti program dela?",
+        "odklepPD": "Odklepanje programa dela",
+        "potrdiOdklep": "Ali res želite odkleniti program dela?",
+        "odkleni": "Odkleni",
         "title": {
             "vnesiOseba": "Vnesite podatke osebe"
         }
@@ -1243,7 +1246,8 @@
     "uspeh": {
         "fetch": "Napaka pri pridobivanju podatkov",
         "kloniranje": "Uspešno kloniran program dela.",
-        "zakleni": "Uspešno zaklenjen program dela"
+        "zakleni": "Uspešno zaklenjen program dela",
+        "odkleni": "Uspešno odklenjen program dela"
     },
     "prenesi": {
         "title": "Prenost vrednosti iz uprizoritve",
