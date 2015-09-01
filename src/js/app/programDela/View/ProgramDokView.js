@@ -140,6 +140,8 @@ define([
             }
         }
     });
+    
+    var chPermission = Radio.channel('global');
 
     ProgramDokView.prototype.render = function () {
         var self = this;
@@ -195,8 +197,7 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onZakleni = function () {
-        var chLovro = Radio.channel('global');
-        var dovoljeno = chLovro.request('isGranted', "programDela-write");
+        var dovoljeno = chPermission.request('isGranted', "programDela-write");
 
         if (dovoljeno) {
             var self = this;
@@ -253,8 +254,7 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onOdkleni = function () {
-        var chLovro = Radio.channel('global');
-        var dovoljeno = chLovro.request('isGranted', "programDela-write");
+        var dovoljeno = chPermission.request('isGranted', "programDela-lock");
 
         if (dovoljeno) {
             var self = this;

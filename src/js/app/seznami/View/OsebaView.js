@@ -68,8 +68,8 @@ define([
         ]
     });
 
-    var chLovro = Radio.channel('global');
-    var dovoljeno = chLovro.request('isGranted', "oseba-read");
+    var chPermission = Radio.channel('global');
+    var dovoljeno = chPermission.request('isGranted', "oseba-read");
     console.log("Oseba-read:" + dovoljeno);
 
     /**
