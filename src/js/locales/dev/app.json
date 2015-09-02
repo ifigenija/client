@@ -118,7 +118,7 @@
         "potrdiOdklep": "Ali res želite odkleniti program dela?",
         "odkleni": "Odkleni",
         "title": {
-            "vnesiOseba": "Vnesite podatke osebe"
+            "vnesiOseba": "Ustvari novo osebo"
         }
     },
     "ent": {
@@ -190,6 +190,7 @@
         "popa": "Poslovni partner",
         "naslov": "Naslov, kjer se nahaja prostor",
         "jePrizorisce": "Prizorišče",
+        "sePlanira": "Prostor se planira",
         "d": {
             "sifra": "$t(ent.d.sifra)",
             "opis": "",
@@ -197,6 +198,7 @@
             "popa": "Poslovni partner",
             "naslov": "Naslov, kjer se nahaja prostor",
             "jePrizorisce": "Ali je prostor prizorišče.",
+            "sePlanira": "Ali se upošteva pri planiranju koledarja.",
             "kapaciteta": "Število mest v prostoru."
         }
     },
@@ -550,7 +552,7 @@
         "maxPrekrivanj": "Max. prekrivanj",
         "privzeti": "Privzeta alternacija",
         "tipFunkcije": "Kategorija funkcije",
-        "naziv": "Naziv",
+        "naziv": "Naziv / Ime funkcije",
         "sort": "$t(ent.sort)",
         "funkcija": "$t(ent.funkcija)",
         "d": {

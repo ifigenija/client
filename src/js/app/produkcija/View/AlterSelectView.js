@@ -112,7 +112,13 @@ define([
     AlterSelectView.prototype.renderIzbor = function () {
 
         var sch;
-        sch = {type: 'Toone', targetEntity: this.options.lookup, editorAttrs: {class: 'form-control relation-select'}};
+        sch = {
+            type: 'Toone',
+            targetEntity: this.options.lookup,
+            editorAttrs: {class: 'form-control relation-select'},
+            help: "lovro",
+            title: "rojko"
+        };
 
         this.formIzberi = new Form({
             template: Handlebars.compile('<form><div data-editors="id"></div></form>'),
@@ -122,14 +128,11 @@ define([
             }
         });
 
-        this.formIzberi.on('id:change', this.onIdChange, this);
+        this.formIzberi.on('dodaj:osebo', this.dodaj, this);
+        this.formIzberi.on('id:change', this.dodaj, this);
 
         this.izborR.show(this.formIzberi);
 
-    };
-
-    AlterSelectView.prototype.onIdChange = function () {
-        this.dodaj();
     };
 
     AlterSelectView.prototype.dodaj = function () {
@@ -139,6 +142,7 @@ define([
             id = val.id.id;
             this.triggerMethod('dodaj:alter', id);
         }
+        this.formIzberi.fields.id.editor.setValue(null);
     };
 
     AlterSelectView.prototype.novaOseba = function () {
@@ -148,7 +152,7 @@ define([
             model: model,
             editor: editor,
             form: this.formIzberi,
-            event: 'id:change'
+            event: 'dodaj:osebo'
         });
     };
 
