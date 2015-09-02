@@ -31,7 +31,7 @@ define([
                 headerCell: 'number',
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('ep.sort'),
+                label: i18next.t('ent.d.sort'),
                 name: 'sort',
                 sortable: true
             },
@@ -81,10 +81,10 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
                     {event: 'uredi', title: i18next.t('std.uredi')},
                     {event: 'premakniGor', title: i18next.t('std.premakniGor')},
-                    {event: 'premakniDol', title: i18next.t('std.premakniDol')}
+                    {event: 'premakniDol', title: i18next.t('std.premakniDol')},
+                    {event: 'brisi', title: i18next.t('std.brisi')}
                 ]
             }
         ]

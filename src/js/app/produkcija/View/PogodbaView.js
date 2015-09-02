@@ -74,8 +74,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')}
+                    {event: 'uredi', title: i18next.t('std.uredi')},
+                    {event: 'brisi', title: i18next.t('std.brisi')}
                 ]
             }
         ]
@@ -102,6 +102,7 @@ define([
 
     PogodbaView.prototype.onFormChange = function (form) {
         this.placiloVaje(form);
+        PostavkeView.prototype.onFormChange.apply(this, arguments);
     };
 
     PogodbaView.prototype.prepareToolbar = function () {

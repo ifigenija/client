@@ -26,7 +26,7 @@ define([
                 headerCell: 'number',
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('strupr.sort'),
+                label: i18next.t('ent.d.sort'),
                 name: 'sort',
                 sortable: true
             },
@@ -76,8 +76,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')}
+                    {event: 'uredi', title: i18next.t('std.uredi')},
+                    {event: 'brisi', title: i18next.t('std.brisi')}
                 ]
             }
         ]

@@ -50,6 +50,20 @@ define([
                 sortable: true
             },
             {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('prostor.popa'),
+                name: 'popa.label',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('prostor.naslov'),
+                name: 'naslov.label',
+                sortable: true
+            },
+            {
                 cell: 'boolean',
                 editable: false,
                 label: i18next.t('prostor.jePrizorisce'),

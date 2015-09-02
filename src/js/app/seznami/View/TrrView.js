@@ -52,8 +52,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('std.brisi')},
-                    {event: 'uredi', title: i18next.t('std.uredi')}
+                    {event: 'uredi', title: i18next.t('std.uredi')},
+                    {event: 'brisi', title: i18next.t('std.brisi')}
                 ]
             }
         ]

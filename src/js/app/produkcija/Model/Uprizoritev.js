@@ -16,7 +16,8 @@ define([
      */
     var ZasedbaCollection = Dokument.PostavkaCollection.extend({
         model: FunkcijaModel,
-        url: baseUrl + '/rest/funkcija'
+        url: baseUrl + '/rest/funkcija',
+        index: 'sort'
     });
 
 

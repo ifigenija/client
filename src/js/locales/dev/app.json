@@ -139,7 +139,7 @@
         "drzava": "Država",
         "jeeu": "Iz EU",
         "podrocje": "Področje",
-        "sort": "Sort",
+        "sort": "Zaporedna številka",
         "uprizoritev": "Uprizoritev",
         "status": "Status",
         "zacetek": "Začetek",
@@ -152,6 +152,7 @@
         "zvrst": "Vrsta uprizoritve",
         "koproducent": "Koproducent",
         "d": {
+            "sort": "Zaporedna",
             "naziv": "Naziv",
             "uprizoritev": "Uprizoritev na katero se nanaša",
             "sifra": "Enolična oznaka",
