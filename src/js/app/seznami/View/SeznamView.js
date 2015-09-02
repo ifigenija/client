@@ -92,7 +92,7 @@ define([
             this.collection = this.getCollection();
         }
 
-        this.listenTo(this.collection, 'selectValue', this.onSelected);
+        //this.listenTo(this.collection, 'selectValue', this.onSelected);
         this.listenTo(this.collection, 'backgrid:action', this.onGridAction);
     };
 
