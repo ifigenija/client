@@ -60,7 +60,7 @@ define([
      * Izris toolbara
      * @returns {undefined}
      */
-    SeznamView.prototype.renderToolbar = function () {
+    Stevilcenje.prototype.renderToolbar = function () {
 
     };
     /**
