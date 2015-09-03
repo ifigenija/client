@@ -19,7 +19,7 @@ define([
     
     var Stevilcenje = SeznamView.extend({
         url: baseUrl + '/rest/stevilcenje',
-        title: i18next.t('vrstaStroska.title'),
+        title: i18next.t('stevilcenje.title'),
         schema: schema,
         filterSchema: filterSchema,
         formTemplate: formTpl,
@@ -34,7 +34,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('vstevilcenje.naziv'),
+                label: i18next.t('stevilcenje.naziv'),
                 name: 'naziv',
                 sortable: true
             },

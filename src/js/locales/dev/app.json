@@ -1388,5 +1388,19 @@
             "podskupina": "Podskupina",
             "naziv": "Naziv"
         }
+    },
+    "stevilcenje": {
+        "konfigmenu": "Konfiguracija številčenja",
+        "menu": "Številčenje",
+        "konfigTitle": "Konfiguracija številčenja",
+        "zaDokument": "Dokument",
+        "ident": "Identifikator",
+        "label": "Naziv številčenja",
+        "title": "Številčenje",
+        "sifra": "Šifra",
+        "naziv": "Naziv",
+        "format": "Format",
+        "prefix": "Predpona",
+        "suffix": "Pripona"
     }
 }
