@@ -12,8 +12,7 @@ define([
     'template!../tpl/osebniPodatki-form.tpl',
     'template!../tpl/osebnipodatki.tpl',
     'i18next',
-    'app/Dokument/View/FormView',
-    './TrrView'
+    'app/Dokument/View/FormView'
 ], function (
         schema,
         Marionette,

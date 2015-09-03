@@ -30,15 +30,11 @@ define([
         {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'}
     ];
 
-    var tabSplosno = [
-        {name: i18next.t('ent.splosno'), event: 'splosni'}
-    ];
-
     var tabNovi = [
         {name: i18next.t('ent.splosno'), event: 'splosni'}
     ];
 
-
+    var chPermission = Radio.channel('global');
 
     var OsebaEditView = DokumentView.extend({
         template: tpl,
@@ -102,11 +98,18 @@ define([
         this.form.on('ime:change', this.polnoIme, this);
         this.form.on('srednjeIme:change', this.polnoIme, this);
         this.form.on('priimek:change', this.polnoIme, this);
-        
+
         if (this.isNew() || this.options.pogled === "modal") {
             this.$('.nav.nav-tabs').addClass('hidden');
-        }else{
+        } else {
             this.$('.nav.nav-tabs').removeClass('hidden');
+        }
+
+        var permission = chPermission.request('isGranted', "Oseba-write");
+        
+        if(!permission){
+            this.$('input').prop("disabled", true);
+            this.$('select').prop("disabled", true);
         }
     };
 
@@ -120,14 +123,17 @@ define([
         var pogled = this.options.pogled;
 
         if (pogled === "kontaktna" || pogled === "modal") {
-            tabs = tabSplosno;
+            tabs = tabNovi;
         } else if (pogled === "vse") {
             tabs = tabVse;
         } else {
             tabs = tabVse;
         }
-
-
+        
+        var permission = chPermission.request('isGranted', "Oseba-write");        
+        if(!permission){
+            tabs = tabNovi;
+        }
 
         if (this.isNew() || this.options.pogled === "modal") {
             tabs = null;
@@ -222,16 +228,22 @@ define([
      */
     OsebaEditView.prototype.renderTelefonske = function () {
         var self = this;
-        var jeOnemogoceno = false;
-
+        var onemogoceno = false;
+        
         if (this.isNew()) {
-            jeOnemogoceno = true;
+            onemogoceno = true;
+        }
+        
+        var permission = chPermission.request('isGranted', "Telefonska-write");
+        
+        if (!permission) {
+            onemogoceno = true;
         }
         require(['app/seznami/View/TelefonskaView'], function (View) {
             var view = new View({
                 collection: self.model.telefonskeCollection,
                 dokument: self.model,
-                disabled: jeOnemogoceno
+                disabled: onemogoceno
             });
             self.regionTelefonske.show(view);
             return view;
@@ -244,16 +256,22 @@ define([
      */
     OsebaEditView.prototype.renderNaslovi = function () {
         var self = this;
-        var jeOnemogoceno = false;
+        var onemogoceno = false;
+
+        var permission = chPermission.request('isGranted', "PostniNaslov-write");
 
         if (this.isNew()) {
-            jeOnemogoceno = true;
+            onemogoceno = true;
         }
+        
+        if (!permission) {
+            onemogoceno = true;
+        }        
         require(['app/seznami/View/PostniNaslovView'], function (View) {
             var view = new View({
                 collection: self.model.nasloviCollection,
                 dokument: self.model,
-                disabled: jeOnemogoceno
+                disabled: onemogoceno
             });
             self.regionNaslovi.show(view);
             return view;

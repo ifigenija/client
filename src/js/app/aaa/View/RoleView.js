@@ -34,6 +34,7 @@ define([
         schema: schema,
         formTemplate: formTpl,
         template: roleTpl,
+        odprtaForma: true,
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
@@ -63,7 +64,8 @@ define([
                 name: '...',
                 sortable: false,
                 actions: [
-                    {event: 'brisi', title: i18next.t('brisi')}
+                    {event: 'uredi', title: i18next.t('std.uredi')},
+                    {event: 'brisi', title: i18next.t('std.brisi')}
                 ]
             }
         ]

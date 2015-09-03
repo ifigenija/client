@@ -41,14 +41,19 @@
             "dogodki": "Dogodki",
             "ljudje": "Ljudje",
             "zasedenost": "Rezervacije"
-        }
+        },
+        "dogodki": "Dogodki",
+        "prostori": "Prostori",
+        "ljudje": "Ljudje",
+        "konflikti": "Konflikti"
     },
     "arhiv": {
         "nav": {
             "label": "Arhiv",
             "isci": "Poišči",
             "arhiviraj": "Arhiviraj",
-            "besedila": "Arhiv besedil"
+            "besedila": "Arhiv besedil",
+            "vrstaZapisa": "Vrsta zapisa"
         }
     },
     "produkcija": {
