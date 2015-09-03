@@ -555,6 +555,7 @@
         "naziv": "Naziv / Ime funkcije",
         "sort": "$t(ent.sort)",
         "funkcija": "$t(ent.funkcija)",
+        "alternacije": "Alternacije",
         "d": {
             "naziv": "Naziv funkcije",
             "komentar": "Dodatne opombe, predlogi, komentarji",
@@ -563,7 +564,8 @@
             "sePlanira": "Ali se funkcija planira ali je določena",
             "dovoliPrekrivanje": "Ali je dovoljeno prekrivanje",
             "vodjaEkipe": "Ali je vodja področja",
-            "pomembna": "Ali je funkcija izpostavljena"
+            "pomembna": "Ali je funkcija izpostavljena",
+            "alternacije": "Tukaj vnašate osebe/alternacije, ki bodo opravljale funkcijo."
         }
     },
     "alternacija": {

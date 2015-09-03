@@ -41,7 +41,7 @@ define([
      * 
      * @type @exp;PostavkeView@call;extend
      */
-    var FunkcijeView = PostavkeView.extend({
+    var FunkcijaView = PostavkeView.extend({
         formTemplate: formTpl,
         template: tpl,
         schema: sch,
@@ -124,7 +124,7 @@ define([
      * 
      * @returns {undefined}
      */
-    FunkcijeView.prototype.onRenderForm = function () {
+    FunkcijaView.prototype.onRenderForm = function () {
 
         if (this.model.get('id')) {
             this.renderAlternacije(this.model);
@@ -143,7 +143,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    FunkcijeView.prototype.renderAlternacije = function (model) {
+    FunkcijaView.prototype.renderAlternacije = function (model) {
 
         this.AlterModel = Backbone.DeepModel.extend({
             urlRoot: baseUrl + '/rest/alternacija'
@@ -177,7 +177,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    FunkcijeView.prototype.brisiAlter = function (alter) {
+    FunkcijaView.prototype.brisiAlter = function (alter) {
         var o = this.alters.findWhere({id: alter});
         if (o) {
             o.destroy({
@@ -191,7 +191,7 @@ define([
      * @param {type} alterID
      * @returns {undefined}
      */
-    FunkcijeView.prototype.privzetoAlter = function (alterID) {
+    FunkcijaView.prototype.privzetoAlter = function (alterID) {
         var o = this.alters.findWhere({id: alterID});
         if (o) {
             o.set('privzeti', true);
@@ -206,7 +206,7 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    FunkcijeView.prototype.dodajAlter = function (oseba) {
+    FunkcijaView.prototype.dodajAlter = function (oseba) {
         var self = this;
         var model = new this.AlterModel();
 
@@ -226,5 +226,5 @@ define([
 
 
 
-    return FunkcijeView;
+    return FunkcijaView;
 });

@@ -3,7 +3,7 @@
  */
 define([
     'app/Dokument/View/DokumentView',
-    './FunkcijeView',
+    './FunkcijaView',
     'template!../tpl/uprizoritev-edit.tpl',
     'template!../tpl/uprizoritev-form.tpl',
     'formSchema!uprizoritev',
@@ -13,7 +13,7 @@ define([
     'radio'
 ], function (
         DokumentView,
-        FunkcijeView,
+        FunkcijaView,
         tpl,
         formTpl,
         shema,
@@ -182,7 +182,7 @@ define([
      * @returns {undefined}
      */
     UprizoritevEditView.prototype.renderFunkcije = function (coll, name, detailName) {
-        var view = new FunkcijeView({
+        var view = new FunkcijaView({
             collection: coll,
             dokument: this.model,
             odprtaForma: true,

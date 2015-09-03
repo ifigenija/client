@@ -116,13 +116,14 @@ define([
             type: 'Toone',
             targetEntity: this.options.lookup,
             editorAttrs: {class: 'form-control relation-select'},
-            help: "lovro",
-            title: "rojko"
+            help: i18next.t('funkcija.d.alternacije'),
+            title: i18next.t('funkcija.alternacije'),
+            name: 'id'
         };
 
         this.formIzberi = new Form({
-            template: Handlebars.compile('<form><div data-editors="id"></div></form>'),
-            className: 'form-inline',
+            template: Handlebars.compile('<form><div data-fields="id"></div></form>'),
+            className: 'funkcija-alternacije',
             schema: {
                 id: sch
             }
