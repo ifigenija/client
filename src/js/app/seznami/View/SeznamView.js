@@ -40,6 +40,8 @@ define([
     var SeznamView = Marionette.LayoutView.extend({
         template: seznamTpl,
         potrdiBrisanje: true,
+        skritaTabela: true,
+        odprtaForma: false,
         url: null,
         columns: null,
         formTemplate: null,
@@ -86,8 +88,8 @@ define([
         this.schema = options.schema || this.schema;
         this.title = options.title || this.title;
         this.columns = options.columns || this.columns;
-        this.odprtaForma = options.odprtaForma || this.odprtaForma || false;
-        this.skrijTabelo = options.skrijTabelo || this.skrijTabelo || true;
+        this.odprtaForma = options.odprtaForma || this.odprtaForma;
+        this.skritaTabela = options.skritaTabela || this.skritaTabela;
 
         if (!this.collection) {
             this.collection = this.getCollection();
@@ -143,12 +145,10 @@ define([
     SeznamView.prototype.onRender = function () {
 
         this.$('.seznam-naslov').text(this.title);
-
-        var grid = this.getPaginatedGrid();
-
         this.renderToolbar();
 
-        this.gridR.show(grid);
+        this.prikaziTabelo();
+
         this.collection.fetch({
             error: Radio.channel('error').request('handler', 'xhr')
         });
@@ -220,19 +220,17 @@ define([
 
     };
 
-    SeznamView.prototype.skrijSeznam = function () {
-        if (this.skrijTabelo) {
+    SeznamView.prototype.skrijTabelo = function () {
+        if (this.skritaTabela) {
             this.gridR.empty();
             this.$('.seznam-naslov').hide();
         }
     };
 
-    SeznamView.prototype.prikaziSeznam = function () {
-        if (this.skrijTabelo) {
-            var grid = this.getPaginatedGrid();
-            this.gridR.show(grid);
-            this.$('.seznam-naslov').show();
-        }
+    SeznamView.prototype.prikaziTabelo = function () {
+        var grid = this.getPaginatedGrid();
+        this.gridR.show(grid);
+        this.$('.seznam-naslov').show();
     };
 
     /**
@@ -242,7 +240,6 @@ define([
      */
     SeznamView.prototype.onUredi = function (model) {
         this.onSelected(model);
-        this.skrijSeznam();
     };
 
     /**
@@ -273,6 +270,12 @@ define([
 
         if (model.get('id')) {
             this.zamenjajUrl(model);
+        }
+
+        if (this.skritaTabela) {
+            this.skrijTabelo();
+        } else {
+            this.prikaziTabelo();
         }
 
         var form = this.formView = this.getFormView(model);
@@ -320,7 +323,7 @@ define([
         this.renderToolbar();
         this.zamenjajUrl();
 
-        this.prikaziSeznam();
+        this.prikaziTabelo();
     };
     /**
      * Pridobi naslov forme
@@ -336,7 +339,7 @@ define([
      * @returns {undefined}
      */
     SeznamView.prototype.onDodaj = function () {
-        this.skrijSeznam();
+        this.skrijTabelo();
         //this.zapSortSt(this.collection, 'sort');
     };
 
