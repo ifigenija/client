@@ -25,6 +25,7 @@ define([
     var UprizoritevView = SeznamView.extend({
         url: baseUrl + '/rest/uprizoritev/vse',
         title: i18next.t('uprizoritev.title'),
+        odprtaForma: true,
         columns: [
             {
                 cell: 'string',
