@@ -94,7 +94,7 @@ define([
 
     ZaposlitevView.prototype.onDodaj = function () {
         var model = new Zaposlitev.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     ZaposlitevView.prototype.novaOseba = function () {

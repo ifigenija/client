@@ -119,7 +119,7 @@ define([
 
     UprizoritevView.prototype.onDodaj = function () {
         var model = new Uprizoritev.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     return UprizoritevView;

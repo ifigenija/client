@@ -98,7 +98,7 @@ define([
         var dovoljeno = chPermission.request('isGranted', "oseba-write");
         if (dovoljeno) {
             var model = new Model.Model();
-            this.onSelected(model);
+            this.onUredi(model);
             this.zapSortSt(this.collection, 'sort');
         } else {
             Radio.channel('error').command('flash', {

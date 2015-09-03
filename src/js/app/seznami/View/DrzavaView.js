@@ -74,7 +74,7 @@ define([
 
     DrzavaView.prototype.onDodaj = function () {
         var model = new Drzava.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     return DrzavaView;

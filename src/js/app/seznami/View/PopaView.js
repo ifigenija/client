@@ -103,7 +103,7 @@ define([
 
     PopaView.prototype.onDodaj = function () {
         var model = new Model.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     return PopaView;

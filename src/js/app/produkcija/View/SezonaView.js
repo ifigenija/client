@@ -78,7 +78,7 @@ define([
 
     SezonaView.prototype.onDodaj = function () {
         var model = new Sezona.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     return SezonaView;

@@ -80,7 +80,7 @@ define([
 
     RoleView.prototype.onDodaj = function () {
         var model = new RoleModel();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     /**

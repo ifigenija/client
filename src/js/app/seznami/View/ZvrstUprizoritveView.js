@@ -60,7 +60,7 @@ define([
     
     ZvrstUprizoritveView.prototype.onDodaj = function () {
         var model = new ZvrstUprizoritve.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     return ZvrstUprizoritveView;

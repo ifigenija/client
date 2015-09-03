@@ -123,7 +123,7 @@ define([
 
     ProstorView.prototype.onDodaj = function () {
         var model = new Prostor.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     ProstorView.prototype.onDodajNaslov = function () {

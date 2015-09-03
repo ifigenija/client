@@ -60,7 +60,7 @@ define([
     
     ZvrstSursView.prototype.onDodaj = function () {
         var model = new ZvrstSurs.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
 

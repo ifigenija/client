@@ -79,7 +79,7 @@ define([
 
     AbonmaView.prototype.onDodaj = function () {
         var model = new Abonma.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     return AbonmaView;

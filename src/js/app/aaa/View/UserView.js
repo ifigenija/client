@@ -85,7 +85,7 @@ define([
 
     UserView.prototype.onDodaj = function () {
         var model = new UserModel();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     UserView.prototype.getTitle = function (model) {

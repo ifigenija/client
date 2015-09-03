@@ -67,7 +67,7 @@ define([
     
     TipFunkcijeView.prototype.onDodaj = function () {
         var model = new TipFunkcije.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     return TipFunkcijeView;

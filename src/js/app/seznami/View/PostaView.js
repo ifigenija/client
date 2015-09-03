@@ -60,7 +60,7 @@ define([
 
     PostaView.prototype.onDodaj = function () {
         var model = new Posta.Model();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     return PostaView;

@@ -86,7 +86,7 @@ define([
 
     PermissionView.prototype.onDodaj = function () {
         var model = new PermissionModel();
-        this.onSelected(model);
+        this.onUredi(model);
     };
 
     /**
