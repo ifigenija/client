@@ -54,6 +54,12 @@ define(['i18next'], function (i18n) {
                     uri: "#prostor",
                     permission: "Prostor-write"
                     
+                },
+                {
+                    label: i18n.t("seznami.nav.vrsteStroska"),
+                    uri: "#vrstaStroska",
+                    permission: "VrstaStroska-write"
+                    
                 }
             ]
         }

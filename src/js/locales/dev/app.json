@@ -74,7 +74,8 @@
             "zvrstSurs": "Zvrsti po SURS",
             "tipUprizoritev": "Tip uprizoritev",
             "besedilo": "Besedila",
-            "abonma": "Abonmaji"
+            "abonma": "Abonmaji",
+            "vrsteStroska": "Vrste stroška"
         }
 
     },
@@ -119,6 +120,9 @@
         "odkleni": "Odkleni",
         "title": {
             "vnesiOseba": "Ustvari novo osebo"
+        },
+        "messages":{
+            "success": "Uspešno opravljena akcija."
         }
     },
     "ent": {
@@ -524,7 +528,7 @@
             "zvrstUprizoritve": "",
             "producent": "",
             "datumZacStudija": "Kdaj se prične študij uprizoritve. S tem dnem se začne zasedati termin v dolgoročnem planu.",
-            "datumZakljucka" : "Datum kdaj je bila uprizoritev zadnje igrana.",
+            "datumZakljucka": "Datum kdaj je bila uprizoritev zadnje igrana.",
             "datumPremiere": "",
             "trajanje": "Trajanje uprizoritve v minutah",
             "stOdmorov": "Število odmorov med uprizoritvijo",
@@ -555,7 +559,7 @@
         "naziv": "Naziv / Ime funkcije",
         "sort": "$t(ent.sort)",
         "funkcija": "$t(ent.funkcija)",
-        "alternacije": "Alternacije",
+        "alternacije": "Osebe/Alternacije",
         "d": {
             "naziv": "Naziv funkcije",
             "komentar": "Dodatne opombe, predlogi, komentarji",
@@ -565,7 +569,7 @@
             "dovoliPrekrivanje": "Ali je dovoljeno prekrivanje",
             "vodjaEkipe": "Ali je vodja področja",
             "pomembna": "Ali je funkcija izpostavljena",
-            "alternacije": "Tukaj vnašate osebe/alternacije, ki bodo opravljale funkcijo."
+            "alternacije": "Tukaj vnesite osebe/alternacije, ki bodo zasedale funkcijo."
         }
     },
     "alternacija": {
@@ -1361,17 +1365,23 @@
         "obiskGostZam": "na gostovanjih v zamejstvu",
         "obiskGostInt": "na mednarodnih gostovanjih (brez zamejstva)"
     },
-    "vrstastroska": {
+    "vrstaStroska": {
         "title": "Vrsta materialnega stroška",
-        "skupina": "Skupina vrste mat. stroška",
-        "podskupina": "Podskupina vrste mat. stroška",
-        "naziv": "Naziv vrste mat. stroška",
-        "opis": "",
+        "nova": "Nova vrsta materialnega stroška",
+        "skupina": "Skupina vrste materialnega stroška",
+        "podskupina": "Podskupina vrste materialnega stroška",
+        "naziv": "Naziv vrste materialnega stroška",
+        "opis": "Opis",
         "d": {
-            "skupina": "Skupina vrste materialnega stroška",
-            "podskupina": "Podskupina vrste materialnega stroška",
-            "naziv": "Naziv vrste materialnega stroška",
-            "opis": "opis"
+            "skupina": "",
+            "podskupina": "",
+            "naziv": "",
+            "opis": ""
+        },
+        "t": {
+            "skupina": "Skupina",
+            "podskupina": "Podskupina",
+            "naziv": "Naziv"
         }
     }
 }

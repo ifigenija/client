@@ -100,6 +100,11 @@ define([
                 odpri(View, 'alternacija.title');
             });
         };
+        model.vrstaStroska = function () {
+            require(['../View/VrstaStroskaView'], function (View) {
+                odpri(View, 'vrstaStroska.title');
+            });
+        };
 
         /**
          * Dostop direktno do podatkov osebe
@@ -199,6 +204,17 @@ define([
                 odpriModel(Model, View, id, 'prostor.title');
             });
         };
+        
+        /**
+         * Neposreden pogled podatkov vrstaStroska
+         * @param {type} id
+         * @returns {undefined}
+         */
+        model.vrstaStroskaOdpri = function (id) {
+            require(['../Model/VrstaStroska', '../View/VrstaStroskaView'], function (Model, View) {
+                odpriModel(Model, View, id, 'vrstaStroska.title');
+            });
+        };
 
         /**
          * 
@@ -219,6 +235,7 @@ define([
                     'popa': 'popa',
                     'abonma': 'abonma',
                     'prostor': 'prostor',
+                    'vrstaStroska': 'vrstaStroska',
                     'alternacija': 'alternacija',
                     'tipFunkcije/:id': 'tipFunkcijeOdpri',
                     'zvrstUprizoritve/:id': 'zvrstUprizoritveOdpri',
@@ -228,7 +245,8 @@ define([
                     'posta/:id': 'postaOdpri',
                     'popa/:id': 'popaOdpri',
                     'abonma/:id': 'abonmaOdpri',
-                    'prostor/:id': 'prostorOdpri'
+                    'prostor/:id': 'prostorOdpri',
+                    'vrstaStroska/:id': 'vrstaStroskaOdpri'
                 }
             });
         });

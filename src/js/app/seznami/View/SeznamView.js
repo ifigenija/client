@@ -311,6 +311,7 @@ define([
             this.formR.empty();
             this.renderToolbar();
         }
+        this.prikaziTabelo();
     };
 
     /**
