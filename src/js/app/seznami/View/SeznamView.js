@@ -310,8 +310,9 @@ define([
             this.model = null;
             this.formR.empty();
             this.renderToolbar();
+            this.prikaziTabelo();
         }
-        this.prikaziTabelo();
+
     };
 
     /**
