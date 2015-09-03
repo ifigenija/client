@@ -18,7 +18,8 @@ define([
     });
 
     var AlternacijaModel = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/alternacija'
+        urlRoot: baseUrl + '/rest/alternacija',
+        index: "sort"
     });
 
     var AlternacijaCollection = Dokument.PostavkaCollection.extend({

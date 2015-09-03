@@ -70,10 +70,15 @@ define([
         model.stevilcenjeKonfig = function () {
             require(['../View/StevilcenjeKonfigView'], function (View) {
                 var view = new View();
-                ch.command('open', view, i18next.t('stevilcenje.kondigmenu'));               
+                ch.command('open', view, i18next.t('stevilcenje.konfigmenu'));               
             });
         };
-
+        model.stevilcenjeStanje = function () {
+            require(['../View/StevilcenjeStanjeView'], function (View) {
+                var view = new View();
+                ch.command('open', view, i18next.t('stevilcenje.stanje'));               
+            });
+        };
         model.addUser = function () {
             model.manageUsers('dodaj');
         };
@@ -139,6 +144,7 @@ define([
                 appRoutes: {
                     'stevilcenje/seznam': 'stevilcenjeSeznam',
                     'stevilcenje/konfig': 'stevilcenjeKonfig',
+                    'stevilcenje/stanje': 'stevilcenjeStanje',
                     'aaa/user/dodaj': 'addUser',
                     'aaa/users': 'manageUsers',
                     'aaa/roles': 'roles',

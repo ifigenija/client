@@ -53,7 +53,6 @@ define([
                 sortable: true
             },
             {
-                headerCell: 'number',
                 cell: 'string',
                 editable: false,
                 label: i18next.t('stevilcenje.suffix'),

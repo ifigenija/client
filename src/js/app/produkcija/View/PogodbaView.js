@@ -86,7 +86,7 @@ define([
         var vrednostVaje = form.fields.vrednostVaje.editor.$el;
         var vrednostVaj = form.fields.vrednostVaj.editor.$el;
 
-        if (!placiloNaVajo) {
+        if (placiloNaVajo) {
             vrednostVaj.attr("disabled", "disabled");
             vrednostVaje.removeAttr("disabled");
         } else {
