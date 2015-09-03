@@ -61,6 +61,19 @@ define([
 
         };
 
+        model.stevilcenjeSeznam = function () {
+            require(['../View/StevilcenjeView'], function (View) {
+                var view = new View();
+                ch.command('open', view, i18next.t('stevilcenje.title'));               
+            });
+        };
+        model.stevilcenjeKonfig = function () {
+            require(['../View/StevilcenjeKonfigView'], function (View) {
+                var view = new View();
+                ch.command('open', view, i18next.t('stevilcenje.kondigmenu'));               
+            });
+        };
+
         model.addUser = function () {
             model.manageUsers('dodaj');
         };
@@ -124,7 +137,8 @@ define([
             new Marionette.AppRouter({
                 controller: model,
                 appRoutes: {
-                    'aaa/moznosti': 'moznosti',
+                    'stevilcenje/seznam': 'stevilcenjeSeznam',
+                    'stevilcenje/konfig': 'stevilcenjeKonfig',
                     'aaa/user/dodaj': 'addUser',
                     'aaa/users': 'manageUsers',
                     'aaa/roles': 'roles',

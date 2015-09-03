@@ -14,6 +14,16 @@ define(['i18next'], function (i18n) {
                     label: i18n.t("nastavitve.nav.moznosti"),
                     uri: "#aaa/moznosti"
                 },
+                                 {
+                    label: i18n.t("stevilcenje.konfigmenu"),
+                    uri: "#stevilcenje/konfig",
+                    permission: 'Stevilcenje-write'
+                },
+                 {
+                    label: i18n.t("stevilcenje.menu"),
+                    uri: "#stevilcenje/seznam",
+                    permission: 'Stevilcenje-write'
+                },
                 {
                     divider: true
                 }, {
