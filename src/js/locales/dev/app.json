@@ -126,7 +126,7 @@
         "title": {
             "vnesiOseba": "Ustvari novo osebo"
         },
-        "messages":{
+        "messages": {
             "success": "Uspešno opravljena akcija."
         }
     },
@@ -1390,17 +1390,49 @@
         }
     },
     "stevilcenje": {
+        "menu": "Številčenje",        
+        "title": "Številčenje",
+        "sifra": "Šifra",
+        "naziv": "Naziv številčenja",
+        "format": "Format",
+        "prefix": "Predpona",
+        "suffix": "Pripona",
+        "d": {
+            "zaDokument": "Dokument",
+            "ident": "Identifikator",
+            "label": "",
+            "sifra": "Oznaka za številčenje",
+            "naziv": "",
+            "format": "Oblika številčenja - uporabljajo se zamenjave %p %l %n %s",
+            "prefix": "Predpona se prilepi na začetek številke dokumenta",
+            "suffix": "Pridpona se prilepi na konec številke dokumenta"
+        },
+        "t": {
+            "zaDokument": "Dokument",
+            "ident": "Identifikator",
+            "label": "Naziv",
+            "sifra": "Šifra",
+            "naziv": "Naziv",
+            "format": "Format",
+            "prefix": "Predpona",
+            "suffix": "Pripona"
+        }
+    },
+    "stevilcenjeKonfig":{
         "konfigmenu": "Konfiguracija številčenja",
-        "menu": "Številčenje",
         "konfigTitle": "Konfiguracija številčenja",
         "zaDokument": "Dokument",
         "ident": "Identifikator",
         "label": "Naziv številčenja",
-        "title": "Številčenje",
-        "sifra": "Šifra",
-        "naziv": "Naziv",
-        "format": "Format",
-        "prefix": "Predpona",
-        "suffix": "Pripona"
+        "d": {
+            "zaDokument": "Dokument",
+            "ident": "Identifikator",
+            "label": ""
+        },
+        "t": {
+            "zaDokument": "Dokument",
+            "ident": "Identifikator",
+            "label": "Naziv"
+        }
     }
 }

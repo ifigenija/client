@@ -19,7 +19,7 @@ define([
 
     var Stevilcenje = SeznamView.extend({
         url: baseUrl + '/rest/stevilcenjekonfig',
-        title: i18next.t('stevilcenje.konfigTitle'),
+        title: i18next.t('stevilcenjeKonfig.konfigTitle'),
         schema: schema,
         filterSchema: filterSchema,
         formTemplate: formTpl,
@@ -27,21 +27,21 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('stevilcenje.zaDokument'),
+                label: i18next.t('stevilcenjeKonfig.zaDokument'),
                 name: 'dok',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('stevilcenje.ident'),
+                label: i18next.t('stevilcenjeKonfig.ident'),
                 name: 'stevilcenje.ident',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('stevilcenje.label'),
+                label: i18next.t('stevilcenjeKonfig.label'),
                 name: 'stevilcenje.label',
                 sortable: true
             },
