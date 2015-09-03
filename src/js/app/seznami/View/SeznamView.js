@@ -311,7 +311,10 @@ define([
             this.formR.empty();
             this.renderToolbar();
         }
-        this.prikaziTabelo();
+        
+        if (!this.skritaTabela) {
+            this.prikaziTabelo();
+        }
     };
 
     /**

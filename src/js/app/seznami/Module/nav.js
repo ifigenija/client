@@ -17,7 +17,7 @@ define(['i18next'], function (i18n) {
                 {
                     label: i18n.t("seznami.nav.popa"),
                     uri: "#popa",
-                    permission: "Popa-read",
+                    permission: "Popa-read"
                 },
                 {
                     label: i18n.t("seznami.nav.posta"),
@@ -37,12 +37,12 @@ define(['i18next'], function (i18n) {
                 {
                     label: i18n.t("seznami.nav.zvrstUprizoritve"),                    
                     uri: "#zvrstUprizoritve",
-                    permission: "ZvrstUprizoritve-write",
+                    permission: "ZvrstUprizoritve-write"
                 },
                 {
                     label: i18n.t("seznami.nav.zvrstSurs"),
                     uri: "#zvrstSurs",
-                    permission: "ZvrstSurs-write",
+                    permission: "ZvrstSurs-write"
                 },
                 {
                     label: i18n.t("seznami.nav.abonma"),

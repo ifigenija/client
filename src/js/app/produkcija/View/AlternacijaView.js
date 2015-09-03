@@ -43,7 +43,7 @@ define([
         }).schema,
         title: i18next.t('alternacija.title'),
         detailName: 'alternacije',
-        formTitle: i18next.t('alternacija.title'),
+        formTitle: i18next.t(''),
         triggers: {
             "click .pogodba-dodaj": "dodaj:pogodbo"
         },
