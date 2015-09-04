@@ -53,6 +53,7 @@ define([
      * @type DokumentView
      */
     var UprizoritevEditView = DokumentView.extend({
+        className: 'uprizoritev',
         template: tpl,
         formTemplate: formTpl,
         schema: shema.toFormSchema().schema,

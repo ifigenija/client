@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="panel-body">
-        <div class="raw">
+        <div class="row">
             <div class="col-sm-6 col-md-8 region-postavke-form"></div>
             <div class="col-sm-6 col-md-4 region-alternacije"></div>
         </div>
