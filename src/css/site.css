@@ -837,6 +837,16 @@ fieldset.pomemben legend span {
 .action-gumb {
   padding-right: 10px;
 }
+.seznam-form {
+  margin-top: 10px;
+}
+.seznam-paginator {
+  text-align: center;
+  margin-top: 12px;
+}
+.uprizoritev-panels .region-form {
+  margin-top: 10px;
+}
 /*
 Licenca GPLv3
 */

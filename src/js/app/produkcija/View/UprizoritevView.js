@@ -3,13 +3,14 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     './UprizoritevEditView',
     '../Model/Uprizoritev',
     'i18next',
     'baseUrl',
     'app/Max/Module/Backgrid',
     'formSchema!uprizoritev',
+    'formSchema!uprizoritev/vse?filter=1',
     'radio'
 ], function (
         SeznamView,
@@ -19,13 +20,16 @@ define([
         baseUrl,
         Backgrid,
         schema,
+        filterSchema,
         Radio
         ) {
 
     var UprizoritevView = SeznamView.extend({
         url: baseUrl + '/rest/uprizoritev/vse',
         title: i18next.t('uprizoritev.title'),
-        odprtaForma: true,
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSchema, 
         columns: [
             {
                 cell: 'string',
