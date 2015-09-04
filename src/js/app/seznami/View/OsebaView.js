@@ -2,11 +2,12 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     './OsebaEditView',
     '../Model/Oseba',
     'i18next',
     'baseUrl',
+    'formSchema!oseba?filter=1',
     'radio'
 ], function (
         SeznamView,
@@ -14,13 +15,16 @@ define([
         Model,
         i18next,
         baseUrl,
+        filterSch,
         Radio
         ) {
 
     var OsebaView = SeznamView.extend({
         url: baseUrl + '/rest/oseba',
         title: i18next.t('oseba.title'),
-        odprtaForma: true,
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         columns: [
             {
                 cell: 'string',
