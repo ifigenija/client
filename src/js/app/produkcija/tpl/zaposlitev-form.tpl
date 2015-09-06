@@ -10,6 +10,7 @@
                                 <i class="fa fa-user-plus"></i>
                             </a>
                         </div>
+                        <div class="col-sm-12" data-fields="delovnoMesto"></div>
                         <div class="col-sm-12" data-fields="status"></div>
                     </div>
                 </div>

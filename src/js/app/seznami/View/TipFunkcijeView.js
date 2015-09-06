@@ -26,6 +26,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('tipFunkcije.sifra'),
+                name: 'sifra',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('tipFunkcije.ime'),
                 name: 'ime',
                 sortable: true

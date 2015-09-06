@@ -2,9 +2,10 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/zaposlitev-form.tpl',
-    'formSchema!zaposlitev',
+    'formSchema!zaposlitev/vse',
+    'formSchema!zaposlitev/vse?filter=1',
     '../Model/Zaposlitev',
     'i18next',
     'baseUrl',
@@ -15,6 +16,7 @@ define([
         SeznamView,
         formTpl,
         schema,
+        filterSchema,
         Zaposlitev,
         i18next,
         baseUrl,
@@ -28,6 +30,7 @@ define([
         title: i18next.t('zaposlitev.title'),
         schema: schema,
         formTemplate: formTpl,
+        filterSchema: filterSchema,
         events: {
             'click .oseba-dodaj': 'novaOseba'
         },
@@ -44,6 +47,13 @@ define([
                 editable: false,
                 label: i18next.t('zaposlitev.oseba'),
                 name: 'oseba.label',
+                sortable: true
+            },
+             {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('zaposlitev.delovnoMesto'),
+                name: 'delovnoMesto',
                 sortable: true
             },
             {
