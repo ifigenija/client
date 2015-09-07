@@ -2,8 +2,9 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/tipFunkcije-form.tpl',
+    'formSchema!tipFunkcije?filter=1',
     'formSchema!tipFunkcije',
     '../Model/TipFunkcije',
     'i18next',
@@ -11,6 +12,7 @@ define([
 ], function (
         SeznamView,
         formTpl,
+        filterSch,
         schema,
         TipFunkcije,
         i18next,
@@ -20,6 +22,9 @@ define([
     var TipFunkcijeView = SeznamView.extend({
         url: baseUrl + '/rest/tipFunkcije',
         title: i18next.t('tipFunkcije.title'),
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         columns: [

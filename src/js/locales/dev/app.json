@@ -243,12 +243,14 @@
         "nastopajoc": "Nastopajoč",
         "podrocje": "$t(ent.podrocje)",
         "opis": "$t(ent.opis)",
+        "sifra": "Oznaka",
         "d": {
             "ime": "Moška oblika funkcije",
             "zenskoIme": "Ženska oblika funkcije",
             "nastopajoc": "Ali bo oseba s to funkcijo nastopala",
             "podrocje": "",
-            "opis": ""
+            "opis": "",
+            "sifra": ""
         }
     },
     "drzava": {

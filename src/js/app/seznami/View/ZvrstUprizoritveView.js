@@ -2,8 +2,9 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/zvrstUprizoritve-form.tpl',
+    'formSchema!zvrstUprizoritve?filter=1',
     'formSchema!zvrstUprizoritve',
     '../Model/ZvrstUprizoritve',
     'i18next',
@@ -11,6 +12,7 @@ define([
 ], function (
         SeznamView,
         formTpl,
+        filterSch,
         schema,
         ZvrstUprizoritve,
         i18next,
@@ -20,6 +22,9 @@ define([
     var ZvrstUprizoritveView = SeznamView.extend({
         url: baseUrl + '/rest/zvrstUprizoritve',
         title: i18next.t('zvrstUprizoritve.title'),
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         columns: [
