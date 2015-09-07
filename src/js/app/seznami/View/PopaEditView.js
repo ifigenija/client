@@ -285,15 +285,9 @@ define([
 
     PopaEditView.prototype.renderKontaktne = function () {
         var self = this;
-        var coll = self.model.kontaktneCollection;
-        if (coll.length === 0) {
-            coll.fetch({
-                error: Radio.channel('error').request('handler', 'xhr')
-            });
-        }
         require(['app/seznami/View/KontaktneView'], function (View) {
             var view = new View({
-                collection: coll,
+                collection: self.model.kontaktneOsebeCollection,
                 dokument: self.model
             });
             self.regionOsebe.show(view);

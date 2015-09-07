@@ -2,14 +2,15 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     './PopaEditView',
     '../Model/Popa',
     'i18next',
     'baseUrl',
     'radio',
     'formSchema!popa',
-    'app/Max/Module/Backgrid'
+    'app/Max/Module/Backgrid',
+    'formSchema!popa?filter=1'
 ], function (
         SeznamView,
         PopaEditView,
@@ -18,13 +19,16 @@ define([
         baseUrl,
         Radio,
         schema,
-        Backgrid
+        Backgrid,
+        filterSch
         ) {
 
     var PopaView = SeznamView.extend({
         url: baseUrl + '/rest/popa',
         title: i18next.t('popa.title'),
-        odprtaForma: true,
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         columns: [
             {
                 cell: 'string',

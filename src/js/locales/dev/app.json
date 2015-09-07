@@ -682,6 +682,7 @@
         "individualnaPogodba": "Individualna pogodba",
         "jeZaposlenVdrugemJZ": "Zaposlen še v drugem JZ",
         "jeNastopajoci": "Nastopajoči",
+        "delovnoMesto": "Delovno mesto",
         "d": {
             "oseba": "",
             "status": "",
@@ -692,7 +693,8 @@
             "malica": "",
             "individualnaPogodba": "Zaposlitev z individualno pogodbo",
             "jeZaposlenVdrugemJZ": "Ali je zaposlen v drugem javnem zavodu",
-            "jeNastopajoci": "Ali je nastopajoči"
+            "jeNastopajoci": "Ali je nastopajoči",
+            "delovnoMesto": ""
         }
     },
     "role": {

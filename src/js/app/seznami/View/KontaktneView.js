@@ -27,7 +27,7 @@ define([
     var KontaktneView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
-        detailName: 'kontaktne',
+        detailName: 'kontaktneOsebe',
         dodaj: i18next.t('dodaj'),
         formTitle: i18next.t('kontaktna.title'),
         triggers: {
