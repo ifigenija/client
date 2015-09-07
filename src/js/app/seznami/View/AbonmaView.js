@@ -2,13 +2,13 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/abonma-form.tpl',
     'formSchema!abonma',
     '../Model/Abonma',
     'i18next',
     'baseUrl',
-    'app/Max/Module/Backgrid'
+    'formSchema!abonma?filter=1'
 ], function (
         SeznamView,
         formTpl,
@@ -16,12 +16,15 @@ define([
         Abonma,
         i18next,
         baseUrl,
-        Backgrid
+        filterSch
         ) {
     
     var AbonmaView = SeznamView.extend({
         url: baseUrl + '/rest/abonma',
         title: i18next.t('abonma.title'),
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         columns: [

@@ -2,8 +2,9 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/zvrstSurs-form.tpl',
+    'formSchema!zvrstSurs?filter=1',
     'formSchema!zvrstSurs',
     '../Model/ZvrstSurs',
     'i18next',
@@ -11,6 +12,7 @@ define([
 ], function (
         SeznamView,
         formTpl,
+        filterSch,
         schema,
         ZvrstSurs,
         i18next,
@@ -20,6 +22,9 @@ define([
     var ZvrstSursView = SeznamView.extend({
         url: baseUrl + '/rest/zvrstSurs',
         title: i18next.t('zvrstSurs.title'),
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         columns: [
