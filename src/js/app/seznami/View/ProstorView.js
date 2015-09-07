@@ -2,7 +2,7 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/prostor-form.tpl',
     'formSchema!prostor',
     '../Model/Prostor',
@@ -13,7 +13,8 @@ define([
     'app/Dokument/View/FormView',
     'template!../tpl/postniNaslov-form.tpl',
     'formSchema!postniNaslov',
-    'template!../tpl/postniNaslov-modal.tpl'
+    'template!../tpl/postniNaslov-modal.tpl',
+    'formSchema!prostor?filter=1'
 ], function (
         SeznamView,
         formTpl,
@@ -26,12 +27,16 @@ define([
         FormView,
         postniNaslovTpl,
         postniNaslovSchema,
-        postniNaslovModalTpl
+        postniNaslovModalTpl,
+        filterSch
         ) {
 
     var ProstorView = SeznamView.extend({
         url: baseUrl + '/rest/prostor',
         title: i18next.t('prostor.title'),
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         columns: [
