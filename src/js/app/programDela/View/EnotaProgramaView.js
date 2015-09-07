@@ -312,6 +312,7 @@ define([
             this.$('.celotnaVrednost').html(f(0, 2));
             this.$('.celotnaVrednostMat').html(f(0, 2));
             this.$('.drugiViriVsota').html(f(0, 2));
+            this.$('.vredPes').html(f(0, 2));
         }
 
         //onemogočimo druge vire če je nov model
@@ -462,6 +463,7 @@ define([
             this.$('.celotnaVrednost').html(f(model.get('celotnaVrednost'), 2));
             this.$('.celotnaVrednostMat').html(f(model.get('celotnaVrednostMat'), 2));
             this.$('.drugiViriVsota').html(f(model.get('drugiViriVsota'), 2));
+            this.$('.vredPes').html(f(model.get('pesVsota'), 2));
         }
     };
 
@@ -628,14 +630,19 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.onZaprosenoChange = function () {
-        if (!this.form.commit()) {
-            this.model.preracunajZaproseno();
-            var polja = this.form.fields;
+        var model = this.model;
+        var form = this.form;
 
-            if (this.model.get('vsota') < polja.zaproseno.getValue()) {
-                var f = Handlebars.formatNumber;
-                var vsota = f(this.model.get('vsota'), 2);
-                polja.zaproseno.setError(i18next.t("napaka.zaproseno1") + vsota + i18next.t("napaka.zaproseno2"));
+        if (!form.commit()) {
+            model.preracunajZaproseno();
+            var polja = form.fields;
+
+            var f = Handlebars.formatNumber;
+            var vsota = f(model.get('vsota'), 2);
+
+            if (vsota < polja.zaproseno.getValue()) {
+                polja.zaproseno.setError(i18next.t("napaka.zaproseno1") + vsota);
+
             } else {
                 polja.zaproseno.clearError();
             }

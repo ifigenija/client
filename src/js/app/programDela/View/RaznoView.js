@@ -117,6 +117,7 @@ define([
                     [
                         this.buttons.shrani,
                         this.buttons.preklici,
+                        this.buttons.izracunaj,
                         this.buttons.nasvet
                     ]
                 ] : [[this.buttons.dodaj]];

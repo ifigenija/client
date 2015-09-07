@@ -79,6 +79,14 @@
         <td class="col-numbers">{{u "formatNumber" dnev}}</td>
     </tr>
     {{/if}}
+    {{#if vredProgEnotSklopF}}
+    <tr>
+        <td>{{t "ep.vredProgEnotSklop"}}</td>
+        <td class="col-numbers">{{u "formatNumber" nasDelez}}</td>
+        <td class="col-numbers">{{u "formatNumber" vredProgEnotSklopF}}</td>
+        <td class="col-numbers">{{u "formatNumber" vsota}}</td>
+    </tr>
+    {{/if}}
     <tr>
         <td></td>
         <td class="col-numbers"></td>

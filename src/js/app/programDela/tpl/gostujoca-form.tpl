@@ -1,7 +1,7 @@
 <form>
     <div class="row">
         <div class="col-sm-6 col-md-6">
-            <fieldset data-fields="uprizoritev,ponoviDoma,imaKoprodukcije">
+            <fieldset data-fields="uprizoritev,ponoviDoma,imaKoprodukcije,sort">
                 <legend>
                     <span>{{t "ep.podatki"}}</span>
                 </legend>

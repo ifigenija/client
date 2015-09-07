@@ -225,7 +225,7 @@ define([
             dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.7,
-            vredProgEnotSklop: 0.7
+            vredProgEnotSklopF: 0.7
         },
         nestedCollections: {
             drugiViri: {collection: DrugiViriCollection, mappedBy: 'enotaPrograma'},
@@ -262,14 +262,26 @@ define([
             var nasD = 0;
 
             var PESCollection = this.programskeEnoteSklopaCollection;
-
-            var faktor = this.get('vredProgEnotSklop');
+            
             PESCollection.each(function (pes) {
-                nasD += pes.attributes.vrednostPE * faktor;
+                nasD += pes.attributes.vrednostPE;
             });
 
+            this.set('pesVsota', nasD);
             this.set('nasDelez', nasD);
             EnotaProgramaPostavka.prototype.preracunajInfo.apply(this, arguments);
+        },
+        preracunajZaproseno: function () {
+            var vsota = 0;
+            var faktor = this.get('vredProgEnotSklopF');
+            if (faktor) {
+                var produkt = this.get('nasDelez') * faktor;
+                if (produkt) {
+                    vsota += produkt;
+                }
+            }
+            
+            this.set('vsota', produkt);
         }
     });
 
@@ -469,7 +481,7 @@ define([
             dnevPrvZadF: 0.0, //mednarodno gostovanje
             dnevF: 0.0, //mednarodno gostovanje
             nasDelezF: 0.0,
-            vredProgEnotSklop: 0.7
+            vredProgEnotSklopF: 0.7
         }
     });
     var RazniCollection = Dokument.PostavkaCollection.extend({

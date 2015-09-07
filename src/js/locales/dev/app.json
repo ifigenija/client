@@ -638,7 +638,7 @@
             "tantieme": "Stroški tantiem",
             "maticniKop": "Ali je koproducent lastno gledališče",
             "zakljuceno": "Ali je program dela zaključen in se naj zaklene?",
-            "kpe": "Koeficient programske enote",
+            "kpe": "",
             "uprizoritev": "Uprizoritev oz. projekt, za katerega je strošek"
         }
     },
@@ -1008,6 +1008,7 @@
         "dodatniPodatki": "Podrobno",
         "odkupPredstave": "Odkup predstave",
         "drugiViri": "Drugi nejavni viri",
+        "vredProgEnotSklop": "Programske enote sklopa",
         "d": {
             "naziv": "",
             "uprizoritev": "",
