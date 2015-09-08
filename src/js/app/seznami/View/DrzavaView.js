@@ -2,8 +2,9 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/drzava-form.tpl',
+    'formSchema!drzava?filter=1',
     'formSchema!drzava',
     '../Model/Drzava',
     'i18next',
@@ -11,6 +12,7 @@ define([
 ], function (
         SeznamView,
         formTpl,
+        filterSch,
         schema,
         Drzava,
         i18next,
@@ -20,6 +22,9 @@ define([
     var DrzavaView = SeznamView.extend({
         url: baseUrl + '/rest/drzava',
         title: i18next.t('drzava.title'),
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         columns: [

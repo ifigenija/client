@@ -2,8 +2,9 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/vrstaStroska-form.tpl',
+    'formSchema!vrstaStroska?filter=1',
     'formSchema!vrstaStroska',
     '../Model/VrstaStroska',
     'i18next',
@@ -11,6 +12,7 @@ define([
 ], function (
         SeznamView,
         formTpl,
+        filterSch,
         schema,
         VrstaStroska,
         i18next,
@@ -20,6 +22,9 @@ define([
     var VrstaStroskaView = SeznamView.extend({
         url: baseUrl + '/rest/vrstaStroska',
         title: i18next.t('vrstaStroska.title'),
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         columns: [

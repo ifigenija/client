@@ -2,8 +2,9 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/posta-form.tpl',
+    'formSchema!posta?filter=1',
     'formSchema!posta',
     '../Model/Posta',
     'i18next',
@@ -11,6 +12,7 @@ define([
 ], function (
         SeznamView,
         formTpl,
+        filterSch,
         schema,
         Posta,
         i18next,
@@ -20,6 +22,9 @@ define([
     var PostaView = SeznamView.extend({
         url: baseUrl + '/rest/posta',
         title: i18next.t('posta.title'),
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         columns: [
