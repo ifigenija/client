@@ -199,6 +199,7 @@
         "popa": "Poslovni partner",
         "naslov": "Naslov, kjer se nahaja prostor",
         "jePrizorisce": "Prizorišče",
+        "jeMaticniOder": "Matični oder",
         "sePlanira": "Prostor se planira",
         "d": {
             "sifra": "$t(ent.d.sifra)",
@@ -208,6 +209,7 @@
             "naslov": "Naslov, kjer se nahaja prostor",
             "jePrizorisce": "Ali je prostor prizorišče.",
             "sePlanira": "Ali se upošteva pri planiranju koledarja.",
+            "jeMaticniOder": "Ali je matični oder",
             "kapaciteta": "Število mest v prostoru."
         }
     },
@@ -746,7 +748,7 @@
         "zacetek": "$t(ent.zacetek)",
         "konec": "$t(ent.konec)",
         "opis": "$t(ent.opis)",
-        "vrednostVaj": "Vrednost vaj",
+        "vrednostVaj": "Vrednost vaj oz. vrednost do premiere",
         "vrednostUre": "Vrednost ure",
         "planiranoSteviloVaj": "Planirano število vaj",
         "vrednostPredstave": "Vrednost predstave",
@@ -768,7 +770,7 @@
             "zacetek": "$t(ent.d.zacetek) pogodbe",
             "konec": "$t(ent.d.konec) pogodbe",
             "opis": "$t(ent.d.opis)",
-            "vrednostVaj": "Pavšalna vrednost za vse vaje",
+            "vrednostVaj": "Pavšalna vrednost za vse vaje oz. vrednost do premiere",
             "vrednostVaje": "Pavšalna vrednost ene vaje",
             "vrednostPredstave": "",
             "popa": "",
@@ -1395,7 +1397,7 @@
         }
     },
     "stevilcenje": {
-        "menu": "Številčenje",        
+        "menu": "Številčenje",
         "title": "Številčenje",
         "sifra": "Šifra",
         "naziv": "Naziv številčenja",
@@ -1423,7 +1425,7 @@
             "suffix": "Pripona"
         }
     },
-    "stevilcenjeKonfig":{
+    "stevilcenjeKonfig": {
         "konfigmenu": "Konfiguracija številčenja",
         "konfigTitle": "Konfiguracija številčenja",
         "zaDokument": "Dokument",
