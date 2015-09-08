@@ -22,7 +22,7 @@ define([
     var ZvrstSursView = SeznamView.extend({
         url: baseUrl + '/rest/zvrstSurs',
         title: i18next.t('zvrstSurs.title'),
-        zapirajFormo: false,
+        zapirajFormo: true,
         skrivajTabelo: true,
         filterSchema: filterSch,
         schema: schema,

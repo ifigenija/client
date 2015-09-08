@@ -22,7 +22,7 @@ define([
     var ZvrstUprizoritveView = SeznamView.extend({
         url: baseUrl + '/rest/zvrstUprizoritve',
         title: i18next.t('zvrstUprizoritve.title'),
-        zapirajFormo: false,
+        zapirajFormo: true,
         skrivajTabelo: true,
         filterSchema: filterSch,
         schema: schema,

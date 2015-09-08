@@ -22,7 +22,7 @@ define([
     var DrzavaView = SeznamView.extend({
         url: baseUrl + '/rest/drzava',
         title: i18next.t('drzava.title'),
-        zapirajFormo: false,
+        zapirajFormo: true,
         skrivajTabelo: true,
         filterSchema: filterSch,
         schema: schema,
