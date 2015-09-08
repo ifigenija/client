@@ -31,6 +31,11 @@ define(['i18next'], function (i18n) {
                     uri: "#fs/manager"
                 },
                 {
+                    label: i18n.t("arhiv.nav.besedila"),
+                    uri: "#arhiv/besedila",
+                    permission: "Besedila-write"
+                },
+                {
                     label: i18n.t("arhiv.nav.vrstaZapisa"),
                     icon: "",
                     uri: "#fs/vrstaZapisa"

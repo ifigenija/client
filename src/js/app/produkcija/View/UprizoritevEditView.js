@@ -186,7 +186,7 @@ define([
         var view = new FunkcijaView({
             collection: coll,
             dokument: this.model,
-            odprtaForma: true,
+            zapirajFormo: false,
             potrdiBrisanje: true
         });
         view.detailName = detailName;

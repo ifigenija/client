@@ -22,7 +22,7 @@ define([
     var TipFunkcijeView = SeznamView.extend({
         url: baseUrl + '/rest/tipFunkcije',
         title: i18next.t('tipFunkcije.title'),
-        zapirajFormo: false,
+        zapirajFormo: true,
         skrivajTabelo: true,
         filterSchema: filterSch,
         schema: schema,

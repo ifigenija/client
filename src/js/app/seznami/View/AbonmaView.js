@@ -22,7 +22,7 @@ define([
     var AbonmaView = SeznamView.extend({
         url: baseUrl + '/rest/abonma',
         title: i18next.t('abonma.title'),
-        zapirajFormo: false,
+        zapirajFormo: true,
         skrivajTabelo: true,
         filterSchema: filterSch,
         schema: schema,

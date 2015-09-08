@@ -2,28 +2,31 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/besedilo-form.tpl',
+    'formSchema!besedilo?filter=1',
     'formSchema!besedilo',
     '../Model/Besedilo',
     'i18next',
     'baseUrl',
-    'app/Max/Module/Backgrid',
     'app/Zapisi/View/ZapisiLayout'
 ], function (
         SeznamView,
         formTpl,
+        filterSch,
         schema,
         Model,
         i18next,
         baseUrl,
-        Backgrid,
         ZapisiLayout
         ) {
 
     var BesediloView = SeznamView.extend({
         url: baseUrl + '/rest/besedilo',
         title: i18next.t('besedilo.title'),
+        zapirajFormo: true,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         columns: [
@@ -58,6 +61,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('besedilo.interNaslov'),
+                name: 'internacionalniNaslov',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('besedilo.prevajalec'),
                 name: 'prevajalec',
                 sortable: true
@@ -68,6 +78,13 @@ define([
                 editable: false,
                 label: i18next.t('besedilo.letoIzida'),
                 name: 'letoIzida',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('besedilo.zaloznik'),
+                name: 'zaloznik',
                 sortable: true
             },
             {

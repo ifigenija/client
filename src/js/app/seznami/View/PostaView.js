@@ -22,7 +22,7 @@ define([
     var PostaView = SeznamView.extend({
         url: baseUrl + '/rest/posta',
         title: i18next.t('posta.title'),
-        zapirajFormo: false,
+        zapirajFormo: true,
         skrivajTabelo: true,
         filterSchema: filterSch,
         schema: schema,

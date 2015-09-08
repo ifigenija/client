@@ -34,7 +34,7 @@ define([
     var ProstorView = SeznamView.extend({
         url: baseUrl + '/rest/prostor',
         title: i18next.t('prostor.title'),
-        zapirajFormo: false,
+        zapirajFormo: true,
         skrivajTabelo: true,
         filterSchema: filterSch,
         schema: schema,
