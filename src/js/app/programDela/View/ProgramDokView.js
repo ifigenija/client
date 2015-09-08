@@ -456,7 +456,7 @@ define([
             var view = new View({
                 collection: self.model.premiereCollection,
                 dokument: self.model,
-                odprtaForma: true,
+                zapirajFormo: false,
                 potrdiBrisanje: true
             });
             self.premiereR.show(view);
@@ -476,7 +476,7 @@ define([
             var view = new View({
                 collection: self.model.ponovitvePremiereCollection,
                 dokument: self.model,
-                odprtaForma: true,
+                zapirajFormo: false,
                 potrdiBrisanje: true
             });
             self.ponovitvePremierR.show(view);
@@ -496,7 +496,7 @@ define([
             var view = new View({
                 collection: self.model.ponovitvePrejsnjihCollection,
                 dokument: self.model,
-                odprtaForma: true,
+                zapirajFormo: false,
                 potrdiBrisanje: true
             });
             self.ponovitvePrejsnjihR.show(view);
@@ -516,7 +516,7 @@ define([
             var view = new View({
                 collection: self.model.gostujociCollection,
                 dokument: self.model,
-                odprtaForma: true,
+                zapirajFormo: false,
                 potrdiBrisanje: true
             });
             self.gostujociR.show(view);
@@ -536,7 +536,7 @@ define([
             var view = new View({
                 collection: self.model.gostovanjaCollection,
                 dokument: self.model,
-                odprtaForma: true,
+                zapirajFormo: false,
                 potrdiBrisanje: true
             });
             self.gostovanjaR.show(view);
@@ -556,7 +556,7 @@ define([
             var view = new View({
                 collection: self.model.izjemniCollection,
                 dokument: self.model,
-                odprtaForma: true,
+                zapirajFormo: false,
                 potrdiBrisanje: true
             });
             self.izjemniR.show(view);
@@ -583,7 +583,7 @@ define([
             var view = new View({
                 collection: coll,
                 dokument: self.model,
-                odprtaForma: true,
+                zapirajFormo: false,
                 potrdiBrisanje: true
             });
             self.festivaliR.show(view);
@@ -603,7 +603,7 @@ define([
             var view = new View({
                 collection: self.model.programiRaznoCollection,
                 dokument: self.model,
-                odprtaForma: true,
+                zapirajFormo: false,
                 potrdiBrisanje: true
             });
             self.razniR.show(view);
