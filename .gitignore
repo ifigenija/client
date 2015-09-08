@@ -1,5 +1,6 @@
 src/lib/
 src/dist/
+src/config.php
 node_modules/
 .DS_Store
 npm-debug.log
