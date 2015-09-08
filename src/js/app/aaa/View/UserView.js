@@ -2,24 +2,24 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/user-form.tpl',
     'template!../tpl/user.tpl',
     './RelationView',
+    'formSchema!user?filter=1',
     'formSchema!user',
     'i18next',
     'baseUrl',
-    'app/Max/Module/Backgrid',
     'app/Dokument/Model/Dokument'
 ], function (
         SeznamView,
         formTpl,
         userTpl,
         RelationView,
+        filterSch,
         schema,
         i18next,
         baseUrl,
-        Backgrid,
         Dokument
         ) {
     
@@ -32,13 +32,16 @@ define([
         formTemplate: formTpl,
         template: userTpl,
         schema: schema,
-        odprtaForma: true,
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
-            rolesR: '.seznam-roles',
-            prilogeR: '.seznam-priloge'
+            sidebarR: '.seznam-sidebar',
+            pagiR: '.seznam-paginator',
+            rolesR: '.seznam-roles'
         },
         title: i18next.t('user.title'),
         columns: [
@@ -157,9 +160,9 @@ define([
         }
     };
 
-    UserView.prototype.preklici = function (model) {
+    UserView.prototype.onPreklici = function (model) {
 
-        SeznamView.prototype.preklici.apply(this, arguments);
+        SeznamView.prototype.onPreklici.apply(this, arguments);
         this.rolesR.empty();
     };
 

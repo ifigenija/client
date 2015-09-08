@@ -5,20 +5,20 @@
 define([
     'app/Dokument/Model/Dokument',
     './RelationView',
-    'underscore',
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/perm-form.tpl',
     'template!../tpl/perm.tpl',
+    'formSchema!permission?filter=1',
     'formSchema!permission',
     'i18next',
     'baseUrl'
 ], function (
         Dokument,
         RelationView,
-        _,
         SeznamView,
         formTpl,
         permTpl,
+        filterSch,
         schema,
         i18next,
         baseUrl
@@ -34,13 +34,16 @@ define([
         schema: schema,
         formTemplate: formTpl,
         template: permTpl,
-        odprtaForma: true,
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
-            rolesR: '.seznam-roles',
-            prilogeR: '.seznam-priloge'
+            sidebarR: '.seznam-sidebar',
+            pagiR: '.seznam-paginator',
+            rolesR: '.seznam-roles'
         },
         columns: [
             {
@@ -117,9 +120,9 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    PermissionView.prototype.preklici = function (model) {
+    PermissionView.prototype.onPreklici = function (model) {
 
-        SeznamView.prototype.preklici.apply(this, arguments);
+        SeznamView.prototype.onPreklici.apply(this, arguments);
         this.rolesR.empty();
     };
 

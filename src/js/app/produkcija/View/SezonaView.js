@@ -2,29 +2,39 @@
  * Licenca GPLv3
  */
 define([
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/sezona-form.tpl',
+    'formSchema!sezona?filter=1',
     'formSchema!sezona',
     '../Model/Sezona',
     'i18next',
-    'baseUrl',
-    'app/Max/Module/Backgrid'
+    'baseUrl'
 ], function (
         SeznamView,
         formTpl,
+        filterSch,
         schema,
         Sezona,
         i18next,
-        baseUrl,
-        Backgrid
+        baseUrl
         ) {
 
     var SezonaView = SeznamView.extend({
         url: baseUrl + '/rest/sezona',
         title: i18next.t('sezona.title'),
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         columns: [
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('sezona.sifra'),
+                name: 'sifra',
+                sortable: true
+            },
             {
                 cell: 'string',
                 editable: false,

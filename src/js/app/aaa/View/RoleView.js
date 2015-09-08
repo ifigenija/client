@@ -5,20 +5,20 @@
 define([
     'app/Dokument/Model/Dokument',
     './RelationView',
-    'underscore',
-    'app/seznami/View/SeznamView',
+    'app/Dokument/View/SeznamView',
     'template!../tpl/perm-form.tpl',
     'template!../tpl/role.tpl',
+    'formSchema!role?filter=1',
     'formSchema!role',
     'i18next',
     'baseUrl'
 ], function (
         Dokument,
         RelationView,
-        _,
         SeznamView,
         formTpl,
         roleTpl,
+        filterSch,
         schema,
         i18next,
         baseUrl
@@ -31,17 +31,20 @@ define([
     var RoleView = SeznamView.extend({
         url: baseUrl + '/rest/role',
         title: i18next.t('role.title'),
+        zapirajFormo: false,
+        skrivajTabelo: true,
+        filterSchema: filterSch,
         schema: schema,
         formTemplate: formTpl,
         template: roleTpl,
-        odprtaForma: true,
         regions: {
             formR: '.seznam-forma',
             gridR: '.seznam-tabela',
             toolbarR: '.seznam-toolbar',
+            sidebarR: '.seznam-sidebar',
+            pagiR: '.seznam-paginator',
             permsR: '.seznam-perms',
-            usersR: '.seznam-users',
-            prilogeR: '.seznam-priloge'
+            usersR: '.seznam-users'
         },
         dodaj: i18next.t('role.dodaj'),
         columns: [
@@ -113,9 +116,9 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    RoleView.prototype.preklici = function (model) {
+    RoleView.prototype.onPreklici = function (model) {
 
-        SeznamView.prototype.preklici.apply(this, arguments);
+        SeznamView.prototype.onPreklici.apply(this, arguments);
         this.usersR.empty();
         this.permsR.empty();
     };
