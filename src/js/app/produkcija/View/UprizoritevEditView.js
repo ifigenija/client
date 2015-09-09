@@ -4,6 +4,8 @@
 define([
     'app/Dokument/View/DokumentView',
     './FunkcijaView',
+    './VajaView',
+    './PredstavaView',
     'template!../tpl/uprizoritev-edit.tpl',
     'template!../tpl/uprizoritev-form.tpl',
     'formSchema!uprizoritev',
@@ -14,6 +16,8 @@ define([
 ], function (
         DokumentView,
         FunkcijaView,
+        VajaView,
+        PredstavaView,
         tpl,
         formTpl,
         shema,
@@ -43,6 +47,14 @@ define([
         {
             name: i18next.t('uprizoritev.ostaliSodelujoci'),
             event: 'tehniki'
+        },
+        {
+            name: i18next.t('uprizoritev.vaje'),
+            event: 'vaje'
+        },
+        {
+            name: i18next.t('uprizoritev.predstave'),
+            event: 'predstave'
         }
     ];
 
@@ -156,14 +168,23 @@ define([
         this.skrijSplosni();
         this.renderTehniki();
     };
-
+    
     /**
-     * Klik na tab za koprodukcija podatke 
+     * Klik na tab za arhivalije podatke 
      * @returns {undefined}
      */
-    UprizoritevEditView.prototype.onKoprodukcija = function () {
+    UprizoritevEditView.prototype.onVaje = function () {
         this.skrijSplosni();
-        this.renderKoprodukcija();
+        this.renderVaje();
+    };
+    
+    /**
+     * Klik na tab za arhivalije podatke 
+     * @returns {undefined}
+     */
+    UprizoritevEditView.prototype.onPredstave = function () {
+        this.skrijSplosni();
+        this.renderPredstave();
     };
 
     /**
@@ -239,6 +260,53 @@ define([
             });
         }
         this.renderFunkcije(c, 'uprizoritev.tehniki', 'tehniki');
+    };
+    /**
+     * 
+     * Render pogleda za ostale sodelujoče
+     * 
+     * @returns {undefined}
+     */
+    UprizoritevEditView.prototype.renderVaje = function () {
+        var c = this.model.vajeCollection;
+        if (c.length === 0) {
+            c.fetch({
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        }
+        
+         var view = new VajaView({
+            collection: c,
+            dokument: this.model,
+            zapirajFormo: false,
+            potrdiBrisanje: true
+        });
+        
+        this.regionDetail.show(view);
+        
+    };
+    /**
+     * 
+     * Render pogleda za ostale sodelujoče
+     * 
+     * @returns {undefined}
+     */
+    UprizoritevEditView.prototype.renderPredstave = function () {
+        var c = this.model.predstaveCollection;
+        if (c.length === 0) {
+            c.fetch({
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        }
+        
+        var view = new PredstavaView({
+            collection: c,
+            dokument: this.model,
+            zapirajFormo: false,
+            potrdiBrisanje: true
+        });
+        
+        this.regionDetail.show(view);
     };
 
     return UprizoritevEditView;

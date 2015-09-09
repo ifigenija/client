@@ -19,6 +19,36 @@ define([
         url: baseUrl + '/rest/funkcija',
         index: 'sort'
     });
+    
+    /**
+     * Model za vajo
+     */
+    var VajaModel = Dokument.Model.extend({
+        urlRoot: baseUrl + '/rest/vaja'
+    });
+    /**
+     * Kolekcija za vaje 
+     */
+    var VajeCollection = Dokument.PostavkaCollection.extend({
+        model: VajaModel,
+        url: baseUrl + '/rest/vaja',
+        index: 'sort'
+    });
+    
+    /**
+     * Model za predstavo
+     */
+    var PredstavaModel = Dokument.Model.extend({
+        urlRoot: baseUrl + '/rest/predstava'
+    });
+    /**
+     * Kolekcija za predstave 
+     */
+    var PredstaveCollection = Dokument.PostavkaCollection.extend({
+        model: PredstavaModel,
+        url: baseUrl + '/rest/predstava',
+        index: 'sort'
+    });
 
 
     var UprizoritevModel = Dokument.Model.extend({
@@ -26,7 +56,9 @@ define([
         nestedCollections: {
             umetniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['umetnik', 'inspicient']}},
             igralci: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['igralec']}},
-            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['tehnik']}}
+            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['tehnik']}},
+            vaje: {collection: VajeCollection, mappedBy: 'uprizoritev'},
+            predstave: {collection: PredstaveCollection, mappedBy: 'uprizoritev'}
 
         },
         dodajPostavko: function (nested) {
@@ -52,6 +84,16 @@ define([
                     postavka = new FunkcijaModel({
                         uprizoritev: this.get('id'),
                         podrocje: 'tehnik'
+                    });
+                    break;
+                case 'vaje':
+                    postavka = new VajaModel({
+                        uprizoritev: this.get('id')
+                    });
+                    break;
+                case 'predstave':
+                    postavka = new PredstavaModel({
+                        uprizoritev: this.get('id')
                     });
                     break;
             }
