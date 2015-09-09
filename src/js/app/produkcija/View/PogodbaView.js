@@ -5,14 +5,12 @@ define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/pogodba-form.tpl',
     'formSchema!pogodba',
-    'i18next',
-    'app/Max/Module/Backgrid'
+    'i18next'
 ], function (
         PostavkeView,
         formTpl,
         schema,
-        i18next,
-        Backgrid
+        i18next
         ) {
     
     var PogodbaView = PostavkeView.extend({
@@ -20,7 +18,7 @@ define([
         schema: schema.toFormSchema().schema,
         title: i18next.t('pogodba.title'),
         detailName: 'pogodbe',
-        formTitle: i18next.t('pogodba.title'),
+        formTitle: i18next.t(''),
         gridMeta: [
             {
                 cell: 'string',
@@ -41,6 +39,13 @@ define([
                 editable: false,
                 label: i18next.t('pogodba.oseba'),
                 name: 'oseba.label',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('pogodba.funkcija'),
+                name: 'funkcija',
                 sortable: true
             },
             {

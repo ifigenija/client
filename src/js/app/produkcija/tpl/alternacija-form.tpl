@@ -1,7 +1,7 @@
 <form>
     <div class="row">
         <div class="col-sm-6">
-            <div data-fields="funkcija,oseba"></div>
+            <div data-fields="oseba,funkcija"></div>
             <div class="row">
                 <div class="col-sm-9">
                     <div data-fields="pogodba"></div>

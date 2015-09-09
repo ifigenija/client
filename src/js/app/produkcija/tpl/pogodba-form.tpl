@@ -7,6 +7,9 @@
                         <div style="display: table-row">
                             {{t "pogodba.oseba"}}: {{ oseba.label }}
                         </div>
+                        <div style="display: table-row">
+                            {{t "pogodba.funkcija"}}: {{ funkcija }}
+                        </div>
                     </div>
                     <div data-fields="jeAvtorskePravice,igralec,zaposlenVDrJz,samozaposlen,zacetek,konec"></div>
                 </div>

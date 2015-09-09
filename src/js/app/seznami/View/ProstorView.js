@@ -71,6 +71,13 @@ define([
             {
                 cell: 'boolean',
                 editable: false,
+                label: i18next.t('prostor.jeMaticniOder'),
+                name: 'jeMaticniOder',
+                sortable: true
+            },
+            {
+                cell: 'boolean',
+                editable: false,
                 label: i18next.t('prostor.jePrizorisce'),
                 name: 'jePrizorisce',
                 sortable: true
