@@ -35,8 +35,31 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('vaja.dogodek'),
+                label: i18next.t('dogodek.title'),
                 name: 'dogodek.title',
+                sortable: true
+            },
+            {
+                headerCell: 'number',
+                cell: 'date',
+                editable: false,
+                label: i18next.t('dogodek.zacetek'),
+                name: 'dogodek.zacetek',
+                sortable: true
+            },
+            {
+                headerCell: 'number',
+                cell: 'date',
+                editable: false,
+                label: i18next.t('dogodek.konec'),
+                name: 'dogodek.konec',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('dogodek.prostor'),
+                name: 'dogodek.prostor',
                 sortable: true
             },
             {
