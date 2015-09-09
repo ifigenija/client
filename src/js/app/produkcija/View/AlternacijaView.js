@@ -160,9 +160,9 @@ define([
 
         this.form.on('konec:change', this.preveriDatum, this);
     };
-    
+
     AlternacijaView.prototype.onShrani = function () {
-        if(this.preveriDatum(this.form, this.form.fields.konec)){
+        if (this.preveriDatum(this.form, this.form.fields.konec)) {
             PostavkeView.prototype.onShrani.apply(this, arguments);
         }
     };
@@ -198,30 +198,32 @@ define([
             template: formModalTpl
         });
 
-        Fv.prototype.onFormChange = function (form) {
+        Fv.prototype.placiloVaje = function (form) {
             var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
             var vrednostVaje = form.fields.vrednostVaje.editor.$el;
             var vrednostVaj = form.fields.vrednostVaj.editor.$el;
+            var steviloVaj = form.fields.planiranoSteviloVaj.editor.$el;
 
-            if (!placiloNaVajo) {
+            if (placiloNaVajo) {
                 vrednostVaj.attr("disabled", "disabled");
+                steviloVaj.removeAttr("disabled");
                 vrednostVaje.removeAttr("disabled");
             } else {
                 vrednostVaj.removeAttr("disabled");
+                steviloVaj.attr("disabled", "disabled");
                 vrednostVaje.attr("disabled", "disabled");
 
             }
         };
 
+        Fv.prototype.onFormChange = function (form) {
+            this.placiloVaje(form);
+        };
+
         Fv.prototype.onRender = function () {
             var self = this;
             this.listenTo(this, 'render', function () {
-                var placiloNaVajo = self.form.fields.placiloNaVajo.editor.getValue();
-                if (placiloNaVajo) {
-                    self.form.fields.vrednostVaje.editor.$el.attr("disabled", "disabled");
-                } else {
-                    self.form.fields.vrednostVaj.editor.$el.attr("disabled", "disabled");
-                }
+                self.placiloVaje(self.form);
             });
         };
 
@@ -244,21 +246,19 @@ define([
         var shraniSpremembe = function () {
             var model = modal.options.content.model;
             var view = modal.options.content;
-            if (!model.get('id')) {
-                view.on('save:success', function (model) {
-                    var form = self.form;
-                    var editor = form.fields.pogodba.editor;
-                    editor.setValue(model.get('id'));
-                    form.trigger('change');
-                    form.trigger('pogodba:change', form, editor);
-                    self.dokument.alternacijeCollection.fetch({
-                        success: function () {
-                            self.renderList();
-                        },
-                        error: Radio.channel('error').request('handler', 'xhr')
-                    });
+            view.on('save:success', function (model) {
+                var form = self.form;
+                var editor = form.fields.pogodba.editor;
+                editor.setValue(model.get('id'));
+                form.trigger('change');
+                //form.trigger('pogodba:change', form, editor);
+                self.dokument.alternacijeCollection.fetch({
+                    success: function () {
+                        self.renderList();
+                    },
+                    error: Radio.channel('error').request('handler', 'xhr')
                 });
-            }
+            });
             view.triggerMethod('shrani');
         };
     };

@@ -518,6 +518,8 @@
         "prvaSlovenska": "Prva slovenska uprizoritev",
         "naslovIzvirnika": "Naslov izvirnika",
         "podnaslovIzvirnika": "Podnaslov izvirnika",
+        "vaje": "Vaje",
+        "predstave": "Predstave",
         "t": {
             "datumPremiere": "Datum premiere",
             "sifra": "Številka"
@@ -1442,6 +1444,37 @@
             "zaDokument": "Dokument",
             "ident": "Identifikator",
             "label": "Naziv"
+        }
+    },
+    "vaja": {
+        "title": "Vaje",
+        "dogodek": "Dogodek",
+        "zaporedna": "Zaporedna",
+        "d": {
+            "dogodek": "",
+            "zaporedna": ""
+        }
+    },
+    "predstava": {
+        "title": "Predstave",
+        "zaporedna": "Zaporedna",
+        "dogodek": "Dogodek",
+        "gostovanje": "Gostovanje",
+        "d": {
+            "zaporedna": "",
+            "dogodek": "",
+            "gostovanje": ""
+        }
+    },
+    "dogodek": {
+        "title": "Dogodki",
+        "zacetek": "Začetek",
+        "konec": "Konec",
+        "prostor": "Prostor",
+        "d": {
+            "zacetek": "",
+            "konec": "",
+            "prostor": ""
         }
     }
 }

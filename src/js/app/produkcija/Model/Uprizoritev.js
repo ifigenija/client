@@ -16,8 +16,7 @@ define([
      */
     var ZasedbaCollection = Dokument.PostavkaCollection.extend({
         model: FunkcijaModel,
-        url: baseUrl + '/rest/funkcija',
-        index: 'sort'
+        url: baseUrl + '/rest/funkcija'
     });
     
     /**
@@ -31,8 +30,7 @@ define([
      */
     var VajeCollection = Dokument.PostavkaCollection.extend({
         model: VajaModel,
-        url: baseUrl + '/rest/vaja',
-        index: "zaporedna"
+        url: baseUrl + '/rest/vaja'
     });
     
     /**

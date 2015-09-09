@@ -85,12 +85,15 @@ define([
         var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
         var vrednostVaje = form.fields.vrednostVaje.editor.$el;
         var vrednostVaj = form.fields.vrednostVaj.editor.$el;
+        var steviloVaj = form.fields.planiranoSteviloVaj.editor.$el;
 
         if (placiloNaVajo) {
             vrednostVaj.attr("disabled", "disabled");
+            steviloVaj.removeAttr("disabled");
             vrednostVaje.removeAttr("disabled");
         } else {
             vrednostVaj.removeAttr("disabled");
+            steviloVaj.attr("disabled", "disabled");
             vrednostVaje.attr("disabled", "disabled");
 
         }
