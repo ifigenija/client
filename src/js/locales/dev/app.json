@@ -1398,6 +1398,31 @@
             "naziv": "Naziv"
         }
     },
+    "postavkaC2": {
+        "title": "Postavka za prilogo C2",
+        "skupina": "Skupina vrste materialnega stroška",
+        "podskupina": "Podskupina vrste materialnega stroška",
+        "naziv": "Naziv vrste materialnega stroška",
+        "vrPremiere": "Vresnosti stroškovpremiere ",
+        "vrPonovitvePremier": "Vrednosti stroškov ponovitve upr. premier ",
+        "vrPonovitvePrejsnjih": "Vrednosti stroškov ponovitve upr. prejšnjih sezon",
+        "vrGostovanjaZamejstvo": "Vrednosti stroškov gostvanj v zamejstvu",
+        "vrFestivali": "Vrednosti stroškov festivali",
+        "vrGostovanjaInt": "Vrednosti stroškov mednarodna gostovanja",
+        "vrOstalo": "Vrednosti stroškov ostalo",
+        "d": {
+            "skupina": "Skupina vrste materialnega stroška",
+            "podskupina": "Podskupina vrste materialnega stroška",
+            "naziv": "Naziv vrste materialnega stroška",
+            "vrPremiere": "Vresnosti stroškovpremiere ",
+            "vrPonovitvePremier": "Vrednosti stroškov ponovitve upr. premier ",
+            "vrPonovitvePrejsnjih": "Vrednosti stroškov ponovitve upr. prejšnjih sezon",
+            "vrGostovanjaZamejstvo": "Vrednosti stroškov gostvanj v zamejstvu",
+            "vrFestivali": "Vrednosti stroškov festivali",
+            "vrGostovanjaInt": "Vrednosti stroškov mednarodna gostovanja",
+            "vrOstalo": "Vrednosti stroškov ostalo"
+        }
+    },
     "stevilcenje": {
         "menu": "Številčenje",
         "title": "Številčenje",
