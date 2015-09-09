@@ -28,7 +28,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('vaja.dogodek'),
-                name: 'dogodek',
+                name: 'dogodek.title',
                 sortable: true
             },
             {
