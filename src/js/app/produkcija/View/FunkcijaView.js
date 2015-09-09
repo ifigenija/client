@@ -13,7 +13,8 @@ define([
     'formSchema!funkcija',
     'template!../tpl/funkcija-form.tpl',
     'template!../tpl/funkcija.tpl',
-    'radio'
+    'radio',
+    'app/seznami/Model/TipFunkcije'
 ], function (
         baseUrl,
         PostavkeView,
@@ -26,7 +27,8 @@ define([
         schema,
         formTpl,
         tpl,
-        Radio
+        Radio,
+        TipFunkcijeModel
         ) {
 
     // odstranim področje iz sheme, ker 
@@ -120,6 +122,29 @@ define([
         ]
     });
 
+    FunkcijaView.prototype.tipFunkcijeChange = function (form, editor) {
+        var tip = form.fields.tipFunkcije.editor.getValue();
+
+        var preveriPodrocje = function () {
+            var vrednost = form.fields.velikost.editor.getValue();
+            var velikost = form.fields.velikost;
+            
+            if (model.get('podrocje') === 'igralec') {
+                if (!vrednost) {
+                    velikost.setError(i18next.t("std.napaka.velikost"));
+                } else {
+                    velikost.clearError();
+                }
+            } else {
+                velikost.clearError();
+            }
+        };
+
+        var model = new TipFunkcijeModel.Model({id: tip});
+        model.once('sync', preveriPodrocje);
+        model.fetch();
+    };
+
     /**
      * 
      * @returns {undefined}
@@ -135,7 +160,8 @@ define([
                 this.alterR.empty();
             }, this);
         }
-
+        this.form.on('tipFunkcije:change', this.tipFunkcijeChange, this);
+        this.form.on('velikost:change', this.tipFunkcijeChange, this);
     };
 
     /**
@@ -185,7 +211,7 @@ define([
             });
         }
     };
-    
+
     /**
      * Nastavimo alternacijo kot privzeto
      * @param {type} alterID

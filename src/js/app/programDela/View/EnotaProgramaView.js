@@ -226,7 +226,7 @@ define([
         var polja = form.fields;
 
         if (avtHonSamoZ > avtHon) {
-            polja.avtorskiHonorarjiSamoz.setError(i18next.t("napaka.avtHonSamoz"));
+            polja.avtorskiHonorarjiSamoz.setError(i18next.t("std.napaka.avtHonSamoz"));
         } else {
             polja.avtorskiHonorarjiSamoz.clearError();
         }
@@ -244,7 +244,7 @@ define([
         var polja = form.fields;
 
         if (vredGostZame > nasDelez) {
-            polja.celotnaVrednostGostovSZ.setError(i18next.t("napaka.gostSZVrednost"));
+            polja.celotnaVrednostGostovSZ.setError(i18next.t("std.napaka.gostSZVrednost"));
         } else {
             polja.celotnaVrednostGostovSZ.clearError();
         }
@@ -641,7 +641,7 @@ define([
             var vsota = f(model.get('vsota'), 2);
 
             if (vsota < polja.zaproseno.getValue()) {
-                polja.zaproseno.setError(i18next.t("napaka.zaproseno1") + vsota);
+                polja.zaproseno.setError(i18next.t("std.napaka.zaproseno1") + vsota);
 
             } else {
                 polja.zaproseno.clearError();

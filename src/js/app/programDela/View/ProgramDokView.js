@@ -172,7 +172,7 @@ define([
 
         var success = function () {
             Radio.channel('error').command('flash', {
-                message: i18next.t("uspeh.kloniranje"),
+                message: i18next.t("std.uspeh.kloniranje"),
                 code: '9000702',
                 severity: 'success'
             });
@@ -180,7 +180,7 @@ define([
 
         var error = function () {
             Radio.channel('error').command('flash', {
-                message: i18next.t("napaka.kloniranje"),
+                message: i18next.t("std.napaka.kloniranje"),
                 code: '9000700',
                 severity: 'error'
             });
@@ -212,7 +212,7 @@ define([
                 });
 
                 Radio.channel('error').command('flash', {
-                    message: i18next.t("uspeh.zakleni"),
+                    message: i18next.t("std.uspeh.zakleni"),
                     code: '9000703',
                     severity: 'success'
                 });
@@ -220,7 +220,7 @@ define([
 
             var error = function () {
                 Radio.channel('error').command('flash', {
-                    message: i18next.t("napaka.zakleni"),
+                    message: i18next.t("std.napaka.zakleni"),
                     code: '9000701',
                     severity: 'error'
                 });
@@ -269,7 +269,7 @@ define([
                 });
 
                 Radio.channel('error').command('flash', {
-                    message: i18next.t("uspeh.odkleni"),
+                    message: i18next.t("std.uspeh.odkleni"),
                     code: '9000703',
                     severity: 'success'
                 });
@@ -277,7 +277,7 @@ define([
 
             var error = function () {
                 Radio.channel('error').command('flash', {
-                    message: i18next.t("napaka.odkleni"),
+                    message: i18next.t("std.napaka.odkleni"),
                     code: '9000701',
                     severity: 'error'
                 });

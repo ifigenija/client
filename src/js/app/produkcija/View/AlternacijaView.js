@@ -141,7 +141,7 @@ define([
         var polja = form.fields;
 
         if (zacetek >= konec) {
-            polja.konec.setError(i18next.t("napaka.datum"));
+            polja.konec.setError(i18next.t("std.napaka.datum"));
             return false;
         } else {
             polja.konec.clearError();

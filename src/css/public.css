@@ -7828,6 +7828,7 @@ span.stevilka-na-veliko {
 .alter-izbor > form.form-inline {
   padding-left: 0px !important;
   padding-right: 0px !important;
+  padding-top: 0px !important;
 }
 .alter-dodaj {
   display: table-cell;
@@ -7983,10 +7984,7 @@ fieldset.pomemben legend span {
   margin-bottom: 5px;
 }
 .vnosno-polje-gumb {
-  padding-top: 24px;
-}
-.vnosno-polje-gumb-funkcija {
-  margin-top: 38px;
+  padding-top: 15px;
 }
 .fieldset-brez-legend {
   margin-top: 15px;
@@ -8003,6 +8001,9 @@ fieldset.pomemben legend span {
 }
 .uprizoritev-panels .region-form {
   margin-top: 10px;
+}
+.funkcija-alternacije-naslov {
+  margin-top: 15px;
 }
 /*
 Licenca GPLv3

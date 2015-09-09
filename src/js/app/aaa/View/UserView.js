@@ -109,7 +109,7 @@ define([
         var geslo = form.fields.password;
         
         if(text.length > 0 && text.length < 8){
-            geslo.setError(i18next.t("napaka.gesloKratko"));
+            geslo.setError(i18next.t("std.napaka.gesloKratko"));
         }else if(text.length >= 8){
             geslo.clearError();
             var maliText = text.toLowerCase();
@@ -130,7 +130,7 @@ define([
             }
             
             if(pogoji < 3){
-                geslo.setError(i18next.t("napaka.gesloSibko"));
+                geslo.setError(i18next.t("std.napaka.gesloSibko"));
             }else{
                 geslo.clearError();
             }

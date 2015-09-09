@@ -122,8 +122,8 @@ define([
         };
 
         this.formIzberi = new Form({
-            template: Handlebars.compile('<form><div data-fields="id"></div></form>'),
-            className: 'funkcija-alternacije',
+            template: Handlebars.compile('<form><div data-editors="id"></div></form>'),
+            className: 'form-inline',
             schema: {
                 id: sch
             }

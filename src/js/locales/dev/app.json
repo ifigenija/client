@@ -128,6 +128,25 @@
         },
         "messages": {
             "success": "Uspešno opravljena akcija."
+        },
+        "napaka": {
+            "fetch": "Napaka pri pridobivanju podatkov",
+            "kloniranje": "Prišlo je do napake pri kloniranju programa dela.",
+            "zakleni": "Prišlo je do napake pri zaklepanju programa dela.",
+            "zaproseno1": "Ministerstvo za kulturo sofinancira do ",
+            "zaproseno2": "€ (glede na trenutni delež matičnega JZ) upravičenih stroškov.",
+            "gesloKratko": "Geslo je prekratko",
+            "gesloSibko": "Geslo mora vsebovati vsaj tri izmed štirih elementov: velike črke, male črke, številke in/ali posebne znake.",
+            "datum": "Datum konca ne sme bit manjši ali enak datumu začetka.",
+            "avtHonSamoz": "Strošek avtorskih honorarjev s statusom samozaposlenih je del stroškov avtorskih honorarjev. Zato ne sme biti strošek večji od avtorskih honorarjev.",
+            "gostSZVrednost": "Vrednost gostovanja po Sloveniji in zamejstvu ne sme biti več, kot je delež matičnega JZ.",
+            "velikost": "Vlogi je potrebno določiti velikost"
+        },
+        "uspeh": {
+            "fetch": "Napaka pri pridobivanju podatkov",
+            "kloniranje": "Uspešno kloniran program dela.",
+            "zakleni": "Uspešno zaklenjen program dela",
+            "odkleni": "Uspešno odklenjen program dela"
         }
     },
     "ent": {
@@ -1256,24 +1275,6 @@
         "meta": "Podatki o datoteki",
         "novaVer": "Nova verzija",
         "download": "Prenesi datoteko"
-    },
-    "napaka": {
-        "fetch": "Napaka pri pridobivanju podatkov",
-        "kloniranje": "Prišlo je do napake pri kloniranju programa dela.",
-        "zakleni": "Prišlo je do napake pri zaklepanju programa dela.",
-        "zaproseno1": "Ministerstvo za kulturo sofinancira do ",
-        "zaproseno2": "€ (glede na trenutni delež matičnega JZ) upravičenih stroškov.",
-        "gesloKratko": "Geslo je prekratko",
-        "gesloSibko": "Geslo mora vsebovati vsaj tri izmed štirih elementov: velike črke, male črke, številke in/ali posebne znake.",
-        "datum": "Datum konca ne sme bit manjši ali enak datumu začetka.",
-        "avtHonSamoz": "Strošek avtorskih honorarjev s statusom samozaposlenih je del stroškov avtorskih honorarjev. Zato ne sme biti strošek večji od avtorskih honorarjev.",
-        "gostSZVrednost": "Vrednost gostovanja po Sloveniji in zamejstvu ne sme biti več, kot je delež matičnega JZ."
-    },
-    "uspeh": {
-        "fetch": "Napaka pri pridobivanju podatkov",
-        "kloniranje": "Uspešno kloniran program dela.",
-        "zakleni": "Uspešno zaklenjen program dela",
-        "odkleni": "Uspešno odklenjen program dela"
     },
     "prenesi": {
         "title": "Prenost vrednosti iz uprizoritve",
