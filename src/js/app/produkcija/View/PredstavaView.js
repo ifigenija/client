@@ -2,17 +2,12 @@
  * Licenca GPLv3
  */
 define([
-    'baseUrl',
     'app/Dokument/View/PostavkeView',
-    'app/Max/Module/Backgrid',
     'i18next',
-    'formSchema!funkcija',
-    'template!../tpl/predstava-form.tpl',
-    'radio'
+    'formSchema!predstava',
+    'template!../tpl/predstava-form.tpl'
 ], function (
-        baseUrl,
         PostavkeView,
-        Backgrid,
         i18next,
         schema,
         formTpl
@@ -23,11 +18,11 @@ define([
      * 
      * @type @exp;PostavkeView@call;extend
      */
-    var FunkcijaView = PostavkeView.extend({
+    var PredstavaView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: schema,
+        schema: schema.toFormSchema().schema,
         detailName: 'predstave',
-        formTitle: i18next.t('funkcija.title'),
+        formTitle: i18next.t('predstava.title'),
         gridMeta: [
             {
                 cell: 'string',
@@ -57,5 +52,5 @@ define([
         ]
     });
     
-    return FunkcijaView;
+    return PredstavaView;
 });

@@ -2,17 +2,12 @@
  * Licenca GPLv3
  */
 define([
-    'baseUrl',
     'app/Dokument/View/PostavkeView',
-    'app/Max/Module/Backgrid',
     'i18next',
-    'formSchema!funkcija',
-    'template!../tpl/vaja-form.tpl',
-    'radio'
+    'formSchema!vaja',
+    'template!../tpl/vaja-form.tpl'
 ], function (
-        baseUrl,
         PostavkeView,
-        Backgrid,
         i18next,
         schema,
         formTpl
@@ -23,17 +18,15 @@ define([
      * 
      * @type @exp;PostavkeView@call;extend
      */
-    var FunkcijaView = PostavkeView.extend({
+    var VajaView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: schema,
+        schema: schema.toFormSchema().schema,
         detailName: 'vaje',
-        formTitle: i18next.t('funkcija.title'),
+        formTitle: i18next.t('vaja.title'),
         gridMeta: [
             {
+                headerCell: 'number',
                 cell: 'integer',
-                headerCell: Backgrid.HeaderCell.extend({
-                    className: 'backgrid-kolona-stevilk'
-                }),
                 editable: false,
                 label: i18next.t('vaja.zaporedna'),
                 name: 'zaporedna',
@@ -73,6 +66,6 @@ define([
             }
         ]
     });
-    
-    return FunkcijaView;
+
+    return VajaView;
 });
