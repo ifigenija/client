@@ -32,7 +32,7 @@ define([
     var VajeCollection = Dokument.PostavkaCollection.extend({
         model: VajaModel,
         url: baseUrl + '/rest/vaja',
-        index: 'sort'
+        index: "zaporedna"
     });
     
     /**
@@ -46,8 +46,7 @@ define([
      */
     var PredstaveCollection = Dokument.PostavkaCollection.extend({
         model: PredstavaModel,
-        url: baseUrl + '/rest/predstava',
-        index: 'sort'
+        url: baseUrl + '/rest/predstava'
     });
 
 

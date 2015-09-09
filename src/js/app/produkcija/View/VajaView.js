@@ -40,13 +40,6 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('vaja.porocilo'),
-                name: 'naziv',
-                sortable: true
-            },
-            {
                 cell: 'action',
                 name: '...',
                 sortable: false,
