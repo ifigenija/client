@@ -448,7 +448,7 @@
         "funkcija": "$t(ent.funkcija)",
         "status": "$t(ent.status)",
         "opis": "$t(ent.opis)",
-        "oseba": "$t(ent.oseba)",
+        "oseba": "Oseba",
         "d": {
             "funkcija": "Funkcija, ki jo oseba opravlja",
             "opis": "",
@@ -628,6 +628,7 @@
             "konec": "$t(ent.d.konec)",
             "opomba": "",
             "zaposlitev": "",
+            "pogodba": "",
             "privzeti": "Ali je privzeti",
             "pomembna": "Ali je alternacija pomembna in se jo prikaže v programu dela?"
         }
