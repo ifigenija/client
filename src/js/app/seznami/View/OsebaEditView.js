@@ -106,8 +106,8 @@ define([
         }
 
         var permission = chPermission.request('isGranted', "Oseba-write");
-        
-        if(!permission){
+
+        if (!permission) {
             this.$('input').prop("disabled", true);
             this.$('select').prop("disabled", true);
         }
@@ -129,9 +129,9 @@ define([
         } else {
             tabs = tabVse;
         }
-        
-        var permission = chPermission.request('isGranted', "Oseba-write");        
-        if(!permission){
+
+        var permission = chPermission.request('isGranted', "Oseba-write");
+        if (!permission) {
             tabs = tabNovi;
         }
 
@@ -228,22 +228,10 @@ define([
      */
     OsebaEditView.prototype.renderTelefonske = function () {
         var self = this;
-        var onemogoceno = false;
-        
-        if (this.isNew()) {
-            onemogoceno = true;
-        }
-        
-        var permission = chPermission.request('isGranted', "Telefonska-write");
-        
-        if (!permission) {
-            onemogoceno = true;
-        }
         require(['app/seznami/View/TelefonskaView'], function (View) {
             var view = new View({
                 collection: self.model.telefonskeCollection,
-                dokument: self.model,
-                disabled: onemogoceno
+                dokument: self.model
             });
             self.regionTelefonske.show(view);
             return view;
@@ -256,22 +244,10 @@ define([
      */
     OsebaEditView.prototype.renderNaslovi = function () {
         var self = this;
-        var onemogoceno = false;
-
-        var permission = chPermission.request('isGranted', "PostniNaslov-write");
-
-        if (this.isNew()) {
-            onemogoceno = true;
-        }
-        
-        if (!permission) {
-            onemogoceno = true;
-        }        
         require(['app/seznami/View/PostniNaslovView'], function (View) {
             var view = new View({
                 collection: self.model.nasloviCollection,
-                dokument: self.model,
-                disabled: onemogoceno
+                dokument: self.model
             });
             self.regionNaslovi.show(view);
             return view;

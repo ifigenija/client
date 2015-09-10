@@ -14,13 +14,32 @@ define([
         i18next,
         Radio
         ) {
+    
+    var chPermission = Radio.channel('global');
+    var dovoljeno = chPermission.request('isGranted', "Telefonska-write");
+
+    var actionsWrite = [
+        {event: 'uredi', title: i18next.t('std.uredi')},
+        {event: 'brisi', title: i18next.t('std.brisi')}
+    ];
+    
+    var actionsRead = [
+        {event: 'uredi', title: i18next.t('std.uredi')}
+    ];
+    
+    var actions;
+    
+    if(dovoljeno){
+        actions = actionsWrite;
+    }else{
+        actions = actionsRead;
+    }
 
     var TelefonskaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'telefonske',
         formTitle: i18next.t('tel.title'),
-        disabled: false,
         gridMeta: [
             {
                 cell: 'string',
@@ -47,27 +66,25 @@ define([
                 cell: 'action',
                 name: '...',
                 sortable: false,
-                actions: [
-                    {event: 'uredi', title: i18next.t('std.uredi')},
-                    {event: 'brisi', title: i18next.t('std.brisi')}
-                ]
+                actions: actions
             }
         ]
     });
     
-    TelefonskaView.prototype.initialize = function(options){
-        this.disabled = options.disabled || this.disabled;
-    };
-    
-    TelefonskaView.prototype.onDodaj = function () {
-        if (!this.disabled) {
-            PostavkeView.prototype.onDodaj.apply(this, arguments);
+    TelefonskaView.prototype.prepareToolbar = function () {
+        if (dovoljeno) {
+            return  this.model ?
+                    [[this.buttons.shrani, this.buttons.preklici, this.buttons.nasvet]] : [[this.buttons.dodaj]];
         } else {
-            Radio.channel('error').command('flash', {
-                message: i18next.t("info.shraniEnotoPrograma"),
-                code: '9000600',
-                severity: 'info'
-            });
+            return this.model ?
+                    [[this.buttons.preklici, this.buttons.nasvet]] : [[]];
+        }
+    };
+
+    TelefonskaView.prototype.onRenderForm = function () {
+        if (!dovoljeno) {
+            this.$('input').prop("disabled", true);
+            this.$('select').prop("disabled", true);
         }
     };
 

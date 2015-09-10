@@ -19,6 +19,26 @@ define([
         Radio
         ) {
 
+    var chPermission = Radio.channel('global');
+    var dovoljeno = chPermission.request('isGranted', "oseba-write");
+
+    var actionsWrite = [
+        {event: 'uredi', title: i18next.t('std.uredi')},
+        {event: 'brisi', title: i18next.t('std.brisi')}
+    ];
+    
+    var actionsRead = [
+        {event: 'uredi', title: i18next.t('std.uredi')}
+    ];
+    
+    var actions;
+    
+    if(dovoljeno){
+        actions = actionsWrite;
+    }else{
+        actions = actionsRead;
+    }
+
     var OsebaView = SeznamView.extend({
         url: baseUrl + '/rest/oseba',
         title: i18next.t('oseba.title'),
@@ -65,17 +85,10 @@ define([
                 cell: 'action',
                 name: '...',
                 sortable: false,
-                actions: [
-                    {event: 'uredi', title: i18next.t('std.uredi')},
-                    {event: 'brisi', title: i18next.t('std.brisi')}
-                ]
+                actions: actions
             }
         ]
     });
-
-    var chPermission = Radio.channel('global');
-    var dovoljeno = chPermission.request('isGranted', "oseba-read");
-    console.log("Oseba-read:" + dovoljeno);
 
     /**
      * Overridana funkcija iz seznamaView
@@ -99,17 +112,15 @@ define([
     };
 
     OsebaView.prototype.onDodaj = function () {
+        var model = new Model.Model();
+        this.onUredi(model);
+        this.zapSortSt(this.collection, 'sort');
+    };
+
+    OsebaView.prototype.renderToolbar = function () {
         var dovoljeno = chPermission.request('isGranted', "oseba-write");
         if (dovoljeno) {
-            var model = new Model.Model();
-            this.onUredi(model);
-            this.zapSortSt(this.collection, 'sort');
-        } else {
-            Radio.channel('error').command('flash', {
-                message: i18next.t('nakapa.dovoljenje'),
-                code: 9001000,
-                severity: 'info'
-            });
+            SeznamView.prototype.renderToolbar.apply(this, arguments);
         }
     };
 
