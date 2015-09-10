@@ -1,11 +1,20 @@
 /* 
  * Licenca GPLv3
  */
-
-
-define(['marionette', 'underscore', 'jquery', 'template!../tpl/calendar-layout.tpl', 'fullcalendar'], function (Marionette, _, $, tpl) {
-
-
+define([
+    'marionette',
+    'underscore',
+    'jquery',
+    'template!../tpl/calendar-layout.tpl',
+    './DogodekModal',
+    'fullcalendar'
+], function (
+        Marionette,
+        _,
+        $,
+        tpl,
+        DogodekModal
+        ) {
 
     var CalendarView = Marionette.LayoutView.extend({
         template: tpl,
@@ -13,7 +22,6 @@ define(['marionette', 'underscore', 'jquery', 'template!../tpl/calendar-layout.t
             filterR: '.calendar-filter',
             msgR: '.calendar-msg',
             dogodekR: '.dogodek'
-
         },
         ui: {
             'calendar': '.calendar-container'
@@ -21,16 +29,28 @@ define(['marionette', 'underscore', 'jquery', 'template!../tpl/calendar-layout.t
         initialize: function (options) {
             this.koledarji = options.koledarji;
             this.filterView = options.filterView || new DefaultFilter();
-
             this.filterView.on('filter', this.searchCollection);
         },
         onRender: function () {
+            var self = this;
             var options = _.extend({
                 header: {
-                    left: 'prev,next today',
+                    left: 'prev,next,today',
                     center: 'title',
                     right: 'month,basicWeek,agendaWeek,basicDay'
                 },
+                events: [
+                    {
+                        title: 'Event1',
+                        start: '2015-09-12',
+                        end: '2015-09-14'
+                    },
+                    {
+                        title: 'Event2',
+                        start: '2015-09-16',
+                        allDay: true
+                    }
+                ],
                 selectable: true,
                 selectHelper: true,
                 editable: true,
@@ -39,20 +59,28 @@ define(['marionette', 'underscore', 'jquery', 'template!../tpl/calendar-layout.t
                 weekNumberCalculation: 'ISO',
                 firstDay: 1,
                 eventClick: this.eventClick,
+                dayClick: function (date, jsEvent, view) {
+                    return self.dayClick.call(arguments);
+                },
                 eventDrop: this.eventDropOrResize,
                 eventResize: this.eventDropOrResize
             }, _.omit(this.options, 'koledarji'));
-
             console.log('options koledar', options);
             this.filterR.show(this.filterView);
             this.ui.calendar.fullCalendar(options);
-
         },
         select: function (startDate, endDate) {
             console.log('select', startDate, endDate);
         },
         eventClick: function (fcEvent) {
-            console.log('click', fcEvent);
+            console.log('event', fcEvent);
+        },
+        dayClick: function (date, jsEvent, view) {
+            console.log('day', date);
+            console.log(this);
+            DogodekModal({
+                //callback: CalendarView.prototype.renderDogodek
+            });
         },
         change: function (event) {
             // Look up the underlying event in the calendar and update its details from the model
@@ -71,7 +99,9 @@ define(['marionette', 'underscore', 'jquery', 'template!../tpl/calendar-layout.t
             console.log('search', data);
         }
     });
-
-
+    
+    CalendarView.prototype.renderDogodek = function(view){
+        this.dogodekR.show(view);
+    };
     return CalendarView;
 });
