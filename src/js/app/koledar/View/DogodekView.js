@@ -41,6 +41,12 @@ define([
                 icon: 'fa fa-info',
                 element: 'button-trigger',
                 trigger: 'nasvet'
+            },
+            brisi: {
+                id: 'doc-brisi',
+                label: i18next.t('std.brisi'),
+                element: 'button-trigger',
+                trigger: 'brisi'
             }
         },
         schema: dogodekSchema.toFormSchema().schema,

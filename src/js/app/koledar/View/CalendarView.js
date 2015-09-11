@@ -96,7 +96,35 @@ define([
     };
 
     CalendarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
-//        console.log('event', fcEvent);
+        this.renderDogodekLayout(fcEvent, jsEvent, view);
+    };
+
+    CalendarView.prototype.change = function (event) {
+        // Look up the underlying event in the calendar and update its details from the model
+        var fcEvent = this.el.fullCalendar('clientEvents', event.get('id'))[0];
+        fcEvent.title = event.get('title');
+        fcEvent.color = event.get('color');
+        this.ui.calendar.fullCalendar('updateEvent', fcEvent);
+    };
+
+    CalendarView.prototype.eventDropOrResize = function (event) {
+        // Lookup the model that has the ID of the event and update its attributes
+        //this.collection.get(fcEvent.id).save({start: fcEvent.start, end: fcEvent.end});
+        console.log('drop/resize');
+        //update dogodka v modelu
+        //v primeru da je odprta forma bi se naj se kliče render da se posodobijo podatki
+        //samo testiranje
+        this.renderDogodekLayout(event);
+    };
+
+    CalendarView.prototype.onDestroy = function () {
+    };
+
+    CalendarView.prototype.searchCollection = function (data) {
+        console.log('search', data);
+    };
+
+    CalendarView.prototype.renderDogodekLayout = function (fcEvent, jsEvent, view) {
         var model = new DogodekModel.Model();
 
         model.set('id', fcEvent.id);
@@ -108,37 +136,13 @@ define([
             model: model
         });
 
+        var self = this;
+
+        view.on('brisi', function () {
+            self.onBrisi(fcEvent, jsEvent, view);
+        }, this);
+
         this.dogodekR.show(view);
-    };
-
-    CalendarView.prototype.change = function (event) {
-        // Look up the underlying event in the calendar and update its details from the model
-        var fcEvent = this.el.fullCalendar('clientEvents', event.get('id'))[0];
-        fcEvent.title = event.get('title');
-        fcEvent.color = event.get('color');
-        this.ui.calendar.fullCalendar('updateEvent', fcEvent);
-    };
-
-    CalendarView.prototype.eventDropOrResize = function (fcEvent) {
-        // Lookup the model that has the ID of the event and update its attributes
-        //this.collection.get(fcEvent.id).save({start: fcEvent.start, end: fcEvent.end});
-        console.log('drop/resize');
-        //update dogodka v modelu
-    };
-
-    CalendarView.prototype.onDestroy = function () {
-    };
-
-    CalendarView.prototype.searchCollection = function (data) {
-        console.log('search', data);
-    };
-
-    CalendarView.prototype.renderDogodekLayout = function (view) {
-        var DlView = new DogodekLayoutView({
-            model: view.model
-        });
-        this.dogodekR.show(DlView);
-        this.dodajDogodek(DlView);
     };
 
     CalendarView.prototype.dodajDogodek = function (view) {
@@ -148,19 +152,23 @@ define([
         }
 
         if (model.get('id')) {
-        var source = {
-            events: [
-                {
-                    id: model.get('id'),
-                    title: model.get('title'),
-                    start: model.get('zacetek'),
-                    end: model.get('konec')
-                }
-            ]
-        };
+            var source = {
+                events: [
+                    {
+                        id: model.get('id'),
+                        title: model.get('title'),
+                        start: model.get('zacetek'),
+                        end: model.get('konec')
+                    }
+                ]
+            };
 
-        this.ui.calendar.fullCalendar('addEventSource', source);
+            this.ui.calendar.fullCalendar('addEventSource', source);
         }
+    };
+
+    CalendarView.prototype.onBrisi = function (fcEvent, jsEvent, view) {
+        this.ui.calendar.fullCalendar('removeEvents', fcEvent.id);
     };
 
     CalendarView.prototype.shraniDogodek = function (model) {

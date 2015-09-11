@@ -50,6 +50,7 @@ define([
         });
 
         view.on('preklici', this.onPreklici, this);
+        view.on('brisi', this.onBrisi, this);
 
         this.dogodekR.show(view);
     };
@@ -57,6 +58,11 @@ define([
     DogodekLayoutView.prototype.onPreklici = function () {
         this.dogodekR.empty();
         this.razredR.empty();
+    };
+    
+    DogodekLayoutView.prototype.onBrisi = function () {
+        this.onPreklici();
+        this.trigger('brisi');
     };
 
     /**
