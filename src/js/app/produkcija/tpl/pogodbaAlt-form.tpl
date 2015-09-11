@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="placiloNaVajo,vrednostVaj,vrednostVaje,planiranoSteviloVaj"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="placiloNaVajo,vrednostVaje,planiranoSteviloVaj,vrednostVaj"></div>
                 <div class="col-sm-12 col-lg-6" data-fields="aktivna,sifra"></div>
             </div>
         </div>

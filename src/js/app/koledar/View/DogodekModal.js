@@ -8,7 +8,8 @@ define([
     '../Model/Dogodek',
     './DogodekView',
     'template!../tpl/dogodekModal-form.tpl',
-    'template!../tpl/dogodek-modal.tpl'
+    'template!../tpl/dogodek-modal.tpl',
+    'formSchema!dogodek/preprost',
 ], function (
         Radio,
         i18next,
@@ -16,7 +17,8 @@ define([
         DogodekModel,
         DogodekView,
         dogodekFormTpl,
-        dogodekModalTpl
+        dogodekModalTpl,
+        schema
         ) {
 
     return function (options) {
@@ -29,15 +31,20 @@ define([
                     trigger: 'nasvet'
                 }
             },
+            schema: schema.toFormSchema().schema,
             formTemplate: dogodekFormTpl,
             template: dogodekModalTpl
         });
         var model = new DogodekModel.Model();
         
         var zacetek = options.zacetek;
+        var konec = options.konec;
         
         if(zacetek){
             model.set('zacetek', zacetek);
+        }
+        if(konec){
+            model.set('konec', konec);
         }
 
         var view = new DV({

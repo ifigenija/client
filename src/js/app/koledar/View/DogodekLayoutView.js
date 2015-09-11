@@ -49,7 +49,14 @@ define([
             model: this.model
         });
 
+        view.on('preklici', this.onPreklici, this);
+
         this.dogodekR.show(view);
+    };
+    
+    DogodekLayoutView.prototype.onPreklici = function () {
+        this.dogodekR.empty();
+        this.razredR.empty();
     };
 
     /**

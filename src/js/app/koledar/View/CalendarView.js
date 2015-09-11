@@ -64,14 +64,13 @@ define([
             selectHelper: true,
             editable: true,
             ignoreTimezone: false,
-            select: this.select,
+            select: function () {
+                return self.select.apply(self, arguments);
+            },
             weekNumberCalculation: 'ISO',
             firstDay: 1,
             eventClick: function () {
                 return self.eventClick.apply(self, arguments);
-            },
-            dayClick: function () {
-                return self.dayClick.apply(self, arguments);
             },
             eventDrop: function () {
                 return self.eventDropOrResize.apply(self, arguments);
@@ -80,39 +79,36 @@ define([
                 return self.eventDropOrResize.apply(self, arguments);
             }
         }, _.omit(this.options, 'koledarji'));
-        console.log('options koledar', options);
+//        console.log('options koledar', options);
         this.filterR.show(this.filterView);
         this.ui.calendar.fullCalendar(options);
     };
 
-    CalendarView.prototype.select = function (startDate, endDate) {
-        console.log('select', startDate, endDate);
+    CalendarView.prototype.select = function (start, end, jsEvent, view) {
+        var self = this;
+        DogodekModal({
+            zacetek: start.format(),
+            konec: end.format(),
+            cb: function () {
+                self.dodajDogodek.apply(self, arguments);
+            }
+        });
     };
 
     CalendarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
-        console.log('event', fcEvent);
+//        console.log('event', fcEvent);
         var model = new DogodekModel.Model();
 
         model.set('id', fcEvent.id);
         model.set('title', fcEvent.title);
         model.set('zacetek', fcEvent.start);
+        model.set('konec', fcEvent.end);
 
         var view = new DogodekLayoutView({
             model: model
         });
 
         this.dogodekR.show(view);
-    };
-
-    CalendarView.prototype.dayClick = function (date, jsEvent, view) {
-        console.log('day', date.format());
-        var self = this;
-        DogodekModal({
-            zacetek: date.format(),
-            cb: function () {
-                self.renderDogodekLayout.apply(self, arguments);
-            }
-        });
     };
 
     CalendarView.prototype.change = function (event) {
@@ -126,6 +122,8 @@ define([
     CalendarView.prototype.eventDropOrResize = function (fcEvent) {
         // Lookup the model that has the ID of the event and update its attributes
         //this.collection.get(fcEvent.id).save({start: fcEvent.start, end: fcEvent.end});
+        console.log('drop/resize');
+        //update dogodka v modelu
     };
 
     CalendarView.prototype.onDestroy = function () {
@@ -136,14 +134,15 @@ define([
     };
 
     CalendarView.prototype.renderDogodekLayout = function (view) {
-        var view = new DogodekLayoutView({
+        var DlView = new DogodekLayoutView({
             model: view.model
         });
-        this.dogodekR.show(view);
-        this.dodajDogodek(view.model);
+        this.dogodekR.show(DlView);
+        this.dodajDogodek(DlView);
     };
 
-    CalendarView.prototype.dodajDogodek = function (model) {
+    CalendarView.prototype.dodajDogodek = function (view) {
+        var model = view.model;
         if (!model.get('id')) {
             this.shraniDogodek(model);
         }
@@ -154,7 +153,8 @@ define([
                 {
                     id: model.get('id'),
                     title: model.get('title'),
-                    start: model.get('zacetek')
+                    start: model.get('zacetek'),
+                    end: model.get('konec')
                 }
             ]
         };

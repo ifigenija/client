@@ -27,7 +27,8 @@ define([
                 id: 'doc-shrani',
                 label: i18next.t('std.shrani'),
                 element: 'button-trigger',
-                trigger: 'shrani'
+                trigger: 'shrani',
+                disabled: true
             },
             preklici: {
                 id: 'doc-preklici',
@@ -57,6 +58,16 @@ define([
         return _.extend(this.model.toJSON(), {
             formTitle: this.formTitle
         });
+    };
+    
+    Fv.prototype.onFormChange = function (form) {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton('doc-shrani');
+        if (but && but.get('disabled')) {
+            but.set({
+                disabled: false
+            });
+        }
     };
 
     return  Fv;

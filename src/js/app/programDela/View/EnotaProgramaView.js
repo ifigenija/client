@@ -638,10 +638,13 @@ define([
             var polja = form.fields;
 
             var f = Handlebars.formatNumber;
-            var vsota = f(model.get('vsota'), 2);
-
-            if (vsota < polja.zaproseno.getValue()) {
-                polja.zaproseno.setError(i18next.t("std.napaka.zaproseno1") + vsota);
+            
+            var vsota = model.get('vsota');
+            var zaproseno = polja.zaproseno.getValue();
+            var razlika = vsota - zaproseno;
+            
+            if (razlika < -0.01) {
+                polja.zaproseno.setError(i18next.t("std.napaka.zaproseno1") + f(vsota, 2));
 
             } else {
                 polja.zaproseno.clearError();
