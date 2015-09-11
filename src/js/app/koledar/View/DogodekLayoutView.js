@@ -7,7 +7,11 @@ define([
     'i18next',
     'marionette',
     './DogodekView',
+    './VajaView',
+    './PredstavaView',
     './ZasedenostView',
+    './SplosniDogodekView',
+    './GostovanjeView',
     'formSchema!dogodek',
     'template!../tpl/dogodekLayout.tpl'
 ], function (
@@ -15,7 +19,11 @@ define([
         i18next,
         Marionette,
         DogodekView,
+        VajaView,
+        PredstavaView,
         ZasedenostView,
+        SplosniDogodekView,
+        GostovanjeView,
         schema,
         tpl
         ) {
@@ -54,12 +62,12 @@ define([
 
         this.dogodekR.show(view);
     };
-    
+
     DogodekLayoutView.prototype.onPreklici = function () {
         this.dogodekR.empty();
         this.razredR.empty();
     };
-    
+
     DogodekLayoutView.prototype.onBrisi = function () {
         this.onPreklici();
         this.trigger('brisi');
@@ -70,26 +78,44 @@ define([
      * @returns {undefined}
      */
     DogodekLayoutView.prototype.renderRazred = function () {
-        this.razredR.show();
+        var razred = this.model.razred;
+        if (razred === '100s') {
+            this.renderPredstava();
+        } else if (razred === '200s') {
+            this.renderVaja();
+        } else if (razred === '300s') {
+            this.renderGostovanje();
+        } else if (razred === '400s') {
+            this.renderSplosni();
+        } else if (razred === '500s') {
+            this.renderZasedenost();
+        }
     };
 
     DogodekLayoutView.prototype.renderVaja = function () {
-        this.razredR.show();
+        var vaja = this.model.vaja;
+        var view = new VajaView({id: vaja});
+        this.razredR.show(view);
     };
     DogodekLayoutView.prototype.renderPredstava = function () {
-        this.razredR.show();
+        var predstava = this.model.predstava;
+        var view = new PredstavaView({id: predstava});
+        this.razredR.show(view);
     };
     DogodekLayoutView.prototype.renderGostovanje = function () {
-        this.razredR.show();
+        var gostovanje = this.model.gostovanje;
+        var view = new GostovanjeView({id: gostovanje});
+        this.razredR.show(view);
     };
     DogodekLayoutView.prototype.renderSplosni = function () {
-        this.razredR.show();
+        var splosni = this.model.splosni;
+        var view = new SplosniDogodekView({id: splosni});
+        this.razredR.show(view);
     };
     DogodekLayoutView.prototype.renderZasedenost = function () {
-        var zas = new ZasedenostView({
-            model: this.model
-        });
-        this.razredR.show();
+        var zesedenost = this.model.zesedenost;
+        var view = new ZasedenostView({id: zesedenost});
+        this.razredR.show(view);
     };
 
     return  DogodekLayoutView;

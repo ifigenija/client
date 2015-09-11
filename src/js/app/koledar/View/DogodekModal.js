@@ -9,7 +9,7 @@ define([
     './DogodekView',
     'template!../tpl/dogodekModal-form.tpl',
     'template!../tpl/dogodek-modal.tpl',
-    'formSchema!dogodek/preprost',
+    'formSchema!dogodek/preprost'
 ], function (
         Radio,
         i18next,
