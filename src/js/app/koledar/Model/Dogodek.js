@@ -8,5 +8,13 @@ define([
     var DogodekModel = Backbone.Model.extend({
         urlRoot: baseUrl + '/rest/dogodek'
     });
-    return DogodekModel;
+    
+    var DogodekCollection = Backbone.Collection.extend({
+        model: DogodekModel,
+        urlRoot: baseUrl + '/rest/dogodek'
+    });
+    return {
+        Model: DogodekModel,
+        Collection : DogodekCollection
+    };
 });

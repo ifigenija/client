@@ -5,19 +5,23 @@
 define([
     'radio',
     'i18next',
+    'underscore',
     'app/Dokument/View/FormView',
     'formSchema!dogodek',
-    'template!../tpl/dogodek-form.tpl'
+    'template!../tpl/dogodek-form.tpl',
+    'template!../tpl/dogodek-modal.tpl'
 ], function (
         Radio,
         i18next,
+        _,
         FormView,
         dogodekSchema,
-        dogodekFormTpl
+        dogodekFormTpl,
+        dogodekTpl
         ) {
 
     var Fv = FormView.extend({
-        formTitle: "naslov",
+        formTitle: i18next.t('dogodek.title'),
         buttons: {
             shrani: {
                 id: 'doc-shrani',
@@ -27,7 +31,7 @@ define([
             },
             preklici: {
                 id: 'doc-preklici',
-                label: i18next.t('std.shrani'),
+                label: i18next.t('std.preklici'),
                 element: 'button-trigger',
                 trigger: 'preklici'
             },
@@ -39,8 +43,21 @@ define([
             }
         },
         schema: dogodekSchema.toFormSchema().schema,
-        formTemplate: dogodekFormTpl
+        formTemplate: dogodekFormTpl,
+        template: dogodekTpl
     });
+    
+    Fv.prototype.initialize = function (options) {
+        if(options.formTitle){
+            this.formTitle = options.formTitle;
+        }
+    };
+    
+    Fv.prototype.serializeData = function () {
+        return _.extend(this.model.toJSON(), {
+            formTitle: this.formTitle
+        });
+    };
 
     return  Fv;
 });

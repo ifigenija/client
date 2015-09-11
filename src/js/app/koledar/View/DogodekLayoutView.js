@@ -6,10 +6,10 @@ define([
     'radio',
     'i18next',
     'marionette',
-    '../DogodekView',
-    '../ZasedenostView',
+    './DogodekView',
+    './ZasedenostView',
     'formSchema!dogodek',
-    'template!../tpl/dogodek-form.tpl'
+    'template!../tpl/dogodekLayout.tpl'
 ], function (
         Radio,
         i18next,
@@ -25,29 +25,33 @@ define([
         className: 'row',
         schema: schema.toFormSchema().schema,
         regions: {
-            dogodekR: '.region-dogodek',
+            dogodekR: '.region-dogodek-nekaj',
             razredR: '.region-razred'
         }
     });
-    
+
     DogodekLayoutView.prototype.initialize = function (options) {
-        this.model = options.model | this.model;
+        if (options.model) {
+            this.model = options.model;
+        }
     };
 
     DogodekLayoutView.prototype.onRender = function () {
-        if (this.model.get('ime')) {
+        if (this.model.get('title')) {
             this.renderDogodek();
-            this.renderRazred();
+            //this.renderRazred();
         }
     };
-    
+
     DogodekLayoutView.prototype.renderDogodek = function () {
         var view = new DogodekView({
+            formTitle: this.model.get('title'),
             model: this.model
         });
+
         this.dogodekR.show(view);
     };
-    
+
     /**
      * logika keri dogodek izriše
      * @returns {undefined}
@@ -55,7 +59,7 @@ define([
     DogodekLayoutView.prototype.renderRazred = function () {
         this.razredR.show();
     };
-    
+
     DogodekLayoutView.prototype.renderVaja = function () {
         this.razredR.show();
     };

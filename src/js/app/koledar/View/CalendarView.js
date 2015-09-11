@@ -7,13 +7,17 @@ define([
     'jquery',
     'template!../tpl/calendar-layout.tpl',
     './DogodekModal',
+    '../Model/Dogodek',
+    './DogodekLayoutView',
     'fullcalendar'
 ], function (
         Marionette,
         _,
         $,
         tpl,
-        DogodekModal
+        DogodekModal,
+        DogodekModel,
+        DogodekLayoutView
         ) {
 
     var CalendarView = Marionette.LayoutView.extend({
@@ -25,83 +29,155 @@ define([
         },
         ui: {
             'calendar': '.calendar-container'
-        },
-        initialize: function (options) {
-            this.koledarji = options.koledarji;
-            this.filterView = options.filterView || new DefaultFilter();
-            this.filterView.on('filter', this.searchCollection);
-        },
-        onRender: function () {
-            var self = this;
-            var options = _.extend({
-                header: {
-                    left: 'prev,next,today',
-                    center: 'title',
-                    right: 'month,basicWeek,agendaWeek,basicDay'
-                },
-                events: [
-                    {
-                        title: 'Event1',
-                        start: '2015-09-12',
-                        end: '2015-09-14'
-                    },
-                    {
-                        title: 'Event2',
-                        start: '2015-09-16',
-                        allDay: true
-                    }
-                ],
-                selectable: true,
-                selectHelper: true,
-                editable: true,
-                ignoreTimezone: false,
-                select: this.select,
-                weekNumberCalculation: 'ISO',
-                firstDay: 1,
-                eventClick: this.eventClick,
-                dayClick: function (date, jsEvent, view) {
-                    return self.dayClick.call(arguments);
-                },
-                eventDrop: this.eventDropOrResize,
-                eventResize: this.eventDropOrResize
-            }, _.omit(this.options, 'koledarji'));
-            console.log('options koledar', options);
-            this.filterR.show(this.filterView);
-            this.ui.calendar.fullCalendar(options);
-        },
-        select: function (startDate, endDate) {
-            console.log('select', startDate, endDate);
-        },
-        eventClick: function (fcEvent) {
-            console.log('event', fcEvent);
-        },
-        dayClick: function (date, jsEvent, view) {
-            console.log('day', date);
-            console.log(this);
-            DogodekModal({
-                //callback: CalendarView.prototype.renderDogodek
-            });
-        },
-        change: function (event) {
-            // Look up the underlying event in the calendar and update its details from the model
-            var fcEvent = this.el.fullCalendar('clientEvents', event.get('id'))[0];
-            fcEvent.title = event.get('title');
-            fcEvent.color = event.get('color');
-            this.ui.calendar.fullCalendar('updateEvent', fcEvent);
-        },
-        eventDropOrResize: function (fcEvent) {
-            // Lookup the model that has the ID of the event and update its attributes
-            this.collection.get(fcEvent.id).save({start: fcEvent.start, end: fcEvent.end});
-        },
-        onDestroy: function () {
-        },
-        searchCollection: function (data) {
-            console.log('search', data);
         }
     });
-    
-    CalendarView.prototype.renderDogodek = function(view){
+
+    CalendarView.prototype.initialize = function (options) {
+        this.koledarji = options.koledarji;
+        this.filterView = options.filterView || new DefaultFilter();
+        this.filterView.on('filter', this.searchCollection);
+    };
+
+    CalendarView.prototype.onRender = function () {
+        var self = this;
+        var options = _.extend({
+            header: {
+                left: 'prev,next,today',
+                center: 'title',
+                right: 'month,basicWeek,agendaWeek,basicDay'
+            },
+            events: [
+                {
+                    id: 1,
+                    title: 'Event1',
+                    start: '2015-09-12',
+                    end: '2015-09-14'
+                },
+                {
+                    id: 2,
+                    title: 'Event2',
+                    start: '2015-09-16',
+                    allDay: true
+                }
+            ],
+            selectable: true,
+            selectHelper: true,
+            editable: true,
+            ignoreTimezone: false,
+            select: this.select,
+            weekNumberCalculation: 'ISO',
+            firstDay: 1,
+            eventClick: function () {
+                return self.eventClick.apply(self, arguments);
+            },
+            dayClick: function () {
+                return self.dayClick.apply(self, arguments);
+            },
+            eventDrop: function () {
+                return self.eventDropOrResize.apply(self, arguments);
+            },
+            eventResize: function () {
+                return self.eventDropOrResize.apply(self, arguments);
+            }
+        }, _.omit(this.options, 'koledarji'));
+        console.log('options koledar', options);
+        this.filterR.show(this.filterView);
+        this.ui.calendar.fullCalendar(options);
+    };
+
+    CalendarView.prototype.select = function (startDate, endDate) {
+        console.log('select', startDate, endDate);
+    };
+
+    CalendarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
+        console.log('event', fcEvent);
+        var model = new DogodekModel.Model();
+
+        model.set('id', fcEvent.id);
+        model.set('title', fcEvent.title);
+        model.set('zacetek', fcEvent.start);
+
+        var view = new DogodekLayoutView({
+            model: model
+        });
+
         this.dogodekR.show(view);
+    };
+
+    CalendarView.prototype.dayClick = function (date, jsEvent, view) {
+        console.log('day', date.format());
+        var self = this;
+        DogodekModal({
+            zacetek: date.format(),
+            cb: function () {
+                self.renderDogodekLayout.apply(self, arguments);
+            }
+        });
+    };
+
+    CalendarView.prototype.change = function (event) {
+        // Look up the underlying event in the calendar and update its details from the model
+        var fcEvent = this.el.fullCalendar('clientEvents', event.get('id'))[0];
+        fcEvent.title = event.get('title');
+        fcEvent.color = event.get('color');
+        this.ui.calendar.fullCalendar('updateEvent', fcEvent);
+    };
+
+    CalendarView.prototype.eventDropOrResize = function (fcEvent) {
+        // Lookup the model that has the ID of the event and update its attributes
+        //this.collection.get(fcEvent.id).save({start: fcEvent.start, end: fcEvent.end});
+    };
+
+    CalendarView.prototype.onDestroy = function () {
+    };
+
+    CalendarView.prototype.searchCollection = function (data) {
+        console.log('search', data);
+    };
+
+    CalendarView.prototype.renderDogodekLayout = function (view) {
+        var view = new DogodekLayoutView({
+            model: view.model
+        });
+        this.dogodekR.show(view);
+        this.dodajDogodek(view.model);
+    };
+
+    CalendarView.prototype.dodajDogodek = function (model) {
+        if (!model.get('id')) {
+            this.shraniDogodek(model);
+        }
+
+        if (model.get('id')) {
+        var source = {
+            events: [
+                {
+                    id: model.get('id'),
+                    title: model.get('title'),
+                    start: model.get('zacetek')
+                }
+            ]
+        };
+
+        this.ui.calendar.fullCalendar('addEventSource', source);
+        }
+    };
+
+    CalendarView.prototype.shraniDogodek = function (model) {
+
+        function makeId()
+        {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for (var i = 0; i < 5; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            return text;
+        }
+
+        model.set('id', makeId());
+        localStorage.setItem('Dogodki', JSON.stringify(model.toJSON()));
     };
     return CalendarView;
 });

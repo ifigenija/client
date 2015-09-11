@@ -6,8 +6,7 @@ define([
     'i18next',
     'backbone-modal',
     '../Model/Dogodek',
-    'formSchema!dogodek',
-    'app/Dokument/View/FormView',
+    './DogodekView',
     'template!../tpl/dogodekModal-form.tpl',
     'template!../tpl/dogodek-modal.tpl'
 ], function (
@@ -15,15 +14,13 @@ define([
         i18next,
         Modal,
         DogodekModel,
-        schema,
-        FormView,
+        DogodekView,
         dogodekFormTpl,
         dogodekModalTpl
         ) {
 
     return function (options) {
-        var Fv = FormView.extend({
-            formTitle: "naslov",
+        var DV = DogodekView.extend({
             buttons: {
                 nasvet: {
                     id: 'doc-nasvet',
@@ -32,13 +29,19 @@ define([
                     trigger: 'nasvet'
                 }
             },
-            schema: schema.toFormSchema().schema,
             formTemplate: dogodekFormTpl,
             template: dogodekModalTpl
         });
-        var model = new DogodekModel();
+        var model = new DogodekModel.Model();
         
-        var view = new Fv({
+        var zacetek = options.zacetek;
+        
+        if(zacetek){
+            model.set('zacetek', zacetek);
+        }
+
+        var view = new DV({
+            formTitle: "Dogodek",
             model: model
         });
 
@@ -48,9 +51,16 @@ define([
             okText: i18next.t("std.izberi"),
             cancelText: i18next.t("std.preklici")
         });
-        
-        var odpriDogodek = function(){
-            //options.callback(view);
+
+        var odpriDogodek = function () {
+            var view = modal.options.content;
+            if (!view.form.commit()) {
+                if (options.cb) {
+                    options.cb(view);
+                }
+            } else {
+                modal.preventClose();
+            }
         };
 
         return modal.open(odpriDogodek);
