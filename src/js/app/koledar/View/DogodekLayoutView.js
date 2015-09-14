@@ -4,28 +4,36 @@
 
 define([
     'radio',
+    'baseUrl',
     'i18next',
     'marionette',
     './DogodekView',
-    './VajaView',
-    './PredstavaView',
-    './ZasedenostView',
-    './SplosniDogodekView',
-    './GostovanjeView',
+//    './VajaView',
+//    './PredstavaView',
+//    './ZasedenostView',
+//    './SplosniDogodekView',
+//    './GostovanjeView',
+    './OsebaSelectView',
     'formSchema!dogodek',
-    'template!../tpl/dogodekLayout.tpl'
+    'template!../tpl/dogodekLayout.tpl',
+    'app/Max/Model/MaxPageableCollection',
+    'backbone'
 ], function (
         Radio,
+        baseUrl,
         i18next,
         Marionette,
         DogodekView,
-        VajaView,
-        PredstavaView,
-        ZasedenostView,
-        SplosniDogodekView,
-        GostovanjeView,
+//        VajaView,
+//        PredstavaView,
+//        ZasedenostView,
+//        SplosniDogodekView,
+//        GostovanjeView,
+        OsebaSelectView,
         schema,
-        tpl
+        tpl,
+        MaxPageable,
+        Backbone
         ) {
 
     var DogodekLayoutView = Marionette.LayoutView.extend({
@@ -33,8 +41,9 @@ define([
         className: 'row',
         schema: schema.toFormSchema().schema,
         regions: {
-            dogodekR: '.region-dogodek-nekaj',
-            razredR: '.region-razred'
+            dogodekR: '.region-dogodek',
+            razredR: '.region-razred',
+            osebaR: '.region-dogodek-oseba'
         }
     });
 
@@ -48,6 +57,7 @@ define([
         if (this.model.get('title')) {
             this.renderDogodek();
             //this.renderRazred();
+            this.renderOsebaSelect();
         }
     };
 
@@ -66,6 +76,7 @@ define([
     DogodekLayoutView.prototype.onPreklici = function () {
         this.dogodekR.empty();
         this.razredR.empty();
+        this.osebaR.empty();
     };
 
     DogodekLayoutView.prototype.onBrisi = function () {
@@ -116,6 +127,27 @@ define([
         var zesedenost = this.model.zesedenost;
         var view = new ZasedenostView({id: zesedenost});
         this.razredR.show(view);
+    };
+
+    DogodekLayoutView.prototype.renderOsebaSelect = function () {
+//        this.OsebaModel = Backbone.DeepModel.extend({
+//            urlRoot: baseUrl + '/rest/oseba'
+//        });
+//        var c = this.osebe = new MaxPageable([], {
+//            model: this.OsebaModel,
+//            state: {
+//                perPage: 50
+//            }
+//        });
+//        c.url = baseUrl + '/rest/oseba';
+//
+//        //query params potrebno določit
+//        c.queryParams.dogodek = this.model.get('id');
+//
+//        var osv = new OsebaSelectView({
+//            collection: c,
+//            lookup: "oseba"
+//        });
     };
 
     return  DogodekLayoutView;
