@@ -125,12 +125,16 @@ define([
     };
 
     CalendarView.prototype.renderDogodekLayout = function (fcEvent, jsEvent, view) {
+        var podatki = this.preberiDogodek(fcEvent);
+        
         var model = new DogodekModel.Model();
 
-        model.set('id', fcEvent.id);
-        model.set('title', fcEvent.title);
-        model.set('zacetek', fcEvent.start);
-        model.set('konec', fcEvent.end);
+        model.set('id', podatki.id);
+        model.set('title', podatki.title);
+        model.set('zacetek', podatki.start);
+        model.set('konec', podatki.end);
+        model.set('razred', podatki.razred);
+        model.set('zasedenost', podatki.zasedenost);
 
         var view = new DogodekLayoutView({
             model: model
@@ -185,7 +189,13 @@ define([
         }
 
         model.set('id', makeId());
-        localStorage.setItem('Dogodki', JSON.stringify(model.toJSON()));
+        localStorage.setItem(model.id, JSON.stringify(model.toJSON()));
+    };
+    
+    CalendarView.prototype.preberiDogodek = function (fcEvent) {
+        var niz = localStorage.getItem(fcEvent.id);
+        
+        return JSON.parse(niz);
     };
     return CalendarView;
 });

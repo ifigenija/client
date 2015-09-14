@@ -6,5 +6,5 @@
 </div>
 <div class="media-body">
     <div class="pull-right oseba-toolbar"></div>
-    <h4 class="media-heading">{{ oseba.label }} </h4>
+    <h4 class="media-heading">{{ polnoIme }} </h4>
 </div>

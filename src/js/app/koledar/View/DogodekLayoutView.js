@@ -8,16 +8,16 @@ define([
     'i18next',
     'marionette',
     './DogodekView',
-//    './VajaView',
+//    './DogodekVajaView',
 //    './PredstavaView',
-//    './ZasedenostView',
+    './ZasedenostView',
 //    './SplosniDogodekView',
 //    './GostovanjeView',
-    './OsebaSelectView',
+//    './OsebaSelectView',
     'formSchema!dogodek',
     'template!../tpl/dogodekLayout.tpl',
-    'app/Max/Model/MaxPageableCollection',
-    'backbone'
+//    'app/Max/Model/MaxPageableCollection',
+//    'backbone'
 ], function (
         Radio,
         baseUrl,
@@ -26,14 +26,14 @@ define([
         DogodekView,
 //        VajaView,
 //        PredstavaView,
-//        ZasedenostView,
+        ZasedenostView,
 //        SplosniDogodekView,
 //        GostovanjeView,
-        OsebaSelectView,
+//        OsebaSelectView,
         schema,
-        tpl,
-        MaxPageable,
-        Backbone
+        tpl
+//        MaxPageable,
+//        Backbone
         ) {
 
     var DogodekLayoutView = Marionette.LayoutView.extend({
@@ -55,8 +55,8 @@ define([
 
     DogodekLayoutView.prototype.onRender = function () {
         if (this.model.get('title')) {
-            this.renderDogodek();
-            //this.renderRazred();
+            //this.renderDogodek();
+            this.renderRazred();
             this.renderOsebaSelect();
         }
     };
@@ -89,7 +89,7 @@ define([
      * @returns {undefined}
      */
     DogodekLayoutView.prototype.renderRazred = function () {
-        var razred = this.model.razred;
+        var razred = this.model.get('razred');
         if (razred === '100s') {
             this.renderPredstava();
         } else if (razred === '200s') {
@@ -124,8 +124,9 @@ define([
         this.razredR.show(view);
     };
     DogodekLayoutView.prototype.renderZasedenost = function () {
-        var zesedenost = this.model.zesedenost;
-        var view = new ZasedenostView({id: zesedenost});
+        var view = new ZasedenostView({
+            model: this.model
+        });
         this.razredR.show(view);
     };
 
@@ -148,6 +149,8 @@ define([
 //            collection: c,
 //            lookup: "oseba"
 //        });
+//        
+//        this.osebaR.show(osv);
     };
 
     return  DogodekLayoutView;
