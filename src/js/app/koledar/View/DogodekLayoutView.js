@@ -42,8 +42,7 @@ define([
         schema: schema.toFormSchema().schema,
         regions: {
             dogodekR: '.region-dogodek',
-            razredR: '.region-razred',
-            osebaR: '.region-dogodek-oseba'
+            razredR: '.region-razred'
         }
     });
 
@@ -55,9 +54,8 @@ define([
 
     DogodekLayoutView.prototype.onRender = function () {
         if (this.model.get('title')) {
-            //this.renderDogodek();
+            this.renderDogodek();
             this.renderRazred();
-            this.renderOsebaSelect();
         }
     };
 
@@ -124,9 +122,8 @@ define([
         this.razredR.show(view);
     };
     DogodekLayoutView.prototype.renderZasedenost = function () {
-        var view = new ZasedenostView({
-            model: this.model
-        });
+        var zesedenost = this.model.zesedenost;
+        var view = new ZasedenostView({id: zesedenost});
         this.razredR.show(view);
     };
 
