@@ -125,16 +125,14 @@ define([
     };
 
     CalendarView.prototype.renderDogodekLayout = function (fcEvent, jsEvent, view) {
-        var podatki = this.preberiDogodek(fcEvent);
-        
         var model = new DogodekModel.Model();
 
-        model.set('id', podatki.id);
-        model.set('title', podatki.title);
-        model.set('zacetek', podatki.start);
-        model.set('konec', podatki.end);
-        model.set('razred', podatki.razred);
-        model.set('zasedenost', podatki.zasedenost);
+        model.set('id', fcEvent.id);
+        model.set('title', fcEvent.title);
+        model.set('zacetek', fcEvent.start);
+        model.set('konec', fcEvent.end);
+        model.set('razred', fcEvent.razred);
+        model.set('zasedenost', fcEvent.zasedenost);
 
         var view = new DogodekLayoutView({
             model: model
