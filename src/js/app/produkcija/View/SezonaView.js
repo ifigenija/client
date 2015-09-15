@@ -22,7 +22,7 @@ define([
     var SezonaView = SeznamView.extend({
         url: baseUrl + '/rest/sezona',
         title: i18next.t('sezona.title'),
-        zapirajFormo: false,
+        zapirajFormo: true,
         skrivajTabelo: true,
         filterSchema: filterSch,
         schema: schema,

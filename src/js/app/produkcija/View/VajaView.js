@@ -4,7 +4,7 @@
 define([
     'app/Dokument/View/PostavkeView',
     'i18next',
-    'formSchema!vaja',
+    'formSchema!vaja/uprizoritev',
     'template!../tpl/vaja-form.tpl'
 ], function (
         PostavkeView,
