@@ -23,7 +23,7 @@ define([
      * Model za vajo
      */
     var VajaModel = Dokument.Model.extend({
-        urlRoot: baseUrl + '/rest/vaja'
+        urlRoot: baseUrl + '/rest/vaja/uprizoritev'
     });
     /**
      * Kolekcija za vaje 
@@ -37,7 +37,7 @@ define([
      * Model za predstavo
      */
     var PredstavaModel = Dokument.Model.extend({
-        urlRoot: baseUrl + '/rest/predstava'
+        urlRoot: baseUrl + '/rest/predstava/uprizoritev'
     });
     /**
      * Kolekcija za predstave 

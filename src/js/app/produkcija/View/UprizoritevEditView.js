@@ -269,11 +269,11 @@ define([
      */
     UprizoritevEditView.prototype.renderVaje = function () {
         var c = this.model.vajeCollection;
-        if (c.length === 0) {
+        //if (c.length === 0) {
             c.fetch({
                 error: Radio.channel('error').request('handler', 'xhr')
             });
-        }
+        //}
         
          var view = new VajaView({
             collection: c,
@@ -293,11 +293,11 @@ define([
      */
     UprizoritevEditView.prototype.renderPredstave = function () {
         var c = this.model.predstaveCollection;
-        if (c.length === 0) {
+        //if (c.length === 0) {
             c.fetch({
                 error: Radio.channel('error').request('handler', 'xhr')
             });
-        }
+        //}
         
         var view = new PredstavaView({
             collection: c,
