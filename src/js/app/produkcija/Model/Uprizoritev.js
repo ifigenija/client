@@ -54,8 +54,8 @@ define([
             umetniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['umetnik', 'inspicient']}},
             igralci: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['igralec']}},
             tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['tehnik']}},
-            vaje: {collection: VajeCollection, mappedBy: 'uprizoritev'},
-            predstave: {collection: PredstaveCollection, mappedBy: 'uprizoritev'}
+            planVaje: {collection: VajeCollection, mappedBy: 'uprizoritev'},
+            planPredstave: {collection: PredstaveCollection, mappedBy: 'uprizoritev'}
 
         },
         dodajPostavko: function (nested) {
@@ -83,12 +83,12 @@ define([
                         podrocje: 'tehnik'
                     });
                     break;
-                case 'vaje':
+                case 'planVaje':
                     postavka = new VajaModel({
                         uprizoritev: this.get('id')
                     });
                     break;
-                case 'predstave':
+                case 'planPredstave':
                     postavka = new PredstavaModel({
                         uprizoritev: this.get('id')
                     });

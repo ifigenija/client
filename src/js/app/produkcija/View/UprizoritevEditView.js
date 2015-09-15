@@ -268,12 +268,12 @@ define([
      * @returns {undefined}
      */
     UprizoritevEditView.prototype.renderVaje = function () {
-        var c = this.model.vajeCollection;
-        //if (c.length === 0) {
+        var c = this.model.planVajeCollection;
+        if (c.length === 0) {
             c.fetch({
                 error: Radio.channel('error').request('handler', 'xhr')
             });
-        //}
+        }
         
          var view = new VajaView({
             collection: c,
@@ -282,6 +282,7 @@ define([
             potrdiBrisanje: true
         });
         
+        view.detailName = 'planVaje';
         this.regionDetail.show(view);
         
     };
@@ -292,12 +293,12 @@ define([
      * @returns {undefined}
      */
     UprizoritevEditView.prototype.renderPredstave = function () {
-        var c = this.model.predstaveCollection;
-        //if (c.length === 0) {
+        var c = this.model.planPredstaveCollection;
+        if (c.length === 0) {
             c.fetch({
                 error: Radio.channel('error').request('handler', 'xhr')
             });
-        //}
+        }
         
         var view = new PredstavaView({
             collection: c,
@@ -306,6 +307,7 @@ define([
             potrdiBrisanje: true
         });
         
+        view.detailName = 'planPredstave';
         this.regionDetail.show(view);
     };
 

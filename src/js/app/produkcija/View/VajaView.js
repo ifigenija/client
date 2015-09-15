@@ -41,7 +41,7 @@ define([
             },
             {
                 headerCell: 'number',
-                cell: 'date',
+                cell: 'datetime',
                 editable: false,
                 label: i18next.t('dogodek.zacetek'),
                 name: 'dogodek.zacetek',
@@ -49,7 +49,7 @@ define([
             },
             {
                 headerCell: 'number',
-                cell: 'date',
+                cell: 'datetime',
                 editable: false,
                 label: i18next.t('dogodek.konec'),
                 name: 'dogodek.konec',
