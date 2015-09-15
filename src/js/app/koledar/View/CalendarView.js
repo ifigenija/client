@@ -160,7 +160,8 @@ define([
                         id: model.get('id'),
                         title: model.get('title'),
                         start: model.get('zacetek'),
-                        end: model.get('konec')
+                        end: model.get('konec'),
+                        razred: model.get('razred')
                     }
                 ]
             };

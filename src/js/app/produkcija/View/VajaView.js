@@ -5,14 +5,19 @@ define([
     'app/Dokument/View/PostavkeView',
     'i18next',
     'formSchema!vaja/uprizoritev',
-    'template!../tpl/vaja-form.tpl'
+    'template!../tpl/vaja-form.tpl',
+    'app/Max/Module/Backgrid'
 ], function (
         PostavkeView,
         i18next,
         schema,
-        formTpl
+        formTpl,
+        Backgrid
         ) {
 
+    var dt = Backgrid.DateTimeCell.extend({
+        displayFormat: 'DD.MM.YYYY HH:mm'
+    });
     /**
      * 
      * 
@@ -41,7 +46,7 @@ define([
             },
             {
                 headerCell: 'number',
-                cell: 'datetime',
+                cell: dt,
                 editable: false,
                 label: i18next.t('dogodek.zacetek'),
                 name: 'dogodek.zacetek',
@@ -49,7 +54,7 @@ define([
             },
             {
                 headerCell: 'number',
-                cell: 'datetime',
+                cell: dt,
                 editable: false,
                 label: i18next.t('dogodek.konec'),
                 name: 'dogodek.konec',
