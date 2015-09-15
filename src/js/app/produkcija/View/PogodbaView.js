@@ -12,7 +12,7 @@ define([
         schema,
         i18next
         ) {
-    
+
     var PogodbaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -85,25 +85,30 @@ define([
             }
         ]
     });
-    
+
     PogodbaView.prototype.placiloVaje = function (form) {
         var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
         var vrednostVaje = form.fields.vrednostVaje.editor.$el;
         var vrednostVaj = form.fields.vrednostVaj.editor.$el;
         var steviloVaj = form.fields.planiranoSteviloVaj.editor.$el;
 
-        if (placiloNaVajo) {
-            vrednostVaj.attr("disabled", "disabled");
-            steviloVaj.removeAttr("disabled");
-            vrednostVaje.removeAttr("disabled");
-        } else {
-            vrednostVaj.removeAttr("disabled");
-            steviloVaj.attr("disabled", "disabled");
-            vrednostVaje.attr("disabled", "disabled");
-
+        if (!form.commit()) {
+            if (placiloNaVajo) {
+                vrednostVaj.attr("disabled", "disabled");
+                steviloVaj.removeAttr("disabled");
+                vrednostVaje.removeAttr("disabled");
+                var vrednostDo = this.model.preracunajVrednostDo();
+                form.fields.vrednostVaj.editor.setValue(vrednostDo);
+            } else {
+                vrednostVaj.removeAttr("disabled");
+                steviloVaj.attr("disabled", "disabled");
+                vrednostVaje.attr("disabled", "disabled");
+                form.fields.vrednostVaje.editor.setValue(0);
+                form.fields.planiranoSteviloVaj.editor.setValue(0);
+            }
         }
     };
-    
+
     PogodbaView.prototype.onRenderForm = function (form) {
         this.placiloVaje(form);
     };

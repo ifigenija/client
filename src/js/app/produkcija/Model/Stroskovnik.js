@@ -9,7 +9,20 @@ define([
         ) {
 
     var PogodbaModel = Dokument.Postavka.extend({
-        urlRoot: baseUrl + '/rest/pogodba'
+        urlRoot: baseUrl + '/rest/pogodba',
+        getVrednost: function (atribut) {
+            var vred = this.get(atribut);
+            return vred = vred ? vred : 0;
+        },
+        preracunajVrednostDo: function () {
+            var vaja = this.getVrednost('vrednostVaje');
+            var stVaj = this.getVrednost('planiranoSteviloVaj');
+
+            if (vaja && stVaj) {
+                return vaja * stVaj;
+            }
+            return 0;
+        }
     });
 
     var PogodbaCollection = Dokument.PostavkaCollection.extend({
