@@ -128,7 +128,7 @@ define([
         var preveriPodrocje = function () {
             var vrednost = form.fields.velikost.editor.getValue();
             var velikost = form.fields.velikost;
-            
+
             if (model.get('podrocje') === 'igralec') {
                 if (!vrednost) {
                     velikost.setError(i18next.t("std.napaka.velikost"));
@@ -205,8 +205,14 @@ define([
      */
     FunkcijaView.prototype.brisiAlter = function (alter) {
         var o = this.alters.findWhere({id: alter});
+        var self = this;
         if (o) {
             o.destroy({
+                success: function () {
+                    self.model.fetch({
+                        error: Radio.channel('error').request('handler', 'xhr')
+                    });
+                },
                 error: Radio.channel('error').request('handler', 'xhr')
             });
         }
@@ -219,9 +225,15 @@ define([
      */
     FunkcijaView.prototype.privzetoAlter = function (alterID) {
         var o = this.alters.findWhere({id: alterID});
+        var self = this;
         if (o) {
             o.set('privzeti', true);
             o.save({
+                success: function () {
+                    self.model.fetch({
+                        error: Radio.channel('error').request('handler', 'xhr')
+                    });
+                },
                 error: Radio.channel('error').request('handler', 'xhr')
             });
         }
@@ -243,6 +255,9 @@ define([
         }, {
             success: function (model, x, xhr) {
                 self.alters.add(model);
+                self.model.fetch({
+                    error: Radio.channel('error').request('handler', 'xhr')
+                });
                 self.form.trigger('change');
             },
             error: Radio.channel('error').request('handler', 'xhr')
