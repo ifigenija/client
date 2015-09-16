@@ -44,29 +44,29 @@ define([
         renderIzbira: function () {
             var view = new IzbiraView();
             this.modalR.show(view);
-            view.on('render:vaja',this.renderVaja,this);
-            view.on('render:predstava',this.renderPredstava,this);
-            view.on('render:zasedenost',this.renderZasedenost,this);
-            view.on('render:gostovanje',this.renderGostovanje,this);
-            view.on('render:splosni',this.renderSplosni,this);
+            view.on('render:vaja', this.renderVaja, this);
+            view.on('render:predstava', this.renderPredstava, this);
+            view.on('render:zasedenost', this.renderZasedenost, this);
+            view.on('render:gostovanje', this.renderGostovanje, this);
+            view.on('render:splosni', this.renderSplosni, this);
         },
-        renderVaja: function(){
+        renderVaja: function () {
             var view = new VajaPlanView({
                 schema: null
             });
-            view.on('preklici',this.renderIzbira,this);
+            view.on('preklici', this.renderIzbira, this);
             this.modalR.show(view);
         },
-        renderPredstava: function(){
+        renderPredstava: function () {
             console.log('predstava');
         },
-        renderZasedenost: function(){
+        renderZasedenost: function () {
             console.log('zasedenost');
         },
-        renderGostovanje: function(){
+        renderGostovanje: function () {
             console.log('gostovanje');
         },
-        renderSplosni: function(){
+        renderSplosni: function () {
             console.log('splosni');
         }
     });
