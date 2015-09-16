@@ -48,11 +48,11 @@ define([
         }
 
         var view = new DV({
-            formTitle: "Dogodek",
             model: model
         });
 
         var modal = new Modal({
+            title: i18next.t("dogodek.title"),
             content: view,
             animate: true,
             okText: i18next.t("std.izberi"),

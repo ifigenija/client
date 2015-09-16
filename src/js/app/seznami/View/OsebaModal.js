@@ -64,6 +64,7 @@ define([
         };
 
         var modal = new Modal({
+            title: i18next.t(options.title),
             content: view,
             animate: true,
             okText: i18next.t("std.izberi"),

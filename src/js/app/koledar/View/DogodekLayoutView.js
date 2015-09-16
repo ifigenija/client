@@ -10,14 +10,11 @@ define([
     './DogodekView',
 //    './DogodekVajaView',
 //    './PredstavaView',
-    './ZasedenostView',
+//    './ZasedenostView',
 //    './SplosniDogodekView',
 //    './GostovanjeView',
-//    './OsebaSelectView',
     'formSchema!dogodek',
-    'template!../tpl/dogodekLayout.tpl',
-//    'app/Max/Model/MaxPageableCollection',
-//    'backbone'
+    'template!../tpl/dogodekLayout.tpl'
 ], function (
         Radio,
         baseUrl,
@@ -26,14 +23,11 @@ define([
         DogodekView,
 //        VajaView,
 //        PredstavaView,
-        ZasedenostView,
+//        ZasedenostView,
 //        SplosniDogodekView,
 //        GostovanjeView,
-//        OsebaSelectView,
         schema,
         tpl
-//        MaxPageable,
-//        Backbone
         ) {
 
     var DogodekLayoutView = Marionette.LayoutView.extend({
@@ -74,7 +68,6 @@ define([
     DogodekLayoutView.prototype.onPreklici = function () {
         this.dogodekR.empty();
         this.razredR.empty();
-        this.osebaR.empty();
     };
 
     DogodekLayoutView.prototype.onBrisi = function () {
@@ -125,29 +118,6 @@ define([
         var zesedenost = this.model.zesedenost;
         var view = new ZasedenostView({id: zesedenost});
         this.razredR.show(view);
-    };
-
-    DogodekLayoutView.prototype.renderOsebaSelect = function () {
-//        this.OsebaModel = Backbone.DeepModel.extend({
-//            urlRoot: baseUrl + '/rest/oseba'
-//        });
-//        var c = this.osebe = new MaxPageable([], {
-//            model: this.OsebaModel,
-//            state: {
-//                perPage: 50
-//            }
-//        });
-//        c.url = baseUrl + '/rest/oseba';
-//
-//        //query params potrebno določit
-//        c.queryParams.dogodek = this.model.get('id');
-//
-//        var osv = new OsebaSelectView({
-//            collection: c,
-//            lookup: "oseba"
-//        });
-//        
-//        this.osebaR.show(osv);
     };
 
     return  DogodekLayoutView;

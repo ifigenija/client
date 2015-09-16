@@ -153,7 +153,8 @@ define([
             model: model,
             editor: editor,
             form: this.formIzberi,
-            event: 'dodaj:osebo'
+            event: 'dodaj:osebo',
+            title: i18next.t('oseba.nova')
         });
     };
 

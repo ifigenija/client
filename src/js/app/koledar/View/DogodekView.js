@@ -21,7 +21,6 @@ define([
         ) {
 
     var Fv = FormView.extend({
-        formTitle: i18next.t('dogodek.title'),
         buttons: {
             shrani: {
                 id: 'doc-shrani',
@@ -53,12 +52,6 @@ define([
         formTemplate: dogodekFormTpl,
         template: dogodekTpl
     });
-    
-    Fv.prototype.initialize = function (options) {
-        if(options.formTitle){
-            this.formTitle = options.formTitle;
-        }
-    };
     
     Fv.prototype.serializeData = function () {
         return _.extend(this.model.toJSON(), {

@@ -112,7 +112,8 @@ define([
         var editor = this.formView.form.fields.oseba.editor;
         this.modal = OsebaModal({
             model: model,
-            editor: editor
+            editor: editor,
+            title: i18next.t('oseba.nova')
         });
     };
 

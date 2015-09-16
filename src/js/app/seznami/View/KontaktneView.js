@@ -95,7 +95,8 @@ define([
         var modal = OsebaModal({
             model: editModel,
             pogled: 'vse',
-            tpl: modalTpl
+            tpl: modalTpl,
+            title: i18next.t(editModel.get('polnoIme'))
         });
     };
 
