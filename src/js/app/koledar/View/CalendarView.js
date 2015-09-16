@@ -8,7 +8,7 @@ define([
     'template!../tpl/calendar-layout.tpl',
     './DogodekModal',
     '../Model/Dogodek',
-    './DogodekLayoutView',
+    './ZasedenostView',
     'fullcalendar'
 ], function (
         Marionette,
@@ -17,7 +17,7 @@ define([
         tpl,
         DogodekModal,
         DogodekModel,
-        DogodekLayoutView
+        ZasedenostView
         ) {
 
     var CalendarView = Marionette.LayoutView.extend({
@@ -96,7 +96,7 @@ define([
     };
 
     CalendarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
-        this.renderDogodekLayout(fcEvent, jsEvent, view);
+        this.renderDogodek(fcEvent, jsEvent, view);
     };
 
     CalendarView.prototype.change = function (event) {
@@ -114,7 +114,7 @@ define([
         //update dogodka v modelu
         //v primeru da je odprta forma bi se naj se kliče render da se posodobijo podatki
         //samo testiranje
-        this.renderDogodekLayout(event);
+        this.renderDogodek(event);
     };
 
     CalendarView.prototype.onDestroy = function () {
@@ -124,7 +124,8 @@ define([
         console.log('search', data);
     };
 
-    CalendarView.prototype.renderDogodekLayout = function (fcEvent, jsEvent, view) {
+    CalendarView.prototype.renderDogodek = function (fcEvent, jsEvent, view) {
+        
         var model = new DogodekModel.Model();
 
         model.set('id', fcEvent.id);
@@ -133,18 +134,25 @@ define([
         model.set('konec', fcEvent.end);
         model.set('razred', fcEvent.razred);
         model.set('zasedenost', fcEvent.zasedenost);
-
-        var view = new DogodekLayoutView({
-            model: model
-        });
-
-        var self = this;
-
-        view.on('brisi', function () {
-            self.onBrisi(fcEvent, jsEvent, view);
-        }, this);
-
-        this.dogodekR.show(view);
+        
+        var razred = fcEvent.razred;
+        if (razred === '100s') {
+            this.renderPredstava(model);
+        } else if (razred === '200s') {
+            this.renderVaja(model);
+        } else if (razred === '300s') {
+            this.renderGostovanje(model);
+        } else if (razred === '400s') {
+            this.renderSplosni(model);
+        } else if (razred === '500s') {
+            this.renderZasedenost(model);
+        }
+        
+//        var self = this;
+//
+//        view.on('brisi', function () {
+//            self.onBrisi(fcEvent, jsEvent, view);
+//        }, this);
     };
 
     CalendarView.prototype.dodajDogodek = function (view) {
@@ -195,6 +203,32 @@ define([
         var niz = localStorage.getItem(fcEvent.id);
         
         return JSON.parse(niz);
+    };
+    
+    CalendarView.prototype.renderVaja = function (model) {
+        var vaja = model.vaja;
+        var view = new VajaView({id: vaja});
+        this.dogodekR.show(view);
+    };
+    CalendarView.prototype.renderPredstava = function (model) {
+        var predstava = model.predstava;
+        var view = new PredstavaView({id: predstava});
+        this.dogodekR.show(view);
+    };
+    CalendarView.prototype.renderGostovanje = function (model) {
+        var gostovanje = model.gostovanje;
+        var view = new GostovanjeView({id: gostovanje});
+        this.dogodekR.show(view);
+    };
+    CalendarView.prototype.renderSplosni = function (model) {
+        var splosni = model.splosni;
+        var view = new SplosniDogodekView({id: splosni});
+        this.dogodekR.show(view);
+    };
+    CalendarView.prototype.renderZasedenost = function (model) {
+        var zesedenost = model.zesedenost;
+        var view = new ZasedenostView({id: zesedenost});
+        this.dogodekR.show(view);
     };
     return CalendarView;
 });
