@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-sm-10" data-editors="naslov"></div>
                             <div class="col-sm-2">
-                                <a class="btn btn-default oseba-nova" title="{{t "std.title.dodajNaslov"}}">
+                                <a class="btn btn-default prostor-dodaj-naslov" title="{{t "std.title.dodajNaslov"}}">
                                     <i class="fa fa-plus"> </i>
                                 </a>
                             </div>

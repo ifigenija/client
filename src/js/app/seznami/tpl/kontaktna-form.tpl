@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-sm-10" data-editors="oseba"></div>
                     <div class="col-sm-2">
-                        <a class="btn btn-default oseba-nova" title="{{t "std.title.vnesiOseba"}}">
+                        <a class="btn btn-default dodaj-osebo" title="{{t "std.title.vnesiOseba"}}">
                             <i class="fa fa-user-plus"> </i>
                         </a>
                     </div>
