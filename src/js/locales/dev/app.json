@@ -1504,5 +1504,12 @@
             "konec": "",
             "prostor": ""
         }
+    },
+    "programPremiera": {
+        "title": "Program premierne uprizoritve",
+        "priKoproducentu": "Premiera pri koproducentu",
+        "d": {
+            "priKoproducentu": "Ali je premiera pri koproducentu in ni na domačem odru"
+        }
     }
 }
