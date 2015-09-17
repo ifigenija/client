@@ -104,7 +104,7 @@ define([
             'click .prostor-dodaj-naslov': 'dodaj:naslov'
         }
     });
-    
+
     ProstorView.prototype.disableGumbNaslov = function (form, editor) {
         var podatek = editor.getValue();
         if (podatek) {
@@ -117,9 +117,9 @@ define([
     };
 
     ProstorView.prototype.onRenderForm = function () {
-        var form =this.formView.form;
-        var editor =this.formView.form.fields.popa.editor;
-        
+        var form = this.formView.form;
+        var editor = this.formView.form.fields.popa.editor;
+
         form.on('popa:change', this.disableGumbNaslov, this);
         this.disableGumbNaslov(form, editor);
     };
