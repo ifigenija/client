@@ -5,20 +5,22 @@ define([
         baseUrl,
         Backbone
         ) {
-    var DogodekModel = Backbone.Model.extend({
-        urlRoot: baseUrl + '/rest/dogodek',
-        initialize: function () {
-            this.start = this.get('zacetek');
-            this.end = this.get('konec');
+    var Model = Backbone.Model.extend({
+        view: 'default',
+        urlRoot: function () {
+            return baseUrl + '/rest/dogodek/' + this.view;
         }
     });
 
-    var DogodekCollection = Backbone.Collection.extend({
-        model: DogodekModel,
-        url: baseUrl + '/rest/dogodek'
+    var Collection = Backbone.Collection.extend({
+        model: Model,
+        view: 'default',
+        url: function () {
+            return baseUrl + '/rest/dogodek/' + this.view;
+        }
     });
     return {
-        Model: DogodekModel,
-        Collection: DogodekCollection
+        Model: Model,
+        Collection: Collection
     };
 });
