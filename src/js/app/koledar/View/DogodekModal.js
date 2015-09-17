@@ -93,6 +93,14 @@ define([
                 view: options.modelView
             });
             var model = new Model();
+
+            if (zacetek) {
+                model.set('zacetek', zacetek);
+            }
+            if (konec) {
+                model.set('konec', konec);
+            }
+
             var Form = Fv.extend({
                 formTemplate: options.formTpl
             });
@@ -153,15 +161,14 @@ define([
         }
     });
     return function (options) {
-
-        var model = new Dogodek.Model();
         var zacetek = options.zacetek;
         var konec = options.konec;
+
         if (zacetek) {
-            model.set('zacetek', zacetek);
+            this.zacetek = zacetek;
         }
         if (konec) {
-            model.set('konec', konec);
+            this.konec = konec;
         }
 
         var view = new DogodekModalLayout();
