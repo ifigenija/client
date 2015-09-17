@@ -87,8 +87,8 @@ define([
     CalendarView.prototype.select = function (start, end, jsEvent, view) {
         var self = this;
         DogodekModal({
-            zacetek: start.format(),
-            konec: end.format(),
+            zacetek: start.format('YYYY-MM-DDTHH:mm:ssZZ'),
+            konec: end.format('YYYY-MM-DDTHH:mm:ssZZ'),
             cb: function () {
                 self.dodajDogodek.apply(self, arguments);
             }
