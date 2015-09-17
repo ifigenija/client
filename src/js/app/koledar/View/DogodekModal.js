@@ -173,12 +173,12 @@ define([
             cancelText: i18next.t("std.preklici")
         });
         var odpriDogodek = function () {
-            var view = modal.options.content;
+            var model = modal.options.content.form.model;
             //tukaj je drugače ker formview.commit vrne true če ni napake
             //form pa vrne false če ni napake zato je tu drugače, kot pri ostalih
             if (view.form.commit()) {
                 if (options.cb) {
-                    options.cb(view);
+                    options.cb(model);
                 }
             } else {
                 modal.preventClose();

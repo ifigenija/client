@@ -155,8 +155,7 @@ define([
 //        }, this);
     };
 
-    CalendarView.prototype.dodajDogodek = function (view) {
-        var model = view.model;
+    CalendarView.prototype.dodajDogodek = function (model) {
         if (!model.get('id')) {
             this.shraniDogodek(model);
         }
