@@ -9,7 +9,7 @@ define([
     'app/Dokument/View/FormView',
     'formSchema!dogodek',
     'template!../tpl/dogodek-form.tpl',
-    'template!../tpl/dogodek-modal.tpl'
+    'template!app/Dokument/tpl/form-simple.tpl'
 ], function (
         Radio,
         i18next,

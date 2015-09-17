@@ -6,7 +6,7 @@ define([
     'radio',
     'i18next',
     'app/Dokument/View/FormView',
-    'formSchema!vaja',
+    'formSchema!dogodek/vaja',
     'template!../tpl/vajaPlan-form.tpl'
 ], function (
         Radio,

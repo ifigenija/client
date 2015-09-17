@@ -13,7 +13,7 @@ define([
     'app/Dokument/View/FormView',
     'template!../tpl/postniNaslov-form.tpl',
     'formSchema!postniNaslov',
-    'template!../tpl/postniNaslov-modal.tpl',
+    'template!app/Dokument/tpl/form-simple.tpl',
     'formSchema!prostor?filter=1'
 ], function (
         SeznamView,
@@ -181,6 +181,7 @@ define([
         };
 
         var modal = new Modal({
+            title: i18next.t('postniNaslov.title'),
             content: view,
             animate: true,
             okText: i18next.t("std.izberi"),

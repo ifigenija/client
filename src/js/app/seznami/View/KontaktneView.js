@@ -96,7 +96,7 @@ define([
             model: editModel,
             pogled: 'vse',
             tpl: modalTpl,
-            title: i18next.t(editModel.get('polnoIme'))
+            title: i18next.t('oseba.nova')
         });
     };
 

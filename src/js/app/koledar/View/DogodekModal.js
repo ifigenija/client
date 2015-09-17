@@ -8,6 +8,7 @@ define([
     'marionette',
     'backbone-modal',
     '../Model/Dogodek',
+    '../Model/DogodekVaja',
     './VajaPlanView',
     'template!../tpl/dogodek-izbira.tpl'
 ], function (
@@ -17,6 +18,7 @@ define([
         Marionette,
         Modal,
         DogodekModel,
+        DogodekVaja,
         VajaPlanView,
         izbiraTpl
         ) {
@@ -51,7 +53,9 @@ define([
             view.on('render:splosni', this.renderSplosni, this);
         },
         renderVaja: function () {
+            var model = new DogodekVaja.Model();
             var view = new VajaPlanView({
+                model: model,
                 schema: null
             });
             view.on('preklici', this.renderIzbira, this);
