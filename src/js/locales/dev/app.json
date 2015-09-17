@@ -18,12 +18,12 @@
         "password_holder": "Vnesite novo geslo",
         "newpass": "NovoGeslo",
         "newpass_holder": "Potrditev gesla",
-        "changePass": "Menjava gesla",
-        "changePara": "Tukaj lahko zamenjate svoje geslo. Vpisati morate svoje trenutno geslo in dvakrat novo geslo. Geslo mora biti dolgo najmanj 8 znakov in mora vsebovati vsaj male in velike črke ter številke. Priporočamo uporabo posebnih znakov",
+        "changePass": "Sprememba gesla",
+        "changePara": "Tukaj lahko spremenite svoje geslo. Vpisati morate svoje trenutno geslo in dvakrat novo geslo. Geslo mora biti dolgo najmanj 8 znakov in mora vsebovati vsaj male in velike črke ter številke. Priporočamo uporabo posebnih znakov",
         "remember": "Ostani prijavljen",
         "signIn": "Vpis",
         "failed": "Vpis neuspešen.",
-        "changePassButt": "Zamenjaj geslo"
+        "changePassButt": "Spremeni geslo"
     },
     "admin": {
         "nav": {
