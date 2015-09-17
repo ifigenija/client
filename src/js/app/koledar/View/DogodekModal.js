@@ -14,7 +14,13 @@ define([
     'template!../tpl/vajaPlan-form.tpl',
     'template!app/Dokument/tpl/form-simple.tpl',
     'formSchema!dogodek/predstava',
-    'template!../tpl/predstavaPlan-form.tpl'
+    'template!../tpl/predstavaPlan-form.tpl',
+    'formSchema!dogodek/zasedenost',
+    'template!../tpl/zasedenostPlan-form.tpl',
+    'formSchema!dogodek/splosni',
+    'template!../tpl/splosniPlan-form.tpl',
+    'formSchema!dogodek/gostovanje',
+    'template!../tpl/gostovanjePlan-form.tpl'
 ], function (
         Radio,
         i18next,
@@ -28,7 +34,13 @@ define([
         formVajaTpl,
         tpl,
         schemaPredstava,
-        formPredstavaTpl
+        formPredstavaTpl,
+        schemaZasedenost,
+        formZasedenostTpl,
+        schemaSplosni,
+        formSplosniTpl,
+        schemaGostovanje,
+        formGostovanjeTpl
         ) {
 
     var Fv = FormView.extend({
@@ -48,7 +60,6 @@ define([
         },
         template: tpl
     });
-
     var IzbiraView = Marionette.ItemView.extend({
         template: izbiraTpl,
         triggers: {
@@ -59,7 +70,6 @@ define([
             'click .dogodek-splosni': 'render:splosni'
         }
     });
-
     var DogodekModalLayout = Marionette.LayoutView.extend({
         tagName: 'div',
         template: Handlebars.compile('<div class="region-modal"></div>'),
@@ -78,60 +88,75 @@ define([
             view.on('render:gostovanje', this.renderGostovanje, this);
             view.on('render:splosni', this.renderSplosni, this);
         },
-        renderVaja: function () {
+        getFormView: function (options) {
             var Model = Dogodek.Model.extend({
-                view: 'vaja'
+                view: options.modelView
             });
             var model = new Model();
-
             var Form = Fv.extend({
-                formTemplate: formVajaTpl
+                formTemplate: options.formTpl
             });
-
             var view = this.form = new Form({
                 model: model,
-                schema: schemaVaja.toFormSchema().schema
+                schema: options.schema.toFormSchema().schema
             });
 
             view.on('preklici', this.renderIzbira, this);
+
+            return view;
+        },
+        renderVaja: function () {
+
+            var view = this.getFormView({
+                modelView: 'vaja',
+                schema: schemaVaja,
+                formTpl: formVajaTpl
+            });
+
             this.modalR.show(view);
         },
         renderPredstava: function () {
-            var Model = Dogodek.Model.extend({
-                view: 'predstava'
-            });
-            var model = new Model();
-
-            var Form = Fv.extend({
-                formTemplate: formPredstavaTpl
+            var view = this.getFormView({
+                modelView: 'predstava',
+                schema: schemaPredstava,
+                formTpl: formPredstavaTpl
             });
 
-            var view = this.form = new Form({
-                model: model,
-                schema: schemaPredstava.toFormSchema().schema,
-            });
-
-            view.on('preklici', this.renderIzbira, this);
             this.modalR.show(view);
         },
         renderZasedenost: function () {
-            console.log('zasedenost');
+            var view = this.getFormView({
+                modelView: 'zasedenost',
+                schema: schemaZasedenost,
+                formTpl: formZasedenostTpl
+            });
+
+            this.modalR.show(view);
         },
         renderGostovanje: function () {
-            console.log('gostovanje');
+            var view = this.getFormView({
+                modelView: 'gostovanje',
+                schema: schemaGostovanje,
+                formTpl: formGostovanjeTpl
+            });
+
+            this.modalR.show(view);
         },
         renderSplosni: function () {
-            console.log('splosni');
+            var view = this.getFormView({
+                modelView: 'splosni',
+                schema: schemaSplosni,
+                formTpl: formSplosniTpl
+            });
+
+            this.modalR.show(view);
         }
     });
-
     return function (options) {
 
         var model = new Dogodek.Model();
-
         var zacetek = options.zacetek;
         var konec = options.konec;
-
         if (zacetek) {
             model.set('zacetek', zacetek);
         }
@@ -140,7 +165,6 @@ define([
         }
 
         var view = new DogodekModalLayout();
-
         var modal = new Modal({
             title: i18next.t("dogodek.title"),
             content: view,
@@ -148,7 +172,6 @@ define([
             okText: i18next.t("std.ustvari"),
             cancelText: i18next.t("std.preklici")
         });
-
         var odpriDogodek = function () {
             var view = modal.options.content;
             //tukaj je drugače ker formview.commit vrne true če ni napake
@@ -161,7 +184,6 @@ define([
                 modal.preventClose();
             }
         };
-
         return modal.open(odpriDogodek);
     };
 });
