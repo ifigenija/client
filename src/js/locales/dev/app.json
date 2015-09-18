@@ -847,6 +847,8 @@
         "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev",
         "stIzvNekomerc": "Število vseh javnih nekomercialnih prireditev skupaj",
         "stIzvPrem": "Število izvedb premiernih produkcij",
+        "stIzvPremDoma": "Število izvedb premiernih produkcij na domačem odru",
+        "stIzvPremKopr": "Število izvedb premiernih produkcij na odru koproducenta v Sloveniji ali zamejstvu",
         "stIzvPonPrem": "Število izvedb ponovitev premiernih uprizoritev",
         "stIzvPonPrej": "Število izvedb ponovitev iz prejšnjih sezon",
         "sredstvaAvt": "Višina sredstev, namenjenih avtorskim honorarjem",
@@ -897,6 +899,8 @@
             "stRazno": "Število razno",
             "stIzjem": "Število izjemnih dogodkov",
             "stPonPrem": "Število ponovitev premier",
+            "stIzvPremDoma": "Število izvedb premiernih produkcij na domačem odru",
+            "stIzvPremKopr": "Število izvedb premiernih produkcij na odru koproducenta v Sloveniji ali zamejstvu",
             "stPonPrej": "Število ponovitev prejšnjih sezon",
             "stPonPrejVelikih": "Število velikih predstav ponovitev prejšnjih sezon",
             "stPonPrejMalih": "Število malih predstav ponovitev prejšnjih sezon",
@@ -1510,6 +1514,19 @@
         "priKoproducentu": "Premiera pri koproducentu",
         "d": {
             "priKoproducentu": "Ali je premiera pri koproducentu in ni na domačem odru"
+        }
+    },
+    "avtorBesedila": {
+        "title": "Avtor besedila",
+        "tipAvtorja": "Tip avtorja",
+        "zaporedna": "Zaporedna številka",
+        "aliVNaslovu": "Ali v naslovu uprizoritve",
+        "besedilo": "Besedilo",
+        "d": {
+            "tipAvtorja": "Tip avtorja - npr. avtor originalnega besedila, soavtor, lektor, prevajalec",
+            "zaporedna": "Zaporedna številka",
+            "aliVNaslovu": "Ali se prikaže kot avtor v naslovu uprizoritve",
+            "besedilo": "Besedilo"
         }
     }
 }
