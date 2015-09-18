@@ -97,6 +97,38 @@ define([
             }
         ]
     });
+        
+    PremieraView.prototype.toggleObisk = function (form, editor) {
+        var priKop = editor.getValue();
+
+        if (priKop) {
+            this.$('input[name="obiskDoma"]').attr("disabled", true);
+            this.$('input[name="obiskKopr"]').attr("disabled", false);
+            form.fields.obiskDoma.editor.setValue('0');
+        } else {
+            this.$('input[name="obiskKopr"]').attr("disabled", true);
+            this.$('input[name="obiskDoma"]').attr("disabled", false);
+            form.fields.obiskKopr.editor.setValue('0');
+        }
+    };
+    
+    PremieraView.prototype.onRenderForm = function (form) {
+        EnotaProgramaView.prototype.onRenderForm.apply(this, arguments);
+        form.on('priKoproducentu:change', this.toggleObisk, this);
+        this.toggleObisk(form, form.fields.priKoproducentu.editor);
+    };
+
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    PremieraView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'ProgramPremiera'
+        });
+        this.prilogeR.show(view);
+    };
 
     /**
      * overridana metoda
@@ -169,36 +201,5 @@ define([
         this.koprodukcijeR.show(view);
     };
     
-    PremieraView.prototype.toggleObisk = function (form, editor) {
-        var priKop = editor.getValue();
-        
-        if(priKop){
-            this.$('input[name="obiskDoma"]').attr("disabled", true);
-            this.$('input[name="obiskKopr"]').attr("disabled", false);
-            form.fields.obiskDoma.editor.setValue('0');
-        }else{
-            this.$('input[name="obiskKopr"]').attr("disabled", true);
-            this.$('input[name="obiskDoma"]').attr("disabled", false);
-            form.fields.obiskKopr.editor.setValue('0');
-        }
-    };
-    
-    PremieraView.prototype.onRenderForm = function (form) {
-        form.on('priKoproducentu:change', this.toggleObisk, this);
-        this.toggleObisk(form, form.fields.priKoproducentu.editor);
-    };
-
-    /**
-     * Overrride render priloge, da se nastavi pravi classLastnika
-     * @returns {undefined}
-     */
-    PremieraView.prototype.renderPriloge = function () {
-        var view = new ZapisiLayout({
-            lastnik: this.model.get('id'),
-            classLastnika: 'ProgramPremiera'
-        });
-        this.prilogeR.show(view);
-    };
-
     return PremieraView;
 });
