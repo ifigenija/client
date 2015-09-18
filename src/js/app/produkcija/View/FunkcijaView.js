@@ -160,8 +160,8 @@ define([
                 this.alterR.empty();
             }, this);
         }
-        //this.form.on('tipFunkcije:change', this.tipFunkcijeChange, this);
-        //this.form.on('velikost:change', this.tipFunkcijeChange, this);
+        this.form.on('tipFunkcije:change', this.tipFunkcijeChange, this);
+        this.form.on('velikost:change', this.tipFunkcijeChange, this);
     };
 
     /**

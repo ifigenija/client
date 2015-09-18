@@ -3,7 +3,7 @@
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-12 col-md-6 ">
-                <fieldset class="pomembni" data-fields="naslov,podnaslov,avtor,datumPremiere,gostujoca,sifra,faza">
+                <fieldset class="pomembni" data-fields="naslov,podnaslov,besedilo,avtor,datumPremiere,gostujoca,sifra,faza">
                     <legend>
                         <span>{{t "uprizoritev.podatki"}}</span>
                     </legend>
@@ -21,7 +21,7 @@
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-12 col-md-6" >
-                      <fieldset class="" data-fields="producent,maticniOder,besedilo,datumZacStudija,datumZakljucka,planiranoSteviloVaj">
+                      <fieldset class="" data-fields="producent,maticniOder,datumZacStudija,datumZakljucka,planiranoSteviloVaj">
                     <legend>
                         <span>{{t "uprizoritev.produkcija"}}</span>
                     </legend>
