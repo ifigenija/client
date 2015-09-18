@@ -702,15 +702,36 @@ define([
             this.set('skSkupaj', mkViriSkupaj + dmlsViriSkupaj + drugiViriSkupaj);
 
             //kazalniki priloga 2
-            this.set('stIzvPremProd', stIzvPrem + stIzvPonPrem);
+            this.set('stIzv', stIzvPrem + stIzvPonPrem);
 
+            // premiera produkcij na domačem odru
             var stIzvPonPremDoma = this.getVrednost('stIzvPonPremDoma');
-            this.set('stIzvPonPremDomaS', stIzvPrem + stIzvPonPremDoma);
+            var stIzvPremDoma = this.getVrednost('stIzvPremDoma');
+            this.set('stIzvDoma', stIzvPonPremDoma + stIzvPremDoma);
+            
+            // premiera produkcij na odriu slovenskega ali zamejskega koproducenta
+            var stIzvPonPremKopr = this.getVrednost('stIzvPonPremKopr');
+            var stIzvPremKopr = this.getVrednost('stIzvPremKopr');
+            this.set('stIzvKopr', stIzvPonPremKopr + stIzvPremKopr);
 
+            //število vseh obiskovalcev na premieri in ponovitvah
             var stObiskPonPrem = this.getVrednost('stObiskPonPrem');
             var stObiskPrem = this.getVrednost('stObiskPrem');
 
-            this.set('stObiskPonPremS', stObiskPonPrem + stObiskPrem);
+            this.set('stObisk', stObiskPonPrem + stObiskPrem);
+            
+            //število obiskovalcev na domačem odru
+            var stObiskPonPremDoma = this.getVrednost('stObiskPonPremDoma');
+            var stObiskPremDoma = this.getVrednost('stObiskPremDoma');
+
+            this.set('stObiskDoma', stObiskPonPremDoma + stObiskPremDoma);
+            
+            //število obiskovalcev na na odru slovenskega ali zamejskega koproducenta
+            var stObiskPonPremKopr = this.getVrednost('stObiskPonPremKopr');
+            var stObiskPremKopr = this.getVrednost('stObiskPremKopr');
+
+            this.set('stObiskKopr', stObiskPonPremKopr + stObiskPremKopr);
+            
 
             var povprecje = (stObiskPonPrem + stObiskPrem) / (stIzvPonPrem + stIzvPrem);
             povprecje = povprecje ? povprecje : 0;
