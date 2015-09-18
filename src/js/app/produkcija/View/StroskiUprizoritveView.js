@@ -5,22 +5,29 @@ define([
     'app/Dokument/View/DokumentView',
     'template!../tpl/uprizoritev-edit.tpl',
     'template!../tpl/uprizoritev-form.tpl',
+    'template!../tpl/povzetekStroskovnika-item.tpl',
     'formSchema!uprizoritev',
+    'marionette',
     'i18next',
     'app/Max/View/TabControl',
     'radio',
     'backbone',
-    'baseUrl'
+    'baseUrl',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         DokumentView,
         tpl,
         formTpl,
+        povzetekTpl,
         shema,
+        Marionette,
         i18next,
         TabControl,
         Radio,
         Backbone,
-        baseUrl
+        baseUrl,
+        $
         ) {
 
     /**
@@ -46,8 +53,6 @@ define([
         }
     ];
 
-
-
     /**
      * Urejanje uprizoritev 
      * @type DokumentView
@@ -62,12 +67,49 @@ define([
         }
     });
 
+    UprizoritevStrosekEditView.prototype.pridobiPodatkeUprizoritve = function (options) {
+        var uprizoritev = this.model.get('uprizoritev');
+        if (uprizoritev) {
+            var zacetek = this.dokument.get('zacetek');
+            var konec = this.dokument.get('konec');
+
+            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
+            rpc.call('podatkiUprizoritve', {
+                'uprizoritevId': uprizoritev.id,
+                'zacetek': zacetek,
+                'konec': konec
+            }, options.success, options.error);
+        }
+    };
 
     UprizoritevStrosekEditView.prototype.getNaslovUprizoritve = function () {
         var naslovT = this.model.get('naslov');
         var naslov = naslovT || i18next.t('strupr.title');
         return naslov;
     };
+    
+    UprizoritevStrosekEditView.prototype.renderFormAndToolbar = function () {
+        //v region form izriši view z podatki uprizoritve in povzetkom stroška
+        var View = Marionette.ItemView.extend({
+            tagName: 'div',
+            className: 'povzetek-stroskovnika',
+            template: povzetekTpl
+        });
+
+        var view = new View();
+
+        this.pridobiPodatkeUprizoritve({
+            success: function (podatki) {
+                console.log(podatki);
+            },
+            error: function (error) {
+                Radio.channel('error').request('handler', 'xhr');
+            }
+        });
+
+        this.regionForm.show(view);
+    };
+
 
     UprizoritevStrosekEditView.prototype.getNaslov = function () {
         return this.isNew() ?
