@@ -47,7 +47,7 @@ define([
         buttons: {
             preklici: {
                 id: 'doc-preklici',
-                label: i18next.t('std.preklici'),
+                label: i18next.t('std.nazaj'),
                 element: 'button-trigger',
                 trigger: 'preklici'
             },
@@ -76,6 +76,11 @@ define([
         regions: {
             modalR: '.region-modal'
         },
+        initialize: function(options){
+            //dodaj default
+            this.zacetek = options.zacetek;
+            this.konec = options.konec;
+        },
         onRender: function () {
             this.renderIzbira();
         },
@@ -94,12 +99,12 @@ define([
             });
             var model = new Model();
 
-            if (zacetek) {
-                model.set('zacetek', zacetek);
+            if (this.zacetek) {
+                model.set('zacetek', this.zacetek);
             }
-            if (konec) {
-                model.set('konec', konec);
-            }
+            
+            model.set('konec', this.options.konec);
+            model.set('title', options.title);
 
             var Form = Fv.extend({
                 formTemplate: options.formTpl
@@ -118,7 +123,8 @@ define([
             var view = this.getFormView({
                 modelView: 'vaja',
                 schema: schemaVaja,
-                formTpl: formVajaTpl
+                formTpl: formVajaTpl,
+                title: 'vaja'
             });
 
             this.modalR.show(view);
@@ -127,7 +133,8 @@ define([
             var view = this.getFormView({
                 modelView: 'predstava',
                 schema: schemaPredstava,
-                formTpl: formPredstavaTpl
+                formTpl: formPredstavaTpl,
+                title: 'predstava'
             });
 
             this.modalR.show(view);
@@ -136,7 +143,8 @@ define([
             var view = this.getFormView({
                 modelView: 'zasedenost',
                 schema: schemaZasedenost,
-                formTpl: formZasedenostTpl
+                formTpl: formZasedenostTpl,
+                title: 'zasedenost'
             });
 
             this.modalR.show(view);
@@ -145,7 +153,8 @@ define([
             var view = this.getFormView({
                 modelView: 'gostovanje',
                 schema: schemaGostovanje,
-                formTpl: formGostovanjeTpl
+                formTpl: formGostovanjeTpl,
+                title: 'gostovanje'
             });
 
             this.modalR.show(view);
@@ -154,24 +163,20 @@ define([
             var view = this.getFormView({
                 modelView: 'splosni',
                 schema: schemaSplosni,
-                formTpl: formSplosniTpl
+                formTpl: formSplosniTpl,
+                title: 'splosni'
             });
 
             this.modalR.show(view);
         }
     });
     return function (options) {
-        var zacetek = options.zacetek;
-        var konec = options.konec;
 
-        if (zacetek) {
-            this.zacetek = zacetek;
-        }
-        if (konec) {
-            this.konec = konec;
-        }
+        var view = new DogodekModalLayout({
+            zacetek: options.zacetek,
+            konec: options.konec
+        });
 
-        var view = new DogodekModalLayout();
         var modal = new Modal({
             title: i18next.t("dogodek.title"),
             content: view,

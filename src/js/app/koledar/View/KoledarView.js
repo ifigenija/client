@@ -20,7 +20,7 @@ define([
         ZasedenostView
         ) {
 
-    var CalendarView = Marionette.LayoutView.extend({
+    var KoledarView = Marionette.LayoutView.extend({
         template: tpl,
         regions: {
             filterR: '.calendar-filter',
@@ -32,13 +32,13 @@ define([
         }
     });
 
-    CalendarView.prototype.initialize = function (options) {
+    KoledarView.prototype.initialize = function (options) {
         this.koledarji = options.koledarji;
         this.filterView = options.filterView || new DefaultFilter();
         this.filterView.on('filter', this.searchCollection);
     };
 
-    CalendarView.prototype.onRender = function () {
+    KoledarView.prototype.onRender = function () {
         var self = this;
         var options = _.extend({
             header: {
@@ -84,22 +84,22 @@ define([
         this.ui.calendar.fullCalendar(options);
     };
 
-    CalendarView.prototype.select = function (start, end, jsEvent, view) {
+    KoledarView.prototype.select = function (start, end, jsEvent, view) {
         var self = this;
         DogodekModal({
-            zacetek: start.format('YYYY-MM-DDTHH:mm:ssZZ'),
-            konec: end.format('YYYY-MM-DDTHH:mm:ssZZ'),
+            zacetek: start.format(),
+            konec: end.format(),
             cb: function () {
                 self.dodajDogodek.apply(self, arguments);
             }
         });
     };
 
-    CalendarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
+    KoledarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
         this.renderDogodek(fcEvent, jsEvent, view);
     };
 
-    CalendarView.prototype.change = function (event) {
+    KoledarView.prototype.change = function (event) {
         // Look up the underlying event in the calendar and update its details from the model
         var fcEvent = this.el.fullCalendar('clientEvents', event.get('id'))[0];
         fcEvent.title = event.get('title');
@@ -107,24 +107,24 @@ define([
         this.ui.calendar.fullCalendar('updateEvent', fcEvent);
     };
 
-    CalendarView.prototype.eventDropOrResize = function (event) {
+    KoledarView.prototype.eventDropOrResize = function (fcEvent) {
         // Lookup the model that has the ID of the event and update its attributes
         //this.collection.get(fcEvent.id).save({start: fcEvent.start, end: fcEvent.end});
         console.log('drop/resize');
         //update dogodka v modelu
         //v primeru da je odprta forma bi se naj se kliče render da se posodobijo podatki
         //samo testiranje
-        this.renderDogodek(event);
+        this.renderDogodek(fcEvent);
     };
 
-    CalendarView.prototype.onDestroy = function () {
+    KoledarView.prototype.onDestroy = function () {
     };
 
-    CalendarView.prototype.searchCollection = function (data) {
+    KoledarView.prototype.searchCollection = function (data) {
         console.log('search', data);
     };
 
-    CalendarView.prototype.renderDogodek = function (fcEvent, jsEvent, view) {
+    KoledarView.prototype.renderDogodek = function (fcEvent, jsEvent, view) {
         
         var model = new DogodekModel.Model();
 
@@ -155,7 +155,7 @@ define([
 //        }, this);
     };
 
-    CalendarView.prototype.dodajDogodek = function (model) {
+    KoledarView.prototype.dodajDogodek = function (model) {
         if (!model.get('id')) {
             this.shraniDogodek(model);
         }
@@ -177,11 +177,11 @@ define([
         }
     };
 
-    CalendarView.prototype.onBrisi = function (fcEvent, jsEvent, view) {
+    KoledarView.prototype.onBrisi = function (fcEvent, jsEvent, view) {
         this.ui.calendar.fullCalendar('removeEvents', fcEvent.id);
     };
 
-    CalendarView.prototype.shraniDogodek = function (model) {
+    KoledarView.prototype.shraniDogodek = function (model) {
 
         function makeId()
         {
@@ -198,36 +198,36 @@ define([
         localStorage.setItem(model.id, JSON.stringify(model.toJSON()));
     };
     
-    CalendarView.prototype.preberiDogodek = function (fcEvent) {
+    KoledarView.prototype.preberiDogodek = function (fcEvent) {
         var niz = localStorage.getItem(fcEvent.id);
         
         return JSON.parse(niz);
     };
     
-    CalendarView.prototype.renderVaja = function (model) {
+    KoledarView.prototype.renderVaja = function (model) {
         var vaja = model.vaja;
         var view = new VajaView({id: vaja});
         this.dogodekR.show(view);
     };
-    CalendarView.prototype.renderPredstava = function (model) {
+    KoledarView.prototype.renderPredstava = function (model) {
         var predstava = model.predstava;
         var view = new PredstavaView({id: predstava});
         this.dogodekR.show(view);
     };
-    CalendarView.prototype.renderGostovanje = function (model) {
+    KoledarView.prototype.renderGostovanje = function (model) {
         var gostovanje = model.gostovanje;
         var view = new GostovanjeView({id: gostovanje});
         this.dogodekR.show(view);
     };
-    CalendarView.prototype.renderSplosni = function (model) {
+    KoledarView.prototype.renderSplosni = function (model) {
         var splosni = model.splosni;
         var view = new SplosniDogodekView({id: splosni});
         this.dogodekR.show(view);
     };
-    CalendarView.prototype.renderZasedenost = function (model) {
+    KoledarView.prototype.renderZasedenost = function (model) {
         var zesedenost = model.zesedenost;
         var view = new ZasedenostView({id: zesedenost});
         this.dogodekR.show(view);
     };
-    return CalendarView;
+    return KoledarView;
 });

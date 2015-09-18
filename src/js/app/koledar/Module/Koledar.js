@@ -56,8 +56,8 @@ define([
          * @returns {undefined}
          */
         mod.pregled = function () {
-            require(['../View/CalendarView', '../View/BasicFilter'], function (CalendarView, FilterView) {
-                var calView = new CalendarView({
+            require(['../View/KoledarView', '../View/BasicFilter'], function (KoledarView, FilterView) {
+                var calView = new KoledarView({
                     filterView: new FilterView()
                 });
                 ch.command('open', calView, 'Kodelar');
