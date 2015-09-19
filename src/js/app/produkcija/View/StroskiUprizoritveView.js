@@ -68,16 +68,16 @@ define([
     });
 
     UprizoritevStrosekEditView.prototype.pridobiPodatkeUprizoritve = function (options) {
-        var uprizoritev = this.model.get('uprizoritev');
+        var uprizoritev = this.model.get('id');
         if (uprizoritev) {
-            var zacetek = this.dokument.get('zacetek');
-            var konec = this.dokument.get('konec');
+            var zacetek = this.model.get('datumZacStudija');
+            var konec = this.model.get('datumZakljucka');
 
             var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
             rpc.call('podatkiUprizoritve', {
-                'uprizoritevId': uprizoritev.id,
-                'zacetek': zacetek,
-                'konec': konec
+                'uprizoritevId': uprizoritev,
+                'zacetek': null,
+                'konec': null
             }, options.success, options.error);
         }
     };
