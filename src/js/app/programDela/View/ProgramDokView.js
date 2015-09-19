@@ -2,6 +2,7 @@
  * Licenca GPLv3
  */
 define([
+    'baseUrl',
     'radio',
     'i18next',
     'app/Dokument/View/DokumentView',
@@ -18,21 +19,21 @@ define([
     'jquery',
     'jquery.jsonrpc'
 ], function (
-        Radio,
-        i18next,
-        DokumentView,
-        dokumentTpl,
-        formTpl,
-        kazalnikiTabelaTpl,
-        formSchema,
-        TabControl,
-        ZapisiLayout,
-        Marionette,
-        SezonaModel,
-        Toolbar,
-        confirm,
-        $
-        ) {
+    baseUrl,
+    Radio,
+    i18next,
+    DokumentView,
+    dokumentTpl,
+    formTpl,
+    kazalnikiTabelaTpl,
+    formSchema,
+    TabControl,
+    ZapisiLayout,
+    Marionette,
+    SezonaModel,
+    Toolbar,
+    confirm,
+    $) {
 
     var ch = Radio.channel('layout');
 
@@ -119,6 +120,15 @@ define([
                 element: 'button-trigger',
                 trigger: 'preklici'
             },
+            print: {
+                id: 'doc-print',
+                icon: 'fa fa-print',
+                title: i18next.t('std.Pomoc'),
+                element: 'button-print',
+                uri: baseUrl + '/rpc/programDela',
+                method: 'natisniDokument',
+                trigger: 'print'
+            },
             nasvet: {
                 id: 'doc-nasvet',
                 icon: 'fa fa-info',
@@ -140,7 +150,7 @@ define([
             }
         }
     });
-    
+
     var chPermission = Radio.channel('global');
 
     ProgramDokView.prototype.render = function () {
@@ -188,8 +198,9 @@ define([
 
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
         rpc.call('kloniraj', {
-            'programDelaId': this.model.get('id')},
-        success, error);
+                'programDelaId': this.model.get('id')
+            },
+            success, error);
     };
 
     /**
@@ -229,8 +240,9 @@ define([
             var zakleni = function () {
                 var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
                 rpc.call('zakleni', {
-                    'programDelaId': self.model.get('id')},
-                success, error);
+                        'programDelaId': self.model.get('id')
+                    },
+                    success, error);
             };
 
             confirm({
@@ -286,8 +298,9 @@ define([
             var odkleni = function () {
                 var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
                 rpc.call('odkleni', {
-                    'programDelaId': self.model.get('id')},
-                success, error);
+                        'programDelaId': self.model.get('id')
+                    },
+                    success, error);
             };
 
             confirm({
@@ -320,9 +333,17 @@ define([
     };
 
     ProgramDokView.prototype.prepareToolbar = function () {
-        return  this.model.get('id') ?
-                [[this.buttons.shrani, this.buttons.preklici, this.buttons.kloniraj, this.buttons.zakleni, this.buttons.nasvet]] :
-                [[this.buttons.shrani, this.buttons.preklici, this.buttons.nasvet]];
+        var buttons = [this.buttons.shrani, this.buttons.preklici];
+        var id = this.model.get('id');
+        if (id) {
+            buttons.push(this.buttons.kloniraj);
+            buttons.push(this.buttons.zakleni);
+            buttons.push(_.extend({
+                dokument: id
+            }, this.buttons.print));
+        }
+        buttons.push(this.buttons.nasvet);
+        return [buttons];
     };
 
     /**
@@ -383,7 +404,7 @@ define([
 
     ProgramDokView.prototype.getNaslov = function () {
         return this.isNew() ?
-                i18next.t('programDela.nova') : this.model.get('naziv');
+            i18next.t('programDela.nova') : this.model.get('naziv');
     };
 
     /**
@@ -632,7 +653,6 @@ define([
 
             self.kazalnikiR.show(view);
         };
-
 
         this.model.fetch({
             error: Radio.channel('error').request('handler', 'xhr'),

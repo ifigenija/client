@@ -16,7 +16,9 @@ define([
     'app/nastavitve/Module/Nastavitve',
     'app/aaa/Module/Aaa',
     'app/Zapisi/Module/Filemanager',
+    'app/JobManager/Module/JobManager',
     'app/Max/View/Buttons',
+        'app/JobManager/View/PrintDokumentButton',
     'bootstrap'
 ], function (
         Marionette,
@@ -33,7 +35,9 @@ define([
         nastavitveInit,
         aaaInit,
         zapisiInit,
-        buttons
+        jobManagerInit,
+        buttons,
+        buttonPrint
         ) {
 
     var app = new Marionette.Application();
@@ -41,6 +45,7 @@ define([
     app.module('nav', navInit);
     app.module('flashManager', fmInit);
     app.module('ifiLayout', ifiLayoutInit);
+    app.module('jobManager', jobManagerInit);
     app.module('uprizoritve', produkcijaInit);
     app.module('koledar', koledarInit);
     app.module('arhiv', arhivInit);
@@ -59,6 +64,7 @@ define([
         // to je tukaj zato, da su gumbi lahko razširljivi, da jih lahko vsaka aplikacija posebej dodaja 
         // ne da bi se spreminjali osvnovni gumbi v Buttons.js
         Radio.channel('global').reply('buttons', function () {
+            buttons['button-print'] = buttonPrint;
             return buttons;
         });
 
