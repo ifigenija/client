@@ -1,7 +1,7 @@
 /**
  * Jobmanager module, ki je stalno prisoten v aplikaciji.
  * Preverjanje sprememb dosežemo s App.JobManager.startPolling()
- * 
+ *
  * @param {type} _
  * @param {type} $
  * @param {type} Backbone
@@ -15,20 +15,19 @@
 define([
     'radio',
     'marionette',
+    'app/bars',
     '../Model/JobModel',
     '../View/JobManager',
     '../View/JobDetail',
     'backbone-modal'
 ], function (
-        Radio,
-        Marionette,
-        JobModel,
-        JobManager,
-        JobDetail,
-        Modal
-        )
-{
-
+    Radio,
+    Marionette,
+    Handlebars,
+    JobModel,
+    JobManager,
+    JobDetail,
+    Modal) {
 
     var moduleInit = function (mod, MyApp, Backbone, Marionette, $, _) {
 
@@ -56,7 +55,36 @@ define([
             mod.refresh();
         });
 
-
+        /**
+         * Prikaži job manager
+         */
+        mod.getObvestilaView = function () {
+            var V = Marionette.ItemView.extend({
+                tagName: 'span',
+                className: 'job-status-button label label-default',
+                template: Handlebars.compile('{{#if counter}} {{alerts}}/{{queue}}/{{counter}} {{/if}}'),
+                triggers:{
+                    'click' : 'click'
+                },
+                initialize: function () {
+                    this.listenTo(mod.collection, 'all', this.render);
+                },
+                onRender: function (){
+                    this.$el.attr('title', "Števec opravil: z alarmom/čakajoča/vsa");
+                },
+                onClick: function () {
+                    mod.showJobManager();
+                },
+                serializeData: function () {
+                    return {
+                        counter: mod.collection.length,
+                        queue: mod.collection.getQueue().length,
+                        alerts: mod.collection.getAlerts().length
+                    }
+                }
+            });
+            return new V();
+        };
         /**
          * Prikaži job manager
          */
@@ -70,8 +98,8 @@ define([
                 title: 'Opravila',
                 content: jobMgr,
                 className: 'modal modal-large',
-                allowCancel: false,
-                okText: 'Zapri'
+                allowCancel: true,
+                showFooter: false,
             });
             modal.open();
             mod.poll();
@@ -156,7 +184,7 @@ define([
          */
         mod.newJobQueue = function (job, poll) {
 
-            sessionTasks.add(job);
+            mod.collection.add(job);
             if (poll) {
                 this.startPolling();
             }
@@ -170,9 +198,9 @@ define([
          * @returns {JobDetail}
          * @param {boolean} poll
          */
-        mod.newJobView = function (jobAttributes, poll) {
+        mod.newJobView = function (jobAttributes, poll) {
 
-            var job = sessionTasks.add(jobAttributes);
+            var job = mod.collection.add(jobAttributes);
             if (poll) {
                 this.startPolling();
             }
@@ -185,7 +213,6 @@ define([
          * @param {Backbone.Collection} coll
          */
         mod.processPollResult = function (coll) {
-
 
             coll.each(function (job) {
                 var model = mod.collection.findWhere({id: job.id});

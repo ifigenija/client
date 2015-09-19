@@ -125,8 +125,11 @@ define([
                 icon: 'fa fa-print',
                 title: i18next.t('std.Pomoc'),
                 element: 'button-print',
-                uri: baseUrl + '/rpc/programDela',
-                method: 'natisniDokument',
+                uri: baseUrl + '/rpc/programdela/programdela',
+                pdf: true,
+                html: true,
+                sync: true,
+                method: 'tiskajDokument',
                 trigger: 'print'
             },
             nasvet: {
@@ -339,7 +342,9 @@ define([
             buttons.push(this.buttons.kloniraj);
             buttons.push(this.buttons.zakleni);
             buttons.push(_.extend({
-                dokument: id
+                params: {
+                    dokument: id
+                }
             }, this.buttons.print));
         }
         buttons.push(this.buttons.nasvet);

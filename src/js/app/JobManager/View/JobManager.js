@@ -25,6 +25,7 @@ define([
             /**
              * Prikaži seznam jobov
              */
+            this.renderList();
         },
         renderList: function () {
             var jobList = new JobList({
@@ -46,9 +47,10 @@ define([
                 buttonGroups: [[
                     {
                         id: "nazaj",
-                        icon: "fa fa-arrow-back",
+                        icon: "fa fa-arrow-left",
                         title: "Nazaj",
-                        triggers: "go:back"
+                        label: "Nazaj",
+                        trigger: "go:back"
                     }
                 ]],
                 listener: this

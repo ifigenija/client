@@ -24,7 +24,7 @@
                     {{u "timestamp" casIzvedbe }}
                 {{/if}}
                 <br/>
-                <small style="top: 6px; text-align: right;">{{t "jobs.ustvaril" }} {{ user.username }}{{u "kdaj" datum}}
+                <small style="top: 6px; text-align: right;">{{t "jobs.ustvaril" }} {{ user.username }}{{{u "kdaj" datum}}}
                 </small>
             </p>
         </div>

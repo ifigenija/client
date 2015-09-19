@@ -16,7 +16,7 @@
         {{t "jobs.plniranCasIzvedbe"}}
     </dt>
     <dd>
-        {{u  "kdaj" casIzvedbe }}
+       {{{u  "kdaj" casIzvedbe }}}
     </dd>
     {{#if izveden }}
     <dt>
@@ -30,7 +30,7 @@
         {{t "jobs.ustvaril"}}
     </dt>
     <dd>
-        {{ user.username }} {{u "kdaj" datum}}
+        {{ user.username }} {{{u "kdaj" datum}}}
     </dd>
 
     <br />

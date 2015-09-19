@@ -4,3 +4,4 @@
 <a href="#logout" title="{{t "Odjava" }}"> 
     <span class="fa fa-sign-out" ></span>
 </a>
+

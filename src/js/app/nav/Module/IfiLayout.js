@@ -22,6 +22,7 @@ define([
                 contentR: '.main',
                 navR: '.glavna-navigacija',
                 userR: '.user-links',
+                jobsR: '.jobmanager-links',
                 obvestilaR: '.obvestila'
             }
         });
@@ -41,10 +42,11 @@ define([
             });
             this.navR.show(menu);
             var userView = new Marionette.ItemView({
+                tagName:'span',
                 template: uporabnikTpl,
                 model: new Backbone.Model(this.user)                
             });
-            
+            this.jobsR.show(application.jobManager.getObvestilaView());
             this.userR.show(userView);
             
         };

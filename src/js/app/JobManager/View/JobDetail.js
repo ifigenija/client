@@ -4,7 +4,6 @@ define(['marionette',
     'underscore',
     '../Model/JobModel',
     './Job',
-    'app/bars',
     'template!../tpl/jobDetail.tpl',
     'template!../tpl/report.tpl'
 ], function (Marionette, Backbone, Handlebars, _, JobModel, Job, tplJobDetail, tplReport) {
@@ -15,9 +14,6 @@ define(['marionette',
         template: tplReport,
         events: {
             'click .btn-natisni': 'showPrint',
-        },
-        initialize: function () {
-            this.printerList = new TiskalnikModel.collection();
         }
     });
     /**

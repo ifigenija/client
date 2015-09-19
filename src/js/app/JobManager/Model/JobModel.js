@@ -8,7 +8,11 @@ define([
         Backbone
         ) {
 
-    var ReportModel = Backbone.Model.extend({});
+    var ReportModel = Backbone.Model.extend({
+        getDownloadUrl: function (){
+            return baseUrl + '/reports/prenesi/' + this.get('id');
+        }
+    });
     var ReportCollection = Backbone.Collection.extend({
         model: ReportModel
     });
@@ -16,7 +20,7 @@ define([
 
     var Job = Backbone.Model.extend({
         url: function() {
-            var url = baseUrl + '/work/job';
+            var url = baseUrl + '/rest/job';
             if (!this.isNew()) {
                 url = url + '/' + this.id;
             }

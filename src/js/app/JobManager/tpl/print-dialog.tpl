@@ -1,4 +1,6 @@
-<div class="podrobnosti-printa">
+<div class="filter-region">
+</div>
+<div class="options-region">
 </div>
 <div class="job-container"></div>
 <div>

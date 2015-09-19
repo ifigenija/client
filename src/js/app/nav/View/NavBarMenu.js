@@ -7,12 +7,12 @@
 define([
     'marionette',
     'app/bars',
-    'text!../tpl/sidebar.tpl',
-    'text!../tpl/dropdown.tpl'
+    'template!../tpl/navbar.tpl',
+    'template!../tpl/dropdown.tpl'
 ], function (
         Marionette,
         Handlebars,
-        sidebarTpl,
+        navbarTpl,
         dropDownTpl
         ) {
 
@@ -54,7 +54,7 @@ define([
     var DropDownMenu = Marionette.CompositeView.extend({
         tagName: 'li',
         className: 'dropdown',
-        template: Handlebars.compile(dropDownTpl),
+        template: dropDownTpl,
         childView: DropDownItem,
         childViewContainer: ".dropdown-menu",
         addChild: function (child, ChildView, index) {
@@ -161,7 +161,7 @@ define([
     var NavBarMenu = Marionette.ItemView.extend({
         className: "navbar navbar-inverse",
         tagName: "nav",
-        template: Handlebars.compile(sidebarTpl),
+        template: navbarTpl,
         onRender: function () {
 
             var menu = new MenuItems({

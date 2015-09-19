@@ -2,14 +2,14 @@ define([
         'marionette',
         'underscore',
         '../Model/JobModel',
-        'text!../tpl/job.tpl'],
+        'template!../tpl/job.tpl'],
     function (
         Marionette,
         _,
         Job,
         tpl) {
         return Marionette.ItemView.extend({
-            template: _.template(tpl),
+            template:tpl,
             triggers: {
                 "click div.panel": "clickjob",
                 "mouseenter div.panel-status": "showJobHide",
