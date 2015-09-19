@@ -13,6 +13,7 @@ define([
     'radio',
     'backbone',
     'baseUrl',
+    'app/bars',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -27,6 +28,7 @@ define([
         Radio,
         Backbone,
         baseUrl,
+        Handlebars,
         $
         ) {
 
@@ -71,13 +73,13 @@ define([
         var uprizoritev = this.model.get('id');
         if (uprizoritev) {
             var zacetek = this.model.get('datumZacStudija');
-            var konec = this.model.get('datumZakljucka');
+            var konec = this.model.get('datumPremiere');
 
             var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
             rpc.call('podatkiUprizoritve', {
                 'uprizoritevId': uprizoritev,
-                'zacetek': null,
-                'konec': null
+                'zacetek': zacetek,
+                'konec': konec
             }, options.success, options.error);
         }
     };
@@ -87,7 +89,31 @@ define([
         var naslov = naslovT || i18next.t('strupr.title');
         return naslov;
     };
-    
+
+    UprizoritevStrosekEditView.prototype.prikaziPodatke = function (podatki) {
+
+        var vrednostiDo = podatki['Do'];
+        var vrednostiNa = podatki['Na'];
+        var f = Handlebars.formatNumber;
+        
+        for (var kljuc in podatki) {
+            if (kljuc !== 'Do' && kljuc !== 'Na') {
+                var jkljuc = '.' + kljuc;
+                this.$(jkljuc).html(podatki[kljuc]);
+            }
+        }
+
+        for (var kljuc in vrednostiDo) {
+            var jkljuc = '.' + kljuc + 'Do';
+            this.$(jkljuc).html(f(vrednostiDo[kljuc], 2));
+        }
+
+        for (var kljuc in vrednostiNa) {
+            var jkljuc = '.' + kljuc + 'Na';
+            this.$(jkljuc).html(f(vrednostiNa[kljuc], 2));
+        }
+    };
+
     UprizoritevStrosekEditView.prototype.renderFormAndToolbar = function () {
         //v region form izriši view z podatki uprizoritve in povzetkom stroška
         var View = Marionette.ItemView.extend({
@@ -97,17 +123,14 @@ define([
         });
 
         var view = new View();
+        this.regionForm.show(view);
 
         this.pridobiPodatkeUprizoritve({
-            success: function (podatki) {
-                console.log(podatki);
-            },
+            success: this.prikaziPodatke,
             error: function (error) {
                 Radio.channel('error').request('handler', 'xhr');
             }
         });
-
-        this.regionForm.show(view);
     };
 
 

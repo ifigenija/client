@@ -457,7 +457,11 @@
         }
     },
     "stroskovnik": {
-        "title": "Stroškovnik"
+        "title": "Stroškovnik",
+        "osnovniPodatki": "Osnovni Podatki",
+        "zaposleni": "Zaposleni",
+        "vrednostNa": "Vrednost na predstavo",
+        "VrednostDo": "Vrednost do premiere"
     },
     "besedilo": {
         "title": "Besedila",
@@ -1528,5 +1532,22 @@
             "aliVNaslovu": "Ali se prikaže kot avtor v naslovu uprizoritve",
             "besedilo": "Besedilo"
         }
+    },
+    "podUpr": {
+        "avtorskePravice": "Avtorske pravice",
+        "avtorskiHonorarji": "Avtorski honorarji",
+        "avtorskiHonorarjiSamoz": "Avtorski honorarji samozoslenih",
+        "materialni": "Materialni stroški",
+        "nasDelez": "Delež matičnega javnega zavoda",
+        "datumPremiere": "Datum premiere",
+        "datumZacStudija": "Datum začetka študija",
+        "naziv": "Naziv",
+        "stHonorarnih": "Število honoranih",
+        "stHonorarnihIgr": "Število honorarnih igralcev",
+        "stHonorarnihIgrSamoz": "Število honorarnih samozaposlenih igralcev",
+        "stHonorarnihIgrTujJZ": "Število igralcev iz drugega javnega zavoda",
+        "stZaposDrug": "Število drugih zaposlenih",
+        "stZaposUmet": "Število zaposlenih iz umetniškega ansambla"
     }
 }
+
