@@ -95,10 +95,14 @@ define([
         var vrednostiDo = podatki['Do'];
         var vrednostiNa = podatki['Na'];
         var f = Handlebars.formatNumber;
-        
+        var fd = Handlebars.timestamp;
+
         for (var kljuc in podatki) {
-            if (kljuc !== 'Do' && kljuc !== 'Na') {
-                var jkljuc = '.' + kljuc;
+            var jkljuc = '.' + kljuc;
+            if (kljuc === "datumPremiere" || kljuc === "datumZacStudija") {
+                this.$(jkljuc).html(fd(podatki[kljuc]));
+            }
+            else if (kljuc !== 'Do' && kljuc !== 'Na') {
                 this.$(jkljuc).html(podatki[kljuc]);
             }
         }
