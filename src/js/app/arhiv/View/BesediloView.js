@@ -9,7 +9,8 @@ define([
     '../Model/Besedilo',
     'i18next',
     'baseUrl',
-    'app/Zapisi/View/ZapisiLayout'
+    'radio',
+    './BesediloDokView'
 ], function (
         SeznamView,
         formTpl,
@@ -18,7 +19,8 @@ define([
         Model,
         i18next,
         baseUrl,
-        ZapisiLayout
+        Radio,
+        BesediloDokView
         ) {
 
     var BesediloView = SeznamView.extend({
@@ -115,22 +117,25 @@ define([
         }
         return text;
     };
+    
+    BesediloView.prototype.getFormView = function (model) {
+        var editModel = model;
+
+        if (model.get('id')) {
+            editModel = new Model.Model({id: model.get('id')});
+            editModel.fetch({
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        }
+
+        return new BesediloDokView({
+            model: editModel
+        });
+    };
 
     BesediloView.prototype.onDodaj = function () {
         var model = new Model.Model();
         this.onUredi(model);
-    };
-    
-    /**
-     * Render priloga, da se nastavi pravi classLastnika
-     * @returns {undefined}
-     */
-    BesediloView.prototype.renderPriloge = function (model) {
-        var view = new ZapisiLayout({
-            lastnik: model.get('id'),
-            classLastnika: 'Besedilo'
-        });
-        this.prilogeR.show(view);
     };
 
     return BesediloView;
