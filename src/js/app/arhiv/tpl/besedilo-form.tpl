@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12 col-lg-6" data-fields="avtor,naslov,podnaslov,internacionalniNaslov"></div>
-                <div class="col-sm-12 col-lg-6" data-fields="jezik,naslovIzvirnika,prevajalec"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="naslov,podnaslov,internacionalniNaslov"></div>
+                <div class="col-sm-12 col-lg-6" data-fields="jezik,naslovIzvirnika"></div>
             </div>
         </div>
         <div class="col-sm-6">

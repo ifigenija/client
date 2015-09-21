@@ -21,7 +21,7 @@ define([
         tpl,
         formTpl,
         povzetekTpl,
-        shema,
+        schema,
         Marionette,
         i18next,
         TabControl,
@@ -62,7 +62,7 @@ define([
     var UprizoritevStrosekEditView = DokumentView.extend({
         template: tpl,
         formTemplate: formTpl,
-        schema: shema.toFormSchema().schema,
+        schema: schema.toFormSchema().schema,
         regions: {
             regionDetail: '.region-detail',
             regionTabs: '.stroskovnik-tabs'

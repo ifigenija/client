@@ -102,20 +102,20 @@ define([
         var vrednostVaj = form.fields.vrednostVaj.editor.$el;
         var steviloVaj = form.fields.planiranoSteviloVaj.editor.$el;
 
-        if (!form.commit()) {
-            if (placiloNaVajo) {
-                vrednostVaj.attr("disabled", "disabled");
-                steviloVaj.removeAttr("disabled");
-                vrednostVaje.removeAttr("disabled");
-                var vrednostDo = this.model.preracunajVrednostDo();
-                form.fields.vrednostVaj.editor.setValue(vrednostDo);
-            } else {
-                vrednostVaj.removeAttr("disabled");
-                steviloVaj.attr("disabled", "disabled");
-                vrednostVaje.attr("disabled", "disabled");
-                form.fields.vrednostVaje.editor.setValue(0);
-                form.fields.planiranoSteviloVaj.editor.setValue(0);
-            }
+        var vredVaje = form.fields.vrednostVaje.editor.getValue();
+        var stVaj = form.fields.planiranoSteviloVaj.editor.getValue();
+
+        if (placiloNaVajo) {
+            vrednostVaj.attr("disabled", "disabled");
+            steviloVaj.removeAttr("disabled");
+            vrednostVaje.removeAttr("disabled");
+            form.fields.vrednostVaj.editor.setValue(vredVaje * stVaj);
+        } else {
+            vrednostVaj.removeAttr("disabled");
+            steviloVaj.attr("disabled", "disabled");
+            vrednostVaje.attr("disabled", "disabled");
+            form.fields.vrednostVaje.editor.setValue(0);
+            form.fields.planiranoSteviloVaj.editor.setValue(0);
         }
     };
 
