@@ -799,6 +799,8 @@
         "osnovniPodatki": "Glavni podatki",
         "vrednost": "Vrednost",
         "dodatniPodatki": "Podrobno",
+        "jeProcentOdInkasa": "je procent od inkasa",
+        "procentOdInkasa": "Procent od inkasa",
         "d": {
             "sifra": "",
             "aktivna": "",
@@ -818,7 +820,8 @@
             "placiloNaVajo": "Ali je oseba plačana na vajo ali ne",
             "planiranoSteviloVaj": "Načrtovano število vaj",
             "samozaposlen": "",
-            "igralec": "je igralec ali študent"
+            "igralec": "je igralec ali študent",
+            "procentOdInkasa": "Avtorske pravice: procent od inkasa"
         }
     },
     "programDela": {

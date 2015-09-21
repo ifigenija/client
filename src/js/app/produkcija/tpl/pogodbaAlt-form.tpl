@@ -10,7 +10,7 @@
                     </fieldset>
                 </div>
                 <div class="col-sm-12 col-lg-6">
-                    <fieldset data-fields="vrednostPredstave,vrednostVaj,placiloNaVajo,vrednostVaje,planiranoSteviloVaj">
+                    <fieldset data-fields="jeProcentOdInkasa,procentOdInkasa,vrednostPredstave,vrednostVaj,placiloNaVajo,vrednostVaje,planiranoSteviloVaj">
                         <legend>
                             <span>{{t "pogodba.vrednost"}}</span>
                         </legend>

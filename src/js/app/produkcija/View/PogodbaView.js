@@ -97,11 +97,13 @@ define([
     });
 
     PogodbaView.prototype.placiloVaje = function (form) {
-        var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
         var vrednostVaje = form.fields.vrednostVaje.editor.$el;
         var vrednostVaj = form.fields.vrednostVaj.editor.$el;
         var steviloVaj = form.fields.planiranoSteviloVaj.editor.$el;
+        var procentInkasa = form.fields.procentOdInkasa.editor.$el;
 
+        var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
+        var inkasa = form.fields.jeProcentOdInkasa.editor.getValue();
         var vredVaje = form.fields.vrednostVaje.editor.getValue();
         var stVaj = form.fields.planiranoSteviloVaj.editor.getValue();
 
@@ -116,6 +118,13 @@ define([
             vrednostVaje.attr("disabled", "disabled");
             form.fields.vrednostVaje.editor.setValue(0);
             form.fields.planiranoSteviloVaj.editor.setValue(0);
+        }
+
+        if (inkasa) {
+            procentInkasa.removeAttr("disabled");
+        } else {
+            procentInkasa.attr("disabled", "disabled");
+            form.fields.procentOdInkasa.editor.setValue(0);
         }
     };
 

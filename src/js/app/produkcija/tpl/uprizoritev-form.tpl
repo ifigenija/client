@@ -7,6 +7,9 @@
                     <legend>
                         <span>{{t "uprizoritev.podatki"}}</span>
                     </legend>
+                    <div data-fields="naslov,podnaslov,besedilo"></div>
+                    <div class="prikazno-polje">{{t "uprizoritev.avtor"}}: <div class="pull-right nasDelez vrednost">{{avtor}}</div></div>
+                    <div data-fields="datumPremiere,gostujoca,sifra,faza"></div>
                 </fieldset>
                 </div>
                 <div class="col-sm-12 col-md-6" >
