@@ -58,25 +58,12 @@ define([
                 odpri(View, 'strupr.title');
             });
         };
-        mod.zaposlitev = function () {
-            require(['../View/ZaposlitevView'], function (View) {
-                odpri(View, 'zaposlitev.title');
-            });
-        };
         mod.sezona = function () {
             require(['../View/SezonaView'], function (View) {
                 odpri(View, 'sezona.title');
             });
         };
-        /**
-         * neposredni dostop do podatkov zaposlitve
-         * @returns {undefined}
-         */
-        mod.zaposlitevOdpri = function (id) {
-            require(['../Model/Zaposlitev', '../View/ZaposlitevView'], function (Model, View) {
-                odpriModel(Model, View, id, 'zaposlitev.title');
-            });
-        };
+
         /**
          * neposredni dostop do podatkov stroškovnika
          * @returns {undefined}
@@ -129,11 +116,9 @@ define([
                 appRoutes: {
                     'pro/uprizoritev': "uprizoritev",
                     "pro/stroskovnik": "stroskovnik",
-                    "pro/zaposlitev": "zaposlitev",
                     "pro/sezona": "sezona",
                     "pro/uprizoritev/:id": 'uprizoritevOdpri',
                     "pro/stroskovnik/:id": "stroskovnikOdpri",
-                    "pro/zaposlitev/:id": "zaposlitevOdpri",
                     "pro/sezona/:id": "sezonaOdpri"
                 }
             });

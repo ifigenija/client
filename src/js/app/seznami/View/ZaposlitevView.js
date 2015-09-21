@@ -97,7 +97,7 @@ define([
         var text = i18next.t("zaposlitev.nova");
 
         if (model.get('id')) {
-            text = model.get('oseba').label || "Oseba";
+            text = model.get('oseba').label || "Zaposlitev";
         }
         return text;
     };

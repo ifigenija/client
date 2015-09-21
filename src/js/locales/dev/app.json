@@ -62,7 +62,6 @@
             "oseba": "Osebe",
             "uprizoritev": "Uprizoritve",
             "strosek": "Stroškovnik",
-            "zaposlitev": "Kadri",
             "sezona": "Sezone"
         }
     },
@@ -80,7 +79,8 @@
             "tipUprizoritev": "Tip uprizoritev",
             "besedilo": "Besedila",
             "abonma": "Abonmaji",
-            "vrsteStroska": "Vrste stroška"
+            "vrsteStroska": "Vrste stroška",
+            "zaposlitev": "Zaposleni"
         }
 
     },
