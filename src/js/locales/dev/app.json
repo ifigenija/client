@@ -62,7 +62,6 @@
             "oseba": "Osebe",
             "uprizoritev": "Uprizoritve",
             "strosek": "Stroškovnik",
-            "zaposlitev": "Kadri",
             "sezona": "Sezone"
         }
     },
@@ -80,7 +79,8 @@
             "tipUprizoritev": "Tip uprizoritev",
             "besedilo": "Besedila",
             "abonma": "Abonmaji",
-            "vrsteStroska": "Vrste stroška"
+            "vrsteStroska": "Vrste stroška",
+            "zaposlitev": "Zaposleni"
         }
 
     },
@@ -1446,6 +1446,11 @@
         }
     },
     "stevilcenje": {
+        "konfigmenu": "Konfiguracija številčenja",
+        "konfigTitle": "Konfiguracija številčenja",
+        "zaDokument": "Dokument",
+        "ident": "Identifikator",
+        "label": "Naziv številčenja",
         "menu": "Številčenje",
         "title": "Številčenje",
         "sifra": "Šifra",
@@ -1453,6 +1458,10 @@
         "format": "Format",
         "prefix": "Predpona",
         "suffix": "Pripona",
+        "stevilcenje": "Številčenje",
+        "stanje": "Stanje",
+        "leto": "Leto",
+        "stevilka": "Številka",
         "d": {
             "zaDokument": "Dokument",
             "ident": "Identifikator",
@@ -1472,23 +1481,6 @@
             "format": "Format",
             "prefix": "Predpona",
             "suffix": "Pripona"
-        }
-    },
-    "stevilcenjeKonfig": {
-        "konfigmenu": "Konfiguracija številčenja",
-        "konfigTitle": "Konfiguracija številčenja",
-        "zaDokument": "Dokument",
-        "ident": "Identifikator",
-        "label": "Naziv številčenja",
-        "d": {
-            "zaDokument": "Dokument",
-            "ident": "Identifikator",
-            "label": ""
-        },
-        "t": {
-            "zaDokument": "Dokument",
-            "ident": "Identifikator",
-            "label": "Naziv"
         }
     },
     "vaja": {

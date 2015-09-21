@@ -23,14 +23,14 @@ define([
 
     var Stevilcenje = SeznamView.extend({
         url: baseUrl + '/rest/stevilcenjekonfig',
-        title: i18next.t('stevilcenjeKonfig.konfigTitle'),
+        title: i18next.t('stevilcenje.konfigTitle'),
         schema: schema,
         filterSchema: filterSchema,
         columns: [
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('stevilcenjeKonfig.zaDokument'),
+                label: i18next.t('stevilcenje.zaDokument'),
                 name: 'dok',
                 sortable: true
             },

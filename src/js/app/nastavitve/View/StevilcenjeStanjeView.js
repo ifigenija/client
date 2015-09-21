@@ -35,7 +35,7 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('stevilcenjeKonfig.zaDokument'),
+                label: i18next.t('stevilcenje.zaDokument'),
                 name: 'objekt',
                 sortable: true
             },
@@ -79,7 +79,7 @@ define([
         var tool = [[
                 {
                     id: 'doc-trenutne',
-                    label: i18next.t('stevilcenjeKonfig.konfigmenu'),
+                    label: i18next.t('stevilcenje.konfigmenu'),
                     element: 'button-route',
                     uri: '#stevilcenje/konfig'
                 }

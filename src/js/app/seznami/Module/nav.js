@@ -13,7 +13,12 @@ define(['i18next'], function (i18n) {
                     label: i18n.t("seznami.nav.oseba"),
                     uri: "#oseba",
                     permission: "Oseba-read"
-                },                
+                },
+                {
+                    label: i18n.t("seznami.nav.zaposlitev"),
+                    uri: "#zaposlitev",
+                    permission: "Zaposlitev-read"
+                },
                 {
                     label: i18n.t("seznami.nav.popa"),
                     uri: "#popa",
