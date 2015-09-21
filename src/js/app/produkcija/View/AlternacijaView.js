@@ -251,8 +251,16 @@ define([
                 var editor = form.fields.pogodba.editor;
                 editor.setValue(model.get('id'));
                 form.trigger('change');
-                //form.trigger('pogodba:change', form, editor);
-                self.dokument.alternacijeCollection.fetch({
+                
+                //shranimo model alternacije, da ne rabimo ponovno shranjevat pogodbe
+                if(!form.commit()){
+                    self.model.save({
+                        error: Radio.channel('error').request('handler', 'xhr')
+                    });
+                }
+                
+                //pridobimo podatke alternacije
+                self.model.fetch({
                     success: function () {
                         self.renderList();
                     },
