@@ -266,8 +266,10 @@ define([
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
+                modal.close();
             });
             view.triggerMethod('shrani');
+            modal.preventClose();
         };
     };
     /**
