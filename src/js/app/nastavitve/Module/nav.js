@@ -15,7 +15,7 @@ define(['i18next'], function (i18n) {
                     uri: "#aaa/moznosti"
                 },
                                  {
-                    label: i18n.t("stevilcenjeKonfig.konfigmenu"),
+                    label: i18n.t("stevilcenje.konfigmenu"),
                     uri: "#stevilcenje/konfig",
                     permission: 'Stevilcenje-write'
                 },

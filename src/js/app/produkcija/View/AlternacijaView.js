@@ -12,7 +12,8 @@ define([
     'i18next',
     'app/Max/Module/Backgrid',
     'backbone-modal',
-    'radio'
+    'radio',
+    'underscore'
 ], function (
         PostavkeView,
         FormView,
@@ -24,7 +25,8 @@ define([
         i18next,
         Backgrid,
         Modal,
-        Radio
+        Radio,
+        _
         ) {
 
     var AlternacijaView = PostavkeView.extend({
@@ -204,6 +206,26 @@ define([
                 steviloVaj.attr("disabled", "disabled");
                 vrednostVaje.attr("disabled", "disabled");
 
+            }
+            
+            var editor = form.fields.popa.editor;
+            var popa = form.fields.popa.editor.getValue();
+            if(popa){
+                editor.schema = _.extend(editor.schema, {
+                    "filters":{
+                        "popa":{
+                            "element": "popa"
+                        }
+                    }
+                });
+            }else{
+                editor.schema = _.extend(editor.schema, {
+                    "filters":{
+                        "oseba":{
+                            "element": "oseba"
+                        }
+                    }
+                });
             }
         };
 

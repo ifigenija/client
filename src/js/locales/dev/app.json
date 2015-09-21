@@ -1442,6 +1442,11 @@
         }
     },
     "stevilcenje": {
+        "konfigmenu": "Konfiguracija številčenja",
+        "konfigTitle": "Konfiguracija številčenja",
+        "zaDokument": "Dokument",
+        "ident": "Identifikator",
+        "label": "Naziv številčenja",
         "menu": "Številčenje",
         "title": "Številčenje",
         "sifra": "Šifra",
@@ -1449,6 +1454,10 @@
         "format": "Format",
         "prefix": "Predpona",
         "suffix": "Pripona",
+        "stevilcenje": "Številčenje",
+        "stanje": "Stanje",
+        "leto": "Leto",
+        "stevilka": "Številka",
         "d": {
             "zaDokument": "Dokument",
             "ident": "Identifikator",
@@ -1468,23 +1477,6 @@
             "format": "Format",
             "prefix": "Predpona",
             "suffix": "Pripona"
-        }
-    },
-    "stevilcenjeKonfig": {
-        "konfigmenu": "Konfiguracija številčenja",
-        "konfigTitle": "Konfiguracija številčenja",
-        "zaDokument": "Dokument",
-        "ident": "Identifikator",
-        "label": "Naziv številčenja",
-        "d": {
-            "zaDokument": "Dokument",
-            "ident": "Identifikator",
-            "label": ""
-        },
-        "t": {
-            "zaDokument": "Dokument",
-            "ident": "Identifikator",
-            "label": "Naziv"
         }
     },
     "vaja": {
