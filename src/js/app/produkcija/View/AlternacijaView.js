@@ -115,20 +115,11 @@ define([
                 sortable: false
             },
             {
-                cell: 'boolean',
-                editable: false,
-                label: i18next.t('alternacija.aktivna'),
-                name: 'aktivna',
-                sortable: false
-            },
-            {
                 cell: 'action',
                 name: '...',
                 sortable: false,
                 actions: [
                     {event: 'uredi', title: i18next.t('std.uredi')},
-                    {event: 'premakniGor', title: i18next.t('std.premakniGor')},
-                    {event: 'premakniDol', title: i18next.t('std.premakniDol')},
                     {event: 'brisi', title: i18next.t('std.brisi')}
                 ]
             }

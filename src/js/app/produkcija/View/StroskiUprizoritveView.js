@@ -3,7 +3,7 @@
  */
 define([
     'app/Dokument/View/DokumentView',
-    'template!../tpl/uprizoritev-edit.tpl',
+    'template!../tpl/stroskovnik-edit.tpl',
     'template!../tpl/uprizoritev-form.tpl',
     'template!../tpl/povzetekStroskovnika-item.tpl',
     'formSchema!uprizoritev',
@@ -65,7 +65,7 @@ define([
         schema: shema.toFormSchema().schema,
         regions: {
             regionDetail: '.region-detail',
-            regionTabs: '.uprizoritev-tabs'
+            regionTabs: '.stroskovnik-tabs'
         }
     });
 
@@ -90,47 +90,27 @@ define([
         return naslov;
     };
 
-    UprizoritevStrosekEditView.prototype.prikaziPodatke = function (podatki) {
-
-        var vrednostiDo = podatki['Do'];
-        var vrednostiNa = podatki['Na'];
-        var f = Handlebars.formatNumber;
-        var fd = Handlebars.timestamp;
-
-        for (var kljuc in podatki) {
-            var jkljuc = '.' + kljuc;
-            if (kljuc === "datumPremiere" || kljuc === "datumZacStudija") {
-                this.$(jkljuc).html(fd(podatki[kljuc]));
-            }
-            else if (kljuc !== 'Do' && kljuc !== 'Na') {
-                this.$(jkljuc).html(podatki[kljuc]);
-            }
-        }
-
-        for (var kljuc in vrednostiDo) {
-            var jkljuc = '.' + kljuc + 'Do';
-            this.$(jkljuc).html(f(vrednostiDo[kljuc], 2));
-        }
-
-        for (var kljuc in vrednostiNa) {
-            var jkljuc = '.' + kljuc + 'Na';
-            this.$(jkljuc).html(f(vrednostiNa[kljuc], 2));
-        }
-    };
-
     UprizoritevStrosekEditView.prototype.renderFormAndToolbar = function () {
-        //v region form izriši view z podatki uprizoritve in povzetkom stroška
-        var View = Marionette.ItemView.extend({
-            tagName: 'div',
-            className: 'povzetek-stroskovnika',
-            template: povzetekTpl
-        });
+        var self = this;
+        var izrisi = function (podatki) {
+            //v region form izriši view z podatki uprizoritve in povzetkom stroška
+            var View = Marionette.ItemView.extend({
+                tagName: 'div',
+                className: 'povzetek-stroskovnika',
+                template: povzetekTpl,
+                serializeData: function () {
+                    return {
+                        "stroski": podatki
+                    };
+                }
+            });
 
-        var view = new View();
-        this.regionForm.show(view);
+            var view = new View();
+            self.regionForm.show(view);
+        };
 
         this.pridobiPodatkeUprizoritve({
-            success: this.prikaziPodatke,
+            success: izrisi,
             error: function (error) {
                 Radio.channel('error').request('handler', 'xhr');
             }

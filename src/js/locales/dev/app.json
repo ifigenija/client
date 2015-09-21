@@ -624,6 +624,8 @@
         "pomembna": "Pomembna",
         "zaposlen": "Zaposlen",
         "imaPogodbo": "Ima pogodbo",
+        "podatki": "Glavni podatki",
+        "dodatniPodatki": "Podrobno",
         "d": {
             "sifra": "$t(ent.d.sifra)",
             "funkcija": "",
@@ -792,6 +794,9 @@
         "samozaposlen": "Samozaposlen",
         "igralec": "Igralec",
         "funkcija": "Funkcija",
+        "osnovniPodatki": "Glavni podatki",
+        "vrednost": "Vrednost",
+        "dodatniPodatki": "Podrobno",
         "d": {
             "sifra": "",
             "aktivna": "",
