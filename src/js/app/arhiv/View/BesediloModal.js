@@ -5,13 +5,13 @@ define([
     'radio',
     'i18next',
     'backbone-modal',
-    'app/seznami/View/OsebaEditView',
+    './BesediloDokView',
     'template!app/Dokument/tpl/form-simple.tpl'
 ], function (
         Radio,
         i18next,
         Modal,
-        OsebaEditView,
+        BesediloDokView,
         ModalTpl
         ) {
 
@@ -24,9 +24,26 @@ define([
      */
     return function (options) {
 
-        var OEV = OsebaEditView.extend({});
+        var BesediloView = BesediloDokView.extend({
+            buttons: {
+                'doc-shrani': {
+                    id: 'doc-shrani',
+                    label: i18next.t('std.shrani'),
+                    element: 'button-trigger',
+                    trigger: 'shrani',
+                    disabled: true
+                },
+                'doc-nasvet': {
+                    id: 'doc-nasvet',
+                    icon: 'fa fa-info',
+                    title: i18next.t('std.Pomoc'),
+                    element: 'button-trigger',
+                    trigger: 'nasvet'
+                }
+            }
+        });
 
-        OEV.prototype.onSaveSuccess = function () {
+        BesediloView.prototype.onSaveSuccess = function () {
             izberi();
         };
 
@@ -34,10 +51,10 @@ define([
          * določimo kakšni 
          * @type OsebaModal_L11.OsebaModal_L27.OEV
          */
-        var view = new OEV({
+        var view = new BesediloView({
             template: options.tpl ? options.tpl : ModalTpl,
             model: options.model,
-            pogled: options.pogled ? options.pogled : 'modal'
+            pogled: 'modal'
         });
 
         var izberi = function () {
@@ -50,10 +67,10 @@ define([
                 if (options.editor) {
                     options.editor.setValue(view.model.get('id'));
                 }
-                modal.close();
                 if (options.form && options.event) {
                     options.form.trigger(options.event);
                 }
+                modal.close();
             }
         };
 

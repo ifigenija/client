@@ -12,7 +12,9 @@ define([
     'i18next',
     'app/Zapisi/View/ZapisiLayout',
     'app/Max/View/TabControl',
-    'radio'
+    'radio',
+    'app/arhiv/Model/Besedilo',
+    'app/arhiv/View/BesediloModal'
 ], function (
         DokumentView,
         FunkcijaView,
@@ -24,7 +26,9 @@ define([
         i18next,
         ZapisiLayout,
         TabControl,
-        Radio
+        Radio,
+        BesediloModel,
+        BesediloModal
         ) {
 
     /**
@@ -73,22 +77,46 @@ define([
             regionDetail: '.region-detail',
             regionTabs: '.uprizoritev-tabs',
             prilogeR: '.region-priloge'
+        },
+        events: {
+            'click .dodaj-besedilo': 'dodajBesedilo'
         }
     });
-    
+
     UprizoritevEditView.prototype.onRenderForm = function () {
         if (this.isNew() || this.options.pogled === "modal") {
             this.$('.nav.nav-tabs').addClass('hidden');
         } else {
             this.$('.nav.nav-tabs').removeClass('hidden');
         }
-        
-        this.form.on('besedilo:change', this.besediloChange, this);
+
+        //this.form.on('besedilo:change', this.besediloChange, this);
     };
-    
-    UprizoritevEditView.prototype.besediloChange = function (){
-        console.log('besedilo');
-        //this.$('.avtor').html();
+
+    UprizoritevEditView.prototype.besediloChange = function (form, editor) {
+        var self = this;
+        this.model.fetch({
+            success: function () {
+                self.$('.avtor').html(self.model.get('avtor'));
+            }
+        });
+        //var id = editor.getValue().id;
+        //this.$('.avtorji').html(this.model.get('avtor'));
+    };
+
+    UprizoritevEditView.prototype.dodajBesedilo = function () {
+        console.log('Dodaj');
+
+        var model = new BesediloModel.Model();
+        var editor = this.form.fields.besedilo.editor;
+
+        BesediloModal({
+            model: model,
+            editor: editor,
+            form: this.form,
+            title: i18next.t('besedilo.nova')
+        });
+
     };
 
 
@@ -183,7 +211,7 @@ define([
         this.skrijSplosni();
         this.renderTehniki();
     };
-    
+
     /**
      * Klik na tab za arhivalije podatke 
      * @returns {undefined}
@@ -192,7 +220,7 @@ define([
         this.skrijSplosni();
         this.renderVaje();
     };
-    
+
     /**
      * Klik na tab za arhivalije podatke 
      * @returns {undefined}
@@ -289,17 +317,17 @@ define([
                 error: Radio.channel('error').request('handler', 'xhr')
             });
         }
-        
-         var view = new VajaView({
+
+        var view = new VajaView({
             collection: c,
             dokument: this.model,
             zapirajFormo: false,
             potrdiBrisanje: true
         });
-        
+
         view.detailName = 'planVaje';
         this.regionDetail.show(view);
-        
+
     };
     /**
      * 
@@ -314,14 +342,14 @@ define([
                 error: Radio.channel('error').request('handler', 'xhr')
             });
         }
-        
+
         var view = new PredstavaView({
             collection: c,
             dokument: this.model,
             zapirajFormo: false,
             potrdiBrisanje: true
         });
-        
+
         view.detailName = 'planPredstave';
         this.regionDetail.show(view);
     };

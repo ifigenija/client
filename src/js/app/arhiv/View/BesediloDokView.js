@@ -28,12 +28,17 @@ define([
         template: tpl,
         formTemplate: formTpl,
         schema: shema.toFormSchema().schema,
+        pogled: null,
         regions: {
             avtorjiR: '.region-avtorji',
             prilogeR: '.region-priloge'
         }
     });
-
+    
+    BesediloDokView.prototype.initialize = function (options) {
+        var pogled = options.pogled;
+        this.pogled = pogled ? pogled : null;
+    };
 
     BesediloDokView.prototype.getNaslovUprizoritve = function () {
         var naslovT = this.model.get('naslov');
@@ -54,7 +59,7 @@ define([
     };
 
     BesediloDokView.prototype.onRender = function () {
-        if (this.model.get('id')) {
+        if (this.model.get('id') && this.pogled === null) {
             this.renderAvtorji();
             this.renderPriloge();
         }
@@ -63,7 +68,8 @@ define([
     BesediloDokView.prototype.renderAvtorji = function () {
         var view = new AvtorBesedilaView({
             collection: this.model.avtorjiCollection,
-            dokument: this.model
+            dokument: this.model,
+            zapirajFormo: true
         });
 
         this.avtorjiR.show(view);

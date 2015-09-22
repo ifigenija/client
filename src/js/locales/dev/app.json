@@ -106,7 +106,7 @@
         "premakniGor": "Premakni Gor",
         "premakniDol": "Premakni Dol",
         "dodaj": "Dodaj",
-        "skrij": "Skrij",
+        "skrij": "Zapri",
         "prazno": "Prazno",
         "privzeto": "Privzeto",
         "deaktiviraj": "Deaktiviraj",
@@ -123,8 +123,10 @@
         "odklepPD": "Odklepanje programa dela",
         "potrdiOdklep": "Ali res želite odkleniti program dela?",
         "odkleni": "Odkleni",
+        "ustvari": "Ustvari",
         "title": {
-            "vnesiOseba": "Ustvari novo osebo"
+            "vnesiOseba": "Ustvari novo osebo",
+            "dodajBesedilo": "Ustvari novo besedilo"
         },
         "messages": {
             "success": "Uspešno opravljena akcija."
@@ -324,7 +326,7 @@
         "datnZav": "Zavezanec za DDV do",
         "zamejstvo": "Iz zamejstva",
         "nvo": "NVO",
-        "koproducent": "Koproducent",
+        "koproducent": "Producent",
         "kupec": "Kupec",
         "podatki": "Glavni podatki",
         "d": {
@@ -471,7 +473,7 @@
         "naslov": "Naslov",
         "podnaslov": "Podnaslov",
         "interNaslov": "Angleški naslov",
-        "jezik": "Jezik",
+        "jezik": "Jezik izvirnika",
         "naslovIzvirnika": "Naslov izvirnika",
         "datumPrejema": "Datum prejema",
         "moskeVloge": "Število moških vlog",
@@ -511,7 +513,7 @@
         "opis": "Sinopsis",
         "title": "Uprizoritev",
         "nova": "Nova uprizoritev",
-        "umetniskeEkipe": "Umetniška Ekipa",
+        "umetniskeEkipe": "Umetniška ekipa",
         "nastopajoci": "Nastopajoči",
         "ostaliSodelujoci": "Ostali sodelujoči",
         "zvrst": "Vrsta",
@@ -682,7 +684,7 @@
         "title": "Stroški uprizoritve",
         "pogodbe": "Pregled pogodb",
         "koprodukcije": "Koprodukcije",
-        "stroski": "Stroški",
+        "stroski": "Materialni stroški",
         "naziv": "Naziv",
         "sort": "Zaporedna številka",
         "tipstroska": "Tip Stroška",
@@ -1254,7 +1256,7 @@
         }
     },
     "drugiVir": {
-        "title": "Drugi viri",
+        "title": "Drugi viri - nejavni",
         "znesek": "Znesek",
         "opis": "Opis",
         "enotaPrograma": "Enota programa",
@@ -1540,6 +1542,9 @@
             "zaporedna": "Zaporedna številka",
             "aliVNaslovu": "Ali se prikaže kot avtor v naslovu uprizoritve",
             "besedilo": "Besedilo"
+        },
+        "t":{
+            "zaporedna": "Zaporedna"
         }
     },
     "podUpr": {

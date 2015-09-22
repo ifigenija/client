@@ -5,7 +5,7 @@
                 <legend>
                     <span>{{t "besedilo.osnovniPodatki"}}</span>
                 </legend>
-                <div data-fields="naslov,podnaslov,naslovIzvirnika,internacionalniNaslov,jezik"></div>
+                <div data-fields="naslov,podnaslov,naslovIzvirnika,jezik,internacionalniNaslov"></div>
             </fieldset>
         </div>
         <div class="col-sm-6">

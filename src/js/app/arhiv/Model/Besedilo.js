@@ -14,7 +14,8 @@ define([
 
     var AvtorjiCollection = Dokument.PostavkaCollection.extend({
         model: AvtorModel,
-        url: baseUrl + '/rest/avtorBesedila'
+        url: baseUrl + '/rest/avtorBesedila',
+        index: 'zaporedna'
     });
     
     var BesediloModel = Dokument.Model.extend({
