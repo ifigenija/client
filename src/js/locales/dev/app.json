@@ -546,6 +546,7 @@
         "podnaslovIzvirnika": "Podnaslov izvirnika",
         "vaje": "Vaje",
         "predstave": "Predstave",
+        "avtorji": "Avtorji",
         "t": {
             "datumPremiere": "Datum premiere",
             "sifra": "Številka"
@@ -1555,7 +1556,8 @@
         "stHonorarnihIgrSamoz": "Število honorarnih samozaposlenih igralcev",
         "stHonorarnihIgrTujJZ": "Število igralcev iz drugega javnega zavoda",
         "stZaposDrug": "Število drugih zaposlenih",
-        "stZaposUmet": "Število zaposlenih iz umetniškega ansambla"
+        "stZaposUmet": "Število zaposlenih iz umetniškega ansambla",
+        "avtorji": "Avtorji"
     }
 }
 

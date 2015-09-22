@@ -5,6 +5,7 @@
                 <legend>
                     <span>{{t "stroskovnik.osnovniPodatki"}}</span>
                 </legend>
+                <div class="prikazno-polje clearfix">{{t "podUpr.avtorji"}}: <div class="pull-right vrednost">{{stroski.avtor}}</div></div>
                 <div class="prikazno-polje clearfix">{{t "podUpr.naziv"}}: <div class="pull-right vrednost">{{stroski.naziv}}</div></div>
                 <div class="prikazno-polje clearfix">{{t "podUpr.datumPremiere"}}: <div class="pull-right vrednost">{{u "date" stroski.datumPremiere}}</div></div>
                 <div class="prikazno-polje clearfix">{{t "podUpr.datumZacStudija"}}: <div class="pull-right vrednost">{{u "date" stroski.datumZacStudija}}</div></div>
