@@ -126,6 +126,26 @@ define([
             procentInkasa.attr("disabled", "disabled");
             form.fields.procentOdInkasa.editor.setValue(0);
         }
+
+        var editor = form.fields.popa.editor;
+        var popa = form.fields.popa.editor.getValue();
+        if (popa) {
+            editor.schema = _.extend(editor.schema, {
+                "filters": {
+                    "popa": {
+                        "element": "popa"
+                    }
+                }
+            });
+        } else {
+            editor.schema = _.extend(editor.schema, {
+                "filters": {
+                    "oseba": {
+                        "element": "oseba"
+                    }
+                }
+            });
+        }
     };
 
     PogodbaView.prototype.onRenderForm = function (form) {

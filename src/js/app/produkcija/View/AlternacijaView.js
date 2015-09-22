@@ -192,36 +192,50 @@ define([
         });
 
         Fv.prototype.placiloVaje = function (form) {
-            var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
             var vrednostVaje = form.fields.vrednostVaje.editor.$el;
-            var vrednostVaj = form.fields.vrednostVaj.editor.$el;
-            var steviloVaj = form.fields.planiranoSteviloVaj.editor.$el;
+        var vrednostVaj = form.fields.vrednostVaj.editor.$el;
+        var steviloVaj = form.fields.planiranoSteviloVaj.editor.$el;
+        var procentInkasa = form.fields.procentOdInkasa.editor.$el;
 
-            if (placiloNaVajo) {
-                vrednostVaj.attr("disabled", "disabled");
-                steviloVaj.removeAttr("disabled");
-                vrednostVaje.removeAttr("disabled");
-            } else {
-                vrednostVaj.removeAttr("disabled");
-                steviloVaj.attr("disabled", "disabled");
-                vrednostVaje.attr("disabled", "disabled");
+        var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
+        var inkasa = form.fields.jeProcentOdInkasa.editor.getValue();
+        var vredVaje = form.fields.vrednostVaje.editor.getValue();
+        var stVaj = form.fields.planiranoSteviloVaj.editor.getValue();
 
-            }
+        if (placiloNaVajo) {
+            vrednostVaj.attr("disabled", "disabled");
+            steviloVaj.removeAttr("disabled");
+            vrednostVaje.removeAttr("disabled");
+            form.fields.vrednostVaj.editor.setValue(vredVaje * stVaj);
+        } else {
+            vrednostVaj.removeAttr("disabled");
+            steviloVaj.attr("disabled", "disabled");
+            vrednostVaje.attr("disabled", "disabled");
+            form.fields.vrednostVaje.editor.setValue(0);
+            form.fields.planiranoSteviloVaj.editor.setValue(0);
+        }
+
+        if (inkasa) {
+            procentInkasa.removeAttr("disabled");
+        } else {
+            procentInkasa.attr("disabled", "disabled");
+            form.fields.procentOdInkasa.editor.setValue(0);
+        }
             
             var editor = form.fields.popa.editor;
             var popa = form.fields.popa.editor.getValue();
-            if(popa){
+            if (popa) {
                 editor.schema = _.extend(editor.schema, {
-                    "filters":{
-                        "popa":{
+                    "filters": {
+                        "popa": {
                             "element": "popa"
                         }
                     }
                 });
-            }else{
+            } else {
                 editor.schema = _.extend(editor.schema, {
-                    "filters":{
-                        "oseba":{
+                    "filters": {
+                        "oseba": {
                             "element": "oseba"
                         }
                     }

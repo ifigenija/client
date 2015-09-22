@@ -3,7 +3,7 @@
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-12 col-md-6 ">
-                <fieldset class="pomembni" data-fields="naslov,podnaslov,besedilo,datumPremiere,gostujoca,sifra,faza">
+                <fieldset class="pomembni">
                     <legend>
                         <span>{{t "uprizoritev.podatki"}}</span>
                     </legend>

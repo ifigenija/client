@@ -26,7 +26,7 @@ define([
     var BesediloView = SeznamView.extend({
         url: baseUrl + '/rest/besedilo',
         title: i18next.t('besedilo.title'),
-        zapirajFormo: true,
+        zapirajFormo: false,
         skrivajTabelo: true,
         filterSchema: filterSch,
         schema: schema,
@@ -42,8 +42,8 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('besedilo.avtor'),
-                name: 'avtor',
+                label: i18next.t('besedilo.avtorji'),
+                name: 'imena',
                 sortable: true
             },
             {
@@ -65,13 +65,6 @@ define([
                 editable: false,
                 label: i18next.t('besedilo.interNaslov'),
                 name: 'internacionalniNaslov',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('besedilo.prevajalec'),
-                name: 'prevajalec',
                 sortable: true
             },
             {

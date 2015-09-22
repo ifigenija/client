@@ -481,6 +481,9 @@
         "letoIzida": "Leto izida",
         "krajIzida": "Kraj izida",
         "zaloznik": "Založnik",
+        "osnovniPodatki": "Glavni podatki",
+        "dodatniPodatki": "Podrobno",
+        "avtorji": "Avtorji",
         "d": {
             "avtor": "",
             "naslov": "",
@@ -1530,6 +1533,7 @@
         "zaporedna": "Zaporedna številka",
         "aliVNaslovu": "Ali v naslovu uprizoritve",
         "besedilo": "Besedilo",
+        "oseba": "Oseba",
         "d": {
             "tipAvtorja": "Tip avtorja - npr. avtor originalnega besedila, soavtor, lektor, prevajalec",
             "zaporedna": "Zaporedna številka",

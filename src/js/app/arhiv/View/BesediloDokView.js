@@ -7,6 +7,7 @@ define([
     'template!../tpl/besedilo-dok.tpl',
     'template!../tpl/besedilo-form.tpl',
     'formSchema!besedilo',
+    'app/Zapisi/View/ZapisiLayout',
     'i18next',
     'radio'
 ], function (
@@ -15,6 +16,7 @@ define([
         tpl,
         formTpl,
         shema,
+        ZapisiLayout,
         i18next,
         Radio
         ) {
@@ -28,7 +30,8 @@ define([
         formTemplate: formTpl,
         schema: shema.toFormSchema().schema,
         regions: {
-            avtorjiR: '.region-avtorji'
+            avtorjiR: '.region-avtorji',
+            prilogeR: '.region-priloge'
         }
     });
 
@@ -54,6 +57,7 @@ define([
     BesediloDokView.prototype.onRender = function () {
         if (this.model.get('id')) {
             this.renderAvtorji();
+            this.renderPriloge();
         }
     };
 
@@ -73,6 +77,18 @@ define([
 
         this.avtorjiR.show(view);
 
+    };
+    
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    BesediloDokView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'Besedilo'
+        });
+        this.prilogeR.show(view);
     };
 
     return BesediloDokView;
