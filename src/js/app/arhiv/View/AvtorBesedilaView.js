@@ -39,7 +39,7 @@ define([
                 sortable: true
             },
             {
-                cell:'string',
+                cell:'boolean',
                 editable: false,
                 label: i18next.t('avtorBesedila.aliVNaslovu'),
                 name: 'aliVNaslovu',
