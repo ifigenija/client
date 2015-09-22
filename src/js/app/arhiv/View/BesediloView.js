@@ -3,9 +3,7 @@
  */
 define([
     'app/Dokument/View/SeznamView',
-    'template!../tpl/besedilo-form.tpl',
     'formSchema!besedilo?filter=1',
-    'formSchema!besedilo',
     '../Model/Besedilo',
     'i18next',
     'baseUrl',
@@ -13,9 +11,7 @@ define([
     './BesediloDokView'
 ], function (
         SeznamView,
-        formTpl,
         filterSch,
-        schema,
         Model,
         i18next,
         baseUrl,
@@ -29,8 +25,6 @@ define([
         zapirajFormo: false,
         skrivajTabelo: true,
         filterSchema: filterSch,
-        schema: schema,
-        formTemplate: formTpl,
         columns: [
             {
                 cell: 'string',
@@ -101,15 +95,6 @@ define([
             }
         ]
     });
-    
-    BesediloView.prototype.getTitle = function (model) {
-        var text = i18next.t("besedilo.nova");
-
-        if (model.get('id')) {
-            text = model.get('naslov') || "Naslov";
-        }
-        return text;
-    };
     
     BesediloView.prototype.getFormView = function (model) {
         var editModel = model;

@@ -75,6 +75,21 @@ define([
             prilogeR: '.region-priloge'
         }
     });
+    
+    UprizoritevEditView.prototype.onRenderForm = function () {
+        if (this.isNew() || this.options.pogled === "modal") {
+            this.$('.nav.nav-tabs').addClass('hidden');
+        } else {
+            this.$('.nav.nav-tabs').removeClass('hidden');
+        }
+        
+        this.form.on('besedilo:change', this.besediloChange, this);
+    };
+    
+    UprizoritevEditView.prototype.besediloChange = function (){
+        console.log('besedilo');
+        //this.$('.avtor').html();
+    };
 
 
     UprizoritevEditView.prototype.getNaslovUprizoritve = function () {

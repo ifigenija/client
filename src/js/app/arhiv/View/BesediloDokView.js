@@ -25,7 +25,6 @@ define([
      * @type DokumentView
      */
     var BesediloDokView = DokumentView.extend({
-        className: 'besedilo',
         template: tpl,
         formTemplate: formTpl,
         schema: shema.toFormSchema().schema,
@@ -62,16 +61,8 @@ define([
     };
 
     BesediloDokView.prototype.renderAvtorji = function () {
-
-        var c = this.model.avtorjiCollection;
-        if (c.length === 0) {
-            c.fetch({
-                error: Radio.channel('error').request('handler', 'xhr')
-            });
-        }
-
         var view = new AvtorBesedilaView({
-            collection: c,
+            collection: this.model.avtorjiCollection,
             dokument: this.model
         });
 
