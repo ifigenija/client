@@ -1563,6 +1563,9 @@
         "stZaposDrug": "Število drugih zaposlenih",
         "stZaposUmet": "Število zaposlenih iz umetniškega ansambla",
         "avtorji": "Avtorji"
+    },
+    "zapisi": {
+        "title": "Priponke in komentarji"
     }
 }
 
