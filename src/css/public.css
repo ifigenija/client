@@ -7992,9 +7992,11 @@ fieldset.pomemben legend span {
   margin-bottom: 0;
   margin-right: 15px;
 }
+/* polja ki so namenjena samo prikazu in fo v formi*/
 .prikazno-polje > .vrednost {
   font-size: 20px;
 }
+/* stili za postavke in postavke v enoti programa*/
 .region-postavke {
   margin: 5px;
   margin-top: 15px;
@@ -8002,11 +8004,9 @@ fieldset.pomemben legend span {
 .enota-programa .region-postavke-form {
   margin-bottom: 5px;
 }
+/*stil za fielset brez legende*/
 .fieldset-brez-legend {
   margin-top: 15px;
-}
-.action-gumb {
-  padding-right: 10px;
 }
 .seznam-form {
   margin-top: 10px;
@@ -8018,6 +8018,7 @@ fieldset.pomemben legend span {
 .uprizoritev-panels .region-form {
   margin-top: 10px;
 }
+/*zgornji razmiki pri različnik*/
 .funkcija-alternacije-naslov {
   margin-top: 15px;
 }
@@ -8027,6 +8028,11 @@ fieldset.pomemben legend span {
 .povzetek-stroskovnik {
   margin-top: 15px;
 }
+/*stil za vrstice gumbov*/
+.dogodek-izbira-gumbi {
+  margin-top: 5px;
+}
+/*stil za oseba modal*/
 .oseba-modal > .modal-dialog {
   width: 80%;
 }
