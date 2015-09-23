@@ -853,7 +853,7 @@ fieldset.pomemben legend span {
   margin-top: 5px;
 }
 /*stil za oseba modal*/
-.oseba-modal > .modal-dialog {
+.oseba-modal-vse > .modal-dialog {
   width: 80%;
 }
 /*

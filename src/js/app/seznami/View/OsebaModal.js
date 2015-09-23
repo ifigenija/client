@@ -62,10 +62,16 @@ define([
             view.triggerMethod('shrani');
             modal.preventClose();
         };
-        
+
         var OM = Modal.extend({
             className: 'oseba-modal modal'
         });
+
+        if (view.options.pogled !== 'modal') {
+            OM = Modal.extend({
+                className: 'oseba-modal-vse modal'
+            });
+        }
 
         var modal = new OM({
             title: i18next.t(options.title),
