@@ -7,14 +7,16 @@ define([
     'formSchema!avtorBesedila',
     'i18next',
     'app/seznami/Model/Oseba',
-    'app/seznami/View/OsebaModal'
+    'app/seznami/View/OsebaModal',
+    'backgrid'
 ], function (
         PostavkeView,
         formTpl,
         schema,
         i18next,
         OsebaModel,
-        OsebaModal
+        OsebaModal,
+        Backgrid
         ) {
 
     var AvtorBesedilaView = PostavkeView.extend({
@@ -42,7 +44,9 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                cell: Backgrid.SelectCell.extend({
+                    optionValues: schema.getOptionValues('tipAvtorja')
+                }),
                 editable: false,
                 label: i18next.t('avtorBesedila.tipAvtorja'),
                 name: 'tipAvtorja',
