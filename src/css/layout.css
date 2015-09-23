@@ -94,9 +94,23 @@
   stroke-linejoin: miter;
   stroke-miterlimit: 79.84031677;
 }
+.logo-maska:hover {
+  -webkit-animation-name: fejs;
+  -webkit-animation-duration: 200ms;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-iteration-count: 2;
+  -webkit-animation-timing-function: linear;
+}
 .logo-napis {
   fill: #000000;
   stroke: none;
+}
+.logo-napis:hover {
+  -webkit-animation-name: thumb;
+  -webkit-animation-duration: 200ms;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-iteration-count: 2;
+  -webkit-animation-timing-function: linear;
 }
 .logo-background {
   position: fixed;
@@ -113,4 +127,26 @@
 .logo-login {
   padding: 50px;
   width: 300px;
+}
+@-webkit-keyframes thumb {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@-webkit-keyframes fejs {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
 }

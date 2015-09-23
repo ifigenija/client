@@ -117,11 +117,25 @@
         stroke: #ff0000;
         stroke-width: 0.523;
         stroke-linejoin: miter;
-        stroke-miterlimit: 79.84031677
+        stroke-miterlimit: 79.84031677;
+        &:hover {
+            -webkit-animation-name: fejs;
+            -webkit-animation-duration: 200ms;
+            -webkit-transform-origin: 50% 50%;
+            -webkit-animation-iteration-count: 2;
+            -webkit-animation-timing-function: linear;
+        }
     }
     &-napis {
         fill: #000000;
         stroke: none;
+        &:hover {
+            -webkit-animation-name: thumb;
+            -webkit-animation-duration: 200ms;
+            -webkit-transform-origin: 50% 50%;
+            -webkit-animation-iteration-count: 2;
+            -webkit-animation-timing-function: linear;
+        }
     }
 
     &-background {
@@ -132,7 +146,7 @@
         max-width: 40%;
         z-index: -1;
         &-tenant {
-            left:15px;
+            left: 15px;
             bottom: 15px;
         }
     }
@@ -141,5 +155,28 @@
         width: 300px;
     }
 
+    @-webkit-keyframes thumb {
+        0% {
+            -webkit-transform: scale(1);
+        }
+        50% {
+            -webkit-transform: scale(0.9);
+        }
+        100% {
+            -webkit-transform: scale(1);
+        }
+    }
+
+    @-webkit-keyframes fejs {
+        0% {
+            -webkit-transform:  scale(1);
+        }
+        50% {
+            -webkit-transform: scale(1.1);
+        }
+        100% {
+            -webkit-transform: scale(1);
+        }
+    }
 }
 
