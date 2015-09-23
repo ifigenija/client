@@ -29,6 +29,9 @@ define([
         OEV.prototype.onSaveSuccess = function () {
             izberi();
         };
+        
+        OEV.prototype.posodobiUrlNaslov = function () {
+        };
 
         /**
          * določimo kakšni 

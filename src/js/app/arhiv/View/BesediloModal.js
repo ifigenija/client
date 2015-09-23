@@ -46,6 +46,8 @@ define([
         BesediloView.prototype.onSaveSuccess = function () {
             izberi();
         };
+        BesediloView.prototype.posodobiUrlNaslov = function () {
+        };
 
         /**
          * določimo kakšni 
