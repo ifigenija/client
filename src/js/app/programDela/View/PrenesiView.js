@@ -6,10 +6,12 @@
  */
 define([
     'marionette',
-    'underscore'
+    'underscore',
+    'i18next'
 ], function (
         Marionette,
-        _
+        _,
+        i18next
         ) {
 
 
@@ -63,11 +65,13 @@ define([
                     this.checked = false;
                 });
                 this.jeOznaceno = false;
+                this.$('.izberi-check').html(i18next.t("std.obkljukaj"));
             }else{
                 this.$('input').each(function(){
                     this.checked = true;
                 });
                 this.jeOznaceno = true;
+                this.$('.izberi-check').html(i18next.t("std.odkljukaj"));
             }
         },
         vsotaPonovitev: function (model) {
