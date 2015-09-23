@@ -83,6 +83,10 @@
   margin-top: 0;
   padding: 15px;
 }
+.logo-tennant {
+  text-align: center;
+  padding-top: 20px;
+}
 .logo-maska {
   fill: #ff0000;
   stroke: #ff0000;
@@ -95,12 +99,16 @@
   stroke: none;
 }
 .logo-background {
-  position: relative;
+  position: fixed;
   bottom: 15px;
   right: 15px;
-  opacity: 0.1;
-  max-width: 70%;
+  opacity: 0.05;
+  max-width: 40%;
   z-index: -1;
+}
+.logo-background-tenant {
+  left: 15px;
+  bottom: 15px;
 }
 .logo-login {
   padding: 50px;

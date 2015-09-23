@@ -78,4 +78,7 @@
     <input type="password" id="inputPassword" class="form-control" placeholder="{{t "login.password"}}" required="">   
     <button class="btn btn-lg btn-primary btn-block" type="submit">{{t "login.signIn"}}</button>
 
+    <DIV class="logo-tennant">
+        <img  src="/local/logo-thumb.png"/>
+    </DIV>
 </form>
