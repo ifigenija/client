@@ -4,23 +4,15 @@
 define([
     'app/Dokument/View/PostavkeView',
     'template!../tpl/avtorBesedila-form.tpl',
-    'formSchema!avtorBesedila?filter=1',
     'formSchema!avtorBesedila',
-    '../Model/Besedilo',
     'i18next',
-    'baseUrl',
-    'radio',
     'app/seznami/Model/Oseba',
     'app/seznami/View/OsebaModal'
 ], function (
         PostavkeView,
         formTpl,
-        filterSch,
         schema,
-        Model,
         i18next,
-        baseUrl,
-        Radio,
         OsebaModel,
         OsebaModal
         ) {

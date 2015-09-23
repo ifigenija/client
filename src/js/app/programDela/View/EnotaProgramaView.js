@@ -393,8 +393,12 @@ define([
             var view = new View({
                 model: this.model
             });
+            
+            var PM = Modal.extend({
+                className: 'prenesi-modal modal'
+            });
 
-            var modal = new Modal({
+            var modal = new PM({
                 content: view,
                 animate: true,
                 okText: i18next.t("std.prenesi"),
@@ -550,8 +554,12 @@ define([
                 className: 'table table-striped table-condensed',
                 model: this.model
             });
+            
+            var IM = Modal.extend({
+                className: 'zaproseno-modal modal'
+            });
 
-            var modal = new Modal({
+            var modal = new IM({
                 content: view,
                 animate: true,
                 okText: i18next.t("std.prepisi"),

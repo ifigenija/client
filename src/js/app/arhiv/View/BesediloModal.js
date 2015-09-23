@@ -79,8 +79,12 @@ define([
             view.triggerMethod('shrani');
             modal.preventClose();
         };
+        
+        var BM = Modal.extend({
+            className: 'besedilo-modal modal'
+        });
 
-        var modal = new Modal({
+        var modal = new BM({
             title: i18next.t(options.title),
             content: view,
             animate: true,

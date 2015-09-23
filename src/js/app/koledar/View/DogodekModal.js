@@ -176,8 +176,12 @@ define([
             zacetek: options.zacetek,
             konec: options.konec
         });
+        
+        var DM = Modal.extend({
+            className: 'dogodek-modal modal'
+        });
 
-        var modal = new Modal({
+        var modal = new DM({
             title: i18next.t("dogodek.title"),
             content: view,
             animate: true,

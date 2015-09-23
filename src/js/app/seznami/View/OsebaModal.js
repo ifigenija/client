@@ -62,8 +62,12 @@ define([
             view.triggerMethod('shrani');
             modal.preventClose();
         };
+        
+        var OM = Modal.extend({
+            className: 'oseba-modal modal'
+        });
 
-        var modal = new Modal({
+        var modal = new OM({
             title: i18next.t(options.title),
             content: view,
             animate: true,

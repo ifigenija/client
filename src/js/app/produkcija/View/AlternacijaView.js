@@ -257,8 +257,12 @@ define([
         var formView = new Fv({
             model: pogodba
         });
+        
+        var PM = Modal.extend({
+            className: 'pogodba-modal modal'
+        });
 
-        var modal = new Modal({
+        var modal = new PM({
             content: formView,
             animate: true,
             okText: i18next.t("std.shrani"),

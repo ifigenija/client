@@ -7869,10 +7869,6 @@ span.stevilka-na-veliko {
 .alter-listitem > .media-body {
   overflow: visible;
 }
-/*stile za modal*/
-.modal-dialog {
-  width: 80%;
-}
 /*stil za tabelo kazalnikov
     odmiki od levega roba
 */
@@ -8030,6 +8026,9 @@ fieldset.pomemben legend span {
 }
 .povzetek-stroskovnik {
   margin-top: 15px;
+}
+.oseba-modal > .modal-dialog {
+  width: 80%;
 }
 /*
 Licenca GPLv3
