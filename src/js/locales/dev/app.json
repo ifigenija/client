@@ -462,8 +462,8 @@
         "title": "Stroškovnik",
         "osnovniPodatki": "Osnovni Podatki",
         "zaposleni": "Zaposleni",
-        "vrednostNa": "Vrednost na predstavo",
-        "vrednostDo": "Vrednost do premiere"
+        "vrednostNa": "Stroški na predstavo",
+        "vrednostDo": "Stroški do premiere"
     },
     "besedilo": {
         "title": "Besedila",

@@ -90,18 +90,21 @@ define([
             this.$('.nav.nav-tabs').removeClass('hidden');
         }
 
-        //this.form.on('besedilo:change', this.besediloChange, this);
+        this.form.on('besedilo:change', this.besediloChange, this);
     };
 
     UprizoritevEditView.prototype.besediloChange = function (form, editor) {
+
         var self = this;
-        this.model.fetch({
+        var id = editor.getValue().id;
+        var model = new BesediloModel.Model({id: id});
+
+        model.fetch({
             success: function () {
-                self.$('.avtor').html(self.model.get('avtor'));
-            }
+                self.$('.avtor').html(model.get('avtor'));
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
         });
-        //var id = editor.getValue().id;
-        //this.$('.avtorji').html(this.model.get('avtor'));
     };
 
     UprizoritevEditView.prototype.dodajBesedilo = function () {

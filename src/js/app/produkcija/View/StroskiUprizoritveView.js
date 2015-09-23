@@ -14,6 +14,7 @@ define([
     'backbone',
     'baseUrl',
     'app/bars',
+    'moment',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -29,6 +30,7 @@ define([
         Backbone,
         baseUrl,
         Handlebars,
+        Moment,
         $
         ) {
 
@@ -72,8 +74,14 @@ define([
     UprizoritevStrosekEditView.prototype.pridobiPodatkeUprizoritve = function (options) {
         var uprizoritev = this.model.get('id');
         if (uprizoritev) {
-            var zacetek = this.model.get('datumZacStudija');
-            var konec = this.model.get('datumPremiere');
+            var datum = this.model.get('datumZacStudija');
+            
+            var format = 'YYYY-MM-DDTHH:mm:ssZZ';
+            var datumZac = Moment(datum);
+            var datumKon = Moment(datum);
+            
+            var konec = datumKon.add(10,'y').format(format);
+            var zacetek = datumZac.subtract(10,'y').format(format);
 
             var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
             rpc.call('podatkiUprizoritve', {
@@ -96,7 +104,7 @@ define([
             //v region form izriši view z podatki uprizoritve in povzetkom stroška
             var View = Marionette.ItemView.extend({
                 tagName: 'div',
-                className: 'povzetek-stroskovnika',
+                className: 'povzetek-stroskovnik',
                 template: povzetekTpl,
                 serializeData: function () {
                     return {
@@ -112,6 +120,7 @@ define([
         this.pridobiPodatkeUprizoritve({
             success: izrisi,
             error: function (error) {
+                console.log('ne dela');
                 Radio.channel('error').request('handler', 'xhr');
             }
         });
