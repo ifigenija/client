@@ -37,7 +37,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('besedilo.avtorji'),
-                name: 'imena',
+                name: 'avtor',
                 sortable: true
             },
             {
@@ -105,15 +105,26 @@ define([
                 error: Radio.channel('error').request('handler', 'xhr')
             });
         }
-
-        return new BesediloDokView({
+        var view = new BesediloDokView({
             model: editModel
         });
+        
+        view.on('skrij', this.onSkrij, this);
+
+        return view;
     };
 
     BesediloView.prototype.onDodaj = function () {
         var model = new Model.Model();
         this.onUredi(model);
+    };
+    
+    BesediloView.prototype.onSkrij = function () {
+        var self = this;
+        this.collection.fetch({
+            success: self.renderGrid,
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
     };
 
     return BesediloView;
