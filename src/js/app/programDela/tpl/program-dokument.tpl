@@ -7,7 +7,7 @@
 <div role="tabpanel">
 
     <!-- Nav tabs -->
-    <div class="nav nav-tabs programDela-tabs"></div>
+    <div class=" programDela-tabs"></div>
 
     <!-- Tab panes -->
     <div class="tab-content programDela-panels">
@@ -19,7 +19,7 @@
         </div>
 
         <div role="tabpanel" class="tab-pane pnl-sklopEna">
-            <div class="nav nav-tabs sklopEna-tabs"></div>
+            <div class="sklopEna-tabs"></div>
             <div class="tab-content sklopEna-panels">
                 <div role="tabpanel" class="tab-pane pnl-premiere active region-premiere"></div>
                 <div role="tabpanel" class="tab-pane pnl-ponovitvePremier region-ponovitvePremier"></div>
@@ -29,7 +29,7 @@
         </div>
 
         <div role="tabpanel" class="tab-pane pnl-sklopDva">
-            <div class="nav nav-tabs sklopDva-tabs"></div>
+            <div class="sklopDva-tabs"></div>
             <div class="tab-content sklopDva-panels">
                 <div role="tabpanel" class="tab-pane pnl-gostovanja active region-gostovanja"></div>
                 <div role="tabpanel" class="tab-pane pnl-festivali region-festivali"></div>

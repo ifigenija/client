@@ -5,7 +5,7 @@
 <div role="tabpanel">
 
     <!-- Nav tabs -->
-    <div class="nav nav-tabs oseba-tabs"></div>
+    <div class="oseba-tabs"></div>
 
     <!-- Tab panes -->
     <div class="tab-content oseba-panels">

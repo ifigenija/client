@@ -6,7 +6,7 @@
 
 <div role="tabpanel">
     <!-- Nav tabs -->
-    <div class="nav nav-tabs uprizoritev-tabs"></div>
+    <div class="uprizoritev-tabs"></div>
 
     <!-- Tab panes -->
     <div class="tab-content uprizoritev-panels">

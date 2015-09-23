@@ -5,7 +5,7 @@
 <div role="tabpanel">
 
     <!-- Nav tabs -->
-    <div class="nav nav-tabs popa-tabs"></div>
+    <div class="popa-tabs"></div>
 
     <!-- Tab panes -->
     <div class="tab-content popa-panels">

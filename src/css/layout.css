@@ -1,3 +1,9 @@
+.navbar {
+  margin-bottom: 2px;
+}
+.nav.nav-tabs {
+  margin-bottom: 5px;
+}
 /* Sidebar in filtri */
 .tip-tab-sidebar {
   position: relative;
@@ -19,6 +25,9 @@
 }
 .filter-action {
   margin-bottom: 7px;
+}
+.pod-navigacija {
+  padding: 0px 10px 5px 5px;
 }
 .filter-form .form-group ul {
   list-style: none;

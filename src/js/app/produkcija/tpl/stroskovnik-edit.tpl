@@ -2,7 +2,7 @@
 <div class="clearfix"></div>
 <div role="tabpanel" class="tabpanel-stroskovnik">
     <!-- Nav tabs -->
-    <div class="nav nav-tabs stroskovnik-tabs"></div>
+    <div class="stroskovnik-tabs"></div>
 
     <!-- Tab panes -->
     <div class="tab-content stroskovnik-panels">

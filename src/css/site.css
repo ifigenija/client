@@ -25,15 +25,9 @@ Licenca GPLv3
 .page-header > h3 {
   margin-bottom: 0;
 }
-.navbar {
-  margin-bottom: 7px;
-}
 .alert {
   padding: 5px 15px;
   margin-bottom: 7px;
-}
-.nav-tabs {
-  margin-bottom: 5px;
 }
 .form-inline label {
   margin-right: 5px;
