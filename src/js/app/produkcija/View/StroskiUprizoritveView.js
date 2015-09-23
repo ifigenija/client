@@ -69,13 +69,13 @@ define([
         var uprizoritev = this.model.get('id');
         if (uprizoritev) {
             var datum = this.model.get('datumZacStudija');
-            
+
             var format = 'YYYY-MM-DDTHH:mm:ssZZ';
             var datumZac = Moment(datum);
             var datumKon = Moment(datum);
-            
-            var konec = datumKon.add(10,'y').format(format);
-            var zacetek = datumZac.subtract(10,'y').format(format);
+
+            var konec = datumKon.add(10, 'y').format(format);
+            var zacetek = datumZac.subtract(10, 'y').format(format);
 
             var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
             rpc.call('podatkiUprizoritve', {
@@ -104,7 +104,7 @@ define([
                     var avt = podatki.Na.avtorskePravice;
                     var avtHon = podatki.Na.avtorskiHonorarji;
                     var mat = podatki.Na.materialni;
-                    
+
                     return {
                         "stroski": podatki,
                         "vsotaNa": avt + avtHon + mat
@@ -236,17 +236,15 @@ define([
      */
     UprizoritevStrosekEditView.prototype.renderPogodbe = function () {
         var c = this.model.pogodbeCollection;
-        if (c.length === 0) {
-            c.fetch({
-                error: Radio.channel('error').request('handler', 'xhr')
-            });
-        }
+        c.fetch({
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
 
         var self = this;
 
         require(['app/produkcija/View/PogodbaView'], function (PogodbaView) {
             var view = new PogodbaView({
-                collection: self.model.pogodbeCollection,
+                collection: c,
                 dokument: self.model
             });
 
