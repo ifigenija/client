@@ -478,6 +478,7 @@
         "interNaslov": "Angleški naslov",
         "jezik": "Jezik izvirnika",
         "naslovIzvirnika": "Naslov izvirnika",
+        "podnaslovIzvirnika": "Podnaslov izvirnika",
         "datumPrejema": "Datum prejema",
         "moskeVloge": "Število moških vlog",
         "zenskeVloge": "Število ženskih vlog",
