@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-6">
-        <fieldset class="fieldset-podatki">
+        <fieldset class="fieldset-podatki fieldset-height">
             <legend>
                 <span>{{t "stroskovnik.osnovniPodatki"}}</span>
             </legend>
@@ -23,6 +23,8 @@
             <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihIgrTujJZ"}}: <div class="pull-right">{{u "formatNumber" stroski.stHonorarnihIgrTujJZ 0}}</div></div>
         </fieldset>
     </div>
+</div>
+<div class="row">
     <div class="col-sm-6">
         <fieldset class="fieldset-vrednostDo">
             <legend>
@@ -49,4 +51,5 @@
             <div class="prikazno-polje clearfix">{{t "stroskovnik.vsotaNa"}}: <div class="pull-right vrednost">{{u "formatNumber" vsotaNa}}</div></div>
         </fieldset>
     </div>
+</div>
 </div>
