@@ -23,7 +23,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="prikazno-polje">{{t "uprizoritev.avtorji"}}: <div class="pull-right avtor">{{avtor}}</div></div>
                         <div data-fields="datumPremiere,gostujoca,sifra,faza"></div>
                     </fieldset>
                 </div>

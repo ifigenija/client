@@ -95,16 +95,18 @@ define([
 
     UprizoritevEditView.prototype.besediloChange = function (form, editor) {
 
-        var self = this;
-        var id = editor.getValue().id;
-        var model = new BesediloModel.Model({id: id});
+        if (this.model.get('id')) {
+            var self = this;
+            var id = editor.getValue().id;
+            var model = new BesediloModel.Model({id: id});
 
-        model.fetch({
-            success: function () {
-                self.$('.avtor').html(model.get('avtor'));
-            },
-            error: Radio.channel('error').request('handler', 'xhr')
-        });
+            model.fetch({
+                success: function () {
+                    self.$('.avtorji').html(" " + model.get('avtor'));
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        }
     };
 
     UprizoritevEditView.prototype.dodajBesedilo = function () {

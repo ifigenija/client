@@ -1,5 +1,8 @@
 <div class="region-doctoolbar pull-right"></div>
-<h2>{{ docNaslov }}</h2>
+<h2>
+    {{ docNaslov }}
+    <small class="avtorji">{{avtor}}</small>
+</h2>
 <div class="clearfix"></div>
 <div role="tabpanel">
     <!-- Nav tabs -->
