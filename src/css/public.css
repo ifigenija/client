@@ -8036,6 +8036,14 @@ fieldset.pomemben legend span {
 .oseba-modal-vse > .modal-dialog {
   width: 80%;
 }
+/*zamik v desno pri izpisih*/
+.padleft {
+  padding-left: 50px;
+}
+/*visina */
+.fieldset-visina {
+  height: 100%;
+}
 /*
 Licenca GPLv3
 */

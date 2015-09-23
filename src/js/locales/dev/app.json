@@ -462,9 +462,11 @@
     "stroskovnik": {
         "title": "Stroškovnik",
         "osnovniPodatki": "Osnovni Podatki",
-        "zaposleni": "Zaposleni",
+        "sodelavci": "Sodelavci",
         "vrednostNa": "Stroški na predstavo",
-        "vrednostDo": "Stroški do premiere"
+        "vrednostDo": "Stroški do premiere",
+        "vsotaNa": "Vsota stroškov na predstavo",
+        "vsotaDo": "Vsota stroškov do premiere"
     },
     "besedilo": {
         "title": "Besedila",
@@ -1560,7 +1562,7 @@
         "stHonorarnih": "Število honoranih",
         "stHonorarnihIgr": "Število honorarnih igralcev",
         "stHonorarnihIgrSamoz": "Število honorarnih samozaposlenih igralcev",
-        "stHonorarnihIgrTujJZ": "Število igralcev iz drugega javnega zavoda",
+        "stHonorarnihIgrTujJZ": "Število honorarnih igralcev iz drugega javnega zavoda",
         "stZaposDrug": "Število drugih zaposlenih",
         "stZaposUmet": "Število zaposlenih iz umetniškega ansambla",
         "avtorji": "Avtorji"

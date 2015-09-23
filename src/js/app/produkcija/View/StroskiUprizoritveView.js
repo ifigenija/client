@@ -11,9 +11,6 @@ define([
     'i18next',
     'app/Max/View/TabControl',
     'radio',
-    'backbone',
-    'baseUrl',
-    'app/bars',
     'moment',
     'jquery',
     'jquery.jsonrpc'
@@ -27,9 +24,6 @@ define([
         i18next,
         TabControl,
         Radio,
-        Backbone,
-        baseUrl,
-        Handlebars,
         Moment,
         $
         ) {
@@ -107,8 +101,13 @@ define([
                 className: 'povzetek-stroskovnik',
                 template: povzetekTpl,
                 serializeData: function () {
+                    var avt = podatki.Na.avtorskePravice;
+                    var avtHon = podatki.Na.avtorskiHonorarji;
+                    var mat = podatki.Na.materialni;
+                    
                     return {
-                        "stroski": podatki
+                        "stroski": podatki,
+                        "vsotaNa": avt + avtHon + mat
                     };
                 }
             });
@@ -120,7 +119,7 @@ define([
         this.pridobiPodatkeUprizoritve({
             success: izrisi,
             error: function (error) {
-                console.log('ne dela');
+                console.log(error);
                 Radio.channel('error').request('handler', 'xhr');
             }
         });
