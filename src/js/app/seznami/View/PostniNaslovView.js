@@ -40,6 +40,7 @@ define([
         schema: schema.toFormSchema().schema,
         detailName: 'naslovi',
         formTitle: i18next.t('postniNaslov.title'),
+        disabled: false,
         gridMeta: [
             {
                 cell: 'string',
@@ -101,6 +102,22 @@ define([
         if (!dovoljeno) {
             this.$('input').prop("disabled", true);
             this.$('select').prop("disabled", true);
+        }
+    };
+    
+    PostniNaslovView.prototype.initialize = function(options){
+        this.disabled = options.disabled || this.disabled;
+    };
+    
+    PostniNaslovView.prototype.onDodaj = function () {
+        if (!this.disabled) {
+            PostavkeView.prototype.onDodaj.apply(this, arguments);
+        } else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t("info.shraniEnotoPrograma"),
+                code: '9000600',
+                severity: 'info'
+            });
         }
     };
 

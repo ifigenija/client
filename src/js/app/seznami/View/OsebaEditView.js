@@ -228,10 +228,16 @@ define([
      */
     OsebaEditView.prototype.renderTelefonske = function () {
         var self = this;
+        var disabled = false;
+        
+        if(!this.model.get('id')){
+            disabled = true;
+        }
         require(['app/seznami/View/TelefonskaView'], function (View) {
             var view = new View({
                 collection: self.model.telefonskeCollection,
-                dokument: self.model
+                dokument: self.model,
+                disabled: disabled
             });
             self.regionTelefonske.show(view);
             return view;
@@ -244,10 +250,16 @@ define([
      */
     OsebaEditView.prototype.renderNaslovi = function () {
         var self = this;
+        var disabled = false;
+        
+        if(!this.model.get('id')){
+            disabled = true;
+        }
         require(['app/seznami/View/PostniNaslovView'], function (View) {
             var view = new View({
                 collection: self.model.nasloviCollection,
-                dokument: self.model
+                dokument: self.model,
+                disabled: disabled
             });
             self.regionNaslovi.show(view);
             return view;

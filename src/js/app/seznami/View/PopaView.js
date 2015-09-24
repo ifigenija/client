@@ -26,7 +26,7 @@ define([
     var PopaView = SeznamView.extend({
         url: baseUrl + '/rest/popa',
         title: i18next.t('popa.title'),
-        zapirajFormo: false,
+        zapirajFormo: true,
         skrivajTabelo: true,
         filterSchema: filterSch,
         columns: [
