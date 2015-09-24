@@ -578,10 +578,12 @@ define([
      * @returns {undefined}
      */
     EnotaProgramaView.prototype.prepisi = function (modal) {
-        this.model.set('zaproseno', modal.options.content.model.get('vsota'));
-        this.renderFormEvents();
-
-        this.prikaziPodatke();
+        var vsota = modal.options.content.model.get('vsota');
+        var form = this.form;
+        
+        this.model.set('zaproseno', vsota);
+        form.fields.zaproseno.setValue(vsota);
+        form.trigger('change');
     };
 
     /**
