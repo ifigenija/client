@@ -216,7 +216,8 @@ define([
 
             var view = new AlternacijaView({
                 collection: self.model.alternacijeCollection,
-                dokument: self.model
+                dokument: self.model,
+                zapirajFormo: true
             });
 
             view.listenTo(view, "save:success", function () {
@@ -245,7 +246,8 @@ define([
         require(['app/produkcija/View/PogodbaView'], function (PogodbaView) {
             var view = new PogodbaView({
                 collection: c,
-                dokument: self.model
+                dokument: self.model,
+                zapirajFormo: true
             });
 
             view.listenTo(view, "save:success", function () {
@@ -266,7 +268,8 @@ define([
         require(['app/produkcija/View/StrosekView'], function (StrosekView) {
             var view = new StrosekView({
                 collection: self.model.stroskiCollection,
-                dokument: self.model
+                dokument: self.model,
+                zapirajFormo: true
             });
             self.regionDetail.show(view);
         });

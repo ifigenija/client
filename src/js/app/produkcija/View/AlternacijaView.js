@@ -101,22 +101,6 @@ define([
                 sortable: false
             },
             {
-                headerCell: 'number',
-                cell: 'date',
-                editable: false,
-                label: i18next.t('alternacija.zacetek'),
-                name: 'zacetek',
-                sortable: false
-            },
-            {
-                headerCell: 'number',
-                cell: 'date',
-                editable: false,
-                label: i18next.t('alternacija.konec'),
-                name: 'konec',
-                sortable: false
-            },
-            {
                 cell: 'action',
                 name: '...',
                 sortable: false,
