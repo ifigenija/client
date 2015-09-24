@@ -7188,6 +7188,11 @@ table.backgrid > thead th.label {
   -webkit-transform-origin: 50% 50%;
   -webkit-animation-iteration-count: 2;
   -webkit-animation-timing-function: linear;
+  animation-name: thumb;
+  animation-duration: 200ms;
+  transform-origin: 50% 50%;
+  animation-iteration-count: 2;
+  animation-timing-function: linear;
 }
 .logo-napis {
   fill: #000000;
@@ -7199,6 +7204,11 @@ table.backgrid > thead th.label {
   -webkit-transform-origin: 50% 50%;
   -webkit-animation-iteration-count: 2;
   -webkit-animation-timing-function: linear;
+  animation-name: thumb;
+  animation-duration: 200ms;
+  transform-origin: 50% 50%;
+  animation-iteration-count: 2;
+  animation-timing-function: linear;
 }
 .logo-background {
   position: fixed;
@@ -7227,6 +7237,17 @@ table.backgrid > thead th.label {
     -webkit-transform: scale(1);
   }
 }
+@keyframes thumb {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 @-webkit-keyframes fejs {
   0% {
     -webkit-transform: scale(1);
@@ -7236,6 +7257,17 @@ table.backgrid > thead th.label {
   }
   100% {
     -webkit-transform: scale(1);
+  }
+}
+@keyframes fejs {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 /*
