@@ -483,6 +483,7 @@ define([
                 collection: self.model.premiereCollection,
                 dokument: self.model,
                 zapirajFormo: false,
+                skrivajTabelo: true,
                 potrdiBrisanje: true
             });
             self.premiereR.show(view);
@@ -503,6 +504,7 @@ define([
                 collection: self.model.ponovitvePremiereCollection,
                 dokument: self.model,
                 zapirajFormo: false,
+                skrivajTabelo: true,
                 potrdiBrisanje: true
             });
             self.ponovitvePremierR.show(view);
@@ -523,6 +525,7 @@ define([
                 collection: self.model.ponovitvePrejsnjihCollection,
                 dokument: self.model,
                 zapirajFormo: false,
+                skrivajTabelo: true,
                 potrdiBrisanje: true
             });
             self.ponovitvePrejsnjihR.show(view);
@@ -543,6 +546,7 @@ define([
                 collection: self.model.gostujociCollection,
                 dokument: self.model,
                 zapirajFormo: false,
+                skrivajTabelo: true,
                 potrdiBrisanje: true
             });
             self.gostujociR.show(view);
@@ -563,6 +567,7 @@ define([
                 collection: self.model.gostovanjaCollection,
                 dokument: self.model,
                 zapirajFormo: false,
+                skrivajTabelo: true,
                 potrdiBrisanje: true
             });
             self.gostovanjaR.show(view);
@@ -583,6 +588,7 @@ define([
                 collection: self.model.izjemniCollection,
                 dokument: self.model,
                 zapirajFormo: false,
+                skrivajTabelo: true,
                 potrdiBrisanje: true
             });
             self.izjemniR.show(view);
@@ -610,6 +616,7 @@ define([
                 collection: coll,
                 dokument: self.model,
                 zapirajFormo: false,
+                skrivajTabelo: true,
                 potrdiBrisanje: true
             });
             self.festivaliR.show(view);
@@ -630,6 +637,7 @@ define([
                 collection: self.model.programiRaznoCollection,
                 dokument: self.model,
                 zapirajFormo: false,
+                skrivajTabelo: true,
                 potrdiBrisanje: true
             });
             self.razniR.show(view);

@@ -256,6 +256,7 @@ define([
             collection: coll,
             dokument: this.model,
             zapirajFormo: false,
+            skrivajTabelo: true,
             potrdiBrisanje: true
         });
         view.detailName = detailName;
@@ -327,6 +328,7 @@ define([
             collection: c,
             dokument: this.model,
             zapirajFormo: false,
+            skrivajTabelo: true,
             potrdiBrisanje: true
         });
 
@@ -352,6 +354,7 @@ define([
             collection: c,
             dokument: this.model,
             zapirajFormo: false,
+            skrivajTabelo: true,
             potrdiBrisanje: true
         });
 
