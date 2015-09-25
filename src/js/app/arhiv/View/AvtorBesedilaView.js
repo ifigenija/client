@@ -75,12 +75,13 @@ define([
 
     AvtorBesedilaView.prototype.onDodajOsebo = function () {
         var model = new OsebaModel.Model();
-        
+
         var editor = this.form.fields.oseba.editor;
 
         var modal = OsebaModal({
             model: model,
             editor: editor,
+            form: this.form,
             title: i18next.t('oseba.nova')
         });
     };

@@ -29,7 +29,7 @@ define([
         OEV.prototype.onSaveSuccess = function () {
             izberi();
         };
-        
+
         OEV.prototype.posodobiUrlNaslov = function () {
         };
 
@@ -52,6 +52,9 @@ define([
             else {
                 if (options.editor) {
                     options.editor.setValue(view.model.get('id'));
+                    if (options.form) {
+                        options.form.trigger('change');
+                    }
                 }
                 modal.close();
                 if (options.form && options.event) {

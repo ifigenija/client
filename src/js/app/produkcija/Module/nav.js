@@ -19,15 +19,15 @@ define(['i18next'], function (i18n) {
                     label: i18n.t("produkcija.nav.strosek"),
                     uri: "#pro/stroskovnik",
                     permission: "StrosekUprizoritve-read"
-                },
-                {
-                    divider: true
-                },
-                {
-                    label: i18n.t("produkcija.nav.sezona"),
-                    uri: "#pro/sezona"
-                    
-                }
+                }//,
+//                {
+//                    divider: true
+//                },
+//                {
+//                    label: i18n.t("produkcija.nav.sezona"),
+//                    uri: "#pro/sezona"
+//                    
+//                }
             ]
         }
     ];

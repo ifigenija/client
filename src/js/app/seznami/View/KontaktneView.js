@@ -92,13 +92,14 @@ define([
     };
 
     KontaktneView.prototype.osebaModal = function (editModel) {
-        
+
         var editor = this.form.fields.oseba.editor;
-        
+
         var modal = OsebaModal({
             model: editModel,
             editor: editor,
             pogled: 'vse',
+            form: this.form,
             tpl: modalTpl,
             title: i18next.t('oseba.nova')
         });
