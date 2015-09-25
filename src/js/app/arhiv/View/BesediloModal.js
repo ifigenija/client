@@ -68,6 +68,9 @@ define([
             else {
                 if (options.editor) {
                     options.editor.setValue(view.model.get('id'));
+                    if(options.form){
+                        options.form.trigger('change');
+                    }
                 }
                 if (options.form && options.event) {
                     options.form.trigger(options.event);

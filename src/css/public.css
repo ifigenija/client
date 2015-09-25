@@ -8010,20 +8010,12 @@ span.stevilka-na-veliko {
   float: none;
 }
 /*stili prikaznih polj*/
-.prikazno-polje .prikazno-polje-naslov {
-  font-weight: normal;
+.prikazno-polje {
+  min-height: 30px;
 }
-.prikazno-polje .prikazno-polje-opis > h3 {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-.prikazno-polje-attribut {
-  /*display: table-cell;*/
-  float: none;
-  vertical-align: bottom;
-}
-.prikazno-polje-vrednost {
+.prikazno-polje .vrednost {
   font-size: 20px;
+  vertical-align: bottom;
 }
 fieldset {
   padding: 6px 12px;
@@ -8079,10 +8071,6 @@ fieldset.pomemben legend span {
   margin-top: 0;
   margin-bottom: 0;
   margin-right: 15px;
-}
-/* polja ki so namenjena samo prikazu in fo v formi*/
-.prikazno-polje > .vrednost {
-  font-size: 20px;
 }
 /* stili za postavke in postavke v enoti programa*/
 .region-postavke {

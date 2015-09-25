@@ -1,17 +1,20 @@
 define([
     'app/Dokument/View/FormView',
     'template!../tpl/alternacijaUredi-form.tpl',
+    'template!app/Dokument/tpl/form-simple.tpl',
     'formSchema!alternacija/uredi',
     'i18next'
 ], function (
         FormView,
+        formTpl,
         tpl,
         schema,
         i18next
         ) {
 
     var AlterUrediView = FormView.extend({
-        formTemplate: tpl,
+        formTemplate: formTpl,
+        template: tpl,
         schema: schema.toFormSchema().schema,
         buttons: {
             'doc-shrani': {

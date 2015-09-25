@@ -775,22 +775,11 @@ span.stevilka-na-veliko {
 
 /*stili prikaznih polj*/
 .prikazno-polje {
-    & .prikazno-polje-naslov{
-        font-weight: normal;
+    min-height: 30px;
+    & .vrednost{
+        font-size: 20px;
+        vertical-align: bottom;
     }
-    & .prikazno-polje-opis > h3{
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-}
-
-.prikazno-polje-attribut {
-    /*display: table-cell;*/
-    float: none;
-    vertical-align: bottom;
-}
-.prikazno-polje-vrednost {
-    font-size: 20px;
 }
 
 fieldset {
@@ -859,13 +848,6 @@ fieldset {
         margin-top: 0;
         margin-bottom: 0;
         margin-right: 15px;
-    }
-}
-
-/* polja ki so namenjena samo prikazu in fo v formi*/
-.prikazno-polje{
-    > .vrednost{
-        font-size: 20px;
     }
 }
 

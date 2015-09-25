@@ -85,7 +85,8 @@ define([
             this.detailR.show(view);
         },
         onSaveSuccess: function(){
-            this.detailR.empty();
+            this.trigger('shranjeno');
+            //this.detailR.empty();
         },
         onPreklici: function(){
             this.detailR.empty();
@@ -108,16 +109,18 @@ define([
         },
         onChildviewUredi: function (view) {
             this.triggerMethod('uredi', view.model);
+        },
+        onChildviewShranjeno: function (view) {
+            this.triggerMethod('shranjeno', view.model);
         }
     });
-
-
 
     /**
      * 
      * @type @exp;Marionette@pro;LayoutView@call;extend
      */
     var AlterSelectView = Marionette.LayoutView.extend({
+        className: 'alternacija-select',
         template: tpl,
         regions: {
             izborR: '.alter-izbor',
@@ -195,6 +198,7 @@ define([
             collection: c
 
         });
+        var self = this;
 
         vloge.on('brisi', function (model) {
             this.triggerMethod('brisi:alter', model.get('id'));
@@ -204,6 +208,9 @@ define([
         }, this);
         vloge.on('uredi', function (model) {
             this.triggerMethod('uredi:alter', model.get('id'));
+        }, this);
+        vloge.on('shranjeno', function (model) {
+            this.triggerMethod('shranjeno:alter', model.get('id'));
         }, this);
 
         c.fetch();

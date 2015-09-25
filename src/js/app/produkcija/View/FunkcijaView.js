@@ -195,7 +195,14 @@ define([
         rv.on('dodaj:alter', this.dodajAlter, this);
         rv.on('brisi:alter', this.brisiAlter, this);
         rv.on('privzeto:alter', this.privzetoAlter, this);
-        rv.on('uredi:alter', this.urediAlter, this);
+        
+        var self = this;
+        rv.on('shranjeno:alter', function () {
+            self.model.fetch({
+                success: function () {
+                    self.renderAlternacije(self.model);
+                }})
+        }, self);
         this.alterR.show(rv);
     };
 
