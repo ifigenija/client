@@ -264,7 +264,8 @@ define([
         require(['app/seznami/View/TrrView'], function (View) {
             var view = new View({
                 collection: self.model.trrjiCollection,
-                dokument: self.model
+                dokument: self.model,
+                zapirajFormo: true
             });
             self.regionTrrji.show(view);
             return view;
@@ -275,7 +276,8 @@ define([
         require(['app/seznami/View/TelefonskaView'], function (View) {
             var view = new View({
                 collection: self.model.telefonskeCollection,
-                dokument: self.model
+                dokument: self.model,
+                zapirajFormo: true
             });
             self.regionTelefonske.show(view);
             return view;
@@ -288,7 +290,8 @@ define([
         require(['app/seznami/View/KontaktneView'], function (View) {
             var view = new View({
                 collection: self.model.kontaktneOsebeCollection,
-                dokument: self.model
+                dokument: self.model,
+                zapirajFormo: true
             });
             self.regionOsebe.show(view);
             return view;
@@ -301,7 +304,8 @@ define([
         require(['app/seznami/View/PostniNaslovView'], function (View) {
             var view = new View({
                 collection: self.model.nasloviCollection,
-                dokument: self.model
+                dokument: self.model,
+                zapirajFormo: true
             });
             self.regionNaslovi.show(view);
             return view;

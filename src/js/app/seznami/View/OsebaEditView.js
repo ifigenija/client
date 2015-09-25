@@ -237,7 +237,8 @@ define([
             var view = new View({
                 collection: self.model.telefonskeCollection,
                 dokument: self.model,
-                disabled: disabled
+                disabled: disabled,
+                zapirajFormo: true
             });
             self.regionTelefonske.show(view);
             return view;
@@ -259,7 +260,8 @@ define([
             var view = new View({
                 collection: self.model.nasloviCollection,
                 dokument: self.model,
-                disabled: disabled
+                disabled: disabled,
+                zapirajFormo: true
             });
             self.regionNaslovi.show(view);
             return view;
