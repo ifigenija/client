@@ -313,6 +313,7 @@ define([
             this.$('.celotnaVrednostMat').html(f(0, 2));
             this.$('.drugiViriVsota').html(f(0, 2));
             this.$('.vredPes').html(f(0, 2));
+            this.$('.obiskDoma').html(f(0, 0));
         }
 
         //onemogočimo druge vire če je nov model
@@ -468,6 +469,7 @@ define([
             this.$('.celotnaVrednostMat').html(f(model.get('celotnaVrednostMat'), 2));
             this.$('.drugiViriVsota').html(f(model.get('drugiViriVsota'), 2));
             this.$('.vredPes').html(f(model.get('pesVsota'), 2));
+            this.$('.obiskDoma').html(f(model.get('obiskDoma'), 0));
         }
     };
 
