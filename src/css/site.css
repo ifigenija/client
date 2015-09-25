@@ -744,12 +744,21 @@ span.stevilka-na-veliko {
   width: 25%;
   float: none;
 }
+/*stili prikaznih polj*/
 .prikazno-polje .prikazno-polje-naslov {
   font-weight: normal;
 }
 .prikazno-polje .prikazno-polje-opis > h3 {
   margin-top: 0px;
   margin-bottom: 0px;
+}
+.prikazno-polje-attribut {
+  /*display: table-cell;*/
+  float: none;
+  vertical-align: bottom;
+}
+.prikazno-polje-vrednost {
+  font-size: 20px;
 }
 fieldset {
   padding: 5px 12px;

@@ -7,7 +7,7 @@ define([
     'template!../tpl/alternacija-form.tpl',
     'template!../tpl/pogodbaAlt-form.tpl',
     'template!../tpl/pogodbaAlt-modal.tpl',
-    'formSchema!alternacija',
+    'formSchema!alternacija/stroskovnik',
     'formSchema!pogodba',
     'i18next',
     'app/Max/Module/Backgrid',
@@ -31,7 +31,7 @@ define([
 
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: schema.toFormSchema({
+        schema: schema.toFormSchema(/*{
             oseba: {
                 editorAttrs: {
                     disabled: true
@@ -42,7 +42,7 @@ define([
                     disabled: true
                 }
             }
-        }).schema,
+        }*/).schema,
         title: i18next.t('alternacija.title'),
         detailName: 'alternacije',
         formTitle: i18next.t(''),
@@ -50,14 +50,6 @@ define([
             "click .pogodba-dodaj": "dodaj:pogodbo"
         },
         gridMeta: [
-            {
-                headerCell: 'number',
-                cell: 'integer',
-                editable: false,
-                label: i18next.t('ent.d.sort'),
-                name: 'sort',
-                sortable: true
-            },
             {
                 cell: 'string',
                 editable: false,
@@ -128,20 +120,6 @@ define([
         ]
     });
 
-    AlternacijaView.prototype.preveriDatum = function (form, editor) {
-        var konec = editor.getValue();
-        var zacetek = form.fields.zacetek.editor.getValue();
-        var polja = form.fields;
-
-        if (zacetek >= konec) {
-            polja.konec.setError(i18next.t("std.napaka.datum"));
-            return false;
-        } else {
-            polja.konec.clearError();
-            return true;
-        }
-    };
-
     AlternacijaView.prototype.onRenderForm = function (options) {
         this.form.on('pogodba:change', function (form, editor) {
             if (editor.getValue()) {
@@ -150,14 +128,6 @@ define([
                 this.$('.pogodba-dodaj').html(i18next.t('std.dodaj'));
             }
         });
-
-        this.form.on('konec:change', this.preveriDatum, this);
-    };
-
-    AlternacijaView.prototype.onShrani = function () {
-        if (this.preveriDatum(this.form, this.form.fields.konec)) {
-            PostavkeView.prototype.onShrani.apply(this, arguments);
-        }
     };
 
     /**

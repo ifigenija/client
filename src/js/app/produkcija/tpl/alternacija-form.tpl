@@ -1,11 +1,37 @@
 <form>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 col-bottom">
             <fieldset>
                 <legend>
                     <span>{{t "alternacija.podatki"}}</span>
                 </legend>
-                <div data-fields="oseba,funkcija"></div>
+                <div class="prikazno-polje">
+                    <span class="prikazno-polje-attribut">{{t "alternacija.oseba"}}: </span>
+                    <div class="pull-right oseba prikazno-polje-vrednost">{{oseba.label}}</div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="prikazno-polje">
+                    <span class="prikazno-polje-attribut">{{t "alternacija.funkcija"}}: </span>
+                    <div class="pull-right funkcija prikazno-polje-vrednost">{{funkcija.label}}</div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="prikazno-polje">
+                    <span class="prikazno-polje-attribut">{{t "alternacija.zacetek"}}: </span>
+                    <div class="pull-right zacetek prikazno-polje-vrednost">{{u "date" zacetek}}</div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="prikazno-polje">
+                    <span class="prikazno-polje-attribut">{{t "alternacija.konec"}}: </span>
+                    <div class="pull-right konec prikazno-polje-vrednost">{{u "date" konec}}</div>
+                    <div class="clearfix"></div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-sm-6">
+            <fieldset>
+                <legend>
+                    <span>{{t "alternacija.dodatniPodatki"}}</span>
+                </legend>
                 <div class="alternacija-vnosno-polje">
                     <div class="alternacije-naslov">
                         <label class="">{{t "alternacija.pogodba"}}</label>
@@ -25,15 +51,7 @@
                         </div>
                     </div>
                 </div> 
-                <div data-fields="zaposlitev"></div>
-            </fieldset>
-        </div>
-        <div class="col-sm-6">
-            <fieldset>
-                <legend>
-                    <span>{{t "alternacija.dodatniPodatki"}}</span>
-                </legend>
-                <div data-fields="zacetek,konec,sifra,pomembna,privzeti"></div>
+                <div data-fields="zaposlitev,sifra"></div>
             </fieldset>
         </div>
     </div>

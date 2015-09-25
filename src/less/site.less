@@ -773,7 +773,7 @@ span.stevilka-na-veliko {
 }
 
 
-
+/*stili prikaznih polj*/
 .prikazno-polje {
     & .prikazno-polje-naslov{
         font-weight: normal;
@@ -782,6 +782,15 @@ span.stevilka-na-veliko {
         margin-top: 0px;
         margin-bottom: 0px;
     }
+}
+
+.prikazno-polje-attribut {
+    /*display: table-cell;*/
+    float: none;
+    vertical-align: bottom;
+}
+.prikazno-polje-vrednost {
+    font-size: 20px;
 }
 
 fieldset {
@@ -815,14 +824,14 @@ fieldset {
 }
 
 .row.enota-postavke {
-  @media (min-width: @screen-lg-min)  {
-    
-    margin: 30px 5px 12px -15px ;
-  }
-  @media (max-width: @screen-md-max) {
+    @media (min-width: @screen-lg-min)  {
 
-    margin: 0px 5px 0px 5px; 
-  }
+        margin: 30px 5px 12px -15px ;
+    }
+    @media (max-width: @screen-md-max) {
+
+        margin: 0px 5px 0px 5px; 
+    }
 
 }
 
@@ -889,7 +898,7 @@ fieldset {
 .uprizoritev {
     &-panels .region-form {
         margin-top: 10px;
-        
+
     }
 }
 
