@@ -1,7 +1,7 @@
 <form>
     <div class="row">
         <div class="col-sm-6">
-            <fieldset class="fieldset-podatki">
+            <fieldset>
                 <legend>
                     <span>{{t "alternacija.podatki"}}</span>
                 </legend>
@@ -29,7 +29,7 @@
             </fieldset>
         </div>
         <div class="col-sm-6">
-            <fieldset class="fieldset-podatki">
+            <fieldset>
                 <legend>
                     <span>{{t "alternacija.dodatniPodatki"}}</span>
                 </legend>

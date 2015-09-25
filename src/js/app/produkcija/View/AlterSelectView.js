@@ -13,7 +13,8 @@ define([
     'template!../tpl/alter-select.tpl',
     'template!../tpl/alter-item.tpl',
     'app/seznami/Model/Oseba',
-    'app/seznami/View/OsebaModal'
+    'app/seznami/View/OsebaModal',
+    './AlterUrediView'
 ], function (
         Radio,
         Marionette,
@@ -25,7 +26,8 @@ define([
         tpl,
         itemTpl,
         OsebaModel,
-        OsebaModal
+        OsebaModal,
+        AlterUrediView
         ) {
 
     /**
@@ -41,13 +43,17 @@ define([
                 element: 'button-dropdown',
                 dropdown: [
                     {
-                        label: i18next.t('std.brisi'),
-                        trigger: 'brisi'
+                        label: i18next.t('std.uredi'),
+                        trigger: 'uredi'
                     },
                     {
                         type: '',
                         label: i18next.t('std.privzeto'),
                         trigger: 'privzeto'
+                    },
+                    {
+                        label: i18next.t('std.brisi'),
+                        trigger: 'brisi'
                     }
                 ]
             }
@@ -57,15 +63,32 @@ define([
         className: 'media alter-listitem',
         template: itemTpl,
         regions: {
-            regionButton: '.alter-toolbar'
+            buttonR: '.alter-toolbar',
+            detailR: '.alter-detail'
         },
         onRender: function () {
-            this.regionButton.show(new Toolbar({
+            this.buttonR.show(new Toolbar({
                 listener: this,
                 buttonGroups: alterItemButtons,
                 groupClass: 'btn-group btn-tripikice'
             }));
-
+        },
+        onUredi: function () {
+            var view = new AlterUrediView({
+                model: this.model
+            });
+            
+            
+            view.on('save:success', this.onSaveSuccess, this);
+            view.on('preklici', this.onPreklici, this);
+            
+            this.detailR.show(view);
+        },
+        onSaveSuccess: function(){
+            this.detailR.empty();
+        },
+        onPreklici: function(){
+            this.detailR.empty();
         }
     });
 
@@ -82,6 +105,9 @@ define([
         },
         onChildviewPrivzeto: function (view) {
             this.triggerMethod('privzeto', view.model);
+        },
+        onChildviewUredi: function (view) {
+            this.triggerMethod('uredi', view.model);
         }
     });
 
@@ -175,6 +201,9 @@ define([
         }, this);
         vloge.on('privzeto', function (model) {
             this.triggerMethod('privzeto:alter', model.get('id'));
+        }, this);
+        vloge.on('uredi', function (model) {
+            this.triggerMethod('uredi:alter', model.get('id'));
         }, this);
 
         c.fetch();

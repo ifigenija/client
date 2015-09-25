@@ -195,6 +195,7 @@ define([
         rv.on('dodaj:alter', this.dodajAlter, this);
         rv.on('brisi:alter', this.brisiAlter, this);
         rv.on('privzeto:alter', this.privzetoAlter, this);
+        rv.on('uredi:alter', this.urediAlter, this);
         this.alterR.show(rv);
     };
 

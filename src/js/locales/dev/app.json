@@ -625,8 +625,8 @@
         "sifra": "Oznaka",
         "funkcija": "Funkcija",
         "oseba": "Oseba",
-        "zacetek": "Začetek",
-        "konec": "Konec",
+        "zacetek": "Od",
+        "konec": "Do",
         "aktivna": "Aktivna",
         "opomba": "Opomba",
         "sort": "Zaporedna številka",
@@ -644,8 +644,8 @@
             "sifra": "$t(ent.d.sifra)",
             "funkcija": "",
             "oseba": "",
-            "zacetek": "$t(ent.d.zacetek)",
-            "konec": "$t(ent.d.konec)",
+            "zacetek": "Začetek opravljanja funkcije",
+            "konec": "Konec opravljanja funkcije",
             "opomba": "",
             "zaposlitev": "",
             "pogodba": "",
@@ -732,8 +732,8 @@
         "d": {
             "oseba": "",
             "status": "",
-            "zacetek": "$t(ent.d.zacetek) zaposlitve",
-            "konec": "$t(ent.d.konec) zaposlitve",
+            "zacetek": "Začetek zaposlitve",
+            "konec": "Konec zaposlitve",
             "tip": "",
             "delovnaObveza": "",
             "malica": "",
@@ -818,9 +818,9 @@
         "d": {
             "sifra": "",
             "aktivna": "",
-            "zacetek": "$t(ent.d.zacetek) pogodbe",
-            "konec": "$t(ent.d.konec) pogodbe",
-            "opis": "$t(ent.d.opis)",
+            "zacetek": "Začetek pogodbe",
+            "konec": "Konec pogodbe",
+            "opis": "",
             "vrednostVaj": "Pavšalna vrednost za vse vaje oz. vrednost do premiere",
             "vrednostVaje": "Pavšalna vrednost ene vaje",
             "vrednostPredstave": "",
@@ -1252,8 +1252,8 @@
             "ime": "Ime sezone",
             "sifra": "Šifra",
             "aktivna": "Ali je sezona aktivna",
-            "zacetek": "$t(ent.d.zacetek) sezone",
-            "konec": "$t(ent.d.konec) sezone"
+            "zacetek": "Začetek sezone",
+            "konec": "Konec sezone"
         }
     },
     "strosekuprizoritve": {

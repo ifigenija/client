@@ -51,11 +51,6 @@
                             <span>{{t "ep.obiskovalci"}}</span>
                         </legend>
                     </fieldset>
-                    <fieldset data-fields="stHonorarnih">
-                        <legend>
-                            <span>{{t "ep.sodelavci"}}</span>
-                        </legend>
-                    </fieldset>
                 </div>
             </div>
         </div>
