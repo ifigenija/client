@@ -1,31 +1,27 @@
 <form>
     <div class="row">
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="col-sm-12 col-lg-6">
-                    <fieldset>
-                        <legend>
-                            <span>{{t "pogodba.osnovniPodatki"}}</span>
-                        </legend>
-                        <div style="display: table;">
-                            <div style="display: table-row">
-                                {{t "pogodba.oseba"}}: {{ oseba.label }}
-                            </div>
-                            <div style="display: table-row">
-                                {{t "pogodba.funkcija"}}: {{ funkcija }}
-                            </div>
-                        </div>
-                        <div data-fields="zacetek,konec,popa,trr,jeAvtorskePravice"></div>
-                    </fieldset>
+        <div class="col-sm-4">
+            <fieldset>
+                <legend>
+                    <span>{{t "pogodba.osnovniPodatki"}}</span>
+                </legend>
+                <div class="prikazno-polje">
+                    <div class="pull-right oseba vrednost">{{oseba.label}}</div>
+                    <div class="attribut">{{t "pogodba.oseba"}}: </div>
                 </div>
-                <div class="col-sm-12 col-lg-6">
-                    <fieldset data-fields="jeProcentOdInkasa,procentOdInkasa,vrednostPredstave,vrednostVaj,placiloNaVajo,vrednostVaje,planiranoSteviloVaj">
-                        <legend>
-                            <span>{{t "pogodba.vrednost"}}</span>
-                        </legend>
-                    </fieldset>
+                <div class="prikazno-polje">
+                    <div class="pull-right funkcija vrednost">{{funkcija}}</div>
+                    <div class="attribut">{{t "pogodba.funkcija"}}: </div>
                 </div>
-            </div>
+                <div data-fields="zacetek,konec,popa,trr,jeAvtorskePravice"></div>
+            </fieldset>
+        </div>
+        <div class="col-sm-4">
+            <fieldset data-fields="jeProcentOdInkasa,procentOdInkasa,vrednostPredstave,vrednostVaj,placiloNaVajo,vrednostVaje,planiranoSteviloVaj">
+                <legend>
+                    <span>{{t "pogodba.vrednost"}}</span>
+                </legend>
+            </fieldset>
         </div>
         <div class="col-sm-4">
             <div class="row">

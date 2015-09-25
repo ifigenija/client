@@ -217,7 +217,8 @@ define([
             var view = new AlternacijaView({
                 collection: self.model.alternacijeCollection,
                 dokument: self.model,
-                zapirajFormo: true
+                zapirajFormo: true,
+                skrivajTabelo: true
             });
 
             view.listenTo(view, "save:success", function () {
@@ -247,7 +248,8 @@ define([
             var view = new PogodbaView({
                 collection: c,
                 dokument: self.model,
-                zapirajFormo: true
+                zapirajFormo: true,
+                skrivajTabelo: true
             });
 
             view.listenTo(view, "save:success", function () {
@@ -269,7 +271,8 @@ define([
             var view = new StrosekView({
                 collection: self.model.stroskiCollection,
                 dokument: self.model,
-                zapirajFormo: true
+                zapirajFormo: true,
+                skrivajTabelo: true
             });
             self.regionDetail.show(view);
         });
