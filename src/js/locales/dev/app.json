@@ -555,6 +555,7 @@
         "vaje": "Vaje",
         "predstave": "Predstave",
         "avtorji": "Avtorji",
+        "jeKoprodukcija": "Ali je uprizoritev koprodukcija",
         "t": {
             "datumPremiere": "Datum premiere",
             "sifra": "Številka"
@@ -586,6 +587,7 @@
             "prvaSlovenska": "Ali je to prva uprizorizev v Sloveniji",
             "naslovIzvirnika": "",
             "podnaslovIzvirnika": "",
+            "jeKoprodukcija": "Ali je uprizoritev koprodukcija",
             "skupniStrosek": "Planiran skupni strošek projekta"
         }
 
@@ -1549,7 +1551,7 @@
             "aliVNaslovu": "Ali se prikaže kot avtor v naslovu uprizoritve",
             "besedilo": "Besedilo"
         },
-        "t":{
+        "t": {
             "zaporedna": "Zaporedna"
         }
     },
