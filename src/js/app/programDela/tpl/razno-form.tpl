@@ -30,10 +30,14 @@
                 </legend>
                 <div class="prikazno-polje clearfix"><div class="pull-right celotnaVrednost vrednost">{{u "formatNumber" celotnaVrednost}}</div></div>
             </fieldset>
-            <fieldset data-fields="obiskDoma">
+            <fieldset>
                 <legend>
                     <span>{{t "ep.obiskovalci"}}</span>
                 </legend>
+                <div class="prikazno-polje">
+                    <div class="pull-right obiskDoma vrednost">{{obiskDoma}}</div>
+                    <div class="attribut">{{t "ep.obiskDoma"}}: </div>
+                </div>
             </fieldset>
             <fieldset data-fields="stZaposlenih,stHonorarnih">
                 <legend>

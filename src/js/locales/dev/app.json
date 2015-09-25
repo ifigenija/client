@@ -1283,12 +1283,14 @@
         "obsegPE": "Obseg",
         "mesecPE": "Mesec",
         "vrednostPE": "Vrednost",
+        "obiskDoma": "Obisk",
         "d": {
             "naslovPE": "",
             "avtorPE": "",
             "obsegPE": "",
             "mesecPE": "",
-            "vrednostPE": ""
+            "vrednostPE": "",
+            "obiskDoma": "Načrtovano število obiskovalcev"
         }
     },
     "zapis": {

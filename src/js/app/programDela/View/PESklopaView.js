@@ -53,6 +53,13 @@ define([
                 sortable: true
             },
             {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('peSklopa.obiskDoma'),
+                name: 'obiskDoma',
+                sortable: true
+            },
+            {
                 headerCell: 'number',
                 cell: 'number',
                 editable: false,

@@ -260,15 +260,18 @@ define([
         },
         preracunajInfo: function (nasDelez) {
             var nasD = 0;
+            var obisk = 0;
 
             var PESCollection = this.programskeEnoteSklopaCollection;
             
             PESCollection.each(function (pes) {
                 nasD += pes.attributes.vrednostPE;
+                obisk += pes.attributes.obiskDoma;
             });
 
             this.set('pesVsota', nasD);
             this.set('nasDelez', nasD);
+            this.set('obiskDoma', obisk);
             EnotaProgramaPostavka.prototype.preracunajInfo.apply(this, arguments);
         },
         preracunajZaproseno: function () {
