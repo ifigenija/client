@@ -735,10 +735,16 @@ span.stevilka-na-veliko {
 .zapisi-list .zapis-item .region-toolbar {
   margin-top: 0px;
 }
+.mapa-list {
+  padding: 0 0 0 0;
+}
 .mapa-listitem {
   list-style: none;
   max-height: 100px;
   float: left;
+  max-width: 350px;
+  padding: 5px;
+  margin: 2px;
 }
 .multi .mapa-list .mapa-listitem {
   width: 25%;
