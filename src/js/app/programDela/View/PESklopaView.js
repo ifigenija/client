@@ -53,10 +53,12 @@ define([
                 sortable: true
             },
             {
-                cell: 'string',
+                headerCell: 'number',
+                cell: 'integer',
                 editable: false,
                 label: i18next.t('peSklopa.obiskDoma'),
                 name: 'obiskDoma',
+                total: 'sum',
                 sortable: true
             },
             {
