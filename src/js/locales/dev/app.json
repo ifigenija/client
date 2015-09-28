@@ -1555,6 +1555,17 @@
             "zaporedna": "Zaporedna"
         }
     },
+    "programIzjemni": {
+        "title": "Program izjemni",
+        "dokument": "Program dela",
+        "prizorisce": "Prizorišče",
+        "trajanje": "Trajanje priprave dogodka (od-do)",
+        "d": {
+            "dokument": "Program dela",
+            "prizorisce": "Prizorišče",
+            "trajanje": "Trajanje priprave dogodka (od-do)"
+        }
+    },
     "podUpr": {
         "avtorskePravice": "Avtorske pravice",
         "avtorskiHonorarji": "Avtorski honorarji",
