@@ -19,21 +19,21 @@ define([
     'jquery',
     'jquery.jsonrpc'
 ], function (
-    baseUrl,
-    Radio,
-    i18next,
-    DokumentView,
-    dokumentTpl,
-    formTpl,
-    kazalnikiTabelaTpl,
-    formSchema,
-    TabControl,
-    ZapisiLayout,
-    Marionette,
-    SezonaModel,
-    Toolbar,
-    confirm,
-    $) {
+        baseUrl,
+        Radio,
+        i18next,
+        DokumentView,
+        dokumentTpl,
+        formTpl,
+        kazalnikiTabelaTpl,
+        formSchema,
+        TabControl,
+        ZapisiLayout,
+        Marionette,
+        SezonaModel,
+        Toolbar,
+        confirm,
+        $) {
 
     var ch = Radio.channel('layout');
 
@@ -207,9 +207,9 @@ define([
 
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
         rpc.call('kloniraj', {
-                'programDelaId': this.model.get('id')
-            },
-            success, error);
+            'programDelaId': this.model.get('id')
+        },
+        success, error);
     };
 
     /**
@@ -249,9 +249,9 @@ define([
             var zakleni = function () {
                 var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
                 rpc.call('zakleni', {
-                        'programDelaId': self.model.get('id')
-                    },
-                    success, error);
+                    'programDelaId': self.model.get('id')
+                },
+                success, error);
             };
 
             confirm({
@@ -307,9 +307,9 @@ define([
             var odkleni = function () {
                 var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
                 rpc.call('odkleni', {
-                        'programDelaId': self.model.get('id')
-                    },
-                    success, error);
+                    'programDelaId': self.model.get('id')
+                },
+                success, error);
             };
 
             confirm({
@@ -415,7 +415,7 @@ define([
 
     ProgramDokView.prototype.getNaslov = function () {
         return this.isNew() ?
-            i18next.t('programDela.nova') : this.model.get('naziv');
+                i18next.t('programDela.nova') : this.model.get('naziv');
     };
 
     /**
@@ -687,15 +687,15 @@ define([
     ProgramDokView.prototype.onCDva = function () {
         this.deselectTab();
         this.$('.pnl-cdve').addClass('active');
-        
+
         var coll = this.model.postavkeCDveCollection;
         if (coll.length === 0) {
             coll.fetch({
                 error: Radio.channel('error').request('handler', 'xhr')
             });
         }
-        
-        
+
+
         var self = this;
         require(['app/programDela/View/PostavkaCDveView'], function (View) {
             var view = new View({
@@ -708,6 +708,12 @@ define([
             self.cDveR.show(view);
             return view;
         });
+
+//        var View = Marionette.CollectionView.extend({
+//            className: 'cdve-list',
+//            tagName: 'table',
+//            childView: cDvaItemView,
+//        });
 
 //        var View = Marionette.ItemView.extend({
 //            template: cDvaTpl

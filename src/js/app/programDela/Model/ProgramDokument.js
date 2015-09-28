@@ -506,6 +506,9 @@ define([
 
             return vrednost ? vrednost : 0;
         },
+        initialize: function(){
+            this.preracunajSkupaj();
+        },
         preracunajSkupaj: function () {
 
             var vrPremiera = getVr('vrPremiere', this);

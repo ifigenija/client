@@ -100,6 +100,15 @@ define([
                 sortable: true
             },
             {
+                headerCell: 'number',
+                cell: 'number',
+                editable: true,
+                label: i18next.t('postavkaCdve.t.vrSkupaj'),
+                name: 'skupaj',
+                total: 'sum',
+                sortable: true
+            },
+            {
                 cell: 'action',
                 name: '...',
                 sortable: false,
