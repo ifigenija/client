@@ -594,7 +594,7 @@
     },
     "funkcija": {
         "title": "Funkcije",
-        "imena": "Alternacije",
+        "imena": "Osebe / Alternacije",
         "vodjaEkipe": "Vodja področja",
         "komentar": "Komentar",
         "velikost": "Velikost",
@@ -607,7 +607,7 @@
         "naziv": "Naziv / Ime funkcije",
         "sort": "Zaporedna številka",
         "funkcija": "Funkcija",
-        "alternacije": "Osebe/Alternacije",
+        "alternacije": "Osebe / Alternacije",
         "d": {
             "naziv": "Naziv funkcije",
             "komentar": "Dodatne opombe, predlogi, komentarji",
@@ -617,7 +617,7 @@
             "dovoliPrekrivanje": "Ali je dovoljeno prekrivanje",
             "vodjaEkipe": "Ali je vodja področja",
             "pomembna": "Ali je funkcija izpostavljena",
-            "alternacije": "Tukaj vnesite osebe/alternacije, ki bodo zasedale funkcijo."
+            "alternacije": "Tukaj vnesite osebe / alternacije, ki bodo zasedale funkcijo."
         }
     },
     "alternacija": {

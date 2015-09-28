@@ -674,6 +674,34 @@ define([
             success: prikaziKazalnike
         });
     };
+    /**
+     * Izris kazalnikov
+     * @returns {undefined}
+     */
+    ProgramDokView.prototype.onCDva = function () {
+        this.deselectTab();
+        this.$('.pnl-cdva').addClass('active');
+
+        var View = Marionette.ItemView.extend({
+            template: cDvaTpl
+        });
+        var self = this;
+        var prikaziCDva = function () {
+
+            self.model.preracunajVrednosti();
+
+            var view = new View({
+                model: self.model
+            });
+
+            self.cDvaR.show(view);
+        };
+
+        this.model.fetch({
+            error: Radio.channel('error').request('handler', 'xhr'),
+            success: prikaziCDva
+        });
+    };
 
     return ProgramDokView;
 });
