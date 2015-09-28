@@ -127,10 +127,16 @@ define([
     AlternacijaView.prototype.onRenderForm = function (options) {
         var self = this;
         this.form.on('pogodba:change', function (form, editor) {
-            if (!form.commit()) {
-                self.model.save({
-                    error: Radio.channel('error').request('handler', 'xhr')
-                });
+            if (editor.getValue()) {
+                this.$('.pogodba-dodaj').html(i18next.t('std.uredi'));
+
+                if (!form.commit()) {
+                    self.model.save({
+                        error: Radio.channel('error').request('handler', 'xhr')
+                    });
+                }
+            } else {
+                this.$('.pogodba-dodaj').html(i18next.t('std.dodaj'));
             }
         });
     };
@@ -260,14 +266,6 @@ define([
                         error: Radio.channel('error').request('handler', 'xhr')
                     });
                 }
-
-                //pridobimo podatke alternacije
-                self.model.fetch({
-                    success: function () {
-                        self.renderList();
-                    },
-                    error: Radio.channel('error').request('handler', 'xhr')
-                });
                 modal.close();
             });
             view.triggerMethod('shrani');
