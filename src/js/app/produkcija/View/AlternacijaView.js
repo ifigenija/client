@@ -32,17 +32,17 @@ define([
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema(/*{
-            oseba: {
-                editorAttrs: {
-                    disabled: true
-                }
-            },
-            funkcija: {
-                editorAttrs: {
-                    disabled: true
-                }
-            }
-        }*/).schema,
+         oseba: {
+         editorAttrs: {
+         disabled: true
+         }
+         },
+         funkcija: {
+         editorAttrs: {
+         disabled: true
+         }
+         }
+         }*/).schema,
         title: i18next.t('alternacija.title'),
         detailName: 'alternacije',
         formTitle: i18next.t(''),
@@ -163,53 +163,49 @@ define([
 
         Fv.prototype.placiloVaje = function (form) {
             var vrednostVaje = form.fields.vrednostVaje.editor.$el;
-        var vrednostVaj = form.fields.vrednostVaj.editor.$el;
-        var steviloVaj = form.fields.planiranoSteviloVaj.editor.$el;
-        var procentInkasa = form.fields.procentOdInkasa.editor.$el;
+            var vrednostVaj = form.fields.vrednostVaj.editor.$el;
+            var steviloVaj = form.fields.planiranoSteviloVaj.editor.$el;
+            var procentInkasa = form.fields.procentOdInkasa.editor.$el;
 
-        var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
-        var inkasa = form.fields.jeProcentOdInkasa.editor.getValue();
-        var vredVaje = form.fields.vrednostVaje.editor.getValue();
-        var stVaj = form.fields.planiranoSteviloVaj.editor.getValue();
+            var placiloNaVajo = form.fields.placiloNaVajo.editor.getValue();
+            var inkasa = form.fields.jeProcentOdInkasa.editor.getValue();
+            var vredVaje = form.fields.vrednostVaje.editor.getValue();
+            var stVaj = form.fields.planiranoSteviloVaj.editor.getValue();
 
-        if (placiloNaVajo) {
-            vrednostVaj.attr("disabled", "disabled");
-            steviloVaj.removeAttr("disabled");
-            vrednostVaje.removeAttr("disabled");
-            form.fields.vrednostVaj.editor.setValue(vredVaje * stVaj);
-        } else {
-            vrednostVaj.removeAttr("disabled");
-            steviloVaj.attr("disabled", "disabled");
-            vrednostVaje.attr("disabled", "disabled");
-            form.fields.vrednostVaje.editor.setValue(0);
-            form.fields.planiranoSteviloVaj.editor.setValue(0);
-        }
-
-        if (inkasa) {
-            procentInkasa.removeAttr("disabled");
-        } else {
-            procentInkasa.attr("disabled", "disabled");
-            form.fields.procentOdInkasa.editor.setValue(0);
-        }
-            
-            var editor = form.fields.popa.editor;
-            var popa = form.fields.popa.editor.getValue();
-            if (popa) {
-                editor.schema = _.extend(editor.schema, {
-                    "filters": {
-                        "popa": {
-                            "element": "popa"
-                        }
-                    }
-                });
+            if (placiloNaVajo) {
+                vrednostVaj.attr("disabled", "disabled");
+                steviloVaj.removeAttr("disabled");
+                vrednostVaje.removeAttr("disabled");
+                form.fields.vrednostVaj.editor.setValue(vredVaje * stVaj);
             } else {
-                editor.schema = _.extend(editor.schema, {
-                    "filters": {
-                        "oseba": {
-                            "element": "oseba"
-                        }
+                vrednostVaj.removeAttr("disabled");
+                steviloVaj.attr("disabled", "disabled");
+                vrednostVaje.attr("disabled", "disabled");
+                form.fields.vrednostVaje.editor.setValue(0);
+                form.fields.planiranoSteviloVaj.editor.setValue(0);
+            }
+
+            if (inkasa) {
+                procentInkasa.removeAttr("disabled");
+            } else {
+                procentInkasa.attr("disabled", "disabled");
+                form.fields.procentOdInkasa.editor.setValue(0);
+            }
+            
+            var popa = form.fields.popa.editor.getValue();
+            var trrEditor = form.fields.trr.editor;
+            if (popa) {
+                trrEditor.filters = {
+                    "popa": {
+                        "element": "popa"
                     }
-                });
+                };
+            } else {
+                trrEditor.filters = {
+                    "oseba": {
+                        "element": "oseba"
+                    }
+                };
             }
         };
 
@@ -227,7 +223,7 @@ define([
         var formView = new Fv({
             model: pogodba
         });
-        
+
         var PM = Modal.extend({
             className: 'pogodba-modal modal'
         });
@@ -252,14 +248,14 @@ define([
                 var editor = form.fields.pogodba.editor;
                 editor.setValue(model.get('id'));
                 form.trigger('change');
-                
+
                 //shranimo model alternacije, da ne rabimo ponovno shranjevat pogodbe
-                if(!form.commit()){
+                if (!form.commit()) {
                     self.model.save({
                         error: Radio.channel('error').request('handler', 'xhr')
                     });
                 }
-                
+
                 //pridobimo podatke alternacije
                 self.model.fetch({
                     success: function () {

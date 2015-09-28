@@ -129,22 +129,19 @@ define([
 
         var editor = form.fields.popa.editor;
         var popa = form.fields.popa.editor.getValue();
+        var trrEditor = form.fields.trr.editor;
         if (popa) {
-            editor.schema = _.extend(editor.schema, {
-                "filters": {
-                    "popa": {
-                        "element": "popa"
-                    }
+            trrEditor.filters = {
+                "popa": {
+                    "element": "popa"
                 }
-            });
+            };
         } else {
-            editor.schema = _.extend(editor.schema, {
-                "filters": {
-                    "oseba": {
-                        "element": "oseba"
-                    }
+            trrEditor.filters = {
+                "oseba": {
+                    "element": "oseba"
                 }
-            });
+            };
         }
     };
 
