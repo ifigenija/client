@@ -102,20 +102,11 @@ define([
             {
                 headerCell: 'number',
                 cell: 'number',
-                editable: true,
+                editable: false,
                 label: i18next.t('postavkaCdve.t.vrSkupaj'),
                 name: 'skupaj',
                 total: 'sum',
                 sortable: true
-            },
-            {
-                cell: 'action',
-                name: '...',
-                sortable: false,
-                actions: [
-                    {event: 'uredi', title: i18next.t('std.uredi')},
-                    {event: 'brisi', title: i18next.t('std.brisi')}
-                ]
             }
         ]
     });
@@ -159,6 +150,14 @@ define([
             }
 
         });
+    };
+    
+    PostavkaCDveView.prototype.onUredi = function () {
+        
+    };
+    
+    PostavkaCDveView.prototype.onSelected = function () {
+        
     };
 
     return PostavkaCDveView;

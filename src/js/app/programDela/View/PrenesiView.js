@@ -33,8 +33,17 @@ define([
 
             if (!this.jeNa) {
                 //tantieme so avtorske pravice na predstavo
-                this.podatkiUprizoritve.Do = _.extend({'tantieme': this.podatkiUprizoritve.Na.avtorskePravice}, this.podatkiUprizoritve.Do);
-                this.podatkiUprizoritve.NaDo = this.podatkiUprizoritve.Do;
+                var uDo = this.podatkiUprizoritve.Do;
+                var uNa = this.podatkiUprizoritve.Na;
+                uDo = _.extend({'tantieme': uNa.avtorskePravice}, uDo);
+                
+                uDo.avtorskePravice += uNa.avtorskePravice;
+                uDo.avtorskiHonorarji += uNa.avtorskiHonorarji;
+                uDo.avtorskiHonorarjiSamoz += uNa.avtorskiHonorarjiSamoz;
+                uDo.materialni += uNa.materialni;
+                
+                this.podatkiUprizoritve.NaDo = uDo;
+                
             } else {
                 var vsotaPon = this.vsotaPonovitev(this.model);
                 var na = this.podatkiUprizoritve.Na;
