@@ -13,7 +13,9 @@ define([
     'app/Max/Module/Backgrid',
     'backbone-modal',
     'radio',
-    'underscore'
+    'underscore',
+    'baseUrl',
+    'backbone'
 ], function (
         PostavkeView,
         FormView,
@@ -26,7 +28,9 @@ define([
         Backgrid,
         Modal,
         Radio,
-        _
+        _,
+        baseUrl,
+        Backbone
         ) {
 
     var AlternacijaView = PostavkeView.extend({
@@ -121,11 +125,12 @@ define([
     });
 
     AlternacijaView.prototype.onRenderForm = function (options) {
+        var self = this;
         this.form.on('pogodba:change', function (form, editor) {
-            if (editor.getValue()) {
-                this.$('.pogodba-dodaj').html(i18next.t('std.uredi'));
-            } else {
-                this.$('.pogodba-dodaj').html(i18next.t('std.dodaj'));
+            if (!form.commit()) {
+                self.model.save({
+                    error: Radio.channel('error').request('handler', 'xhr')
+                });
             }
         });
     };
@@ -191,7 +196,7 @@ define([
                 procentInkasa.attr("disabled", "disabled");
                 form.fields.procentOdInkasa.editor.setValue(0);
             }
-            
+
             var popa = form.fields.popa.editor.getValue();
             var trrEditor = form.fields.trr.editor;
             if (popa) {
@@ -279,25 +284,27 @@ define([
         var self = this;
         var pogodba = null;
 
-        if (!self.model.get('imaPogodbo')) {
-            pogodba = this.dokument.dodajPogodbo(this.model);
-            this.pogodbaModal(pogodba);
+        var editor = this.form.fields.pogodba.editor;
+        var vrednosti = editor.getValue();
 
-        } else {
-            var pogodbe = self.dokument.pogodbeCollection;
-            pogodbe.fetch({
+        if (vrednosti) {
+            var Pogodba = Backbone.Model.extend({
+                urlRoot: baseUrl + '/rest/pogodba'
+            });
+
+            var model = new Pogodba({id: vrednosti.id});
+
+            model.fetch({
                 success: function () {
-                    var vrednosti = self.model.get('pogodba');
-                    if (vrednosti) {
-                        var id = vrednosti['id'];
-                        if (id) {
-                            pogodba = pogodbe.get(id);
-                            self.pogodbaModal(pogodba);
-                        }
-                    }
+                    self.pogodbaModal(model);
                 },
                 error: Radio.channel('error').request('handler', 'xhr')
             });
+            //vzemi id in fetchni model model odpri v modalu
+        } else {
+            pogodba = this.dokument.dodajPogodbo(this.model);
+            this.pogodbaModal(pogodba);
+            this.$('.pogodba-dodaj').html(i18next.t('std.uredi'));
         }
     };
     return AlternacijaView;
