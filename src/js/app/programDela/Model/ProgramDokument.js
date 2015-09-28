@@ -537,7 +537,7 @@ define([
             premiere: {collection: PremiereCollection, mappedBy: 'dokument'},
             festivali: {collection: FestivaliCollection, mappedBy: 'programDela'},
             programiRazno: {collection: RazniCollection, mappedBy: 'dokument'},
-            postavkeC2: {collection: PostavkeCDveCollection, mappedBy: 'programDela'}
+            postavkeCDve: {collection: PostavkeCDveCollection, mappedBy: 'programDela'}
         },
         dodajPostavko: function (nested) {
 

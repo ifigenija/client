@@ -688,7 +688,7 @@ define([
         this.deselectTab();
         this.$('.pnl-cdve').addClass('active');
         
-        var coll = this.model.postavkeC2Collection;
+        var coll = this.model.postavkeCDveCollection;
         if (coll.length === 0) {
             coll.fetch({
                 error: Radio.channel('error').request('handler', 'xhr')
