@@ -61,6 +61,11 @@ define([
             title: i18next.t('kazalnik.d.kazalniki'),
             name: i18next.t('kazalnik.naslov'),
             event: 'kazalniki'
+        },
+        {
+            title: i18next.t('programDela.d.cDva'),
+            name: i18next.t('programDela.cDva'),
+            event: 'cDva'
         }
     ];
 
@@ -100,6 +105,7 @@ define([
             festivaliR: '.region-festivali',
             razniR: '.region-razni',
             kazalnikiR: '.region-kazalniki',
+            cDveR: '.region-cdve',
             tabsR: '.programDela-tabs',
             sklopEnaR: '.sklopEna-tabs',
             sklopDvaR: '.sklopDva-tabs',
@@ -680,27 +686,48 @@ define([
      */
     ProgramDokView.prototype.onCDva = function () {
         this.deselectTab();
-        this.$('.pnl-cdva').addClass('active');
-
-        var View = Marionette.ItemView.extend({
-            template: cDvaTpl
-        });
-        var self = this;
-        var prikaziCDva = function () {
-
-            self.model.preracunajVrednosti();
-
-            var view = new View({
-                model: self.model
+        this.$('.pnl-cdve').addClass('active');
+        
+        var coll = this.model.postavkeC2Collection;
+        if (coll.length === 0) {
+            coll.fetch({
+                error: Radio.channel('error').request('handler', 'xhr')
             });
-
-            self.cDvaR.show(view);
-        };
-
-        this.model.fetch({
-            error: Radio.channel('error').request('handler', 'xhr'),
-            success: prikaziCDva
+        }
+        
+        
+        var self = this;
+        require(['app/programDela/View/PostavkaCDveView'], function (View) {
+            var view = new View({
+                collection: coll,
+                dokument: self.model,
+                zapirajFormo: false,
+                skrivajTabelo: true,
+                potrdiBrisanje: true
+            });
+            self.cDveR.show(view);
+            return view;
         });
+
+//        var View = Marionette.ItemView.extend({
+//            template: cDvaTpl
+//        });
+//        var self = this;
+//        var prikaziCDva = function () {
+//
+//            self.model.preracunajVrednosti();
+//
+//            var view = new View({
+//                model: self.model
+//            });
+//
+//            self.cDvaR.show(view);
+//        };
+//
+//        this.model.fetch({
+//            error: Radio.channel('error').request('handler', 'xhr'),
+//            success: prikaziCDva
+//        });
     };
 
     return ProgramDokView;

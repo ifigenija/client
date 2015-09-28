@@ -39,6 +39,7 @@
         </div>
 
         <div role="tabpanel" class="tab-pane pnl-kazalniki region-kazalniki"></div>
+        <div role="tabpanel" class="tab-pane pnl-cdve region-cdve"></div>
     </div>
 </div>
 

@@ -917,6 +917,7 @@
         "stObiskPonPremInt": "Na mednarodnih gostovanjih (brez zamejstva):",
         "vDelu": "V delu",
         "poslanMzK": "Oddan na Mzk",
+        "cDva": "Priloga C2",
         "d": {
             "sifra": "",
             "naziv": "",
@@ -1586,6 +1587,45 @@
     },
     "zapisi": {
         "title": "Priponke in komentarji"
+    },
+    "postavkaCdve": {
+        "title": "Priloga C2",
+        "skupina": "Skupina",
+        "podskupina": "Podskupina",
+        "naziv": "Naziv",
+        "vrPremiere": "Vrednost premiere",
+        "vrPonovitvePremier": "Vrednost ponovitve premiere",
+        "vrPonovitvePrejsnjih": "Vrednost ponovitve uprizoritve iz prejšnje sezone",
+        "vrGostovanjaZamejstvo": "Vrednost gostovanja pri slovencih v zamejstvu",
+        "vrFestivali": "Vrednost festivala",
+        "vrGostovanjaInt": "Vrednost mednarodnega gostovanja",
+        "vrOstalo": "Vrednost ostalo",
+        "podatki": "Glavni podatki",
+        "vrednosti": "Vrednost",
+        "d": {
+            "skupina": "",
+            "podskupina": "",
+            "naziv": "",
+            "vrPremiere": "",
+            "vrPonovitvePremier": "",
+            "vrPonovitvePrejsnjih": "",
+            "vrGostovanjaZamejstvo": "",
+            "vrFestivali": "",
+            "vrGostovanjaInt": "",
+            "vrOstalo": ""
+        },
+        "t": {
+            "skupina": "Skupina",
+            "podskupina": "Podskupina",
+            "naziv": "Naziv",
+            "vrPremiere": "Premiere",
+            "vrPonovitvePremier": "Ponovitve premiernih uprizoritev",
+            "vrPonovitvePrejsnjih": "Ponovitve uprizoritve",
+            "vrGostovanjaZamejstvo": "Gostovanja",
+            "vrFestivali": "Festivali",
+            "vrGostovanjaInt": "Mednarodna gostovanja",
+            "vrOstalo": "Ostalo"
+        }
     }
 }
 

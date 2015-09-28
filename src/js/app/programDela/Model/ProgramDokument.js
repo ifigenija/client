@@ -91,7 +91,7 @@ define([
             viri.each(function (vir) {
                 viriVsota += vir.attributes.znesek;
             });
-            
+
             this.set('drugiViriVsota', viriVsota);
 
             var koproVsota = 0;
@@ -263,7 +263,7 @@ define([
             var obisk = 0;
 
             var PESCollection = this.programskeEnoteSklopaCollection;
-            
+
             PESCollection.each(function (pes) {
                 nasD += pes.attributes.vrednostPE;
                 obisk += pes.attributes.obiskDoma;
@@ -283,7 +283,7 @@ define([
                     vsota += produkt;
                 }
             }
-            
+
             this.set('vsota', produkt);
         }
     });
@@ -492,6 +492,39 @@ define([
         url: baseUrl + '/rest/programRazno',
         index: 'sort'
     });
+    var getVr = function (spremenljivka, contex) {
+        var vrednost = contex.get(spremenljivka);
+
+        return vrednost ? vrednost : 0;
+    };
+
+
+    var PostavkaCDvaModel = EnotaProgramaPostavka.extend({
+        urlRoot: baseUrl + '/rest/postavkacdve',
+        getVrednost: function (spremenljivka, contex) {
+            var vrednost = contex.get(spremenljivka);
+
+            return vrednost ? vrednost : 0;
+        },
+        preracunajSkupaj: function () {
+
+            var vrPremiera = getVr('vrPremiere', this);
+            var vrPonovitvePremier = getVr('vrPonovitvePremier', this);
+            var vrPonovitvePrejsnjih = getVr('vrPonovitvePrejsnjih', this);
+            var vrGostovanjaZamejstvo = getVr('vrGostovanjaZamejstvo', this);
+            var vrFestivali = getVr('vrFestivali', this);
+            var vrGostovanjaInt = getVr('vrGostovanjaInt', this);
+            var vrOstalo = getVr('vrOstalo', this);
+
+            var skupaj = vrPremiera + vrPonovitvePremier + vrPonovitvePrejsnjih +
+                    vrGostovanjaZamejstvo + vrFestivali + vrGostovanjaInt + vrOstalo;
+            this.set('skupaj', skupaj);
+        }
+    });
+    var PostavkeCDveCollection = Dokument.PostavkaCollection.extend({
+        model: PostavkaCDvaModel,
+        url: baseUrl + '/rest/postavkacdve'
+    });
 
     var ProgramDelaModel = Dokument.Model.extend({
         urlRoot: baseUrl + '/rest/programDela',
@@ -503,7 +536,8 @@ define([
             ponovitvePrejsnjih: {collection: PonovitvePrejsnjihCollection, mappedBy: 'dokument'},
             premiere: {collection: PremiereCollection, mappedBy: 'dokument'},
             festivali: {collection: FestivaliCollection, mappedBy: 'programDela'},
-            programiRazno: {collection: RazniCollection, mappedBy: 'dokument'}
+            programiRazno: {collection: RazniCollection, mappedBy: 'dokument'},
+            postavkeC2: {collection: PostavkeCDveCollection, mappedBy: 'programDela'}
         },
         dodajPostavko: function (nested) {
 
@@ -552,6 +586,12 @@ define([
                     postavka = new RaznoModel({
                         dokument: this.id
                     });
+                    break;
+                case 'postavkeC2':
+                    postavka = new PostavkaCDvaModel({
+                        programDela: this.id
+                    });
+                    postavka.programDela = this;
                     break;
             }
             postavka.dokument = this;
@@ -711,7 +751,7 @@ define([
             var stIzvPonPremDoma = this.getVrednost('stIzvPonPremDoma');
             var stIzvPremDoma = this.getVrednost('stIzvPremDoma');
             this.set('stIzvDoma', stIzvPonPremDoma + stIzvPremDoma);
-            
+
             // premiera produkcij na odriu slovenskega ali zamejskega koproducenta
             var stIzvPonPremKopr = this.getVrednost('stIzvPonPremKopr');
             var stIzvPremKopr = this.getVrednost('stIzvPremKopr');
@@ -722,19 +762,19 @@ define([
             var stObiskPrem = this.getVrednost('stObiskPrem');
 
             this.set('stObisk', stObiskPonPrem + stObiskPrem);
-            
+
             //število obiskovalcev na domačem odru
             var stObiskPonPremDoma = this.getVrednost('stObiskPonPremDoma');
             var stObiskPremDoma = this.getVrednost('stObiskPremDoma');
 
             this.set('stObiskDoma', stObiskPonPremDoma + stObiskPremDoma);
-            
+
             //število obiskovalcev na na odru slovenskega ali zamejskega koproducenta
             var stObiskPonPremKopr = this.getVrednost('stObiskPonPremKopr');
             var stObiskPremKopr = this.getVrednost('stObiskPremKopr');
 
             this.set('stObiskKopr', stObiskPonPremKopr + stObiskPremKopr);
-            
+
 
             var povprecje = (stObiskPonPrem + stObiskPrem) / (stIzvPonPrem + stIzvPrem);
             povprecje = povprecje ? povprecje : 0;
