@@ -1,7 +1,3 @@
-<div>
-    filter
-    <form>
-    <input type="text" name="q">
-    <button type="submit" name="isci"> Išči </button>
-    </form>
-</div>
+<div class="region-form"></div>
+<div clasS="region-list"></div>
+<div class="region-paginator"></div>

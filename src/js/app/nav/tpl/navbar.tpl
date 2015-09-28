@@ -9,6 +9,6 @@
         </button>
         <a class="navbar-brand" href="#">{{ label }}</a>
     </div>
-    <div class="navbar-collapse" id="navbar">           
+    <div class="navbar-collapse collapse" id="navbar">
     </div>
 </div>

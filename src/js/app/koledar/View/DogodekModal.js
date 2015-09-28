@@ -7,7 +7,7 @@ define([
     'app/bars',
     'marionette',
     'backbone-modal',
-    '../Model/Dogodek',
+    '../Model/Dogodki',
     'app/Dokument/View/FormView',
     'template!../tpl/dogodek-izbira.tpl',
     'formSchema!dogodek/vaja',

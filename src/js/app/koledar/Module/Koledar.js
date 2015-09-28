@@ -32,7 +32,7 @@ define([
          * @returns {undefined}
          */
         mod.prostori = function () {
-            require(['../View/PlanerView', '../Model/Resursi', '../View/BasicFilter'], function (PlanerView, resursi, FilterView) {
+            require(['../View/PlanerView', '../Model/Resursi', '.'], function (PlanerView, resursi, FilterView) {
                 var calView = new PlanerView({
                     resCollection: resursi.prostori,
                     filterView: new FilterView(),
@@ -56,11 +56,15 @@ define([
          * @returns {undefined}
          */
         mod.pregled = function () {
-            require(['../View/KoledarView', '../View/BasicFilter'], function (KoledarView, FilterView) {
-                var calView = new KoledarView({
-                    filterView: new FilterView()
+            require(['../View/KoledarView', '../Model/Dogodki', 'jquery', 'fullcalendar'], function (View, Collection) {
+                require(['fclang/sl'], function () {
+                    var coll = new Collection();
+
+                    var calView = new View({
+                        collection: coll
+                    });
+                    ch.command('openTab', calView, 'Koledar');
                 });
-                ch.command('open', calView, 'Kodelar');
             });
 
         };

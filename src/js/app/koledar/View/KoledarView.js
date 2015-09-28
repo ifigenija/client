@@ -7,18 +7,16 @@ define([
     'jquery',
     'template!../tpl/calendar-layout.tpl',
     './DogodekModal',
-    '../Model/Dogodek',
-    './ZasedenostView',
-    'fullcalendar'
+    './DogodekFilter',
+    './ZasedenostView'
 ], function (
-        Marionette,
-        _,
-        $,
-        tpl,
-        DogodekModal,
-        DogodekModel,
-        ZasedenostView
-        ) {
+    Marionette,
+    _,
+    $,
+    tpl,
+    DogodekModal,
+    DogodekFilter,
+    ZasedenostView) {
 
     var KoledarView = Marionette.LayoutView.extend({
         template: tpl,
@@ -33,56 +31,64 @@ define([
     });
 
     KoledarView.prototype.initialize = function (options) {
-        this.koledarji = options.koledarji;
-        this.filterView = options.filterView || new DefaultFilter();
-        this.filterView.on('filter', this.searchCollection);
+        this.filterView = options.filterView || new DogodekFilter();
+        this.filterView.on('filter', function () {
+            this.ui.calendar.fullCalendar('refetchEvents');
+        }, this);
     };
 
     KoledarView.prototype.onRender = function () {
         var self = this;
         var options = _.extend({
-            header: {
-                left: 'prev,next,today',
-                center: 'title',
-                right: 'month,basicWeek,agendaWeek,basicDay'
-            },
-            events: [
-                {
-                    id: 1,
-                    title: 'Event1',
-                    start: '2015-09-12',
-                    end: '2015-09-14'
-                },
-                {
-                    id: 2,
-                    title: 'Event2',
-                    start: '2015-09-16',
-                    allDay: true
-                }
-            ],
-            selectable: true,
-            selectHelper: true,
-            editable: true,
-            ignoreTimezone: false,
-            select: function () {
-                return self.select.apply(self, arguments);
-            },
-            weekNumberCalculation: 'ISO',
-            firstDay: 1,
-            eventClick: function () {
-                return self.eventClick.apply(self, arguments);
-            },
-            eventDrop: function () {
-                return self.eventDropOrResize.apply(self, arguments);
-            },
-            eventResize: function () {
-                return self.eventDropOrResize.apply(self, arguments);
-            }
-        }, _.omit(this.options, 'koledarji'));
-//        console.log('options koledar', options);
+                    lang: 'sl',
+                    header: {
+                        left: 'prev,next,today',
+                        center: 'title',
+                        right: 'month,basicWeek,agendaWeek,basicDay'
+                    },
+                    lang: 'sl',
+                    timezone: false,
+                    selectable: true,
+                    defaultView: 'month',
+                    selectHelper: true,
+                    editable: true,
+                    select: this.select,
+                    weekNumberCalculation: 'ISO',
+                    weekNumbers: true,
+                    firstDay: 1,
+                    timeFormat: 'H(:mm)',
+                    eventClick: function () {
+                        return self.eventClick.apply(self, arguments)
+                    },
+                    eventDrop: this.eventDropOrResize,
+                    eventResize: this.eventDropOrResize,
+                    eventSources: [
+                        {
+                            events: function (zacetek, konec, timezone, callback) {
+                                var list = [];
+                                self.collection.queryParams.zacetek = zacetek.toISOString();
+                                self.collection.queryParams.konec = konec.toISOString();
+                                self.collection.queryParams = _.extend(self.collection.queryParams, self.filterView.form.getValue());
+                                self.collection.fetch({
+                                   success: function (coll) {
+                                       coll.each(function (eventModel) {
+                                            list.push(eventModel.getEventObject);
+                                       });
+                                       callback(list);
+                                   }
+                                });
+                            },
+                            coll: self.collection
+                        }
+                    ],
+                    eventResize: function () {
+                        return self.eventDropOrResize.apply(self, arguments);
+                    }
+                });
         this.filterR.show(this.filterView);
         this.ui.calendar.fullCalendar(options);
     };
+
 
     KoledarView.prototype.select = function (start, end, jsEvent, view) {
         var self = this;
@@ -108,13 +114,6 @@ define([
     };
 
     KoledarView.prototype.eventDropOrResize = function (fcEvent) {
-        // Lookup the model that has the ID of the event and update its attributes
-        //this.collection.get(fcEvent.id).save({start: fcEvent.start, end: fcEvent.end});
-        console.log('drop/resize');
-        //update dogodka v modelu
-        //v primeru da je odprta forma bi se naj se kliče render da se posodobijo podatki
-        //samo testiranje
-        this.renderDogodek(fcEvent);
     };
 
     KoledarView.prototype.onDestroy = function () {
@@ -125,7 +124,7 @@ define([
     };
 
     KoledarView.prototype.renderDogodek = function (fcEvent, jsEvent, view) {
-        
+
         var model = new DogodekModel.Model();
 
         model.set('id', fcEvent.id);
@@ -134,76 +133,28 @@ define([
         model.set('konec', fcEvent.end);
         model.set('razred', fcEvent.razred);
         model.set('zasedenost', fcEvent.zasedenost);
-        
+
         var razred = fcEvent.razred;
-        if (razred === '100s') {
-            this.renderPredstava(model);
-        } else if (razred === '200s') {
-            this.renderVaja(model);
-        } else if (razred === '300s') {
-            this.renderGostovanje(model);
-        } else if (razred === '400s') {
-            this.renderSplosni(model);
-        } else if (razred === '500s') {
-            this.renderZasedenost(model);
-        }
-        
-//        var self = this;
-//
-//        view.on('brisi', function () {
-//            self.onBrisi(fcEvent, jsEvent, view);
-//        }, this);
-    };
-
-    KoledarView.prototype.dodajDogodek = function (model) {
-        if (!model.get('id')) {
-            this.shraniDogodek(model);
+        switch (razred) {
+            case '100s':
+                this.renderPredstava(model);
+                break;
+            case '200s':
+                this.renderVaja(model);
+                break;
+            case '300s':
+                this.renderGostovanje(model);
+                break;
+            case '400s':
+                this.renderSplosni(model);
+                break;
+            case '500s':
+                this.renderZasedenost(model);
+                break;
         }
 
-        if (model.get('id')) {
-            var source = {
-                events: [
-                    {
-                        id: model.get('id'),
-                        title: model.get('title'),
-                        start: model.get('zacetek'),
-                        end: model.get('konec'),
-                        razred: model.get('razred')
-                    }
-                ]
-            };
-
-            this.ui.calendar.fullCalendar('addEventSource', source);
-        }
     };
 
-    KoledarView.prototype.onBrisi = function (fcEvent, jsEvent, view) {
-        this.ui.calendar.fullCalendar('removeEvents', fcEvent.id);
-    };
-
-    KoledarView.prototype.shraniDogodek = function (model) {
-
-        function makeId()
-        {
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-            for (var i = 0; i < 5; i++)
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-            return text;
-        }
-
-        model.set('id', makeId());
-        localStorage.setItem(model.id, JSON.stringify(model.toJSON()));
-    };
-    
-    KoledarView.prototype.preberiDogodek = function (fcEvent) {
-        var niz = localStorage.getItem(fcEvent.id);
-        
-        return JSON.parse(niz);
-    };
-    
     KoledarView.prototype.renderVaja = function (model) {
         var vaja = model.vaja;
         var view = new VajaView({id: vaja});
@@ -230,4 +181,5 @@ define([
         this.dogodekR.show(view);
     };
     return KoledarView;
-});
+})
+;

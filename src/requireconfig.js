@@ -31,6 +31,7 @@ require.config({
         'ckeditor': '../lib/ckeditor/ckeditor',
         'fullcalendar': '../lib/fullcalendar/dist/fullcalendar',
         'fc-schedule': '../lib/fullcalendar-scheduler/dist/scheduler.min',
+        'fclang': '../lib/fullcalendar/dist/lang',
         'radio': '../lib/backbone.radio/build/backbone.radio',
         'bootstrap-datepicker': '../lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
         'formSchema': 'app/Max/Loader/formSchema',
