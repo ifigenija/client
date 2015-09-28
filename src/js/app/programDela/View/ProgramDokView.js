@@ -418,6 +418,7 @@ define([
      */
     ProgramDokView.prototype.deselectTab = function () {
         this.$('.programDela-panels .tab-pane').removeClass('active');
+        this.$('.region-doctoolbar').addClass('hidden');
     };
     /**
      * Klik deselect v tabcontrol sklopa ena
@@ -444,6 +445,7 @@ define([
         if (this.model.get('id')) {
             this.renderPriloge();
         }
+        this.$('.region-doctoolbar').removeClass('hidden');
     };
 
     /**
