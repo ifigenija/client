@@ -71,7 +71,7 @@
             </td>
             <td>{{t "ep.stHonorarnih"}}</td>
             <td class="col-numbers">{{u "formatNumber" stHonorarnih 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnih 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnih 0}}</td>
         </tr>
         <tr>
             <td>
@@ -79,7 +79,7 @@
             </td>
             <td>{{t "ep.stHonorarnihIgr"}}</td>
             <td class="col-numbers">{{u "formatNumber" stHonorarnihIgr 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnihIgr 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnihIgr 0}}</td>
         </tr>
         <tr>
             <td>
@@ -87,7 +87,7 @@
             </td>
             <td>{{t "ep.stHonorarnihIgrTujJZ"}}</td>
             <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrTujJZ 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnihIgrTujJZ 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnihIgrTujJZ 0}}</td>
         </tr>
         <tr>
             <td>
@@ -95,7 +95,7 @@
             </td>
             <td>{{t "ep.stHonorarnihIgrSamoz"}}</td>
             <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrSamoz 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnihIgrSamoz 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnihIgrSamoz 0}}</td>
         </tr>
         <tr>
             <td>

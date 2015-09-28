@@ -498,16 +498,16 @@ define([
             model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
         }
         if (view.$('.stHonorarnih').is(':checked')) {
-            model.set('stHonorarnih', uprizoritev.stHonorarnih);
+            model.set('stHonorarnih', uprizoritev.NaDo.stHonorarnih);
         }
         if (view.$('.stHonorarnihIgr').is(':checked')) {
-            model.set('stHonorarnihIgr', uprizoritev.stHonorarnihIgr);
+            model.set('stHonorarnihIgr', uprizoritev.NaDo.stHonorarnihIgr);
         }
         if (view.$('.stHonorarnihIgrTujJZ').is(':checked')) {
-            model.set('stHonorarnihIgrTujJZ', uprizoritev.stHonorarnihIgrTujJZ);
+            model.set('stHonorarnihIgrTujJZ', uprizoritev.NaDo.stHonorarnihIgrTujJZ);
         }
         if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
-            model.set('stHonorarnihIgrSamoz', uprizoritev.stHonorarnihIgrSamoz);
+            model.set('stHonorarnihIgrSamoz', uprizoritev.NaDo.stHonorarnihIgrSamoz);
         }
         if (view.$('.stZaposDrug').is(':checked')) {
             model.set('stZaposDrug', uprizoritev.stZaposDrug);

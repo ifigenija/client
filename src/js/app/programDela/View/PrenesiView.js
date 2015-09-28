@@ -51,10 +51,12 @@ define([
                 naDo.nasDelez = naDo.avtorskiHonorarji + naDo.tantieme + naDo.avtorskePravice + naDo.materialni;
                 naDo.steviloPonovitev = vsotaPon;
             }
-
-            return _.extend(this.model.toJSON(), {
+            
+            var podatki = _.extend(this.model.toJSON(), {
                 uprizoritevData: this.podatkiUprizoritve
             });
+
+            return podatki;
         },
         triggers: {
             'click .izberi-check': 'izberi:vse'
