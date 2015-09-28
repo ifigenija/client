@@ -41,15 +41,5 @@
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev 0}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.materialni}}</td>
         </tr>
-        <tr>
-            <td>
-                <input class="stHonorarnih" type="checkbox">
-            </td>
-            <td>{{t "ep.stHonorarnih"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stHonorarnih 0}}</td>
-            <td class="col-numbers"></td>
-            <td class="col-numbers"></td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.stHonorarnih 0}}</td>
-        </tr>
     </tbody>
 </table>

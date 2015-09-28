@@ -40,16 +40,17 @@ define([
                 var na = this.podatkiUprizoritve.Na;
 
                 //avtorskih pravic ni pri ponovitvah
-                this.podatkiUprizoritve.NaDo = {
+                var naDo = {
                     avtorskiHonorarji: na.avtorskiHonorarji * vsotaPon,
                     avtorskiHonorarjiSamoz: na.avtorskiHonorarjiSamoz * vsotaPon,
                     tantieme: na.avtorskePravice * vsotaPon,
                     materialni: na.materialni * vsotaPon
                 };
-
-                var naDo = this.podatkiUprizoritve.NaDo;
+                
                 naDo.nasDelez = naDo.avtorskiHonorarji + naDo.tantieme + naDo.avtorskePravice + naDo.materialni;
                 naDo.steviloPonovitev = vsotaPon;
+                
+                this.podatkiUprizoritve.NaDo = _.extend(naDo, this.podatkiUprizoritve.Na);
             }
             
             var podatki = _.extend(this.model.toJSON(), {
