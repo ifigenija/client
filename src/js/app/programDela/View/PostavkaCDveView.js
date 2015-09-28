@@ -32,20 +32,6 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('postavkaCdve.t.skupina'),
-                name: 'skupina',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('postavkaCdve.t.podskupina'),
-                name: 'podskupina',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
                 label: i18next.t('postavkaCdve.t.naziv'),
                 name: 'naziv',
                 sortable: true

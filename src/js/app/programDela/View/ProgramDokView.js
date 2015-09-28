@@ -701,7 +701,7 @@ define([
             var view = new View({
                 collection: coll,
                 dokument: self.model,
-                zapirajFormo: false,
+                zapirajFormo: true,
                 skrivajTabelo: true,
                 potrdiBrisanje: true
             });
