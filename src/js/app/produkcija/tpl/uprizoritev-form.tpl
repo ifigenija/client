@@ -45,7 +45,7 @@
                     </fieldset>
                 </div>
                 <div class="col-sm-12 col-md-6" >
-                    <fieldset class="" data-fields="zvrstSurs,zvrstUprizoritve,trajanje,stOdmorov,sloAvtor,krstna,prvaSlovenska">
+                    <fieldset class="" data-fields="zvrstSurs,zvrstUprizoritve,trajanje,stOdmorov,sloAvtor,krstna,prvaSlovenska,jeKoprodukcija">
                         <legend>
                             <span>{{t "uprizoritev.lastnosti"}}</span>
                         </legend>
