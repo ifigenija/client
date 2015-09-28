@@ -22,7 +22,7 @@ define([
                 label: i18next.t('std.shrani'),
                 element: 'button-trigger',
                 trigger: 'shrani',
-                disabled: false
+                disabled: true
             },
             'doc-cancel': {
                 id: 'doc-cancel',
