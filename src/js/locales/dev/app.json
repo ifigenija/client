@@ -1,4 +1,5 @@
 {
+    "Naziv": "Naslov",
     "nav": {
         "home": "Domov",
         "prijava": "Vpis",
@@ -125,6 +126,8 @@
         "potrdiOdklep": "Ali res želite odkleniti program dela?",
         "odkleni": "Odkleni",
         "ustvari": "Ustvari",
+        "zapri": "Zapri",
+        "download": "Prenesi",
         "title": {
             "vnesiOseba": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo"
@@ -1631,6 +1634,15 @@
             "vrOstalo": "Ostalo",
             "vrSkupaj": "Skupaj"
         }
+    },
+    "jobs":{
+        "izvajanjejoba": "Izvajanje opravila",
+        "ustvaril": "Opravilo ustvarjeno",
+        "jobName": "Naziv opravila",
+        "status": "Status",
+        "plniranCasIzvedbe": "Planiran čas izvedbe",
+        "izveden": "Opravilo izvedeno",
+        "zapisIzReporta": "Zapis iz poročila"
     }
 }
 
