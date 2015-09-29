@@ -46,7 +46,7 @@ define([
 
             } else {
                 var vsotaPon = this.vsotaPonovitev(this.model);
-                var na = this.podatkiUprizoritve.Na;
+                var na = _.clone(this.podatkiUprizoritve.Na);
 
                 //avtorskih pravic ni pri ponovitvah
                 var naDo = {
