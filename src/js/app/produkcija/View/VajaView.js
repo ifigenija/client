@@ -4,7 +4,7 @@
 define([
     'app/Dokument/View/PostavkeView',
     'i18next',
-    'formSchema!vaja/uprizoritev',
+    'formSchema!vaja',
     'template!../tpl/vaja-form.tpl',
     'app/Max/Module/Backgrid'
 ], function (
@@ -18,12 +18,11 @@ define([
     var dt = Backgrid.DateTimeCell.extend({
         displayFormat: 'DD.MM.YYYY HH:mm'
     });
-    /**
-     * 
-     * 
-     * @type @exp;PostavkeView@call;extend
-     */
-    var VajaView = PostavkeView.extend({
+    var dk = Backgrid.DateTimeCell.extend({
+        displayFormat: 'HH:mm'
+    });
+
+    return PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
         detailName: 'vaje',
@@ -40,8 +39,15 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('vaja.vrsta'),
+                name: 'vrsta',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('dogodek.title'),
-                name: 'dogodek.title',
+                name: 'title',
                 sortable: true
             },
             {
@@ -49,22 +55,22 @@ define([
                 cell: dt,
                 editable: false,
                 label: i18next.t('dogodek.zacetek'),
-                name: 'dogodek.zacetek',
+                name: 'zacetek',
                 sortable: true
             },
             {
                 headerCell: 'number',
-                cell: dt,
+                cell: dk,
                 editable: false,
                 label: i18next.t('dogodek.konec'),
-                name: 'dogodek.konec',
+                name: 'konec',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('dogodek.prostor'),
-                name: 'dogodek.prostor',
+                name: 'prostor',
                 sortable: true
             },
             {
@@ -80,6 +86,4 @@ define([
             }
         ]
     });
-
-    return VajaView;
 });

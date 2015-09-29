@@ -4,19 +4,24 @@
  * Licenca GPLv3
  */
 
-define(['baseUrl', 'backbone', 'app/Max/Model/MaxPageableCollection', 'deep-model'], function (baseUrl, Backbone, Pageable) {
+define(['baseUrl', 'backbone', 'app/Max/Model/MaxPageableCollection', 'underscore', 'moment', 'deep-model'], function (baseUrl, Backbone, Pageable, _, moment) {
 
     var Dogodek = Backbone.DeepModel.extend({
         view: 'default',
         urlRoot: function () {
             return baseUrl + '/rest/dogodek/' + this.view;
         },
-        getEventObject: function () {
-            var obj = this.pluck('title', 'allDay', 'planiranZacetek', 'razred', 'status');
-            obj.start = this.get('zacetek');
-            obj.end = this.get('konec');
-
-            return obj;
+        getEventObject: function (eObj) {
+            if (!eObj) {
+                eObj = _.clone(this.attributes);
+            } else {
+                for (var k in  this.attributes) {
+                    eObj[k] = this.get(k);
+                }
+            }
+            eObj.start = moment(this.get('zacetek'));
+            eObj.end = moment(this.get('konec'));
+            return eObj;
         }
     });
 

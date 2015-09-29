@@ -8,7 +8,7 @@ define([
     'template!../tpl/calendar-layout.tpl',
     './DogodekModal',
     './DogodekFilter',
-    './ZasedenostView'
+    './DogodekView'
 ], function (
     Marionette,
     _,
@@ -16,7 +16,7 @@ define([
     tpl,
     DogodekModal,
     DogodekFilter,
-    ZasedenostView) {
+    DogodekView) {
 
     var KoledarView = Marionette.LayoutView.extend({
         template: tpl,
@@ -35,6 +35,7 @@ define([
         this.filterView.on('filter', function () {
             this.ui.calendar.fullCalendar('refetchEvents');
         }, this);
+        this.listenTo(this.collection, 'change', this.change );
     };
 
     KoledarView.prototype.onRender = function () {
@@ -72,7 +73,7 @@ define([
                                 self.collection.fetch({
                                    success: function (coll) {
                                        coll.each(function (eventModel) {
-                                            list.push(eventModel.getEventObject);
+                                            list.push(eventModel.getEventObject());
                                        });
                                        callback(list);
                                    }
@@ -107,13 +108,20 @@ define([
 
     KoledarView.prototype.change = function (event) {
         // Look up the underlying event in the calendar and update its details from the model
-        var fcEvent = this.el.fullCalendar('clientEvents', event.get('id'))[0];
-        fcEvent.title = event.get('title');
-        fcEvent.color = event.get('color');
-        this.ui.calendar.fullCalendar('updateEvent', fcEvent);
+        var e = this.ui.calendar.fullCalendar('clientEvents', event.get('id'))[0];
+        e = event.getEventObject(e);
+        this.ui.calendar.fullCalendar('updateEvent', e);
     };
 
-    KoledarView.prototype.eventDropOrResize = function (fcEvent) {
+    KoledarView.prototype.eventDropOrResize =  function (fcEvent, delta, revert, jsEvent, ui, view) {
+        // Lookup the model that has the ID of the event and update its attributes
+        var model = fcEvent.source.coll.get(fcEvent.id);
+        model.save({zacetek: fcEvent.start.toISOString(), konec: fcEvent.end.toISOString(), tehen: fcEvent.resourceId}, {
+            error: function (model, xhr) {
+                revert();
+                Radio.channel('error').command('xhr', model, xhr);
+            }
+        });
     };
 
     KoledarView.prototype.onDestroy = function () {
@@ -125,14 +133,7 @@ define([
 
     KoledarView.prototype.renderDogodek = function (fcEvent, jsEvent, view) {
 
-        var model = new DogodekModel.Model();
-
-        model.set('id', fcEvent.id);
-        model.set('title', fcEvent.title);
-        model.set('zacetek', fcEvent.start);
-        model.set('konec', fcEvent.end);
-        model.set('razred', fcEvent.razred);
-        model.set('zasedenost', fcEvent.zasedenost);
+        var model = fcEvent.source.coll.get(fcEvent.id);
 
         var razred = fcEvent.razred;
         switch (razred) {
@@ -156,13 +157,11 @@ define([
     };
 
     KoledarView.prototype.renderVaja = function (model) {
-        var vaja = model.vaja;
-        var view = new VajaView({id: vaja});
+        var view = new DogodekView({model: model});
         this.dogodekR.show(view);
     };
     KoledarView.prototype.renderPredstava = function (model) {
-        var predstava = model.predstava;
-        var view = new PredstavaView({id: predstava});
+        var view = new DogodekView({model: model});
         this.dogodekR.show(view);
     };
     KoledarView.prototype.renderGostovanje = function (model) {
@@ -177,7 +176,7 @@ define([
     };
     KoledarView.prototype.renderZasedenost = function (model) {
         var zesedenost = model.zesedenost;
-        var view = new ZasedenostView({id: zesedenost});
+        var view = new DogodekView({id: zesedenost});
         this.dogodekR.show(view);
     };
     return KoledarView;

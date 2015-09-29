@@ -108,7 +108,7 @@ define([
             new Marionette.AppRouter({
                 controller: mod,
                 appRoutes: {
-                    'koledar/navigacija': 'navigacija',
+                    'koledar/navigacija': 'pregled',
                     'koledar/pregled': 'pregled',
                     'koledar/ludje': 'ljudje',
                     'koledar/prostori': 'prostori',

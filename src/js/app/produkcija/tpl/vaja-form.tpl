@@ -1,6 +1,6 @@
 <form>
     <div class="row">
-        <div class="col-md-6 col-sm-12" data-fields="zaporedna"></div>
-        <div class="col-md-6 col-sm-12" data-fields="zacetek,konec"></div>        
+        <div class="col-md-6 col-sm-12" data-fields="title,zacetek,konec"></div>
+        <div class="col-md-6 col-sm-12" data-fields="status,vrsta,prostor,zaporedna"></div>
     </div>
 </form>

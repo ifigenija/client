@@ -10,17 +10,7 @@ define([
     '../Model/Dogodki',
     'app/Dokument/View/FormView',
     'template!../tpl/dogodek-izbira.tpl',
-    'formSchema!dogodek/vaja',
-    'template!../tpl/vajaPlan-form.tpl',
-    'template!app/Dokument/tpl/form-simple.tpl',
-    'formSchema!dogodek/predstava',
-    'template!../tpl/predstavaPlan-form.tpl',
-    'formSchema!dogodek/zasedenost',
-    'template!../tpl/zasedenostPlan-form.tpl',
-    'formSchema!dogodek/splosni',
-    'template!../tpl/splosniPlan-form.tpl',
-    'formSchema!dogodek/gostovanje',
-    'template!../tpl/gostovanjePlan-form.tpl'
+    'template!../tpl/dogodek-form.tpl'
 ], function (
         Radio,
         i18next,
@@ -30,17 +20,7 @@ define([
         Dogodek,
         FormView,
         izbiraTpl,
-        schemaVaja,
-        formVajaTpl,
-        tpl,
-        schemaPredstava,
-        formPredstavaTpl,
-        schemaZasedenost,
-        formZasedenostTpl,
-        schemaSplosni,
-        formSplosniTpl,
-        schemaGostovanje,
-        formGostovanjeTpl
+        tpl
         ) {
 
     var Fv = FormView.extend({
@@ -82,93 +62,8 @@ define([
             this.konec = options.konec;
         },
         onRender: function () {
-            this.renderIzbira();
-        },
-        renderIzbira: function () {
-            var view = new IzbiraView();
-            this.modalR.show(view);
-            view.on('render:vaja', this.renderVaja, this);
-            view.on('render:predstava', this.renderPredstava, this);
-            view.on('render:zasedenost', this.renderZasedenost, this);
-            view.on('render:gostovanje', this.renderGostovanje, this);
-            view.on('render:splosni', this.renderSplosni, this);
-        },
-        getFormView: function (options) {
-            var Model = Dogodek.Model.extend({
-                view: options.modelView
-            });
-            var model = new Model();
-
-            if (this.zacetek) {
-                model.set('zacetek', this.zacetek);
-            }
-            
-            model.set('konec', this.options.konec);
-            model.set('title', options.title);
-
-            var Form = Fv.extend({
-                formTemplate: options.formTpl
-            });
-            var view = this.form = new Form({
-                model: model,
-                schema: options.schema.toFormSchema().schema
-            });
-
-            view.on('preklici', this.renderIzbira, this);
-
-            return view;
-        },
-        renderVaja: function () {
-
-            var view = this.getFormView({
-                modelView: 'vaja',
-                schema: schemaVaja,
-                formTpl: formVajaTpl,
-                title: 'vaja'
-            });
-
-            this.modalR.show(view);
-        },
-        renderPredstava: function () {
-            var view = this.getFormView({
-                modelView: 'predstava',
-                schema: schemaPredstava,
-                formTpl: formPredstavaTpl,
-                title: 'predstava'
-            });
-
-            this.modalR.show(view);
-        },
-        renderZasedenost: function () {
-            var view = this.getFormView({
-                modelView: 'zasedenost',
-                schema: schemaZasedenost,
-                formTpl: formZasedenostTpl,
-                title: 'zasedenost'
-            });
-
-            this.modalR.show(view);
-        },
-        renderGostovanje: function () {
-            var view = this.getFormView({
-                modelView: 'gostovanje',
-                schema: schemaGostovanje,
-                formTpl: formGostovanjeTpl,
-                title: 'gostovanje'
-            });
-
-            this.modalR.show(view);
-        },
-        renderSplosni: function () {
-            var view = this.getFormView({
-                modelView: 'splosni',
-                schema: schemaSplosni,
-                formTpl: formSplosniTpl,
-                title: 'splosni'
-            });
-
-            this.modalR.show(view);
         }
+
     });
     return function (options) {
 

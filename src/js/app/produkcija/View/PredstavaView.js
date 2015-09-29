@@ -14,9 +14,12 @@ define([
         formTpl,
         Backgrid
         ) {
-    
+
     var dt = Backgrid.DateTimeCell.extend({
         displayFormat: 'DD.MM.YYYY HH:mm'
+    });
+    var dk = Backgrid.DateTimeCell.extend({
+        displayFormat: 'HH:mm'
     });
 
     /**
@@ -41,7 +44,7 @@ define([
                 cell: 'string',
                 editable: false,
                 label: i18next.t('dogodek.title'),
-                name: 'dogodek.title',
+                name: 'title',
                 sortable: true
             },
             {
@@ -49,22 +52,22 @@ define([
                 cell: dt,
                 editable: false,
                 label: i18next.t('dogodek.zacetek'),
-                name: 'dogodek.zacetek',
+                name: 'zacetek',
                 sortable: true
             },
             {
                 headerCell: 'number',
-                cell: dt,
+                cell: dk,
                 editable: false,
                 label: i18next.t('dogodek.konec'),
-                name: 'dogodek.konec',
+                name: 'konec',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('dogodek.prostor'),
-                name: 'dogodek.prostor',
+                name: 'prostor',
                 sortable: true
             },
             {

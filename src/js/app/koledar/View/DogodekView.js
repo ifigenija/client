@@ -1,4 +1,4 @@
-/* 
+/*
  * Licenca GPLv3
  */
 
@@ -9,16 +9,15 @@ define([
     'app/Dokument/View/FormView',
     'formSchema!dogodek',
     'template!../tpl/dogodek-form.tpl',
-    'template!app/Dokument/tpl/form-simple.tpl'
+    'template!../tpl/dogodek.tpl'
 ], function (
-        Radio,
-        i18next,
-        _,
-        FormView,
-        dogodekSchema,
-        dogodekFormTpl,
-        dogodekTpl
-        ) {
+    Radio,
+    i18next,
+    _,
+    FormView,
+    dogodekSchema,
+    dogodekFormTpl,
+    dogodekTpl) {
 
     var Fv = FormView.extend({
         buttons: {
@@ -41,24 +40,25 @@ define([
                 element: 'button-trigger',
                 trigger: 'nasvet'
             },
-            brisi: {
-                id: 'doc-brisi',
-                label: i18next.t('std.brisi'),
-                element: 'button-trigger',
-                trigger: 'brisi'
-            }
         },
         schema: dogodekSchema.toFormSchema().schema,
         formTemplate: dogodekFormTpl,
         template: dogodekTpl
     });
-    
+
     Fv.prototype.serializeData = function () {
         return _.extend(this.model.toJSON(), {
-            formTitle: this.formTitle
+            formTitle: this.formTitle,
+            dogodekIme: {
+                '100s': 'Vaja',
+                '200s': 'Predstava',
+                '300s': 'Gostovnaje',
+                '400s': 'Splošni dogodek',
+                '500s': 'Zasedenost'
+            }[this.model.get('razred')]
         });
     };
-    
+
     Fv.prototype.onFormChange = function (form) {
         var tb = this.getToolbarModel();
         var but = tb.getButton('doc-shrani');
@@ -69,5 +69,5 @@ define([
         }
     };
 
-    return  Fv;
+    return Fv;
 });
