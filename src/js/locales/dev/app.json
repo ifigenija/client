@@ -1506,9 +1506,11 @@
         "title": "Vaje",
         "dogodek": "Dogodek",
         "zaporedna": "Zaporedna",
+        "vrsta": "Vrsta",
         "d": {
             "dogodek": "",
-            "zaporedna": ""
+            "zaporedna": "",
+            "vrsta": ""
         }
     },
     "predstava": {

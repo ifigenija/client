@@ -863,6 +863,10 @@ fieldset.pomemben legend span {
   font-weight: bold;
   font-size: 130%;
 }
+.table .col-numbers-kazalnik {
+  text-align: right;
+  padding-right: 1cm;
+}
 /*
 Licenca GPLv3
 */
