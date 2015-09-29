@@ -97,7 +97,8 @@ define([
         require(['app/seznami/View/TrrView'], function (View) {
             var view = new View({
                 collection: self.model.trrjiCollection,
-                dokument: self.model
+                dokument: self.model,
+                zapirajFormo: true
             });
             self.regionTrrji.show(view);
             return view;

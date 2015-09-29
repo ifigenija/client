@@ -85,7 +85,7 @@ define([
                 label: i18next.t('funkcija.tipFunkcije'),
                 name: 'tipFunkcije',
                 optionValues: opts,
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
