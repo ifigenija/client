@@ -36,14 +36,14 @@ define([
                 var uDo = this.podatkiUprizoritve.Do;
                 var uNa = this.podatkiUprizoritve.Na;
                 uDo = _.extend({'tantieme': uNa.avtorskePravice}, uDo);
-                
+
                 uDo.avtorskePravice += uNa.avtorskePravice;
                 uDo.avtorskiHonorarji += uNa.avtorskiHonorarji;
                 uDo.avtorskiHonorarjiSamoz += uNa.avtorskiHonorarjiSamoz;
                 uDo.materialni += uNa.materialni;
-                
+
                 this.podatkiUprizoritve.NaDo = uDo;
-                
+
             } else {
                 var vsotaPon = this.vsotaPonovitev(this.model);
                 var na = this.podatkiUprizoritve.Na;
@@ -55,13 +55,13 @@ define([
                     tantieme: na.avtorskePravice * vsotaPon,
                     materialni: na.materialni * vsotaPon
                 };
-                
+
                 naDo.nasDelez = naDo.avtorskiHonorarji + naDo.tantieme + naDo.avtorskePravice + naDo.materialni;
                 naDo.steviloPonovitev = vsotaPon;
-                
-                this.podatkiUprizoritve.NaDo = _.extend(naDo, this.podatkiUprizoritve.Na);
+
+                this.podatkiUprizoritve.NaDo = _.extend(na, naDo);
             }
-            
+
             var podatki = _.extend(this.model.toJSON(), {
                 uprizoritevData: this.podatkiUprizoritve
             });
@@ -73,13 +73,13 @@ define([
         },
         onIzberiVse: function () {
             if (this.jeOznaceno) {
-                this.$('input').each(function(){
+                this.$('input').each(function () {
                     this.checked = false;
                 });
                 this.jeOznaceno = false;
                 this.$('.izberi-check').html(i18next.t("std.obkljukaj"));
-            }else{
-                this.$('input').each(function(){
+            } else {
+                this.$('input').each(function () {
                     this.checked = true;
                 });
                 this.jeOznaceno = true;
