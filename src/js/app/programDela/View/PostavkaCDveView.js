@@ -140,9 +140,9 @@ define([
                 'programDelaId': this.dokument.get('id')
             },
             success,
-            Radio.channel('error').request('handler', 'xhr'));
+                    Radio.channel('error').request('handler', 'xhr'));
         }
-        
+
         this.collection.sort();
 
         this.listenTo(this.collection, "backgrid:edited", function (model, schema, command) {
@@ -157,9 +157,39 @@ define([
                         },
                         error: Radio.channel('error').request('handler', 'xhr')
                     });
+
+                    self.preracunajTabelo();
                 }
             }
+        });
+    };
 
+    PostavkaCDveView.prototype.preracunajTabelo = function () {
+        var coll = this.collection;
+
+        for (var i = 1; i < 8; i++) {
+            var skupina = coll.where({'skupina': i});
+            var sestevek = coll.where({'podskupina': 0, 'skupina': i});
+
+            var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
+                    vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
+                    vsotaOstalo = 0;
+            skupina.each(function (model) {
+                var ps = model.get('podskupina');
+                if (ps !== 0) {
+                    vsotaPremiera += getVr('vrPremiere', model);
+                    vsotaPonovitvePremier += getVr('vrPonovitvePremier', model);
+                    vsotaPonovitvePrejsnjih += getVr('vrPonovitvePrejsnjih', model);
+                    vsotaGostovanjaZamejstvo += getVr('vrGostovanjaZamejstvo', model);
+                    vasotaFestivali += getVr('vrFestivali', model);
+                    vsotaGostovanjaInt += getVr('vrGostovanjaInt', model);
+                    vsotaOstalo += getVr('vrOstalo', model);
+                }
+            });
+        }
+
+        coll.each(function (model) {
+            var ps = model.get('podskupina');
         });
     };
 

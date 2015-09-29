@@ -233,14 +233,21 @@ define([
                     severity: 'success'
                 });
             };
+            
+            var error = function (error) {
+                Radio.channel('error').command('flash', {
+                    message: error.message,
+                    code: error.code,
+                    severity: error.severity
+                });
+            };
 
             var zakleni = function () {
                 var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
                 rpc.call('zakleni', {
                     'programDelaId': self.model.get('id')
                 },
-                success,
-                        Radio.channel('error').request('handler', 'xhr'));
+                success, error);                    
             };
 
             confirm({
@@ -285,14 +292,20 @@ define([
                 });
             };
 
+            var error = function (error) {
+                Radio.channel('error').command('flash', {
+                    message: error.message,
+                    code: error.code,
+                    severity: error.severity
+                });
+            };
+
             var odkleni = function () {
                 var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
                 rpc.call('odkleni', {
                     'programDelaId': self.model.get('id')
                 },
-                success,
-                        Radio.channel('error').request('handler', 'xhr')
-                        );
+                success, error);
             };
 
             confirm({
