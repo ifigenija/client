@@ -38,6 +38,7 @@ define([
                     filterView: new FilterView(),
                 });
                 ch.command('open', calView, 'Planer');
+                ch.command('enableMenu', 'koledar');
             });
 
         };
@@ -64,6 +65,7 @@ define([
                         collection: coll
                     });
                     ch.command('openTab', calView, 'Koledar');
+                    ch.command('enableMenu', 'koledar');
                 });
             });
 
@@ -95,6 +97,7 @@ define([
                 var view = new NaviView({
                 });
                 ch.command('open', view, 'Navigacija');
+                ch.command('enableMenu', 'koledar');
             });
         };
 

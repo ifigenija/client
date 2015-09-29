@@ -64,19 +64,22 @@ define([
         model.stevilcenjeSeznam = function () {
             require(['../View/StevilcenjeView'], function (View) {
                 var view = new View();
-                ch.command('open', view, i18next.t('stevilcenje.title'));               
+                ch.command('open', view, i18next.t('stevilcenje.title'));
+                ch.command('enableMenu', 'nastavitve');
             });
         };
         model.stevilcenjeKonfig = function () {
             require(['../View/StevilcenjeKonfigView'], function (View) {
                 var view = new View();
-                ch.command('open', view, i18next.t('stevilcenje.konfigmenu'));               
+                ch.command('open', view, i18next.t('stevilcenje.konfigmenu'));
+                ch.command('enableMenu', 'nastavitve');
             });
         };
         model.stevilcenjeStanje = function () {
             require(['../View/StevilcenjeStanjeView'], function (View) {
                 var view = new View();
-                ch.command('open', view, i18next.t('stevilcenje.stanje'));               
+                ch.command('open', view, i18next.t('stevilcenje.stanje'));
+                ch.command('enableMenu', 'nastavitve');
             });
         };
         model.addUser = function () {
@@ -87,6 +90,7 @@ define([
             require(['app/aaa/View/UserView'], function (View) {
                 var view = new View();
                 ch.command('open', view, i18next.t('user.title'));
+                ch.command('enableMenu', 'nastavitve');
                 if (akcija) {
                     view.triggerMethod(akcija);
                 }
