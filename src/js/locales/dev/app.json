@@ -1602,6 +1602,7 @@
         "vrOstalo": "Vrednost ostalo",
         "podatki": "Glavni podatki",
         "vrednosti": "Vrednost",
+        "vrSkupaj": "Skupaj",
         "d": {
             "skupina": "",
             "podskupina": "",
@@ -1612,7 +1613,8 @@
             "vrGostovanjaZamejstvo": "",
             "vrFestivali": "",
             "vrGostovanjaInt": "",
-            "vrOstalo": ""
+            "vrOstalo": "",
+            "vrSkupaj": ""
         },
         "t": {
             "skupina": "Skupina",
@@ -1624,7 +1626,8 @@
             "vrGostovanjaZamejstvo": "Gostovanja",
             "vrFestivali": "Festivali",
             "vrGostovanjaInt": "Mednarodna gostovanja",
-            "vrOstalo": "Ostalo"
+            "vrOstalo": "Ostalo",
+            "vrSkupaj": "Skupaj"
         }
     }
 }

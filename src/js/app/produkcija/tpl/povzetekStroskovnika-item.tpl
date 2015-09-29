@@ -11,7 +11,7 @@
         </fieldset>
     </div>
     <div class="col-sm-6">
-        <fieldset class="fieldset-povzetek fieldset-height">
+        <fieldset class="fieldset-povzetek stroskovnik-visina">
             <legend>
                 <span>{{t "stroskovnik.sodelavci"}}</span>
             </legend>

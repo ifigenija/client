@@ -118,10 +118,7 @@ define([
 
         this.pridobiPodatkeUprizoritve({
             success: izrisi,
-            error: function (error) {
-                console.log(error);
-                Radio.channel('error').request('handler', 'xhr');
-            }
+            error: Radio.channel('error').request('handler', 'xhr')
         });
     };
 

@@ -506,7 +506,7 @@ define([
 
             return vrednost ? vrednost : 0;
         },
-        initialize: function(){
+        initialize: function () {
             this.preracunajSkupaj();
         },
         preracunajSkupaj: function () {
@@ -787,6 +787,7 @@ define([
     });
     return {
         Model: ProgramDelaModel,
-        Postavka: PremieraModel
+        Postavka: PremieraModel,
+        PostavkaCDvaModel: PostavkaCDvaModel
     };
 });
