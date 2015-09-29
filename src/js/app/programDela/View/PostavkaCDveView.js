@@ -9,6 +9,7 @@ define([
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!postavkaCDve',
     'radio',
+    '../Model/ProgramDokument',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -19,6 +20,7 @@ define([
         ZapisiLayout,
         schema,
         Radio,
+        ProgramDokument,
         $
         ) {
 
@@ -112,7 +114,20 @@ define([
     });
 
     PostavkaCDveView.prototype.initialize = function () {
+        var self = this;
+        //dodamo skupno vrstico na konec
+        var dodajModel = function () {
+            var model = new ProgramDokument.PostavkaCDvaModel();
 
+            model.set('skupina', 'Z');
+            model.set('podskupina', 0);
+            model.set('naziv', 'SKUPAJ');
+
+            self.collection.add(model, {
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        };
+        // Komparator za sort collectiona
         this.collection.comparator = function (a, b) {
             var sa = a.get('skupina');
             var sb = b.get('skupina');
@@ -126,11 +141,14 @@ define([
             }
         };
 
-        if (this.collection.length === 0) {
-            var self = this;
+        if (this.collection.length <= 0) {
+
             var success = function () {
                 self.collection.fetch({
-                    success: self.collection.sort,
+                    success: function () {
+                        self.collection.sort();
+                        dodajModel();
+                    },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
             };
@@ -144,6 +162,7 @@ define([
         }
 
         this.collection.sort();
+        dodajModel();
 
         this.listenTo(this.collection, "backgrid:edited", function (model, schema, command) {
             var self = this;
@@ -151,46 +170,59 @@ define([
                 if (model.changedAttributes() || _.isObject(schema.get('optionValues'))) {
                     model.preracunajSkupaj();
                     model.save({}, {
-                        success: function (model) {
-                            self.triggerMethod('save:success', model);
-                            Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
-                        },
                         error: Radio.channel('error').request('handler', 'xhr')
                     });
 
                     self.preracunajTabelo();
+
                 }
             }
         });
     };
 
+    /*
+     * Metoda ki preračuna podatke tabele
+     * @returns {undefined}
+     */
     PostavkaCDveView.prototype.preracunajTabelo = function () {
         var coll = this.collection;
 
-        for (var i = 1; i < 8; i++) {
-            var skupina = coll.where({'skupina': i});
-            var sestevek = coll.where({'podskupina': 0, 'skupina': i});
+        var polje = ['1', '2', '3', '4', '5', '6', '7', 'H'];
+
+        for (var i = 0; i < polje.length; i++) {
+            var skupina = coll.where({'skupina': polje[i].toString()});
+            var sestevek = coll.findWhere({'podskupina': 0, 'skupina': polje[i].toString()});
 
             var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
                     vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
                     vsotaOstalo = 0;
-            skupina.each(function (model) {
+            skupina.forEach(function (model) {
                 var ps = model.get('podskupina');
                 if (ps !== 0) {
-                    vsotaPremiera += getVr('vrPremiere', model);
-                    vsotaPonovitvePremier += getVr('vrPonovitvePremier', model);
-                    vsotaPonovitvePrejsnjih += getVr('vrPonovitvePrejsnjih', model);
-                    vsotaGostovanjaZamejstvo += getVr('vrGostovanjaZamejstvo', model);
-                    vasotaFestivali += getVr('vrFestivali', model);
-                    vsotaGostovanjaInt += getVr('vrGostovanjaInt', model);
-                    vsotaOstalo += getVr('vrOstalo', model);
+                    vsotaPremiera += model.get('vrPremiere');
+                    vsotaPonovitvePremier += model.get('vrPonovitvePremier');
+                    vsotaPonovitvePrejsnjih += model.get('vrPonovitvePrejsnjih');
+                    vsotaGostovanjaZamejstvo += model.get('vrGostovanjaZamejstvo');
+                    vasotaFestivali += model.get('vrFestivali');
+                    vsotaGostovanjaInt += model.get('vrGostovanjaInt');
+                    vsotaOstalo += model.get('vrOstalo');
                 }
             });
-        }
 
-        coll.each(function (model) {
-            var ps = model.get('podskupina');
-        });
+            sestevek.set('vrPremiere', vsotaPremiera);
+            sestevek.set('vrPonovitvePremier', vsotaPonovitvePremier);
+            sestevek.set('vrPonovitvePrejsnjih', vsotaPonovitvePrejsnjih);
+            sestevek.set('vrGostovanjaZamejstvo', vsotaGostovanjaZamejstvo);
+            sestevek.set('vrFestivali', vasotaFestivali);
+            sestevek.set('vrGostovanjaInt', vsotaGostovanjaInt);
+            sestevek.set('vrOstalo', vsotaOstalo);
+            
+            sestevek.preracunajSkupaj();
+
+            sestevek.save({
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        }
     };
 
     PostavkaCDveView.prototype.renderList = function () {

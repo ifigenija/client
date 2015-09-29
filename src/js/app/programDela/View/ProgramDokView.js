@@ -14,9 +14,7 @@ define([
     'app/Zapisi/View/ZapisiLayout',
     'marionette',
     'app/produkcija/Model/Sezona',
-    'app/Max/View/Toolbar',
     'app/Max/View/Confirm',
-    '../Model/ProgramDokument',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -32,9 +30,7 @@ define([
         ZapisiLayout,
         Marionette,
         SezonaModel,
-        Toolbar,
         confirm,
-        ProgramDokument,
         $
         ) {
 
@@ -700,20 +696,7 @@ define([
         };
 
         var coll = this.model.postavkeCDveCollection;
-
-        var dodajModel = function () {
-            var model = new ProgramDokument.PostavkaCDvaModel();
-
-            model.set('skupina', 'Z');
-            model.set('podskupina', 0);
-            model.set('naziv', 'SKUPAJ');
-
-            coll.add(model, {
-                error: Radio.channel('error').request('handler', 'xhr')
-            });
-        };
-
-        coll.once('sync', dodajModel);
+        
         if (coll.length === 0) {
             coll.fetch({
                 success: prikaziPostavkeCDva,
