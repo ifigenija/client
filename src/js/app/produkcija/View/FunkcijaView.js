@@ -195,13 +195,13 @@ define([
         rv.on('dodaj:alter', this.dodajAlter, this);
         rv.on('brisi:alter', this.brisiAlter, this);
         rv.on('privzeto:alter', this.privzetoAlter, this);
-        
+
         var self = this;
         rv.on('shranjeno:alter', function () {
             self.model.fetch({
                 success: function () {
                     self.renderAlternacije(self.model);
-                }})
+                }});
         }, self);
         this.alterR.show(rv);
     };
@@ -236,13 +236,18 @@ define([
         var self = this;
         if (o) {
             o.set('privzeti', true);
-            o.save({
+            o.save(o.attributes, {
                 success: function () {
                     self.model.fetch({
+                        success: function () {
+                            self.renderAlternacije(self.model);
+                        },
                         error: Radio.channel('error').request('handler', 'xhr')
                     });
                 },
-                error: Radio.channel('error').request('handler', 'xhr')
+                error: function () {
+                    Radio.channel('error').request('handler', 'xhr');
+                }
             });
         }
     };
