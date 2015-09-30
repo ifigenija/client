@@ -324,7 +324,7 @@ define([
             text: i18next.t('std.potrdiPrepis'),
             modalOptions: {
                 title: i18next.t("std.prepisiCDve"),
-                okText: i18next.t("std.prepisi")
+                okText: i18next.t("std.obnovi")
             },
             ok: function () {
                 PostavkaCDveView.prototype.osvezi.apply(self, arguments);

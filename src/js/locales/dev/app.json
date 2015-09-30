@@ -129,6 +129,10 @@
         "ustvari": "Ustvari",
         "zapri": "Zapri",
         "download": "Prenesi",
+        "osvezi": "Obnovi podatke",
+        "potrdiPrepis": "Obnovili boste podatke. Do sedaj vnešeni podatki bodo prepisani. Ali želite nadaljevati?",
+        "prepisiCDve": "Obnovitev podatkov",
+        "obnovi": "Nadaljuj",
         "title": {
             "vnesiOseba": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo"
@@ -621,7 +625,8 @@
             "dovoliPrekrivanje": "Ali je dovoljeno prekrivanje",
             "vodjaEkipe": "Ali je vodja področja",
             "pomembna": "Ali je funkcija izpostavljena",
-            "alternacije": "Tukaj vnesite osebe / alternacije, ki bodo zasedale funkcijo."
+            "alternacije": "Tukaj vnesite osebe / alternacije, ki bodo zasedale funkcijo.",
+            "sort": ""
         }
     },
     "alternacija": {
@@ -714,7 +719,8 @@
             "opis": "",
             "vrednostDo": "",
             "vrednostNa": "",
-            "popa": ""
+            "popa": "",
+            "sort": ""
         }
     },
     "zaposlitev": {
@@ -1006,7 +1012,7 @@
             "avgCenaVstopnice": "",
             "stProdVstopnic": "",
             "stZaposlenih": "Število vseh zaposlenih v javnem zavodu",
-            "stZaposIgralcev": "Število zaposlenih igralcev",
+            "stZaposIgralcev": "",
             "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev (popvprečno število nastopov v letu)"
         }
     },
@@ -1041,7 +1047,6 @@
         "obiskDoma": "Število obiskovalcev na domačem odru",
         "obiskKopr": "Število obiskovalcev na odru slovenskega ali zamejskega koproducenta",
         "ponoviKopr": "Število ponovitev na odru slovenskega ali zamejskega koproducenta",
-        "obiskKopr": "Število obiskovalcev na odru slovenskega ali zamejskega koproducenta",
         "ponoviKoprInt": "Število ponovitev na odru koproducenta v tujini",
         "obiskKoprInt": "Število obiskovalcev na odru koproducenta v tujini",
         "obiskGost": "Število obiskovalcev na gostovanjih",
@@ -1091,7 +1096,7 @@
             "zaproseno": "Ministrstvo za kulturo sofinancira do X% upravičenih stroškov celotne vrednosti.",
             "lastnaSredstva": "Lastna sredstva, ki so na voljo",
             "avtorskiHonorarji": "Stroški avtorskih honorarjev zunanjih sodelavcev",
-            "avtorskiHonorarjiSamoz": "Avtorski honorarji za sodelavce s statusom samozaposlenega v kulturi",
+            "avtorskiHonorarjiSamoz": "",
             "tantieme": "Stroški tantiem, vezanih na uprizoritev",
             "materialni": "Materialni stroški",
             "vlozekGostitelja": "",
@@ -1103,9 +1108,9 @@
             "obiskInt": "Načrtovano število vseh obiskovalcev na mednarodnih gostovanjih",
             "ponoviDoma": "Načrtovano število vseh ponovitev na domačem odru",
             "ponoviKopr": "Število ponovitev na odru slovenskega ali zamejskega koproducenta",
-            "obiskKop": "Število obiskovalcev na odru slovenskega ali zamejskega koproducenta",
-            "ponoviKoprInt": "Število ponovitev na odru koproducenta v tujini",
-            "obiskKoprInt": "Število obiskovalcev na odru koproducenta v tujini",
+            "obiskKopr": "Načrtovano število obiskovalcev na odru slovenskega ali zamejskega koproducenta",
+            "ponoviKoprInt": "",
+            "obiskKoprInt": "Načrtovano število obiskovalcev na odru koproducenta v tujini",
             "ponoviZamejo": "Načrtovano število vseh ponovitev na gostovanjih v zamejstvu",
             "ponoviGost": "Načrtovano število vseh ponovitev na gostovanjih po Sloveniji",
             "ponoviInt": "Načrtovano število vseh ponovitev na mednarodnih gostovanjih",
@@ -1125,14 +1130,15 @@
             "ponoviInt": "Načrtovano število vseh ponovitev na mednarodnih gostovanjih od prve reprize dalje",
             "utemeljitev": "Vsebinska utemeljitev predloga",
             "tipProgramskeEnote": "",
-            "kpe": "Koeficient programske enote",
+            "kpe": "",
             "stZaposlenih": "Število zaposlenih, ki sodelujejo pri izvedbi projekta",
             "stZaposUmet": "Vsi navedeni ustvarjalci, ki so zaposleni v tem JZ (razen inšpicienta in šepetalke)",
             "stZaposDrug": "Vsi, ki sodelujejo pri uprizoritvi in so zaposleni v Tehniki, inšpicient in šepetalka",
             "stHonorarnih": "Vsi navedeni ustvarjalci, ki niso zaposleni v tem JZ",
             "stHonorarnihIgr": "Število diplomiranih igralcev in študenti AGRFT",
             "stHonorarnihIgrTujJZ": "Število vseh, ki sodelujejo honorarno od tega igralcev, zaposlenih v drugih javnih zavodih",
-            "stHonorarnihIgrSamoz": "Število igralcev s statusom samozaposlenega v kulturi"
+            "stHonorarnihIgrSamoz": "Število igralcev s statusom samozaposlenega v kulturi",
+            "sort": ""
         },
         "t": {
             "celotnaVrednost": "Vrednost",
@@ -1231,8 +1237,8 @@
         "strosekOdkPred": "Strošek odkupa predstave",
         "stroskiOstali": "Ostali stroški",
         "d": {
-            "strosekOdkPred": "Strošek odkupa predstave",
-            "stroskiOstali": "Ostali stroški"
+            "strosekOdkPred": "",
+            "stroskiOstali": ""
         }
     },
     "izjemni": {
@@ -1566,12 +1572,12 @@
     "programIzjemni": {
         "title": "Program izjemni",
         "dokument": "Program dela",
-        "prizorisce": "Prizorišče",
+        "prizorisce": "Prizorišče(šča)",
         "trajanje": "Trajanje priprave dogodka (od-do)",
         "d": {
             "dokument": "Program dela",
-            "prizorisce": "Prizorišče",
-            "trajanje": "Trajanje priprave dogodka (od-do)"
+            "prizorisce": "",
+            "trajanje": ""
         }
     },
     "podUpr": {
