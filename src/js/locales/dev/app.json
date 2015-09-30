@@ -1652,7 +1652,8 @@
         "status": "Status",
         "plniranCasIzvedbe": "Planiran čas izvedbe",
         "izveden": "Opravilo izvedeno",
-        "zapisIzReporta": "Zapis iz poročila"
+        "zapisIzReporta": "Zapis iz poročila",
+        "showLog": "Prikaži log"
     }
 }
 

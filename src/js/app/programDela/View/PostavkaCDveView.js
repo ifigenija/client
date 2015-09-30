@@ -32,6 +32,7 @@ define([
         detailName: 'postavkeC2',
         formTitle: i18next.t('postavkaCdve.title'),
         disabled: false,
+        className: 'cdve-tabela',
         buttons: {
             osvezi: {
                 id: 'doc-postavka-osvezi',
