@@ -169,6 +169,7 @@ define([
 
         this.collection.sort();
         this.dodajModel();
+        this.preracunajTabelo();
 
         this.listenTo(this.collection, "backgrid:edited", function (model, schema, command) {
             var self = this;
@@ -225,7 +226,7 @@ define([
                 vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
                         vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
                         vsotaOstalo = 0;
-            } else if (podskupina !== 0){
+            } else if (podskupina !== 0) {
                 prejsnjaSkupina = model.get('skupina');
 
                 vsotaPremiera += model.get('vrPremiere');
@@ -242,7 +243,7 @@ define([
     };
 
     PostavkaCDveView.prototype.preracunajSkupaj = function (coll) {
-        
+
         var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
                 vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
                 vsotaOstalo = 0;
@@ -250,7 +251,7 @@ define([
             var model = coll.models[i];
             var podskupina = model.get('podskupina');
 
-            if (podskupina !== 0){
+            if (podskupina !== 0) {
                 vsotaPremiera += model.get('vrPremiere');
                 vsotaPonovitvePremier += model.get('vrPonovitvePremier');
                 vsotaPonovitvePrejsnjih += model.get('vrPonovitvePrejsnjih');
