@@ -34,6 +34,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('postavkaCdve.t.razred'),
+                name: 'razred',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('postavkaCdve.t.naziv'),
                 name: 'naziv',
                 sortable: false
@@ -119,9 +126,10 @@ define([
         var dodajModel = function () {
             var model = new ProgramDokument.PostavkaCDvaModel();
 
+            model.set('razred', 'Skupaj');
             model.set('skupina', 'Z');
             model.set('podskupina', 0);
-            model.set('naziv', 'SKUPAJ');
+            model.set('naziv', 'SKUPAJ C.2.');
 
             self.collection.add(model, {
                 error: Radio.channel('error').request('handler', 'xhr')
