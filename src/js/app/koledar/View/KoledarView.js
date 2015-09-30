@@ -158,6 +158,7 @@ define([
 
     KoledarView.prototype.renderVaja = function (model) {
         var view = new DogodekView({model: model});
+        view.on('preklici', this.onPreklici, this);
         this.dogodekR.show(view);
     };
     KoledarView.prototype.renderPredstava = function (model) {
@@ -179,6 +180,9 @@ define([
         var view = new DogodekView({id: zesedenost});
         this.dogodekR.show(view);
     };
+    KoledarView.prototype.onPreklici = function () {
+        this.dogodekR.empty();
+    }
     return KoledarView;
 })
 ;
