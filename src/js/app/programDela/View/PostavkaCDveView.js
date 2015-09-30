@@ -236,6 +236,8 @@ define([
                 vasotaFestivali += model.get('vrFestivali');
                 vsotaGostovanjaInt += model.get('vrGostovanjaInt');
                 vsotaOstalo += model.get('vrOstalo');
+                
+                model.preracunajSkupaj();
             }
 
         }
@@ -306,6 +308,7 @@ define([
                 success: function () {
                     self.collection.sort();
                     self.dodajModel();
+                    self.preracunajTabelo();
                 },
                 error: Radio.channel('error').request('handler', 'xhr')
             });
