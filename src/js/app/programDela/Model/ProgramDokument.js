@@ -526,7 +526,8 @@ define([
     });
     var PostavkeCDveCollection = Dokument.PostavkaCollection.extend({
         model: PostavkaCDvaModel,
-        url: baseUrl + '/rest/postavkacdve'
+        url: baseUrl + '/rest/postavkacdve',
+        mode: "server"
     });
 
     var ProgramDelaModel = Dokument.Model.extend({

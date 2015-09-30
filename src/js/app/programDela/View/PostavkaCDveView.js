@@ -126,6 +126,8 @@ define([
             self.collection.add(model, {
                 error: Radio.channel('error').request('handler', 'xhr')
             });
+            
+            self.preracunajSkupaj(self.collection);
         };
         // Komparator za sort collectiona
         this.collection.comparator = function (a, b) {
@@ -187,10 +189,13 @@ define([
     PostavkaCDveView.prototype.preracunajTabelo = function () {
         var coll = this.collection;
 
-        var polje = ['1', '2', '3', '4', '5', '6', '7', 'H'];
+        var polje = ['1', '2', '3', '4', '5', '6', '7', 'H', 'T'];
 
+        // seštevek vseh vrednosti posameznih skupin v model z enako skupino in podskupino 0
         for (var i = 0; i < polje.length; i++) {
+            //pridobimo posamezne skupine
             var skupina = coll.where({'skupina': polje[i].toString()});
+            //pridobimo model v katerega bomo shranili vsote vrednosti skupine
             var sestevek = coll.findWhere({'podskupina': 0, 'skupina': polje[i].toString()});
 
             var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
@@ -198,6 +203,7 @@ define([
                     vsotaOstalo = 0;
             skupina.forEach(function (model) {
                 var ps = model.get('podskupina');
+                //v kolikor ni podskupina 0 se vrednosti seštevajo
                 if (ps !== 0) {
                     vsotaPremiera += model.get('vrPremiere');
                     vsotaPonovitvePremier += model.get('vrPonovitvePremier');
@@ -209,6 +215,7 @@ define([
                 }
             });
 
+            //shranemo vse vsote
             sestevek.set('vrPremiere', vsotaPremiera);
             sestevek.set('vrPonovitvePremier', vsotaPonovitvePremier);
             sestevek.set('vrPonovitvePrejsnjih', vsotaPonovitvePrejsnjih);
@@ -216,13 +223,47 @@ define([
             sestevek.set('vrFestivali', vasotaFestivali);
             sestevek.set('vrGostovanjaInt', vsotaGostovanjaInt);
             sestevek.set('vrOstalo', vsotaOstalo);
-            
+
             sestevek.preracunajSkupaj();
 
             sestevek.save({
                 error: Radio.channel('error').request('handler', 'xhr')
             });
         }
+        this.preracunajSkupaj(coll);
+    };
+    
+    PostavkaCDveView.prototype.preracunajSkupaj = function(coll){
+        //seštevek vseh skupin s podskupino 0
+        var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
+                vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
+                vsotaOstalo = 0;
+
+        var skupine = coll.where({'podskupina': 0});
+        var skupaj = coll.findWhere({'podskupina': 0, 'skupina': 'Z'});
+        skupine.forEach(function (model) {
+            var ps = model.get('skupina');
+            if (ps !== 'Z') {
+                vsotaPremiera += model.get('vrPremiere');
+                vsotaPonovitvePremier += model.get('vrPonovitvePremier');
+                vsotaPonovitvePrejsnjih += model.get('vrPonovitvePrejsnjih');
+                vsotaGostovanjaZamejstvo += model.get('vrGostovanjaZamejstvo');
+                vasotaFestivali += model.get('vrFestivali');
+                vsotaGostovanjaInt += model.get('vrGostovanjaInt');
+                vsotaOstalo += model.get('vrOstalo');
+            }
+        });
+
+        //shranemo vse vsote
+        skupaj.set('vrPremiere', vsotaPremiera);
+        skupaj.set('vrPonovitvePremier', vsotaPonovitvePremier);
+        skupaj.set('vrPonovitvePrejsnjih', vsotaPonovitvePrejsnjih);
+        skupaj.set('vrGostovanjaZamejstvo', vsotaGostovanjaZamejstvo);
+        skupaj.set('vrFestivali', vasotaFestivali);
+        skupaj.set('vrGostovanjaInt', vsotaGostovanjaInt);
+        skupaj.set('vrOstalo', vsotaOstalo);
+        
+        skupaj.preracunajSkupaj();
     };
 
     PostavkaCDveView.prototype.renderList = function () {

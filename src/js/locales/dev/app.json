@@ -1637,7 +1637,7 @@
         }
     },
     "jobs":{
-        "izvajanjejoba": "Izvajanje opravila",
+        "izvajanjeJoba": "Priprava dokumenta",
         "ustvaril": "Opravilo ustvarjeno",
         "jobName": "Naziv opravila",
         "status": "Status",
