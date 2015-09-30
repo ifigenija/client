@@ -163,6 +163,7 @@ define([
     };
     KoledarView.prototype.renderPredstava = function (model) {
         var view = new DogodekView({model: model});
+        view.on('preklici', this.onPreklici, this);
         this.dogodekR.show(view);
     };
     KoledarView.prototype.renderGostovanje = function (model) {
