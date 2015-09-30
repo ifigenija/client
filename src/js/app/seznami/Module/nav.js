@@ -8,7 +8,7 @@ define(['i18next'], function (i18n) {
             label: i18n.t("seznami.nav.label"),
             icon: 'fa-list',
             id: "seznami",
-            pages: [                
+            pages: [
                 {
                     label: i18n.t("seznami.nav.oseba"),
                     uri: "#oseba",
@@ -40,7 +40,7 @@ define(['i18next'], function (i18n) {
 //                    permission: "TipFunkcije-write"
 //                },
                 {
-                    label: i18n.t("seznami.nav.zvrstUprizoritve"),                    
+                    label: i18n.t("seznami.nav.zvrstUprizoritve"),
                     uri: "#zvrstUprizoritve",
                     permission: "ZvrstUprizoritve-write"
                 },
@@ -58,13 +58,13 @@ define(['i18next'], function (i18n) {
                     label: i18n.t("seznami.nav.prostori"),
                     uri: "#prostor",
                     permission: "Prostor-write"
-                    
+
                 },
                 {
                     label: i18n.t("seznami.nav.vrsteStroska"),
                     uri: "#vrstaStroska",
                     permission: "VrstaStroska-write"
-                    
+
                 }
             ]
         }

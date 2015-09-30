@@ -102,7 +102,13 @@ define([
 
             model.fetch({
                 success: function () {
-                    self.$('.avtorji').html(" " + model.get('avtor'));
+                    var avtor = model.get('avtor');
+                    var izpis = "";
+                    if (avtor) {
+                        izpis = " " + model.get('avtor');
+                    }
+
+                    self.$('.avtorji').html(izpis);
                 },
                 error: Radio.channel('error').request('handler', 'xhr')
             });

@@ -10,6 +10,7 @@ define([
     'formSchema!postavkaCDve',
     'radio',
     '../Model/ProgramDokument',
+    'app/Max/View/Confirm',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -21,6 +22,7 @@ define([
         schema,
         Radio,
         ProgramDokument,
+        confirm,
         $
         ) {
 
@@ -30,6 +32,14 @@ define([
         detailName: 'postavkeC2',
         formTitle: i18next.t('postavkaCdve.title'),
         disabled: false,
+        buttons: {
+            osvezi: {
+                id: 'doc-postavka-osvezi',
+                label: i18next.t('std.osvezi'),
+                element: 'button-trigger',
+                trigger: 'osvezi'
+            }
+        },
         gridMeta: [
             {
                 cell: 'string',
@@ -119,24 +129,25 @@ define([
             }
         ]
     });
+    //dodamo skupno vrstico na konec
+    PostavkaCDveView.prototype.dodajModel = function () {
+        var self = this;
+        var model = new ProgramDokument.PostavkaCDvaModel();
+
+        model.set('razred', 'Skupaj');
+        model.set('skupina', 'ZZZZZ1234');
+        model.set('podskupina', 0);
+        model.set('naziv', 'SKUPAJ C.2.');
+
+        self.collection.add(model, {
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
+
+        self.preracunajSkupaj(self.collection);
+    };
 
     PostavkaCDveView.prototype.initialize = function () {
-        var self = this;
-        //dodamo skupno vrstico na konec
-        var dodajModel = function () {
-            var model = new ProgramDokument.PostavkaCDvaModel();
 
-            model.set('razred', 'Skupaj');
-            model.set('skupina', 'Z');
-            model.set('podskupina', 0);
-            model.set('naziv', 'SKUPAJ C.2.');
-
-            self.collection.add(model, {
-                error: Radio.channel('error').request('handler', 'xhr')
-            });
-            
-            self.preracunajSkupaj(self.collection);
-        };
         // Komparator za sort collectiona
         this.collection.comparator = function (a, b) {
             var sa = a.get('skupina');
@@ -152,27 +163,11 @@ define([
         };
 
         if (this.collection.length <= 0) {
-
-            var success = function () {
-                self.collection.fetch({
-                    success: function () {
-                        self.collection.sort();
-                        dodajModel();
-                    },
-                    error: Radio.channel('error').request('handler', 'xhr')
-                });
-            };
-
-            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
-            rpc.call('osveziTabeloC2', {
-                'programDelaId': this.dokument.get('id')
-            },
-            success,
-                    Radio.channel('error').request('handler', 'xhr'));
+            this.osvezi();
         }
 
         this.collection.sort();
-        dodajModel();
+        this.dodajModel();
 
         this.listenTo(this.collection, "backgrid:edited", function (model, schema, command) {
             var self = this;
@@ -194,64 +189,44 @@ define([
      * Metoda ki preračuna podatke tabele
      * @returns {undefined}
      */
+
     PostavkaCDveView.prototype.preracunajTabelo = function () {
         var coll = this.collection;
+        coll.sort();
 
-        var polje = ['1', '2', '3', '4', '5', '6', '7', 'H', 'T'];
-
-        // seštevek vseh vrednosti posameznih skupin v model z enako skupino in podskupino 0
-        for (var i = 0; i < polje.length; i++) {
-            //pridobimo posamezne skupine
-            var skupina = coll.where({'skupina': polje[i].toString()});
-            //pridobimo model v katerega bomo shranili vsote vrednosti skupine
-            var sestevek = coll.findWhere({'podskupina': 0, 'skupina': polje[i].toString()});
-
-            var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
-                    vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
-                    vsotaOstalo = 0;
-            skupina.forEach(function (model) {
-                var ps = model.get('podskupina');
-                //v kolikor ni podskupina 0 se vrednosti seštevajo
-                if (ps !== 0) {
-                    vsotaPremiera += model.get('vrPremiere');
-                    vsotaPonovitvePremier += model.get('vrPonovitvePremier');
-                    vsotaPonovitvePrejsnjih += model.get('vrPonovitvePrejsnjih');
-                    vsotaGostovanjaZamejstvo += model.get('vrGostovanjaZamejstvo');
-                    vasotaFestivali += model.get('vrFestivali');
-                    vsotaGostovanjaInt += model.get('vrGostovanjaInt');
-                    vsotaOstalo += model.get('vrOstalo');
-                }
-            });
-
-            //shranemo vse vsote
-            sestevek.set('vrPremiere', vsotaPremiera);
-            sestevek.set('vrPonovitvePremier', vsotaPonovitvePremier);
-            sestevek.set('vrPonovitvePrejsnjih', vsotaPonovitvePrejsnjih);
-            sestevek.set('vrGostovanjaZamejstvo', vsotaGostovanjaZamejstvo);
-            sestevek.set('vrFestivali', vasotaFestivali);
-            sestevek.set('vrGostovanjaInt', vsotaGostovanjaInt);
-            sestevek.set('vrOstalo', vsotaOstalo);
-
-            sestevek.preracunajSkupaj();
-
-            sestevek.save({
-                error: Radio.channel('error').request('handler', 'xhr')
-            });
-        }
-        this.preracunajSkupaj(coll);
-    };
-    
-    PostavkaCDveView.prototype.preracunajSkupaj = function(coll){
-        //seštevek vseh skupin s podskupino 0
         var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
                 vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
                 vsotaOstalo = 0;
 
-        var skupine = coll.where({'podskupina': 0});
-        var skupaj = coll.findWhere({'podskupina': 0, 'skupina': 'Z'});
-        skupine.forEach(function (model) {
-            var ps = model.get('skupina');
-            if (ps !== 'Z') {
+        var prejsnjaSkupina = "";
+        for (var i = 0; i < coll.length; i++) {
+            var model = coll.models[i];
+            var podskupina = model.get('podskupina');
+
+            if (podskupina === 0 && i !== 0) {
+
+                //shranemo sestevek
+                var sestevek = coll.findWhere({'podskupina': 0, 'skupina': prejsnjaSkupina.toString()});
+                sestevek.set('vrPremiere', vsotaPremiera);
+                sestevek.set('vrPonovitvePremier', vsotaPonovitvePremier);
+                sestevek.set('vrPonovitvePrejsnjih', vsotaPonovitvePrejsnjih);
+                sestevek.set('vrGostovanjaZamejstvo', vsotaGostovanjaZamejstvo);
+                sestevek.set('vrFestivali', vasotaFestivali);
+                sestevek.set('vrGostovanjaInt', vsotaGostovanjaInt);
+                sestevek.set('vrOstalo', vsotaOstalo);
+
+                sestevek.preracunajSkupaj();
+
+                sestevek.save({
+                    error: Radio.channel('error').request('handler', 'xhr')
+                });
+
+                vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
+                        vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
+                        vsotaOstalo = 0;
+            } else if (podskupina !== 0){
+                prejsnjaSkupina = model.get('skupina');
+
                 vsotaPremiera += model.get('vrPremiere');
                 vsotaPonovitvePremier += model.get('vrPonovitvePremier');
                 vsotaPonovitvePrejsnjih += model.get('vrPonovitvePrejsnjih');
@@ -260,8 +235,32 @@ define([
                 vsotaGostovanjaInt += model.get('vrGostovanjaInt');
                 vsotaOstalo += model.get('vrOstalo');
             }
-        });
 
+        }
+        this.preracunajSkupaj(coll);
+    };
+
+    PostavkaCDveView.prototype.preracunajSkupaj = function (coll) {
+        
+        var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
+                vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
+                vsotaOstalo = 0;
+        for (var i = 0; i < coll.length; i++) {
+            var model = coll.models[i];
+            var podskupina = model.get('podskupina');
+
+            if (podskupina !== 0){
+                vsotaPremiera += model.get('vrPremiere');
+                vsotaPonovitvePremier += model.get('vrPonovitvePremier');
+                vsotaPonovitvePrejsnjih += model.get('vrPonovitvePrejsnjih');
+                vsotaGostovanjaZamejstvo += model.get('vrGostovanjaZamejstvo');
+                vasotaFestivali += model.get('vrFestivali');
+                vsotaGostovanjaInt += model.get('vrGostovanjaInt');
+                vsotaOstalo += model.get('vrOstalo');
+            }
+
+        }
+        var skupaj = coll.findWhere({'podskupina': 0, 'skupina': 'ZZZZZ1234'});
         //shranemo vse vsote
         skupaj.set('vrPremiere', vsotaPremiera);
         skupaj.set('vrPonovitvePremier', vsotaPonovitvePremier);
@@ -270,7 +269,7 @@ define([
         skupaj.set('vrFestivali', vasotaFestivali);
         skupaj.set('vrGostovanjaInt', vsotaGostovanjaInt);
         skupaj.set('vrOstalo', vsotaOstalo);
-        
+
         skupaj.preracunajSkupaj();
     };
 
@@ -298,10 +297,47 @@ define([
         this.regionList.show(grid);
         return grid;
     };
+    PostavkaCDveView.prototype.osvezi = function () {
+        var self = this;
+        var success = function () {
+            self.collection.fetch({
+                success: function () {
+                    self.collection.sort();
+                    self.dodajModel();
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        };
 
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
+        rpc.call('osveziTabeloC2', {
+            'programDelaId': self.dokument.get('id')
+        },
+        success,
+                Radio.channel('error').request('handler', 'xhr'));
+    };
+
+
+    PostavkaCDveView.prototype.onOsvezi = function () {
+        var self = this;
+        confirm({
+            text: i18next.t('std.potrdiPrepis'),
+            modalOptions: {
+                title: i18next.t("std.prepisiCDve"),
+                okText: i18next.t("std.prepisi")
+            },
+            ok: function () {
+                PostavkaCDveView.prototype.osvezi.apply(self, arguments);
+            }
+        });
+    };
 
     PostavkaCDveView.prototype.prepareToolbar = function () {
-        return null;
+        return [
+            [
+                this.buttons.osvezi
+            ]
+        ];
     };
 
     PostavkaCDveView.prototype.onUredi = function () {

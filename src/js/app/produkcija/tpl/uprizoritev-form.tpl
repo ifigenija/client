@@ -8,18 +8,16 @@
                             <span>{{t "uprizoritev.podatki"}}</span>
                         </legend>
                         <div data-fields="naslov,podnaslov"></div>
-                        <div class="besedilo-vnosno-polje">
-                            <div class="besedilo-naslov">
+                        <div class="vnosno-polje">
+                            <div class="naslov">
                                 <label class="">{{t "uprizoritev.besedilo"}}</label>
                                 <div class="help-block hidden">{{t "uprizoritev.d.besedilo"}}</div>
                                 <div class="error-block"></div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-10" data-editors="besedilo"></div>
-                                <div class="col-sm-2">
-                                    <a class="btn btn-default dodaj-besedilo" title="{{t "std.title.dodajBesedilo"}}">
-                                        <i class="fa fa-plus"> </i>
-                                    </a>
+                            <div style="width: 100%; display: table;">
+                                <div style="display: table-row">
+                                    <div class="izbor"  data-editors="besedilo">  </div>
+                                    <div class="dodaj" > <a class="btn btn-default gumb dodaj-besedilo" title="{{t "std.title.dodajBesedilo"}}"><i class="fa fa-plus"> </i></a> </div>
                                 </div>
                             </div>
                         </div>

@@ -8128,9 +8128,21 @@ fieldset.pomemben legend span {
   font-weight: bold;
   font-size: 130%;
 }
-.table .col-numbers-kazalnik {
-  text-align: right;
-  padding-right: 1cm;
+.vnosno-polje {
+  margin-bottom: 10px;
+}
+.vnosno-polje .izbor {
+  width: 70%;
+  display: table-cell;
+  overflow-x: hidden;
+}
+.vnosno-polje .dodaj {
+  display: table-cell;
+  padding-left: 5px;
+  vertical-align: top;
+}
+.vnosno-polje .gumb {
+  width: 100%;
 }
 /*
 Licenca GPLv3
