@@ -3,7 +3,7 @@
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-12 col-md-6 ">
-                    <fieldset class="pomembni">
+                    <fieldset>
                         <legend>
                             <span>{{t "uprizoritev.podatki"}}</span>
                         </legend>
@@ -25,7 +25,7 @@
                     </fieldset>
                 </div>
                 <div class="col-sm-12 col-md-6" >
-                    <fieldset class="" data-fields="naslovIzvirnika,podnaslovIzvirnika,delovniNaslov,kratkiNaslov,internacionalniNaslov">
+                    <fieldset data-fields="naslovIzvirnika,podnaslovIzvirnika,delovniNaslov,kratkiNaslov,internacionalniNaslov">
                         <legend>
                             <span>{{t "uprizoritev.naslovi"}}</span>
                         </legend>
@@ -36,14 +36,14 @@
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-12 col-md-6" >
-                    <fieldset class="" data-fields="producent,maticniOder,datumZacStudija,datumZakljucka,planiranoSteviloVaj">
+                    <fieldset data-fields="producent,maticniOder,datumZacStudija,datumZakljucka,planiranoSteviloVaj">
                         <legend>
                             <span>{{t "uprizoritev.produkcija"}}</span>
                         </legend>
                     </fieldset>
                 </div>
                 <div class="col-sm-12 col-md-6" >
-                    <fieldset class="" data-fields="zvrstSurs,zvrstUprizoritve,trajanje,stOdmorov,sloAvtor,krstna,prvaSlovenska,jeKoprodukcija">
+                    <fieldset data-fields="zvrstSurs,zvrstUprizoritve,trajanje,stOdmorov,sloAvtor,krstna,prvaSlovenska,jeKoprodukcija">
                         <legend>
                             <span>{{t "uprizoritev.lastnosti"}}</span>
                         </legend>
