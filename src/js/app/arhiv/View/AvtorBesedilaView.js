@@ -86,5 +86,9 @@ define([
         });
     };
 
+    AvtorBesedilaView.prototype.onSaveSuccess = function () {
+        this.trigger('avtor:save');
+    };
+
     return AvtorBesedilaView;
 });

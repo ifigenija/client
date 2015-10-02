@@ -34,7 +34,7 @@ define([
             prilogeR: '.region-priloge'
         }
     });
-    
+
     BesediloDokView.prototype.initialize = function (options) {
         var pogled = options.pogled;
         this.pogled = pogled ? pogled : null;
@@ -72,10 +72,12 @@ define([
             zapirajFormo: true
         });
 
+        view.on('avtor:save', this.avtorSave, this);
+
         this.avtorjiR.show(view);
 
     };
-    
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -87,6 +89,19 @@ define([
         });
         this.prilogeR.show(view);
     };
+
+    BesediloDokView.prototype.avtorSave = function () {
+        var self = this;
+        this.model.fetch({
+            success: function () {
+                var avtor = self.model.get('avtor');
+                if (avtor) {
+                    self.$('.besedilo-avtor').html(avtor);
+                }
+            }
+        });
+    };
+
 
     return BesediloDokView;
 });
