@@ -63,11 +63,11 @@
         <td class="col-numbers">{{u "formatNumber" transportniStroskiI}}</td>
     </tr>
     {{/if}}
-    {{#if dnevPZF}}
+    {{#if dnevPrvZadF}}
     <tr>
         <td>{{t "ep.dnevnicePZ"}}</td>
         <td class="col-numbers">{{u "formatNumber" dnevPrvZad}}</td>
-        <td class="col-numbers">{{u "formatNumber" dnevPrvZad}}</td>
+        <td class="col-numbers">{{u "formatNumber" dnevPrvZadF}}</td>
         <td class="col-numbers">{{u "formatNumber" dnevPrvZadI}}</td>
     </tr>
     {{/if}}
