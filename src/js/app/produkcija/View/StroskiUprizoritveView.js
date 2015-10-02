@@ -146,6 +146,7 @@ define([
     UprizoritevStrosekEditView.prototype.onSplosni = function () {
         this.$('.pnl-detail').removeClass('active');
         this.$('.pnl-splosno').addClass('active');
+        this.renderFormAndToolbar();
     };
 
     /**
