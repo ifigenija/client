@@ -11,6 +11,7 @@ define([
     'radio',
     '../Model/ProgramDokument',
     'app/Max/View/Confirm',
+    'underscore',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -23,6 +24,7 @@ define([
         Radio,
         ProgramDokument,
         confirm,
+        _,
         $
         ) {
 
@@ -130,7 +132,8 @@ define([
             }
         ]
     });
-    //dodamo skupno vrstico na konec
+
+    //dodamo nov model na konec tabele
     PostavkaCDveView.prototype.dodajModel = function () {
         var self = this;
         var model = new ProgramDokument.PostavkaCDvaModel();
@@ -140,10 +143,12 @@ define([
         model.set('podskupina', 0);
         model.set('naziv', 'SKUPAJ C.2.');
 
+        //dodamo model v collection
         self.collection.add(model, {
             error: Radio.channel('error').request('handler', 'xhr')
         });
 
+        //preračunamo skupno polje, seštevek vseh vsot
         self.preracunajSkupaj(self.collection);
     };
 
@@ -151,8 +156,21 @@ define([
 
         // Komparator za sort collectiona
         this.collection.comparator = function (a, b) {
-            var sa = a.get('skupina');
-            var sb = b.get('skupina');
+
+            var temp = a.get('skupina');
+            if ($.isNumeric(temp)) {
+                temp = '0000000000' + temp;
+                temp = temp.slice(temp.length - 10);
+            }
+            var sa = temp;
+
+            temp = b.get('skupina');
+            if ($.isNumeric(temp)) {
+                temp = '0000000000' + temp;
+                temp = temp.slice(temp.length - 10);
+            }
+            var sb = temp;
+
             var psa = a.get('podskupina');
             var psb = b.get('podskupina');
 
@@ -163,10 +181,12 @@ define([
             }
         };
 
+        //v kolikor nimamo podatkov v bazi jih ustvarimo
         if (this.collection.length <= 0) {
             this.osvezi();
         }
 
+        //collection sortiramo in dodamo model skupaj(seštevki vseh modelov)
         this.collection.sort();
         this.dodajModel();
         this.preracunajTabelo();
@@ -191,7 +211,6 @@ define([
      * Metoda ki preračuna podatke tabele
      * @returns {undefined}
      */
-
     PostavkaCDveView.prototype.preracunajTabelo = function () {
         var coll = this.collection;
         coll.sort();
@@ -206,27 +225,31 @@ define([
             var podskupina = model.get('podskupina');
 
             if (podskupina === 0 && i !== 0) {
-
-                //shranemo sestevek
+                //v kolikor je podskupina 0 shranemo vsote
                 var sestevek = coll.findWhere({'podskupina': 0, 'skupina': prejsnjaSkupina.toString()});
-                sestevek.set('vrPremiere', vsotaPremiera);
-                sestevek.set('vrPonovitvePremier', vsotaPonovitvePremier);
-                sestevek.set('vrPonovitvePrejsnjih', vsotaPonovitvePrejsnjih);
-                sestevek.set('vrGostovanjaZamejstvo', vsotaGostovanjaZamejstvo);
-                sestevek.set('vrFestivali', vasotaFestivali);
-                sestevek.set('vrGostovanjaInt', vsotaGostovanjaInt);
-                sestevek.set('vrOstalo', vsotaOstalo);
+                if (sestevek) {
+                    sestevek.set('vrPremiere', vsotaPremiera);
+                    sestevek.set('vrPonovitvePremier', vsotaPonovitvePremier);
+                    sestevek.set('vrPonovitvePrejsnjih', vsotaPonovitvePrejsnjih);
+                    sestevek.set('vrGostovanjaZamejstvo', vsotaGostovanjaZamejstvo);
+                    sestevek.set('vrFestivali', vasotaFestivali);
+                    sestevek.set('vrGostovanjaInt', vsotaGostovanjaInt);
+                    sestevek.set('vrOstalo', vsotaOstalo);
 
-                sestevek.preracunajSkupaj();
+                    //preračunamo vsoto vseh vsot
+                    sestevek.preracunajSkupaj();
 
-                sestevek.save({
-                    error: Radio.channel('error').request('handler', 'xhr')
-                });
+                    sestevek.save({
+                        error: Radio.channel('error').request('handler', 'xhr')
+                    });
+                }
 
+                //vsote ponastavimo nazaj na 0
                 vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
                         vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
                         vsotaOstalo = 0;
             } else if (podskupina !== 0) {
+                //v kolikor ni podskupina 0 prištejemo vrednosti
                 prejsnjaSkupina = model.get('skupina');
 
                 vsotaPremiera += model.get('vrPremiere');
@@ -236,7 +259,8 @@ define([
                 vasotaFestivali += model.get('vrFestivali');
                 vsotaGostovanjaInt += model.get('vrGostovanjaInt');
                 vsotaOstalo += model.get('vrOstalo');
-                
+
+                //preračunamo vsoto vseh vsot
                 model.preracunajSkupaj();
             }
 
@@ -244,6 +268,10 @@ define([
         this.preracunajSkupaj(coll);
     };
 
+    /**
+     * Preračunamo vsoto vseh vrednosti v modelu in jo shranemo v model namenjen prikazovanju skupnih vsot
+     * @returns returns {PostavkaCDveView_L16.PostavkaCDveView.collection|PostavkeView@call;extend.prototype.preracunajSkupaj.coll}
+     */
     PostavkaCDveView.prototype.preracunajSkupaj = function (coll) {
 
         var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
@@ -253,6 +281,7 @@ define([
             var model = coll.models[i];
             var podskupina = model.get('podskupina');
 
+            //podkupina 0 hrani vsote vrednosti skupin zato se preskoči
             if (podskupina !== 0) {
                 vsotaPremiera += model.get('vrPremiere');
                 vsotaPonovitvePremier += model.get('vrPonovitvePremier');
@@ -265,7 +294,7 @@ define([
 
         }
         var skupaj = coll.findWhere({'podskupina': 0, 'skupina': 'ZZZZZ1234'});
-        //shranemo vse vsote
+        //shranemo vse vsote v model namenjen izpisu vsoto vseh vredosti
         skupaj.set('vrPremiere', vsotaPremiera);
         skupaj.set('vrPonovitvePremier', vsotaPonovitvePremier);
         skupaj.set('vrPonovitvePrejsnjih', vsotaPonovitvePrejsnjih);
@@ -274,9 +303,16 @@ define([
         skupaj.set('vrGostovanjaInt', vsotaGostovanjaInt);
         skupaj.set('vrOstalo', vsotaOstalo);
 
-        skupaj.preracunajSkupaj();
+        //preačunamo vsoto vsot
+        skupaj.preracunajSkupaj(coll);
+
+        return coll;
     };
 
+    /**
+     * Metoda extenda trenutni izris metode in doda razred modelom, ki so namenjeni izpisu
+     * @returns {PostavkaCDveView_L16.Backgrid.Grid|PostavkeView@call;extend.prototype.renderList.grid}
+     */
     PostavkaCDveView.prototype.renderList = function () {
         var Povdarjena = Backgrid.Row.extend({
             /**
