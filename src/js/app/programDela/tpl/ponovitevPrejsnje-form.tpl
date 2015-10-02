@@ -38,6 +38,7 @@
                         <legend>
                             <span>{{t "ep.vrednostProjekta"}}</span>
                         </legend>
+                        <div class="help-block hidden">{{t "ep.d.celotnaVrednost"}}</div>
                         <div class="prikazno-polje clearfix"><div class="pull-right celotnaVrednost vrednost">{{u "formatNumber" celotnaVrednost}}</div></div>
                     </fieldset>
                 </div>
