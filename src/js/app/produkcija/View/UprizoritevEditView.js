@@ -82,7 +82,11 @@ define([
             'click .dodaj-besedilo': 'dodajBesedilo'
         }
     });
-
+    /**
+     * Skrijemo tabe da se ne vidi črta pri vnašanju uprizoritve
+     * obesimo besedilo change, da lahko izrisemo avtorje
+     * @returns {undefined}
+     */
     UprizoritevEditView.prototype.onRenderForm = function () {
         if (this.isNew() || this.options.pogled === "modal") {
             this.$('.nav.nav-tabs').addClass('hidden');
@@ -116,8 +120,6 @@ define([
     };
 
     UprizoritevEditView.prototype.dodajBesedilo = function () {
-        console.log('Dodaj');
-
         var model = new BesediloModel.Model();
         var editor = this.form.fields.besedilo.editor;
 
@@ -127,7 +129,6 @@ define([
             form: this.form,
             title: i18next.t('besedilo.nova')
         });
-
     };
 
 
