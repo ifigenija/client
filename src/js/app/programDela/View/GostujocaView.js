@@ -18,10 +18,14 @@ define([
         schema,
         Handlebars
         ) {
+    
+    var sch = schema.toFormSchema().schema;
+    
+    sch.zaproseno.help = i18next.t('ep.zaprosenoGost');
 
     var GostujocaView = EnotaProgramaView.extend({
         formTemplate: formTpl,
-        schema: schema.toFormSchema().schema,
+        schema: sch,
         detailName: 'gostujoci',
         formTitle: i18next.t('gostujoca.title'),
         gridMeta: [

@@ -21,9 +21,13 @@ define([
         schema
         ) {
     
+    var sch = schema.toFormSchema().schema;
+    
+    sch.zaproseno.help = i18next.t('ep.zaprosenoPonPrem');
+    
     var PonovitevView = EnotaProgramaView.extend({
         formTemplate: formTpl,
-        schema: schema.toFormSchema().schema,
+        schema: sch,
         detailName: 'ponovitvePremiere',
         formTitle: i18next.t('ponovitevPremiere.title'),
         gridMeta: [

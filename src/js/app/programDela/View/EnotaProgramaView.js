@@ -19,6 +19,7 @@ define([
     'template!../tpl/enota-programa.tpl',
     'template!../tpl/prenesi.tpl',
     'template!../tpl/izracunaj-form.tpl',
+    'underscore',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -36,6 +37,7 @@ define([
         enotaTpl,
         prenesiTpl,
         izracunajTpl,
+        _,
         $
         ) {
 
@@ -534,6 +536,11 @@ define([
             template: izracunajTpl,
             initialize: function () {
                 this.model.preracunajZaproseno();
+            },
+            serializeData: function(){
+                return _.extend(this.model.toJSON(), {
+                    help: this.help
+                });
             }
         });
 

@@ -20,11 +20,15 @@ define([
         ZapisiLayout,
         schema
         ) {
+    
+    var sch = schema.toFormSchema().schema;
+    
+    sch.zaproseno.help = i18next.t('ep.zaprosenoRazno');
 
     var RaznoView = EnotaProgramaView.extend({
         template: tpl,
         formTemplate: formTpl,
-        schema: schema.toFormSchema().schema,
+        schema: sch,
         detailName: 'programiRazno',
         formTitle: i18next.t('programRazno.title'),
         disabled: false,

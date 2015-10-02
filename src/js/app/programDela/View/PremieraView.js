@@ -26,10 +26,14 @@ define([
         kopFormTpl,
         kopShema
         ) {
+    
+    var sch = schema.toFormSchema().schema;
+    
+    sch.zaproseno.help = i18next.t('ep.zaprosenoPrem');
 
     var PremieraView = EnotaProgramaView.extend({
         formTemplate: formTpl,
-        schema: schema.toFormSchema().schema,
+        schema: sch,
         detailName: 'premiere',
         formTitle: i18next.t('premiera.title'),
         gridMeta: [

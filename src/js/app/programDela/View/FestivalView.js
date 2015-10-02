@@ -16,10 +16,14 @@ define([
         ZapisiLayout,
         schema
         ) {
+    
+    var sch = schema.toFormSchema().schema;
+    
+    sch.zaproseno.help = i18next.t('ep.zaprosenoFest');
 
     var FestivalView = EnotaProgramaView.extend({
         formTemplate: formTpl,
-        schema: schema.toFormSchema().schema,
+        schema: sch,
         detailName: 'festivali',
         formTitle: i18next.t('festival.title'),
         gridMeta: [
