@@ -74,7 +74,7 @@ define([
         formTemplate: formTpl,
         schema: shema.toFormSchema().schema,
         regions: {
-            regionDetail: '.region-detail',
+            regionDetail: '.region-uprizoritev-detail',
             regionTabs: '.uprizoritev-tabs',
             prilogeR: '.region-priloge'
         },

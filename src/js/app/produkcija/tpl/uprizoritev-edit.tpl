@@ -16,7 +16,7 @@
             <div class="region-form"></div>
             <div class="region-priloge"></div>
         </div>
-        <div role="tabpanel" class="tab-pane pnl-detail region-detail"></div>
+        <div role="tabpanel" class="tab-pane pnl-detail region-uprizoritev-detail"></div>
     </div>
 </div>
 
