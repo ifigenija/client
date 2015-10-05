@@ -68,14 +68,13 @@ define([
     UprizoritevStrosekEditView.prototype.pridobiPodatkeUprizoritve = function (options) {
         var uprizoritev = this.model.get('id');
         if (uprizoritev) {
-            var datum = this.model.get('datumZacStudija');
-
+            
             var format = 'YYYY-MM-DDTHH:mm:ssZZ';
-            var datumZac = Moment(datum);
-            var datumKon = Moment(datum);
+            var datumZac = Moment();
+            var datumKon = Moment();
 
-            var konec = datumKon.add(10, 'y').format(format);
-            var zacetek = datumZac.subtract(10, 'y').format(format);
+            var konec = datumKon.add(20, 'y').format(format);
+            var zacetek = datumZac.subtract(20, 'y').format(format);
 
             var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
             rpc.call('podatkiUprizoritve', {
