@@ -1211,6 +1211,9 @@
         "koprodukcija": "O koprodukciji",
         "sredstva": "O sredstvih",
         "zvrst": "Zvrst",
+        "avtor": "Avtor",
+        "reziser": "Režiser",
+        "datum": "Datum",
         "d": {
             "stProdukcij": "Skupno število festivalskih produkcij",
             "stPredstav": "Skupno število predstav",
@@ -1230,7 +1233,10 @@
             "stHonorarnihZun   ": "Št. honorarnih zunanjih sodelavcev:",
             "opredelitevDrugiViri": "Opredelitev drugih virov",
             "vlozekKoproducenta": "Vložek producenta",
-            "zvrst": ""
+            "avtor": "Avtor",
+            "reziser": "Režiser",
+            "datum": "Datum",
+            "zvrst": "Zvrst"
         }
     },
     "premiera": {
@@ -1581,9 +1587,11 @@
         "dokument": "Program dela",
         "prizorisce": "Prizorišče(šča)",
         "trajanje": "Trajanje priprave dogodka (od-do)",
+        "zvrst": "Zvrst",
         "d": {
             "dokument": "Program dela",
             "prizorisce": "",
+            "zvrst": "Zvrst",
             "trajanje": ""
         }
     },
