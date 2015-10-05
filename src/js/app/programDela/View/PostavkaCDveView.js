@@ -197,11 +197,11 @@ define([
                 if (model.changedAttributes() || _.isObject(schema.get('optionValues'))) {
                     model.preracunajSkupaj();
                     model.save({}, {
+                        success: function () {
+                            self.preracunajTabelo();
+                        },
                         error: Radio.channel('error').request('handler', 'xhr')
                     });
-
-                    self.preracunajTabelo();
-
                 }
             }
         });
@@ -213,7 +213,6 @@ define([
      */
     PostavkaCDveView.prototype.preracunajTabelo = function () {
         var coll = this.collection;
-        coll.sort();
 
         var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
                 vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
@@ -239,7 +238,7 @@ define([
                     //preračunamo vsoto vseh vsot
                     sestevek.preracunajSkupaj();
 
-                    sestevek.save({
+                    sestevek.save({}, {
                         error: Radio.channel('error').request('handler', 'xhr')
                     });
                 }
@@ -260,10 +259,9 @@ define([
                 vsotaGostovanjaInt += model.get('vrGostovanjaInt');
                 vsotaOstalo += model.get('vrOstalo');
 
-                //preračunamo vsoto vseh vsot
+                //preračunamo vsoto vseh vrednosti
                 model.preracunajSkupaj();
             }
-
         }
         this.preracunajSkupaj(coll);
     };
@@ -305,7 +303,6 @@ define([
 
         //preačunamo vsoto vsot
         skupaj.preracunajSkupaj(coll);
-
         return coll;
     };
 
@@ -337,6 +334,7 @@ define([
         this.regionList.show(grid);
         return grid;
     };
+
     PostavkaCDveView.prototype.osvezi = function () {
         var self = this;
         var success = function () {
@@ -357,7 +355,6 @@ define([
         success,
                 Radio.channel('error').request('handler', 'xhr'));
     };
-
 
     PostavkaCDveView.prototype.onOsvezi = function () {
         var self = this;
