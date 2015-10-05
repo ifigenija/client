@@ -499,17 +499,17 @@ define([
         if (view.$('.avtorskePravice').is(':checked')) {
             model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
         }
-        if (view.$('.stHonorarnih').is(':checked')) {
-            model.set('stHonorarnih', uprizoritev.NaDo.stHonorarnih);
+        if (view.$('.stHonorarnihZun').is(':checked')) {
+            model.set('stHonorarnihZun', uprizoritev.NaDo.stHonorarnihZun);
         }
-        if (view.$('.stHonorarnihIgr').is(':checked')) {
-            model.set('stHonorarnihIgr', uprizoritev.NaDo.stHonorarnihIgr);
+        if (view.$('.stHonorarnihZunIgr').is(':checked')) {
+            model.set('stHonorarnihZunIgr', uprizoritev.NaDo.stHonorarnihZunIgr);
         }
-        if (view.$('.stHonorarnihIgrTujJZ').is(':checked')) {
-            model.set('stHonorarnihIgrTujJZ', uprizoritev.NaDo.stHonorarnihIgrTujJZ);
+        if (view.$('.stHonorarnihZunIgrTujJZ').is(':checked')) {
+            model.set('stHonorarnihZunIgrTujJZ', uprizoritev.NaDo.stHonorarnihZunIgrTujJZ);
         }
-        if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
-            model.set('stHonorarnihIgrSamoz', uprizoritev.NaDo.stHonorarnihIgrSamoz);
+        if (view.$('.stHonorarnihZunSamoz').is(':checked')) {
+            model.set('stHonorarnihZunSamoz', uprizoritev.NaDo.stHonorarnihZunSamoz);
         }
         if (view.$('.stZaposDrug').is(':checked')) {
             model.set('stZaposDrug', uprizoritev.stZaposDrug);

@@ -40,7 +40,7 @@
                     <div class="attribut">{{t "ep.obiskDoma"}}: </div>
                 </div>
             </fieldset>
-            <fieldset data-fields="stZaposlenih,stHonorarnih">
+            <fieldset data-fields="stZaposlenih,stHonorarnihZun">
                 <legend>
                     <span>{{t "ep.sodelavci"}}</span>
                 </legend>
