@@ -6,7 +6,6 @@ define([
     'i18next',
     'app/Dokument/View/PostavkeView',
     'template!../tpl/postavkaCDve-form.tpl',
-    'app/Zapisi/View/ZapisiLayout',
     'formSchema!postavkaCDve',
     'radio',
     '../Model/ProgramDokument',
@@ -19,7 +18,6 @@ define([
         i18next,
         PostavkeView,
         formTpl,
-        ZapisiLayout,
         schema,
         Radio,
         ProgramDokument,
@@ -133,9 +131,10 @@ define([
         ]
     });
 
-    //dodamo nov model na konec tabele
-    PostavkaCDveView.prototype.dodajModel = function () {
-        var self = this;
+    //collection sortiramo in dodamo model skupaj(seštevki vseh modelov)
+    PostavkaCDveView.prototype.dopolniTabelo = function () {
+        this.collection.sort();
+
         var model = new ProgramDokument.PostavkaCDvaModel();
 
         model.set('razred', 'Skupaj');
@@ -144,12 +143,12 @@ define([
         model.set('naziv', 'SKUPAJ C.2.');
 
         //dodamo model v collection
-        self.collection.add(model, {
+        this.collection.add(model, {
             error: Radio.channel('error').request('handler', 'xhr')
         });
 
-        //preračunamo skupno polje, seštevek vseh vsot
-        self.preracunajSkupaj(self.collection);
+        //preračunamo vrednosti tabele
+        this.preracunajTabelo();
     };
 
     PostavkaCDveView.prototype.initialize = function () {
@@ -186,10 +185,7 @@ define([
             this.osvezi();
         }
 
-        //collection sortiramo in dodamo model skupaj(seštevki vseh modelov)
-        this.collection.sort();
-        this.dodajModel();
-        this.preracunajTabelo();
+        this.dopolniTabelo();
 
         this.listenTo(this.collection, "backgrid:edited", function (model, schema, command) {
             var self = this;
@@ -198,6 +194,7 @@ define([
                     model.preracunajSkupaj();
                     model.save({}, {
                         success: function () {
+                            //na novo preračunamo vrednosti tabele
                             self.preracunajTabelo();
                         },
                         error: Radio.channel('error').request('handler', 'xhr')
@@ -335,14 +332,16 @@ define([
         return grid;
     };
 
+    /**
+     * Osvezimo/prepišemo vrednosti tabele
+     * @returns {undefined}
+     */
     PostavkaCDveView.prototype.osvezi = function () {
         var self = this;
         var success = function () {
             self.collection.fetch({
                 success: function () {
-                    self.collection.sort();
-                    self.dodajModel();
-                    self.preracunajTabelo();
+                    self.dopolniTabelo();
                 },
                 error: Radio.channel('error').request('handler', 'xhr')
             });
