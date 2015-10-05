@@ -52,7 +52,7 @@
                             <span>{{t "ep.obiskovalci"}}</span>
                         </legend>
                     </fieldset>
-                    <fieldset data-fields="stZaposUmet,stZaposDrug,stHonorarnih,stHonorarnihIgr,stHonorarnihIgrTujJZ,stHonorarnihIgrSamoz">
+                    <fieldset data-fields="stZaposUmet,stZaposDrug,stHonorarnihZun,stHonorarnihZunIgr,stHonorarnihZunIgrTujJZ,stHonorarnihZunSamoz">
                         <legend>
                             <span>{{t "ep.sodelavci"}}</span>
                         </legend>

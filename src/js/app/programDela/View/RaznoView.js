@@ -74,7 +74,7 @@ define([
                 headerCell: 'number',
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.stHonorarnih'),
+                label: i18next.t('ep.stHonorarnihZun'),
                 name: 'stHonoranih',
                 total: 'count',
                 sortable: true

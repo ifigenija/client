@@ -396,7 +396,7 @@ define([
             var view = new View({
                 model: this.model
             });
-            
+
             var PM = Modal.extend({
                 className: 'prenesi-modal modal'
             });
@@ -499,17 +499,17 @@ define([
         if (view.$('.avtorskePravice').is(':checked')) {
             model.set('avtorskePravice', uprizoritev.NaDo.avtorskePravice);
         }
-        if (view.$('.stHonorarnih').is(':checked')) {
-            model.set('stHonorarnih', uprizoritev.NaDo.stHonorarnih);
+        if (view.$('.stHonorarnihZun').is(':checked')) {
+            model.set('stHonorarnihZun', uprizoritev.NaDo.stHonorarnihZun);
         }
-        if (view.$('.stHonorarnihIgr').is(':checked')) {
-            model.set('stHonorarnihIgr', uprizoritev.NaDo.stHonorarnihIgr);
+        if (view.$('.stHonorarnihZunIgr').is(':checked')) {
+            model.set('stHonorarnihZunIgr', uprizoritev.NaDo.stHonorarnihZunIgr);
         }
-        if (view.$('.stHonorarnihIgrTujJZ').is(':checked')) {
-            model.set('stHonorarnihIgrTujJZ', uprizoritev.NaDo.stHonorarnihIgrTujJZ);
+        if (view.$('.stHonorarnihZunIgrTujJZ').is(':checked')) {
+            model.set('stHonorarnihZunIgrTujJZ', uprizoritev.NaDo.stHonorarnihZunIgrTujJZ);
         }
-        if (view.$('.stHonorarnihIgrSamoz').is(':checked')) {
-            model.set('stHonorarnihIgrSamoz', uprizoritev.NaDo.stHonorarnihIgrSamoz);
+        if (view.$('.stHonorarnihZunSamoz').is(':checked')) {
+            model.set('stHonorarnihZunSamoz', uprizoritev.NaDo.stHonorarnihZunSamoz);
         }
         if (view.$('.stZaposDrug').is(':checked')) {
             model.set('stZaposDrug', uprizoritev.stZaposDrug);
@@ -537,7 +537,7 @@ define([
             initialize: function () {
                 this.model.preracunajZaproseno();
             },
-            serializeData: function(){
+            serializeData: function () {
                 return _.extend(this.model.toJSON(), {
                     help: this.help
                 });
@@ -563,7 +563,7 @@ define([
                 className: 'table table-striped table-condensed',
                 model: this.model
             });
-            
+
             var IM = Modal.extend({
                 className: 'zaproseno-modal modal'
             });
@@ -589,7 +589,7 @@ define([
     EnotaProgramaView.prototype.prepisi = function (modal) {
         var vsota = modal.options.content.model.get('vsota');
         var form = this.form;
-        
+
         this.model.set('zaproseno', vsota);
         form.fields.zaproseno.setValue(vsota);
         form.trigger('change');
@@ -657,13 +657,13 @@ define([
             var polja = form.fields;
 
             var f = Handlebars.formatNumber;
-            
+
             var vsota = model.get('vsota');
             var zaproseno = polja.zaproseno.getValue();
             var razlika = vsota - zaproseno;
-            
+
             if (razlika < -0.01) {
-                polja.zaproseno.setError(i18next.t("std.napaka.zaproseno1") + f(vsota, 2));
+                polja.zaproseno.setError(i18next.t("std.napaka.zaproseno1") + " " + f(vsota, 2));
 
             } else {
                 polja.zaproseno.clearError();

@@ -67,35 +67,35 @@
         </tr>
         <tr>
             <td>
-                <input class="stHonorarnih" type="checkbox">
+                <input class="stHonorarnihZun" type="checkbox">
             </td>
-            <td>{{t "ep.stHonorarnih"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stHonorarnih 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnih 0}}</td>
+            <td>{{t "ep.stHonorarnihZun"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnihZun 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnihZun 0}}</td>
         </tr>
         <tr>
             <td>
-                <input class="stHonorarnihIgr" type="checkbox">
+                <input class="stHonorarnihZunIgr" type="checkbox">
             </td>
-            <td>{{t "ep.stHonorarnihIgr"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgr 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnihIgr 0}}</td>
+            <td>{{t "ep.stHonorarnihZunIgr"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnihZunIgr 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnihZunIgr 0}}</td>
         </tr>
         <tr>
             <td>
-                <input class="stHonorarnihIgrTujJZ" type="checkbox">
+                <input class="stHonorarnihZunIgrTujJZ" type="checkbox">
             </td>
-            <td>{{t "ep.stHonorarnihIgrTujJZ"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrTujJZ 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnihIgrTujJZ 0}}</td>
+            <td>{{t "ep.stHonorarnihZunIgrTujJZ"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnihZunIgrTujJZ 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnihZunIgrTujJZ 0}}</td>
         </tr>
         <tr>
             <td>
-                <input class="stHonorarnihIgrSamoz" type="checkbox">
+                <input class="stHonorarnihZunSamoz" type="checkbox">
             </td>
-            <td>{{t "ep.stHonorarnihIgrSamoz"}}</td>
-            <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrSamoz 0}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnihIgrSamoz 0}}</td>
+            <td>{{t "ep.stHonorarnihZunSamoz"}}</td>
+            <td class="col-numbers">{{u "formatNumber" stHonorarnihZunSamoz 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.stHonorarnihZunSamoz 0}}</td>
         </tr>
         <tr>
             <td>

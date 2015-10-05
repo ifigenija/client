@@ -42,7 +42,7 @@ define([
     var OsebaView = SeznamView.extend({
         url: baseUrl + '/rest/oseba',
         title: i18next.t('oseba.title'),
-        zapirajFormo: true,
+        zapirajFormo: false,
         skrivajTabelo: true,
         filterSchema: filterSch,
         columns: [

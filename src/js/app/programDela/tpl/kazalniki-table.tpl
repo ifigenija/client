@@ -9,35 +9,35 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{t "kazalnik.stPremier"}}</td>
+                <td>{{t "kazalnik.stPremier"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stPremier 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stPonPrej"}}</td>
+                <td>{{t "kazalnik.stPonPrej"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stPonPrej 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stVsehPredstav"}}</td>
+                <td>{{t "kazalnik.stVsehPredstav"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stVsehPredstav 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stObiskNekom"}}</td>
+                <td>{{t "kazalnik.stObiskNekom"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stObiskNekom 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stProdVstopnic"}}</td>
+                <td>{{t "kazalnik.stProdVstopnic"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stProdVstopnic 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stIzvGostovanjSlo"}}</td>
+                <td>{{t "kazalnik.stIzvGostovanjSlo"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvGostovanjSlo 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stIzvGostovanjZam"}}</td>
+                <td>{{t "kazalnik.stIzvGostovanjZam"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvGostovanjZam 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stIzvGostovanjInt"}}</td>
+                <td>{{t "kazalnik.stIzvGostovanjInt"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvGostovanjInt 0}}</td>
             </tr>
         </tbody>
@@ -188,245 +188,267 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{t "kazalnik.stPremier"}}</td>
+                <td>{{t "kazalnik.stPremier"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stPremier 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stPonPrej"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stPonPrejVelikih"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stPremierVelikih 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stPonPrejMalih"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stPremierMalih 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stPonPrejMalihKopr"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stPremierMalihKopr 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stPonPrejSredKopr"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stPremierSredKopr 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stPonPrejVelikihKopr"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stPremierVelikihKopr 0}}</td>
+            </tr>
+            <tr>
+                <td>{{t "kazalnik.stPonPrej"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stPonPrej 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stPonPrejVelikih"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stPonPrejVelikih"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stPonPrejVelikih 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stPonPrejMalih"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stPonPrejMalih"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stPonPrejMalih 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stPonPrejMalihKopr"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stPonPrejMalihKopr"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stPonPrejMalihKopr 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stPonPrejSredKopr"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stPonPrejSredKopr"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stPonPrejSredKopr 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stPonPrejVelikihKopr"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stPonPrejVelikihKopr"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stPonPrejVelikihKopr 0}}</td>
             </tr>
-            <tr><!--možna decimalna števila-->
-                <td>{{t "kazalnik.vrPS1"}}</td>
+            <tr>
+                <td>{{t "kazalnik.vrPS1"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" vrPS1}}</td>
             </tr>
             <tr>
-                <td class="">{{t "kazalnik.vrPS1Do"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.vrPS1Do"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" vrPS1Do}}</td>
             </tr>
             <tr>
-                <td class="">{{t "kazalnik.vrPS1Mat"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.vrPS1Mat"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" vrPS1Mat}}</td>
             </tr>
             <tr>
-                <td class="">{{t "kazalnik.vrPS1GostovSZ"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.vrPS1GostovSZ"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" vrPS1GostovSZ}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stIzvNekomerc"}}</td>
+                <td>{{t "kazalnik.stIzvNekomerc"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvNekomerc 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stIzvPremProd"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stIzv 0}}</td>
+                <td>{{t "kazalnik.stIzvPrem"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPrem 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.oderDom"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvDoma 0}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.oderDom"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPremDoma 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.gostZam"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvPonPremZamejo 0}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.oderSloZam"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPremKopr 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.gostSlo"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.gostSlo"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvPonPremGost 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.gostTuj"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.gostZam"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPonPremZamejo 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.gostTuj"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvPonPremInt 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.oderSloZam"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvKopr 0}}</td>
-            </tr>
-            <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.oderKopTuj"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.oderKopTuj"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvPonPremKoprInt 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stIzvPonPrej"}}</td>
+                <td>{{t "kazalnik.stIzvPonPrej"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvPonPrej 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.oderDom"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.oderDom"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvPonPrejDoma 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.gostZam"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvPonPrejZamejo 0}}</td>
-            </tr>
-            <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.gostSlo"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvPonPrejGost 0}}</td>
-            </tr><tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.gostTuj"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvPonPrejInt 0}}</td>
-            </tr><tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.oderSloZam"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.oderSloZam"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvPonPrejKopr 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.oderKopTuj"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.gostSlo"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPonPrejGost 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.gostZam"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPonPrejZamejo 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.gostTuj"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPonPrejInt 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.oderKopTuj"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvPonPrejKoprInt 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stObiskPonPrem"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stObisk 0}}</td>
-            </tr>
-            <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.obiskDom"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stObiskDoma 0}}</td>
-            </tr>
-            <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.obiskSloZam"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stObiskKopr 0}}</td>
-            </tr>
-            <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.obiskKopTuj"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stObiskPonPremKoprInt 0}}</td>
-            </tr>
-            <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.obiskGostSlo"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stObiskPonPremGost 0}}</td>
-            </tr>
-            <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.obiskGostZam"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stObiskPonPremZamejo 0}}</td>
-            </tr>
-            <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.obiskGostInt"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stObiskPonPremInt 0}}</td>
-            </tr>
-            <tr>
-                <td>{{t "kazalnik.stIzvGostuj"}}</td>
+                <td>{{t "kazalnik.stIzvGostuj"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvGostuj 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stIzvOstalihNek"}}</td>
+                <td>{{t "kazalnik.stIzvOstalihNek"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvOstalihNek 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stIzvGostovanjSlo"}}</td>
+                <td>{{t "kazalnik.stIzvGostovanjSlo"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvGostovanjSlo 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stIzvGostovanjZam"}}</td>
+                <td>{{t "kazalnik.stIzvGostovanjZam"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvGostovanjZam 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stIzvGostovanjInt"}}</td>
+                <td>{{t "kazalnik.stIzvGostovanjInt"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stIzvGostovanjInt 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stObiskNekom"}}</td>
+                <td>{{t "kazalnik.stObiskPrem"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stObiskPrem 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.obiskDom"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stObiskPremDoma 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.obiskSloZam"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stObiskPremKopr 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.obiskKopTuj"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stObiskPonPremKoprInt 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.obiskGostSlo"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stObiskPonPremGost 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.obiskGostZam"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stObiskPonPremZamejo 0}}</td>
+            </tr>
+            <tr>
+                <td class="kazalnik-padleft">- {{t "kazalnik.obiskGostInt"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stObiskPonPremInt 0}}</td>
+            </tr>
+            <tr>
+                <td>{{t "kazalnik.stObiskNekom"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stObiskNekom 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.obiskPov"}}</td>
-                <td class="col-numbers">{{u "formatNumber" obiskPov}}</td>
-            </tr>
-            <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stObiskNekomMat"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stObiskNekomMat"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stObiskNekomMat 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stObiskNekomGostSlo"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stObiskNekomGostSlo"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stObiskNekomGostSlo 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stObiskNekomGostZam"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stObiskNekomGostZam"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stObiskNekomGostZam 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stObiskNekomGostInt"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stObiskNekomGostInt"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stObiskNekomGostInt 0}}</td>
             </tr>
-            <tr><!--povprecje-->
-                <td>{{t "kazalnik.avgObiskPrired"}}</td>
+            <tr>
+                <td>{{t "kazalnik.avgObiskPrired"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" avgObiskPrired}}</td>
             </tr>
-            <tr><!--povprecje-->
-                <td>{{t "kazalnik.avgZasedDvoran"}}</td>
+            <tr>
+                <td>{{t "kazalnik.obiskPov"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" obiskPov}}</td>
+            </tr>
+            <tr>
+                <td>{{t "kazalnik.avgZasedDvoran"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" avgZasedDvoran}}</td>
             </tr>
-            <tr><!--povprecje-->
-                <td>{{t "kazalnik.avgCenaVstopnice"}}</td>
+            <tr>
+                <td>{{t "kazalnik.avgCenaVstopnice"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" avgCenaVstopnice}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stProdVstopnic"}}</td>
+                <td>{{t "kazalnik.stProdVstopnic"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stProdVstopnic 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stKoprodukcij"}}</td>
+                <td>{{t "kazalnik.stKoprodukcij"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stKoprodukcij 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stKoprodukcijInt"}}</td>
+                <td>{{t "kazalnik.stKoprodukcijInt"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stKoprodukcijInt 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stKoprodukcijNVO"}}</td>
+                <td>{{t "kazalnik.stKoprodukcijNVO"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stKoprodukcijNVO 0}}</td>
             </tr>        
             <tr>
-                <td>{{t "kazalnik.stZaposlenih"}}</td>
+                <td>{{t "kazalnik.stZaposlenih"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stZaposlenih 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stZaposIgralcev"}}</td>
+                <td>{{t "kazalnik.stZaposIgralcev"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stZaposIgralcev 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.avgStNastopovIgr"}}</td>
+                <td>{{t "kazalnik.avgStNastopovIgr"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" avgStNastopovIgr}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.stHonorarnih"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stHonorarnih 0}}</td>
+                <td>{{t "kazalnik.stHonorarnihZun"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stHonorarnihZun 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stHonorarnihIgrSamoz" 0}}</td>
-                <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrSamoz 0}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stHonorarnihZunSamoz"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stHonorarnihZunSamoz 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stHonorarnihIgr"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stHonorarnihIgr 0}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stHonorarnihZunIgr"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stHonorarnihZunIgr 0}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.stHonorarnihIgrTujJZ"}}</td>
-                <td class="col-numbers">{{u "formatNumber" stHonorarnihIgrTujJZ 0}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.stHonorarnihZunIgrTujJZ"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stHonorarnihZunIgrTujJZ 0}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.sredstvaInt"}}</td>
+                <td>{{t "kazalnik.sredstvaInt"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaInt}}</td>
             </tr>
             <tr>
-                <td>{{t "kazalnik.sredstvaAvt"}}</td>
+                <td>{{t "kazalnik.sredstvaAvt"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaAvt}}</td>
             </tr>
             <tr>
-                <td class="kazalnik-padleft">{{t "kazalnik.sredstvaAvtSamoz"}}</td>
+                <td class="kazalnik-padleft">- {{t "kazalnik.sredstvaAvtSamoz"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaAvtSamoz}}</td>
             </tr>
         </tbody>

@@ -30,10 +30,10 @@
             <div class="prikazno-polje clearfix">{{t "podUpr.avtorskePravice"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Do.avtorskePravice }}</div></div>
             <div class="prikazno-polje clearfix">{{t "podUpr.avtorskiHonorarji"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Do.avtorskiHonorarji}}</div></div>
             <div class="prikazno-polje clearfix padleft">- {{t "podUpr.avtorskiHonorarjiSamoz"}}: <div class="pull-right">{{u "formatNumber" stroski.Do.avtorskiHonorarjiSamoz}}</div></div>
-            <div class="prikazno-polje clearfix">{{t "podUpr.stHonorarnih"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Do.stHonorarnih 0}}</div></div>
-            <div class="prikazno-polje clearfix">{{t "podUpr.stHonorarnihIgr"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Do.stHonorarnihIgr 0}}</div></div>
-            <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihIgrSamoz"}}: <div class="pull-right">{{u "formatNumber" stroski.Do.stHonorarnihIgrSamoz 0}}</div></div>
-            <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihIgrTujJZ"}}: <div class="pull-right">{{u "formatNumber" stroski.Do.stHonorarnihIgrTujJZ 0}}</div></div>
+            <div class="prikazno-polje clearfix">{{t "podUpr.stHonorarnihZun"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Do.stHonorarnihZun 0}}</div></div>
+            <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihZunSamoz"}}: <div class="pull-right">{{u "formatNumber" stroski.Do.stHonorarnihZunSamoz 0}}</div></div>
+            <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihZunIgr"}}: <div class="pull-right">{{u "formatNumber" stroski.Do.stHonorarnihZunIgr 0}}</div></div>
+            <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihZunIgrTujJZ"}}: <div class="pull-right">{{u "formatNumber" stroski.Do.stHonorarnihZunIgrTujJZ 0}}</div></div>
             <hr>
             <div class="prikazno-polje clearfix">{{t "stroskovnik.vsotaDo"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Do.nasDelez}}</div></div>
         </fieldset>
@@ -47,10 +47,10 @@
             <div class="prikazno-polje clearfix">{{t "podUpr.avtorskePravice"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Na.avtorskePravice }}</div></div>
             <div class="prikazno-polje clearfix">{{t "podUpr.avtorskiHonorarji"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Na.avtorskiHonorarji }}</div></div>
             <div class="prikazno-polje clearfix padleft">- {{t "podUpr.avtorskiHonorarjiSamoz"}}: <div class="pull-right">{{u "formatNumber" stroski.Na.avtorskiHonorarjiSamoz }}</div></div>
-            <div class="prikazno-polje clearfix">{{t "podUpr.stHonorarnih"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Na.stHonorarnih 0}}</div></div>
-            <div class="prikazno-polje clearfix">{{t "podUpr.stHonorarnihIgr"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Na.stHonorarnihIgr 0}}</div></div>
-            <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihIgrSamoz"}}: <div class="pull-right">{{u "formatNumber" stroski.Na.stHonorarnihIgrSamoz 0}}</div></div>
-            <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihIgrTujJZ"}}: <div class="pull-right">{{u "formatNumber" stroski.Na.stHonorarnihIgrTujJZ 0}}</div></div>
+            <div class="prikazno-polje clearfix">{{t "podUpr.stHonorarnihZun"}}: <div class="pull-right vrednost">{{u "formatNumber" stroski.Na.stHonorarnihZun 0}}</div></div>
+            <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihZunSamoz"}}: <div class="pull-right">{{u "formatNumber" stroski.Na.stHonorarnihZunSamoz 0}}</div></div>
+            <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihZunIgr"}}: <div class="pull-right">{{u "formatNumber" stroski.Na.stHonorarnihZunIgr 0}}</div></div>
+            <div class="prikazno-polje clearfix padleft">- {{t "podUpr.stHonorarnihZunIgrTujJZ"}}: <div class="pull-right">{{u "formatNumber" stroski.Na.stHonorarnihZunIgrTujJZ 0}}</div></div>
             <hr>
             <div class="prikazno-polje clearfix">{{t "stroskovnik.vsotaNa"}}: <div class="pull-right vrednost">{{u "formatNumber" vsotaNa}}</div></div>
         </fieldset>
