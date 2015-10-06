@@ -25,28 +25,15 @@ define([
         schema,
         schemaPogodba,
         i18next,
-        Backgrid,
         Modal,
         Radio,
-        _,
         baseUrl,
         Backbone
         ) {
 
     var AlternacijaView = PostavkeView.extend({
         formTemplate: formTpl,
-        schema: schema.toFormSchema(/*{
-         oseba: {
-         editorAttrs: {
-         disabled: true
-         }
-         },
-         funkcija: {
-         editorAttrs: {
-         disabled: true
-         }
-         }
-         }*/).schema,
+        schema: schema.toFormSchema().schema,
         title: i18next.t('alternacija.title'),
         detailName: 'alternacije',
         formTitle: i18next.t(''),
@@ -54,13 +41,6 @@ define([
             "click .pogodba-dodaj": "dodaj:pogodbo"
         },
         gridMeta: [
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('alternacija.sort'),
-                name: 'sort',
-                sortable: true
-            },
             {
                 cell: 'string',
                 editable: false,

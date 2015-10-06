@@ -651,7 +651,7 @@
         "podatki": "Glavni podatki",
         "dodatniPodatki": "Podrobno",
         "d": {
-            "sifra": "$t(ent.d.sifra)",
+            "sifra": "Oznaka",
             "funkcija": "",
             "oseba": "",
             "zacetek": "Začetek opravljanja funkcije",
@@ -661,6 +661,9 @@
             "pogodba": "",
             "privzeti": "Ali je privzeti",
             "pomembna": "Ali je alternacija pomembna in se jo prikaže v programu dela?"
+        },
+        "t":{
+            "sort": "Zaporedna"
         }
     },
     "prodel": {
