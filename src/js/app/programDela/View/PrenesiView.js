@@ -98,9 +98,12 @@ define([
 
             temp = model.get('ponoviInt');
             var ponoviInt = temp ? temp : 0;
+            
+            temp = model.get('ponoviKopr');
+            var ponoviKopr = temp ? temp : 0;
 
 
-            return ponoviDoma + ponoviZamejo + ponoviGost + ponoviInt;
+            return ponoviDoma + ponoviZamejo + ponoviGost + ponoviInt + ponoviKopr;
         }
     });
 
