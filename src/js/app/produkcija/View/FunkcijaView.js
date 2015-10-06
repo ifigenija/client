@@ -54,10 +54,8 @@ define([
         },
         gridMeta: [
             {
+                headerCell: 'number',
                 cell: 'integer',
-                headerCell: Backgrid.HeaderCell.extend({
-                    className: 'backgrid-kolona-stevilk'
-                }),
                 editable: false,
                 label: i18next.t('ent.d.sort'),
                 name: 'sort',
