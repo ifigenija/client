@@ -1592,6 +1592,7 @@
         "prizorisce": "Prizorišče(šča)",
         "trajanje": "Trajanje priprave dogodka (od-do)",
         "zvrst": "Zvrst",
+        "soustvarjalci": "Soustvarjalci",
         "d": {
             "dokument": "Program dela",
             "prizorisce": "",
@@ -1599,7 +1600,8 @@
             "avtor": "",
             "reziser": "",
             "datum": "",
-            "zvrst": ""
+            "zvrst": "",
+            "soustvarjalci": ""
         }
     },
     "podUpr": {

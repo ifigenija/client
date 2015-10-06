@@ -3,7 +3,7 @@
         <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-6 col-md-6">
-                    <fieldset data-fields="naziv,avtor,reziser,zvrst,datum,prizorisce,trajanje,imaKoprodukcije,ponoviDoma,ponoviZamejo,ponoviGost,ponoviInt,sort">
+                    <fieldset data-fields="naziv,avtor,reziser,soustvarjalci,zvrst,datum,prizorisce,trajanje,imaKoprodukcije,ponoviDoma,ponoviZamejo,ponoviGost,ponoviInt,sort">
                         <legend>
                             <span>{{t "ep.podatki"}}</span>
                         </legend>
