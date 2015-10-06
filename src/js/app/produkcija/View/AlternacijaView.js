@@ -57,6 +57,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('alternacija.sort'),
+                name: 'sort',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('alternacija.sifra'),
                 name: 'sifra',
                 sortable: true

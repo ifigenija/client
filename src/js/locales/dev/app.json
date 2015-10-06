@@ -1675,7 +1675,8 @@
         "plniranCasIzvedbe": "Planiran čas izvedbe",
         "izveden": "Opravilo izvedeno",
         "zapisIzReporta": "Zapis iz poročila",
-        "showLog": "Prikaži log"
+        "showLog": "Prikaži log",
+        "skrij": "Skrij"
     }
 }
 

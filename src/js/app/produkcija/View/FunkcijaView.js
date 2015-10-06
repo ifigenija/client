@@ -264,7 +264,8 @@ define([
         model.save({
             oseba: oseba,
             funkcija: this.model.get('id'),
-            aktivna: true
+            aktivna: true,
+            sort: this.alters.length
         }, {
             success: function (model, x, xhr) {
                 self.alters.add(model);
