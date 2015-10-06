@@ -1570,7 +1570,8 @@
             "besedilo": "Besedilo"
         },
         "t": {
-            "zaporedna": "Zaporedna"
+            "zaporedna": "Zaporedna",
+            "aliVNaslovu": "V naslovu"
         }
     },
     "programIzjemni": {

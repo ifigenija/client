@@ -128,7 +128,7 @@ define([
             print: {
                 id: 'doc-print',
                 icon: 'fa fa-print',
-                title: i18next.t('std.Pomoc'),
+                title: i18next.t('std.pomoc'),
                 element: 'button-print',
                 uri: baseUrl + '/rpc/programdela/programdela',
                 pdf: true,
@@ -140,7 +140,7 @@ define([
             nasvet: {
                 id: 'doc-nasvet',
                 icon: 'fa fa-info',
-                title: i18next.t('std.Pomoc'),
+                title: i18next.t('std.pomoc'),
                 element: 'button-trigger',
                 trigger: 'nasvet'
             },

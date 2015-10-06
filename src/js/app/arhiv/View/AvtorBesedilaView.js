@@ -55,7 +55,7 @@ define([
             {
                 cell: 'boolean',
                 editable: false,
-                label: i18next.t('avtorBesedila.aliVNaslovu'),
+                label: i18next.t('avtorBesedila.t.aliVNaslovu'),
                 name: 'aliVNaslovu',
                 sortable: true
             },

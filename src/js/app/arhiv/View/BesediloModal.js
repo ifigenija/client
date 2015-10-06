@@ -36,7 +36,7 @@ define([
                 'doc-nasvet': {
                     id: 'doc-nasvet',
                     icon: 'fa fa-info',
-                    title: i18next.t('std.Pomoc'),
+                    title: i18next.t('std.pomoc'),
                     element: 'button-trigger',
                     trigger: 'nasvet'
                 }
