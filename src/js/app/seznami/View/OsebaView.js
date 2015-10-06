@@ -112,6 +112,7 @@ define([
     };
 
     OsebaView.prototype.onDodaj = function () {
+        SeznamView.prototype.zamenjajUrl();
         var model = new Model.Model();
         this.onUredi(model);
         this.zapSortSt(this.collection, 'sort');

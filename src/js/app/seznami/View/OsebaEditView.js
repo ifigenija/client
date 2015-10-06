@@ -46,8 +46,77 @@ define([
             regionTelefonske: '.region-telefonske',
             regionTabs: '.oseba-tabs',
             prilogeR: '.region-priloge'
+        },
+        buttons: {
+            shraniDodaj: {
+                id: 'doc-shrani-dodaj',
+                label: i18next.t('std.shraniDodaj'),
+                element: 'button-trigger',
+                trigger: 'shraniDodaj',
+                disabled: true
+            },
+            shrani: {
+                id: 'doc-shrani',
+                label: i18next.t('std.shrani'),
+                element: 'button-trigger',
+                trigger: 'shrani',
+                disabled: true
+            },
+            preklici: {
+                id: 'doc-preklici',
+                label: i18next.t('std.preklici'),
+                element: 'button-trigger',
+                trigger: 'preklici'
+            },
+            nasvet: {
+                id: 'doc-nasvet',
+                icon: 'fa fa-info',
+                title: i18next.t('std.pomoc'),
+                element: 'button-trigger',
+                trigger: 'nasvet'
+            }
         }
     });
+
+    OsebaEditView.prototype.prepareToolbar = function () {
+        return  this.model ?
+                [
+                    [
+                        this.buttons.shraniDodaj,
+                        this.buttons.shrani,
+                        this.buttons.preklici,
+                        this.buttons.nasvet
+                    ]
+                ] : [[]];
+
+    };
+
+    OsebaEditView.prototype.onShraniDodaj = function () {
+        var self = this;
+        this.on('save:success', function () {
+            self.trigger('dodaj');
+        }, this);
+        DokumentView.prototype.onShrani.apply(this, arguments);
+    };
+    
+    OsebaEditView.prototype.formChange = function (form) {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton('doc-shrani');
+        if (but && but.get('disabled')) {
+            but.set({
+                disabled: false
+            });
+        }
+        
+        var but = tb.getButton('doc-shrani-dodaj');
+        if (but && but.get('disabled')) {
+            but.set({
+                disabled: false
+            });
+        }
+
+        this.triggerMethod('form:change', form);
+    };
 
     OsebaEditView.prototype.getImePriimek = function () {
         var imeT = this.model.get('ime');
@@ -229,8 +298,8 @@ define([
     OsebaEditView.prototype.renderTelefonske = function () {
         var self = this;
         var disabled = false;
-        
-        if(!this.model.get('id')){
+
+        if (!this.model.get('id')) {
             disabled = true;
         }
         require(['app/seznami/View/TelefonskaView'], function (View) {
@@ -252,8 +321,8 @@ define([
     OsebaEditView.prototype.renderNaslovi = function () {
         var self = this;
         var disabled = false;
-        
-        if(!this.model.get('id')){
+
+        if (!this.model.get('id')) {
             disabled = true;
         }
         require(['app/seznami/View/PostniNaslovView'], function (View) {
