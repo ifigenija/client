@@ -1438,7 +1438,7 @@
         "obiskGostSlo": "na gostovanjih po Sloveniji",
         "obiskGostZam": "na gostovanjih v zamejstvu",
         "obiskGostInt": "na mednarodnih gostovanjih (brez zamejstva)",
-        "d":{
+        "d": {
             "kazalniki": "Kazalniki"
         }
     },
@@ -1592,6 +1592,7 @@
         "prizorisce": "Prizorišče(šča)",
         "trajanje": "Trajanje priprave dogodka (od-do)",
         "zvrst": "Zvrst",
+        "soustvarjalci": "Soustvarjalci",
         "d": {
             "dokument": "Program dela",
             "prizorisce": "",
@@ -1599,6 +1600,7 @@
             "avtor": "",
             "reziser": "",
             "datum": "",
+            "soustvarjalci": "Drugi pomembni soustvarjalci dogodka",
             "zvrst": ""
         }
     },
