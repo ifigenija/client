@@ -128,7 +128,7 @@ define([
             print: {
                 id: 'doc-print',
                 icon: 'fa fa-print',
-                title: i18next.t('std.pomoc'),
+                title: i18next.t('std.tiskanje'),
                 element: 'button-print',
                 uri: baseUrl + '/rpc/programdela/programdela',
                 pdf: true,

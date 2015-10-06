@@ -133,6 +133,7 @@
         "potrdiPrepis": "Obnovili boste podatke. Do sedaj vnešeni podatki bodo prepisani. Ali želite nadaljevati?",
         "prepisiCDve": "Obnovitev podatkov",
         "obnovi": "Nadaljuj",
+        "tiskanje": "Tiskanje",
         "title": {
             "vnesiOseba": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo"
@@ -198,7 +199,8 @@
             "zacetek": "Začetni datum",
             "konec": "Končni datum",
             "aktivna": "Ali je pogodba aktivna",
-            "zaposlenVDrJz": "Ali je oseba zaposlena v drugem javnem zavodu"
+            "zaposlenVDrJz": "Ali je oseba zaposlena v drugem javnem zavodu",
+            "splosno": "Splošno"
         }
     },
     "abonma": {
@@ -932,6 +934,9 @@
             "naziv": "",
             "zacetek": "",
             "konec": "",
+            "sklopEna": "Programski sklop I.",
+            "sklopDva": "Programski sklop II.",
+            "cDva": "Priloga C2",
             "sezona": "Program dela za sezono",
             "stPremier": "Število premier",
             "stInt": "Število mednarodnih gostovanj",
@@ -1432,7 +1437,10 @@
         "obiskKopTuj": "na odru koproducenta iz tujine",
         "obiskGostSlo": "na gostovanjih po Sloveniji",
         "obiskGostZam": "na gostovanjih v zamejstvu",
-        "obiskGostInt": "na mednarodnih gostovanjih (brez zamejstva)"
+        "obiskGostInt": "na mednarodnih gostovanjih (brez zamejstva)",
+        "d":{
+            "kazalniki": "Kazalniki"
+        }
     },
     "vrstaStroska": {
         "title": "Vrsta materialnega stroška",
