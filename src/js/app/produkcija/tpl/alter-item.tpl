@@ -10,6 +10,7 @@
     <h5>{{#if  privzeti }}
         <small>{{t "alternacija.privzeti"}}|</small>
         {{/if}}
+        <small>{{u "formatNumber" sort 0}}|</small>
         {{#if  zacetek }}
             <small>{{u "date" zacetek }}|</small>
             {{#if  konec }}

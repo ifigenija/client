@@ -54,10 +54,8 @@ define([
         },
         gridMeta: [
             {
+                headerCell: 'number',
                 cell: 'integer',
-                headerCell: Backgrid.HeaderCell.extend({
-                    className: 'backgrid-kolona-stevilk'
-                }),
                 editable: false,
                 label: i18next.t('ent.d.sort'),
                 name: 'sort',
@@ -261,10 +259,29 @@ define([
         var self = this;
         var model = new this.AlterModel();
 
+        var sortStevilo = function (collection, attrSort) {
+            var min = -100;
+            _.each(collection.models, function (e) {
+                var sort = e.get(attrSort);
+                if (sort >= min) {
+                    min = sort;
+                }
+            });
+
+            if (min >= 0) {
+                return min + 1;
+            } else {
+                return 0;
+            }
+        };
+        
+        var sort = sortStevilo(this.alters, 'sort');
+
         model.save({
             oseba: oseba,
             funkcija: this.model.get('id'),
-            aktivna: true
+            aktivna: true,
+            sort: sort
         }, {
             success: function (model, x, xhr) {
                 self.alters.add(model);

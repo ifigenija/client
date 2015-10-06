@@ -2,5 +2,5 @@
     <legend>
         <span>{{t "alternacija.podatki"}}</span>
     </legend>
-    <div data-fields="zacetek,konec,sifra,pomembna"></div>
+    <div data-fields="zacetek,konec,sort,sifra,pomembna"></div>
 </fieldset>
