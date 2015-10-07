@@ -618,6 +618,8 @@
         "sort": "Zaporedna številka",
         "funkcija": "Funkcija",
         "alternacije": "Osebe / Alternacije",
+        "glavniPodatki": "Glavni podatki",
+        "dodatniPodatki": "Podrobno",
         "d": {
             "naziv": "Naziv funkcije",
             "komentar": "Dodatne opombe, predlogi, komentarji",
@@ -651,6 +653,7 @@
         "imaPogodbo": "Ima pogodbo",
         "podatki": "Glavni podatki",
         "dodatniPodatki": "Podrobno",
+        "seznam": "Seznam",
         "d": {
             "sifra": "Oznaka",
             "funkcija": "",
@@ -1536,6 +1539,8 @@
         "dogodek": "Dogodek",
         "zaporedna": "Zaporedna",
         "vrsta": "Vrsta",
+        "glavniPodatki": "Glavni podatki",
+        "dodatniPodatki": "Podrobno",
         "d": {
             "dogodek": "",
             "zaporedna": "",
@@ -1547,6 +1552,8 @@
         "zaporedna": "Zaporedna",
         "dogodek": "Dogodek",
         "gostovanje": "Gostovanje",
+        "glavniPodatki": "Glavni podatki",
+        "dodatniPodatki": "Podrobno",
         "d": {
             "zaporedna": "",
             "dogodek": "",
