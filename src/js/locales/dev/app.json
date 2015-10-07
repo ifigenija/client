@@ -789,6 +789,7 @@
         "defaultRoute": "Privzeta pot ob prijavi",
         "defaultRouteParams": "Parametri za pot",
         "lastLogon": "Čas zadnje priajve",
+        "glavniPodatki": "Glavni podatki",
         "d": {
             "name": "Polno ime uporabnika. Ime in priimek oz. opis",
             "enabled": "Ali je uporabnik omogočen ali onemogočen",
