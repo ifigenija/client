@@ -87,16 +87,10 @@ define([
         };
 
         var shrani = function () {
-            return null;
+            var view = modal.options.content;
+            view.triggerMethod('shrani');
+            modal.preventClose();
         };
-
-        if (options.shrani) {
-            var shrani = function () {
-                var view = modal.options.content;
-                view.triggerMethod('shrani');
-                modal.preventClose();
-            };
-        }
 
         var OM = Modal.extend({
             className: 'oseba-modal modal'
@@ -109,7 +103,7 @@ define([
         }
 
         var ok = options.okText || i18next.t("std.ustvari");
-
+        
         var modal = new OM({
             title: i18next.t(options.title),
             content: view,
