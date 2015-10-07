@@ -121,7 +121,7 @@ define([
             },
             preklici: {
                 id: 'doc-preklici',
-                label: i18next.t('std.preklici'),
+                label: i18next.t('std.zapri'),
                 element: 'button-trigger',
                 trigger: 'preklici'
             },
@@ -160,6 +160,24 @@ define([
     });
 
     var chPermission = Radio.channel('global');
+    
+    ProgramDokView.prototype.onFormChange = function () {
+            var tb = this.getToolbarModel();
+            var butS = tb.getButton('doc-shrani');
+            var butP = tb.getButton('doc-preklici');
+
+            if (butS && butS.get('disabled')) {
+                butS.set({
+                    disabled: false
+                });
+            }
+
+            if (butS && !butS.get('disabled')) {
+                butP.set({
+                    label: i18next.t('std.preklici')
+                });
+            }
+        };
 
     ProgramDokView.prototype.render = function () {
         var self = this;

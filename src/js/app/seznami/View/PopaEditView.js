@@ -101,7 +101,7 @@ define([
         },
         buttons: gumbi
     });
-    
+
     PopaEditView.prototype.getNaziv = function () {
         var naziv = this.model.get('naziv');
         return naziv ? naziv : i18next.t('popa.naziv');
@@ -111,7 +111,7 @@ define([
         return this.isNew() ?
                 i18next.t('popa.nova') : this.getNaziv();
     };
-    
+
     /**
      * namenjeno je boljšemu workflowu.
      * Shranemo obstoječ model in dodamo nov model 
@@ -128,6 +128,10 @@ define([
         DokumentView.prototype.onShrani.apply(this, arguments);
     };
 
+    /*
+     * posodobimo url strani in dodamo nov model
+     * @returns 
+     */
     PopaEditView.prototype.posodobiUrlNaslovBrezRender = function () {
         // zamenjamo zadnji del url z id (#model/dodaj -> #model/id)
         var url = Backbone.history.location.hash;
@@ -136,20 +140,31 @@ define([
         Radio.channel('layout').command('setTitle', this.getNaslov());
         this.trigger('dodaj');
     };
-    
+    /**
+     * namenjeno vodenju gumbov shrani in (shrani in dodaj)
+     * @param FormView form
+     */
     PopaEditView.prototype.formChange = function (form) {
         var tb = this.getToolbarModel();
-        var but = tb.getButton('doc-shrani');
-        if (but && but.get('disabled')) {
-            but.set({
+        var butS = tb.getButton('doc-shrani');
+        var butSD = tb.getButton('doc-shrani-dodaj');
+        var butP = tb.getButton('doc-preklici');
+        
+        if (butS && butS.get('disabled')) {
+            butS.set({
                 disabled: false
             });
         }
 
-        var but = tb.getButton('doc-shrani-dodaj');
-        if (but && but.get('disabled')) {
-            but.set({
+        if (butSD && butSD.get('disabled')) {
+            butSD.set({
                 disabled: false
+            });
+        }
+        
+        if (butS && !butS.get('disabled')) {
+            butP.set({
+                label: i18next.t('std.preklici')
             });
         }
 

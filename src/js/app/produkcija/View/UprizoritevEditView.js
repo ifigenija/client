@@ -14,7 +14,8 @@ define([
     'app/Max/View/TabControl',
     'radio',
     'app/arhiv/Model/Besedilo',
-    'app/arhiv/View/BesediloModal'
+    'app/arhiv/View/BesediloModal',
+    'backbone'
 ], function (
         DokumentView,
         FunkcijaView,
@@ -28,7 +29,8 @@ define([
         TabControl,
         Radio,
         BesediloModel,
-        BesediloModal
+        BesediloModal,
+        Backbone
         ) {
 
     /**
@@ -62,8 +64,6 @@ define([
         }
     ];
 
-
-
     /**
      * Urejanje uprizoritev 
      * @type DokumentView
@@ -80,8 +80,97 @@ define([
         },
         events: {
             'click .dodaj-besedilo': 'dodajBesedilo'
+        },
+        buttons: {
+            shraniDodaj: {
+                id: 'doc-shrani-dodaj',
+                label: i18next.t('std.shraniDodaj'),
+                element: 'button-trigger',
+                trigger: 'shraniDodaj',
+                disabled: true
+            },
+            shrani: {
+                id: 'doc-shrani',
+                label: i18next.t('std.shrani'),
+                element: 'button-trigger',
+                trigger: 'shrani',
+                disabled: true
+            },
+            preklici: {
+                id: 'doc-preklici',
+                label: i18next.t('std.zapri'),
+                element: 'button-trigger',
+                trigger: 'preklici'
+            },
+            nasvet: {
+                id: 'doc-nasvet',
+                icon: 'fa fa-info',
+                title: i18next.t('std.pomoc'),
+                element: 'button-trigger',
+                trigger: 'nasvet'
+            }
         }
     });
+    
+    /**
+     * namenjeno je boljšemu workflowu.
+     * Shranemo obstoječ model in dodamo nov model 
+     * @returns {undefined}
+     */
+    UprizoritevEditView.prototype.onShraniDodaj = function () {
+        var self = this;
+        this.onShrani({
+            success: self.posodobiUrlNaslovBrezRender
+        });
+    };
+
+    UprizoritevEditView.prototype.onShrani = function (options) {
+        DokumentView.prototype.onShrani.apply(this, arguments);
+    };
+
+    /*
+     * posodobimo url strani in dodamo nov model
+     * @returns 
+     */
+    UprizoritevEditView.prototype.posodobiUrlNaslovBrezRender = function () {
+        // zamenjamo zadnji del url z id (#model/dodaj -> #model/id)
+        var url = Backbone.history.location.hash;
+        var newUrl = url.replace(/([\w-]+)$/g, this.model.id);
+        Radio.channel('layout').command('replaceUrl', newUrl);
+        Radio.channel('layout').command('setTitle', this.getNaslov());
+        this.trigger('dodaj');
+    };
+    /**
+     * namenjeno vodenju gumbov shrani in (shrani in dodaj)
+     * @param FormView form
+     */
+    UprizoritevEditView.prototype.formChange = function (form) {
+        var tb = this.getToolbarModel();
+        var butS = tb.getButton('doc-shrani');
+        var butSD = tb.getButton('doc-shrani-dodaj');
+        var butP = tb.getButton('doc-preklici');
+        
+        if (butS && butS.get('disabled')) {
+            butS.set({
+                disabled: false
+            });
+        }
+
+        if (butSD && butSD.get('disabled')) {
+            butSD.set({
+                disabled: false
+            });
+        }
+        
+        if (butS && !butS.get('disabled')) {
+            butP.set({
+                label: i18next.t('std.preklici')
+            });
+        }
+
+        this.triggerMethod('form:change', form);
+    };
+    
     /**
      * Skrijemo tabe da se ne vidi črta pri vnašanju uprizoritve
      * obesimo besedilo change, da lahko izrisemo avtorje
