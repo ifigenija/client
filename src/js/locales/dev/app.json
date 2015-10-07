@@ -1507,6 +1507,8 @@
         "stanje": "Stanje",
         "leto": "Leto",
         "stevilka": "Številka",
+        "glavniPodatki": "Glavni podatki",
+        "dodatniPodatki": "Podrobno",
         "d": {
             "zaDokument": "Dokument",
             "ident": "Identifikator",
