@@ -59,6 +59,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('oseba.psevdonim'),
+                name: 'oseba.psevdonim',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('zaposlitev.delovnoMesto'),
                 name: 'delovnoMesto',
                 sortable: true

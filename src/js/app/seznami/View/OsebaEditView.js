@@ -9,7 +9,8 @@ define([
     'i18next',
     'app/Max/View/TabControl',
     'radio',
-    'app/Zapisi/View/ZapisiLayout'
+    'app/Zapisi/View/ZapisiLayout',
+    'backbone'
 ], function (
         DokumentView,
         tpl,
@@ -18,7 +19,8 @@ define([
         i18next,
         TabControl,
         Radio,
-        ZapisiLayout
+        ZapisiLayout,
+        Backbone
         ) {
     /**
      * Različni možni pogledi osebeedit view.
@@ -93,12 +95,25 @@ define([
 
     OsebaEditView.prototype.onShraniDodaj = function () {
         var self = this;
-        this.on('save:success', function () {
-            self.trigger('dodaj');
-        }, this);
+        this.onShrani({
+            success: self.posodobiUrlNaslovBrezRender
+        });
+    };
+
+    OsebaEditView.prototype.onShrani = function (options) {
         DokumentView.prototype.onShrani.apply(this, arguments);
     };
-    
+
+    OsebaEditView.prototype.posodobiUrlNaslovBrezRender = function () {
+        // zamenjamo zadnji del url z id (#model/dodaj -> #model/id)
+        var url = Backbone.history.location.hash;
+        var newUrl = url.replace(/([\w-]+)$/g, this.model.id);
+        Radio.channel('layout').command('replaceUrl', newUrl);
+        Radio.channel('layout').command('setTitle', this.getNaslov());
+        this.trigger('dodaj');
+    };
+
+
     OsebaEditView.prototype.formChange = function (form) {
         var tb = this.getToolbarModel();
         var but = tb.getButton('doc-shrani');
@@ -107,7 +122,7 @@ define([
                 disabled: false
             });
         }
-        
+
         var but = tb.getButton('doc-shrani-dodaj');
         if (but && but.get('disabled')) {
             but.set({
