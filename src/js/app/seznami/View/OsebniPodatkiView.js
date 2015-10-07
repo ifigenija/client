@@ -38,7 +38,7 @@ define([
     });
 
     OsebniPodatkiView.prototype.onBeforeRender = function () {
-        this.listenTo(this.model, 'sync', function (coll) {
+        this.listenToOnce(this.model, 'sync', function (coll) {
             this.renderForm();
             this.renderTrrji();
         });

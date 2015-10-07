@@ -145,7 +145,7 @@ define([
 
     UprizoritevEditView.prototype.onBeforeRender = function () {
         var self = this;
-        this.listenTo(this.model, 'sync', function (coll) {
+        this.listenToOnce(this.model, 'sync', function (coll) {
             self.render();
         });
     };

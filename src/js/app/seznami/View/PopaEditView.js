@@ -106,7 +106,7 @@ define([
 
     PopaEditView.prototype.onBeforeRender = function () {
         var self = this;
-        this.listenTo(this.model, 'sync', function () {
+        this.listenToOnce(this.model, 'sync', function () {
             self.render();
         });
     };
