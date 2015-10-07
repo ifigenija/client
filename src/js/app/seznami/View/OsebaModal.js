@@ -24,7 +24,30 @@ define([
      */
     return function (options) {
 
-        var OEV = OsebaEditView.extend({});
+        var OEV = OsebaEditView.extend({
+            buttons: {
+                shrani: {
+                    id: 'doc-shrani',
+                    label: i18next.t('std.shrani'),
+                    element: 'button-trigger',
+                    trigger: 'shrani',
+                    disabled: true
+                },
+                preklici: {
+                    id: 'doc-preklici',
+                    label: i18next.t('std.zapri'),
+                    element: 'button-trigger',
+                    trigger: 'preklici'
+                },
+                nasvet: {
+                    id: 'doc-nasvet',
+                    icon: 'fa fa-info',
+                    title: i18next.t('std.pomoc'),
+                    element: 'button-trigger',
+                    trigger: 'nasvet'
+                }
+            }
+        });
 
         OEV.prototype.onSaveSuccess = function () {
             izberi();

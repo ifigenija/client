@@ -10,10 +10,8 @@ define([
     'formSchema!alternacija/stroskovnik',
     'formSchema!pogodba',
     'i18next',
-    'app/Max/Module/Backgrid',
     'backbone-modal',
     'radio',
-    'underscore',
     'baseUrl',
     'backbone'
 ], function (

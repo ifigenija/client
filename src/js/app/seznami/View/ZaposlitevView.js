@@ -127,6 +127,7 @@ define([
         this.modal = OsebaModal({
             model: model,
             editor: editor,
+            form: this.formView.form,
             title: i18next.t('oseba.nova')
         });
     };

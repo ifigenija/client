@@ -882,6 +882,11 @@ fieldset.pomemben legend span {
 .vnosno-polje .gumb {
   width: 100%;
 }
+/*AlternacijaView*/
+/*podaljšan fieldset*/
+.fieldset-alternacija {
+  padding-bottom: 70px;
+}
 /*
 Licenca GPLv3
 */

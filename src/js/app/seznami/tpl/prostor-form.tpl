@@ -2,21 +2,19 @@
     <div class="row">
         <div class="col-sm-6">
             <div data-fields="naziv,popa"></div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="prostor-vnosno-polje">
-                        <div class="prostor-naslov">
-                            <label class="">{{t "prostor.naslov"}}</label>
-                            <div class="help-block hidden">{{t "prostor.d.naslov"}}</div>
-                            <div class="error-block"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-10" data-editors="naslov"></div>
-                            <div class="col-sm-2">
-                                <a class="btn btn-default prostor-dodaj-naslov" title="{{t "std.title.dodajNaslov"}}">
-                                    <i class="fa fa-plus"> </i>
-                                </a>
-                            </div>
+            <div class="vnosno-polje">
+                <div class="naslov">
+                    <label class="">{{t "prostor.naslov"}}</label>
+                    <div class="help-block hidden">{{t "prostor.d.naslov"}}</div>
+                    <div class="error-block"></div>
+                </div>
+                <div style="width: 100%; display: table;">
+                    <div style="display: table-row">
+                        <div class="izbor"  data-editors="naslov">  </div>
+                        <div class="dodaj">
+                            <a class="btn btn-default gumb prostor-dodaj-naslov" title="{{t "std.title.dodajNaslov"}}">
+                                <i class="fa fa-plus"> </i>
+                            </a>
                         </div>
                     </div>
                 </div>

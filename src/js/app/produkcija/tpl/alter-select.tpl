@@ -3,18 +3,20 @@
         <legend>
             <span>{{t "alternacija.seznam"}}</span>
         </legend>
-        <div class="funkcija-alternacija-vnosno-polje">
-            <div class="funkcija-alternacije-naslov">
-                <label class="">{{t "funkcija.alternacije"}}</label>
+        <div class="vnosno-polje">
+            <div class="naslov">
+                <label>{{t "funkcija.alternacije"}}</label>
                 <div class="help-block hidden">{{t "funkcija.d.alternacije"}}</div>
                 <div class="error-block"></div>
             </div>
-            <div class="row">
-                <div class="col-sm-10 alter-izbor"></div>
-                <div class="col-sm-2">
-                    <a class="btn btn-default oseba-nova" title="{{t "std.title.vnesiOseba"}}">
-                        <i class="fa fa-user-plus"> </i>
-                    </a>
+            <div style="width: 100%; display: table;">
+                <div style="display: table-row">
+                    <div class="izbor alter-izbor"></div>
+                    <div class="dodaj"> 
+                        <a class="btn btn-default gumb oseba-nova" title="{{t "std.title.dodajBesedilo"}}">
+                            <i class="fa fa-user-plus"> </i>
+                        </a> 
+                    </div>
                 </div>
             </div>
         </div>
