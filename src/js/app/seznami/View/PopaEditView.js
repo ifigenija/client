@@ -45,6 +45,13 @@ define([
     ];
 
     var gumbi = {
+        shraniDodaj: {
+            id: 'doc-shrani-dodaj',
+            label: i18next.t('std.shraniDodaj'),
+            element: 'button-trigger',
+            trigger: 'shraniDodaj',
+            disabled: true
+        },
         shrani: {
             id: 'doc-shrani',
             label: i18next.t('std.shrani'),
@@ -94,6 +101,7 @@ define([
         },
         buttons: gumbi
     });
+    
     PopaEditView.prototype.getNaziv = function () {
         var naziv = this.model.get('naziv');
         return naziv ? naziv : i18next.t('popa.naziv');
@@ -102,6 +110,50 @@ define([
     PopaEditView.prototype.getNaslov = function () {
         return this.isNew() ?
                 i18next.t('popa.nova') : this.getNaziv();
+    };
+    
+    /**
+     * namenjeno je boljšemu workflowu.
+     * Shranemo obstoječ model in dodamo nov model 
+     * @returns {undefined}
+     */
+    PopaEditView.prototype.onShraniDodaj = function () {
+        var self = this;
+        this.onShrani({
+            success: self.posodobiUrlNaslovBrezRender
+        });
+    };
+
+    PopaEditView.prototype.onShrani = function (options) {
+        DokumentView.prototype.onShrani.apply(this, arguments);
+    };
+
+    PopaEditView.prototype.posodobiUrlNaslovBrezRender = function () {
+        // zamenjamo zadnji del url z id (#model/dodaj -> #model/id)
+        var url = Backbone.history.location.hash;
+        var newUrl = url.replace(/([\w-]+)$/g, this.model.id);
+        Radio.channel('layout').command('replaceUrl', newUrl);
+        Radio.channel('layout').command('setTitle', this.getNaslov());
+        this.trigger('dodaj');
+    };
+    
+    PopaEditView.prototype.formChange = function (form) {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton('doc-shrani');
+        if (but && but.get('disabled')) {
+            but.set({
+                disabled: false
+            });
+        }
+
+        var but = tb.getButton('doc-shrani-dodaj');
+        if (but && but.get('disabled')) {
+            but.set({
+                disabled: false
+            });
+        }
+
+        this.triggerMethod('form:change', form);
     };
 
     PopaEditView.prototype.onBeforeRender = function () {

@@ -80,19 +80,6 @@ define([
         }
     });
 
-    OsebaEditView.prototype.prepareToolbar = function () {
-        return  this.model ?
-                [
-                    [
-                        this.buttons.shraniDodaj,
-                        this.buttons.shrani,
-                        this.buttons.preklici,
-                        this.buttons.nasvet
-                    ]
-                ] : [[]];
-
-    };
-
     OsebaEditView.prototype.onShraniDodaj = function () {
         var self = this;
         this.onShrani({
@@ -104,6 +91,10 @@ define([
         DokumentView.prototype.onShrani.apply(this, arguments);
     };
 
+    /*
+     * posodobimo url strani in dodamo nov model
+     * @returns 
+     */
     OsebaEditView.prototype.posodobiUrlNaslovBrezRender = function () {
         // zamenjamo zadnji del url z id (#model/dodaj -> #model/id)
         var url = Backbone.history.location.hash;
@@ -112,8 +103,11 @@ define([
         Radio.channel('layout').command('setTitle', this.getNaslov());
         this.trigger('dodaj');
     };
-
-
+    /**
+     * namenjeno vodenju gumbov shrani in (shrani in dodaj)
+     * @param FormView form
+     * @returns {undefined}
+     */
     OsebaEditView.prototype.formChange = function (form) {
         var tb = this.getToolbarModel();
         var but = tb.getButton('doc-shrani');
