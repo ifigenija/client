@@ -87,10 +87,16 @@ define([
         };
 
         var shrani = function () {
-            var view = modal.options.content;
-            view.triggerMethod('shrani');
-            modal.preventClose();
+            return null;
         };
+
+        if (options.shrani) {
+            var shrani = function () {
+                var view = modal.options.content;
+                view.triggerMethod('shrani');
+                modal.preventClose();
+            };
+        }
 
         var OM = Modal.extend({
             className: 'oseba-modal modal'
@@ -102,11 +108,13 @@ define([
             });
         }
 
+        var ok = options.okText || i18next.t("std.ustvari");
+
         var modal = new OM({
             title: i18next.t(options.title),
             content: view,
             animate: true,
-            okText: i18next.t("std.ustvari"),
+            okText: ok,
             cancelText: i18next.t("std.preklici")
         });
 

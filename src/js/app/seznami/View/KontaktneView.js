@@ -116,6 +116,8 @@ define([
                     model: editModel,
                     pogled: 'vse',
                     tpl: modalTpl,
+                    okText: i18next.t('std.zapri'),
+                    shrani: false,
                     title: editModel.get('polnoIme')
                 });
             },
