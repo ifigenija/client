@@ -45,11 +45,18 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('zaposlitev.oseba'),
-                name: 'oseba.label',
+                label: i18next.t('oseba.ime'),
+                name: 'oseba.ime',
                 sortable: true
             },
-             {
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('oseba.priimek'),
+                name: 'oseba.priimek',
+                sortable: true
+            },
+            {
                 cell: 'string',
                 editable: false,
                 label: i18next.t('zaposlitev.delovnoMesto'),
