@@ -75,7 +75,7 @@ define([
         },
         preklici: {
             id: 'doc-preklici',
-            label: i18next.t('std.preklici'),
+            label: i18next.t('std.zapri'),
             element: 'button-trigger',
             trigger: 'preklici'
         },
