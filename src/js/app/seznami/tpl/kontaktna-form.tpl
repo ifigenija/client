@@ -7,18 +7,20 @@
             </div>
         </div>
         <div class="col-sm-6 col-lg-4">
-            <div class="kontaktna-vnosno-polje">
-                <div class="kontaktna-naslov">
+            <div class="vnosno-polje">
+                <div class="naslov">
                     <label class="">{{t "kontaktna.oseba"}}</label>
                     <div class="help-block hidden">{{t "kontaktna.d.oseba"}}</div>
                     <div class="error-block"></div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-10" data-editors="oseba"></div>
-                    <div class="col-sm-2">
-                        <a class="btn btn-default dodaj-osebo" title="{{t "std.title.vnesiOseba"}}">
-                            <i class="fa fa-user-plus"> </i>
-                        </a>
+                <div style="width: 100%; display: table;">
+                    <div style="display: table-row">
+                        <div class="izbor"  data-editors="oseba">  </div>
+                        <div class="dodaj">
+                            <a class="btn btn-default gumb dodaj-osebo" title="{{t "std.title.vnesiOseba"}}">
+                                <i class="fa fa-user-plus"> </i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

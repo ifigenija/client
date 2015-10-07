@@ -94,13 +94,11 @@ define([
     KontaktneView.prototype.osebaModal = function (editModel) {
 
         var editor = this.form.fields.oseba.editor;
-
+        
         var modal = OsebaModal({
             model: editModel,
             editor: editor,
-            pogled: 'vse',
             form: this.form,
-            tpl: modalTpl,
             title: i18next.t('oseba.nova')
         });
     };
@@ -114,7 +112,12 @@ define([
         var self = this;
         editModel.fetch({
             success: function () {
-                self.osebaModal(editModel);
+                var modal = OsebaModal({
+                    model: editModel,
+                    pogled: 'vse',
+                    tpl: modalTpl,
+                    title: editModel.get('polnoIme')
+                });
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
