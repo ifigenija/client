@@ -914,12 +914,12 @@ fieldset.pomemben legend span {
   opacity: 0.4;
 }
 .lookup-modal-nov .lookup-grid {
-  position: relative;
-  display: block;
   width: 100%;
   padding: 0;
   border: 0;
   height: 100%;
+  overflow-y: auto;
+  max-height: 750px;
 }
 /*
 Licenca GPLv3
