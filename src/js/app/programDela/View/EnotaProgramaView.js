@@ -189,13 +189,22 @@ define([
         vnosnaPolja.forEach(function (i) {
             self.form.on(i + ':change', self.prikaziPodatke, self);
         });
+        
+        var vnosnaPoljaPrenesi = [
+            'ponoviDoma',
+            'ponoviZamejo',
+            'ponoviKopr',
+            'ponoviKoprInt',
+            'ponoviGost',
+            'ponoviInt',
+            'ponoviKoprZamejo',
+            'ponoviKoprGost'
+        ];
+        
+        vnosnaPoljaPrenesi.forEach(function (i) {
+            self.form.on(i + ':change', self.togglePrenesi, self);
+        });
 
-        this.form.on('ponoviDoma:change', this.togglePrenesi, this);
-        this.form.on('ponoviZamejo:change', this.togglePrenesi, this);
-        this.form.on('ponoviKopr:change', this.togglePrenesi, this);
-        this.form.on('ponoviKoprInt:change', this.togglePrenesi, this);
-        this.form.on('ponoviGost:change', this.togglePrenesi, this);
-        this.form.on('ponoviInt:change', this.togglePrenesi, this);
         this.form.on('celotnaVrednostGostovSZ:change', this.preveriVrednost, this);
 
         var uprizoritev = this.form.fields.uprizoritev;
@@ -275,14 +284,23 @@ define([
         vnosnaPolja.forEach(function (i) {
             self.form.off(i + ':change', self.prikaziPodatke, self);
         });
+        
+        var vnosnaPoljaPrenesi = [
+            'ponoviDoma',
+            'ponoviZamejo',
+            'ponoviKopr',
+            'ponoviKoprInt',
+            'ponoviGost',
+            'ponoviInt',
+            'ponoviKoprZamejo',
+            'ponoviKoprGost'
+        ];
+        
+        vnosnaPoljaPrenesi.forEach(function (i) {
+            self.form.off(i + ':change', self.togglePrenesi, self);
+        });
 
         this.form.off('celotnaVrednostGostovSZ:change', this.preveriVrednost, this);
-        this.form.off('ponoviDoma:change', this.togglePrenesi, this);
-        this.form.off('ponoviZamejo:change', this.togglePrenesi, this);
-        this.form.off('ponoviGost:change', this.togglePrenesi, this);
-        this.form.off('ponoviKopr:change', this.togglePrenesi, this);
-        this.form.off('ponoviKoprInt:change', this.togglePrenesi, this);
-        this.form.off('ponoviInt:change', this.togglePrenesi, this);
 
         this.form.off('uprizoritev:change', this.togglePrenesi, this);
         this.form.off('tipProgramskeEnote:change', this.imaKoprodukcijeChange, this);

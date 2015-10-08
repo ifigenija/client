@@ -20,11 +20,11 @@ define([
         ZapisiLayout,
         schema
         ) {
-    
+
     var sch = schema.toFormSchema().schema;
-    
+
     sch.zaproseno.help = i18next.t('ep.zaprosenoPonPrem');
-    
+
     var PonovitevView = EnotaProgramaView.extend({
         formTemplate: formTpl,
         schema: sch,
@@ -95,7 +95,7 @@ define([
             }
         ]
     });
-    
+
     PonovitevView.prototype.getPrenesiView = function () {
         var View = PrenesiView.extend({
             template: prenesiTpl,
@@ -105,7 +105,7 @@ define([
 
         return View;
     };
-    
+
     /**
      * preračun števila ponovitev
      * @param {type} form
@@ -113,17 +113,19 @@ define([
      */
     PonovitevView.prototype.steviloPonovitev = function (form) {
         var polja = form.fields;
-        
+
         var ponoviDoma = polja.ponoviDoma.getValue();
         var ponoviZamejo = polja.ponoviZamejo.getValue();
         var ponoviGost = polja.ponoviGost.getValue();
         var ponoviKopr = polja.ponoviKopr.getValue();
+        var ponoviKoprZamejo = polja.ponoviKoprZamejo.getValue();
+        var ponoviKoprGost = polja.ponoviKoprGost.getValue();
 
-        var stPonovi = ponoviDoma + ponoviZamejo + ponoviGost + ponoviKopr;
-        
+        var stPonovi = ponoviDoma + ponoviZamejo + ponoviGost + ponoviKopr + ponoviKoprZamejo + ponoviKoprGost;
+
         return stPonovi;
     };
-    
+
     /**
      * Overrride render priloge, da se nastavi pravi classLastnika
      * @returns {undefined}
@@ -135,6 +137,6 @@ define([
         });
         this.prilogeR.show(view);
     };
-    
+
     return PonovitevView;
 });
