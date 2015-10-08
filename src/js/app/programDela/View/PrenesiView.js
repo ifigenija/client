@@ -87,29 +87,34 @@ define([
             }
         },
         vsotaPonovitev: function (model) {
+            
+            var vsota = 0;
+            
             var temp = model.get('ponoviDoma');
-            var ponoviDoma = temp ? temp : 0;
+            vsota += temp ? temp : 0;
 
             temp = model.get('ponoviZamejo');
-            var ponoviZamejo = temp ? temp : 0;
+            vsota += temp ? temp : 0;
 
             temp = model.get('ponoviGost');
-            var ponoviGost = temp ? temp : 0;
+            vsota += temp ? temp : 0;
 
             temp = model.get('ponoviInt');
-            var ponoviInt = temp ? temp : 0;
+            vsota += temp ? temp : 0;
             
             temp = model.get('ponoviKopr');
-            var ponoviKopr = temp ? temp : 0;
+            vsota += temp ? temp : 0;
+            
+            temp = model.get('obiskKoprZamejo');
+            vsota += temp ? temp : 0;
+            
+            temp = model.get('obiskKoprGost');
+            vsota += temp ? temp : 0;
 
 
-            return ponoviDoma + ponoviZamejo + ponoviGost + ponoviInt + ponoviKopr;
+            return vsota;
         }
     });
-
-    PrenesiView.prototype.oznaciCheckboxe = function () {
-        //pri vrednostih, ki se razlikujejo, označi checkbox
-    };
 
     return PrenesiView;
 });

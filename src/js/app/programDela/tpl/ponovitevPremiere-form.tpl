@@ -3,7 +3,7 @@
         <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-6 col-md-6">
-                    <fieldset data-fields="uprizoritev,tipProgramskeEnote,ponoviDoma,ponoviKopr,ponoviZamejo,ponoviGost,sort">
+                    <fieldset data-fields="uprizoritev,tipProgramskeEnote,ponoviDoma,ponoviKopr,ponoviZamejo,ponoviKoprZamejo,ponoviGost,ponoviKoprGost,sort">
                         <legend>
                             <span>{{t "ep.podatki"}}</span>
                         </legend>
@@ -47,7 +47,7 @@
                         <div class="help-block hidden">{{t "ep.d.celotnaVrednost"}}</div>
                         <div class="prikazno-polje clearfix"><div class="pull-right celotnaVrednost vrednost">{{u "formatNumber" celotnaVrednost}}</div></div>
                     </fieldset>
-                    <fieldset data-fields="obiskDoma,obiskKopr,obiskGost,obiskZamejo">
+                    <fieldset data-fields="obiskDoma,obiskKopr,obiskZamejo,obiskKoprZamejo,obiskGost,obiskKoprGost">
                         <legend>
                             <span>{{t "ep.obiskovalci"}}</span>
                         </legend>

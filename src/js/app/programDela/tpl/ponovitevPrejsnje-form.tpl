@@ -3,11 +3,13 @@
         <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-6 col-md-6">
-                    <fieldset data-fields="uprizoritev,tipProgramskeEnote,ponoviDoma,ponoviKopr,ponoviZamejo,ponoviGost,sort">
+                    <fieldset data-fields="uprizoritev,tipProgramskeEnote,ponoviDoma,ponoviKopr,ponoviZamejo,ponoviKoprZamejo,ponoviGost,ponoviKoprGost,sort">
                         <legend>
                             <span>{{t "ep.podatki"}}</span>
                         </legend>
                     </fieldset>
+                </div>
+                <div class="col-sm-6 col-md-6">
                     <fieldset class="fieldset-stroski">
                         <legend>
                             <span>{{t "ep.stroski"}}</span>
@@ -16,8 +18,6 @@
                         <div class="prikazno-polje">{{t "ep.nasDelez"}}: <div class="pull-right nasDelez vrednost">{{u "formatNumber" nasDelez}}</div></div>
                     </fieldset>
                     <div data-fields="avtorskiHonorarjiSamoz"></div>
-                </div>
-                <div class="col-sm-6 col-md-6">
                     <fieldset class="fieldset-viri">
                         <legend>
                             <span>{{t "ep.viri"}}</span>
@@ -47,7 +47,7 @@
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-12">
-                    <fieldset data-fields="obiskDoma,obiskKopr,obiskGost,obiskZamejo">
+                    <fieldset data-fields="obiskDoma,obiskKopr,obiskZamejo,obiskKoprZamejo,obiskGost,obiskKoprGost">
                         <legend>
                             <span>{{t "ep.obiskovalci"}}</span>
                         </legend>

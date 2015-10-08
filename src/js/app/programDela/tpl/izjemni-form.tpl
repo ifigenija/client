@@ -3,7 +3,7 @@
         <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-6 col-md-6">
-                    <fieldset data-fields="naziv,avtor,reziser,soustvarjalci,zvrst,datum,prizorisce,trajanje,imaKoprodukcije,ponoviDoma,ponoviZamejo,ponoviGost,ponoviInt,sort">
+                    <fieldset data-fields="naziv,avtor,reziser,soustvarjalci,zvrst,datum,prizorisce,trajanje,imaKoprodukcije,ponoviDoma,ponoviZamejo,ponoviKoprZamejo,ponoviGost,ponoviKoprGost,ponoviInt,sort">
                         <legend>
                             <span>{{t "ep.podatki"}}</span>
                         </legend>
@@ -40,7 +40,7 @@
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-12">
-                    <fieldset data-fields="obiskDoma,obiskGost,obiskZamejo,obiskInt">
+                    <fieldset data-fields="obiskDoma,obiskZamejo,obiskKoprZamejo,obiskGost,obiskKoprGost,obiskInt">
                         <legend>
                             <span>{{t "ep.obiskovalci"}}</span>
                         </legend>
