@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvGostovanjSlo"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvGostovanjSlo 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvGostovanjSlo}}</td>
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvGostovanjZam"}}:</td>
@@ -269,7 +269,7 @@
             </tr>
             <tr>
                 <td class="kazalnik-padleft">- {{t "kazalnik.gostSlo"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvPonPremGost 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPonPremGost}}</td>
             </tr>
             <tr>
                 <td class="kazalnik-padleft">- {{t "kazalnik.gostZam"}}:</td>
@@ -285,7 +285,7 @@
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvPonPrej"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvPonPrej 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPonPrej}}</td>
             </tr>
             <tr>
                 <td class="kazalnik-padleft">- {{t "kazalnik.oderDom"}}:</td>
@@ -297,11 +297,11 @@
             </tr>
             <tr>
                 <td class="kazalnik-padleft">- {{t "kazalnik.gostSlo"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvPonPrejGost 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPonPrejGost}}</td>
             </tr>
             <tr>
                 <td class="kazalnik-padleft">- {{t "kazalnik.gostZam"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvPonPrejZamejo 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPonPrejZamejo}}</td>
             </tr>
             <tr>
                 <td class="kazalnik-padleft">- {{t "kazalnik.gostTuj"}}:</td>
@@ -325,7 +325,7 @@
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvGostovanjZam"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvGostovanjZam 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvGostovanjZam}}</td>
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvGostovanjInt"}}:</td>
