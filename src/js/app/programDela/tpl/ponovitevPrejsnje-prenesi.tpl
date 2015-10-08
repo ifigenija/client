@@ -18,7 +18,7 @@
             <td>{{t "ep.avtorskiHonorarji"}}</td>
             <td class="col-numbers">{{u "formatNumber" avtorskiHonorarji}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.Na.avtorskiHonorarji}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.avtorskiHonorarji}}</td>
         </tr>
         <tr>
@@ -28,7 +28,7 @@
             <td>{{t "ep.tantieme"}}</td>
             <td class="col-numbers">{{u "formatNumber" tantieme}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.Na.avtorskePravice}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.tantieme}}</td>
         </tr>
         <tr>
@@ -38,7 +38,7 @@
             <td>{{t "ep.materialni"}}</td>
             <td class="col-numbers">{{u "formatNumber" materialni}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.Na.materialni}}</td>
-            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev 0}}</td>
+            <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.steviloPonovitev}}</td>
             <td class="col-numbers">{{u "formatNumber" uprizoritevData.NaDo.materialni}}</td>
         </tr>
         <tr>

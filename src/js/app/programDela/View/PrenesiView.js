@@ -88,7 +88,7 @@ define([
         },
         vsotaPonovitev: function (model) {
             
-            var vsota = 0;
+            var vsota = 0.00;
             
             var temp = model.get('ponoviDoma');
             vsota += temp ? temp : 0;
@@ -105,12 +105,13 @@ define([
             temp = model.get('ponoviKopr');
             vsota += temp ? temp : 0;
             
-            temp = model.get('obiskKoprZamejo');
+            temp = model.get('ponoviKoprZamejo');
             vsota += temp ? temp : 0;
             
-            temp = model.get('obiskKoprGost');
+            temp = model.get('ponoviKoprGost');
             vsota += temp ? temp : 0;
 
+            vsota = Math.round(vsota * 100) / 100;
 
             return vsota;
         }
