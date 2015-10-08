@@ -313,7 +313,7 @@ define([
             Backgrid.Cell.prototype.enterEditMode.apply(this, arguments);
             this.currentEditor.$el.select();
         };
-        
+
         var Povdarjena = Backgrid.Row.extend({
             /**
              Renders a row of cells for this row's model.
@@ -390,6 +390,12 @@ define([
     PostavkaCDveView.prototype.onSelected = function () {
 
     };
-
+    
+    PostavkaCDveView.prototype.onDestroy = function () {
+        Backgrid.NumberCell.prototype.enterEditMode = function () {
+            Backgrid.Cell.prototype.enterEditMode.apply(this, arguments);
+        };
+    };
+    
     return PostavkaCDveView;
 });
