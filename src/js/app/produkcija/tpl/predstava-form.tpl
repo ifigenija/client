@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <fieldset>
                 <legend>
-                    <span>{{t "vaja.glavniPodatki"}}</span>
+                    <span>{{t "std.glavniPodatki"}}</span>
                 </legend>
                 <div data-fields="title,zacetek,konec"></div>
             </fieldset>
@@ -11,7 +11,7 @@
         <div class="col-md-6">
             <fieldset>
                 <legend>
-                    <span>{{t "vaja.dodatniPodatki"}}</span>
+                    <span>{{t "std.dodatniPodatki"}}</span>
                 </legend>
                 <div data-fields="status,objavljenZacetek"></div>
             </fieldset>

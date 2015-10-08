@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <fieldset>
                 <legend>
-                    <span>{{t "funkcija.glavniPodatki"}}</span>
+                    <span>{{t "std.glavniPodatki"}}</span>
                 </legend>
                 <div data-fields="naziv,komentar,tipFunkcije,velikost"></div>
             </fieldset>
@@ -11,7 +11,7 @@
         <div class="col-md-6">
             <fieldset>
                 <legend>
-                    <span>{{t "funkcija.dodatniPodatki"}}</span>
+                    <span>{{t "std.dodatniPodatki"}}</span>
                 </legend>
                 <div data-fields="maxPrekrivanj,sort,pomembna,sePlanira,dovoliPrekrivanje,vodjaEkipe"></div>
             </fieldset>

@@ -2,14 +2,14 @@
     <div class="col-sm-6 col-md-4">
         <fieldset data-fields="naziv,globalno,poLetih,sifra">
             <legend>
-                <span>{{t "stevilcenje.glavniPodatki"}}</span>
+                <span>{{t "std.glavniPodatki"}}</span>
             </legend>
         </fieldset>
     </div>
     <div class="col-sm-6 col-md-8">
         <fieldset>
             <legend>
-                <span>{{t "stevilcenje.dodatniPodatki"}}</span>
+                <span>{{t "std.dodatniPodatki"}}</span>
             </legend>
             <div class="row">
                 <div class="col-sm-6" data-fields="prefix,suffix"></div>

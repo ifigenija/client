@@ -3,7 +3,7 @@
         <div class="col-sm-6">
             <fieldset class="fieldset-strosek-podatki">
                 <legend>
-                    <span>{{t "stroskovnik.osnovniPodatki"}}</span>
+                    <span>{{t "std.glavniPodatki"}}</span>
                 </legend>
                 <div data-fields="naziv,vrednostDo,vrednostNa"></div>
             </fieldset>
@@ -11,7 +11,7 @@
         <div class="col-sm-6">
             <fieldset class="fieldset-strosek-dodatni">
                 <legend>
-                    <span>{{t "stroskovnik.dodatniPodatki"}}</span>
+                    <span>{{t "std.dodatniPodatki"}}</span>
                 </legend>
                 <div data-fields="tipstroska,vrstaStroska,popa,sort"></div>
             </fieldset>

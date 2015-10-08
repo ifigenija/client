@@ -3,7 +3,7 @@
         <div class="col-sm-4">
             <fieldset>
                 <legend>
-                    <span>{{t "pogodba.osnovniPodatki"}}</span>
+                    <span>{{t "std.glavniPodatki"}}</span>
                 </legend>
                 <div class="prikazno-polje">
                     <div class="pull-right oseba vrednost">{{oseba.label}}</div>
@@ -28,7 +28,7 @@
                 <div class="col-sm-12">
                     <fieldset data-fields="igralec,zaposlenVDrJz,samozaposlen,sifra">
                         <legend>
-                            <span>{{t "pogodba.dodatniPodatki"}}</span>
+                            <span>{{t "std.dodatniPodatki"}}</span>
                         </legend>
                     </fieldset>
                 </div>

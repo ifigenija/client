@@ -1,7 +1,7 @@
 <form>
     <fieldset>
         <legend>
-            <span>{{t "user.glavniPodatki"}}</span>
+            <span>{{t "std.glavniPodatki"}}</span>
         </legend>
         <div class="row">
             <div class="col-sm-6" data-fields="email,password,name,enabled"></div>

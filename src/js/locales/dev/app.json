@@ -135,6 +135,8 @@
         "obnovi": "Nadaljuj",
         "tiskanje": "Tiskanje",
         "shraniDodaj": "Shrani in dodaj",
+        "glavniPodatki": "Glavni podatki",
+        "dodatniPodatki": "Podrobno",
         "title": {
             "vnesiOseba": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo"
@@ -382,7 +384,6 @@
         "drzavaRojstva": "Država rojstva",
         "krajRojstva": "Kraj rojstva",
         "podatki": "Glavni podatki",
-        "dodatniPodatki": "Dodatni podatki",
         "d": {
             "sifra": "",
             "email": "E-pošta",
@@ -471,14 +472,11 @@
     },
     "stroskovnik": {
         "title": "Stroškovnik",
-        "osnovniPodatki": "Osnovni Podatki",
         "sodelavci": "Sodelavci",
         "vrednostNa": "Stroški na predstavo",
         "vrednostDo": "Stroški do premiere",
         "vsotaNa": "Vsota stroškov na predstavo",
-        "vsotaDo": "Vsota stroškov do premiere",
-        "osnovniPodatki": "Glavni podatki",
-        "dodatniPodatki": "Podrobno"
+        "vsotaDo": "Vsota stroškov do premiere"
     },
     "besedilo": {
         "title": "Besedila",
@@ -499,8 +497,6 @@
         "letoIzida": "Leto izida",
         "krajIzida": "Kraj izida",
         "zaloznik": "Založnik",
-        "osnovniPodatki": "Glavni podatki",
-        "dodatniPodatki": "Podrobno",
         "avtorji": "Avtorji",
         "d": {
             "avtor": "",
@@ -618,8 +614,6 @@
         "sort": "Zaporedna številka",
         "funkcija": "Funkcija",
         "alternacije": "Osebe / Alternacije",
-        "glavniPodatki": "Glavni podatki",
-        "dodatniPodatki": "Podrobno",
         "d": {
             "naziv": "Naziv funkcije",
             "komentar": "Dodatne opombe, predlogi, komentarji",
@@ -652,7 +646,6 @@
         "zaposlen": "Zaposlen",
         "imaPogodbo": "Ima pogodbo",
         "podatki": "Glavni podatki",
-        "dodatniPodatki": "Podrobno",
         "seznam": "Seznam",
         "d": {
             "sifra": "Oznaka",
@@ -792,7 +785,6 @@
         "defaultRoute": "Privzeta pot ob prijavi",
         "defaultRouteParams": "Parametri za pot",
         "lastLogon": "Čas zadnje priajve",
-        "glavniPodatki": "Glavni podatki",
         "d": {
             "name": "Polno ime uporabnika. Ime in priimek oz. opis",
             "enabled": "Ali je uporabnik omogočen ali onemogočen",
@@ -829,9 +821,7 @@
         "samozaposlen": "Samozaposlen",
         "igralec": "Igralec",
         "funkcija": "Funkcija",
-        "osnovniPodatki": "Glavni podatki",
         "vrednost": "Vrednosti",
-        "dodatniPodatki": "Podrobno",
         "jeProcentOdInkasa": "je procent od inkasa",
         "procentOdInkasa": "Procent od inkasa",
         "d": {
@@ -1092,7 +1082,6 @@
         "vrednostProjekta": "Vrednost projekta",
         "obiskovalci": "Obiskovalci",
         "sodelavci": "Sodelavci",
-        "dodatniPodatki": "Podrobno",
         "odkupPredstave": "Odkup predstave",
         "drugiViri": "Drugi nejavni viri",
         "vredProgEnotSklop": "Programske enote sklopa",
@@ -1511,8 +1500,6 @@
         "stanje": "Stanje",
         "leto": "Leto",
         "stevilka": "Številka",
-        "glavniPodatki": "Glavni podatki",
-        "dodatniPodatki": "Podrobno",
         "d": {
             "zaDokument": "Dokument",
             "ident": "Identifikator",
@@ -1539,8 +1526,6 @@
         "dogodek": "Dogodek",
         "zaporedna": "Zaporedna",
         "vrsta": "Vrsta",
-        "glavniPodatki": "Glavni podatki",
-        "dodatniPodatki": "Podrobno",
         "d": {
             "dogodek": "",
             "zaporedna": "",
@@ -1552,8 +1537,6 @@
         "zaporedna": "Zaporedna",
         "dogodek": "Dogodek",
         "gostovanje": "Gostovanje",
-        "glavniPodatki": "Glavni podatki",
-        "dodatniPodatki": "Podrobno",
         "d": {
             "zaporedna": "",
             "dogodek": "",

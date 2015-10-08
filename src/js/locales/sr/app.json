@@ -372,7 +372,6 @@
         "drzavaRojstva": "Država rođenja",
         "krajRojstva": "Mesto rođenja",
         "podatki": "Osnovni podaci",
-        "dodatniPodatki": "Dodatni podaci",
         "d": {
             "sifra": "",
             "email": "E-pošta",
@@ -461,14 +460,11 @@
     },
     "stroskovnik": {
         "title": "Troškovnik",
-        "osnovniPodatki": "Osnovni Podaci",
         "sodelavci": "Saradnici",
         "vrednostNa": "Troškovi po predstavi",
         "vrednostDo": "Troškovi do premijere",
         "vsotaNa": "Iznos troškova po predstavi",
-        "vsotaDo": "Iznos troškova do premijere",
-        "osnovniPodatki": "Osnovni podaci",
-        "dodatniPodatki": "Detaljnije"
+        "vsotaDo": "Iznos troškova do premijere"
     },
     "besedilo": {
         "title": "Tekst",
@@ -489,8 +485,6 @@
         "letoIzida": "Godina objave",
         "krajIzida": "Mesto objave",
         "zaloznik": "Izdavač",
-        "osnovniPodatki": "Osnovni podaci",
-        "dodatniPodatki": "Detaljno",
         "avtorji": "Autori",
         "d": {
             "avtor": "",
@@ -639,7 +633,6 @@
         "zaposlen": "Zaposlen",
         "imaPogodbo": "Ima ugovor",
         "podatki": "Osnovni podaci",
-        "dodatniPodatki": "Detaljnije",
         "d": {
             "sifra": "$t(ent.d.sifra)",
             "funkcija": "",
@@ -810,9 +803,7 @@
         "samozaposlen": "Samozaposlen",
         "igralec": "Glumac",
         "funkcija": "Funkcija",
-        "osnovniPodatki": "Osnovni podaci",
         "vrednost": "Vrednost",
-        "dodatniPodatki": "Detaljno",
         "jeProcentOdInkasa": "je procent od naplate",
         "procentOdInkasa": "Procent od naplate",
         "d": {
@@ -1070,7 +1061,6 @@
         "vrednostProjekta": "Vrednost projekta",
         "obiskovalci": "Posetioci",
         "sodelavci": "Saradnici",
-        "dodatniPodatki": "Detaljno",
         "odkupPredstave": "Otkup predstave",
         "drugiViri": "Drugi nejavni izvori",
         "vredProgEnotSklop": "Programska jedinica grupe",
