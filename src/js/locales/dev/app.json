@@ -139,7 +139,8 @@
         "dodatniPodatki": "Podrobno",
         "title": {
             "vnesiOseba": "Ustvari novo osebo",
-            "dodajBesedilo": "Ustvari novo besedilo"
+            "dodajBesedilo": "Ustvari novo besedilo",
+            "dodajNaslov": "Dodaj nov naslov"
         },
         "messages": {
             "success": "Uspešno opravljena akcija."
