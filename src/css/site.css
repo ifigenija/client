@@ -913,6 +913,14 @@ fieldset.pomemben legend span {
   color: #222222;
   opacity: 0.4;
 }
+.lookup-modal-nov .lookup-grid {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  height: 100%;
+}
 /*
 Licenca GPLv3
 */
