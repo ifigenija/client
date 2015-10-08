@@ -308,6 +308,12 @@ define([
      * @returns {PostavkaCDveView_L16.Backgrid.Grid|PostavkeView@call;extend.prototype.renderList.grid}
      */
     PostavkaCDveView.prototype.renderList = function () {
+
+        Backgrid.NumberCell.prototype.enterEditMode = function () {
+            Backgrid.Cell.prototype.enterEditMode.apply(this, arguments);
+            this.currentEditor.$el.select();
+        };
+        
         var Povdarjena = Backgrid.Row.extend({
             /**
              Renders a row of cells for this row's model.
