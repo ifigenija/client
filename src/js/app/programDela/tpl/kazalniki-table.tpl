@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvGostovanjZam"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvGostovanjZam 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvGostovanjZam}}</td>
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvGostovanjInt"}}:</td>
@@ -253,11 +253,11 @@
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvNekomerc"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvNekomerc 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvNekomerc}}</td>
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvPrem"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvPrem 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPrem}}</td>
             </tr>
             <tr>
                 <td class="kazalnik-padleft">- {{t "kazalnik.oderDom"}}:</td>
@@ -273,7 +273,7 @@
             </tr>
             <tr>
                 <td class="kazalnik-padleft">- {{t "kazalnik.gostZam"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvPonPremZamejo 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvPonPremZamejo}}</td>
             </tr>
             <tr>
                 <td class="kazalnik-padleft">- {{t "kazalnik.gostTuj"}}:</td>
@@ -317,7 +317,7 @@
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvOstalihNek"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvOstalihNek 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvOstalihNek}}</td>
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvGostovanjSlo"}}:</td>
