@@ -3,7 +3,7 @@
         <div class="col-sm-6">
             <fieldset class="fieldset-alternacija">
                 <legend>
-                    <span>{{t "alternacija.podatki"}}</span>
+                    <span>{{t "std.glavniPodatki"}}</span>
                 </legend>
                 <div class="prikazno-polje">
                     <div class="pull-right oseba vrednost">{{oseba.label}}</div>
@@ -27,7 +27,7 @@
         <div class="col-sm-6">
             <fieldset>
                 <legend>
-                    <span>{{t "alternacija.dodatniPodatki"}}</span>
+                    <span>{{t "std.dodatniPodatki"}}</span>
                 </legend>
                 <div class="vnosno-polje">
                     <div class="naslov">

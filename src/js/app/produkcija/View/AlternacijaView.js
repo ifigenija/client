@@ -72,14 +72,14 @@ define([
                 editable: false,
                 label: i18next.t('alternacija.zaposlen'),
                 name: 'zaposlen',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'boolean',
                 editable: false,
                 label: i18next.t('alternacija.imaPogodbo'),
                 name: 'imaPogodbo',
-                sortable: false
+                sortable: true
             },
             {
                 headerCell: 'number',
@@ -87,7 +87,7 @@ define([
                 editable: false,
                 label: i18next.t('alternacija.zacetek'),
                 name: 'zacetek',
-                sortable: false
+                sortable: true
             },
             {
                 headerCell: 'number',
@@ -95,7 +95,7 @@ define([
                 editable: false,
                 label: i18next.t('alternacija.konec'),
                 name: 'konec',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'action',
