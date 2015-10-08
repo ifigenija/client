@@ -967,10 +967,23 @@ fieldset {
 
     & .modal-dialog {
         width: 100%;
+        height: 97%;
     }
+    
+    & .modal-content{
+        height: 100%;
+    }
+    
     & .modal-footer{
         height: 0px;
         padding: 0px;
         visibility: hidden;
+    }
+
+    & .modal-header{
+        & .close {
+            color: #222222;
+            opacity: 0.4;
+        }
     }
 }

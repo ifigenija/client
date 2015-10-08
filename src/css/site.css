@@ -899,11 +899,19 @@ fieldset.pomemben legend span {
 }
 .lookup-modal-nov .modal-dialog {
   width: 100%;
+  height: 97%;
+}
+.lookup-modal-nov .modal-content {
+  height: 100%;
 }
 .lookup-modal-nov .modal-footer {
   height: 0px;
   padding: 0px;
   visibility: hidden;
+}
+.lookup-modal-nov .modal-header .close {
+  color: #222222;
+  opacity: 0.4;
 }
 /*
 Licenca GPLv3
