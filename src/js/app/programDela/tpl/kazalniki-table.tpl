@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <td>{{t "kazalnik.stVsehPredstav"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stVsehPredstav 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stVsehPredstav}}</td>
             </tr>
             <tr>
                 <td>{{t "kazalnik.stObiskNekom"}}:</td>
@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvGostovanjInt"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvGostovanjInt}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvGostovanjInt 0}}</td>
             </tr>
         </tbody>
     </table>
