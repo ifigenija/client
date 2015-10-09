@@ -880,16 +880,8 @@ fieldset.pomemben legend span {
   padding-left: 5px;
   vertical-align: top;
 }
-.vnosno-polje .check {
-  display: table-cell;
-  padding-left: 5px;
-}
 .vnosno-polje .gumb {
   width: 100%;
-}
-.vnosno-polje .prenesi-gumb-ime {
-  margin-top: 5px;
-  margin-right: 5px;
 }
 /*AlternacijaView*/
 /*podaljšan fieldset*/

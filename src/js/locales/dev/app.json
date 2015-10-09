@@ -1333,7 +1333,8 @@
         "brisi": "Brisi",
         "vMapo": "Daj v mapo",
         "premik": "Premik v mapo",
-        "odstrani": "Odstrani"
+        "odstrani": "Odstrani",
+        "lastnik": "Lastnik"
     },
     "dat": {
         "meta": "Podatki o datoteki",
