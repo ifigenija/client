@@ -77,6 +77,10 @@ define([
                 element: 'button-trigger',
                 trigger: 'nasvet'
             }
+        },
+        triggers: {
+            "click .oseba-polnoime": "polnoIme",
+            "click .oseba-psevdonim": "psevdonim"
         }
     });
 
@@ -180,9 +184,7 @@ define([
             polnoIme = ime + ' ' + priimek;
         }
 
-        if (!this.$('.oseba-check-psevdonim').is(':checked')) {
-            this.form.fields.polnoIme.setValue(polnoIme);
-        }
+        this.form.fields.polnoIme.setValue(polnoIme);
 
         return polnoIme;
     };
@@ -192,9 +194,7 @@ define([
         var psevdonim = polja.psevdonim.editor.getValue();
         psevdonim = psevdonim ? psevdonim : '';
 
-        if (this.$('.oseba-check-psevdonim').is(':checked')) {
-            this.form.fields.polnoIme.setValue(psevdonim);
-        }
+        this.form.fields.polnoIme.setValue(psevdonim);
 
         return psevdonim;
     };
