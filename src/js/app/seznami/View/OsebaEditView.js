@@ -167,13 +167,17 @@ define([
 
     OsebaEditView.prototype.onPolnoIme = function () {
         var polja = this.form.fields;
+        
         var ime = polja.ime.editor.getValue();
+        ime = ime.replace(/\s+$/, '');
         ime = ime ? ime : '';
 
         var srednjeIme = polja.srednjeIme.editor.getValue();
+        srednjeIme = srednjeIme.replace(/\s+$/, '');
         srednjeIme = srednjeIme ? srednjeIme.toUpperCase().charAt(0) + '.' : '';
 
         var priimek = polja.priimek.editor.getValue();
+        priimek = priimek.replace(/\s+$/, '');
         priimek = priimek ? priimek : '';
 
         var polnoIme;
@@ -192,6 +196,7 @@ define([
     OsebaEditView.prototype.onPsevdonim = function () {
         var polja = this.form.fields;
         var psevdonim = polja.psevdonim.editor.getValue();
+        psevdonim = psevdonim.replace(/\s+$/, '');
         psevdonim = psevdonim ? psevdonim : '';
 
         this.form.fields.polnoIme.setValue(psevdonim);
