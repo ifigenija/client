@@ -539,7 +539,7 @@ define([
             ponovitvePremiere: {collection: PonovitvePremierCollection, mappedBy: 'dokument'},
             ponovitvePrejsnjih: {collection: PonovitvePrejsnjihCollection, mappedBy: 'dokument'},
             premiere: {collection: PremiereCollection, mappedBy: 'dokument'},
-            festivali: {collection: FestivaliCollection, mappedBy: 'programDela'},
+            programiFestival: {collection: FestivaliCollection, mappedBy: 'programDela'},
             programiRazno: {collection: RazniCollection, mappedBy: 'dokument'},
             postavkeCDve: {collection: PostavkeCDveCollection, mappedBy: 'programDela'}
         },
@@ -580,7 +580,7 @@ define([
                         dokument: this.id
                     });
                     break;
-                case 'festivali':
+                case 'programiFestival':
                     postavka = new FestivalModel({
                         programDela: this.id
                     });
@@ -593,7 +593,7 @@ define([
                     break;
                 case 'postavkeC2':
                     postavka = new PostavkaCDvaModel({
-                        programDela: this.id
+                        programDela: this.id                    
                     });
                     postavka.programDela = this;
                     break;

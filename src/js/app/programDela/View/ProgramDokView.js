@@ -621,7 +621,7 @@ define([
         this.deselectTabDva();
         this.$('.pnl-festivali').addClass('active');
 
-        var coll = this.model.festivaliCollection;
+        var coll = this.model.programiFestivalCollection;
         if (coll.length === 0) {
             coll.fetch({
                 error: Radio.channel('error').request('handler', 'xhr')
