@@ -114,7 +114,7 @@ define([
          * @returns {undefined}
          */
         model.permissionOdpri = function (id) {
-            require(['../Model/Permission', '../View/PermissionView'], function (Model, View) {
+            require(['../Model/Permission', 'app/aaa/View/PermissionView'], function (Model, View) {
                 odpriModel(Model, View, id, 'permission.title');
             });
         };
@@ -123,7 +123,7 @@ define([
          * @returns {undefined}
          */
         model.roleOdpri = function (id) {
-            require(['../Model/Role', '../View/RoleView'], function (Model, View) {
+            require(['../Model/Role', 'app/aaa/View/RoleView'], function (Model, View) {
                 odpriModel(Model, View, id, 'role.title');
             });
         };
@@ -132,7 +132,7 @@ define([
          * @returns {undefined}
          */
         model.userOdpri = function (id) {
-            require(['../Model/User', '../View/UserView'], function (Model, View) {
+            require(['../Model/User', 'app/aaa/View/UserView'], function (Model, View) {
                 odpriModel(Model, View, id, 'user.title');
             });
         };
