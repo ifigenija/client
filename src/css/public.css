@@ -8145,6 +8145,10 @@ fieldset.pomemben legend span {
   padding-left: 5px;
   vertical-align: top;
 }
+.vnosno-polje .check {
+  display: table-cell;
+  padding-left: 5px;
+}
 .vnosno-polje .gumb {
   width: 100%;
 }

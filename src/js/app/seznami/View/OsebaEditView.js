@@ -77,10 +77,6 @@ define([
                 element: 'button-trigger',
                 trigger: 'nasvet'
             }
-        },
-        triggers: {
-            "click .oseba-polnoime" : "polnoIme",
-            "click .oseba-psevdonim" : "psevdonim"
         }
     });
 
@@ -184,17 +180,21 @@ define([
             polnoIme = ime + ' ' + priimek;
         }
 
-        this.form.fields.polnoIme.setValue(polnoIme);
+        if (!this.$('.oseba-check-psevdonim').is(':checked')) {
+            this.form.fields.polnoIme.setValue(polnoIme);
+        }
 
         return polnoIme;
     };
-    
+
     OsebaEditView.prototype.onPsevdonim = function () {
         var polja = this.form.fields;
         var psevdonim = polja.psevdonim.editor.getValue();
         psevdonim = psevdonim ? psevdonim : '';
 
-        this.form.fields.polnoIme.setValue(psevdonim);
+        if (this.$('.oseba-check-psevdonim').is(':checked')) {
+            this.form.fields.polnoIme.setValue(psevdonim);
+        }
 
         return psevdonim;
     };
@@ -203,6 +203,7 @@ define([
         this.form.on('ime:change', this.onPolnoIme, this);
         this.form.on('srednjeIme:change', this.onPolnoIme, this);
         this.form.on('priimek:change', this.onPolnoIme, this);
+        this.form.on('psevdonim:change', this.onPsevdonim, this);
 
         if (this.isNew() || this.options.pogled === "modal") {
             this.$('.nav.nav-tabs').addClass('hidden');

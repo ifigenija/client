@@ -18,15 +18,11 @@
                     <div style="width: 100%; display: table;">
                         <div style="display: table-row">
                             <div class="izbor"  data-editors="polnoIme"></div>
-
-                        </div>
-                        <div style="display: table-row">
-                            <a class="btn btn-default prenesi-gumb-ime oseba-polnoime" title="{{t "std.title.prenesiIme"}}">
-                                {{t "std.polnoIme"}}
-                            </a> 
-                            <a class="btn btn-default prenesi-gumb-ime oseba-psevdonim" title="{{t "std.title.prenesiPsevdonim"}}">
-                                {{t "std.psevdonim"}}
-                            </a> 
+                            <div class="check gumb checkbox">
+                                <label>
+                                    <input class="oseba-check-psevdonim" type="checkbox"> {{t "std.psevdonim"}}
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
