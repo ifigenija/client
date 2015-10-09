@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td>{{t "kazalnik.stIzvGostovanjInt"}}:</td>
-                <td class="col-numbers">{{u "formatNumber" stIzvGostovanjInt 0}}</td>
+                <td class="col-numbers">{{u "formatNumber" stIzvGostovanjInt}}</td>
             </tr>
         </tbody>
     </table>

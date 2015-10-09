@@ -167,7 +167,7 @@ define([
 
     OsebaEditView.prototype.onPolnoIme = function () {
         var polja = this.form.fields;
-        
+
         var ime = polja.ime.editor.getValue();
         ime = ime.replace(/\s+$/, '');
         ime = ime ? ime : '';
@@ -188,7 +188,11 @@ define([
             polnoIme = ime + ' ' + priimek;
         }
 
-        this.form.fields.polnoIme.setValue(polnoIme);
+        var psevdonim = polja.psevdonim.editor.getValue();
+
+        if (!psevdonim) {
+            this.form.fields.polnoIme.setValue(polnoIme);
+        }
 
         return polnoIme;
     };
@@ -199,7 +203,11 @@ define([
         psevdonim = psevdonim.replace(/\s+$/, '');
         psevdonim = psevdonim ? psevdonim : '';
 
-        this.form.fields.polnoIme.setValue(psevdonim);
+        if (psevdonim) {
+            this.form.fields.polnoIme.setValue(psevdonim);
+        } else {
+            this.form.fields.polnoIme.setValue(this.onPolnoIme());
+        }
 
         return psevdonim;
     };
