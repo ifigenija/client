@@ -737,9 +737,9 @@ define([
 
             //skupaj programski sklop ena in programski sklop dva
             var stEnotSkupaj = stEnotSK1 + stEnotSK2;
-            var mkViriSkupaj = mkViriSK2 + mkViriSK2;
-            var dmlsViriSkupaj = dmlsViriSK2 + dmlsViriSK2;
-            var drugiViriSkupaj = drugiViriSK2 + drugiViriSK2;
+            var mkViriSkupaj = mkViriSK1 + mkViriSK2;
+            var dmlsViriSkupaj = dmlsViriSK1 + dmlsViriSK2;
+            var drugiViriSkupaj = drugiViriSK1 + drugiViriSK2;
 
             this.set('stEnotSkupaj', stEnotSkupaj);
             this.set('mkViriSkupaj', mkViriSkupaj);

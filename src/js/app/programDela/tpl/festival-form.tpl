@@ -12,7 +12,7 @@
                 <div class="col-sm-6 col-md-6">
                     <fieldset data-fields="casPriprave,casIzvedbe,umetVodja,programskoTelo,imaKoprodukcije,stTujihSelektorjev,prizorisca">
                         <legend>
-                            <span>{{t "ep.dodatniPodatki"}}</span>
+                            <span>{{t "std.dodatniPodatki"}}</span>
                         </legend>
                     </fieldset>
                     <fieldset class="fieldset-stroski">
