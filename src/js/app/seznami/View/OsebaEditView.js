@@ -77,6 +77,10 @@ define([
                 element: 'button-trigger',
                 trigger: 'nasvet'
             }
+        },
+        triggers: {
+            "click .oseba-polnoime" : "polnoIme",
+            "click .oseba-psevdonim" : "psevdonim"
         }
     });
 
@@ -112,7 +116,7 @@ define([
         var butS = tb.getButton('doc-shrani');
         var butSD = tb.getButton('doc-shrani-dodaj');
         var butP = tb.getButton('doc-preklici');
-        
+
         if (butS && butS.get('disabled')) {
             butS.set({
                 disabled: false
@@ -124,7 +128,7 @@ define([
                 disabled: false
             });
         }
-        
+
         if (butS && !butS.get('disabled')) {
             butP.set({
                 label: i18next.t('std.preklici')
@@ -161,7 +165,7 @@ define([
         });
     };
 
-    OsebaEditView.prototype.polnoIme = function () {
+    OsebaEditView.prototype.onPolnoIme = function () {
         var polja = this.form.fields;
         var ime = polja.ime.editor.getValue();
         ime = ime ? ime : '';
@@ -172,17 +176,33 @@ define([
         var priimek = polja.priimek.editor.getValue();
         priimek = priimek ? priimek : '';
 
-        var polnoIme = ime + ' ' + srednjeIme + ' ' + priimek;
+        var polnoIme;
+
+        if (srednjeIme) {
+            polnoIme = ime + ' ' + srednjeIme + ' ' + priimek;
+        } else {
+            polnoIme = ime + ' ' + priimek;
+        }
 
         this.form.fields.polnoIme.setValue(polnoIme);
 
         return polnoIme;
     };
+    
+    OsebaEditView.prototype.onPsevdonim = function () {
+        var polja = this.form.fields;
+        var psevdonim = polja.psevdonim.editor.getValue();
+        psevdonim = psevdonim ? psevdonim : '';
+
+        this.form.fields.polnoIme.setValue(psevdonim);
+
+        return psevdonim;
+    };
 
     OsebaEditView.prototype.onRenderForm = function () {
-        this.form.on('ime:change', this.polnoIme, this);
-        this.form.on('srednjeIme:change', this.polnoIme, this);
-        this.form.on('priimek:change', this.polnoIme, this);
+        this.form.on('ime:change', this.onPolnoIme, this);
+        this.form.on('srednjeIme:change', this.onPolnoIme, this);
+        this.form.on('priimek:change', this.onPolnoIme, this);
 
         if (this.isNew() || this.options.pogled === "modal") {
             this.$('.nav.nav-tabs').addClass('hidden');

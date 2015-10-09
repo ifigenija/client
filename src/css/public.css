@@ -8086,6 +8086,7 @@ fieldset.pomemben legend span {
 /*stil za fielset brez legende*/
 .fieldset-brez-legend {
   margin-top: 15px;
+  padding-top: 22px;
 }
 .seznam-form {
   margin-top: 10px;
@@ -8146,6 +8147,10 @@ fieldset.pomemben legend span {
 }
 .vnosno-polje .gumb {
   width: 100%;
+}
+.vnosno-polje .prenesi-gumb-ime {
+  margin-top: 5px;
+  margin-right: 5px;
 }
 /*AlternacijaView*/
 /*podaljšan fieldset*/

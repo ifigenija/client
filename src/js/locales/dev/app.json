@@ -138,10 +138,14 @@
         "glavniPodatki": "Glavni podatki",
         "dodatniPodatki": "Podrobno",
         "lookupModal": "Izberi vrednost za:",
+        "polnoIme": "Polno ime",
+        "psevdonim": "Psevdonim",
         "title": {
             "vnesiOseba": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
-            "dodajNaslov": "Dodaj nov naslov"
+            "dodajNaslov": "Dodaj nov naslov",
+            "prenesiIme": "Prenesi polno ime",
+            "prenesiPsevdonim": "Prenesi psevdonim"
         },
         "messages": {
             "success": "Uspešno opravljena akcija."
@@ -375,7 +379,7 @@
         "osebniPodatki": "Osebni podatki",
         "priimek": "Priimek",
         "srednjeIme": "Srednje ime",
-        "polnoIme": "Polno ime",
+        "polnoIme": "Ime za prikaz",
         "psevdonim": "Psevdonim",
         "datumRojstva": "Datum rojstva",
         "emso": "EMŠO",
@@ -660,7 +664,7 @@
             "privzeti": "Ali je privzeti",
             "pomembna": "Ali je alternacija pomembna in se jo prikaže v programu dela?"
         },
-        "t":{
+        "t": {
             "sort": "Zaporedna"
         }
     },
