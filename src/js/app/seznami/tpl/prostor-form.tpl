@@ -25,11 +25,11 @@
                 </div>
             </fieldset>
         </div>
-        <fieldset>
+        <fieldset class="col-sm-6">
             <legend>
                 <span>{{t "std.dodatniPodatki"}}</span>
             </legend>
-            <div class="col-sm-6" data-fields="kapaciteta,jeMaticniOder,jePrizorisce,sePlanira,sifra"></div>
+            <div data-fields="kapaciteta,jeMaticniOder,jePrizorisce,sePlanira,sifra"></div>
         </fieldset>
     </div>
     <div class="row">
