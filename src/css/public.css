@@ -8187,6 +8187,12 @@ fieldset.pomemben legend span {
   overflow-y: auto;
   max-height: 750px;
 }
+/*ckeditor*/
+.cke_editable {
+  background-color: white;
+  border: solid 1px;
+  border-color: #ccc;
+}
 /*
 Licenca GPLv3
 */
