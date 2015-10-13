@@ -295,6 +295,19 @@
             "sifra": ""
         }
     },
+    "tipPopa": {
+        "title": "Tipi poslovnih partnerjev",
+        "ime": "Ime",
+        "opis": "Opis",
+        "sort": "Sort",
+        "popa": "Poslovni partner",
+        "d": {
+            "ime": "Ime",
+            "opis": "Opis",
+            "popa": "Poslovni partner",
+            "sort": "Sort"
+        }
+    },
     "drzava": {
         "title": "Države",
         "nova": "Nova država",
@@ -356,7 +369,7 @@
             "drzava": "",
             "panoga": "",
             "maticna": "",
-            "tipkli": "Tip klienta (kupec, dobavitelj, koproducent, )",
+            "tipkli": "Tip klienta (šola, gledalci, sponzorji, ...)",
             "stakli": "AK-aktiven, NA-neaktiven",
             "naziv1": "Dodatni naziv za klienta",
             "url": "URL naslov spletne strani",
