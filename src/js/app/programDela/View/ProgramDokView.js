@@ -769,6 +769,10 @@ define([
             ok: brisi
         });
     };
+    
+    ProgramDokView.prototype.onSaveSuccess = function () {
+        this.renderToolbar();
+    };
 
     return ProgramDokView;
 });
