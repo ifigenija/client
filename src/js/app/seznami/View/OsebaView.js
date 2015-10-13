@@ -79,7 +79,7 @@ define([
                 editable: false,
                 label: i18next.t('oseba.psevdonim'),
                 name: 'psevdonim',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'action',
