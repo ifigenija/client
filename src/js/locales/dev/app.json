@@ -101,7 +101,7 @@
     "std": {
         "brisi": "Briši",
         "uredi": "Uredi",
-        "potrdiIzbris": "Ali res želite izbrisati podatek",
+        "potrdiIzbris": "Ali res želite izbrisati podatek?",
         "izberi": "Izberi",
         "preklici": "Prekliči",
         "shrani": "Shrani",
@@ -141,7 +141,7 @@
         "polnoIme": "Polno ime",
         "psevdonim": "Psevdonim",
         "title": {
-            "vnesiOseba": "Ustvari novo osebo",
+            "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
             "dodajNaslov": "Dodaj nov naslov",
             "prenesiIme": "Prenesi polno ime",
@@ -225,8 +225,8 @@
             "ime": "",
             "opis": "",
             "kapaciteta": "",
-            "stPredstav": "Število predstav abonmaja",
-            "stKuponov": "Število kuponov abonmaja"
+            "stPredstav": "",
+            "stKuponov": ""
         }
     },
     "prostor": {
@@ -242,11 +242,11 @@
         "jeMaticniOder": "Matični oder",
         "sePlanira": "Prostor se planira",
         "d": {
-            "sifra": "$t(ent.d.sifra)",
+            "sifra": "Enolična oznaka",
             "opis": "",
             "naziv": "",
-            "popa": "Poslovni partner",
-            "naslov": "Naslov, kjer se nahaja prostor",
+            "popa": "",
+            "naslov": "",
             "jePrizorisce": "Ali je prostor prizorišče.",
             "sePlanira": "Ali se upošteva pri planiranju koledarja.",
             "jeMaticniOder": "Ali je matični oder",
@@ -295,6 +295,19 @@
             "sifra": ""
         }
     },
+    "tipPopa": {
+        "title": "Tipi poslovnih partnerjev",
+        "ime": "Ime",
+        "opis": "Opis",
+        "sort": "Sort",
+        "popa": "Poslovni partner",
+        "d": {
+            "ime": "Ime",
+            "opis": "Opis",
+            "popa": "Poslovni partner",
+            "sort": "Sort"
+        }
+    },
     "drzava": {
         "title": "Države",
         "nova": "Nova država",
@@ -319,7 +332,7 @@
         "sifra": "Poštna številka",
         "naziv": "Naziv",
         "d": {
-            "sifra": "Poštna številka",
+            "sifra": "",
             "naziv": ""
         }
     },
@@ -356,7 +369,7 @@
             "drzava": "",
             "panoga": "",
             "maticna": "",
-            "tipkli": "Tip klienta (kupec, dobavitelj, koproducent, )",
+            "tipkli": "Tip klienta (šola, gledalci, sponzorji, ...)",
             "stakli": "AK-aktiven, NA-neaktiven",
             "naziv1": "Dodatni naziv za klienta",
             "url": "URL naslov spletne strani",
@@ -392,7 +405,7 @@
         "podatki": "Glavni podatki",
         "d": {
             "sifra": "",
-            "email": "E-pošta",
+            "email": "",
             "ime": "",
             "priimek": "",
             "srednjeIme": "",
@@ -456,7 +469,7 @@
         "stevilka": "Telefonska številka",
         "d": {
             "vrsta": "Vrsta telefonske številke",
-            "stevilka": "Telefonska številka",
+            "stevilka": "",
             "privzeta": "Ali je privzeta telefonska številka",
             "popa": "Poslovni partner, ki je ima to telefosnko številko",
             "oseba": "Oseba, ki je ima to telefosnko številko"
@@ -505,6 +518,7 @@
         "zaloznik": "Založnik",
         "avtorji": "Avtorji",
         "d": {
+            "stevilka": "Številka besedila",
             "avtor": "",
             "naslov": "",
             "podnaslov": "",
@@ -519,7 +533,8 @@
             "letoIzida": "",
             "krajIzida": "",
             "zaloznik": "",
-            "naslovIzvirnika": "Naslov izvirnika besedila"
+            "naslovIzvirnika": "Naslov izvirnika besedila",
+            "podnaslovIzvirnika": "Podnaslov izvirnika besedila"
         }
     },
     "uprizoritev": {
@@ -653,7 +668,7 @@
         "imaPogodbo": "Ima pogodbo",
         "seznam": "Seznam",
         "d": {
-            "sifra": "Oznaka",
+            "sifra": "",
             "funkcija": "",
             "oseba": "",
             "zacetek": "Začetek opravljanja funkcije",
@@ -746,6 +761,7 @@
         "jeNastopajoci": "Nastopajoči",
         "delovnoMesto": "Delovno mesto",
         "d": {
+            "sifra": "Enolična oznaka",
             "oseba": "",
             "status": "",
             "zacetek": "Začetek zaposlitve",
@@ -832,8 +848,8 @@
         "d": {
             "sifra": "",
             "aktivna": "",
-            "zacetek": "Začetek pogodbe",
-            "konec": "Konec pogodbe",
+            "zacetek": "",
+            "konec": "",
             "opis": "",
             "vrednostVaj": "Pavšalna vrednost za vse vaje oz. vrednost do premiere",
             "vrednostVaje": "Pavšalna vrednost ene vaje",
@@ -1462,9 +1478,9 @@
     "vrstaStroska": {
         "title": "Vrsta materialnega stroška",
         "nova": "Nova vrsta materialnega stroška",
-        "skupina": "Skupina vrste materialnega stroška",
-        "podskupina": "Podskupina vrste materialnega stroška",
-        "naziv": "Naziv vrste materialnega stroška",
+        "skupina": "Skupina",
+        "podskupina": "Podskupina",
+        "naziv": "Naziv",
         "opis": "Opis",
         "d": {
             "skupina": "",
@@ -1589,10 +1605,11 @@
         "besedilo": "Besedilo",
         "oseba": "Oseba",
         "d": {
+            "oseba": "",
             "tipAvtorja": "Tip avtorja - npr. avtor originalnega besedila, soavtor, lektor, prevajalec",
-            "zaporedna": "Zaporedna številka",
+            "zaporedna": "",
             "aliVNaslovu": "Ali se prikaže kot avtor v naslovu uprizoritve",
-            "besedilo": "Besedilo"
+            "besedilo": ""
         },
         "t": {
             "zaporedna": "Zaporedna",

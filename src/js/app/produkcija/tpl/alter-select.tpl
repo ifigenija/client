@@ -13,7 +13,7 @@
                 <div style="display: table-row">
                     <div class="izbor alter-izbor"></div>
                     <div class="dodaj"> 
-                        <a class="btn btn-default gumb oseba-nova" title="{{t "std.title.dodajBesedilo"}}">
+                        <a class="btn btn-default gumb oseba-nova" title="{{t "std.title.dodajOsebo"}}">
                             <i class="fa fa-user-plus"> </i>
                         </a> 
                     </div>

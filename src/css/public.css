@@ -7367,21 +7367,21 @@ span.lookup-label {
   max-width: 250px;
   padding: 6px;
 }
-.lookup-modal {
-  position: fixed;
-  margin: 3px;
-  z-index: 5000;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  top: 51px;
+/*.lookup-modal {
+    position: fixed;
+    margin: 3px;
+    z-index: 5000;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 51px;
 }
 .lookup-modal > .panel {
-  height: 100%;
-}
-.lookup-modal > .panel > .panel-body {
-  padding: 2px;
-}
+    height: 100%;
+}*/
+/*.lookup-modal > .panel > .panel-body {
+    padding: 2px;
+}*/
 .lookup-grid {
   position: relative;
   display: block;
@@ -8175,6 +8175,10 @@ fieldset.pomemben legend span {
   padding: 0px;
   visibility: hidden;
 }
+.lookup-modal-nov .modal-body {
+  height: 90%;
+  overflow-y: auto;
+}
 .lookup-modal-nov .modal-header .close {
   color: #222222;
   opacity: 0.4;
@@ -8183,9 +8187,6 @@ fieldset.pomemben legend span {
   width: 100%;
   padding: 0;
   border: 0;
-  height: 100%;
-  overflow-y: auto;
-  max-height: 750px;
 }
 /*ckeditor*/
 .cke_editable {

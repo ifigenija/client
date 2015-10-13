@@ -19,7 +19,7 @@
                                         <div style="display: table-row">
                                             <div class="izbor"  data-editors="oseba">  </div>
                                             <div class="dodaj">
-                                                <a class="btn btn-default gumb oseba-dodaj" title="{{t "std.title.vnesiOseba"}}">
+                                                <a class="btn btn-default gumb oseba-dodaj" title="{{t "std.title.dodajOsebo"}}">
                                                     <i class="fa fa-user-plus"> </i>
                                                 </a>
                                             </div>

@@ -38,15 +38,6 @@ define([
                 sortable: true
             },
             {
-                cell: Backgrid.SelectCell.extend({
-                    optionValues: schema.getOptionValues('tipstroska')
-                }),
-                editable: false,
-                label: i18next.t('strupr.tipstroska'),
-                name: 'tipstroska',
-                sortable: true
-            },
-            {
                 headerCell: 'number',
                 cell: 'number',
                 editable: false,

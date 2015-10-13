@@ -51,7 +51,7 @@ define([
                 editable: false,
                 label: i18next.t('popa.stakli'),
                 name: 'stakli',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'string',
@@ -72,7 +72,7 @@ define([
                 editable: false,
                 label: i18next.t('popa.idddv'),
                 name: 'idddv',
-                sortable: false
+                sortable: true
             },
             {
                 cell: 'action',
