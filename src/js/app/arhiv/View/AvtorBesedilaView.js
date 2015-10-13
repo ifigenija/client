@@ -87,7 +87,11 @@ define([
     };
 
     AvtorBesedilaView.prototype.onSaveSuccess = function () {
-        this.trigger('avtor:save');
+        this.trigger('avtor:osvezi');
+    };
+    
+    AvtorBesedilaView.prototype.onDestroySuccess = function () {
+        this.trigger('avtor:osvezi');
     };
 
     return AvtorBesedilaView;

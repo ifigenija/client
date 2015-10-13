@@ -162,7 +162,7 @@ define([
             zapirajFormo: true
         });
 
-        view.on('avtor:save', this.avtorSave, this);
+        view.on('avtor:osvezi', this.avtorOsvezi, this);
 
         this.avtorjiR.show(view);
 
@@ -180,7 +180,7 @@ define([
         this.prilogeR.show(view);
     };
 
-    BesediloDokView.prototype.avtorSave = function () {
+    BesediloDokView.prototype.avtorOsvezi = function () {
         var self = this;
         this.model.fetch({
             success: function () {
