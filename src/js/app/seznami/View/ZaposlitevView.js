@@ -45,15 +45,15 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('oseba.ime'),
-                name: 'oseba.ime',
+                label: i18next.t('oseba.priimek'),
+                name: 'oseba.priimek',
                 sortable: true
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('oseba.priimek'),
-                name: 'oseba.priimek',
+                label: i18next.t('oseba.ime'),
+                name: 'oseba.ime',
                 sortable: true
             },
             {
