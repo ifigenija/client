@@ -225,8 +225,8 @@
             "ime": "",
             "opis": "",
             "kapaciteta": "",
-            "stPredstav": "Število predstav abonmaja",
-            "stKuponov": "Število kuponov abonmaja"
+            "stPredstav": "",
+            "stKuponov": ""
         }
     },
     "prostor": {
@@ -242,11 +242,11 @@
         "jeMaticniOder": "Matični oder",
         "sePlanira": "Prostor se planira",
         "d": {
-            "sifra": "$t(ent.d.sifra)",
+            "sifra": "Enolična oznaka",
             "opis": "",
             "naziv": "",
-            "popa": "Poslovni partner",
-            "naslov": "Naslov, kjer se nahaja prostor",
+            "popa": "",
+            "naslov": "",
             "jePrizorisce": "Ali je prostor prizorišče.",
             "sePlanira": "Ali se upošteva pri planiranju koledarja.",
             "jeMaticniOder": "Ali je matični oder",
@@ -319,7 +319,7 @@
         "sifra": "Poštna številka",
         "naziv": "Naziv",
         "d": {
-            "sifra": "Poštna številka",
+            "sifra": "",
             "naziv": ""
         }
     },
@@ -392,7 +392,7 @@
         "podatki": "Glavni podatki",
         "d": {
             "sifra": "",
-            "email": "E-pošta",
+            "email": "",
             "ime": "",
             "priimek": "",
             "srednjeIme": "",
@@ -456,7 +456,7 @@
         "stevilka": "Telefonska številka",
         "d": {
             "vrsta": "Vrsta telefonske številke",
-            "stevilka": "Telefonska številka",
+            "stevilka": "",
             "privzeta": "Ali je privzeta telefonska številka",
             "popa": "Poslovni partner, ki je ima to telefosnko številko",
             "oseba": "Oseba, ki je ima to telefosnko številko"
@@ -746,6 +746,7 @@
         "jeNastopajoci": "Nastopajoči",
         "delovnoMesto": "Delovno mesto",
         "d": {
+            "sifra": "Enolična oznaka",
             "oseba": "",
             "status": "",
             "zacetek": "Začetek zaposlitve",
@@ -1450,9 +1451,9 @@
     "vrstaStroska": {
         "title": "Vrsta materialnega stroška",
         "nova": "Nova vrsta materialnega stroška",
-        "skupina": "Skupina vrste materialnega stroška",
-        "podskupina": "Podskupina vrste materialnega stroška",
-        "naziv": "Naziv vrste materialnega stroška",
+        "skupina": "Skupina",
+        "podskupina": "Podskupina",
+        "naziv": "Naziv",
         "opis": "Opis",
         "d": {
             "skupina": "",

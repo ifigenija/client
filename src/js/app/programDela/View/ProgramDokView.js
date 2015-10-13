@@ -741,6 +741,10 @@ define([
         }
     };
 
+    /**
+     * Brisanje programa dela
+     * @returns {undefined}
+     */
     ProgramDokView.prototype.onBrisi = function () {
         var model = this.model;
         var self = this;
