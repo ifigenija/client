@@ -582,7 +582,8 @@ define([
                     break;
                 case 'programiFestival':
                     postavka = new FestivalModel({
-                        programDela: this.id
+                        programDela: this.id,
+                        dokument: this.id
                     });
                     postavka.programDela = this;
                     break;
@@ -593,7 +594,8 @@ define([
                     break;
                 case 'postavkeC2':
                     postavka = new PostavkaCDvaModel({
-                        programDela: this.id                    
+                        programDela: this.id,
+                        dokument: this.id                        
                     });
                     postavka.programDela = this;
                     break;
