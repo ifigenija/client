@@ -505,6 +505,7 @@
         "zaloznik": "Založnik",
         "avtorji": "Avtorji",
         "d": {
+            "stevilka": "Številka besedila",
             "avtor": "",
             "naslov": "",
             "podnaslov": "",
@@ -519,7 +520,8 @@
             "letoIzida": "",
             "krajIzida": "",
             "zaloznik": "",
-            "naslovIzvirnika": "Naslov izvirnika besedila"
+            "naslovIzvirnika": "Naslov izvirnika besedila",
+            "podnaslovIzvirnika": "Podnaslov izvirnika besedila"
         }
     },
     "uprizoritev": {
@@ -653,7 +655,7 @@
         "imaPogodbo": "Ima pogodbo",
         "seznam": "Seznam",
         "d": {
-            "sifra": "Oznaka",
+            "sifra": "",
             "funkcija": "",
             "oseba": "",
             "zacetek": "Začetek opravljanja funkcije",
@@ -833,8 +835,8 @@
         "d": {
             "sifra": "",
             "aktivna": "",
-            "zacetek": "Začetek pogodbe",
-            "konec": "Konec pogodbe",
+            "zacetek": "",
+            "konec": "",
             "opis": "",
             "vrednostVaj": "Pavšalna vrednost za vse vaje oz. vrednost do premiere",
             "vrednostVaje": "Pavšalna vrednost ene vaje",
@@ -1578,10 +1580,11 @@
         "besedilo": "Besedilo",
         "oseba": "Oseba",
         "d": {
+            "oseba": "",
             "tipAvtorja": "Tip avtorja - npr. avtor originalnega besedila, soavtor, lektor, prevajalec",
-            "zaporedna": "Zaporedna številka",
+            "zaporedna": "",
             "aliVNaslovu": "Ali se prikaže kot avtor v naslovu uprizoritve",
-            "besedilo": "Besedilo"
+            "besedilo": ""
         },
         "t": {
             "zaporedna": "Zaporedna",
