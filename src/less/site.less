@@ -105,7 +105,7 @@ span.lookup-label {
     max-width: 250px;
     padding: 6px;
 }
-.lookup-modal {
+/*.lookup-modal {
     position: fixed;
     margin: 3px;
     z-index: 5000;
@@ -116,15 +116,15 @@ span.lookup-label {
 }
 .lookup-modal > .panel {
     height: 100%;
-}
+}*/
 
 .lookup-filter {
 
 
 }
-.lookup-modal > .panel > .panel-body {
+/*.lookup-modal > .panel > .panel-body {
     padding: 2px;
-}
+}*/
 .lookup-grid {
     position: relative;
     display: block;
@@ -980,6 +980,11 @@ fieldset {
         padding: 0px;
         visibility: hidden;
     }
+    
+    & .modal-body {
+        height: 90%;
+        overflow-y: auto;
+    }
 
     & .modal-header{
         & .close {
@@ -992,9 +997,6 @@ fieldset {
         width: 100%;
         padding: 0;
         border: 0;
-        height: 100%;
-        overflow-y: auto;
-        max-height: 750px;
     }
 }
 
