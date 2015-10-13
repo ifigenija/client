@@ -101,7 +101,7 @@
     "std": {
         "brisi": "Briši",
         "uredi": "Uredi",
-        "potrdiIzbris": "Ali res želite izbrisati podatek",
+        "potrdiIzbris": "Ali res želite izbrisati podatek?",
         "izberi": "Izberi",
         "preklici": "Prekliči",
         "shrani": "Shrani",
@@ -141,7 +141,7 @@
         "polnoIme": "Polno ime",
         "psevdonim": "Psevdonim",
         "title": {
-            "vnesiOseba": "Ustvari novo osebo",
+            "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
             "dodajNaslov": "Dodaj nov naslov",
             "prenesiIme": "Prenesi polno ime",

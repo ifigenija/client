@@ -150,6 +150,13 @@ define([
                 element: 'button-trigger',
                 trigger: 'kloniraj'
             },
+            brisi: {
+                id: 'doc-brisi',
+                icon: 'fa fa-trash',
+                title: 'Briši program dela',
+                element: 'button-trigger',
+                trigger: 'brisi'
+            },
             zakleni: {
                 id: 'doc-zakleni',
                 label: i18next.t('std.zakleni'),
@@ -160,24 +167,24 @@ define([
     });
 
     var chPermission = Radio.channel('global');
-    
+
     ProgramDokView.prototype.onFormChange = function () {
-            var tb = this.getToolbarModel();
-            var butS = tb.getButton('doc-shrani');
-            var butP = tb.getButton('doc-preklici');
+        var tb = this.getToolbarModel();
+        var butS = tb.getButton('doc-shrani');
+        var butP = tb.getButton('doc-preklici');
 
-            if (butS && butS.get('disabled')) {
-                butS.set({
-                    disabled: false
-                });
-            }
+        if (butS && butS.get('disabled')) {
+            butS.set({
+                disabled: false
+            });
+        }
 
-            if (butS && !butS.get('disabled')) {
-                butP.set({
-                    label: i18next.t('std.preklici')
-                });
-            }
-        };
+        if (butS && !butS.get('disabled')) {
+            butP.set({
+                label: i18next.t('std.preklici')
+            });
+        }
+    };
 
     ProgramDokView.prototype.render = function () {
         var self = this;
@@ -227,7 +234,7 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onZakleni = function () {
-        var dovoljeno = chPermission.request('isGranted', "programDela-write");
+        var dovoljeno = chPermission.request('isGranted', "programDela-lock");
 
         if (dovoljeno) {
             var self = this;
@@ -247,7 +254,7 @@ define([
                     severity: 'success'
                 });
             };
-            
+
             var error = function (error) {
                 Radio.channel('error').command('flash', {
                     message: error.message,
@@ -261,7 +268,7 @@ define([
                 rpc.call('zakleni', {
                     'programDelaId': self.model.get('id')
                 },
-                success, error);                    
+                success, error);
             };
 
             confirm({
@@ -285,7 +292,7 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onOdkleni = function () {
-        var dovoljeno = chPermission.request('isGranted', "programDela-lock");
+        var dovoljeno = chPermission.request('isGranted', "programDela-unlock");
 
         if (dovoljeno) {
             var self = this;
@@ -356,12 +363,23 @@ define([
         var id = this.model.get('id');
         if (id) {
             buttons.push(this.buttons.kloniraj);
-            buttons.push(this.buttons.zakleni);
+            var zaklepD = chPermission.request('isGranted', "programDela-lock");
+            var odklepD = chPermission.request('isGranted', "programDela-unlock");
+            
+            if (zaklepD || odklepD) {
+                buttons.push(this.buttons.zakleni);
+            }
+            
             buttons.push(_.extend({
                 params: {
                     dokument: id
                 }
             }, this.buttons.print));
+            
+            var dovoljeno = chPermission.request('isGranted', "programDela-write");
+            if (!this.model.get('potrjenProgram') && dovoljeno) {
+                buttons.push(this.buttons.brisi);
+            }
         }
         buttons.push(this.buttons.nasvet);
         return [buttons];
@@ -714,13 +732,42 @@ define([
         };
 
         var coll = this.model.postavkeCDveCollection;
-        
+
         if (coll.length === 0) {
             coll.fetch({
                 success: prikaziPostavkeCDva,
                 error: Radio.channel('error').request('handler', 'xhr')
             });
         }
+    };
+
+    ProgramDokView.prototype.onBrisi = function () {
+        var model = this.model;
+        var self = this;
+        
+        var brisi = function () {
+            model.destroy({
+                wait: true,
+                success: function () {
+                    Radio.channel('error').command('flash', {
+                        message: i18next.t('std.messages.success'),
+                        severity: 'success'
+                    });
+
+                    self.onPreklici();
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        };
+
+        confirm({
+            text: i18next.t('std.potrdiIzbris'),
+            modalOptions: {
+                title: i18next.t("std.brisi"),
+                okText: i18next.t("std.brisi")
+            },
+            ok: brisi
+        });
     };
 
     return ProgramDokView;
