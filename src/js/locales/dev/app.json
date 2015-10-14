@@ -297,6 +297,7 @@
     },
     "tipPopa": {
         "title": "Tipi poslovnih partnerjev",
+        "nova": "Nov tip poslovnega partnerja",
         "ime": "Ime",
         "opis": "Opis",
         "sort": "Zaporedna številka",
@@ -308,6 +309,9 @@
             "popa": "",
             "sort": "",
             "sifra": ""
+        },
+        "t": {
+            "sort": "Zaporedna"
         }
     },
     "drzava": {
