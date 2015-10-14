@@ -299,13 +299,15 @@
         "title": "Tipi poslovnih partnerjev",
         "ime": "Ime",
         "opis": "Opis",
-        "sort": "Sort",
+        "sort": "Zaporedna številka",
         "popa": "Poslovni partner",
+        "sifra": "Oznaka",
         "d": {
-            "ime": "Ime",
-            "opis": "Opis",
-            "popa": "Poslovni partner",
-            "sort": "Sort"
+            "ime": "",
+            "opis": "",
+            "popa": "",
+            "sort": "",
+            "sifra": ""
         }
     },
     "drzava": {
