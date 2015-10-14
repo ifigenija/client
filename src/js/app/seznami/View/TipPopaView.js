@@ -58,7 +58,7 @@ define([
         var text = i18next.t("tipPopa.nova");
 
         if (model.get('id')) {
-            text = model.get('naziv') || "naziv";
+            text = model.get('ime') || "naziv";
         }
         return text;
     };
