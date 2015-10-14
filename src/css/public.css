@@ -8194,6 +8194,11 @@ fieldset.pomemben legend span {
   border: solid 1px;
   border-color: #ccc;
 }
+/*checkbox help block*/
+.checkbox-help .help-block {
+  margin: 0px;
+  margin-bottom: 20px;
+}
 /*
 Licenca GPLv3
 */
