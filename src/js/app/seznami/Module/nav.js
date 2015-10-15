@@ -25,6 +25,11 @@ define(['i18next'], function (i18n) {
                     permission: "Popa-read"
                 },
                 {
+                    label: i18n.t("seznami.nav.tipPopa"),
+                    uri: "#tipPopa",
+                    permission: "tipPopa-write"
+                },
+                {
                     label: i18n.t("seznami.nav.posta"),
                     uri: "#posta",
                     permission: "Posta-write"

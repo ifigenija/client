@@ -111,6 +111,12 @@ define([
                 odpri(View, 'zaposlitev.title');
             });
         };
+        
+        model.tipPopa = function () {
+            require(['../View/TipPopaView'], function (View) {
+                odpri(View, 'tipPopa.title');
+            });
+        };
 
         /**
          * Dostop direktno do podatkov osebe
@@ -227,6 +233,12 @@ define([
                 odpriModel(Model, View, id, 'zaposlitev.title');
             });
         };
+        
+        model.tipPopaOdpri = function (id) {
+            require(['../Model/TipPopa', '../View/TipPopaView'], function (Model, View) {
+                odpriModel(Model, View, id, 'tipPopa.title');
+            });
+        };
 
         /**
          * 
@@ -249,7 +261,8 @@ define([
                     'prostor': 'prostor',
                     'vrstaStroska': 'vrstaStroska',
                     'alternacija': 'alternacija',
-                    "zaposlitev": "zaposlitev",
+                    'zaposlitev': 'zaposlitev',
+                    'tipPopa': 'tipPopa',
                     'tipFunkcije/:id': 'tipFunkcijeOdpri',
                     'zvrstUprizoritve/:id': 'zvrstUprizoritveOdpri',
                     'zvrstSurs/:id': 'zvrstSursOdpri',
@@ -260,7 +273,8 @@ define([
                     'abonma/:id': 'abonmaOdpri',
                     'prostor/:id': 'prostorOdpri',
                     'vrstaStroska/:id': 'vrstaStroskaOdpri',
-                    "zaposlitev/:id": "zaposlitevOdpri"
+                    'zaposlitev/:id': 'zaposlitevOdpri',
+                    'tipPopa/:id': 'tipPopaOdpri'
                 }
             });
         });
