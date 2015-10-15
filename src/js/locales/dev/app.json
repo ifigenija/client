@@ -82,7 +82,8 @@
             "besedilo": "Besedila",
             "abonma": "Abonmaji",
             "vrsteStroska": "Vrste stroška",
-            "zaposlitev": "Zaposleni"
+            "zaposlitev": "Zaposleni",
+            "tipPopa": "Tipi poslovnih partnerjev"
         }
 
     },
@@ -249,7 +250,7 @@
             "naslov": "",
             "jePrizorisce": "Ali je prostor prizorišče.",
             "sePlanira": "Ali se upošteva pri planiranju koledarja.",
-            "jeMaticniOder": "Ali je matični oder",
+            "jeMaticniOder": "Ali je prostor matični oder",
             "kapaciteta": "Število mest v prostoru."
         }
     },
@@ -297,15 +298,22 @@
     },
     "tipPopa": {
         "title": "Tipi poslovnih partnerjev",
+        "nova": "Nov tip poslovnega partnerja",
         "ime": "Ime",
         "opis": "Opis",
-        "sort": "Sort",
+        "sifra": "Oznaka",
+        "sort": "Zaporedna številka",
         "popa": "Poslovni partner",
+        "sifra": "Oznaka",
         "d": {
-            "ime": "Ime",
-            "opis": "Opis",
-            "popa": "Poslovni partner",
-            "sort": "Sort"
+            "ime": "",
+            "opis": "",
+            "popa": "",
+            "sort": "",
+            "sifra": ""
+        },
+        "t": {
+            "sort": "Zaporedna"
         }
     },
     "drzava": {
@@ -346,8 +354,8 @@
         "drzava": "Država",
         "racuni": "Računi",
         "osebe": "Kontaktne osebe",
-        "tipkli": "Tip klienta",
-        "stakli": "Status klienta",
+        "tipkli": "Tip poslovnega partnerja",
+        "stakli": "Status poslovnega partnerja",
         "naziv1": "Dodatni naziv",
         "panoga": "Panoga",
         "url": "Spletna stran",
@@ -369,7 +377,7 @@
             "drzava": "",
             "panoga": "",
             "maticna": "",
-            "tipkli": "Tip klienta (šola, gledalci, sponzorji, ...)",
+            "tipkli": "Tipi poslovnega partnerja se urejajo v seznamu tipi poslovnih partnerjev",
             "stakli": "AK-aktiven, NA-neaktiven",
             "naziv1": "Dodatni naziv za klienta",
             "url": "URL naslov spletne strani",
@@ -377,7 +385,7 @@
             "zavezanec": "Je klient zavezanec za DDV",
             "datZav": "Zavezanec za DDV od dne",
             "datnZav": "Zavezanec za DDV do dne",
-            "nvo": "Nevladna organizacija",
+            "nvo": "Ali je poslovni partner nevladna organizacija",
             "zamejstvo": "Je poslovni partner iz zamejstva"
         }
     },
@@ -450,7 +458,7 @@
         "privzeti": "Privzeti naslov",
         "d": {
             "drzava": "",
-            "jeeu": "$t(ent.d.jeeu)",
+            "jeeu": "ali je naslov v EU ali ne",
             "naziv": "",
             "popa": "Poslovni partner, ki je lastnik naslova",
             "ulica": "",
@@ -638,13 +646,13 @@
         "d": {
             "naziv": "Naziv funkcije",
             "komentar": "Dodatne opombe, predlogi, komentarji",
-            "tipFunkcije": "Razporedite osebo v eno od ponujenih kategorij.",
+            "tipFunkcije": "Razporedite osebo v eno od ponujenih kategorij",
             "velikost": "",
             "sePlanira": "Ali se funkcija planira ali je določena",
-            "dovoliPrekrivanje": "Ali je dovoljeno prekrivanje",
-            "vodjaEkipe": "Ali je vodja področja",
-            "pomembna": "Ali je funkcija izpostavljena",
-            "alternacije": "Tukaj vnesite osebe / alternacije, ki bodo zasedale funkcijo.",
+            "dovoliPrekrivanje": "Ali v koledarju prikazuje konflikte, če je določena oseba ob istem času tudi kje drugje zasedena",
+            "vodjaEkipe": "Ali je oseba vodja področja",
+            "pomembna": "Izpostavljene funkcije se izpišejo v gledališkem listu",
+            "alternacije": "Tukaj vnesite osebe / alternacije, ki bodo zasedale funkcijo",
             "sort": ""
         }
     },
@@ -676,8 +684,9 @@
             "opomba": "",
             "zaposlitev": "",
             "pogodba": "",
-            "privzeti": "Ali je privzeti",
-            "pomembna": "Ali je alternacija pomembna in se jo prikaže v programu dela?"
+            "sort": "",
+            "privzeti": "",
+            "pomembna": "Če želimo izpis osebe v izpisu programa dela."
         },
         "t": {
             "sort": "Zaporedna"
@@ -772,7 +781,9 @@
             "individualnaPogodba": "Zaposlitev z individualno pogodbo",
             "jeZaposlenVdrugemJZ": "Ali je zaposlen v drugem javnem zavodu",
             "jeNastopajoci": "Ali je nastopajoči",
-            "delovnoMesto": ""
+            "delovnoMesto": "",
+            "izmenskoDelo": "Opravljanje dela v izmenah",
+            "individualnaPogodb": "Ali ima sklenjeno individualno pogodbo"
         }
     },
     "role": {
@@ -782,6 +793,8 @@
         "opis": "Opis",
         "builtIn": "Vgrajeno",
         "d": {
+            "naziv": "",
+            "opis": "",
             "builtIn": "Vloga, ki pride z namestitvijo sistema"
         }
     },
@@ -792,6 +805,8 @@
         "opis": "Opis",
         "builtIn": "Vgrajeno",
         "d": {
+            "naziv": "",
+            "opis": "",
             "builtIn": "Dovoljene, ki pride z namestitvijo sistema"
         }
     },
@@ -808,7 +823,7 @@
         "lastLogon": "Čas zadnje priajve",
         "d": {
             "name": "Polno ime uporabnika. Ime in priimek oz. opis",
-            "enabled": "Ali je uporabnik omogočen ali onemogočen",
+            "enabled": "Ali je uporabnik aktiven ali neaktiven",
             "expires": "Po tem datumu se uporabnik ne more prijaviti",
             "defaultRoute": "Privzeta pot v aplikaciji po prijavi",
             "defaultRouteParams": "Parametri za privzeto pot v aplikaciji po prijavi",
@@ -1033,7 +1048,8 @@
             "stProdVstopnic": "",
             "stZaposlenih": "Število vseh zaposlenih v javnem zavodu",
             "stZaposIgralcev": "",
-            "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev (popvprečno število nastopov v letu)"
+            "avgStNastopovIgr": "Povprečna zasedenost zaposlenih igralcev (popvprečno število nastopov v letu)",
+            "potrjenProgram": "Ali je program dela potrjen ali ne"
         }
     },
     "ep": {
@@ -1059,7 +1075,7 @@
         "datumZacStudija": "$t(uprizoritev.datumZacStudija)",
         "datumPremiere": "$t(uprizoritev.datumPremiere)",
         "drugiJavni": "Drugi javni viri",
-        "imaKoprodukcije": "Koprodukcije",
+        "imaKoprodukcije": "Koprodukcija",
         "izberiTipProgramskeEnote": "Izberi tip programske enote",
         "lastnaSredstva": "Lastna sredstva",
         "materialni": "Materialni stroški",
@@ -1115,7 +1131,7 @@
         "odkupPredstave": "Odkup predstave",
         "drugiViri": "Drugi nejavni viri",
         "vredProgEnotSklop": "Programske enote sklopa",
-        "jeKoprodukcija": "je koprodukcija",
+        "jeKoprodukcija": "Koprodukcija",
         "dnevnicePZ": "Dnevnice za prvi in zadnji dan",
         "d": {
             "naziv": "",
@@ -1169,7 +1185,9 @@
             "stHonorarnihZunSamoz": "Število honorarnih zunanjih sodelavcev - s statusom samozaposlenega v kulturi",
             "stHonorarnihZunIgr": "Število honorarnih zunanjih sodelavcev - igralcev",
             "stHonorarnihZunIgrTujJZ": "Število honorarnih zunanjih sodelavcev - igralcev, zaposlenih v drugih javnih zavodih",
-            "sort": ""
+            "sort": "",
+            "jeKoprodukcija": "Ali je uprizoritev koprodukcija",
+            "imaKoprodukcije": "Ali je enota programa koprodukcija"
         },
         "t": {
             "celotnaVrednost": "Vrednost",
@@ -1318,10 +1336,10 @@
         "enotaPrograma": "Enota programa",
         "mednarodni": "Mednarodni viri",
         "d": {
-            "znesek": "Znesek drugega vira",
-            "opis": "Opis drugega vira",
+            "znesek": "Znesek vira",
+            "opis": "Opis vira",
             "enotaPrograma": "Enota programa drugega vira",
-            "mednarodni": "Ali je drugi vir mednarodni"
+            "mednarodni": "Ali je vir mednarodni"
         }
     },
     "peSklopa": {

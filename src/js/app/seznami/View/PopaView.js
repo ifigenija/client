@@ -56,6 +56,13 @@ define([
             {
                 cell: 'string',
                 editable: false,
+                label: i18next.t('popa.tipkli'),
+                name: 'tipkli.ident',
+                sortable: true
+            },
+            {
+                cell: 'string',
+                editable: false,
                 label: i18next.t('popa.email'),
                 name: 'email',
                 sortable: false
