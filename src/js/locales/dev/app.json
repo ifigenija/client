@@ -1731,6 +1731,33 @@
         "zapisIzReporta": "Zapis iz poročila",
         "showLog": "Prikaži log",
         "skrij": "Skrij"
+    },
+    "terminStoritve": {
+        "title": "Termin storitve",
+        "planiranZacetek": "Planiran začetek",
+        "planiranKonec": "Planiran konec",
+        "zacetek": "Začetek",
+        "konec": "Konec",
+        "planiranoTraja": "Planirano traja",
+        "dogodek": "Dogodek",
+        "alternacija": "Alternacija",
+        "dezurni": "Dežurni",
+        "gost": "Gost",
+        "oseba": "Oseba",
+        "d": {
+            "title": "Termin storitve",
+            "planiranZacetek": "Planiran začetek",
+            "planiranKonec": "Planiran konec",
+            "zacetek": "Začetek",
+            "konec": "Konec",
+            "planiranoTraja": "Planirano traja",
+            "dogodek": "Dogodek",
+            "alternacija": "Alternacija",
+            "dezurni": "Dežurni",
+            "gost": "Gost",
+            "oseba": "Oseba"
+        }
     }
+
 }
 
