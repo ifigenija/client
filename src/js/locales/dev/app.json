@@ -299,12 +299,14 @@
         "title": "Tipi poslovnih partnerjev",
         "ime": "Ime",
         "opis": "Opis",
+        "sifra": "Oznaka",
         "sort": "Sort",
         "popa": "Poslovni partner",
         "d": {
             "ime": "Ime",
             "opis": "Opis",
             "popa": "Poslovni partner",
+            "sifra": "",
             "sort": "Sort"
         }
     },
@@ -1023,6 +1025,10 @@
             "sredstvaDrugiViriFest": "Drugi viri za Festivale",
             "sredstvaDrugiViriRazno": "Drugi viri za Razno",
             "sredstvaDrugiViriIzjem": "Drugi viri za Izjemne dogodke",
+            "stHonorarnih": "Načrtovano število honorarnih sodelavcev",
+            "stHonorarnihIgr": "Načrtovano število honorarnih igralcev",
+            "stHonorarnihIgrTujJZ": "Načrtovano število honorarnih zunanjih sodelavcev",
+            "stHonorarnihIgrSamoz": "Načrtovano število sodelavcev s statusom samozaposlenega v kulturi",
             "sredstvaInt": "Višina sredstev iz mednarodnih virov - z razpisi pridobljena sredstva",
             "avgZasedDvoran": "Povprečna zasedenost lastnih dvoran",
             "avgCenaVstopnice": "",
@@ -1084,6 +1090,7 @@
         "stHonorarnihZunIgrTujJZ": "Št. hon. zun. sodelavcev - igralcev, zaposlenih v drugih JZ",
         "stZaposUmet": "Število zaposlenih članov umetniškega ansambla",
         "stZaposlenih": "Število zaposlenih",
+        "stHonorarnihIgrSamoz": "Število samozaposlenih igralcev",
         "tipProgramskeEnote": "Tip programske enote",
         "kpe": "Koeficient programske enote",
         "tantieme": "Tantieme",
@@ -1436,8 +1443,15 @@
         "stKoprodukcij": "Število koprodukcij",
         "stKoprodukcijInt": "Število koprodukcij z mednarodnimi koproducenti",
         "stKoprodukcijNVO": "Število koprodukcij s slovenskimi NVO",
+        "stHonorarnih": "Načrtovano število honorarnih sodelavcev",
+        "stHonorarnihIgr": "od tega število honorarnih zunanjih sodelavcev - od tega igralcev",
+        "stHonorarnihIgrTujJZ": "od tega število honorarnih zunanjih sodelavcev - od tega igralcev - od tega igralcev, zaposlenih v drugih JZ",
         "sredstvaAvt": "Višina sredstev, namenjenih avtorskim honorarjem",
         "sredstvaAvtSamoz": "od tega za sodelavce s statusom samozaposlenega v kulturi",
+        "stHonorarnih": "Načrtovano število honorarnih zunanjih sodelavcev",
+        "stHonorarnihIgr": "od tega število igralcev",
+        "stHonorarnihIgrTujJZ": "od tega igralcev, zaposlenih v drugih javnih zavodih",
+        "stHonorarnihIgrSamoz": "od tega število sodelavcev s statusom samozaposlenega v kulturi",
         "sredstvaInt": "Višina sredstev iz mednarodnih virov - z razpisi pridobljena sredstva",
         "avgZasedDvoran": "Povprečna zasedenost lastnih dvoran  (v % na predstavo)",
         "avgCenaVstopnice": "Povprečna cena vstopnice",
@@ -1691,7 +1705,7 @@
             "razred": "Skupina"
         }
     },
-    "jobs": {
+    "jobs":{
         "izvajanjeJoba": "Priprava dokumenta",
         "ustvaril": "Opravilo ustvarjeno",
         "jobName": "Naziv opravila",
