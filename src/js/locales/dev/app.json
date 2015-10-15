@@ -180,7 +180,7 @@
         "sifra": "Oznaka",
         "kapaciteta": "Kapaciteta",
         "opomba": "Opomba",
-        "email": "E-pošta",
+        "email": "Epošta",
         "stevilka": "Številka",
         "naslov": "Naslov",
         "podnaslov": "Podnaslov",
@@ -262,8 +262,8 @@
         "opis": "Opis",
         "d": {
             "opis": "",
-            "sifra": "Šifra zvrsti po SURS-u",
-            "naziv": "Naziv zvrsti po SURS-u"
+            "sifra": "Šifra zvrsti po SURSu",
+            "naziv": "Naziv zvrsti po SURSu"
         }
     },
     "zvrstUprizoritve": {
@@ -349,7 +349,7 @@
         "nova": "Nov poslovni partner",
         "sifra": "Oznaka",
         "naziv": "Naziv",
-        "email": "E-pošta",
+        "email": "Epošta",
         "opomba": "Opomba",
         "drzava": "Država",
         "racuni": "Računi",
@@ -393,7 +393,7 @@
         "title": "Osebe",
         "nova": "Nova oseba",
         "sifra": "Oznaka",
-        "email": "E-pošta",
+        "email": "Epošta",
         "ime": "Ime",
         "naziv": "Naslavljanje",
         "funkcija": "Funkcija",
@@ -494,7 +494,7 @@
             "funkcija": "Funkcija, ki jo oseba opravlja",
             "opis": "",
             "oseba": "",
-            "status": "AK-aktiven, NA-neaktiven"
+            "status": "AKaktiven, NAneaktiven"
         }
     },
     "stroskovnik": {
@@ -583,7 +583,7 @@
         "produkcija": "Produkcija",
         "podatki": "Glavni podatki",
         "lastnosti": "Lastnosti",
-        "krstna": "Krstna uprizoritev - praizvedba",
+        "krstna": "Krstna uprizoritev  praizvedba",
         "prvaSlovenska": "Prva slovenska uprizoritev",
         "naslovIzvirnika": "Naslov izvirnika",
         "podnaslovIzvirnika": "Podnaslov izvirnika",
@@ -769,6 +769,7 @@
         "jeZaposlenVdrugemJZ": "Zaposlen še v drugem JZ",
         "jeNastopajoci": "Nastopajoči",
         "delovnoMesto": "Delovno mesto",
+        "organizacijskaEnota": "Organizacijska enota",
         "d": {
             "sifra": "Enolična oznaka",
             "oseba": "",
@@ -783,7 +784,8 @@
             "jeNastopajoci": "Ali je nastopajoči",
             "delovnoMesto": "",
             "izmenskoDelo": "Opravljanje dela v izmenah",
-            "individualnaPogodb": "Ali ima sklenjeno individualno pogodbo"
+            "individualnaPogodb": "Ali ima sklenjeno individualno pogodbo",
+            "organizacijskaEnota": ""
         }
     },
     "role": {
@@ -813,7 +815,7 @@
     "user": {
         "title": "Uporabniki",
         "nova": "Nov uporabnik",
-        "email": "E-pošta",
+        "email": "Epošta",
         "name": "Polno ime",
         "password": "Geslo",
         "enabled": "Aktiven",
@@ -987,7 +989,7 @@
             "stPonPrejSredKopr": "Število srednjih koprodukcij ponovitev prejšnjih sezon",
             "stPonPrejVelikihKopr": "Število velikih koprodukcij ponovitev prejšnjih sezon",
             "stGostujo": "Število gostujočih uprizoritev",
-            "vrPS1": "Celotna vrednost lastne produkcije in postprodukcije (ponovitev) - programski sklop 1",
+            "vrPS1": "Celotna vrednost lastne produkcije in postprodukcije (ponovitev)  programski sklop 1",
             "vrPS1Do": "Vrednost produkcije do premiere",
             "vrPS1Mat": "Vrednost ponovitev na matičnem odru",
             "vrPS1GostovSZ": "Vrednost ponovitev na gostovanjih po SLO in zamejstvu",
@@ -1085,23 +1087,23 @@
         "ponoviKopr": "Število ponovitev na odru slovenskega ali zamejskega koproducenta",
         "ponoviKoprInt": "Število ponovitev na odru koproducenta v tujini",
         "obiskKoprInt": "Število obiskovalcev na odru koproducenta v tujini",
-        "obiskGost": "Število obiskovalcev na gostovanjih - delež matičnega JZ",
-        "obiskKoprGost": "Število obiskovalcev na gostovanjih - delež ostalih koproducentov",
-        "obiskZamejo": "Število obiskovalcev v zamejstvu - delež matičnega JZ",
-        "obiskKoprZamejo": "Število obiskovalcev v zamejstvu - delež ostalih koproducentov",
+        "obiskGost": "Število obiskovalcev na gostovanjih  delež matičnega JZ",
+        "obiskKoprGost": "Število obiskovalcev na gostovanjih  delež ostalih koproducentov",
+        "obiskZamejo": "Število obiskovalcev v zamejstvu  delež matičnega JZ",
+        "obiskKoprZamejo": "Število obiskovalcev v zamejstvu  delež ostalih koproducentov",
         "obiskInt": "Število obiskovalcev na med. gostovanjih",
         "ponoviDoma": "Število ponovitev na domačem odru",
-        "ponoviZamejo": "Število ponovitev v zamejstvu - delež matičnega JZ",
-        "ponoviKoprZamejo": "Število ponovitev v zamejstvu - delež ostalih koproducentov",
-        "ponoviGost": "Število ponovitev na gostovanjih po Sloveniji - delež matičnega JZ",
-        "ponoviKoprGost": "Število ponovitev na gostovanjih po Sloveniji - delež ostalih koproducentov",
+        "ponoviZamejo": "Število ponovitev v zamejstvu  delež matičnega JZ",
+        "ponoviKoprZamejo": "Število ponovitev v zamejstvu  delež ostalih koproducentov",
+        "ponoviGost": "Število ponovitev na gostovanjih po Sloveniji  delež matičnega JZ",
+        "ponoviKoprGost": "Število ponovitev na gostovanjih po Sloveniji  delež ostalih koproducentov",
         "ponoviInt": "Število ponovitev na med. gostovanjih",
         "stZaposlenih": "Število zaposlenih na projektu",
         "stZaposDrug": "Število drugih zaposlenih",
         "stHonorarnihZun": "Število honorarnih zunanjih sodelavcev",
-        "stHonorarnihZunSamoz": "Št. hon. zun. sodelavcev - samozaposlenih",
-        "stHonorarnihZunIgr": "Št. hon. zun. sodelavcev - igralcev",
-        "stHonorarnihZunIgrTujJZ": "Št. hon. zun. sodelavcev - igralcev, zaposlenih v drugih JZ",
+        "stHonorarnihZunSamoz": "Št. hon. zun. sodelavcev  samozaposlenih",
+        "stHonorarnihZunIgr": "Št. hon. zun. sodelavcev  igralcev",
+        "stHonorarnihZunIgrTujJZ": "Št. hon. zun. sodelavcev  igralcev, zaposlenih v drugih JZ",
         "stZaposUmet": "Število zaposlenih članov umetniškega ansambla",
         "stZaposlenih": "Število zaposlenih",
         "stHonorarnihIgrSamoz": "Število samozaposlenih igralcev",
@@ -1149,14 +1151,14 @@
             "tantieme": "Stroški tantiem, vezanih na uprizoritev",
             "materialni": "Materialni stroški",
             "vlozekGostitelja": "",
-            "vlozekKoproducenta": "Vložek koproducenta(-ov)",
+            "vlozekKoproducenta": "Vložek koproducenta(ov)",
             "drugiJavni": "Vir druga ministrstva in lokalna skupnost",
             "obiskDoma": "Načrtovano število vseh obiskovalcev na domačem odru",
-            "obiskZamejo": "Načrtovano število vseh obiskovalcev na gostovanjih v zamejstvu -delež matičnega JZ",
-            "obiskKoprZamejo": "Načrtovano število vseh obiskovalcev na gostovanjih v zamejstvu - delež ostalih koproducentov",
+            "obiskZamejo": "Načrtovano število vseh obiskovalcev na gostovanjih v zamejstvu delež matičnega JZ",
+            "obiskKoprZamejo": "Načrtovano število vseh obiskovalcev na gostovanjih v zamejstvu  delež ostalih koproducentov",
             "obiskInt": "Načrtovano število vseh obiskovalcev na mednarodnih gostovanjih",
-            "obiskGost": "Načrtovano število vseh obiskovalcev na gostovanjih po Sloveniji -delež matičnega JZ.V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
-            "obiskKoprGost": "Načrtovano število vseh obiskovalcev na gostovanjih po Sloveniji - delež ostalih koproducentov. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
+            "obiskGost": "Načrtovano število vseh obiskovalcev na gostovanjih po Sloveniji delež matičnega JZ.V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
+            "obiskKoprGost": "Načrtovano število vseh obiskovalcev na gostovanjih po Sloveniji  delež ostalih koproducentov. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
             "ponoviDoma": "Načrtovano število vseh ponovitev na domačem odru",
             "ponoviKopr": "Število ponovitev na odru slovenskega ali zamejskega koproducenta",
             "obiskKopr": "Načrtovano število obiskovalcev na odru slovenskega ali zamejskega koproducenta",
@@ -1166,14 +1168,14 @@
             "avtorskiHonorarji": "Stroški avtorskih honorarjev",
             "tantieme": "Stroški tantiem, vezanih na uprizoritev",
             "vlozekGostitelja": "Prihodek od odkupa predstave v primeru gostovanja po Sloveniji in zamejstvu",
-            "vlozekKoproducenta": "Vložek koproducenta(-ov)",
+            "vlozekKoproducenta": "Vložek koproducenta(ov)",
             "drugiJavni": "Vir druga ministrstva in lokalna skupnost",
             "materialni": "",
             "ponoviDoma": "Načrtovano število vseh ponovitev na domačem odru od prve reprize dalje.",
-            "ponoviZamejo": "Načrtovano število vseh ponovitev na gostovanjih v zamejstvu od prve reprize dalje -delež matičnega JZ. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
-            "ponoviKoprZamejo": "Načrtovano število vseh ponovitev na gostovanjih v zamejstvu od prve reprize dalje -delež ostalih koproducentov. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
-            "ponoviGost": "Načrtovano število vseh ponovitev na gostovanjih po Sloveniji od prve reprize dalje -delež matičnega JZ. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
-            "ponoviKoprGost": "Načrtovano število vseh ponovitev na gostovanjih po Sloveniji od prve reprize dalje - delež ostalih koproducentov. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
+            "ponoviZamejo": "Načrtovano število vseh ponovitev na gostovanjih v zamejstvu od prve reprize dalje delež matičnega JZ. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
+            "ponoviKoprZamejo": "Načrtovano število vseh ponovitev na gostovanjih v zamejstvu od prve reprize dalje delež ostalih koproducentov. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
+            "ponoviGost": "Načrtovano število vseh ponovitev na gostovanjih po Sloveniji od prve reprize dalje delež matičnega JZ. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
+            "ponoviKoprGost": "Načrtovano število vseh ponovitev na gostovanjih po Sloveniji od prve reprize dalje  delež ostalih koproducentov. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
             "ponoviInt": "Načrtovano število vseh ponovitev na mednarodnih gostovanjih od prve reprize dalje. V primeru koprodukcije se število ponovitev uskladi z razmerjem finančnih deležev v koprodukciji.",
             "utemeljitev": "Vsebinska utemeljitev predloga",
             "tipProgramskeEnote": "",
@@ -1182,9 +1184,9 @@
             "stZaposUmet": "Vsi navedeni ustvarjalci, ki so zaposleni v tem JZ (razen inšpicienta in šepetalke)",
             "stZaposDrug": "Vsi, ki sodelujejo pri uprizoritvi in so zaposleni v Tehniki, inšpicient in šepetalka",
             "stHonorarnihZun": "",
-            "stHonorarnihZunSamoz": "Število honorarnih zunanjih sodelavcev - s statusom samozaposlenega v kulturi",
-            "stHonorarnihZunIgr": "Število honorarnih zunanjih sodelavcev - igralcev",
-            "stHonorarnihZunIgrTujJZ": "Število honorarnih zunanjih sodelavcev - igralcev, zaposlenih v drugih javnih zavodih",
+            "stHonorarnihZunSamoz": "Število honorarnih zunanjih sodelavcev  s statusom samozaposlenega v kulturi",
+            "stHonorarnihZunIgr": "Število honorarnih zunanjih sodelavcev  igralcev",
+            "stHonorarnihZunIgrTujJZ": "Število honorarnih zunanjih sodelavcev  igralcev, zaposlenih v drugih javnih zavodih",
             "sort": "",
             "jeKoprodukcija": "Ali je uprizoritev koprodukcija",
             "imaKoprodukcije": "Ali je enota programa koprodukcija"
@@ -1267,7 +1269,7 @@
             "prizorisca": "Prizorišče(šča)",
             "umetVodja": "",
             "programskoTelo": "",
-            "stTujihSelektorjev": "Predvideno število tujih selektorjev - gostov",
+            "stTujihSelektorjev": "Predvideno število tujih selektorjev  gostov",
             "stZaposlenih": "Število zaposlenih, ki sodelujejo pri izvedbi festivala",
             "stHonorarnihZun": "Število honorarnih zunanjih sodelavcev",
             "opredelitevDrugiViri": "Opredelitev drugih virov",
@@ -1330,7 +1332,7 @@
         }
     },
     "drugiVir": {
-        "title": "Drugi viri - nejavni",
+        "title": "Drugi viri  nejavni",
         "znesek": "Znesek",
         "opis": "Opis",
         "enotaPrograma": "Enota programa",
@@ -1434,7 +1436,7 @@
         "stPonPrejMalihKopr": "od tega malih koprodukcij",
         "stPonPrejSredKopr": "od tega srednjih koprodukcij",
         "stPonPrejVelikihKopr": "od tega velikih koprodukcij",
-        "vrPS1": "Celotna vrednost lastne produkcije in postprodukcije (ponovitev) - programski sklop 1",
+        "vrPS1": "Celotna vrednost lastne produkcije in postprodukcije (ponovitev)  programski sklop 1",
         "vrPS1Do": "vrednost produkcije (vključno s premiero)",
         "vrPS1Mat": "vrednost ponovitev na matičnem odru (po premieri)",
         "vrPS1GostovSZ": "vrednost ponovitev na gostovanjih po SLO in zamejstvu",
@@ -1560,7 +1562,7 @@
             "label": "",
             "sifra": "Oznaka za številčenje",
             "naziv": "",
-            "format": "Oblika številčenja - uporabljajo se zamenjave %p %l %n %s",
+            "format": "Oblika številčenja  uporabljajo se zamenjave %p %l %n %s",
             "prefix": "Predpona se prilepi na začetek številke dokumenta",
             "suffix": "Pridpona se prilepi na konec številke dokumenta"
         },
@@ -1624,7 +1626,7 @@
         "oseba": "Oseba",
         "d": {
             "oseba": "",
-            "tipAvtorja": "Tip avtorja - npr. avtor originalnega besedila, soavtor, lektor, prevajalec",
+            "tipAvtorja": "Tip avtorja  npr. avtor originalnega besedila, soavtor, lektor, prevajalec",
             "zaporedna": "",
             "aliVNaslovu": "Ali se prikaže kot avtor v naslovu uprizoritve",
             "besedilo": ""
@@ -1642,7 +1644,7 @@
         "datum": "Datum",
         "zvrst": "Zvrst",
         "prizorisce": "Prizorišče(šča)",
-        "trajanje": "Trajanje priprave dogodka (od-do)",
+        "trajanje": "Trajanje priprave dogodka (oddo)",
         "zvrst": "Zvrst",
         "soustvarjalci": "Soustvarjalci",
         "d": {
@@ -1666,9 +1668,9 @@
         "datumZacStudija": "Datum začetka študija",
         "naziv": "Naziv",
         "stHonorarnihZun": "Število honorarnih zunanjih sodelavcev",
-        "stHonorarnihZunSamoz": "Št. hon. zun. sodelavcev - samozaposlenih",
-        "stHonorarnihZunIgr": "Št. hon. zun. sodelavcev - igralcev",
-        "stHonorarnihZunIgrTujJZ": "Št. hon. zun. sodelavcev - igralcev, zaposlenih v drugih javnih zavodih",
+        "stHonorarnihZunSamoz": "Št. hon. zun. sodelavcev  samozaposlenih",
+        "stHonorarnihZunIgr": "Št. hon. zun. sodelavcev  igralcev",
+        "stHonorarnihZunIgrTujJZ": "Št. hon. zun. sodelavcev  igralcev, zaposlenih v drugih javnih zavodih",
         "stZaposDrug": "Število drugih zaposlenih",
         "stZaposUmet": "Število zaposlenih iz umetniškega ansambla",
         "avtorji": "Avtorji"
@@ -1756,8 +1758,23 @@
             "dezurni": "Dežurni",
             "gost": "Gost",
             "oseba": "Oseba"
+        },
+        "orgEnota": {
+            "sifra": "Oznaka",
+            "ime": "Ime",
+            "parent": "Nadrejena enota",
+            "vodja": "Vodja",
+            "namestnik": "Namestnik",
+            "d": {
+                "sifra": "Enolična oznaka",
+                "ime": "Ime organizacijske enote",
+                "parent": "Nadrejena organizacijska enota",
+                "vodja": "Oseba, ki vodi organizacijsko enoto",
+                "namestnik": "Oseba, ki bo nadomestila vodjo."
+            }
         }
     }
-
 }
 
+
+        
