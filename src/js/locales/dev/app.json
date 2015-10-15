@@ -354,8 +354,8 @@
         "drzava": "Država",
         "racuni": "Računi",
         "osebe": "Kontaktne osebe",
-        "tipkli": "Tip klienta",
-        "stakli": "Status klienta",
+        "tipkli": "Tip poslovnega partnerja",
+        "stakli": "Status poslovnega partnerja",
         "naziv1": "Dodatni naziv",
         "panoga": "Panoga",
         "url": "Spletna stran",
@@ -377,7 +377,7 @@
             "drzava": "",
             "panoga": "",
             "maticna": "",
-            "tipkli": "Tip klienta (šola, gledalci, sponzorji, ...)",
+            "tipkli": "Tipi poslovnega partnerja se urejajo v seznamu tipi poslovnih partnerjev",
             "stakli": "AK-aktiven, NA-neaktiven",
             "naziv1": "Dodatni naziv za klienta",
             "url": "URL naslov spletne strani",
@@ -646,13 +646,13 @@
         "d": {
             "naziv": "Naziv funkcije",
             "komentar": "Dodatne opombe, predlogi, komentarji",
-            "tipFunkcije": "Razporedite osebo v eno od ponujenih kategorij.",
+            "tipFunkcije": "Razporedite osebo v eno od ponujenih kategorij",
             "velikost": "",
             "sePlanira": "Ali se funkcija planira ali je določena",
-            "dovoliPrekrivanje": "Ali je dovoljeno prekrivanje",
+            "dovoliPrekrivanje": "Ali v koledarju prikazuje konflikte, če je določena oseba ob istem času tudi kje drugje zasedena",
             "vodjaEkipe": "Ali je oseba vodja področja",
-            "pomembna": "Izpostavljene funkcije se izpišejo v gledališkem listu.",
-            "alternacije": "Tukaj vnesite osebe / alternacije, ki bodo zasedale funkcijo.",
+            "pomembna": "Izpostavljene funkcije se izpišejo v gledališkem listu",
+            "alternacije": "Tukaj vnesite osebe / alternacije, ki bodo zasedale funkcijo",
             "sort": ""
         }
     },
@@ -684,7 +684,8 @@
             "opomba": "",
             "zaposlitev": "",
             "pogodba": "",
-            "privzeti": "Ali je privzeti",
+            "sort": "",
+            "privzeti": "",
             "pomembna": "Če želimo izpis osebe v izpisu programa dela."
         },
         "t": {
@@ -1720,7 +1721,7 @@
             "razred": "Skupina"
         }
     },
-    "jobs":{
+    "jobs": {
         "izvajanjeJoba": "Priprava dokumenta",
         "ustvaril": "Opravilo ustvarjeno",
         "jobName": "Naziv opravila",
