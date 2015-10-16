@@ -1758,23 +1758,23 @@
             "dezurni": "Dežurni",
             "gost": "Gost",
             "oseba": "Oseba"
-        },
-        "orgEnota": {
-            "sifra": "Oznaka",
-            "ime": "Ime",
-            "parent": "Nadrejena enota",
-            "vodja": "Vodja",
-            "namestnik": "Namestnik",
-            "d": {
-                "sifra": "Enolična oznaka",
-                "ime": "Ime organizacijske enote",
-                "parent": "Nadrejena organizacijska enota",
-                "vodja": "Oseba, ki vodi organizacijsko enoto",
-                "namestnik": "Oseba, ki bo nadomestila vodjo."
-            }
+        }
+    },
+    "orgEnota": {
+        "sifra": "Oznaka",
+        "naziv": "Naziv",
+        "parent": "Nadrejena enota",
+        "vodja": "Vodja",
+        "namestnik": "Namestnik",
+        "d": {
+            "sifra": "Enolična oznaka",
+            "Naziv": "Ime organizacijske enote",
+            "parent": "Nadrejena organizacijska enota",
+            "vodja": "Oseba, ki vodi organizacijsko enoto",
+            "namestnik": "Oseba, ki bo nadomestila vodjo."
         }
     }
 }
 
 
-        
+
