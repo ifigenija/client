@@ -12,13 +12,5 @@
 </div>
 <div id="detail-container" class="col-sm-8">
     <div id="tabs"></div>
-    <div class="row">
-        <div class="col-sm-8 page-header">
-            <h4 id="tab-title"></h4>
-        </div>
-        <div class="col-sm-4">
-            <div class="pull-right" id="tab-toolbar"></div>
-        </div>
-    </div>
-    <div id="detail-panel" class="clearfix row"></div>
+    <div id="orgEnota-detail"></div>
 </div>

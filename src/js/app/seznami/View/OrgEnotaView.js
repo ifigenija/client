@@ -3,43 +3,54 @@ define([
     'i18next',
     'marionette',
     './OrgEnotaTree',
-    'app/Max/Module/Form',
+    'app/Dokument/View/FormView',
     'app/Max/View/PaginatedGrid',
-    'app/Max/View/TabControl',
     'app/Max/View/TabControl',
     '../Model/OrgEnotaTreeModel',
     '../Model/Zaposlitev',
     'template!../tpl/orgEnota-manager.tpl',
+    'template!../tpl/orgEnota-form.tpl',
     'app/Zapisi/View/ZapisiLayout',
     'formSchema!organizacijskaEnota',
     'formSchema!zaposlitev',
-    'app/Max/Module/Backgrid'
+    'app/Max/Module/Backgrid',
+    'template!../tpl/orgEnota-form-simple.tpl'
 ], function (
         Radio,
         i18next,
         Marionette,
         OrgEnotaTree,
-        Form,
+        FormView,
         PaginatedGrid,
         TabControl,
-        Toolbar,
         OrgEnotaTreeModel,
         ZaposlitevModel,
         tpl,
+        formTpl,
         ZapisiLayout,
         schema,
         schemaZap,
-        Backgrid
+        Backgrid,
+        template
         ) {
+
+    var tabsVsi = [{
+            name: i18next.t('orgEnota.title'),
+            event: 'show:form'
+        }, {
+            name: i18next.t('orgEnota.zaposleni'),
+            event: 'show:zaposleni'
+        }, {
+            name: i18next.t('orgEnota.zapisi'),
+            event: 'show:zapisi'
+        }];
 
     var OrgEnotaManager = Marionette.LayoutView.extend({
         template: tpl,
         regions: {
-            tree: '#tree-container',
-            detail: '#detail-panel',
-            tabs: '#tabs',
-            tabToolbar: '#tab-toolbar',
-            treeToolbar: '#tree-toolbar'
+            treeR: '#tree-container',
+            detailR: '#orgEnota-detail',
+            tabsR: '#tabs'
         },
         ui: {
             tabs: 'ul.nav-tabs'
@@ -114,23 +125,9 @@ define([
     });
     OrgEnotaManager.prototype.initialize = function (options) {
         this.seznam = new ZaposlitevModel.Collection();
-        this.tabControl = new TabControl({
-            tabs: [{
-                    name: i18next.t('orgEnota.title'),
-                    event: 'show:form'
-                }, {
-                    name: i18next.t('orgEnota.zaposleni'),
-                    event: 'show:zaposleni'
-                }, {
-                    name: i18next.t('orgEnota.zapisi'),
-                    event: 'show:zapisi'
-                }],
-            listener: this
-        });
     };
     OrgEnotaManager.prototype.onRender = function () {
         this.showTree(null);
-        this.tabs.show(this.tabControl);
     };
     OrgEnotaManager.prototype.showTree = function (parent) {
         var treeCollection = new OrgEnotaTreeModel.collection({}, {
@@ -144,12 +141,19 @@ define([
         tree.on('node:selected', function (view) {
             self.triggerMethod("tree:item:selected", view);
         });
-        this.tree.show(tree);
+        this.treeR.show(tree);
     };
     OrgEnotaManager.prototype.onTreeItemSelected = function (view) {
         this.selected = view;
         this.seznam.setOrgEnota(this.selected.model);
-        this.tabControl.refreshActiveTab();
+        
+        var tabs = null;
+        if (!this.selected.model.get('id')) {
+            tabs = null;
+        } else {
+            tabs = tabsVsi;
+        }
+        this.renderTabs(tabs);
     };
     OrgEnotaManager.prototype.onShowZaposleni = function () {
         var self = this;
@@ -160,7 +164,7 @@ define([
         this.seznam.getFirstPage({
             reset: true
         });
-        self.detail.show(zaposleniGrid);
+        self.detailR.show(zaposleniGrid);
     };
     OrgEnotaManager.prototype.onShowZapisi = function (entity, id) {
         var priponke = new ZapisiLayout({
@@ -168,46 +172,80 @@ define([
             ownerClass: entity,
             vent: Radio.channel('global')
         });
-        this.detail.show(priponke);
+        this.detailR.show(priponke);
     };
     OrgEnotaManager.prototype.onHideTree = function () {
 
     };
     OrgEnotaManager.prototype.onDodajOrgEnoto = function () {
         console.log('dodaj');
+        
+        this.selected = {};
+        this.selected.model = new OrgEnotaTreeModel.model();
+        
+        var tabs = null;
+        if (!this.selected.model.get('id')) {
+            tabs = null;
+        } else {
+            tabs = tabsVsi;
+        }
+        this.renderTabs(tabs);
+        this.onShowForm();
     };
     OrgEnotaManager.prototype.onOdstraniOrgEnoto = function () {
         console.log('odstrani');
     };
     OrgEnotaManager.prototype.onShowForm = function () {
-
         if (this.selected && this.selected.model) {
-            var form = new Form({
-                schema: schema.toFormSchema().schema,
-                fieldsets: schema.toFormSchema().fieldsets,
-                model: this.selected.model
+            var model = this.selected.model;
+            var Fv = this.getFormView(model);
+            var form = new Fv({
+                model: model
             });
-            this.tabToolbar.show(this.formToolbar());
-            this.detail.show(form);
+
+            this.detailR.show(form);
         }
     };
-    OrgEnotaManager.prototype.formToolbar = function () {
-        var groups = [[{
-                    id: 'save',
-                    element: 'button-commit',
-                    icon: 'fa fa-save',
-                    label: 'Shrani',
-                    trigger: 'form-commit'
-                }, {
-                    id: 'help',
-                    element: 'button-help',
-                    icon: 'fa fa-question-sign'
-                }]];
-        return new Toolbar({
-            buttonGroups: groups,
-            size: 'xs',
-            listener: this
+
+    /**
+     * 
+     * @returns {Marionette.LayoutView@call;extend.prototype.getFormView.form}
+     */
+    OrgEnotaManager.prototype.getFormView = function (model) {
+        var self = this;
+        var Fv = FormView.extend({
+            formTitle: i18next.t(self.getTitle(model)),
+            schema: schema.toFormSchema().schema,
+            formTemplate: formTpl,
+            //template: template,
+            serializeData: function () {
+                return  {
+                    formTitle: this.formTitle
+                };
+            }
         });
+
+        return Fv;
     };
+    
+    OrgEnotaManager.prototype.getTitle = function (model) {
+        var text = i18next.t("orgEnota.nova");
+
+        if (model.get('id')) {
+            text = model.get('naziv') || "Naziv";
+        }
+        return text;
+    };
+
+    /**
+     * Izris tabov
+     * @returns {OsebaEditView_L11.TabControl}
+     */
+    OrgEnotaManager.prototype.renderTabs = function (tabs) {
+        this.tabControl = new TabControl({tabs: tabs, listener: this});
+        this.tabsR.show(this.tabControl);
+        return this.tabControl;
+    };
+
     return OrgEnotaManager;
 });
