@@ -70,6 +70,12 @@ define(['i18next'], function (i18n) {
                     uri: "#vrstaStroska",
                     permission: "VrstaStroska-write"
 
+                },
+                {
+                    label: i18n.t("seznami.nav.organizacijskeEnote"),
+                    uri: "#orgEnota",
+                    permission: "OrganizacijskaEnota-write"
+
                 }
             ]
         }

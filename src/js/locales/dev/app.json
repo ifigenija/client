@@ -1761,6 +1761,10 @@
         }
     },
     "orgEnota": {
+        "title": "Organizacijska enota",
+        "titles": "Organizacijske enote",
+        "zaposleni": "Zaposleni",
+        "zapisi": "Zapisi",
         "sifra": "Oznaka",
         "naziv": "Naziv",
         "parent": "Nadrejena enota",

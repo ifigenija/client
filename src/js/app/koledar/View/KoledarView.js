@@ -10,13 +10,13 @@ define([
     './DogodekFilter',
     './DogodekView'
 ], function (
-    Marionette,
-    _,
-    $,
-    tpl,
-    DogodekModal,
-    DogodekFilter,
-    DogodekView) {
+        Marionette,
+        _,
+        $,
+        tpl,
+        DogodekModal,
+        DogodekFilter,
+        DogodekView) {
 
     var KoledarView = Marionette.LayoutView.extend({
         template: tpl,
@@ -35,59 +35,61 @@ define([
         this.filterView.on('filter', function () {
             this.ui.calendar.fullCalendar('refetchEvents');
         }, this);
-        this.listenTo(this.collection, 'change', this.change );
+        this.listenTo(this.collection, 'change', this.change);
     };
 
     KoledarView.prototype.onRender = function () {
         var self = this;
         var options = _.extend({
-                    lang: 'sl',
-                    header: {
-                        left: 'prev,next,today',
-                        center: 'title',
-                        right: 'month,basicWeek,agendaWeek,basicDay'
-                    },
-                    lang: 'sl',
+            lang: 'sl',
+            header: {
+                left: 'prev,next,today',
+                center: 'title',
+                right: 'month,basicWeek,agendaWeek,basicDay'
+            },
+            lang: 'sl',
                     timezone: false,
-                    selectable: true,
-                    defaultView: 'month',
-                    selectHelper: true,
-                    editable: true,
-                    select: this.select,
-                    weekNumberCalculation: 'ISO',
-                    weekNumbers: true,
-                    firstDay: 1,
-                    timeFormat: 'H(:mm)',
-                    eventClick: function () {
-                        return self.eventClick.apply(self, arguments)
-                    },
-                    eventDrop: this.eventDropOrResize,
-                    eventResize: this.eventDropOrResize,
-                    eventSources: [
-                        {
-                            events: function (zacetek, konec, timezone, callback) {
-                                var list = [];
-                                self.collection.queryParams.zacetek = zacetek.toISOString();
-                                self.collection.queryParams.konec = konec.toISOString();
-                                self.collection.queryParams = _.extend(self.collection.queryParams, self.filterView.form.getValue());
-                                self.collection.fetch({
-                                   success: function (coll) {
-                                       coll.each(function (eventModel) {
-                                            list.push(eventModel.getEventObject());
-                                       });
-                                       callback(list);
-                                   }
+            selectable: true,
+            defaultView: 'month',
+            selectHelper: true,
+            editable: true,
+            select: this.select,
+            weekNumberCalculation: 'ISO',
+            weekNumbers: true,
+            firstDay: 1,
+            timeFormat: 'H(:mm)',
+            eventClick: function () {
+                return self.eventClick.apply(self, arguments);
+            },
+            eventDrop: this.eventDropOrResize,
+            eventResize: this.eventDropOrResize,
+            eventSources: [
+                {
+                    events: function (zacetek, konec, timezone, callback) {
+                        var list = [];
+                        self.collection.queryParams.zacetek = zacetek.toISOString();
+                        self.collection.queryParams.konec = konec.toISOString();
+                        self.collection.queryParams = _.extend(self.collection.queryParams, self.filterView.form.getValue());
+                        self.collection.fetch({
+                            success: function (coll) {
+                                coll.each(function (eventModel) {
+                                    list.push(eventModel.getEventObject());
                                 });
-                            },
-                            coll: self.collection
-                        }
-                    ],
-                    eventResize: function () {
-                        return self.eventDropOrResize.apply(self, arguments);
-                    }
-                });
+                                callback(list);
+                            }
+                        });
+                    },
+                    coll: self.collection
+                }
+            ],
+            eventResize: function () {
+                return self.eventDropOrResize.apply(self, arguments);
+            }
+        });
         this.filterR.show(this.filterView);
-        this.ui.calendar.fullCalendar(options);
+        setTimeout(function () {
+            self.ui.calendar.fullCalendar(options);
+        }, 200);
     };
 
 
@@ -113,7 +115,7 @@ define([
         this.ui.calendar.fullCalendar('updateEvent', e);
     };
 
-    KoledarView.prototype.eventDropOrResize =  function (fcEvent, delta, revert, jsEvent, ui, view) {
+    KoledarView.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
         // Lookup the model that has the ID of the event and update its attributes
         var model = fcEvent.source.coll.get(fcEvent.id);
         model.save({zacetek: fcEvent.start.toISOString(), konec: fcEvent.end.toISOString(), tehen: fcEvent.resourceId}, {
@@ -186,4 +188,4 @@ define([
     }
     return KoledarView;
 })
-;
+        ;
