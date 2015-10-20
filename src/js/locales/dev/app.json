@@ -232,6 +232,23 @@
             "stKuponov": ""
         }
     },
+    "praznik": {
+        "title": "Prazniki",
+        "ime": "Naziv",
+        "dan": "Dan",
+        "mesec": "Mesec",
+        "leto": "Leto",
+        "delaProst": "Dela prost dan",
+        "cerkv": "Cerkveni",
+        "d": {
+            "ime": "",
+            "dan": "",
+            "mesec": "",
+            "leto": "",
+            "delaProst": "",
+            "cerkv": ""
+        }
+    },
     "prostor": {
         "title": "Prostori",
         "nova": "Nov prostor",
