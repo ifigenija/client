@@ -309,11 +309,25 @@
             "ime": "",
             "opis": "",
             "popa": "",
-            "sort": "",
             "sifra": ""
         },
         "t": {
-            "sort": "Zaporedna"
+            "sifra": "Oznaka"
+        }
+    },
+    "tipVaje": {
+        "title": "Tipi vaj",
+        "ime": "Ime",
+        "opis": "Opis",
+        "sifra": "Oznaka",
+        "d": {
+            "ime": "",
+            "opis": "",
+            "popa": "",
+            "sifra": ""
+        },
+        "t": {
+            "sifra": "Oznaka"
         }
     },
     "drzava": {
@@ -1579,35 +1593,71 @@
     },
     "vaja": {
         "title": "Vaje",
+        "tipvaje": "Vrsta vaje",
+        "zaporedna": "Zaporedna št.",
+        "porocilo": "Poročilo",
         "dogodek": "Dogodek",
-        "zaporedna": "Zaporedna",
-        "vrsta": "Vrsta",
+        "uprizoritev": "Uprizoritev",
         "d": {
+            "tipvaje": "",
+            "zaporedna": "Zaporedna številka vaje",
+            "porocilo": "",
             "dogodek": "",
-            "zaporedna": "",
-            "vrsta": ""
+            "uprizoritev": ""
         }
     },
     "predstava": {
         "title": "Predstave",
-        "zaporedna": "Zaporedna",
+        "zaporedna": "Zaporedna št.",
+        "zaporednaSez": "Zaporedna št. v sezoni",
+        "objavljenZacetek": "Začetek za objavo",
+        "porocilo": "Poročilo",
         "dogodek": "Dogodek",
+        "uprizoritev": "Uprizoritev",
         "gostovanje": "Gostovanje",
+        "dezurni": "Dežurni",
         "d": {
-            "zaporedna": "",
+            "zaporedna": "Zaporedna številka predstave",
+            "zaporednaSez": "Zaporedna številka predstave v sezoni",
+            "porocilo": "",
             "dogodek": "",
-            "gostovanje": ""
+            "uprizoritev": "",
+            "gostovanje": "",
+            "dezurni": "Dežurni na predstavi",
+            "objavljenZacetek": "Čas začetka predstave, kot je objavljen za publiko."
         }
     },
     "dogodek": {
         "title": "Dogodki",
+        "allDay": "Celodnevni",
         "zacetek": "Začetek",
         "konec": "Konec",
+        "status": "Status",
+        "razred": "Razred",
+        "termin": "Termin",
+        "title": "Ime",
+        "predstava": "Predstava",
+        "zasedenost": "Zasedenost",
+        "vaja": "Vaja",
+        "gostovanje": "Gostovanje",
+        "splosni": "Splošni dogodek",
         "prostor": "Prostor",
+        "sezona": "Sezona",
         "d": {
+            "allDay": "Dogodek se razteza skozi cel dan",
             "zacetek": "",
             "konec": "",
-            "prostor": ""
+            "status": "",
+            "razred": "",
+            "termin": "",
+            "title": "",
+            "predstava": "",
+            "zasedenost": "",
+            "vaja": "",
+            "gostovanje": "",
+            "splosni": "Dogodek, ki ni ne vaja, ne predstava, ne gostovanje, zaseda pa prostor",
+            "prostor": "",
+            "sezona": ""
         }
     },
     "programPremiera": {
