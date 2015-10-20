@@ -177,10 +177,12 @@ define([
 
     };
     OrgEnotaManager.prototype.onDodajOrgEnoto = function () {
-        if (this.selected) {
-            var parent = this.selected;
+        if (this.selected.model) {
+            var parent = this.selected.model;
             this.selected = {};
-            this.selected.model = new OrgEnotaTreeModel.model();
+            this.selected.model = new OrgEnotaTreeModel.model({
+                parent: parent
+            });
 
             var tabs = null;
             if (!this.selected.model.get('id')) {
