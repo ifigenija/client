@@ -58,9 +58,9 @@ define([
     var UprizoritevModel = Dokument.Model.extend({
         urlRoot: baseUrl + '/rest/uprizoritev',
         nestedCollections: {
-            umetniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['umetnik', 'inspicient']}},
+            umetniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['umetnik']}},
             igralci: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['igralec']}},
-            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['tehnik']}},
+            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['tehnik','inspicient']}},
             planVaje: {collection: VajeCollection, mappedBy: 'uprizoritev'},
             planPredstave: {collection: PredstaveCollection, mappedBy: 'uprizoritev'}
 
