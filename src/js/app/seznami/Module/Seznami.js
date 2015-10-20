@@ -117,6 +117,12 @@ define([
                 odpri(View, 'tipPopa.title');
             });
         };
+        
+        model.orgEnota = function () {
+            require(['../View/OrgEnotaView'], function (View) {
+                odpri(View, 'orgEnota.title');
+            });
+        };
 
         /**
          * Dostop direktno do podatkov osebe
@@ -263,6 +269,7 @@ define([
                     'alternacija': 'alternacija',
                     'zaposlitev': 'zaposlitev',
                     'tipPopa': 'tipPopa',
+                    'orgEnota': 'orgEnota',
                     'tipFunkcije/:id': 'tipFunkcijeOdpri',
                     'zvrstUprizoritve/:id': 'zvrstUprizoritveOdpri',
                     'zvrstSurs/:id': 'zvrstSursOdpri',
