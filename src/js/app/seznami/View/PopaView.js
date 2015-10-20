@@ -45,6 +45,20 @@ define([
                 sortable: true
             },
             {
+                cell: 'boolean',
+                editable: false,
+                label: i18next.t('popa.producent'),
+                name: 'producent',
+                sortable: true
+            },
+            {
+                cell: 'boolean',
+                editable: false,
+                label: i18next.t('popa.kupec'),
+                name: 'kupec',
+                sortable: true
+            },
+            {
                 cell: Backgrid.SelectCell.extend({
                     optionValues: schema.getOptionValues('stakli')
                 }),

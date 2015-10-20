@@ -61,9 +61,9 @@ define([
         },
         producent: {
             id: 'doc-producent',
-            label: i18next.t('popa.koproducent'),
+            label: i18next.t('popa.producent'),
             element: 'button-trigger',
-            trigger: 'koproducent',
+            trigger: 'producent',
             hidden: true
         },
         kupec: {
@@ -217,7 +217,7 @@ define([
      * registrira poslovnega partnerja kot produkcijsko hišo. 
      * @returns {undefined}
      */
-    PopaEditView.prototype.onKoproducent = function () {
+    PopaEditView.prototype.onProducent = function () {
         var B = Backbone.Model.extend({
             url: baseUrl + '/rest/produkcijskahisa'
         });
