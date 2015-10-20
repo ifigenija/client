@@ -13,7 +13,7 @@
                 <legend>
                     <span>{{t "std.dodatniPodatki"}}</span>
                 </legend>
-                <div data-fields="status,vrsta,prostor,zaporedna"></div>
+                <div data-fields="status,tipvaje,prostor,zaporedna"></div>
             </fieldset>
         </div>
     </div>

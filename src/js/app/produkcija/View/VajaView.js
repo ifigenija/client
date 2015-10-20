@@ -39,8 +39,8 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('vaja.vrsta'),
-                name: 'vrsta',
+                label: i18next.t('vaja.tipvaje'),
+                name: 'tipvaje',
                 sortable: true
             },
             {

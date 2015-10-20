@@ -31,7 +31,7 @@
                             <div class="col-sm-12" data-fields="status"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-6" data-fields="zacetek,konec"></div>
+                    <div class="col-sm-12 col-lg-6" data-fields="zacetek,konec,organizacijskaEnota"></div>
                 </div>
             </fieldset>
         </div>

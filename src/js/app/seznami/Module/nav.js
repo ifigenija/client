@@ -60,15 +60,27 @@ define(['i18next'], function (i18n) {
                     permission: "Abonma-write"
                 },
                 {
-                    label: i18n.t("seznami.nav.prostori"),
+                    label: i18n.t("seznami.nav.prostor"),
                     uri: "#prostor",
                     permission: "Prostor-write"
 
                 },
                 {
-                    label: i18n.t("seznami.nav.vrsteStroska"),
+                    label: i18n.t("seznami.nav.vrstaStroska"),
                     uri: "#vrstaStroska",
                     permission: "VrstaStroska-write"
+
+                },
+                {
+                    label: i18n.t("seznami.nav.organizacijskaEnota"),
+                    uri: "#orgEnota",
+                    permission: "OrganizacijskaEnota-write"
+
+                },
+                {
+                    label: i18n.t("seznami.nav.tipVaje"),
+                    uri: "#tipVaje",
+                    permission: "tipVaje-write"
 
                 }
             ]

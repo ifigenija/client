@@ -52,15 +52,6 @@ define([
                 sortable: true
             },
             {
-                headerCell: 'number',
-                cell: 'number',
-                editable: false,
-                label: i18next.t('ep.vlozekKoproducenta'),
-                name: 'vlozekKoproducenta',
-                total: 'sum',
-                sortable: true
-            },
-            {
                 cell: 'action',
                 name: '...',
                 sortable: false,
