@@ -83,7 +83,7 @@ define([
                 headerCell: 'number',
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('ep.stHonorarnihZun'),
+                label: i18next.t('ep.t.stHonorarnihZun'),
                 name: 'stHonorarnihZun',
                 total: 'sum',
                 sortable: true

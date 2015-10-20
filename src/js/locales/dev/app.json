@@ -1197,7 +1197,8 @@
             "lastnaSredstva": "Lastna Sredstva",
             "avtorskiHonorarji": "Honorarji",
             "drugiJavni": "Javni viri",
-            "tipProgramskeEnote": "Tip"
+            "tipProgramskeEnote": "Tip",
+            "stHonorarnihZun": "Št. hon. zun. sodelavcev"
         }
     },
     "gostovanje": {
