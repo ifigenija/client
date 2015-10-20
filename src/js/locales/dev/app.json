@@ -318,6 +318,7 @@
     },
     "tipVaje": {
         "title": "Tipi vaj",
+        "nova": "Nov tip vaje",
         "ime": "Ime",
         "opis": "Opis",
         "sifra": "Oznaka",

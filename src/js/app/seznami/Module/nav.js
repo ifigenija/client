@@ -76,6 +76,12 @@ define(['i18next'], function (i18n) {
                     uri: "#orgEnota",
                     permission: "OrganizacijskaEnota-write"
 
+                },
+                {
+                    label: i18n.t("seznami.nav.tipVaje"),
+                    uri: "#tipVaje",
+                    permission: "tipVaje-write"
+
                 }
             ]
         }

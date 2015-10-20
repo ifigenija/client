@@ -118,6 +118,12 @@ define([
             });
         };
         
+        model.tipVaje = function () {
+            require(['../View/TipVajeView'], function (View) {
+                odpri(View, 'tipVaje.title');
+            });
+        };
+        
         model.orgEnota = function () {
             require(['../View/OrgEnotaView'], function (View) {
                 odpri(View, 'orgEnota.title');
@@ -245,6 +251,12 @@ define([
                 odpriModel(Model, View, id, 'tipPopa.title');
             });
         };
+        
+        model.tipVajeOdpri = function (id) {
+            require(['../Model/TipVaje', '../View/TipVajeView'], function (Model, View) {
+                odpriModel(Model, View, id, 'tipVaje.title');
+            });
+        };
 
         /**
          * 
@@ -269,6 +281,7 @@ define([
                     'alternacija': 'alternacija',
                     'zaposlitev': 'zaposlitev',
                     'tipPopa': 'tipPopa',
+                    'tipVaje': 'tipVaje',
                     'orgEnota': 'orgEnota',
                     'tipFunkcije/:id': 'tipFunkcijeOdpri',
                     'zvrstUprizoritve/:id': 'zvrstUprizoritveOdpri',
@@ -281,7 +294,8 @@ define([
                     'prostor/:id': 'prostorOdpri',
                     'vrstaStroska/:id': 'vrstaStroskaOdpri',
                     'zaposlitev/:id': 'zaposlitevOdpri',
-                    'tipPopa/:id': 'tipPopaOdpri'
+                    'tipPopa/:id': 'tipPopaOdpri',
+                    'tipVaje/:id': 'tipVajeOdpri'
                 }
             });
         });
