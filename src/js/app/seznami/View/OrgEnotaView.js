@@ -146,7 +146,7 @@ define([
     OrgEnotaManager.prototype.onTreeItemSelected = function (view) {
         this.selected = view;
         this.seznam.setOrgEnota(this.selected.model);
-        
+
         var tabs = null;
         if (!this.selected.model.get('id')) {
             tabs = null;
@@ -166,31 +166,33 @@ define([
         });
         self.detailR.show(zaposleniGrid);
     };
-    OrgEnotaManager.prototype.onShowZapisi = function (entity, id) {
-        var priponke = new ZapisiLayout({
-            owner: id,
-            ownerClass: entity,
-            vent: Radio.channel('global')
+    OrgEnotaManager.prototype.onShowZapisi = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.selected.model.get('id'),
+            classLastnika: 'OrganizacijskaEnota'
         });
-        this.detailR.show(priponke);
+        this.detailR.show(view);
     };
     OrgEnotaManager.prototype.onHideTree = function () {
 
     };
     OrgEnotaManager.prototype.onDodajOrgEnoto = function () {
-        console.log('dodaj');
-        
-        this.selected = {};
-        this.selected.model = new OrgEnotaTreeModel.model();
-        
-        var tabs = null;
-        if (!this.selected.model.get('id')) {
-            tabs = null;
-        } else {
-            tabs = tabsVsi;
+        if (this.selected.model) {
+            var parent = this.selected.model;
+            this.selected = {};
+            this.selected.model = new OrgEnotaTreeModel.model({
+                parent: parent
+            });
+
+            var tabs = null;
+            if (!this.selected.model.get('id')) {
+                tabs = null;
+            } else {
+                tabs = tabsVsi;
+            }
+            this.renderTabs(tabs);
+            this.onShowForm();
         }
-        this.renderTabs(tabs);
-        this.onShowForm();
     };
     OrgEnotaManager.prototype.onOdstraniOrgEnoto = function () {
         console.log('odstrani');
@@ -222,12 +224,17 @@ define([
                 return  {
                     formTitle: this.formTitle
                 };
+            },
+            buttons: FormView.prototype.defaultButtons,
+            onPreklici: function () {
+                self.detailR.empty();
+                self.tabsR.empty();
             }
         });
 
         return Fv;
     };
-    
+
     OrgEnotaManager.prototype.getTitle = function (model) {
         var text = i18next.t("orgEnota.nova");
 

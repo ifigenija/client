@@ -143,6 +143,8 @@
         "lookupModal": "Izberi vrednost za:",
         "polnoIme": "Polno ime",
         "psevdonim": "Psevdonim",
+        "odstraniOrgEnota": "Odstrani organizacijsko enoto",
+        "dodajOrgEnota": "Dodaj organizacijsko enoto",
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
@@ -1833,6 +1835,7 @@
         }
     },
     "orgEnota": {
+        "nova": "Nova organizacijska enota",
         "title": "Organizacijska enota",
         "titles": "Organizacijske enote",
         "zaposleni": "Zaposleni",
