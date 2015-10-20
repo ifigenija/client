@@ -84,7 +84,7 @@ define([
             },
             {
                 headerCell: 'number',
-                cell: 'number',
+                cell: 'integer',
                 editable: false,
                 label: i18next.t('prostor.kapaciteta'),
                 name: 'kapaciteta',
