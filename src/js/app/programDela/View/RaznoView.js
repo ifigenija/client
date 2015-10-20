@@ -74,17 +74,17 @@ define([
                 headerCell: 'number',
                 cell: 'number',
                 editable: false,
-                label: i18next.t('ep.stHonorarnihZun'),
-                name: 'stHonoranih',
-                total: 'count',
+                label: i18next.t('ep.tantieme'),
+                name: 'tantieme',
+                total: 'sum',
                 sortable: true
             },
             {
                 headerCell: 'number',
-                cell: 'number',
+                cell: 'integer',
                 editable: false,
-                label: i18next.t('ep.tantieme'),
-                name: 'tantieme',
+                label: i18next.t('ep.stHonorarnihZun'),
+                name: 'stHonorarnihZun',
                 total: 'sum',
                 sortable: true
             },

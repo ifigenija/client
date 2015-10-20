@@ -72,7 +72,7 @@
             "label": "Seznami",
             "oseba": "Osebe",
             "posta": "Pošta",
-            "prostori": "Prostori",
+            "prostor": "Prostori",
             "popa": "Poslovni partnerji",
             "drzava": "Države",
             "tipFunkcije": "Tipi funkcij",
@@ -81,9 +81,10 @@
             "tipUprizoritev": "Tip uprizoritev",
             "besedilo": "Besedila",
             "abonma": "Abonmaji",
-            "vrsteStroska": "Vrste stroška",
+            "vrstaStroska": "Vrste stroška",
             "zaposlitev": "Zaposleni",
-            "tipPopa": "Tipi poslovnih partnerjev"
+            "tipPopa": "Tipi poslovnih partnerjev",
+            "organizacijskaEnota": "Organizacijske enote"
         }
 
     },
