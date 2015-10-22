@@ -448,6 +448,7 @@
         "drzavaRojstva": "Država rojstva",
         "krajRojstva": "Kraj rojstva",
         "podatki": "Glavni podatki",
+        "relacije": "Uporabljena v",
         "d": {
             "sifra": "",
             "email": "",
@@ -712,6 +713,7 @@
         "zaposlen": "Zaposlen",
         "imaPogodbo": "Ima pogodbo",
         "seznam": "Seznam",
+        "relacija": "Kot alternacija v uprizoritvah",
         "d": {
             "sifra": "",
             "funkcija": "",
@@ -807,6 +809,7 @@
         "jeNastopajoci": "Nastopajoči",
         "delovnoMesto": "Delovno mesto",
         "organizacijskaEnota": "Organizacijska enota",
+        "relacija": "Kot zaposlena oseba",
         "d": {
             "sifra": "Enolična oznaka",
             "oseba": "",
@@ -899,6 +902,7 @@
         "vrednost": "Vrednosti",
         "jeProcentOdInkasa": "je procent od inkasa",
         "procentOdInkasa": "Procent od inkasa",
+        "relacija": "Uporabljena v stroškovniku uprizoritev s pogodbami",
         "d": {
             "sifra": "",
             "aktivna": "",
@@ -1698,6 +1702,7 @@
         "aliVNaslovu": "Ali v naslovu uprizoritve",
         "besedilo": "Besedilo",
         "oseba": "Oseba",
+        "relacija": "Uporabljen v besedilih",
         "d": {
             "oseba": "",
             "tipAvtorja": "Tip avtorja  npr. avtor originalnega besedila, soavtor, lektor, prevajalec",
@@ -1852,6 +1857,9 @@
             "vodja": "Oseba, ki vodi organizacijsko enoto",
             "namestnik": "Oseba, ki bo nadomestila vodjo."
         }
+    },
+    "kontaktnaOseba":{
+        "relacija": "Uporabljena v poslovnih partnerjih"
     }
 }
 

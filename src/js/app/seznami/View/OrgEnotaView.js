@@ -178,10 +178,8 @@ define([
     };
     OrgEnotaManager.prototype.onDodajOrgEnoto = function () {
         if (this.selected.model) {
-            var parent = this.selected.model;
-            this.selected = {};
-            this.selected.model = new OrgEnotaTreeModel.model({
-                parent: parent
+            var model = new OrgEnotaTreeModel.model({
+                parent: this.selected.model
             });
 
             var tabs = null;
@@ -191,22 +189,36 @@ define([
                 tabs = tabsVsi;
             }
             this.renderTabs(tabs);
-            this.onShowForm();
+            var form = this.onShowForm(model);
+            var self = this;
+            form.on('save:success', function () {
+                self.showTree(null);
+            }, this);
         }
     };
     OrgEnotaManager.prototype.onOdstraniOrgEnoto = function () {
-        console.log('odstrani');
+        var self = this;
+        this.selected.model.destroy({
+            wait: true,
+            success: function () {
+                console.log('odstrani');
+                self.showTree(null);
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
     };
-    OrgEnotaManager.prototype.onShowForm = function () {
-        if (this.selected && this.selected.model) {
-            var model = this.selected.model;
-            var Fv = this.getFormView(model);
-            var form = new Fv({
-                model: model
-            });
-
-            this.detailR.show(form);
+    OrgEnotaManager.prototype.onShowForm = function (model) {
+        if (!model) {
+            model = this.selected.model;
         }
+        var Fv = this.getFormView(model);
+
+        var form = new Fv({
+            model: model
+        });
+
+        this.detailR.show(form);
+        return form;
     };
 
     /**
@@ -227,8 +239,7 @@ define([
             },
             buttons: FormView.prototype.defaultButtons,
             onPreklici: function () {
-                self.detailR.empty();
-                self.tabsR.empty();
+                self.onShowForm();
             }
         });
 

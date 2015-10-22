@@ -33,12 +33,12 @@ define([
                     trigger: 'shrani',
                     disabled: true
                 },
-                preklici: {
-                    id: 'doc-preklici',
-                    label: i18next.t('std.zapri'),
-                    element: 'button-trigger',
-                    trigger: 'preklici'
-                },
+//                preklici: {
+//                    id: 'doc-preklici',
+//                    label: i18next.t('std.zapri'),
+//                    element: 'button-trigger',
+//                    trigger: 'preklici'
+//                },
                 nasvet: {
                     id: 'doc-nasvet',
                     icon: 'fa fa-info',

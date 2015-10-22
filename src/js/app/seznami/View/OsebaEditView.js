@@ -10,7 +10,8 @@ define([
     'app/Max/View/TabControl',
     'radio',
     'app/Zapisi/View/ZapisiLayout',
-    'backbone'
+    'backbone',
+    'app/seznami/View/OsebaRelacijeView'
 ], function (
         DokumentView,
         tpl,
@@ -20,7 +21,8 @@ define([
         TabControl,
         Radio,
         ZapisiLayout,
-        Backbone
+        Backbone,
+        RelacijeView
         ) {
     /**
      * Različni možni pogledi osebeedit view.
@@ -29,7 +31,8 @@ define([
      */
     var tabVse = [
         {name: i18next.t('ent.splosno'), event: 'splosni'},
-        {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'}
+        {name: i18next.t('oseba.osebniPodatki'), event: 'osebniPodatki'},
+        {name: i18next.t('oseba.relacije'), event: 'relacije'}
     ];
 
     var tabNovi = [
@@ -47,7 +50,12 @@ define([
             regionNaslovi: '.region-naslovi',
             regionTelefonske: '.region-telefonske',
             regionTabs: '.oseba-tabs',
-            prilogeR: '.region-priloge'
+            prilogeR: '.region-priloge',
+            kontaktneOsebeR: '.region-kontaktneOsebe',
+            avtorjiBesedilR: '.region-avtorjiBesedil',
+            alternacijeR: '.region-alternacije',
+            pogodbeR: '.region-pogodbe',
+            zaposlitveR: '.region-zaposlitev'
         },
         buttons: {
             shraniDodaj: {
@@ -301,6 +309,17 @@ define([
     };
 
     /**
+     * Klik na relacije tab
+     * @returns {undefined}
+     */
+    OsebaEditView.prototype.onRelacije = function () {
+        this.deselectTab();
+        this.$('.pnl-relacije').addClass('active');
+        this.renderRelacije();
+
+    };
+
+    /**
      * deselect taba 
      * @returns {undefined}
      */
@@ -385,6 +404,190 @@ define([
             self.regionNaslovi.show(view);
             return view;
         });
+    };
+
+    /**
+     * 
+     * @param string relation
+     * @param string lookup
+     * @param {type} columns
+     * @returns {DokumentView@call;extend.prototype.getRelationView.view|OsebaEditView_L15.RelacijeView}
+     */
+    OsebaEditView.prototype.getRelationView = function (relation, lookup, columns) {
+        var view = new RelacijeView({
+            owner: 'oseba',
+            ownerId: this.model.get('id'),
+            relation: relation,
+            lookup: lookup,
+            type: 'lookup',
+            columns: columns,
+            title: i18next.t(lookup + ".relacija")
+        });
+        
+        //view.on('uredi', function(model){console.log(model);},this);
+        return view;
+    };
+
+    /**
+     * Izris Osebnih podakov
+     * @returns {undefined}
+     */
+    OsebaEditView.prototype.renderRelacije = function () {
+        this.renderAlternacije();
+        this.renderPogodbe();
+        this.renderZaposlitve();
+        this.renderKontaktneOsebe();
+        this.renderAvtorjeBesedil();
+    };
+
+    OsebaEditView.prototype.renderAlternacije = function () {
+        var columns = [
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Šifra uprizoritve'),
+                name: 'funkcija.uprizoritev.ident',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Naziv uprizoritve'),
+                name: 'funkcija.uprizoritev.label',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Šifra funkcije'),
+                name: 'funkcija.sort',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Naziv funkcije'),
+                name: 'funkcija.naziv',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Šifra alternacije'),
+                name: 'sifra',
+                sortable: false
+            }
+        ];
+        var rv = this.getRelationView('alternacije', 'alternacija', columns);
+        this.alternacijeR.show(rv);
+    };
+
+    OsebaEditView.prototype.renderPogodbe = function () {
+        var columns = [
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Šifra uprizoritve'),
+                name: 'alternacije.0.funkcija.uprizoritev.ident',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Naziv uprizoritve'),
+                name: 'alternacije.0.funkcija.uprizoritev.label',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Šifra funkcije'),
+                name: 'alternacije.0.funkcija.sort',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Naziv Funkcije'),
+                name: 'alternacije.0.funkcija.naziv',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Šifra alternacije'),
+                name: 'alternacije.0.sifra',
+                sortable: false
+            }
+        ];
+        var rv = this.getRelationView('pogodbe', 'pogodba', columns);
+        this.pogodbeR.show(rv);
+    };
+
+    OsebaEditView.prototype.renderZaposlitve = function () {
+        var columns = [
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('zaposlitev.sifra'),
+                name: 'sifra',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('zaposlitev.delovnoMesto'),
+                name: 'delovnoMesto',
+                sortable: false
+            }
+        ];
+        var rv = this.getRelationView('zaposlitve', 'zaposlitev', columns);
+        this.zaposlitveR.show(rv);
+    };
+
+    OsebaEditView.prototype.renderKontaktneOsebe = function () {
+        var columns = [
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('popa.sifra') + ' posl. partnerja',
+                name: 'popa.ident',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('popa.naziv') + ' posl. partnerja',
+                name: 'popa.label',
+                sortable: false
+            }
+        ];
+        var funkcije = function(model){
+            
+        };
+        var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', columns);
+        this.kontaktneOsebeR.show(rv);
+    };
+
+    OsebaEditView.prototype.renderAvtorjeBesedil = function () {
+        var columns = [
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Šifra besedila'),
+                name: 'besedilo.ident',
+                sortable: false
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Naziv besedila'),
+                name: 'besedilo.label',
+                sortable: false
+            }
+        ];
+        var rv = this.getRelationView('avtorjiBesedil', 'avtorBesedila', columns);
+        this.avtorjiBesedilR.show(rv);
     };
 
     return OsebaEditView;
