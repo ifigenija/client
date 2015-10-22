@@ -13,6 +13,9 @@
             <div class="region-toolbar pull-right"></div>
             <div class="clearfix"></div>
             <div class="row">
+                <div class="col-sm-12">
+                    <div class="region-podobne-osebe"></div>
+                </div>
                 <div class="col-md-6">
                     <div class="region-form"></div>
                 </div>

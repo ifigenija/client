@@ -11,7 +11,10 @@ define([
     'radio',
     'app/Zapisi/View/ZapisiLayout',
     'backbone',
-    'app/seznami/View/OsebaRelacijeView'
+    'app/seznami/View/OsebaRelacijeView',
+    'app/seznami/View/PodobneOsebeView',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         DokumentView,
         tpl,
@@ -22,7 +25,9 @@ define([
         Radio,
         ZapisiLayout,
         Backbone,
-        RelacijeView
+        RelacijeView,
+        PodobneOsebeView,
+        $
         ) {
     /**
      * Različni možni pogledi osebeedit view.
@@ -45,6 +50,7 @@ define([
         template: tpl,
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
+        checkBeforeSave: true,
         regions: {
             regionOsebniPodatki: '.region-osebniPodatki',
             regionNaslovi: '.region-naslovi',
@@ -55,7 +61,8 @@ define([
             avtorjiBesedilR: '.region-avtorjiBesedil',
             alternacijeR: '.region-alternacije',
             pogodbeR: '.region-pogodbe',
-            zaposlitveR: '.region-zaposlitev'
+            zaposlitveR: '.region-zaposlitev',
+            podobneOsebeR: '.region-podobne-osebe'
         },
         buttons: {
             shraniDodaj: {
@@ -97,6 +104,80 @@ define([
         this.onShrani({
             success: self.posodobiUrlNaslovBrezRender
         });
+    };
+
+    OsebaEditView.prototype.renderPodobneOsebe = function (osebe, options) {
+        var podOsebeView = new PodobneOsebeView({
+            osebe: osebe,
+            formTitle: "Opozorilo: Najdene osebe s podobnim priimkom"
+        });
+
+        podOsebeView.once('shraniOsebo', function () {
+            this.trigger('shraniModel', options);
+        }, this);
+
+        podOsebeView.once('preklici', function () {
+            this.podobneOsebeR.empty();
+            //omogočimo gumb shrani
+            var tb = this.getToolbarModel();
+            var butS = tb.getButton('doc-shrani');
+
+            if (butS) {
+                butS.set({
+                    disabled: false
+                });
+            }
+        }, this);
+
+        this.podobneOsebeR.show(podOsebeView);
+    };
+
+    /**
+     * funkcija namenjena preverjanju pred shranjevanjem modela
+     * @param {type} options
+     * @returns {undefined}
+     */
+    OsebaEditView.prototype.onBeforeShrani = function (options) {
+        var self = this;
+
+        if (!this.model.id) {
+            this.model.set('id', null);
+        }
+
+        /**
+         * Pri uspešno pridobljenem seznamu oseb
+         * @param Array osebe
+         * @param opcije options
+         * @returns {undefined}
+         */
+        var success = function (osebe, options) {
+            if (osebe.length === 0) {
+                self.trigger('shraniModel', options);
+            } else {
+                //onemogočimo gumb shrani dokler ne shranemo ali prekličemo 
+                var tb = self.getToolbarModel();
+                var butS = tb.getButton('doc-shrani');
+
+                if (butS) {
+                    butS.set({
+                        disabled: true
+                    });
+                }
+                //izris seznama podobnih oseb
+                self.renderPodobneOsebe(osebe, options);
+            }
+        };
+        var error = function (error) {
+            Radio.channel('error').command('flash', {
+                message: error.message,
+                code: error.code,
+                severity: error.severity
+            });
+        };
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/app/oseba'});
+        rpc.call('podobneOsebe', {
+            'oseba': this.model
+        }, success, error);
     };
 
     OsebaEditView.prototype.onShrani = function (options) {
