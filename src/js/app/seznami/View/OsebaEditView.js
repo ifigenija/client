@@ -552,7 +552,7 @@ define([
         ];
 
         var urlKlic = function (model) {
-            var url = '#popa/' + model.get('popa').id;
+            var url = '#zaposlitev/' + model.id;
             Backbone.history.navigate(url, {trigger: true});
         };
 
