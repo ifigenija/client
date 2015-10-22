@@ -22,33 +22,7 @@ define([
         Radio,
         Backbone
         ) {
-
-    /**
-     * 
-     * @type @exp;Marionette@pro;ItemView@call;extend
-     */
-    var RelacijaView = Marionette.ItemView.extend({
-        tagName: 'a',
-        className: 'list-group-item col-sm-6',
-        template: Handlebars.compile('{{ itemNaslov }}')
-    });
-    RelacijaView.prototype.serializeData = function () {
-        var self = this;
-
-        return _.extend(this.model.toJSON(), {
-            itemNaslov: function () {
-                return self.model.get('id');
-            }
-        });
-    };
-    /**
-     * 
-     * @type @exp;Marionette@pro;CollectionView@call;extend
-     */
-    var RelacijeView = Marionette.CollectionView.extend({
-        className: 'list-group',
-        childView: RelacijaView
-    });
+    
     /**
      * 
      * @type @exp;Marionette@pro;LayoutView@call;extend
@@ -84,16 +58,13 @@ define([
         });
 
         this.listenTo(c, 'selectValue', this.onUredi);
-//        var vloge = new RelacijeView({
-//            collection: c
-//        });
+        
         c.fetch({
             success: function () {
                 self.seznamR.show(grid);
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
-//        this.seznamR.show(vloge);
     };
     /**
      * 

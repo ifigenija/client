@@ -562,9 +562,7 @@ define([
                 sortable: false
             }
         ];
-        var funkcije = function(model){
-            
-        };
+        
         var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', columns);
         this.kontaktneOsebeR.show(rv);
     };
