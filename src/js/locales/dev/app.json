@@ -713,7 +713,7 @@
         "zaposlen": "Zaposlen",
         "imaPogodbo": "Ima pogodbo",
         "seznam": "Seznam",
-        "relacija": "Alternacija v uprizoritvah",
+        "relacija": "Zaseda funkcije v uprizoritvah",
         "d": {
             "sifra": "",
             "funkcija": "",
@@ -1859,7 +1859,7 @@
         }
     },
     "kontaktnaOseba":{
-        "relacija": "Kontaktna oseba za poslovne partnerje"
+        "relacija": "Kontaktna oseba pri poslovnih partnerjih"
     }
 }
 

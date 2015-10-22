@@ -71,7 +71,7 @@ define([
      * @returns {undefined}
      */
     OsebaRelacijeView.prototype.onUredi = function (model) {
-        this.trigger('uredi',model);
+        this.trigger('uredi', model);
     };
 
     return OsebaRelacijeView;

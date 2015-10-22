@@ -413,7 +413,7 @@ define([
      * @param {type} columns
      * @returns {DokumentView@call;extend.prototype.getRelationView.view|OsebaEditView_L15.RelacijeView}
      */
-    OsebaEditView.prototype.getRelationView = function (relation, lookup, columns) {
+    OsebaEditView.prototype.getRelationView = function (relation, lookup, columns, funkcija) {
         var view = new RelacijeView({
             owner: 'oseba',
             ownerId: this.model.get('id'),
@@ -423,8 +423,8 @@ define([
             columns: columns,
             title: i18next.t(lookup + ".relacija")
         });
-        
-        //view.on('uredi', function(model){console.log(model);},this);
+
+        view.on('uredi', funkcija, this);
         return view;
     };
 
@@ -445,40 +445,41 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('Šifra uprizoritve'),
-                name: 'funkcija.uprizoritev.ident',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
                 label: i18next.t('Naziv uprizoritve'),
-                name: 'funkcija.uprizoritev.label',
+                name: 'funkcija.uprizoritev.naslov',
+                sortable: false
+            },
+            {
+                headerCell: 'number',
+                cell: 'date',
+                editable: false,
+                label: i18next.t('Datum premiere'),
+                name: 'funkcija.uprizoritev.datumPremiere',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('Šifra funkcije'),
-                name: 'funkcija.sort',
+                label: i18next.t('Tip funkcije'),
+                name: 'funkcija.tipFunkcije.ime',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('Naziv funkcije'),
+                label: i18next.t('Funkcija'),
                 name: 'funkcija.naziv',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('Šifra alternacije'),
-                name: 'sifra',
                 sortable: false
             }
         ];
-        var rv = this.getRelationView('alternacije', 'alternacija', columns);
+
+        var urlKlic = function (model) {
+            var uprId = model.get('funkcija').uprizoritev.id;
+            var url = '#pro/uprizoritev/' + uprId;
+            Backbone.history.navigate(url, {trigger: true});
+        };
+
+        var rv = this.getRelationView('alternacije', 'alternacija', columns, urlKlic);
         this.alternacijeR.show(rv);
     };
 
@@ -487,28 +488,29 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('Šifra uprizoritve'),
-                name: 'alternacije.0.funkcija.uprizoritev.ident',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
                 label: i18next.t('Naziv uprizoritve'),
-                name: 'alternacije.0.funkcija.uprizoritev.label',
+                name: 'alternacije.0.funkcija.uprizoritev.naslov',
+                sortable: false
+            },
+            {
+                headerCell: 'number',
+                cell: 'date',
+                editable: false,
+                label: i18next.t('Datum premiere'),
+                name: 'alternacije.0.funkcija.uprizoritev.datumPremiere',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('Šifra funkcije'),
-                name: 'alternacije.0.funkcija.sort',
+                label: i18next.t('Tip funkcije'),
+                name: 'alternacije.0.funkcija.tipFunkcije.ime',
                 sortable: false
             },
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('Naziv Funkcije'),
+                label: i18next.t('Funkcija'),
                 name: 'alternacije.0.funkcija.naziv',
                 sortable: false
             },
@@ -520,7 +522,14 @@ define([
                 sortable: false
             }
         ];
-        var rv = this.getRelationView('pogodbe', 'pogodba', columns);
+
+        var urlKlic = function (model) {
+            var uprId = model.get('alternacije')[0].funkcija.uprizoritev.id;
+            var url = '#pro/stroskovnik/' + uprId;
+            Backbone.history.navigate(url, {trigger: true});
+        };
+
+        var rv = this.getRelationView('pogodbe', 'pogodba', columns, urlKlic);
         this.pogodbeR.show(rv);
     };
 
@@ -541,7 +550,13 @@ define([
                 sortable: false
             }
         ];
-        var rv = this.getRelationView('zaposlitve', 'zaposlitev', columns);
+
+        var urlKlic = function (model) {
+            var url = '#popa/' + model.get('popa').id;
+            Backbone.history.navigate(url, {trigger: true});
+        };
+
+        var rv = this.getRelationView('zaposlitve', 'zaposlitev', columns, urlKlic);
         this.zaposlitveR.show(rv);
     };
 
@@ -562,8 +577,13 @@ define([
                 sortable: false
             }
         ];
-        
-        var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', columns);
+
+        var urlKlic = function (model) {
+            var url = '#popa/' + model.get('popa').id;
+            Backbone.history.navigate(url, {trigger: true});
+        };
+
+        var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', columns, urlKlic);
         this.kontaktneOsebeR.show(rv);
     };
 
@@ -584,7 +604,13 @@ define([
                 sortable: false
             }
         ];
-        var rv = this.getRelationView('avtorjiBesedil', 'avtorBesedila', columns);
+
+        var urlKlic = function (model) {
+            var url = '#arhiv/besedila/' + model.get('besedilo').id;
+            Backbone.history.navigate(url, {trigger: true});
+        };
+
+        var rv = this.getRelationView('avtorjiBesedil', 'avtorBesedila', columns, urlKlic);
         this.avtorjiBesedilR.show(rv);
     };
 
