@@ -1,7 +1,7 @@
 <form>
     <div class="row">
         <div class="col-sm-6">
-            <fieldset>
+            <fieldset >
                 <legend>
                     <span>{{t "std.glavniPodatki"}}</span>
                 </legend>
@@ -24,13 +24,16 @@
                     </div>
                 </div>
             </fieldset>
+
         </div>
-        <fieldset class="col-sm-6">
-            <legend>
-                <span>{{t "std.dodatniPodatki"}}</span>
-            </legend>
-            <div data-fields="kapaciteta,jeMaticniOder,jePrizorisce,sePlanira,sifra"></div>
-        </fieldset>
+        <div class="col-sm-6">
+            <fieldset>
+                <legend>
+                    <span>{{t "std.dodatniPodatki"}}</span>
+                </legend>
+                <div data-fields="kapaciteta,jeMaticniOder,jePrizorisce,sePlanira,sifra"></div>
+            </fieldset>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6 col-md-offset-3" data-fields="opis"></div>

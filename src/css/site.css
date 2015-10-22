@@ -93,30 +93,18 @@ div[class*='col-'].form-group {
 /*
  To One lookup
 */
-span.lookup-label {
+.lookup.input-group {
+  width: 100%;
+}
+.lookup-label {
   text-overflow: ellipsis;
   cursor: pointer;
   white-space: pre;
   overflow: hidden;
-  min-width: 180px;
-  max-width: 250px;
+  width: 75%;
   padding: 6px;
+  display: inline-block;
 }
-/*.lookup-modal {
-    position: fixed;
-    margin: 3px;
-    z-index: 5000;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    top: 51px;
-}
-.lookup-modal > .panel {
-    height: 100%;
-}*/
-/*.lookup-modal > .panel > .panel-body {
-    padding: 2px;
-}*/
 .lookup-grid {
   position: relative;
   display: block;
@@ -124,6 +112,10 @@ span.lookup-label {
   padding: 0;
   overflow: auto;
   border: 0;
+}
+.lookup input[type='text'] {
+  width: 25%;
+  display: inline-block;
 }
 .paginator-control input {
   clear: none;
@@ -138,40 +130,6 @@ span.cenik-button {
     margin-top: -1px;
     margin-bottom: 1px;
   }
-}
-.lookup-header .close {
-  line-height: 0.8em;
-}
-.lookup-container {
-  position: relative;
-  max-width: 450px;
-  max-height: 300px;
-  min-height: 100px;
-  border-radius: 4px /*{cornerRadius}*/;
-  border: 1px;
-  border-color: #ddd;
-  background-color: #fcefa1;
-  padding: 1px;
-  background-color: #fff;
-  border-style: solid;
-  overflow-y: auto;
-  /* prevent horizontal scrollbar */
-  overflow-x: hidden;
-}
-ul.lookup-list {
-  width: 350px;
-}
-ul.lookup-list > li > a {
-  padding: 5px;
-}
-span.lookup-hilite {
-  font-weight: bolder;
-}
-.lookup > input[type='text'] {
-  min-width: 40px;
-}
-.lookup {
-  max-width: 500px;
 }
 .filter-form .lookup > input {
   border-top-right-radius: 4px !important;
@@ -570,7 +528,7 @@ div.pagination-container {
 .sporocila-ifi {
   position: fixed;
   width: 100%;
-  top: 30px ;
+  top: 30px;
   z-index: 1100;
 }
 .tab-title h3 {
@@ -871,17 +829,14 @@ fieldset.pomemben legend span {
   margin-bottom: 10px;
 }
 .vnosno-polje .izbor {
-  width: 70%;
   display: table-cell;
   overflow-x: hidden;
 }
 .vnosno-polje .dodaj {
+  width: auto;
   display: table-cell;
   padding-left: 5px;
   vertical-align: top;
-}
-.vnosno-polje .gumb {
-  width: 100%;
 }
 /*AlternacijaView*/
 /*podaljšan fieldset*/
