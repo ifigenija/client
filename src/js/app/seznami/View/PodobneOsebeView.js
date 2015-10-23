@@ -7,6 +7,7 @@ define([
     'i18next',
     'radio',
     'backbone',
+    'underscore',
     'template!../tpl/podobnaOseba-item.tpl',
     'template!../tpl/podobneOsebe.tpl'
 ], function (
@@ -15,6 +16,7 @@ define([
         i18next,
         Radio,
         Backbone,
+        _,
         itemTpl,
         tpl
         ) {
@@ -22,7 +24,12 @@ define([
     var OsebaView = Marionette.ItemView.extend({
         tagName: 'li',
         className: 'col-sm-6',
-        template: itemTpl
+        template: itemTpl,
+        serializeData: function () {
+            return _.extend(this.model.toJSON(), {
+                href: '#oseba/' + this.model.id
+            });
+        }
     });
 
     var OsebeView = Marionette.CollectionView.extend({
@@ -43,7 +50,7 @@ define([
         onRender: function () {
             this.renderSeznam();
         },
-        initialize: function(options){
+        initialize: function (options) {
             this.formTitle = options.formTitle;
         },
         serializeData: function () {
@@ -56,11 +63,11 @@ define([
     PodobneOsebeView.prototype.onShrani = function () {
         this.trigger('shraniOsebo');
     };
-    
+
     PodobneOsebeView.prototype.onPreklici = function () {
         this.trigger('preklici');
     };
-    
+
     PodobneOsebeView.prototype.renderSeznam = function () {
         this.collection = new Backbone.Collection(this.options.osebe);
 

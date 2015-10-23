@@ -1,5 +1,5 @@
 <div class="podobana-oseba">
-    <label><a>{{polnoIme}}</a>
+    <label><a href="{{href}}">{{polnoIme}}</a>
         {{#if email}}
         ({{email}})
         {{/if}}
