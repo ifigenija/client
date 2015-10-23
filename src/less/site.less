@@ -21,10 +21,6 @@ Licenca GPLv3
     margin-bottom: 0;
 }
 
-.alert {
-    padding: 5px 15px;
-    margin-bottom: 7px;
-}
 
 .form-inline label {
     margin-right: 5px;
@@ -33,9 +29,14 @@ Licenca GPLv3
 .table .col-numbers, .pull-right .col-numbers {
     text-align: right;
 }
+<<<<<<< HEAD
 .table-bordered th {
     background-color: #f5f5f5;
 }
+=======
+
+
+>>>>>>> popravek less po strelu v stopalo
 .left-align {
     text-align: left !important;
 }
@@ -46,14 +47,19 @@ Licenca GPLv3
     width: 40px;
     padding-left: 10px
 }
+<<<<<<< HEAD
 body.stoposto {
     margin-left: 2px;
     margin-right: 2px;
 }
+=======
+
+>>>>>>> popravek less po strelu v stopalo
 .mouse-hand {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 /*
  Dodatki za vnosna polja
 */
@@ -69,14 +75,15 @@ input.lookup-naslov {
 input.datum-polje {
     width: 110px;
 }
+=======
+>>>>>>> popravek less po strelu v stopalo
 input.decimal-polje {
-
     text-align: right;
 }
 input.integer-polje {
-
     text-align: right;
 }
+<<<<<<< HEAD
 input.sifra-polje {
 
 }
@@ -92,10 +99,19 @@ select.slim-select {
 div[class*='col-'].form-group {
     padding-left: 0px;
 }
+=======
+
+
+select.slim-select {
+    width: 90px;
+}
+
+>>>>>>> popravek less po strelu v stopalo
 
 /*
  To One lookup
 */
+<<<<<<< HEAD
 span.lookup-label {
     text-overflow: ellipsis;
     cursor: pointer;
@@ -119,6 +135,37 @@ span.lookup-label {
 }*/
 
 .lookup-filter {
+=======
+.lookup {
+    &.input-group {
+        width: 100%;
+    }
+    &-label {
+        text-overflow: ellipsis;
+        cursor: pointer;
+        white-space: normal;
+        overflow: hidden;
+        width: 75%;
+        max-width: calc(100% - 60px);
+        padding: 6px;
+        display: inline-block;
+        max-height: @input-height-base;
+    }
+
+    &-grid {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 0;
+        overflow: auto;
+        border: 0;
+    }
+
+    & input[type='text'] {
+        width: 25%;
+        min-width: 60px;
+        display: inline-block;
+>>>>>>> popravek less po strelu v stopalo
 
 
 }
@@ -138,9 +185,13 @@ span.lookup-label {
     display: inline;
     height: 30px;
 }
+<<<<<<< HEAD
 span.cenik-button {
     cursor: pointer;
 }
+=======
+
+>>>>>>> popravek less po strelu v stopalo
 
 @media (min-width: 768px) {
     .lookup-paginator {
@@ -148,6 +199,7 @@ span.cenik-button {
         margin-bottom: 1px;
     }
 }
+<<<<<<< HEAD
 .lookup-header .close {
     line-height: 0.8em;
 }
@@ -196,6 +248,10 @@ span.lookup-hilite {
     height: 32px;
     width: 100%;
 }
+=======
+
+
+>>>>>>> popravek less po strelu v stopalo
 /* Horizontal form label fix */
 .form-horizontal label {
     margin-top: 6px;
@@ -325,6 +381,7 @@ i.tree-view-chevron.icon-chevron-right {
 i.tree-view-icon.icon-folder-close-alt {
     margin-right: 3px;
 }
+<<<<<<< HEAD
 /*
  Stili za filemanager
 */
@@ -370,6 +427,9 @@ li.filemanager-datoteka > a {
 #filemanager-detail {
     transition: height 1s ease-in-out;
 }
+=======
+
+>>>>>>> popravek less po strelu v stopalo
 .drop-hilite {
     border-color: rgba(126, 239, 104, 0.8);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
@@ -378,6 +438,7 @@ li.filemanager-datoteka > a {
 .label-inverse, .badge-inverse {
     background-color: #333333;
 }
+<<<<<<< HEAD
 .paklink {
     margin-right: 1px;
     margin-bottom: 1px;
@@ -470,6 +531,17 @@ div.pagination-container {
     position: relative;
     top: 4px;
     display: none;
+=======
+
+.paginator-control {
+    & a {
+        padding: 5px 8px;
+    }
+
+.paginator-control > input {
+        width: 40px;
+    }
+>>>>>>> popravek less po strelu v stopalo
 }
 /* Job-style panel styling */
 .panel-status-label {
@@ -492,6 +564,7 @@ div.pagination-container {
         width: 900px;
     }
 }
+<<<<<<< HEAD
 .dl-job dt {
     width: 200px;
     white-space: normal;
@@ -499,6 +572,18 @@ div.pagination-container {
 }
 .dl-job dd {
     margin-left: 220px;
+=======
+
+.dl-job {
+    & dt {
+        width: 200px;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+    & dd {
+        margin-left: 220px;
+    }
+>>>>>>> popravek less po strelu v stopalo
 }
 .panel-log .panel-body {
     overflow-y: scroll;
@@ -515,6 +600,7 @@ div.pagination-container {
  */
 .panel-form {
     margin-bottom: 8px;
+<<<<<<< HEAD
 }
 .panel-form .panel-heading {
     padding: 4px;
@@ -532,6 +618,28 @@ div.pagination-container {
 .panel-form h4 {
     margin-top: 6px;
     margin-bottom: 0;
+=======
+
+    & .panel-heading {
+        padding: 4px;
+    }
+
+    & .panel-footer {
+        padding: 4px;
+    }
+
+    & > .panel-body {
+        padding: 0;
+        & form {
+            padding: @panel-body-padding @panel-body-padding 0 @panel-body-padding;
+        }
+    }
+
+    & h4 {
+        margin-top: 6px;
+        margin-bottom: 0;
+    }
+>>>>>>> popravek less po strelu v stopalo
 }
 
 .glowing-border {
@@ -551,6 +659,7 @@ div.pagination-container {
     margin-top: 5px;
     margin-bottom: 10px;
 }
+<<<<<<< HEAD
 #flashMessagesManager .flashMessages {
     position: fixed;
     bottom: 1px;
@@ -572,6 +681,32 @@ div.pagination-container {
 #flashMessagesManager .flashMessagesList .panel .panel-body {
     margin-bottom: 0;
     padding: 7px 7px 0 7px;
+=======
+
+#flashMessagesManager {
+    & .flashMessages {
+        position: fixed;
+        bottom: 1px;
+        right: 1px;
+        z-index: 420;
+        border: 1px solid #ccc;
+    }
+
+    & .flashMessagesList {
+        position: fixed;
+        bottom: 1px;
+        right: 1px;
+        margin-bottom: 23px;
+        padding: 0;
+        z-index: 421;
+        & .panel {
+            margin-bottom: 0;
+            & .panel-body {
+                padding: 7px 7px 0 7px;
+            }
+        }
+    }
+>>>>>>> popravek less po strelu v stopalo
 }
 
 .sporocila-ifi {
@@ -598,6 +733,7 @@ div.pagination-container {
 .popover {
     max-width: 600px;
 }
+<<<<<<< HEAD
 /* Manjši fix za small inline form */
 .input-group-sm > .input-group-addon > * {
     line-height: 0.8;
@@ -619,7 +755,14 @@ form ul.radio-inline > li > input {
     margin-left: 0 !important;
 }
 form ul.radio-inline > li {
+=======
+
+& > li {
+>>>>>>> popravek less po strelu v stopalo
     float: left;
+    & > input {
+        margin-left: 0 !important;
+    }
 }
 
 /* Grid filter */
@@ -627,6 +770,7 @@ form ul.radio-inline > li {
     margin-left: 7px
 }
 
+<<<<<<< HEAD
 /* Fix za vertikalni toolbar */
 .btn-toolbar > .btn-group-vertical > .btn:first-child {
     border-top-right-radius: 4px !important;
@@ -635,6 +779,8 @@ form ul.radio-inline > li {
     width: 100%;
 }
 
+=======
+>>>>>>> popravek less po strelu v stopalo
 .unselectable {
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -649,6 +795,7 @@ span.stevilka-na-veliko {
     float:right;
 }
 
+<<<<<<< HEAD
 
 .relation-izbor {
     width: 70%; display: table-cell;
@@ -679,15 +826,27 @@ span.stevilka-na-veliko {
 .alter-dodaj {
     display: table-cell; padding-left:5px    
 }
+=======
 
-.alter-gumb {
-    width: 100%;
+.polje-z-gumbom {
+    display: flex;
+    & .izbor {
+        width: calc(100% - 42px);
+        display: inline-block;
+        white-space: normal;
+>>>>>>> popravek less po strelu v stopalo
+
+    }
+
+    & .dodaj {
+        display: inline-block;
+        width: 42px;
+        vertical-align: top;
+        margin-left: 5px;
+    }
 }
 
-.alter-seznam {
-    margin-top: 10px;
-}
-
+<<<<<<< HEAD
 .media.alter-listitem {
     overflow:visible;
 }
@@ -695,6 +854,19 @@ span.stevilka-na-veliko {
 
 .alter-listitem > .media-body {
     overflow:visible;
+=======
+ .alter {
+    &seznam {
+        margin-top: 10px;
+    }
+
+    &-listitem.media  {
+        overflow: visible;
+        & > .media-body  {
+            overflow: visible;
+        }
+    }
+>>>>>>> popravek less po strelu v stopalo
 }
 
 /*stil za tabelo kazalnikov
@@ -930,6 +1102,7 @@ fieldset {
     padding-right: 20px;
 }
 
+<<<<<<< HEAD
 .vnosno-polje{
     margin-bottom: 10px;
     & .izbor {
@@ -948,6 +1121,9 @@ fieldset {
         width: 100%;
     }
 }
+=======
+
+>>>>>>> popravek less po strelu v stopalo
 
 /*AlternacijaView*/
 

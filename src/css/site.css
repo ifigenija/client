@@ -25,10 +25,6 @@ Licenca GPLv3
 .page-header > h3 {
   margin-bottom: 0;
 }
-.alert {
-  padding: 5px 15px;
-  margin-bottom: 7px;
-}
 .form-inline label {
   margin-right: 5px;
   margin-left: 5px;
@@ -36,9 +32,6 @@ Licenca GPLv3
 .table .col-numbers,
 .pull-right .col-numbers {
   text-align: right;
-}
-.table-bordered th {
-  background-color: #f5f5f5;
 }
 .left-align {
   text-align: left !important;
@@ -50,27 +43,8 @@ Licenca GPLv3
   width: 40px;
   padding-left: 10px;
 }
-body.stoposto {
-  margin-left: 2px;
-  margin-right: 2px;
-}
 .mouse-hand {
   cursor: pointer;
-}
-/*
- Dodatki za vnosna polja
-*/
-input.lookup-polje {
-  width: 90px;
-}
-input.lookup-polje.kratko {
-  width: 60px;
-}
-input.lookup-naslov {
-  width: 90px;
-}
-input.datum-polje {
-  width: 110px;
 }
 input.decimal-polje {
   text-align: right;
@@ -78,17 +52,8 @@ input.decimal-polje {
 input.integer-polje {
   text-align: right;
 }
-select.teden-polje {
-  width: 90px;
-}
-select.leto-polje {
-  width: 90px;
-}
 select.slim-select {
   width: 90px;
-}
-div[class*='col-'].form-group {
-  padding-left: 0px;
 }
 /*
  To One lookup
@@ -99,11 +64,13 @@ div[class*='col-'].form-group {
 .lookup-label {
   text-overflow: ellipsis;
   cursor: pointer;
-  white-space: pre;
+  white-space: normal;
   overflow: hidden;
   width: 75%;
+  max-width: calc(100% - 60px);
   padding: 6px;
   display: inline-block;
+  max-height: 31px;
 }
 .lookup-grid {
   position: relative;
@@ -115,6 +82,7 @@ div[class*='col-'].form-group {
 }
 .lookup input[type='text'] {
   width: 25%;
+  min-width: 60px;
   display: inline-block;
 }
 .paginator-control input {
@@ -122,27 +90,11 @@ div[class*='col-'].form-group {
   display: inline;
   height: 30px;
 }
-span.cenik-button {
-  cursor: pointer;
-}
 @media (min-width: 768px) {
   .lookup-paginator {
     margin-top: -1px;
     margin-bottom: 1px;
   }
-}
-.filter-form .lookup > input {
-  border-top-right-radius: 4px !important;
-  border-bottom-left-radius: 0;
-}
-.filter-form .lookup > span {
-  display: block;
-  border-bottom-left-radius: 4px;
-  border-left: 1px solid lightgray;
-  border-top-right-radius: 0;
-  margin-top: -1px;
-  height: 32px;
-  width: 100%;
 }
 /* Horizontal form label fix */
 .form-horizontal label {
@@ -278,51 +230,6 @@ i.tree-view-chevron.icon-chevron-right {
 i.tree-view-icon.icon-folder-close-alt {
   margin-right: 3px;
 }
-/*
- Stili za filemanager
-*/
-ul.filemanager-filelist {
-  list-style: none;
-  margin-left: -40px;
-}
-.filemanager-filelist > li.active {
-  background-color: #ddd;
-}
-.filemanager-icon-div {
-  padding: 3px;
-  float: left;
-}
-.filemanager-file-info {
-  padding: 3px;
-}
-.filemanager-mapa-acl {
-  padding: 5px;
-  border: 1px #e5e5e5 solid;
-  border-radius: 5px;
-  background-color: #f5f5f5;
-}
-.filemanager-filename {
-  color: #000;
-  font-size: 90%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-li.filemanager-datoteka {
-  width: 250px;
-  height: 60px;
-}
-li.filemanager-datoteka > a {
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.filemanager-info-small {
-  color: #333;
-  text-shadow: 1;
-  font-size: 70%;
-}
-#filemanager-detail {
-  transition: height 1s ease-in-out;
-}
 .drop-hilite {
   border-color: rgba(126, 239, 104, 0.8);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
@@ -332,99 +239,11 @@ li.filemanager-datoteka > a {
 .badge-inverse {
   background-color: #333333;
 }
-.paklink {
-  margin-right: 1px;
-  margin-bottom: 1px;
-  display: inline-block;
-}
-.label-default.paklink > a {
-  color: #E6E6FA;
-}
-.badge-default.paklink > a {
-  color: #E6E6FA;
-}
-.paklink > a {
-  color: #4BA6F4;
-}
-.form-actions {
-  margin-top: 14px;
-}
-.badge-warning {
-  background-color: #F0AD4E;
-}
-/* ************************** PAGINATION ********************************** */
-/* A bit more visible active page on the pagination control */
-.pagination .active a {
-  color: #666666;
-  background-color: #ededed;
-  font-weight: bold;
-}
-/* Outer container for pagination, encompasses the actual pagination control and the optional statistics */
-div.pagination-container {
-  margin-top: 10px;
-  margin-bottom: 12px;
-}
-/* Remove the original .pagination class margins */
-.pagination {
-  margin: 0;
-}
-/* An extra class added to the right aligned pagination control when statistics are displayed inline */
-.pagination-float-right {
-  float: right;
-}
-/* An extra class added to the left aligned pagination control when statistics are displayed inline */
-.pagination-float-left {
-  float: left;
-}
-/* Pagination statistics */
-.pagination-stats {
-  margin-top: 4px;
-  margin-bottom: 0;
-  color: #808080;
-  font-size: 90%;
-}
-/* Pagination statistics aligned left */
-.pagination-stats-left {
-  text-align: left;
-}
-/* Pagination statistics aligned center */
-.pagination-stats-center,
-.pagination-centered {
-  text-align: center;
-}
-/* Pagination statistics aligned right */
-.pagination-stats-right {
-  text-align: right;
-}
-/* An extra class added to the right aligned pagination statistics when statistics are displayed inline */
-.pagination-stats-float-right {
-  float: right;
-  margin-right: 8px;
-  margin-top: 0;
-  line-height: 36px;
-}
-/* An extra class added to the left aligned pagination statistics when statistics are displayed inline */
-.pagination-stats-float-left {
-  float: left;
-  margin-left: 8px;
-  margin-top: 0;
-  line-height: 36px;
-}
-.paginator-control > a {
+.paginator-control a {
   padding: 5px 8px;
 }
-.paginator-control > input {
+.paginator-control .paginator-control > input {
   width: 40px;
-}
-/* Dodatni gumbi za forme */
-.showAdvancedBtn {
-  position: relative;
-  left: 4px;
-}
-.showAdvanced {
-  position: relative;
-  top: 4px;
-  display: none;
 }
 /* Job-style panel styling */
 .panel-status-label {
@@ -522,7 +341,6 @@ div.pagination-container {
   margin-bottom: 0;
 }
 #flashMessagesManager .flashMessagesList .panel .panel-body {
-  margin-bottom: 0;
   padding: 7px 7px 0 7px;
 }
 .sporocila-ifi {
@@ -553,37 +371,15 @@ div.pagination-container {
 .popover {
   max-width: 600px;
 }
-/* Manjši fix za small inline form */
-.input-group-sm > .input-group-addon > * {
-  line-height: 0.8;
-}
-/* Fix zaobljenih robov pri input group addon */
-.input-group-addon + div > .input-group > input:first-child {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-/* Backbone form */
-form ul.radio-inline {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 6px;
-}
-form ul.radio-inline > li > input {
-  margin-left: 0 !important;
-}
-form ul.radio-inline > li {
+ > li {
   float: left;
+}
+ > li > input {
+  margin-left: 0 !important;
 }
 /* Grid filter */
 .grid-filter {
   margin-left: 7px;
-}
-/* Fix za vertikalni toolbar */
-.btn-toolbar > .btn-group-vertical > .btn:first-child {
-  border-top-right-radius: 4px !important;
-}
-.btn-toolbar > .btn-group-vertical {
-  width: 100%;
 }
 .unselectable {
   -moz-user-select: -moz-none;
@@ -597,45 +393,27 @@ span.stevilka-na-veliko {
   font-size: 300%;
   float: right;
 }
-.relation-izbor {
-  width: 70%;
-  display: table-cell;
-  overflow-x: hidden;
+.polje-z-gumbom {
+  display: flex;
 }
-.relation-dodaj {
-  display: table-cell;
-  padding-left: 5px;
+.polje-z-gumbom .izbor {
+  width: calc(100% - 42px);
+  display: inline-block;
+  white-space: normal;
 }
-.relation-gumb {
-  width: 100%;
+.polje-z-gumbom .dodaj {
+  display: inline-block;
+  width: 42px;
+  vertical-align: top;
+  margin-left: 5px;
 }
-.form-control.relation-select {
-  width: 100%;
-}
-.alter-izbor {
-  width: 70%;
-  display: table-cell;
-  overflow-x: hidden;
-}
-.alter-izbor > form.form-inline {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-  padding-top: 0px !important;
-}
-.alter-dodaj {
-  display: table-cell;
-  padding-left: 5px;
-}
-.alter-gumb {
-  width: 100%;
-}
-.alter-seznam {
+.alterseznam {
   margin-top: 10px;
 }
-.media.alter-listitem {
+.alter-listitem.media {
   overflow: visible;
 }
-.alter-listitem > .media-body {
+.alter-listitem.media > .media-body {
   overflow: visible;
 }
 /*stil za tabelo kazalnikov
@@ -824,19 +602,6 @@ fieldset.pomemben legend span {
 }
 .cdve-tabela {
   padding-right: 20px;
-}
-.vnosno-polje {
-  margin-bottom: 10px;
-}
-.vnosno-polje .izbor {
-  display: table-cell;
-  overflow-x: hidden;
-}
-.vnosno-polje .dodaj {
-  width: auto;
-  display: table-cell;
-  padding-left: 5px;
-  vertical-align: top;
 }
 /*AlternacijaView*/
 /*podaljšan fieldset*/
