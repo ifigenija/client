@@ -39,7 +39,6 @@ define([
         var sch = {type: 'Toone', targetEntity: 'uprizoritev', editorAttrs: {class: 'form-control'}};
         this.formIzberi = new Form({
             template: Handlebars.compile('<form><div data-editors="id"></div></form>'),
-            className: 'form-inline',
             schema: {
                 id: sch
             }

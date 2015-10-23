@@ -123,7 +123,7 @@ define([
         className: 'alternacija-select',
         template: tpl,
         regions: {
-            izborR: '.alter-izbor',
+            izborR: '.polje-z-gumbom .izbor',
             seznamR: '.alter-seznam'
         },
         events: {
@@ -151,8 +151,7 @@ define([
         };
 
         this.formIzberi = new Form({
-            template: Handlebars.compile('<form><div data-editors="id"></div></form>'),
-            className: 'form-inline',
+            template: Handlebars.compile('<div data-editors="id"></div>'),
             schema: {
                 id: sch
             }

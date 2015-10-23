@@ -1,14 +1,13 @@
-<div class="panel panel-default">
+<div class="panel panel-default relation">
     <div class="panel-heading relation-title">
     </div>
 
     <div class="panel-body">
-        <div style="width: 100%; display: table;">
-            <div style="display: table-row">
-                <div class="relation-izbor" >  </div>
-                <div class="relation-dodaj" > <a class="btn btn-default relation-gumb">{{t "std.dodaj"}}</a> </div>
-            </div>
+        <div class="polje-z-gumbom">
+            <div class="izbor"></div>
+            <a class="btn btn-default dodaj" title="{{t "std.dodaj"}}"><span
+                    class="fa fa-plus"></span></a>
         </div>
-            <div class="relation-seznam"></div>
+        <div class="relation-seznam"></div>
     </div>
 </div>

@@ -48,11 +48,11 @@ define([
     var RelationView = Marionette.LayoutView.extend({
         template: relationTpl,
         regions: {
-            izborR: '.relation-izbor',
+            izborR: '.polje-z-gumbom .izbor',
             seznamR: '.relation-seznam'
         },
         events: {
-            'click .relation-gumb': 'dodaj'
+            'click .polje-z-gumbom .dodaj': 'dodaj'
         },
         onRender: function () {
             this.renderIzbor();
@@ -68,14 +68,13 @@ define([
         var sch;
 
         if (!this.options.type) {
-            sch = {type: 'LookupSelect', targetEntity: this.options.lookup, editorAttrs: {class: 'form-control relation-select'}};
+            sch = {type: 'LookupSelect', targetEntity: this.options.lookup, editorAttrs: {class: 'form-control'}};
         } else if (this.options.type === 'lookup') {
-            sch = {type: 'Toone', targetEntity: this.options.lookup, editorAttrs: {class: 'form-control relation-select'}};
+            sch = {type: 'Toone', targetEntity: this.options.lookup, editorAttrs: {class: 'form-control'}};
         }
 
         this.formIzberi = new Form({
-            template: Handlebars.compile('<form><div data-editors="id"></div></form>'),
-            className: 'form-inline',
+            template: Handlebars.compile('<div data-editors="id"></div>'),
             schema: {
                 id: sch
             }
