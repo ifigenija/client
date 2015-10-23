@@ -432,6 +432,9 @@
         "nova": "Nova oseba",
         "sifra": "Oznaka",
         "email": "Epošta",
+        "twitter": "twitter",
+        "skype": "skype",
+        "fb": "facebook",
         "ime": "Ime",
         "naziv": "Naslavljanje",
         "funkcija": "Funkcija",
@@ -453,6 +456,9 @@
         "d": {
             "sifra": "",
             "email": "",
+            "twitter": "",
+            "skype": "",
+            "fb": "",
             "ime": "",
             "priimek": "",
             "srednjeIme": "",
@@ -1859,7 +1865,7 @@
             "namestnik": "Oseba, ki bo nadomestila vodjo."
         }
     },
-    "kontaktnaOseba":{
+    "kontaktnaOseba": {
         "relacija": "Kontaktna oseba pri poslovnih partnerjih"
     }
 }
