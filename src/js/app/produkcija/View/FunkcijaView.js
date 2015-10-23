@@ -216,6 +216,7 @@ define([
         if (o) {
             var self = this;
             var index = this.alters.indexOf(o);
+            var sortStevilo = o.get('sort');
 
             var prestevilci = function () {
                 var coll = self.alters;
@@ -224,11 +225,12 @@ define([
                 if (index >= 0 && index < dolzina) {
                     for (var i = index; i < dolzina; i++) {
                         var model = coll.models[i];
-                        model.set('sort', model.get('sort') - 1);
+                        model.set('sort', sortStevilo);
                         model.save(null, {
                             wait: true,
                             error: Radio.channel('error').request('handler', 'xhr')
                         });
+                        sortStevilo++;
                     }
                 }
                 self.renderAlternacije(self.model);
