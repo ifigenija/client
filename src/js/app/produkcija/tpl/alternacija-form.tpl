@@ -31,23 +31,19 @@
                 </legend>
                 <div class="vnosno-polje">
                     <div class="naslov">
-                        <label class="">{{t "alternacija.pogodba"}}</label>
-                        <div class="help-block hidden">{{t "alternacija.d.pogodba"}}</div>
+                        <label class="">{{t "avtorBesedila.oseba"}}</label>
+                        <div class="help-block hidden">{{t "avtorBesedila.d.oseba"}}</div>
                         <div class="error-block"></div>
                     </div>
-                    <div style="width: 100%; display: table;">
-                        <div style="display: table-row">
-                            <div class="izbor"  data-editors="pogodba">  </div>
-                            <div class="dodaj">
-                                <a class="btn btn-default gumb pogodba-dodaj">
-                                    {{#if imaPogodbo}}
-                                    {{t "std.uredi"}}
-                                    {{else}}
-                                    {{t "std.dodaj"}}
-                                    {{/if}}
-                                </a>
-                            </div>
-                        </div>
+                    <div class="polje-z-gumbom">
+                        <div class="izbor"  data-editors="pogodba"></div>
+                        <a class="btn btn-default dodaj dodaj-pogodbo" title="{{t "std.title.dodajPogodbo"}}">
+                            {{#if imaPogodbo}}
+                            <i id="icon" class="fa fa-pencil-square-o"></i>
+                            {{else}}
+                            <i id="icon" class="fa fa-plus"></i>
+                            {{/if}}
+                        </a>
                     </div>
                 </div>
                 <div data-fields="zaposlitev,sifra"></div>
@@ -55,6 +51,6 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-offset-3" data-fields="opomba"></div>
+        <div class="col-md-6 col-md-offset-3" data-fields="opomba"></div>
     </div>
 </form>

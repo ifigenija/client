@@ -77,18 +77,18 @@ define([
             var view = new AlterUrediView({
                 model: this.model
             });
-            
-            
+
+
             view.on('save:success', this.onSaveSuccess, this);
             view.on('preklici', this.onPreklici, this);
-            
+
             this.detailR.show(view);
         },
-        onSaveSuccess: function(){
+        onSaveSuccess: function () {
             this.trigger('shranjeno');
             //this.detailR.empty();
         },
-        onPreklici: function(){
+        onPreklici: function () {
             this.detailR.empty();
         }
     });
@@ -123,11 +123,11 @@ define([
         className: 'alternacija-select',
         template: tpl,
         regions: {
-            izborR: '.alter-izbor',
+            izborR: '.polje-z-gumbom .izbor',
             seznamR: '.alter-seznam'
         },
         events: {
-            'click .oseba-nova': 'novaOseba'
+            'click .dodaj-osebo': 'novaOseba'
         },
         onRender: function () {
             this.renderIzbor();
@@ -151,8 +151,7 @@ define([
         };
 
         this.formIzberi = new Form({
-            template: Handlebars.compile('<form><div data-editors="id"></div></form>'),
-            className: 'form-inline',
+            template: Handlebars.compile('<div data-editors="id"></div>'),
             schema: {
                 id: sch
             }
@@ -192,6 +191,12 @@ define([
      * @returns {undefined}
      */
     AlterSelectView.prototype.renderSeznam = function () {
+        this.collection.comparator = function (a, b) {
+            var as = a.get('sort');
+            var bs = b.get('sort');            
+            return (as < bs) ? -1 : 1;
+        };
+
         var c = this.collection;
 
         var vloge = new AltersList({
@@ -213,8 +218,11 @@ define([
             this.triggerMethod('shranjeno:alter', model.get('id'));
         }, this);
 
-        c.fetch();
-        this.seznamR.show(vloge);
+        c.fetch({
+            success: function () {
+                self.seznamR.show(vloge);
+            }
+        });
 
     };
 

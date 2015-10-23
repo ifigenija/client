@@ -32,7 +32,7 @@ define([
         formTemplate: formTpl,
         filterSchema: filterSchema,
         events: {
-            'click .oseba-dodaj': 'novaOseba'
+            'click .dodaj-osebo': 'novaOseba'
         },
         columns: [
             {

@@ -212,15 +212,40 @@ define([
     FunkcijaView.prototype.brisiAlter = function (alter) {
         var o = this.alters.findWhere({id: alter});
         var self = this;
+
         if (o) {
+            var self = this;
+            var index = this.alters.indexOf(o);
+            var sortStevilo = o.get('sort');
+
+            var prestevilci = function () {
+                var coll = self.alters;
+                var dolzina = coll.length;
+
+                if (index >= 0 && index < dolzina) {
+                    for (var i = index; i < dolzina; i++) {
+                        var model = coll.models[i];
+                        model.set('sort', sortStevilo);
+                        model.save(null, {
+                            wait: true,
+                            error: Radio.channel('error').request('handler', 'xhr')
+                        });
+                        sortStevilo++;
+                    }
+                }
+                self.renderAlternacije(self.model);
+            };
+
             o.destroy({
                 success: function () {
                     self.model.fetch({
+                        success: prestevilci,
                         error: Radio.channel('error').request('handler', 'xhr')
                     });
                 },
                 error: Radio.channel('error').request('handler', 'xhr')
             });
+
         }
     };
 
@@ -271,10 +296,10 @@ define([
             if (min >= 0) {
                 return min + 1;
             } else {
-                return 0;
+                return 1;
             }
         };
-        
+
         var sort = sortStevilo(this.alters, 'sort');
 
         model.save({
