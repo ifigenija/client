@@ -271,7 +271,7 @@ define([
             if (min >= 0) {
                 return min + 1;
             } else {
-                return 0;
+                return 1;
             }
         };
         
