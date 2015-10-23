@@ -1005,6 +1005,13 @@ fieldset {
     background-color: white;
     border: solid 1px;
     border-color: #ccc;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 12px;
+    padding-left: 12px;
+    & * {
+        margin-bottom: 0px;
+    }
 }
 
 /*checkbox help block*/
@@ -1015,14 +1022,15 @@ fieldset {
     }
 }
 
-.seznam-podobnih-oseb {
-    padding: 5px;
-}
-
-.toolbar-podobnih-oseb {
-    padding: 10px;
-}
-
-.podobne-osebe-panel {
-    margin-top: 10px;
+.podobne-osebe{
+    &-panel{
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    &-toolbar{
+        padding: 10px;
+    }
+    &-seznam{
+        padding: 5px;
+    }
 }

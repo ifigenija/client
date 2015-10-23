@@ -165,7 +165,8 @@
             "datum": "Datum konca ne sme bit manjši ali enak datumu začetka.",
             "avtHonSamoz": "Strošek avtorskih honorarjev s statusom samozaposlenih je del stroškov avtorskih honorarjev. Zato ne sme biti strošek večji od avtorskih honorarjev.",
             "gostSZVrednost": "Vrednost gostovanja po Sloveniji in zamejstvu ne sme biti več, kot je delež matičnega JZ.",
-            "velikost": "Vlogi je potrebno določiti velikost"
+            "velikost": "Vlogi je potrebno določiti velikost",
+            "podobneOsebe": "V seznamu so bile najdene osebe s podobnim priimkom. Ali res želite shraniti osebo?"
         },
         "uspeh": {
             "fetch": "Napaka pri pridobivanju podatkov",

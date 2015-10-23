@@ -4,25 +4,33 @@
 define([
     'marionette',
     '../Model/RelationCollection',
-    'app/bars',
     'i18next',
-    'app/Max/Module/Backgrid',
-    'underscore',
     'template!../tpl/oseba-relacije.tpl',
-    'radio',
-    'backbone'
+    'radio'
 ], function (
         Marionette,
         RelationColl,
-        Handlebars,
         i18next,
-        Backgrid,
-        _,
         relationTpl,
-        Radio,
-        Backbone
+        Radio
         ) {
-    
+    var ModelView = Marionette.ItemView.extend({
+        tagName: 'li',
+        template: null,
+        initialize: function (options) {
+            this.template = options.itemTpl;
+            this.serializeData = options.serializeData;
+        }
+    });
+
+    var CollView = Marionette.CollectionView.extend({
+        tagName: 'ul',
+        className: 'row',
+        childView: ModelView,
+        initialize: function (options) {
+            this.childView = ModelView.extend({options: options.options});
+        }
+    });
     /**
      * 
      * @type @exp;Marionette@pro;LayoutView@call;extend
@@ -51,27 +59,17 @@ define([
             relation: this.options.relation
         });
 
-        var grid = new Backgrid.Grid({
-            collection: c,
-            row: Backgrid.ClickableRow,
-            columns: this.options.columns
+        var collView = new CollView({
+            collection: this.collection,
+            options: this.options
         });
 
-        this.listenTo(c, 'selectValue', this.onUredi);
-        
         c.fetch({
             success: function () {
-                self.seznamR.show(grid);
+                self.seznamR.show(collView);
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
-    };
-    /**
-     * 
-     * @returns {undefined}
-     */
-    OsebaRelacijeView.prototype.onUredi = function (model) {
-        this.trigger('uredi', model);
     };
 
     return OsebaRelacijeView;

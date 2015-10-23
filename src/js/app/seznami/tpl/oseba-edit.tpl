@@ -37,10 +37,14 @@
         <div role="tabpanel" class="tab-pane pnl-trrji region-trrji"></div>
         <div role="tabpanel" class="tab-pane pnl-relacije">
             <div class="row">
-                <div class="region-alternacije col-md-12"></div>
-                <div class="region-pogodbe col-md-12"></div>
                 <div class="region-kontaktneOsebe col-md-6"></div>
                 <div class="region-zaposlitev col-md-6"></div>
+            </div>
+            <div class="row">
+                <div class="region-alternacije col-md-6"></div>
+                <div class="region-pogodbe col-md-6"></div>
+            </div>
+            <div class="row">
                 <div class="region-avtorjiBesedil col-md-6"></div>
             </div>
         </div>

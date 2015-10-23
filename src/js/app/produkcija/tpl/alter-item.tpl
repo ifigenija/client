@@ -7,15 +7,15 @@
     <div class="pull-right alter-toolbar"></div>
     <h4 class="media-heading">{{ oseba.label }}
     </h4>
-    <h5>{{#if  privzeti }}
-        <small>{{t "alternacija.privzeti"}}|</small>
+    <h5><small>{{u "formatNumber" sort 0}}</small>
+        {{#if  privzeti }}
+        <small>|{{t "alternacija.privzeti"}}</small>
         {{/if}}
-        <small>{{u "formatNumber" sort 0}}|</small>
         {{#if  zacetek }}
-            <small>{{u "date" zacetek }}|</small>
-            {{#if  konec }}
-            <small>{{u "date" konec }}</small>
-            {{/if}}
+        <small>|{{u "date" zacetek }}</small>
+        {{#if  konec }}
+        <small>|{{u "date" konec }}</small>
+        {{/if}}
         {{/if}}
     </h5>
 </div>

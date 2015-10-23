@@ -3,18 +3,14 @@
  */
 define([
     'marionette',
-    'app/bars',
     'i18next',
-    'radio',
     'backbone',
     'underscore',
     'template!../tpl/podobnaOseba-item.tpl',
     'template!../tpl/podobneOsebe.tpl'
 ], function (
         Marionette,
-        Handlebars,
         i18next,
-        Radio,
         Backbone,
         _,
         itemTpl,
@@ -41,11 +37,11 @@ define([
     var PodobneOsebeView = Marionette.LayoutView.extend({
         template: tpl,
         regions: {
-            seznamR: '.seznam-podobnih-oseb'
+            seznamR: '.podobne-osebe-seznam'
         },
         triggers: {
-            'click .shrani-podobno-osebo': 'shrani',
-            'click .preklici-podobno-osebo': 'preklici'
+            'click .podobne-osebe-shrani': 'shrani',
+            'click .podobne-osebe-preklici': 'preklici'
         },
         onRender: function () {
             this.renderSeznam();

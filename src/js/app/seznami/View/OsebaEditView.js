@@ -13,6 +13,12 @@ define([
     'backbone',
     'app/seznami/View/OsebaRelacijeView',
     'app/seznami/View/PodobneOsebeView',
+    'template!../tpl/alternacija-oseba-relacija.tpl',
+    'template!../tpl/zaposlitev-oseba-relacija.tpl',
+    'template!../tpl/avtor-oseba-relacija.tpl',
+    'template!../tpl/pogodba-oseba-relacija.tpl',
+    'template!../tpl/kontaktna-oseba-relacija.tpl',
+    'underscore',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -27,6 +33,12 @@ define([
         Backbone,
         RelacijeView,
         PodobneOsebeView,
+        alternacijaRelTpl,
+        zaposlitevRelTpl,
+        avtorRelTpl,
+        pogodbaRelTpl,
+        kontaktnaRelTpl,
+        _,
         $
         ) {
     /**
@@ -494,18 +506,17 @@ define([
      * @param {type} columns
      * @returns {DokumentView@call;extend.prototype.getRelationView.view|OsebaEditView_L15.RelacijeView}
      */
-    OsebaEditView.prototype.getRelationView = function (relation, lookup, columns, funkcija) {
+    OsebaEditView.prototype.getRelationView = function (relation, lookup, serializeData, tpl) {
         var view = new RelacijeView({
             owner: 'oseba',
             ownerId: this.model.get('id'),
             relation: relation,
             lookup: lookup,
             type: 'lookup',
-            columns: columns,
-            title: i18next.t(lookup + ".relacija")
+            title: i18next.t(lookup + ".relacija"),
+            itemTpl: tpl,
+            serializeData: serializeData
         });
-
-        view.on('uredi', funkcija, this);
         return view;
     };
 
@@ -522,176 +533,64 @@ define([
     };
 
     OsebaEditView.prototype.renderAlternacije = function () {
-        var columns = [
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('Naziv uprizoritve'),
-                name: 'funkcija.uprizoritev.naslov',
-                sortable: false
-            },
-            {
-                headerCell: 'number',
-                cell: 'date',
-                editable: false,
-                label: i18next.t('Datum premiere'),
-                name: 'funkcija.uprizoritev.datumPremiere',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('Tip funkcije'),
-                name: 'funkcija.tipFunkcije.ime',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('Funkcija'),
-                name: 'funkcija.naziv',
-                sortable: false
-            }
-        ];
-
-        var urlKlic = function (model) {
-            var uprId = model.get('funkcija').uprizoritev.id;
+        var serializeData = function () {
+            var uprId = this.model.get('funkcija').uprizoritev.id;
             var url = '#pro/uprizoritev/' + uprId;
-            Backbone.history.navigate(url, {trigger: true});
+            return _.extend(this.model.toJSON(), {
+                href: url
+            });
         };
 
-        var rv = this.getRelationView('alternacije', 'alternacija', columns, urlKlic);
+        var rv = this.getRelationView('alternacije', 'alternacija', serializeData, alternacijaRelTpl);
         this.alternacijeR.show(rv);
     };
 
     OsebaEditView.prototype.renderPogodbe = function () {
-        var columns = [
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('Naziv uprizoritve'),
-                name: 'alternacije.0.funkcija.uprizoritev.naslov',
-                sortable: false
-            },
-            {
-                headerCell: 'number',
-                cell: 'date',
-                editable: false,
-                label: i18next.t('Datum premiere'),
-                name: 'alternacije.0.funkcija.uprizoritev.datumPremiere',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('Tip funkcije'),
-                name: 'alternacije.0.funkcija.tipFunkcije.ime',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('Funkcija'),
-                name: 'alternacije.0.funkcija.naziv',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('Šifra alternacije'),
-                name: 'alternacije.0.sifra',
-                sortable: false
-            }
-        ];
-
-        var urlKlic = function (model) {
-            var uprId = model.get('alternacije')[0].funkcija.uprizoritev.id;
+        var serializeData = function () {
+            var uprId = this.model.get('alternacije')[0].funkcija.uprizoritev.id;
             var url = '#pro/stroskovnik/' + uprId;
-            Backbone.history.navigate(url, {trigger: true});
+            return _.extend(this.model.toJSON(), {
+                href: url
+            });
         };
 
-        var rv = this.getRelationView('pogodbe', 'pogodba', columns, urlKlic);
+        var rv = this.getRelationView('pogodbe', 'pogodba', serializeData, pogodbaRelTpl);
         this.pogodbeR.show(rv);
     };
 
     OsebaEditView.prototype.renderZaposlitve = function () {
-        var columns = [
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('zaposlitev.sifra'),
-                name: 'sifra',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('zaposlitev.delovnoMesto'),
-                name: 'delovnoMesto',
-                sortable: false
-            }
-        ];
-
-        var urlKlic = function (model) {
-            var url = '#zaposlitev/' + model.id;
-            Backbone.history.navigate(url, {trigger: true});
+        var serializeData = function () {
+            var url = '#zaposlitev/' + this.model.id;
+            return _.extend(this.model.toJSON(), {
+                href: url
+            });
         };
 
-        var rv = this.getRelationView('zaposlitve', 'zaposlitev', columns, urlKlic);
+        var rv = this.getRelationView('zaposlitve', 'zaposlitev', serializeData, zaposlitevRelTpl);
         this.zaposlitveR.show(rv);
     };
 
     OsebaEditView.prototype.renderKontaktneOsebe = function () {
-        var columns = [
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('popa.sifra') + ' posl. partnerja',
-                name: 'popa.ident',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('popa.naziv') + ' posl. partnerja',
-                name: 'popa.label',
-                sortable: false
-            }
-        ];
-
-        var urlKlic = function (model) {
-            var url = '#popa/' + model.get('popa').id;
-            Backbone.history.navigate(url, {trigger: true});
+        var serializeData = function () {
+            var url = '#popa/' + this.model.get('popa').id;
+            return _.extend(this.model.toJSON(), {
+                href: url
+            });
         };
 
-        var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', columns, urlKlic);
+        var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', serializeData, kontaktnaRelTpl);
         this.kontaktneOsebeR.show(rv);
     };
 
     OsebaEditView.prototype.renderAvtorjeBesedil = function () {
-        var columns = [
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('Šifra besedila'),
-                name: 'besedilo.ident',
-                sortable: false
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('Naziv besedila'),
-                name: 'besedilo.label',
-                sortable: false
-            }
-        ];
-
-        var urlKlic = function (model) {
-            var url = '#arhiv/besedila/' + model.get('besedilo').id;
-            Backbone.history.navigate(url, {trigger: true});
+        var serializeData = function () {
+            var url = '#arhiv/besedila/' + this.model.get('besedilo').id;
+            return _.extend(this.model.toJSON(), {
+                href: url
+            });
         };
 
-        var rv = this.getRelationView('avtorjiBesedil', 'avtorBesedila', columns, urlKlic);
+        var rv = this.getRelationView('avtorjiBesedil', 'avtorBesedila', serializeData, avtorRelTpl);
         this.avtorjiBesedilR.show(rv);
     };
 
