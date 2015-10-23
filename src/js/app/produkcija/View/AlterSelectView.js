@@ -127,7 +127,7 @@ define([
             seznamR: '.alter-seznam'
         },
         events: {
-            'click .oseba-nova': 'novaOseba'
+            'click .dodaj-osebo': 'novaOseba'
         },
         onRender: function () {
             this.renderIzbor();

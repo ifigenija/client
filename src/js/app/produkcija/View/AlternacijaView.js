@@ -36,7 +36,7 @@ define([
         detailName: 'alternacije',
         formTitle: i18next.t(''),
         triggers: {
-            "click .pogodba-dodaj": "dodaj:pogodbo"
+            "click .dodaj-pogodbo": "dodaj:pogodbo"
         },
         gridMeta: [
             {
@@ -120,7 +120,9 @@ define([
         var self = this;
         this.form.on('pogodba:change', function (form, editor) {
             if (editor.getValue()) {
-                this.$('.pogodba-dodaj').html(i18next.t('std.uredi'));
+                //this.$('.pogodba-dodaj').html(i18next.t('std.uredi'));
+                this.$('#icon').removeClass();
+                this.$('#icon').addClass('fa fa-pencil-square-o');
 
                 if (!form.commit()) {
                     self.model.save({
@@ -128,7 +130,9 @@ define([
                     });
                 }
             } else {
-                this.$('.pogodba-dodaj').html(i18next.t('std.dodaj'));
+                //this.$('.pogodba-dodaj').html(i18next.t('std.dodaj'));
+                this.$('#icon').removeClass();
+                this.$('#icon').addClass('fa fa-plus');
             }
         });
     };
@@ -294,7 +298,9 @@ define([
         } else {
             pogodba = this.dokument.dodajPogodbo(this.model);
             this.pogodbaModal(pogodba);
-            this.$('.pogodba-dodaj').html(i18next.t('std.uredi'));
+//            this.$('.pogodba-dodaj').html(i18next.t('std.uredi'));
+            this.$('#icon').removeClass();
+            this.$('#icon').addClass('fa fa-pencil-square-o');
         }
     };
     return AlternacijaView;

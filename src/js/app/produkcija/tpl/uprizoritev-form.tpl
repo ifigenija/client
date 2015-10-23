@@ -14,10 +14,12 @@
                                 <div class="help-block hidden">{{t "uprizoritev.d.besedilo"}}</div>
                                 <div class="error-block"></div>
                             </div>
-                                <div class="polje-z-gumbom">
-                                    <div class="izbor"  data-editors="besedilo"></div><a class="btn btn-default dodaj dodaj-besedilo" title="{{t "std.title.dodajBesedilo"}}"><i class="fa fa-plus"> </i></a>
-                                </div>
-
+                            <div class="polje-z-gumbom">
+                                <div class="izbor"  data-editors="besedilo"></div>
+                                <a class="btn btn-default dodaj dodaj-besedilo" title="{{t "std.title.dodajBesedilo"}}">
+                                    <i class="fa fa-plus"> </i>
+                                </a>
+                            </div>
                         </div>
                         <div data-fields="datumPremiere,gostujoca,sifra,faza"></div>
                     </fieldset>

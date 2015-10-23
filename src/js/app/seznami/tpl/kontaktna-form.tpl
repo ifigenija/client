@@ -7,15 +7,11 @@
                     <div class="help-block hidden">{{t "kontaktna.d.oseba"}}</div>
                     <div class="error-block"></div>
                 </div>
-                <div style="width: 100%; display: table;">
-                    <div style="display: table-row">
-                        <div class="izbor"  data-editors="oseba">  </div>
-                        <div class="dodaj">
-                            <a class="btn btn-default gumb dodaj-osebo" title="{{t "std.title.dodajOsebo"}}">
-                                <i class="fa fa-user-plus"> </i>
-                            </a>
-                        </div>
-                    </div>
+                <div class="polje-z-gumbom">
+                    <div class="izbor"  data-editors="oseba"></div>
+                    <a class="btn btn-default dodaj dodaj-osebo" title="{{t "std.title.dodajOsebo"}}">
+                        <i class="fa fa-user-plus"> </i>
+                    </a>
                 </div>
             </div>
             <div data-fields="funkcija"></div>

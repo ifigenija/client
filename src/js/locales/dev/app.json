@@ -150,7 +150,8 @@
             "dodajBesedilo": "Ustvari novo besedilo",
             "dodajNaslov": "Dodaj nov naslov",
             "prenesiIme": "Prenesi polno ime",
-            "prenesiPsevdonim": "Prenesi psevdonim"
+            "prenesiPsevdonim": "Prenesi psevdonim",
+            "dodajPogodbo": "Dodaj/Uredi pogodbo"
         },
         "messages": {
             "success": "Uspešno opravljena akcija."
