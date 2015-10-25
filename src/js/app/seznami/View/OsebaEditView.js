@@ -139,6 +139,13 @@ define([
                     disabled: false
                 });
             }
+            var butS = tb.getButton('doc-shrani-dodaj');
+
+                if (butS) {
+                    butS.set({
+                        disabled: false
+                    });
+                }
         }, this);
 
         this.podobneOsebeR.show(podOsebeView);
@@ -169,6 +176,13 @@ define([
                 //onemogočimo gumb shrani dokler ne shranemo ali prekličemo 
                 var tb = self.getToolbarModel();
                 var butS = tb.getButton('doc-shrani');
+
+                if (butS) {
+                    butS.set({
+                        disabled: true
+                    });
+                }
+                var butS = tb.getButton('doc-shrani-dodaj');
 
                 if (butS) {
                     butS.set({
