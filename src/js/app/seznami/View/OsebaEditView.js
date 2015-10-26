@@ -562,7 +562,7 @@ define([
         };
         
         var EmptyView = Marionette.ItemView.extend({
-            template: Handlebars.compile('<li class="prazno-pogodba">Oseba ne nastopa v nobeni uprizoritvi.</li> ')
+            template: Handlebars.compile('<li class="prazno-pogodba">Oseba nima funkcije v nobeni uprizoritvi.</li> ')
         });
 
         var rv = this.getRelationView('alternacije', 'alternacija', serializeData, alternacijaRelTpl, EmptyView);
@@ -611,7 +611,7 @@ define([
         };
         
         var EmptyView = Marionette.ItemView.extend({
-            template: Handlebars.compile('<li class="prazno-kontaktna">Oseba ni kontakt za nobenega poslovnega partnerja.</li> ')
+            template: Handlebars.compile('<li class="prazno-kontaktna">Oseba ni kontaktna oseba pri nobenem poslovnem partnerju.</li> ')
         });
 
         var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', serializeData, kontaktnaRelTpl,EmptyView);
@@ -627,7 +627,7 @@ define([
         };
         
         var EmptyView = Marionette.ItemView.extend({
-            template: Handlebars.compile('<li class="prazno-avtor">Oseba ni avtor.</li> ')
+            template: Handlebars.compile('<li class="prazno-avtor">Oseba ni avtor nobenega besedila.</li> ')
         });
 
         var rv = this.getRelationView('avtorjiBesedil', 'avtorBesedila', serializeData, avtorRelTpl, EmptyView);
