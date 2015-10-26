@@ -1,7 +1,17 @@
-<div class="podobana-oseba">
-    <label><a href="{{href}}" target="_blank">{{polnoIme}}</a>
-        {{#if email}}
-        ({{email}})
-        {{/if}}
-    </label>
-</div>
+{{#if index}}
+, 
+{{/if}}
+<a href="{{href}}" target="_blank">
+    {{#if ime}}
+    {{ime}}
+    {{/if}}
+    {{#if srednjeIme}}
+    {{srednjeIme}}
+    {{/if}}
+    {{#if priimek}}
+    {{priimek}}
+    {{/if}}
+</a>
+{{#if email}}
+({{email}})
+{{/if}}

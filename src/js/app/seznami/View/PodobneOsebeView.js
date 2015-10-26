@@ -18,20 +18,23 @@ define([
         ) {
 
     var OsebaView = Marionette.ItemView.extend({
-        tagName: 'li',
-        className: 'col-sm-6',
+        tagName: 'label',
         template: itemTpl,
         serializeData: function () {
             return _.extend(this.model.toJSON(), {
-                href: '#oseba/' + this.model.id
+                href: '#oseba/' + this.model.id,
+                index: this.options.itemIndex
             });
         }
     });
 
     var OsebeView = Marionette.CollectionView.extend({
-        tagName: 'ul',
-        className: 'row',
-        childView: OsebaView
+        childView: OsebaView,
+        childViewOptions: function (model, index) {
+            return {
+                itemIndex: index
+            };
+        }
     });
 
     var PodobneOsebeView = Marionette.LayoutView.extend({

@@ -7936,6 +7936,9 @@ fieldset.pomemben legend span {
 .podobne-osebe-seznam {
   padding: 5px;
 }
+.pnl-relacije .relation-seznam {
+  margin-top: 10px;
+}
 /*
 Licenca GPLv3
 */

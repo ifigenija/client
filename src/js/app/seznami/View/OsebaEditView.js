@@ -19,6 +19,8 @@ define([
     'template!../tpl/pogodba-oseba-relacija.tpl',
     'template!../tpl/kontaktna-oseba-relacija.tpl',
     'underscore',
+    'app/bars',
+    'marionette',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -39,6 +41,8 @@ define([
         pogodbaRelTpl,
         kontaktnaRelTpl,
         _,
+        Handlebars,
+        Marionette,
         $
         ) {
     /**
@@ -520,7 +524,7 @@ define([
      * @param {type} columns
      * @returns {DokumentView@call;extend.prototype.getRelationView.view|OsebaEditView_L15.RelacijeView}
      */
-    OsebaEditView.prototype.getRelationView = function (relation, lookup, serializeData, tpl) {
+    OsebaEditView.prototype.getRelationView = function (relation, lookup, serializeData, tpl, EmptyView) {
         var view = new RelacijeView({
             owner: 'oseba',
             ownerId: this.model.get('id'),
@@ -529,7 +533,8 @@ define([
             type: 'lookup',
             title: i18next.t(lookup + ".relacija"),
             itemTpl: tpl,
-            serializeData: serializeData
+            serializeData: serializeData,
+            emptyView: EmptyView
         });
         return view;
     };
@@ -554,8 +559,12 @@ define([
                 href: url
             });
         };
+        
+        var EmptyView = Marionette.ItemView.extend({
+            template: Handlebars.compile('<li class="prazno-pogodba">Oseba ne nastopa v nobeni uprizoritvi.</li> ')
+        });
 
-        var rv = this.getRelationView('alternacije', 'alternacija', serializeData, alternacijaRelTpl);
+        var rv = this.getRelationView('alternacije', 'alternacija', serializeData, alternacijaRelTpl, EmptyView);
         this.alternacijeR.show(rv);
     };
 
@@ -567,8 +576,12 @@ define([
                 href: url
             });
         };
+        
+        var EmptyView = Marionette.ItemView.extend({
+            template: Handlebars.compile('<li class="prazno-pogodba">Oseba nima sklenjene nobene pogodbe.</li> ')
+        });
 
-        var rv = this.getRelationView('pogodbe', 'pogodba', serializeData, pogodbaRelTpl);
+        var rv = this.getRelationView('pogodbe', 'pogodba', serializeData, pogodbaRelTpl, EmptyView);
         this.pogodbeR.show(rv);
     };
 
@@ -579,8 +592,12 @@ define([
                 href: url
             });
         };
+        
+        var EmptyView = Marionette.ItemView.extend({
+            template: Handlebars.compile('<li class="prazno-zaposlitev">Oseba ni zaposlena v tem javnem zavodu.</li> ')
+        });
 
-        var rv = this.getRelationView('zaposlitve', 'zaposlitev', serializeData, zaposlitevRelTpl);
+        var rv = this.getRelationView('zaposlitve', 'zaposlitev', serializeData, zaposlitevRelTpl, EmptyView);
         this.zaposlitveR.show(rv);
     };
 
@@ -591,8 +608,12 @@ define([
                 href: url
             });
         };
+        
+        var EmptyView = Marionette.ItemView.extend({
+            template: Handlebars.compile('<li class="prazno-kontaktna">Oseba ni kontakt za noben poslovni partner.</li> ')
+        });
 
-        var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', serializeData, kontaktnaRelTpl);
+        var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', serializeData, kontaktnaRelTpl,EmptyView);
         this.kontaktneOsebeR.show(rv);
     };
 
@@ -603,8 +624,12 @@ define([
                 href: url
             });
         };
+        
+        var EmptyView = Marionette.ItemView.extend({
+            template: Handlebars.compile('<li class="prazno-avtor">Oseba ni avtor.</li> ')
+        });
 
-        var rv = this.getRelationView('avtorjiBesedil', 'avtorBesedila', serializeData, avtorRelTpl);
+        var rv = this.getRelationView('avtorjiBesedil', 'avtorBesedila', serializeData, avtorRelTpl, EmptyView);
         this.avtorjiBesedilR.show(rv);
     };
 

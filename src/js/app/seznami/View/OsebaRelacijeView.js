@@ -29,6 +29,7 @@ define([
         childView: ModelView,
         initialize: function (options) {
             this.childView = ModelView.extend({options: options.options});
+            this.emptyView = options.options.emptyView;
         }
     });
     /**
