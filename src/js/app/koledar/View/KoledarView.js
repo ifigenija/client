@@ -8,7 +8,8 @@ define([
     'template!../tpl/calendar-layout.tpl',
     './DogodekModal',
     './DogodekFilter',
-    './DogodekView'
+    './DogodekView',
+    'radio'
 ], function (
         Marionette,
         _,
@@ -16,7 +17,9 @@ define([
         tpl,
         DogodekModal,
         DogodekFilter,
-        DogodekView) {
+        DogodekView,
+        Radio
+        ) {
 
     var KoledarView = Marionette.LayoutView.extend({
         template: tpl,
@@ -47,8 +50,7 @@ define([
                 center: 'title',
                 right: 'month,basicWeek,agendaWeek,basicDay'
             },
-            lang: 'sl',
-                    timezone: false,
+            timezone: false,
             selectable: true,
             defaultView: 'month',
             selectHelper: true,
@@ -81,10 +83,7 @@ define([
                     },
                     coll: self.collection
                 }
-            ],
-            eventResize: function () {
-                return self.eventDropOrResize.apply(self, arguments);
-            }
+            ]
         });
         this.filterR.show(this.filterView);
         setTimeout(function () {
@@ -118,7 +117,7 @@ define([
     KoledarView.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
         // Lookup the model that has the ID of the event and update its attributes
         var model = fcEvent.source.coll.get(fcEvent.id);
-        model.save({zacetek: fcEvent.start.toISOString(), konec: fcEvent.end.toISOString(), tehen: fcEvent.resourceId}, {
+        model.save({zacetek: fcEvent.start.toISOString(), konec: fcEvent.end.toISOString()}, {
             error: function (model, xhr) {
                 revert();
                 Radio.channel('error').command('xhr', model, xhr);
@@ -185,7 +184,8 @@ define([
     };
     KoledarView.prototype.onPreklici = function () {
         this.dogodekR.empty();
-    }
+    };
+    
     return KoledarView;
 })
         ;

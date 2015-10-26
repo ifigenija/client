@@ -25,7 +25,6 @@ define([
 
     var CollView = Marionette.CollectionView.extend({
         tagName: 'ul',
-        className: 'row',
         childView: ModelView,
         initialize: function (options) {
             this.childView = ModelView.extend({options: options.options});
