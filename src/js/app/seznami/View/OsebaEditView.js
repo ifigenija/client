@@ -125,7 +125,7 @@ define([
     OsebaEditView.prototype.renderPodobneOsebe = function (osebe, options) {
         var podOsebeView = new PodobneOsebeView({
             osebe: osebe,
-            formTitle: "Opozorilo: Najdene osebe s podobnim priimkom"
+            formTitle: i18next.t("std.opozorilo.podobneOsebe")
         });
 
         podOsebeView.once('shraniOsebo', function () {

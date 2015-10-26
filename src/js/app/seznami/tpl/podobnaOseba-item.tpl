@@ -1,7 +1,7 @@
 {{#if index}}
 , 
 {{/if}}
-<a href="{{href}}" target="_blank">
+<a href="{{href}}" class="alert-link" target="_blank">
     {{#if ime}}
     {{ime}}
     {{/if}}

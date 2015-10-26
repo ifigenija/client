@@ -168,13 +168,16 @@
             "avtHonSamoz": "Strošek avtorskih honorarjev s statusom samozaposlenih je del stroškov avtorskih honorarjev. Zato ne sme biti strošek večji od avtorskih honorarjev.",
             "gostSZVrednost": "Vrednost gostovanja po Sloveniji in zamejstvu ne sme biti več, kot je delež matičnega JZ.",
             "velikost": "Vlogi je potrebno določiti velikost",
-            "podobneOsebe": "V seznamu so bile najdene osebe s podobnim priimkom. Ali res želite shraniti osebo?"
+            "podobneOsebe": "Najdene so bile osebe s podobnimi podatki kot oseba katero želite shraniti. Ali res želite shraniti osebo?"
         },
         "uspeh": {
             "fetch": "Napaka pri pridobivanju podatkov",
             "kloniranje": "Uspešno kloniran program dela.",
             "zakleni": "Uspešno zaklenjen program dela",
             "odkleni": "Uspešno odklenjen program dela"
+        },
+        "opozorilo": {
+            "podobneOsebe": "Opozorilo: Najdene podobne osebe."
         }
     },
     "ent": {

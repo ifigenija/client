@@ -666,6 +666,12 @@ fieldset.pomemben legend span {
 .podobne-osebe-toolbar {
   padding: 10px;
 }
+.podobne-osebe-toolbar .alert-warning {
+  opacity: 50%;
+  color: black;
+  background-color: rgba(233, 144, 0, 0.7);
+  border-color: rgba(210, 130, 0, 0.7);
+}
 .podobne-osebe-seznam {
   padding: 5px;
 }

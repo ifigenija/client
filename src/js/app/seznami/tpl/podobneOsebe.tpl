@@ -4,7 +4,7 @@
         <strong>{{ formTitle }}</strong>
         <div class="podobne-osebe-seznam"></div>
         <div class="clearfix"></div>
-        <strong><div class="podobne-osebe-napaka">{{t "std.napaka.podobneOsebe"}}</div></strong>
+        <div class="podobne-osebe-napaka">{{t "std.napaka.podobneOsebe"}}</div>
         <button class="btn btn-default podobne-osebe-shrani pull-right">{{t "std.vseenoShrani"}}</button>
         <div class="clearfix"></div>
     </div>
