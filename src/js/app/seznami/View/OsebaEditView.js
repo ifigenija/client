@@ -610,7 +610,7 @@ define([
         };
         
         var EmptyView = Marionette.ItemView.extend({
-            template: Handlebars.compile('<li class="prazno-kontaktna">Oseba ni kontakt za noben poslovni partner.</li> ')
+            template: Handlebars.compile('<li class="prazno-kontaktna">Oseba ni kontakt za nobenega poslovnega partnerja.</li> ')
         });
 
         var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', serializeData, kontaktnaRelTpl,EmptyView);
