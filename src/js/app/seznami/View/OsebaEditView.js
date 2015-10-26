@@ -134,6 +134,7 @@ define([
 
         podOsebeView.once('preklici', function () {
             this.podobneOsebeR.empty();
+            this.off('shraniModel');
             //omogočimo gumb shrani
             var tb = this.getToolbarModel();
             var butS = tb.getButton('doc-shrani');
