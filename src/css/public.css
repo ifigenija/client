@@ -7907,6 +7907,7 @@ fieldset.pomemben legend span {
   width: 100%;
   padding: 0;
   border: 0;
+  margin-top: 10px;
 }
 /*ckeditor*/
 .cke_editable {

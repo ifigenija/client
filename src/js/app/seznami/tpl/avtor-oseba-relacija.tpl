@@ -1,4 +1,3 @@
-<div class="alternacija-relacija">
-    <label>{{besedilo.ident}}</label>
-    <label><a href="{{href}}" target="_blank">{{besedilo.label}}</a></label>
+<div class="avtor-relacija">
+    Oseba je avtor besedila <a href="{{href}}" target="_blank">{{besedilo.label}}</a>({{besedilo.ident}})
 </div>
