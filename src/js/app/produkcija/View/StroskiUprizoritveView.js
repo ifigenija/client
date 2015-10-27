@@ -69,12 +69,11 @@ define([
         var uprizoritev = this.model.get('id');
         if (uprizoritev) {
             
-            var format = 'YYYY-MM-DDTHH:mm:ssZZ';
             var datumZac = Moment();
             var datumKon = Moment();
 
-            var konec = datumKon.add(20, 'y').format(format);
-            var zacetek = datumZac.subtract(20, 'y').format(format);
+            var konec = datumKon.add(20, 'y').toISOString();
+            var zacetek = datumZac.subtract(20, 'y').toISOString();
 
             var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/enotaPrograma'});
             rpc.call('podatkiUprizoritve', {
