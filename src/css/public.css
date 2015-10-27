@@ -7344,6 +7344,9 @@ select.slim-select {
   display: inline-block;
   max-height: 34px;
 }
+.lookup-label:hover {
+  max-height: none;
+}
 .lookup-grid {
   position: relative;
   display: block;
@@ -7671,6 +7674,7 @@ span.stevilka-na-veliko {
   width: 42px;
   vertical-align: top;
   margin-left: 5px;
+  max-height: 34px;
 }
 .alterseznam {
   margin-top: 10px;
