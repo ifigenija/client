@@ -15,8 +15,12 @@ define([
     'marionette',
     'app/produkcija/Model/Sezona',
     'app/Max/View/Confirm',
+    'app/JobManager/View/PrintDialog',
+    'app/Max/Module/Form',
+    'template!../tpl/program-izpis.tpl',
+    'app/bars',
     'jquery',
-    'jquery.jsonrpc'
+    'jquery.jsonrpc',
 ], function (
         baseUrl,
         Radio,
@@ -31,6 +35,10 @@ define([
         Marionette,
         SezonaModel,
         confirm,
+        PrintDialog,
+        Form,
+        PrintOptsTpl,
+        Handlebars,
         $
         ) {
 
@@ -128,14 +136,9 @@ define([
             print: {
                 id: 'doc-print',
                 icon: 'fa fa-print',
-                title: i18next.t('std.tiskanje'),
-                element: 'button-print',
-                uri: baseUrl + '/rpc/programdela/programdela',
-                pdf: true,
-                html: true,
-                sync: true,
-                method: 'tiskajDokument',
-                trigger: 'print'
+                label: i18next.t('std.tiskanje'),
+                element: 'button-trigger',
+                trigger: 'print',
             },
             nasvet: {
                 id: 'doc-nasvet',
@@ -163,6 +166,100 @@ define([
                 element: 'button-trigger',
                 trigger: 'zakleni'
             }
+        },
+        onPrint: function () {
+            var itemtpl = Handlebars.compile('\
+      <div class="form-group field-{{ key }}">\
+      <label for="{{ editorId }}">{{ title }}</label>\
+      <div class="input-group" data-editor></div></div>');
+            var params = new Form({
+                schema: {
+                    jePs1: {
+                        name: "ps1",
+                        type: "Checkbox",
+                        title: "Prog. sklop 1",
+                        help: "",
+                        editorAttrs: {},
+                        template: itemtpl
+                    },
+                    jePs2: {
+                        name: "ps2",
+                        type: "Checkbox",
+                        title: "Prog. sklop 2",
+                        help: "",
+                        editorAttrs: {},
+                        template: itemtpl
+                    },
+                    jeKaz: {
+                        name: "kaz",
+                        type: "Checkbox",
+                        title: "Kazalniki",
+                        help: "",
+                        editorAttrs: {},
+                        template: itemtpl
+                    },
+                    jeC2: {
+                        name: "c2",
+                        type: "Checkbox",
+                        title: "Priloga C2",
+                        help: "",
+                        editorAttrs: {},
+                        template: itemtpl
+                    },
+                    jeZapis: {
+                        name: "zapis",
+                        type: "Checkbox",
+                        title: "Brez prilog",
+                        help: "",
+                        editorAttrs: {},
+                        template: itemtpl
+                    }
+                },
+                template: PrintOptsTpl,
+                data: {
+                    jePs1: true,
+                    jePs2: true,
+                    jeKaz: true,
+                    jeC2: true,
+                    jeZapis: false
+                }
+            });
+
+            this.dialog = new PrintDialog({
+                params: params,
+                pdf: true,
+                html: true,
+                sync: true
+            });
+            this.dialog.on('akcija', this.izvediPrint, this);
+            this.dialog.modal();
+        },
+        izvediPrint: function () {
+            var self = this;
+            var rpc = new $.JsonRpcClient({
+                ajaxUrl: baseUrl + '/rpc/programdela/programdela'
+            });
+
+            this.dialog.triggerMethod('loading');
+            var params = this.dialog.params.getValue();
+            var prtopt = this.dialog.model.toJSON();
+            rpc.call(
+                    'tiskajDokument', {
+                        dokument: this.model.get('id'),
+                        options: {
+                            jePs1: params.jePs1,
+                            jePs2: params.jePs2,
+                            jeKaz: params.jeKaz,
+                            jeC2: params.jeC2,
+                            jeZapis: params.jeZapis,
+                            html: prtopt.html,
+                            pdf: prtopt.pdf,
+                            sync: prtopt.sync
+                        },
+                    },
+                    this.dialog.success,
+                    this.dialog.error
+                    );
         }
     });
 
@@ -365,17 +462,17 @@ define([
             buttons.push(this.buttons.kloniraj);
             var zaklepD = chPermission.request('isGranted', "programDela-lock");
             var odklepD = chPermission.request('isGranted', "programDela-unlock");
-            
+
             if (zaklepD || odklepD) {
                 buttons.push(this.buttons.zakleni);
             }
-            
+
             buttons.push(_.extend({
                 params: {
                     dokument: id
                 }
             }, this.buttons.print));
-            
+
             var dovoljeno = chPermission.request('isGranted', "programDela-write");
             if (!this.model.get('potrjenProgram') && dovoljeno) {
                 buttons.push(this.buttons.brisi);
@@ -748,7 +845,7 @@ define([
     ProgramDokView.prototype.onBrisi = function () {
         var model = this.model;
         var self = this;
-        
+
         var brisi = function () {
             model.destroy({
                 wait: true,
@@ -773,7 +870,7 @@ define([
             ok: brisi
         });
     };
-    
+
     ProgramDokView.prototype.onSaveSuccess = function () {
         this.renderToolbar();
     };

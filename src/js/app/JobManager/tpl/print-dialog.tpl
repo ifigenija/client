@@ -1,7 +1,6 @@
-<div class="filter-region">
-</div>
-<div class="options-region">
-</div>
+<div class="filter-region"></div>
+<div class="params-region"></div>
+<div class="options-region"></div>
 <div class="job-container"></div>
 <div>
     <button class="btn btn-default btnOk">OK</button>

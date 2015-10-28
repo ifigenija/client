@@ -8,21 +8,24 @@ define([
     'radio',
     'app/bars',
     'underscore',
+    'backbone-modal',
     'app/Max/Module/Form',
     'template!../tpl/print-dialog.tpl',
-    'template!../tpl/print-opts.tpl'
+    'template!../tpl/print-opts.tpl',
 ], function (
-    Marionette,
-    Radio,
-    Handlebars,
-    _,
-    Form,
-    tpl,
-tplOpts) {
+        Marionette,
+        Radio,
+        Handlebars,
+        _,
+        Modal,
+        Form,
+        tpl,
+        tplOpts) {
 
     var LoadingView = Marionette.ItemView.extend({
         template: Handlebars.compile('<div style="text-align:center"><i class="fa fa-spinner fa fa-spin fa fa-4x"></i> <br/>{{t "jobs.izvajanjeJoba"}}</div>')
     });
+
     /**
      * dialog, ki vpraša po parametrih izpisa,
      * opcijsko prijaže tiskalnike in potem povzetek
@@ -30,10 +33,12 @@ tplOpts) {
      */
     return Marionette.LayoutView.extend({
         template: tpl,
+        className: 'print-dialog',
         initialize: function (options) {
-        this.params = new Backbone.Model(options.params || {});
-        this.schema = options.schema || null;
-    },
+            this.model = this.model || new Backbone.Model(_.pick(options, 'html', 'pdf', 'sync'));
+            this.on('loading', this.onLoading, this);
+            this.params = options.params || null;
+        },
         onRender: function () {
 
             if (this.schema) {
@@ -52,14 +57,21 @@ tplOpts) {
                 'pdf': {type: 'Checkbox', title: 'Naredi Pdf', template: templ},
                 'html': {type: 'Checkbox', title: 'Naredi Html', template: templ},
             };
-                formDef.sync = {type: 'Checkbox', title: 'Izvedi takoj', template: templ, editorAttrs:{disabled: this.model.get('sync')!== true}};
+            formDef.sync = {type: 'Checkbox', title: 'Izvedi takoj', template: templ, editorAttrs: {disabled: this.model.get('sync') !== true}};
             var form = this.form = new Form({
                 template: tplOpts,
                 schema: formDef,
                 model: this.model
             });
 
+            _.bindAll(this, 'success', 'error');
+            this.listenTo(form, 'change', this.onFormChange);
             this.formR.show(form);
+
+            if (this.params) {
+                this.filterR.show(this.params);
+            }
+
         },
         triggers: {
             'click button.btnCancel': 'preklici',
@@ -79,39 +91,57 @@ tplOpts) {
         onOk: function () {
             this.form.commit();
             if (this.schema) {
-                this.filterForm.commit();
+                this.params.commit();
             }
             this.jobR.show(new LoadingView());
-            this.triggerMethod('akcija');
+            this.trigger('akcija');
         },
-        onAkcija: function () {
-            var printOptions = this.model.pick(['pdf', 'html', 'sync']);
+        modal: function () {
+            this.on('preklici', this.destroyModal, this);
 
-            this.runJob(this.params.attributes,printOptions);
+            var options = {
+                title: 'Natisni dokument',
+                showFooter: false,
+                enterTriggersOk: true,
+                animate: true,
+            };
+            options.modalOptions = {
+                className: 'modal modal-confirm'
+            };
+            options.content = this;
 
+            this.modal = new Modal(options);
+            this.modal.open();
+            
         },
-        runJob: function (filter,printOptions) {
-            var self = this;
-            var rpc = new $.JsonRpcClient({
-                ajaxUrl: this.model.get('uri')
-            });
-            filter.printOptions = printOptions;
-            rpc.call(this.model.get('method'),
-                filter,
-                function (job) {
-                    var jm = Radio.channel('jobs');
-                    var jobView = jm.request('new:job:view', job, !printOptions.sync);
-                    self.showJob(jobView);
-                    self.ui.btnOk.hide();
-                    self.formR.empty();
-                    self.filterR.empty();
-                },
-                function (error) {
-                    self.jobR.empty();
-                    Radio.channel('error').command('flash', error);
-                });
-
+        destroyModal: function () {
+            this.destroy();
+            this.modal.close();
+        },
+        onLoading: function () {
+            this.jobR.show(new LoadingView());
         },
 
+        /**
+         * se uporabi kot callback v success pri jsonrpc klicu printa
+         * @param array job
+         */
+        success: function (job) {
+            var jobs = Radio.channel('jobs');
+            //this.$('.btnOk').hide();
+            this.formR.empty();
+            this.filterR.empty();
+            var jobView = jobs.request('new:job:view',job, !this.model.get('sync'));
+            this.jobR.show(jobView);
+            this.trigger('show:job', jobView);
+        },
+        /**
+         * se uporabi kot callback za error pr jsonroc klicu printa
+         * @param resp
+         */
+        error: function (resp) {
+            this.jobR.empty();
+            Radio.channel('error').command('flash', resp);
+        }
     });
 });
