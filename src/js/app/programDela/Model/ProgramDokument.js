@@ -3,10 +3,9 @@ define([
     'app/Dokument/Model/Dokument',
     'underscore'
 ], function (
-        baseUrl,
-        Dokument,
-        _
-        ) {
+    baseUrl,
+    Dokument,
+    _) {
 
     var DrugiVirModel = Dokument.Postavka.extend({
         urlRoot: baseUrl + '/rest/drugiVir'
@@ -95,19 +94,18 @@ define([
             this.set('drugiViriVsota', viriVsota);
 
             var koproVsota = 0;
-            var stevec = 0;
             kopro.each(function (produkcija) {
-                if (stevec !== 0) {
-                    koproVsota += produkcija.attributes.delez;
-                }
-                stevec++;
+                koproVsota += produkcija.attributes.delez;
             });
 
             var nasD = this.getVrednost('nasDelez');
-
+            var celVred;
             var lastSred = nasD - (javni + zap + viriVsota + vlozekGostitelja);
-            var celVred = nasD + koproVsota;
-
+            if (koproVsota > 0) {
+                celVred = koproVsota;
+            } else {
+                celVred = nasD;
+            }
             var vredGostSZ = this.getVrednost('celotnaVrednostGostovSZ');
 
             var vredMat = celVred - vredGostSZ;
@@ -324,7 +322,6 @@ define([
         }
     });
 
-
     var GostujocaModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programGostujoca',
         defaults: {
@@ -344,7 +341,6 @@ define([
         url: baseUrl + '/rest/programGostujoca',
         index: 'sort'
     });
-
 
     var IzjemniModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programIzjemni',
@@ -366,7 +362,6 @@ define([
         index: 'sort'
     });
 
-
     var PonovitevPremiereModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programPonovitevPremiere',
         defaults: {
@@ -386,7 +381,6 @@ define([
         url: baseUrl + '/rest/programPonovitevPremiere',
         index: 'sort'
     });
-
 
     var PonovitevPrejsnjeModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programPonovitevPrejsnjih',
@@ -408,7 +402,6 @@ define([
         index: 'sort'
     });
 
-
     var PremieraModel = PremieraPostavka.extend({
         urlRoot: baseUrl + '/rest/programPremiera',
         defaults: {
@@ -428,7 +421,6 @@ define([
         url: baseUrl + '/rest/programPremiera',
         index: 'sort'
     });
-
 
     var GostovanjeModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programGostovanje',
@@ -450,7 +442,6 @@ define([
         index: 'sort'
     });
 
-
     var FestivalModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/programFestival',
         defaults: {
@@ -470,7 +461,6 @@ define([
         url: baseUrl + '/rest/programFestival',
         index: 'sort'
     });
-
 
     var RaznoModel = RaznoPostavka.extend({
         urlRoot: baseUrl + '/rest/programRazno',
@@ -498,7 +488,6 @@ define([
         return vrednost ? vrednost : 0;
     };
 
-
     var PostavkaCDvaModel = EnotaProgramaPostavka.extend({
         urlRoot: baseUrl + '/rest/postavkacdve',
         getVrednost: function (spremenljivka, contex) {
@@ -520,7 +509,7 @@ define([
             var vrOstalo = getVr('vrOstalo', this);
 
             var skupaj = vrPremiera + vrPonovitvePremier + vrPonovitvePrejsnjih +
-                    vrGostovanjaZamejstvo + vrFestivali + vrGostovanjaInt + vrOstalo;
+                vrGostovanjaZamejstvo + vrFestivali + vrGostovanjaInt + vrOstalo;
             this.set('skupaj', skupaj);
         }
     });
@@ -595,7 +584,7 @@ define([
                 case 'postavkeC2':
                     postavka = new PostavkaCDvaModel({
                         programDela: this.id,
-                        dokument: this.id                        
+                        dokument: this.id
                     });
                     postavka.programDela = this;
                     break;
@@ -677,11 +666,11 @@ define([
             this.set('gostujoceSredstva', gostujoceSredstva);
 
             this.set('sredstvaSkupajSK1',
-                    premiereSredstva +
-                    ponovitvePremierSredstva +
-                    ponovitvePrejsnjihSredstva +
-                    gostujoceSredstva
-                    );
+                premiereSredstva +
+                ponovitvePremierSredstva +
+                ponovitvePrejsnjihSredstva +
+                gostujoceSredstva
+            );
 
             //Programski sklop dva
             //število enot
@@ -731,11 +720,11 @@ define([
             this.set('izjemniSredstva', izjemniSredstva);
 
             this.set('sredstvaSkupajSK2',
-                    gostovanjaSredstva +
-                    festivaliSredstva +
-                    raznoSredstva +
-                    izjemniSredstva
-                    );
+                gostovanjaSredstva +
+                festivaliSredstva +
+                raznoSredstva +
+                izjemniSredstva
+            );
 
             //skupaj programski sklop ena in programski sklop dva
             var stEnotSkupaj = stEnotSK1 + stEnotSK2;
@@ -780,7 +769,6 @@ define([
             var stObiskPremKopr = this.getVrednost('stObiskPremKopr');
 
             this.set('stObiskPremKopr', stObiskPonPremKopr + stObiskPremKopr);
-
 
             var povprecje = (stObiskPonPrem + stObiskPrem) / (stIzvPonPrem + stIzvPrem);
             povprecje = povprecje ? povprecje : 0;
