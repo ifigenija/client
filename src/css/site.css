@@ -76,9 +76,6 @@ select.slim-select {
   display: inline-block;
   max-height: 31px;
 }
-.lookup-label:hover {
-  max-height: none;
-}
 .lookup-grid {
   position: relative;
   display: block;
@@ -408,8 +405,11 @@ span.stevilka-na-veliko {
   margin-left: 5px;
   max-height: 31px;
 }
-.alterseznam {
+.alter-seznam {
   margin-top: 10px;
+}
+.alter-select-oseba {
+  padding: 15px 15px 0 0;
 }
 .alter-listitem.media {
   overflow: visible;

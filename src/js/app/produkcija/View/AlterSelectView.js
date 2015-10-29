@@ -120,7 +120,7 @@ define([
      * @type @exp;Marionette@pro;LayoutView@call;extend
      */
     var AlterSelectView = Marionette.LayoutView.extend({
-        className: 'alternacija-select',
+        className: 'alter-select-oseba',
         template: tpl,
         regions: {
             izborR: '.polje-z-gumbom .izbor',
@@ -144,18 +144,28 @@ define([
         sch = {
             type: 'Toone',
             targetEntity: this.options.lookup,
-            editorAttrs: {class: 'form-control relation-select'},
+            editorAttrs: {class: 'form-control'},
             help: i18next.t('funkcija.d.alternacije'),
             title: i18next.t('funkcija.alternacije'),
             name: 'id'
         };
 
-        this.formIzberi = new Form({
+        var  I = Form.extend({
             template: Handlebars.compile('<div data-editors="id"></div>'),
             schema: {
                 id: sch
+            },
+            events: {
+                'submit': "prevent",
+                'keypress': "keypress"
+            },
+            prevent: function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
             }
         });
+        this.formIzberi = new I();
 
         this.formIzberi.on('dodaj:osebo', this.dodaj, this);
         this.formIzberi.on('id:change', this.dodaj, this);

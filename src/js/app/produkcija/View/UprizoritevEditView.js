@@ -190,7 +190,17 @@ define([
 
         if (this.model.get('id')) {
             var self = this;
-            var id = editor.getValue().id;
+
+            var id;
+            var e = editor.getValue();
+            if (e) {
+                if (e.id ) {
+                    id = e.id;
+                }             else {
+                    id = e;
+                }
+            }
+
             var model = new BesediloModel.Model({id: id});
 
             model.fetch({
