@@ -3,9 +3,9 @@ define([
     'app/Dokument/Model/Dokument',
     'underscore'
 ], function (
-    baseUrl,
-    Dokument,
-    _) {
+        baseUrl,
+        Dokument,
+        _) {
 
     var DrugiVirModel = Dokument.Postavka.extend({
         urlRoot: baseUrl + '/rest/drugiVir'
@@ -509,7 +509,7 @@ define([
             var vrOstalo = getVr('vrOstalo', this);
 
             var skupaj = vrPremiera + vrPonovitvePremier + vrPonovitvePrejsnjih +
-                vrGostovanjaZamejstvo + vrFestivali + vrGostovanjaInt + vrOstalo;
+                    vrGostovanjaZamejstvo + vrFestivali + vrGostovanjaInt + vrOstalo;
             this.set('skupaj', skupaj);
         }
     });
@@ -646,6 +646,15 @@ define([
             var dmlsViriSK1 = sredDJPrem + sredDJPonPrem + sredDJPonPrej + sredDJGostujo;
             this.set('dmlsViriSK1', dmlsViriSK1);
 
+            // lastna sredstva
+            var sredLastPrem = this.getVrednost('sredstvaLastnaPrem');
+            var sredLastPonPrem = this.getVrednost('sredstvaLastnaPonPrem');
+            var sredLastPonPrej = this.getVrednost('sredstvaLastnaPonPrej');
+            var sredLastGostujo = this.getVrednost('sredstvaLastnaGostujo');
+
+            var lastnaSK1 = sredLastPrem + sredLastPonPrem + sredLastPonPrej + sredLastGostujo;
+            this.set('lastnaSK1', lastnaSK1);
+
             // drugi viri
             var sredDVPrem = this.getVrednost('sredstvaDrugiViriPrem');
             var sredDVPonPrem = this.getVrednost('sredstvaDrugiViriPonPrem');
@@ -655,10 +664,19 @@ define([
             var drugiViriSK1 = sredDVPrem + sredDVPonPrem + sredDVPonPrej + sredDVGostujo;
             this.set('drugiViriSK1', drugiViriSK1);
 
-            var premiereSredstva = sredZapPrem + sredDJPrem + sredDVPrem;
-            var ponovitvePremierSredstva = sredZapPonPrem + sredDJPonPrem + sredDVPonPrem;
-            var ponovitvePrejsnjihSredstva = sreZapPonPrej + sredDJPonPrej + sredDVPonPrej;
-            var gostujoceSredstva = sredZapGostujo + sredDJGostujo + sredDVGostujo;
+            // vložek gostiteljev
+            var sredVlGosPrem = this.getVrednost('sredstvaVlozekGostiteljaPrem');
+            var sredVlGosPonPrem = this.getVrednost('sredstvaVlozekGostiteljaPonPrem');
+            var sredVlGosPonPrej = this.getVrednost('sredstvaVlozekGostiteljaPonPrej');
+            var sredVlGosGostujo = this.getVrednost('sredstvaVlozekGostiteljaGostujo');
+
+            var vlozekGostSK1 = sredVlGosPrem + sredVlGosPonPrem + sredVlGosPonPrej + sredVlGosGostujo;
+            this.set('vlozekGostSK1', vlozekGostSK1);
+
+            var premiereSredstva = sredZapPrem + sredDJPrem + sredLastPrem + sredDVPrem + sredVlGosPrem;
+            var ponovitvePremierSredstva = sredZapPonPrem + sredDJPonPrem + sredLastPonPrem + sredDVPonPrem + sredVlGosPonPrem;
+            var ponovitvePrejsnjihSredstva = sreZapPonPrej + sredDJPonPrej + sredLastPonPrej + sredDVPonPrej + sredVlGosPonPrej;
+            var gostujoceSredstva = sredZapGostujo + sredDJGostujo + sredLastGostujo + sredDVGostujo + sredVlGosGostujo;
 
             this.set('premiereSredstva', premiereSredstva);
             this.set('ponovitvePremierSredstva', ponovitvePremierSredstva);
@@ -666,11 +684,11 @@ define([
             this.set('gostujoceSredstva', gostujoceSredstva);
 
             this.set('sredstvaSkupajSK1',
-                premiereSredstva +
-                ponovitvePremierSredstva +
-                ponovitvePrejsnjihSredstva +
-                gostujoceSredstva
-            );
+                    premiereSredstva +
+                    ponovitvePremierSredstva +
+                    ponovitvePrejsnjihSredstva +
+                    gostujoceSredstva
+                    );
 
             //Programski sklop dva
             //število enot
@@ -700,7 +718,17 @@ define([
             var dmlsViriSK2 = sredDJInt + sredDJFest + sredDJRazno + sredDJIzjem;
             this.set('dmlsViriSK2', dmlsViriSK2);
 
-            // drugi viri
+
+            // lastna sredstva
+            var sredLastInt = this.getVrednost('sredstvaLastnaInt');
+            var sredLastFest = this.getVrednost('sredstvaLastnaFest');
+            var sredLastRazno = this.getVrednost('sredstvaLastnaRazno');
+            var sredLastIzjem = this.getVrednost('sredstvaLastnaIzjem');
+
+            var lastnaSK2 = sredLastInt + sredLastFest + sredLastRazno + sredLastIzjem;
+            this.set('lastnaSK2', lastnaSK2);
+
+            // drugi javni viri
             var sredDVInt = this.getVrednost('sredstvaDrugiViriInt');
             var sredDVFest = this.getVrednost('sredstvaDrugiViriFest');
             var sredDVRazno = this.getVrednost('sredstvaDrugiViriRazno');
@@ -709,10 +737,19 @@ define([
             var drugiViriSK2 = sredDVInt + sredDVFest + sredDVRazno + sredDVIzjem;
             this.set('drugiViriSK2', drugiViriSK2);
 
-            var gostovanjaSredstva = sredZapInt + sredDJInt + sredDVInt;
-            var festivaliSredstva = sredZapFest + sredDJFest + sredDVFest;
-            var raznoSredstva = sredZapRazno + sredDJRazno + sredDVRazno;
-            var izjemniSredstva = sredZapIzjem + sredDJIzjem + sredDVIzjem;
+            // vložek gostiteljev
+            var sredVlGosInt = this.getVrednost('sredstvaVlozekGostiteljaInt');
+            var sredVlGosFest = this.getVrednost('sredstvaVlozekGostiteljaFest');
+            var sredVlGosRazno = this.getVrednost('sredstvaVlozekGostiteljaRazno');
+            var sredVlGosIzjem = this.getVrednost('sredstvaVlozekGostiteljaIzjem');
+
+            var vlozekGostSK2 = sredVlGosInt + sredVlGosFest + sredVlGosRazno + sredVlGosIzjem;
+            this.set('vlozekGostSK2', vlozekGostSK2);
+
+            var gostovanjaSredstva = sredZapInt + sredDJInt + sredLastInt + sredDVInt + sredVlGosInt;
+            var festivaliSredstva = sredZapFest + sredDJFest + sredLastFest + sredDVFest + sredVlGosFest;
+            var raznoSredstva = sredZapRazno + sredDJRazno + sredLastRazno + sredDVRazno + sredVlGosRazno;
+            var izjemniSredstva = sredZapIzjem + sredDJIzjem + sredLastIzjem + sredDVIzjem + sredVlGosIzjem;
 
             this.set('gostovanjaSredstva', gostovanjaSredstva);
             this.set('festivaliSredstva', festivaliSredstva);
@@ -720,11 +757,11 @@ define([
             this.set('izjemniSredstva', izjemniSredstva);
 
             this.set('sredstvaSkupajSK2',
-                gostovanjaSredstva +
-                festivaliSredstva +
-                raznoSredstva +
-                izjemniSredstva
-            );
+                    gostovanjaSredstva +
+                    festivaliSredstva +
+                    raznoSredstva +
+                    izjemniSredstva
+                    );
 
             //skupaj programski sklop ena in programski sklop dva
             var stEnotSkupaj = stEnotSK1 + stEnotSK2;
