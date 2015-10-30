@@ -51,7 +51,9 @@
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.stEnot"}}</th>
                 <th class="col-sm-2 col-numbers">{{t "kazalnik.virMK"}}</th>
                 <th class="col-sm-3 col-numbers">{{t "kazalnik.virDMLS"}}</th>
+                <th class="col-sm-1 col-numbers">{{t "kazalnik.virLastna"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.drugiVir"}}</th>
+                <th class="col-sm-1 col-numbers">{{t "kazalnik.vlozGostit"}}</th>
                 <th class="col-sm-2 col-numbers">{{t "kazalnik.skupaj"}}</th>
             </tr>
         </thead>
@@ -61,7 +63,9 @@
                 <td class="col-numbers">{{u "formatNumber" stPremier 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaZaprosenoPrem}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiJavniPrem}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaLastnaPrem}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiViriPrem}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaVlozekGostiteljaPrem}}</td>
                 <td class="col-numbers">{{u "formatNumber" premiereSredstva}}</td>
             </tr>
             <tr>
@@ -69,7 +73,9 @@
                 <td class="col-numbers">{{u "formatNumber" stPonPrem 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaZaprosenoPonPrem}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiJavniPonPrem}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaLastnaPonPrem}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiViriPonPrem}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaVlozekGostiteljaPonPrem}}</td>
                 <td class="col-numbers">{{u "formatNumber" ponovitvePremierSredstva}}</td>
             </tr>
             <tr>
@@ -77,7 +83,9 @@
                 <td class="col-numbers">{{u "formatNumber" stPonPrej 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaZaprosenoPonPrej}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiJavniPonPrej}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaLastnaPonPrej}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiViriPonPrej}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaVlozekGostiteljaPonPrej}}</td>
                 <td class="col-numbers">{{u "formatNumber" ponovitvePrejsnjihSredstva}}</td>
             </tr>
             <tr>
@@ -85,7 +93,9 @@
                 <td class="col-numbers">{{u "formatNumber" stGostujo 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaZaprosenoGostujo}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiJavniGostujo}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaLastnaGostujo}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiViriGostujo}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaVlozekGostiteljaGostujo}}</td>
                 <td class="col-numbers">{{u "formatNumber" gostujoceSredstva}}</td>
             </tr>
             <tr>
@@ -93,7 +103,9 @@
                 <td class="col-numbers">{{u "formatNumber" stEnotSK1 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" mkViriSK1}}</td>
                 <td class="col-numbers">{{u "formatNumber" dmlsViriSK1}}</td>
+                <td class="col-numbers">{{u "formatNumber" lastnaSK1}}</td>
                 <td class="col-numbers">{{u "formatNumber" drugiViriSK1}}</td>
+                <td class="col-numbers">{{u "formatNumber" vlozekGostSK1}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaSkupajSK1}}</td>
             </tr>
         </tbody>
@@ -107,7 +119,9 @@
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.stEnot"}}</th>
                 <th class="col-sm-2 col-numbers">{{t "kazalnik.virMK"}}</th>
                 <th class="col-sm-3 col-numbers">{{t "kazalnik.virDMLS"}}</th>
+                <th class="col-sm-1 col-numbers">{{t "kazalnik.virLastna"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.drugiVir"}}</th>
+                <th class="col-sm-1 col-numbers">{{t "kazalnik.vlozGostit"}}</th>
                 <th class="col-sm-2 col-numbers">{{t "kazalnik.skupaj"}}</th>
             </tr>
         </thead>
@@ -117,7 +131,9 @@
                 <td class="col-numbers">{{u "formatNumber" stInt 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaZaprosenoInt}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiJavniInt}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaLastnaInt}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiViriInt}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaVlozekGostiteljaInt}}</td>
                 <td class="col-numbers">{{u "formatNumber" gostovanjaSredstva}}</td>
             </tr>
             <tr>
@@ -125,7 +141,9 @@
                 <td class="col-numbers">{{u "formatNumber" stFest 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaZaprosenoFest}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiJavniFest}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaLastnaFest}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiViriFest}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaVlozekGostiteljaFest}}</td>
                 <td class="col-numbers">{{u "formatNumber" festivaliSredstva}}</td>
             </tr>
             <tr>
@@ -133,7 +151,9 @@
                 <td class="col-numbers">{{u "formatNumber" stRazno 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaZaprosenoRazno}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiJavniRazno}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaLastnaRazno}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiViriRazno}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaVlozekGostiteljaRazno}}</td>
                 <td class="col-numbers">{{u "formatNumber" raznoSredstva}}</td>
             </tr>
             <tr>
@@ -141,7 +161,9 @@
                 <td class="col-numbers">{{u "formatNumber" stIzjem 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaZaprosenoIzjem}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiJavniIzjem}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaLastnaIzjem}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaDrugiViriIzjem}}</td>
+                <td class="col-numbers">{{u "formatNumber" sredstvaVlozekGostiteljaIzjem}}</td>
                 <td class="col-numbers">{{u "formatNumber" izjemniSredstva}}</td>
             </tr>
             <tr>
@@ -149,7 +171,9 @@
                 <td class="col-numbers">{{u "formatNumber" stEnotSK2 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" mkViriSK2}}</td>
                 <td class="col-numbers">{{u "formatNumber" dmlsViriSK2}}</td>
+                <td class="col-numbers">{{u "formatNumber" lastnaSK2}}</td>
                 <td class="col-numbers">{{u "formatNumber" drugiViriSK2}}</td>
+                <td class="col-numbers">{{u "formatNumber" vlozekGostSK2}}</td>
                 <td class="col-numbers">{{u "formatNumber" sredstvaSkupajSK2}}</td>
             </tr>
         </tbody>
@@ -162,7 +186,9 @@
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.stEnot"}}</th>
                 <th class="col-sm-2 col-numbers">{{t "kazalnik.virMK"}}</th>
                 <th class="col-sm-3 col-numbers">{{t "kazalnik.virDMLS"}}</th>
+                <th class="col-sm-1 col-numbers">{{t "kazalnik.virLastna"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.drugiVir"}}</th>
+                <th class="col-sm-1 col-numbers">{{t "kazalnik.vlozGostit"}}</th>
                 <th class="col-sm-2 col-numbers">{{t "kazalnik.skupaj"}}</th>
             </tr>
         </thead>
@@ -172,7 +198,9 @@
                 <td class="col-numbers">{{u "formatNumber" stEnotSkupaj 0}}</td>
                 <td class="col-numbers">{{u "formatNumber" mkViriSkupaj}}</td>
                 <td class="col-numbers">{{u "formatNumber" dmlsViriSkupaj}}</td>
+                <td class="col-numbers">{{u "formatNumber" lastnaSkupaj}}</td>
                 <td class="col-numbers">{{u "formatNumber" drugiViriSkupaj}}</td>
+                <td class="col-numbers">{{u "formatNumber" vlozekGostSkupaj}}</td>
                 <td class="col-numbers">{{u "formatNumber" skSkupaj}}</td>
             </tr>
         </tbody>

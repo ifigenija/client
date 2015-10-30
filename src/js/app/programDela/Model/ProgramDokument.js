@@ -768,11 +768,15 @@ define([
             var mkViriSkupaj = mkViriSK1 + mkViriSK2;
             var dmlsViriSkupaj = dmlsViriSK1 + dmlsViriSK2;
             var drugiViriSkupaj = drugiViriSK1 + drugiViriSK2;
+            var lastnaSkupaj = lastnaSK1 + lastnaSK2;
+            var vlozekGostSkupaj = vlozekGostSK1 + vlozekGostSK2;
 
             this.set('stEnotSkupaj', stEnotSkupaj);
             this.set('mkViriSkupaj', mkViriSkupaj);
             this.set('dmlsViriSkupaj', dmlsViriSkupaj);
             this.set('drugiViriSkupaj', drugiViriSkupaj);
+            this.set('lastnaSkupaj', lastnaSkupaj);
+            this.set('vlozekGostSkupaj', vlozekGostSkupaj);
 
             this.set('skSkupaj', mkViriSkupaj + dmlsViriSkupaj + drugiViriSkupaj);
 
