@@ -774,11 +774,11 @@ define([
             this.set('stEnotSkupaj', stEnotSkupaj);
             this.set('mkViriSkupaj', mkViriSkupaj);
             this.set('dmlsViriSkupaj', dmlsViriSkupaj);
-            this.set('drugiViriSkupaj', drugiViriSkupaj);
             this.set('lastnaSkupaj', lastnaSkupaj);
+            this.set('drugiViriSkupaj', drugiViriSkupaj);
             this.set('vlozekGostSkupaj', vlozekGostSkupaj);
 
-            this.set('skSkupaj', mkViriSkupaj + dmlsViriSkupaj + drugiViriSkupaj);
+            this.set('skSkupaj', mkViriSkupaj + dmlsViriSkupaj + lastnaSkupaj + drugiViriSkupaj + vlozekGostSkupaj);
 
             //kazalniki priloga 2
             this.set('stIzvPrem', stIzvPrem + stIzvPonPrem);

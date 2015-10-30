@@ -50,7 +50,7 @@
                 <th class="col-sm-3">{{t "kazalnik.sklop1"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.stEnot"}}</th>
                 <th class="col-sm-2 col-numbers">{{t "kazalnik.virMK"}}</th>
-                <th class="col-sm-3 col-numbers">{{t "kazalnik.virDMLS"}}</th>
+                <th class="col-sm-2 col-numbers">{{t "kazalnik.virDMLS"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.virLastna"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.drugiVir"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.vlozGostit"}}</th>
@@ -118,7 +118,7 @@
                 <th class="col-sm-3">{{t "kazalnik.sklop2"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.stEnot"}}</th>
                 <th class="col-sm-2 col-numbers">{{t "kazalnik.virMK"}}</th>
-                <th class="col-sm-3 col-numbers">{{t "kazalnik.virDMLS"}}</th>
+                <th class="col-sm-2 col-numbers">{{t "kazalnik.virDMLS"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.virLastna"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.drugiVir"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.vlozGostit"}}</th>
@@ -185,7 +185,7 @@
                 <th class="col-sm-3"></th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.stEnot"}}</th>
                 <th class="col-sm-2 col-numbers">{{t "kazalnik.virMK"}}</th>
-                <th class="col-sm-3 col-numbers">{{t "kazalnik.virDMLS"}}</th>
+                <th class="col-sm-2 col-numbers">{{t "kazalnik.virDMLS"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.virLastna"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.drugiVir"}}</th>
                 <th class="col-sm-1 col-numbers">{{t "kazalnik.vlozGostit"}}</th>
