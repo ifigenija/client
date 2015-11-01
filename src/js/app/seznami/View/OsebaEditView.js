@@ -122,6 +122,41 @@ define([
         });
     };
 
+    OsebaEditView.prototype.onShrani = function (options) {
+        DokumentView.prototype.onShrani.apply(this, arguments);
+    };
+
+    /**
+     * posodobimo url strani in dodamo nov model
+     */
+    OsebaEditView.prototype.posodobiUrlNaslovBrezRender = function () {
+        // zamenjamo zadnji del url z id (#model/id -> #model)
+        var url = Backbone.history.location.hash;
+        var newUrl = url.replace(/\/([\w-]+)$/g, '');
+        Radio.channel('layout').command('replaceUrl', newUrl);
+        Radio.channel('layout').command('setTitle', this.getNaslov());
+        this.trigger('dodaj');
+    };
+    
+    /**
+     * zamenjamo id z drugim id ali pa ga odstranimo
+     * @returns {undefined}
+     */
+    OsebaEditView.prototype.posodobiUrlNaslov = function () {
+        var fragment = Backbone.history.getFragment();
+
+        fragment = fragment.replace(/\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/, '');
+
+        var newUrl = fragment;
+        if (this.model) {
+            newUrl = fragment + '/' + this.model.get('id');
+        }
+
+        Radio.channel('layout').command('replaceUrl', newUrl);
+        Radio.channel('layout').command('setTitle', this.getNaslov());
+        this.render();
+    };
+
     OsebaEditView.prototype.renderPodobneOsebe = function (osebe, options) {
         var podOsebeView = new PodobneOsebeView({
             osebe: osebe,
@@ -146,11 +181,11 @@ define([
             }
             var butS = tb.getButton('doc-shrani-dodaj');
 
-                if (butS) {
-                    butS.set({
-                        disabled: false
-                    });
-                }
+            if (butS) {
+                butS.set({
+                    disabled: false
+                });
+            }
         }, this);
 
         this.podobneOsebeR.show(podOsebeView);
@@ -174,7 +209,7 @@ define([
          * @param opcije options
          * @returns {undefined}
          */
-        var success = function (osebe, options) {
+        var success = function (osebe) {
             if (osebe.length === 0) {
                 self.trigger('shraniModel', options);
             } else {
@@ -209,22 +244,6 @@ define([
         rpc.call('podobneOsebe', {
             'oseba': this.model
         }, success, error);
-    };
-
-    OsebaEditView.prototype.onShrani = function (options) {
-        DokumentView.prototype.onShrani.apply(this, arguments);
-    };
-
-    /**
-     * posodobimo url strani in dodamo nov model
-     */
-    OsebaEditView.prototype.posodobiUrlNaslovBrezRender = function () {
-        // zamenjamo zadnji del url z id (#model/dodaj -> #model/id)
-        var url = Backbone.history.location.hash;
-        var newUrl = url.replace(/([\w-]+)$/g, this.model.id);
-        Radio.channel('layout').command('replaceUrl', newUrl);
-        Radio.channel('layout').command('setTitle', this.getNaslov());
-        this.trigger('dodaj');
     };
 
     /**
@@ -560,7 +579,7 @@ define([
                 href: url
             });
         };
-        
+
         var EmptyView = Marionette.ItemView.extend({
             template: Handlebars.compile('<li class="prazno-pogodba">Oseba nima funkcije v nobeni uprizoritvi.</li> ')
         });
@@ -577,7 +596,7 @@ define([
                 href: url
             });
         };
-        
+
         var EmptyView = Marionette.ItemView.extend({
             template: Handlebars.compile('<li class="prazno-pogodba">Oseba nima sklenjene nobene pogodbe.</li> ')
         });
@@ -593,7 +612,7 @@ define([
                 href: url
             });
         };
-        
+
         var EmptyView = Marionette.ItemView.extend({
             template: Handlebars.compile('<li class="prazno-zaposlitev">Oseba ni zaposlena v tem javnem zavodu.</li> ')
         });
@@ -609,12 +628,12 @@ define([
                 href: url
             });
         };
-        
+
         var EmptyView = Marionette.ItemView.extend({
             template: Handlebars.compile('<li class="prazno-kontaktna">Oseba ni kontaktna oseba pri nobenem poslovnem partnerju.</li> ')
         });
 
-        var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', serializeData, kontaktnaRelTpl,EmptyView);
+        var rv = this.getRelationView('kontaktneOsebe', 'kontaktnaOseba', serializeData, kontaktnaRelTpl, EmptyView);
         this.kontaktneOsebeR.show(rv);
     };
 
@@ -625,7 +644,7 @@ define([
                 href: url
             });
         };
-        
+
         var EmptyView = Marionette.ItemView.extend({
             template: Handlebars.compile('<li class="prazno-avtor">Oseba ni avtor nobenega besedila.</li> ')
         });

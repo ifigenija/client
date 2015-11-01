@@ -16,6 +16,8 @@
                 <div class="col-sm-12">
                     <div class="region-podobne-osebe"></div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="region-form"></div>
                 </div>
