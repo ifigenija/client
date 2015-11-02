@@ -31,8 +31,8 @@
                 </legend>
                 <div class="vnosno-polje">
                     <div class="naslov">
-                        <label class="">{{t "avtorBesedila.oseba"}}</label>
-                        <div class="help-block hidden">{{t "avtorBesedila.d.oseba"}}</div>
+                        <label class="">{{t "alternacija.pogodba"}}</label>
+                        <div class="help-block hidden">{{t "alternacija.d.pogodba"}}</div>
                         <div class="error-block"></div>
                     </div>
                     <div class="polje-z-gumbom">

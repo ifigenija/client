@@ -131,5 +131,14 @@ define([
         this.onUredi(model);
     };
 
+    PopaView.prototype.onPreklici = function () {
+        var self = this;
+        this.collection.fetch({
+            success: function () {
+                SeznamView.prototype.onPreklici.apply(self, arguments);
+            }
+        });
+    };
+
     return PopaView;
 });

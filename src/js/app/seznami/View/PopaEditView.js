@@ -133,12 +133,30 @@ define([
      * @returns 
      */
     PopaEditView.prototype.posodobiUrlNaslovBrezRender = function () {
-        // zamenjamo zadnji del url z id (#model/dodaj -> #model/id)
+        // zamenjamo zadnji del url z id (#model/id -> #model)
         var url = Backbone.history.location.hash;
-        var newUrl = url.replace(/([\w-]+)$/g, this.model.id);
+        var newUrl = url.replace(/\/([\w-]+)$/g, '');
         Radio.channel('layout').command('replaceUrl', newUrl);
         Radio.channel('layout').command('setTitle', this.getNaslov());
         this.trigger('dodaj');
+    };
+    /**
+     * zamenjamo id z drugim id ali pa ga odstranimo
+     * @returns {undefined}
+     */
+    PopaEditView.prototype.posodobiUrlNaslov = function () {
+        var fragment = Backbone.history.getFragment();
+
+        fragment = fragment.replace(/\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/, '');
+
+        var newUrl = fragment;
+        if (this.model) {
+            newUrl = fragment + '/' + this.model.get('id');
+        }
+
+        Radio.channel('layout').command('replaceUrl', newUrl);
+        Radio.channel('layout').command('setTitle', this.getNaslov());
+        this.render();
     };
     /**
      * namenjeno vodenju gumbov shrani in (shrani in dodaj)
@@ -149,7 +167,7 @@ define([
         var butS = tb.getButton('doc-shrani');
         var butSD = tb.getButton('doc-shrani-dodaj');
         var butP = tb.getButton('doc-preklici');
-        
+
         if (butS && butS.get('disabled')) {
             butS.set({
                 disabled: false
@@ -161,7 +179,7 @@ define([
                 disabled: false
             });
         }
-        
+
         if (butS && !butS.get('disabled')) {
             butP.set({
                 label: i18next.t('std.preklici')
@@ -203,11 +221,13 @@ define([
         var self = this;
 
         kup.save({
-            popa: this.model.get('id'),
-            status: this.model.get('stakli')
+            popa: self.model.get('id'),
+            status: self.model.get('stakli')
         }, {
             success: function (model) {
                 self.toolbarView.hideButtons(['doc-kupec']);
+                self.model.set('kupec', kup.get('id'));
+                self.model.save({});
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
@@ -226,11 +246,13 @@ define([
         var self = this;
 
         kup.save({
-            popa: this.model.get('id'),
-            status: this.model.get('stakli')
+            popa: self.model.get('id'),
+            status: self.model.get('stakli')
         }, {
             success: function (model) {
                 self.toolbarView.hideButtons(['doc-producent']);
+                self.model.set('producent', kup.get('id'));
+                self.model.save({});
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
