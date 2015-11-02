@@ -49,12 +49,9 @@ define([
         onRender: function () {
             this.renderSeznam();
         },
-        initialize: function (options) {
-            this.formTitle = options.formTitle;
-        },
         serializeData: function () {
             return  {
-                formTitle: this.formTitle
+                formTitle: i18next.t("std.opozorilo.podobneOsebe")
             };
         }
     });

@@ -159,8 +159,7 @@ define([
 
     OsebaEditView.prototype.renderPodobneOsebe = function (osebe, options) {
         var podOsebeView = new PodobneOsebeView({
-            osebe: osebe,
-            formTitle: i18next.t("std.opozorilo.podobneOsebe")
+            osebe: osebe
         });
 
         podOsebeView.once('shraniOsebo', function () {
