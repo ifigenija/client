@@ -1701,6 +1701,13 @@
             "objavljenZacetek": "Čas začetka predstave, kot je objavljen za publiko."
         }
     },
+    "dogodekSplosni": {
+        "title": "Splošni dogodki",
+        "dogodek": "Dogodek",
+        "d": {
+            "dogodek": ""
+        }
+    },
     "dogodek": {
         "title": "Dogodki",
         "allDay": "Celodnevni",
