@@ -104,6 +104,7 @@
     "std": {
         "brisi": "Briši",
         "uredi": "Uredi",
+        "potrdi": "Potrdi",
         "potrdiIzbris": "Ali res želite izbrisati podatek?",
         "izberi": "Izberi",
         "preklici": "Prekliči",
@@ -146,6 +147,7 @@
         "odstraniOrgEnota": "Odstrani organizacijsko enoto",
         "dodajOrgEnota": "Dodaj organizacijsko enoto",
         "vseenoShrani": "Vseeno shrani",
+        "uvoz": "Uvozi programske enote",
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
