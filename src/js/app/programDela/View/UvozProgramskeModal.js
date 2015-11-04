@@ -20,10 +20,7 @@ define([
         ) {
 
     /**
-     * options.model je model osebe
-     * options.editor predstavlja vnosno polje, ki se bo po kreiranju osebe zapolnlo
      * @param {type} options.model
-     * @param {type} options.editor
      * @returns {unresolved}
      */
     return function (options) {
@@ -50,9 +47,17 @@ define([
                 
             var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
             rpc.call('uvozi', {
-                'ids': ids
+                'programDelaId': options.programDelaId,
+                'srcIds': ids
             },
-            success,
+            function () {
+                Radio.channel('error').command('flash', {
+                    'code': '3000999',
+                    'message': 'Uvoz uspešen',
+                    'severity': 'success',
+                });
+                modal.close();
+            },
             Radio.channel('error').request('handler', 'xhr'));
         };
 

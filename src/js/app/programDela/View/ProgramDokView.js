@@ -890,7 +890,7 @@ define([
     ProgramDokView.prototype.onUvozi = function () {
         //render Uvozi programske enote programov dela
         var collection = new ProgramSeznamModel.Collection();
-        
+        var self = this;
         var columns = [
             {
                 cell: 'select-row',
@@ -910,7 +910,8 @@ define([
             success: function () {
                 var modal = UvozModal({
                     collection: collection,
-                    columns: columns
+                    columns: columns,
+                    programDelaId: self.model.get('id'),
                 });
             }
         });
