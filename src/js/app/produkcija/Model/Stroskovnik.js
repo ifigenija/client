@@ -27,7 +27,8 @@ define([
 
     var PogodbaCollection = Dokument.PostavkaCollection.extend({
         model: PogodbaModel,
-        url: baseUrl + '/rest/pogodba'
+        url: baseUrl + '/rest/pogodba',
+        mode: 'server'
     });
 
     var AlternacijaModel = Dokument.Postavka.extend({
@@ -36,7 +37,8 @@ define([
 
     var AlternacijaCollection = Dokument.PostavkaCollection.extend({
         model: AlternacijaModel,
-        url: baseUrl + '/rest/alternacija'
+        url: baseUrl + '/rest/alternacija',
+        mode: 'server'
     });
 
     var StrosekModel = Dokument.Postavka.extend({
@@ -45,7 +47,8 @@ define([
 
     var StrosekCollection = Dokument.PostavkaCollection.extend({
         model: StrosekModel,
-        url: baseUrl + '/rest/strosekUprizoritve'
+        url: baseUrl + '/rest/strosekUprizoritve',
+        mode: 'server'
     });
 
     var UprizoritevStrosekModel = Dokument.Model.extend({
