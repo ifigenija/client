@@ -217,11 +217,11 @@ define([
 
                 //Preverimo ali je vnosno polje z naslovom prazno, če je prazen prepišemo naslov in podnaslov iz besedila
                 //V primeru da je model nov se kljub temu prepiše naslov in podnaslov, neglede ali je prazen ali ne.
-                if ((!polja.naslov.editor.getValue() && naslov) || !self.model.get('id')) {
+                if (!polja.naslov.editor.getValue() && naslov) {
                     polja.naslov.setValue(naslov);
                     var podNaslov = model.get('podnaslov');
 
-                    if ((!polja.podnaslov.editor.getValue() && podNaslov) || !self.model.get('id')) {
+                    if (!polja.podnaslov.editor.getValue() && podNaslov) {
                         polja.podnaslov.setValue(podNaslov);
                     } else {
                         polja.podnaslov.setValue('');
