@@ -111,7 +111,7 @@ define([
             }
         }
     });
-    
+
     /**
      * namenjeno je boljšemu workflowu.
      * Shranemo obstoječ model in dodamo nov model 
@@ -149,7 +149,7 @@ define([
         var butS = tb.getButton('doc-shrani');
         var butSD = tb.getButton('doc-shrani-dodaj');
         var butP = tb.getButton('doc-preklici');
-        
+
         if (butS && butS.get('disabled')) {
             butS.set({
                 disabled: false
@@ -161,7 +161,7 @@ define([
                 disabled: false
             });
         }
-        
+
         if (butS && !butS.get('disabled')) {
             butP.set({
                 label: i18next.t('std.preklici')
@@ -170,7 +170,7 @@ define([
 
         this.triggerMethod('form:change', form);
     };
-    
+
     /**
      * Skrijemo tabe da se ne vidi črta pri vnašanju uprizoritve
      * obesimo besedilo change, da lahko izrisemo avtorje
@@ -188,34 +188,46 @@ define([
 
     UprizoritevEditView.prototype.besediloChange = function (form, editor) {
 
-        if (this.model.get('id')) {
-            var self = this;
+        var self = this;
 
-            var id;
-            var e = editor.getValue();
-            if (e) {
-                if (e.id ) {
-                    id = e.id;
-                }             else {
-                    id = e;
-                }
+        var id;
+        var e = editor.getValue();
+        if (e) {
+            if (e.id) {
+                id = e.id;
+            } else {
+                id = e;
             }
-
-            var model = new BesediloModel.Model({id: id});
-
-            model.fetch({
-                success: function () {
-                    var avtor = model.get('avtor');
-                    var izpis = "";
-                    if (avtor) {
-                        izpis = " " + model.get('avtor');
-                    }
-
-                    self.$('.avtorji').html(izpis);
-                },
-                error: Radio.channel('error').request('handler', 'xhr')
-            });
         }
+
+        var model = new BesediloModel.Model({id: id});
+
+        model.fetch({
+            success: function () {
+                var avtor = model.get('avtor');
+                var izpis = "";
+                if (avtor) {
+                    izpis = " " + model.get('avtor');
+                }
+
+                self.$('.avtorji').html(izpis);
+
+                var polja = self.form.fields;
+                var naslov = model.get('naslov');
+
+                //Preverimo ali je vnosno polje z naslovom prazno, če je prazen prepišemo naslov in podnaslov iz besedila
+                //V primeru da je model nov se kljub temu prepiše naslov in podnaslov, neglede ali je prazen ali ne.
+                if ((!polja.naslov.editor.getValue() && naslov) || !self.model.get('id')) {
+                    polja.naslov.setValue(naslov);
+                    var podNaslov = model.get('podNaslov');
+
+                    if (!polja.podnaslov.editor.getValue() && podNaslov) {
+                        polja.podnaslov.setValue(podNaslov);
+                    }
+                }
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
     };
 
     UprizoritevEditView.prototype.dodajBesedilo = function () {
