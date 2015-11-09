@@ -219,10 +219,12 @@ define([
                 //V primeru da je model nov se kljub temu prepiše naslov in podnaslov, neglede ali je prazen ali ne.
                 if ((!polja.naslov.editor.getValue() && naslov) || !self.model.get('id')) {
                     polja.naslov.setValue(naslov);
-                    var podNaslov = model.get('podNaslov');
+                    var podNaslov = model.get('podnaslov');
 
-                    if (!polja.podnaslov.editor.getValue() && podNaslov) {
+                    if ((!polja.podnaslov.editor.getValue() && podNaslov) || !self.model.get('id')) {
                         polja.podnaslov.setValue(podNaslov);
+                    } else {
+                        polja.podnaslov.setValue('');
                     }
                 }
             },
@@ -238,6 +240,7 @@ define([
             model: model,
             editor: editor,
             form: this.form,
+            trigger: 'besedilo:change',
             title: i18next.t('besedilo.nova')
         });
     };

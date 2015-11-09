@@ -267,7 +267,7 @@ define([
             });
         }
 
-        if (butP && !butP.get('disabled')) {
+        if (butS && !butS.get('disabled')) {
             butP.set({
                 label: i18next.t('std.preklici')
             });
