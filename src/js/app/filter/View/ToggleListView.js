@@ -31,7 +31,7 @@ define([
         Coll
         ) {
     
-    var ToggleListView = new Marionette.LayoutView.extend({});
+    var ToggleListView = Marionette.LayoutView.extend({});
     
     /**
      * Poskrbeli bomo da lahko nastavljamo različne viewje kot optione

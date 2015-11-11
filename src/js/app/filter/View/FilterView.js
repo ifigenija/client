@@ -37,7 +37,7 @@ define([
         tpl
         ) {
     
-    var FilterView = new Marionette.CompositeView.extend({
+    var FilterView = Marionette.CompositeView.extend({
         template: tpl,
         childViewContainer: '.filter-vrstefiltra'
     });

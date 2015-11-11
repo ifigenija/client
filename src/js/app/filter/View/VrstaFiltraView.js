@@ -31,7 +31,7 @@ define([
         Marionette
         ) {
 
-    var VrstaFiltraView = new Marionette.LayoutView.extend({});
+    var VrstaFiltraView = Marionette.LayoutView.extend({});
 
     /**
      * Poskrbeli bomo da lahko nastavljamo različne viewje kot optione

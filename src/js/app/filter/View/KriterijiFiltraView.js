@@ -27,11 +27,11 @@ define([
         Coll
         ) {
     
-    var KriterijFiltraView = new Marionette.ItemView.extend({
+    var KriterijFiltraView = Marionette.ItemView.extend({
         template: 'simple template'
     });
     
-    var KriterijiFiltraView = new Marionette.CollectionView.extend({
+    var KriterijiFiltraView = Marionette.CollectionView.extend({
         template: 'simple template'
     });
     

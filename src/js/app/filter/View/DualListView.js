@@ -19,7 +19,7 @@ define([
     'underscore',
     'marionette',
     'app/Max/Module/Backgrid',
-    '../tpl/dualList.tpl',
+    'template!../tpl/dualList.tpl',
     'backgrid-select-all'
 ], function (
         Radio,
@@ -32,6 +32,11 @@ define([
         ) {
 
     var columns = [
+        {
+            cell: 'select-row',
+            headerCell: 'select-all',
+            name: ""
+        },
         {
             cell: 'string',
             editable: false,
@@ -48,13 +53,37 @@ define([
         }
     ];
 
-    var DualListView = new Marionette.LayoutView.extend({
+    var ClickableRow = Backgrid.ClickableRow.extend({
+        select: function (event) {
+            var t = $(event.target);
+
+            if (t.parent().hasClass('select-row-cell')) {
+                return true;
+            }
+            var coll = this.model.collection.fullCollection || this.model.collection;
+            coll.trigger('selectValue', this.model);
+            if (this.$el.hasClass('active')) {
+                this.$el.removeClass('active');
+            } else {
+                this.$el.addClass('active');
+            }
+        }
+    });
+
+
+    var DualListView = Marionette.LayoutView.extend({
         template: dualListTpl,
         regions: {
-            filterR: 'duallist-filter',
-            leviSeznamR: 'duallist-seznam-levi',
-            gumbiR: 'duallist-gumbi',
-            desniSeznamR: 'duallist-seznam-desni'
+            filterR: '.duallist-filter',
+            leviSeznamR: '.duallist-seznam-levi',
+            gumbiR: '.duallist-gumbi',
+            desniSeznamR: '.duallist-seznam-desni'
+        },
+        triggers: {
+            'click .vsiDesno': 'premakniVseDesno',
+            'click .izbraniDesno': 'premakniIzbraneDesno',
+            'click .izbraniLevo': 'premakniIzbraneLevo',
+            'click .vsiLevo': 'premakniVseLevo'
         }
     });
 
@@ -69,17 +98,12 @@ define([
         this.collectionIzbira = options.collectionIzbira || null;
         this.columns = options.columns || columns;
 
-        if (!this.collectionIzbrani) {
-            //exception
+        if (!this.collectionIzbira) {
+            throw 'Ni nastavljen collection izbira';
         }
 
-        if (!this.columns) {
-            //exception
-        }
-        
-        //preverimo ali je eniteta ali collectionIzbira določen
-        if (!this.collectionIzbira) {
-            //exception
+        if (!this.collectionIzbrani) {
+            throw 'Ni nastavljen collection izbrani';
         }
 
         this.listenTo(this.collection, 'selectValue', this.onSelect);
@@ -115,7 +139,7 @@ define([
     DualListView.prototype.renderLeviSeznam = function (options) {
         var grid = new Backgrid.Grid({
             collection: this.collectionIzbira,
-            row: Backgrid.ClickableRow,
+            row: ClickableRow,
             columns: this.columns
         });
         this.leviSeznamR.show(grid);
@@ -130,10 +154,10 @@ define([
     DualListView.prototype.renderDesniSeznam = function (options) {
         var grid = new Backgrid.Grid({
             collection: this.collectionIzbrani,
-            row: Backgrid.ClickableRow,
+            row: ClickableRow,
             columns: this.columns
         });
-        this.leviSeznamR.show(grid);
+        this.desniSeznamR.show(grid);
         return grid;
     };
 
@@ -143,6 +167,9 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onPremakniVseDesno = function (options) {
+        console.log('VD');
+
+        var n = this.leviSeznam.getSelectedModels();
     };
 
     /**
@@ -151,7 +178,7 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onPremakniIzbraneDesno = function (options) {
-
+        console.log('ID');
     };
 
     /**
@@ -160,7 +187,7 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onPremakniIzbraneLevo = function (options) {
-
+        console.log('IL');
     };
 
     /**
@@ -169,7 +196,7 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onPremakniVseLevo = function (options) {
-
+        console.log('VL');
     };
 
     /**

@@ -6,7 +6,6 @@ define([
     'radio',
     'require',
     './nav'
-
 ], function (
         Marionette,
         Radio,
@@ -14,16 +13,11 @@ define([
         moduleNav
         ) {
 
-
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
-
 
         var ch = Radio.channel('layout');
 
-
-
         mod.ljudje = function () {
-
         };
 
         /**
@@ -71,12 +65,20 @@ define([
 
         };
 
+        mod.test = function () {
+            require(['../../filter/View/TestView'], function (View) {
+                var view = new View();
+
+                ch.command('openTab', view, 'Koledar');
+                ch.command('enableMenu', 'koledar');
+            });
+        };
+
         /**
          * Pregled predstav po uprizoritveh 
          * @returns {undefined}
          */
         mod.predstave = function () {
-
         };
 
         /**
@@ -85,7 +87,6 @@ define([
          * @returns {undefined}
          */
         mod.vaje = function () {
-
         };
 
         /**
@@ -112,12 +113,14 @@ define([
                 controller: mod,
                 appRoutes: {
                     'koledar/navigacija': 'pregled',
+                    'koledar/planiranje': 'pregled',
                     'koledar/pregled': 'pregled',
                     'koledar/ludje': 'ljudje',
                     'koledar/prostori': 'prostori',
                     'koledar/zasedenost': 'zasedenost',
                     'koledar/vaje': 'vaje',
-                    'koledar/predstave': 'predstave'
+                    'koledar/predstave': 'predstave',
+                    'koledar/test': 'test'
                 }
             });
         });
