@@ -18,16 +18,13 @@ define([
     'backbone',
     'underscore',
     'marionette',
-    'app/Max/Module/Backgrid',
-    'template!../tpl/dualList.tpl',
-    'backgrid-select-all'
+    'template!../tpl/dualList.tpl'
 ], function (
         Radio,
         i18next,
         Backbone,
         _,
         Marionette,
-        Backgrid,
         dualListTpl
         ) {
 
@@ -52,25 +49,7 @@ define([
             sortable: true
         }
     ];
-
-    var ClickableRow = Backgrid.ClickableRow.extend({
-        select: function (event) {
-            var t = $(event.target);
-
-            if (t.parent().hasClass('select-row-cell')) {
-                return true;
-            }
-            var coll = this.model.collection.fullCollection || this.model.collection;
-            coll.trigger('selectValue', this.model);
-            if (this.$el.hasClass('active')) {
-                this.$el.removeClass('active');
-            } else {
-                this.$el.addClass('active');
-            }
-        }
-    });
-
-
+    
     var DualListView = Marionette.LayoutView.extend({
         template: dualListTpl,
         regions: {
@@ -137,13 +116,12 @@ define([
      * @returns {DualListView_L24.Backgrid.Grid|DualListView_L24.Marionette.LayoutView.extend.prototype.renderLeviSeznam.grid}
      */
     DualListView.prototype.renderLeviSeznam = function (options) {
-        var grid = new Backgrid.Grid({
-            collection: this.collectionIzbira,
-            row: ClickableRow,
-            columns: this.columns
+        var view = new IzbiraCollectionView({
+            collection: this.collectionIzbira
         });
-        this.leviSeznamR.show(grid);
-        return grid;
+        
+        this.leviSeznamR.show(view);
+        return view;
     };
 
     /**
@@ -152,13 +130,12 @@ define([
      * @returns {DualListView_L24.Backgrid.Grid|DualListView_L24.Marionette.LayoutView.extend.prototype.renderDesniSeznam.grid}
      */
     DualListView.prototype.renderDesniSeznam = function (options) {
-        var grid = new Backgrid.Grid({
-            collection: this.collectionIzbrani,
-            row: ClickableRow,
-            columns: this.columns
+        var view = new IzbraniCollectionView({
+            collection: this.collectionIzbrani
         });
-        this.desniSeznamR.show(grid);
-        return grid;
+        
+        this.desniSeznamR.show(view);
+        return view;
     };
 
     /**
@@ -168,8 +145,6 @@ define([
      */
     DualListView.prototype.onPremakniVseDesno = function (options) {
         console.log('VD');
-
-        var n = this.leviSeznam.getSelectedModels();
     };
 
     /**

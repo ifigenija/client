@@ -32,11 +32,11 @@ define([
 
     TestView.prototype.onTest = function (options) {
         var columns = [
-            {
-                cell: 'select-row',
-                headerCell: 'select-all',
-                name: ""
-            },
+//            {
+//                cell: 'select-row',
+//                headerCell: 'select-all',
+//                name: ""
+//            },
             {
                 cell: 'string',
                 editable: false,
