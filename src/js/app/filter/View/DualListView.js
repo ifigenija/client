@@ -19,8 +19,8 @@ define([
     'underscore',
     'marionette',
     'app/Max/Module/Backgrid',
-    'app/Max/Model/LookupModel',
-    '../tpl/dualList.tpl'
+    '../tpl/dualList.tpl',
+    'backgrid-select-all'
 ], function (
         Radio,
         i18next,
@@ -28,9 +28,25 @@ define([
         _,
         Marionette,
         Backgrid,
-        LookupModel,
         dualListTpl
         ) {
+
+    var columns = [
+        {
+            cell: 'string',
+            editable: false,
+            label: i18next.t('std.label'),
+            name: 'label',
+            sortable: true
+        },
+        {
+            cell: 'string',
+            editable: false,
+            label: i18next.t('std.ident'),
+            name: 'ident',
+            sortable: true
+        }
+    ];
 
     var DualListView = new Marionette.LayoutView.extend({
         template: dualListTpl,
@@ -49,24 +65,56 @@ define([
      */
     DualListView.prototype.initialize = function (options) {
         this.template = options.tempalte || this.template;
-        this.collection = options.collection || this.collection;
+        this.collectionIzbrani = options.collectionIzbrani || null;
+        this.collectionIzbira = options.collectionIzbira || null;
+        this.columns = options.columns || columns;
 
-        this.listenTo(this.collection, 'selectValue', this.onSelected);
+        if (!this.collectionIzbrani) {
+            //exception
+        }
+
+        if (!this.columns) {
+            //exception
+        }
+        
+        //preverimo ali je eniteta ali collectionIzbira določen
+        if (!this.collectionIzbira) {
+            //exception
+        }
+
+        this.listenTo(this.collection, 'selectValue', this.onSelect);
     };
 
+    /**
+     * Kaj se zgodi ob izrisu Viewja
+     * @param {type} options
+     * @returns {undefined}
+     */
+    DualListView.prototype.onRender = function (options) {
+        this.filter = this.renderFilter(options);
+        this.leviSeznam = this.renderLeviSeznam(options);
+        this.desniSeznam = this.renderDesniSeznam(options);
+    };
+
+    /**
+     * Izris filtra filtriramo vedno.
+     * Ker uporabljamo obstoječ collection možnih izbir moremo filtrirat na clientu
+     * @param {type} options
+     * @returns {DualListView_L24.Marionette.LayoutView.extend.prototype.renderFilter.filter|DualListView_L24.Backgrid.Extension.ServerSideFilter}
+     */
     DualListView.prototype.renderFilter = function (options) {
-        var filter = new Backgrid.Extension.ServerSideFilter({
-            collection: this.collection,
-            name: 'q',
-            placeholder: 'Išči..'
-        });
-
-        this.filterR.show(filter);
+        return null;
     };
 
-    DualListView.prototype.renderSeznam = function (options) {
+    /**
+     * Levi seznam je namenjen prikazu vseh elementov, ki jih lahko izberemo
+     * Poizbiri elementa bi bilo dobro da se postavijo na prvo mesto, da uporabnik vidi kaj je vse izbral
+     * @param {type} options
+     * @returns {DualListView_L24.Backgrid.Grid|DualListView_L24.Marionette.LayoutView.extend.prototype.renderLeviSeznam.grid}
+     */
+    DualListView.prototype.renderLeviSeznam = function (options) {
         var grid = new Backgrid.Grid({
-            collection: this.collection,
+            collection: this.collectionIzbira,
             row: Backgrid.ClickableRow,
             columns: this.columns
         });
@@ -74,7 +122,12 @@ define([
         return grid;
     };
 
-    DualListView.prototype.renderSeznamIzbranih = function (options) {
+    /**
+     * Desni seznam je namenjen Prikazu že izbranih elementov
+     * @param {type} options
+     * @returns {DualListView_L24.Backgrid.Grid|DualListView_L24.Marionette.LayoutView.extend.prototype.renderDesniSeznam.grid}
+     */
+    DualListView.prototype.renderDesniSeznam = function (options) {
         var grid = new Backgrid.Grid({
             collection: this.collectionIzbrani,
             row: Backgrid.ClickableRow,

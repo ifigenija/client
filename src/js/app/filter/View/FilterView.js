@@ -43,7 +43,7 @@ define([
     });
     
     FilterView.prototype.getChildView = function(){
-        return this.vrstaFiltraView;
+        return this.VrstaFiltraView;
     };
     
     /**
@@ -53,6 +53,7 @@ define([
      */
     FilterView.prototype.initialize = function(options){
         this.template = options.template || this.template;
+        this.VrstaFiltraView = options.VrstaFiltraView || VrstaFiltraView;
     };
     
     FilterView.prototype.renderSeznam = function(options){

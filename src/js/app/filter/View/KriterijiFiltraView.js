@@ -27,11 +27,11 @@ define([
         Coll
         ) {
     
-    var KriterijView = new Marionette.ItemView.extend({
+    var KriterijFiltraView = new Marionette.ItemView.extend({
         template: 'simple template'
     });
     
-    var SeznamKriterijevView = new Marionette.CollectionView.extend({
+    var KriterijiFiltraView = new Marionette.CollectionView.extend({
         template: 'simple template'
     });
     
@@ -40,15 +40,15 @@ define([
      * @param Array options
      * @returns {undefined}
      */
-    SeznamKriterijevView.prototype.initialize = function(options){
+    KriterijiFiltraView.prototype.initialize = function(options){
         
     };
     
-    SeznamKriterijevView.prototype.renderSeznam = function(options){
+    KriterijiFiltraView.prototype.renderSeznam = function(options){
         
     };
 
-    return SeznamKriterijevView;
+    return KriterijiFiltraView;
 });
 
 
