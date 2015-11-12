@@ -15,17 +15,21 @@
 define([
     'radio',
     'i18next',
+    'app/bars',
     'backbone',
     'underscore',
     'marionette',
-    'template!../tpl/dualList.tpl'
+    'template!../tpl/dualList.tpl',
+    './DualListCollView'
 ], function (
         Radio,
         i18next,
+        Handlebars,
         Backbone,
         _,
         Marionette,
-        dualListTpl
+        dualListTpl,
+        DualListCollView
         ) {
 
     var columns = [
@@ -49,9 +53,10 @@ define([
             sortable: true
         }
     ];
-    
+
     var DualListView = Marionette.LayoutView.extend({
         template: dualListTpl,
+        className: 'duallist',
         regions: {
             filterR: '.duallist-filter',
             leviSeznamR: '.duallist-seznam-levi',
@@ -73,15 +78,17 @@ define([
      */
     DualListView.prototype.initialize = function (options) {
         this.template = options.tempalte || this.template;
-        this.collectionIzbrani = options.collectionIzbrani || null;
-        this.collectionIzbira = options.collectionIzbira || null;
+        this.collIzbrani = options.collIzbrani || null;
+        this.collIzbira = options.collIzbira || null;
         this.columns = options.columns || columns;
+        this.IzbiraView = options.IzbiraView || DualListCollView;
+        this.IzbraniView = options.IzbraniView || DualListCollView;
 
-        if (!this.collectionIzbira) {
+        if (!this.collIzbira) {
             throw 'Ni nastavljen collection izbira';
         }
 
-        if (!this.collectionIzbrani) {
+        if (!this.collIzbrani) {
             throw 'Ni nastavljen collection izbrani';
         }
 
@@ -116,10 +123,10 @@ define([
      * @returns {DualListView_L24.Backgrid.Grid|DualListView_L24.Marionette.LayoutView.extend.prototype.renderLeviSeznam.grid}
      */
     DualListView.prototype.renderLeviSeznam = function (options) {
-        var view = new IzbiraCollectionView({
-            collection: this.collectionIzbira
+        var view = this.izbiraView = new this.IzbiraView({
+            collection: this.collIzbira
         });
-        
+
         this.leviSeznamR.show(view);
         return view;
     };
@@ -130,10 +137,10 @@ define([
      * @returns {DualListView_L24.Backgrid.Grid|DualListView_L24.Marionette.LayoutView.extend.prototype.renderDesniSeznam.grid}
      */
     DualListView.prototype.renderDesniSeznam = function (options) {
-        var view = new IzbraniCollectionView({
-            collection: this.collectionIzbrani
+        var view = this.izbraniView = new this.IzbraniView({
+            collection: this.collIzbrani
         });
-        
+
         this.desniSeznamR.show(view);
         return view;
     };
@@ -144,7 +151,14 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onPremakniVseDesno = function (options) {
-        console.log('VD');
+        var models = this.izbiraView.getAllModels();
+
+        for (var index in models) {
+            this.izbraniView.collection.add(models[index]);
+        }
+        
+        this.nastaviFilter();
+        this.refresh();
     };
 
     /**
@@ -153,7 +167,14 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onPremakniIzbraneDesno = function (options) {
-        console.log('ID');
+        var models = this.izbiraView.getSelectedModels();
+
+        for (var index in models) {
+            this.izbraniView.collection.add(models[index]);
+        }
+        
+        this.nastaviFilter();
+        this.refresh();
     };
 
     /**
@@ -162,7 +183,14 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onPremakniIzbraneLevo = function (options) {
-        console.log('IL');
+        var models = this.izbraniView.getSelectedModels();
+
+        for (var index in models) {
+            this.izbraniView.collection.remove(models[index]);
+        }
+        
+        this.nastaviFilter();
+        this.refresh();
     };
 
     /**
@@ -171,26 +199,44 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onPremakniVseLevo = function (options) {
-        console.log('VL');
-    };
+        var models = this.izbraniView.getAllModels();
 
-    /**
-     * Kaj se zgodi ko izberemo enga od vnosov
-     * @param {type} options
+        for (var index in models) {
+            this.izbraniView.collection.remove(models[index]);
+        }
+        
+        this.nastaviFilter();
+        this.refresh();
+    };
+    
+    /*
+     * Nastavimo filter za prikaz modelov v levemseznamu, ki niso v med izbranimi modeli
      * @returns {undefined}
      */
-    DualListView.prototype.onSelect = function (options) {
-
+    DualListView.prototype.nastaviFilter = function () {
+        var self = this;
+        this.izbiraView.filter = function(child, index, collection){
+            var models = self.izbraniView.collection.models;
+            for(var index in models){
+                if(child.get('id') === models[index].get('id')){
+                    return false;
+                }
+            }
+            return true;
+        };
     };
-
     /**
-     * Kaj se zgodi ko zavržemo izbiro enga izbranih vnosov
-     * @param {type} options
+     * Osvežimo tabele in izbrane modele pri posameznih 
      * @returns {undefined}
      */
-    DualListView.prototype.onDeselect = function (options) {
-
+    DualListView.prototype.refresh = function () {
+        this.izbraniView.render();
+        this.izbiraView.render();
+        
+        this.izbraniView.resetSelection();
+        this.izbiraView.resetSelection();
     };
+    
 
     return DualListView;
 });

@@ -7956,6 +7956,22 @@ fieldset.pomemben legend span {
 .pnl-relacije .relation-seznam {
   margin-top: 10px;
 }
+.duallist {
+  position: absolute;
+  left: 200px;
+  top: 200px;
+  width: 50%;
+  height: 50%;
+  text-align: center;
+  z-index: 1000;
+  background-color: white;
+}
+.duallist-gumb {
+  margin-top: 15px;
+}
+.duallist-gumb {
+  margin-top: 15px;
+}
 /*
 Licenca GPLv3
 */

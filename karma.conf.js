@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['requirejs','mocha' ,'chai-sinon'],
+    frameworks: ['requirejs', 'mocha', 'chai-sinon', 'fixture'],
 
 
     // list of files / patterns to load in the browser
@@ -18,6 +18,7 @@ module.exports = function(config) {
       'test/test-main.js',
       {pattern: 'test/**/*Spec.js', included: false},
       {pattern: 'test/**/*.json', included: false},
+      {pattern: 'test/**/*.html', included: false},
       {pattern: 'js/app/**/*.*', included: false},
       {pattern: 'js/locales/*.json', included: false},
       {pattern: 'js/locales/**/*.json', included: false},
@@ -38,8 +39,13 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'test/**/*.html'   : ['html2js'],
+      'test/**/*.json'   : ['json_fixtures']
     },
 
+    jsonFixturesPreprocessor: {
+      variableName: '__json__'
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

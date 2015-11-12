@@ -58,18 +58,22 @@ define([
         var C = Coll.extend({
             model: M,
             url: baseUrl + '/rest/oseba',
-            mode: 'client'
+            mode: 'client',
+            state: {
+                pageSize: 1000,
+                currentPage: 1
+            }
         });
-        var collSelected = new C();
 
+        var collSelected = new C();
         var collSelect = new C();
         var self = this;
 
         collSelect.fetch({
             success: function () {
                 var view = new DualListView({
-                    collectionIzbrani: collSelected,
-                    collectionIzbira: collSelect,
+                    collIzbrani: collSelected,
+                    collIzbira: collSelect,
                     columns: columns
                 });
 
