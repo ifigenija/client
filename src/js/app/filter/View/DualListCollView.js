@@ -36,7 +36,7 @@ define([
     });
     var DualListCollView = Marionette.CollectionView.extend({
         template: Handlebars.compile('<div>cv</div>'),
-        className: 'duallist-coll'
+        className: 'duallist-seznam'
     });
 
     DualListCollView.prototype.initialize = function () {

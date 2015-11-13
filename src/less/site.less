@@ -790,22 +790,24 @@ fieldset {
     }
 }
 
+// duallist
 .duallist{
     position: absolute;
-    left: 200px;
-    top: 200px;
     width:50%;
     height:50%;
-    text-align:center;
     z-index: 1000;
     background-color: white;
-
-    &-gumb{
-        margin-top: 15px;
-    }
 }
 
 .duallist{
+    &-seznam{
+        max-height: 400px;
+        overflow: auto;
+    }
+    &-gumbi{
+        text-align: center;
+        padding-top: 100px;
+    }
     &-gumb{
         margin-top: 15px;
     }

@@ -9,7 +9,8 @@ define([
     'template!../tpl/test.tpl',
     'app/Max/Model/MaxPageableCollection',
     'baseUrl',
-    './DualListView'
+    './DualListView',
+    'app/bars'
 ], function (
         Radio,
         i18next,
@@ -18,25 +19,23 @@ define([
         testTpl,
         Coll,
         baseUrl,
-        DualListView
+        DualListView,
+        Handlebars
         ) {
     var TestView = Marionette.LayoutView.extend({
         template: testTpl,
         regions: {
-            testR: '.region-test'
+            testR: '.region-test',
+            selectR: '.region-testselect'
         },
         triggers: {
-            'click .test': 'test'
+            'click .test': 'test',
+            'click .testselect': 'testSelect'
         }
     });
 
     TestView.prototype.onTest = function (options) {
         var columns = [
-//            {
-//                cell: 'select-row',
-//                headerCell: 'select-all',
-//                name: ""
-//            },
             {
                 cell: 'string',
                 editable: false,
@@ -68,18 +67,29 @@ define([
         var collSelected = new C();
         var collSelect = new C();
         var self = this;
-
+        var gumb = self.$('.test');
+        
         collSelect.fetch({
             success: function () {
                 var view = new DualListView({
                     collIzbrani: collSelected,
-                    collIzbira: collSelect,
-                    columns: columns
+                    collIzbira: collSelect
+//                    top: gumb.position().top + gumb.parent().height(),
+//                    left: gumb.position().left
                 });
 
                 self.testR.show(view);
             }
         });
+    };
+    TestView.prototype.onTestSelect = function (options) {
+        var View = Marionette.LayoutView.extend({
+            template: Handlebars.compile('<div>Nekaj</div')
+        });
+
+        var view = new View();
+
+        this.selectR.show(view);
     };
     return TestView;
 });

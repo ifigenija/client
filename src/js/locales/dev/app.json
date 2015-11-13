@@ -146,6 +146,10 @@
         "odstraniOrgEnota": "Odstrani organizacijsko enoto",
         "dodajOrgEnota": "Dodaj organizacijsko enoto",
         "vseenoShrani": "Vseeno shrani",
+        "premakniVseDesno":"Izberi vse",
+        "premakniIzbraneDesno":"Premakni Izbrane",
+        "premakniIzbraneLevo":"Odstrani izbrane",
+        "premakniVseLevo":"Odstrani vse",
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
