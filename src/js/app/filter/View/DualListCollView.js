@@ -28,7 +28,7 @@ define([
         _
         ) {
     var DualListItemView = Marionette.ItemView.extend({
-        template: Handlebars.compile('<div class="item">{{sifra}}</div>'),
+        template: Handlebars.compile('<div class="item">{{label}}</div>'),
         className: 'duallist-item',
         triggers: {
             'click .item': 'select'
@@ -75,7 +75,7 @@ define([
     };
 
     /**
-     * Vrne polje vseh izbranih modelov iz collectiona
+     * Vrne polje modelov, ki jih želimo izbrati
      * @returns {Marionette.CollectionView@call;extend.prototype.getSelectedModels.result|Array}
      */
     DualListCollView.prototype.getSelectedModels = function () {
@@ -93,13 +93,36 @@ define([
     DualListCollView.prototype.getAllModels = function () {
         return _.clone(this.collection.models);
     };
-    
+
     /**
-     * resetiramo izbiro modelov
+     * resetiramo polje modelov
      * @returns {DualListCollView_L21.DualListCollView.collection.models}
      */
     DualListCollView.prototype.resetSelection = function () {
         this.selectedModels = {};
+    };
+
+    DualListCollView.prototype.search = function (options) {
+        var search = options.search;
+        var coll = options.coll;
+
+        this.filter = function (child, index, collection) {
+            var models = coll.models;
+            for (var index in models) {
+                if (child.get('id') === models[index].get('id')) {
+                    return false;
+                } else {
+                    for (var attr in models.attributes) {
+                        if (!_.isArray(attr) && attr.toLowerCase().indexOf(search) < 0) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        };
+
+        this.render();
     };
 
     return DualListCollView;

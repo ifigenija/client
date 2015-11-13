@@ -42,10 +42,10 @@ define([
             desniSeznamR: '.duallist-seznam-desni'
         },
         triggers: {
-            'click .vsiDesno': 'premakniVseDesno',
-            'click .izbraniDesno': 'premakniIzbraneDesno',
-            'click .izbraniLevo': 'premakniIzbraneLevo',
-            'click .vsiLevo': 'premakniVseLevo'
+            'click .vsiDesno': 'vseDesno',
+            'click .izbraniDesno': 'izbraneDesno',
+            'click .izbraniLevo': 'izbraneLevo',
+            'click .vsiLevo': 'vseLevo'
         }
     });
 
@@ -60,46 +60,30 @@ define([
         this.collIzbira = options.collIzbira || new Backbone.Collection();
         this.IzbiraView = options.IzbiraView || DualListCollView;
         this.IzbraniView = options.IzbraniView || DualListCollView;
-        this.left = options.left || null;
-        this.top = options.top || null;
 
         this.listenTo(this.collection, 'selectValue', this.onSelect);
     };
 
     /**
      * Kaj se zgodi ob izrisu Viewja
-     * @param {type} options
      * @returns {undefined}
      */
-    DualListView.prototype.onRender = function (options) {
-        this.filter = this.renderFilter(options);
-        this.leviSeznam = this.renderLeviSeznam(options);
-        this.desniSeznam = this.renderDesniSeznam(options);
-        if (this.top) {
-            this.$el.css('top', this.top);
-        }
-        if (this.left) {
-            this.$el.css('left', this.left);
-        }
+    DualListView.prototype.onRender = function () {
+        this.filter = this.renderFilter();
+        this.leviSeznam = this.renderLeviSeznam();
+        this.desniSeznam = this.renderDesniSeznam();
     };
 
-    /**
-     * Izris filtra filtriramo vedno.
-     * Ker uporabljamo obstoječ collection možnih izbir moremo filtrirat na clientu
-     * @param {type} options
-     * @returns {DualListView_L24.Marionette.LayoutView.extend.prototype.renderFilter.filter|DualListView_L24.Backgrid.Extension.ServerSideFilter}
-     */
-    DualListView.prototype.renderFilter = function (options) {
+    DualListView.prototype.renderFilter = function () {
         return null;
     };
 
     /**
      * Levi seznam je namenjen prikazu vseh elementov, ki jih lahko izberemo
      * Poizbiri elementa bi bilo dobro da se postavijo na prvo mesto, da uporabnik vidi kaj je vse izbral
-     * @param {type} options
      * @returns {DualListView_L24.Backgrid.Grid|DualListView_L24.Marionette.LayoutView.extend.prototype.renderLeviSeznam.grid}
      */
-    DualListView.prototype.renderLeviSeznam = function (options) {
+    DualListView.prototype.renderLeviSeznam = function () {
         var view = this.izbiraView = new this.IzbiraView({
             collection: this.collIzbira
         });
@@ -110,10 +94,9 @@ define([
 
     /**
      * Desni seznam je namenjen Prikazu že izbranih elementov
-     * @param {type} options
      * @returns {DualListView_L24.Backgrid.Grid|DualListView_L24.Marionette.LayoutView.extend.prototype.renderDesniSeznam.grid}
      */
-    DualListView.prototype.renderDesniSeznam = function (options) {
+    DualListView.prototype.renderDesniSeznam = function () {
         var view = this.izbraniView = new this.IzbraniView({
             collection: this.collIzbrani
         });
@@ -124,15 +107,12 @@ define([
 
     /**
      * Premaknemo vse elemente iz levega stolpca v desnega
-     * @param {type} options
      * @returns {undefined}
      */
-    DualListView.prototype.onPremakniVseDesno = function (options) {
+    DualListView.prototype.onVseDesno = function () {
         var models = this.izbiraView.getAllModels();
 
-        for (var index in models) {
-            this.izbraniView.collection.add(models[index]);
-        }
+        this.izbraniView.collection.add(models);
 
         this.nastaviFilter();
         this.refresh();
@@ -140,15 +120,12 @@ define([
 
     /**
      * Premaknemo izbrane elemente iz levega stolpca v desnega
-     * @param {type} options
      * @returns {undefined}
      */
-    DualListView.prototype.onPremakniIzbraneDesno = function (options) {
+    DualListView.prototype.onIzbraneDesno = function () {
         var models = this.izbiraView.getSelectedModels();
 
-        for (var index in models) {
-            this.izbraniView.collection.add(models[index]);
-        }
+        this.izbraniView.collection.add(models);
 
         this.nastaviFilter();
         this.refresh();
@@ -156,15 +133,12 @@ define([
 
     /**
      * Premaknemo izbrane elemente iz desnega stolpca v levega
-     * @param {type} options
      * @returns {undefined}
      */
-    DualListView.prototype.onPremakniIzbraneLevo = function (options) {
+    DualListView.prototype.onIzbraneLevo = function () {
         var models = this.izbraniView.getSelectedModels();
 
-        for (var index in models) {
-            this.izbraniView.collection.remove(models[index]);
-        }
+        this.izbraniView.collection.remove(models);
 
         this.nastaviFilter();
         this.refresh();
@@ -172,35 +146,26 @@ define([
 
     /**
      * Premaknemo vse elemente iz desnega stolpca v levega
-     * @param {type} options
      * @returns {undefined}
      */
-    DualListView.prototype.onPremakniVseLevo = function (options) {
+    DualListView.prototype.onVseLevo = function () {
         var models = this.izbraniView.getAllModels();
 
-        for (var index in models) {
-            this.izbraniView.collection.remove(models[index]);
-        }
+        this.izbraniView.collection.remove(models);
 
         this.nastaviFilter();
         this.refresh();
     };
 
     /*
-     * Nastavimo filter za prikaz modelov v levemseznamu, ki niso v med izbranimi modeli
+     * Nastavimo filter za prikaz modelov v levems eznamu, ki niso v med izbranimi modeli
      * @returns {undefined}
      */
     DualListView.prototype.nastaviFilter = function () {
-        var self = this;
-        this.izbiraView.filter = function (child, index, collection) {
-            var models = self.izbraniView.collection.models;
-            for (var index in models) {
-                if (child.get('id') === models[index].get('id')) {
-                    return false;
-                }
-            }
-            return true;
-        };
+        this.izbiraView.search({
+            search: 'ton',
+            coll: this.izbraniView.collection
+        });
     };
     /**
      * Osvežimo tabele in izbrane modele pri posameznih 

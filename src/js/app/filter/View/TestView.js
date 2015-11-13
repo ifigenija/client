@@ -10,7 +10,8 @@ define([
     'app/Max/Model/MaxPageableCollection',
     'baseUrl',
     './DualListView',
-    'app/bars'
+    'app/bars',
+    'app/Max/Model/LookupModel'
 ], function (
         Radio,
         i18next,
@@ -20,7 +21,8 @@ define([
         Coll,
         baseUrl,
         DualListView,
-        Handlebars
+        Handlebars,
+        LookupModel
         ) {
     var TestView = Marionette.LayoutView.extend({
         template: testTpl,
@@ -51,31 +53,20 @@ define([
                 sortable: true
             }
         ];
-        var M = Backbone.Model.extend({
-            urlRoot: baseUrl + '/rest/oseba'
-        });
-        var C = Coll.extend({
-            model: M,
-            url: baseUrl + '/rest/oseba',
-            mode: 'client',
-            state: {
-                pageSize: 1000,
-                currentPage: 1
-            }
-        });
 
-        var collSelected = new C();
-        var collSelect = new C();
+        var collSelected = new LookupModel(null, {
+            entity: 'oseba'
+        });
+        var collSelect = new LookupModel(null, {
+            entity: 'oseba'
+        });
         var self = this;
-        var gumb = self.$('.test');
         
         collSelect.fetch({
             success: function () {
                 var view = new DualListView({
                     collIzbrani: collSelected,
                     collIzbira: collSelect
-//                    top: gumb.position().top + gumb.parent().height(),
-//                    left: gumb.position().left
                 });
 
                 self.testR.show(view);
