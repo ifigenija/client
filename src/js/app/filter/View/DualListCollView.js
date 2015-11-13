@@ -65,6 +65,8 @@ define([
             item.$el.removeClass('active');
         }
 
+        //spremeni shrani v collection da si ga označil
+        //potem lahko v collectionu samo gledaš kere prenesti
         var model = item.model;
 
         if (selected)
