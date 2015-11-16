@@ -14,7 +14,9 @@ define([
     'underscore',
     'marionette',
     'text!./fixtures/polniCollection.json',
-    'app/filter/View/DualListView'
+    'app/filter/View/DualListView',
+    'backgrid',
+    'jquery'
 ], function (
         Radio,
         i18next,
@@ -23,7 +25,9 @@ define([
         _,
         Marionette,
         collFixture,
-        DualListView
+        DualListView,
+        Backgrid,
+        $
         ) {
 
     describe("DualListView", function () {
@@ -40,67 +44,113 @@ define([
                 collIzbrani: new Backbone.Collection()
             });
 
+            this.dolzina = this.coll.length;
+
             view.render();
         });
-        
+
         afterEach(function () {
             this.view = null;
             this.coll = null;
         });
 
         it('inicializacija View-a', function () {
-            expect(this.view.collIzbira).to.equal(this.coll);
+            expect(this.view.collIzbira.length).to.equal(this.dolzina);
         });
 
         //izberemo vse elemente iz levega seznama
-        it('izberi vse elemente', function (done) {
+        it('izberi vse elemente', function () {
             var collIzbrani = this.view.collIzbrani;
 
-            collIzbrani.on('add', function () {
-                expect(collIzbrani.length).to.not.equal(0);
-                done();
-            });
-
             this.view.triggerMethod('vseDesno');
+            expect(collIzbrani.length).to.equal(this.dolzina);
         });
 
         // izberemo samo označene elemente iz levega seznama
-        it('izberi označene elemente', function (done) {
+        it('izberi označene elemente', function () {
             var collIzbrani = this.view.collIzbrani;
 
-            collIzbrani.on('add', function () {
-                expect(collIzbrani.length).to.not.equal(0);
-                done();
-            });
+            //simulacija klika na model v seznamu
+            var self = this;
+            var item = {
+                $el: $('.test'),
+                model: self.coll.models[0]
+            };
+            this.view.izbiraView.triggerMethod('childviewSelect', item);
 
+            //izberemo označene modele
             this.view.triggerMethod('izbraneDesno');
+            expect(collIzbrani.length).to.equal(1);
         });
 
         //odstranimo označene elemente iz desnega seznama
-        it('odstrani označene elemente', function (done) {
+        it('odstrani označene elemente', function () {
             var collIzbrani = this.view.collIzbrani;
 
-            collIzbrani.on('remove', function () {
-                expect(collIzbrani.length).to.equal(0);
-                done();
-            });
+            //izberemo vse modele
+            this.view.triggerMethod('vseDesno');
+            expect(collIzbrani.length).to.equal(this.dolzina);
 
-            this.view.triggerMethod('premakniIzbraneLevo');
+            //simulacija klika na model v seznamu
+            var self = this;
+            var item = {
+                $el: $('.test'),
+                model: self.coll.models[0]
+            };
+            this.view.izbraniView.triggerMethod('childviewSelect', item);
+
+            //odstranimo označen model
+            this.view.triggerMethod('izbraneLevo');
+            expect(collIzbrani.length).to.equal(this.dolzina - 1);
         });
 
         //odstranimo vse elemente iz desnega seznama
-        it('odstrani vse elemente', function (done) {
+        it('odstrani vse elemente', function () {
             var collIzbrani = this.view.collIzbrani;
 
-            collIzbrani.on('remove', function () {
-                expect(collIzbrani.length).to.equal(0);
-                done();
-            });
+            //izberemo vse modele
+            this.view.triggerMethod('vseDesno');
+            expect(collIzbrani.length).to.equal(this.dolzina);
 
-            this.view.triggerMethod('premakniVseLevo');
+            //odstranimo vse modele
+            this.view.triggerMethod('vseLevo');
+            expect(collIzbrani.length).to.equal(0);
         });
-        
-        //v collection shrani ali je označen
-        //izbiraš še vedno lahko več
+
+        //vrnemo celotni collection od izraniView
+        it('get izbrane modele', function () {
+            var collIzbrani = this.view.collIzbrani;
+            var izbraniView = this.view.izbraniView;
+
+            this.view.triggerMethod('vseDesno');
+            expect(collIzbrani.length).to.equal(this.dolzina);
+
+            //preverimo ali je vrnjen celi collection od izbraniView
+            var spy = sinon.spy(izbraniView, 'getAllModels');
+            izbraniView.triggerMethod('getAllModels');
+            spy.returned(collIzbrani.models);
+        });
+
+//        it('search collection', function () {
+//            var collIzbrani = this.view.collIzbrani;
+//            var filterView = this.view.filterView;
+//
+//            var stub = sinon.stub(filterView, "searchBox", function () {
+//                return {
+//                    val: function () {
+//                        return 'ana';
+//                    }
+//                };
+//            });
+//            var spy = sinon.spy(filterView,'search');
+//
+//            filterView.trigger('submit');
+//            
+//            expect(spy.called).to.be.true;
+//
+//            //this.view.triggerMethod('vseDesno');
+//            expect(collIzbrani.length).to.equal(2);
+//
+//        });
     });
 });

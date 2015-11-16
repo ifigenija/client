@@ -11,6 +11,13 @@
  *
  * Izhodni podatki:
  *      - collection izbranih kriterijev
+ *      
+ * Api Collection View
+ *  metode:
+ *      - getSelectedModels
+ *      - getAllModels
+ *      - onChildviewSelect
+ *      - resetSelection
  */
 define([
     'radio',
@@ -27,27 +34,50 @@ define([
         Marionette,
         _
         ) {
+    /**
+     * V kolikor želimo overridat ItemView, mora itemView imeti
+     * trigger, ki sproči "select"
+     * @type @exp;Marionette@pro;ItemView@call;extend
+     */
     var DualListItemView = Marionette.ItemView.extend({
-        template: Handlebars.compile('<div class="item">{{label}}</div>'),
-        className: 'duallist-item',
+        template: Handlebars.compile('{{label}}'),
+        tagName: 'li',
+        className: 'duallist-item list-group-item',
         triggers: {
-            'click .item': 'select'
+            'click': 'select'
         }
     });
+
     var DualListCollView = Marionette.CollectionView.extend({
-        template: Handlebars.compile('<div>cv</div>'),
-        className: 'duallist-seznam'
+        tagName: 'ul',
+        className: 'duallist-seznam list-group'
     });
 
-    DualListCollView.prototype.initialize = function () {
-        this.selectedModels = {};
+    /**
+     * 
+     * @param Array options
+     *      - ItemView je View, ki se bo uporabil za pogled
+     *      - template za itemViewja
+     * @returns {undefined}
+     */
+    DualListCollView.prototype.initialize = function (options) {
+        this.ItemView = options.ItemView || DualListItemView;
+        this.itemTemplate = options.itemTemplate || null;
+
+        //izvedemo samo v primeru da imamo zunanji template brez podanega ItemView-ja
+        if (options.itemTemplate && !options.ItemView) {
+            this.ItemView = this.ItemView.extend({
+                template: this.itemTemplate
+            });
+        }
     };
+
     /**
      * Vrne View, ki se bo uporabil kot ChildView za collectionView
      * @returns {DualListCollView_L21.DualListCollView.options.ItemView}
      */
     DualListCollView.prototype.getChildView = function () {
-        return this.options.ItemView || DualListItemView;
+        return this.ItemView;
     };
 
     /**
@@ -57,37 +87,31 @@ define([
      * @returns {undefined}
      */
     DualListCollView.prototype.onChildviewSelect = function (item) {
-        var selected = false;
-        if (!item.$el.hasClass('active')) {
-            item.$el.addClass('active');
-            selected = true;
-        } else {
-            item.$el.removeClass('active');
-        }
-
-        //spremeni shrani v collection da si ga označil
-        //potem lahko v collectionu samo gledaš kere prenesti
         var model = item.model;
+        var $el = item.$el;
 
-        if (selected)
-            this.selectedModels[model.id] = 1;
-        else {
-            delete this.selectedModels[model.id];
+        if (!$el.hasClass('active')) {
+            $el.addClass('active');
+            model.set('selected', true);
+        } else {
+            $el.removeClass('active');
+            model.set('selected', false);
         }
     };
-
     /**
      * Vrne polje modelov, ki jih želimo izbrati
      * @returns {Marionette.CollectionView@call;extend.prototype.getSelectedModels.result|Array}
      */
     DualListCollView.prototype.getSelectedModels = function () {
         var result = [];
-        for (var modelId in this.selectedModels) {
-            result.push(this.collection.get(modelId));
+        var models = this.collection.models;
+        for (var modelId in models) {
+            if (models[modelId].get('selected')) {
+                result.push(models[modelId]);
+            }
         }
         return result;
     };
-
     /**
      * Vrne polje vseh modelov iz collectiona
      * @returns {DualListCollView_L21.DualListCollView.collection.models}
@@ -95,35 +119,33 @@ define([
     DualListCollView.prototype.getAllModels = function () {
         return _.clone(this.collection.models);
     };
-
     /**
      * resetiramo polje modelov
      * @returns {DualListCollView_L21.DualListCollView.collection.models}
      */
     DualListCollView.prototype.resetSelection = function () {
-        this.selectedModels = {};
+        var models = this.collection.models;
+        for (var modelId in models) {
+            models[modelId].set('selected', false);
+        }
     };
 
-    DualListCollView.prototype.search = function (options) {
-        var search = options.search;
-        var coll = options.coll;
-
+    /**
+     * 
+     * @param Collection collPrimerjava
+     *      collPrimerjava vsebuje seznam modelov, ki jih v tem collectionu ne smemo prikazati.
+     * @returns {undefined}
+     */
+    DualListCollView.prototype.search = function (collPrimerjava) {
         this.filter = function (child, index, collection) {
-            var models = coll.models;
+            var models = collPrimerjava.models;
             for (var index in models) {
                 if (child.get('id') === models[index].get('id')) {
                     return false;
-                } else {
-                    for (var attr in models.attributes) {
-                        if (!_.isArray(attr) && attr.toLowerCase().indexOf(search) < 0) {
-                            return false;
-                        }
-                    }
                 }
             }
             return true;
         };
-
         this.render();
     };
 

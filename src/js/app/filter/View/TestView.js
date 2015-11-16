@@ -24,6 +24,17 @@ define([
         Handlebars,
         LookupModel
         ) {
+    
+    var tpl = Handlebars.compile('{{ident}}');
+    
+    var DualListItemView = Marionette.ItemView.extend({
+        template: Handlebars.compile('{{label}}'),
+        tagName: 'li',
+        className: 'lovro-item list-group-item',
+        triggers: {
+            'click': 'select'
+        }
+    });
     var TestView = Marionette.LayoutView.extend({
         template: testTpl,
         regions: {
@@ -37,22 +48,6 @@ define([
     });
 
     TestView.prototype.onTest = function (options) {
-        var columns = [
-            {
-                cell: 'string',
-                editable: false,
-                label: 'oseba.sifra',
-                name: 'sifra',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: 'oseba.priimek',
-                name: 'priimek',
-                sortable: true
-            }
-        ];
 
         var collSelected = new LookupModel(null, {
             entity: 'oseba'
@@ -66,7 +61,9 @@ define([
             success: function () {
                 var view = new DualListView({
                     collIzbrani: collSelected,
-                    collIzbira: collSelect
+                    collIzbira: collSelect,
+                    //ItemView: DualListItemView,
+                    //itemTemplate: tpl
                 });
 
                 self.testR.show(view);

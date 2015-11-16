@@ -792,21 +792,28 @@ fieldset {
 
 // duallist
 .duallist{
-    position: absolute;
-    width:50%;
-    height:50%;
-    z-index: 1000;
-    background-color: white;
-}
-
-.duallist{
+    &-content{
+        position: relative;
+        z-index: @zindex-modal;
+    }
+    &-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: @zindex-modal-background;
+    }
+    &-seznama{
+        margin-top: 15px;
+    }
     &-seznam{
         max-height: 400px;
         overflow: auto;
     }
     &-gumbi{
         text-align: center;
-        padding-top: 100px;
+        vertical-align: middle;
     }
     &-gumb{
         margin-top: 15px;

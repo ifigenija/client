@@ -7956,12 +7956,20 @@ fieldset.pomemben legend span {
 .pnl-relacije .relation-seznam {
   margin-top: 10px;
 }
-.duallist {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  z-index: 1000;
-  background-color: white;
+.duallist-content {
+  position: relative;
+  z-index: 1050;
+}
+.duallist-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+}
+.duallist-seznama {
+  margin-top: 15px;
 }
 .duallist-seznam {
   max-height: 400px;
@@ -7969,7 +7977,7 @@ fieldset.pomemben legend span {
 }
 .duallist-gumbi {
   text-align: center;
-  padding-top: 100px;
+  vertical-align: middle;
 }
 .duallist-gumb {
   margin-top: 15px;
