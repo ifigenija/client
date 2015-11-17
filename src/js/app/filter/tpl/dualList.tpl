@@ -12,7 +12,7 @@
                 <div class="col-xs-5">
                     <div class="duallist-seznam-levi"></div>
                 </div>
-                <div class="col-xs-2 text-center">
+                <div class="col-xs-2">
                     <div class="row duallist-gumbi">
                         <div class="col-sm-12">
                             <a class="btn btn-default duallist-gumb vsiDesno" title="{{t "std.premakniVseDesno"}}">>></a>

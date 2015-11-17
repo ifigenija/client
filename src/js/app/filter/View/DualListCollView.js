@@ -18,6 +18,7 @@
  *      - getAllModels
  *      - onChildviewSelect
  *      - resetSelection
+ *      - search
  */
 define([
     'radio',
@@ -36,21 +37,39 @@ define([
         ) {
     /**
      * V kolikor želimo overridat ItemView, mora itemView imeti
-     * trigger, ki sproči "select"
+     * event, na klick da poberemo event podatke za shift in control
+     * prožit more select s event podatki kot parametrom
      * @type @exp;Marionette@pro;ItemView@call;extend
      */
     var DualListItemView = Marionette.ItemView.extend({
         template: Handlebars.compile('{{label}}'),
         tagName: 'li',
         className: 'duallist-item list-group-item',
-        triggers: {
-            'click': 'select'
+        events: {
+            'click': 'klikVrstica'
+        },
+        klikVrstica: function (e) {
+            this.trigger('select', e);
         }
     });
 
+    var EmptyView = Marionette.ItemView.extend({
+        template: Handlebars.compile('{{t "std.prazenSeznam"}}')
+    });
+
+    /**
+     * Collection view skrbi za iznačevanje modelov
+     *  methode, ki jih mora vsebovati onChildviewSelect skrbi za označevanje modelov
+     *      - getSelectedModels : vrne označene modele v collectionu
+     *      - getAllModels : vrne vse modele iz collectiona
+     *      - resetselection : vse označene modele odznači
+     *      - search : nastavi filter collectiona, kateri filtri se naj pokažejo kateri pa ne
+     * @type @exp;Marionette@pro;CollectionView@call;extend
+     */
     var DualListCollView = Marionette.CollectionView.extend({
         tagName: 'ul',
-        className: 'duallist-seznam list-group'
+        className: 'duallist-seznam list-group',
+        emptyView: EmptyView
     });
 
     /**
@@ -86,17 +105,60 @@ define([
      * @param {type} item
      * @returns {undefined}
      */
-    DualListCollView.prototype.onChildviewSelect = function (item) {
+    DualListCollView.prototype.onChildviewSelect = function (item, e) {
         var model = item.model;
         var $el = item.$el;
 
-        if (!$el.hasClass('active')) {
+        if (e.shiftKey && this.getSelectedModels().length > 0) {
+            //določimo in označimo trenutni model
+            var trenutniModel = model;
             $el.addClass('active');
             model.set('selected', true);
+
+            var models = this.collection.models;
+            var oznacuj = false;
+
+            for (var id in models) {
+                //v kolikor so modeli med trenutnim in zadnje izbranim modelom se označujejo
+                if (models[id] === trenutniModel || models[id] === this.zadnjiOznacen) {
+                    oznacuj = !oznacuj;
+                }
+                //v kolikor je označevanje true se poišče model in se označi
+                if (oznacuj) {
+                    models[id].set('selected', true);
+                    var child = this.children.findByModel(models[id]);
+                    var $e = child.$el;
+                    if (!$e.hasClass('active')) {
+                        $e.addClass('active');
+                    }
+                }
+            }
+            this.zadnjiOznacen = trenutniModel;
+
+        } else if (e.ctrlKey) {
+            //če je pritisnjen ctrl se označujejo vsi modeli na katere kliknemo
+            if (!$el.hasClass('active')) {
+                $el.addClass('active');
+                model.set('selected', true);
+                this.zadnjiOznacen = model;
+                ;
+            } else {
+                $el.removeClass('active');
+                model.set('selected', false);
+            }
         } else {
-            $el.removeClass('active');
-            model.set('selected', false);
+            //odstranimo vse prej označene modele
+            this.$('.duallist-item').removeClass('active');
+            this.resetSelection();
+
+            //označimo kliknjen model
+            if (!$el.hasClass('active')) {
+                $el.addClass('active');
+                model.set('selected', true);
+                this.zadnjiOznacen = model;
+            }
         }
+
     };
     /**
      * Vrne polje modelov, ki jih želimo izbrati
