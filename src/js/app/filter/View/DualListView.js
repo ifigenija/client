@@ -67,7 +67,6 @@ define([
      *      - title: kakšen naslov se naj izpiše DualListView-ja
      *      - ItemView: ItemView je namenjen izrisu modelov collectionov v IzbiraView in IzbraniView(dafault null)
      *      - itemTemplate: v primeru da želimo spremeniti samo template ItemViewja mu podamo samo template(default null)
-     *      - $anchor : jquery element, ki služi kot sidro v viewjih
      * @returns {undefined}
      */
     DualListView.prototype.initialize = function (options) {
@@ -79,7 +78,6 @@ define([
         this.title = options.title || "Izberi";
         this.ItemView = options.ItemView || null;
         this.itemTemplate = options.itemTemplate || null;
-        this.$anchor = options.$anchor || null;
         
         $(window).on('resize', this.resize);
     };
@@ -92,11 +90,6 @@ define([
     
     DualListView.prototype.resize = function () {
         console.log('resize');
-//        if(this.$anchor){
-//            var position = this.$anchor.position();
-//            this.$el.css('top', position.top);
-//            this.$el.css('left', position.left);
-//        }
     };
 
     /**
