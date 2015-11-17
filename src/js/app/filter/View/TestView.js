@@ -10,8 +10,10 @@ define([
     'app/Max/Model/MaxPageableCollection',
     'baseUrl',
     './DualListView',
+    './ToggleListView',
     'app/bars',
-    'app/Max/Model/LookupModel'
+    'app/Max/Model/LookupModel',
+    '../Model/Collection'
 ], function (
         Radio,
         i18next,
@@ -21,12 +23,14 @@ define([
         Coll,
         baseUrl,
         DualListView,
+        ToggleListView,
         Handlebars,
-        LookupModel
+        LookupModel,
+        Collection
         ) {
-    
+
     var tpl = Handlebars.compile('{{ident}}');
-    
+
     var DualListItemView = Marionette.ItemView.extend({
         template: Handlebars.compile('{{label}}'),
         tagName: 'li',
@@ -57,15 +61,20 @@ define([
         });
         var self = this;
         var $gumb = self.$('.test');
-        
+
         collSelect.fetch({
             success: function () {
                 var view = new DualListView({
                     collIzbrani: collSelected,
                     collIzbira: collSelect,
                     //ItemView: DualListItemView,
-                    //itemTemplate: tpl
-                    $anchor : $gumb
+                    //itemTemplate: tpl,
+                    $anchor: $gumb,
+                    title: "izbira oseb"
+                });
+
+                view.on('close', function () {
+                    console.log(collSelected.models);
                 });
 
                 self.testR.show(view);
@@ -73,13 +82,40 @@ define([
         });
     };
     TestView.prototype.onTestSelect = function (options) {
-        var View = Marionette.LayoutView.extend({
-            template: Handlebars.compile('<div>Nekaj</div')
+
+        var collSelected = new LookupModel(null, {
+            entity: 'oseba'
         });
 
-        var view = new View();
+//        var collSelect = new LookupModel(null, {
+//            entity: 'oseba'
+//        });
 
-        this.selectR.show(view);
+        var collSelect = new Collection({
+            entity: 'oseba'
+        });
+
+        var self = this;
+        var $gumb = self.$('.testselect');
+
+        collSelect.fetch({
+            success: function () {
+                var view = new ToggleListView({
+                    collIzbira: collSelect,
+                    collIzbrani: collSelected,
+                    //ItemView: DualListItemView,
+                    //itemTemplate: tpl,
+                    $anchor: $gumb,
+                    title: "izbira oseb"
+                });
+
+                view.on('close', function () {
+                    console.log(collSelected.models);
+                });
+
+                self.selectR.show(view);
+            }
+        });
     };
     return TestView;
 });

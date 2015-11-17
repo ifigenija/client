@@ -44,7 +44,7 @@ define([
     var DualListItemView = Marionette.ItemView.extend({
         template: Handlebars.compile('{{label}}'),
         tagName: 'li',
-        className: 'duallist-item list-group-item',
+        className: 'selectlist-item list-group-item',
         events: {
             'click': 'klikVrstica'
         },
@@ -68,7 +68,7 @@ define([
      */
     var DualListCollView = Marionette.CollectionView.extend({
         tagName: 'ul',
-        className: 'duallist-seznam list-group',
+        className: 'selectlist-seznam list-group',
         emptyView: EmptyView
     });
 
@@ -150,7 +150,7 @@ define([
             }
         } else {
             //odstranimo vse prej označene modele
-            this.$('.duallist-item').removeClass('active');
+            this.$('.selectlist-item').removeClass('active');
             this.resetSelection();
 
             //označimo kliknjen model

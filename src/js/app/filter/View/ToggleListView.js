@@ -12,60 +12,78 @@
  * Izhodni podatki:
  *      - collection izbranih kriterijev
  */
-
 define([
+    'jquery',
     'radio',
     'i18next',
+    'app/bars',
     'backbone',
     'underscore',
-    'marionette',    
-    'app/Max/Module/Backgrid',
-    'app/Max/Model/MaxPageableCollection'
+    'marionette',
+    'template!../tpl/toggleList.tpl',
+    './ToggleListView',
+    './DualListView',
+    'backgrid',
+    'backgrid-filter'
 ], function (
+        $,
         Radio,
         i18next,
+        Handlebars,
         Backbone,
         _,
         Marionette,
-        Backgrid,
-        Coll
+        toggleListTpl,
+        ToggleListView,
+        DualListView,
+        Backgrid
         ) {
-    
-    var ToggleListView = Marionette.LayoutView.extend({});
-    
+
+    var ToggleListView = DualListView.extend({
+        template: toggleListTpl
+    });
+
     /**
-     * Poskrbeli bomo da lahko nastavljamo različne viewje kot optione
-     * @param Array options
+     * Kaj se zgodi ob izrisu Viewja
      * @returns {undefined}
      */
-    ToggleListView.prototype.initialize = function(options){
-        
+    ToggleListView.prototype.onRender = function () {
+        this.leviSeznam = this.renderLeviSeznam();
+        this.filter = this.renderFilter();
     };
-    
-    ToggleListView.prototype.renderSeznam = function(options){
-        
+    /**
+     * Izris filtra
+     * @returns {undefined}
+     */
+    ToggleListView.prototype.renderFilter = function () {
+        var filterView = this.filterView = new Backgrid.Extension.ClientSideFilter({
+            collection: this.izbiraView.collection
+        });
+
+        this.filterR.show(filterView);
+    };
+
+    /**
+     * Osvežimo tabele in izbrane modele pri posameznih 
+     * @returns {undefined}
+     */
+    ToggleListView.prototype.refresh = function () {
+        this.izbiraView.render();
+        this.izbiraView.resetSelection();
     };
     
     /**
-     * Kaj se zgodi ko izberemo enga od vnosov
-     * @param {type} options
+     * Zapri View, ga uničimo
+     * Se kliče ko stisnemo izven Viewja
      * @returns {undefined}
      */
-    ToggleListView.prototype.onSelect = function(options){
-        
-    };
-    
-    /**
-     * Kaj se zgodi ko zavržemo izbiro enga izbranih vnosov
-     * @param {type} options
-     * @returns {undefined}
-     */
-    ToggleListView.prototype.onDeselect = function(options){
-        
+    DualListView.prototype.onClose = function () {
+        $(window).off('resize', jQuery.proxy(this, "resize"));
+        this.onIzbraneDesno();
+        this.destroy();
     };
 
     return ToggleListView;
 });
-
 
 

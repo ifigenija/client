@@ -39,19 +39,19 @@ define([
 
     var DualListView = Marionette.LayoutView.extend({
         template: dualListTpl,
-        className: 'duallist',
+        className: 'selectlist',
         regions: {
-            filterR: '.duallist-filter',
-            leviSeznamR: '.duallist-seznam-levi',
-            gumbiR: '.duallist-gumbi',
-            desniSeznamR: '.duallist-seznam-desni'
+            filterR: '.selectlist-filter',
+            leviSeznamR: '.selectlist-seznam-levi',
+            gumbiR: '.selectlist-gumbi',
+            desniSeznamR: '.selectlist-seznam-desni'
         },
         triggers: {
             'click .vsiDesno': 'vseDesno',
             'click .izbraniDesno': 'izbraneDesno',
             'click .izbraniLevo': 'izbraneLevo',
             'click .vsiLevo': 'vseLevo',
-            'click .duallist-backdrop': 'close'
+            'click .selectlist-backdrop': 'close'
         }
     });
 
@@ -128,6 +128,10 @@ define([
         this.filter = this.renderFilter();
     };
 
+    /**
+     * Ko je view- v celoti narisan se pokliče resize
+     * @returns {undefined}
+     */
     DualListView.prototype.onShow = function () {
         $(window).trigger('resize');
     };

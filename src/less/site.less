@@ -790,8 +790,8 @@ fieldset {
     }
 }
 
-// duallist style
-.duallist{
+// selectlist style
+.selectlist{
     position: absolute;
     width: 600px;
     height: 500px;
@@ -807,16 +807,15 @@ fieldset {
         left: 0;
         z-index: @zindex-modal-background;
     }
-    &-seznama{
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -o-user-select: none;
-    }
     &-seznam{
         max-height: 400px;
         overflow: auto;
         margin-top: 10px;
+        //da se ob shift kliku ne označuje vsebina
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -o-user-select: none;
     }
     &-gumbi{
         padding-bottom: 5px;
@@ -846,11 +845,11 @@ fieldset {
     }
 }
 
-h4.duallist-naslov{
+h4.selectlist-naslov{
     margin: 0px;
 }
 
-//namenjeno testiranju duallista
+//namenjeno testiranju selectlista
 .test{
     margin-left: 10%;
     //margin-top: 90%;
