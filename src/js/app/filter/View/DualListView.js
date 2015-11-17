@@ -80,8 +80,9 @@ define([
         this.ItemView = options.ItemView || null;
         this.itemTemplate = options.itemTemplate || null;
         this.$anchor = options.$anchor || null;
-        
-        $(window).on('resize', jQuery.proxy( this, "resize" ));
+
+        //poslušamo resize event od windowa in naredimo proxy, da se uporabi pravi konteks pri klicanju funkcije
+        $(window).on('resize', jQuery.proxy(this, "resize"));
     };
 
     DualListView.prototype.serializeData = function () {
@@ -89,12 +90,31 @@ define([
             title: this.title
         };
     };
-    
+
     DualListView.prototype.resize = function () {
-        if(this.$anchor){
-            var position = this.$anchor.offset();
-            this.$el.css('left', position.left);
-            this.$el.css('top', position.top + this.$anchor.outerHeight());
+        var $anchor = this.$anchor;
+
+        if ($anchor) {
+            var position = $anchor.offset();
+            var left = position.left;
+            var top = position.top + $anchor.outerHeight();
+
+            var sirinaOkno = $(window).width();
+            var visinaOkno = $(window).height();
+
+            var sirinaView = this.$el.width();
+            var visinaView = this.$el.height();
+
+            if (left + sirinaView > sirinaOkno) {
+                left = left - (sirinaView - $anchor.outerWidth());
+            }
+
+            if (top + visinaView > visinaOkno) {
+                top = top - visinaView - 2 * $anchor.outerHeight();
+            }
+
+            this.$el.css('left', left);
+            this.$el.css('top', top);
         }
     };
 
@@ -106,8 +126,11 @@ define([
         this.leviSeznam = this.renderLeviSeznam();
         this.desniSeznam = this.renderDesniSeznam();
         this.filter = this.renderFilter();
-        this.resize();
     };
+    
+    DualListView.prototype.onShow = function () {
+        $(window).trigger('resize');
+    };    
 
     /**
      * Izris filtra
@@ -230,7 +253,7 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onClose = function () {
-        $(window).off('resize', jQuery.proxy( this, "resize" ));
+        $(window).off('resize', jQuery.proxy(this, "resize"));
         this.destroy();
     };
 

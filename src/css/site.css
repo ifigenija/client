@@ -690,8 +690,8 @@ fieldset.pomemben legend span {
 }
 .duallist {
   position: absolute;
-  max-width: 600px;
-  max-height: 500px;
+  width: 600px;
+  height: 500px;
 }
 .duallist-content {
   position: relative;
@@ -714,31 +714,40 @@ fieldset.pomemben legend span {
 .duallist-seznam {
   max-height: 400px;
   overflow: auto;
-  margin: 10px;
+  margin-top: 10px;
 }
 .duallist-gumbi {
-  text-align: center;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 .duallist-gumb {
-  margin-top: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   width: 100%;
 }
 .duallist-filter {
-  margin-left: 4px;
-  margin-right: 4px;
+  margin-left: 9px;
+  margin-right: 9px;
+}
+.duallist-body {
+  padding-bottom: 0px;
 }
 .duallist .input-group {
   width: 100%;
 }
 .duallist .form-group {
   width: 100%;
+  margin-bottom: 0px;
+}
+.duallist .panel-default {
+  margin-bottom: 0px;
 }
 .test {
-  margin-left: 20%;
+  margin-left: 90%;
+  margin-top: 90%;
 }
 h4.duallist-naslov {
-  margin-bottom: 5px;
-  margin-left: 7px;
+  margin: 0px;
 }
 /*
 Licenca GPLv3
