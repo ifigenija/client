@@ -127,9 +127,11 @@ define([
                 if (oznacuj) {
                     models[id].set('selected', true);
                     var child = this.children.findByModel(models[id]);
-                    var $e = child.$el;
-                    if (!$e.hasClass('active')) {
-                        $e.addClass('active');
+                    if (child) {
+                        var $e = child.$el;
+                        if (!$e.hasClass('active')) {
+                            $e.addClass('active');
+                        }
                     }
                 }
             }

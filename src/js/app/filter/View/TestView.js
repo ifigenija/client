@@ -56,6 +56,7 @@ define([
             entity: 'oseba'
         });
         var self = this;
+        //var $gumb = self.$('.test');
         
         collSelect.fetch({
             success: function () {
@@ -64,6 +65,7 @@ define([
                     collIzbira: collSelect,
                     //ItemView: DualListItemView,
                     //itemTemplate: tpl
+                    //$anchor : $gumb
                 });
 
                 self.testR.show(view);

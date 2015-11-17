@@ -7956,6 +7956,11 @@ fieldset.pomemben legend span {
 .pnl-relacije .relation-seznam {
   margin-top: 10px;
 }
+.duallist {
+  position: absolute;
+  max-width: 600px;
+  max-height: 500px;
+}
 .duallist-content {
   position: relative;
   z-index: 1050;
@@ -7995,6 +8000,9 @@ fieldset.pomemben legend span {
 }
 .duallist .form-group {
   width: 100%;
+}
+.test {
+  margin-left: 20%;
 }
 h4.duallist-naslov {
   margin-bottom: 5px;
