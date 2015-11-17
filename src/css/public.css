@@ -8010,12 +8010,11 @@ fieldset.pomemben legend span {
 .duallist .panel-default {
   margin-bottom: 0px;
 }
-.test {
-  margin-left: 90%;
-  margin-top: 90%;
-}
 h4.duallist-naslov {
   margin: 0px;
+}
+.test {
+  margin-left: 10%;
 }
 /*
 Licenca GPLv3

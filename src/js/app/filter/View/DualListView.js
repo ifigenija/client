@@ -105,11 +105,11 @@ define([
             var sirinaView = this.$el.width();
             var visinaView = this.$el.height();
 
-            if (left + sirinaView > sirinaOkno) {
+            if (left + sirinaView > sirinaOkno && (sirinaView + sirinaView * 0.2) <= sirinaOkno) {
                 left = left - (sirinaView - $anchor.outerWidth());
             }
 
-            if (top + visinaView > visinaOkno) {
+            if (top + visinaView > visinaOkno && (visinaView + visinaView * 0.2) <= visinaOkno) {
                 top = top - visinaView - 2 * $anchor.outerHeight();
             }
 
@@ -127,10 +127,10 @@ define([
         this.desniSeznam = this.renderDesniSeznam();
         this.filter = this.renderFilter();
     };
-    
+
     DualListView.prototype.onShow = function () {
         $(window).trigger('resize');
-    };    
+    };
 
     /**
      * Izris filtra
