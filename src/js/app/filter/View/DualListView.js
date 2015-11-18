@@ -21,7 +21,7 @@ define([
     'underscore',
     'marionette',
     'template!../tpl/dualList.tpl',
-    './DualListCollView',
+    './SelectListView',
     'backgrid',
     'backgrid-filter'
 ], function (
@@ -33,7 +33,7 @@ define([
         _,
         Marionette,
         dualListTpl,
-        DualListCollView,
+        SelectListView,
         Backgrid
         ) {
 
@@ -62,8 +62,8 @@ define([
      *      - template : templeta za DualListView
      *      - collIzbrani: collection izbranih modelov (na začetku prazen collection)
      *      - collIzbira: collection modelov med katerimi lahko izbiramo
-     *      - IzbiraView: deklaracija IzbiraView, namenjen izrisu collIzbira(default DualListCollView)
-     *      - IzbraniView: deklaracija IzbraniView, collIzbrani(default DualListCollView)
+     *      - IzbiraView: deklaracija IzbiraView, namenjen izrisu collIzbira(default SelectListView)
+     *      - IzbraniView: deklaracija IzbraniView, collIzbrani(default SelectListView)
      *      - title: kakšen naslov se naj izpiše DualListView-ja
      *      - ItemView: ItemView je namenjen izrisu modelov collectionov v IzbiraView in IzbraniView(dafault null)
      *      - itemTemplate: v primeru da želimo spremeniti samo template ItemViewja mu podamo samo template(default null)
@@ -74,8 +74,8 @@ define([
         this.template = options.tempalte || this.template;
         this.collIzbrani = options.collIzbrani || new Backbone.Collection();
         this.collIzbira = options.collIzbira || new Backbone.Collection();
-        this.IzbiraView = options.IzbiraView || DualListCollView;
-        this.IzbraniView = options.IzbraniView || DualListCollView;
+        this.IzbiraView = options.IzbiraView || SelectListView;
+        this.IzbraniView = options.IzbraniView || SelectListView;
         this.title = options.title || "Izberi";
         this.ItemView = options.ItemView || null;
         this.itemTemplate = options.itemTemplate || null;
@@ -123,9 +123,10 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onRender = function () {
-        this.leviSeznam = this.renderLeviSeznam();
-        this.desniSeznam = this.renderDesniSeznam();
-        this.filter = this.renderFilter();
+        this.renderLeviSeznam();
+        this.renderDesniSeznam();
+        this.renderFilter();
+        this.filtrirajIzbrane();
     };
 
     /**

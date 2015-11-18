@@ -41,7 +41,7 @@ define([
      * prožit more select s event podatki kot parametrom
      * @type @exp;Marionette@pro;ItemView@call;extend
      */
-    var DualListItemView = Marionette.ItemView.extend({
+    var SelectListItemView = Marionette.ItemView.extend({
         template: Handlebars.compile('{{label}}'),
         tagName: 'li',
         className: 'selectlist-item list-group-item',
@@ -66,7 +66,7 @@ define([
      *      - search : nastavi filter collectiona, kateri filtri se naj pokažejo kateri pa ne
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
-    var DualListCollView = Marionette.CollectionView.extend({
+    var SelectListView = Marionette.CollectionView.extend({
         tagName: 'ul',
         className: 'selectlist-seznam list-group',
         emptyView: EmptyView
@@ -79,8 +79,8 @@ define([
      *      - template za itemViewja
      * @returns {undefined}
      */
-    DualListCollView.prototype.initialize = function (options) {
-        this.ItemView = options.ItemView || DualListItemView;
+    SelectListView.prototype.initialize = function (options) {
+        this.ItemView = options.ItemView || SelectListItemView;
         this.itemTemplate = options.itemTemplate || null;
 
         //izvedemo samo v primeru da imamo zunanji template brez podanega ItemView-ja
@@ -93,9 +93,9 @@ define([
 
     /**
      * Vrne View, ki se bo uporabil kot ChildView za collectionView
-     * @returns {DualListCollView_L21.DualListCollView.options.ItemView}
+     * @returns {SelectListView_L21.SelectListView.options.ItemView}
      */
-    DualListCollView.prototype.getChildView = function () {
+    SelectListView.prototype.getChildView = function () {
         return this.ItemView;
     };
 
@@ -105,7 +105,7 @@ define([
      * @param {type} item
      * @returns {undefined}
      */
-    DualListCollView.prototype.onChildviewSelect = function (item, e) {
+    SelectListView.prototype.onChildviewSelect = function (item, e) {
         var model = item.model;
         var $el = item.$el;
 
@@ -166,7 +166,7 @@ define([
      * Vrne polje modelov, ki jih želimo izbrati
      * @returns {Marionette.CollectionView@call;extend.prototype.getSelectedModels.result|Array}
      */
-    DualListCollView.prototype.getSelectedModels = function () {
+    SelectListView.prototype.getSelectedModels = function () {
         var result = [];
         var models = this.collection.models;
         for (var modelId in models) {
@@ -178,16 +178,16 @@ define([
     };
     /**
      * Vrne polje vseh modelov iz collectiona
-     * @returns {DualListCollView_L21.DualListCollView.collection.models}
+     * @returns {SelectListView_L21.SelectListView.collection.models}
      */
-    DualListCollView.prototype.getAllModels = function () {
+    SelectListView.prototype.getAllModels = function () {
         return _.clone(this.collection.models);
     };
     /**
      * resetiramo polje modelov
-     * @returns {DualListCollView_L21.DualListCollView.collection.models}
+     * @returns {SelectListView_L21.SelectListView.collection.models}
      */
-    DualListCollView.prototype.resetSelection = function () {
+    SelectListView.prototype.resetSelection = function () {
         var models = this.collection.models;
         for (var modelId in models) {
             models[modelId].set('selected', false);
@@ -200,7 +200,7 @@ define([
      *      collPrimerjava vsebuje seznam modelov, ki jih v tem collectionu ne smemo prikazati.
      * @returns {undefined}
      */
-    DualListCollView.prototype.search = function (collPrimerjava) {
+    SelectListView.prototype.search = function (collPrimerjava) {
         this.filter = function (child, index, collection) {
             var models = collPrimerjava.models;
             for (var index in models) {
@@ -213,5 +213,31 @@ define([
         this.render();
     };
 
-    return DualListCollView;
+    /**
+     * Metoda prejme collection izbranih modelov s katerim primerja collection tega viewja.
+     * Vsi isti modeli se v seznamu označijo označijo
+     * @param Collection collIzbrani
+     * @returns {undefined}
+     */
+    SelectListView.prototype.oznaciModele = function (collIzbrani) {
+        //modeli, ki so izbrani
+        var models = collIzbrani.models;
+
+        for (var id in models) {
+            //model, ki ga želimo označit
+            var model = this.collection.get(models[id]);
+            if (model) {
+                model.set('selected', true);
+                var child = this.children.findByModel(model);
+                if (child) {
+                    var $e = child.$el;
+                    if (!$e.hasClass('active')) {
+                        $e.addClass('active');
+                    }
+                }
+            }
+        }
+    };
+
+    return SelectListView;
 });

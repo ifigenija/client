@@ -22,16 +22,18 @@ define([
     'i18next',
     'backbone',
     'underscore',
-    'marionette'
+    'marionette',
+    'template!../tpl/vrstaFiltra.tpl'
 ], function (
         Radio,
         i18next,
         Backbone,
         _,
-        Marionette
+        Marionette,
+        vrstaFiltraTpl
         ) {
 
-    var VrstaFiltraView = Marionette.LayoutView.extend({});
+    var VrstaFiltraView = Marionette.ItemView.extend({});
 
     /**
      * Poskrbeli bomo da lahko nastavljamo različne viewje kot optione
@@ -39,8 +41,10 @@ define([
      * @returns {undefined}
      */
     VrstaFiltraView.prototype.initialize = function (options) {
-        this.template = '';
-        this.DolociView = options.DolociView || this.DolociView;
+        this.template = options.template || vrstaFiltraTpl;
+        this.collection = options.collection || new Backbone.Collection();
+        this.stIzpisov = options.stIzpisov || 2;
+        this.izpisiVse = options.Izpisivse || false;
     };
 
     /**

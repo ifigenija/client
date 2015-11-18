@@ -27,23 +27,43 @@ define([
     'backbone',
     'underscore',
     'marionette',
-    '../tpl/filter.tpl'
+    'app/bars',
+    'template!../tpl/filter.tpl',
+    'template!../tpl/vrsta-filtra.tpl'
 ], function (
         Radio,
         i18next,
         Backbone,
         _,
         Marionette,
-        tpl
+        Handlebars,
+        tpl,
+        itemTpl
         ) {
+    
+    var VrstaFiltraView = Marionette.ItemView.extend({
+        template: itemTpl,
+        className: 'vrsta-filtra-item',
+        triggers:{
+            'click .vrsta-filtra-brisi' : 'brisi',
+            'click .vrsta-filtra' : 'uredi'
+        }
+    });
     
     var FilterView = Marionette.CompositeView.extend({
         template: tpl,
-        childViewContainer: '.filter-vrstefiltra'
+        className: 'filter-select',
+        childViewContainer: '.region-vrste-filtra',
+        onChildviewUredi: function(item){
+            console.log('uredi');
+        },
+        onChildviewBrisi: function(item){
+            console.log('brisi');
+        }
     });
     
     FilterView.prototype.getChildView = function(){
-        return this.VrstaFiltraView;
+        return VrstaFiltraView;
     };
     
     /**
@@ -56,7 +76,11 @@ define([
         this.VrstaFiltraView = options.VrstaFiltraView || VrstaFiltraView;
     };
     
-    FilterView.prototype.renderSeznam = function(options){
+    FilterView.prototype.onrender = function(options){
+        this.renderToolbar();
+    };
+    
+    FilterView.prototype.renderToolbar = function(){
         
     };
     

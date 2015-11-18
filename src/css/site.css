@@ -743,6 +743,22 @@ fieldset.pomemben legend span {
 h4.selectlist-naslov {
   margin: 0px;
 }
+.filter-select .vrsta-filtra-item {
+  display: inline-block;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+.vrsta-filtra-brisi {
+  display: inline-block;
+  height: 100%;
+}
+.vrsta-filtra .ikona {
+  vertical-align: middle;
+  height: 100%;
+}
+.vrsta-filtra-podatki {
+  display: inline-block;
+}
 .test {
   margin-left: 10%;
 }
