@@ -14,7 +14,8 @@ define([
     './ToolbarFilterView',
     'app/bars',
     'app/Max/Model/LookupModel',
-    'baseUrl'
+    'baseUrl',
+    '../Model/VrstaFiltraModel'
 ], function (
         Radio,
         i18next,
@@ -28,7 +29,8 @@ define([
         FilterView,
         Handlebars,
         LookupModel,
-        baseUrl
+        baseUrl,
+        VrstaFiltra
         ) {
 
     var tpl = Handlebars.compile('{{ime}}');
@@ -105,17 +107,25 @@ define([
     };
 
     TestView.prototype.onTestFilter = function () {
-        var self = this;
-        
-        collSelect.fetch({
-            success: function () {
-                var view = new FilterView({
-                    collection: collSelect
-                });
-
-                self.filterR.show(view);
-            }
+        var model = new VrstaFiltra.Model({
+            entity: 'oseba'
         });
+        var model1 = new VrstaFiltra.Model({
+            entity: 'oseba'
+        });
+        var model2 = new VrstaFiltra.Model({
+            entity: 'oseba'
+        });
+
+        var coll = new VrstaFiltra.Collection();
+        coll.add([model,model1,model2]);
+        
+        var view = new FilterView({
+            collection: coll,
+            vrsteFiltraColl: coll
+        });
+
+        this.filterR.show(view);
     };
 
     return TestView;

@@ -1,9 +1,9 @@
 <div class="vrsta-filtra">
-    <div class="vrsta-filtra-podatki">
-        <div class="vrsta-filtra-naslov">naslov</div>
-        <div class="vrsta-filtra-seznam">seznam</div>
-    </div>
-    <div class="vrsta-filtra-brisi">
+    <span class="vrsta-filtra-naslov">
+        <i class="fa fa-user"></i>
+    </span>
+    <span class="vrsta-filtra-seznam">seznam</span>
+    <span class="vrsta-filtra-brisi">
         <i class="fa fa-times"></i>
-    </div>
+    </span>
 </div>

@@ -7,7 +7,7 @@
  *      - vrsta filtra
  *      - collection
  *
- * Izbira kriterijev filtra
+ * Mozni kriterijev filtra
  *
  * Izhodni podatki:
  *      - collection izbranih kriterijev
@@ -61,7 +61,7 @@ define([
     };
 
     ToggleListView.prototype.renderToolbar = function () {
-        var models = this.collIzbira.models;
+        var models = this.collMozni.models;
         //preverimo ali so vsi modeli označeni
         var label = i18next.t('std.odkljukaj');
         
@@ -97,7 +97,7 @@ define([
      * @returns {undefined}
      */
     ToggleListView.prototype.oznaciIzbrane = function () {
-        this.izbiraView.oznaciModele(this.collIzbrani);
+        this.mozniView.oznaciModele(this.collIzbrani);
     };
 
     /**
@@ -105,8 +105,8 @@ define([
      * @returns {undefined}
      */
     ToggleListView.prototype.refresh = function () {
-        this.izbiraView.render();
-        this.izbiraView.resetSelection();
+        this.mozniView.render();
+        this.mozniView.resetSelection();
     };
 
     /**
@@ -125,7 +125,7 @@ define([
      * @returns {undefined}
      */
     ToggleListView.prototype.getIzbraniModeli = function () {
-        var models = this.izbiraView.getSelectedModels();
+        var models = this.mozniView.getSelectedModels();
         this.collIzbrani.reset(models);
     };
 
@@ -145,12 +145,12 @@ define([
                     label: i18next.t('std.odkljukaj')
                 });
 
-                this.izbiraView.oznaciModele(this.collIzbira);
+                this.mozniView.oznaciModele(this.collMozni);
             } else {
                 but.set({
                     label: i18next.t('std.obkljukaj')
                 });
-                this.izbiraView.resetSelection();
+                this.mozniView.resetSelection();
                 this.render();
             }
         }

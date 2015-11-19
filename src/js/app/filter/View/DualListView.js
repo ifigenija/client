@@ -7,7 +7,7 @@
  *      - vrsta filtra
  *      - collection
  *
- * Izbira kriterijev filtra
+ * Mozni kriterijev filtra
  *
  * Izhodni podatki:
  *      - collection izbranih kriterijev
@@ -61,11 +61,11 @@ define([
      * @param Array options
      *      - template : templeta za DualListView
      *      - collIzbrani: collection izbranih modelov (na začetku prazen collection)
-     *      - collIzbira: collection modelov med katerimi lahko izbiramo
-     *      - IzbiraView: deklaracija IzbiraView, namenjen izrisu collIzbira(default SelectListView)
+     *      - collMozni: collection modelov med katerimi lahko moznimo
+     *      - MozniView: deklaracija MozniView, namenjen izrisu collMozni(default SelectListView)
      *      - IzbraniView: deklaracija IzbraniView, collIzbrani(default SelectListView)
      *      - title: kakšen naslov se naj izpiše DualListView-ja
-     *      - ItemView: ItemView je namenjen izrisu modelov collectionov v IzbiraView in IzbraniView(dafault null)
+     *      - ItemView: ItemView je namenjen izrisu modelov collectionov v MozniView in IzbraniView(dafault null)
      *      - itemTemplate: v primeru da želimo spremeniti samo template ItemViewja mu podamo samo template(default null)
      *      - $anchor: namenjen je pozicioniranju viewja(default null)
      * @returns {undefined}
@@ -73,8 +73,8 @@ define([
     DualListView.prototype.initialize = function (options) {
         this.template = options.tempalte || this.template;
         this.collIzbrani = options.collIzbrani || new Backbone.Collection();
-        this.collIzbira = options.collIzbira || new Backbone.Collection();
-        this.IzbiraView = options.IzbiraView || SelectListView;
+        this.collMozni = options.collMozni || new Backbone.Collection();
+        this.MozniView = options.MozniView || SelectListView;
         this.IzbraniView = options.IzbraniView || SelectListView;
         this.title = options.title || "Izberi";
         this.ItemView = options.ItemView || null;
@@ -97,7 +97,7 @@ define([
         if ($anchor) {
             var position = $anchor.offset();
             var left = position.left;
-            var top = position.top + $anchor.outerHeight();
+            //var top = position.top + $anchor.outerHeight();
 
             var sirinaOkno = $(window).width();
             var visinaOkno = $(window).height();
@@ -127,6 +127,7 @@ define([
         this.renderDesniSeznam();
         this.renderFilter();
         this.filtrirajIzbrane();
+        this.triggerMethod('show');
     };
 
     /**
@@ -143,7 +144,7 @@ define([
      */
     DualListView.prototype.renderFilter = function () {
         var filterView = this.filterView = new Backgrid.Extension.ServerSideFilter({
-            collection: this.izbiraView.collection
+            collection: this.mozniView.collection
         });
 
         this.filterR.show(filterView);
@@ -155,8 +156,8 @@ define([
      * @returns {DualListView_L24.Backgrid.Grid|DualListView_L24.Marionette.LayoutView.extend.prototype.renderLeviSeznam.grid}
      */
     DualListView.prototype.renderLeviSeznam = function () {
-        var view = this.izbiraView = new this.IzbiraView({
-            collection: this.collIzbira,
+        var view = this.mozniView = new this.MozniView({
+            collection: this.collMozni,
             ItemView: this.ItemView,
             itemTemplate: this.itemTemplate
         });
@@ -185,7 +186,7 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onVseDesno = function () {
-        var models = this.izbiraView.getAllModels();
+        var models = this.mozniView.getAllModels();
 
         this.izbraniView.collection.add(models);
 
@@ -198,7 +199,7 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.onIzbraneDesno = function () {
-        var models = this.izbiraView.getSelectedModels();
+        var models = this.mozniView.getSelectedModels();
 
         this.izbraniView.collection.add(models);
 
@@ -237,7 +238,7 @@ define([
      * @returns {undefined}
      */
     DualListView.prototype.filtrirajIzbrane = function () {
-        this.izbiraView.search(this.izbraniView.collection);
+        this.mozniView.search(this.izbraniView.collection);
     };
 
     /**
@@ -246,10 +247,10 @@ define([
      */
     DualListView.prototype.refresh = function () {
         this.izbraniView.render();
-        this.izbiraView.render();
+        this.mozniView.render();
 
         this.izbraniView.resetSelection();
-        this.izbiraView.resetSelection();
+        this.mozniView.resetSelection();
     };
 
     /**

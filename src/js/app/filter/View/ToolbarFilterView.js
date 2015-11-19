@@ -27,6 +27,7 @@ define([
     'backbone',
     'underscore',
     'marionette',
+    'jquery',
     'app/bars',
     'template!../tpl/filter.tpl',
     'template!../tpl/vrsta-filtra.tpl'
@@ -36,70 +37,81 @@ define([
         Backbone,
         _,
         Marionette,
+        $,
         Handlebars,
         tpl,
         itemTpl
         ) {
-    
+
     var VrstaFiltraView = Marionette.ItemView.extend({
         template: itemTpl,
         className: 'vrsta-filtra-item',
-        triggers:{
-            'click .vrsta-filtra-brisi' : 'brisi',
-            'click .vrsta-filtra' : 'uredi'
+        triggers: {
+            'click .vrsta-filtra-brisi': 'brisi',
+            'click .vrsta-filtra': 'uredi'
         }
     });
-    
+
     var FilterView = Marionette.CompositeView.extend({
         template: tpl,
         className: 'filter-select',
         childViewContainer: '.region-vrste-filtra',
-        onChildviewUredi: function(item){
-            console.log('uredi');
-        },
-        onChildviewBrisi: function(item){
-            console.log('brisi');
+        triggers: {
+            'click .vrsta-filtra-dodaj': 'dodaj',
+            'click .vrsta-filtra-reset': 'ponastavi'
         }
     });
-    
-    FilterView.prototype.getChildView = function(){
-        return VrstaFiltraView;
-    };
-    
+
     /**
      * Poskrbeli bomo da lahko nastavljamo različne viewje kot optione
      * @param Array options
      * @returns {undefined}
      */
-    FilterView.prototype.initialize = function(options){
+    FilterView.prototype.initialize = function (options) {
         this.template = options.template || this.template;
         this.VrstaFiltraView = options.VrstaFiltraView || VrstaFiltraView;
-    };
-    
-    FilterView.prototype.onrender = function(options){
-        this.renderToolbar();
-    };
-    
-    FilterView.prototype.renderToolbar = function(){
+        this.vrstaFiltraTpl = options.vrstaFiltraTpl || null;
+        this.vrsteFiltraColl = options.vrsteFiltraColl || null;
         
+        //izvedemo samo v primeru da imamo zunanji template brez podanega VrstaFiltraView-ja
+        if (options.vrstaFiltraTpl && !options.VrstaFiltraView) {
+            this.VrstaFiltraView = this.VrstaFiltraView.extend({
+                template: this.vrstaFiltraTpl
+            });
+        }
     };
-    
-    /**
-     * Kaj se zgodi ko izberemo enga od vnosov
-     * @param {type} options
-     * @returns {undefined}
-     */
-    FilterView.prototype.onSelect = function(options){
-        
+
+    FilterView.prototype.getChildView = function () {
+        return VrstaFiltraView;
     };
-    
-    /**
-     * Kaj se zgodi ko zavržemo izbiro enga izbranih vnosov
-     * @param {type} options
-     * @returns {undefined}
-     */
-    FilterView.prototype.onDeselect = function(options){
-        
+
+    FilterView.prototype.onChildviewUredi = function (item) {
+        var model = item.model;
+        var $el = item.$el;
+        var $e = $('<div class="selectlist-content"></div>');
+        $('body').append($e);
+        var view = new model.SelectView({
+            collIzbrani: model.collIzbrani,
+            collIzbira: model.collIzbira,
+            ItemView: model.ItemView,
+            itemTemplate: model.itemtemplate,
+            $anchor: $el,
+            el: $e,
+            title: "izbira oseb"
+        });
+        view.render();
+    };
+
+    FilterView.prototype.onChildviewBrisi = function (item) {
+        this.collection.remove(item.model);
+    };
+
+    FilterView.prototype.onDodaj = function (item) {
+        console.log('dodaj');
+    };
+
+    FilterView.prototype.onPonastavi = function (item) {
+        console.log('ponastavi');
     };
 
     return FilterView;
