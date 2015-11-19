@@ -64,6 +64,9 @@ define([
 
     /**
      * Poskrbeli bomo da lahko nastavljamo različne viewje kot optione
+     * parametri
+     *      - collection : collection aktivnih vrst filtra
+     *      - collVrste: collection vrst filtra
      * @param Array options
      * @returns {undefined}
      */
@@ -71,7 +74,7 @@ define([
         this.template = options.template || this.template;
         this.VrstaFiltraView = options.VrstaFiltraView || VrstaFiltraView;
         this.vrstaFiltraTpl = options.vrstaFiltraTpl || null;
-        this.vrsteFiltraColl = options.vrsteFiltraColl || null;
+        this.collVrste = options.collVrste || null;
         
         //izvedemo samo v primeru da imamo zunanji template brez podanega VrstaFiltraView-ja
         if (options.vrstaFiltraTpl && !options.VrstaFiltraView) {
@@ -90,11 +93,13 @@ define([
         var $el = item.$el;
         var $e = $('<div class="selectlist-content"></div>');
         $('body').append($e);
-        var view = new model.SelectView({
+        var modelM = model.modelMozni;
+        
+        var view = new modelM.SelectView({
             collIzbrani: model.collIzbrani,
-            collIzbira: model.collIzbira,
-            ItemView: model.ItemView,
-            itemTemplate: model.itemtemplate,
+            collMozni: modelM.podatki.collMozni,
+            ItemView: modelM.ItemView,
+            itemTemplate: modelM.itemTemplate,
             $anchor: $el,
             el: $e,
             title: "izbira oseb"

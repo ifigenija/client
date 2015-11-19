@@ -13,13 +13,13 @@ define([
         ) {
     /**
      * options:
-     *      - entity: določa katero entiteto bomo vzeli v collIzbira in v collIzbrani
-     *      - collIzbira: določi collection kriterijev filtra med katerimi lahko izbiramo
+     *      - entity: določa katero entiteto bomo vzeli v collMozni in v collIzbrani
+     *      - collMozni: določi collection kriterijev filtra med katerimi lahko izbiramo
      *      - collIzbrani: določa collection izbranih kriterijev filtra
      *      - SelectView: predstavlja view, ki se bo prikazal pri urejanju/spreminjaju kriterijev
      *      
-     * V primeru da določimo entiteto se bosta collIzbira in collIzbrani inicializirala.
-     * V nasprotnem primeru pa moramo podati modelu collIzbira in collIzbrani
+     * V primeru da določimo entiteto se bosta collMozni in collIzbrani inicializirala.
+     * V nasprotnem primeru pa moramo podati modelu collMozni in collIzbrani
      * @type @exp;Backbone@pro;Model@call;extend
      */
     var VrstaFiltraModel = Backbone.Model.extend({
@@ -29,18 +29,18 @@ define([
                     entity: options.entity
                 });
 
-                this.collIzbira = new LookupModel(null, {
+                this.collMozni = new LookupModel(null, {
                     entity: options.entity
                 });
 
-                this.collIzbira.fetch({
+                this.collMozni.fetch({
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
             } else {
-                if (!options.collIzbira) {
+                if (!options.collMozni) {
                     throw 'Collection modelov med katerimi lahko izbiramo ni določen';
                 } else {
-                    this.collIzbira = options.collIzbira;
+                    this.collMozni = options.collMozni;
                 }
 
                 if (!options.collIzbrani) {

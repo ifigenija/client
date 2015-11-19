@@ -15,7 +15,9 @@ define([
     'app/bars',
     'app/Max/Model/LookupModel',
     'baseUrl',
-    '../Model/VrstaFiltraModel'
+    '../Model/VrstaFiltraModel',
+    '../Model/AktivnaVrstaCollection',
+    '../Model/VrstaCollection'
 ], function (
         Radio,
         i18next,
@@ -30,7 +32,9 @@ define([
         Handlebars,
         LookupModel,
         baseUrl,
-        VrstaFiltra
+        VrstaFiltra,
+        AktivnaVrsta,
+        Vrsta
         ) {
 
     var tpl = Handlebars.compile('{{ime}}');
@@ -107,25 +111,46 @@ define([
     };
 
     TestView.prototype.onTestFilter = function () {
-        var model = new VrstaFiltra.Model({
-            entity: 'oseba'
-        });
-        var model1 = new VrstaFiltra.Model({
-            entity: 'oseba'
-        });
-        var model2 = new VrstaFiltra.Model({
-            entity: 'oseba'
-        });
-
-        var coll = new VrstaFiltra.Collection();
-        coll.add([model,model1,model2]);
+        var self = this;
         
-        var view = new FilterView({
-            collection: coll,
-            vrsteFiltraColl: coll
-        });
+//        var model = new Backbone.Model();
+//        model.set('label', 'mojLabel');
+//        
+//        var coll = new Backbone.Collection();
+//        
+//        coll.add(model);
 
-        this.filterR.show(view);
+        collSelected = collSelect.first(5);
+        
+        collSelect.fetch({
+            success: function () {
+                //vrste
+                var vColl = new Vrsta.Collection();
+
+                var vMod = new Vrsta.Model({
+                    collIzbrani: new Backbone.Collection(),
+                    collMozni: collSelect
+                });
+                vColl.add(vMod);
+
+                //aktivnevrste
+                var avColl = new AktivnaVrsta.Collection();
+
+                var avMod = new AktivnaVrsta.Model({
+                    collIzbrani: new Backbone.Collection(),
+                    modelMozni: vColl.models[0]
+                });
+
+                avColl.add(avMod);
+
+                var view = new FilterView({
+                    collection: avColl,
+                    vrstaColl: vColl
+                });
+
+                self.filterR.show(view);
+            }
+        });
     };
 
     return TestView;
