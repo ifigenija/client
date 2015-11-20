@@ -51,7 +51,8 @@ define([
             'click .izbraniDesno': 'izbraneDesno',
             'click .izbraniLevo': 'izbraneLevo',
             'click .vsiLevo': 'vseLevo',
-            'click .selectlist-backdrop': 'close'
+            'click .selectlist-backdrop': 'close',
+            'click .selectlist-zapri': 'close'
         }
     });
 

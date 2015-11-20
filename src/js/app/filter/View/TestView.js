@@ -11,11 +11,10 @@ define([
     'baseUrl',
     './DualListView',
     './ToggleListView',
-    './ToolbarFilterView',
+    './FilterView',
     'app/bars',
     'app/Max/Model/LookupModel',
     'baseUrl',
-    '../Model/VrstaFiltraModel',
     '../Model/AktivnaVrstaCollection',
     '../Model/VrstaCollection'
 ], function (
@@ -32,13 +31,11 @@ define([
         Handlebars,
         LookupModel,
         baseUrl,
-        VrstaFiltra,
         AktivnaVrsta,
         Vrsta
         ) {
 
     var tpl = Handlebars.compile('{{ime}}');
-
     var DualListItemView = Marionette.ItemView.extend({
         template: Handlebars.compile('{{ime}}'),
         tagName: 'li',
@@ -47,15 +44,12 @@ define([
             'click': 'select'
         }
     });
-
     var collSelected = new LookupModel(null, {
         entity: 'oseba'
     });
-
     var collSelect = new LookupModel(null, {
         entity: 'oseba'
     });
-
     var TestView = Marionette.LayoutView.extend({
         template: testTpl,
         regions: {
@@ -69,11 +63,9 @@ define([
             'click .testfilter': 'testFilter'
         }
     });
-
     TestView.prototype.onTest = function (options) {
         var self = this;
         var $gumb = self.$('.test');
-
         collSelect.fetch({
             success: function () {
                 var view = new DualListView({
@@ -84,7 +76,6 @@ define([
                     $anchor: $gumb,
                     title: "izbira oseb"
                 });
-
                 self.testR.show(view);
             }
         });
@@ -93,7 +84,6 @@ define([
 
         var self = this;
         var $gumb = self.$('.testselect');
-
         collSelect.fetch({
             success: function () {
                 var view = new ToggleListView({
@@ -104,55 +94,60 @@ define([
                     $anchor: $gumb,
                     title: "izbira oseb"
                 });
-
                 self.selectR.show(view);
             }
         });
     };
-
     TestView.prototype.onTestFilter = function () {
         var self = this;
-        
-//        var model = new Backbone.Model();
-//        model.set('label', 'mojLabel');
-//        
-//        var coll = new Backbone.Collection();
-//        
-//        coll.add(model);
 
-        collSelected = collSelect.first(5);
-        
         collSelect.fetch({
             success: function () {
                 //vrste
-                var vColl = new Vrsta.Collection();
-
-                var vMod = new Vrsta.Model({
-                    collIzbrani: new Backbone.Collection(),
-                    collMozni: collSelect
-                });
-                vColl.add(vMod);
-
+                var vColl = new Vrsta();
+                vColl.add([{
+                        collIzbrani: new Backbone.Collection(),
+                        collMozni: collSelect,
+                        icon: 'fa fa-user'
+                    }, {
+                        collIzbrani: new Backbone.Collection(),
+                        collMozni: collSelect,
+                        icon: 'fa fa-home',
+                        SelectView: ToggleListView
+                    }]);
                 //aktivnevrste
-                var avColl = new AktivnaVrsta.Collection();
-
-                var avMod = new AktivnaVrsta.Model({
-                    collIzbrani: new Backbone.Collection(),
-                    modelMozni: vColl.models[0]
-                });
-
-                avColl.add(avMod);
-
+                collSelected.reset(collSelect.first(5));
+                var avColl = new AktivnaVrsta();
+                avColl.add([{
+                        collIzbrani: collSelected,
+                        modelMozni: vColl.models[0]
+                    }, {
+                        collIzbrani: new Backbone.Collection(),
+                        modelMozni: vColl.models[1]
+                    }]);
                 var view = new FilterView({
                     collection: avColl,
-                    vrstaColl: vColl
+                    //vrsteFiltrov: vColl
+                    vrsteFiltrov: [{
+                            title: 'Izbira oseb',
+                            vrsta: 'oseba',
+                            collIzbrani: new Backbone.Collection(),
+                            collMozni: collSelect,
+                            icon: 'fa fa-user'
+                        },
+                        {
+                            title: 'Izbira prostorov',
+                            vrsta: 'prostor',
+                            collIzbrani: new Backbone.Collection(),
+                            collMozni: collSelect,
+                            icon: 'fa fa-home',
+                            SelectView: ToggleListView
+                        }]
                 });
-
                 self.filterR.show(view);
             }
         });
     };
-
     return TestView;
 });
 

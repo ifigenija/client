@@ -1,40 +1,32 @@
 define([
     'radio',
     'baseUrl',
-    'backbone'
+    'backbone',
+    'underscore',
+    './VrstaCollection'
 ], function (
         Radio,
         baseUrl,
-        Backbone
+        Backbone,
+        _,
+        Vrsta
         ) {
 
     var AktivnaVrstaModel = Backbone.Model.extend({
-        collIzbrani: null,
-        modelMozni: null
+        defaults: {
+            collIzbrani: new Backbone.Collection(),
+            modelMozni: new Vrsta(),
+            vrsta: 'nedoloceno'
+        }
     });
 
-    AktivnaVrstaModel.prototype.initialize = function (options) {
-        this.collIzbrani = options.collIzbrani || new Backbone.Collection();
-        this.modelMozni = options.modelMozni || null;
-        if (options.entity) {
-            this.collIzbrani = new LookupModel(null, {
-                entity: options.entity
-            });
-        } else {
-            if (!options.collIzbrani) {
-                throw 'Collection Izbranih modelov ni določen';
-            } else {
-                this.collIzbrani = options.collIzbrani;
-            }
-        }
+    AktivnaVrstaModel.prototype.initialize = function (attr) {
+        this.attributes = _.extend(this.attributes, attr);
     };
 
     var AktivnaVrstaCollection = Backbone.Collection.extend({
         model: AktivnaVrstaModel
     });
 
-    return {
-        Model: AktivnaVrstaModel,
-        Collection: AktivnaVrstaCollection
-    };
+    return AktivnaVrstaCollection;
 });

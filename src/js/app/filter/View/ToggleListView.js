@@ -42,7 +42,8 @@ define([
         template: toggleListTpl,
         triggers: {
             'click .togglelist-gumb': 'izberiVse',
-            'click .selectlist-backdrop': 'close'
+            'click .selectlist-backdrop': 'close',
+            'click .selectlist-zapri': 'close'
         }
     });
 
@@ -58,15 +59,16 @@ define([
     ToggleListView.prototype.onRender = function () {
         this.renderLeviSeznam();
         this.renderToolbar();
+        this.triggerMethod('show');
     };
 
     ToggleListView.prototype.renderToolbar = function () {
         var models = this.collMozni.models;
         //preverimo ali so vsi modeli označeni
         var label = i18next.t('std.odkljukaj');
-        
+
         for (var id in models) {
-            if (!models[id].get('selected') ) {
+            if (!models[id].get('selected')) {
                 label = i18next.t('std.obkljukaj');
                 break;
             }
@@ -105,8 +107,8 @@ define([
      * @returns {undefined}
      */
     ToggleListView.prototype.refresh = function () {
-        this.mozniView.render();
         this.mozniView.resetSelection();
+        this.mozniView.render();
     };
 
     /**
@@ -151,6 +153,7 @@ define([
                     label: i18next.t('std.obkljukaj')
                 });
                 this.mozniView.resetSelection();
+                this.getIzbraniModeli();
                 this.render();
             }
         }

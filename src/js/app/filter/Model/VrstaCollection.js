@@ -3,16 +3,18 @@ define([
     'i18next',
     'baseUrl',
     'backbone',
-    '../View/DualListView'
+    'underscore',
+    '../View/DualListView',
+    '../View/VrstaFiltraView'
 ], function (
         Radio,
         i18next,
         baseUrl,
         Backbone,
-        DualListView
+        _,
+        DualListView,
+        VrstaFiltraView
         ) {
-    var VrstaModel = Backbone.Model.extend({});
-
     /**
      * Parametri
      *      - title
@@ -25,31 +27,39 @@ define([
      *          collMozni,
      *          collIzbrani
      *          }
-     * @param Array options
+     * @param Array attr
      * @returns {undefined}
      */
-    VrstaModel.prototype.initialize = function (options) {
-        this.title = options.title || i18next.t('std.title');
-        this.icon = options.icon || i18next.t('std.icon');
-        this.stIzpisov = options.stIzpisov || 2;
-        this.SelectView = options.SelectView || DualListView;
-        this.ItemView = options.ItemView || null;
-        this.itemTpl = options.itemTpl || null;
-        this.podatki = options.podatki || {
-            collMozni: null,
-            collIzbrani: null
-        };
+    var VrstaModel = Backbone.Model.extend({
+        defaults: {
+            title: i18next.t('std.title'),
+            icon: 'fa fa-tablet',
+            stIzpisov: 2,
+            SelectView: DualListView,
+            ItemView: null,
+            itemTpl: null,
+            VrstaFiltraView: VrstaFiltraView,
+            vrstaFiltraTpl: null,
+            podatki: {
+                collMozni: new Backbone.Collection(),
+                collIzbrani: new Backbone.Collection()
+            }
+        }
+    });
 
-        if (!options.collMozni) {
+    VrstaModel.prototype.initialize = function (attr) {
+        this.attributes = _.extend(this.attributes, attr);
+
+        if (!attr.collMozni) {
             throw 'Collection modelov med katerimi lahko izbiramo ni določen';
         } else {
-            this.podatki.collMozni = options.collMozni;
+            this.get('podatki').collMozni = attr.collMozni;
         }
 
-        if (!options.collIzbrani) {
+        if (!attr.collIzbrani) {
             throw 'Collection Izbranih modelov ni določen';
         } else {
-            this.podatki.collIzbrani = options.collIzbrani;
+            this.get('podatki').collIzbrani = attr.collIzbrani;
         }
     };
 
@@ -57,8 +67,5 @@ define([
         model: VrstaModel
     });
 
-    return {
-        Model: VrstaModel,
-        Collection: VrstaCollection
-    };
+    return VrstaCollection;
 });

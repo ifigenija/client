@@ -3,86 +3,98 @@
  * 
  * @author Lovro Rojko
  * 
- * Vhodni podatki:
- *      - collection
- *      - izpiši vse kriterije(bolean: default false)
- *      - število izpisov pri izpisu izbranih kriterijev
- * 
- * Izpis izbranih kriterijev:
- *      - celoten seznam
- *      - povzetek(default)
- * 
- * Izbrira kriterijev vrste filtra
+ * Vhnodni podatki:
+ *      vrste filtrov
+ *      prednastavljeni filter
+ *      {
+ *      vrsta1:{ids:{}},
+ *      vrsta2:{ids:{}}
+ *      }
+ *
+ * Prikaz vrst filtrov
+ * toolbar z gumboma dodaj vrsto filtra in ponastavi filtre
  * 
  * Izhodni podatki:
- * collection izbranih kriterijev vrste filtra
+ *      {
+ *      vrsta1:{ids:{}},
+ *      vrsta2:{ids:{}}
+ *      }
  */
+
 define([
     'radio',
     'i18next',
     'backbone',
-    'underscore',
     'marionette',
-    'template!../tpl/vrstaFiltra.tpl'
+    'underscore',
+    'jquery',
+    'template!../tpl/vrsta-filtra.tpl'
 ], function (
         Radio,
         i18next,
         Backbone,
-        _,
         Marionette,
-        vrstaFiltraTpl
+        _,
+        $,
+        itemTpl
         ) {
 
-    var VrstaFiltraView = Marionette.ItemView.extend({});
-
-    /**
-     * Poskrbeli bomo da lahko nastavljamo različne viewje kot optione
-     * @param Array options
-     * @returns {undefined}
-     */
-    VrstaFiltraView.prototype.initialize = function (options) {
-        this.template = options.template || vrstaFiltraTpl;
-        this.collection = options.collection || new Backbone.Collection();
-        this.stIzpisov = options.stIzpisov || 2;
-        this.izpisiVse = options.Izpisivse || false;
-    };
-
-    /**
-     * Kaj se zgodi ko se izriše vrstafiltra view
-     * @param {type} options
-     * @returns {undefined}
-     */
-    VrstaFiltraView.prototype.onRrender = function (options) {
-
-    };
-
-    /**
-     * Izpis seznama kriterijev
-     * @param {type} options
-     * @returns {undefined}
-     */
-    VrstaFiltraView.prototype.renderSeznamKriterijev = function (options) {
-
-    };
-    /**
-     * povzetek, podatkov iz collectiona
-     * @param {type} options
-     * @returns {undefined}
-     */
-    VrstaFiltraView.prototype.renderPovzetek = function (options) {
-
-    };
-
-    /**
-     * kaj se zgodi ko želimo izbrati kriterije vrste filtra
-     * @param {type} options
-     * @returns {undefined}
-     */
-    VrstaFiltraView.prototype.onDolociKriterije = function (options) {
-        if (this.DolociView) {
-            var dolociView = new this.DolociView(filteredOptions);
-            
+    var VrstaFiltraView = Marionette.LayoutView.extend({
+        template: itemTpl,
+        className: 'vrsta-filtra-item',
+        regions: {
+            seznamR: '.vrsta-filtra-seznam-region'
+        },
+        triggers: {
+            'click .vrsta-filtra-brisi': 'brisi',
+            'click .vrsta-filtra': 'uredi'
         }
+    });
+
+    VrstaFiltraView.prototype.serializeData = function () {
+
+    };
+    
+    VrstaFiltraView.prototype.serializeData = function () {
+        return _.extend(this.options, {
+            icon: this.model.get('modelMozni').get('icon'),
+            title: this.model.get('modelMozni').get('titel')
+        });
+    };
+
+    VrstaFiltraView.prototype.onRender = function () {
+        this.renderSeznam();
+    };
+
+    VrstaFiltraView.prototype.renderSeznam = function () {
+        //this.seznamR.show();
+    };
+
+    VrstaFiltraView.prototype.onUredi = function () {
+        var model = this.model;
+        var $el = this.$el;
+        var $e = $('<div class="selectlist-content"></div>');
+        $('body').append($e);
+        var modelM = model.get('modelMozni');
+
+        var SelectView = modelM.get('SelectView');
+
+        var view = new SelectView({
+            collIzbrani: model.get('collIzbrani'),
+            collMozni: modelM.get('podatki').collMozni,
+            ItemView: modelM.get('ItemView'),
+            itemTemplate: modelM.get('itemTemplate'),
+            $anchor: $el,
+            el: $e,
+            title: "izbira oseb"
+        });
+
+        view.on('close', this.render);
+        view.render();
+    };
+
+    VrstaFiltraView.prototype.onBrisi = function () {
+        this.model.destroy();
     };
 
     return VrstaFiltraView;
