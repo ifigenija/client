@@ -69,8 +69,8 @@ define([
         collSelect.fetch({
             success: function () {
                 var view = new DualListView({
-                    collIzbrani: collSelected,
-                    collIzbira: collSelect,
+                    izbrani: collSelected,
+                    mozni: collSelect,
                     //ItemView: DualListItemView,
                     //itemTemplate: tpl,
                     $anchor: $gumb,
@@ -87,8 +87,8 @@ define([
         collSelect.fetch({
             success: function () {
                 var view = new ToggleListView({
-                    collIzbira: collSelect,
-                    collIzbrani: collSelected,
+                    mozni: collSelect,
+                    izbrani: collSelected,
                     //ItemView: DualListItemView,
                     //itemTemplate: tpl,
                     $anchor: $gumb,
@@ -103,44 +103,28 @@ define([
 
         collSelect.fetch({
             success: function () {
-                //vrste
-                var vColl = new Vrsta();
-                vColl.add([{
-                        collIzbrani: new Backbone.Collection(),
-                        collMozni: collSelect,
-                        icon: 'fa fa-user'
-                    }, {
-                        collIzbrani: new Backbone.Collection(),
-                        collMozni: collSelect,
-                        icon: 'fa fa-home',
-                        SelectView: ToggleListView
-                    }]);
-                //aktivnevrste
                 collSelected.reset(collSelect.first(5));
-                var avColl = new AktivnaVrsta();
-                avColl.add([{
-                        collIzbrani: collSelected,
-                        modelMozni: vColl.models[0]
-                    }, {
-                        collIzbrani: new Backbone.Collection(),
-                        modelMozni: vColl.models[1]
-                    }]);
                 var view = new FilterView({
-                    collection: avColl,
-                    //vrsteFiltrov: vColl
+                    aktivneVrste: [{
+                            izbrani: collSelected,
+                            vrsta: 'oseba'
+                        }, {
+                            izbrani: new Backbone.Collection(),
+                            vrsta: 'prostor'
+                        }],
                     vrsteFiltrov: [{
                             title: 'Izbira oseb',
                             vrsta: 'oseba',
-                            collIzbrani: new Backbone.Collection(),
-                            collMozni: collSelect,
-                            icon: 'fa fa-user'
+                            icon: 'fa fa-user',
+                            izbrani: new Backbone.Collection(),
+                            mozni: collSelect
                         },
                         {
                             title: 'Izbira prostorov',
                             vrsta: 'prostor',
-                            collIzbrani: new Backbone.Collection(),
-                            collMozni: collSelect,
                             icon: 'fa fa-home',
+                            izbrani: new Backbone.Collection(),
+                            mozni: collSelect,
                             SelectView: ToggleListView
                         }]
                 });

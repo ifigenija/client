@@ -29,7 +29,8 @@ define([
     'marionette',
     'jquery',
     'template!../tpl/filter.tpl',
-    '../Model/VrstaCollection'
+    '../Model/VrstaCollection',
+    '../Model/AktivnaVrstaCollection'
 ], function (
         Radio,
         i18next,
@@ -38,7 +39,8 @@ define([
         Marionette,
         $,
         tpl,
-        Vrsta
+        Vrsta,
+        AktivnaVrsta
         ) {
 
     var FilterView = Marionette.CompositeView.extend({
@@ -61,28 +63,86 @@ define([
      */
     FilterView.prototype.initialize = function (options) {
         this.template = options.template || this.template;
-        this.vrsteFiltrov = this.getVrsteFiltrov(options.vrsteFiltrov) || null;
-        this.aktivneVrste = this.getAktivneVrste(options.aktivneVrste) || null;
+
+        if (options.vrsteFiltrov) {
+            this.vrsteFiltrov = this.getVrsteFiltrov(options.vrsteFiltrov);
+        } else {
+            this.vrsteFiltrov = new Backbone.Collection();
+        }
+
+        if (options.aktivneVrste) {
+            this.aktivneVrste = this.getAktivneVrste(options.aktivneVrste);
+        } else {
+            this.aktivneVrste = new Backbone.Collection();
+        }
+
+        this.collection = this.aktivneVrste;
+        this.ponastavitev = this.aktivneVrste.clone();
     };
 
     /**
-     * 
+     * V primeru da je aktivna vrsta array ga pretvorimo vcollection in določimo referenco na definicijo vrstefiltra
+     * @param {Array,Collection} AVrsta
+     * @returns Collection
+     */
+    FilterView.prototype.getAktivneVrste = function (aVrsta) {
+        var coll;
+        if (_.isArray(aVrsta)) {
+            coll = this._arrayToCollection(aVrsta, AktivnaVrsta);
+        } else if (aVrsta instanceof Backbone.Collection) {
+            coll = aVrsta;
+        }
+        if (coll) {
+            this.dolociVrsto(coll);
+        }
+        return coll;
+    };
+
+    /**
+     * Pogledamo kakšne vrste je aktivni filter in poiščemo definicijo tega filtra med vrstamiFiltrov.
+     * V kolikor bo vrsta nedoločena lahko v model vstavimo vrstaModel in se bodp od tam brale definicije
+     * @param {type} coll
+     * @returns {undefined}
+     */
+    FilterView.prototype.dolociVrsto = function (coll) {
+        var self = this;
+        //pogledamo vrsto modela
+        coll.each(function (model) {
+            var vrsta = model.get('vrsta');
+            //v primeru da ni nedoločena poiščemo definicijo vrste v coll vrsteFiltra
+            if (vrsta !== 'nedoloceno') {
+                self.vrsteFiltrov.each(function (vModel) {
+                    if (vModel.get('vrsta') === vrsta) {
+                        model.set('vrstaModel', vModel);
+                    }
+                });
+            }
+        });
+    };
+
+    /**
+     * Iz arraya pretvorimo v collection
      * @param {Array,Collection} vrste
      * @returns Collection
      */
     FilterView.prototype.getVrsteFiltrov = function (vrste) {
-        var coll = new Backbone.Collection();
-
+        var coll;
         if (_.isArray(vrste)) {
-            coll = this._arrayToCollection(vrste);
+            coll = this._arrayToCollection(vrste, Vrsta);
         } else if (vrste instanceof Backbone.Collection) {
             coll = vrste;
         }
         return coll;
     };
 
-    FilterView.prototype._arrayToCollection = function (array) {
-        var collection = new Vrsta();
+    /**
+     * Array pretvorimo v collection
+     * @param {type} array
+     * @param {type} Coll
+     * @returns {FilterView_L34.FilterView.prototype._arrayToCollection.Coll|Marionette.CompositeView@call;extend.prototype._arrayToCollection.collection}
+     */
+    FilterView.prototype._arrayToCollection = function (array, Coll) {
+        var collection = new Coll();
         _.each(array, function (vrsta) {
             collection.add(vrsta);
         }, this);
@@ -90,19 +150,29 @@ define([
         return collection;
     };
 
-    FilterView.prototype.getChildView = function (item) {
-        var model = item.get('modelMozni');
-        return model.get('VrstaFiltraView');
+    /**
+     * Pridobimo view ki naj bo renderiran v povezavi s posameznim modelom
+     * @param {type} child
+     * @returns {unresolved}
+     */
+    FilterView.prototype.getChildView = function (child) {
+        var model = child.get('vrstaModel');
+        return model.get('AktivnaVrstaView');
     };
 
     FilterView.prototype.onDodaj = function () {
         console.log('dodaj');
     };
 
+    /**
+     * Ko dodajamo nov aktivni model podamo še model definicij vrste filtra
+     * @param Model model
+     * @returns {undefined}
+     */
     FilterView.prototype.dodajAktivnoVrsto = function (model) {
         this.collection.add({
-            collIzbrani: model.get('podatki').collIzbrani,
-            modelMozni: model
+            izbrani: model.get('izbrani'),
+            vrstaModel: model
         });
     };
 

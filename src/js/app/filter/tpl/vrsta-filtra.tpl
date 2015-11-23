@@ -4,7 +4,7 @@
             <i class="{{icon}}"></i>
         </span>
         <span class="vrsta-filtra-naslov">{{title}}</span>
-        <span class="vrsta-filtra-seznam-region"></span>
+        <span class="vrsta-filtra-povzetek-region"></span>
         <span class="vrsta-filtra-brisi">
             <i class="fa fa-times"></i>
         </span>

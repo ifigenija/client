@@ -14,9 +14,10 @@ define([
     'underscore',
     'marionette',
     'text!./fixtures/polniCollection.json',
-    'app/filter/View/DualListView',
+    'app/filter/View/ToggleListView',
     'backgrid',
-    'jquery'
+    'jquery',
+    'app/Max/View/Toolbar'
 ], function (
         Radio,
         i18next,
@@ -25,12 +26,13 @@ define([
         _,
         Marionette,
         collFixture,
-        DualListView,
+        ToggleListView,
         Backgrid,
-        $
+        $,
+        Toolbar
         ) {
 
-    describe("DualListView", function () {
+    describe("ToggleListView", function () {
 
         beforeEach(function () {
             var fixture = JSON.parse(collFixture);
@@ -39,8 +41,8 @@ define([
             var coll = this.coll = new Backbone.Collection();
             coll.add(models);
 
-            var view = this.view = new DualListView({
-                collIzbira: coll,
+            var view = this.view = new ToggleListView({
+                collMozni: coll,
                 collIzbrani: new Backbone.Collection()
             });
 
@@ -55,7 +57,7 @@ define([
         });
 
         it('inicializacija View-a', function () {
-            expect(this.view.collIzbira.length).to.equal(this.dolzina);
+            expect(this.view.collMozni.length).to.equal(this.dolzina);
         });
 
         //izberemo vse elemente iz levega seznama
@@ -76,7 +78,13 @@ define([
                 $el: $('.test'),
                 model: self.coll.models[0]
             };
-            this.view.izbiraView.triggerMethod('childviewSelect', item);
+            
+            var mouseEvent = {
+                shiftkey: false,
+                ctrlKey: false
+            };
+            
+            this.view.mozniView.triggerMethod('childviewSelect', item, mouseEvent);
 
             //izberemo označene modele
             this.view.triggerMethod('izbraneDesno');
@@ -97,7 +105,13 @@ define([
                 $el: $('.test'),
                 model: self.coll.models[0]
             };
-            this.view.izbraniView.triggerMethod('childviewSelect', item);
+
+            var mouseEvent = {
+                shiftkey: false,
+                ctrlKey: false
+            };
+
+            this.view.izbraniView.triggerMethod('childviewSelect', item, mouseEvent);
 
             //odstranimo označen model
             this.view.triggerMethod('izbraneLevo');

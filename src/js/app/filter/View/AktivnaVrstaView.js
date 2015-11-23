@@ -28,7 +28,8 @@ define([
     'marionette',
     'underscore',
     'jquery',
-    'template!../tpl/vrsta-filtra.tpl'
+    'template!../tpl/vrsta-filtra.tpl',
+    './PovzetekView'
 ], function (
         Radio,
         i18next,
@@ -36,14 +37,15 @@ define([
         Marionette,
         _,
         $,
-        itemTpl
+        itemTpl,
+        PovzetekView
         ) {
 
-    var VrstaFiltraView = Marionette.LayoutView.extend({
+    var AktivnaVrstaView = Marionette.LayoutView.extend({
         template: itemTpl,
         className: 'vrsta-filtra-item',
         regions: {
-            seznamR: '.vrsta-filtra-seznam-region'
+            povzetekR: '.vrsta-filtra-povzetek-region'
         },
         triggers: {
             'click .vrsta-filtra-brisi': 'brisi',
@@ -51,39 +53,42 @@ define([
         }
     });
 
-    VrstaFiltraView.prototype.serializeData = function () {
-
+    AktivnaVrstaView.prototype.initialize = function (options) {
+        this.PovzetekView = options.PovzetekView || PovzetekView;
     };
-    
-    VrstaFiltraView.prototype.serializeData = function () {
+
+    AktivnaVrstaView.prototype.serializeData = function () {
         return _.extend(this.options, {
-            icon: this.model.get('modelMozni').get('icon'),
-            title: this.model.get('modelMozni').get('titel')
+            icon: this.model.get('vrstaModel').get('icon'),
+            title: this.model.get('vrstaModel').get('titel')
         });
     };
 
-    VrstaFiltraView.prototype.onRender = function () {
-        this.renderSeznam();
+    AktivnaVrstaView.prototype.onRender = function () {
+        this.renderPovzetek();
     };
 
-    VrstaFiltraView.prototype.renderSeznam = function () {
-        //this.seznamR.show();
+    AktivnaVrstaView.prototype.renderPovzetek = function () {
+        var view = new this.PovzetekView({
+            collection: this.model.get('izbrani')
+        });
+        this.povzetekR.show(view);
     };
 
-    VrstaFiltraView.prototype.onUredi = function () {
+    AktivnaVrstaView.prototype.onUredi = function () {
         var model = this.model;
         var $el = this.$el;
         var $e = $('<div class="selectlist-content"></div>');
         $('body').append($e);
-        var modelM = model.get('modelMozni');
+        var modelM = model.get('vrstaModel');
 
         var SelectView = modelM.get('SelectView');
 
         var view = new SelectView({
-            collIzbrani: model.get('collIzbrani'),
-            collMozni: modelM.get('podatki').collMozni,
+            izbrani: model.get('izbrani'),
+            mozni: modelM.get('mozni'),
             ItemView: modelM.get('ItemView'),
-            itemTemplate: modelM.get('itemTemplate'),
+            itemTemplate: modelM.get('itemTpl'),
             $anchor: $el,
             el: $e,
             title: "izbira oseb"
@@ -93,11 +98,11 @@ define([
         view.render();
     };
 
-    VrstaFiltraView.prototype.onBrisi = function () {
+    AktivnaVrstaView.prototype.onBrisi = function () {
         this.model.destroy();
     };
 
-    return VrstaFiltraView;
+    return AktivnaVrstaView;
 });
 
 

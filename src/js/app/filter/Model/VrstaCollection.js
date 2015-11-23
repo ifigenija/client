@@ -5,7 +5,9 @@ define([
     'backbone',
     'underscore',
     '../View/DualListView',
-    '../View/VrstaFiltraView'
+    '../View/AktivnaVrstaView',
+    '../View/PovzetekView',
+    '../View/SelectListItemView'
 ], function (
         Radio,
         i18next,
@@ -13,7 +15,9 @@ define([
         Backbone,
         _,
         DualListView,
-        VrstaFiltraView
+        AktivnaVrstaView,
+        PovzetekView,
+        SelectListItemView
         ) {
     /**
      * Parametri
@@ -23,43 +27,41 @@ define([
      *      - SelectView
      *      - ItemView
      *      - itemTpl
-     *      - podatki:{
-     *          collMozni,
-     *          collIzbrani
-     *          }
+     *      - mozni, (podatki, ki jih lahko izbiramo)
+     *      - izbrani (izbrani podatki)
      * @param Array attr
      * @returns {undefined}
      */
     var VrstaModel = Backbone.Model.extend({
         defaults: {
             title: i18next.t('std.title'),
+            vrsta: 'nedoloceno',
             icon: 'fa fa-tablet',
             stIzpisov: 2,
+            AktivnaVrstaView: AktivnaVrstaView,
+            aktivnaVrstaTpl: null,
+            PovzetekView: PovzetekView,
+            povzetekTpl: null,
             SelectView: DualListView,
-            ItemView: null,
+            ItemView: SelectListItemView,
             itemTpl: null,
-            VrstaFiltraView: VrstaFiltraView,
-            vrstaFiltraTpl: null,
-            podatki: {
-                collMozni: new Backbone.Collection(),
-                collIzbrani: new Backbone.Collection()
-            }
+            mozni: new Backbone.Collection(),
+            izbrani: new Backbone.Collection()
         }
     });
 
     VrstaModel.prototype.initialize = function (attr) {
         this.attributes = _.extend(this.attributes, attr);
-
-        if (!attr.collMozni) {
-            throw 'Collection modelov med katerimi lahko izbiramo ni določen';
-        } else {
-            this.get('podatki').collMozni = attr.collMozni;
-        }
-
-        if (!attr.collIzbrani) {
-            throw 'Collection Izbranih modelov ni določen';
-        } else {
-            this.get('podatki').collIzbrani = attr.collIzbrani;
+        
+        if(attr.mozni){
+            var mozni = attr.mozni;
+            if(_.isArray(mozni)){
+                
+            }else if(_.isObject(mozni)){
+                
+            }else if(mozni instanceof Backbone.Collection){
+                
+            }
         }
     };
 

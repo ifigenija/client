@@ -14,8 +14,8 @@ define([
 
     var AktivnaVrstaModel = Backbone.Model.extend({
         defaults: {
-            collIzbrani: new Backbone.Collection(),
-            modelMozni: new Vrsta(),
+            izbrani: new Backbone.Collection(),
+            vrstaModel: new Vrsta(),
             vrsta: 'nedoloceno'
         }
     });

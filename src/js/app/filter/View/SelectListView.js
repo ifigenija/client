@@ -26,14 +26,16 @@ define([
     'app/bars',
     'backbone',
     'marionette',
-    'underscore'
+    'underscore',
+    './SelectListItemView'
 ], function (
         Radio,
         i18next,
         Handlebars,
         Backbone,
         Marionette,
-        _
+        _,
+        SelectListItemView
         ) {
     /**
      * V kolikor želimo overridat ItemView, mora itemView imeti
@@ -216,12 +218,12 @@ define([
     /**
      * Metoda prejme collection izbranih modelov s katerim primerja collection tega viewja.
      * Vsi isti modeli se v seznamu označijo označijo
-     * @param Collection collIzbrani
+     * @param Collection izbrani
      * @returns {undefined}
      */
-    SelectListView.prototype.oznaciModele = function (collIzbrani) {
+    SelectListView.prototype.oznaciModele = function (izbrani) {
         //modeli, ki so izbrani
-        var models = collIzbrani.models;
+        var models = izbrani.models;
 
         for (var id in models) {
             //model, ki ga želimo označit

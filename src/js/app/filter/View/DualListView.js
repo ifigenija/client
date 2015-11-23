@@ -61,10 +61,10 @@ define([
      * 
      * @param Array options
      *      - template : templeta za DualListView
-     *      - collIzbrani: collection izbranih modelov (na začetku prazen collection)
-     *      - collMozni: collection modelov med katerimi lahko moznimo
-     *      - MozniView: deklaracija MozniView, namenjen izrisu collMozni(default SelectListView)
-     *      - IzbraniView: deklaracija IzbraniView, collIzbrani(default SelectListView)
+     *      - izbrani: collection izbranih modelov (na začetku prazen collection)
+     *      - mozni: collection modelov med katerimi lahko moznimo
+     *      - MozniView: deklaracija MozniView, namenjen izrisu mozni(default SelectListView)
+     *      - IzbraniView: deklaracija IzbraniView, izbrani(default SelectListView)
      *      - title: kakšen naslov se naj izpiše DualListView-ja
      *      - ItemView: ItemView je namenjen izrisu modelov collectionov v MozniView in IzbraniView(dafault null)
      *      - itemTemplate: v primeru da želimo spremeniti samo template ItemViewja mu podamo samo template(default null)
@@ -73,8 +73,8 @@ define([
      */
     DualListView.prototype.initialize = function (options) {
         this.template = options.tempalte || this.template;
-        this.collIzbrani = options.collIzbrani || new Backbone.Collection();
-        this.collMozni = options.collMozni || new Backbone.Collection();
+        this.izbrani = options.izbrani || new Backbone.Collection();
+        this.mozni = options.mozni || new Backbone.Collection();
         this.MozniView = options.MozniView || SelectListView;
         this.IzbraniView = options.IzbraniView || SelectListView;
         this.title = options.title || "Izberi";
@@ -158,7 +158,7 @@ define([
      */
     DualListView.prototype.renderLeviSeznam = function () {
         var view = this.mozniView = new this.MozniView({
-            collection: this.collMozni,
+            collection: this.mozni,
             ItemView: this.ItemView,
             itemTemplate: this.itemTemplate
         });
@@ -173,7 +173,7 @@ define([
      */
     DualListView.prototype.renderDesniSeznam = function () {
         var view = this.izbraniView = new this.IzbraniView({
-            collection: this.collIzbrani,
+            collection: this.izbrani,
             ItemView: this.ItemView,
             itemTemplate: this.itemTemplate
         });

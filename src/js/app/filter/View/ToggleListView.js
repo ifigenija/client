@@ -63,7 +63,7 @@ define([
     };
 
     ToggleListView.prototype.renderToolbar = function () {
-        var models = this.collMozni.models;
+        var models = this.mozni.models;
         //preverimo ali so vsi modeli označeni
         var label = i18next.t('std.odkljukaj');
 
@@ -99,7 +99,7 @@ define([
      * @returns {undefined}
      */
     ToggleListView.prototype.oznaciIzbrane = function () {
-        this.mozniView.oznaciModele(this.collIzbrani);
+        this.mozniView.oznaciModele(this.izbrani);
     };
 
     /**
@@ -128,7 +128,7 @@ define([
      */
     ToggleListView.prototype.getIzbraniModeli = function () {
         var models = this.mozniView.getSelectedModels();
-        this.collIzbrani.reset(models);
+        this.izbrani.reset(models);
     };
 
     /**
@@ -147,7 +147,7 @@ define([
                     label: i18next.t('std.odkljukaj')
                 });
 
-                this.mozniView.oznaciModele(this.collMozni);
+                this.mozniView.oznaciModele(this.mozni);
             } else {
                 but.set({
                     label: i18next.t('std.obkljukaj')

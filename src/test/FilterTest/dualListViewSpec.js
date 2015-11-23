@@ -40,8 +40,8 @@ define([
             coll.add(models);
 
             var view = this.view = new DualListView({
-                collIzbira: coll,
-                collIzbrani: new Backbone.Collection()
+                mozni: coll,
+                izbrani: new Backbone.Collection()
             });
 
             this.dolzina = this.coll.length;
@@ -55,20 +55,20 @@ define([
         });
 
         it('inicializacija View-a', function () {
-            expect(this.view.collIzbira.length).to.equal(this.dolzina);
+            expect(this.view.mozni.length).to.equal(this.dolzina);
         });
 
         //izberemo vse elemente iz levega seznama
         it('izberi vse elemente', function () {
-            var collIzbrani = this.view.collIzbrani;
+            var izbrani = this.view.izbrani;
 
             this.view.triggerMethod('vseDesno');
-            expect(collIzbrani.length).to.equal(this.dolzina);
+            expect(izbrani.length).to.equal(this.dolzina);
         });
 
         // izberemo samo označene elemente iz levega seznama
         it('izberi označene elemente', function () {
-            var collIzbrani = this.view.collIzbrani;
+            var izbrani = this.view.izbrani;
 
             //simulacija klika na model v seznamu
             var self = this;
@@ -76,20 +76,26 @@ define([
                 $el: $('.test'),
                 model: self.coll.models[0]
             };
-            this.view.izbiraView.triggerMethod('childviewSelect', item);
+            
+            var mouseEvent = {
+                shiftkey: false,
+                ctrlKey: false
+            };
+            
+            this.view.mozniView.triggerMethod('childviewSelect', item, mouseEvent);
 
             //izberemo označene modele
             this.view.triggerMethod('izbraneDesno');
-            expect(collIzbrani.length).to.equal(1);
+            expect(izbrani.length).to.equal(1);
         });
 
         //odstranimo označene elemente iz desnega seznama
         it('odstrani označene elemente', function () {
-            var collIzbrani = this.view.collIzbrani;
+            var izbrani = this.view.izbrani;
 
             //izberemo vse modele
             this.view.triggerMethod('vseDesno');
-            expect(collIzbrani.length).to.equal(this.dolzina);
+            expect(izbrani.length).to.equal(this.dolzina);
 
             //simulacija klika na model v seznamu
             var self = this;
@@ -97,42 +103,48 @@ define([
                 $el: $('.test'),
                 model: self.coll.models[0]
             };
-            this.view.izbraniView.triggerMethod('childviewSelect', item);
+
+            var mouseEvent = {
+                shiftkey: false,
+                ctrlKey: false
+            };
+
+            this.view.izbraniView.triggerMethod('childviewSelect', item, mouseEvent);
 
             //odstranimo označen model
             this.view.triggerMethod('izbraneLevo');
-            expect(collIzbrani.length).to.equal(this.dolzina - 1);
+            expect(izbrani.length).to.equal(this.dolzina - 1);
         });
 
         //odstranimo vse elemente iz desnega seznama
         it('odstrani vse elemente', function () {
-            var collIzbrani = this.view.collIzbrani;
+            var izbrani = this.view.izbrani;
 
             //izberemo vse modele
             this.view.triggerMethod('vseDesno');
-            expect(collIzbrani.length).to.equal(this.dolzina);
+            expect(izbrani.length).to.equal(this.dolzina);
 
             //odstranimo vse modele
             this.view.triggerMethod('vseLevo');
-            expect(collIzbrani.length).to.equal(0);
+            expect(izbrani.length).to.equal(0);
         });
 
         //vrnemo celotni collection od izraniView
         it('get izbrane modele', function () {
-            var collIzbrani = this.view.collIzbrani;
+            var izbrani = this.view.izbrani;
             var izbraniView = this.view.izbraniView;
 
             this.view.triggerMethod('vseDesno');
-            expect(collIzbrani.length).to.equal(this.dolzina);
+            expect(izbrani.length).to.equal(this.dolzina);
 
             //preverimo ali je vrnjen celi collection od izbraniView
             var spy = sinon.spy(izbraniView, 'getAllModels');
             izbraniView.triggerMethod('getAllModels');
-            spy.returned(collIzbrani.models);
+            spy.returned(izbrani.models);
         });
 
 //        it('search collection', function () {
-//            var collIzbrani = this.view.collIzbrani;
+//            var izbrani = this.view.izbrani;
 //            var filterView = this.view.filterView;
 //
 //            var stub = sinon.stub(filterView, "searchBox", function () {
@@ -149,7 +161,7 @@ define([
 //            expect(spy.called).to.be.true;
 //
 //            //this.view.triggerMethod('vseDesno');
-//            expect(collIzbrani.length).to.equal(2);
+//            expect(izbrani.length).to.equal(2);
 //
 //        });
     });
