@@ -118,6 +118,8 @@ define([
                 });
             }
         });
+        
+        return coll;
     };
 
     /**

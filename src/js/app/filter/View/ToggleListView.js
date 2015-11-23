@@ -22,8 +22,7 @@ define([
     'marionette',
     'template!../tpl/toggleList.tpl',
     './ToggleListView',
-    './DualListView',
-    'app/Max/View/Toolbar'
+    './DualListView'
 ], function (
         $,
         Radio,
@@ -34,8 +33,7 @@ define([
         Marionette,
         toggleListTpl,
         ToggleListView,
-        DualListView,
-        Toolbar
+        DualListView
         ) {
 
     var ToggleListView = DualListView.extend({
@@ -43,14 +41,10 @@ define([
         triggers: {
             'click .togglelist-gumb': 'izberiVse',
             'click .selectlist-backdrop': 'close',
-            'click .selectlist-zapri': 'close'
+            'click .selectlist-zapri': 'close',
+            'click .oznacivse': 'izberiVse'
         }
     });
-
-    ToggleListView.prototype.initialize = function () {
-        DualListView.prototype.initialize.apply(this, arguments);
-        this.addRegions({toolbarR: '.selectlist-toolbar'});
-    };
 
     /**
      * Kaj se zgodi ob izrisu Viewja
@@ -58,11 +52,11 @@ define([
      */
     ToggleListView.prototype.onRender = function () {
         this.renderLeviSeznam();
-        this.renderToolbar();
+        this.renameGumb();
         this.triggerMethod('show');
     };
 
-    ToggleListView.prototype.renderToolbar = function () {
+    ToggleListView.prototype.renameGumb = function () {
         var models = this.mozni.models;
         //preverimo ali so vsi modeli označeni
         var label = i18next.t('std.odkljukaj');
@@ -73,21 +67,7 @@ define([
                 break;
             }
         }
-        var tool = [[
-                {
-                    id: 'doc-izberi',
-                    label: label,
-                    element: 'button-trigger',
-                    trigger: 'izberiVse'
-                }
-            ]];
-
-        var tb = this.toolbar = new Toolbar({
-            buttonGroups: tool,
-            listener: this
-        });
-
-        this.toolbarR.show(tb);
+        this.$('.oznacivse').html(label);
     };
 
     ToggleListView.prototype.onShow = function () {
@@ -136,27 +116,23 @@ define([
      * @returns {undefined}
      */
     ToggleListView.prototype.onIzberiVse = function () {
-        var tb = this.toolbarR.currentView.collection;
 
-        var but = tb.getButton('doc-izberi');
-        if (but) {
-            var text = but.get('label');
-            //preverimo ali izberemo vse ali prekličemo izbor vseh
-            if (text === i18next.t('std.obkljukaj')) {
-                but.set({
-                    label: i18next.t('std.odkljukaj')
-                });
+        var text = this.$('.oznacivse').html();
+        //preverimo ali izberemo vse ali prekličemo izbor vseh
+        if (text === i18next.t('std.obkljukaj')) {
+            var label = i18next.t('std.odkljukaj');
+            this.$('.oznacivse').html(label);
 
-                this.mozniView.oznaciModele(this.mozni);
-            } else {
-                but.set({
-                    label: i18next.t('std.obkljukaj')
-                });
-                this.mozniView.resetSelection();
-                this.getIzbraniModeli();
-                this.render();
-            }
+            this.mozniView.oznaciModele(this.mozni);
+        } else {
+
+            var label = i18next.t('std.obkljukaj');
+            this.$('.oznacivse').html(label);
+
+            this.mozniView.resetSelection();
         }
+        this.getIzbraniModeli();
+        this.render();
     };
 
     return ToggleListView;

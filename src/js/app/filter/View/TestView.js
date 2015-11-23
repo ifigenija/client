@@ -64,21 +64,28 @@ define([
         }
     });
     TestView.prototype.onTest = function (options) {
-        var self = this;
-        var $gumb = self.$('.test');
-        collSelect.fetch({
-            success: function () {
-                var view = new DualListView({
-                    izbrani: collSelected,
-                    mozni: collSelect,
-                    //ItemView: DualListItemView,
-                    //itemTemplate: tpl,
-                    $anchor: $gumb,
-                    title: "izbira oseb"
-                });
-                self.testR.show(view);
-            }
+//        var self = this;
+//        var $gumb = self.$('.test');
+//        collSelect.fetch({
+//            success: function () {
+//                var view = new DualListView({
+//                    izbrani: collSelected,
+//                    mozni: collSelect,
+//                    //ItemView: DualListItemView,
+//                    //itemTemplate: tpl,
+//                    $anchor: $gumb,
+//                    title: "izbira oseb"
+//                });
+//                self.testR.show(view);
+//            }
+//        });
+        var coll = new Backbone.Collection({
         });
+
+        coll.add([{lovro: "dela"},
+            {boris: "nedela"}]);
+
+        console.log(coll.models);
     };
     TestView.prototype.onTestSelect = function (options) {
 
@@ -100,6 +107,7 @@ define([
     };
     TestView.prototype.onTestFilter = function () {
         var self = this;
+        this.$('.testfilter').html('testiram');
 
         collSelect.fetch({
             success: function () {
@@ -107,10 +115,13 @@ define([
                 var view = new FilterView({
                     aktivneVrste: [{
                             izbrani: collSelected,
-                            vrsta: 'oseba'
+                            vrsta: 'oseba',
+                            ales: 'web'
                         }, {
                             izbrani: new Backbone.Collection(),
-                            vrsta: 'prostor'
+                            vrsta: 'prostor',
+                            lovro: 'test',
+                            boris: 'šef'
                         }],
                     vrsteFiltrov: [{
                             title: 'Izbira oseb',
