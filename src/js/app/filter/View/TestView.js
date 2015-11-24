@@ -109,23 +109,42 @@ define([
         var self = this;
         this.$('.testfilter').html('testiram');
 
+        var vrsteFiltrov = new Vrsta();
+        vrsteFiltrov.add([{
+                title: 'Izbira oseb',
+                id: 'oseba',
+                icon: 'fa fa-user',
+                izbrani: new Backbone.Collection(),
+                mozni: collSelect
+            },
+            {
+                title: 'Izbira prostorov',
+                vrsta: 'prostor',
+                icon: 'fa fa-home',
+                izbrani: new Backbone.Collection(),
+                mozni: [
+                    {ident: "1", "label": "lovro"},
+                    {ident: "2", "label": "simon"},
+                    {ident: "3", "label": "aleš"}
+                ],
+                SelectView: ToggleListView
+            }]);
+
         collSelect.fetch({
             success: function () {
                 collSelected.reset(collSelect.first(5));
+
                 var view = new FilterView({
                     aktivneVrste: [{
                             izbrani: collSelected,
-                            vrsta: 'oseba',
-                            ales: 'web'
+                            vrsta: 'oseba'
                         }, {
                             izbrani: new Backbone.Collection(),
-                            vrsta: 'prostor',
-                            lovro: 'test',
-                            boris: 'šef'
+                            vrsta: 'prostor'
                         }],
                     vrsteFiltrov: [{
                             title: 'Izbira oseb',
-                            vrsta: 'oseba',
+                            id: 'oseba',
                             icon: 'fa fa-user',
                             izbrani: new Backbone.Collection(),
                             mozni: collSelect
@@ -135,9 +154,20 @@ define([
                             vrsta: 'prostor',
                             icon: 'fa fa-home',
                             izbrani: new Backbone.Collection(),
-                            mozni: collSelect,
+                            mozni: [
+                                {ident: "1", "label": "lovro"},
+                                {ident: "2", "label": "simon"},
+                                {ident: "3", "label": "aleš"}
+                            ],
                             SelectView: ToggleListView
                         }]
+//                    aktivneVrste: {
+//                        'oseba': [
+//                            {ident: "dsss", "label": "dsfsdf"}
+//                        ],
+//                        'prostor': new Backbone.Collection()
+//                    },
+//                        vrsteFiltrov: vrsteFiltrov
                 });
                 self.filterR.show(view);
             }

@@ -50,24 +50,61 @@ define([
         }
     });
 
-    VrstaModel.prototype.initialize = function (attr) {
-        this.attributes = _.extend(this.attributes, attr);
-        
-        if(attr.mozni){
-            var mozni = attr.mozni;
-            if(_.isArray(mozni)){
-                
-            }else if(_.isObject(mozni)){
-                
-            }else if(mozni instanceof Backbone.Collection){
-                
+    var array2Coll = function (array) {
+        var collection = new Backbone.Collection();
+        _.each(array, function (vrednost) {
+            collection.add(vrednost);
+        }, this);
+
+        return collection;
+    };
+
+    var obj2Coll = function (obj) {
+        var array = [];
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                array.push(obj[key]);
             }
         }
+
+        return array2Coll(array);
+    };
+
+    VrstaModel.prototype.initialize = function (attr) {
+        if (attr.mozni) {
+            var mozni = attr.mozni;
+            if (_.isArray(mozni)) {
+                attr.mozni = array2Coll(mozni);
+            } else if (mozni instanceof Backbone.Collection) {
+
+            }
+            else if (_.isObject(mozni)) {
+                attr.mozni = obj2Coll(mozni);
+            }
+        }
+
+        this.attributes = _.extend(this.attributes, attr);
+
     };
 
     var VrstaCollection = Backbone.Collection.extend({
         model: VrstaModel
     });
+
+    VrstaCollection.prototype.initialize = function (models, options) {
+        if (options && options.vrsteFiltrov) {
+            var vrste = options.vrsteFiltrov;
+            if (!(vrste instanceof Backbone.Collection)) {
+                if (_.isObject(vrste)) {
+                    this.models = obj2Coll(vrste).models;
+                } else if (_.isArray(vrste)) {
+                    this.models = array2Coll(vrste).models;
+                }
+            } else {
+                this.models = vrste.models;
+            }
+        }
+    };
 
     return VrstaCollection;
 });

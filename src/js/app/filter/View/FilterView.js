@@ -64,17 +64,19 @@ define([
     FilterView.prototype.initialize = function (options) {
         this.template = options.template || this.template;
 
-        if (options.vrsteFiltrov) {
-            this.vrsteFiltrov = this.getVrsteFiltrov(options.vrsteFiltrov);
-        } else {
-            this.vrsteFiltrov = new Backbone.Collection();
-        }
+        this.vrsteFiltrov = new Vrsta(null, {
+            vrsteFiltrov: options.vrsteFiltrov
+        });
 
-        if (options.aktivneVrste) {
-            this.aktivneVrste = this.getAktivneVrste(options.aktivneVrste);
-        } else {
-            this.aktivneVrste = new Backbone.Collection();
-        }
+//        if (options.aktivneVrste) {
+//            this.aktivneVrste = this.getAktivneVrste(options.aktivneVrste);
+//        } else {
+//            this.aktivneVrste = new Backbone.Collection();
+//        }
+
+        this.aktivneVrste = new AktivnaVrsta(null, {
+            aktivneVrste: options.aktivneVrste
+        });
 
         this.collection = this.aktivneVrste;
         this.ponastavitev = this.aktivneVrste.clone();
@@ -112,28 +114,13 @@ define([
             //v primeru da ni nedoločena poiščemo definicijo vrste v coll vrsteFiltra
             if (vrsta !== 'nedoloceno') {
                 self.vrsteFiltrov.each(function (vModel) {
-                    if (vModel.get('vrsta') === vrsta) {
+                    if (vModel.get('id') === vrsta) {
                         model.set('vrstaModel', vModel);
                     }
                 });
             }
         });
         
-        return coll;
-    };
-
-    /**
-     * Iz arraya pretvorimo v collection
-     * @param {Array,Collection} vrste
-     * @returns Collection
-     */
-    FilterView.prototype.getVrsteFiltrov = function (vrste) {
-        var coll;
-        if (_.isArray(vrste)) {
-            coll = this._arrayToCollection(vrste, Vrsta);
-        } else if (vrste instanceof Backbone.Collection) {
-            coll = vrste;
-        }
         return coll;
     };
 
