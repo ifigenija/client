@@ -28,14 +28,13 @@ define([
      *      - ItemView
      *      - itemTpl
      *      - mozni, (podatki, ki jih lahko izbiramo)
-     *      - izbrani (izbrani podatki)
      * @param Array attr
      * @returns {undefined}
      */
     var VrstaModel = Backbone.Model.extend({
         defaults: {
             title: i18next.t('std.title'),
-            vrsta: 'nedoloceno',
+            id: 'nedoloceno',
             icon: 'fa fa-tablet',
             stIzpisov: 2,
             AktivnaVrstaView: AktivnaVrstaView,
@@ -45,11 +44,10 @@ define([
             SelectView: DualListView,
             ItemView: SelectListItemView,
             itemTpl: null,
-            mozni: new Backbone.Collection(),
-            izbrani: new Backbone.Collection()
+            mozni: new Backbone.Collection()
         }
     });
-
+    
     var array2Coll = function (array) {
         var collection = new Backbone.Collection();
         _.each(array, function (vrednost) {
@@ -86,11 +84,28 @@ define([
         this.attributes = _.extend(this.attributes, attr);
 
     };
+    
+    VrstaModel.prototype.initialize = function (attr) {
+        if (attr.mozni) {
+            var mozni = attr.mozni;
+            if (_.isArray(mozni)) {
+                attr.mozni = array2Coll(mozni);
+            } else if (mozni instanceof Backbone.Collection) {
+
+            }
+            else if (_.isObject(mozni)) {
+                attr.mozni = obj2Coll(mozni);
+            }
+        }
+
+        this.attributes = _.extend(this.attributes, attr);
+
+    };
 
     var VrstaCollection = Backbone.Collection.extend({
         model: VrstaModel
     });
-
+    
     VrstaCollection.prototype.initialize = function (models, options) {
         if (options && options.vrsteFiltrov) {
             var vrste = options.vrsteFiltrov;

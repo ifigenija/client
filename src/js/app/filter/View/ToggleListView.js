@@ -97,9 +97,8 @@ define([
      * @returns {undefined}
      */
     ToggleListView.prototype.onClose = function () {
-        $(window).off('resize', jQuery.proxy(this, "resize"));
         this.getIzbraniModeli();
-        this.destroy();
+        DualListView.prototype.onClose.apply(this, arguments);
     };
 
     /**

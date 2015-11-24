@@ -118,8 +118,20 @@ define([
             //
             //izhod collection vrste
         });
+        
+        it('get aktivne fitre', function () {
+            //vhod array podatkov
+            //
+            //izhod collection vrste
+        });
 
-        it('get aktivni fitri', function () {
+        it('dodaj novo aktivno vrsto filtra', function () {
+            //vhod array podatkov
+            //
+            //izhod collection vrste
+        });
+        
+        it('ponastavi aktivne vrste filtra', function () {
             //vhod array podatkov
             //
             //izhod collection vrste

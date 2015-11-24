@@ -64,19 +64,25 @@ define([
     FilterView.prototype.initialize = function (options) {
         this.template = options.template || this.template;
 
-        this.vrsteFiltrov = new Vrsta(null, {
-            vrsteFiltrov: options.vrsteFiltrov
-        });
+//        this.vrsteFiltrov = new Vrsta(null, {
+//            vrsteFiltrov: options.vrsteFiltrov
+//        });
+//
+//        this.aktivneVrste = new AktivnaVrsta(null, {
+//            aktivneVrste: options.aktivneVrste
+//        });
 
-//        if (options.aktivneVrste) {
-//            this.aktivneVrste = this.getAktivneVrste(options.aktivneVrste);
-//        } else {
-//            this.aktivneVrste = new Backbone.Collection();
-//        }
-
-        this.aktivneVrste = new AktivnaVrsta(null, {
-            aktivneVrste: options.aktivneVrste
-        });
+        if (options.vrsteFiltrov) {
+            this.vrsteFiltrov = this.getVrsteFiltrov(options.vrsteFiltrov);
+        } else {
+            this.vrsteFiltrov = new Backbone.Collection();
+        }
+        if (options.aktivneVrste) {
+            this.aktivneVrste = this.getAktivneVrste(options.aktivneVrste);
+        } else {
+            this.aktivneVrste = new Backbone.Collection();
+        }
+        
 
         this.collection = this.aktivneVrste;
         this.ponastavitev = this.aktivneVrste.clone();
@@ -125,6 +131,21 @@ define([
     };
 
     /**
+     * Iz arraya pretvorimo v collection
+     * @param {Array,Collection} vrste
+     * @returns Collection
+     */
+    FilterView.prototype.getVrsteFiltrov = function (vrste) {
+        var coll;
+        if (_.isArray(vrste)) {
+            coll = this._arrayToCollection(vrste, Vrsta);
+        } else if (vrste instanceof Backbone.Collection) {
+            coll = vrste;
+        }
+        return coll;
+    };
+
+    /**
      * Array pretvorimo v collection
      * @param {type} array
      * @param {type} Coll
@@ -150,7 +171,28 @@ define([
     };
 
     FilterView.prototype.onDodaj = function () {
-        console.log('dodaj');
+        this.dodajAktivnoVrsto(this.vrsteFiltrov.models[0]);
+        this.render();
+    };
+    
+    /**
+     * Metoda se kliče, ko se v childu proži "izbrane:vrednosti:filtra"
+     * ob spremembi enega filtra preberemo vse vrednosti filtrov
+     * @param {type} child
+     * @returns {undefined}
+     */
+    FilterView.prototype.onChildviewIzbraneVrednostiFiltra = function (child) {
+        var vrednostiFiltra = this.getVrednostiAktivnihFiltrov();
+        this.trigger('posodobljene:vrednosti:filtrov');
+    };
+    
+    /**
+     * Vrne Vse nastavljene vrednosti aktivnih vrst filtrov
+     * @param {type} child
+     * @returns {FilterView_L34.FilterView.prototype@pro;aktivneVrste@call;getVrednostiFiltrov}
+     */
+    FilterView.prototype.getVrednostiAktivnihFiltrov = function (child) {
+        return this.aktivneVrste.getVrednostiFiltrov();
     };
 
     /**
@@ -160,13 +202,15 @@ define([
      */
     FilterView.prototype.dodajAktivnoVrsto = function (model) {
         this.collection.add({
-            izbrani: model.get('izbrani'),
-            vrstaModel: model
+            izbrani: new Backbone.Collection(),
+            vrstaModel: model,
+            vrsta: model.get('id')
         });
     };
 
     FilterView.prototype.onPonastavi = function () {
-        console.log('ponastavi');
+        this.collection = this.ponastavitev.clone();
+        this.render();
     };
 
     return FilterView;

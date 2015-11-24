@@ -107,33 +107,31 @@ define([
     };
     TestView.prototype.onTestFilter = function () {
         var self = this;
-        this.$('.testfilter').html('testiram');
-
-        var vrsteFiltrov = new Vrsta();
-        vrsteFiltrov.add([{
-                title: 'Izbira oseb',
-                id: 'oseba',
-                icon: 'fa fa-user',
-                izbrani: new Backbone.Collection(),
-                mozni: collSelect
-            },
-            {
-                title: 'Izbira prostorov',
-                vrsta: 'prostor',
-                icon: 'fa fa-home',
-                izbrani: new Backbone.Collection(),
-                mozni: [
-                    {ident: "1", "label": "lovro"},
-                    {ident: "2", "label": "simon"},
-                    {ident: "3", "label": "aleš"}
-                ],
-                SelectView: ToggleListView
-            }]);
+        
+//        var vrsteFiltrov = new Vrsta();
+//        vrsteFiltrov.add([{
+//                title: 'Izbira oseb',
+//                id: 'oseba',
+//                icon: 'fa fa-user',
+//                izbrani: new Backbone.Collection(),
+//                mozni: collSelect
+//            },
+//            {
+//                title: 'Izbira prostorov',
+//                vrsta: 'prostor',
+//                icon: 'fa fa-home',
+//                izbrani: new Backbone.Collection(),
+//                mozni: [
+//                    {ident: "1", "label": "lovro"},
+//                    {ident: "2", "label": "simon"},
+//                    {ident: "3", "label": "aleš"}
+//                ],
+//                SelectView: ToggleListView
+//            }]);
 
         collSelect.fetch({
             success: function () {
                 collSelected.reset(collSelect.first(5));
-
                 var view = new FilterView({
                     aktivneVrste: [{
                             izbrani: collSelected,
@@ -146,19 +144,13 @@ define([
                             title: 'Izbira oseb',
                             id: 'oseba',
                             icon: 'fa fa-user',
-                            izbrani: new Backbone.Collection(),
                             mozni: collSelect
                         },
                         {
                             title: 'Izbira prostorov',
-                            vrsta: 'prostor',
+                            id: 'prostor',
                             icon: 'fa fa-home',
-                            izbrani: new Backbone.Collection(),
-                            mozni: [
-                                {ident: "1", "label": "lovro"},
-                                {ident: "2", "label": "simon"},
-                                {ident: "3", "label": "aleš"}
-                            ],
+                            mozni: collSelect,
                             SelectView: ToggleListView
                         }]
 //                    aktivneVrste: {

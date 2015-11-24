@@ -68,6 +68,10 @@ define([
         this.renderPovzetek();
     };
 
+    /**
+     * Metoda prikaže view  povzetka izbranih modelov
+     * @returns {undefined}
+     */
     AktivnaVrstaView.prototype.renderPovzetek = function () {
         var view = new this.PovzetekView({
             collection: this.model.get('izbrani')
@@ -75,6 +79,10 @@ define([
         this.povzetekR.show(view);
     };
 
+    /**
+     * metoda odpre view za urejanje filtra
+     * @returns {undefined}
+     */
     AktivnaVrstaView.prototype.onUredi = function () {
         var model = this.model;
         var $el = this.$el;
@@ -94,10 +102,30 @@ define([
             title: "izbira oseb"
         });
 
-        view.on('close', this.render);
+        view.on('izbrane:vrednosti:filtra', this.izbraneVrednostiFiltra, this);
         view.render();
     };
 
+    /**
+     * metoda, ki proži trigger, da je filterIzbran
+     * @returns {undefined}
+     */
+    AktivnaVrstaView.prototype.izbraneVrednostiFiltra = function () {
+        this.trigger('izbrane:vrednosti:filtra');
+    };
+
+    /**
+     * Metoda vrne izbrane vrednosti filtra
+     * @returns {undefined}
+     */
+    AktivnaVrstaView.prototype.getIzbraneVrednosti = function () {
+        this.model.get('izbrani');
+    };
+
+    /**
+     * Metoda briše model
+     * @returns {undefined}
+     */
     AktivnaVrstaView.prototype.onBrisi = function () {
         this.model.destroy();
     };

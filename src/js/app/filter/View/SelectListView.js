@@ -37,23 +37,6 @@ define([
         _,
         SelectListItemView
         ) {
-    /**
-     * V kolikor želimo overridat ItemView, mora itemView imeti
-     * event, na klick da poberemo event podatke za shift in control
-     * prožit more select s event podatki kot parametrom
-     * @type @exp;Marionette@pro;ItemView@call;extend
-     */
-    var SelectListItemView = Marionette.ItemView.extend({
-        template: Handlebars.compile('{{label}}'),
-        tagName: 'li',
-        className: 'selectlist-item list-group-item',
-        events: {
-            'click': 'klikVrstica'
-        },
-        klikVrstica: function (e) {
-            this.trigger('select', e);
-        }
-    });
 
     var EmptyView = Marionette.ItemView.extend({
         template: Handlebars.compile('{{t "std.prazenSeznam"}}')

@@ -253,6 +253,14 @@ define([
         this.izbraniView.resetSelection();
         this.mozniView.resetSelection();
     };
+    
+    /**
+     * vrne izbrane vrednosti filtra
+     * @returns {Array}
+     */
+    DualListView.prototype.getVrednostiFiltra = function () {
+        return this.izbrani.models;
+    };
 
     /**
      * Zapri View, ga uničimo
@@ -261,6 +269,7 @@ define([
      */
     DualListView.prototype.onClose = function () {
         $(window).off('resize', jQuery.proxy(this, "resize"));
+        this.trigger("izbrane:vrednosti:filtra");
         this.destroy();
     };
 
