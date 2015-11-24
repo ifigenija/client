@@ -44,7 +44,7 @@ define([
         //odstranimo aktivno vrsto filtra
         it('odstrani aktivno vrsto', function () {
         });
-        
+
         //uredimo aktivno vrsto filtra
         it('uredi aktivno vrsto', function () {
         });

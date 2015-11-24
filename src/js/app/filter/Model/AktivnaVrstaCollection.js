@@ -40,7 +40,7 @@ define([
 
     AktivnaVrstaCollection.prototype.getVrednostiFiltrov = function () {
         var obj = {};
-        
+
         this.each(function (vrsta) {
             var tipVrsta = vrsta.get('vrsta');
             obj[tipVrsta] = [];

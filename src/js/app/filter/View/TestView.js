@@ -107,7 +107,7 @@ define([
     };
     TestView.prototype.onTestFilter = function () {
         var self = this;
-        
+
 //        var vrsteFiltrov = new Vrsta();
 //        vrsteFiltrov.add([{
 //                title: 'Izbira oseb',

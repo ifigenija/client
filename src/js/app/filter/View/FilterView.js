@@ -172,7 +172,24 @@ define([
 
     FilterView.prototype.onDodaj = function () {
         this.dodajAktivnoVrsto(this.vrsteFiltrov.models[0]);
+        this.renderIzbiraFiltra();
+    };
+    
+    FilterView.prototype.renderIzbiraFiltra = function () {
         this.render();
+    };    
+    
+    /**
+     * Ko dodajamo nov aktivni model podamo še model definicij vrste filtra
+     * @param Model model
+     * @returns {undefined}
+     */
+    FilterView.prototype.dodajAktivnoVrsto = function (model) {
+        this.collection.add({
+            izbrani: new Backbone.Collection(),
+            vrstaModel: model,
+            vrsta: model.get('id')
+        });
     };
     
     /**
@@ -195,18 +212,6 @@ define([
         return this.aktivneVrste.getVrednostiFiltrov();
     };
 
-    /**
-     * Ko dodajamo nov aktivni model podamo še model definicij vrste filtra
-     * @param Model model
-     * @returns {undefined}
-     */
-    FilterView.prototype.dodajAktivnoVrsto = function (model) {
-        this.collection.add({
-            izbrani: new Backbone.Collection(),
-            vrstaModel: model,
-            vrsta: model.get('id')
-        });
-    };
 
     FilterView.prototype.onPonastavi = function () {
         this.collection = this.ponastavitev.clone();
@@ -215,6 +220,3 @@ define([
 
     return FilterView;
 });
-
-
-

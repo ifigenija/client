@@ -47,7 +47,7 @@ define([
             mozni: new Backbone.Collection()
         }
     });
-    
+
     var array2Coll = function (array) {
         var collection = new Backbone.Collection();
         _.each(array, function (vrednost) {
@@ -84,7 +84,7 @@ define([
         this.attributes = _.extend(this.attributes, attr);
 
     };
-    
+
     VrstaModel.prototype.initialize = function (attr) {
         if (attr.mozni) {
             var mozni = attr.mozni;
@@ -105,18 +105,18 @@ define([
     var VrstaCollection = Backbone.Collection.extend({
         model: VrstaModel
     });
-    
+
     VrstaCollection.prototype.initialize = function (models, options) {
         if (options && options.vrsteFiltrov) {
             var vrste = options.vrsteFiltrov;
             if (!(vrste instanceof Backbone.Collection)) {
                 if (_.isObject(vrste)) {
-                    this.models = obj2Coll(vrste).models;
+                    this.add(obj2Coll(vrste).models);
                 } else if (_.isArray(vrste)) {
-                    this.models = array2Coll(vrste).models;
+                    this.add(array2Coll(vrste).models);
                 }
             } else {
-                this.models = vrste.models;
+                this.add(vrste.models);
             }
         }
     };
