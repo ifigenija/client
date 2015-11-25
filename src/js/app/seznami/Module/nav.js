@@ -27,17 +27,17 @@ define(['i18next'], function (i18n) {
                 {
                     label: i18n.t("seznami.nav.tipPopa"),
                     uri: "#tipPopa",
-                    permission: "tipPopa-write"
+                    permission: "TipPopa-read"
                 },
                 {
                     label: i18n.t("seznami.nav.posta"),
                     uri: "#posta",
-                    permission: "Posta-write"
+                    permission: "Posta-read"
                 },
                 {
                     label: i18n.t("seznami.nav.drzava"),
                     uri: "#drzava",
-                    permission: "Drzava-write"
+                    permission: "Drzava-read"
                 },
 //                {
 //                    label: i18n.t("seznami.nav.tipFunkcije"),
@@ -47,40 +47,40 @@ define(['i18next'], function (i18n) {
                 {
                     label: i18n.t("seznami.nav.zvrstUprizoritve"),
                     uri: "#zvrstUprizoritve",
-                    permission: "ZvrstUprizoritve-write"
+                    permission: "ZvrstUprizoritve-read"
                 },
                 {
                     label: i18n.t("seznami.nav.zvrstSurs"),
                     uri: "#zvrstSurs",
-                    permission: "ZvrstSurs-write"
+                    permission: "ZvrstSurs-read"
                 },
                 {
                     label: i18n.t("seznami.nav.abonma"),
                     uri: "#abonma",
-                    permission: "Abonma-write"
+                    permission: "Abonma-read"
                 },
                 {
                     label: i18n.t("seznami.nav.prostor"),
                     uri: "#prostor",
-                    permission: "Prostor-write"
+                    permission: "Prostor-read"
 
                 },
                 {
                     label: i18n.t("seznami.nav.vrstaStroska"),
                     uri: "#vrstaStroska",
-                    permission: "VrstaStroska-write"
+                    permission: "VrstaStroska-read"
 
                 },
                 {
                     label: i18n.t("seznami.nav.organizacijskaEnota"),
                     uri: "#orgEnota",
-                    permission: "OrganizacijskaEnota-write"
+                    permission: "OrganizacijskaEnota-read"
 
                 },
                 {
                     label: i18n.t("seznami.nav.tipVaje"),
                     uri: "#tipVaje",
-                    permission: "tipVaje-write"
+                    permission: "TipVaje-read"
 
                 }
             ]

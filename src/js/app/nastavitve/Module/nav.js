@@ -17,12 +17,12 @@ define(['i18next'], function (i18n) {
                                  {
                     label: i18n.t("stevilcenje.konfigmenu"),
                     uri: "#stevilcenje/konfig",
-                    permission: 'Stevilcenje-write'
+                    permission: 'Stevilcenje-read'
                 },
                  {
                     label: i18n.t("stevilcenje.menu"),
                     uri: "#stevilcenje/seznam",
-                    permission: 'Stevilcenje-write'
+                    permission: 'Stevilcenje-read'
                 },
                 {
                     divider: true
@@ -30,21 +30,25 @@ define(['i18next'], function (i18n) {
                     label: i18n.t("admin.nav.addUser"),
                     icon: "fa-user-plus",
                     uri: "#aaa/user/dodaj",
-                    role: "administrator-dostopov"
+                    permission: 'Aaa-read'
+//                    role: "administrator-dostopov"
                 }, {
                     label: i18n.t("admin.nav.users"),
-                    icon: "fa-user-plus",
+//                    icon: "fa-user-plus",
                     uri: "#aaa/users",
-                    role: "administrator-dostopov"
+                    permission: 'Aaa-read'
+//                    role: "administrator-dostopov"
 
                 }, {
                     label: i18n.t("admin.nav.roles"),
                     uri: "#aaa/roles",
-                    role: "administrator-dostopov"
+                    permission: 'Aaa-read'
+//                    role: "administrator-dostopov"
                 }, {
                     label: i18n.t("admin.nav.permission"),
                     uri: "#aaa/permissions",
-                    role: "administrator-dostopov"
+                    permission: 'Aaa-read'
+//                    role: "administrator-dostopov"
                 }
 
             ]

@@ -27,18 +27,20 @@ define(['i18next'], function (i18n) {
 //                },
                 {
                     label: i18n.t("arhiv.nav.manager"),
-                    icon: "fa-user-plus",
-                    uri: "#fs/manager"
+//                    icon: "fa-user-plus",
+                    uri: "#fs/manager",
+                    permission: "Mapa-read"
                 },
                 {
                     label: i18n.t("arhiv.nav.besedila"),
                     uri: "#arhiv/besedila",
-                    permission: "Besedila-write"
+                    permission: "Besedilo-read"
                 },
                 {
                     label: i18n.t("arhiv.nav.vrstaZapisa"),
                     icon: "",
-                    uri: "#fs/vrstaZapisa"
+                    uri: "#fs/vrstaZapisa",
+                    permission: "VrstaZapisa-read"
                 }
             ]
         }
