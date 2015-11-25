@@ -19,18 +19,7 @@ define([
         PovzetekView,
         SelectListItemView
         ) {
-    /**
-     * Parametri
-     *      - title
-     *      - icon
-     *      - stIzpisov
-     *      - SelectView
-     *      - ItemView
-     *      - itemTpl
-     *      - mozni, (podatki, ki jih lahko izbiramo)
-     * @param Array attr
-     * @returns {undefined}
-     */
+
     var VrstaModel = Backbone.Model.extend({
         defaults: {
             title: i18next.t('std.title'),
@@ -48,6 +37,23 @@ define([
         }
     });
 
+    /**
+     * inicializacija Modela
+     * 
+     * @param {Object} attr
+     * @param {String} [attr.title]              Title Default: prevod od std.title
+     * @param {String} [attr.id]                 id/vrsta filtra Default: nedoloceno
+     * @param {String} [attr.icon]               Ikona Default: fa fa-tablet
+     * @param {Number} [attr.stIzpisov]          Število izpisov pri povzetku Default: 2
+     * @param {View} [attr.AktivnaVrstaView]     View za prikaz aktivnih filtrov/uveljavljenih filtrov Default: AktivnaVrstaView
+     * @param {Function} [attr.aktivnaVrstaTpl]  Template za AktivnoVrstoView Default: null
+     * @param {View} [attr.PovzetekView]         View za prikaz vrednosti aktivnig filtrov Default: PovzetekView
+     * @param {Function} [attr.povzetekTpl]      template povzetkaview Default: null
+     * @param {View} [attr.SelectView]           Urejanje/zbiranje vrednosti aktivnega filtra Default: DualListView
+     * @param {View} [attr.ItemView]             View za izpis vrednosti filtra v SelectView Default: SelectListItemView
+     * @param {Function} [attr.itemTpl]          template za Itemview Default: null
+     * @param {Array|Collection} [attr.mozni]    Array ali Collection podatkov, ki jih lahko izberemo Default: new Backbone.Collection()
+     */
     VrstaModel.prototype.initialize = function (attr) {
         if (attr.mozni) {
             var mozni = attr.mozni;
@@ -64,7 +70,7 @@ define([
         this.attributes = _.extend(this.attributes, attr);
 
     };
-    
+
     var array2Coll = function (array, Coll) {
         var collection = new Coll();
         _.each(array, function (vrednost) {
@@ -89,6 +95,12 @@ define([
         model: VrstaModel
     });
 
+    /**
+     *
+     * @param {Object} models
+     * @param {Object} options
+     * @param {Array|Collection} [options.vrsteFiltrov]     Array(polje objektov po vzorcu vrstaModel) ali Collection(VrstaCollection)
+     */
     VrstaCollection.prototype.initialize = function (models, options) {
         if (options && options.vrsteFiltrov) {
             var vrste = options.vrsteFiltrov;

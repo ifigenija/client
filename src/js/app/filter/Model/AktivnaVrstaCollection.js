@@ -20,6 +20,15 @@ define([
         }
     });
 
+    /**
+     *
+     * @param {Object} attr
+     * @param {Array|Collection} [attr.izbrani]     Polje ali collection podatkov, ki so izbrani
+     * @param {Collection} [attr.vrstaModel]        Collection Default: VrstaCollection
+     * @param {String} [attr.vrsta]                 Aktivne vrsta filtra se upari z id/vrsto iz vresteCollection
+     *
+     * @type @exp;Backbone@pro;Model@call;extend
+     */
     AktivnaVrstaModel.prototype.initialize = function (attr) {
         this.attributes = _.extend(this.attributes, attr);
     };
@@ -28,6 +37,13 @@ define([
         model: AktivnaVrstaModel
     });
 
+    /**
+     *
+     * @param {Object} models
+     * @param {Object} options
+     * @param {Object} [options.aktivneVrste]           Objekt vseh vrednosti aktivnih Vrst
+     * @param {Collection} [options.vrsteFiltrov]       Collection vrstFiltrov, ki so navoljo
+     */
     AktivnaVrstaCollection.prototype.initialize = function (models, options) {
         if (options && options.aktivneVrste) {
             var vrste = options.aktivneVrste;
@@ -43,11 +59,11 @@ define([
             }
         }
     };
-    
+
     var getVrstaModel = function (vrsta, vrsteFiltrov) {
         //v primeru da ni nedoločena poiščemo definicijo vrste v coll vrsteFiltra
         var vrstaModel;
-        
+
         if (vrsta !== 'nedoloceno') {
             vrsteFiltrov.each(function (vModel) {
                 if (vModel.get('id') === vrsta) {

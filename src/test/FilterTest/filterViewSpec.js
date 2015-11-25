@@ -62,79 +62,26 @@ define([
 
         it('inicializacija', function () {
         });
-
-        /**
-         * Testiranje funkcije array to collection
-         * @returns {undefined}
-         */
-        it('test arrayTCollection()', function () {
-            var polje = [{
-                    izbrani: new Backbone.Collection(),
-                    vrsta: 'oseba'
-                }, {
-                    izbrani: new Backbone.Collection(),
-                    vrsta: 'prostor'
-                }];
-
-            var coll = this.filterView._arrayToCollection(polje, AktivnaVrsta);
-
-            expect(coll.length).to.equal(2);
-            expect(coll.models[0].get('vrsta')).to.equal('oseba');
-            expect(coll.models[1].get('vrsta')).to.equal('prostor');
-        });
-
-        it('test dolociVrsto()', function () {
-            var polje = [{
-                    izbrani: new Backbone.Collection(),
-                    vrsta: 'oseba'
-                }, {
-                    izbrani: new Backbone.Collection(),
-                    vrsta: 'prostor'
-                }];
-
-            var coll = this.filterView._arrayToCollection(polje, AktivnaVrsta);
-            expect(coll.models[0].get('vrstaModel').get('vrsta')).to.equal('nedoloceno');
-            expect(coll.models[1].get('vrstaModel').get('vrsta')).to.equal('nedoloceno');
-            
-            coll = this.filterView.dolociVrsto(coll);
-            
-            expect(coll.models[0].get('vrstaModel')).to.not.equal(new Vrsta());
-            expect(coll.models[1].get('vrstaModel')).to.not.equal(new Vrsta());
-        });
-
-        it('pretvorba aktivnih vrst Filtra, s podano vsrsto filtra', function () {
-            //vhod array
-            //izhod collection vrste
-        });
-
-        it('pretvorba aktivnih vrst Filtra, brez podane vrste filtra', function () {
-            //vhod array podatkov
-            //
-            //izhod collection vrste
-        });
-
-        it('get aktivni fiter', function () {
-            //vhod array podatkov
-            //
-            //izhod collection vrste
-        });
         
         it('get aktivne fitre', function () {
             //vhod array podatkov
             //
             //izhod collection vrste
+            expect(false).to.equal(true);
         });
 
         it('dodaj novo aktivno vrsto filtra', function () {
             //vhod array podatkov
             //
             //izhod collection vrste
+            expect(false).to.equal(true);
         });
         
         it('ponastavi aktivne vrste filtra', function () {
             //vhod array podatkov
             //
             //izhod collection vrste
+            expect(false).to.equal(true);
         });
     });
 });
