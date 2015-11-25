@@ -74,7 +74,8 @@ define([
      */
     AktivnaVrstaView.prototype.renderPovzetek = function () {
         var view = new this.PovzetekView({
-            collection: this.model.get('izbrani')
+            collection: this.model.get('izbrani'),
+            stIzpisov: this.model.get('vrstaModel').get('stIzpisov')
         });
         this.povzetekR.show(view);
     };

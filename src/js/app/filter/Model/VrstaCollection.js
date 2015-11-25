@@ -48,8 +48,25 @@ define([
         }
     });
 
-    var array2Coll = function (array) {
-        var collection = new Backbone.Collection();
+    VrstaModel.prototype.initialize = function (attr) {
+        if (attr.mozni) {
+            var mozni = attr.mozni;
+            if (_.isArray(mozni)) {
+                attr.mozni = array2Coll(mozni, Backbone.Collection);
+            } else if (mozni instanceof Backbone.Collection) {
+
+            }
+            else if (_.isObject(mozni)) {
+                attr.mozni = obj2Coll(mozni, Backbone.Collection);
+            }
+        }
+
+        this.attributes = _.extend(this.attributes, attr);
+
+    };
+    
+    var array2Coll = function (array, Coll) {
+        var collection = new Coll();
         _.each(array, function (vrednost) {
             collection.add(vrednost);
         }, this);
@@ -57,7 +74,7 @@ define([
         return collection;
     };
 
-    var obj2Coll = function (obj) {
+    var obj2Coll = function (obj, Coll) {
         var array = [];
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
@@ -65,41 +82,7 @@ define([
             }
         }
 
-        return array2Coll(array);
-    };
-
-    VrstaModel.prototype.initialize = function (attr) {
-        if (attr.mozni) {
-            var mozni = attr.mozni;
-            if (_.isArray(mozni)) {
-                attr.mozni = array2Coll(mozni);
-            } else if (mozni instanceof Backbone.Collection) {
-
-            }
-            else if (_.isObject(mozni)) {
-                attr.mozni = obj2Coll(mozni);
-            }
-        }
-
-        this.attributes = _.extend(this.attributes, attr);
-
-    };
-
-    VrstaModel.prototype.initialize = function (attr) {
-        if (attr.mozni) {
-            var mozni = attr.mozni;
-            if (_.isArray(mozni)) {
-                attr.mozni = array2Coll(mozni);
-            } else if (mozni instanceof Backbone.Collection) {
-
-            }
-            else if (_.isObject(mozni)) {
-                attr.mozni = obj2Coll(mozni);
-            }
-        }
-
-        this.attributes = _.extend(this.attributes, attr);
-
+        return array2Coll(array, Coll);
     };
 
     var VrstaCollection = Backbone.Collection.extend({
@@ -111,9 +94,9 @@ define([
             var vrste = options.vrsteFiltrov;
             if (!(vrste instanceof Backbone.Collection)) {
                 if (_.isObject(vrste)) {
-                    this.add(obj2Coll(vrste).models);
+                    this.add(obj2Coll(vrste, VrstaCollection).models);
                 } else if (_.isArray(vrste)) {
-                    this.add(array2Coll(vrste).models);
+                    this.add(array2Coll(vrste, VrstaCollection).models);
                 }
             } else {
                 this.add(vrste.models);

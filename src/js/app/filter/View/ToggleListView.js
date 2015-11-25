@@ -107,7 +107,8 @@ define([
      */
     ToggleListView.prototype.getIzbraniModeli = function () {
         var models = this.mozniView.getSelectedModels();
-        this.izbrani.reset(models);
+        this.izbrani.reset();
+        this.izbrani.add(models);
     };
 
     /**

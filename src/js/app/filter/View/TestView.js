@@ -108,58 +108,42 @@ define([
     TestView.prototype.onTestFilter = function () {
         var self = this;
 
-//        var vrsteFiltrov = new Vrsta();
-//        vrsteFiltrov.add([{
-//                title: 'Izbira oseb',
-//                id: 'oseba',
-//                icon: 'fa fa-user',
-//                izbrani: new Backbone.Collection(),
-//                mozni: collSelect
-//            },
-//            {
-//                title: 'Izbira prostorov',
-//                vrsta: 'prostor',
-//                icon: 'fa fa-home',
-//                izbrani: new Backbone.Collection(),
-//                mozni: [
-//                    {ident: "1", "label": "lovro"},
-//                    {ident: "2", "label": "simon"},
-//                    {ident: "3", "label": "aleš"}
-//                ],
-//                SelectView: ToggleListView
-//            }]);
-
         collSelect.fetch({
             success: function () {
                 collSelected.reset(collSelect.first(5));
                 var view = new FilterView({
-                    aktivneVrste: [{
-                            izbrani: collSelected,
-                            vrsta: 'oseba'
-                        }, {
-                            izbrani: new Backbone.Collection(),
-                            vrsta: 'prostor'
-                        }],
                     vrsteFiltrov: [{
                             title: 'Izbira oseb',
                             id: 'oseba',
                             icon: 'fa fa-user',
-                            mozni: collSelect
+                            stIzpisov: 1,
+                            mozni: [
+                                {id:1, ident: "1", "label": "lovro"},
+                                {id:2, ident: "2", "label": "simon"},
+                                {id:3, ident: "3", "label": "aleš"}
+                            ]
                         },
                         {
                             title: 'Izbira prostorov',
                             id: 'prostor',
                             icon: 'fa fa-home',
-                            mozni: collSelect,
+                            mozni: [
+                                {id:1, ident: "1", "label": "lovro"},
+                                {id:2, ident: "2", "label": "simon"},
+                                {id:3, ident: "3", "label": "aleš"}
+                            ],
                             SelectView: ToggleListView
-                        }]
-//                    aktivneVrste: {
-//                        'oseba': [
-//                            {ident: "dsss", "label": "dsfsdf"}
-//                        ],
-//                        'prostor': new Backbone.Collection()
-//                    },
-//                        vrsteFiltrov: vrsteFiltrov
+                        }],
+                    aktivneVrste: {
+                        'oseba': [
+                                {id:1, ident: "1", "label": "lovro"},
+                                {id:2, ident: "2", "label": "simon"},
+                                {id:3, ident: "3", "label": "aleš"}
+                            ],
+                        'prostor': [
+                            {id:1, ident: "1", "label": "lovro"}
+                        ]
+                    }
                 });
                 self.filterR.show(view);
             }
