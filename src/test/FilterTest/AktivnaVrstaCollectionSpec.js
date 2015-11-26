@@ -87,6 +87,7 @@ define([
             expect(coll.models[0].get('vrstaModel')).to.not.equal(new VrstaColl());
             expect(coll.models[1].get('vrstaModel')).to.not.equal(new VrstaColl());
             expect(coll.models[0].get('izbrani').length).to.equal(3);
+            expect(coll.models[1].get('izbrani').length).to.equal(1);
         });
     });
 });

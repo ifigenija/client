@@ -69,14 +69,28 @@ define([
                     ]
                 }
             });
+            
+            this.filterView.render();
         });
 
         afterEach(function () {
             this.filterView = null;
         });
 
-        it('inicializacija', function () {
+        it('inicializacija', function () {            
             expect(this.filterView.aktivneVrste.length).to.equal(2);
+        });
+        
+        it('preveri elemente', function(){
+            var $vrstaR = this.filterView.$('.region-vrste-filtra');
+            var $vrsteFiltra = this.filterView.$('.vrsta-filtra');
+            var $dodaj = this.filterView.$('.vrsta-filtra-dodaj');
+            var $reset = this.filterView.$('.vrsta-filtra-reset');
+            
+            expect($dodaj.length).to.equal(1);
+            expect($reset.length).to.equal(1);
+            expect($vrsteFiltra.length).to.equal(2);
+            expect($vrstaR.text()).to.not.equal("");
         });
 
         it('dodaj novo aktivno vrsto filtra', function () {
@@ -126,7 +140,7 @@ define([
                     1
                 ]
             };
-            expect(obj).to.equal(objtest);
+            expect(obj).to.deep.equal(objtest);
         });
     });
 });

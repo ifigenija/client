@@ -83,11 +83,7 @@ define([
             vrsteFiltrov: this.vrsteFiltrov,
             aktivneVrste: this.aktivneVrste
         });
-        
-//        this.aktivneVrste.on('add remove',function () {
-//            console.log('changed');
-//        });
-//        
+
         view.on('change:vrednosti', function () {
             console.log('change:vrednosti');
         }, this);
