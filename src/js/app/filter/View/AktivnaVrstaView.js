@@ -56,6 +56,7 @@ define([
     AktivnaVrstaView.prototype.initialize = function (options) {
         this.PovzetekView = options.PovzetekView || PovzetekView;
         
+        //za sprotno spreminjanje collectiona izbranih modelov
         var izbrani = this.model.get('izbrani');        
         izbrani.on('add remove', this.changeVrednosti, this);
     };
@@ -106,6 +107,7 @@ define([
             title: "izbira oseb"
         });
 
+        //onclose proži change:vrednosti
         view.on('change:vrednosti', this.changeVrednosti, this);
         view.render();
     };

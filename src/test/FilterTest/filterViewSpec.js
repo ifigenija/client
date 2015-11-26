@@ -76,38 +76,43 @@ define([
         });
 
         it('inicializacija', function () {
-            expect(this.filterView.collection.length).to.equal(2);
+            expect(this.filterView.aktivneVrste.length).to.equal(2);
         });
 
         it('dodaj novo aktivno vrsto filtra', function () {
 
-            expect(this.filterView.collection.length).to.equal(2);
+            var fView = this.filterView;
+            expect(fView.aktivneVrste.length).to.equal(2);
 
-            var model = this.filterView.vrsteFiltrov.models[0];
-            this.filterView.dodajAktivnoVrsto(model);
-
-            expect(this.filterView.collection.length).to.equal(3);
+            var model = fView.vrsteFiltrov.models[0];
+            var spy = sinon.spy(fView, 'onDodajAktivnoVrsto');
+            fView.triggerMethod('dodajAktivnoVrsto', model);
+            
+            expect(spy).called;
+            expect(fView.aktivneVrste.length).to.equal(3);
         });
 
         it('ponastavi aktivne vrste filtra', function () {
             var fView = this.filterView;
-            expect(fView.collection.length).to.equal(2);
+            expect(fView.aktivneVrste.length).to.equal(2);
 
             var model = fView.vrsteFiltrov.models[0];
-            fView.dodajAktivnoVrsto(model);
-
-            expect(fView.collection.length).to.equal(3);
+            var spy = sinon.spy(fView, 'onDodajAktivnoVrsto');
+            fView.triggerMethod('dodajAktivnoVrsto', model);
+            
+            expect(spy).called;
+            expect(fView.aktivneVrste.length).to.equal(3);
 
             var spy = sinon.spy(fView, 'onPonastavi');
             fView.triggerMethod('ponastavi', model);
 
-            expect(fView.collection.length).to.equal(2);
+            expect(fView.aktivneVrste.length).to.equal(2);
             expect(spy).called;
         });
 
         it('get aktivne fitre', function () {
             var fView = this.filterView;
-            expect(fView.collection.length).to.equal(2);
+            expect(fView.aktivneVrste.length).to.equal(2);
             var spy = sinon.spy(fView, 'getVrednostiAktivnihFiltrov');
             var obj = fView.getVrednostiAktivnihFiltrov();
             expect(spy).called;
