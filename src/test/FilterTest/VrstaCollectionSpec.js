@@ -40,6 +40,7 @@ define([
         });
 
         it('inicializacija collectiona s podatki(array)', function () {
+            
             var coll = new VrstaColl(null, {
                 vrsteFiltrov: [{
                         title: 'Izbira oseb',
@@ -63,11 +64,12 @@ define([
                         ]
                     }]
             });
-            
+
             expect(coll.length).to.equal(2);
             expect(coll.models[0].get('mozni')).to.be.instanceof(Backbone.Collection);
             expect(coll.models[1].get('mozni')).to.be.instanceof(Backbone.Collection);
         });
+
         it('inicializacija collectiona s podatki(Collection)', function () {
             var vrsteFiltrov = new VrstaColl();
             vrsteFiltrov.add([{
@@ -93,7 +95,7 @@ define([
             var coll = new VrstaColl(null, {
                 vrsteFiltrov: vrsteFiltrov
             });
-            
+
             expect(coll.length).to.equal(2);
             expect(coll.models[0].get('mozni')).to.be.instanceof(Backbone.Collection);
             expect(coll.models[1].get('mozni')).to.be.instanceof(Backbone.Collection);

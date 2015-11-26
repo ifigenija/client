@@ -30,7 +30,9 @@ define([
     'jquery',
     'template!../tpl/filter.tpl',
     '../Model/VrstaCollection',
-    '../Model/AktivnaVrstaCollection'
+    '../Model/AktivnaVrstaCollection',
+    '../View/AktivniFiltriCollectionView',
+    'app/Max/View/Toolbar'
 ], function (
         Radio,
         i18next,
@@ -40,27 +42,23 @@ define([
         $,
         tpl,
         Vrsta,
-        AktivnaVrsta
+        AktivnaVrsta,
+        AktivniFiltriCollectionView,
+        Toolbar
         ) {
 
-    var FilterView = Marionette.CompositeView.extend({
+    var FilterView = Marionette.LayoutView.extend({
         template: tpl,
         className: 'filter-select',
-        childViewContainer: '.region-vrste-filtra',
+        regions: {
+            vrsteR: '.region-vrste-filtra'
+        },
         triggers: {
             'click .vrsta-filtra-dodaj': 'dodaj',
             'click .vrsta-filtra-reset': 'ponastavi'
         }
     });
 
-    /**
-     * Poskrbeli bomo da lahko nastavljamo različne viewje kot optione
-     * parametri
-     *      - collection : collection aktivnih vrst filtra
-     *      - vrsteFiltra: collection vrst filtra
-     * @param Array options
-     * @returns {undefined}
-     */
     FilterView.prototype.initialize = function (options) {
         this.template = options.template || this.template;
 
@@ -73,19 +71,28 @@ define([
             vrsteFiltrov: this.vrsteFiltrov
         });
 
-
-        this.collection = this.aktivneVrste;
         this.ponastavitev = this.aktivneVrste.clone();
     };
 
-    /**
-     * Pridobimo view ki naj bo renderiran v povezavi s posameznim modelom
-     * @param {type} child
-     * @returns {unresolved}
-     */
-    FilterView.prototype.getChildView = function (child) {
-        var model = child.get('vrstaModel');
-        return model.get('AktivnaVrstaView');
+    FilterView.prototype.onRender = function () {
+        this.renderAktivniSeznam();
+    };
+
+    FilterView.prototype.renderAktivniSeznam = function () {
+        var view = new AktivniFiltriCollectionView({
+            vrsteFiltrov: this.vrsteFiltrov,
+            aktivneVrste: this.aktivneVrste
+        });
+        
+        this.aktivneVrste.on('add remove',function () {
+            console.log('changed');
+        });
+        
+        view.on('change:vrednosti', function () {
+            console.log('change:vrednosti');
+        }, this);
+
+        this.vrsteR.show(view);
     };
 
     /**
@@ -93,15 +100,63 @@ define([
      * @returns {undefined}
      */
     FilterView.prototype.onDodaj = function () {
-        this.dodajAktivnoVrsto(this.vrsteFiltrov.models[0]);
         this.renderIzbiraFiltra();
     };
 
-/**
- * render Viewja ki je zadolžen za izbiro novega filtra
- * @returns {undefined}
- */
     FilterView.prototype.renderIzbiraFiltra = function () {
+
+        var groups = [];
+        var buttons = [];
+        var self = this;
+
+        this.vrsteFiltrov.each(function (vMmodel) {
+            var obstaja = false;
+            self.aktivneVrste.each(function (aModel) {
+                if (aModel.get('vrsta') === vMmodel.get('id')) {
+                    obstaja = true;
+                }
+            });
+
+            if (!obstaja) {
+                var obj = {
+                    id: 'filter-' + vMmodel.get('id'),
+                    label: vMmodel.get('label'),
+                    icon: vMmodel.get('icon'),
+                    element: 'button-trigger',
+                    trigger: 'dodajAktivnoVrsto',
+                    data: vMmodel
+                };
+                buttons.push(obj);
+            }
+        });
+
+        if (buttons.length) {
+            var obj = {
+                id: 'filter-preklici',
+                label: i18next.t('std.preklici'),
+                element: 'button-trigger',
+                trigger: 'preklici'
+            };
+            buttons.push(obj);
+            
+            groups.push(buttons);
+
+            var toolbarView = new Toolbar({
+                buttonGroups: groups,
+                listener: this
+            });
+
+            this.vrsteR.show(toolbarView);
+        } else {
+            Radio.channel('error').command('flash', {
+                message: i18next.t('std.filterIzbira'),
+                code: 100200,
+                severity: 'warning'
+            });
+        }
+    };
+    
+    FilterView.prototype.onPreklici = function () {
         this.render();
     };
 
@@ -110,23 +165,13 @@ define([
      * @param Model model
      * @returns {undefined}
      */
-    FilterView.prototype.dodajAktivnoVrsto = function (model) {
-        this.collection.add({
+    FilterView.prototype.onDodajAktivnoVrsto = function (model) {
+        this.aktivneVrste.add({
             izbrani: new Backbone.Collection(),
             vrstaModel: model,
-            vrsta: model.get('vrsta')
+            vrsta: model.get('id')
         });
-    };
-
-    /**
-     * Metoda se kliče, ko se v childu proži "izbrane:vrednosti:filtra"
-     * ob spremembi enega filtra preberemo vse vrednosti filtrov
-     * @param {type} child
-     * @returns {undefined}
-     */
-    FilterView.prototype.onChildviewIzbraneVrednostiFiltra = function (child) {
-        var vrednostiFiltra = this.getVrednostiAktivnihFiltrov();
-        this.trigger('posodobljene:vrednosti:filtrov');
+        this.render();
     };
 
     /**
@@ -138,13 +183,12 @@ define([
         return this.aktivneVrste.getVrednostiFiltrov();
     };
 
-
     /**
      * zamenjamo collection viewja s podatki ki smo jih dobili ob inicializaciji
      * @returns {undefined}
      */
     FilterView.prototype.onPonastavi = function () {
-        this.collection = this.ponastavitev.clone();
+        this.aktivneVrste = this.ponastavitev.clone();
         this.render();
     };
 

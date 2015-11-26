@@ -55,6 +55,9 @@ define([
 
     AktivnaVrstaView.prototype.initialize = function (options) {
         this.PovzetekView = options.PovzetekView || PovzetekView;
+        
+        var izbrani = this.model.get('izbrani');        
+        izbrani.on('add remove', this.changeVrednosti, this);
     };
 
     AktivnaVrstaView.prototype.serializeData = function () {
@@ -103,7 +106,7 @@ define([
             title: "izbira oseb"
         });
 
-        view.on('izbrane:vrednosti:filtra', this.izbraneVrednostiFiltra, this);
+        view.on('change:vrednosti', this.changeVrednosti, this);
         view.render();
     };
 
@@ -111,8 +114,8 @@ define([
      * metoda, ki proži trigger, da je filterIzbran
      * @returns {undefined}
      */
-    AktivnaVrstaView.prototype.izbraneVrednostiFiltra = function () {
-        this.trigger('izbrane:vrednosti:filtra');
+    AktivnaVrstaView.prototype.changeVrednosti = function () {
+        this.trigger('change:vrednosti');
     };
 
     /**

@@ -33,7 +33,8 @@ define([
             SelectView: DualListView,
             ItemView: SelectListItemView,
             itemTpl: null,
-            mozni: new Backbone.Collection()
+            mozni: new Backbone.Collection(),
+            label: 'nedoloceno'
         }
     });
 
@@ -41,18 +42,19 @@ define([
      * inicializacija Modela
      * 
      * @param {Object} attr
-     * @param {String} [attr.title]              Title Default: prevod od std.title
-     * @param {String} [attr.id]                 id/vrsta filtra Default: nedoloceno
-     * @param {String} [attr.icon]               Ikona Default: fa fa-tablet
-     * @param {Number} [attr.stIzpisov]          Število izpisov pri povzetku Default: 2
-     * @param {View} [attr.AktivnaVrstaView]     View za prikaz aktivnih filtrov/uveljavljenih filtrov Default: AktivnaVrstaView
-     * @param {Function} [attr.aktivnaVrstaTpl]  Template za AktivnoVrstoView Default: null
-     * @param {View} [attr.PovzetekView]         View za prikaz vrednosti aktivnig filtrov Default: PovzetekView
-     * @param {Function} [attr.povzetekTpl]      template povzetkaview Default: null
-     * @param {View} [attr.SelectView]           Urejanje/zbiranje vrednosti aktivnega filtra Default: DualListView
-     * @param {View} [attr.ItemView]             View za izpis vrednosti filtra v SelectView Default: SelectListItemView
-     * @param {Function} [attr.itemTpl]          template za Itemview Default: null
-     * @param {Array|Collection} [attr.mozni]    Array ali Collection podatkov, ki jih lahko izberemo Default: new Backbone.Collection()
+     * @param {String} [attr.title]                 Title Default: prevod od std.title
+     * @param {String} [attr.id]                    id/vrsta filtra Default: nedoloceno
+     * @param {String} [attr.icon]                  Ikona Default: fa fa-tablet
+     * @param {Number} [attr.stIzpisov]             Število izpisov pri povzetku Default: 2
+     * @param {View} [attr.AktivnaVrstaView]        View za prikaz aktivnih filtrov/uveljavljenih filtrov Default: AktivnaVrstaView
+     * @param {Function} [attr.aktivnaVrstaTpl]     Template za AktivnoVrstoView Default: null
+     * @param {View} [attr.PovzetekView]            View za prikaz vrednosti aktivnig filtrov Default: PovzetekView
+     * @param {Function} [attr.povzetekTpl]         template povzetkaview Default: null
+     * @param {View} [attr.SelectView]              Urejanje/zbiranje vrednosti aktivnega filtra Default: DualListView
+     * @param {View} [attr.ItemView]                View za izpis vrednosti filtra v SelectView Default: SelectListItemView
+     * @param {Function} [attr.itemTpl]             template za Itemview Default: null
+     * @param {Array|Collection} [attr.mozni]       Array ali Collection podatkov, ki jih lahko izberemo Default: new Backbone.Collection()
+     * @param {String} [attr.label]                 label gumba, pri dodajanju aktivnih vrst filtra
      */
     VrstaModel.prototype.initialize = function (attr) {
         if (attr.mozni) {

@@ -118,30 +118,32 @@ define([
                             icon: 'fa fa-user',
                             stIzpisov: 1,
                             mozni: [
-                                {id:1, ident: "1", "label": "lovro"},
-                                {id:2, ident: "2", "label": "simon"},
-                                {id:3, ident: "3", "label": "aleš"}
-                            ]
+                                {id: 1, ident: "1", "label": "lovro"},
+                                {id: 2, ident: "2", "label": "simon"},
+                                {id: 3, ident: "3", "label": "aleš"}
+                            ],
+                            label:'oseba'
                         },
                         {
                             title: 'Izbira prostorov',
                             id: 'prostor',
                             icon: 'fa fa-home',
                             mozni: [
-                                {id:1, ident: "1", "label": "lovro"},
-                                {id:2, ident: "2", "label": "simon"},
-                                {id:3, ident: "3", "label": "aleš"}
+                                {id: 1, ident: "1", "label": "lovro"},
+                                {id: 2, ident: "2", "label": "simon"},
+                                {id: 3, ident: "3", "label": "aleš"}
                             ],
-                            SelectView: ToggleListView
+                            SelectView: ToggleListView,
+                            label:'prostor'
                         }],
                     aktivneVrste: {
                         'oseba': [
-                                {id:1, ident: "1", "label": "lovro"},
-                                {id:2, ident: "2", "label": "simon"},
-                                {id:3, ident: "3", "label": "aleš"}
-                            ],
+                            1,
+                            2,
+                            3
+                        ],
                         'prostor': [
-                            {id:1, ident: "1", "label": "lovro"}
+                            1
                         ]
                     }
                 });

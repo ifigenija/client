@@ -269,7 +269,7 @@ define([
      */
     DualListView.prototype.onClose = function () {
         $(window).off('resize', jQuery.proxy(this, "resize"));
-        this.trigger("izbrane:vrednosti:filtra");
+        this.trigger("change:vrednosti");
         this.destroy();
     };
 

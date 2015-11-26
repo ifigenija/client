@@ -82,13 +82,26 @@ define([
 
         return collection;
     };
+    
+    var getIzbrani = function (array, vrstaModel, Coll) {
+        var collection = new Coll();
+        _.each(array, function (id) {
+            vrstaModel.get('mozni').each(function(model){
+                if(model.get('id') === id){
+                    collection.add(model);
+                }
+            });
+        }, this);
+
+        return collection;
+    };
 
     var obj2Coll = function (obj, vrsteFiltrov) {
         var array = [];
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 var vrstaModel = getVrstaModel(key, vrsteFiltrov);
-                var izbrani = array2Coll(obj[key], Backbone.Collection);
+                var izbrani = getIzbrani(obj[key], vrstaModel, Backbone.Collection);
                 array.push({vrsta: key, vrstaModel: vrstaModel, izbrani: izbrani});
             }
         }
