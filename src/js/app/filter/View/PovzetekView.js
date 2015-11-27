@@ -49,7 +49,7 @@ define([
     PovzetekView.prototype.initialize = function (options) {
         this.stIzpisov = options.stIzpisov || 2;
         
-        this.collection.on('add remove', this.changeOstanek, this);
+        this.collection.on('add remove reset', this.changeOstanek, this);
     };
 
     PovzetekView.prototype.serializeData = function () {

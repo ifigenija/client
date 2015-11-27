@@ -51,11 +51,9 @@ define([
         template: tpl,
         className: 'filter-select',
         regions: {
-            vrsteR: '.region-vrste-filtra'
-        },
-        triggers: {
-            'click .vrsta-filtra-dodaj': 'dodaj',
-            'click .vrsta-filtra-reset': 'ponastavi'
+            vrsteR: '.region-vrste-filtra',
+            toolbarLR: '.region-toolbar-left',
+            toolbarDR: '.region-toolbar-right'
         }
     });
 
@@ -79,7 +77,57 @@ define([
     };
 
     FilterView.prototype.onRender = function () {
+        this.renderToolbarLevo();
+        this.renderToolbarDesno();
         this.renderAktivniSeznam();
+    };
+
+    FilterView.prototype.renderToolbarLevo = function () {
+
+        var buttons = this.getButtons();
+        var groups = [[
+                {
+                    id: 'filter-dodaj',
+                    icon: 'fa fa-plus',
+                    element: 'button-dropdown',
+                    trigger: 'dodaj',
+                    dropdown: buttons
+                }
+            ]];
+
+        var toolbarView = this.toolbarLView = new Toolbar({
+            buttonGroups: groups,
+            listener: this,
+            size: 'md'
+        });
+
+        if (buttons.length === 0) {
+            toolbarView.disableButtons(['filter-dodaj']);
+        }else{
+            toolbarView.enable(['filter-dodaj']);
+        }
+
+        this.toolbarLR.show(toolbarView);
+        return toolbarView;
+    };
+
+    FilterView.prototype.renderToolbarDesno = function () {
+        var groups = [[
+                {
+                    id: 'filter-reset',
+                    icon: 'fa fa-undo',
+                    element: 'button-trigger',
+                    trigger: 'ponastavi'
+                }
+            ]];
+
+        var toolbarView = new Toolbar({
+            buttonGroups: groups,
+            listener: this,
+            size: 'md'
+        });
+
+        this.toolbarDR.show(toolbarView);
     };
 
     FilterView.prototype.renderAktivniSeznam = function () {
@@ -91,25 +139,17 @@ define([
         view.on('change:vrednosti', function () {
             console.log('change:vrednosti');
         }, this);
-        
+
         view.on('changed:vrednosti', function () {
             console.log('changed:vrednosti');
+            this.renderToolbarLevo();
         }, this);
 
         this.vrsteR.show(view);
     };
 
-    /**
-     * Ob kliku na gumb dodaj odpremo view za izbiranje filtra
-     * @returns {undefined}
-     */
-    FilterView.prototype.onDodaj = function () {
-        this.renderIzbiraFiltra();
-    };
+    FilterView.prototype.getButtons = function () {
 
-    FilterView.prototype.renderIzbiraFiltra = function () {
-
-        var groups = [];
         var buttons = [];
         var self = this;
 
@@ -126,7 +166,6 @@ define([
                     id: 'filter-' + vMmodel.get('id'),
                     label: vMmodel.get('label'),
                     icon: vMmodel.get('icon'),
-                    element: 'button-trigger',
                     trigger: 'dodajAktivnoVrsto',
                     data: vMmodel
                 };
@@ -134,31 +173,7 @@ define([
             }
         });
 
-        if (buttons.length) {
-            var obj = {
-                id: 'filter-preklici',
-                label: i18next.t('std.preklici'),
-                element: 'button-trigger',
-                trigger: 'preklici'
-            };
-            buttons.push(obj);
-
-            groups.push(buttons);
-
-            var toolbarView = new Toolbar({
-                buttonGroups: groups,
-                listener: this,
-                size: 'md'
-            });
-
-            this.vrsteR.show(toolbarView);
-        } else {
-            Radio.channel('error').command('flash', {
-                message: i18next.t('std.filterIzbira'),
-                code: 100200,
-                severity: 'warning'
-            });
-        }
+        return buttons;
     };
 
     FilterView.prototype.onPreklici = function () {

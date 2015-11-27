@@ -32,10 +32,6 @@ define([
 
     describe("FilterView", function () {
         beforeEach(function () {
-            this.collSelect = new LookupModel(null, {
-                entity: 'oseba'
-            });
-
             this.filterView = new FilterView({
                 vrsteFiltrov: [{
                         title: 'Izbira oseb',

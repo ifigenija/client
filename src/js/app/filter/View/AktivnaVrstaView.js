@@ -49,7 +49,7 @@ define([
         },
         triggers: {
             'click .vrsta-filtra-brisi': 'brisi',
-            'click .vrsta-filtra': 'uredi'
+            'click': 'uredi'
         }
     });
 
@@ -58,7 +58,7 @@ define([
         
         //za sprotno spreminjanje collectiona izbranih modelov
         var izbrani = this.model.get('izbrani');        
-        izbrani.on('add remove', function(){
+        izbrani.on('add remove reset', function(){
             this.trigger('change:vrednosti');
         }, this);
     };

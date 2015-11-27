@@ -40,7 +40,7 @@ define([
                 collection: coll,
                 stIzpisov: 1
             });
-            
+
             this.povzetek.render();
         });
 
@@ -54,17 +54,32 @@ define([
         it('pravilen izpis', function () {
             var $item = this.povzetek.$('.povzetek-item');
             var $ostanek = this.povzetek.$('.povzetek-ostanek');
-            
+
             expect($item.length).to.equal(1);
             expect($ostanek.text()).to.contain('(1)');
         });
 
         it('dodaj vrednost izpis', function () {
-            expect(true).to.equal(false);
+            this.povzetek.collection.add({
+                label: 'aleš',
+                poklic: 'web'
+            });
+
+            var $item = this.povzetek.$('.povzetek-item');
+            var $ostanek = this.povzetek.$('.povzetek-ostanek');
+
+            expect($item.length).to.equal(1);
+            expect($ostanek.text()).to.contain('(2)');
         });
 
         it('odstrani izpis', function () {
-            expect(true).to.equal(false);
+            this.povzetek.collection.remove({
+                label: 'lovro',
+                poklic: 'razvijalec'
+            });
+            
+            var $ostanek = this.povzetek.$('.povzetek-ostanek');
+            expect($ostanek.text()).to.not.contain('(');
         });
     });
 });
