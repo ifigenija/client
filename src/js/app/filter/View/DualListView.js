@@ -269,7 +269,7 @@ define([
      */
     DualListView.prototype.onClose = function () {
         $(window).off('resize', jQuery.proxy(this, "resize"));
-        this.trigger("change:vrednosti");
+        this.trigger("changed:vrednosti");
         this.destroy();
     };
 

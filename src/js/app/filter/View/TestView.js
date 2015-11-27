@@ -117,7 +117,11 @@ define([
                             id: 'oseba',
                             icon: 'fa fa-user',
                             stIzpisov: 1,
-                            mozni: collSelect,
+                            mozni: [
+                                {id: 1, ident: "1", "label": "lovro"},
+                                {id: 2, ident: "2", "label": "simon"},
+                                {id: 3, ident: "3", "label": "aleš"}
+                            ],
                             label:'oseba'
                         },
                         {
@@ -134,9 +138,9 @@ define([
                         }],
                     aktivneVrste: {
                         'oseba': [
-                            '00090000-5656-ac4a-ac75-ff6d8d5219cd',
-                            '00090000-5656-ac4a-7c9a-4e4541021b99',
-                            '00090000-5656-ac4a-fb24-8e2ae01b6ec5'
+                            1,
+                            2,
+                            3
                         ],
                         'prostor': [
                             1

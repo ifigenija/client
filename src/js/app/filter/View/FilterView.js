@@ -71,7 +71,11 @@ define([
             vrsteFiltrov: this.vrsteFiltrov
         });
 
-        this.ponastavitev = this.aktivneVrste.clone();
+        //še inicializiramo ponastavitev, ker backboneclone ni deep operacija
+        this.ponastavitev = new AktivnaVrsta(null, {
+            aktivneVrste: options.aktivneVrste,
+            vrsteFiltrov: this.vrsteFiltrov
+        });
     };
 
     FilterView.prototype.onRender = function () {
@@ -86,6 +90,10 @@ define([
 
         view.on('change:vrednosti', function () {
             console.log('change:vrednosti');
+        }, this);
+        
+        view.on('changed:vrednosti', function () {
+            console.log('changed:vrednosti');
         }, this);
 
         this.vrsteR.show(view);
@@ -134,12 +142,13 @@ define([
                 trigger: 'preklici'
             };
             buttons.push(obj);
-            
+
             groups.push(buttons);
 
             var toolbarView = new Toolbar({
                 buttonGroups: groups,
-                listener: this
+                listener: this,
+                size: 'md'
             });
 
             this.vrsteR.show(toolbarView);
@@ -151,7 +160,7 @@ define([
             });
         }
     };
-    
+
     FilterView.prototype.onPreklici = function () {
         this.render();
     };
@@ -184,7 +193,15 @@ define([
      * @returns {undefined}
      */
     FilterView.prototype.onPonastavi = function () {
-        this.aktivneVrste = this.ponastavitev.clone();
+        //ker backbone clone ni deep operacija
+        var vrsteFiltrov = new Vrsta(null, {
+            vrsteFiltrov: this.options.vrsteFiltrov
+        });
+
+        this.aktivneVrste = new AktivnaVrsta(null, {
+            aktivneVrste: this.options.aktivneVrste,
+            vrsteFiltrov: this.vrsteFiltrov
+        });
         this.render();
     };
 
