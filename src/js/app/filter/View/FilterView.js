@@ -7,8 +7,8 @@
  *      vrste filtrov
  *      prednastavljeni filter
  *      {
- *      vrsta1:{ids:{}},
- *      vrsta2:{ids:{}}
+ *      vrsta1:{[ids]},
+ *      vrsta2:{[ids]}
  *      }
  *
  * Prikaz vrst filtrov
@@ -16,8 +16,8 @@
  * 
  * Izhodni podatki:
  *      {
- *      vrsta1:{ids:{}},
- *      vrsta2:{ids:{}}
+ *      vrsta1:{[ids]},
+ *      vrsta2:{[ids]}
  *      }
  */
 
@@ -59,19 +59,21 @@ define([
 
     FilterView.prototype.initialize = function (options) {
         this.template = options.template || this.template;
-
+        this.vrsteFiltrovData = options.vrsteFiltrov || this.vrsteFiltrovData;
+        this.aktivneVrsteData = options.aktivneVrste || this.aktivneVrsteData;
+        
         this.vrsteFiltrov = new Vrsta(null, {
-            vrsteFiltrov: options.vrsteFiltrov
+            vrsteFiltrov: this.vrsteFiltrovData
         });
 
         this.aktivneVrste = new AktivnaVrsta(null, {
-            aktivneVrste: options.aktivneVrste,
+            aktivneVrste: this.aktivneVrsteData,
             vrsteFiltrov: this.vrsteFiltrov
         });
 
         //še inicializiramo ponastavitev, ker backboneclone ni deep operacija
         this.ponastavitev = new AktivnaVrsta(null, {
-            aktivneVrste: options.aktivneVrste,
+            aktivneVrste: this.aktivneVrsteData,
             vrsteFiltrov: this.vrsteFiltrov
         });
     };
@@ -83,7 +85,6 @@ define([
     };
 
     FilterView.prototype.renderToolbarLevo = function () {
-
         var buttons = this.getButtons();
         var groups = [[
                 {
@@ -136,12 +137,14 @@ define([
             aktivneVrste: this.aktivneVrste
         });
 
+        //se proži ob vsaki spremembi vrednosti aktivnega filtra
         view.on('change:vrednosti', function () {
-            console.log('change:vrednosti');
+            this.trigger('change');
         }, this);
 
+        //se proži ko smo dodali ali odstranili aktivni filter, ter če smo zaključili z urejanjem vrednosti aktivnega filtra
         view.on('changed:vrednosti', function () {
-            console.log('changed:vrednosti');
+            this.trigger('changed');
             this.renderToolbarLevo();
         }, this);
 
@@ -176,10 +179,6 @@ define([
         return buttons;
     };
 
-    FilterView.prototype.onPreklici = function () {
-        this.render();
-    };
-
     /**
      * Ko dodajamo nov aktivni model podamo še model definicij vrste filtra
      * @param Model model
@@ -196,10 +195,9 @@ define([
 
     /**
      * Vrne Vse nastavljene vrednosti aktivnih vrst filtrov
-     * @param {type} child
      * @returns {FilterView_L34.FilterView.prototype@pro;aktivneVrste@call;getVrednostiFiltrov}
      */
-    FilterView.prototype.getVrednostiAktivnihFiltrov = function (child) {
+    FilterView.prototype.getVrednostiAktivnihFiltrov = function () {
         return this.aktivneVrste.getVrednostiFiltrov();
     };
 
@@ -209,12 +207,8 @@ define([
      */
     FilterView.prototype.onPonastavi = function () {
         //ker backbone clone ni deep operacija
-        var vrsteFiltrov = new Vrsta(null, {
-            vrsteFiltrov: this.options.vrsteFiltrov
-        });
-
         this.aktivneVrste = new AktivnaVrsta(null, {
-            aktivneVrste: this.options.aktivneVrste,
+            aktivneVrste: this.aktivneVrsteData,
             vrsteFiltrov: this.vrsteFiltrov
         });
         this.render();

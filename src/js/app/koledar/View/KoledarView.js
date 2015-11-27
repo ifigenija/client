@@ -9,7 +9,9 @@ define([
     './DogodekModal',
     './DogodekFilter',
     './DogodekView',
-    'radio'
+    './KoledarFilterView',
+    'radio',
+    'app/seznami/Model/Prostor'
 ], function (
         Marionette,
         _,
@@ -18,7 +20,9 @@ define([
         DogodekModal,
         DogodekFilter,
         DogodekView,
-        Radio
+        KoledarFilterView,
+        Radio,
+        Prostor
         ) {
 
     var KoledarView = Marionette.LayoutView.extend({
@@ -26,7 +30,8 @@ define([
         regions: {
             filterR: '.calendar-filter',
             msgR: '.calendar-msg',
-            dogodekR: '.dogodek'
+            dogodekR: '.dogodek',
+            koledarFilterR: '.koledar-filter-bar'
         },
         ui: {
             'calendar': '.calendar-container'
@@ -34,14 +39,15 @@ define([
     });
 
     KoledarView.prototype.initialize = function (options) {
-        this.filterView = options.filterView || new DogodekFilter();
-        this.filterView.on('filter', function () {
-            this.ui.calendar.fullCalendar('refetchEvents');
-        }, this);
+        //this.filterView = options.filterView || new DogodekFilter();
+//        this.filterView.on('filter', function () {
+//            this.ui.calendar.fullCalendar('refetchEvents');
+//        }, this);
         this.listenTo(this.collection, 'change', this.change);
     };
 
     KoledarView.prototype.onRender = function () {
+        this.renderFilterView();
         var self = this;
         var options = _.extend({
             lang: 'sl',
@@ -69,9 +75,10 @@ define([
                 {
                     events: function (zacetek, konec, timezone, callback) {
                         var list = [];
+                        var vrednosti = self.vrednostiFiltrov;
                         self.collection.queryParams.zacetek = zacetek.toISOString();
                         self.collection.queryParams.konec = konec.toISOString();
-                        self.collection.queryParams = _.extend(self.collection.queryParams, self.filterView.form.getValue());
+                        self.collection.queryParams = _.extend(self.collection.queryParams, vrednosti);
                         self.collection.fetch({
                             success: function (coll) {
                                 coll.each(function (eventModel) {
@@ -85,12 +92,24 @@ define([
                 }
             ]
         });
-        this.filterR.show(this.filterView);
+        //this.filterR.show(this.filterView);
         setTimeout(function () {
             self.ui.calendar.fullCalendar(options);
         }, 200);
     };
 
+
+    KoledarView.prototype.renderFilterView = function () {
+        var filterView = new KoledarFilterView();
+        var self = this;
+
+        filterView.on('changed', function () {
+            self.vrednostiFiltrov = filterView.getVrednostiAktivnihFiltrov();
+            self.ui.calendar.fullCalendar('refetchEvents');
+        });
+
+        this.koledarFilterR.show(filterView);
+    };
 
     KoledarView.prototype.select = function (start, end, jsEvent, view) {
         var self = this;
@@ -185,7 +204,7 @@ define([
     KoledarView.prototype.onPreklici = function () {
         this.dogodekR.empty();
     };
-    
+
     return KoledarView;
 })
         ;
