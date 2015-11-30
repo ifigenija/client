@@ -1721,7 +1721,6 @@
         "status": "Status",
         "razred": "Razred",
         "termin": "Termin",
-        "title": "Ime",
         "predstava": "Predstava",
         "zasedenost": "Zasedenost",
         "vaja": "Vaja",
@@ -1730,6 +1729,7 @@
         "tehnicni": "Tehnični dogodek",
         "prostor": "Prostor",
         "sezona": "Sezona",
+        "dodajDogodek": "Dodaj dogodek",
         "d": {
             "allDay": "Dogodek se razteza skozi cel dan",
             "zacetek": "",

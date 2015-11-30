@@ -10,8 +10,7 @@ define([
     './DogodekFilter',
     './DogodekView',
     './KoledarFilterView',
-    'radio',
-    'app/seznami/Model/Prostor'
+    'radio'
 ], function (
         Marionette,
         _,
@@ -21,8 +20,7 @@ define([
         DogodekFilter,
         DogodekView,
         KoledarFilterView,
-        Radio,
-        Prostor
+        Radio
         ) {
 
     var KoledarView = Marionette.LayoutView.extend({
@@ -117,9 +115,13 @@ define([
             zacetek: start.format(),
             konec: end.format(),
             cb: function () {
-                self.dodajDogodek.apply(self, arguments);
+                self.onUredi.apply(self, arguments);
             }
         });
+    };
+    
+    KoledarView.prototype.onUredi = function () {
+        console.log('uredi');
     };
 
     KoledarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
