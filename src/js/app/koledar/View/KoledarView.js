@@ -2,6 +2,7 @@
  * Licenca GPLv3
  */
 define([
+    'radio',
     'marionette',
     'underscore',
     'jquery',
@@ -10,8 +11,10 @@ define([
     './DogodekFilter',
     './DogodekView',
     './KoledarFilterView',
-    'radio'
+    './VajaView',
+    'formSchema!vaja',
 ], function (
+        Radio,
         Marionette,
         _,
         $,
@@ -20,7 +23,8 @@ define([
         DogodekFilter,
         DogodekView,
         KoledarFilterView,
-        Radio
+        VajaView,
+        schemaVaja
         ) {
 
     var KoledarView = Marionette.LayoutView.extend({
@@ -86,7 +90,8 @@ define([
                             }
                         });
                     },
-                    coll: self.collection
+                    coll: self.collection,
+                    view: self
                 }
             ]
         });
@@ -115,13 +120,18 @@ define([
             zacetek: start.format(),
             konec: end.format(),
             cb: function () {
-                self.onUredi.apply(self, arguments);
+                KoledarView.prototype.onUredi.apply(self, arguments);
             }
         });
     };
-    
-    KoledarView.prototype.onUredi = function () {
-        console.log('uredi');
+
+    KoledarView.prototype.onUredi = function (model) {
+        var view = new VajaView({
+            model: model,
+            schema: schemaVaja.toFormSchema().schema,
+        });
+
+        this.filterR.show(view);
     };
 
     KoledarView.prototype.eventClick = function (fcEvent, jsEvent, view) {

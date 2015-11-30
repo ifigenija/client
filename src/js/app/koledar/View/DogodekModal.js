@@ -68,7 +68,6 @@ define([
 
             this.izbiraR.show(view);
         },
-        
         renderIzbiraUprizoritve: function (cb) {
             var sch = {type: 'Toone', targetEntity: 'uprizoritev', editorAttrs: {class: 'form-control'}, title: 'Uprizoritev'};
             var podrobnoView = new Form({
@@ -85,9 +84,9 @@ define([
                 var Model = Backbone.Model.extend({
                     urlRoot: baseUrl + '/vaja'
                 });
-                var model = new Model();
-                
-                var view = new VajaView({
+                var model = this.model = new Model();
+
+                var view = this.vajaView = new VajaView({
                     model: model,
                     schema: schemaVaja.toFormSchema().schema
                 });
@@ -118,10 +117,8 @@ define([
             cancelText: i18next.t("std.preklici")
         });
         var odpriDogodek = function () {
-            var model = modal.options.content.form.model;
-            //tukaj je drugače ker formview.commit vrne true če ni napake
-            //form pa vrne false če ni napake zato je tu drugače, kot pri ostalih
-            if (view.form.commit()) {
+            var model = view.model;
+            if (!view.vajaView.form.commit()) {
                 if (options.cb) {
                     options.cb(model);
                 }
