@@ -146,11 +146,11 @@
         "odstraniOrgEnota": "Odstrani organizacijsko enoto",
         "dodajOrgEnota": "Dodaj organizacijsko enoto",
         "vseenoShrani": "Vseeno shrani",
-        "premakniVseDesno":"Izberi vse",
-        "premakniIzbraneDesno":"Premakni Izbrane",
-        "premakniIzbraneLevo":"Odstrani izbrane",
-        "premakniVseLevo":"Odstrani vse",
-        "prazenSeznam":"Seznam je prazen",
+        "premakniVseDesno": "Izberi vse",
+        "premakniIzbraneDesno": "Premakni Izbrane",
+        "premakniIzbraneLevo": "Odstrani izbrane",
+        "premakniVseLevo": "Odstrani vse",
+        "prazenSeznam": "Seznam je prazen",
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
@@ -1394,8 +1394,10 @@
     },
     "programRazno": {
         "title": "Razno",
+        "stDogodkov": "Število dogodkov",
         "stPE": "Število programskih enot",
         "d": {
+            "stDogodkov": "Število dogodkov",
             "stPE": "Število programskih enot"
         }
     },
@@ -1442,6 +1444,7 @@
         "obsegPE": "Obseg",
         "mesecPE": "Mesec",
         "vrednostPE": "Vrednost",
+        "stDogodkov": "Število dogodkov",
         "obiskDoma": "Število obiskovalcev",
         "d": {
             "naslovPE": "",
@@ -1449,6 +1452,7 @@
             "obsegPE": "",
             "mesecPE": "",
             "vrednostPE": "",
+            "stDogodkov": "Število dogodkov",
             "obiskDoma": "Načrtovano število obiskovalcev"
         }
     },
