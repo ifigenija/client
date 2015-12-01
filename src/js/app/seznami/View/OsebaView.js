@@ -20,7 +20,7 @@ define([
         ) {
 
     var chPermission = Radio.channel('global');
-    var dovoljeno = chPermission.request('isGranted', "oseba-write");
+    var dovoljeno = chPermission.request('isGranted', "Oseba-write");
 
     var actionsWrite = [
         {event: 'uredi', title: i18next.t('std.uredi')},
@@ -119,7 +119,7 @@ define([
     };
 
     OsebaView.prototype.renderToolbar = function () {
-        var dovoljeno = chPermission.request('isGranted', "oseba-write");
+        var dovoljeno = chPermission.request('isGranted', "Oseba-write");
         if (dovoljeno) {
             SeznamView.prototype.renderToolbar.apply(this, arguments);
         }

@@ -331,7 +331,7 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onZakleni = function () {
-        var dovoljeno = chPermission.request('isGranted', "programDela-lock");
+        var dovoljeno = chPermission.request('isGranted', "ProgramDela-lock");
 
         if (dovoljeno) {
             var self = this;
@@ -389,7 +389,7 @@ define([
      * @returns {undefined}
      */
     ProgramDokView.prototype.onOdkleni = function () {
-        var dovoljeno = chPermission.request('isGranted', "programDela-unlock");
+        var dovoljeno = chPermission.request('isGranted', "ProgramDela-unlock");
 
         if (dovoljeno) {
             var self = this;
@@ -460,8 +460,8 @@ define([
         var id = this.model.get('id');
         if (id) {
             buttons.push(this.buttons.kloniraj);
-            var zaklepD = chPermission.request('isGranted', "programDela-lock");
-            var odklepD = chPermission.request('isGranted', "programDela-unlock");
+            var zaklepD = chPermission.request('isGranted', "ProgramDela-lock");
+            var odklepD = chPermission.request('isGranted', "ProgramDela-unlock");
 
             if (zaklepD || odklepD) {
                 buttons.push(this.buttons.zakleni);
@@ -473,7 +473,7 @@ define([
                 }
             }, this.buttons.print));
 
-            var dovoljeno = chPermission.request('isGranted', "programDela-write");
+            var dovoljeno = chPermission.request('isGranted', "ProgramDela-write");
             if (!this.model.get('potrjenProgram') && dovoljeno) {
                 buttons.push(this.buttons.brisi);
             }

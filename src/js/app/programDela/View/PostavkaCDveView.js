@@ -130,27 +130,21 @@ define([
             }
         ]
     });
-
     //collection sortiramo in dodamo model skupaj(seštevki vseh modelov)
     PostavkaCDveView.prototype.dopolniTabelo = function () {
         this.collection.sort();
-
         var model = new ProgramDokument.PostavkaCDvaModel();
-
         model.set('razred', 'Skupaj');
         model.set('skupina', 'ZZZZZ1234');
         model.set('podskupina', 0);
         model.set('naziv', 'SKUPAJ C.2.');
-
         //dodamo model v collection
         this.collection.add(model, {
             error: Radio.channel('error').request('handler', 'xhr')
         });
-
         //preračunamo vrednosti tabele
         this.preracunajTabelo();
     };
-
     PostavkaCDveView.prototype.initialize = function () {
 
         // Komparator za sort collectiona
@@ -162,31 +156,26 @@ define([
                 temp = temp.slice(temp.length - 10);
             }
             var sa = temp;
-
             temp = b.get('skupina');
             if ($.isNumeric(temp)) {
                 temp = '0000000000' + temp;
                 temp = temp.slice(temp.length - 10);
             }
             var sb = temp;
-
             var psa = a.get('podskupina');
             var psb = b.get('podskupina');
-
             if (sa === sb) {
                 return (psa < psb) ? -1 : (psa > psb) ? 1 : 0;
             } else {
                 return (sa < sb) ? -1 : 1;
             }
         };
-
         //v kolikor nimamo podatkov v bazi jih ustvarimo
         if (this.collection.length <= 0) {
             this.osvezi();
         }
 
         this.dopolniTabelo();
-
         this.listenTo(this.collection, "backgrid:edited", function (model, schema, command) {
             var self = this;
             if (!command.cancel()) {
@@ -203,23 +192,20 @@ define([
             }
         });
     };
-
     /*
      * Metoda ki preračuna podatke tabele
      * @returns {undefined}
      */
     PostavkaCDveView.prototype.preracunajTabelo = function () {
         var coll = this.collection;
-
         var vsotaPremiera = 0, vsotaPonovitvePremier = 0, vsotaPonovitvePrejsnjih = 0,
                 vsotaGostovanjaZamejstvo = 0, vasotaFestivali = 0, vsotaGostovanjaInt = 0,
                 vsotaOstalo = 0;
-
         var prejsnjaSkupina = "";
+
         for (var i = 0; i < coll.length; i++) {
             var model = coll.models[i];
             var podskupina = model.get('podskupina');
-
             if (podskupina === 0 && i !== 0) {
                 //v kolikor je podskupina 0 shranemo vsote
                 var sestevek = coll.findWhere({'podskupina': 0, 'skupina': prejsnjaSkupina.toString()});
@@ -231,10 +217,8 @@ define([
                     sestevek.set('vrFestivali', vasotaFestivali);
                     sestevek.set('vrGostovanjaInt', vsotaGostovanjaInt);
                     sestevek.set('vrOstalo', vsotaOstalo);
-
                     //preračunamo vsoto vseh vsot
                     sestevek.preracunajSkupaj();
-
                     sestevek.save({}, {
                         error: Radio.channel('error').request('handler', 'xhr')
                     });
@@ -247,7 +231,6 @@ define([
             } else if (podskupina !== 0) {
                 //v kolikor ni podskupina 0 prištejemo vrednosti
                 prejsnjaSkupina = model.get('skupina');
-
                 vsotaPremiera += model.get('vrPremiere');
                 vsotaPonovitvePremier += model.get('vrPonovitvePremier');
                 vsotaPonovitvePrejsnjih += model.get('vrPonovitvePrejsnjih');
@@ -255,14 +238,12 @@ define([
                 vasotaFestivali += model.get('vrFestivali');
                 vsotaGostovanjaInt += model.get('vrGostovanjaInt');
                 vsotaOstalo += model.get('vrOstalo');
-
                 //preračunamo vsoto vseh vrednosti
                 model.preracunajSkupaj();
             }
         }
         this.preracunajSkupaj(coll);
     };
-
     /**
      * Preračunamo vsoto vseh vrednosti v modelu in jo shranemo v model namenjen prikazovanju skupnih vsot
      * @returns returns {PostavkaCDveView_L16.PostavkaCDveView.collection|PostavkeView@call;extend.prototype.preracunajSkupaj.coll}
@@ -275,7 +256,6 @@ define([
         for (var i = 0; i < coll.length; i++) {
             var model = coll.models[i];
             var podskupina = model.get('podskupina');
-
             //podkupina 0 hrani vsote vrednosti skupin zato se preskoči
             if (podskupina !== 0) {
                 vsotaPremiera += model.get('vrPremiere');
@@ -297,12 +277,10 @@ define([
         skupaj.set('vrFestivali', vasotaFestivali);
         skupaj.set('vrGostovanjaInt', vsotaGostovanjaInt);
         skupaj.set('vrOstalo', vsotaOstalo);
-
         //preačunamo vsoto vsot
         skupaj.preracunajSkupaj(coll);
         return coll;
     };
-
     /**
      * Metoda extenda trenutni izris metode in doda razred modelom, ki so namenjeni izpisu
      * @returns {PostavkaCDveView_L16.Backgrid.Grid|PostavkeView@call;extend.prototype.renderList.grid}
@@ -313,14 +291,12 @@ define([
             Backgrid.Cell.prototype.enterEditMode.apply(this, arguments);
             this.currentEditor.$el.select();
         };
-
         var Povdarjena = Backgrid.Row.extend({
             /**
              Renders a row of cells for this row's model.
              */
             render: function () {
                 Backgrid.Row.prototype.render.apply(this, arguments);
-
                 if (this.model.get('podskupina') === 0) {
                     this.$el.addClass('povdarjena-vrstica');
                 }
@@ -328,7 +304,6 @@ define([
                 return this;
             }
         });
-
         var grid = new Backgrid.Grid({
             collection: this.collection,
             row: Povdarjena,
@@ -337,7 +312,6 @@ define([
         this.regionList.show(grid);
         return grid;
     };
-
     /**
      * Osvezimo/prepišemo vrednosti tabele
      * @returns {undefined}
@@ -352,7 +326,6 @@ define([
                 error: Radio.channel('error').request('handler', 'xhr')
             });
         };
-
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
         rpc.call('osveziTabeloC2', {
             'programDelaId': self.dokument.get('id')
@@ -360,7 +333,6 @@ define([
         success,
                 Radio.channel('error').request('handler', 'xhr'));
     };
-
     PostavkaCDveView.prototype.onOsvezi = function () {
         var self = this;
         confirm({
@@ -374,7 +346,6 @@ define([
             }
         });
     };
-
     PostavkaCDveView.prototype.prepareToolbar = function () {
         return [
             [
@@ -382,20 +353,16 @@ define([
             ]
         ];
     };
-
     PostavkaCDveView.prototype.onUredi = function () {
 
     };
-
     PostavkaCDveView.prototype.onSelected = function () {
 
     };
-    
     PostavkaCDveView.prototype.onDestroy = function () {
         Backgrid.NumberCell.prototype.enterEditMode = function () {
             Backgrid.Cell.prototype.enterEditMode.apply(this, arguments);
         };
     };
-    
     return PostavkaCDveView;
 });
