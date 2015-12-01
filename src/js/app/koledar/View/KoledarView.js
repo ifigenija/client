@@ -32,8 +32,7 @@ define([
         regions: {
             filterR: '.calendar-filter',
             msgR: '.calendar-msg',
-            dogodekR: '.dogodek',
-            koledarFilterR: '.koledar-filter-bar'
+            dogodekR: '.dogodek'
         },
         ui: {
             'calendar': '.calendar-container'
@@ -59,6 +58,7 @@ define([
                 right: 'month,basicWeek,agendaWeek,basicDay'
             },
             timezone: false,
+            aspectRatio:1.6,
             selectable: true,
             defaultView: 'month',
             selectHelper: true,
@@ -90,10 +90,10 @@ define([
                             }
                         });
                     },
-                    coll: self.collection,
-                    view: self
+                    coll: self.collection
                 }
-            ]
+            ],
+            view: self
         });
         //this.filterR.show(this.filterView);
         setTimeout(function () {
@@ -111,7 +111,7 @@ define([
             self.ui.calendar.fullCalendar('refetchEvents');
         });
 
-        this.koledarFilterR.show(filterView);
+        this.filterR.show(filterView);
     };
 
     KoledarView.prototype.select = function (start, end, jsEvent, view) {
@@ -126,12 +126,19 @@ define([
     };
 
     KoledarView.prototype.onUredi = function (model) {
-        var view = new VajaView({
-            model: model,
-            schema: schemaVaja.toFormSchema().schema,
+        var View = VajaView.extend({
+            posodobiUrlNaslov: function(){}
         });
+        var view = new View({
+            model: model,
+            schema: schemaVaja.toFormSchema().schema
+        });
+        
+        view.on('save:success', function () {
+            this.options.view.ui.calendar.fullCalendar('refetchEvents');
+        }, this);
 
-        this.filterR.show(view);
+        this.options.view.dogodekR.show(view);
     };
 
     KoledarView.prototype.eventClick = function (fcEvent, jsEvent, view) {

@@ -54,7 +54,6 @@ define([
         template: simpleTpl,
         formTemplate: vajaTpl,
         schema: schemaVaja.toFormSchema().schema,
-        checkBeforeSave: true,
         regions: {
             tabsR: '.vaja-tabs'
         },

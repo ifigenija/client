@@ -9,15 +9,10 @@ define([
     'marionette',
     'backbone-modal',
     'app/Max/Module/Form',
-    'app/Dokument/View/FormView',
     'template!../tpl/dogodek-izbira.tpl',
-    'template!../tpl/dogodek-form.tpl',
     'template!../tpl/dogodek-modal.tpl',
-    'template!app/Dokument/tpl/form-simple.tpl',
-    'formSchema!vaja',
-    'template!../tpl/vajaPlan-form.tpl',
-    'baseUrl',
-    './VajaView'
+    'moment',
+    '../Model/Dogodek'
 ], function (
         Radio,
         i18next,
@@ -26,15 +21,10 @@ define([
         Marionette,
         Modal,
         Form,
-        FormView,
         izbiraTpl,
-        tpl,
         modalTpl,
-        simpleTpl,
-        schemaVaja,
-        vajaTpl,
-        baseUrl,
-        VajaView
+        moment,
+        Dogodek
         ) {
     var IzbiraView = Marionette.ItemView.extend({
         template: izbiraTpl,
@@ -54,21 +44,64 @@ define([
         },
         initialize: function (options) {
             //dodaj default
-            this.zacetek = options.zacetek;
-            this.konec = options.konec;
+            this.zacetek = options.zacetek || moment();
+            this.konec = options.konec || moment();
+            this.title = options.title || i18next.t('std.naslov');
         },
         onRender: function () {
             var view = new IzbiraView();
 
-            view.on('render:vaja', this.renderVaja, this);
-            view.on('render:predstava', this.renderPredstava, this);
-            view.on('render:zasedenost', this.renderZasedenost, this);
-            view.on('render:gostovanje', this.renderGostovanje, this);
-            view.on('render:splosni', this.renderSplosni, this);
+            view.on('render:vaja', this.onVaja, this);
+            view.on('render:predstava', this.onPredstava, this);
+            view.on('render:zasedenost', this.onZasedenost, this);
+            view.on('render:gostovanje', this.onGostovanje, this);
+            view.on('render:splosni', this.onSplosni, this);
+            view.on('render:tehnicni', this.onTehnicni, this);
 
             this.izbiraR.show(view);
         },
-        renderIzbiraUprizoritve: function (cb) {
+        /**
+         * 
+         * @param {String} model: določimo url modela
+         * @returns {undefined}
+         */
+        initModel: function(model){
+            var model = this.model = new Dogodek({
+                view: 'vaja'
+            });
+            
+            if (this.zacetek) {
+                model.set('zacetek', this.zacetek);
+            }
+            model.set('konec', this.konec);
+            
+            return model;
+        },
+        onVaja: function () {
+            this.initModel('vaja');
+            this.renderIzbiraUprizoritve();
+        },
+        onPredstava: function () {
+            this.initModel('predstava');
+            this.renderIzbiraUprizoritve();
+        },
+        onGostovanje: function () {
+            this.initModel('gostovanje');
+            this.preklici();
+        },
+        onSplosni: function () {
+            this.initModel('splosni');
+            this.preklici();
+        },
+        onTehnicni: function () {
+            this.initModel('tehnicni');
+            this.preklici();
+        },
+        onZasedenost: function () {
+            this.initModel('zasedenost');
+            this.preklici();
+        },
+        renderIzbiraUprizoritve: function () {
             var sch = {type: 'Toone', targetEntity: 'uprizoritev', editorAttrs: {class: 'form-control'}, title: 'Uprizoritev'};
             var podrobnoView = new Form({
                 template: Handlebars.compile('<form><div data-fields="uprizoritev"></div></form>'),
@@ -76,26 +109,17 @@ define([
                     uprizoritev: sch
                 }
             });
-            podrobnoView.on('uprizoritev:change', cb, this);
+            var self = this;
+
+            //določimo uprizoritev modelu
+            podrobnoView.on('uprizoritev:change', function () {
+                self.model.set('uprizoritev', podrobnoView.fields.uprizoritev.getValue());
+            }, this);
+
             this.podrobnoR.show(podrobnoView);
         },
-        renderVaja: function () {
-            var form = function () {
-                var Model = Backbone.Model.extend({
-                    urlRoot: baseUrl + '/vaja'
-                });
-                var model = this.model = new Model();
-
-                var view = this.vajaView = new VajaView({
-                    model: model,
-                    schema: schemaVaja.toFormSchema().schema
-                });
-
-                this.podrobnoR.show(view);
-                this.izbiraR.empty();
-            };
-
-            this.renderIzbiraUprizoritve(form);
+        preklici: function () {
+            this.podrobnoR.empty();
         }
     });
     return function (options) {
@@ -118,13 +142,13 @@ define([
         });
         var odpriDogodek = function () {
             var model = view.model;
-            if (!view.vajaView.form.commit()) {
-                if (options.cb) {
-                    options.cb(model);
-                }
-            } else {
-                modal.preventClose();
+            //if (!view.vajaView.form.commit()) {
+            if (options.cb) {
+                options.cb(model);
             }
+//            } else {
+//                modal.preventClose();
+//            }
         };
         return modal.open(odpriDogodek);
     };
