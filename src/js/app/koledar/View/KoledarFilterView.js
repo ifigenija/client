@@ -38,7 +38,7 @@ define([
     uprizoritve.fetch({error: Radio.channel('error').request('handler', 'xhr')});
 
     var KoledarFilterView = FilterView.extend({
-        template: filterTpl,
+        //template: filterTpl,
         vrsteFiltrovData: [{
                 title: 'Izbira oseb',
                 id: 'oseba',

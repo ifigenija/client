@@ -79,11 +79,11 @@ define([
         },
         onVaja: function () {
             this.initModel('vaja');
-            this.renderIzbiraUprizoritve();
+            this.renderIzbiraUprizoritve(i18next.t('vaja.title'));
         },
         onPredstava: function () {
             this.initModel('predstava');
-            this.renderIzbiraUprizoritve();
+            this.renderIzbiraUprizoritve(i18next.t('predstava.title'));
         },
         onGostovanje: function () {
             this.initModel('gostovanje');
@@ -101,7 +101,7 @@ define([
             this.initModel('zasedenost');
             this.preklici();
         },
-        renderIzbiraUprizoritve: function () {
+        renderIzbiraUprizoritve: function (title) {
             var sch = {type: 'Toone', targetEntity: 'uprizoritev', editorAttrs: {class: 'form-control'}, title: 'Uprizoritev'};
             var podrobnoView = new Form({
                 template: Handlebars.compile('<form><div data-fields="uprizoritev"></div></form>'),
@@ -113,7 +113,9 @@ define([
 
             //določimo uprizoritev modelu
             podrobnoView.on('uprizoritev:change', function () {
-                self.model.set('uprizoritev', podrobnoView.fields.uprizoritev.getValue());
+                var podatki = podrobnoView.fields.uprizoritev.getValue();
+                self.model.set('uprizoritev', podatki.id);
+                self.model.set('title', podatki.label + (title ? ' : ' + title : i18next.t('dogodek.title')));
             }, this);
 
             this.podrobnoR.show(podrobnoView);
@@ -142,13 +144,9 @@ define([
         });
         var odpriDogodek = function () {
             var model = view.model;
-            //if (!view.vajaView.form.commit()) {
             if (options.cb) {
                 options.cb(model);
             }
-//            } else {
-//                modal.preventClose();
-//            }
         };
         return modal.open(odpriDogodek);
     };

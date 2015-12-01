@@ -10,8 +10,8 @@
                 <div class="region-toolbar pull-right"></div>
                 <div class="clearfix"></div>
                 <div class="region-form"></div>
+                <div class="region-priloge"></div>
             </div>
-            <div role="tabpanel" class="tab-pane pnl-zakljucek region-zakljucek"></div>
             <div role="tabpanel" class="tab-pane pnl-sodelujoci region-sodelujoci"></div>
         </div>
     </div>

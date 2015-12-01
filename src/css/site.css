@@ -609,7 +609,7 @@ fieldset.pomemben legend span {
 .fieldset-alternacija {
   padding-bottom: 70px;
 }
-.lookup-modal-nov {
+.lookup-modal {
   position: fixed;
   margin: 3px;
   z-index: 5000;
@@ -619,27 +619,27 @@ fieldset.pomemben legend span {
   top: 0px;
   padding: 15px;
 }
-.lookup-modal-nov .modal-dialog {
+.lookup-modal .modal-dialog {
   width: 100%;
   height: 97%;
 }
-.lookup-modal-nov .modal-content {
+.lookup-modal .modal-content {
   height: 97%;
 }
-.lookup-modal-nov .modal-footer {
+.lookup-modal .modal-footer {
   height: 0px;
   padding: 0px;
   visibility: hidden;
 }
-.lookup-modal-nov .modal-body {
+.lookup-modal .modal-body {
   height: 90%;
   overflow-y: auto;
 }
-.lookup-modal-nov .modal-header .close {
+.lookup-modal .modal-header .close {
   color: #222222;
   opacity: 0.4;
 }
-.lookup-modal-nov .lookup-grid {
+.lookup-modal .lookup-grid {
   width: 100%;
   padding: 0;
   border: 0;
