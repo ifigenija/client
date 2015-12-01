@@ -70,12 +70,12 @@ define([
             var coll = new AktivnaVrstaColl(null, {
                 aktivneVrste: {
                     'oseba': [
-                        {id: 1, ident: "1", "label": "lovro"},
-                        {id: 2, ident: "2", "label": "simon"},
-                        {id: 3, ident: "3", "label": "aleš"}
+                        1,
+                        2,
+                        3
                     ],
                     'prostor': [
-                        {id: 1, ident: "1", "label": "lovro"}
+                        1
                     ]
                 },
                 vrsteFiltrov: self.vrsteFiltrov
@@ -86,6 +86,8 @@ define([
             expect(coll.models[1].get('vrsta')).to.not.equal('nedoloceno');
             expect(coll.models[0].get('vrstaModel')).to.not.equal(new VrstaColl());
             expect(coll.models[1].get('vrstaModel')).to.not.equal(new VrstaColl());
+            expect(coll.models[0].get('izbrani').length).to.equal(3);
+            expect(coll.models[1].get('izbrani').length).to.equal(1);
         });
     });
 });

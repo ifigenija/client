@@ -688,69 +688,6 @@ fieldset.pomemben legend span {
 .pnl-relacije .relation-seznam {
   margin-top: 10px;
 }
-.selectlist {
-  position: relative;
-  width: 600px;
-  height: 500px;
-}
-.selectlist-content {
-  position: relative;
-  z-index: 1050;
-}
-.selectlist-backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1040;
-}
-.selectlist-seznam {
-  max-height: 400px;
-  overflow: auto;
-  margin-top: 10px;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-}
-.selectlist-gumbi {
-  padding-bottom: 5px;
-  padding-top: 5px;
-}
-.selectlist-gumb {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 100%;
-}
-.selectlist-filter {
-  margin-left: 9px;
-  margin-right: 9px;
-}
-.selectlist-body {
-  padding-bottom: 0px;
-}
-.selectlist .input-group {
-  width: 100%;
-}
-.selectlist .form-group {
-  width: 100%;
-  margin-bottom: 0px;
-}
-.selectlist .panel-default {
-  margin-bottom: 0px;
-}
-h4.selectlist-naslov {
-  margin: 0px;
-}
-.filter-select .vrsta-filtra-item {
-  display: inline-block;
-  margin-left: 5px;
-  margin-bottom: 5px;
-}
-.test {
-  margin-left: 10%;
-}
 /*
 Licenca GPLv3
 */

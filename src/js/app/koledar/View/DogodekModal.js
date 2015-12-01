@@ -5,41 +5,37 @@ define([
     'radio',
     'i18next',
     'app/bars',
+    'backbone',
     'marionette',
     'backbone-modal',
-    '../Model/Dogodki',
+    'app/Max/Module/Form',
     'app/Dokument/View/FormView',
     'template!../tpl/dogodek-izbira.tpl',
-    'template!../tpl/dogodek-form.tpl'
+    'template!../tpl/dogodek-form.tpl',
+    'template!../tpl/dogodek-modal.tpl',
+    'template!app/Dokument/tpl/form-simple.tpl',
+    'formSchema!vaja',
+    'template!../tpl/vajaPlan-form.tpl',
+    'baseUrl',
+    './VajaView'
 ], function (
         Radio,
         i18next,
         Handlebars,
+        Backbone,
         Marionette,
         Modal,
-        Dogodek,
+        Form,
         FormView,
         izbiraTpl,
-        tpl
+        tpl,
+        modalTpl,
+        simpleTpl,
+        schemaVaja,
+        vajaTpl,
+        baseUrl,
+        VajaView
         ) {
-
-    var Fv = FormView.extend({
-        buttons: {
-            preklici: {
-                id: 'doc-preklici',
-                label: i18next.t('std.nazaj'),
-                element: 'button-trigger',
-                trigger: 'preklici'
-            },
-            nasvet: {
-                id: 'doc-nasvet',
-                icon: 'fa fa-info',
-                element: 'button-trigger',
-                trigger: 'nasvet'
-            }
-        },
-        template: tpl
-    });
     var IzbiraView = Marionette.ItemView.extend({
         template: izbiraTpl,
         triggers: {
@@ -51,19 +47,56 @@ define([
         }
     });
     var DogodekModalLayout = Marionette.LayoutView.extend({
-        tagName: 'div',
-        template: Handlebars.compile('<div class="region-modal"></div>'),
+        template: modalTpl,
         regions: {
-            modalR: '.region-modal'
+            izbiraR: '.region-dogodek-izbira',
+            podrobnoR: '.region-dogodek-podrobno'
         },
-        initialize: function(options){
+        initialize: function (options) {
             //dodaj default
             this.zacetek = options.zacetek;
             this.konec = options.konec;
         },
         onRender: function () {
-        }
+            var view = new IzbiraView();
 
+            view.on('render:vaja', this.renderVaja, this);
+            view.on('render:predstava', this.renderPredstava, this);
+            view.on('render:zasedenost', this.renderZasedenost, this);
+            view.on('render:gostovanje', this.renderGostovanje, this);
+            view.on('render:splosni', this.renderSplosni, this);
+
+            this.izbiraR.show(view);
+        },
+        renderIzbiraUprizoritve: function (cb) {
+            var sch = {type: 'Toone', targetEntity: 'uprizoritev', editorAttrs: {class: 'form-control'}, title: 'Uprizoritev'};
+            var podrobnoView = new Form({
+                template: Handlebars.compile('<form><div data-fields="uprizoritev"></div></form>'),
+                schema: {
+                    uprizoritev: sch
+                }
+            });
+            podrobnoView.on('uprizoritev:change', cb, this);
+            this.podrobnoR.show(podrobnoView);
+        },
+        renderVaja: function () {
+            var form = function () {
+                var Model = Backbone.Model.extend({
+                    urlRoot: baseUrl + '/vaja'
+                });
+                var model = this.model = new Model();
+
+                var view = this.vajaView = new VajaView({
+                    model: model,
+                    schema: schemaVaja.toFormSchema().schema
+                });
+
+                this.podrobnoR.show(view);
+                this.izbiraR.empty();
+            };
+
+            this.renderIzbiraUprizoritve(form);
+        }
     });
     return function (options) {
 
@@ -71,23 +104,21 @@ define([
             zacetek: options.zacetek,
             konec: options.konec
         });
-        
+
         var DM = Modal.extend({
             className: 'dogodek-modal modal'
         });
 
         var modal = new DM({
-            title: i18next.t("dogodek.title"),
+            title: i18next.t("dogodek.dodajDogodek"),
             content: view,
             animate: true,
             okText: i18next.t("std.ustvari"),
             cancelText: i18next.t("std.preklici")
         });
         var odpriDogodek = function () {
-            var model = modal.options.content.form.model;
-            //tukaj je drugače ker formview.commit vrne true če ni napake
-            //form pa vrne false če ni napake zato je tu drugače, kot pri ostalih
-            if (view.form.commit()) {
+            var model = view.model;
+            if (!view.vajaView.form.commit()) {
                 if (options.cb) {
                     options.cb(model);
                 }

@@ -7,8 +7,8 @@
  *      vrste filtrov
  *      prednastavljeni filter
  *      {
- *      vrsta1:{ids:{}},
- *      vrsta2:{ids:{}}
+ *      vrsta1:{[ids]},
+ *      vrsta2:{[ids]}
  *      }
  *
  * Prikaz vrst filtrov
@@ -16,8 +16,8 @@
  * 
  * Izhodni podatki:
  *      {
- *      vrsta1:{ids:{}},
- *      vrsta2:{ids:{}}
+ *      vrsta1:{[ids]},
+ *      vrsta2:{[ids]}
  *      }
  */
 
@@ -51,31 +51,84 @@ define([
         template: tpl,
         className: 'filter-select',
         regions: {
-            vrsteR: '.region-vrste-filtra'
-        },
-        triggers: {
-            'click .vrsta-filtra-dodaj': 'dodaj',
-            'click .vrsta-filtra-reset': 'ponastavi'
+            vrsteR: '.region-vrste-filtra',
+            toolbarLR: '.region-toolbar-left',
+            toolbarDR: '.region-toolbar-right'
         }
     });
 
     FilterView.prototype.initialize = function (options) {
         this.template = options.template || this.template;
-
+        this.vrsteFiltrovData = options.vrsteFiltrov || this.vrsteFiltrovData;
+        this.aktivneVrsteData = options.aktivneVrste || this.aktivneVrsteData;
+        
         this.vrsteFiltrov = new Vrsta(null, {
-            vrsteFiltrov: options.vrsteFiltrov
+            vrsteFiltrov: this.vrsteFiltrovData
         });
 
         this.aktivneVrste = new AktivnaVrsta(null, {
-            aktivneVrste: options.aktivneVrste,
+            aktivneVrste: this.aktivneVrsteData,
             vrsteFiltrov: this.vrsteFiltrov
         });
 
-        this.ponastavitev = this.aktivneVrste.clone();
+        //še inicializiramo ponastavitev, ker backboneclone ni deep operacija
+        this.ponastavitev = new AktivnaVrsta(null, {
+            aktivneVrste: this.aktivneVrsteData,
+            vrsteFiltrov: this.vrsteFiltrov
+        });
     };
 
     FilterView.prototype.onRender = function () {
+        this.renderToolbarLevo();
+        this.renderToolbarDesno();
         this.renderAktivniSeznam();
+    };
+
+    FilterView.prototype.renderToolbarLevo = function () {
+        var buttons = this.getButtons();
+        var groups = [[
+                {
+                    id: 'filter-dodaj',
+                    icon: 'fa fa-plus',
+                    element: 'button-dropdown',
+                    trigger: 'dodaj',
+                    dropdown: buttons
+                }
+            ]];
+
+        var toolbarView = this.toolbarLView = new Toolbar({
+            buttonGroups: groups,
+            listener: this,
+            size: 'md'
+        });
+
+        if (buttons.length === 0) {
+            toolbarView.disableButtons(['filter-dodaj']);
+        }else{
+            toolbarView.enable(['filter-dodaj']);
+        }
+
+        this.toolbarLR.show(toolbarView);
+        return toolbarView;
+    };
+
+    FilterView.prototype.renderToolbarDesno = function () {
+        var groups = [[
+                {
+                    id: 'filter-reset',
+                    icon: 'fa fa-undo',
+                    element: 'button-trigger',
+                    trigger: 'ponastavi'
+                }
+            ]];
+
+        var toolbarView = new Toolbar({
+            buttonGroups: groups,
+            listener: this,
+            size: 'md'
+        });
+
+        this.toolbarDR.show(toolbarView);
     };
 
     FilterView.prototype.renderAktivniSeznam = function () {
@@ -83,29 +136,23 @@ define([
             vrsteFiltrov: this.vrsteFiltrov,
             aktivneVrste: this.aktivneVrste
         });
-        
-        this.aktivneVrste.on('add remove',function () {
-            console.log('changed');
-        });
-        
+
+        //se proži ob vsaki spremembi vrednosti aktivnega filtra
         view.on('change:vrednosti', function () {
-            console.log('change:vrednosti');
+            this.trigger('change');
+        }, this);
+
+        //se proži ko smo dodali ali odstranili aktivni filter, ter če smo zaključili z urejanjem vrednosti aktivnega filtra
+        view.on('changed:vrednosti', function () {
+            this.trigger('changed');
+            this.renderToolbarLevo();
         }, this);
 
         this.vrsteR.show(view);
     };
 
-    /**
-     * Ob kliku na gumb dodaj odpremo view za izbiranje filtra
-     * @returns {undefined}
-     */
-    FilterView.prototype.onDodaj = function () {
-        this.renderIzbiraFiltra();
-    };
+    FilterView.prototype.getButtons = function () {
 
-    FilterView.prototype.renderIzbiraFiltra = function () {
-
-        var groups = [];
         var buttons = [];
         var self = this;
 
@@ -122,7 +169,6 @@ define([
                     id: 'filter-' + vMmodel.get('id'),
                     label: vMmodel.get('label'),
                     icon: vMmodel.get('icon'),
-                    element: 'button-trigger',
                     trigger: 'dodajAktivnoVrsto',
                     data: vMmodel
                 };
@@ -130,34 +176,7 @@ define([
             }
         });
 
-        if (buttons.length) {
-            var obj = {
-                id: 'filter-preklici',
-                label: i18next.t('std.preklici'),
-                element: 'button-trigger',
-                trigger: 'preklici'
-            };
-            buttons.push(obj);
-            
-            groups.push(buttons);
-
-            var toolbarView = new Toolbar({
-                buttonGroups: groups,
-                listener: this
-            });
-
-            this.vrsteR.show(toolbarView);
-        } else {
-            Radio.channel('error').command('flash', {
-                message: i18next.t('std.filterIzbira'),
-                code: 100200,
-                severity: 'warning'
-            });
-        }
-    };
-    
-    FilterView.prototype.onPreklici = function () {
-        this.render();
+        return buttons;
     };
 
     /**
@@ -176,10 +195,9 @@ define([
 
     /**
      * Vrne Vse nastavljene vrednosti aktivnih vrst filtrov
-     * @param {type} child
      * @returns {FilterView_L34.FilterView.prototype@pro;aktivneVrste@call;getVrednostiFiltrov}
      */
-    FilterView.prototype.getVrednostiAktivnihFiltrov = function (child) {
+    FilterView.prototype.getVrednostiAktivnihFiltrov = function () {
         return this.aktivneVrste.getVrednostiFiltrov();
     };
 
@@ -188,7 +206,11 @@ define([
      * @returns {undefined}
      */
     FilterView.prototype.onPonastavi = function () {
-        this.aktivneVrste = this.ponastavitev.clone();
+        //ker backbone clone ni deep operacija
+        this.aktivneVrste = new AktivnaVrsta(null, {
+            aktivneVrste: this.aktivneVrsteData,
+            vrsteFiltrov: this.vrsteFiltrov
+        });
         this.render();
     };
 

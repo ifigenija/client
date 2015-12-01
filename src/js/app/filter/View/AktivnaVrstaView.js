@@ -49,15 +49,18 @@ define([
         },
         triggers: {
             'click .vrsta-filtra-brisi': 'brisi',
-            'click .vrsta-filtra': 'uredi'
+            'click': 'uredi'
         }
     });
 
     AktivnaVrstaView.prototype.initialize = function (options) {
         this.PovzetekView = options.PovzetekView || PovzetekView;
         
+        //za sprotno spreminjanje collectiona izbranih modelov
         var izbrani = this.model.get('izbrani');        
-        izbrani.on('add remove', this.changeVrednosti, this);
+        izbrani.on('add remove reset', function(){
+            this.trigger('change:vrednosti');
+        }, this);
     };
 
     AktivnaVrstaView.prototype.serializeData = function () {
@@ -106,16 +109,11 @@ define([
             title: "izbira oseb"
         });
 
-        view.on('change:vrednosti', this.changeVrednosti, this);
+        //onclose proži changed:vrednosti
+        view.on('changed:vrednosti', function(){
+            this.trigger('changed:vrednosti');
+        }, this);
         view.render();
-    };
-
-    /**
-     * metoda, ki proži trigger, da je filterIzbran
-     * @returns {undefined}
-     */
-    AktivnaVrstaView.prototype.changeVrednosti = function () {
-        this.trigger('change:vrednosti');
     };
 
     /**

@@ -98,7 +98,7 @@ define([
         if ($anchor) {
             var position = $anchor.offset();
             var left = position.left;
-            //var top = position.top + $anchor.outerHeight();
+            var top = position.top + $anchor.outerHeight();
 
             var sirinaOkno = $(window).width();
             var visinaOkno = $(window).height();
@@ -111,7 +111,7 @@ define([
             }
 
             if (top + visinaView > visinaOkno && (visinaView + visinaView * 0.2) <= visinaOkno) {
-                top = top - visinaView - 2 * $anchor.outerHeight();
+                top = top - visinaView - $anchor.outerHeight();
             }
 
             this.$el.css('left', left);
@@ -269,7 +269,7 @@ define([
      */
     DualListView.prototype.onClose = function () {
         $(window).off('resize', jQuery.proxy(this, "resize"));
-        this.trigger("change:vrednosti");
+        this.trigger("changed:vrednosti");
         this.destroy();
     };
 

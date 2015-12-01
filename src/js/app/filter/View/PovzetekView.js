@@ -24,6 +24,7 @@ define([
 
     var ItemView = Backbone.Marionette.ItemView.extend({
         tagName: 'span',
+        className: 'povzetek-item',
         template: Handlebars.compile('{{#if index}}, {{/if}}{{label}}'),
         serializeData: function () {
             return _.extend(this.model.toJSON(), {
@@ -34,6 +35,7 @@ define([
 
     var PovzetekView = Marionette.CompositeView.extend({
         tagName: 'span',
+        className: 'povzetek',
         template: povzetekTpl,
         childViewContainer: ".povzetek-seznam",
         childView: ItemView,
@@ -47,7 +49,7 @@ define([
     PovzetekView.prototype.initialize = function (options) {
         this.stIzpisov = options.stIzpisov || 2;
         
-        this.collection.on('add remove', this.changeOstanek, this);
+        this.collection.on('add remove reset', this.changeOstanek, this);
     };
 
     PovzetekView.prototype.serializeData = function () {

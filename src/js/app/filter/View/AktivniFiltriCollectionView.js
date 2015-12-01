@@ -31,6 +31,10 @@ define([
         this.vrsteFiltrov = options.vrsteFiltrov;
         this.aktivneVrste = options.aktivneVrste;
         this.collection = this.aktivneVrste;
+        
+        this.collection.on('add remove', function(){
+            this.trigger('changed:vrednosti');
+        }, this);
     };
     
     /**
@@ -49,6 +53,10 @@ define([
      * @param {type} child
      * @returns {undefined}
      */
+    AktivniFiltriCollectionView.prototype.onChildviewChangedVrednosti = function (child) {
+        this.trigger('changed:vrednosti');
+    };
+    
     AktivniFiltriCollectionView.prototype.onChildviewChangeVrednosti = function (child) {
         this.trigger('change:vrednosti');
     };
