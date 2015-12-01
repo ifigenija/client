@@ -14,7 +14,8 @@ define([
     './KoledarFilterView',
     './VajaView',
     'formSchema!vaja',
-    'app/Max/View/Toolbar'
+    'app/Max/View/Toolbar',
+    'fc-schedule'
 ], function (
         Radio,
         i18next,
@@ -53,6 +54,7 @@ define([
         var self = this;
         var options = _.extend({
             lang: 'sl',
+            schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             header: {
                 left: 'prev,next,today',
                 center: 'title',
