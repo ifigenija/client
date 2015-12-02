@@ -70,7 +70,7 @@ define([
      * @returns {undefined}
      */
     OsebaEditView.prototype.onRender = function () {
-        var tabs = tabVse;        
+        var tabs = tabVse;
         this.renderTabs(tabs);
     };
 
@@ -107,7 +107,7 @@ define([
             this.renderPriloge();
         }
     };
-    
+
     OsebaEditView.prototype.onSodelujoci = function () {
         this.deselectTab();
         this.$('.pnl-sodelujoci').addClass('active');
@@ -122,11 +122,10 @@ define([
     OsebaEditView.prototype.deselectTab = function () {
         this.$('.oseba-panels .tab-pane').removeClass('active');
     };
-    
+
     OsebaEditView.prototype.renderSodelujoci = function () {
-        var collection = new Backbone.Collection();
         var view = new SodelujociView({
-            collection: collection
+            uprizoritev: this.model.get('uprizoritev')
         });
         
         this.sodelujociR.show(view);

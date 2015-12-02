@@ -1,0 +1,95 @@
+{
+  "data": [
+    {
+      "id": "001a0000-565e-a36f-717c-15b23994a527",
+      "planiranZacetek": "2015-06-26T10:00:00+0200",
+      "planiranKonec": "2015-06-26T10:00:00+0200",
+      "zacetek": null,
+      "konec": null,
+      "planiranoTraja": 2,
+      "dezurni": false,
+      "gost": false,
+      "dogodek": "00180000-565e-a36f-0fdd-9704bcc11685",
+      "alternacija": "000c0000-565e-a36f-724b-341466fd282a",
+      "oseba": "00090000-565e-a36f-ca35-12665987b0fe"
+    },
+    {
+      "id": "001a0000-565e-a36f-6f60-3226d12b6cbe",
+      "planiranZacetek": "2015-06-26T10:00:00+0200",
+      "planiranKonec": "2015-06-26T10:00:00+0200",
+      "zacetek": null,
+      "konec": null,
+      "planiranoTraja": 2,
+      "dezurni": false,
+      "gost": false,
+      "dogodek": "00180000-565e-a36f-0fdd-9704bcc11685",
+      "alternacija": "000c0000-565e-a36f-f3b9-0b83cd37796a",
+      "oseba": "00090000-565e-a36f-bf8e-86ca1daf3592"
+    },
+    {
+      "id": "001a0000-565e-a36f-daa4-697dbc2e3970",
+      "planiranZacetek": "2015-06-26T10:00:00+0200",
+      "planiranKonec": "2015-06-26T10:00:00+0200",
+      "zacetek": null,
+      "konec": null,
+      "planiranoTraja": 2,
+      "dezurni": false,
+      "gost": false,
+      "dogodek": "00180000-565e-a36f-0fdd-9704bcc11685",
+      "alternacija": "000c0000-565e-a36f-2503-6833ea4e9b57",
+      "oseba": "00090000-565e-a36f-7528-80d64f5e2f72"
+    },
+    {
+      "id": "001a0000-565e-a36f-8331-da284e7a257a",
+      "planiranZacetek": "2015-06-26T10:00:00+0200",
+      "planiranKonec": "2015-06-26T10:00:00+0200",
+      "zacetek": null,
+      "konec": null,
+      "planiranoTraja": 2,
+      "dezurni": false,
+      "gost": false,
+      "dogodek": "00180000-565e-a36f-0fdd-9704bcc11685",
+      "alternacija": "000c0000-565e-a36f-b372-6d105dffafd0",
+      "oseba": "00090000-565e-a36f-8aa6-969456516b85"
+    },
+    {
+      "id": "001a0000-565e-a36f-020a-ea9dae591fb1",
+      "planiranZacetek": "2015-06-26T10:00:00+0200",
+      "planiranKonec": "2015-06-26T10:00:00+0200",
+      "zacetek": null,
+      "konec": null,
+      "planiranoTraja": 2,
+      "dezurni": false,
+      "gost": false,
+      "dogodek": "00180000-565e-a36f-0fdd-9704bcc11685",
+      "alternacija": "000c0000-565e-a36f-3858-87c28726b6f4",
+      "oseba": "00090000-565e-a36f-d515-ba9a5fa7f05f"
+    },
+    {
+      "id": "001a0000-565e-a36f-17ec-422e0988f687",
+      "planiranZacetek": "2015-08-01T20:00:00+0200",
+      "planiranKonec": "2015-08-01T23:00:00+0200",
+      "zacetek": null,
+      "konec": null,
+      "planiranoTraja": 2,
+      "dezurni": true,
+      "gost": false,
+      "dogodek": "00180000-565e-a36f-53e6-cad275eaf509",
+      "alternacija": null,
+      "oseba": "00090000-565e-a36f-d515-ba9a5fa7f05f"
+    },
+    {
+      "id": "001a0000-565e-a36f-0234-ea2e33bf72cb",
+      "planiranZacetek": "2015-08-01T20:00:00+0200",
+      "planiranKonec": "2015-08-01T23:00:00+0200",
+      "zacetek": null,
+      "konec": null,
+      "planiranoTraja": 2,
+      "dezurni": false,
+      "gost": true,
+      "dogodek": "00180000-565e-a36f-53e6-cad275eaf509",
+      "alternacija": null,
+      "oseba": "00090000-565e-a36f-bf8e-86ca1daf3592"
+    }
+  ]
+}

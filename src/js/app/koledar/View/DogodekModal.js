@@ -33,7 +33,8 @@ define([
             'click .dogodek-predstava': 'render:predstava',
             'click .dogodek-zasedenost': 'render:zasedenost',
             'click .dogodek-gostovanje': 'render:gostovanje',
-            'click .dogodek-splosni': 'render:splosni'
+            'click .dogodek-splosni': 'render:splosni',
+            'click .dogodek-tehnicni': 'render:tehnicni'
         }
     });
     var DogodekModalLayout = Marionette.LayoutView.extend({
@@ -67,7 +68,7 @@ define([
          */
         initModel: function(model){
             var model = this.model = new Dogodek({
-                view: 'vaja'
+                view: model
             });
             
             if (this.zacetek) {
@@ -139,7 +140,7 @@ define([
             title: i18next.t("dogodek.dodajDogodek"),
             content: view,
             animate: true,
-            okText: i18next.t("std.ustvari"),
+            okText: i18next.t("std.potrdi"),
             cancelText: i18next.t("std.preklici")
         });
         var odpriDogodek = function () {
