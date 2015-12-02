@@ -23,22 +23,22 @@ define([
         model: Model,
         mode: "server"
     });
-    
-    Collection.prototype.razdeli = function(){
+
+    Collection.prototype.razdeli = function () {
         var models = this.models;
-        
+
         var object = {};
-        
-        for(var id in models){
+
+        for (var id in models) {
             var model = models[id];
             var podrocje = model.get('funkcija.tipFunkcije.podrocje');
-            if(!object[podrocje]){
+            if (!object[podrocje]) {
                 object[podrocje] = [];
             }
-            
+
             object[podrocje].push(model);
         }
-        
+
         return object;
     };
 

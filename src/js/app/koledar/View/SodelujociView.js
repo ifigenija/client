@@ -14,7 +14,8 @@ define([
     'template!../tpl/sodelujoci.tpl',
     '../Model/Alternacije',
     '../Model/Osebe',
-    'app/filter/View/DualListView'
+    'app/filter/View/DualListView',
+    '../Model/TerminiStoritve'
 ], function (
         Radio,
         i18next,
@@ -27,7 +28,8 @@ define([
         sodelujociTpl,
         Alternacije,
         Osebe,
-        DualListView
+        DualListView,
+        TerminiStoritve
         ) {
 
     var SodelujociView = Marionette.LayoutView.extend({
@@ -62,9 +64,9 @@ define([
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
-        this.izbraniUmetniki = new Backbone.Collection();
-        this.izbraniTehniki = new Backbone.Collection();
-        this.izbraniGosti = new Backbone.Collection();
+        this.izbraniUmetniki = new TerminiStoritve();
+        this.izbraniTehniki = new TerminiStoritve();
+        this.izbraniGosti = new TerminiStoritve();
     };
     SodelujociView.prototype.razdeliCollection = function () {
         var modeli = this.collection.razdeli();
