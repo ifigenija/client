@@ -7,7 +7,7 @@ define([
     'marionette',
     'underscore',
     'jquery',
-    'template!../tpl/koledar-layout.tpl',
+    'template!../tpl/koledar-layout1.tpl',
     './DogodekModal',
     './DogodekFilter',
     './DogodekView',
