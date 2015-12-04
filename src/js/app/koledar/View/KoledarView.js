@@ -115,7 +115,7 @@ define([
 
         this.filterR.show(filterView);
     };
-    
+
     KoledarView.prototype.renderToolbar = function () {
         var groups = [[
                 {
@@ -131,7 +131,7 @@ define([
             listener: this,
             size: 'md'
         });
-        
+
         this.toolbarR.show(toolbarView);
     };
 
@@ -145,7 +145,7 @@ define([
             }
         });
     };
-    
+
     KoledarView.prototype.onDodaj = function () {
         var self = this;
         DogodekModal({
@@ -156,6 +156,15 @@ define([
     };
 
     KoledarView.prototype.onUredi = function (model) {
+        //model, določi url modela
+        var razred = model.get('model');
+
+        if (razred === 'vaja') {
+            this.onVaja(model);
+        }
+    };
+
+    KoledarView.prototype.onVaja = function (model) {
         var View = VajaView.extend({
             posodobiUrlNaslov: function () {
             }

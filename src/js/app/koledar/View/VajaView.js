@@ -59,9 +59,14 @@ define([
             prilogeR: '.region-priloge'
         },
         triggers: {
+            'click .prikazi-koledar': 'koledar:prostor'
         }
     });
 
+    OsebaEditView.prototype.onKoledarProstor = function () {
+        console.log('koledar');
+    };
+    
     OsebaEditView.prototype.onRenderForm = function () {
     };
 

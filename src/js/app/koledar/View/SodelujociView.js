@@ -15,7 +15,7 @@ define([
     '../Model/Alternacije',
     '../Model/Osebe',
     'app/filter/View/DualListView',
-    '../Model/TerminiStoritve'
+    '../Model/TerminiStoritev'
 ], function (
         Radio,
         i18next,
@@ -29,7 +29,7 @@ define([
         Alternacije,
         Osebe,
         DualListView,
-        TerminiStoritve
+        TerminiStoritev
         ) {
 
     var SodelujociView = Marionette.LayoutView.extend({
@@ -64,18 +64,22 @@ define([
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
-        this.izbraniUmetniki = new TerminiStoritve();
-        this.izbraniTehniki = new TerminiStoritve();
-        this.izbraniGosti = new TerminiStoritve();
+        
+        this.izbraniUmetniki = new TerminiStoritev();
+        this.izbraniTehniki = new TerminiStoritev();
+        this.izbraniGosti = new TerminiStoritev();
     };
     SodelujociView.prototype.razdeliCollection = function () {
         var modeli = this.collection.razdeli();
+        
         this.umetnikiColl = new Alternacije();
         this.umetnikiColl.add(modeli.umetnik);
         this.umetnikiColl.add(modeli.igralec);
+        
         this.tehnikiColl = new Alternacije();
         this.tehnikiColl.add(modeli.tehnik);
         this.tehnikiColl.add(modeli.inspicient);
+        
         this.gostiColl = new Osebe();
         this.gostiColl.fetch({error: Radio.channel('error').request('handler', 'xhr')});
     };

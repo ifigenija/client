@@ -12,7 +12,8 @@ define([
     'template!../tpl/dogodek-izbira.tpl',
     'template!../tpl/dogodek-modal.tpl',
     'moment',
-    '../Model/Dogodek'
+    '../Model/Dogodek',
+    '../Model/TerminiStoritev'
 ], function (
         Radio,
         i18next,
@@ -24,7 +25,8 @@ define([
         izbiraTpl,
         modalTpl,
         moment,
-        Dogodek
+        Dogodek,
+        TerminiStoritev
         ) {
     var IzbiraView = Marionette.ItemView.extend({
         template: izbiraTpl,
@@ -63,44 +65,68 @@ define([
         },
         /**
          * 
-         * @param {String} model: določimo url modela
+         * @param {String} options.model: določimo url modela
+         * @param {String} options.title: določimo title dogodka
          * @returns {undefined}
          */
-        initModel: function(model){
+        initModel: function(options){
             var model = this.model = new Dogodek({
-                view: model
+                model: options.model,
+                zacetek: this.zacetek ? this.zacetek : moment(),
+                konec: this.konec ? this.konec : moment(),
+                title:  options.title
             });
-            
-            if (this.zacetek) {
-                model.set('zacetek', this.zacetek);
-            }
-            model.set('konec', this.konec);
             
             return model;
         },
         onVaja: function () {
-            this.initModel('vaja');
+            this.initModel({
+                model: 'vaja',
+                title: 'Vaja'
+            });
             this.renderIzbiraUprizoritve(i18next.t('vaja.title'));
         },
         onPredstava: function () {
-            this.initModel('predstava');
+            this.initModel({
+                model: 'predstava',
+                title: 'Predstava'
+            });
             this.renderIzbiraUprizoritve(i18next.t('predstava.title'));
         },
         onGostovanje: function () {
-            this.initModel('gostovanje');
+            this.initModel({
+                model: 'gostovanje',
+                title: 'Gostovanje'
+            });
             this.preklici();
+            this.trigger('potrdi:dogodek');
         },
         onSplosni: function () {
-            this.initModel('splosni');
+            this.initModel({
+                model: 'splosni',
+                title: 'Splošni'
+            });
             this.preklici();
+            this.trigger('potrdi:dogodek');
         },
         onTehnicni: function () {
-            this.initModel('tehnicni');
+            this.initModel({
+                model: 'tehnicni',
+                title: 'Tehnični'
+            });
             this.preklici();
+            this.trigger('potrdi:dogodek');
         },
         onZasedenost: function () {
-            this.initModel('zasedenost');
+            var model = this.model = new TerminiStoritev.prototype.model();
+            
+            if (this.zacetek) {
+                model.set('planiranZacetek', this.zacetek);
+            }
+            model.set('planiranKonec', this.konec);
+            
             this.preklici();
+            this.trigger('potrdi:dogodek');
         },
         renderIzbiraUprizoritve: function (title) {
             var sch = {type: 'Toone', targetEntity: 'uprizoritev', editorAttrs: {class: 'form-control'}, title: 'Uprizoritev'};
@@ -143,12 +169,21 @@ define([
             okText: i18next.t("std.potrdi"),
             cancelText: i18next.t("std.preklici")
         });
+        
         var odpriDogodek = function () {
             var model = view.model;
             if (options.cb) {
                 options.cb(model);
             }
         };
+        
+        var zapriModal = function(){
+            odpriDogodek();
+            modal.close();
+        };
+        
+        view.on('potrdi:dogodek', zapriModal, this);
+        
         return modal.open(odpriDogodek);
     };
 });
