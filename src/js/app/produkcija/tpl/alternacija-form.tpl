@@ -46,7 +46,7 @@
                         </a>
                     </div>
                 </div>
-                <div data-fields="zaposlitev,pomembna,sifra"></div>
+                <div data-fields="zaposlitev,sifra"></div>
             </fieldset>
         </div>
     </div>

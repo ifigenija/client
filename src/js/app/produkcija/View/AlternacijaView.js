@@ -13,7 +13,9 @@ define([
     'backbone-modal',
     'radio',
     'baseUrl',
-    'backbone'
+    'backbone',
+    'app/Max/Module/Backgrid',
+    'app/Max/View/BackgridFooter'
 ], function (
         PostavkeView,
         FormView,
@@ -26,7 +28,9 @@ define([
         Modal,
         Radio,
         baseUrl,
-        Backbone
+        Backbone,
+        Backgrid,
+        BackgridFooter
         ) {
 
     var AlternacijaView = PostavkeView.extend({
@@ -69,7 +73,7 @@ define([
             },
             {
                 cell: 'boolean',
-                editable: false,
+                editable: true,
                 label: i18next.t('alternacija.pomembna'),
                 name: 'pomembna',
                 sortable: true
@@ -116,6 +120,22 @@ define([
         ]
     });
 
+    AlternacijaView.prototype.initialize = function (options) {
+        PostavkeView.prototype.initialize.apply(this, arguments);
+        var self = this;
+        this.collection.on("backgrid:edited", function (model, schema, command) {
+            if (!command.cancel()) {
+                model.save({}, {
+                    success: function (model) {
+                        self.triggerMethod('save:success', model);
+                        Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
+                    },
+                    error: Radio.channel('error').request('handler', 'xhr')
+                });
+            }
+
+        });
+    };
     AlternacijaView.prototype.onRenderForm = function (options) {
         var self = this;
         this.form.on('pogodba:change', function (form, editor) {
@@ -303,5 +323,17 @@ define([
             this.$('#icon').addClass('fa fa-pencil-square-o');
         }
     };
+
+    AlternacijaView.prototype.renderList = function () {
+        var grid = new Backgrid.Grid({
+            collection: this.collection,
+            columns: this.gridMeta,
+            footer: BackgridFooter.extend({columns: this.gridMeta})
+        });
+
+        this.regionList.show(grid);
+        return grid;
+    };
+
     return AlternacijaView;
 });
