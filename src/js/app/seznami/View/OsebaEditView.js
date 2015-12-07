@@ -387,7 +387,7 @@ define([
             tabs = tabVse;
         }
 
-        var permission = chPermission.request('isGranted', "Oseba-write");
+        var permission = chPermission.request('isGranted', "Oseba-read");
         if (!permission) {
             tabs = tabNovi;
         }
