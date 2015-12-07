@@ -66,7 +66,7 @@ define([
         };
 
         mod.test = function () {
-            require(['../../filter/View/TestView'], function (View) {
+            require(['../View/PlaniranjeView'], function (View) {
                 var view = new View();
 
                 ch.command('openTab', view, 'Koledar');

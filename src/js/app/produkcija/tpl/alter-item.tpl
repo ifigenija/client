@@ -11,11 +11,14 @@
         {{#if  privzeti }}
         <small>|{{t "alternacija.privzeti"}}</small>
         {{/if}}
+        {{#if  pomembna }}
+        <small>|{{t "alternacija.pomembna"}}</small>
+        {{/if}}
         {{#if  zacetek }}
         <small>|{{u "date" zacetek }}</small>
-        {{#if  konec }}
-        <small>|{{u "date" konec }}</small>
-        {{/if}}
+            {{#if  konec }}
+            <small>|{{u "date" konec }}</small>
+            {{/if}}
         {{/if}}
     </h5>
 </div>

@@ -14,6 +14,8 @@ define([
     'formSchema!vaja',
     'template!../tpl/vajaPlan-form.tpl',
     'template!../tpl/vaja-dok.tpl',
+    'app/Zapisi/View/ZapisiLayout',
+    './SodelujociView',
     'jquery.jsonrpc'
 ], function (
         Radio,
@@ -27,7 +29,9 @@ define([
         DokumentView,
         schemaVaja,
         vajaTpl,
-        simpleTpl
+        dokumentTpl,
+        ZapisiLayout,
+        SodelujociView
         ) {
     /**
      * Različni možni pogledi osebeedit view.
@@ -36,7 +40,6 @@ define([
      */
     var tabVse = [
         {name: i18next.t('vaja.splosno'), event: 'splosni'},
-        {name: i18next.t('vaja.zakljucek'), event: 'zakljucek'},
         {name: i18next.t('vaja.sodelujoci'), event: 'sodelujoci'}
     ];
 
@@ -44,24 +47,26 @@ define([
         {name: i18next.t('ent.splosno'), event: 'splosni'}
     ];
 
-    var tabZakljucevanje = [
-        {name: i18next.t('vaja.zakljucek'), event: 'zakljucek'}
-    ];
-
     var chPermission = Radio.channel('global');
 
     var OsebaEditView = DokumentView.extend({
-        template: simpleTpl,
+        template: dokumentTpl,
         formTemplate: vajaTpl,
         schema: schemaVaja.toFormSchema().schema,
-        checkBeforeSave: true,
         regions: {
-            tabsR: '.vaja-tabs'
+            tabsR: '.vaja-tabs',
+            sodelujociR: '.region-sodelujoci',
+            prilogeR: '.region-priloge'
         },
         triggers: {
+            'click .prikazi-koledar': 'koledar:prostor'
         }
     });
 
+    OsebaEditView.prototype.onKoledarProstor = function () {
+        console.log('koledar');
+    };
+    
     OsebaEditView.prototype.onRenderForm = function () {
     };
 
@@ -70,7 +75,7 @@ define([
      * @returns {undefined}
      */
     OsebaEditView.prototype.onRender = function () {
-        var tabs = tabVse;        
+        var tabs = tabVse;
         this.renderTabs(tabs);
     };
 
@@ -91,7 +96,7 @@ define([
     OsebaEditView.prototype.renderPriloge = function () {
         var view = new ZapisiLayout({
             lastnik: this.model.get('id'),
-            classLastnika: 'Oseba'
+            classLastnika: 'Vaja'
         });
         this.prilogeR.show(view);
     };
@@ -107,14 +112,11 @@ define([
             this.renderPriloge();
         }
     };
-    /**
-     * Klik na osebni podatki tab
-     * @returns {undefined}
-     */
-    OsebaEditView.prototype.onOsebniPodatki = function () {
+
+    OsebaEditView.prototype.onSodelujoci = function () {
         this.deselectTab();
-        this.$('.pnl-osebniPodatki').addClass('active');
-        this.renderOsebniPodatki();
+        this.$('.pnl-sodelujoci').addClass('active');
+        this.renderSodelujoci();
 
     };
 
@@ -126,50 +128,12 @@ define([
         this.$('.oseba-panels .tab-pane').removeClass('active');
     };
 
-    /**
-     * Izris Osebnih podakov
-     * @returns {undefined}
-     */
-    OsebaEditView.prototype.renderOsebniPodatki = function () {
-
-        var self = this;
-        require(['app/seznami/View/OsebniPodatkiView', 'app/seznami/Model/OsebniPodatki'], function (OsebniView, Model) {
-
-            if (!self.osebniModel) {
-                self.osebniModel = new Model({id: self.model.get('id')});
-                self.osebniModel.fetch({
-                    error: Radio.channel('error').request('handler', 'xhr')
-                });
-            }
-
-            var o = new OsebniView({
-                model: self.osebniModel
-            });
-            self.regionOsebniPodatki.show(o);
+    OsebaEditView.prototype.renderSodelujoci = function () {
+        var view = new SodelujociView({
+            uprizoritev: this.model.get('uprizoritev')
         });
-    };
-
-    /**
-     * Izris telefonskih
-     * @returns {undefined}
-     */
-    OsebaEditView.prototype.renderTelefonske = function () {
-        var self = this;
-        var disabled = false;
-
-        if (!this.model.get('id')) {
-            disabled = true;
-        }
-        require(['app/seznami/View/TelefonskaView'], function (View) {
-            var view = new View({
-                collection: self.model.telefonskeCollection,
-                dokument: self.model,
-                disabled: disabled,
-                zapirajFormo: true
-            });
-            self.regionTelefonske.show(view);
-            return view;
-        });
+        
+        this.sodelujociR.show(view);
     };
 
     return OsebaEditView;

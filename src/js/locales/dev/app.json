@@ -1454,6 +1454,10 @@
             "vrednostPE": "",
             "stDogodkov": "Število dogodkov",
             "obiskDoma": "Načrtovano število obiskovalcev"
+        },
+        "t": {
+            "stDogodkov": "Št. dogodkov",
+            "obiskDoma": "Št. obiskovalcev"
         }
     },
     "zapis": {

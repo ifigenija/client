@@ -41,13 +41,6 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('peSklopa.obsegPE'),
-                name: 'obsegPE',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
                 label: i18next.t('peSklopa.mesecPE'),
                 name: 'mesecPE',
                 sortable: true
@@ -56,7 +49,16 @@ define([
                 headerCell: 'number',
                 cell: 'integer',
                 editable: false,
-                label: i18next.t('peSklopa.obiskDoma'),
+                label: i18next.t('peSklopa.t.stDogodkov'),
+                name: 'stDogodkov',
+                total: 'sum',
+                sortable: true
+            },
+            {
+                headerCell: 'number',
+                cell: 'integer',
+                editable: false,
+                label: i18next.t('peSklopa.t.obiskDoma'),
                 name: 'obiskDoma',
                 total: 'sum',
                 sortable: true
@@ -106,5 +108,12 @@ define([
             });
         }
     };
+    
+    PESklopaView.prototype.onRenderForm = function () {
+        if(!this.model.get('id')){
+            this.form.fields.stDogodkov.setValue(1);
+        }
+    };
+    
     return PESklopaView;
 });
