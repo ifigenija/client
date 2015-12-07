@@ -26,6 +26,9 @@ define([
         $
         ) {
 
+    var chPermission = Radio.channel('global');
+    var dovoljeno = chPermission.request('isGranted', "ProgramDela-write");
+
     var PostavkaCDveView = PostavkeView.extend({
         formTemplate: formTpl,
         schema: schema.toFormSchema().schema,
@@ -181,13 +184,15 @@ define([
             if (!command.cancel()) {
                 if (model.changedAttributes() || _.isObject(schema.get('optionValues'))) {
                     model.preracunajSkupaj();
-                    model.save({}, {
-                        success: function () {
-                            //na novo preračunamo vrednosti tabele
-                            self.preracunajTabelo();
-                        },
-                        error: Radio.channel('error').request('handler', 'xhr')
-                    });
+                    if (dovoljeno) {
+                        model.save({}, {
+                            success: function () {
+                                //na novo preračunamo vrednosti tabele
+                                self.preracunajTabelo();
+                            },
+                            error: Radio.channel('error').request('handler', 'xhr')
+                        });
+                    }
                 }
             }
         });
@@ -219,9 +224,11 @@ define([
                     sestevek.set('vrOstalo', vsotaOstalo);
                     //preračunamo vsoto vseh vsot
                     sestevek.preracunajSkupaj();
-                    sestevek.save({}, {
-                        error: Radio.channel('error').request('handler', 'xhr')
-                    });
+                    if (dovoljeno) {
+                        sestevek.save({}, {
+                            error: Radio.channel('error').request('handler', 'xhr')
+                        });
+                    }
                 }
 
                 //vsote ponastavimo nazaj na 0
@@ -289,8 +296,18 @@ define([
 
         Backgrid.NumberCell.prototype.enterEditMode = function () {
             Backgrid.Cell.prototype.enterEditMode.apply(this, arguments);
-            this.currentEditor.$el.select();
+            if (this.currentEditor && this.currentEditor.$el) {
+                this.currentEditor.$el.select();
+            }
         };
+        
+        if(!dovoljeno){
+            var columns = this.gridMeta;
+            
+            for(var id in columns){
+                columns[id].editable = false;
+            }
+        }
         var Povdarjena = Backgrid.Row.extend({
             /**
              Renders a row of cells for this row's model.
@@ -326,12 +343,18 @@ define([
                 error: Radio.channel('error').request('handler', 'xhr')
             });
         };
+        var error = function (error) {
+            Radio.channel('error').command('flash', {
+                message: error.message,
+                code: error.code,
+                severity: error.severity
+            });
+        };
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/programDela/programDela'});
         rpc.call('osveziTabeloC2', {
             'programDelaId': self.dokument.get('id')
         },
-        success,
-                Radio.channel('error').request('handler', 'xhr'));
+        success, error);
     };
     PostavkaCDveView.prototype.onOsvezi = function () {
         var self = this;
