@@ -11,7 +11,7 @@ define([
         Backbone,
         $,
         collFixture,
-        KoledarView
+        PlaniranjeView
         ) {
 
     describe("Planiranje View", function () {
@@ -26,24 +26,44 @@ define([
         });
         
         beforeEach(function () {
+            var view = this.view = new PlaniranjeView();
+            view.render();
         });
         
         afterEach(function () {
         });
         
         it('renderira koledar', function () {
+            var $region = this.view.$('.planiranje-region-koledar');
+            expect($region).to.not.be.null;
         });
         
         it('renderira toolbar', function () {
+            var $region = this.view.$('.planiranje-region-toolbar');
+            expect($region).to.not.be.null;
         });
         
         it('renderira dogodek', function () {
+            var $region = this.view.$('.planiranje-region-dogodek');
+            expect($region).to.not.be.null;
         });
         
-        it('proži in posluša triggerje', function () {
+        it('proži dodaj', function () {
+            //obstaja gumb dodaj
+            var $dodaj = this.view.$('button:contains(Dodaj)');
+            expect($dodaj.length).to.not.equal(0);
+            //proženje eventa
+            var dodajSpy = sinon.spy();
+            this.view.on('dodaj', dodajSpy);
+            //klik na gumb
+            $dodaj.click();
+            
+            expect(dodajSpy).to.have.been.called;
+            
         });
         
         it('posluša Koledar klikPrazno', function () {
+            expect(true).to.be.false;
         });
     });
 });

@@ -37,9 +37,9 @@ define([
     var PlaniranjeView = Marionette.LayoutView.extend({
         template: tpl,
         regions: {
-            dogodekR: '.planiranje-dogodek',
-            koledarR: '.planiranje-koledar',
-            toolbarR: '.planiranje-toolbar'
+            dogodekR: '.planiranje-region-dogodek',
+            koledarR: '.planiranje-region-koledar',
+            toolbarR: '.planiranje-region-toolbar'
         }
     });
 
@@ -98,15 +98,15 @@ define([
      * @returns {undefined}
      */
     PlaniranjeView.prototype.onDodaj = function (array) {
-        var self = this;
-
-        DogodekModal({
-            zacetek: array[0] ? array[0].format() : moment(),
-            konec: array[1] ? array[1].format() : moment(),
-            cb: function () {
-                 self.renderDogodek.apply(self, arguments);
-            }
-        });
+//        var self = this;
+//
+//        DogodekModal({
+//            zacetek: array[0] ? array[0].format() : moment(),
+//            konec: array[1] ? array[1].format() : moment(),
+//            cb: function () {
+//                 self.renderDogodek.apply(self, arguments);
+//            }
+//        });
     };
 
     PlaniranjeView.prototype.onVaja = function (model) {
