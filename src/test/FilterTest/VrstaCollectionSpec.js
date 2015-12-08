@@ -27,6 +27,16 @@ define([
         ) {
 
     describe("VrstaCollection", function () {
+        
+        before(function () {
+            var ajax = $.ajax({
+                dataType: 'html',
+                url: 'http://localhost:8889/',
+                headers: {
+                    'Authorization': "Basic " + btoa('admin@ifigenija.si' + ":" + 'Admin1234')
+                }
+            });
+        });
 
         beforeEach(function () {
         });

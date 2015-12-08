@@ -98,4 +98,4 @@ require.config({
     noGlobal: true
 });
 
-define('baseUrl', 'http://localhost:8888');
+define('baseUrl', 'http://localhost:8889');

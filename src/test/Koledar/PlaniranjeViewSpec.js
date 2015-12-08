@@ -6,7 +6,7 @@ define([
     'backbone',
     'jquery',
     'text!./fixtures/terminiStoritve.json',
-    'app/koledar/View/Planiranjeview'
+    'app/koledar/View/PlaniranjeView'
 ], function (
         Backbone,
         $,
@@ -15,6 +15,16 @@ define([
         ) {
 
     describe("Planiranje View", function () {
+        before(function () {
+            var ajax = $.ajax({
+                dataType: 'html',
+                url: 'http://localhost:8889/',
+                headers: {
+                    'Authorization': "Basic " + btoa('admin@ifigenija.si' + ":" + 'Admin1234')
+                }
+            });
+        });
+        
         beforeEach(function () {
         });
         
@@ -31,11 +41,9 @@ define([
         });
         
         it('proži in posluša triggerje', function () {
-            onDodaj
         });
         
         it('posluša Koledar klikPrazno', function () {
-            onDodaj
         });
     });
 });

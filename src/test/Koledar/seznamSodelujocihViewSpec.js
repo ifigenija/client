@@ -15,6 +15,15 @@ define([
         ) {
 
     describe("Seznam sodelujočih view", function () {
+        before(function () {
+            var ajax = $.ajax({
+                dataType: 'html',
+                url: 'http://localhost:8889/',
+                headers: {
+                    'Authorization': "Basic " + btoa('admin@ifigenija.si' + ":" + 'Admin1234')
+                }
+            });
+        });
         beforeEach(function () {
             var fixture = JSON.parse(collFixture);
             var models = fixture.data;
@@ -51,15 +60,13 @@ define([
             var $uredi = this.view.$('.sodelujoci-uredi');
             expect($uredi).to.not.be.null;
 
-            var urediSpy = sinon.spy(), urediViewSpy = sinon.spy();
+            var urediSpy = sinon.spy();
 
             this.view.on('uredi', urediSpy);
-            this.view.on('uredi:view', urediViewSpy);
 
-            this.view.$('.sodelujoci-uredi').click();
+            $uredi.click();
 
             expect(urediSpy).to.have.been.called;
-            expect(urediViewSpy).to.have.been.called;
         });
 
         /**
