@@ -37,9 +37,9 @@ define([
         });
         
         beforeEach(function () {
-            var coll = new Backbone.Collection();
+            var coll = this.coll = new Backbone.Collection();
 
-            coll.add([{
+            this.coll.add([{
                     label: 'lovro',
                     poklic: 'razvijalec'
                 }, {
@@ -56,6 +56,8 @@ define([
         });
 
         afterEach(function () {
+            this.povzetek = null;
+            this.coll = null;
         });
 
         it('inicializacija', function () {
@@ -84,13 +86,11 @@ define([
         });
 
         it('odstrani izpis', function () {
-            this.povzetek.collection.remove({
-                label: 'lovro',
-                poklic: 'razvijalec'
-            });
+            var coll = this.povzetek.collection;
+            coll.remove(coll.first());
             
             var $ostanek = this.povzetek.$('.povzetek-ostanek');
-            expect($ostanek.text()).to.not.contain('(');
+            expect($ostanek.text()).to.not.contain('(1)');
         });
     });
 });

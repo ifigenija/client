@@ -87,16 +87,16 @@ define([
             expect(this.filterView.aktivneVrste.length).to.equal(2);
         });
         
-        it('preveri elemente', function(){
+        it('se renderirajo vsi elementi', function(){
             var $vrstaR = this.filterView.$('.region-vrste-filtra');
-            var $vrsteFiltra = this.filterView.$('.vrsta-filtra');
-            var $dodaj = this.filterView.$('.vrsta-filtra-dodaj');
-            var $reset = this.filterView.$('.vrsta-filtra-reset');
+            var $vrsteFiltra = this.filterView.$('.vrsta-filtra-item');
+            var $dodaj = this.filterView.$('.region-toolbar-left');
+            var $reset = this.filterView.$('.region-toolbar-right');
             
-            expect($dodaj.length).to.equal(1);
-            expect($reset.length).to.equal(1);
             expect($vrsteFiltra.length).to.equal(2);
             expect($vrstaR.text()).to.not.equal("");
+            expect($dodaj.text()).to.not.equal("");
+            expect($reset.text()).to.not.equal("");
         });
 
         it('dodaj novo aktivno vrsto filtra', function () {

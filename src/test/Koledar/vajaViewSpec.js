@@ -7,21 +7,13 @@ define([
     'jquery',
     'text!./fixtures/vaje.json',
     'app/koledar/View/VajaView',
-    'formSchema!vaja',
-    'radio',
-    'app/Max/View/Buttons',
-    'app/JobManager/View/PrintDokumentButton',
-    'test/Helpers/buttons'
+    'formSchema!vaja'
 ], function (
         Backbone,
         $,
         vajeFix,
         VajaView,
-        schemaVaja,
-        Radio,
-        buttons,
-        buttonPrint,
-        butoons
+        schemaVaja
         ) {
 
     describe("Vaja view", function () {
@@ -32,11 +24,6 @@ define([
                 headers: {
                     'Authorization': "Basic " + btoa('admin@ifigenija.si' + ":" + 'Admin1234')
                 }
-            });
-
-            Radio.channel('global').reply('buttons', function () {
-                buttons['button-print'] = buttonPrint;
-                return buttons;
             });
         });
 
