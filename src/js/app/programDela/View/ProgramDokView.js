@@ -19,8 +19,10 @@ define([
     'app/Max/Module/Form',
     'template!../tpl/program-izpis.tpl',
     'app/bars',
+    '../Model/ProgramSeznam',
+    './UvozProgramskeModal',
     'jquery',
-    'jquery.jsonrpc',
+    'jquery.jsonrpc'
 ], function (
         baseUrl,
         Radio,
@@ -39,6 +41,8 @@ define([
         Form,
         PrintOptsTpl,
         Handlebars,
+        ProgramSeznamModel,
+        UvozModal,
         $
         ) {
 
@@ -149,9 +153,17 @@ define([
             },
             kloniraj: {
                 id: 'doc-kloniraj',
-                label: i18next.t('std.kloniraj'),
+                icon: 'fa fa-clone',
+                title: i18next.t('std.kloniraj'),
                 element: 'button-trigger',
                 trigger: 'kloniraj'
+            },
+            uvozi: {
+                id: 'doc-uvozi',
+                icon: 'fa fa-arrow-circle-o-down',
+                title: i18next.t('std.uvozi'),
+                element: 'button-trigger',
+                trigger: 'uvozi'
             },
             brisi: {
                 id: 'doc-brisi',
@@ -456,7 +468,7 @@ define([
     };
 
     ProgramDokView.prototype.prepareToolbar = function () {
-        var buttons = [this.buttons.shrani, this.buttons.preklici];
+        var buttons = [this.buttons.shrani, this.buttons.preklici, this.buttons.uvozi];
         var id = this.model.get('id');
         if (id) {
             buttons.push(this.buttons.kloniraj);
@@ -873,6 +885,36 @@ define([
 
     ProgramDokView.prototype.onSaveSuccess = function () {
         this.renderToolbar();
+    };
+
+    ProgramDokView.prototype.onUvozi = function () {
+        //render Uvozi programske enote programov dela
+        var collection = new ProgramSeznamModel.Collection();
+        var self = this;
+        var columns = [
+            {
+                cell: 'select-row',
+                headerCell: 'select-all',
+                name: ""
+            },
+            {
+                cell: 'string',
+                editable: false,
+                label: i18next.t('Naziv'),
+                name: 'naziv',
+                sortable: true
+            }
+        ];
+        
+        collection.fetch({
+            success: function () {
+                var modal = UvozModal({
+                    collection: collection,
+                    columns: columns,
+                    programDelaId: self.model.get('id'),
+                });
+            }
+        });
     };
 
     return ProgramDokView;
