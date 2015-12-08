@@ -14,7 +14,7 @@ Licenca GPLv3
     padding:  10px;
 }
 .page-header {
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 7px;
 }
 .page-header > h3 {
@@ -36,21 +36,7 @@ Licenca GPLv3
     padding-left: 10px
 }
 
-/*
- Dodatki za vnosna polja
-*/
-input.lookup-polje {
-    width: 90px;
-}
-input.lookup-polje.kratko {
-    width: 60px;
-}
-input.lookup-naslov {
-    width: 90px;
-}
-input.datum-polje {
-    width: 110px;
-}
+
 input.decimal-polje {
     text-align: right;
 }
@@ -128,19 +114,19 @@ ul[type="select"] > li > label {
  Ikone
 */
 .icon-afna {
-    font-family: Arial;
+    font-family: Arial, serif;
 }
 .icon-afna:before {
     content: "@"
 }
 .icon-procent {
-    font-family: Arial;
+    font-family: Arial, serif;
 }
 .icon-procent:before {
     content: "%"
 }
 .icon-euro {
-    font-family: Arial;
+    font-family: Arial, serif;
 }
 .icon-euro:before {
     content: "€"
@@ -174,7 +160,6 @@ ul.tree-view-root a, .tree-view-node > ul a {
     line-height: 12px;
     padding: 3px;
     -moz-user-select: -moz-none;
-    -khtml-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -322,6 +307,7 @@ i.tree-view-icon.icon-folder-close-alt {
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
+
 #reportList .errors > div {
     margin-top: 3px;
     margin-left: 0;
@@ -366,7 +352,7 @@ i.tree-view-icon.icon-folder-close-alt {
     z-index: 1100;
 }
 .tab-title h3 {
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 15px;
 }
 /**
@@ -401,16 +387,9 @@ i.tree-view-icon.icon-folder-close-alt {
 
 .unselectable {
     -moz-user-select: -moz-none;
-    -khtml-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-
-span.stevilka-na-veliko {
-    font-weight: 160%;
-    font-size: 300%;
-    float:right;
 }
 
 
@@ -481,7 +460,7 @@ span.stevilka-na-veliko {
     & .zapisi-list .zapis-item {
         margin-left: 30px;
         & .region-toolbar {
-            margin-top: 0px;
+            margin-top: 0;
         }
         & h4 {
             font-size: 12px;
@@ -503,7 +482,7 @@ span.stevilka-na-veliko {
             background-color: @table-bg-accent;
         }
         & .region-toolbar {
-            margin-top: 0px;
+            margin-top: 0;
         }
     }
 
@@ -553,7 +532,7 @@ fieldset {
             border-radius: 6px;
         }
         margin-bottom: 3px;
-        border-bottom: 0px;
+        border-bottom: 0;
     }
 
     &.pomemben {
@@ -574,7 +553,7 @@ fieldset {
     }
     @media (max-width: @screen-md-max) {
 
-        margin: 0px 5px 0px 5px; 
+        margin: 0 5px 0 5px;
     }
 
 }
@@ -588,7 +567,7 @@ fieldset {
         background-color: @body-bg;
         border: 0;
         border-style: none;
-        padding-top:  0px;
+        padding-top:  0;
         margin-left: 5px;
     }
     & ul.dropdown-menu {
@@ -695,10 +674,10 @@ fieldset {
     position: fixed;
     margin: 3px;
     z-index: 5000;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
     padding: 15px;
 
 
@@ -712,8 +691,8 @@ fieldset {
     }
 
     & .modal-footer{
-        height: 0px;
-        padding: 0px;
+        height: 0;
+        padding: 0;
         visibility: hidden;
     }
 
@@ -747,14 +726,14 @@ fieldset {
     padding-right: 12px;
     padding-left: 12px;
     & * {
-        margin-bottom: 0px;
+        margin-bottom: 0;
     }
 }
 
 /*checkbox help block*/
 .checkbox-help {
     & .help-block{
-        margin: 0px;
+        margin: 0;
         margin-bottom: 20px;
     }
 }
@@ -767,7 +746,7 @@ fieldset {
     &-toolbar{
         padding: 10px;
         & .alert-warning{
-            opacity: 50%;
+            opacity: 0.5;
             color: black;
             background-color: rgba(233,144,0,0.70);
             border-color: rgba(210,130,0,0.70);
@@ -789,3 +768,4 @@ fieldset {
         margin-top: 10px;
     }
 }
+

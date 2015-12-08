@@ -36,7 +36,8 @@ require.config({
         'bootstrap-datepicker': '../lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min',
         'formSchema': 'app/Max/Loader/formSchema',
         'formMeta': 'app/Max/Loader/formMeta',
-        'template': 'app/Max/Loader/template'
+        'template': 'app/Max/Loader/template',
+        'print-dialog': 'app/JobManager/View/PrintDialog'
     },
     shim: {
         underscore: {
