@@ -51,7 +51,7 @@ define([
             expect($konec).to.not.be.null;
         });
 
-        it('prikaži koledar', function () {
+        it('proži prikaz koledar prostorov', function () {
             var $gumb = this.view.$('.prikazi-koledar');
             expect($gumb).to.not.be.null;
 

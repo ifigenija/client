@@ -22,6 +22,7 @@ define([
 
     var KoledarView = Marionette.LayoutView.extend({
         template: tpl,
+        className: 'koledar',
         regions: {
             toolbarR: '.koledar-toolbar',
             filterR: '.koledar-filter',
