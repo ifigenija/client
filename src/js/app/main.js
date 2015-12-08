@@ -17,8 +17,6 @@ define([
     'app/aaa/Module/Aaa',
     'app/Zapisi/Module/Filemanager',
     'app/JobManager/Module/JobManager',
-    'app/Max/View/Buttons',
-        'app/JobManager/View/PrintDokumentButton',
     'bootstrap'
 ], function (
         Marionette,
@@ -35,9 +33,7 @@ define([
         nastavitveInit,
         aaaInit,
         zapisiInit,
-        jobManagerInit,
-        buttons,
-        buttonPrint
+        jobManagerInit
         ) {
 
     var app = new Marionette.Application();
@@ -61,7 +57,7 @@ define([
      */
     app.on('start', function (options) {
 
-        // to je tukaj zato, da su gumbi lahko razširljivi, da jih lahko vsaka aplikacija posebej dodaja 
+        // to je tukaj zato, da su gumbi lahko razširljivi, da jih lahko vsaka aplikacija posebej dodaja
         // ne da bi se spreminjali osvnovni gumbi v Buttons.js
         Radio.channel('global').reply('buttons', function () {
             buttons['button-print'] = buttonPrint;

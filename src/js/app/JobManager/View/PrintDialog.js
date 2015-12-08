@@ -10,8 +10,8 @@ define([
     'underscore',
     'backbone-modal',
     'app/Max/Module/Form',
-    'template!../tpl/print-dialog.tpl',
-    'template!../tpl/print-opts.tpl',
+    'template!app/JobManager/tpl/print-dialog.tpl',
+    'template!app/JobManager/tpl/print-opts.tpl',
 ], function (
         Marionette,
         Radio,
