@@ -71,7 +71,7 @@ define([
          */
         initModel: function(options){
             var model = this.model = new Dogodek({
-                model: options.model,
+                view: options.view,
                 zacetek: this.zacetek ? this.zacetek : moment(),
                 konec: this.konec ? this.konec : moment(),
                 title:  options.title
@@ -81,21 +81,21 @@ define([
         },
         onVaja: function () {
             this.initModel({
-                model: 'vaja',
+                view: 'vaja',
                 title: 'Vaja'
             });
             this.renderIzbiraUprizoritve(i18next.t('vaja.title'));
         },
         onPredstava: function () {
             this.initModel({
-                model: 'predstava',
+                view: 'predstava',
                 title: 'Predstava'
             });
             this.renderIzbiraUprizoritve(i18next.t('predstava.title'));
         },
         onGostovanje: function () {
             this.initModel({
-                model: 'gostovanje',
+                view: 'gostovanje',
                 title: 'Gostovanje'
             });
             this.preklici();
@@ -103,7 +103,7 @@ define([
         },
         onSplosni: function () {
             this.initModel({
-                model: 'splosni',
+                view: 'splosni',
                 title: 'Splošni'
             });
             this.preklici();
@@ -111,7 +111,7 @@ define([
         },
         onTehnicni: function () {
             this.initModel({
-                model: 'tehnicni',
+                view: 'tehnicni',
                 title: 'Tehnični'
             });
             this.preklici();

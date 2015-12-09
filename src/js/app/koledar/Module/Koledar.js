@@ -51,27 +51,27 @@ define([
          * @returns {undefined}
          */
         mod.pregled = function () {
-            require(['../View/KoledarView', '../Model/Dogodki', 'jquery', 'fullcalendar'], function (View, Collection) {
-                require(['fclang/sl'], function () {
-                    var coll = new Collection();
-
-                    var calView = new View({
-                        collection: coll
-                    });
-                    ch.command('openTab', calView, 'Koledar');
-                    ch.command('enableMenu', 'koledar');
-                });
-            });
-
-        };
-
-        mod.test = function () {
             require(['../View/PlaniranjeView'], function (View) {
                 var view = new View();
 
                 ch.command('openTab', view, 'Koledar');
                 ch.command('enableMenu', 'koledar');
             });
+        };
+        
+        mod.test = function () {
+//            require(['../View/KoledarView', '../Model/Dogodki', 'jquery', 'fullcalendar'], function (View, Collection) {
+//                require(['fclang/sl'], function () {
+//                    var coll = new Collection();
+//
+//                    var calView = new View({
+//                        collection: coll
+//                    });
+//                    ch.command('openTab', calView, 'Koledar');
+//                    ch.command('enableMenu', 'koledar');
+//                });
+//            });
+
         };
 
         /**

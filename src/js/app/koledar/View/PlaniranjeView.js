@@ -4,14 +4,11 @@
 define([
     'radio',
     'i18next',
-    'backbone',
-    'underscore',
-    'app/bars',
     'marionette',
-    'jquery',
+    'moment',
     'app/Max/View/Toolbar',
     'template!../tpl/planiranje.tpl',
-    './KoledarViewN',
+    './KoledarView',
     './DogodekModal',
     '../Model/Dogodki',
     './VajaView',
@@ -20,11 +17,8 @@ define([
 ], function (
         Radio,
         i18next,
-        Backbone,
-        _,
-        Handlebars,
         Marionette,
-        $,
+        moment,
         Toolbar,
         tpl,
         KoledarView,
@@ -62,7 +56,7 @@ define([
             collection: coll
         });
 
-        view.on('select', this.onDodaj, this);
+        view.on('prikazi:dogodek', this.onUredi, this);
 
         this.koledarR.show(view);
     };
@@ -85,28 +79,33 @@ define([
         this.toolbarR.show(toolbarView);
     };
 
-    PlaniranjeView.prototype.renderDogodek = function (model) {
-        var razred = model.get('model');
+    PlaniranjeView.prototype.onUredi = function (model) {
+        var razred = model.get('view');
 
         if (razred === 'vaja') {
             this.onVaja(model);
         }
+        
+        this.dogodekView.on('skrij', this.onPreklici, this);
     };
+    PlaniranjeView.prototype.onPreklici = function () {
+        this.dogodekR.empty();
+    };    
 
     /**
      * Klik na gumb Dodaj
      * @returns {undefined}
      */
-    PlaniranjeView.prototype.onDodaj = function (array) {
-//        var self = this;
-//
-//        DogodekModal({
-//            zacetek: array[0] ? array[0].format() : moment(),
-//            konec: array[1] ? array[1].format() : moment(),
-//            cb: function () {
-//                 self.renderDogodek.apply(self, arguments);
-//            }
-//        });
+    PlaniranjeView.prototype.onDodaj = function () {
+        var self = this;
+
+        DogodekModal({
+            zacetek: moment(),
+            konec: moment(),
+            cb: function () {
+                 self.onUredi.apply(self, arguments);
+            }
+        });
     };
 
     PlaniranjeView.prototype.onVaja = function (model) {
@@ -114,17 +113,13 @@ define([
             posodobiUrlNaslov: function () {
             }
         });
-        var view = new View({
+        var view = this.dogodekView = new View({
             model: model,
             schema: schemaVaja.toFormSchema().schema
         });
 
         view.on('save:success', function () {
             this.koledarView.ui.koledar.fullCalendar('refetchEvents');
-        }, this);
-
-        view.on('skrij', function () {
-            this.koledarView.dogodekR.empty();
         }, this);
         
         this.dogodekR.show(view);

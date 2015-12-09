@@ -42,13 +42,13 @@ define([
             var $tipVaje = $('.field-tipvaje');
             var $prostor = $('[name~="prostor"]');
             var $zacetek = $('.field-zacetek');
-            var $konec = $('.dbsadksajh');
+            var $konec = $('.field-konec');
 
-            expect($title).to.not.be.null;
-            expect($tipVaje).to.not.be.null;
-            expect($prostor).to.not.be.null;
-            expect($zacetek).to.not.be.null;
-            expect($konec).to.not.be.null;
+            expect($title.length).to.not.equal(0);
+            expect($tipVaje.length).to.not.equal(0);
+            expect($prostor.length).to.not.equal(0);
+            expect($zacetek.length).to.not.equal(0);
+            expect($konec.length).to.not.equal(0);
         });
 
         it('proži prikaz koledar prostorov', function () {

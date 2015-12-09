@@ -4,11 +4,13 @@
 
 define([
     'backbone',
+    'app/koledar/Model/Dogodek',
     'jquery',
     'text!./fixtures/terminiStoritve.json',
     'app/koledar/View/PlaniranjeView'
 ], function (
         Backbone,
+        Dogodek,
         $,
         collFixture,
         PlaniranjeView
@@ -24,30 +26,30 @@ define([
                 }
             });
         });
-        
+
         beforeEach(function () {
             var view = this.view = new PlaniranjeView();
             view.render();
         });
-        
+
         afterEach(function () {
         });
-        
+
         it('renderira koledar', function () {
             var $region = this.view.$('.planiranje-region-koledar');
             expect($region).to.not.be.null;
         });
-        
+
         it('renderira toolbar', function () {
             var $region = this.view.$('.planiranje-region-toolbar');
             expect($region).to.not.be.null;
         });
-        
+
         it('renderira dogodek', function () {
             var $region = this.view.$('.planiranje-region-dogodek');
             expect($region).to.not.be.null;
         });
-        
+
         it('proži dodaj', function () {
             //obstaja gumb dodaj
             var $dodaj = this.view.$('button:contains(Dodaj)');
@@ -57,13 +59,20 @@ define([
             this.view.on('dodaj', dodajSpy);
             //klik na gumb
             $dodaj.click();
-            
+
             expect(dodajSpy).to.have.been.called;
-            
+
         });
-        
-        it('posluša Koledar klikPrazno', function () {
-            expect(true).to.be.false;
+
+        it('posluša prikazi:dogodek', function () {
+            var spy = sinon.spy(this.view, 'onUredi');
+
+            var model = new Dogodek({
+                view: 'vaja'
+            });
+            this.view.koledarView.trigger('prikazi:dogodek', model);
+            
+            expect(spy).called;
         });
     });
 });
