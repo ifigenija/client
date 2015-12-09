@@ -19,7 +19,7 @@ Licenca GPLv3
   padding: 10px;
 }
 .page-header {
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 7px;
 }
 .page-header > h3 {
@@ -36,21 +36,6 @@ Licenca GPLv3
 .enota {
   width: 40px;
   padding-left: 10px;
-}
-/*
- Dodatki za vnosna polja
-*/
-input.lookup-polje {
-  width: 90px;
-}
-input.lookup-polje.kratko {
-  width: 60px;
-}
-input.lookup-naslov {
-  width: 90px;
-}
-input.datum-polje {
-  width: 110px;
 }
 input.decimal-polje {
   text-align: right;
@@ -120,19 +105,19 @@ ul[type="select"] > li > label {
  Ikone
 */
 .icon-afna {
-  font-family: Arial;
+  font-family: Arial, serif;
 }
 .icon-afna:before {
   content: "@";
 }
 .icon-procent {
-  font-family: Arial;
+  font-family: Arial, serif;
 }
 .icon-procent:before {
   content: "%";
 }
 .icon-euro {
-  font-family: Arial;
+  font-family: Arial, serif;
 }
 .icon-euro:before {
   content: "€";
@@ -169,7 +154,6 @@ ul.tree-view-root a,
   line-height: 12px;
   padding: 3px;
   -moz-user-select: -moz-none;
-  -khtml-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -344,7 +328,7 @@ i.tree-view-icon.icon-folder-close-alt {
   z-index: 1100;
 }
 .tab-title h3 {
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 15px;
 }
 /**
@@ -380,15 +364,9 @@ i.tree-view-icon.icon-folder-close-alt {
 }
 .unselectable {
   -moz-user-select: -moz-none;
-  -khtml-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-span.stevilka-na-veliko {
-  font-weight: 160%;
-  font-size: 300%;
-  float: right;
 }
 .polje-z-gumbom {
   display: flex;
@@ -447,7 +425,7 @@ span.stevilka-na-veliko {
   margin-left: 30px;
 }
 .zapisi-list .zapisi-list .zapis-item .region-toolbar {
-  margin-top: 0px;
+  margin-top: 0;
 }
 .zapisi-list .zapisi-list .zapis-item h4 {
   font-size: 12px;
@@ -467,7 +445,7 @@ span.stevilka-na-veliko {
   background-color: #f9f9f9;
 }
 .zapisi-list .zapis-item .region-toolbar {
-  margin-top: 0px;
+  margin-top: 0;
 }
 .mapa-list {
   padding: 0 0 0 0;
@@ -500,7 +478,7 @@ fieldset {
 }
 fieldset legend {
   margin-bottom: 3px;
-  border-bottom: 0px;
+  border-bottom: 0;
 }
 fieldset legend span {
   background-color: #eeeeee;
@@ -521,7 +499,7 @@ fieldset.pomemben legend span {
 }
 @media (max-width: 1199px) {
   .row.enota-postavke {
-    margin: 0px 5px 0px 5px;
+    margin: 0 5px 0 5px;
   }
 }
 .btn-tripikice {
@@ -532,7 +510,7 @@ fieldset.pomemben legend span {
   background-color: #ffffff;
   border: 0;
   border-style: none;
-  padding-top: 0px;
+  padding-top: 0;
   margin-left: 5px;
 }
 .btn-tripikice ul.dropdown-menu {
@@ -613,10 +591,10 @@ fieldset.pomemben legend span {
   position: fixed;
   margin: 3px;
   z-index: 5000;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
   padding: 15px;
 }
 .lookup-modal .modal-dialog {
@@ -627,8 +605,8 @@ fieldset.pomemben legend span {
   height: 97%;
 }
 .lookup-modal .modal-footer {
-  height: 0px;
-  padding: 0px;
+  height: 0;
+  padding: 0;
   visibility: hidden;
 }
 .lookup-modal .modal-body {
@@ -656,11 +634,11 @@ fieldset.pomemben legend span {
   padding-left: 12px;
 }
 .cke_editable * {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 /*checkbox help block*/
 .checkbox-help .help-block {
-  margin: 0px;
+  margin: 0;
   margin-bottom: 20px;
 }
 .podobne-osebe-panel {
@@ -671,7 +649,7 @@ fieldset.pomemben legend span {
   padding: 10px;
 }
 .podobne-osebe-toolbar .alert-warning {
-  opacity: 50%;
+  opacity: 0.5;
   color: black;
   background-color: rgba(233, 144, 0, 0.7);
   border-color: rgba(210, 130, 0, 0.7);

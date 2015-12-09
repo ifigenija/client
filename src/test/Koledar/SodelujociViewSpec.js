@@ -32,21 +32,38 @@ define([
         });
         
         beforeEach(function () {
-            this.server = sinon.fakeServer.create();
-
+            var view = this.view = SodelujociView();
+            view.render();
         });
         afterEach(function () {
-            this.server.restore();
         });
 
         /**
          * ali se vse regije zapolnijo
          * @returns {undefined}
          */
-        it('je renderirano', function () {
+        it('renderiran region umetniki', function () {
+            var $region = this.view.$('.region-umetniki');
+            expect($region.length).to.equal(1);
+        });
+        
+        it('renderiran region tehniki', function () {
+            var $region = this.view.$('.region-tehniki');
+            expect($region.length).to.equal(1);
+        });
+        
+        it('renderiran region gosti', function () {
+            var $region = this.view.$('.region-gosti');
+            expect($region.length).to.equal(1);
         });
 
-        it('renderUredi', function () {
+        it('poslušanje renderUredi', function () {
+            var spy = sinon.spy(this.view);
+            this.view.on('render:uredi', spy);
+            
+            var funRenUrediSpy = sinon.spy(this.view, 'renderUredi');
+            
+            expect(funRenUrediSpy).to.have.been.called;
         });
 
         /**
