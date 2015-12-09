@@ -34,9 +34,6 @@ define([
         }
     });
 
-    KoledarView.prototype.initialize = function (options) {
-    };
-
     KoledarView.prototype.onRender = function () {
         this.renderFilterView();
         var self = this;
@@ -60,7 +57,9 @@ define([
             weekNumbers: true,
             firstDay: 1,
             timeFormat: 'H(:mm)',
-            eventClick: this.eventClick,
+            eventClick: function () {
+                return self.eventClick.apply(self, arguments);
+            },
             eventDrop: this.eventDropOrResize,
             eventResize: this.eventDropOrResize,
             eventSources: [
@@ -115,7 +114,7 @@ define([
 
     KoledarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
         var model = fcEvent.source.coll.get(fcEvent.id);
-        view.trigger('prikazi:dogodek', model);
+        this.trigger('prikazi:dogodek', model);
     };
     
     KoledarView.prototype.change = function (event) {

@@ -1,2 +1,2 @@
-<div class="region-dogodek-izbira"></div>
-<div class="region-dogodek-podrobno"></div>
+<div class="dogodek-region-izbira"></div>
+<div class="dogodek-region-podrobno"></div>

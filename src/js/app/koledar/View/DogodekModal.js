@@ -41,14 +41,16 @@ define([
     });
     var DogodekModalLayout = Marionette.LayoutView.extend({
         template: modalTpl,
+        zacetek: moment(),
+        konec: moment(),
         regions: {
-            izbiraR: '.region-dogodek-izbira',
-            podrobnoR: '.region-dogodek-podrobno'
+            izbiraR: '.dogodek-region-izbira',
+            podrobnoR: '.dogodek-region-podrobno'
         },
         initialize: function (options) {
             //dodaj default
-            this.zacetek = options.zacetek || moment();
-            this.konec = options.konec || moment();
+            this.zacetek = options.zacetek || this.zacetek;
+            this.konec = options.konec || this.konec;
             this.title = options.title || i18next.t('std.naslov');
         },
         onRender: function () {
@@ -69,14 +71,14 @@ define([
          * @param {String} options.title: določimo title dogodka
          * @returns {undefined}
          */
-        initModel: function(options){
+        initModel: function (options) {
             var model = this.model = new Dogodek({
                 view: options.view,
-                zacetek: this.zacetek ? this.zacetek : moment(),
-                konec: this.konec ? this.konec : moment(),
-                title:  options.title
+                zacetek: this.zacetek,
+                konec: this.konec,
+                title: options.title
             });
-            
+
             return model;
         },
         onVaja: function () {
@@ -119,12 +121,12 @@ define([
         },
         onZasedenost: function () {
             var model = this.model = new TerminiStoritev.prototype.model();
-            
+
             if (this.zacetek) {
                 model.set('planiranZacetek', this.zacetek);
             }
             model.set('planiranKonec', this.konec);
-            
+
             this.preklici();
             this.trigger('potrdi:dogodek');
         },
@@ -154,8 +156,8 @@ define([
     return function (options) {
 
         var view = new DogodekModalLayout({
-            zacetek: options.zacetek,
-            konec: options.konec
+            zacetek: (options && options.zacetek) ? options.zacetek : moment(),
+            konec: (options && options.konec) ? options.zacetek : moment(),
         });
 
         var DM = Modal.extend({
@@ -169,21 +171,18 @@ define([
             okText: i18next.t("std.potrdi"),
             cancelText: i18next.t("std.preklici")
         });
-        
-        var odpriDogodek = function () {
+
+        var zapriModal = function () {
             var model = view.model;
             if (options.cb) {
                 options.cb(model);
             }
-        };
-        
-        var zapriModal = function(){
-            odpriDogodek();
             modal.close();
         };
-        
+
         view.on('potrdi:dogodek', zapriModal, this);
-        
-        return modal.open(odpriDogodek);
+
+        modal.open(zapriModal);
+        return modal;
     };
 });

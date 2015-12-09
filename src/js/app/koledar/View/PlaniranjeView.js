@@ -8,6 +8,8 @@ define([
     'moment',
     'app/Max/View/Toolbar',
     'template!../tpl/planiranje.tpl',
+    '../Model/Dogodek',
+    '../Model/TerminiStoritev',
     './KoledarView',
     './DogodekModal',
     '../Model/Dogodki',
@@ -21,6 +23,8 @@ define([
         moment,
         Toolbar,
         tpl,
+        Dogodek,
+        TerminiStoritev,
         KoledarView,
         DogodekModal,
         Collection,
@@ -80,17 +84,21 @@ define([
     };
 
     PlaniranjeView.prototype.onUredi = function (model) {
-        var razred = model.get('view');
+        var razred = model.get('view') || model.get('razred');
 
-        if (razred === 'vaja') {
-            this.onVaja(model);
+        if (model instanceof Dogodek) {
+            if (razred === 'vaja' || razred === '200s') {
+                this.onVaja(model);
+            }
+            this.dogodekView.on('skrij', this.onPreklici, this);
+        } else if (model instanceof TerminiStoritev.prototype.model) {
+            this.onZasedenost(model);
+            this.dogodekView.on('skrij', this.onPreklici, this);
         }
-        
-        this.dogodekView.on('skrij', this.onPreklici, this);
     };
     PlaniranjeView.prototype.onPreklici = function () {
         this.dogodekR.empty();
-    };    
+    };
 
     /**
      * Klik na gumb Dodaj
@@ -103,7 +111,7 @@ define([
             zacetek: moment(),
             konec: moment(),
             cb: function () {
-                 self.onUredi.apply(self, arguments);
+                self.onUredi.apply(self, arguments);
             }
         });
     };
@@ -121,8 +129,13 @@ define([
         view.on('save:success', function () {
             this.koledarView.ui.koledar.fullCalendar('refetchEvents');
         }, this);
-        
+
         this.dogodekR.show(view);
+    };
+
+    PlaniranjeView.prototype.onZasedenost = function (model) {
+        this.dogodekView = new Marionette.ItemView();
+        console.log('zasedenost');
     };
 
     return PlaniranjeView;
