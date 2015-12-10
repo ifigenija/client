@@ -1,3 +1,4 @@
+<div class="dogodek-naslov"></div>
 <div class="row">
     <div class="col-sm-12 dogodek-izbira-gumbi">
         <a class="btn btn-default dogodek-vaja" title="{{t "std.dogodek.dodajVajo"}}">

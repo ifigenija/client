@@ -31,8 +31,8 @@ define([
     });
 
     Collection.prototype.razdeli = function () {
-        var alterColl = new Alternacije();
-        var osebeColl = new Osebe();
+        var alterColl = this.alternacije = new Alternacije();
+        var osebeColl = this.osebe = new Osebe();
 
         var models = this.models;
         for (var id in models) {
@@ -59,6 +59,46 @@ define([
             osebe: osebeColl,
             alternacije: alterColl
         };
+    };
+    /**
+     * Funkcija vrne collection oseb za odstranit iz terminov storitev in collection oseb za dodat v terminstoritev
+     * @param {Collection} osebe    Vhodni podatek je collection izbranih oseb
+     * @returns {undefined}
+     */
+    Collection.prototype.dodajOdstrani = function (osebe) {
+        //ali je oseba v terminih storitve
+        for (var id in this.models) {
+            var model = this.models[id];
+            var vsebovana = false;
+            for (var ids in osebe) {
+                var oseba = osebe[ids];
+                if (model.get('oseba') === oseba.get('id')) {
+                    vsebovana = true;
+                }
+            }
+            if (!vsebovana) {
+                model.destroy({
+                    error: ''
+                });
+            }
+        }
+
+        //ali je oseba v terminih storitve
+        for (var ids in osebe) {
+            var oseba = osebe[ids];
+            vsebovana = false;
+            for (var id in this.models) {
+                var model = this.models[id];
+                if (oseba.get('id') === model.get('oseba')) {
+                    vsebovana = true;
+                }
+            }
+            if (!vsebovana) {
+                model.save({
+                    error: ''
+                });
+            }
+        }
     };
 
     return Collection;

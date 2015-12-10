@@ -44,8 +44,7 @@ define([
         zacetek: moment(),
         konec: moment(),
         regions: {
-            izbiraR: '.dogodek-region-izbira',
-            podrobnoR: '.dogodek-region-podrobno'
+            obrazecR: '.dogodek-region-obrazec'
         },
         initialize: function (options) {
             //dodaj default
@@ -63,7 +62,7 @@ define([
             view.on('render:splosni', this.onSplosni, this);
             view.on('render:tehnicni', this.onTehnicni, this);
 
-            this.izbiraR.show(view);
+            this.obrazecR.show(view);
         },
         /**
          * 
@@ -147,10 +146,10 @@ define([
                 self.model.set('title', podatki.label + (title ? ' : ' + title : i18next.t('dogodek.title')));
             }, this);
 
-            this.podrobnoR.show(podrobnoView);
+            this.obrazecR.show(podrobnoView);
         },
         preklici: function () {
-            this.podrobnoR.empty();
+            this.obrazecR.empty();
         }
     });
     return function (options) {
