@@ -38,15 +38,17 @@ define([
         });
 
         it('je forma renderirana', function () {
-            var $title = $('.field-title');
-            var $tipVaje = $('.field-tipvaje');
-            var $prostor = $('[name~="prostor"]');
-            var $zacetek = $('.field-zacetek');
-            var $konec = $('.field-konec');
+            var view = this.view;
+            
+            var $title = view.$('.field-title');
+            var $tipVaje = view.$('.field-tipvaje');
+            var $prostor = view.$('[name~="prostor"]');
+            var $zacetek = view.$('.field-zacetek');
+            var $konec = view.$('.field-konec');
 
             expect($title.length).to.equal(1);
             expect($tipVaje.length).to.equal(1);
-            expect($prostor.length).to.equal(1);
+            expect($prostor.length).to.equal(2);
             expect($zacetek.length).to.equal(1);
             expect($konec.length).to.equal(1);
         });

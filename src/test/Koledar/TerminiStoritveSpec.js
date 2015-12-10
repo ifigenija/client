@@ -66,20 +66,7 @@ define([
         });
         
         it('dodaj odstrani alternacije v TS', function () {
-
-            var podatki = this.coll.razdeli();
-            var alternacije = podatki.alternacije;
-            var osebe = podatki.osebe;
-
-            expect(alternacije).to.be.an.instanceOf(Alternacije);
-            expect(alternacije.length).to.be.equal(5);
-
-            expect(osebe).to.be.an.instanceOf(Osebe);
-            expect(osebe.length).to.be.equal(2);
-
-            var tsA = this.coll.first().get('alternacija.id');
-            var A = alternacije.first().get('id');
-            expect(tsA).to.equal(A);
+            expect(true).to.be.false;
         });
     });
 });

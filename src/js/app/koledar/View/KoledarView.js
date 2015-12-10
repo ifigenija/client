@@ -88,7 +88,6 @@ define([
         }, 200);
     };
 
-
     KoledarView.prototype.renderFilterView = function () {
         var filterView = new KoledarFilterView();
         var self = this;
