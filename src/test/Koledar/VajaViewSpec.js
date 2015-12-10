@@ -44,11 +44,11 @@ define([
             var $zacetek = $('.field-zacetek');
             var $konec = $('.field-konec');
 
-            expect($title.length).to.not.equal(0);
-            expect($tipVaje.length).to.not.equal(0);
-            expect($prostor.length).to.not.equal(0);
-            expect($zacetek.length).to.not.equal(0);
-            expect($konec.length).to.not.equal(0);
+            expect($title.length).to.equal(1);
+            expect($tipVaje.length).to.equal(1);
+            expect($prostor.length).to.equal(1);
+            expect($zacetek.length).to.equal(1);
+            expect($konec.length).to.equal(1);
         });
 
         it('proži prikaz koledar prostorov', function () {

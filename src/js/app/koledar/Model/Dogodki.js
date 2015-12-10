@@ -22,6 +22,9 @@ define(['baseUrl', 'backbone', 'app/Max/Model/MaxPageableCollection', 'underscor
             eObj.start = moment(this.get('zacetek'));
             eObj.end = moment(this.get('konec'));
             return eObj;
+        },
+        initialize: function(attr){
+            this.view = attr.view || this.view;
         }
     });
 

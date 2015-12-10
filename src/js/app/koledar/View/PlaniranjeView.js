@@ -8,7 +8,7 @@ define([
     'moment',
     'app/Max/View/Toolbar',
     'template!../tpl/planiranje.tpl',
-    '../Model/Dogodek',
+    '../Model/Dogodki',
     '../Model/TerminiStoritev',
     './KoledarView',
     './DogodekModal',
@@ -23,7 +23,7 @@ define([
         moment,
         Toolbar,
         tpl,
-        Dogodek,
+        Dogodki,
         TerminiStoritev,
         KoledarView,
         DogodekModal,
@@ -86,7 +86,7 @@ define([
     PlaniranjeView.prototype.onUredi = function (model) {
         var razred = model.get('view') || model.get('razred');
 
-        if (model instanceof Dogodek) {
+        if (model instanceof Dogodki.prototype.model) {
             if (razred === 'vaja' || razred === '200s') {
                 this.onVaja(model);
             }

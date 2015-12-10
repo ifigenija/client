@@ -68,6 +68,25 @@ define([
 
             $region = this.content.$('.dogodek-region-podrobno:empty');
             expect($region.length).to.equal(0);
+        });     
+        
+        it('proži callback', function () {
+            
+            var potrdiSpy = sinon.spy();
+            
+            var view = DogodekModal({
+                cb: potrdiSpy
+            });
+            var content = view.options.content;
+            
+            var $region = content.$('.dogodek-region-podrobno:empty');
+            expect($region.length).to.equal(1);
+
+            var $gumb = content.$('.dogodek-tehnicni');
+            expect($gumb.length).to.equal(1);
+            $gumb.click();
+            
+            expect(potrdiSpy).to.have.been.called;
         });
     });
 });

@@ -12,7 +12,7 @@ define([
     'template!../tpl/dogodek-izbira.tpl',
     'template!../tpl/dogodek-modal.tpl',
     'moment',
-    '../Model/Dogodek',
+    '../Model/Dogodki',
     '../Model/TerminiStoritev'
 ], function (
         Radio,
@@ -25,7 +25,7 @@ define([
         izbiraTpl,
         modalTpl,
         moment,
-        Dogodek,
+        Dogodki,
         TerminiStoritev
         ) {
     var IzbiraView = Marionette.ItemView.extend({
@@ -72,7 +72,7 @@ define([
          * @returns {undefined}
          */
         initModel: function (options) {
-            var model = this.model = new Dogodek({
+            var model = this.model = new Dogodki.prototype.model({
                 view: options.view,
                 zacetek: this.zacetek,
                 konec: this.konec,
@@ -172,17 +172,31 @@ define([
             cancelText: i18next.t("std.preklici")
         });
 
-        var zapriModal = function () {
+        var odpriDogodek = function () {
             var model = view.model;
-            if (options.cb) {
-                options.cb(model);
+            if (model.view === 'vaja' || model.view === 'predstava') {
+                if (model.get('uprizoritev')) {
+                    if (options.cb) {
+                        options.cb(model);
+                    }
+                } else {
+                    modal.preventClose();
+                }
+            } else {
+                if (options.cb) {
+                    options.cb(model);
+                }
             }
+        };
+
+        var zapriModal = function () {
+            odpriDogodek();
             modal.close();
         };
 
         view.on('potrdi:dogodek', zapriModal, this);
 
-        modal.open(zapriModal);
+        modal.open(odpriDogodek);
         return modal;
     };
 });

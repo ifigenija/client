@@ -47,11 +47,11 @@ define([
         });
 
         it('proži prikazi:dogodek ob kliku na prazno', function () {
-
+            expect(true).to.be.false;
         });
-        
-        it('proži prikazi:dogodek ob kliku na dogodek', function () {
 
+        it('proži prikazi:dogodek ob kliku na dogodek', function () {
+            expect(true).to.be.false;
         });
     });
 });
