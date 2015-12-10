@@ -9,11 +9,10 @@ define([
     'app/Max/View/Toolbar',
     'template!../tpl/planiranje.tpl',
     '../Model/Dogodki',
+    '../Model/Dogodek',
     '../Model/TerminiStoritev',
     './KoledarView',
     './DogodekModal',
-    '../Model/Dogodki',
-    '../Model/Dogodek',
     './DogodekView',
     './VajaView',
     'jquery.jsonrpc'
@@ -29,7 +28,6 @@ define([
         TerminiStoritev,
         KoledarView,
         DogodekModal,
-        Collection,
         DogodekView,
         VajaView
         ) {
@@ -56,7 +54,7 @@ define([
      * @returns {undefined}
      */
     PlaniranjeView.prototype.renderKoledar = function () {
-        var coll = new Collection();
+        var coll = new Dogodki();
 
         var view = this.koledarView = new KoledarView({
             collection: coll
