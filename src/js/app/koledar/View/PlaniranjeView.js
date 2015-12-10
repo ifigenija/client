@@ -13,8 +13,9 @@ define([
     './KoledarView',
     './DogodekModal',
     '../Model/Dogodki',
+    '../Model/Dogodek',
+    './DogodekView',
     './VajaView',
-    'formSchema!vaja',
     'jquery.jsonrpc'
 ], function (
         Radio,
@@ -24,12 +25,13 @@ define([
         Toolbar,
         tpl,
         Dogodki,
+        Dogodek,
         TerminiStoritev,
         KoledarView,
         DogodekModal,
         Collection,
-        VajaView,
-        schemaVaja
+        DogodekView,
+        VajaView
         ) {
 
     var PlaniranjeView = Marionette.LayoutView.extend({
@@ -84,11 +86,20 @@ define([
     };
 
     PlaniranjeView.prototype.onUredi = function (model) {
-        var razred = model.get('view') || model.get('razred');
+        var razred = model.get('razred');
 
         if (model instanceof Dogodki.prototype.model) {
-            if (razred === 'vaja' || razred === '200s') {
+            if (razred === '100s') {
+            } else if (razred === '200s') {
                 this.onVaja(model);
+            } else if (razred === '300s') {
+
+            } else if (razred === '400s') {
+
+            } else if (razred === '500s') {
+
+            } else if (razred === '600s') {
+
             }
             this.dogodekView.on('skrij', this.onPreklici, this);
         } else if (model instanceof TerminiStoritev.prototype.model) {
@@ -117,20 +128,26 @@ define([
     };
 
     PlaniranjeView.prototype.onVaja = function (model) {
-        var View = VajaView.extend({
-            posodobiUrlNaslov: function () {
+        var model = new Dogodek({
+            id: model.get('vaja'),
+            view: 'vaja'
+        });
+        
+        model.fetch({
+            success: function () {
+                var view = DogodekView({
+                    model: model,
+                    TipDogView: VajaView,
+                    tipDogModel: model,
+                    posodobiUrlNaslov: function () {
+                    }
+                });
+                view.on('save:success', function () {
+                    this.koledarView.ui.koledar.fullCalendar('refetchEvents');
+                }, this);
+                this.dogodekR.show(view);
             }
         });
-        var view = this.dogodekView = new View({
-            model: model,
-            schema: schemaVaja.toFormSchema().schema
-        });
-
-        view.on('save:success', function () {
-            this.koledarView.ui.koledar.fullCalendar('refetchEvents');
-        }, this);
-
-        this.dogodekR.show(view);
     };
 
     PlaniranjeView.prototype.onZasedenost = function (model) {

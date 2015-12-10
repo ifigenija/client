@@ -1,73 +1,158 @@
-/*
+/* 
  * Licenca GPLv3
  */
-
 define([
     'radio',
     'i18next',
+    'backbone',
     'underscore',
-    'app/Dokument/View/FormView',
+    'app/bars',
+    'marionette',
+    'jquery',
+    'app/Max/View/TabControl',
+    'app/Dokument/View/DokumentView',
     'formSchema!dogodek',
+    'template!../tpl/dogodek-dok.tpl',
     'template!../tpl/dogodek-form.tpl',
-    'template!../tpl/dogodek.tpl'
+    'app/Zapisi/View/ZapisiLayout',
+    './SodelujociView',
+    'app/Dokument/View/FormView',
+    '../Model/Dogodek',
+    'jquery.jsonrpc'
 ], function (
-    Radio,
-    i18next,
-    _,
-    FormView,
-    dogodekSchema,
-    dogodekFormTpl,
-    dogodekTpl) {
+        Radio,
+        i18next,
+        Backbone,
+        _,
+        Handlebars,
+        Marionette,
+        $,
+        TabControl,
+        DokumentView,
+        schemaDogodek,
+        dokumentTpl,
+        dogodekTpl,
+        ZapisiLayout,
+        SodelujociView,
+        FormView,
+        Dogodek
+        ) {
+    
+    var tabVse = [
+        {name: i18next.t('dogodek.title'), event: 'dogodek'},
+        {name: i18next.t('dogodek.razred'), event: 'razred'},
+        {name: i18next.t('dogodek.sodelujoci'), event: 'sodelujoci'}
+    ];
 
-    var Fv = FormView.extend({
-        buttons: {
-            shrani: {
-                id: 'doc-shrani',
-                label: i18next.t('std.shrani'),
-                element: 'button-trigger',
-                trigger: 'shrani',
-                disabled: true
-            },
-            preklici: {
-                id: 'doc-preklici',
-                label: i18next.t('std.preklici'),
-                element: 'button-trigger',
-                trigger: 'preklici'
-            },
-            nasvet: {
-                id: 'doc-nasvet',
-                icon: 'fa fa-info',
-                element: 'button-trigger',
-                trigger: 'nasvet'
-            },
+    var tabNovi = [
+        {name: i18next.t('dogodek.title'), event: 'dogodek'}
+    ];
+
+    var DogodekView = DokumentView.extend({
+        template: dokumentTpl,
+        formTemplate: dogodekTpl,
+        schema: schemaDogodek.toFormSchema().schema,
+        TipDogView: null,
+        tipDogModel: null,
+        regions: {
+            tabsR: '.dogodek-tabs',
+            sodelujociR: '.region-sodelujoci',
+            razredDogodkaR: '.region-razred-dogodka',
+            prilogeR: '.region-priloge'
         },
-        schema: dogodekSchema.toFormSchema().schema,
-        formTemplate: dogodekFormTpl,
-        template: dogodekTpl
+        triggers: {
+            'click .prikazi-koledar': 'koledar:prostor'
+        }
     });
 
-    Fv.prototype.serializeData = function () {
-        return _.extend(this.model.toJSON(), {
-            formTitle: this.formTitle,
-            dogodekIme: {
-                '100s': 'Vaja',
-                '200s': 'Predstava',
-                '300s': 'Gostovnaje',
-                '400s': 'Splošni dogodek',
-                '500s': 'Zasedenost'
-            }[this.model.get('razred')]
-        });
+    DogodekView.prototype.initialize = function (options) {
+        this.schema = options.schema || this.schema;
+        this.TipDogView = options.TipDogView || this.TipDogView;
+        this.tipDogModel = options.tipDogModel || this.tipDogModel;
     };
 
-    Fv.prototype.onFormChange = function (form) {
-        var tb = this.getToolbarModel();
-        var but = tb.getButton('doc-shrani');
-        if (but && but.get('disabled')) {
-            but.set({
-                disabled: false
-            });
+    /**
+     * Kaj se zgodi ko se je view že vstavil v DOM
+     * @returns {undefined}
+     */
+    DogodekView.prototype.onRender = function () {
+        var chPermission = Radio.channel('global');
+        
+        var tabs = tabVse;
+        this.renderTabs(tabs);
+    };
+    
+    /**
+     * deselect taba 
+     * @returns {undefined}
+     */
+    DogodekView.prototype.deselectTab = function () {
+        this.$('.dogodek-panels .tab-pane').removeClass('active');
+    };
+
+    /**
+     * Izris tabov
+     * @returns {DogodekView_L11.TabControl}
+     */
+    DogodekView.prototype.renderTabs = function (tabs) {
+        this.tabControl = new TabControl({tabs: tabs, listener: this});
+        this.tabsR.show(this.tabControl);
+        return this.tabControl;
+    };
+    
+    /**
+     * Klik na splošni tab
+     * @returns {undefined}
+     */
+    DogodekView.prototype.onDogodek = function () {
+        this.deselectTab();
+        this.$('.pnl-splosno').addClass('active');
+        if (this.model.get('id')) {
+            this.renderPriloge();
         }
     };
 
-    return Fv;
+    DogodekView.prototype.onSodelujoci = function () {
+        this.deselectTab();
+        this.$('.pnl-sodelujoci').addClass('active');
+        this.renderSodelujoci();
+
+    };
+
+    DogodekView.prototype.onRazred = function () {
+        this.deselectTab();
+        this.$('.pnl-razred').addClass('active');
+        this.renderRazredDogodka();
+
+    };
+
+    /**
+     * Overrride render priloge, da se nastavi pravi classLastnika
+     * @returns {undefined}
+     */
+    DogodekView.prototype.renderPriloge = function () {
+        var view = new ZapisiLayout({
+            lastnik: this.model.get('id'),
+            classLastnika: 'Dogodek'
+        });
+        this.prilogeR.show(view);
+    };
+
+    DogodekView.prototype.renderSodelujoci = function () {
+        var view = new SodelujociView({
+            uprizoritev: this.model.get('uprizoritev')
+        });
+
+        this.sodelujociR.show(view);
+    };
+
+    DogodekView.prototype.renderRazredDogodka = function () {        
+        var view = this.TipDogView({
+            model: this.tipDogmodel
+        });
+        
+        this.razredDogodkaR.show(view);
+    };
+
+    return DogodekView;
 });

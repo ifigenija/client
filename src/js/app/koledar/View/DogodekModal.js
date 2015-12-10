@@ -76,7 +76,8 @@ define([
                 view: options.view,
                 zacetek: this.zacetek,
                 konec: this.konec,
-                title: options.title
+                title: options.title,
+                razred: options.razred
             });
 
             return model;
@@ -84,7 +85,8 @@ define([
         onVaja: function () {
             this.initModel({
                 view: 'vaja',
-                title: 'Vaja'
+                title: 'Vaja',
+                razred: '200s'
             });
             this.renderIzbiraUprizoritve(i18next.t('vaja.title'));
         },
