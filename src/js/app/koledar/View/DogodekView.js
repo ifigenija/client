@@ -16,8 +16,6 @@ define([
     'template!../tpl/dogodek-form.tpl',
     'app/Zapisi/View/ZapisiLayout',
     './SodelujociView',
-    'app/Dokument/View/FormView',
-    '../Model/Dogodek',
     'jquery.jsonrpc'
 ], function (
         Radio,
@@ -33,9 +31,7 @@ define([
         dokumentTpl,
         dogodekTpl,
         ZapisiLayout,
-        SodelujociView,
-        FormView,
-        Dogodek
+        SodelujociView
         ) {
     
     var tabVse = [
@@ -121,7 +117,7 @@ define([
 
     DogodekView.prototype.onRazred = function () {
         this.deselectTab();
-        this.$('.pnl-razred').addClass('active');
+        this.$('.pnl-razred-dogodka').addClass('active');
         this.renderRazredDogodka();
 
     };
@@ -142,15 +138,13 @@ define([
         var view = new SodelujociView({
             uprizoritev: this.model.get('uprizoritev')
         });
-
         this.sodelujociR.show(view);
     };
 
     DogodekView.prototype.renderRazredDogodka = function () {        
-        var view = this.TipDogView({
-            model: this.tipDogmodel
-        });
-        
+        var view = new this.TipDogView({
+            model: this.tipDogModel
+        });        
         this.razredDogodkaR.show(view);
     };
 

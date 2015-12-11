@@ -17,7 +17,10 @@ define([
         template: simpleTpl,
         formTemplate: vajaTpl,
         schema: schemaVaja.toFormSchema().schema,
-        buttons: FormView.prototype.defaultButtons
+        buttons: FormView.prototype.defaultButtons,
+        triggers:{
+            'click .prikazi-koledar': 'prikazi:koledar:prostor'
+        }
     });
 
     return VajaView;

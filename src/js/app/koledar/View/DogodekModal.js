@@ -12,6 +12,7 @@ define([
     'template!../tpl/dogodek-izbira.tpl',
     'template!../tpl/dogodek-modal.tpl',
     'moment',
+    '../Model/Dogodek',
     '../Model/Dogodki',
     '../Model/TerminiStoritev'
 ], function (
@@ -25,6 +26,7 @@ define([
         izbiraTpl,
         modalTpl,
         moment,
+        Dogodek,
         Dogodki,
         TerminiStoritev
         ) {
@@ -39,6 +41,7 @@ define([
             'click .dogodek-tehnicni': 'render:tehnicni'
         }
     });
+
     var DogodekModalLayout = Marionette.LayoutView.extend({
         template: modalTpl,
         zacetek: moment(),
@@ -72,12 +75,12 @@ define([
          * @returns {undefined}
          */
         initModel: function (options) {
-            var model = this.model = new Dogodki.prototype.model({
+            var model = this.model = new Dogodek({
                 view: options.view,
                 zacetek: this.zacetek,
                 konec: this.konec,
                 title: options.title,
-                razred: options.razred
+                status: options.status
             });
 
             return model;
@@ -86,21 +89,23 @@ define([
             this.initModel({
                 view: 'vaja',
                 title: 'Vaja',
-                razred: '200s'
+                status: '100s'
             });
             this.renderIzbiraUprizoritve(i18next.t('vaja.title'));
         },
         onPredstava: function () {
             this.initModel({
                 view: 'predstava',
-                title: 'Predstava'
+                title: 'Predstava',
+                status: '100s'
             });
             this.renderIzbiraUprizoritve(i18next.t('predstava.title'));
         },
         onGostovanje: function () {
             this.initModel({
                 view: 'gostovanje',
-                title: 'Gostovanje'
+                title: 'Gostovanje',
+                status: '100s'
             });
             this.preklici();
             this.trigger('potrdi:dogodek');
@@ -108,7 +113,8 @@ define([
         onSplosni: function () {
             this.initModel({
                 view: 'splosni',
-                title: 'Splošni'
+                title: 'Splošni',
+                status: '100s'
             });
             this.preklici();
             this.trigger('potrdi:dogodek');
@@ -116,7 +122,8 @@ define([
         onTehnicni: function () {
             this.initModel({
                 view: 'tehnicni',
-                title: 'Tehnični'
+                title: 'Tehnični',
+                status: '100s'
             });
             this.preklici();
             this.trigger('potrdi:dogodek');
@@ -174,19 +181,41 @@ define([
             cancelText: i18next.t("std.preklici")
         });
 
+        /**
+         * iz modela tipa dogodka pridobimo model dogodek
+         * @param {TipDogodkaModel} model
+         * @returns {undefined}
+         */
+        var getDogodek = function (model) {
+            var id = model.get('dogodek');
+            var dogodekModel = new Dogodki.prototype.model({id: id});
+
+            dogodekModel.fetch({
+                success: function () {
+                    options.cb(dogodekModel);
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+        };
+
         var odpriDogodek = function () {
             var model = view.model;
             if (model.view === 'vaja' || model.view === 'predstava') {
                 if (model.get('uprizoritev')) {
                     if (options.cb) {
-                        options.cb(model);
+                        model.save({}, {
+                            success: function () {
+                                getDogodek(model);
+                            },
+                            error: Radio.channel('error').request('handler', 'xhr')
+                        });
                     }
                 } else {
                     modal.preventClose();
                 }
             } else {
                 if (options.cb) {
-                    options.cb(model);
+                    getDogodek(model);
                 }
             }
         };
