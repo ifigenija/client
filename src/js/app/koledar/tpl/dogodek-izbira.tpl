@@ -42,17 +42,3 @@
         </a>
     </div>
 </div>
-<div class="row">
-    <a class="btn btn-default nazaj">
-        <i class="fa fa-chevron-left"> </i>
-        <div class="caption text-center">
-            <h4>{{t "std.nazaj"}}</h4>
-        </div>
-    </a>
-    <a class="btn btn-default naprej">
-        <i class="fa fa-chevron-right"> </i>
-        <div class="caption text-center">
-            <h4>{{t "std.naprej"}}</h4>
-        </div>
-    </a>
-</div>

@@ -29,9 +29,7 @@ define([
             'click .dogodek-zasedenost': 'zasedenost',
             'click .dogodek-gostovanje': 'gostovanje',
             'click .dogodek-splosni': 'splosni',
-            'click .dogodek-tehnicni': 'tehnicni',
-            'click .naprej': 'naprej',
-            'click .nazaj': 'nazaj'
+            'click .dogodek-tehnicni': 'tehnicni'
         }
     });
 
@@ -57,6 +55,7 @@ define([
             title: 'Vaja',
             status: '100s'
         });
+        this.trigger('ready');
     };
     IzbiraView.prototype.onPredstava = function () {
         this.initRazredDogodka({
@@ -64,6 +63,7 @@ define([
             title: 'Predstava',
             status: '100s'
         });
+        this.trigger('ready');
     };
     IzbiraView.prototype.onZasedenost = function () {
         var model = this.model = new TerminiStoritev.prototype.model();
@@ -72,13 +72,15 @@ define([
             model.set('planiranZacetek', this.zacetek);
         }
         model.set('planiranKonec', this.konec);
+        this.trigger('ready');
     };
     IzbiraView.prototype.onGostovanje = function () {
         this.initRazredDogodka({
             view: 'gostovanje',
             title: 'Gostovanje',
             status: '100s'
-        });
+        });this.trigger('ready');
+        
     };
     IzbiraView.prototype.onSplosni = function () {
         this.initRazredDogodka({
@@ -86,6 +88,7 @@ define([
             title: 'Splošni',
             status: '100s'
         });
+        this.trigger('ready');
     };
     IzbiraView.prototype.onTehnicni = function () {
         this.initRazredDogodka({
@@ -93,6 +96,7 @@ define([
             title: 'Tehnični',
             status: '100s'
         });
+        this.trigger('ready');
     };
 
     return IzbiraView;
