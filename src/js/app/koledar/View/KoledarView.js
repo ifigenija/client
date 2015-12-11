@@ -10,6 +10,7 @@ define([
     'template!../tpl/koledar-layout.tpl',
     './KoledarFilterView',
     './DogodekModal',
+    '../Model/RazredDogodek',
     'fc-schedule'
 ], function (
         Radio,
@@ -19,7 +20,8 @@ define([
         $,
         tpl,
         KoledarFilterView,
-        DogodekModal
+        DogodekModal,
+        Dogodek
         ) {
 
     var KoledarView = Marionette.LayoutView.extend({
@@ -99,7 +101,7 @@ define([
 
         this.filterR.show(filterView);
     };
-    
+
     KoledarView.prototype.select = function (start, end, jsEvent, view) {
         var view = this.options.view;
         DogodekModal({
@@ -112,16 +114,55 @@ define([
     };
 
     KoledarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
-        var model = fcEvent.source.coll.get(fcEvent.id);
-        this.trigger('prikazi:dogodek', model);
+        var dogodekModel = fcEvent.source.coll.get(fcEvent.id);
+        var razred = dogodekModel.get('razred');
+        var model;
+        if (razred === '100s') {
+            model = new Dogodek({
+                id: dogodekModel.get('predstava'),
+                view: 'predstava'
+            });
+        } else if (razred === '200s') {
+            model = new Dogodek({
+                id: dogodekModel.get('vaja'),
+                view: 'vaja'
+            });
+        } else if (razred === '300s') {
+            model = new Dogodek({
+                id: dogodekModel.get('gostovanje'),
+                view: 'gostovanje'
+            });
+
+        } else if (razred === '400s') {
+            model = new Dogodek({
+                id: dogodekModel.get('splosni'),
+                view: 'dogodekSplosni'
+            });
+
+        } else if (razred === '500s') {
+
+        } else if (razred === '600s') {
+            model = new Dogodek({
+                id: dogodekModel.get('tehnicni'),
+                view: 'dogodekTehnicni'
+            });
+
+        }
+        var self = this;
+        model.fetch({
+            success: function () {
+                self.trigger('prikazi:dogodek', model);
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
     };
-    
+
     KoledarView.prototype.change = function (event) {
         // Look up the underlying event in the koledar and update its details from the model
         var e = this.ui.koledar.fullCalendar('clientEvents', event.get('id'))[0];
         e = event.getEventObject(e);
         this.ui.koledar.fullCalendar('updateEvent', e);
-    };    
+    };
 
     KoledarView.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
         // Lookup the model that has the ID of the event and update its attributes

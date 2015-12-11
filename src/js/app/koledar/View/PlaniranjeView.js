@@ -9,14 +9,14 @@ define([
     'app/Max/View/Toolbar',
     'template!../tpl/planiranje.tpl',
     '../Model/Dogodki',
-    '../Model/Dogodek',
-    '../Model/TerminiStoritev',
     './KoledarView',
     './DogodekModal',
     './DogodekView',
     './VajaView',
-    'formSchema!dogodek',
-    'jquery.jsonrpc'
+    './PredstavaView',
+    './GostovanjeView',
+    './SplosniView',
+    './TehnicniView'
 ], function (
         Radio,
         i18next,
@@ -25,13 +25,14 @@ define([
         Toolbar,
         tpl,
         Dogodki,
-        Dogodek,
-        TerminiStoritev,
         KoledarView,
         DogodekModal,
         DogodekView,
         VajaView,
-        schemaDogodek
+        PredstavaView,
+        GostovanjeView,
+        SplosniView,
+        TehnicniView
         ) {
 
     var PlaniranjeView = Marionette.LayoutView.extend({
@@ -89,26 +90,23 @@ define([
         this.koledarView.ui.koledar.fullCalendar('refetchEvents');
         this.onUredi(model);
     };
-    
+
     PlaniranjeView.prototype.onUredi = function (model) {
-        var razred = model.get('razred');
-
-        if (model instanceof Dogodki.prototype.model) {
-            if (razred === '100s') {
-            } else if (razred === '200s') {
-                this.onVaja(model);
-            } else if (razred === '300s') {
-
-            } else if (razred === '400s') {
-
-            } else if (razred === '500s') {
-
-            } else if (razred === '600s') {
-
-            }
-        } else if (model instanceof TerminiStoritev.prototype.model) {
+        var razred = model.get('dogodek').razred;
+        if (razred === '100s') {
+            this.renderRazredDogodek(model, PredstavaView);
+        } else if (razred === '200s') {
+            this.renderRazredDogodek(model, VajaView);
+        } else if (razred === '300s') {
+            this.renderRazredDogodek(model, GostovanjeView);
+        } else if (razred === '400s') {
+            this.renderRazredDogodek(model, SplosniView);
+        } else if (razred === '500s') {
             this.onZasedenost(model);
             this.dogodekView.on('skrij', this.onPreklici, this);
+
+        } else if (razred === '600s') {
+            this.renderRazredDogodek(model, TehnicniView);
         }
     };
     PlaniranjeView.prototype.onPreklici = function () {
@@ -131,28 +129,22 @@ define([
         });
     };
 
-    PlaniranjeView.prototype.onVaja = function (model) {
-        var vajaModel = new Dogodek({
-            id: model.get('vaja'),
-            view: 'vaja'
-        });
+    PlaniranjeView.prototype.renderRazredDogodek = function (razredModel, TipDogView) {
+        var dogodekModel = new Dogodki.prototype.model(razredModel.get('dogodek'));
+
         var self = this;
-        vajaModel.fetch({
-            success: function () {
-                var view = new DogodekView({
-                    model: model,
-                    TipDogView: VajaView,
-                    tipDogModel: vajaModel,
-                    posodobiUrlNaslov: function () {
-                    }
-                });
-                view.on('save:success', function () {
-                    self.koledarView.ui.koledar.fullCalendar('refetchEvents');
-                }, self);
-                view.on('skrij', self.onPreklici, self);
-                self.dogodekR.show(view);
+        var view = new DogodekView({
+            model: dogodekModel,
+            TipDogView: TipDogView,
+            tipDogModel: razredModel,
+            posodobiUrlNaslov: function () {
             }
         });
+        view.on('save:success', function () {
+            self.koledarView.ui.koledar.fullCalendar('refetchEvents');
+        }, self);
+        view.on('skrij', self.onPreklici, self);
+        self.dogodekR.show(view);
     };
 
     PlaniranjeView.prototype.onZasedenost = function (model) {

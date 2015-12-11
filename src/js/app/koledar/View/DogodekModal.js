@@ -12,7 +12,7 @@ define([
     'template!../tpl/dogodek-izbira.tpl',
     'template!../tpl/dogodek-modal.tpl',
     'moment',
-    '../Model/Dogodek',
+    '../Model/RazredDogodek',
     '../Model/Dogodki',
     '../Model/TerminiStoritev'
 ], function (
@@ -112,7 +112,7 @@ define([
         },
         onSplosni: function () {
             this.initModel({
-                view: 'splosni',
+                view: 'dogodekSplosni',
                 title: 'Splošni',
                 status: '100s'
             });
@@ -121,7 +121,7 @@ define([
         },
         onTehnicni: function () {
             this.initModel({
-                view: 'tehnicni',
+                view: 'dogodekTehnicni',
                 title: 'Tehnični',
                 status: '100s'
             });
@@ -186,13 +186,10 @@ define([
          * @param {TipDogodkaModel} model
          * @returns {undefined}
          */
-        var getDogodek = function (model) {
-            var id = model.get('dogodek');
-            var dogodekModel = new Dogodki.prototype.model({id: id});
-
-            dogodekModel.fetch({
+        var shraniRazredDogodka = function (model) {
+            model.save({}, {
                 success: function () {
-                    options.cb(dogodekModel);
+                    options.cb(model);
                 },
                 error: Radio.channel('error').request('handler', 'xhr')
             });
@@ -203,19 +200,14 @@ define([
             if (model.view === 'vaja' || model.view === 'predstava') {
                 if (model.get('uprizoritev')) {
                     if (options.cb) {
-                        model.save({}, {
-                            success: function () {
-                                getDogodek(model);
-                            },
-                            error: Radio.channel('error').request('handler', 'xhr')
-                        });
+                        shraniRazredDogodka(model);
                     }
                 } else {
                     modal.preventClose();
                 }
             } else {
                 if (options.cb) {
-                    getDogodek(model);
+                    shraniRazredDogodka(model);
                 }
             }
         };

@@ -1,4 +1,3 @@
-<div class="dogodek-naslov"></div>
 <div class="row">
     <div class="col-sm-12 dogodek-izbira-gumbi">
         <a class="btn btn-default dogodek-vaja" title="{{t "std.dogodek.dodajVajo"}}">
@@ -42,4 +41,18 @@
             </div>
         </a>
     </div>
+</div>
+<div class="row">
+    <a class="btn btn-default nazaj">
+        <i class="fa fa-chevron-left"> </i>
+        <div class="caption text-center">
+            <h4>{{t "std.nazaj"}}</h4>
+        </div>
+    </a>
+    <a class="btn btn-default naprej">
+        <i class="fa fa-chevron-right"> </i>
+        <div class="caption text-center">
+            <h4>{{t "std.naprej"}}</h4>
+        </div>
+    </a>
 </div>

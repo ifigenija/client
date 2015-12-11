@@ -4,8 +4,8 @@
 define([
     'app/Dokument/View/FormView',
     'template!app/Dokument/tpl/form-simple.tpl',
-    'template!../tpl/vaja-form.tpl',
-    'formSchema!vaja'
+    'template!../tpl/gostovanje-form.tpl',
+    'formSchema!gostovanje'
 ], function (
         FormView,
         simpleTpl,
@@ -13,15 +13,12 @@ define([
         schema
         ) {
 
-    var VajaView = FormView.extend({
+    var GostovanjeView = FormView.extend({
         template: simpleTpl,
         formTemplate: tpl,
         schema: schema.toFormSchema().schema,
-        buttons: FormView.prototype.defaultButtons,
-        triggers:{
-            'click .prikazi-koledar': 'prikazi:koledar:prostor'
-        }
+        buttons: FormView.prototype.defaultButtons
     });
 
-    return VajaView;
+    return GostovanjeView;
 });

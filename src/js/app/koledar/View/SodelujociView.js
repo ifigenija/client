@@ -50,36 +50,34 @@ define([
     SodelujociView.prototype.initialize = function (options) {
         if (options && options.uprizoritev) {
             this.uprizoritev = options.uprizoritev;
-        } else {
-            throw new Error('SodelujociView nima definirane uprizoritve.');
+
+            var coll = this.collection = new Alternacije();
+            coll.queryParams.uprizoritev = this.uprizoritev;
+            var self = this;
+            coll.fetch({
+                success: function () {
+                    self.razdeliCollection();
+                    self.onRender();
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
         }
 
-        var coll = this.collection = new Alternacije();
-        coll.queryParams.uprizoritev = this.uprizoritev;
-        var self = this;
-        coll.fetch({
-            success: function () {
-                self.razdeliCollection();
-                self.onRender();
-            },
-            error: Radio.channel('error').request('handler', 'xhr')
-        });
-        
         this.izbraniUmetniki = new TerminiStoritev();
         this.izbraniTehniki = new TerminiStoritev();
         this.izbraniGosti = new TerminiStoritev();
     };
     SodelujociView.prototype.razdeliCollection = function () {
         var modeli = this.collection.razdeli();
-        
+
         this.umetnikiColl = new Alternacije();
         this.umetnikiColl.add(modeli.umetnik);
         this.umetnikiColl.add(modeli.igralec);
-        
+
         this.tehnikiColl = new Alternacije();
         this.tehnikiColl.add(modeli.tehnik);
         this.tehnikiColl.add(modeli.inspicient);
-        
+
         this.gostiColl = new Osebe();
         this.gostiColl.fetch({error: Radio.channel('error').request('handler', 'xhr')});
     };

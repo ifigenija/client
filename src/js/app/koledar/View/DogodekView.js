@@ -15,8 +15,7 @@ define([
     'template!../tpl/dogodek-dok.tpl',
     'template!../tpl/dogodek-form.tpl',
     'app/Zapisi/View/ZapisiLayout',
-    './SodelujociView',
-    'jquery.jsonrpc'
+    './SodelujociView'
 ], function (
         Radio,
         i18next,
@@ -136,7 +135,7 @@ define([
 
     DogodekView.prototype.renderSodelujoci = function () {
         var view = new SodelujociView({
-            uprizoritev: this.model.get('uprizoritev')
+            uprizoritev: this.tipDogModel.get('uprizoritev')
         });
         this.sodelujociR.show(view);
     };
