@@ -378,7 +378,7 @@ define([
             tabs = tabVse;
         }
 
-        var permission = chPermission.request('isGranted', "Oseba-read");
+        var permission = chPermission.request('isGranted', "OsebniPodatki-read");
         if (!permission) {
             tabs = tabNovi;
         }
