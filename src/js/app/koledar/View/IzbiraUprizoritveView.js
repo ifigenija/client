@@ -31,8 +31,12 @@ define([
 
         this.on('uprizoritev:change', function () {
             var podatki = this.fields.uprizoritev.getValue();
-            this.model.set('uprizoritev', podatki.id);
-            this.trigger('ready');
+            if (podatki) {
+                this.model.set('uprizoritev', podatki.id);
+                this.trigger('ready');
+            } else {
+                this.trigger('not:ready');
+            }
         }, this);
     };
 

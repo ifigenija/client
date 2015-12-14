@@ -10,7 +10,9 @@ define([
     'template!../tpl/planiranje.tpl',
     '../Model/Dogodki',
     './KoledarView',
-    './DogodekModal',
+    //'./DogodekModal',
+    './WizardView',
+    './IzbiraView',
     './DogodekView',
     './VajaView',
     './PredstavaView',
@@ -26,7 +28,9 @@ define([
         tpl,
         Dogodki,
         KoledarView,
-        DogodekModal,
+        //DogodekModal,
+        WizardView,
+        IzbiraView,
         DogodekView,
         VajaView,
         PredstavaView,
@@ -119,14 +123,29 @@ define([
      */
     PlaniranjeView.prototype.onDodaj = function () {
         var self = this;
-
-        DogodekModal({
-            zacetek: moment(),
-            konec: moment(),
-            cb: function () {
-                self.onUredi.apply(self, arguments);
-            }
+        
+        var iv1 = new IzbiraView();
+        var iv2 = new IzbiraView();
+        var wizardView = new WizardView({
+            content:[
+                iv1,
+                iv2
+            ],
+            nazajText: 'nazaj',
+            naprejText:'naprej',
+            okText:'potrdi',
+            cancelText:'preklici'
         });
+        
+        wizardView.open();
+
+//        DogodekModal({
+//            zacetek: moment(),
+//            konec: moment(),
+//            cb: function () {
+//                self.onUredi.apply(self, arguments);
+//            }
+//        });
     };
 
     PlaniranjeView.prototype.renderRazredDogodek = function (razredModel, TipDogView) {

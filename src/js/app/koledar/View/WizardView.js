@@ -41,13 +41,13 @@ define([
     <div class="modal-body">{{content}}</div>\
     <% if (showFooter) { %>\
       <div class="modal-footer">\
-      <a href="#" class="btn nazaj btn-default">{{okText}}</a>\
-        <a href="#" class="btn naprej btn-default">{{okText}}</a>\
         <% if (allowCancel) { %>\
           <% if (cancelText) { %>\
             <a href="#" class="btn cancel">{{cancelText}}</a>\
           <% } %>\
         <% } %>\
+        <a href="#" class="btn nazaj btn-default">{{nazajText}}</a>\
+        <a href="#" class="btn naprej btn-default">{{naprejText}}</a>\
         <a href="#" class="btn ok btn-primary">{{okText}}</a>\
       </div>\
     <% } %>\
@@ -60,9 +60,17 @@ define([
 
     var WizardView = Modal.extend({
         className: 'wizard-modal modal',
-        triggers:{
-            'click .naprej' : 'naprej',
-            'click .nazaj' : 'nazaj'
+        events: function () {
+            return _.extend({}, Modal.prototype.events, {
+                'click .naprej': function (event) {
+                    event.preventDefault();
+                    this.trigger('naprej');
+                },
+                'click .nazaj': function (event) {
+                    event.preventDefault();
+                    this.trigger('nazaj');
+                }
+            });
         }
     });
     WizardView.prototype.initialize = function (options) {
@@ -81,10 +89,10 @@ define([
             this.konec = options.konec || this.konec;
             this.title = options.title || i18next.t('std.naslov');
         }
-        
+
         this.on('naprej', this.onNaprej, this);
         this.on('nazaj', this.onNazaj, this);
-        
+
         this.stevecView = 0;
     };
     /**
@@ -112,6 +120,7 @@ define([
 
         if (options.content.length > 1) {
             this.skrijOK();
+            this.disableNaprej();
         }
 
         if (this.stevecView === 0) {
@@ -124,11 +133,11 @@ define([
     };
 
     WizardView.prototype.onReady = function () {
-        this.prikaziOK();
+        this.enableNaprej();
     };
 
     WizardView.prototype.onNotReady = function () {
-        this.skrijOK();
+        this.disableNaprej();
     };
 
     /**
@@ -150,8 +159,9 @@ define([
 
         if (this.stevecView >= options.content.length - 1) {
             this.prikaziOK();
-            this.$('.naprej').addClass('hidden');
+            this.disableNaprej();
         }
+        this.toggleNazaj();
     };
     /**
      * Ko se na viewju triggera nazaj se izvede ta funkcija.
@@ -172,14 +182,10 @@ define([
 
         if (this.stevecView < options.content.length - 1) {
             this.skrijOK();
-            this.$('.naprej').removeClass('hidden');
+            this.enableNaprej();
         }
 
-        if (this.stevecView === 0) {
-            this.$('.nazaj').addClass('hidden');
-        } else {
-            this.$('.nazaj').removeClass('hidden');
-        }
+        this.toggleNazaj();
     };
     /**
      * Prikaži gumbe Wizardviewja(Modala)
@@ -194,6 +200,23 @@ define([
      */
     WizardView.prototype.skrijOK = function () {
         this.$('.ok').addClass('hidden');
+    };
+    
+    WizardView.prototype.toggleNazaj = function () {
+        if (this.stevecView === 0) {
+            this.$('.nazaj').addClass('hidden');
+        } else {
+            this.$('.nazaj').removeClass('hidden');
+        }
+    };
+    WizardView.prototype.disableNaprej = function () {
+        this.$('.naprej').prop('disabled', true);
+        this.$('.naprej').attr('disabled', 'disabled');
+    };
+    
+    WizardView.prototype.enableNaprej = function () {
+        this.$('.naprej').prop('disabled', false);
+        this.$('.naprej').removeAttr('disabled');
     };
     return WizardView;
 });
