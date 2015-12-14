@@ -59,6 +59,11 @@ define([
     var tabNovi = [
         {name: i18next.t('ent.splosno'), event: 'splosni'}
     ];
+    
+    var tabSplosno = [
+        {name: i18next.t('ent.splosno'), event: 'splosni'},
+        {name: i18next.t('oseba.relacije'), event: 'relacije'}
+    ];
 
     var chPermission = Radio.channel('global');
 
@@ -135,7 +140,7 @@ define([
         Radio.channel('layout').command('setTitle', this.getNaslov());
         this.trigger('dodaj');
     };
-    
+
     /**
      * zamenjamo id z drugim id ali pa ga odstranimo
      * @returns {undefined}
@@ -370,7 +375,7 @@ define([
         var tabs = null;
         var pogled = this.options.pogled;
 
-        if (pogled === "kontaktna" || pogled === "modal") {
+        if (pogled === "kontaktna") {
             tabs = tabNovi;
         } else if (pogled === "vse") {
             tabs = tabVse;
@@ -380,14 +385,12 @@ define([
 
         var permission = chPermission.request('isGranted', "OsebniPodatki-read");
         if (!permission) {
-            tabs = tabNovi;
+            tabs = tabSplosno;
         }
 
-        if (this.isNew() || this.options.pogled === "modal") {
+        if (this.isNew() || pogled === "modal") {
             tabs = null;
-        }
-
-        if (pogled !== "modal") {
+        } else {
             this.renderTabs(tabs);
         }
     };
@@ -472,7 +475,7 @@ define([
             }
 
             var o = new OsebniView({
-                model: self.osebniModel             
+                model: self.osebniModel
             });
             self.regionOsebniPodatki.show(o);
         });
