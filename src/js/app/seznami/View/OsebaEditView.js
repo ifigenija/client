@@ -69,8 +69,6 @@ define([
         checkBeforeSave: true,
         regions: {
             regionOsebniPodatki: '.region-osebniPodatki',
-            regionNaslovi: '.region-naslovi',
-            regionTelefonske: '.region-telefonske',
             regionTabs: '.oseba-tabs',
             prilogeR: '.region-priloge',
             kontaktneOsebeR: '.region-kontaktneOsebe',
@@ -253,7 +251,6 @@ define([
         var tb = this.getToolbarModel();
         var butS = tb.getButton('doc-shrani');
         var butSD = tb.getButton('doc-shrani-dodaj');
-        var butP = tb.getButton('doc-preklici');
 
         if (butS && butS.get('disabled')) {
             butS.set({
@@ -264,12 +261,6 @@ define([
         if (butSD && butSD.get('disabled')) {
             butSD.set({
                 disabled: false
-            });
-        }
-
-        if (butS && !butS.get('disabled')) {
-            butP.set({
-                label: i18next.t('std.preklici')
             });
         }
 
@@ -398,9 +389,6 @@ define([
 
         if (pogled !== "modal") {
             this.renderTabs(tabs);
-
-            this.renderNaslovi();
-            this.renderTelefonske();
         }
     };
 
@@ -484,55 +472,9 @@ define([
             }
 
             var o = new OsebniView({
-                model: self.osebniModel
+                model: self.osebniModel             
             });
             self.regionOsebniPodatki.show(o);
-        });
-    };
-
-    /**
-     * Izris telefonskih
-     * @returns {undefined}
-     */
-    OsebaEditView.prototype.renderTelefonske = function () {
-        var self = this;
-        var disabled = false;
-
-        if (!this.model.get('id')) {
-            disabled = true;
-        }
-        require(['app/seznami/View/TelefonskaView'], function (View) {
-            var view = new View({
-                collection: self.model.telefonskeCollection,
-                dokument: self.model,
-                disabled: disabled,
-                zapirajFormo: true
-            });
-            self.regionTelefonske.show(view);
-            return view;
-        });
-    };
-
-    /**
-     * Izris naslovov
-     * @returns {undefined}
-     */
-    OsebaEditView.prototype.renderNaslovi = function () {
-        var self = this;
-        var disabled = false;
-
-        if (!this.model.get('id')) {
-            disabled = true;
-        }
-        require(['app/seznami/View/PostniNaslovView'], function (View) {
-            var view = new View({
-                collection: self.model.nasloviCollection,
-                dokument: self.model,
-                disabled: disabled,
-                zapirajFormo: true
-            });
-            self.regionNaslovi.show(view);
-            return view;
         });
     };
 

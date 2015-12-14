@@ -30,13 +30,7 @@
                 </div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane pnl-osebniPodatki region-osebniPodatki">
-            <div class="row">
-                <div class="region-telefonske col-md-6"></div>
-                <div class="region-naslovi col-md-6"></div>
-            </div>
-        </div>
-        <div role="tabpanel" class="tab-pane pnl-trrji region-trrji"></div>
+        <div role="tabpanel" class="tab-pane pnl-osebniPodatki region-osebniPodatki"></div>
         <div role="tabpanel" class="tab-pane pnl-relacije">
             <div class="row">
                 <div class="region-kontaktneOsebe col-md-6"></div>

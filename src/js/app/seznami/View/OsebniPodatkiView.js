@@ -33,7 +33,9 @@ define([
         schema: schema.toFormSchema().schema,
         regions: {
             regionForm: '.region-form',
-            regionTrrji: '.region-trrji'
+            regionTrrji: '.region-trrji',
+            regionNaslovi: '.region-naslovi',
+            regionTelefonske: '.region-telefonske'
         }
     });
 
@@ -41,6 +43,8 @@ define([
         this.listenToOnce(this.model, 'sync', function (coll) {
             this.renderForm();
             this.renderTrrji();
+            this.renderNaslovi();
+            this.renderTelefonske();
         });
     };
 
@@ -51,6 +55,8 @@ define([
         if (this.model.get('ime')) {
             this.renderForm();
             this.renderTrrji();
+            this.renderNaslovi();
+            this.renderTelefonske();
         }
     };
 
@@ -101,6 +107,42 @@ define([
                 zapirajFormo: true
             });
             self.regionTrrji.show(view);
+            return view;
+        });
+    };
+    
+    /**
+     * Izris telefonskih
+     * @returns {undefined}
+     */
+    OsebniPodatkiView.prototype.renderTelefonske = function () {
+        var self = this;
+        
+        require(['app/seznami/View/TelefonskaView'], function (View) {
+            var view = new View({
+                collection: self.model.telefonskeCollection,
+                dokument: self.model,
+                zapirajFormo: true
+            });
+            self.regionTelefonske.show(view);
+            return view;
+        });
+    };
+
+    /**
+     * Izris naslovov
+     * @returns {undefined}
+     */
+    OsebniPodatkiView.prototype.renderNaslovi = function () {
+        var self = this;
+        
+        require(['app/seznami/View/PostniNaslovView'], function (View) {
+            var view = new View({
+                collection: self.model.nasloviCollection,
+                dokument: self.model,
+                zapirajFormo: true
+            });
+            self.regionNaslovi.show(view);
             return view;
         });
     };
