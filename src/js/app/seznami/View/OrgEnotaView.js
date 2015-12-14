@@ -14,7 +14,8 @@ define([
     'formSchema!organizacijskaEnota',
     'formSchema!zaposlitev',
     'app/Max/Module/Backgrid',
-    'template!../tpl/orgEnota-form-simple.tpl'
+    'template!../tpl/orgEnota-form-simple.tpl',
+    'app/Max/Model/LookupModel'
 ], function (
         Radio,
         i18next,
@@ -31,7 +32,8 @@ define([
         schema,
         schemaZap,
         Backgrid,
-        template
+        template,
+        LookupModel
         ) {
 
     var tabsVsi = [{
@@ -64,29 +66,8 @@ define([
             {
                 cell: 'string',
                 editable: false,
-                label: i18next.t('zaposlitev.sifra'),
-                name: 'sifra',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('oseba.priimek'),
-                name: 'oseba.priimek',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('oseba.ime'),
-                name: 'oseba.ime',
-                sortable: true
-            },
-            {
-                cell: 'string',
-                editable: false,
-                label: i18next.t('oseba.psevdonim'),
-                name: 'oseba.psevdonim',
+                label: i18next.t('std.polnoIme'),
+                name: 'label',
                 sortable: true
             },
             {
@@ -104,27 +85,19 @@ define([
                 label: i18next.t('zaposlitev.status'),
                 name: 'status',
                 sortable: true
-            },
-            {
-                headerCell: 'number',
-                cell: 'date',
-                editable: false,
-                label: i18next.t('zaposlitev.zacetek'),
-                name: 'zacetek',
-                sortable: true
-            },
-            {
-                headerCell: 'number',
-                cell: 'date',
-                editable: false,
-                label: i18next.t('zaposlitev.konec'),
-                name: 'konec',
-                sortable: true
             }
         ]
     });
     OrgEnotaManager.prototype.initialize = function (options) {
-        this.seznam = new ZaposlitevModel.Collection();
+        var LM = LookupModel.extend({
+            setOrgEnota: function (orgEnota) {
+                this.orgEnota = orgEnota;
+                this.queryParams.organizacijskaenota = this.orgEnota.id;
+            }
+        });
+        this.seznam = new LM(null, {
+            entity: 'zaposlitev'
+        });
     };
     OrgEnotaManager.prototype.onRender = function () {
         this.showTree(null);
