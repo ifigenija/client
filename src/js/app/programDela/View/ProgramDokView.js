@@ -15,7 +15,7 @@ define([
     'marionette',
     'app/produkcija/Model/Sezona',
     'app/Max/View/Confirm',
-    'app/JobManager/View/PrintDialog',
+    'print-dialog',
     'app/Max/Module/Form',
     'template!../tpl/program-izpis.tpl',
     'app/bars',

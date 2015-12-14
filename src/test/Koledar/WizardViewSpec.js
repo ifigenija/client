@@ -80,7 +80,6 @@ define([
         });
 
         it('pravilno skrivanje btn ok', function () {
-            //imamo dva itema
             var wizardView = this.wizardView;
 
             this.wizardView.trigger('naprej');
@@ -90,6 +89,42 @@ define([
             this.wizardView.trigger('naprej');
             var $ok = wizardView.$('.ok.hidden');
             expect($ok.length).to.equal(0);
+        });
+        /**
+         * Prikaz gumbov pri prvem izrisanem viewju
+         * preklici: true
+         * nazaj: false
+         * naprej: true
+         * potrdi/ok: false
+         * @returns {undefined}
+         */
+        it('Prikaz gumbov pri prvem view', function () {
+            var wizardView = this.wizardView;
+            
+            var $nazaj = wizardView.$('.nazaj.hidden');
+            var $naprej = wizardView.$('.naprej.hidden');
+            expect($nazaj.length).to.equal(1);
+            expect($naprej.length).to.equal(0);
+        });
+        
+        /**
+         * Prikaz gumbov pri zadnjem izrisanem viewju
+         * preklici: true
+         * nazaj: true
+         * naprej: false
+         * potrdi/ok: true
+         * @returns {undefined}
+         */
+        it('prikaz gumbov pri zadnjem viewju', function () {
+            var wizardView = this.wizardView;
+            
+            this.wizardView.trigger('naprej');
+            this.wizardView.trigger('naprej');
+            
+            var $nazaj = wizardView.$('.nazaj.hidden');
+            var $naprej = wizardView.$('.naprej.hidden');
+            expect($nazaj.length).to.equal(0);
+            expect($naprej.length).to.equal(1);
         });
     });
 });

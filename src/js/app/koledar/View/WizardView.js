@@ -81,6 +81,10 @@ define([
             this.konec = options.konec || this.konec;
             this.title = options.title || i18next.t('std.naslov');
         }
+        
+        this.on('naprej', this.onNaprej, this);
+        this.on('nazaj', this.onNazaj, this);
+        
         this.stevecView = 0;
     };
     /**
@@ -111,7 +115,7 @@ define([
         }
 
         if (this.stevecView === 0) {
-            content.$('.nazaj').addClass('hidden');
+            this.$('.nazaj').addClass('hidden');
         }
 
         this.isRendered = true;
@@ -146,7 +150,7 @@ define([
 
         if (this.stevecView >= options.content.length - 1) {
             this.prikaziOK();
-            content.$('.naprej').addClass('hidden');
+            this.$('.naprej').addClass('hidden');
         }
     };
     /**
@@ -168,13 +172,13 @@ define([
 
         if (this.stevecView < options.content.length - 1) {
             this.skrijOK();
-            content.$('.naprej').removeClass('hidden');
+            this.$('.naprej').removeClass('hidden');
         }
 
         if (this.stevecView === 0) {
-            content.$('.nazaj').addClass('hidden');
+            this.$('.nazaj').addClass('hidden');
         } else {
-            content.$('.nazaj').removeClass('hidden');
+            this.$('.nazaj').removeClass('hidden');
         }
     };
     /**
