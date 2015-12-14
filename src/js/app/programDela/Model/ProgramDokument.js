@@ -614,10 +614,41 @@ define([
             var stIzvPonPrem = this.getVrednost('stIzvPonPrem');
             var stIzvPonPrej = this.getVrednost('stIzvPonPrej');
             var stIzvGostovanjInt = this.getVrednost('stIzvGostovanjInt');
+            var stIzvPonPrejKopr = this.getVrednost('stIzvPonPrejKopr');
+            var stIzvPonPrejKoprGost = this.getVrednost('stIzvPonPrejKoprGost');
+            var stIzvPonPrejKoprInt = this.getVrednost('stIzvPonPrejKoprInt');
+            var stIzvPonPrejKoprZamejo = this.getVrednost('stIzvPonPrejKoprZamejo');
+            var stIzvPonPremKoprGost = this.getVrednost('stIzvPonPremKoprGost');
+            var stIzvPonPremKoprInt = this.getVrednost('stIzvPonPremKoprInt');
+            var stIzvPonPremKoprZamejo = this.getVrednost('stIzvPonPremKoprZamejo');
+            var stObiskPonPrejGostKopr = this.getVrednost('stObiskPonPrejGostKopr');
+            var stObiskPonPrejKopr = this.getVrednost('stObiskPonPrejKopr');
+            var stObiskPonPrejKoprInt = this.getVrednost('stObiskPonPrejKoprInt');
+            var stObiskPonPrejZamejoKopr = this.getVrednost('stObiskPonPrejZamejoKopr');
+            var stObiskPonPremKoprInt = this.getVrednost('stObiskPonPremKoprInt');
+            var stObiskPonPremZamejoKopr = this.getVrednost('stObiskPonPremZamejoKopr');
+            var stObiskNekom = this.getVrednost('stObiskNekom');
+            var stObiskPonPremGostKopr = this.getVrednost('stObiskPonPremGostKopr');
+            var stIzvPremKopr = this.getVrednost('stIzvPremKopr');
+            var stIzvPonPremKopr = this.getVrednost('stIzvPonPremKopr');
+            var stObiskPremKopr = this.getVrednost('stObiskPremKopr');
+            var stObiskPonPremKopr = this.getVrednost('stObiskPonPremKopr');
 
-            var stVsehPredstav = stIzvPrem + stIzvPonPrem + stIzvPonPrej + stIzvGostovanjInt;
+            var stVsehPredstav = stIzvPrem + stIzvPonPrem + stIzvPonPrej;
             this.set('stVsehPredstav', stVsehPredstav);
 
+
+            var stVsehPredstavSKopr = stIzvPrem + stIzvPonPrem + stIzvPonPrej + stIzvPremKopr + stIzvPonPremKopr
+                    + stIzvPonPremKoprInt + stIzvPonPrejKopr + stIzvPonPrejKoprInt + stIzvPonPremKoprZamejo
+                    + stIzvPonPremKoprGost + stIzvPonPrejKoprZamejo + stIzvPonPrejKoprGost;
+            this.set('stVsehPredstavSKopr', stVsehPredstavSKopr);
+
+            var stObiskNekomSKopr = stObiskNekom + stObiskPremKopr + stObiskPonPremKopr + stObiskPonPremGostKopr
+                    + stObiskPonPremZamejoKopr + stObiskPonPremKoprInt + stObiskPonPrejKopr + stObiskPonPrejGostKopr
+                    + stObiskPonPrejZamejoKopr + stObiskPonPrejKoprInt;
+            this.set('stObiskNekomSKopr', stObiskNekomSKopr);
+
+            //
             //Programski sklop ena
             //število enot
             var stPremier = this.getVrednost('stPremier');

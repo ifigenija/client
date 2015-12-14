@@ -21,8 +21,16 @@
                 <td class="col-numbers">{{u "formatNumber" stVsehPredstav}}</td>
             </tr>
             <tr>
+                <td>{{t "kazalnik.stVsehPredstavSKopr"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stVsehPredstavSKopr}}</td>
+            </tr>
+            <tr>
                 <td>{{t "kazalnik.stObiskNekom"}}:</td>
                 <td class="col-numbers">{{u "formatNumber" stObiskNekom 0}}</td>
+            </tr>
+            <tr>
+                <td>{{t "kazalnik.stObiskNekomSKopr"}}:</td>
+                <td class="col-numbers">{{u "formatNumber" stObiskNekomSKopr 0}}</td>
             </tr>
             <tr>
                 <td>{{t "kazalnik.stProdVstopnic"}}:</td>
