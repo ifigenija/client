@@ -6,7 +6,7 @@ define([
     'i18next',
     'backbone-modal',
     'app/seznami/View/OsebaEditView',
-    'template!app/Dokument/tpl/form-simple.tpl'
+    'template!../tpl/oseba-modal.tpl'
 ], function (
         Radio,
         i18next,
