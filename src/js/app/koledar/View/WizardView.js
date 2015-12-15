@@ -74,8 +74,14 @@ define([
         }
     });
     WizardView.prototype.initialize = function (options) {
-        options.template = template;
         Modal.prototype.initialize.apply(this, arguments);
+
+        this.options = _.extend({
+            nazajText: i18next.t('std.nazaj'),
+            naprejText: i18next.t('std.naprej')
+        }, 
+        this.options, {template: template});
+
         if (!_.isArray(options.content)) {
             throw new 'Content naj bo array';
         } else {
@@ -104,15 +110,10 @@ define([
 
         var $el = this.$el;
         var options = this.options;
-        var content = options.content[this.stevecView];
-        //Create the modal container
         $el.html(options.template(options));
-        var $content = this.$content = $el.find('.modal-body');
-        //Insert the main content if it's a view
-        if (content.$el) {
-            content.render();
-            $el.find('.modal-body').html(content.$el);
-        }
+        
+        
+        this.renderView(this.stevecView);
 
         if (options.animate && this.stevecView === 0) {
             $el.addClass('fade');
@@ -123,21 +124,28 @@ define([
             this.disableNaprej();
         }
 
-        if (this.stevecView === 0) {
-            this.$('.nazaj').addClass('hidden');
-        }
+        this.toggleNazaj(this.stevecView);
 
         this.isRendered = true;
 
         return this;
     };
-
+    /**
+     * Viewji prožijo ready, ko lahko wizard nadaljuje z naslednjim korakom
+     * @returns {undefined}
+     */
     WizardView.prototype.onReady = function () {
         this.enableNaprej();
+        this.enableOK();
     };
 
+    /**
+     * Viewji prožijo not ready, da wizardview ne more nadaljevati z naslednjim korakom
+     * @returns {undefined}
+     */
     WizardView.prototype.onNotReady = function () {
         this.disableNaprej();
+        this.disableOK();
     };
 
     /**
@@ -147,21 +155,14 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.onNaprej = function () {
-        var $el = this.$el;
-        var options = this.options;
+        this.disableNaprej();
+        this.disableOK();
+
         this.stevecView++;
-        var content = options.content[this.stevecView];
+        this.renderView(this.stevecView);
 
-        if (content.$el) {
-            content.render();
-            $el.find('.modal-body').html(content.$el);
-        }
-
-        if (this.stevecView >= options.content.length - 1) {
-            this.prikaziOK();
-            this.disableNaprej();
-        }
-        this.toggleNazaj();
+        this.toggleNaprejOK(this.stevecView, this.options.content.length);
+        this.toggleNazaj(this.stevecView);
     };
     /**
      * Ko se na viewju triggera nazaj se izvede ta funkcija.
@@ -170,53 +171,84 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.onNazaj = function () {
+        this.enableNaprej();
+        this.enableOK();
+
+        this.stevecView--;
+        this.renderView(this.stevecView);
+
+        this.toggleNaprejOK(this.stevecView, this.options.content.length);
+        this.toggleNazaj(this.stevecView);
+    };
+
+    /**
+     * Render enega izmed podanih viewjev iz contenta
+     * @param {type} stevecView
+     * @returns {Modal@call;extend.prototype.renderView.content|backbone.marionette_L26.content|Marionette@call;_getValue.content|backbone.marionette_L35.content|backbone_L34.content|message.content}
+     */
+    WizardView.prototype.renderView = function (stevecView) {
         var $el = this.$el;
         var options = this.options;
-        this.stevecView--;
-        var content = options.content[this.stevecView];
+        var content = options.content[stevecView];
 
         if (content.$el) {
             content.render();
             $el.find('.modal-body').html(content.$el);
         }
 
-        if (this.stevecView < options.content.length - 1) {
-            this.skrijOK();
-            this.enableNaprej();
-        }
+        return content;
+    };
 
-        this.toggleNazaj();
-    };
     /**
-     * Prikaži gumbe Wizardviewja(Modala)
+     * Funkcija skrije ali prikaže gumb nazaj glede na trenutni števec viewjev
      * @returns {undefined}
      */
-    WizardView.prototype.prikaziOK = function () {
-        this.$('.ok').removeClass('hidden');
-    };
-    /**
-     * Skrij gumbe Wizardviewja(Modala)
-     * @returns {undefined}
-     */
-    WizardView.prototype.skrijOK = function () {
-        this.$('.ok').addClass('hidden');
-    };
-    
-    WizardView.prototype.toggleNazaj = function () {
-        if (this.stevecView === 0) {
+    WizardView.prototype.toggleNazaj = function (stevecView) {
+        if (stevecView === 0) {
             this.$('.nazaj').addClass('hidden');
         } else {
             this.$('.nazaj').removeClass('hidden');
         }
     };
-    WizardView.prototype.disableNaprej = function () {
-        this.$('.naprej').prop('disabled', true);
-        this.$('.naprej').attr('disabled', 'disabled');
+
+    WizardView.prototype.toggleNaprejOK = function (stevecView, stView) {
+        if (stevecView < stView - 1) {
+            this.skrijOK();
+            this.prikaziNaprej();
+        } else {
+            this.prikaziOK();
+            this.skrijNaprej();
+        }
     };
-    
+
+    WizardView.prototype.prikaziOK = function () {
+        this.$('.ok').removeClass('hidden');
+    };
+    WizardView.prototype.skrijOK = function () {
+        this.$('.ok').addClass('hidden');
+    };
+    WizardView.prototype.disableOK = function () {
+        this.$('.ok').addClass('disabled');
+    };
+
+    WizardView.prototype.enableOK = function () {
+        this.$('.ok').removeClass('disabled');
+    };
+
+    WizardView.prototype.disableNaprej = function () {
+        this.$('.naprej').addClass('disabled');
+    };
+
     WizardView.prototype.enableNaprej = function () {
-        this.$('.naprej').prop('disabled', false);
-        this.$('.naprej').removeAttr('disabled');
+        this.$('.naprej').removeClass('disabled');
+    };
+
+    WizardView.prototype.prikaziNaprej = function () {
+        this.$('.naprej').removeClass('hidden');
+    };
+
+    WizardView.prototype.skrijNaprej = function () {
+        this.$('.naprej').addClass('hidden');
     };
     return WizardView;
 });

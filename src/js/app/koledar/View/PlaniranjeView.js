@@ -4,6 +4,7 @@
 define([
     'radio',
     'i18next',
+    'backbone',
     'marionette',
     'moment',
     'app/Max/View/Toolbar',
@@ -12,7 +13,8 @@ define([
     './KoledarView',
     //'./DogodekModal',
     './WizardView',
-    './IzbiraView',
+    './IzbiraRazredDogodkaView',
+    './IzbiraDatumView',
     './DogodekView',
     './VajaView',
     './PredstavaView',
@@ -22,6 +24,7 @@ define([
 ], function (
         Radio,
         i18next,
+        Backbone,
         Marionette,
         moment,
         Toolbar,
@@ -31,6 +34,7 @@ define([
         //DogodekModal,
         WizardView,
         IzbiraView,
+        IzbiraDatumaView,
         DogodekView,
         VajaView,
         PredstavaView,
@@ -122,30 +126,32 @@ define([
      * @returns {undefined}
      */
     PlaniranjeView.prototype.onDodaj = function () {
-        var self = this;
-        
-        var iv1 = new IzbiraView();
-        var iv2 = new IzbiraView();
-        var wizardView = new WizardView({
-            content:[
-                iv1,
-                iv2
-            ],
-            nazajText: 'nazaj',
-            naprejText:'naprej',
-            okText:'potrdi',
-            cancelText:'preklici'
+        var model = new Backbone.Model();
+
+        var iv1 = new IzbiraView({
+            model: model
         });
         
-        wizardView.open();
+        var idv2 = new IzbiraDatumaView({
+            model: model
+        });
 
-//        DogodekModal({
-//            zacetek: moment(),
-//            konec: moment(),
-//            cb: function () {
-//                self.onUredi.apply(self, arguments);
-//            }
-//        });
+        var wizardView = new WizardView({
+            content: [
+                iv1,
+                idv2
+            ],
+            nazajText: 'nazaj',
+            naprejText: 'naprej',
+            okText: 'potrdi',
+            cancelText: 'preklici'
+        });
+
+        var zakljucek = function () {
+            console.log(model);
+        };
+
+        wizardView.open(zakljucek);
     };
 
     PlaniranjeView.prototype.renderRazredDogodek = function (razredModel, TipDogView) {

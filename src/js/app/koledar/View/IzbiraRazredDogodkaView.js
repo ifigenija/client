@@ -21,7 +21,7 @@ define([
         TerminiStoritev
         ) {
 
-    var IzbiraView = Marionette.ItemView.extend({
+    var IzbiraRazredDogodkaView = Marionette.ItemView.extend({
         template: izbiraTpl,
         triggers: {
             'click .dogodek-vaja': 'vaja',
@@ -33,11 +33,11 @@ define([
         }
     });
 
-    IzbiraView.prototype.initialize = function (options) {
+    IzbiraRazredDogodkaView.prototype.initialize = function (options) {
         this.model = options.model || this.model;
     };
 
-    IzbiraView.prototype.initRazredDogodka = function (options) {
+    IzbiraRazredDogodkaView.prototype.initRazredDogodka = function (options) {
         var model = this.model = new RazredDogodek({
             view: options.view,
             zacetek: this.zacetek,
@@ -49,7 +49,7 @@ define([
         return model;
     };
     
-    IzbiraView.prototype.onVaja = function () {
+    IzbiraRazredDogodkaView.prototype.onVaja = function () {
         this.initRazredDogodka({
             view: 'vaja',
             title: 'Vaja',
@@ -57,7 +57,7 @@ define([
         });
         this.trigger('ready');
     };
-    IzbiraView.prototype.onPredstava = function () {
+    IzbiraRazredDogodkaView.prototype.onPredstava = function () {
         this.initRazredDogodka({
             view: 'predstava',
             title: 'Predstava',
@@ -65,7 +65,7 @@ define([
         });
         this.trigger('ready');
     };
-    IzbiraView.prototype.onZasedenost = function () {
+    IzbiraRazredDogodkaView.prototype.onZasedenost = function () {
         var model = this.model = new TerminiStoritev.prototype.model();
 
         if (this.zacetek) {
@@ -74,15 +74,15 @@ define([
         model.set('planiranKonec', this.konec);
         this.trigger('ready');
     };
-    IzbiraView.prototype.onGostovanje = function () {
+    IzbiraRazredDogodkaView.prototype.onGostovanje = function () {
         this.initRazredDogodka({
             view: 'gostovanje',
             title: 'Gostovanje',
             status: '100s'
-        });this.trigger('ready');
-        
+        });
+        this.trigger('ready');        
     };
-    IzbiraView.prototype.onSplosni = function () {
+    IzbiraRazredDogodkaView.prototype.onSplosni = function () {
         this.initRazredDogodka({
             view: 'dogodekSplosni',
             title: 'Splošni',
@@ -90,7 +90,7 @@ define([
         });
         this.trigger('ready');
     };
-    IzbiraView.prototype.onTehnicni = function () {
+    IzbiraRazredDogodkaView.prototype.onTehnicni = function () {
         this.initRazredDogodka({
             view: 'dogodekTehnicni',
             title: 'Tehnični',
@@ -99,5 +99,5 @@ define([
         this.trigger('ready');
     };
 
-    return IzbiraView;
+    return IzbiraRazredDogodkaView;
 });

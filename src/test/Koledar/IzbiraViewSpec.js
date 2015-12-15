@@ -1,6 +1,6 @@
 define([
     'jquery',
-    'app/koledar/View/IzbiraView'
+    'app/koledar/View/IzbiraRazredDogodkaView'
 ], function (
         $,
         IzbiraView

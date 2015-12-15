@@ -1,12 +1,10 @@
 define([
     'jquery',
-    'app/koledar/View/IzbiraView',
-    'app/koledar/View/IzbiraUprizoritveView',
+    'app/koledar/View/IzbiraRazredDogodkaView',
     'app/koledar/View/WizardView'
 ], function (
         $,
         IzbiraView,
-        IzbiraUprizoritveView,
         WizardView
         ) {
 
@@ -16,13 +14,13 @@ define([
             this.NazajSpy = sinon.spy(WizardView.prototype, 'onNazaj');
 
             var izbiraView = this.izbiraView = new IzbiraView();
-            var izbiraUprizoritveView = this.izbiraUprizoritveView = new IzbiraUprizoritveView();
+            var izbiraView2 = this.izbiraView2 = new IzbiraView();
             var izbiraView3 = this.izbiraView3 = new IzbiraView();
 
             var wizard = this.wizardView = new WizardView({
                 content: [
                     izbiraView,
-                    izbiraUprizoritveView,
+                    izbiraView2,
                     izbiraView3
                 ],
                 animate: true
@@ -49,17 +47,17 @@ define([
 
         it('on ready', function () {
             this.izbiraView.trigger('ready');
-            var $ok = this.wizardView.$('.ok.hidden');
+            var $ok = this.wizardView.$('.naprej.disabled');
             expect($ok.length).to.equal(0);
         });
         it('on not:ready', function () {
             this.izbiraView.trigger('ready');
-            var $ok = this.wizardView.$('.ok.hidden');
-            expect($ok.length).to.equal(0);
+            var $naprej = this.wizardView.$('.naprej.disabled');
+            expect($naprej.length).to.equal(0);
             
             this.izbiraView.trigger('not:ready');
-            var $ok = this.wizardView.$('.ok.hidden');
-            expect($ok.length).to.equal(1);
+            $naprej = this.wizardView.$('.naprej.disabled');
+            expect($naprej.length).to.equal(1);
         });
         it('on naprej', function () {
             this.wizardView.trigger('naprej');
@@ -103,8 +101,36 @@ define([
             
             var $nazaj = wizardView.$('.nazaj.hidden');
             var $naprej = wizardView.$('.naprej.hidden');
+            var $cancel = wizardView.$('.cancel.hidden');
+            var $ok = wizardView.$('.ok.hidden');
+            
             expect($nazaj.length).to.equal(1);
             expect($naprej.length).to.equal(0);
+            expect($cancel.length).to.equal(0);
+            expect($ok.length).to.equal(1);
+        });
+        
+        /**
+         * Prikaz gumbov pri vmesnem viewju
+         * preklici: true
+         * nazaj: true
+         * naprej: true
+         * potrdi/ok: false
+         * @returns {undefined}
+         */
+        it('Prikaz gumbov pri prvem view', function () {
+            var wizardView = this.wizardView;            
+            this.wizardView.trigger('naprej');
+            
+            var $nazaj = wizardView.$('.nazaj.hidden');
+            var $naprej = wizardView.$('.naprej.hidden');
+            var $cancel = wizardView.$('.cancel.hidden');
+            var $ok = wizardView.$('.ok.hidden');
+            
+            expect($nazaj.length).to.equal(0);
+            expect($naprej.length).to.equal(0);
+            expect($cancel.length).to.equal(0);
+            expect($ok.length).to.equal(1);
         });
         
         /**
@@ -116,15 +142,19 @@ define([
          * @returns {undefined}
          */
         it('prikaz gumbov pri zadnjem viewju', function () {
-            var wizardView = this.wizardView;
-            
+            var wizardView = this.wizardView;            
             this.wizardView.trigger('naprej');
             this.wizardView.trigger('naprej');
             
             var $nazaj = wizardView.$('.nazaj.hidden');
             var $naprej = wizardView.$('.naprej.hidden');
+            var $cancel = wizardView.$('.cancel.hidden');
+            var $ok = wizardView.$('.ok.hidden');
+            
             expect($nazaj.length).to.equal(0);
             expect($naprej.length).to.equal(1);
+            expect($cancel.length).to.equal(0);
+            expect($ok.length).to.equal(0);
         });
     });
 });
