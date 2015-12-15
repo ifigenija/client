@@ -65,13 +65,17 @@ define([
         this.on('change', this.nadaljuj, this);
     };
 
-    IzbriraUprizoritveView.prototype.render = function () {
+    IzbriraUprizoritveView.prototype.render = function (options) {
         Form.prototype.render.apply(this, arguments);
         if (this.zacetek) {
             this.fields.zacetek.editor.setValue(this.zacetek);
         }
         if (this.konec) {
             this.fields.konec.editor.setValue(this.konec);
+        }
+        
+        if(options && options.wizardModel){
+            this.wizardModel = options.wizardModel || new Backbone.Model();
         }
         this.nadaljuj();
     };
@@ -81,9 +85,9 @@ define([
         var konec = this.fields.konec.getValue();
 
         if (zacetek && konec) {
-            this.model.set('zacetek', zacetek);
-            this.model.set('konec', konec);
-            this.trigger('ready');
+            this.wizardModel.set('zacetek', zacetek);
+            this.wizardModel.set('konec', konec);
+            this.trigger('ready', this.wizardModel);
         } else {
             this.trigger('not:ready');
         }

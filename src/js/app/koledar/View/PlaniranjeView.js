@@ -148,7 +148,7 @@ define([
         });
 
         var zakljucek = function () {
-            console.log(model);
+            console.log(wizardView.wizardModel);
         };
 
         wizardView.open(zakljucek);

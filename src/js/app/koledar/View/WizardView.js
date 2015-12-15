@@ -100,6 +100,10 @@ define([
         this.on('nazaj', this.onNazaj, this);
 
         this.stevecView = 0;
+        
+        if(options && options.model){
+            this.wizardModel = options.model || new Backbone.Model();
+        }
     };
     /**
      * renderiramo prvi vju iz polja content
@@ -134,9 +138,10 @@ define([
      * Viewji prožijo ready, ko lahko wizard nadaljuje z naslednjim korakom
      * @returns {undefined}
      */
-    WizardView.prototype.onReady = function () {
+    WizardView.prototype.onReady = function (model) {
         this.enableNaprej();
         this.enableOK();
+        this.wizardModel = model;
     };
 
     /**
@@ -192,7 +197,9 @@ define([
         var content = options.content[stevecView];
 
         if (content.$el) {
-            content.render();
+            content.render({
+                wizardModel: this.wizardModel
+            });
             $el.find('.modal-body').html(content.$el);
         }
 

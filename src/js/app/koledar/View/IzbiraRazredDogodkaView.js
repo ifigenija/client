@@ -48,14 +48,13 @@ define([
 
         return model;
     };
-    
     IzbiraRazredDogodkaView.prototype.onVaja = function () {
         this.initRazredDogodka({
             view: 'vaja',
             title: 'Vaja',
             status: '100s'
         });
-        this.trigger('ready');
+        this.trigger('ready', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onPredstava = function () {
         this.initRazredDogodka({
@@ -63,7 +62,7 @@ define([
             title: 'Predstava',
             status: '100s'
         });
-        this.trigger('ready');
+        this.trigger('ready', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onZasedenost = function () {
         var model = this.model = new TerminiStoritev.prototype.model();
@@ -72,7 +71,7 @@ define([
             model.set('planiranZacetek', this.zacetek);
         }
         model.set('planiranKonec', this.konec);
-        this.trigger('ready');
+        this.trigger('ready', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onGostovanje = function () {
         this.initRazredDogodka({
@@ -80,7 +79,7 @@ define([
             title: 'Gostovanje',
             status: '100s'
         });
-        this.trigger('ready');        
+        this.trigger('ready', this.model);        
     };
     IzbiraRazredDogodkaView.prototype.onSplosni = function () {
         this.initRazredDogodka({
@@ -88,7 +87,7 @@ define([
             title: 'Splošni',
             status: '100s'
         });
-        this.trigger('ready');
+        this.trigger('ready', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onTehnicni = function () {
         this.initRazredDogodka({
@@ -96,7 +95,7 @@ define([
             title: 'Tehnični',
             status: '100s'
         });
-        this.trigger('ready');
+        this.trigger('ready', this.model);
     };
 
     return IzbiraRazredDogodkaView;
