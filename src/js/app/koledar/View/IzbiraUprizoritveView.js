@@ -7,17 +7,23 @@ define([
     'app/bars',
     'backbone',
     'marionette',
-    'app/Max/Module/Form'
+    'template!../tpl/izbira-upr.tpl'
 ], function (
         Radio,
         i18next,
         Handlebars,
         Backbone,
         Marionette,
-        Form
+        tpl
         ) {
-    var IzbriraUprizoritveView = Marionette.LayoutView.extend({});
-
+    var IzbriraUprizoritveView = Marionette.LayoutView.extend({
+        template: tpl,
+        regions: {
+            uprizoritevR: '.region-uprizoritev',
+            vzporedniceR: '.region-vzporednice',
+            osebeR: '.region-osebe'
+        }
+    });
 
     return IzbriraUprizoritveView;
 });
