@@ -44,12 +44,12 @@ define([
         }
     };
 
-    var IzbriraUprizoritveView = Form.extend({
+    var IzbiraDatumView = Form.extend({
         template: Handlebars.compile('<form><div data-fields="zacetek"></div><div data-fields="konec"></div></form>'),
         schema: sch
     });
 
-    IzbriraUprizoritveView.prototype.initialize = function (options) {
+    IzbiraDatumView.prototype.initialize = function (options) {
         Form.prototype.initialize.apply(this, arguments);
         
         if (options && options.model) {
@@ -65,7 +65,7 @@ define([
         this.on('change', this.nadaljuj, this);
     };
 
-    IzbriraUprizoritveView.prototype.render = function (options) {
+    IzbiraDatumView.prototype.render = function (options) {
         Form.prototype.render.apply(this, arguments);
         if (this.zacetek) {
             this.fields.zacetek.editor.setValue(this.zacetek);
@@ -80,7 +80,7 @@ define([
         this.nadaljuj();
     };
 
-    IzbriraUprizoritveView.prototype.nadaljuj = function () {
+    IzbiraDatumView.prototype.nadaljuj = function () {
         var zacetek = this.fields.zacetek.getValue();
         var konec = this.fields.konec.getValue();
 
@@ -93,5 +93,5 @@ define([
         }
     };
 
-    return IzbriraUprizoritveView;
+    return IzbiraDatumView;
 });

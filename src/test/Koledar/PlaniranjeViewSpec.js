@@ -3,17 +3,17 @@
  */
 
 define([
-    'backbone',
-    'app/koledar/Model/Dogodki',
     'jquery',
-    'text!./fixtures/terminiStoritve.json',
-    'app/koledar/View/PlaniranjeView'
+    'backbone',
+    'app/koledar/Model/RazredDogodek',
+    'app/koledar/View/PlaniranjeView',
+    'text!./fixtures/dogodekModelFixture.json'
 ], function (
-        Backbone,
-        Dogodki,
         $,
-        collFixture,
-        PlaniranjeView
+        Backbone,
+        RazredDogodek,
+        PlaniranjeView,
+        modelFixture
         ) {
 
     describe("Planiranje View", function () {
@@ -28,6 +28,9 @@ define([
         });
 
         beforeEach(function () {
+            var fixture = JSON.parse(modelFixture);
+            this.model = fixture;
+            
             var view = this.view = new PlaniranjeView();
             view.render();
         });
@@ -61,16 +64,14 @@ define([
             $dodaj.click();
 
             expect(dodajSpy).to.have.been.called;
-
         });
 
         it('posluša prikazi:dogodek', function () {
             var spy = sinon.spy();
             this.view.koledarView.on('prikazi:dogodek', spy);
+
+            var model = new RazredDogodek(this.model);
             
-            var model = new Dogodki.prototype.model({
-                view: 'vaja'
-            });
             this.view.koledarView.trigger('prikazi:dogodek', model);
 
             expect(spy).called;

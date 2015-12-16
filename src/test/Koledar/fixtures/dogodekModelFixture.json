@@ -1,0 +1,33 @@
+{
+    "id": "00200000-5671-32a8-83e2-bfb6579e1267",
+    "zaporedna": 0,
+    "porocilo": null,
+    "tipvaje": null,
+    "dogodek": {
+        "id": "00180000-5671-32a8-6d03-8293604400ff",
+        "allDay": false,
+        "zacetek": "2015-12-17T10:45:12+0100",
+        "konec": "2015-12-17T10:45:12+0100",
+        "status": "100s",
+        "razred": "200s",
+        "termin": null,
+        "title": "Smoletov vrt : Vaje",
+        "predstava": null,
+        "zasedenost": null,
+        "vaja": "00200000-5671-32a8-83e2-bfb6579e1267",
+        "gostovanje": null,
+        "splosni": null,
+        "tehnicni": null,
+        "prostor": null,
+        "terminiStoritve": [],
+        "prodajaPredstave": [],
+        "sezona": null
+    },
+    "uprizoritev": "000e0000-5671-0624-147f-4790692fa654",
+    "zacetek": "2015-12-17T10:45:12+0100",
+    "konec": "2015-12-17T10:45:12+0100",
+    "prostor": null,
+    "sezona": null,
+    "title": "Smoletov vrt : Vaje",
+    "status": "100s"
+}

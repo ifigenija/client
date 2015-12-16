@@ -31,12 +31,14 @@ define([
         beforeEach(function () {
             var model = this.models[0];
             
+            this.urediSpy = sinon.spy(SodelujociView.prototype, 'renderUredi');
             var view = this.view = new SodelujociView({
                 uprizoritev: model
             });
             view.render();
         });
         afterEach(function () {
+            this.urediSpy.restore();
         });
 
         /**
@@ -59,7 +61,9 @@ define([
         });
 
         it('poslušanje renderUredi', function () {
-            expect(true).to.be.false;
+            this.view.umetnikiView.trigger('render:uredi');
+            
+            expect(this.urediSpy).to.have.been.called;
         });
     });
 });

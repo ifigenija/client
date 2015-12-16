@@ -25,5 +25,26 @@ define([
         }
     });
 
+    IzbriraUprizoritveView.prototype.render = function (options) {
+        if (options && options.wizardModel) {
+            this.wizardModel = options.wizarfModel || new Backbone.Model();
+        }
+    };
+
+    IzbriraUprizoritveView.prototype.onRender = function (options) {
+        this.renderUprizoritev();
+        this.renderVzporednice();
+        this.renderOsebe();
+    };
+    IzbriraUprizoritveView.prototype.renderUprizoritev = function () {
+        this.uprizoritevR.show();
+    };
+    IzbriraUprizoritveView.prototype.renderVzporednice = function () {
+        this.vzporedniceR.show();
+    };
+    IzbriraUprizoritveView.prototype.renderOsebe = function () {
+        this.osebeR.show();
+    };
+
     return IzbriraUprizoritveView;
 });

@@ -11,7 +11,6 @@ define([
     'template!../tpl/planiranje.tpl',
     '../Model/Dogodki',
     './KoledarView',
-    //'./DogodekModal',
     './WizardView',
     './IzbiraRazredDogodkaView',
     './IzbiraDatumView',
@@ -31,7 +30,6 @@ define([
         tpl,
         Dogodki,
         KoledarView,
-        //DogodekModal,
         WizardView,
         IzbiraView,
         IzbiraDatumaView,
@@ -99,6 +97,11 @@ define([
         this.onUredi(model);
     };
 
+    /**
+     * Vhodni parameter model je razredDogodka
+     * @param {type} model
+     * @returns {undefined}
+     */
     PlaniranjeView.prototype.onUredi = function (model) {
         var razred = model.get('dogodek').razred;
         if (razred === '100s') {
@@ -131,7 +134,7 @@ define([
         var iv1 = new IzbiraView({
             model: model
         });
-        
+
         var idv2 = new IzbiraDatumaView({
             model: model
         });

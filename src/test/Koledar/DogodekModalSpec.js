@@ -24,11 +24,15 @@ define([
         });
 
         beforeEach(function () {
-            var view = this.view = DogodekModal();
+            this.potrdiSpy = sinon.spy();
+            var view = this.view = DogodekModal({
+                cb: this.potrdiSpy
+            });
             this.content = this.view.options.content;
         });
 
         afterEach(function () {
+            this.potrdiSpy = null;
         });
 
         it('renderira region izbira', function () {
@@ -68,25 +72,15 @@ define([
 
             $region = this.content.$('.dogodek-region-podrobno:empty');
             expect($region.length).to.equal(0);
-        });     
-        
-        it('proži callback', function () {
-            
-            var potrdiSpy = sinon.spy();
-            
-            var view = DogodekModal({
-                cb: potrdiSpy
-            });
-            var content = view.options.content;
-            
-            var $region = content.$('.dogodek-region-podrobno:empty');
-            expect($region.length).to.equal(1);
+        });
 
-            var $gumb = content.$('.dogodek-tehnicni');
-            expect($gumb.length).to.equal(1);
-            $gumb.click();
-            
-            expect(potrdiSpy).to.have.been.called;
+        it('proži callback', function () {
+//            var $ok = this.view.$('.ok');
+//            expect($ok.length).to.equal(1);
+//            $ok.click();
+//
+//            expect(this.potrdiSpy).to.have.been.called;
+            expect(true).to.equal(false);
         });
     });
 });

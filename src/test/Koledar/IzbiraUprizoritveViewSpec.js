@@ -28,6 +28,7 @@ define([
             expect($vzp.length).to.equal(1);
             expect($osebe.length).to.equal(1);
         });
+        
         it('posluša selected', function () {
             this.view.vzporedniceView.trigger('selected');
             expect(this.selectedSpy).to.have.been.called;

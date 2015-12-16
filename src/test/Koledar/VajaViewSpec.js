@@ -55,11 +55,11 @@ define([
 
         it('proži prikaz koledar prostorov', function () {
             var $gumb = this.view.$('.prikazi-koledar');
-            expect($gumb).to.not.be.null;
+            expect($gumb.length).to.equal(1);;
 
             var koledarSpy = sinon.spy();
 
-            this.view.on('koledar:prostor', koledarSpy);
+            this.view.on('prikazi:koledar:prostor', koledarSpy);
 
             $gumb.click();
 
