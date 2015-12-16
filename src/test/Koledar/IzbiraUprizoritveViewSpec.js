@@ -8,8 +8,8 @@ define([
 
     describe("IzbiraUprizoritveView", function () {
         beforeEach(function () {
-            this.selectedSpy = sinon.spy(IzbiraUprizoritveView, 'onSelected');
-            this.changeSpy = sinon.spy(IzbiraUprizoritveView, 'onChange');
+            this.selectedSpy = sinon.spy(IzbiraUprizoritveView.prototype, 'onSelected');
+            this.changeSpy = sinon.spy(IzbiraUprizoritveView.prototype, 'onChange');
             
             this.view = new IzbiraUprizoritveView();
             this.view.render();

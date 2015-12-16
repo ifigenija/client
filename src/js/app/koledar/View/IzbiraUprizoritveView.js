@@ -45,6 +45,13 @@ define([
     IzbriraUprizoritveView.prototype.renderOsebe = function () {
         this.osebeR.show();
     };
+    
+    IzbriraUprizoritveView.prototype.onSelected = function () {
+        this.osebeR.show();
+    };
+    IzbriraUprizoritveView.prototype.onChange = function () {
+        this.osebeR.show();
+    };
 
     return IzbriraUprizoritveView;
 });

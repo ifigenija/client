@@ -36,6 +36,22 @@ define([
         LookupModel
         ) {
 
+    var LM = LookupModel.extend({
+        odstraniOstale: function (orgEnota) {
+            var modeli = [];
+            for (var id in this.models) {
+                var model = this.models[id];
+                var OEID = model.get('organizacijskaEnota.id');
+                var OEID2 = orgEnota.get('id');
+                if (OEID !== OEID2) {
+                    modeli.push(model);
+                }
+            }
+
+            this.remove(modeli);
+        }
+    });
+
     var tabsVsi = [{
             name: i18next.t('orgEnota.title'),
             event: 'show:form'
@@ -89,12 +105,6 @@ define([
         ]
     });
     OrgEnotaManager.prototype.initialize = function (options) {
-        var LM = LookupModel.extend({
-            setOrgEnota: function (orgEnota) {
-                this.orgEnota = orgEnota;
-                this.queryParams.organizacijskaenota = this.orgEnota.id;
-            }
-        });
         this.seznam = new LM(null, {
             entity: 'zaposlitev'
         });
@@ -118,7 +128,10 @@ define([
     };
     OrgEnotaManager.prototype.onTreeItemSelected = function (view) {
         this.selected = view;
-        this.seznam.setOrgEnota(this.selected.model);
+
+        this.seznam = new LM(null, {
+            entity: 'zaposlitev'
+        });
 
         var tabs = null;
         if (!this.selected.model.get('id')) {
@@ -130,14 +143,26 @@ define([
     };
     OrgEnotaManager.prototype.onShowZaposleni = function () {
         var self = this;
-        var zaposleniGrid = new PaginatedGrid({
-            collection: this.seznam,
-            columns: this.columns
-        });
-        this.seznam.getFirstPage({
-            reset: true
-        });
-        self.detailR.show(zaposleniGrid);
+        if (this.seznam.length === 0) {
+            this.seznam.fetch({
+                success: function () {
+                    self.seznam.odstraniOstale(self.selected.model);
+
+                    var zaposleniGrid = new PaginatedGrid({
+                        collection: self.seznam,
+                        columns: self.columns
+                    });
+                    self.detailR.show(zaposleniGrid);
+                }
+            });
+        } else {
+            self.seznam.odstraniOstale(self.selected.model);
+            var zaposleniGrid = new PaginatedGrid({
+                collection: self.seznam,
+                columns: self.columns
+            });
+            self.detailR.show(zaposleniGrid);
+        }
     };
     OrgEnotaManager.prototype.onShowZapisi = function () {
         var view = new ZapisiLayout({
