@@ -32,7 +32,7 @@ define([
         ZapisiLayout,
         SodelujociView
         ) {
-    
+
     var tabVse = [
         {name: i18next.t('dogodek.title'), event: 'dogodek'},
         {name: i18next.t('dogodek.razred'), event: 'razred'},
@@ -42,7 +42,11 @@ define([
     var tabNovi = [
         {name: i18next.t('dogodek.title'), event: 'dogodek'}
     ];
-
+    /**
+     * Dogodekview namenjen prikazu dogodka in razreda dogodka
+     * 
+     * @type @exp;DokumentView@call;extend
+     */
     var DogodekView = DokumentView.extend({
         template: dokumentTpl,
         formTemplate: dogodekTpl,
@@ -60,6 +64,16 @@ define([
         }
     });
 
+    DogodekView.prototype.posodobiUrlNaslov = function () {
+    };
+
+    /**
+     * 
+     * @param {Array} options
+     * @param {View} options.TipDogView, namenjen prikazu tipa dogodka
+     * @param {model} options.TipDogModel model, ki bo uporabljen v tipDogView
+     * @returns {undefined}
+     */
     DogodekView.prototype.initialize = function (options) {
         this.schema = options.schema || this.schema;
         this.TipDogView = options.TipDogView || this.TipDogView;
@@ -72,11 +86,11 @@ define([
      */
     DogodekView.prototype.onRender = function () {
         var chPermission = Radio.channel('global');
-        
+
         var tabs = tabVse;
         this.renderTabs(tabs);
     };
-    
+
     /**
      * deselect taba 
      * @returns {undefined}
@@ -94,7 +108,7 @@ define([
         this.tabsR.show(this.tabControl);
         return this.tabControl;
     };
-    
+
     /**
      * Klik na splošni tab
      * @returns {undefined}
@@ -140,10 +154,10 @@ define([
         this.sodelujociR.show(view);
     };
 
-    DogodekView.prototype.renderRazredDogodka = function () {        
+    DogodekView.prototype.renderRazredDogodka = function () {
         var view = new this.TipDogView({
             model: this.tipDogModel
-        });        
+        });
         this.razredDogodkaR.show(view);
     };
 

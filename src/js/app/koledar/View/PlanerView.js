@@ -3,121 +3,306 @@
  */
 
 define(['marionette',
+    'backbone',
     'moment',
     'underscore',
     'jquery',
-    'template!../tpl/calendar-layout.tpl',
-    'fullcalendar',
-    'fc-schedule'
+    '../Model/PlanerTeden',
+    'app/Max/Module/Form',
+    '../Model/Dogodki',
+    '../Model/RazredDogodek',
+    './DogodekView',
+    './VajaView',
+    './PredstavaView',
+    './GostovanjeView',
+    './SplosniView',
+    './TehnicniView',
+    'template!../tpl/planer-layout.tpl',
+    'template!../tpl/planer-dan.tpl',
+    'template!../tpl/planer-dogodek.tpl',
+    'template!../tpl/planer-termin.tpl',
+    'template!../tpl/planer-dogodkidan.tpl'
 ], function (Marionette,
+        Backbone,
         moment,
         _,
         $,
-        tpl) {
+        PlanerTeden,
+        Form,
+        Dogodki,
+        RazredDogodek,
+        DogodekView,
+        VajaView,
+        PredstavaView,
+        GostovanjeView,
+        SplosniView,
+        TehnicniView,
+        tpl,
+        tplDan,
+        tplDogodek,
+        tplTermin,
+        tplDogodkiDan
+        ) {
 
+    /**
+     * Prikazuje posamezen dogodek 
+     * @type @exp;Marionette@pro;ItemView@call;extend
+     */
+    var DogodekItemView = Marionette.ItemView.extend({
+        className: 'planer-dogodek',
+        template: tplDogodek,
+        triggers: {
+            'click': 'prikazi'
+        },
+        onPrikazi: function () {
+            var dogodekModel = this.model;
+            var razred = dogodekModel.get('razred');
+            var modelT;
+
+            if (razred === '100s') {
+                modelT = new RazredDogodek({
+                    id: dogodekModel.get('predstava'),
+                    view: 'predstava'
+                });
+            } else if (razred === '200s') {
+                modelT = new RazredDogodek({
+                    id: dogodekModel.get('vaja'),
+                    view: 'vaja'
+                });
+            } else if (razred === '300s') {
+                modelT = new RazredDogodek({
+                    id: dogodekModel.get('gostovanje'),
+                    view: 'gostovanje'
+                });
+
+            } else if (razred === '400s') {
+                modelT = new RazredDogodek({
+                    id: dogodekModel.get('splosni'),
+                    view: 'dogodekSplosni'
+                });
+
+            } else if (razred === '500s') {
+
+            } else if (razred === '600s') {
+                modelT = new RazredDogodek({
+                    id: dogodekModel.get('tehnicni'),
+                    view: 'dogodekTehnicni'
+                });
+
+            }
+            var self = this;
+            modelT.fetch({
+                success: function () {
+                    self.trigger('prikazi:dogodek', modelT);
+                }
+            });
+        }
+    });
+
+
+    /**
+     * Odgovoren za prika seznama dogodkov 
+     * znotraj posameznega dela dneva 
+     * @type @exp;Marionette@pro;CollectionView@call;extend
+     */
+    var DogodkiCompositeView = Marionette.CompositeView.extend({
+        className: 'planer-dogodki',
+        template: tplDogodkiDan,
+        childViewContainer: ".childview-container",
+        childView: DogodekItemView,
+        triggers: {
+            'click .dodaj-dogodek': 'dodaj:dogodek',
+            'click .odstrani-dogodke': 'odstrani:dogodke'
+        },
+        onDodajDogodek: function () {
+
+        },
+        onOdstraniDogodke: function () {
+
+        },
+        onChildviewPrikaziDogodek: function (dogodekM, razredDogodkaM) {
+            this.trigger('prikazi:dogodek', razredDogodkaM);
+        }
+    });
+
+    /**
+     * Prikazuje posamezni dan v planeru
+     * Regije za tri dele dneva, popoldne, dopoldne, zvečer. 
+     * 
+     * 
+     * @type @exp;Marionette@pro;LayoutView@call;extend
+     */
+    var DanView = Marionette.LayoutView.extend({
+        className: 'planer-dan',
+        template: tplDan,
+        regions: {
+            dopoldneR: '.region-dopoldne',
+            popoldneR: '.region-popoldne',
+            zvecerR: '.region-zvecer',
+            detailR: '.region-detail'
+        },
+        onRender: function () {
+            this.renderDopoldne();
+            this.renderPopoldne();
+            this.renderZvecer();
+        },
+        renderDopoldne: function () {
+            var view = this.dopoldneView = new DogodkiCompositeView({
+                collection: this.model.get('dopoldneColl')
+            });
+            view.on('prikazi:dogodek', this.prikaziDogodek, this);
+            this.dopoldneR.show(view);
+        },
+        renderPopoldne: function () {
+            var view = this.popoldneView = new DogodkiCompositeView({
+                collection: this.model.get('popoldneColl')
+            });
+            view.on('prikazi:dogodek', this.prikaziDogodek, this);
+            this.popoldneR.show(view);
+        },
+        renderZvecer: function () {
+            var view = this.zvecerView = new DogodkiCompositeView({
+                collection: this.model.get('zvecerColl')
+            });
+            view.on('prikazi:dogodek', this.prikaziDogodek, this);
+            this.zvecerR.show(view);
+        },
+        prikaziDogodek: function (model) {
+            var razred = model.get('dogodek').razred;
+            var TipDogodkaView;
+            if (razred === '100s') {
+                TipDogodkaView = PredstavaView;
+            } else if (razred === '200s') {
+                TipDogodkaView = VajaView;
+            } else if (razred === '300s') {
+                TipDogodkaView = GostovanjeView;
+            } else if (razred === '400s') {
+                TipDogodkaView = SplosniView;
+            } else if (razred === '500s') {
+                this.onZasedenost(model);
+                this.dogodekView.on('skrij', this.onPreklici, this);
+
+            } else if (razred === '600s') {
+                TipDogodkaView = TehnicniView;
+            }
+            var view = new DogodekView({
+                model: model,
+                TipDogView: TipDogodkaView,
+                tipDogModel: model
+            });
+            view.on('skrij', function () {
+                this.detailR.empty();
+            }, this);
+            this.detailR.show(view);
+        }
+    });
+
+
+    /**
+     * Odgovoren je za prika kolekcije dnevov
+     * za obdobje, ki ga planer trenutno obdeluje
+     * @type @exp;Marionette@pro;CollectionView@call;extend
+     */
+
+    var TedenCollectionView = Marionette.CollectionView.extend({
+        childView: DanView
+    });
+
+    var handleChangeTeden = function (e, form, datum) {
+        form.getEditor('teden').setValue(datum.toISOString());
+        setTimeout(function () {
+            form.trigger("change");
+        });
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    };
+
+    /**
+     * 
+     * @type @exp;Form@call;extend
+     */
+    var TerminView = Form.extend({
+        template: tplTermin,
+        events: {
+            'click .nazaj-mesec': "nazajMesec",
+            'click .naprej-mesec': "naprejMesec",
+            'click .nazaj-teden': "nazajTeden",
+            'click .naprej-teden': "naprejTeden"
+        },
+        schema: {
+            teden: {type: 'DatePicker', validators: ['required'], editorAttrs: {class: 'form-control'}}
+        },
+        naprejMesec: function (e) {
+            var v = moment(this.getValue('teden')).add(1, 'month');
+            return handleChangeTeden(e, this, v);
+        },
+        nazajTeden: function (e) {
+            var v = moment(this.getValue('teden')).subtract(1, 'week');
+            return handleChangeTeden(e, this, v);
+        },
+        naprejTeden: function (e) {
+            var v = moment(this.getValue('teden')).add(1, 'week');
+            return handleChangeTeden(e, this, v);
+        },
+        nazajMesec: function (e) {
+            var v = moment(this.getValue('teden')).subtract(1, 'month');
+            return handleChangeTeden(e, this, v);
+        }
+    });
+
+
+    /**
+     * Layout za planer, ima regije za vnosno form termina in 
+     * prikaz dogodkov tedna
+     * 
+     * @type @exp;Marionette@pro;LayoutView@call;extend
+     */
     var PlanerView = Marionette.LayoutView.extend({
         template: tpl,
         regions: {
-            filterR: '.calendar-filter',
-            msgR: '.calendar-msg',
-            dogodekR: '.dogodek'
-
-        },
-        ui: {
-            'calendar': '.calendar-container'
-        },
-        initialize: function (options) {
-            this.koledarji = options.koledarji;
-            this.filterView = options.filterView || new DefaultFilter();
-            this.resCollection = options.resCollection;
-            if (!this.resCollection) {
-                throw "resource collection not specified";
-            }
-            this.filterView.on('filter', this.searchCollection);
-            this.listenTo(this.resCollection, 'add', this.addResource);
-            this.listenTo(this.resCollection, 'remove', this.removeResource);
-            this.listenTo(this.resCollection, 'reset', this.resetResources);
+            tedenR: '.region-teden',
+            terminR: '.region-termin'
         },
         onRender: function () {
-            var options = _.extend({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'timelineDan,timelineTeden,timelineMonth'
-                },
-                contentHeight: 'auto',
-                events: function (start, end, callback) {
-                    console.log(start,end);
-                    callback([         ]);
-                },
-                defaultView: "timelineDan",
-                resourceGroupField: 'popa',
-                resourceGroupText: function (group) {
-                    return group ? group.label : 'Doma';
-                },
-                views: {
-                    timelineTeden: {
-                        type: 'timeline',
-                        duration: {days: 7},
-                        slotDuration: {hours: 4}
-                    },
-                    timelineDan: {
-                        type: 'timeline',
-                        duration: {days: 2},
-                        minTime: {hours: 8},
-                        slotDuration: {hours: 2}
-                    }
-                },
-                resourceColumns: [],
-                selectable: true,
-                selectHelper: true,
-                editable: true,
-                ignoreTimezone: false,
-                select: this.select,
-                weekNumberCalculation: 'ISO',
-                firstDay: 1,
-                defaultView: 'timelineWeek',
-                schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
-                eventClick: this.eventClick,
-                eventDrop: this.eventDropOrResize,
-                eventResize: this.eventDropOrResize,
-                resources: this.resCollection.getResources
-            }, this.options.calendarOptions);
-            console.log('options koledar', options);
-            this.filterR.show(this.filterView);
-            this.ui.calendar.fullCalendar(options);
-        },
-        addResource: function (model) {
 
-        },
-        removeResource: function (model) {
+            this.form = new TerminView({
+                model: new Backbone.Model({
+                    datum: moment().toISOString()
+                })
+            });
 
-        },
-        resetResources: function (model) {
+            this.form.on('change', this.naloziDogodke, this);
 
+            this.terminR.show(this.form);
         },
-        select: function (startDate, endDate) {
-            console.log('select', startDate, endDate);
-        },
-        eventClick: function (fcEvent) {
-            console.log('click', fcEvent);
-        },
-        change: function (event) {
-            // Look up the underlying event in the calendar and update its details from the model
-            var fcEvent = this.el.fullCalendar('clientEvents', event.get('id'))[0];
-            fcEvent.title = event.get('title');
-            fcEvent.color = event.get('color');
-            this.ui.calendar.fullCalendar('updateEvent', fcEvent);
-        },
-        eventDropOrResize: function (fcEvent) {
-            // Lookup the model that has the ID of the event and update its attributes
-            this.collection.get(fcEvent.id).save({start: fcEvent.start, end: fcEvent.end});
-        },
-        onDestroy: function () {
-        },
-        searchCollection: function (data) {
-            console.log('search', data);
+        naloziDogodke: function () {
+            var datum = moment(this.form.getEditor('teden').getValue());
+
+            var planerTeden = new PlanerTeden();
+            planerTeden.initTeden(moment(datum));
+
+            var zacetek = moment(datum).startOf('week');
+            var konec = moment(datum).endOf('week');
+
+            this.collection = new Dogodki();
+            this.collection.queryParams.zacetek = zacetek.toISOString();
+            this.collection.queryParams.konec = konec.toISOString();
+
+            var self = this;
+            this.collection.fetch({
+                success: function () {
+                    self.collection.pretvoriVPlanerTeden(planerTeden);
+                    var tedenView = new TedenCollectionView({
+                        collection: planerTeden
+                    });
+
+                    self.tedenR.show(tedenView);
+                }
+            });
         }
+
     });
+
     return PlanerView;
 });

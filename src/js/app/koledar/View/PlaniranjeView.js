@@ -164,9 +164,7 @@ define([
         var view = new DogodekView({
             model: dogodekModel,
             TipDogView: TipDogView,
-            tipDogModel: razredModel,
-            posodobiUrlNaslov: function () {
-            }
+            tipDogModel: razredModel
         });
         view.on('save:success', function () {
             self.koledarView.ui.koledar.fullCalendar('refetchEvents');

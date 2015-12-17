@@ -9,17 +9,23 @@ define(['i18next'], function (i18n) {
             icon: 'fa-calendar',
             uri: '#koledar/navigacija',
             id: "koledar",
-            permission: "Koledar-read",
+//            permission: "Koledar-read",
             pages: [
                 {
                     label: i18n.t("koledar.nav.planiranje"),
                     uri: '#koledar/planiranje',
-                    permission: "Koledar-read"
+//                    permission: "Koledar-read"
                 },
+                {
+                    label: i18n.t("koledar.nav.planiranje"),
+                    uri: '#koledar/planer',
+ //                   permission: ""
+                },
+                
                 {
                     label: i18n.t("Test"),
                     uri: "#koledar/test",
-                    permission: "Koledar-read"
+//                    permission: "Koledar-read"
                 }
             ]
         }

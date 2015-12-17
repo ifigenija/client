@@ -103,6 +103,18 @@ define([
         };
 
         /**
+         * Navigacija med posameznimi pogledi v koledarju
+         * @returns {undefined}
+         */
+        mod.planer = function () {
+            require(['../View/PlanerView'], function (Planer) {
+                var view = new Planer();
+                ch.command('open', view, 'Planer');
+                ch.command('enableMenu', 'koledar');
+            });
+        };
+
+        /**
          * 
          * Routing za javni pogled 
          */
@@ -114,6 +126,7 @@ define([
                 appRoutes: {
                     'koledar/navigacija': 'pregled',
                     'koledar/planiranje': 'pregled',
+                    'koledar/planer': 'planer',
                     'koledar/pregled': 'pregled',
                     'koledar/ludje': 'ljudje',
                     'koledar/prostori': 'prostori',

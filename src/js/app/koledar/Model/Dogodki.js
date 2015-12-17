@@ -4,7 +4,21 @@
  * Licenca GPLv3
  */
 
-define(['baseUrl', 'backbone', 'app/Max/Model/MaxPageableCollection', 'underscore', 'moment', 'deep-model'], function (baseUrl, Backbone, Pageable, _, moment) {
+define([
+    'baseUrl',
+    'backbone',
+    'app/Max/Model/MaxPageableCollection',
+    'underscore',
+    'moment',
+    'deep-model'
+], function (
+        baseUrl,
+        Backbone,
+        Pageable,
+        _,
+        moment,
+        PlanerCollection
+        ) {
 
     var Dogodek = Backbone.DeepModel.extend({
         view: 'default',
@@ -44,42 +58,45 @@ define(['baseUrl', 'backbone', 'app/Max/Model/MaxPageableCollection', 'underscor
         }
     });
 
-    Dogodki.prototype.pretvori = function () {
+    Dogodki.prototype.pretvoriVPlanerTeden = function (planerTeden) {
+        var self= this;
+        //preverjamo kateri iz kolekcije dogodki spada v planer model z datumom 
+        planerTeden.each(function (planerM) {
+            //datum planerModela
+            var datum = moment(planerM.get('datum')).startOf('day');
 
-        this.comparator = 'zacetek';
-        this.sort();
-        var collection = new PlanerCollection();
+            for (var id in self.models) {
+                var model = self.models[id];
+                var zacetek = moment(model.get('zacetek'));
+                var dan = moment(zacetek).startOf('day');
 
-        for (var id in this.models) {
-            var model = this.models[id];
-            var planerModel = new PlanerCollection.prototype.model();
+                //preverjamo ali je dan začetka enak datumu planer modela
+                //v primeru da je se razvrsti v eno od kolekcij dopoldne, popoldne, zvecer
+                if (datum.isSame(dan)) {
+                    //nastavimo čas dopoldanskega, popoldanskega in večernega termina
+                    var dopoldan = moment(dan);
+                    dopoldan.set('hour', 14);
+                    var popoldan = moment(dan);
+                    popoldan.set('hour', 19);
+                    var zvecer = moment(dan);
+                    zvecer.set('hour', 23);
 
-            var zacetek = moment(model.get('zacetek'));
-            var konec = moment(model.get('konec'));
-            
-            planerModel.datum = moment(zacetek, "DD.MM.YYYY");
 
-            var dopoldan = moment('14:00', 'HH:mm');
-            var popoldan = moment('19:00', 'HH:mm');
-            var zvecer = moment('23:00', 'HH:mm');
-
-            if (dopoldan.diff(zacetek, 'minutes') > 0) {
-                planerModel.dopoldanColl.add(model);
-            } else if (popoldan.diff(zacetek, 'minutes') > 0) {
-                planerModel.popoldanColl.add(model);
-            } else if (zvecer.diff(zacetek, 'minutes') > 0) {
-                planerModel.zvecerColl.add(model);
+                    //v primeru da je dopoldne pozneje od začetka se vstavi v dopoldne
+                    if (zacetek.diff(dopoldan) < 0) {
+                        planerM.get('dopoldneColl').add(model);
+                    } else if (zacetek.diff(popoldan) < 0) {
+                        planerM.get('popoldneColl').add(model);
+                    } else if (zacetek.diff(zvecer) < 0) {
+                        planerM.get('zvecerColl').add(model);
+                    }
+                }
             }
-            
-            if (dopoldan.diff(konec, 'minutes') > 0) {
-                planerModel.dopoldanColl.add(model);
-            } else if (popoldan.diff(konec, 'minutes') > 0) {
-                planerModel.popoldanColl.add(model);
-            } else if (zvecer.diff(konec, 'minutes') > 0) {
-                planerModel.zvecerColl.add(model);
-            }
-        }
+            ;
+        });
     };
+
+
 
     return Dogodki;
 
