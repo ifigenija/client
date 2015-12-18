@@ -36,13 +36,13 @@ define([
     });
 
     IzbiraRazredDogodkaView.prototype.initialize = function (options) {
-        this.state = options;
+        this.model = options.model;
         this.zacetek = moment(options.model.get('zacetek'));
         this.konec = moment(options.model.get('konec'));
     };
 
     IzbiraRazredDogodkaView.prototype.initRazredDogodka = function (options) {
-        var model = this.state.model = new RazredDogodek({
+        var model = this.model = new RazredDogodek({
             view: options.view,
             zacetek: this.zacetek,
             konec: this.konec,
@@ -58,7 +58,7 @@ define([
             title: 'Vaja',
             status: '100s'
         });
-        this.trigger('ready', this.state.model);
+        this.trigger('ready:naprej', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onPredstava = function () {
         this.initRazredDogodka({
@@ -66,16 +66,16 @@ define([
             title: 'Predstava',
             status: '100s'
         });
-        this.trigger('ready', this.state);
+        this.trigger('ready:naprej', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onZasedenost = function () {
-        var model = this.state.model = new TerminiStoritev.prototype.model();
+        var model = this.model = new TerminiStoritev.prototype.model();
 
         if (this.zacetek) {
             model.set('planiranZacetek', this.zacetek);
         }
         model.set('planiranKonec', this.konec);
-        this.trigger('ready', this.state);
+        this.trigger('ready:naprej', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onGostovanje = function () {
         this.initRazredDogodka({
@@ -83,7 +83,7 @@ define([
             title: 'Gostovanje',
             status: '100s'
         });
-        this.trigger('ready', this.state);        
+        this.trigger('ready:naprej', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onSplosni = function () {
         this.initRazredDogodka({
@@ -91,7 +91,7 @@ define([
             title: 'Splošni',
             status: '100s'
         });
-        this.trigger('ready', this.state);
+        this.trigger('ready:naprej', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onTehnicni = function () {
         this.initRazredDogodka({
@@ -99,7 +99,7 @@ define([
             title: 'Tehnični',
             status: '100s'
         });
-        this.trigger('ready', this.state);
+        this.trigger('ready:naprej', this.model);
     };
 
     return IzbiraRazredDogodkaView;

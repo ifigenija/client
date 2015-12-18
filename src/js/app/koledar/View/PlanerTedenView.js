@@ -122,13 +122,16 @@ define([
         var model = new Backbone.Model();
         model.set('zacetek', moment(interval.zacetek).toISOString());
         model.set('konec', moment(interval.konec).toISOString());
+        
         var view = new WizardView({
             model: model,
-            views: [
-                IzbiraView,
-                IzbiraDatumView
-            ],
-            title: 'dodaj dogodek'
+            defView: {
+                views: [
+                    IzbiraView,
+                    IzbiraDatumView
+                ],
+                title: 'dodaj dogodek'
+            }
         });
 
         view.on('zapri:wizard', function () {

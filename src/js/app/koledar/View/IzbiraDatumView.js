@@ -54,19 +54,16 @@ define([
 
         if (options && options.model) {
             this.model = options.model || this.model;
-            
+
             this.zacetek = this.model.get('zacetek') || null;
             this.konec = this.model.get('konec') || null;
-        }
-
-        if (options) {
-            this.state = options;
         }
 
         this.on('change', this.nadaljuj, this);
     };
 
-    IzbiraDatumView.prototype.onRender = function (options) {
+    IzbiraDatumView.prototype.render = function (options) {
+        Form.prototype.render.apply(this, arguments);
         if (this.zacetek) {
             this.fields.zacetek.editor.setValue(this.zacetek);
         }
@@ -81,9 +78,9 @@ define([
         var konec = this.fields.konec.getValue();
 
         if (zacetek && konec) {
-            this.state.model.set('zacetek', zacetek);
-            this.state.model.set('konec', konec);
-            this.trigger('ready', this.state);
+            this.model.set('zacetek', zacetek);
+            this.model.set('konec', konec);
+            this.trigger('ready', this.model);
         } else {
             this.trigger('not:ready');
         }

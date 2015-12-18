@@ -41,32 +41,33 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.initialize = function (options) {
-        if (!_.isArray(options.views)) {
+        if (!_.isArray(options.defView.views)) {
             throw new 'Content naj bo array';
         } else {
-            this.title = options.title || i18next.t('std.naslov');
-            this.stevecView = 0;
-            
             if (options) {
-                this.state = options;
+                this.model = options.model;
+                this.defView = options.defView;
+                this.title = this.defView.title || i18next.t('std.naslov');
+                this.views = this.defView.views;
             }
+            this.stevecView = 0;
         }
     };
-    
+
     WizardView.prototype.serializeData = function () {
         return {
             title: this.title
         };
     };
     /**
-     * renderiramo prvi vju iz polja state.views
+     * renderiramo prvi vju iz polja model.views
      * skrijemo gumbe wizardViewja(Modala)
      * @returns {WizardView_L13.WizardView.prototype}
      */
     WizardView.prototype.onRender = function () {
         this.renderView(this.stevecView);
 
-        if (this.state.views.length > 1) {
+        if (this.views.length > 1) {
             this.skrijOK();
             this.disableNaprej();
         }
@@ -77,10 +78,19 @@ define([
      * Viewji prožijo ready, ko lahko wizard nadaljuje z naslednjim korakom
      * @returns {undefined}
      */
-    WizardView.prototype.onReady = function (state) {
+    WizardView.prototype.onReadyNaprej = function (model) {
+        this.onReady(model);
+        this.onNaprej();
+    };
+
+    /**
+     * Viewji prožijo ready, ko lahko wizard nadaljuje z naslednjim korakom
+     * @returns {undefined}
+     */
+    WizardView.prototype.onReady = function (model) {
         this.enableNaprej();
         this.enableOK();
-        this.state = state;
+        this.model = model;
     };
 
     /**
@@ -94,7 +104,7 @@ define([
 
     /**
      * Ko se na viewju triggera naprej se izvede ta funkcija.
-     * Povečamo števec vzamemo pravi view iz state.viewsa
+     * Povečamo števec vzamemo pravi view iz model.viewsa
      * renderiramo view
      * @returns {undefined}
      */
@@ -105,12 +115,12 @@ define([
         this.stevecView++;
         this.renderView(this.stevecView);
 
-        this.toggleNaprejOK(this.stevecView, this.state.views.length);
+        this.toggleNaprejOK(this.stevecView, this.views.length);
         this.toggleNazaj(this.stevecView);
     };
     /**
      * Ko se na viewju triggera nazaj se izvede ta funkcija.
-     * Zmanjšamo števec vzamemo pravi view iz state.viewsa
+     * Zmanjšamo števec vzamemo pravi view iz model.viewsa
      * renderiramo view
      * @returns {undefined}
      */
@@ -121,31 +131,34 @@ define([
         this.stevecView--;
         this.renderView(this.stevecView);
 
-        this.toggleNaprejOK(this.stevecView, this.state.views.length);
+        this.toggleNaprejOK(this.stevecView, this.views.length);
         this.toggleNazaj(this.stevecView);
     };
-    
+
     WizardView.prototype.onPotrdi = function () {
         var self = this;
-        
-        this.state.model.save({},{
-            success:function(){
+
+        this.model.save({}, {
+            success: function () {
                 Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
-                self.trigger('zapri:wizard', this.state);
+                self.trigger('zapri:wizard', this.model);
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
     };
 
     /**
-     * Render enega izmed podanih viewjev iz state.viewsa
+     * Render enega izmed podanih viewjev iz model.viewsa
      * @param {type} stevecView
-     * @returns {Modal@call;extend.prototype.renderView.state.views|backbone.marionette_L26.state.views|Marionette@call;_getValue.state.views|backbone.marionette_L35.state.views|backbone_L34.state.views|message.state.views}
+     * @returns {Modal@call;extend.prototype.renderView.model.views|backbone.marionette_L26.model.views|Marionette@call;_getValue.model.views|backbone.marionette_L35.model.views|backbone_L34.model.views|message.model.views}
      */
     WizardView.prototype.renderView = function (stevecView) {
-        var View = this.state.views[stevecView];
-        var view = new View(this.state);
+        var View = this.views[stevecView];
+        var view = new View({
+            model: this.model
+        });
 
+        view.on('ready:naprej', this.onReadyNaprej, this);
         view.on('ready', this.onReady, this);
         view.on('not:ready', this.onNotReady, this);
 
