@@ -2,7 +2,8 @@
  * Licenca GPLv3
  */
 
-define(['marionette',
+define([
+    'marionette',
     'backbone',
     'moment',
     'underscore',
@@ -12,7 +13,8 @@ define(['marionette',
     './PlanerTedenView',
     './PlanerTerminView',
     'template!../tpl/planer-layout.tpl'
-], function (Marionette,
+], function (
+        Marionette,
         Backbone,
         moment,
         _,
@@ -36,10 +38,13 @@ define(['marionette',
             tedenR: '.region-teden',
             terminR: '.region-termin'
         },
+        initialize: function(options){
+            this.datum = options.datum || moment();
+        },
         onRender: function () {
             this.form = new PlanerTerminView({
                 model: new Backbone.Model({
-                    datum: moment().toISOString()
+                    datum: moment(this.datum).toISOString()
                 })
             });
 

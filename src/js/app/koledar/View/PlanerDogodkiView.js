@@ -92,11 +92,14 @@ define([
             'click .dodaj-dogodek': 'dodaj:dogodek',
             'click .odstrani-dogodke': 'odstrani:dogodke'
         },
+        initialize: function(options){
+            this.datum = options.datum || null;
+        },
         onDodajDogodek: function () {
-
+            this.trigger('dodaj:dogodek', this.datum);
         },
         onOdstraniDogodke: function () {
-
+            this.trigger('odstrani:dogodke');
         },
         onChildviewPrikaziDogodek: function (dogodekM, razredDogodkaM) {
             this.trigger('prikazi:dogodek', razredDogodkaM);

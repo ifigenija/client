@@ -2,14 +2,16 @@
  * Licenca GPLv3
  */
 
-define(['marionette',
+define([
+    'marionette',
     'backbone',
     'moment',
     'underscore',
     'jquery',
     'app/Max/Module/Form',
     'template!../tpl/planer-termin.tpl'
-], function (Marionette,
+], function (
+        Marionette,
         Backbone,
         moment,
         _,
@@ -36,9 +38,14 @@ define(['marionette',
         template: tplTermin,
         events: {
             'click .nazaj-mesec': "nazajMesec",
-            'click .naprej-mesec': "naprejMesec",
             'click .nazaj-teden': "nazajTeden",
-            'click .naprej-teden': "naprejTeden"
+            'click .naprej-teden': "naprejTeden",
+            'click .naprej-mesec': "naprejMesec"
+        },
+        render: function(){
+            Form.prototype.render.apply(this,arguments);
+            this.fields.teden.editor.setValue(moment(this.model.get('datum')).toISOString());
+            this.trigger("change");
         },
         schema: {
             teden: {type: 'DatePicker', validators: ['required'], editorAttrs: {class: 'form-control'}}

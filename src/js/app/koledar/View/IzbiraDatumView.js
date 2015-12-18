@@ -51,31 +51,30 @@ define([
 
     IzbiraDatumView.prototype.initialize = function (options) {
         Form.prototype.initialize.apply(this, arguments);
-        
+
         if (options && options.model) {
             this.model = options.model || this.model;
+            if (this.model.zacetek) {
+                this.zacetek = this.model.zacetek;
+            }
+            if (this.model.konec) {
+                this.konec = this.model.konec;
+            }
         }
-        if (options && options.zacetek) {
-            this.zacetek = options.zacetek || this.zacetek;
-        }
-        if (options && options.konec) {
-            this.konec = options.konec || this.konec;
+
+        if (options) {
+            this.state = options;
         }
 
         this.on('change', this.nadaljuj, this);
     };
 
-    IzbiraDatumView.prototype.render = function (options) {
-        Form.prototype.render.apply(this, arguments);
+    IzbiraDatumView.prototype.onRender = function (options) {
         if (this.zacetek) {
             this.fields.zacetek.editor.setValue(this.zacetek);
         }
         if (this.konec) {
             this.fields.konec.editor.setValue(this.konec);
-        }
-        
-        if(options && options.wizardModel){
-            this.wizardModel = options.wizardModel || new Backbone.Model();
         }
         this.nadaljuj();
     };
@@ -85,9 +84,9 @@ define([
         var konec = this.fields.konec.getValue();
 
         if (zacetek && konec) {
-            this.wizardModel.set('zacetek', zacetek);
-            this.wizardModel.set('konec', konec);
-            this.trigger('ready', this.wizardModel);
+            this.state.model.set('zacetek', zacetek);
+            this.state.model.set('konec', konec);
+            this.trigger('ready', this.state);
         } else {
             this.trigger('not:ready');
         }

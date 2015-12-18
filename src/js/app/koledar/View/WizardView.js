@@ -9,7 +9,7 @@ define([
     'app/bars',
     'marionette',
     'jquery',
-    'backbone-modal'
+    'template!../tpl/wizard-layout.tpl'
 ], function (
         Radio,
         i18next,
@@ -18,130 +18,69 @@ define([
         Handlebars,
         Marionette,
         $,
-        Modal
+        tpl
         ) {
 
-    //Set custom template settings
-    var _interpolateBackup = _.templateSettings;
-    _.templateSettings = {
-        interpolate: /\{\{(.+?)\}\}/g,
-        evaluate: /<%([\s\S]+?)%>/g
-    };
-
-    var template = _.template('\
-    <div class="modal-dialog"><div class="modal-content">\
-    <% if (title) { %>\
-      <div class="modal-header">\
-        <% if (allowCancel) { %>\
-          <a class="close">&times;</a>\
-        <% } %>\
-        <h4>{{title}}</h4>\
-      </div>\
-    <% } %>\
-    <div class="modal-body">{{content}}</div>\
-    <% if (showFooter) { %>\
-      <div class="modal-footer">\
-        <% if (allowCancel) { %>\
-          <% if (cancelText) { %>\
-            <a href="#" class="btn cancel">{{cancelText}}</a>\
-          <% } %>\
-        <% } %>\
-        <a href="#" class="btn nazaj btn-default">{{nazajText}}</a>\
-        <a href="#" class="btn naprej btn-default">{{naprejText}}</a>\
-        <a href="#" class="btn ok btn-primary">{{okText}}</a>\
-      </div>\
-    <% } %>\
-    </div></div>\
-  ');
-
-    //Reset to users' template settings
-    _.templateSettings = _interpolateBackup;
-
-
-    var WizardView = Modal.extend({
-        className: 'wizard-modal modal',
-        events: function () {
-            return _.extend({}, Modal.prototype.events, {
-                'click .naprej': function (event) {
-                    event.preventDefault();
-                    this.trigger('naprej');
-                },
-                'click .nazaj': function (event) {
-                    event.preventDefault();
-                    this.trigger('nazaj');
-                }
-            });
+    var WizardView = Marionette.LayoutView.extend({
+        template: tpl,
+        className: 'wizard',
+        triggers: {
+            'click .naprej': 'naprej',
+            'click .nazaj': 'nazaj',
+            'click .preklici': 'preklici',
+            'click .potrdi': 'potrdi'
+        },
+        regions: {
+            detailR: '.wizard-body'
         }
     });
+
+    /**
+     * 
+     * @param {type} options
+     * @returns {undefined}
+     */
     WizardView.prototype.initialize = function (options) {
-        Modal.prototype.initialize.apply(this, arguments);
-
-        this.options = _.extend({
-            nazajText: i18next.t('std.nazaj'),
-            naprejText: i18next.t('std.naprej')
-        }, 
-        this.options, {template: template});
-
-        if (!_.isArray(options.content)) {
+        if (!_.isArray(options.views)) {
             throw new 'Content naj bo array';
         } else {
-            for (var id in options.content) {
-                var view = options.content[id];
-                view.on('ready', this.onReady, this);
-                view.on('not:ready', this.onNotReady, this);
-            }
-
-            this.zacetek = options.zacetek || this.zacetek;
-            this.konec = options.konec || this.konec;
             this.title = options.title || i18next.t('std.naslov');
-        }
-
-        this.on('naprej', this.onNaprej, this);
-        this.on('nazaj', this.onNazaj, this);
-
-        this.stevecView = 0;
-        
-        if(options && options.model){
-            this.wizardModel = options.model || new Backbone.Model();
+            this.stevecView = 0;
+            
+            if (options) {
+                this.state = options;
+            }
         }
     };
+    
+    WizardView.prototype.serializeData = function () {
+        return {
+            title: this.title
+        };
+    };
     /**
-     * renderiramo prvi vju iz polja content
+     * renderiramo prvi vju iz polja state.views
      * skrijemo gumbe wizardViewja(Modala)
      * @returns {WizardView_L13.WizardView.prototype}
      */
-    WizardView.prototype.render = function () {
-
-        var $el = this.$el;
-        var options = this.options;
-        $el.html(options.template(options));
-        
-        
+    WizardView.prototype.onRender = function () {
         this.renderView(this.stevecView);
 
-        if (options.animate && this.stevecView === 0) {
-            $el.addClass('fade');
-        }
-
-        if (options.content.length > 1) {
+        if (this.state.views.length > 1) {
             this.skrijOK();
             this.disableNaprej();
         }
 
         this.toggleNazaj(this.stevecView);
-
-        this.isRendered = true;
-
-        return this;
     };
     /**
      * Viewji prožijo ready, ko lahko wizard nadaljuje z naslednjim korakom
      * @returns {undefined}
      */
-    WizardView.prototype.onReady = function (model) {
+    WizardView.prototype.onReady = function (state) {
         this.enableNaprej();
         this.enableOK();
-        this.wizardModel = model;
+        this.state = state;
     };
 
     /**
@@ -155,7 +94,7 @@ define([
 
     /**
      * Ko se na viewju triggera naprej se izvede ta funkcija.
-     * Povečamo števec vzamemo pravi view iz contenta
+     * Povečamo števec vzamemo pravi view iz state.viewsa
      * renderiramo view
      * @returns {undefined}
      */
@@ -166,12 +105,12 @@ define([
         this.stevecView++;
         this.renderView(this.stevecView);
 
-        this.toggleNaprejOK(this.stevecView, this.options.content.length);
+        this.toggleNaprejOK(this.stevecView, this.state.views.length);
         this.toggleNazaj(this.stevecView);
     };
     /**
      * Ko se na viewju triggera nazaj se izvede ta funkcija.
-     * Zmanjšamo števec vzamemo pravi view iz contenta
+     * Zmanjšamo števec vzamemo pravi view iz state.viewsa
      * renderiramo view
      * @returns {undefined}
      */
@@ -182,28 +121,36 @@ define([
         this.stevecView--;
         this.renderView(this.stevecView);
 
-        this.toggleNaprejOK(this.stevecView, this.options.content.length);
+        this.toggleNaprejOK(this.stevecView, this.state.views.length);
         this.toggleNazaj(this.stevecView);
+    };
+    
+    WizardView.prototype.onPotrdi = function () {
+        var self = this;
+        
+        this.state.model.save({},{
+            success:function(){
+                Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
+                self.trigger('zapri:wizard', this.state);
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
+        });
     };
 
     /**
-     * Render enega izmed podanih viewjev iz contenta
+     * Render enega izmed podanih viewjev iz state.viewsa
      * @param {type} stevecView
-     * @returns {Modal@call;extend.prototype.renderView.content|backbone.marionette_L26.content|Marionette@call;_getValue.content|backbone.marionette_L35.content|backbone_L34.content|message.content}
+     * @returns {Modal@call;extend.prototype.renderView.state.views|backbone.marionette_L26.state.views|Marionette@call;_getValue.state.views|backbone.marionette_L35.state.views|backbone_L34.state.views|message.state.views}
      */
     WizardView.prototype.renderView = function (stevecView) {
-        var $el = this.$el;
-        var options = this.options;
-        var content = options.content[stevecView];
+        var View = this.state.views[stevecView];
+        var view = new View(this.state);
 
-        if (content.$el) {
-            content.render({
-                wizardModel: this.wizardModel
-            });
-            $el.find('.modal-body').html(content.$el);
-        }
+        view.on('ready', this.onReady, this);
+        view.on('not:ready', this.onNotReady, this);
 
-        return content;
+        this.detailR.show(view);
+        return view;
     };
 
     /**
@@ -229,17 +176,17 @@ define([
     };
 
     WizardView.prototype.prikaziOK = function () {
-        this.$('.ok').removeClass('hidden');
+        this.$('.potrdi').removeClass('hidden');
     };
     WizardView.prototype.skrijOK = function () {
-        this.$('.ok').addClass('hidden');
+        this.$('.potrdi').addClass('hidden');
     };
     WizardView.prototype.disableOK = function () {
-        this.$('.ok').addClass('disabled');
+        this.$('.potrdi').addClass('disabled');
     };
 
     WizardView.prototype.enableOK = function () {
-        this.$('.ok').removeClass('disabled');
+        this.$('.potrdi').removeClass('disabled');
     };
 
     WizardView.prototype.disableNaprej = function () {
