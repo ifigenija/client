@@ -10,7 +10,7 @@ define([
     'jquery',
     '../Model/RazredDogodek',
     'template!../tpl/planer-dogodek.tpl',
-    'template!../tpl/planer-dogodkidan.tpl'
+    'template!../tpl/planer-dogodki-termin.tpl'
 ], function (
         Marionette,
         Backbone,
@@ -18,8 +18,8 @@ define([
         _,
         $,
         RazredDogodek,
-        tplDogodek,
-        tplDogodkiDan
+        dogodekTpl,
+        terminDogodkiTpl
         ) {
 
     /**
@@ -28,7 +28,7 @@ define([
      */
     var DogodekItemView = Marionette.ItemView.extend({
         className: 'planer-dogodek',
-        template: tplDogodek,
+        template: dogodekTpl,
         triggers: {
             'click': 'prikazi'
         },
@@ -84,19 +84,23 @@ define([
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
     var PlanerDogodkiView = Marionette.CompositeView.extend({
-        className: 'planer-dogodki',
-        template: tplDogodkiDan,
-        childViewContainer: ".childview-container",
+        className: 'planer-termin',
+        template: terminDogodkiTpl,
+        childViewContainer: ".dogodki-container",
         childView: DogodekItemView,
         triggers: {
             'click .dodaj-dogodek': 'dodaj:dogodek',
             'click .odstrani-dogodke': 'odstrani:dogodke'
         },
         initialize: function(options){
-            this.datum = options.datum || null;
+            this.zacetek = options.zacetek || null;
+            this.konec = options.konec || null;
         },
         onDodajDogodek: function () {
-            this.trigger('dodaj:dogodek', this.datum);
+            this.trigger('dodaj:dogodek', {
+                zacetek: this.zacetek,
+                konec: this.konec
+            });
         },
         onOdstraniDogodke: function () {
             this.trigger('odstrani:dogodke');

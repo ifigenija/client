@@ -54,12 +54,9 @@ define([
 
         if (options && options.model) {
             this.model = options.model || this.model;
-            if (this.model.zacetek) {
-                this.zacetek = this.model.zacetek;
-            }
-            if (this.model.konec) {
-                this.konec = this.model.konec;
-            }
+            
+            this.zacetek = this.model.get('zacetek') || null;
+            this.konec = this.model.get('konec') || null;
         }
 
         if (options) {

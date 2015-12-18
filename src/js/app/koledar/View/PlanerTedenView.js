@@ -53,90 +53,94 @@ define([
             popoldneR: '.region-popoldne',
             zvecerR: '.region-zvecer',
             detailR: '.region-detail'
-        },
-        onRender: function () {
-            this.renderDopoldne();
-            this.renderPopoldne();
-            this.renderZvecer();
-        },
-        renderDopoldne: function () {
-            var view = this.dopoldneView = new PlanerDogodkiView({
-                collection: this.model.get('dopoldne'),
-                datum: this.model.get('datum')
-            });
-            this.bindToDogodkiView(view);
-            this.dopoldneR.show(view);
-        },
-        renderPopoldne: function () {
-            var view = this.popoldneView = new PlanerDogodkiView({
-                collection: this.model.get('popoldne'),
-                datum: this.model.get('datum')
-            });
-            this.bindToDogodkiView(view);
-            this.popoldneR.show(view);
-        },
-        renderZvecer: function () {
-            var view = this.zvecerView = new PlanerDogodkiView({
-                collection: this.model.get('zvecer'),
-                datum: this.model.get('datum')
-            });
-            this.bindToDogodkiView(view);
-            this.zvecerR.show(view);
-        },
-        bindToDogodkiView: function (view) {
-            view.on('prikazi:dogodek', this.prikaziDogodek, this);
-            view.on('dodaj:dogodek', this.dodajDogodek, this);
-        },
-        prikaziDogodek: function (model) {
-            var razred = model.get('dogodek').razred;
-            var TipDogodkaView;
-            if (razred === '100s') {
-                TipDogodkaView = PredstavaView;
-            } else if (razred === '200s') {
-                TipDogodkaView = VajaView;
-            } else if (razred === '300s') {
-                TipDogodkaView = GostovanjeView;
-            } else if (razred === '400s') {
-                TipDogodkaView = SplosniView;
-            } else if (razred === '500s') {
-                this.onZasedenost(model);
-                this.dogodekView.on('skrij', this.onPreklici, this);
-            } else if (razred === '600s') {
-                TipDogodkaView = TehnicniView;
-            }
-            var view = new DogodekView({
-                model: model,
-                TipDogView: TipDogodkaView,
-                tipDogModel: model
-            });
-            view.on('skrij', function () {
-                this.detailR.empty();
-            }, this);
-            this.detailR.show(view);
-        },
-        dodajDogodek: function (datum) {
-            var view = new WizardView({
-                model: new Backbone.Model(),
-                views: [
-                    IzbiraView,
-                    IzbiraDatumView
-                ],
-                title: 'dodaj dogodek',
-                zacetek: moment(datum).toISOString(),
-                konec: moment(datum).toISOString()
-            });
-
-            view.on('zapri:wizard', function () {
-                this.detailR.empty();
-            }, this);
-            
-            view.on('preklici', function () {
-                this.detailR.empty();
-            }, this);
-
-            this.detailR.show(view);
         }
     });
+    DanView.prototype.onRender = function () {
+        this.renderDopoldne();
+        this.renderPopoldne();
+        this.renderZvecer();
+    };
+    DanView.prototype.renderDopoldne = function () {
+        var view = this.dopoldneView = new PlanerDogodkiView({
+            collection: this.model.get('dopoldne'),
+            zacetek: moment(this.model.get('datum')).set('hour', 10),
+            konec: moment(this.model.get('datum')).set('hour', 14)
+        });
+        this.bindToDogodkiView(view);
+        this.dopoldneR.show(view);
+    };
+    DanView.prototype.renderPopoldne = function () {
+        var view = this.popoldneView = new PlanerDogodkiView({
+            collection: this.model.get('popoldne'),
+            zacetek: moment(this.model.get('datum')).set('hour', 14),
+            konec: moment(this.model.get('datum')).set('hour', 19)
+        });
+        this.bindToDogodkiView(view);
+        this.popoldneR.show(view);
+    };
+    DanView.prototype.renderZvecer = function () {
+        var view = this.zvecerView = new PlanerDogodkiView({
+            collection: this.model.get('zvecer'),
+            zacetek: moment(this.model.get('datum')).set('hour', 19),
+            konec: moment(this.model.get('datum')).set('hour', 23)
+        });
+        this.bindToDogodkiView(view);
+        this.zvecerR.show(view);
+    };
+    DanView.prototype.bindToDogodkiView = function (view) {
+        view.on('prikazi:dogodek', this.prikaziDogodek, this);
+        view.on('dodaj:dogodek', this.dodajDogodek, this);
+    };
+    DanView.prototype.prikaziDogodek = function (model) {
+        var razred = model.get('dogodek').razred;
+        var TipDogodkaView;
+        if (razred === '100s') {
+            TipDogodkaView = PredstavaView;
+        } else if (razred === '200s') {
+            TipDogodkaView = VajaView;
+        } else if (razred === '300s') {
+            TipDogodkaView = GostovanjeView;
+        } else if (razred === '400s') {
+            TipDogodkaView = SplosniView;
+        } else if (razred === '500s') {
+            this.onZasedenost(model);
+            this.dogodekView.on('skrij', this.onPreklici, this);
+        } else if (razred === '600s') {
+            TipDogodkaView = TehnicniView;
+        }
+        var view = new DogodekView({
+            model: model,
+            TipDogView: TipDogodkaView,
+            tipDogModel: model
+        });
+        view.on('skrij', function () {
+            this.detailR.empty();
+        }, this);
+        this.detailR.show(view);
+    };
+    DanView.prototype.dodajDogodek = function (interval) {
+        var model = new Backbone.Model();
+        model.set('zacetek', moment(interval.zacetek).toISOString());
+        model.set('konec', moment(interval.konec).toISOString());
+        var view = new WizardView({
+            model: model,
+            views: [
+                IzbiraView,
+                IzbiraDatumView
+            ],
+            title: 'dodaj dogodek'
+        });
+
+        view.on('zapri:wizard', function () {
+            this.detailR.empty();
+        }, this);
+
+        view.on('preklici', function () {
+            this.detailR.empty();
+        }, this);
+
+        this.detailR.show(view);
+    };
 
 
     /**

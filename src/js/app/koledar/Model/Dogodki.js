@@ -72,8 +72,8 @@ define([
                 }
 
                 return {
-                    dopoldan: dopoldne,
-                    popoldan: popoldne,
+                    dopoldne: dopoldne,
+                    popoldne: popoldne,
                     zvecer: zvecer
                 };
             }
@@ -108,10 +108,10 @@ define([
 
                 var termini = model.naDanNaTermin(planerM.get('datum'));
                 if (termini) {
-                    if (termini.dopoldan) {
+                    if (termini.dopoldne) {
                         planerM.get('dopoldne').add(model);
                     }
-                    if (termini.popoldan) {
+                    if (termini.popoldne) {
                         planerM.get('popoldne').add(model);
                     }
                     if (termini.zvecer) {

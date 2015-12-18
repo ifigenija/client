@@ -7,6 +7,7 @@ define([
     'app/bars',
     'backbone',
     'marionette',
+    'moment',
     'template!../tpl/dogodek-izbira.tpl',
     '../Model/RazredDogodek',
     '../Model/TerminiStoritev'
@@ -16,6 +17,7 @@ define([
         Handlebars,
         Backbone,
         Marionette,
+        moment,
         izbiraTpl,
         RazredDogodek,
         TerminiStoritev
@@ -35,8 +37,8 @@ define([
 
     IzbiraRazredDogodkaView.prototype.initialize = function (options) {
         this.state = options;
-        this.zacetek = options.model.zacetek;
-        this.konec = options.model.konec;
+        this.zacetek = moment(options.model.get('zacetek'));
+        this.konec = moment(options.model.get('konec'));
     };
 
     IzbiraRazredDogodkaView.prototype.initRazredDogodka = function (options) {
@@ -56,7 +58,7 @@ define([
             title: 'Vaja',
             status: '100s'
         });
-        this.trigger('ready', this.state);
+        this.trigger('ready', this.state.model);
     };
     IzbiraRazredDogodkaView.prototype.onPredstava = function () {
         this.initRazredDogodka({
