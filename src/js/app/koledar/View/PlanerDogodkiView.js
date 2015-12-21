@@ -79,7 +79,7 @@ define([
 
 
     /**
-     * Odgovoren za prika seznama dogodkov 
+     * Odgovoren za prika seznama dogodkov v določenem terminu
      * znotraj posameznega dela dneva 
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
@@ -89,14 +89,14 @@ define([
         childViewContainer: ".dogodki-container",
         childView: DogodekItemView,
         triggers: {
-            'click .dodaj-dogodek': 'dodaj:dogodek',
+            'click .dodaj-dogodek': 'dodaj',
             'click .odstrani-dogodke': 'odstrani:dogodke'
         },
         initialize: function(options){
             this.zacetek = options.zacetek || null;
             this.konec = options.konec || null;
         },
-        onDodajDogodek: function () {
+        onDodaj: function () {
             this.trigger('dodaj:dogodek', {
                 zacetek: this.zacetek,
                 konec: this.konec

@@ -131,30 +131,22 @@ define([
     PlaniranjeView.prototype.onDodaj = function () {
         var model = new Backbone.Model();
 
-        var iv1 = new IzbiraView({
-            model: model
-        });
-
-        var idv2 = new IzbiraDatumaView({
-            model: model
-        });
-
         var wizardView = new WizardView({
-            content: [
-                iv1,
-                idv2
-            ],
-            nazajText: 'nazaj',
-            naprejText: 'naprej',
-            okText: 'potrdi',
-            cancelText: 'preklici'
+            model: model,
+            defView: {
+                views: [
+                    IzbiraView,
+                    IzbiraDatumaView
+                ],
+                title: 'dodaj dogodek',
+                nazajText: 'nazaj',
+                naprejText: 'naprej',
+                okText: 'potrdi',
+                cancelText: 'preklici'
+            }
         });
-
-        var zakljucek = function () {
-            console.log(wizardView.wizardModel);
-        };
-
-        wizardView.open(zakljucek);
+        
+        this.dogodekR.show(wizardView);
     };
 
     PlaniranjeView.prototype.renderRazredDogodek = function (razredModel, TipDogView) {

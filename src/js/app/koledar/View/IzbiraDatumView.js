@@ -70,7 +70,7 @@ define([
         if (this.konec) {
             this.fields.konec.editor.setValue(this.konec);
         }
-        this.nadaljuj();
+        this.trigger('change');
     };
 
     IzbiraDatumView.prototype.nadaljuj = function () {

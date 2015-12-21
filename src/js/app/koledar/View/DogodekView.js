@@ -85,9 +85,10 @@ define([
      * @returns {undefined}
      */
     DogodekView.prototype.onRender = function () {
-        var chPermission = Radio.channel('global');
-
         var tabs = tabVse;
+        if (this.model.get('id')) {
+            tabs.push({name: i18next.t('dogodek.priloge'), event: 'priloge'});
+        }
         this.renderTabs(tabs);
     };
 
@@ -116,9 +117,6 @@ define([
     DogodekView.prototype.onDogodek = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
-        if (this.model.get('id')) {
-            this.renderPriloge();
-        }
     };
 
     DogodekView.prototype.onSodelujoci = function () {
@@ -132,6 +130,12 @@ define([
         this.deselectTab();
         this.$('.pnl-razred-dogodka').addClass('active');
         this.renderRazredDogodka();
+
+    };
+    DogodekView.prototype.onPriloge = function () {
+        this.deselectTab();
+        this.$('.pnl-priloge').addClass('active');
+        this.renderPriloge();
 
     };
 

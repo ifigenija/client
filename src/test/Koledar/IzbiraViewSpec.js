@@ -1,8 +1,10 @@
 define([
     'jquery',
+    'backbone',
     'app/koledar/View/IzbiraRazredDogodkaView'
 ], function (
         $,
+        Backbone,
         IzbiraView
         ) {
 
@@ -15,7 +17,10 @@ define([
             this.gostovanjeSpy = sinon.spy(IzbiraView.prototype, 'onGostovanje');
             this.tehnicniSpy = sinon.spy(IzbiraView.prototype, 'onTehnicni');
 
-            this.view = new IzbiraView();
+            var model = new Backbone.Model();
+            this.view = new IzbiraView({
+                model: model
+            });
             this.view.render();
         });
         afterEach(function () {
@@ -36,7 +41,7 @@ define([
             expect($gumb.length).to.equal(1);
 
             var spy = sinon.spy();
-            this.view.on('ready', spy);
+            this.view.on('ready:naprej', spy);
             $gumb.click();
 
             expect(this.vajaSpy).to.have.been.called;
@@ -47,7 +52,7 @@ define([
             expect($gumb.length).to.equal(1);
 
             var spy = sinon.spy();
-            this.view.on('ready', spy);
+            this.view.on('ready:naprej', spy);
             $gumb.click();
 
             expect(this.predstavaSpy).to.have.been.called;
@@ -58,7 +63,7 @@ define([
             expect($gumb.length).to.equal(1);
 
             var spy = sinon.spy();
-            this.view.on('ready', spy);
+            this.view.on('ready:naprej', spy);
             $gumb.click();
 
             expect(this.splosniSpy).to.have.been.called;
@@ -69,7 +74,7 @@ define([
             expect($gumb.length).to.equal(1);
 
             var spy = sinon.spy();
-            this.view.on('ready', spy);
+            this.view.on('ready:naprej', spy);
             $gumb.click();
 
             expect(this.zasedenostSpy).to.have.been.called;
@@ -80,7 +85,7 @@ define([
             expect($gumb.length).to.equal(1);
 
             var spy = sinon.spy();
-            this.view.on('ready', spy);
+            this.view.on('ready:naprej', spy);
             $gumb.click();
 
             expect(this.gostovanjeSpy).to.have.been.called;
@@ -91,7 +96,7 @@ define([
             expect($gumb.length).to.equal(1);
 
             var spy = sinon.spy();
-            this.view.on('ready', spy);
+            this.view.on('ready:naprej', spy);
             $gumb.click();
 
             expect(this.tehnicniSpy).to.have.been.called;

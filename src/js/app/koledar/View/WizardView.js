@@ -154,7 +154,7 @@ define([
      */
     WizardView.prototype.renderView = function (stevecView) {
         var View = this.views[stevecView];
-        var view = new View({
+        var view = this.view = new View({
             model: this.model
         });
 

@@ -15,10 +15,10 @@ define([
             this.nadaljujSpy = sinon.spy(IzbiraDatumView.prototype, 'nadaljuj');
             var model = new Backbone.Model();
 
-            this.view = new IzbiraDatumView();
-            this.view.render({
-                wizardModel: model
+            this.view = new IzbiraDatumView({
+                model: model
             });
+            this.view.render();
         });
         afterEach(function () {
             this.nadaljujSpy.restore();
