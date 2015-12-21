@@ -35,6 +35,7 @@ define([
      * @type @exp;Form@call;extend
      */
     var TerminView = Form.extend({
+        className: 'planer-izbira-datum',
         template: tplTermin,
         events: {
             'click .nazaj-mesec': "nazajMesec",

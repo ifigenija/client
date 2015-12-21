@@ -90,7 +90,7 @@ define([
         childView: DogodekItemView,
         triggers: {
             'click .dodaj-dogodek': 'dodaj',
-            'click .odstrani-dogodke': 'odstrani:dogodke'
+            'click .odstrani-dogodke': 'odstrani'
         },
         initialize: function(options){
             this.zacetek = options.zacetek || null;
@@ -102,7 +102,7 @@ define([
                 konec: this.konec
             });
         },
-        onOdstraniDogodke: function () {
+        onOdstrani: function () {
             this.trigger('odstrani:dogodke');
         },
         onChildviewPrikaziDogodek: function (dogodekM, razredDogodkaM) {

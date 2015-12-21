@@ -2,22 +2,22 @@ define([
     'jquery',
     'backbone',
     'moment',
-    'app/koledar/View/PlanerTerminView'
+    'app/koledar/View/PlanerIzbiraDatumaView'
 ], function (
         $,
         Backbone,
         moment,
-        PlanerTerminView
+        PlanerIzbiraDatumaView
         ) {
 
     describe("Planer termin view", function () {
         beforeEach(function () {
-            this.nazajMSpy = sinon.spy(PlanerTerminView.prototype, 'nazajMesec');
-            this.nazajTSpy = sinon.spy(PlanerTerminView.prototype, 'nazajTeden');
-            this.naprejTSpy = sinon.spy(PlanerTerminView.prototype, 'naprejTeden');
-            this.naprejMSpy = sinon.spy(PlanerTerminView.prototype, 'naprejMesec');
+            this.nazajMSpy = sinon.spy(PlanerIzbiraDatumaView.prototype, 'nazajMesec');
+            this.nazajTSpy = sinon.spy(PlanerIzbiraDatumaView.prototype, 'nazajTeden');
+            this.naprejTSpy = sinon.spy(PlanerIzbiraDatumaView.prototype, 'naprejTeden');
+            this.naprejMSpy = sinon.spy(PlanerIzbiraDatumaView.prototype, 'naprejMesec');
 
-            this.view = new PlanerTerminView({
+            this.view = new PlanerIzbiraDatumaView({
                 model: new Backbone.Model({
                     datum: moment().toISOString()
                 })
@@ -26,10 +26,10 @@ define([
             this.view.render();
         });
         afterEach(function () {
-            PlanerTerminView.prototype.nazajMesec.restore();
-            PlanerTerminView.prototype.nazajTeden.restore();
-            PlanerTerminView.prototype.naprejTeden.restore();
-            PlanerTerminView.prototype.naprejMesec.restore();
+            PlanerIzbiraDatumaView.prototype.nazajMesec.restore();
+            PlanerIzbiraDatumaView.prototype.nazajTeden.restore();
+            PlanerIzbiraDatumaView.prototype.naprejTeden.restore();
+            PlanerIzbiraDatumaView.prototype.naprejMesec.restore();
         });
 
         it('elementi v DOM', function () {

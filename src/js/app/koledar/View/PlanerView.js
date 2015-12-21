@@ -11,7 +11,7 @@ define([
     '../Model/Dogodki',
     '../Model/PlanerTeden',
     './PlanerTedenView',
-    './PlanerTerminView',
+    './PlanerIzbiraDatumaView',
     'template!../tpl/planer-layout.tpl'
 ], function (
         Marionette,
@@ -22,7 +22,7 @@ define([
         Dogodki,
         PlanerTeden,
         PlanerTedenView,
-        PlanerTerminView,
+        PlanerIzbiraDatumaView,
         tpl
         ) {
 
@@ -33,6 +33,7 @@ define([
      * @type @exp;Marionette@pro;LayoutView@call;extend
      */
     var PlanerView = Marionette.LayoutView.extend({
+        className: 'planer',
         template: tpl,
         regions: {
             tedenR: '.region-teden',
@@ -42,7 +43,7 @@ define([
             this.datum = options.datum || moment();
         },
         onRender: function () {
-            this.form = new PlanerTerminView({
+            this.form = new PlanerIzbiraDatumaView({
                 model: new Backbone.Model({
                     datum: moment(this.datum).toISOString()
                 })

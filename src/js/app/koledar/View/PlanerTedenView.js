@@ -61,35 +61,40 @@ define([
         this.renderZvecer();
     };
     DanView.prototype.renderDopoldne = function () {
-        var view = this.dopoldneView = new PlanerDogodkiView({
-            collection: this.model.get('dopoldne'),
-            zacetek: moment(this.model.get('datum')).set('hour', 10),
-            konec: moment(this.model.get('datum')).set('hour', 14)
-        });
-        this.bindToDogodkiView(view);
+        var view = this.dopoldneView = this.getDogodekView(
+            this.model.get('dopoldne'),
+            moment(this.model.get('datum')).set('hour', 10),
+            moment(this.model.get('datum')).set('hour', 14)
+        );
         this.dopoldneR.show(view);
     };
     DanView.prototype.renderPopoldne = function () {
-        var view = this.popoldneView = new PlanerDogodkiView({
-            collection: this.model.get('popoldne'),
-            zacetek: moment(this.model.get('datum')).set('hour', 14),
-            konec: moment(this.model.get('datum')).set('hour', 19)
-        });
-        this.bindToDogodkiView(view);
+        var view = this.popoldneView = this.getDogodekView(
+            this.model.get('popoldne'),
+            moment(this.model.get('datum')).set('hour', 14),
+            moment(this.model.get('datum')).set('hour', 19)
+        );
         this.popoldneR.show(view);
     };
     DanView.prototype.renderZvecer = function () {
-        var view = this.zvecerView = new PlanerDogodkiView({
-            collection: this.model.get('zvecer'),
-            zacetek: moment(this.model.get('datum')).set('hour', 19),
-            konec: moment(this.model.get('datum')).set('hour', 23)
-        });
-        this.bindToDogodkiView(view);
+        var view = this.zvecerView = this.getDogodekView(
+            this.model.get('zvecer'),
+            moment(this.model.get('datum')).set('hour', 19),
+            moment(this.model.get('datum')).set('hour', 23)
+        );
         this.zvecerR.show(view);
     };
-    DanView.prototype.bindToDogodkiView = function (view) {
+    DanView.prototype.getDogodekView = function (collection, zacetek, konec) {
+        var view = new PlanerDogodkiView({
+            collection: collection,
+            zacetek: zacetek,
+            konec: konec
+        });
+        
         view.on('prikazi:dogodek', this.prikaziDogodek, this);
         view.on('dodaj:dogodek', this.dodajDogodek, this);
+        
+        return view;
     };
     DanView.prototype.prikaziDogodek = function (model) {
         var razred = model.get('dogodek').razred;
@@ -153,6 +158,7 @@ define([
      */
 
     var PlanerTedenView = Marionette.CollectionView.extend({
+        className: 'planer-teden',
         childView: DanView
     });
 

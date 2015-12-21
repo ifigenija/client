@@ -7,7 +7,7 @@ define([
     'backbone',
     'app/koledar/Model/RazredDogodek',
     'app/koledar/View/PlaniranjeView',
-    'text!./fixtures/dogodekModelFixture.json'
+    'text!./fixtures/razredDogodka.json'
 ], function (
         $,
         Backbone,
