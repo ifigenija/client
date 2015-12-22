@@ -10,6 +10,7 @@ define([
     './SelectVzporedniceView',
     './SelectSodelujociView',
     'template!../tpl/izbira-upr.tpl',
+    'baseUrl',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -21,6 +22,7 @@ define([
         SelectVzporedniceView,
         SelectSodelujociView,
         tpl,
+        baseUrl,
         $
         ) {
     var IzbriraUprizoritveView = Marionette.LayoutView.extend({
@@ -41,7 +43,6 @@ define([
     IzbriraUprizoritveView.prototype.render = function () {
         this.renderUprizoritev();
         this.renderVzporednice();
-        this.renderOsebe();
     };
 
     IzbriraUprizoritveView.prototype.renderUprizoritev = function () {
@@ -75,7 +76,7 @@ define([
         view.on('selected', self.onSelected, self);
         self.vzporedniceR.show(view);
     };
-    
+
     IzbriraUprizoritveView.prototype.rpcError = function (data) {
     };
 
@@ -88,9 +89,18 @@ define([
         });
     };
     IzbriraUprizoritveView.prototype.renderOsebe = function () {
-        var view = this.osebeView = new SelectSodelujociView();
-        view.on('change', this.onChange, this);
-        this.osebeR.show(view);
+        var uprID = this.model.get('uprizoritev');
+        var collection = new Backbone.Collection({
+            url: baseUrl + '/rest/funkcije/vzporednica?uprizoritev='+ uprID
+        });
+        var self = this;
+        collection.fetch({success: function () {
+                var view = self.osebeView = new SelectSodelujociView({
+                    collection: collection
+                });
+                view.on('change', self.onChange, self);
+                self.osebeR.show(view);
+            }});
     };
 
     IzbriraUprizoritveView.prototype.onSelected = function (model) {
@@ -102,6 +112,8 @@ define([
             zacetek: this.model.get('zacetek'),
             konec: this.model.get('konec')
         });
+
+        this.renderOsebe();
     };
     IzbriraUprizoritveView.prototype.onChange = function (funkcije) {
         this.rpcVzporednice({
