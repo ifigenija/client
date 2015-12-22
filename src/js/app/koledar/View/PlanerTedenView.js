@@ -38,6 +38,10 @@ define([
         IzbiraDatumView
         ) {
 
+        var uraZacetek = 10;
+        var uraDopoldne = 14;
+        var uraPopoldne = 19;
+        var uraZvecer = 23;
     /**
      * Prikazuje posamezni dan v planeru
      * Regije za tri dele dneva, popoldne, dopoldne, zvečer. 
@@ -63,24 +67,24 @@ define([
     DanView.prototype.renderDopoldne = function () {
         var view = this.dopoldneView = this.getDogodekView(
             this.model.get('dopoldne'),
-            moment(this.model.get('datum')).set('hour', 10),
-            moment(this.model.get('datum')).set('hour', 14)
+            moment(this.model.get('datum')).set('hour', uraZacetek),
+            moment(this.model.get('datum')).set('hour', uraDopoldne)
         );
         this.dopoldneR.show(view);
     };
     DanView.prototype.renderPopoldne = function () {
         var view = this.popoldneView = this.getDogodekView(
             this.model.get('popoldne'),
-            moment(this.model.get('datum')).set('hour', 14),
-            moment(this.model.get('datum')).set('hour', 19)
+            moment(this.model.get('datum')).set('hour', uraDopoldne),
+            moment(this.model.get('datum')).set('hour', uraPopoldne)
         );
         this.popoldneR.show(view);
     };
     DanView.prototype.renderZvecer = function () {
         var view = this.zvecerView = this.getDogodekView(
             this.model.get('zvecer'),
-            moment(this.model.get('datum')).set('hour', 19),
-            moment(this.model.get('datum')).set('hour', 23)
+            moment(this.model.get('datum')).set('hour', uraPopoldne),
+            moment(this.model.get('datum')).set('hour', uraZvecer)
         );
         this.zvecerR.show(view);
     };
