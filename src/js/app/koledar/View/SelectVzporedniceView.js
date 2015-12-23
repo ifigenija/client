@@ -31,14 +31,18 @@ define([
             });
         },
         getZasedeni: function () {
-            if (this.model.get('osebe')) {
-
+            var osebe = this.model.get('osebe');
+            if (osebe) {
+                
             }
+            return null;
         },
         getNezaseden: function () {
-            if (this.model.get('osebe')) {
-
+            var osebe = this.model.get('osebe');
+            if (osebe) {
+                
             }
+            return null;
         }
     });
 

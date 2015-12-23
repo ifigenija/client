@@ -28,7 +28,7 @@ define([
     var VzpUprizoritevView = Marionette.ItemView.extend({
         tagName: 'span',
         className: 'vzp-uprizoritev',
-        tempalte: vzpUprItemTpl,
+        template: vzpUprItemTpl,
         triggers: {
             'click .odstrani': 'odstrani'
         }
@@ -41,10 +41,10 @@ define([
         tagName: 'span',
         className: 'vzp-uprizoritve',
         template: vzpUprTpl,
-        childViewContainer: 'vzp-upr-container',
+        childViewContainer: '.vzp-upr-container',
         childView: VzpUprizoritevView,
         triggers: {
-            'click .odstrani-vse': 'odstraniVse'
+            'click .odstrani-vse': 'odstrani:vse'
         },
         onChildviewOdstrani: function (child) {
             this.collection.remove(child.model);
@@ -53,5 +53,6 @@ define([
             this.collection.reset();
         }
     });
+    
     return VzpUprView;
 });

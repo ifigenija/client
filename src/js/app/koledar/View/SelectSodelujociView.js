@@ -39,7 +39,7 @@ define([
         childViewContainer: 'region-osebe',
         childview: OsebaView,
         onChildviewIzbranaOseba: function (child) {
-            this.each(function (model) {
+            this.collection.each(function (model) {
                 model.set('izbran', false);
             });
             child.model.set('izbran', true);
@@ -89,7 +89,7 @@ define([
             });
             funkcijaOseba[funkcija.get('id')] = osebaTemp.get('id');
         });
-        this.trigger('selected:model', funkcijaOseba);
+        this.trigger('change', funkcijaOseba);
     };
 
     return SelectSodelujociView;
