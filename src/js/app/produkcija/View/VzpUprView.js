@@ -21,6 +21,10 @@ define([
         vzpUprTpl
         ) {
 
+    /**
+     * Zadolžen za izpis ene uprizoritve
+     * @type @exp;Marionette@pro;ItemView@call;extend
+     */
     var VzpUprizoritevView = Marionette.ItemView.extend({
         tagName: 'span',
         className: 'vzp-uprizoritev',
@@ -29,6 +33,10 @@ define([
             'click .odstrani': 'odstrani'
         }
     });
+    /**
+     * Zadolžen za izpis izbranih uprizoritev/vzporednic
+     * @type @exp;Marionette@pro;CompositeView@call;extend
+     */
     var VzpUprView = Marionette.CompositeView.extend({
         tagName: 'span',
         className: 'vzp-uprizoritve',

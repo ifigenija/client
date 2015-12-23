@@ -1,6 +1,6 @@
 define([
     'jquery',
-    'text!./fixtures/terminiStoritve.json',
+    'text!../fixtures/terminiStoritve.json',
     'app/koledar/Model/TerminiStoritev',
     'app/koledar/Model/Alternacije',
     'app/koledar/Model/Osebe'

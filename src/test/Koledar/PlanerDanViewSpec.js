@@ -5,8 +5,8 @@ define([
     'app/koledar/View/PlanerTedenView',
     'app/koledar/Model/PlanerTeden',
     'app/koledar/Model/RazredDogodek',
-    'text!./fixtures/dogodki.json',
-    'text!./fixtures/razredDogodka.json'
+    'text!../fixtures/dogodki.json',
+    'text!../fixtures/razredDogodka.json'
 ], function (
         $,
         moment,
