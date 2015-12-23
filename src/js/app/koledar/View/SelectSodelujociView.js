@@ -15,82 +15,44 @@ define([
         Marionette
         ) {
 
-    /**
-     * View odgovoren za prikaz osebe
-     * @type @exp;Marionette@pro;ItemView@call;extend
-     */
     var OsebaView = Marionette.ItemView.extend({
-        tagName: 'li',
-        classname: 'oseba',
-        template: Handlebars.compile('<div class="oseba">{{label}}</div>'),
-        trigger: {
-            'click': 'izbrana:oseba'
+        className: 'sodelujoci-oseba',
+        template: '',
+        triggers:{
+            'click' : 'selected'
         }
     });
-
-    /**
-     * View odgovoren za prikaz Oseb funkcije in izbiro osebe
-     * @type @exp;Marionette@pro;CompositeView@call;extend
-     */
+    
     var FunkcijaView = Marionette.CompositeView.extend({
-        tagName: 'li',
-        className: 'select-funkcija',
-        template: Handlebars.compile('<h4 class="title">{{title}}</h4><ul class="region-osebe"></ul>'),
-        childViewContainer: 'region-osebe',
-        childview: OsebaView,
-        onChildviewIzbranaOseba: function (child) {
-            this.collection.each(function (model) {
-                model.set('izbran', false);
-            });
-            child.model.set('izbran', true);
-            this.trigger('change', child);
+        className: 'sodelujoci-funkcija',
+        template: '',
+        childView: OsebaView,
+        onChildviewSelected: function(item){
+            //dodaj attribute selected
+            this.trigger('selected');
         }
     });
 
-    /**
-     * View odgovoren za prikaz vseh funkcij z več kot eno osebo
-     * @type @exp;Marionette@pro;CollectionView@call;extend
-     */
-    var SelectSodelujociView = Marionette.CollectionView.extend({
-        tagName: 'ul',
-        className: 'select-funkcije',
+    var FunkcijeView = Marionette.CompositeView.extend({
+        className: 'sodelujoci-funkcije',
+        template: '',
         childView: FunkcijaView,
-        childViewOptions: function (model, index) {
-            return{
-                collection: model.get('osebe')
-            };
-        },
-        initialize: function () {
-            this.collection.sortBy('uprizoritev_id');
+        onChildviewSelected: function(item){
+            this.trigger('selected');
         }
     });
-
-    /**
-     * Ko child proži change se izvede ta metoda.
-     * sestavi polje    [
-     *                      funkcijaid: osebaid
-     *                      funkcijaid: osebaid
-     *                  ]
-     * @param {type} item
-     * @returns {undefined}
-     */
-    SelectSodelujociView.prototype.onChildviewChange = function (item) {
-        var funkcijaOseba = [];
-        //gremo skozi vse funkcije
-        this.collection.each(function (funkcija) {
-            var osebe = funkcija.get('osebe');
-            var osebaTemp;
-            //gremo skozi vse osebe
-            osebe.each(function (oseba) {
-                //v primeru da je oseba izbrana
-                if (oseba.get('izbrana')) {
-                    osebaTemp = oseba;
-                }
-            });
-            funkcijaOseba[funkcija.get('id')] = osebaTemp.get('id');
-        });
-        this.trigger('change', funkcijaOseba);
-    };
+    
+    var UprizoritevView = Marionette.CompositeView.extend({
+        className: 'sodelujoci-uprizoritev',
+        template: '',
+        childView: FunkcijeView
+    });
+    
+    var SelectSodelujociView = Marionette.CompositeView.extend({
+        className: 'sodelujoci-upritve',
+        template: '',
+        childView: UprizoritevView
+    });
 
     return SelectSodelujociView;
 });
