@@ -59,6 +59,9 @@ define([
             return{
                 collection: model.get('osebe')
             };
+        },
+        initialize: function () {
+            this.collection.sortBy('uprizoritev_id');
         }
     });
 

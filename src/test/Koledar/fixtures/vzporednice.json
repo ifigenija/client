@@ -1,0 +1,39 @@
+{
+    "id": "01",
+    "label": "Uprizoritev1",
+    "funkcije":[
+        {
+            "id": "02",
+            "label":"Funkcija1",
+            "zasedene":[
+                {
+                    "id":"03",
+                    "label":"Lovro",
+                    "polnoIme":"Lovro Rojko"
+                },
+                {
+                    "id":"04",
+                    "label":"Vesna",
+                    "polnoIme":"Vesna Rojko"
+                },
+                {
+                    "id":"05",
+                    "label":"Primož",
+                    "polnoIme":"Primož Rojko"
+                }
+            ],
+            "nezasedene":[
+                {
+                    "id":"06",
+                    "label":"Boris",
+                    "polnoIme":"Boris Rojko"
+                },
+                {
+                    "id":"07",
+                    "label":"Simon",
+                    "polnoIme":"Simon Rojko"
+                }
+            ]
+        }
+    ]
+}
