@@ -21,10 +21,7 @@ define([
      */
     var OsebaView = Marionette.ItemView.extend({
         className: 'vzporednice-oseba',
-        template: Handlebars.compile('<div>{{label}}</div>'),
-        triggers: {
-            'click': 'change'
-        }
+        template: Handlebars.compile('<div>{{label}}</div>')
     });
 
     /**
@@ -33,10 +30,7 @@ define([
      */
     var FunkcijeView = Marionette.CollectionView.extend({
         className: 'vzporednice-funkcije',
-        childView: OsebaView,
-        onChildviewChange: function (item) {
-            this.trigger('change', item.model);
-        }
+        childView: OsebaView
     });
 
     /**
@@ -47,9 +41,6 @@ define([
         className: 'vzporednice-uprizoritev',
         template: Handlebars.compile('<div>{{label}}</div>'),
         childView: FunkcijeView,
-        initialize: function(options){
-            this.funkcijeOsebe = [];
-        },
         childViewOptions: function (model, index) {
             var modeli = model.get('osebe');
             var coll = new Backbone.Collection(modeli);
@@ -57,9 +48,8 @@ define([
                 collection: coll
             };
         },
-        onChildviewChange: function (item, osebaM) {
-            this.funkcijeOsebe[item.model.get('id')] = osebaM.get('id');
-            this.trigger('change', this.funkcijeOsebe);
+        triggers: {
+            'click': 'selected'
         }
     });
 
@@ -70,9 +60,6 @@ define([
     var SelectVzporedniceView = Marionette.CollectionView.extend({
         className: 'vzporednice-uprizoritve',
         childView: UprizoritevView,
-        initialize: function(){
-            this.izbraneOsebe = [];
-        },
         childViewOptions: function (model, index) {
             var modeli = model.get('alterCountFunkcije');
             var coll = new Backbone.Collection(modeli);
@@ -80,9 +67,8 @@ define([
                 collection: coll
             };
         },
-        onChildviewChange: function (item, funkcijaOseba) {
-            this.izbraneOsebe.concat(funkcijaOseba);
-            this.trigger('change', this.izbraneOsebe);
+        onChildviewSelected: function (child) {
+            this.trigger('selected', child.model);
         }
     });
 

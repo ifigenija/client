@@ -31,8 +31,8 @@ define([
         });
         it('proži change', function () {
             var spy = sinon.spy();
-            this.view.on('change', spy);
-            var $osebe = this.view.$('.vzporednice-oseba');
+            this.view.on('selected', spy);
+            var $osebe = this.view.$('.vzporednice-uprizoritev');
             $osebe.first().click();
 
             expect(spy).to.have.been.called;
