@@ -2,35 +2,37 @@
  * Licenca GPLv3
  */
 define([
+    'radio',
+    'i18next',
+    'backbone',
     'app/Dokument/View/DokumentView',
-    './FunkcijaView',
-    './VajaView',
-    './PredstavaView',
     'template!../tpl/uprizoritev-edit.tpl',
     'template!../tpl/uprizoritev-form.tpl',
     'formSchema!uprizoritev',
-    'i18next',
+    './FunkcijaView',
+    './VajaView',
+    './PredstavaView',
     'app/Zapisi/View/ZapisiLayout',
     'app/Max/View/TabControl',
-    'radio',
     'app/arhiv/Model/Besedilo',
     'app/arhiv/View/BesediloModal',
-    'backbone'
+    'app/produkcija/View/VzporedniceView'
 ], function (
+        Radio,
+        i18next,
+        Backbone,
         DokumentView,
-        FunkcijaView,
-        VajaView,
-        PredstavaView,
         tpl,
         formTpl,
         shema,
-        i18next,
+        FunkcijaView,
+        VajaView,
+        PredstavaView,
         ZapisiLayout,
         TabControl,
-        Radio,
         BesediloModel,
         BesediloModal,
-        Backbone
+        VzporedniceView
         ) {
 
     /**
@@ -61,6 +63,10 @@ define([
         {
             name: i18next.t('uprizoritev.predstave'),
             event: 'predstave'
+        },
+        {
+            name: i18next.t('uprizoritev.vzporednice'),
+            event: 'vzporednice'
         }
     ];
 
@@ -477,6 +483,15 @@ define([
         });
 
         view.detailName = 'planPredstave';
+        this.regionDetail.show(view);
+    };
+    
+    UprizoritevEditView.prototype.onVzporednice = function () {
+        this.skrijSplosni();
+        
+        var view = new VzporedniceView({
+            model: this.model
+        });
         this.regionDetail.show(view);
     };
 

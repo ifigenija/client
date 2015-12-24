@@ -29,7 +29,7 @@ define([
 
             expect($osebe.length).to.equal(5);
         });
-        it('proži change', function () {
+        it('proži selected', function () {
             var spy = sinon.spy();
             this.view.on('selected', spy);
             var $osebe = this.view.$('.vzporednice-uprizoritev');

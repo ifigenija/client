@@ -28,24 +28,49 @@ define([
      * Namenjena izroisu oseb v funkciji
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
-    var FunkcijeView = Marionette.CollectionView.extend({
-        className: 'vzporednice-funkcije',
+    var OsebeView = Marionette.CollectionView.extend({
+        className: 'vzporednice-osebe',
         childView: OsebaView
     });
+    
+    var FunkcijeView = Marionette.LayoutView.extend({
+        className: 'vzporednice-funkcije',
+        template: Handlebars.compile('<div class="zasedene-osebe"></div><div class="nezasedene-osebe"></div>'),
+        regions:{
+            zasedeneR: '.zasedene-osebe',
+            nezasedeneR: '.nezasedene-osebe'
+        },
+        onRender: function(){
+            var zasedeneView = new OsebeView({
+                collection: this.options.zasedene
+            });
+            var nezasedeneView = new OsebeView({
+                collection: this.options.nezasedene
+            });
+            
+            this.zasedeneR.show(zasedeneView);
+            this.nezasedeneR.show(nezasedeneView);
+        }
+    });
 
+    //potrebno bo pretvoriti v layout view z dvema regijama in collectionview za zasedene in nezasedene
     /**
      * Namenjena izrisu funkcij v uprizoritvi
      * @type @exp;Marionette@pro;CompositeView@call;extend
      */
     var UprizoritevView = Marionette.CompositeView.extend({
         className: 'vzporednice-uprizoritev',
-        template: Handlebars.compile('<div>{{label}}</div>'),
+        template: Handlebars.compile('<div>{{label}}</div><div class="funkcije-container"></div>'),
         childView: FunkcijeView,
+        childViewContainer: '.funkcije-container',
         childViewOptions: function (model, index) {
-            var modeli = model.get('osebe');
-            var coll = new Backbone.Collection(modeli);
+            var modeli = model.get('zasedene');
+            var collZ = new Backbone.Collection(modeli);
+            var modeli = model.get('nezasedene');
+            var collNZ = new Backbone.Collection(modeli);
             return{
-                collection: coll
+                zasedene: collZ,
+                nezasedene: collNZ
             };
         },
         triggers: {
@@ -61,7 +86,7 @@ define([
         className: 'vzporednice-uprizoritve',
         childView: UprizoritevView,
         childViewOptions: function (model, index) {
-            var modeli = model.get('alterCountFunkcije');
+            var modeli = model.get('konfliktneFunkcije');
             var coll = new Backbone.Collection(modeli);
             return{
                 collection: coll
