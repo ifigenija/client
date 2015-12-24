@@ -51,7 +51,7 @@ define([
             this.funkcijeOsebe = [];
         },
         childViewOptions: function (model, index) {
-            var modeli = model.get('osebe');
+            var modeli = model.get('alternacije');
             var coll = new Backbone.Collection(modeli);
             return{
                 collection: coll
@@ -74,7 +74,7 @@ define([
             this.izbraneOsebe = [];
         },
         childViewOptions: function (model, index) {
-            var modeli = model.get('alterCountFunkcije');
+            var modeli = model.get('funkcije');
             var coll = new Backbone.Collection(modeli);
             return{
                 collection: coll
