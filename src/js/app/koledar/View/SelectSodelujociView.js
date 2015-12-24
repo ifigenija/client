@@ -15,43 +15,75 @@ define([
         Marionette
         ) {
 
+    /**
+     * Namenjena izrisu osebe
+     * @type @exp;Marionette@pro;ItemView@call;extend
+     */
     var OsebaView = Marionette.ItemView.extend({
         className: 'sodelujoci-oseba',
-        template: '',
-        triggers:{
-            'click' : 'selected'
-        }
-    });
-    
-    var FunkcijaView = Marionette.CompositeView.extend({
-        className: 'sodelujoci-funkcija',
-        template: '',
-        childView: OsebaView,
-        onChildviewSelected: function(item){
-            //dodaj attribute selected
-            this.trigger('selected');
+        template: Handlebars.compile('<div>{{label}}</div>'),
+        triggers: {
+            'click': 'change'
         }
     });
 
-    var FunkcijeView = Marionette.CompositeView.extend({
+    /**
+     * Namenjena izroisu oseb v funkciji
+     * @type @exp;Marionette@pro;CollectionView@call;extend
+     */
+    var FunkcijeView = Marionette.CollectionView.extend({
         className: 'sodelujoci-funkcije',
-        template: '',
-        childView: FunkcijaView,
-        onChildviewSelected: function(item){
-            this.trigger('selected');
+        childView: OsebaView,
+        onChildviewChange: function (item) {
+            this.trigger('change', item.model);
         }
     });
-    
+
+    /**
+     * Namenjena izrisu funkcij v uprizoritvi
+     * @type @exp;Marionette@pro;CompositeView@call;extend
+     */
     var UprizoritevView = Marionette.CompositeView.extend({
         className: 'sodelujoci-uprizoritev',
-        template: '',
-        childView: FunkcijeView
+        template: Handlebars.compile('<div>{{label}}</div>'),
+        childView: FunkcijeView,
+        initialize: function(options){
+            this.funkcijeOsebe = [];
+        },
+        childViewOptions: function (model, index) {
+            var modeli = model.get('osebe');
+            var coll = new Backbone.Collection(modeli);
+            return{
+                collection: coll
+            };
+        },
+        onChildviewChange: function (item, osebaM) {
+            this.funkcijeOsebe[item.model.get('id')] = osebaM.get('id');
+            this.trigger('change', this.funkcijeOsebe);
+        }
     });
-    
-    var SelectSodelujociView = Marionette.CompositeView.extend({
+
+    /**
+     * namenjena izrisu uprizoritev
+     * @type @exp;Marionette@pro;CollectionView@call;extend
+     */
+    var SelectSodelujociView = Marionette.CollectionView.extend({
         className: 'sodelujoci-upritve',
-        template: '',
-        childView: UprizoritevView
+        childView: UprizoritevView,
+        initialize: function(){
+            this.izbraneOsebe = [];
+        },
+        childViewOptions: function (model, index) {
+            var modeli = model.get('alterCountFunkcije');
+            var coll = new Backbone.Collection(modeli);
+            return{
+                collection: coll
+            };
+        },
+        onChildviewChange: function (item, funkcijaOseba) {
+            this.izbraneOsebe.concat(funkcijaOseba);
+            this.trigger('change', this.izbraneOsebe);
+        }
     });
 
     return SelectSodelujociView;

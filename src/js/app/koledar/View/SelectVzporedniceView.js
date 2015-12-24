@@ -6,72 +6,85 @@ define([
     'i18next',
     'app/bars',
     'backbone',
-    'marionette',
-    'underscore'
+    'marionette'
 ], function (
         Radio,
         i18next,
         Handlebars,
         Backbone,
-        Marionette,
-        _
+        Marionette
         ) {
 
-    var ItemView = Marionette.ItemView.extend({
-        tagName: 'li',
-        className: 'vzporednica',
-        template: Handlebars.compile('{{label}}'),
+    /**
+     * Namenjena izrisu osebe
+     * @type @exp;Marionette@pro;ItemView@call;extend
+     */
+    var OsebaView = Marionette.ItemView.extend({
+        className: 'vzporednice-oseba',
+        template: Handlebars.compile('<div>{{label}}</div>'),
         triggers: {
-            'click': 'selected'
-        },
-        serializeData: function () {
-            return _.extend(this.model.toJSON(), {
-                zasedeni: this.getZasedeni(),
-                nezasedeni: this.getNezasedeni()
-            });
-        },
-        getZasedeni: function () {
-            var osebe = this.model.get('osebe');
-            if (osebe) {
-                
-            }
-            return null;
-        },
-        getNezaseden: function () {
-            var osebe = this.model.get('osebe');
-            if (osebe) {
-                
-            }
-            return null;
+            'click': 'change'
         }
     });
 
-    var SelectVzporedniceView = Marionette.CollectionView.extend({
-        tagName: 'ul',
-        className: 'vzporednice',
-        childView: ItemView,
-        initialize: function () {
-            this.collection.comparator = function (model1, model2) {
-                if (model1.get('osebe') && model2.get('osebe')) {
-                    return 0;
-                } else if (!model1.get('osebe') && !model2.get('osebe')) {
-                    return 0;
-                }
-                else if (model1.get('osebe')) {
-                    return 1;
-                }
-                else if (model2.get('osebe')) {
-                    return -1;
-                }
+    /**
+     * Namenjena izroisu oseb v funkciji
+     * @type @exp;Marionette@pro;CollectionView@call;extend
+     */
+    var FunkcijeView = Marionette.CollectionView.extend({
+        className: 'vzporednice-funkcije',
+        childView: OsebaView,
+        onChildviewChange: function (item) {
+            this.trigger('change', item.model);
+        }
+    });
+
+    /**
+     * Namenjena izrisu funkcij v uprizoritvi
+     * @type @exp;Marionette@pro;CompositeView@call;extend
+     */
+    var UprizoritevView = Marionette.CompositeView.extend({
+        className: 'vzporednice-uprizoritev',
+        template: Handlebars.compile('<div>{{label}}</div>'),
+        childView: FunkcijeView,
+        initialize: function(options){
+            this.funkcijeOsebe = [];
+        },
+        childViewOptions: function (model, index) {
+            var modeli = model.get('osebe');
+            var coll = new Backbone.Collection(modeli);
+            return{
+                collection: coll
             };
-            this.collection.sort();
+        },
+        onChildviewChange: function (item, osebaM) {
+            this.funkcijeOsebe[item.model.get('id')] = osebaM.get('id');
+            this.trigger('change', this.funkcijeOsebe);
         }
     });
 
-    SelectVzporedniceView.prototype.onChildviewSelected = function (item) {
-        var model = item.model;
-        this.trigger('selected', model);
-    };
+    /**
+     * namenjena izrisu uprizoritev
+     * @type @exp;Marionette@pro;CollectionView@call;extend
+     */
+    var SelectVzporedniceView = Marionette.CollectionView.extend({
+        className: 'vzporednice-uprizoritve',
+        childView: UprizoritevView,
+        initialize: function(){
+            this.izbraneOsebe = [];
+        },
+        childViewOptions: function (model, index) {
+            var modeli = model.get('alterCountFunkcije');
+            var coll = new Backbone.Collection(modeli);
+            return{
+                collection: coll
+            };
+        },
+        onChildviewChange: function (item, funkcijaOseba) {
+            this.izbraneOsebe.concat(funkcijaOseba);
+            this.trigger('change', this.izbraneOsebe);
+        }
+    });
 
     return SelectVzporedniceView;
 });
