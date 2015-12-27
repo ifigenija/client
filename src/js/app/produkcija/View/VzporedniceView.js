@@ -69,6 +69,7 @@ define([
             var view = new SelectVzporedniceView({
                 collection: coll
             });
+            view.on('selected', self.onSelected,self);
             self.vzporedniceR.show(view);
         };
 
@@ -90,7 +91,10 @@ define([
 
         var success = function (data) {
             var coll = new Backbone.Collection(data);
-            var view = new SelectVzporedniceView({
+            var SVV = SelectVzporedniceView.extend({
+                onChildviewSelected: function (child) {}
+            });
+            var view = new SVV({
                 collection: coll
             });
             self.vzporedniceR.show(view);
@@ -118,21 +122,20 @@ define([
                 var view = new SelectSodelujociView({
                     collection: planirane
                 });
+                view.on('selected',self.onSelected,self);
                 self.osebeR.show(view);
             }
         });
     };
 
-
     VzporedniceView.prototype.onSelected = function (model) {
         this.vzpUprColl.add(model);
         var uprIDji = this.vzpUprColl.pluck('id');
 
-        this.rpcVzporednice({
-            uprizoritve: uprIDji
-        });
-
+        this.renderVzporednice();
+        this.renderOsebe();
         this.renderUprizoritve();
+//        this.renderPrekrivanje();
     };
 
     return VzporedniceView;
