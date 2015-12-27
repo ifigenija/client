@@ -42,11 +42,26 @@ define([
 
     VzporedniceView.prototype.initialize = function (options) {
         this.vzpUprColl = new Backbone.Collection();
+        this.CollectionFunkcij = new Backbone.Collection();
+        this.vzpUprColl.on('add remove', this.uprizoritevChange, this);
         if (options && options.model) {
             this.model = options.model;
         } else {
             //napaka
         }
+    };
+    VzporedniceView.prototype.uprizoritevChange = function (model) {
+        var planirane = new PlanFun({
+            uprizoritevId: model.get('id')
+        });
+        var self = this;
+        planirane.fetch({
+            success: function () {
+                self.CollectionFunkcij.add(planirane);
+                self.renderOsebe();
+            }
+        });
+
     };
     VzporedniceView.prototype.onRender = function () {
         this.renderUprizoritve();
@@ -69,7 +84,7 @@ define([
             var view = new SelectVzporedniceView({
                 collection: coll
             });
-            view.on('selected', self.onSelected,self);
+            view.on('selected', self.onSelected, self);
             self.vzporedniceR.show(view);
         };
 
@@ -92,7 +107,8 @@ define([
         var success = function (data) {
             var coll = new Backbone.Collection(data);
             var SVV = SelectVzporedniceView.extend({
-                onChildviewSelected: function (child) {}
+                onChildviewSelected: function (child) {
+                }
             });
             var view = new SVV({
                 collection: coll
@@ -113,19 +129,11 @@ define([
         }, success, error);
     };
     VzporedniceView.prototype.renderOsebe = function () {
-        var planirane = new PlanFun({
-            uprizoritevId: this.model.get('id')
+
+        var view = new SelectSodelujociView({
+            collection: this.CollectionFunkcij
         });
-        var self = this;
-        planirane.fetch({
-            success: function () {
-                var view = new SelectSodelujociView({
-                    collection: planirane
-                });
-                view.on('selected',self.onSelected,self);
-                self.osebeR.show(view);
-            }
-        });
+        this.osebeR.show(view);
     };
 
     VzporedniceView.prototype.onSelected = function (model) {
@@ -133,7 +141,6 @@ define([
         var uprIDji = this.vzpUprColl.pluck('id');
 
         this.renderVzporednice();
-        this.renderOsebe();
         this.renderUprizoritve();
 //        this.renderPrekrivanje();
     };
