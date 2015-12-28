@@ -38,7 +38,7 @@ define([
     var FunkcijeView = Marionette.LayoutView.extend({
         tagName: 'li',
         className: 'vzporednice-funkcije',
-        template: Handlebars.compile('<ul class="zasedene-osebe"></ul><ul class="nezasedene-osebe"></ul>'),
+        template: Handlebars.compile('<div>{{label}}</div><ul class="zasedene-osebe"></ul><ul class="nezasedene-osebe"></ul>'),
         regions: {
             zasedeneR: '.zasedene-osebe',
             nezasedeneR: '.nezasedene-osebe'
@@ -68,9 +68,9 @@ define([
         childView: FunkcijeView,
         childViewContainer: '.funkcije-container',
         childViewOptions: function (model, index) {
-            var modeli = model.get('zasedene');
+            var modeli = model.get('zasedeneOsebe');
             var collZ = new Backbone.Collection(modeli);
-            var modeli = model.get('nezasedene');
+            var modeli = model.get('nezasedeneOsebe');
             var collNZ = new Backbone.Collection(modeli);
             return{
                 zasedene: collZ,

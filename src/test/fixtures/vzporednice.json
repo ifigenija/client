@@ -1,84 +1,45 @@
 {
     "id": "01",
     "label": "Uprizoritev1",
-    "konfliktneFunkcije":[
+    "konfliktneFunkcije": [
         {
             "id": "02",
-            "label":"Funkcija1",
-            "zasedene":[
+            "label": "Funkcija1",
+            "zasedeneOsebe": [
                 {
-                    "id":"05",
-                    "label":"Primož",
-                    "polnoIme":"Primož Rojko"
+                    "id": "05",
+                    "label": "Primož",
+                    "polnoIme": "Primož Rojko"
                 }
             ],
-            "nezasedene":[
+            "nezasedeneOsebe": [
                 {
-                    "id":"07",
-                    "label":"Simon",
-                    "polnoIme":"Simon Rojko"
+                    "id": "07",
+                    "label": "Simon",
+                    "polnoIme": "Simon Rojko"
                 }
             ]
         },
         {
             "id": "03",
-            "label":"Funkcija2",
-            "zasedene":[
+            "label": "Funkcija2",
+            "zasedeneOsebe": [
                 {
-                    "id":"03",
-                    "label":"Lovro",
-                    "polnoIme":"Lovro Rojko"
+                    "id": "03",
+                    "label": "Lovro",
+                    "polnoIme": "Lovro Rojko"
                 },
                 {
-                    "id":"04",
-                    "label":"Vesna",
-                    "polnoIme":"Vesna Rojko"
+                    "id": "04",
+                    "label": "Vesna",
+                    "polnoIme": "Vesna Rojko"
                 }
             ],
-            "nezasedene":[
+            "nezasedeneOsebe": [
                 {
-                    "id":"06",
-                    "label":"Boris",
-                    "polnoIme":"Boris Rojko"
-                }
-            ]
-        }
-    ],
-    "alterCountFunkcije":[
-        {
-            "id": "02",
-            "label":"Funkcija1",
-            "osebe":[
-                {
-                    "id":"05",
-                    "label":"Primož",
-                    "polnoIme":"Primož Rojko"
-                },
-                {
-                    "id":"07",
-                    "label":"Simon",
-                    "polnoIme":"Simon Rojko"
-                }
-            ]
-        },
-        {
-            "id": "03",
-            "label":"Funkcija2",
-            "osebe":[
-                {
-                    "id":"03",
-                    "label":"Lovro",
-                    "polnoIme":"Lovro Rojko"
-                },
-                {
-                    "id":"04",
-                    "label":"Vesna",
-                    "polnoIme":"Vesna Rojko"
-                },
-                {
-                    "id":"06",
-                    "label":"Boris",
-                    "polnoIme":"Boris Rojko"
+                    "id": "06",
+                    "label": "Boris",
+                    "polnoIme": "Boris Rojko"
                 }
             ]
         }

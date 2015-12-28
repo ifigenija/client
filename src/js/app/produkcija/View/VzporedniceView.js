@@ -105,7 +105,7 @@ define([
         };
 
         var error = function (error) {
-            console.log(error.message);
+            console.log(error);
         };
 
         var upr = this.vzpUprColl.pluck('id');
@@ -132,8 +132,8 @@ define([
             self.vzporedniceR.show(view);
         };
 
-        var error = function () {
-            console.log(error.message);
+        var error = function (error) {
+            console.log(error);
         };
 
         var upr = this.vzpUprColl.pluck('id');
