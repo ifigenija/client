@@ -57,7 +57,9 @@ define([
         var self = this;
         planirane.fetch({
             success: function () {
-                self.CollectionFunkcij.add(planirane);
+                self.CollectionFunkcij.add({
+                    funkcije: planirane
+                });
                 self.renderOsebe();
             }
         });

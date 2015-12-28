@@ -6,13 +6,17 @@ define([
     'i18next',
     'app/bars',
     'backbone',
-    'marionette'
+    'marionette',
+    'template!../tpl/select-sodelujoci-uprizoritve.tpl',
+    'template!../tpl/select-sodelujoci-uprizoritev.tpl'
 ], function (
         Radio,
         i18next,
         Handlebars,
         Backbone,
-        Marionette
+        Marionette,
+        uprizoritveTpl,
+        uprizoritevTpl
         ) {
 
     /**
@@ -32,7 +36,6 @@ define([
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
     var FunkcijeView = Marionette.CollectionView.extend({
-        className: 'sodelujoci-funkcije',
         childView: OsebaView,
         onChildviewChange: function (item) {
             this.trigger('change', item.model);
@@ -44,14 +47,14 @@ define([
      * @type @exp;Marionette@pro;CompositeView@call;extend
      */
     var UprizoritevView = Marionette.CompositeView.extend({
-        className: 'sodelujoci-uprizoritev',
-        template: Handlebars.compile('<div>{{label}}</div>'),
+        template: uprizoritevTpl,
         childView: FunkcijeView,
-        initialize: function(options){
+        childViewContainer: '.sodelujoci-funkcije',
+        initialize: function (options) {
             this.funkcijeOsebe = [];
         },
         childViewOptions: function (model, index) {
-            var modeli = model.get('alternacije');
+            var modeli = model.get('osebe');
             var coll = new Backbone.Collection(modeli);
             return{
                 collection: coll
@@ -68,9 +71,9 @@ define([
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
     var SelectSodelujociView = Marionette.CollectionView.extend({
-        className: 'sodelujoci-upritve',
         childView: UprizoritevView,
-        initialize: function(){
+        childViewContainer: '.sodelujoci-uprizoritve',
+        initialize: function () {
             this.izbraneOsebe = [];
         },
         childViewOptions: function (model, index) {

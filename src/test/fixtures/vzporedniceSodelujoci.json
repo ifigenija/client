@@ -1,0 +1,144 @@
+{
+    "data": [
+        {
+            "funkcije": [
+                {
+                    "id": "00180000-5677-aaa8-3716-cd6cdc805b49",
+                    "title": "funkcija1",
+                    "osebe": [
+                        {
+                            "id": "000e0000-5677-9f2b-582f-9965fe50175f",
+                            "ident": "0001",
+                            "label": "Lovro",
+                            "polnoIme": "Lovro Rojko"
+                        },
+                        {
+                            "id": "000e0000-5677-9f2b-582f-9965fe50175e",
+                            "ident": "0002",
+                            "label": "Rado",
+                            "polnoIme": "Rado Brglez"
+                        },
+                        {
+                            "id": "000e0000-5677-9f2b-582f-9965fe50174f",
+                            "ident": "0003",
+                            "label": "Boris",
+                            "polnoIme": "Boris Lašič"
+                        }
+                    ]
+                },
+                {
+                    "id": "00180000-5677-aaa8-3716-cd6cdc805b50",
+                    "title": "funkcija2",
+                    "osebe": [
+                        {
+                            "id": "000e0000-5677-9f2b-582f-9965fe50166f",
+                            "ident": "0004",
+                            "label": "Aleš",
+                            "polnoIme": "Aleš Likar"
+                        },
+                        {
+                            "id": "000e0000-5677-9f2b-582f-9965fe50167e",
+                            "ident": "0005",
+                            "label": "Simon",
+                            "polnoIme": "Simon Rojko"
+                        }
+                    ]
+                },
+                {
+                    "id": "00180000-5677-aaa8-3716-cd6cdc805b48",
+                    "title": "funkcija3",
+                    "osebe": [
+                        {
+                            "id": "000e0000-5677-9f2b-582f-9965fe50123f",
+                            "ident": "0006",
+                            "label": "Vesna",
+                            "polnoIme": "Vesna Rojko"
+                        },
+                        {
+                            "id": "000e0000-5677-9f2b-582f-9965fe50134e",
+                            "ident": "0007",
+                            "label": "Primož",
+                            "polnoIme": "Primož Rojko"
+                        },
+                        {
+                            "id": "000e0000-5677-9f2b-582f-9965fe50145f",
+                            "ident": "0008",
+                            "label": "Urška",
+                            "polnoIme": "Urška Rojko"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "funkcije": [
+                {
+                    "id": "00180000-5677-aaa8-3716-cd6cdc805b51",
+                    "title": "funkcija1",
+                    "osebe": [
+                        {
+                            "id": "100e0000-5677-9f2b-582f-9965fe50175f",
+                            "ident": "0001",
+                            "label": "Lovro",
+                            "polnoIme": "Lovro Rojko"
+                        },
+                        {
+                            "id": "200e0000-5677-9f2b-582f-9965fe50175e",
+                            "ident": "0002",
+                            "label": "Rado",
+                            "polnoIme": "Rado Brglez"
+                        },
+                        {
+                            "id": "000e0000-5677-9f2b-582f-9965fe50174f",
+                            "ident": "0003",
+                            "label": "Boris",
+                            "polnoIme": "Boris Lašič"
+                        }
+                    ]
+                },
+                {
+                    "id": "00180000-5677-aaa8-3716-cd6cdc805b52",
+                    "title": "funkcija2",
+                    "osebe": [
+                        {
+                            "id": "300e0000-5677-9f2b-582f-9965fe50166f",
+                            "ident": "0004",
+                            "label": "Aleš",
+                            "polnoIme": "Aleš Likar"
+                        },
+                        {
+                            "id": "400e0000-5677-9f2b-582f-9965fe50167e",
+                            "ident": "0005",
+                            "label": "Simon",
+                            "polnoIme": "Simon Rojko"
+                        }
+                    ]
+                },
+                {
+                    "id": "00180000-5677-aaa8-3716-cd6cdc805b53",
+                    "title": "funkcija3",
+                    "osebe": [
+                        {
+                            "id": "500e0000-5677-9f2b-582f-9965fe50123f",
+                            "ident": "0006",
+                            "label": "Vesna",
+                            "polnoIme": "Vesna Rojko"
+                        },
+                        {
+                            "id": "600e0000-5677-9f2b-582f-9965fe50134e",
+                            "ident": "0007",
+                            "label": "Primož",
+                            "polnoIme": "Primož Rojko"
+                        },
+                        {
+                            "id": "700e0000-5677-9f2b-582f-9965fe50145f",
+                            "ident": "0008",
+                            "label": "Urška",
+                            "polnoIme": "Urška Rojko"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
