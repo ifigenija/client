@@ -5,17 +5,16 @@
  */
 define([
     'baseUrl',
-    'backbone'
+    'backbone',
+    'app/Max/Model/MaxPageableCollection'
 ], function (
         baseUrl,
-        Backbone
+        Backbone,
+        MaxPageableCollection
         ) {
-    var PlanFun = Backbone.Collection.extend({
+    var PlanFun = MaxPageableCollection.extend({
         url: function () {
-            return baseUrl + '/rest/funkcija/planirane?uprizoritev=' + this.id;
-        },
-        initialize: function (attrs, opts) {
-            this.id = attrs.uprizoritevId;
+            return baseUrl + '/rest/funkcija/planirane';
         }
     });
     return PlanFun;

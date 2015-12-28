@@ -10,7 +10,6 @@ define([
     'underscore',
     'app/koledar/View/SelectVzporedniceView',
     'app/koledar/View/SelectSodelujociView',
-    './VzpUprView',
     'template!../tpl/vzporednice.tpl',
     '../Model/PlanFun',
     'jquery',
@@ -24,7 +23,6 @@ define([
         _,
         SelectVzporedniceView,
         SelectSodelujociView,
-        VzpUprView,
         vzporedniceTpl,
         PlanFun,
         $
@@ -33,7 +31,6 @@ define([
         className: 'vzporednice',
         template: vzporedniceTpl,
         regions: {
-            uprizoritveR: '.region-uprizoritve',
             vzporedniceR: '.region-vzporednice',
             osebeR: '.region-osebe',
             prekrivanjeR: '.region-prekrivanja'
@@ -41,15 +38,14 @@ define([
     });
 
     VzporedniceView.prototype.initialize = function (options) {
-        var self = this;
-
-        this.vzpUprColl = new Backbone.Collection();
-        this.collectionFunkcij = new Backbone.Collection();
-//        this.vzpUprColl.on('remove', this.uprizoritevRemove, this);
-//        this.vzpUprColl.on('add', this.uprizoritevAdd, this);
-//        this.vzpUprColl.on('reset', function(){
-//            self.collectionFunkcij.reset();
-//        }, this);
+        this.collectionUprizoritev = new Backbone.Collection();
+        this.collectionUprizoritev.on('remove', this.uprizoritevRemove, this);
+        this.collectionUprizoritev.on('add', this.uprizoritevAdd, this);
+        
+        //nezadovoljen z rešitvijo
+        this.model.set('label',this.model.get('naslov'));
+        this.collectionUprizoritev.add(this.model);
+        
         if (options && options.model) {
             this.model = options.model;
         } else {
@@ -57,39 +53,29 @@ define([
         }
     };
     VzporedniceView.prototype.uprizoritevRemove = function (model) {
-        var model = this.collectionFunkcij.findWhere({
-            uprID: model.get('id')
-        });
-        this.collectionFunkcij.remove(model);
         this.renderOsebe();
+        this.renderVzporednice();
+        this.renderPrekrivanja();
     };
     VzporedniceView.prototype.uprizoritevAdd = function (model) {
-        var planirane = new PlanFun({
-            uprizoritevId: model.get('id')
-        });
+        var planirane = new PlanFun();
+        planirane.queryParams.uprizoritev = model.get('id');
+        
         var self = this;
         planirane.fetch({
             success: function () {
-                self.collectionFunkcij.add({
-                    uprID: model.get('id'),
-                    funkcije: planirane
-                });
+                model.set('funkcije', planirane.models);
                 self.renderOsebe();
-            }
+                self.renderPrekrivanja();
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
         });
 
     };
     VzporedniceView.prototype.onRender = function () {
-        this.renderUprizoritve();
         this.renderVzporednice();
-//        this.renderOsebe();
-//        this.renderPrekrivanja();
-    };
-    VzporedniceView.prototype.renderUprizoritve = function () {
-        var view = this.uprizoritveView = new VzpUprView({
-            collection: this.vzpUprColl
-        });
-        this.uprizoritveR.show(view);
+        this.renderOsebe();
+        this.renderPrekrivanja();
     };
 
     VzporedniceView.prototype.renderVzporednice = function () {
@@ -108,11 +94,11 @@ define([
             console.log(error);
         };
 
-        var upr = this.vzpUprColl.pluck('id');
+        var upr = this.collectionUprizoritev.pluck('id');
         upr.push(this.model.get('id'));
 
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
-        rpc.call('vzporednice', {
+        rpc.call('dajVzporednice', {
             'uprizoritveIds': upr
         }, success, error);
     };
@@ -127,36 +113,37 @@ define([
                 }
             });
             var view = new SVV({
-                collection: coll
+                collection: coll,
+                title: i18next.t('prekrivanja.title')
             });
-            self.vzporedniceR.show(view);
+            self.prekrivanjeR.show(view);
         };
 
         var error = function (error) {
             console.log(error);
         };
 
-        var upr = this.vzpUprColl.pluck('id');
+        var upr = this.collectionUprizoritev.pluck('id');
         upr.push(this.model.get('id'));
 
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
-        rpc.call('prekrivanja', {
+        rpc.call('dajPrekrivanja', {
             'uprizoritveIds': upr
         }, success, error);
     };
     VzporedniceView.prototype.renderOsebe = function () {
 
         var view = new SelectSodelujociView({
-            collection: this.collectionFunkcij
+            collection: this.collectionUprizoritev
         });
         this.osebeR.show(view);
     };
 
     VzporedniceView.prototype.onSelected = function (model) {
-        this.vzpUprColl.add(model);
+        this.collectionUprizoritev.add(model);
 
         this.renderVzporednice();
-        this.renderUprizoritve();
+        this.renderOsebe();
 //        this.renderPrekrivanje();
     };
 

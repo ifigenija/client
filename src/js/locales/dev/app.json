@@ -155,6 +155,8 @@
         "premakniVseLevo": "Odstrani vse",
         "prazenSeznam": "Seznam je prazen",
         "uvoz": "Uvozi programske enote",
+        "zasedeneOsebe": "Zasedene osebe",
+        "nezasedeneOsebe": "Nezasedene osebe",
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
@@ -1934,6 +1936,12 @@
     },
     "kontaktnaOseba": {
         "relacija": "Kontaktna oseba pri poslovnih partnerjih"
+    },
+    "vzporednice": {
+        "title": "Vzporednice"
+    },
+    "prekrivanja": {
+        "title": "Prekrivanja"
     }
 }
 

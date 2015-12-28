@@ -5,7 +5,7 @@
                 {
                     "id": "00180000-5677-aaa8-3716-cd6cdc805b49",
                     "title": "funkcija1",
-                    "osebe": [
+                    "alternacije": [
                         {
                             "id": "000e0000-5677-9f2b-582f-9965fe50175f",
                             "ident": "0001",
@@ -29,7 +29,7 @@
                 {
                     "id": "00180000-5677-aaa8-3716-cd6cdc805b50",
                     "title": "funkcija2",
-                    "osebe": [
+                    "alternacije": [
                         {
                             "id": "000e0000-5677-9f2b-582f-9965fe50166f",
                             "ident": "0004",
@@ -47,7 +47,7 @@
                 {
                     "id": "00180000-5677-aaa8-3716-cd6cdc805b48",
                     "title": "funkcija3",
-                    "osebe": [
+                    "alternacije": [
                         {
                             "id": "000e0000-5677-9f2b-582f-9965fe50123f",
                             "ident": "0006",
@@ -75,7 +75,7 @@
                 {
                     "id": "00180000-5677-aaa8-3716-cd6cdc805b51",
                     "title": "funkcija1",
-                    "osebe": [
+                    "alternacije": [
                         {
                             "id": "100e0000-5677-9f2b-582f-9965fe50175f",
                             "ident": "0001",
@@ -99,7 +99,7 @@
                 {
                     "id": "00180000-5677-aaa8-3716-cd6cdc805b52",
                     "title": "funkcija2",
-                    "osebe": [
+                    "alternacije": [
                         {
                             "id": "300e0000-5677-9f2b-582f-9965fe50166f",
                             "ident": "0004",
@@ -117,7 +117,7 @@
                 {
                     "id": "00180000-5677-aaa8-3716-cd6cdc805b53",
                     "title": "funkcija3",
-                    "osebe": [
+                    "alternacije": [
                         {
                             "id": "500e0000-5677-9f2b-582f-9965fe50123f",
                             "ident": "0006",

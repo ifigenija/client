@@ -24,8 +24,9 @@ define([
      * @type @exp;Marionette@pro;ItemView@call;extend
      */
     var OsebaView = Marionette.ItemView.extend({
+        tagName: 'li',
         className: 'sodelujoci-oseba',
-        template: Handlebars.compile('<div>{{label}}</div>'),
+        template: Handlebars.compile('<div>{{oseba.label}}</div>'),
         triggers: {
             'click': 'change'
         }
@@ -35,8 +36,10 @@ define([
      * Namenjena izroisu oseb v funkciji
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
-    var FunkcijeView = Marionette.CollectionView.extend({
+    var FunkcijeView = Marionette.CompositeView.extend({
+        template: Handlebars.compile('{{naziv}}<ul class="sodelujoci-osebe"></ul>'),
         childView: OsebaView,
+        childViewContainer: '.sodelujoci-osebe',
         onChildviewChange: function (item) {
             this.trigger('change', item.model);
         }
@@ -48,13 +51,14 @@ define([
      */
     var UprizoritevView = Marionette.CompositeView.extend({
         template: uprizoritevTpl,
+        className: 'panel panel-default sodelujoci-uprizoritev',
         childView: FunkcijeView,
         childViewContainer: '.sodelujoci-funkcije',
         initialize: function (options) {
             this.funkcijeOsebe = [];
         },
         childViewOptions: function (model, index) {
-            var modeli = model.get('osebe');
+            var modeli = model.get('alternacije');
             var coll = new Backbone.Collection(modeli);
             return{
                 collection: coll
@@ -63,6 +67,9 @@ define([
         onChildviewChange: function (item, osebaM) {
             this.funkcijeOsebe[item.model.get('id')] = osebaM.get('id');
             this.trigger('change', this.funkcijeOsebe);
+        },
+        triggers:{
+            'click .uprizoritev-odstrani' : 'odstrani'
         }
     });
 
@@ -87,6 +94,9 @@ define([
         onChildviewChange: function (item, funkcijaOseba) {
             this.izbraneOsebe.concat(funkcijaOseba);
             this.trigger('change', this.izbraneOsebe);
+        },
+        onChildviewOdstrani: function (child) {
+            this.collection.remove(child.model);
         }
     });
 

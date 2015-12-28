@@ -38,7 +38,7 @@ define([
     var FunkcijeView = Marionette.LayoutView.extend({
         tagName: 'li',
         className: 'vzporednice-funkcije',
-        template: Handlebars.compile('<div>{{label}}</div><ul class="zasedene-osebe"></ul><ul class="nezasedene-osebe"></ul>'),
+        template: Handlebars.compile('<div>{{label}}</div><div>{{t "std.zasedeneOsebe"}}</div><ul class="zasedene-osebe"></ul><div>{{t "std.nezasedeneOsebe"}}</div><ul class="nezasedene-osebe"></ul>'),
         regions: {
             zasedeneR: '.zasedene-osebe',
             nezasedeneR: '.nezasedene-osebe'
@@ -99,6 +99,11 @@ define([
         },
         onChildviewSelected: function (child) {
             this.trigger('selected', child.model);
+        },
+        serializeData: function(){
+            return{
+                title: this.options.title || i18next.t('vzporednice.title')
+            };
         }
     });
 
