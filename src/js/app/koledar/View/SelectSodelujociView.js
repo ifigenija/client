@@ -47,7 +47,6 @@ define([
      * @type @exp;Marionette@pro;CompositeView@call;extend
      */
     var UprizoritevView = Marionette.CompositeView.extend({
-        tagName: 'li',
         template: uprizoritevTpl,
         childView: FunkcijeView,
         childViewContainer: '.sodelujoci-funkcije',
@@ -71,8 +70,8 @@ define([
      * namenjena izrisu uprizoritev
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
-    var SelectSodelujociView = Marionette.CollectionView.extend({
-        tagName: 'ul',
+    var SelectSodelujociView = Marionette.CompositeView.extend({
+        template: uprizoritveTpl,
         childView: UprizoritevView,
         childViewContainer: '.sodelujoci-uprizoritve',
         initialize: function () {

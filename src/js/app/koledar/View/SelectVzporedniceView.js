@@ -6,13 +6,15 @@ define([
     'i18next',
     'app/bars',
     'backbone',
-    'marionette'
+    'marionette',
+    'template!../tpl/select-vzporednice.tpl'
 ], function (
         Radio,
         i18next,
         Handlebars,
         Backbone,
-        Marionette
+        Marionette,
+        vzporedniceTpl
         ) {
 
     /**
@@ -32,23 +34,23 @@ define([
         className: 'vzporednice-osebe',
         childView: OsebaView
     });
-    
+
     var FunkcijeView = Marionette.LayoutView.extend({
         tagName: 'li',
         className: 'vzporednice-funkcije',
         template: Handlebars.compile('<ul class="zasedene-osebe"></ul><ul class="nezasedene-osebe"></ul>'),
-        regions:{
+        regions: {
             zasedeneR: '.zasedene-osebe',
             nezasedeneR: '.nezasedene-osebe'
         },
-        onRender: function(){
+        onRender: function () {
             var zasedeneView = new OsebeView({
                 collection: this.options.zasedene
             });
             var nezasedeneView = new OsebeView({
                 collection: this.options.nezasedene
             });
-            
+
             this.zasedeneR.show(zasedeneView);
             this.nezasedeneR.show(nezasedeneView);
         }
@@ -84,10 +86,10 @@ define([
      * namenjena izrisu uprizoritev
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
-    var SelectVzporedniceView = Marionette.CollectionView.extend({
-        tagName: 'ul',
-        className: 'vzporednice-uprizoritve',
+    var SelectVzporedniceView = Marionette.CompositeView.extend({
+        template: vzporedniceTpl,
         childView: UprizoritevView,
+        childViewContainer: '.vzporednice-uprizoritve',
         childViewOptions: function (model, index) {
             var modeli = model.get('konfliktneFunkcije');
             var coll = new Backbone.Collection(modeli);

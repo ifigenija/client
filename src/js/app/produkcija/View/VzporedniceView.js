@@ -42,7 +42,7 @@ define([
 
     VzporedniceView.prototype.initialize = function (options) {
         var self = this;
-        
+
         this.vzpUprColl = new Backbone.Collection();
         this.collectionFunkcij = new Backbone.Collection();
 //        this.vzpUprColl.on('remove', this.uprizoritevRemove, this);
@@ -57,9 +57,11 @@ define([
         }
     };
     VzporedniceView.prototype.uprizoritevRemove = function (model) {
-        var model = this.collectionFunkcij.findWhere({uprID: model.get('id')});
+        var model = this.collectionFunkcij.findWhere({
+            uprID: model.get('id')
+        });
         this.collectionFunkcij.remove(model);
-        this.renderOsebe();        
+        this.renderOsebe();
     };
     VzporedniceView.prototype.uprizoritevAdd = function (model) {
         var planirane = new PlanFun({
