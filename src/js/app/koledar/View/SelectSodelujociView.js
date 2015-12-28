@@ -29,6 +29,18 @@ define([
         template: Handlebars.compile('<div>{{oseba.label}}</div>'),
         triggers: {
             'click': 'change'
+        },
+        initialize: function(){
+            var privzeti = this.model.get('privzeti');
+            if(privzeti){
+                this.model.set('izbran', true);
+            }
+        },
+        onRender: function(){
+            var izbran = this.model.get('izbran');
+            if(izbran){
+                this.$el.addClass('active');
+            }
         }
     });
 
@@ -40,8 +52,13 @@ define([
         template: Handlebars.compile('{{naziv}}<ul class="sodelujoci-osebe"></ul>'),
         childView: OsebaView,
         childViewContainer: '.sodelujoci-osebe',
-        onChildviewChange: function (item) {
-            this.trigger('change', item.model);
+        onChildviewChange: function (child) {
+            var izbran = child.model.get('izbran');
+            if(izbran){
+                this.$('.sodelujoci-oseba').removeClass('active');
+                child.$el.addClass('active');
+            }
+            this.trigger('change', child.model.get('id'));
         }
     });
 
@@ -64,9 +81,9 @@ define([
                 collection: coll
             };
         },
-        onChildviewChange: function (item, osebaM) {
-            this.funkcijeOsebe[item.model.get('id')] = osebaM.get('id');
-            this.trigger('change', this.funkcijeOsebe);
+        onChildviewChange: function (item, osebaID) {
+            var funkcijaID = item.model.get('id');
+            this.trigger('change', funkcijaID, osebaID);
         },
         triggers:{
             'click .uprizoritev-odstrani' : 'odstrani'
@@ -82,7 +99,7 @@ define([
         childView: UprizoritevView,
         childViewContainer: '.sodelujoci-uprizoritve',
         initialize: function () {
-            this.izbraneOsebe = [];
+            this.izbraneOsebe = {};
         },
         childViewOptions: function (model, index) {
             var modeli = model.get('funkcije');
@@ -91,8 +108,8 @@ define([
                 collection: coll
             };
         },
-        onChildviewChange: function (item, funkcijaOseba) {
-            this.izbraneOsebe.concat(funkcijaOseba);
+        onChildviewChange: function (item, funkcijaID, osebaID) {
+            this.izbraneOsebe[funkcijaID] = osebaID;
             this.trigger('change', this.izbraneOsebe);
         },
         onChildviewOdstrani: function (child) {
