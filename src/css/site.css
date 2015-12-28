@@ -668,6 +668,9 @@ fieldset.pomemben legend span {
 .vzporednice-content {
   margin-top: 15px;
 }
+.sodelujoci-oseba.active {
+  background-color: grey;
+}
 /*
 Licenca GPLv3
 */

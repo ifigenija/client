@@ -7936,6 +7936,9 @@ fieldset.pomemben legend span {
 .vzporednice-content {
   margin-top: 15px;
 }
+.sodelujoci-oseba.active {
+  background-color: grey;
+}
 /*!
  * Datetimepicker for Bootstrap 3
  * version : 4.15.35

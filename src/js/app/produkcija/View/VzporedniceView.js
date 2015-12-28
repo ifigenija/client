@@ -167,7 +167,7 @@ define([
         this.renderOsebe();
         this.renderPrekrivanje();
     };
-    VzporedniceView.prototype.onChange = function (x,y,izbraneOsebe) {        
+    VzporedniceView.prototype.onChange = function (izbraneOsebe) {        
         var self = this;
 
         var success = function (data) {
