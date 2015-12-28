@@ -34,8 +34,9 @@ define([
     });
     
     var FunkcijeView = Marionette.LayoutView.extend({
+        tagName: 'li',
         className: 'vzporednice-funkcije',
-        template: Handlebars.compile('<div class="zasedene-osebe"></div><div class="nezasedene-osebe"></div>'),
+        template: Handlebars.compile('<ul class="zasedene-osebe"></ul><ul class="nezasedene-osebe"></ul>'),
         regions:{
             zasedeneR: '.zasedene-osebe',
             nezasedeneR: '.nezasedene-osebe'
@@ -59,8 +60,9 @@ define([
      * @type @exp;Marionette@pro;CompositeView@call;extend
      */
     var UprizoritevView = Marionette.CompositeView.extend({
+        tagName: 'li',
         className: 'vzporednice-uprizoritev',
-        template: Handlebars.compile('<div>{{label}}</div><div class="funkcije-container"></div>'),
+        template: Handlebars.compile('<div>{{label}}</div><ul class="funkcije-container"></ul>'),
         childView: FunkcijeView,
         childViewContainer: '.funkcije-container',
         childViewOptions: function (model, index) {
@@ -83,6 +85,7 @@ define([
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
     var SelectVzporedniceView = Marionette.CollectionView.extend({
+        tagName: 'ul',
         className: 'vzporednice-uprizoritve',
         childView: UprizoritevView,
         childViewOptions: function (model, index) {

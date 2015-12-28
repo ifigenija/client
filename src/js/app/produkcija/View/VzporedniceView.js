@@ -41,23 +41,35 @@ define([
     });
 
     VzporedniceView.prototype.initialize = function (options) {
+        var self = this;
+        
         this.vzpUprColl = new Backbone.Collection();
-        this.CollectionFunkcij = new Backbone.Collection();
-        this.vzpUprColl.on('add remove', this.uprizoritevChange, this);
+        this.collectionFunkcij = new Backbone.Collection();
+//        this.vzpUprColl.on('remove', this.uprizoritevRemove, this);
+//        this.vzpUprColl.on('add', this.uprizoritevAdd, this);
+//        this.vzpUprColl.on('reset', function(){
+//            self.collectionFunkcij.reset();
+//        }, this);
         if (options && options.model) {
             this.model = options.model;
         } else {
             //napaka
         }
     };
-    VzporedniceView.prototype.uprizoritevChange = function (model) {
+    VzporedniceView.prototype.uprizoritevRemove = function (model) {
+        var model = this.collectionFunkcij.findWhere({uprID: model.get('id')});
+        this.collectionFunkcij.remove(model);
+        this.renderOsebe();        
+    };
+    VzporedniceView.prototype.uprizoritevAdd = function (model) {
         var planirane = new PlanFun({
             uprizoritevId: model.get('id')
         });
         var self = this;
         planirane.fetch({
             success: function () {
-                self.CollectionFunkcij.add({
+                self.collectionFunkcij.add({
+                    uprID: model.get('id'),
                     funkcije: planirane
                 });
                 self.renderOsebe();
@@ -68,7 +80,7 @@ define([
     VzporedniceView.prototype.onRender = function () {
         this.renderUprizoritve();
         this.renderVzporednice();
-        this.renderOsebe();
+//        this.renderOsebe();
 //        this.renderPrekrivanja();
     };
     VzporedniceView.prototype.renderUprizoritve = function () {
@@ -133,14 +145,13 @@ define([
     VzporedniceView.prototype.renderOsebe = function () {
 
         var view = new SelectSodelujociView({
-            collection: this.CollectionFunkcij
+            collection: this.collectionFunkcij
         });
         this.osebeR.show(view);
     };
 
     VzporedniceView.prototype.onSelected = function (model) {
         this.vzpUprColl.add(model);
-        var uprIDji = this.vzpUprColl.pluck('id');
 
         this.renderVzporednice();
         this.renderUprizoritve();
