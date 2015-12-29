@@ -27,8 +27,11 @@ define([
         tagName: 'li',
         className: 'sodelujoci-oseba',
         template: Handlebars.compile('<div>{{oseba.label}}</div>'),
-        triggers: {
-            'click': 'change'
+        events: {
+            'click': 'klikOseba'
+        },
+        klikOseba: function (e) {
+            this.trigger('change', e);
         },
         initialize: function () {
             var privzeti = this.model.get('privzeti');
@@ -52,11 +55,68 @@ define([
         template: Handlebars.compile('{{naziv}}<ul class="sodelujoci-osebe"></ul>'),
         childView: OsebaView,
         childViewContainer: '.sodelujoci-osebe',
-        onChildviewChange: function (child) {
-            var izbran = child.model.get('izbran');
-            if (izbran) {
-                this.$('.sodelujoci-oseba').removeClass('active');
-                child.$el.addClass('active');
+        resetSelection: function () {
+            var models = this.collection.models;
+            for (var modelId in models) {
+                models[modelId].set('izbran', false);
+            }
+        },
+        onChildviewChange: function (child, e) {
+            var model = child.model;
+            var $el = child.$el;
+
+            if (e.shiftKey) {
+                //določimo in označimo trenutni model
+                var trenutniModel = model;
+                $el.addClass('active');
+                model.set('izbran', true);
+
+                var models = this.collection.models;
+                var oznacuj = false;
+
+                for (var id in models) {
+                    //v kolikor so modeli med trenutnim in zadnje izbranim modelom se označujejo
+                    if (models[id] === trenutniModel || models[id] === this.zadnjiOznacen) {
+                        oznacuj = !oznacuj;
+                    }
+                    //v kolikor je označevanje true se poišče model in se označi
+                    if (oznacuj) {
+                        models[id].set('izbran', true);
+                        var child = this.children.findByModel(models[id]);
+                        if (child) {
+                            var $e = child.$el;
+                            if (!$e.hasClass('active')) {
+                                $e.addClass('active');
+                            }
+                        }
+                    }
+                }
+                this.zadnjiOznacen = trenutniModel;
+
+            } else if (e.ctrlKey) {
+                //če je pritisnjen ctrl se označujejo vsi modeli na katere kliknemo
+                if (!$el.hasClass('active')) {
+                    $el.addClass('active');
+                    model.set('izbran', true);
+                    this.zadnjiOznacen = model;
+                    ;
+                } else {
+                    $el.removeClass('active');
+                    model.set('izbran', false);
+                }
+            } else {
+                //odstranimo vse prej označene modele
+                this.resetSelection();
+
+                //označimo kliknjen model
+                if (!$el.hasClass('active')) {
+                    this.$('.sodelujoci-oseba').removeClass('active');
+                    $el.addClass('active');
+                    model.set('izbran', true);
+                    this.zadnjiOznacen = model;
+                } else {
+                    $el.removeClass('active');
+                }
             }
             this.trigger('change', child.model.get('id'));
         },

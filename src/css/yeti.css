@@ -7100,8 +7100,24 @@ Licenca GPLv3
 .nezasedene-osebe .vzporednice-oseba {
   background-color: greenyellow;
 }
+.sodelujoci-funkcije {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+}
 .sodelujoci-oseba:hover {
-  background-color: #dddddd;
+  background-color: #5bc0de;
+  cursor: pointer;
+}
+.sodelujoci-oseba.active {
+  background-color: #008cba;
+}
+.vzporednice-content {
+  margin-top: 15px;
+}
+.vzporednice-uprizoritev:hover {
+  background-color: #5bc0de;
   cursor: pointer;
 }
 /*

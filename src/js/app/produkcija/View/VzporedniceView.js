@@ -157,7 +157,7 @@ define([
         var view = new SelectSodelujociView({
             collection: this.collectionUprizoritev
         });
-        view.on('change', this.onChange, this);
+//        view.on('change', this.onChange, this);
         this.osebeR.show(view);
     };
 

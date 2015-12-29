@@ -6,6 +6,9 @@ Licenca GPLv3
     Author     : boris
 */
 
+@yeti-blue: #008cba;
+@bright-blue: #5bc0de;
+
 .koledar-navigacija {
     background-color: #dddddd;
 }
@@ -26,9 +29,33 @@ Licenca GPLv3
     }
 }
 
+.sodelujoci-funkcije{
+    //da se ob shift kliku ne označuje vsebina
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+}
+
 .sodelujoci-oseba{
     &:hover{
-        background-color: #dddddd;
+        background-color: @bright-blue;
+        cursor: pointer;
+    }
+    &.active{
+        background-color: @yeti-blue;        
+    }
+}
+
+//produkcija vzporednice
+
+.vzporednice-content{
+    margin-top: 15px;
+}
+
+.vzporednice-uprizoritev{
+    &:hover{
+        background-color: @bright-blue;
         cursor: pointer;
     }
 }

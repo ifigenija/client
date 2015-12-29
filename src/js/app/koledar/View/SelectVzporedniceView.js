@@ -67,7 +67,7 @@ define([
      */
     var UprizoritevView = Marionette.CompositeView.extend({
         className: 'vzporednice-uprizoritev',
-        template: Handlebars.compile('<div>{{label}}</div><ul class="funkcije-container"></ul>'),
+        template: Handlebars.compile('<div class="naslov">{{label}}</div><ul class="funkcije-container"></ul>'),
         childView: FunkcijeView,
         childViewContainer: '.funkcije-container',
         childViewOptions: function (model, index) {
