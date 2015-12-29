@@ -129,11 +129,7 @@ define([
 
         var success = function (data) {
             var coll = new Backbone.Collection(data.data);
-            var SVV = SelectVzporedniceView.extend({
-                onChildviewSelected: function (child) {
-                }
-            });
-            var view = new SVV({
+            var view = new PrekrivanjaView({
                 collection: coll,
                 title: i18next.t('prekrivanja.title'),
                 class: 'prekrivanje'

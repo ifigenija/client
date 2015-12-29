@@ -83,9 +83,9 @@ define([
         triggers: {
             'click': 'selected'
         },
-//        initiallize: function(options){
-//            this.template = options.template || this.tempalte;
-//        }
+        initiallize: function(options){
+            this.template = options.template || this.tempalte;
+        }
     });
 
     var EmptyView = Marionette.ItemView.extend({

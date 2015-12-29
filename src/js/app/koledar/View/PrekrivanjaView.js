@@ -37,7 +37,7 @@ define([
         var coll = new Backbone.Collection(modeli);
         return{
             collection: coll,
-            template: Handlebars.compile('<a href="{{href}}" target="_blank">{{besedilo.label}}</a><ul class="funkcije"></ul>')
+            template: Handlebars.compile('<a href="{{href}}" target="_blank">{{label}}</a><ul class="funkcije"></ul>')
         };
     };
 
