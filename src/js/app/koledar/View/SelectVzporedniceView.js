@@ -42,7 +42,7 @@ define([
     var FunkcijeView = Marionette.LayoutView.extend({
         tagName: 'li',
         className: 'funkcije',
-        template: Handlebars.compile('{{label}}: <span class="zasedene-osebe"></span><span class="nezasedene-osebe"></span>'),
+        template: Handlebars.compile('{{#if label}}{{label}}{{else}}{{t "funkcija.neimenovana"}}{{/if}}: <span class="zasedene-osebe"></span><span class="nezasedene-osebe"></span>'),
         regions: {
             zasedeneR: '.zasedene-osebe',
             nezasedeneR: '.nezasedene-osebe'
@@ -82,7 +82,14 @@ define([
         },
         triggers: {
             'click': 'selected'
-        }
+        },
+//        initiallize: function(options){
+//            this.template = options.template || this.tempalte;
+//        }
+    });
+
+    var EmptyView = Marionette.ItemView.extend({
+        template: Handlebars.compile('<div>Vzporednica ne obstaja.</div>')
     });
 
     /**
@@ -91,6 +98,7 @@ define([
      */
     var SelectVzporedniceView = Marionette.CompositeView.extend({
         template: vzporedniceTpl,
+        emptyView: EmptyView,
         childView: UprizoritevView,
         childViewContainer: function () {
             return '.' + this.class + '-uprizoritve';
@@ -110,7 +118,7 @@ define([
                     return 1;
                 }
             };
-            
+
             this.class = options.class;
 
             this.collection.sort();

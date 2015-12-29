@@ -24,9 +24,9 @@ define([
      * @type @exp;Marionette@pro;ItemView@call;extend
      */
     var OsebaView = Marionette.ItemView.extend({
-        tagName: 'li',
+        tagName: 'span',
         className: 'sodelujoci-oseba',
-        template: Handlebars.compile('{{oseba.label}}'),
+        template: Handlebars.compile('<span class="ime">{{oseba.label}}</span>, '),
         events: {
             'click': 'klikOseba'
         },
@@ -53,7 +53,7 @@ define([
      */
     var FunkcijeView = Marionette.CompositeView.extend({
         className: 'sodelujoci-funkcija',
-        template: Handlebars.compile('{{naziv}}<ul class="sodelujoci-osebe"></ul>'),
+        template: Handlebars.compile('{{#if naziv}}{{naziv}}{{else}}{{t "funkcija.neimenovana"}}{{/if}}: <span class="sodelujoci-osebe"></span>'),
         childView: OsebaView,
         childViewContainer: '.sodelujoci-osebe',
         resetSelection: function () {

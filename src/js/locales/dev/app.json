@@ -705,6 +705,7 @@
         "sort": "Zaporedna številka",
         "funkcija": "Funkcija",
         "alternacije": "Osebe / Alternacije",
+        "neimenovana": "Funkcija",
         "d": {
             "naziv": "Naziv funkcije",
             "komentar": "Dodatne opombe, predlogi, komentarji",

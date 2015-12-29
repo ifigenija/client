@@ -22,12 +22,16 @@ Licenca GPLv3
 }
 
 .sodelujoci-oseba{
-    &:hover{
-        background-color: @bright-blue;
-        cursor: pointer;
+    & .ime{
+        &:hover{
+            background-color: @bright-blue;
+            cursor: pointer;
+        }
     }
-    &.active{
-        background-color: @yeti-blue;        
+    & .active{
+        & .ime{
+            background-color: @yeti-blue;
+        }
     }
 }
 

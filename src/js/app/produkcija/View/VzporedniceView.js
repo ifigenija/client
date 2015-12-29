@@ -8,6 +8,7 @@ define([
     'backbone',
     'marionette',
     'underscore',
+    'app/koledar/View/PrekrivanjaView',
     'app/koledar/View/SelectVzporedniceView',
     'app/koledar/View/SelectSodelujociView',
     'template!../tpl/vzporednice.tpl',
@@ -21,6 +22,7 @@ define([
         Backbone,
         Marionette,
         _,
+        PrekrivanjaView,
         SelectVzporedniceView,
         SelectSodelujociView,
         vzporedniceTpl,
@@ -83,7 +85,7 @@ define([
         var self = this;
 
         var success = function (data) {
-            var coll = new Backbone.Collection(data);
+            var coll = new Backbone.Collection(data.data);
             var view = new SelectVzporedniceView({
                 collection: coll,
                 class: 'vzporednice'
@@ -126,7 +128,7 @@ define([
         var self = this;
 
         var success = function (data) {
-            var coll = new Backbone.Collection(data);
+            var coll = new Backbone.Collection(data.data);
             var SVV = SelectVzporedniceView.extend({
                 onChildviewSelected: function (child) {
                 }
@@ -172,7 +174,7 @@ define([
         var self = this;
 
         var success = function (data) {
-            var coll = new Backbone.Collection(data);
+            var coll = new Backbone.Collection(data.data);
             var view = new SelectVzporedniceView({
                 collection: coll,
                 class: 'prekrivanja'
