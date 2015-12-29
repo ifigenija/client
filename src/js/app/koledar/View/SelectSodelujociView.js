@@ -30,15 +30,15 @@ define([
         triggers: {
             'click': 'change'
         },
-        initialize: function(){
+        initialize: function () {
             var privzeti = this.model.get('privzeti');
-            if(privzeti){
+            if (privzeti) {
                 this.model.set('izbran', true);
             }
         },
-        onRender: function(){
+        onRender: function () {
             var izbran = this.model.get('izbran');
-            if(izbran){
+            if (izbran) {
                 this.$el.addClass('active');
             }
         }
@@ -54,11 +54,42 @@ define([
         childViewContainer: '.sodelujoci-osebe',
         onChildviewChange: function (child) {
             var izbran = child.model.get('izbran');
-            if(izbran){
+            if (izbran) {
                 this.$('.sodelujoci-oseba').removeClass('active');
                 child.$el.addClass('active');
             }
             this.trigger('change', child.model.get('id'));
+        },
+        initialize: function (options) {
+            this.funkcijeOsebe = [];
+
+            this.collection.comparator = function (m1, m2) {
+                var m1Privzeti = m1.get('privzeti');
+                var m2Privzeti = m2.get('privzeti');
+
+                if (m1Privzeti && !m2Privzeti) {
+                    return -1;
+                }
+                else if (m1Privzeti === m2Privzeti) {
+                    var m1Sort = m1.get('sort');
+                    var m2Sort = m2.get('sort');
+
+                    if (m1Sort < m2Sort) {
+                        return -1;
+                    }
+                    else if (m1Sort === m2Sort) {
+                        return 0;
+                    }
+                    else if (m1Sort > m2Sort) {
+                        return 1;
+                    }
+                }
+                else if (!m1Privzeti && m2Privzeti) {
+                    return 1;
+                }
+            };
+
+            this.collection.sort();
         }
     });
 
@@ -73,6 +104,23 @@ define([
         childViewContainer: '.sodelujoci-funkcije',
         initialize: function (options) {
             this.funkcijeOsebe = [];
+
+            this.collection.comparator = function (m1, m2) {
+                var m1Count = m1.get('alterCount');
+                var m2Count = m2.get('alterCount');
+
+                if (m1Count > m2Count) {
+                    return -1;
+                }
+                else if (m1Count === m2Count) {
+                    return 0;
+                }
+                else if (m1Count < m2Count) {
+                    return 1;
+                }
+            };
+
+            this.collection.sort();
         },
         childViewOptions: function (model, index) {
             var modeli = model.get('alternacije');
@@ -85,8 +133,8 @@ define([
             var funkcijaID = item.model.get('id');
             this.trigger('change', funkcijaID, osebaID);
         },
-        triggers:{
-            'click .uprizoritev-odstrani' : 'odstrani'
+        triggers: {
+            'click .uprizoritev-odstrani': 'odstrani'
         }
     });
 

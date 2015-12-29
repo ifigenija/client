@@ -7091,6 +7091,19 @@ Licenca GPLv3
 .koledar-navigacija {
   background-color: #dddddd;
 }
+.funkcije-container {
+  margin-bottom: 0px;
+}
+.zasedene-osebe .vzporednice-oseba {
+  background-color: orangered;
+}
+.nezasedene-osebe .vzporednice-oseba {
+  background-color: greenyellow;
+}
+.sodelujoci-oseba:hover {
+  background-color: #dddddd;
+  cursor: pointer;
+}
 /*
 Licenca GPLv3
 */

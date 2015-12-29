@@ -44,6 +44,7 @@ define([
         
         //nezadovoljen z rešitvijo
         this.model.set('label',this.model.get('naslov'));
+        this.model.set('neBrisi', true);
         this.collectionUprizoritev.add(this.model);
         
         if (options && options.model) {
@@ -163,7 +164,7 @@ define([
     VzporedniceView.prototype.onSelected = function (model) {
         this.collectionUprizoritev.add(model);
 
-        this.renderVzporednice();
+        this.renderVzporednice(); 
         this.renderOsebe();
         this.renderPrekrivanje();
     };

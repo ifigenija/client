@@ -1,7 +1,9 @@
 <div class="panel-heading" role="tab" id="heading-{{id}}">
     <h4 class="panel-title">
         <div class="pull-right uprizoritev-odstrani">
+            {{#unless  neBrisi }}
             <i class="fa fa-times" title="{{t "std.odstrani"}}"></i>
+            {{/unless}}
         </div>
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{id}}" aria-expanded="true" aria-controls="{{id}}">
             {{label}}
