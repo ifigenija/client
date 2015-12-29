@@ -24,9 +24,9 @@ define([
      * @type @exp;Marionette@pro;ItemView@call;extend
      */
     var OsebaView = Marionette.ItemView.extend({
-        tagName: 'li',
-        className: 'vzporednice-oseba',
-        template: Handlebars.compile('<span>{{label}}</span>')
+        className: 'oseba',
+        tagName: 'span',
+        template: Handlebars.compile('<span class="ime">{{label}}</span>, ')
     });
 
     /**
@@ -34,15 +34,15 @@ define([
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
     var OsebeView = Marionette.CollectionView.extend({
-        tagName: 'ul',
-        className: 'vzporednice-osebe',
+        className: 'osebe',
+        tagName: 'span',
         childView: OsebaView
     });
 
     var FunkcijeView = Marionette.LayoutView.extend({
         tagName: 'li',
-        className: 'vzporednice-funkcije',
-        template: Handlebars.compile('<div>{{label}}<div class="zasedene-osebe"></div><div class="nezasedene-osebe"></div>'),
+        className: 'funkcije',
+        template: Handlebars.compile('{{label}}: <span class="zasedene-osebe"></span><span class="nezasedene-osebe"></span>'),
         regions: {
             zasedeneR: '.zasedene-osebe',
             nezasedeneR: '.nezasedene-osebe'
@@ -66,10 +66,10 @@ define([
      * @type @exp;Marionette@pro;CompositeView@call;extend
      */
     var UprizoritevView = Marionette.CompositeView.extend({
-        className: 'vzporednice-uprizoritev',
-        template: Handlebars.compile('<div class="naslov">{{label}}</div><ul class="funkcije-container"></ul>'),
+        className: 'uprizoritev',
+        template: Handlebars.compile('{{label}}<ul class="funkcije"></ul>'),
         childView: FunkcijeView,
-        childViewContainer: '.funkcije-container',
+        childViewContainer: '.funkcije',
         childViewOptions: function (model, index) {
             var modeli = model.get('zasedeneOsebe');
             var collZ = new Backbone.Collection(modeli);
@@ -92,8 +92,10 @@ define([
     var SelectVzporedniceView = Marionette.CompositeView.extend({
         template: vzporedniceTpl,
         childView: UprizoritevView,
-        childViewContainer: '.vzporednice-uprizoritve',
-        initialize: function () {
+        childViewContainer: function () {
+            return '.' + this.class + '-uprizoritve';
+        },
+        initialize: function (options) {
             this.collection.comparator = function (m1, m2) {
                 var m1konf = m1.get('konfliktneFunkcije');
                 var m2konf = m2.get('konfliktneFunkcije');
@@ -101,14 +103,16 @@ define([
                 if (_.isEmpty(m1konf) && !_.isEmpty(m2konf)) {
                     return -1;
                 }
-                else if (_.isEmpty(m1konf) === _.isEmpty(m2konf)){
+                else if (_.isEmpty(m1konf) === _.isEmpty(m2konf)) {
                     return 0;
                 }
-                else if (!_.isEmpty(m1konf) && _.isEmpty(m2konf)){
+                else if (!_.isEmpty(m1konf) && _.isEmpty(m2konf)) {
                     return 1;
                 }
             };
             
+            this.class = options.class;
+
             this.collection.sort();
         },
         childViewOptions: function (model, index) {
@@ -122,7 +126,8 @@ define([
             this.trigger('selected', child.model);
         },
         serializeData: function () {
-            return{
+            return {
+                class: this.options.class,
                 title: this.options.title || i18next.t('vzporednice.title')
             };
         }

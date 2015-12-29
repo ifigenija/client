@@ -6,7 +6,7 @@
             {{/unless}}
         </div>
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{id}}" aria-expanded="true" aria-controls="{{id}}">
-            {{label}}
+            {{t "vzporednice.zasedba"}}: {{label}}
         </a>
     </h4>
 </div>

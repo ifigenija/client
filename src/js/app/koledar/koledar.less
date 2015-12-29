@@ -13,16 +13,6 @@ Licenca GPLv3
     background-color: #dddddd;
 }
 
-.funkcije-container{
-    margin-bottom: 0px;
-}
-
-.zasedene-osebe{
-    & .vzporednice-oseba{
-        background-color: orangered;
-    }
-}
-
 .sodelujoci-funkcije{
     //da se ob shift kliku ne označuje vsebina
     -webkit-user-select: none;
@@ -47,9 +37,19 @@ Licenca GPLv3
     margin-top: 15px;
 }
 
-.vzporednice-uprizoritev{
-    &:hover{
-        background-color: @bright-blue;
-        cursor: pointer;
+.vzporednice-panel{
+    & .uprizoritev{
+        &:hover{
+            background-color: @bright-blue;
+            cursor: pointer;
+        }
+    }
+    & .funkcije{
+        margin-bottom:0px;
+    }
+    & .zasedene-osebe{
+        & .oseba .ime{
+            background-color: orangered;
+        }
     }
 }

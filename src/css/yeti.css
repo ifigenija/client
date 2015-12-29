@@ -7091,12 +7091,6 @@ Licenca GPLv3
 .koledar-navigacija {
   background-color: #dddddd;
 }
-.funkcije-container {
-  margin-bottom: 0px;
-}
-.zasedene-osebe .vzporednice-oseba {
-  background-color: orangered;
-}
 .sodelujoci-funkcije {
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -7113,9 +7107,15 @@ Licenca GPLv3
 .vzporednice-content {
   margin-top: 15px;
 }
-.vzporednice-uprizoritev:hover {
+.vzporednice-panel .uprizoritev:hover {
   background-color: #5bc0de;
   cursor: pointer;
+}
+.vzporednice-panel .funkcije {
+  margin-bottom: 0px;
+}
+.vzporednice-panel .zasedene-osebe .oseba .ime {
+  background-color: orangered;
 }
 /*
 Licenca GPLv3

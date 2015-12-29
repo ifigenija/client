@@ -28,7 +28,7 @@ define([
         $
         ) {
     var VzporedniceView = Marionette.LayoutView.extend({
-        className: 'vzporednice',
+        //className: 'vzporednice',
         template: vzporedniceTpl,
         regions: {
             vzporedniceR: '.region-vzporednice',
@@ -85,7 +85,8 @@ define([
         var success = function (data) {
             var coll = new Backbone.Collection(data);
             var view = new SelectVzporedniceView({
-                collection: coll
+                collection: coll,
+                class: 'vzporednice'
             });
             view.on('selected', self.onSelected, self);
             self.vzporedniceR.show(view);
@@ -132,7 +133,8 @@ define([
             });
             var view = new SVV({
                 collection: coll,
-                title: i18next.t('prekrivanja.title')
+                title: i18next.t('prekrivanja.title'),
+                class: 'prekrivanje'
             });
             self.prekrivanjeR.show(view);
         };
@@ -172,10 +174,11 @@ define([
         var success = function (data) {
             var coll = new Backbone.Collection(data);
             var view = new SelectVzporedniceView({
-                collection: coll
+                collection: coll,
+                class: 'prekrivanja'
             });
             view.on('selected', self.onSelected, self);
-            self.vzporedniceR.show(view);
+            self.prekrivanjaR.show(view);
         };
 
         var error = function (error) {

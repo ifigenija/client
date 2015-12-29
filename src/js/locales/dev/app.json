@@ -652,6 +652,7 @@
         "predstave": "Predstave",
         "avtorji": "Avtorji",
         "jeKoprodukcija": "Ali je uprizoritev koprodukcija",
+        "vzporednice": "Vzporednice",
         "t": {
             "datumPremiere": "Datum premiere",
             "sifra": "Številka"
@@ -1938,7 +1939,8 @@
         "relacija": "Kontaktna oseba pri poslovnih partnerjih"
     },
     "vzporednice": {
-        "title": "Vzporednice"
+        "title": "Vzporednice",
+        "zasedba": "Zasedba"
     },
     "prekrivanja": {
         "title": "Prekrivanja"
