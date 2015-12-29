@@ -96,7 +96,6 @@ define([
         };
 
         var upr = this.collectionUprizoritev.pluck('id');
-        upr.push(this.model.get('id'));
 
         this.rpcDajVzporednice({
             uprizoritve: upr,
@@ -143,7 +142,6 @@ define([
         };
 
         var upr = this.collectionUprizoritev.pluck('id');
-        upr.push(this.model.get('id'));
         
         this.rpcDajPrekrivanje({
             uprizoritve: upr,
@@ -157,7 +155,7 @@ define([
         var view = new SelectSodelujociView({
             collection: this.collectionUprizoritev
         });
-//        view.on('change', this.onChange, this);
+        view.on('change', this.onChange, this);
         this.osebeR.show(view);
     };
 

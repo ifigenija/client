@@ -190,8 +190,19 @@ define([
             };
         },
         onChildviewChange: function (item, osebaID) {
-            var funkcijaID = item.model.get('id');
-            this.trigger('change', funkcijaID, osebaID);
+            var funkcije = [];
+            this.collection.each(function (funkcija) {
+                var osebe = [];
+                var alternacije = funkcija.get('alternacije');
+                for (var key in alternacije) {
+                    var alternacija = alternacije[key];
+                    osebe.push(alternacija.oseba.id);
+                }
+                var funk = {};
+                funk[funkcija.get('id')] = osebe;
+                funkcije.push(funk);
+            });
+            this.trigger('change', funkcije);
         },
         triggers: {
             'click .uprizoritev-odstrani': 'odstrani'
@@ -216,9 +227,8 @@ define([
                 collection: coll
             };
         },
-        onChildviewChange: function (item, funkcijaID, osebaID) {
-            this.izbraneOsebe[funkcijaID] = osebaID;
-            this.trigger('change', this.izbraneOsebe);
+        onChildviewChange: function (item, funkcije) {
+            this.trigger('change', funkcije);
         },
         onChildviewOdstrani: function (child) {
             this.collection.remove(child.model);

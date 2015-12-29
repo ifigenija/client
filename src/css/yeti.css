@@ -7097,9 +7097,6 @@ Licenca GPLv3
 .zasedene-osebe .vzporednice-oseba {
   background-color: orangered;
 }
-.nezasedene-osebe .vzporednice-oseba {
-  background-color: greenyellow;
-}
 .sodelujoci-funkcije {
   -webkit-user-select: none;
   -khtml-user-select: none;
