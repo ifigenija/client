@@ -43,12 +43,12 @@ define([
         this.collectionUprizoritev = new Backbone.Collection();
         this.collectionUprizoritev.on('remove', this.uprizoritevRemove, this);
         this.collectionUprizoritev.on('add', this.uprizoritevAdd, this);
-        
+
         //nezadovoljen z rešitvijo
-        this.model.set('label',this.model.get('naslov'));
+        this.model.set('label', this.model.get('naslov'));
         this.model.set('neBrisi', true);
         this.collectionUprizoritev.add(this.model);
-        
+
         if (options && options.model) {
             this.model = options.model;
         } else {
@@ -63,7 +63,7 @@ define([
     VzporedniceView.prototype.uprizoritevAdd = function (model) {
         var planirane = new PlanFun();
         planirane.queryParams.uprizoritev = model.get('id');
-        
+
         var self = this;
         planirane.fetch({
             success: function () {
@@ -82,7 +82,7 @@ define([
         this.renderPrekrivanja();
     };
 
-    VzporedniceView.prototype.renderVzporednice = function () {
+    VzporedniceView.prototype.renderVzporednice = function (izbraneOsebe) {
         var self = this;
 
         var success = function (data) {
@@ -103,8 +103,8 @@ define([
 
         this.rpcDajVzporednice({
             uprizoritve: upr,
-            alternacije:[],
-            success:success,
+            alternacije: izbraneOsebe ? izbraneOsebe : [],
+            success: success,
             error: error
         });
     };
@@ -115,7 +115,7 @@ define([
             'alternacije': options.alternacije
         }, options.success, options.error);
     };
-    
+
 
     VzporedniceView.prototype.rpcDajPrekrivanja = function (options) {
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
@@ -124,8 +124,8 @@ define([
             'alternacije': options.alternacije
         }, options.success, options.error);
     };
-    
-    VzporedniceView.prototype.renderPrekrivanja = function () {
+
+    VzporedniceView.prototype.renderPrekrivanja = function (izbraneOsebe) {
         var self = this;
 
         var success = function (data) {
@@ -143,11 +143,11 @@ define([
         };
 
         var upr = this.collectionUprizoritev.pluck('id');
-        
+
         this.rpcDajPrekrivanja({
             uprizoritve: upr,
-            alternacije:[],
-            success:success,
+            alternacije: izbraneOsebe ? izbraneOsebe : [],
+            success: success,
             error: error
         });
     };
@@ -163,30 +163,9 @@ define([
     VzporedniceView.prototype.onSelected = function (model) {
         this.collectionUprizoritev.add(model);
     };
-    VzporedniceView.prototype.onChange = function (izbraneOsebe) {        
-        var self = this;
-
-        var success = function (data) {
-            var coll = new Backbone.Collection(data.data);
-            var view = new PrekrivanjaView({
-                collection: coll,
-                title: i18next.t('prekrivanja.title'),
-                class: 'prekrivanja'
-            });
-            view.on('selected', self.onSelected, self);
-            self.prekrivanjaR.show(view);
-        };
-
-        var error = function (error) {
-            console.log(error);
-        };
-
-        this.rpcDajPrekrivanja({
-            uprizoritve: [],
-            alternacije:izbraneOsebe,
-            success:success,
-            error: error
-        });
+    VzporedniceView.prototype.onChange = function (izbraneOsebe) {
+        this.renderPrekrivanja(izbraneOsebe);
+        this.renderVzporednice(izbraneOsebe);
     };
 
     return VzporedniceView;
