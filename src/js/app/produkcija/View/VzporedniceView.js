@@ -41,13 +41,15 @@ define([
 
     VzporedniceView.prototype.initialize = function (options) {
         this.collectionUprizoritev = new Backbone.Collection();
+        
+        this.model.set('label',this.model.get('naslov'));
+        this.model.set('neBrisi', true);
+        this.collectionUprizoritev.add(this.model);
+        
         this.collectionUprizoritev.on('remove', this.uprizoritevRemove, this);
         this.collectionUprizoritev.on('add', this.uprizoritevAdd, this);
         
         //nezadovoljen z rešitvijo
-        this.model.set('label',this.model.get('naslov'));
-        this.model.set('neBrisi', true);
-        this.collectionUprizoritev.add(this.model);
         
         if (options && options.model) {
             this.model = options.model;
@@ -68,6 +70,7 @@ define([
         planirane.fetch({
             success: function () {
                 model.set('funkcije', planirane.models);
+                self.renderVzporednice();
                 self.renderOsebe();
                 self.renderPrekrivanja();
             },
@@ -161,10 +164,6 @@ define([
 
     VzporedniceView.prototype.onSelected = function (model) {
         this.collectionUprizoritev.add(model);
-
-        this.renderVzporednice(); 
-        this.renderOsebe();
-        this.renderPrekrivanja();
     };
     VzporedniceView.prototype.onChange = function (izbraneOsebe) {        
         var self = this;

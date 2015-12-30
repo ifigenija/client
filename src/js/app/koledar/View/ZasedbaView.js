@@ -51,7 +51,7 @@ define([
      * Namenjena izroisu oseb v funkciji
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
-    var FunkcijeView = Marionette.CompositeView.extend({
+    var OsebeView = Marionette.CompositeView.extend({
         className: 'sodelujoci-funkcija',
         template: Handlebars.compile('{{#if naziv}}{{naziv}}{{else}}{{t "funkcija.neimenovana"}}{{/if}}: <span class="sodelujoci-osebe"></span>'),
         childView: OsebaView,
@@ -158,10 +158,10 @@ define([
      * Namenjena izrisu funkcij v uprizoritvi
      * @type @exp;Marionette@pro;CompositeView@call;extend
      */
-    var UprizoritevView = Marionette.CompositeView.extend({
+    var FunkcijeView = Marionette.CompositeView.extend({
         template: uprizoritevTpl,
         className: 'panel panel-default sodelujoci-uprizoritev',
-        childView: FunkcijeView,
+        childView: OsebeView,
         childViewContainer: '.sodelujoci-funkcije',
         initialize: function (options) {
             this.funkcijeOsebe = [];
@@ -191,16 +191,18 @@ define([
             };
         },
         onChildviewChange: function (item, osebaID) {
+            var self = this;
             var funkcije = [];
-            this.collection.each(function (funkcija) {
+            this.children.each(function (funkcija) {
                 var osebe = [];
-                var alternacije = funkcija.get('alternacije');
-                for (var key in alternacije) {
-                    var alternacija = alternacije[key];
-                    osebe.push(alternacija.oseba.id);
-                }
+                var alternacije = funkcija.collection;
+                alternacije.each(function (alternacija) {
+                    if (alternacija.get('izbran')) {
+                        osebe.push(alternacija.get('oseba').id);
+                    }
+                });
                 var funk = {};
-                funk[funkcija.get('id')] = osebe;
+                funk[funkcija.model.get('id')] = osebe;
                 funkcije.push(funk);
             });
             this.trigger('change', funkcije);
@@ -209,6 +211,10 @@ define([
             'click .uprizoritev-odstrani': 'odstrani'
         }
     });
+    
+    var EmptyView = Marionette.ItemView.extend({
+        template: Handlebars.compile('<div>Uprizoritev nima določene nobene funkcije.</div>')
+    });
 
     /**
      * namenjena izrisu uprizoritev
@@ -216,7 +222,8 @@ define([
      */
     var ZasedbaView = Marionette.CompositeView.extend({
         template: uprizoritveTpl,
-        childView: UprizoritevView,
+        emptyView: EmptyView,
+        childView: FunkcijeView,
         childViewContainer: '.sodelujoci-uprizoritve',
         initialize: function () {
             this.izbraneOsebe = {};
