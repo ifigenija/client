@@ -8,7 +8,7 @@ define([
     'backbone',
     'marionette',
     './SelectVzporedniceView',
-    './SelectSodelujociView',
+    './ZasedbaView',
     'template!../tpl/izbira-upr.tpl',
     'baseUrl',
     'jquery',
@@ -20,7 +20,7 @@ define([
         Backbone,
         Marionette,
         SelectVzporedniceView,
-        SelectSodelujociView,
+        ZasedbaView,
         tpl,
         baseUrl,
         $
@@ -95,7 +95,7 @@ define([
         });
         var self = this;
         collection.fetch({success: function () {
-                var view = self.osebeView = new SelectSodelujociView({
+                var view = self.osebeView = new ZasedbaView({
                     collection: collection
                 });
                 view.on('change', self.onChange, self);

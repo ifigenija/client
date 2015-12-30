@@ -83,13 +83,13 @@ define([
         triggers: {
             'click': 'selected'
         },
-        initiallize: function(options){
+        initiallize: function (options) {
             this.template = options.template || this.tempalte;
         }
     });
 
     var EmptyView = Marionette.ItemView.extend({
-        template: Handlebars.compile('<div>Vzporednica ne obstaja.</div>')
+        template: Handlebars.compile('<div>Vzporednice ne obstajajo.</div>')
     });
 
     /**

@@ -7117,6 +7117,13 @@ Licenca GPLv3
 .vzporednice-panel .zasedene-osebe .oseba .ime {
   background-color: orangered;
 }
+.prekrivanja-panel .uprizoritev:hover {
+  background-color: #5bc0de;
+  cursor: pointer;
+}
+.prekrivanja-panel .funkcije {
+  margin-bottom: 0px;
+}
 /*
 Licenca GPLv3
 */

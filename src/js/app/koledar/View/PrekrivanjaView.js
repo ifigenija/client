@@ -19,17 +19,16 @@ define([
         SelectVzporedniceView
         ) {
 
-    var tpl = '<a href="{{href}}" target="_blank">{{besedilo.label}}</a>';
-
-    var EmptyView = Marionette.ItemView.extend({
-        template: Handlebars.compile('<div>Prekrivanje ne obstaja.</div>')
+    var TestView = Marionette.ItemView.extend({
+        template: Handlebars.compile('<div>Prekrivanja ne obstajajo.</div>')
     });
     
     var PrekrivanjaView = SelectVzporedniceView.extend({
-        emptyView: EmptyView
+        emptyView: TestView
     });
 
-    PrekrivanjaView.prototype.onChildviewSelected = function () {
+    PrekrivanjaView.prototype.onChildviewSelected = function (child) {
+        window.open('#pro/uprizoritev/' + child.model.get('id'));
     };
 
     PrekrivanjaView.prototype.childViewOptions = function (model, index) {
@@ -37,7 +36,7 @@ define([
         var coll = new Backbone.Collection(modeli);
         return{
             collection: coll,
-            template: Handlebars.compile('<a href="{{href}}" target="_blank">{{label}}</a><ul class="funkcije"></ul>')
+            template: Handlebars.compile('{{label}}<ul class="funkcije"></ul>')
         };
     };
 

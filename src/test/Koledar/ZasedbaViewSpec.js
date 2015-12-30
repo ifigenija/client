@@ -1,21 +1,21 @@
 define([
     'jquery',
     'backbone',
-    'app/koledar/View/SelectSodelujociView',
+    'app/koledar/View/ZasedbaView',
     'text!../fixtures/vzporedniceSodelujoci.json'
 ], function (
         $,
         Backbone,
-        SelectSodelujociView,
+        ZasedbaView,
         sodelujociFixture
         ) {
 
-    describe("SelectSodelujociView", function () {
+    describe("ZasedbaView", function () {
         beforeEach(function () {
             var fixture = JSON.parse(sodelujociFixture);
             var coll = new Backbone.Collection(fixture.data);
 
-            this.view = new SelectSodelujociView({
+            this.view = new ZasedbaView({
                 collection: coll
             });
 

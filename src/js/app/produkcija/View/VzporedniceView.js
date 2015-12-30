@@ -10,7 +10,7 @@ define([
     'underscore',
     'app/koledar/View/PrekrivanjaView',
     'app/koledar/View/SelectVzporedniceView',
-    'app/koledar/View/SelectSodelujociView',
+    'app/koledar/View/ZasedbaView',
     'template!../tpl/vzporednice.tpl',
     '../Model/PlanFun',
     'jquery',
@@ -24,7 +24,7 @@ define([
         _,
         PrekrivanjaView,
         SelectVzporedniceView,
-        SelectSodelujociView,
+        ZasedbaView,
         vzporedniceTpl,
         PlanFun,
         $
@@ -35,7 +35,7 @@ define([
         regions: {
             vzporedniceR: '.region-vzporednice',
             osebeR: '.region-osebe',
-            prekrivanjeR: '.region-prekrivanja'
+            prekrivanjaR: '.region-prekrivanja'
         }
     });
 
@@ -116,7 +116,7 @@ define([
     };
     
 
-    VzporedniceView.prototype.rpcDajPrekrivanje = function (options) {
+    VzporedniceView.prototype.rpcDajPrekrivanja = function (options) {
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
         rpc.call('dajPrekrivanja', {
             'uprizoritveIds': options.uprizoritve,
@@ -132,9 +132,9 @@ define([
             var view = new PrekrivanjaView({
                 collection: coll,
                 title: i18next.t('prekrivanja.title'),
-                class: 'prekrivanje'
+                class: 'prekrivanja'
             });
-            self.prekrivanjeR.show(view);
+            self.prekrivanjaR.show(view);
         };
 
         var error = function (error) {
@@ -143,7 +143,7 @@ define([
 
         var upr = this.collectionUprizoritev.pluck('id');
         
-        this.rpcDajPrekrivanje({
+        this.rpcDajPrekrivanja({
             uprizoritve: upr,
             alternacije:[],
             success:success,
@@ -152,7 +152,7 @@ define([
     };
     VzporedniceView.prototype.renderOsebe = function () {
 
-        var view = new SelectSodelujociView({
+        var view = new ZasedbaView({
             collection: this.collectionUprizoritev
         });
         view.on('change', this.onChange, this);
@@ -164,15 +164,16 @@ define([
 
         this.renderVzporednice(); 
         this.renderOsebe();
-        this.renderPrekrivanje();
+        this.renderPrekrivanja();
     };
     VzporedniceView.prototype.onChange = function (izbraneOsebe) {        
         var self = this;
 
         var success = function (data) {
             var coll = new Backbone.Collection(data.data);
-            var view = new SelectVzporedniceView({
+            var view = new PrekrivanjaView({
                 collection: coll,
+                title: i18next.t('prekrivanja.title'),
                 class: 'prekrivanja'
             });
             view.on('selected', self.onSelected, self);
@@ -183,7 +184,7 @@ define([
             console.log(error);
         };
 
-        this.rpcDajPrekrivanje({
+        this.rpcDajPrekrivanja({
             uprizoritve: [],
             alternacije:izbraneOsebe,
             success:success,
