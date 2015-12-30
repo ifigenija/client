@@ -190,28 +190,14 @@ define([
                 collection: coll
             };
         },
-        onChildviewChange: function (item, osebaID) {
-            var self = this;
-            var funkcije = [];
-            this.children.each(function (funkcija) {
-                var osebe = [];
-                var alternacije = funkcija.collection;
-                alternacije.each(function (alternacija) {
-                    if (alternacija.get('izbran')) {
-                        osebe.push(alternacija.get('oseba').id);
-                    }
-                });
-                var funk = {};
-                funk[funkcija.model.get('id')] = osebe;
-                funkcije.push(funk);
-            });
-            this.trigger('change', funkcije);
+        onChildviewChange: function () {
+            this.trigger('change');
         },
         triggers: {
             'click .uprizoritev-odstrani': 'odstrani'
         }
     });
-    
+
     var EmptyView = Marionette.ItemView.extend({
         template: Handlebars.compile('<div>Uprizoritev nima določene nobene funkcije.</div>')
     });
@@ -235,8 +221,24 @@ define([
                 collection: coll
             };
         },
-        onChildviewChange: function (item, funkcije) {
-            this.trigger('change', funkcije);
+        onChildviewChange: function () {
+            var funkcijeUpr = [];
+            this.children.each(function (uprizoritev) {
+                var funkcije = uprizoritev.collection;
+                funkcije.each(function (funkcija) {
+                    var osebe = [];
+                    var alternacije = funkcija.collection;
+                    alternacije.each(function (alternacija) {
+                        if (alternacija.get('izbran')) {
+                            osebe.push(alternacija.get('oseba').id);
+                        }
+                    });
+                    var funk = {};
+                    funk[funkcija.get('id')] = osebe;
+                    funkcijeUpr.push(funk);
+                });
+            });
+            this.trigger('change', funkcijeUpr);
         },
         onChildviewOdstrani: function (child) {
             this.collection.remove(child.model);

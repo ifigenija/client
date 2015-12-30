@@ -34,11 +34,17 @@ define([
         template: vzporedniceTpl,
         regions: {
             vzporedniceR: '.region-vzporednice',
-            osebeR: '.region-osebe',
+            zasedbaR: '.region-zasedba',
             prekrivanjaR: '.region-prekrivanja'
         }
     });
 
+    /**
+     * inicializacija collectiona Uprizoritev
+     * V kolekcijo dodamo uprizoritev, ki jo trenutno gledamo
+     * @param {type} options
+     * @returns {undefined}
+     */
     VzporedniceView.prototype.initialize = function (options) {
         this.collectionUprizoritev = new Backbone.Collection();
         this.collectionUprizoritev.on('remove', this.uprizoritevRemove, this);
@@ -55,11 +61,23 @@ define([
             //napaka
         }
     };
-    VzporedniceView.prototype.uprizoritevRemove = function (model) {
-        this.renderOsebe();
+    /**
+     * Kaj se zgodi ko iz kolekcije uprizoritev odstranimo model.
+     * Ponovno renderiramo vzporednice, zasedbe in prekrivanja
+     * @param {type} model
+     * @returns {undefined}
+     */
+    VzporedniceView.prototype.uprizoritevRemove = function () {
+        this.renderZasedba();
         this.renderVzporednice();
         this.renderPrekrivanja();
     };
+    /**
+     * Kaj se zgodi ko dodamo uprizoritev v kolekcijo uprizoritev.
+     * iz strežnika pridobimo planirane funkcije uprizoritve
+     * @param {type} model
+     * @returns {undefined}
+     */
     VzporedniceView.prototype.uprizoritevAdd = function (model) {
         var planirane = new PlanFun();
         planirane.queryParams.uprizoritev = model.get('id');
@@ -69,23 +87,64 @@ define([
             success: function () {
                 model.set('funkcije', planirane.models);
                 self.renderVzporednice();
-                self.renderOsebe();
+                self.renderZasedba();
                 self.renderPrekrivanja();
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
 
     };
+
     VzporedniceView.prototype.onRender = function () {
         this.renderVzporednice();
-        this.renderOsebe();
+        this.renderZasedba();
         this.renderPrekrivanja();
     };
 
+    /**
+     * RPC klic za vzporednice
+     * 
+     * @param {Object} options
+     *        {Array} options.uprizoritev: Polje idjev uprizoritev, od katerih želimo vzporednice
+     *                                      [uprid, uprid, uprid]
+     *        {Array} options.alternacije: [{funkcijaid:[osebaid, osebaid]},
+     *                                      {funkcijaid:[osebaid, osebaid]}]
+     *        {Function} options.success: funkcija, ki se kliče ob uspešnej RPC klicu
+     *        {Function} options.error: funkcija, ki se kliče ob neuspešnem RPC klicu
+     * @returns {undefined}
+     */
+    VzporedniceView.prototype.rpcDajVzporednice = function (options) {
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
+        rpc.call('dajVzporednice', {
+            'uprizoritveIds': options.uprizoritve,
+            'alternacije': options.alternacije
+        }, options.success, options.error);
+    };
+
+    /**
+     * Enako kot pri zgornji funkciji
+     * @param {type} options
+     * @returns {undefined}
+     */
+    VzporedniceView.prototype.rpcDajPrekrivanja = function (options) {
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
+        rpc.call('dajPrekrivanja', {
+            'uprizoritveIds': options.uprizoritve,
+            'alternacije': options.alternacije
+        }, options.success, options.error);
+    };
+    /**
+     * 
+     * @param {Array} izbraneOsebe: [{funkcijaid:[osebaid, osebaid]},
+     *                              {funkcijaid:[osebaid, osebaid]}]
+     * @returns {undefined}
+     */
     VzporedniceView.prototype.renderVzporednice = function (izbraneOsebe) {
         var self = this;
 
+        //Ob uspešno izvedenem RPC klicu se renderirajo vzporednice
         var success = function (data) {
+            //podatke od rpc responsa pretvorimo v kolekcijo
             var coll = new Backbone.Collection(data.data);
             var view = new SelectVzporedniceView({
                 collection: coll,
@@ -108,27 +167,18 @@ define([
             error: error
         });
     };
-    VzporedniceView.prototype.rpcDajVzporednice = function (options) {
-        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
-        rpc.call('dajVzporednice', {
-            'uprizoritveIds': options.uprizoritve,
-            'alternacije': options.alternacije
-        }, options.success, options.error);
-    };
-
-
-    VzporedniceView.prototype.rpcDajPrekrivanja = function (options) {
-        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
-        rpc.call('dajPrekrivanja', {
-            'uprizoritveIds': options.uprizoritve,
-            'alternacije': options.alternacije
-        }, options.success, options.error);
-    };
-
+    /**
+     * 
+     * @param {Array} izbraneOsebe: [{funkcijaid:[osebaid, osebaid]},
+     *                              {funkcijaid:[osebaid, osebaid]}]
+     * @returns {undefined}
+     */
     VzporedniceView.prototype.renderPrekrivanja = function (izbraneOsebe) {
         var self = this;
 
+        //Ob uspešno izvedenem RPC klicu se renderirajo vzporednice
         var success = function (data) {
+            //podatke od rpc responsa pretvorimo v kolekcijo
             var coll = new Backbone.Collection(data.data);
             var view = new PrekrivanjaView({
                 collection: coll,
@@ -151,13 +201,14 @@ define([
             error: error
         });
     };
-    VzporedniceView.prototype.renderOsebe = function () {
+
+    VzporedniceView.prototype.renderZasedba = function () {
 
         var view = new ZasedbaView({
             collection: this.collectionUprizoritev
         });
         view.on('change', this.onChange, this);
-        this.osebeR.show(view);
+        this.zasedbaR.show(view);
     };
 
     VzporedniceView.prototype.onSelected = function (model) {
