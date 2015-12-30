@@ -23,7 +23,7 @@ define([
      * Namenjena izrisu osebe
      * @type @exp;Marionette@pro;ItemView@call;extend
      */
-    var OsebaView = Marionette.ItemView.extend({
+    var AlternacijaView = Marionette.ItemView.extend({
         tagName: 'span',
         className: 'sodelujoci-oseba',
         template: Handlebars.compile('<span class="ime">{{oseba.label}}</span>'),
@@ -51,10 +51,10 @@ define([
      * Namenjena izroisu oseb v funkciji
      * @type @exp;Marionette@pro;CollectionView@call;extend
      */
-    var OsebeView = Marionette.CompositeView.extend({
+    var AlternacijeView = Marionette.CompositeView.extend({
         className: 'sodelujoci-funkcija',
         template: Handlebars.compile('{{#if naziv}}{{naziv}}{{else}}{{t "funkcija.neimenovana"}}{{/if}}: <span class="sodelujoci-osebe"></span>'),
-        childView: OsebaView,
+        childView: AlternacijaView,
         childViewContainer: '.sodelujoci-osebe',
         resetSelection: function () {
             var models = this.collection.models;
@@ -161,7 +161,7 @@ define([
     var FunkcijeView = Marionette.CompositeView.extend({
         template: uprizoritevTpl,
         className: 'panel panel-default sodelujoci-uprizoritev',
-        childView: OsebeView,
+        childView: AlternacijeView,
         childViewContainer: '.sodelujoci-funkcije',
         initialize: function (options) {
             this.funkcijeOsebe = [];
@@ -184,28 +184,12 @@ define([
             this.collection.sort();
         },
         childViewOptions: function (model, index) {
-            var modeli = model.get('alternacije');
-            var coll = new Backbone.Collection(modeli);
             return{
-                collection: coll
+                collection: model.get('alternacije')
             };
         },
-        onChildviewChange: function (item, osebaID) {
-            var self = this;
-            var funkcije = [];
-            this.children.each(function (funkcija) {
-                var osebe = [];
-                var alternacije = funkcija.collection;
-                alternacije.each(function (alternacija) {
-                    if (alternacija.get('izbran')) {
-                        osebe.push(alternacija.get('oseba').id);
-                    }
-                });
-                var funk = {};
-                funk[funkcija.model.get('id')] = osebe;
-                funkcije.push(funk);
-            });
-            this.trigger('change', funkcije);
+        onChildviewChange: function () {
+            this.trigger('change');
         },
         triggers: {
             'click .uprizoritev-odstrani': 'odstrani'
@@ -224,14 +208,12 @@ define([
             this.izbraneOsebe = [];
         },
         childViewOptions: function (model, index) {
-            var modeli = model.get('funkcije');
-            var coll = new Backbone.Collection(modeli);
             return{
-                collection: coll
+                collection: model.get('funkcije')
             };
         },
-        onChildviewChange: function (item, funkcije) {
-            this.izbraneOsebe = this.izbraneOsebe.concat(funkcije);
+        onChildviewChange: function () {
+            var n = this.collection;
             this.trigger('change', this.izbraneOsebe);
         },
         onChildviewOdstrani: function (child) {

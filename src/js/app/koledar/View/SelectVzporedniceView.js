@@ -24,40 +24,22 @@ define([
      * @type @exp;Marionette@pro;ItemView@call;extend
      */
     var OsebaView = Marionette.ItemView.extend({
-        className: 'oseba',
-        tagName: 'span',
-        template: Handlebars.compile('<span class="ime">{{label}}</span> ')
-    });
-
-    /**
-     * Namenjena izroisu oseb v funkciji
-     * @type @exp;Marionette@pro;CollectionView@call;extend
-     */
-    var OsebeView = Marionette.CollectionView.extend({
-        className: 'osebe',
-        tagName: 'span',
-        childView: OsebaView
-    });
-
-    var FunkcijeView = Marionette.LayoutView.extend({
-        tagName: 'li',
-        className: 'funkcije',
-        template: Handlebars.compile('{{#if label}}{{label}}{{else}}{{t "funkcija.neimenovana"}}{{/if}}: <span class="zasedene-osebe"></span><span class="nezasedene-osebe"></span>'),
-        regions: {
-            zasedeneR: '.zasedene-osebe',
-            nezasedeneR: '.nezasedene-osebe'
+        className: function(){
+            if(this.model.get('zasedena')){
+                return 'oseba zasedena';
+            }
+            return 'oseba';
         },
-        onRender: function () {
-            var zasedeneView = new OsebeView({
-                collection: this.options.zasedene
-            });
-            var nezasedeneView = new OsebeView({
-                collection: this.options.nezasedene
-            });
-
-            this.zasedeneR.show(zasedeneView);
-            this.nezasedeneR.show(nezasedeneView);
-        }
+        tagName: 'span',
+        template: Handlebars.compile('{{label}} ')
+    });
+    
+    var OsebeView = Marionette.CompositeView.extend({
+        className: 'funkcija',
+        tagName: 'span',
+        template: Handlebars.compile('{{#if label }}{{label}}{{else}}{{t "funkcija.neimenovana"}}{{/if}}: <div class="osebe"></div>'),
+        childView: OsebaView,
+        childViewContainer: '.osebe'
     });
 
     //potrebno bo pretvoriti v layout view z dvema regijama in collectionview za zasedene in nezasedene
@@ -65,19 +47,14 @@ define([
      * Namenjena izrisu funkcij v uprizoritvi
      * @type @exp;Marionette@pro;CompositeView@call;extend
      */
-    var UprizoritevView = Marionette.CompositeView.extend({
+    var FunkcijeView = Marionette.CompositeView.extend({
         className: 'uprizoritev',
         template: Handlebars.compile('{{label}} <ul class="funkcije"></ul>'),
-        childView: FunkcijeView,
+        childView: OsebeView,
         childViewContainer: '.funkcije',
-        childViewOptions: function (model, index) {
-            var modeli = model.get('zasedeneOsebe');
-            var collZ = new Backbone.Collection(modeli);
-            var modeli = model.get('nezasedeneOsebe');
-            var collNZ = new Backbone.Collection(modeli);
+        childViewOptions: function (model) {
             return{
-                zasedene: collZ,
-                nezasedene: collNZ
+                collection: model.get('osebe')
             };
         },
         triggers: {
@@ -99,7 +76,7 @@ define([
     var SelectVzporedniceView = Marionette.CompositeView.extend({
         template: vzporedniceTpl,
         emptyView: EmptyView,
-        childView: UprizoritevView,
+        childView: FunkcijeView,
         className: 'vzporednice-panel',
         childViewContainer: '.uprizoritve',
         initialize: function (options) {
@@ -123,10 +100,8 @@ define([
             this.collection.sort();
         },
         childViewOptions: function (model, index) {
-            var modeli = model.get('konfliktneFunkcije');
-            var coll = new Backbone.Collection(modeli);
             return{
-                collection: coll
+                collection: model.get('konfliktneFunkcije')
             };
         },
         onChildviewSelected: function (child) {

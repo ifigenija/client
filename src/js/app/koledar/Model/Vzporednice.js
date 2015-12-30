@@ -6,18 +6,33 @@ define([
     'baseUrl',
     'i18next',
     'backbone',
-    'underscore'
+    'underscore',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         baseUrl,
         i18next,
         Backbone,
-        _
+        _,
+        $
         ) {
 
     var Oseba = Backbone.Model.extend({});
     var Osebe = Backbone.Collection.extend({
         model: Oseba
     });
+
+    Osebe.prototype.initialize = function (models, options) {
+        var zasedena = false;
+        if (options && options.zasedene) {
+            zasedena = true;
+        }
+
+        for (var key in models) {
+            var model = models[key];
+            model['zasedena'] = zasedena;
+        }
+    };
 
     var Funkcija = Backbone.Model.extend({
         defaults: {
@@ -40,24 +55,56 @@ define([
         model: Uprizoritev
     });
 
-    Uprizoritve.prototype.initialize = function (attrs, options) {
-        var uprizoritve = options.data;
+    Uprizoritve.prototype.initialize = function (models) {
+        this.pretvoriVCollection(models);
+    };
 
+    Uprizoritve.prototype.pretvoriVCollection = function (uprizoritve) {
         for (var uprKey in uprizoritve) {
             var uprizoritev = uprizoritve[uprKey];
             var funkcije = uprizoritev['konfliktneFunkcije'];
             for (var funkKey in funkcije) {
                 var funkcija = funkcije[funkKey];
 
-                var osebe = funkcija['zasedeneOsebe'];
-                funkcija['zasedeneOsebe'] = new Osebe(osebe);
+                var zasedeneOsebe = funkcija['zasedeneOsebe'];
+                var zo = new Osebe(zasedeneOsebe);
 
-                osebe = funkcija['nezasedeneOsebe'];
-                funkcija['zasedeneOsebe'] = new Osebe(osebe);
+                var nezasedeneOsebe = funkcija['nezasedeneOsebe'];
+                var nzo = new Osebe(nezasedeneOsebe, {zasedene: true});
+
+                zo.add(nzo.toJSON());
+                funkcija['osebe'] = zo;
             }
             uprizoritev['konfliktneFunkcije'] = new Funkcije(funkcije);
         }
-        this.collection = new Uprizoritve(uprizoritve);
+    };
+
+    /**
+     * RPC klic za vzporednice
+     * 
+     * @param {Object} options
+     *        {Array} options.uprizoritev: Polje idjev uprizoritev, od katerih želimo vzporednice
+     *                                      [uprid, uprid, uprid]
+     *        {Array} options.alternacije: [{funkcijaid:[osebaid, osebaid]},
+     *                                      {funkcijaid:[osebaid, osebaid]}]
+     *        {Function} options.success: funkcija, ki se kliče ob uspešnej RPC klicu
+     *        {Function} options.error: funkcija, ki se kliče ob neuspešnem RPC klicu
+     * @returns {undefined}
+     */
+    Uprizoritve.prototype.dajVzporednice = function (options) {
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
+        rpc.call('dajVzporednice', {
+            'uprizoritveIds': options.uprizoritve,
+            'alternacije': options.alternacije
+        }, options.success, options.error);
+    };
+
+    Uprizoritve.prototype.dajPrekrivanja = function (options) {
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
+        rpc.call('dajPrekrivanja', {
+            'uprizoritveIds': options.uprizoritve,
+            'alternacije': options.alternacije
+        }, options.success, options.error);
     };
     return Uprizoritve;
 });

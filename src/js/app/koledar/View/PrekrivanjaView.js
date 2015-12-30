@@ -32,14 +32,5 @@ define([
         window.open('#pro/uprizoritev/' + child.model.get('id'));
     };
 
-    PrekrivanjaView.prototype.childViewOptions = function (model, index) {
-        var modeli = model.get('konfliktneFunkcije');
-        var coll = new Backbone.Collection(modeli);
-        return{
-            collection: coll,
-            template: Handlebars.compile('{{label}}<ul class="funkcije"></ul>')
-        };
-    };
-
     return PrekrivanjaView;
 });

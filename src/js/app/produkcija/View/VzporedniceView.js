@@ -13,6 +13,8 @@ define([
     'app/koledar/View/ZasedbaView',
     'template!../tpl/vzporednice.tpl',
     '../Model/PlanFun',
+    'app/koledar/Model/Vzporednice',
+    'app/koledar/Model/Zasedbe',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -27,6 +29,8 @@ define([
         ZasedbaView,
         vzporedniceTpl,
         PlanFun,
+        Vzporednice,
+        Zasedbe,
         $
         ) {
     var VzporedniceView = Marionette.LayoutView.extend({
@@ -46,7 +50,7 @@ define([
      * @returns {undefined}
      */
     VzporedniceView.prototype.initialize = function (options) {
-        this.collectionUprizoritev = new Backbone.Collection();
+        this.collectionUprizoritev = new Zasedbe();
         this.collectionUprizoritev.on('remove', this.uprizoritevRemove, this);
         this.collectionUprizoritev.on('add', this.uprizoritevAdd, this);
 
@@ -68,7 +72,7 @@ define([
      * @returns {undefined}
      */
     VzporedniceView.prototype.uprizoritevRemove = function () {
-        this.renderZasedba();
+//        this.renderZasedba();
         this.renderVzporednice();
         this.renderPrekrivanja();
     };
@@ -79,19 +83,22 @@ define([
      * @returns {undefined}
      */
     VzporedniceView.prototype.uprizoritevAdd = function (model) {
-        var planirane = new PlanFun();
-        planirane.queryParams.uprizoritev = model.get('id');
-
-        var self = this;
-        planirane.fetch({
-            success: function () {
-                model.set('funkcije', planirane.models);
-                self.renderVzporednice();
-                self.renderZasedba();
-                self.renderPrekrivanja();
-            },
-            error: Radio.channel('error').request('handler', 'xhr')
-        });
+//        var planirane = new PlanFun();
+//        planirane.queryParams.uprizoritev = model.get('id');
+//
+//        var self = this;
+//        planirane.fetch({
+//            success: function () {
+//                planirane.each(function (planirana) {
+//                    planirana.set('alternacije', new Backbone.Collection(planirana.get('alternacije')));
+//                });
+//                model.set('funkcije', new Backbone.Collection(planirane.models));
+//                self.renderVzporednice();
+////                self.renderZasedba();
+//                self.renderPrekrivanja();
+//            },
+//            error: Radio.channel('error').request('handler', 'xhr')
+//        });
 
     };
 
@@ -145,7 +152,7 @@ define([
         //Ob uspešno izvedenem RPC klicu se renderirajo vzporednice
         var success = function (data) {
             //podatke od rpc responsa pretvorimo v kolekcijo
-            var coll = new Backbone.Collection(data.data);
+            var coll = new Vzporednice(data.data);
             var view = new SelectVzporedniceView({
                 collection: coll,
                 class: 'vzporednice'
@@ -179,7 +186,7 @@ define([
         //Ob uspešno izvedenem RPC klicu se renderirajo vzporednice
         var success = function (data) {
             //podatke od rpc responsa pretvorimo v kolekcijo
-            var coll = new Backbone.Collection(data.data);
+            var coll = new Vzporednice(data.data);
             var view = new PrekrivanjaView({
                 collection: coll,
                 title: i18next.t('prekrivanja.title'),
