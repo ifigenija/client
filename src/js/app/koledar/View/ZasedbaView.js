@@ -190,16 +190,26 @@ define([
                 collection: coll
             };
         },
-        onChildviewChange: function () {
-            this.trigger('change');
+        onChildviewChange: function (item, osebaID) {
+            var self = this;
+            var funkcije = [];
+            this.children.each(function (funkcija) {
+                var osebe = [];
+                var alternacije = funkcija.collection;
+                alternacije.each(function (alternacija) {
+                    if (alternacija.get('izbran')) {
+                        osebe.push(alternacija.get('oseba').id);
+                    }
+                });
+                var funk = {};
+                funk[funkcija.model.get('id')] = osebe;
+                funkcije.push(funk);
+            });
+            this.trigger('change', funkcije);
         },
         triggers: {
             'click .uprizoritev-odstrani': 'odstrani'
         }
-    });
-
-    var EmptyView = Marionette.ItemView.extend({
-        template: Handlebars.compile('<div>Uprizoritev nima določene nobene funkcije.</div>')
     });
 
     /**
@@ -208,11 +218,10 @@ define([
      */
     var ZasedbaView = Marionette.CompositeView.extend({
         template: uprizoritveTpl,
-        emptyView: EmptyView,
         childView: FunkcijeView,
         childViewContainer: '.sodelujoci-uprizoritve',
         initialize: function () {
-            this.izbraneOsebe = {};
+            this.izbraneOsebe = [];
         },
         childViewOptions: function (model, index) {
             var modeli = model.get('funkcije');
@@ -221,24 +230,9 @@ define([
                 collection: coll
             };
         },
-        onChildviewChange: function () {
-            var funkcijeUpr = [];
-            this.children.each(function (uprizoritev) {
-                var funkcije = uprizoritev.collection;
-                funkcije.each(function (funkcija) {
-                    var osebe = [];
-                    var alternacije = funkcija.collection;
-                    alternacije.each(function (alternacija) {
-                        if (alternacija.get('izbran')) {
-                            osebe.push(alternacija.get('oseba').id);
-                        }
-                    });
-                    var funk = {};
-                    funk[funkcija.get('id')] = osebe;
-                    funkcijeUpr.push(funk);
-                });
-            });
-            this.trigger('change', funkcijeUpr);
+        onChildviewChange: function (item, funkcije) {
+            this.izbraneOsebe = this.izbraneOsebe.concat(funkcije);
+            this.trigger('change', this.izbraneOsebe);
         },
         onChildviewOdstrani: function (child) {
             this.collection.remove(child.model);
