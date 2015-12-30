@@ -26,7 +26,7 @@ define([
     var OsebaView = Marionette.ItemView.extend({
         tagName: 'span',
         className: 'sodelujoci-oseba',
-        template: Handlebars.compile('<span class="ime">{{oseba.label}}</span>, '),
+        template: Handlebars.compile('<span class="ime">{{oseba.label}}</span>'),
         events: {
             'click': 'klikOseba'
         },

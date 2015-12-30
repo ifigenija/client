@@ -20,11 +20,12 @@ define([
         ) {
 
     var TestView = Marionette.ItemView.extend({
-        template: Handlebars.compile('<div>Prekrivanja ne obstajajo.</div>')
+        template: Handlebars.compile('Prekrivanja ne obstajajo.')
     });
     
     var PrekrivanjaView = SelectVzporedniceView.extend({
-        emptyView: TestView
+        emptyView: TestView,
+        className: 'prekrivanje-panel'
     });
 
     PrekrivanjaView.prototype.onChildviewSelected = function (child) {

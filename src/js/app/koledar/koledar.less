@@ -6,14 +6,11 @@ Licenca GPLv3
     Author     : boris
 */
 
-@yeti-blue: #008cba;
-@bright-blue: #5bc0de;
-
 .koledar-navigacija {
     background-color: #dddddd;
 }
 
-.sodelujoci-funkcije{
+.sodelujoci-funkcije {
     //da se ob shift kliku ne označuje vsebina
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -21,51 +18,44 @@ Licenca GPLv3
     -o-user-select: none;
 }
 
-.sodelujoci-oseba{
-    & .ime{
-        &:hover{
-            background-color: @bright-blue;
-            cursor: pointer;
-        }
+.sodelujoci-oseba {
+    &:not(:last-child):after {
+        content: ',';
     }
-    &.active{
-        & .ime{
-            background-color: @yeti-blue;
-        }
+    &:hover {
+        background-color: @brand-info;
+        cursor: pointer;
     }
+    &.active {
+        background-color: @brand-success;
+        color: #fff;
+    }
+    margin-right: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 //produkcija vzporednice
 
-.vzporednice-content{
+.vzporednice-content {
     margin-top: 15px;
 }
 
-.vzporednice-panel{
-    & .uprizoritev{
-        &:hover{
-            background-color: @bright-blue;
-            cursor: pointer;
-        }
-    }
-    & .funkcije{
-        margin-bottom:0px;
-    }
-    & .zasedene-osebe{
-        & .oseba .ime{
-            background-color: orangered;
-        }
-    }
-}
+.vzporednice-seznam {
 
-.prekrivanja-panel{
-    & .uprizoritev{
-        &:hover{
-            background-color: @bright-blue;
+    & .uprizoritev:hover {
+            background-color: @gray-lighter;
             cursor: pointer;
         }
+    & .funkcije {
+        margin-bottom: 3px;
     }
-    & .funkcije{
-        margin-bottom:0px;
+    & .osebe:not(:last-child) .ime:after {
+        content: ',';
     }
+    & .nezasedene-osebe .ime {
+        background-color: @brand-success;
+        color: #fff;
+    }
+
 }

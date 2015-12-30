@@ -26,7 +26,7 @@ define([
     var OsebaView = Marionette.ItemView.extend({
         className: 'oseba',
         tagName: 'span',
-        template: Handlebars.compile('<span class="ime">{{label}}</span>, ')
+        template: Handlebars.compile('<span class="ime">{{label}}</span> ')
     });
 
     /**
@@ -100,9 +100,8 @@ define([
         template: vzporedniceTpl,
         emptyView: EmptyView,
         childView: UprizoritevView,
-        childViewContainer: function () {
-            return '.' + this.class + '-uprizoritve';
-        },
+        className: 'vzporednice-panel',
+        childViewContainer: '.uprizoritve',
         initialize: function (options) {
             this.collection.comparator = function (m1, m2) {
                 var m1konf = m1.get('konfliktneFunkcije');

@@ -7097,32 +7097,38 @@ Licenca GPLv3
   -moz-user-select: none;
   -o-user-select: none;
 }
-.sodelujoci-oseba .ime:hover {
+.sodelujoci-oseba {
+  margin-right: 5px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.sodelujoci-oseba:not(:last-child):after {
+  content: ',';
+}
+.sodelujoci-oseba:hover {
   background-color: #5bc0de;
   cursor: pointer;
 }
-.sodelujoci-oseba.active .ime {
-  background-color: #008cba;
+.sodelujoci-oseba.active {
+  background-color: #43ac6a;
+  color: #fff;
 }
 .vzporednice-content {
   margin-top: 15px;
 }
-.vzporednice-panel .uprizoritev:hover {
-  background-color: #5bc0de;
+.vzporednice-seznam .uprizoritev:hover {
+  background-color: #eeeeee;
   cursor: pointer;
 }
-.vzporednice-panel .funkcije {
-  margin-bottom: 0px;
+.vzporednice-seznam .funkcije {
+  margin-bottom: 3px;
 }
-.vzporednice-panel .zasedene-osebe .oseba .ime {
-  background-color: orangered;
+.vzporednice-seznam .osebe:not(:last-child) .ime:after {
+  content: ',';
 }
-.prekrivanja-panel .uprizoritev:hover {
-  background-color: #5bc0de;
-  cursor: pointer;
-}
-.prekrivanja-panel .funkcije {
-  margin-bottom: 0px;
+.vzporednice-seznam .nezasedene-osebe .ime {
+  background-color: #43ac6a;
+  color: #fff;
 }
 /*
 Licenca GPLv3
