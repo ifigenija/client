@@ -34,12 +34,12 @@ define([
         model: Funkcija,
         add: function (models, options) {
             var self = this;
-            
+
             if (!_.isArray(models)) {
                 models = [models];
             }
 
-             for (var k in models) {                 
+            for (var k in models) {
                 var planirane = new PlanFun();
                 planirane.queryParams.uprizoritev = models[k].id;
                 models[k].set('funkcije', planirane);
@@ -48,12 +48,35 @@ define([
                         funkcije.each(function (funkcija) {
                             funkcija.set('alternacije', new Backbone.Collection(funkcija.get('alternacije')));
                         });
+                        self.trigger('dodano');
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
             }
             Backbone.Collection.prototype.add.apply(self, arguments);
 
+        },
+        vrniIzbraneOsebe: function () {
+            var funkOsebe = [];
+            this.each(function (uprizoritev) {
+                var funkcije = uprizoritev.get('funkcije');
+                funkcije.each(function (funkcija) {
+                    var alternacije = funkcija.get('alternacije');
+                    var alterPolje = [];
+                    if (alternacije instanceof Backbone.Collection) {
+                        alternacije.each(function (alternacija) {
+                            if (alternacija.get('izbran')) {
+                                alterPolje.push(alternacija.get('id'));
+                            }
+                        });
+                    }
+                    var funk = {};
+                    funk[funkcija.get('id')] = alterPolje;
+                    funkOsebe.push(funk);
+                });
+            });
+
+            return funkOsebe;
         }
     });
     return Zasedbe;

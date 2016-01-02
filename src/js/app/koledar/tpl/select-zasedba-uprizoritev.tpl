@@ -12,6 +12,6 @@
 </div>
 <div id="{{id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{id}}">
     <div class="panel-body">
-        <div class="sodelujoci-funkcije"></div>
+        <div class="zasedba-region-funkcije"></div>
     </div>
 </div>

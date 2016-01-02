@@ -18,7 +18,7 @@ Licenca GPLv3
     -o-user-select: none;
 }
 
-.sodelujoci-oseba {
+.zasedba-oseba {
     &:not(:last-child):after {
         content: ',';
     }
@@ -50,10 +50,10 @@ Licenca GPLv3
     & .funkcije {
         margin-bottom: 3px;
     }
-    & .osebe:not(:last-child) .ime:after {
+    & .osebe:not(:last-child) .oseba:after {
         content: ',';
     }
-    & .nezasedene-osebe .ime {
+    & .oseba.nezasedena {
         background-color: @brand-success;
         color: #fff;
     }

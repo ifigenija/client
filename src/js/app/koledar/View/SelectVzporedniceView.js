@@ -24,61 +24,89 @@ define([
      * @type @exp;Marionette@pro;ItemView@call;extend
      */
     var OsebaView = Marionette.ItemView.extend({
-        className: function(){
-            if(this.model.get('zasedena')){
+        className: function () {
+            if (this.model.get('zasedena')) {
                 return 'oseba zasedena';
             }
-            return 'oseba';
+            return 'oseba nezasedena';
         },
         tagName: 'span',
         template: Handlebars.compile('{{label}} ')
     });
-    
-    var OsebeView = Marionette.CompositeView.extend({
-        className: 'funkcija',
+
+    var OsebeView = Marionette.CollectionView.extend({
+        className: 'osebe',
         tagName: 'span',
-        template: Handlebars.compile('{{#if label }}{{label}}{{else}}{{t "funkcija.neimenovana"}}{{/if}}: <div class="osebe"></div>'),
-        childView: OsebaView,
-        childViewContainer: '.osebe'
+        childView: OsebaView
     });
 
-    //potrebno bo pretvoriti v layout view z dvema regijama in collectionview za zasedene in nezasedene
-    /**
-     * Namenjena izrisu funkcij v uprizoritvi
-     * @type @exp;Marionette@pro;CompositeView@call;extend
-     */
-    var FunkcijeView = Marionette.CompositeView.extend({
-        className: 'uprizoritev',
-        template: Handlebars.compile('{{label}} <ul class="funkcije"></ul>'),
-        childView: OsebeView,
-        childViewContainer: '.funkcije',
-        childViewOptions: function (model) {
-            return{
-                collection: model.get('osebe')
-            };
+    var FunkcijaView = Marionette.LayoutView.extend({
+        className: 'funkcija',
+        template: Handlebars.compile('{{#if label }}{{label}}{{else}}{{t "funkcija.neimenovana"}}{{/if}}: <span class="region-osebe"></span>'),
+        regions: {
+            alternacijeR: '.region-osebe'
         },
-        triggers: {
-            'click': 'selected'
-        },
-        initiallize: function (options) {
-            this.template = options.template || this.tempalte;
+        onRender: function () {
+            var view = new OsebeView({
+                collection: this.model.get('osebe')
+            });
+
+            this.alternacijeR.show(view);
         }
     });
 
-    var EmptyView = Marionette.ItemView.extend({
-        template: Handlebars.compile('<div>Vzporednice ne obstajajo.</div>')
+    var FunkcijeView = Marionette.CollectionView.extend({
+        className: 'funkcije',
+        childView: FunkcijaView,
+        initiallize: function (options) {
+            this.funkcijeOsebe = [];
+
+            this.collection.comparator = function (m1, m2) {
+                var m1Count = m1.get('alterCount');
+                var m2Count = m2.get('alterCount');
+
+                if (m1Count > m2Count) {
+                    return -1;
+                }
+                else if (m1Count === m2Count) {
+                    return 0;
+                }
+                else if (m1Count < m2Count) {
+                    return 1;
+                }
+            };
+
+            this.collection.sort();
+        }
     });
 
-    /**
-     * namenjena izrisu uprizoritev
-     * @type @exp;Marionette@pro;CollectionView@call;extend
-     */
-    var SelectVzporedniceView = Marionette.CompositeView.extend({
-        template: vzporedniceTpl,
+    var UprizoritevView = Marionette.LayoutView.extend({
+        className: 'uprizoritev',
+        template: Handlebars.compile('<a href="{{href}}" class="uprizoritev-link">{{label}}</a><div class="region-funkcije"></div'),
+        regions: {
+            funkcijeR: '.region-funkcije'
+        },
+        triggers: {
+            'click .uprizoritev-link': 'selected'
+        },
+        serializeData: function () {
+            return _.extend(this.model.toJSON(), {
+                href: this.options.href || 'javascript:void(0)'
+            });
+        },
+        onRender: function () {
+            var view = new FunkcijeView({
+                collection: this.model.get('konfliktneFunkcije')
+            });
+
+            this.funkcijeR.show(view);
+        }
+    });
+
+    var UprizoritveView = Marionette.CollectionView.extend({
         emptyView: EmptyView,
-        childView: FunkcijeView,
-        className: 'vzporednice-panel',
-        childViewContainer: '.uprizoritve',
+        childView: UprizoritevView,
+        className: 'uprizoritve',
         initialize: function (options) {
             this.collection.comparator = function (m1, m2) {
                 var m1konf = m1.get('konfliktneFunkcije');
@@ -99,13 +127,32 @@ define([
 
             this.collection.sort();
         },
-        childViewOptions: function (model, index) {
-            return{
-                collection: model.get('konfliktneFunkcije')
-            };
-        },
         onChildviewSelected: function (child) {
             this.trigger('selected', child.model);
+        }
+    });
+
+    var EmptyView = Marionette.ItemView.extend({
+        template: Handlebars.compile('<div>Vzporednice ne obstajajo.</div>')
+    });
+
+    var SelectVzporedniceView = Marionette.LayoutView.extend({
+        template: vzporedniceTpl,
+        className: 'vzporednice-panel',
+        regions: {
+            uprizoritveR: '.uprizoritve'
+        },
+        onRender: function () {
+            var view = new UprizoritveView({
+                collection: this.options.collection
+            });
+
+            var self = this;
+            view.on('selected', function (model) {
+                self.trigger('selected', model);
+            }, this);
+
+            this.uprizoritveR.show(view);
         },
         serializeData: function () {
             return {

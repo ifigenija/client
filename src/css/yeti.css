@@ -7097,19 +7097,19 @@ Licenca GPLv3
   -moz-user-select: none;
   -o-user-select: none;
 }
-.sodelujoci-oseba {
+.zasedba-oseba {
   margin-right: 5px;
   padding-left: 3px;
   padding-right: 3px;
 }
-.sodelujoci-oseba:not(:last-child):after {
+.zasedba-oseba:not(:last-child):after {
   content: ',';
 }
-.sodelujoci-oseba:hover {
+.zasedba-oseba:hover {
   background-color: #5bc0de;
   cursor: pointer;
 }
-.sodelujoci-oseba.active {
+.zasedba-oseba.active {
   background-color: #43ac6a;
   color: #fff;
 }
@@ -7123,10 +7123,10 @@ Licenca GPLv3
 .vzporednice-seznam .funkcije {
   margin-bottom: 3px;
 }
-.vzporednice-seznam .osebe:not(:last-child) .ime:after {
+.vzporednice-seznam .osebe:not(:last-child) .oseba:after {
   content: ',';
 }
-.vzporednice-seznam .nezasedene-osebe .ime {
+.vzporednice-seznam .oseba.nezasedena {
   background-color: #43ac6a;
   color: #fff;
 }
