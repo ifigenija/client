@@ -25,7 +25,7 @@ define([
      */
     var AlternacijaView = Marionette.ItemView.extend({
         tagName: 'span',
-        className: 'zasedba-oseba',
+        className: 'zasedba-alternacija',
         template: Handlebars.compile('{{oseba.label}} '),
         events: {
             'click': 'klikOseba'
@@ -150,12 +150,10 @@ define([
     });
 
     var FunkcijaView = Marionette.LayoutView.extend({
+        className: 'funkcija',
         template: Handlebars.compile('<span class="funkcija-naslov">{{naziv}}: </span><span class="zasedba-region-alternacije"></span>'),
         regions: {
             alternacijeR: '.zasedba-region-alternacije'
-        },
-        initialize: function () {
-            this.model.on('change', this.onRender, this);
         },
         onRender: function () {
             var view = new AlternacijeView({
@@ -171,6 +169,7 @@ define([
     });
 
     var FunkcijeView = Marionette.CollectionView.extend({
+        className: 'funkcije',
         childView: FunkcijaView,
         initialize: function (options) {
             this.funkcijeOsebe = [];
@@ -198,6 +197,7 @@ define([
     });
 
     var UprizoritevView = Marionette.LayoutView.extend({
+        className: 'uprizoritev',
         template: uprizoritevTpl,
         triggers: {
             'click .uprizoritev-odstrani': 'odstrani'
@@ -219,6 +219,7 @@ define([
     });
 
     var UprizoritveView = Marionette.CollectionView.extend({
+        className: 'uprizoritve',
         childView: UprizoritevView,
         onChildviewChange: function () {
             this.trigger('change');
@@ -229,6 +230,7 @@ define([
     });
 
     var ZasedbaView = Marionette.LayoutView.extend({
+        className: 'zasedba',
         template: uprizoritveTpl,
         regions: {
             uprizoritveR: '.zasedba-region-uprizoritve'
