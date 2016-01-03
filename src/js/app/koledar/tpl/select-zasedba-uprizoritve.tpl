@@ -1,1 +1,0 @@
-<div class="panel-group zasedba-region-uprizoritve" id="accordion" role="tablist" aria-multiselectable="true"></div>

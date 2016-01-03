@@ -7,7 +7,6 @@ define([
     'app/bars',
     'backbone',
     'marionette',
-    'template!../tpl/select-zasedba-uprizoritve.tpl',
     'template!../tpl/select-zasedba-uprizoritev.tpl'
 ], function (
         Radio,
@@ -15,7 +14,6 @@ define([
         Handlebars,
         Backbone,
         Marionette,
-        uprizoritveTpl,
         uprizoritevTpl
         ) {
 
@@ -197,7 +195,7 @@ define([
     });
 
     var UprizoritevView = Marionette.LayoutView.extend({
-        className: 'uprizoritev',
+        className: 'panel panel-default uprizoritev',
         template: uprizoritevTpl,
         triggers: {
             'click .uprizoritev-odstrani': 'odstrani'
@@ -219,8 +217,13 @@ define([
     });
 
     var UprizoritveView = Marionette.CollectionView.extend({
-        className: 'uprizoritve',
+        className: 'panel-group uprizoritve',
         childView: UprizoritevView,
+        attributes: {
+            "id": "accordion",
+            "role": "tablist",
+            "aria-multiselectable": "true"
+        },
         onChildviewChange: function () {
             this.trigger('change');
         },
@@ -229,25 +232,5 @@ define([
         }
     });
 
-    var ZasedbaView = Marionette.LayoutView.extend({
-        className: 'zasedba',
-        template: uprizoritveTpl,
-        regions: {
-            uprizoritveR: '.zasedba-region-uprizoritve'
-        },
-        onRender: function () {
-            var view = new UprizoritveView({
-                collection: this.options.collection
-            });
-
-            view.on('change', this.onChange, this);
-
-            this.uprizoritveR.show(view);
-        },
-        onChange: function () {
-            this.trigger('change');
-        }
-    });
-
-    return ZasedbaView;
+    return UprizoritveView;
 });

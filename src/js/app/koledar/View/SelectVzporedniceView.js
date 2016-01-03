@@ -103,10 +103,12 @@ define([
         }
     });
 
-    var UprizoritveView = Marionette.CollectionView.extend({
+    var UprizoritveView = Marionette.CompositeView.extend({
         emptyView: EmptyView,
+        template: vzporedniceTpl,
         childView: UprizoritevView,
-        className: 'uprizoritve',
+        className: 'panel panel-default vzporednice-panel',
+        childViewContainer: '.uprizoritve',
         initialize: function (options) {
             this.collection.comparator = function (m1, m2) {
                 var m1konf = m1.get('konfliktneFunkcije');
@@ -129,30 +131,6 @@ define([
         },
         onChildviewSelected: function (child) {
             this.trigger('selected', child.model);
-        }
-    });
-
-    var EmptyView = Marionette.ItemView.extend({
-        template: Handlebars.compile('<div>Vzporednice ne obstajajo.</div>')
-    });
-
-    var SelectVzporedniceView = Marionette.LayoutView.extend({
-        template: vzporedniceTpl,
-        className: 'vzporednice-panel',
-        regions: {
-            uprizoritveR: '.uprizoritve'
-        },
-        onRender: function () {
-            var view = new UprizoritveView({
-                collection: this.options.collection
-            });
-
-            var self = this;
-            view.on('selected', function (model) {
-                self.trigger('selected', model);
-            }, this);
-
-            this.uprizoritveR.show(view);
         },
         serializeData: function () {
             return {
@@ -162,5 +140,9 @@ define([
         }
     });
 
-    return SelectVzporedniceView;
+    var EmptyView = Marionette.ItemView.extend({
+        template: Handlebars.compile('<div>Vzporednice ne obstajajo.</div>')
+    });
+
+    return UprizoritveView;
 });

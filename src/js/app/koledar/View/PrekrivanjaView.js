@@ -19,13 +19,13 @@ define([
         SelectVzporedniceView
         ) {
 
-    var TestView = Marionette.ItemView.extend({
+    var EmptyView = Marionette.ItemView.extend({
         template: Handlebars.compile('Prekrivanja ne obstajajo.')
     });
     
     var PrekrivanjaView = SelectVzporedniceView.extend({
-        emptyView: TestView,
-        className: 'prekrivanje-panel'
+        emptyView: EmptyView,
+        className: 'panel panel-default prekrivanje-panel'
     });
 
     PrekrivanjaView.prototype.onChildviewSelected = function (child) {
