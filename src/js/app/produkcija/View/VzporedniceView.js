@@ -49,8 +49,8 @@ define([
      */
     VzporedniceView.prototype.initialize = function (options) {
         this.collectionUprizoritev = new Zasedbe();
-        this.collectionUprizoritev.on('remove', this.uprizoritevRemove, this);
-        this.collectionUprizoritev.on('add', this.uprizoritevAdd, this);
+        this.collectionUprizoritev.on('remove', this.update, this);
+        this.collectionUprizoritev.on('added', this.update, this);
 
         //nezadovoljen z rešitvijo
         this.model.set('label', this.model.get('naslov'));
@@ -63,23 +63,8 @@ define([
             //napaka
         }
     };
-    /**
-     * Kaj se zgodi ko iz kolekcije uprizoritev odstranimo model.
-     * Ponovno renderiramo vzporednice, zasedbe in prekrivanja
-     * @param {type} model
-     * @returns {undefined}
-     */
-    VzporedniceView.prototype.uprizoritevRemove = function () {
-        this.renderVzporednice();
-        this.renderPrekrivanja();
-    };
-    /**
-     * Kaj se zgodi ko dodamo uprizoritev v kolekcijo uprizoritev.
-     * iz strežnika pridobimo planirane funkcije uprizoritve
-     * @param {type} model
-     * @returns {undefined}
-     */
-    VzporedniceView.prototype.uprizoritevAdd = function (model) {
+    
+    VzporedniceView.prototype.update = function () {
         this.renderVzporednice();
         this.renderPrekrivanja();
     };
@@ -122,13 +107,8 @@ define([
             'alternacije': options.alternacije
         }, options.success, options.error);
     };
-    /**
-     * 
-     * @param {Array} izbraneOsebe: [{funkcijaid:[osebaid, osebaid]},
-     *                              {funkcijaid:[osebaid, osebaid]}]
-     * @returns {undefined}
-     */
-    VzporedniceView.prototype.renderVzporednice = function (izbraneOsebe) {
+    
+    VzporedniceView.prototype.renderVzporednice = function () {
         var self = this;
 
         //Ob uspešno izvedenem RPC klicu se renderirajo vzporednice
@@ -141,6 +121,12 @@ define([
             });
             view.on('selected', self.onSelected, self);
             self.vzporedniceR.show(view);
+            
+            var error = data.error;
+            
+            if(error){
+                
+            }
         };
 
         var error = function (error) {
@@ -157,13 +143,8 @@ define([
             error: error
         });
     };
-    /**
-     * 
-     * @param {Array} izbraneOsebe: [{funkcijaid:[osebaid, osebaid]},
-     *                              {funkcijaid:[osebaid, osebaid]}]
-     * @returns {undefined}
-     */
-    VzporedniceView.prototype.renderPrekrivanja = function (izbraneOsebe) {
+    
+    VzporedniceView.prototype.renderPrekrivanja = function () {
         var self = this;
 
         //Ob uspešno izvedenem RPC klicu se renderirajo vzporednice

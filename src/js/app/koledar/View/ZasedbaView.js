@@ -31,12 +31,6 @@ define([
         klikOseba: function (e) {
             this.trigger('change', e);
         },
-        initialize: function () {
-            var privzeti = this.model.get('privzeti');
-            if (privzeti) {
-                this.model.set('izbran', true);
-            }
-        },
         onRender: function () {
             var izbran = this.model.get('izbran');
             if (izbran) {
@@ -45,7 +39,12 @@ define([
         }
     });
 
+    var EmptyAlternacijeView = Marionette.ItemView.extend({
+        template: Handlebars.compile(i18next.t('vzporednice.niAlternacij'))
+    });
+
     var AlternacijeView = Marionette.CollectionView.extend({
+        emptyView: EmptyAlternacijeView,
         tagName: "span",
         childView: AlternacijaView,
         className: 'zasedba-alternacije',
@@ -104,7 +103,7 @@ define([
 
                 //označimo kliknjen model
                 if (!$el.hasClass('active')) {
-                    this.$('.zasedba-oseba').removeClass('active');
+                    this.$('.zasedba-alternacija').removeClass('active');
                     $el.addClass('active');
                     model.set('izbran', true);
                     this.zadnjiOznacen = model;
@@ -154,19 +153,26 @@ define([
             alternacijeR: '.zasedba-region-alternacije'
         },
         onRender: function () {
-            var view = new AlternacijeView({
-                collection: this.model.get('alternacije')
-            });
+            if (this.model.get('alternacije') instanceof Backbone.Collection) {
+                var view = new AlternacijeView({
+                    collection: this.model.get('alternacije')
+                });
 
-            view.on('change', function () {
-                this.trigger('change');
-            }, this);
+                view.on('change', function () {
+                    this.trigger('change');
+                }, this);
 
-            this.alternacijeR.show(view);
+                this.alternacijeR.show(view);
+            }
         }
     });
 
+    var EmptyFunkcijeView = Marionette.ItemView.extend({
+        template: Handlebars.compile(i18next.t('vzporednice.niFunkcij'))
+    });
+
     var FunkcijeView = Marionette.CollectionView.extend({
+        emptyView: EmptyFunkcijeView,
         className: 'funkcije',
         childView: FunkcijaView,
         initialize: function (options) {
@@ -188,6 +194,10 @@ define([
             };
 
             this.collection.sort();
+            var self = this;
+            this.collection.on('posodobljeno', function () {
+                self.render();
+            }, this);
         },
         onChildviewChange: function () {
             this.trigger('change');
@@ -205,7 +215,7 @@ define([
         },
         onRender: function () {
             var view = new FunkcijeView({
-                collection: this.model.get('funkcije')
+                collection: this.model.get('planiraneFunkcije')
             });
 
             view.on('change', function () {
@@ -228,7 +238,9 @@ define([
             this.trigger('change');
         },
         onChildviewOdstrani: function (child) {
-            this.collection.remove(child.model);
+            this.collection.remove(child.model, {
+                wait: true
+            });
         }
     });
 

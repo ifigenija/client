@@ -42,13 +42,22 @@ define([
             for (var k in models) {
                 var planirane = new PlanFun();
                 planirane.queryParams.uprizoritev = models[k].id;
-                models[k].set('funkcije', planirane);
+                models[k].set('planiraneFunkcije', planirane);
                 planirane.fetch({
                     success: function (funkcije) {
                         funkcije.each(function (funkcija) {
-                            funkcija.set('alternacije', new Backbone.Collection(funkcija.get('alternacije')));
+                            var alternacije = new Backbone.Collection(funkcija.get('alternacije'));
+                            for (k in alternacije.models) {
+                                var alternacija = alternacije.models[k];
+                                var privzeti = alternacija.get('privzeti');
+                                if (privzeti) {
+                                    alternacija.set('izbran', true);
+                                }
+                            }
+                            funkcija.set('alternacije', alternacije);
                         });
-                        self.trigger('dodano');
+                        funkcije.trigger('posodobljeno');
+                        self.trigger('added');
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
@@ -59,14 +68,14 @@ define([
         vrniIzbraneOsebe: function () {
             var funkOsebe = [];
             this.each(function (uprizoritev) {
-                var funkcije = uprizoritev.get('funkcije');
+                var funkcije = uprizoritev.get('planiraneFunkcije');
                 funkcije.each(function (funkcija) {
                     var alternacije = funkcija.get('alternacije');
                     var alterPolje = [];
                     if (alternacije instanceof Backbone.Collection) {
                         alternacije.each(function (alternacija) {
                             if (alternacija.get('izbran')) {
-                                alterPolje.push(alternacija.get('id'));
+                                alterPolje.push(alternacija.get('oseba').id);
                             }
                         });
                     }

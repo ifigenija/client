@@ -7097,19 +7097,19 @@ Licenca GPLv3
   -moz-user-select: none;
   -o-user-select: none;
 }
-.zasedba-oseba {
+.zasedba-alternacija {
   margin-right: 5px;
   padding-left: 3px;
   padding-right: 3px;
 }
-.zasedba-oseba:not(:last-child):after {
+.zasedba-alternacija:not(:last-child):after {
   content: ',';
 }
-.zasedba-oseba:hover {
+.zasedba-alternacija:hover {
   background-color: #5bc0de;
   cursor: pointer;
 }
-.zasedba-oseba.active {
+.zasedba-alternacija.active {
   background-color: #43ac6a;
   color: #fff;
 }

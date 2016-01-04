@@ -102,6 +102,10 @@ define([
             this.funkcijeR.show(view);
         }
     });
+    
+    var EmptyView = Marionette.ItemView.extend({
+        template: Handlebars.compile('Vzporednice ne obstajajo.')
+    });
 
     var UprizoritveView = Marionette.CompositeView.extend({
         emptyView: EmptyView,
@@ -138,10 +142,6 @@ define([
                 title: this.options.title || i18next.t('vzporednice.title')
             };
         }
-    });
-
-    var EmptyView = Marionette.ItemView.extend({
-        template: Handlebars.compile('<div>Vzporednice ne obstajajo.</div>')
     });
 
     return UprizoritveView;
