@@ -20,18 +20,9 @@ define([
         PlanFun,
         $
         ) {
-
-    var Alternacija = Backbone.Model.extend({});
-    var Alternacije = Backbone.Collection.extend({
-        model: Alternacija
-    });
-    var Funkcija = Backbone.Model.extend({});
-    var Funkcije = Backbone.Collection.extend({
-        model: Funkcija
-    });
-
+    
     var Zasedbe = Backbone.Collection.extend({
-        model: Funkcija,
+        model: Backbone.Model,
         add: function (models, options) {
             var self = this;
 

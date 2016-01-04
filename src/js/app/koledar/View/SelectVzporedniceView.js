@@ -90,8 +90,9 @@ define([
             'click .uprizoritev-link': 'selected'
         },
         serializeData: function () {
+            var href = this.model.get('href');
             return _.extend(this.model.toJSON(), {
-                href: this.options.href || 'javascript:void(0)'
+                href: href ? href : 'javascript:void(0)'
             });
         },
         onRender: function () {
@@ -102,7 +103,7 @@ define([
             this.funkcijeR.show(view);
         }
     });
-    
+
     var EmptyView = Marionette.ItemView.extend({
         template: Handlebars.compile('Vzporednice ne obstajajo.')
     });

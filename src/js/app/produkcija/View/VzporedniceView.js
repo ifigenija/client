@@ -14,6 +14,7 @@ define([
     'template!../tpl/vzporednice.tpl',
     'app/koledar/Model/Vzporednice',
     'app/koledar/Model/Zasedbe',
+    'app/koledar/View/VzpOpozorilaView',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -29,6 +30,7 @@ define([
         vzporedniceTpl,
         Vzporednice,
         Zasedbe,
+        OpozorilaView,
         $
         ) {
     var VzporedniceView = Marionette.LayoutView.extend({
@@ -37,7 +39,8 @@ define([
         regions: {
             vzporedniceR: '.region-vzporednice',
             zasedbaR: '.region-zasedba',
-            prekrivanjaR: '.region-prekrivanja'
+            prekrivanjaR: '.region-prekrivanja',
+            opozorilaR: '.region-opozorila'
         }
     });
 
@@ -63,7 +66,7 @@ define([
             //napaka
         }
     };
-    
+
     VzporedniceView.prototype.update = function () {
         this.renderVzporednice();
         this.renderPrekrivanja();
@@ -107,7 +110,7 @@ define([
             'alternacije': options.alternacije
         }, options.success, options.error);
     };
-    
+
     VzporedniceView.prototype.renderVzporednice = function () {
         var self = this;
 
@@ -121,11 +124,15 @@ define([
             });
             view.on('selected', self.onSelected, self);
             self.vzporedniceR.show(view);
-            
+
             var error = data.error;
-            
-            if(error){
-                
+
+            if (error.length) {
+                var opozoriloView = new OpozorilaView({
+                    collection: new Backbone.Collection(error)
+                });
+
+                self.opozorilaR.show(opozoriloView);
             }
         };
 
@@ -143,7 +150,7 @@ define([
             error: error
         });
     };
-    
+
     VzporedniceView.prototype.renderPrekrivanja = function () {
         var self = this;
 
