@@ -24,7 +24,7 @@ define([
     var AlternacijaView = Marionette.ItemView.extend({
         tagName: 'span',
         className: 'zasedba-alternacija',
-        template: Handlebars.compile('{{oseba.label}} '),
+        template: Handlebars.compile('{{oseba.label}}'),
         events: {
             'click': 'klikOseba'
         },
@@ -227,7 +227,7 @@ define([
     });
 
     var UprizoritveView = Marionette.CollectionView.extend({
-        className: 'panel-group uprizoritve',
+        className: 'panel-group zasedba-uprizoritve',
         childView: UprizoritevView,
         attributes: {
             "id": "accordion",

@@ -10,7 +10,7 @@ Licenca GPLv3
     background-color: #dddddd;
 }
 
-.sodelujoci-funkcije {
+.zasedba-uprizoritve{
     //da se ob shift kliku ne označuje vsebina
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -44,18 +44,23 @@ Licenca GPLv3
 .vzporednice-seznam {
 
     & .uprizoritev:hover {
-            background-color: @gray-lighter;
-            cursor: pointer;
-        }
+        background-color: @gray-lighter;
+        cursor: pointer;
+    }
     & .funkcije {
         margin-bottom: 3px;
     }
-    & .osebe:not(:last-child) .oseba:after {
+    & .oseba:not(:last-child):after {
         content: ',';
     }
     & .oseba.nezasedena {
         background-color: @brand-success;
         color: #fff;
+    }
+    & .oseba{
+        margin-right: 5px;
+        padding-left: 3px;
+        padding-right: 3px;
     }
 
 }
