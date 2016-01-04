@@ -5,6 +5,7 @@ define([
     'radio',
     'baseUrl',
     'i18next',
+    'app/bars',
     'backbone',
     'marionette',
     'underscore',
@@ -14,13 +15,14 @@ define([
     'template!../tpl/vzporednice.tpl',
     'app/koledar/Model/Vzporednice',
     'app/koledar/Model/Zasedbe',
-    'app/koledar/View/VzpOpozorilaView',
+    'template!app/koledar/tpl/opozorila.tpl',
     'jquery',
     'jquery.jsonrpc'
 ], function (
         Radio,
         baseUrl,
         i18next,
+        Handlebars,
         Backbone,
         Marionette,
         _,
@@ -30,9 +32,14 @@ define([
         vzporedniceTpl,
         Vzporednice,
         Zasedbe,
-        OpozorilaView,
+        opozorilaTpl,
         $
         ) {
+    
+    var OpozoriloView = Marionette.ItemView.extend({
+        template: opozorilaTpl
+    });
+    
     var VzporedniceView = Marionette.LayoutView.extend({
         //className: 'vzporednice',
         template: vzporedniceTpl,
@@ -41,6 +48,9 @@ define([
             zasedbaR: '.region-zasedba',
             prekrivanjaR: '.region-prekrivanja',
             opozorilaR: '.region-opozorila'
+        },
+        triggers:{
+            'click .prikazi-prekrivanja': 'prikazi:prekrivanja'
         }
     });
 
@@ -66,16 +76,21 @@ define([
             //napaka
         }
     };
+    
+    VzporedniceView.prototype.onPrikaziPrekrivanja = function () {
+        this.renderPrekrivanja();
+        this.$('.prikazi-prekrivanja').addClass('hidden');
+    };
 
     VzporedniceView.prototype.update = function () {
         this.renderVzporednice();
-        this.renderPrekrivanja();
+//        this.renderPrekrivanja();
     };
 
     VzporedniceView.prototype.onRender = function () {
         this.renderVzporednice();
         this.renderZasedba();
-        this.renderPrekrivanja();
+//        this.renderPrekrivanja();
     };
 
     /**
@@ -124,15 +139,21 @@ define([
             });
             view.on('selected', self.onSelected, self);
             self.vzporedniceR.show(view);
+            self.prekrivanjaR.empty();
 
             var error = data.error;
 
             if (error.length) {
-                var opozoriloView = new OpozorilaView({
-                    collection: new Backbone.Collection(error)
+                var model = new Backbone.Model({
+                    opozorila: error
+                });
+                var opozoriloView = new OpozoriloView({
+                    model: model
                 });
 
                 self.opozorilaR.show(opozoriloView);
+            }else{
+                self.opozorilaR.empty();
             }
         };
 
@@ -194,7 +215,7 @@ define([
         this.collectionUprizoritev.add(model);
     };
     VzporedniceView.prototype.onChange = function () {
-        this.renderPrekrivanja();
+//        this.renderPrekrivanja();
         this.renderVzporednice();
     };
 

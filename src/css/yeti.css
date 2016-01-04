@@ -7135,6 +7135,13 @@ Licenca GPLv3
   padding-left: 3px;
   padding-right: 3px;
 }
+.prikazi-prekrivanja {
+  margin-bottom: 15px;
+}
+.zasedba-body {
+  max-height: 600px;
+  overflow: auto;
+}
 /*
 Licenca GPLv3
 */

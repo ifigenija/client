@@ -11,7 +11,7 @@
     </h4>
 </div>
 <div id="{{id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{id}}">
-    <div class="panel-body">
+    <div class="panel-body zasedba-body">
         <div class="zasedba-region-funkcije"></div>
     </div>
 </div>

@@ -41,6 +41,7 @@ define([
     });
 
     var FunkcijaView = Marionette.LayoutView.extend({
+        tagName: 'li',
         className: 'funkcija',
         template: Handlebars.compile('{{#if label }}{{label}}{{else}}{{t "funkcija.neimenovana"}}{{/if}}: <span class="region-osebe"></span>'),
         regions: {
@@ -56,6 +57,7 @@ define([
     });
 
     var FunkcijeView = Marionette.CollectionView.extend({
+        tagName: 'ul',
         className: 'funkcije',
         childView: FunkcijaView,
         initiallize: function (options) {

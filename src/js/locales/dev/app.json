@@ -1943,7 +1943,9 @@
         "title": "Vzporednice",
         "zasedba": "Zasedba",
         "niAlternacij": "Na funkcijo ni vezana nobena oseba.",
-        "niFunkcij": "Na uprizoritvi ni nobene funkcije."
+        "niFunkcij": "Na uprizoritvi ni nobene funkcije.",
+        "opozoriloPrekrivanja": "Prekrivanja izbrane zasedbe",
+        "prikaziPrekrivanja": "Prikazi prekrivanja"
     },
     "prekrivanja": {
         "title": "Prekrivanja"
