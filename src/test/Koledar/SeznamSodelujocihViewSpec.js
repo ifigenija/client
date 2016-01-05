@@ -5,7 +5,7 @@
 define([
     'backbone',
     'jquery',
-    'text!./fixtures/terminiStoritve.json',
+    'text!../fixtures/terminiStoritve.json',
     'app/koledar/View/SeznamSodelujocihView'
 ], function (
         Backbone,

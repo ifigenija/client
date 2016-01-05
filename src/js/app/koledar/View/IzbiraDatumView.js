@@ -51,15 +51,12 @@ define([
 
     IzbiraDatumView.prototype.initialize = function (options) {
         Form.prototype.initialize.apply(this, arguments);
-        
+
         if (options && options.model) {
             this.model = options.model || this.model;
-        }
-        if (options && options.zacetek) {
-            this.zacetek = options.zacetek || this.zacetek;
-        }
-        if (options && options.konec) {
-            this.konec = options.konec || this.konec;
+
+            this.zacetek = this.model.get('zacetek') || null;
+            this.konec = this.model.get('konec') || null;
         }
 
         this.on('change', this.nadaljuj, this);
@@ -73,11 +70,7 @@ define([
         if (this.konec) {
             this.fields.konec.editor.setValue(this.konec);
         }
-        
-        if(options && options.wizardModel){
-            this.wizardModel = options.wizardModel || new Backbone.Model();
-        }
-        this.nadaljuj();
+        this.trigger('change');
     };
 
     IzbiraDatumView.prototype.nadaljuj = function () {
@@ -85,9 +78,9 @@ define([
         var konec = this.fields.konec.getValue();
 
         if (zacetek && konec) {
-            this.wizardModel.set('zacetek', zacetek);
-            this.wizardModel.set('konec', konec);
-            this.trigger('ready', this.wizardModel);
+            this.model.set('zacetek', zacetek);
+            this.model.set('konec', konec);
+            this.trigger('ready', this.model);
         } else {
             this.trigger('not:ready');
         }

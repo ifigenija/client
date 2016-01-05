@@ -13,7 +13,7 @@ define([
     'backbone',
     'underscore',
     'marionette',
-    'text!./fixtures/polniCollection.json',
+    'text!../fixtures/polniCollection.json',
     'app/filter/View/DualListView',
     'backgrid',
     'jquery'

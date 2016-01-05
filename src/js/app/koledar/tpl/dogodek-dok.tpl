@@ -10,10 +10,10 @@
                 <div class="region-toolbar pull-right"></div>
                 <div class="clearfix"></div>
                 <div class="region-form"></div>
-                <div class="region-priloge"></div>
             </div>
             <div role="tabpanel" class="tab-pane pnl-sodelujoci region-sodelujoci"></div>
             <div role="tabpanel" class="tab-pane pnl-razred-dogodka region-razred-dogodka"></div>
+            <div role="tabpanel" class="tab-pane pnl-priloge region-priloge"></div>
         </div>
     </div>
 </div>

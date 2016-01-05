@@ -16,8 +16,7 @@ define([
         Backbone,
         Pageable,
         _,
-        moment,
-        PlanerCollection
+        moment
         ) {
 
     var Dogodek = Backbone.DeepModel.extend({
@@ -39,6 +38,104 @@ define([
         },
         initialize: function (attr) {
             this.view = attr.view || this.view;
+        },
+        /**
+         * 
+         * @param {String|Moment} uraT
+         * @param {Boolean} zacetek
+         * @returns {
+         *          {Boolean} dopoldne,
+         *          {Boolean} popoldne,
+         *          {Boolean} zvecer,
+         *          {Boolean} allDay
+         *          }
+         */
+        terminiZacetekKonec: function (uraT, zacetek) {
+            var ura = moment(uraT);
+            var uraDopoldan = moment(ura).set('hour', 14);
+            var uraPopoldan = moment(ura).set('hour', 19);
+            var uraZvecer = moment(ura).set('hour', 23);
+
+            var dopoldne = false;
+            var popoldne = false;
+            var zvecer = false;
+            var allDay = false;
+
+            if (ura.diff(uraDopoldan) < 0) {
+                if (zacetek) {
+                    allDay = true;
+                    dopoldne = true;
+                    popoldne = true;
+                    zvecer = true;
+                } else {
+                    dopoldne = true;
+                }
+            } else if (ura.diff(uraDopoldan) >= 0 && ura.diff(uraPopoldan) < 0) {
+                if (zacetek) {
+                    popoldne = true;
+                    zvecer = true;
+                } else {
+                    dopoldne = true;
+                    popoldne = true;
+                }
+            } else if (ura.diff(uraPopoldan) >= 0 && ura.diff(uraZvecer) < 0) {
+                if (zacetek) {
+                    zvecer = true;
+                } else {
+                    dopoldne = true;
+                    popoldne = true;
+                    zvecer = true;
+                    allDay = true;
+                }
+            }
+
+            return {
+                dopoldne: dopoldne,
+                popoldne: popoldne,
+                zvecer: zvecer,
+                allDay: allDay
+            };
+        },
+        /**
+         * 
+         * @param {type} datum
+         * @returns {
+         *          {Boolean} dopoldne,
+         *          {Boolean} popoldne,
+         *          {Boolean} zvecer,
+         *          {Boolean} allDay
+         *          }
+         */
+        naDanNaTermin: function (datum) {
+            //naspremenjen začetek in konec
+            var zacetekO = this.get('zacetek');
+            var konecO = this.get('konec');
+
+            //začetek dneva na dan začetka in dan konca
+            var zacetekD = moment(zacetekO).startOf('day');
+            var konecD = moment(konecO).startOf('day');
+
+            /* V primeru da dan med začetkom in koncem ni dan začetka ali konca,
+             * se upošteva da je dogodek čez cel dan.
+             */
+            //ali je dogodek na podan datum
+            var dan = moment(datum).startOf('day');
+            if (zacetekD.diff(dan, 'days') < 0 && konecD.diff(dan, 'days') > 0) {
+                return {
+                    dopoldne: true,
+                    popoldne: true,
+                    zvecer: true,
+                    allDay: true
+                };
+            } else if (zacetekD.diff(dan, 'days') === 0) {
+                //preračunaj termine na dan začetka
+                return this.terminiZacetekKonec(zacetekO, true);
+            } else if (konecD.diff(dan, 'days') === 0) {
+                //preračunaj termine na dan konca
+                return this.terminiZacetekKonec(konecO, false);
+            }
+
+            return null;
         }
     });
 
@@ -59,47 +156,26 @@ define([
     });
 
     Dogodki.prototype.pretvoriVPlanerTeden = function (planerTeden) {
-        var self= this;
-        //preverjamo kateri iz kolekcije dogodki spada v planer model z datumom 
+        var self = this;
         planerTeden.each(function (planerM) {
-            //datum planerModela
-            var datum = moment(planerM.get('datum')).startOf('day');
+            var dogodki = self.models;
+            for (var id in dogodki) {
+                var dogodek = dogodki[id];
 
-            for (var id in self.models) {
-                var model = self.models[id];
-                var zacetek = moment(model.get('zacetek'));
-                var dan = moment(zacetek).startOf('day');
-
-                //preverjamo ali je dan začetka enak datumu planer modela
-                //v primeru da je se razvrsti v eno od kolekcij dopoldne, popoldne, zvecer
-                if (datum.isSame(dan)) {
-                    //nastavimo čas dopoldanskega, popoldanskega in večernega termina
-                    var dopoldan = moment(dan);
-                    dopoldan.set('hour', 14);
-                    var popoldan = moment(dan);
-                    popoldan.set('hour', 19);
-                    var zvecer = moment(dan);
-                    zvecer.set('hour', 23);
-
-
-                    //v primeru da je dopoldne pozneje od začetka se vstavi v dopoldne
-                    if (zacetek.diff(dopoldan) < 0) {
-                        planerM.get('dopoldneColl').add(model);
-                    } else if (zacetek.diff(popoldan) < 0) {
-                        planerM.get('popoldneColl').add(model);
-                    } else if (zacetek.diff(zvecer) < 0) {
-                        planerM.get('zvecerColl').add(model);
+                var termini = dogodek.naDanNaTermin(planerM.get('datum'));
+                if (termini) {
+                    if (termini.dopoldne) {
+                        planerM.get('dopoldne').add(dogodek);
+                    }
+                    if (termini.popoldne) {
+                        planerM.get('popoldne').add(dogodek);
+                    }
+                    if (termini.zvecer) {
+                        planerM.get('zvecer').add(dogodek);
                     }
                 }
             }
-            ;
         });
     };
-
-
-
     return Dogodki;
-
 });
-
-

@@ -7,14 +7,23 @@ define([
     'app/bars',
     'backbone',
     'marionette',
-    'template!../tpl/izbira-upr.tpl'
+    './SelectVzporedniceView',
+    './ZasedbaView',
+    'template!../tpl/izbira-upr.tpl',
+    'baseUrl',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         Radio,
         i18next,
         Handlebars,
         Backbone,
         Marionette,
-        tpl
+        SelectVzporedniceView,
+        ZasedbaView,
+        tpl,
+        baseUrl,
+        $
         ) {
     var IzbriraUprizoritveView = Marionette.LayoutView.extend({
         template: tpl,
@@ -25,32 +34,95 @@ define([
         }
     });
 
-    IzbriraUprizoritveView.prototype.render = function (options) {
-        if (options && options.wizardModel) {
-            this.wizardModel = options.wizarfModel || new Backbone.Model();
+    IzbriraUprizoritveView.prototype.initialize = function (options) {
+        if (options && options.model) {
+            this.model = options.model;
         }
     };
 
-    IzbriraUprizoritveView.prototype.onRender = function (options) {
+    IzbriraUprizoritveView.prototype.render = function () {
         this.renderUprizoritev();
         this.renderVzporednice();
-        this.renderOsebe();
     };
+
     IzbriraUprizoritveView.prototype.renderUprizoritev = function () {
-        this.uprizoritevR.show();
     };
+
+    /**
+     * uprizoritve polje idjev
+     * funkcije polje ključe
+     * 
+     * @param {type} options
+     * @returns {undefined}
+     */
+    IzbriraUprizoritveView.prototype.rpcVzporednice = function (options) {
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/uprizoritev'});
+        rpc.call('vzporednice', {
+            'uprizoritve': options.uprizoritve,
+            'funkcije': options.funkcije,
+            'zacetek': options.zacetek,
+            'konec': options.konec
+        }, this.rpcSuccess, this.rpcError);
+    };
+
+    IzbriraUprizoritveView.prototype.rpcSuccess = function (data) {
+        var self = this;
+
+        var collection = new Backbone.Collection(data);
+
+        var view = self.vzporedniceView = new SelectVzporedniceView({
+            collection: collection
+        });
+        view.on('selected', self.onSelected, self);
+        self.vzporedniceR.show(view);
+    };
+
+    IzbriraUprizoritveView.prototype.rpcError = function (data) {
+    };
+
     IzbriraUprizoritveView.prototype.renderVzporednice = function () {
-        this.vzporedniceR.show();
+        this.rpcVzporednice({
+            uprizoritve: [],
+            funkcije: [],
+            zacetek: this.model.get('zacetek'),
+            konec: this.model.get('konec')
+        });
     };
     IzbriraUprizoritveView.prototype.renderOsebe = function () {
-        this.osebeR.show();
+        var uprID = this.model.get('uprizoritev');
+        var collection = new Backbone.Collection({
+            url: baseUrl + '/rest/funkcije/vzporednica?uprizoritev='+ uprID
+        });
+        var self = this;
+        collection.fetch({success: function () {
+                var view = self.osebeView = new ZasedbaView({
+                    collection: collection
+                });
+                view.on('change', self.onChange, self);
+                self.osebeR.show(view);
+            }});
     };
-    
-    IzbriraUprizoritveView.prototype.onSelected = function () {
-        this.osebeR.show();
+
+    IzbriraUprizoritveView.prototype.onSelected = function (model) {
+        this.model.set('uprizoritev', model.get('id'));
+
+        this.rpcVzporednice({
+            uprizoritve: [this.model.get('uprizoritev')],
+            funkcije: [],
+            zacetek: this.model.get('zacetek'),
+            konec: this.model.get('konec')
+        });
+
+        this.renderOsebe();
     };
-    IzbriraUprizoritveView.prototype.onChange = function () {
-        this.osebeR.show();
+    IzbriraUprizoritveView.prototype.onChange = function (funkcije) {
+        this.rpcVzporednice({
+            uprizoritve: [this.model.get('uprizoritev')],
+            funkcije: funkcije,
+            zacetek: this.model.get('zacetek'),
+            konec: this.model.get('konec')
+        });
+        console.log('change');
     };
 
     return IzbriraUprizoritveView;

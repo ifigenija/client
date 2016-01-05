@@ -26,9 +26,9 @@ define([
     var PlanerModel = Backbone.Model.extend({
         defaults: {
             datum: null,
-            dopoldneColl: null,
-            popoldneColl: null,
-            zvecerColl: null
+            dopoldne: null,
+            popoldne: null,
+            zvecer: null
         }
     });
 
@@ -43,9 +43,9 @@ define([
             while (end.isAfter(start)) {
                 this.add(new PlanerModel({
                     datum: moment(start),
-                    dopoldneColl: new Collection(),
-                    popoldneColl: new Collection(),
-                    zvecerColl: new Collection()
+                    dopoldne: new Collection(),
+                    popoldne: new Collection(),
+                    zvecer: new Collection()
                 }));
                 start.add(1, 'days');
             }

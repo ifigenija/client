@@ -5,7 +5,7 @@
 define([
     'backbone',
     'jquery',
-    'text!./fixtures/vaje.json',
+    'text!../fixtures/vaje.json',
     'app/koledar/View/VajaView',
     'formSchema!vaja'
 ], function (

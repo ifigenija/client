@@ -9,3 +9,71 @@ Licenca GPLv3
 .koledar-navigacija {
     background-color: #dddddd;
 }
+
+.zasedba-uprizoritve{
+    //da se ob shift kliku ne označuje vsebina
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+}
+
+.zasedba-alternacija {
+    &:not(:last-child):after {
+        content: ',';
+    }
+    &:hover {
+        background-color: @brand-info;
+        cursor: pointer;
+    }
+    &.active {
+        background-color: @brand-success;
+        color: #fff;
+    }
+    margin-right: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+//produkcija vzporednice
+
+.vzporednice-content {
+    margin-top: 15px;
+}
+
+.vzporednice-seznam {
+
+    & .uprizoritev:hover {
+        background-color: @gray-lighter;
+        cursor: pointer;
+    }
+    & .funkcije {
+        margin-bottom: 3px;
+    }
+    & .oseba:not(:last-child):after {
+        content: ',';
+    }
+    & .oseba.nezasedena {
+        background-color: @brand-success;
+        color: #fff;
+    }
+    & .oseba{
+        margin-right: 5px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+}
+
+.prikazi-prekrivanja{
+    margin-bottom: 15px;
+}
+
+.zasedba-body{
+    max-height: 600px;
+    overflow: auto;
+}
+
+.zasedba-warning .opozorila{
+    padding-top: 15px;
+    padding-left: 15px;
+}

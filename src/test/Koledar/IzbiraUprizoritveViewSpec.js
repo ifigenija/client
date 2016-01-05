@@ -29,11 +29,19 @@ define([
             expect($osebe.length).to.equal(1);
         });
         
+        /**
+         * Selected proži vzporedniceView
+         * @returns {undefined}
+         */
         it('posluša selected', function () {
             this.view.vzporedniceView.trigger('selected');
             expect(this.selectedSpy).to.have.been.called;
         });
         
+        /**
+         * Change proži osebeView
+         * @returns {undefined}
+         */
         it('posluša change', function () {
             this.view.osebeView.trigger('change');
             expect(this.changeSpy).to.have.been.called;

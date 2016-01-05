@@ -36,7 +36,8 @@ define([
     var tabVse = [
         {name: i18next.t('dogodek.title'), event: 'dogodek'},
         {name: i18next.t('dogodek.razred'), event: 'razred'},
-        {name: i18next.t('dogodek.sodelujoci'), event: 'sodelujoci'}
+        {name: i18next.t('dogodek.sodelujoci'), event: 'sodelujoci'},
+        {name: i18next.t('dogodek.priloge'), event: 'priloge'}
     ];
 
     var tabNovi = [
@@ -67,6 +68,10 @@ define([
     DogodekView.prototype.posodobiUrlNaslov = function () {
     };
 
+    DogodekView.prototype.onKoledarProstor = function () {
+        console.log('onKoledarProstor');
+    };
+
     /**
      * 
      * @param {Array} options
@@ -85,10 +90,8 @@ define([
      * @returns {undefined}
      */
     DogodekView.prototype.onRender = function () {
-        var chPermission = Radio.channel('global');
-
-        var tabs = tabVse;
-        this.renderTabs(tabs);
+        this.tabs = tabVse;
+        this.renderTabs(this.tabs);
     };
 
     /**
@@ -116,9 +119,6 @@ define([
     DogodekView.prototype.onDogodek = function () {
         this.deselectTab();
         this.$('.pnl-splosno').addClass('active');
-        if (this.model.get('id')) {
-            this.renderPriloge();
-        }
     };
 
     DogodekView.prototype.onSodelujoci = function () {
@@ -132,6 +132,12 @@ define([
         this.deselectTab();
         this.$('.pnl-razred-dogodka').addClass('active');
         this.renderRazredDogodka();
+
+    };
+    DogodekView.prototype.onPriloge = function () {
+        this.deselectTab();
+        this.$('.pnl-priloge').addClass('active');
+        this.renderPriloge();
 
     };
 

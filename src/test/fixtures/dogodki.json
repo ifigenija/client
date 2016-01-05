@@ -1,0 +1,83 @@
+{
+  "state": {
+    "sortKey": "title",
+    "order": "asc",
+    "currentPage": 1,
+    "totalRecords": 3,
+    "lastPage": 1,
+    "pageSize": 30
+  },
+  "data": [
+    {
+      "id": "00180000-5677-aaa8-3716-cd6cdc805b49",
+      "allDay": false,
+      "zacetek": "2015-12-23T08:30:00+0100",
+      "konec": "2015-12-24T09:00:00+0100",
+      "status": "100s",
+      "razred": "100s",
+      "termin": null,
+      "title": "Smoletov vrt : Predstave",
+      "predstava": "001b0000-5677-aaa8-d40b-f6b06d24cd0d",
+      "zasedenost": null,
+      "vaja": null,
+      "gostovanje": null,
+      "splosni": null,
+      "tehnicni": null,
+      "prostor": null,
+      "terminiStoritve": [],
+      "prodajaPredstave": [],
+      "sezona": null,
+      "uprizoritev": {
+        "id": "000e0000-5677-9f2b-582f-9965fe50175f",
+        "ident": "0002",
+        "label": "Smoletov vrt"
+      }
+    },
+    {
+      "id": "00180000-5677-9f47-da37-c818dbe78a48",
+      "allDay": false,
+      "zacetek": "2015-12-21T15:42:00+0100",
+      "konec": "2015-12-27T11:00:00+0100",
+      "status": "100s",
+      "razred": "200s",
+      "termin": null,
+      "title": "Smoletov vrt : Vaje",
+      "predstava": null,
+      "zasedenost": null,
+      "vaja": "00200000-5677-9f47-8c8d-dc77a3344475",
+      "gostovanje": null,
+      "splosni": null,
+      "tehnicni": null,
+      "prostor": null,
+      "terminiStoritve": [],
+      "prodajaPredstave": [],
+      "sezona": null,
+      "uprizoritev": {
+        "id": "000e0000-5677-9f2b-582f-9965fe50175f",
+        "ident": "0002",
+        "label": "Smoletov vrt"
+      }
+    },
+    {
+      "id": "00180000-5677-b157-5042-73de4fe3be8c",
+      "allDay": false,
+      "zacetek": "2015-12-25T19:00:00+0100",
+      "konec": "2015-12-25T23:00:00+0100",
+      "status": "100s",
+      "razred": "600s",
+      "termin": null,
+      "title": "Tehnični",
+      "predstava": null,
+      "zasedenost": null,
+      "vaja": null,
+      "gostovanje": null,
+      "splosni": null,
+      "tehnicni": "00440000-5677-b157-9033-7406a16cf5e2",
+      "prostor": null,
+      "terminiStoritve": [],
+      "prodajaPredstave": [],
+      "sezona": null,
+      "uprizoritev": null
+    }
+  ]
+}
