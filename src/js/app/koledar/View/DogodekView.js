@@ -68,6 +68,10 @@ define([
     DogodekView.prototype.posodobiUrlNaslov = function () {
     };
 
+    DogodekView.prototype.onKoledarProstor = function () {
+        console.log('onKoledarProstor');
+    };
+
     /**
      * 
      * @param {Array} options
