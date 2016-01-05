@@ -7142,6 +7142,10 @@ Licenca GPLv3
   max-height: 600px;
   overflow: auto;
 }
+.zasedba-warning .opozorila {
+  padding-top: 15px;
+  padding-left: 15px;
+}
 /*
 Licenca GPLv3
 */
