@@ -1932,6 +1932,28 @@
     },
     "kontaktnaOseba": {
         "relacija": "Kontaktna oseba pri poslovnih partnerjih"
+    },
+    "dodatek": {
+        "title": "Dodatek",
+        "trajanje": "Trajanje",
+        "terminStoritve": "Termin storitve",
+        "tipdodatka": "Tip dodatka",
+        "d": {
+            "trajanje": "Trajanje dodatka v minutah",
+            "terminStoritve": "Termin storitve",
+            "tipdodatka": "Tip dodatka"
+        }
+    },
+    "tipdodatka": {
+        "title": "Tip dodatka",
+        "sifra": "Šifra",
+        "ime": "Ime",
+        "opis": "Opis",
+        "d": {
+            "sifra": "Šifra",
+            "ime": "Ime",
+            "opis": "Opis"
+        }
     }
 }
 
