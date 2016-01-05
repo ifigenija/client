@@ -35,11 +35,11 @@ define([
         opozorilaTpl,
         $
         ) {
-    
+
     var OpozoriloView = Marionette.ItemView.extend({
         template: opozorilaTpl
     });
-    
+
     var VzporedniceView = Marionette.LayoutView.extend({
         template: vzporedniceTpl,
         regions: {
@@ -48,7 +48,7 @@ define([
             prekrivanjaR: '.region-prekrivanja',
             opozorilaR: '.region-opozorila'
         },
-        triggers:{
+        triggers: {
             'click .prikazi-prekrivanja': 'prikazi:prekrivanja'
         }
     });
@@ -75,7 +75,7 @@ define([
             //napaka
         }
     };
-    
+
     VzporedniceView.prototype.onPrikaziPrekrivanja = function () {
         this.renderPrekrivanja();
         this.$('.prikazi-prekrivanja').addClass('hidden');
@@ -83,6 +83,9 @@ define([
 
     VzporedniceView.prototype.update = function () {
         this.renderVzporednice();
+        if (this.$('.prikazi-prekrivanja').hasClass('hidden')) {
+            this.$('.prikazi-prekrivanja').removeClass('hidden');
+        }
     };
 
     VzporedniceView.prototype.onRender = function () {
@@ -149,7 +152,7 @@ define([
                 });
 
                 self.opozorilaR.show(opozoriloView);
-            }else{
+            } else {
                 self.opozorilaR.empty();
             }
         };

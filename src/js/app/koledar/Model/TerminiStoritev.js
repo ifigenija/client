@@ -30,9 +30,28 @@ define([
         mode: "server"
     });
 
-    Collection.prototype.razdeli = function () {
-        var alterColl = this.alternacije = new Alternacije();
+    Collection.prototype.TS2Osebe = function () {
         var osebeColl = this.osebe = new Osebe();
+
+        var models = this.models;
+        for (var id in models) {
+            var model = models[id];
+            var alter = model.get('alternacija');
+            if (!alter) {
+                var oseba = model.get('oseba');
+
+                if (_.isObject(oseba)) {
+                    osebeColl.add(oseba);
+                } else {
+                    osebeColl.add({id: oseba});
+                }
+            }
+        }
+
+        return osebeColl;
+    };
+    Collection.prototype.TS2Alternacije = function () {
+        var alterColl = this.alternacije = new Alternacije();
 
         var models = this.models;
         for (var id in models) {
@@ -44,21 +63,10 @@ define([
                 } else {
                     alterColl.add({id: alter});
                 }
-            } else {
-                var oseba = model.get('oseba');
-
-                if (_.isObject(oseba)) {
-                    osebeColl.add(oseba);
-                } else {
-                    osebeColl.add({id: oseba});
-                }
             }
         }
 
-        return {
-            osebe: osebeColl,
-            alternacije: alterColl
-        };
+        return alterColl;
     };
     /**
      * Funkcija vrne collection oseb za odstranit iz terminov storitev in collection oseb za dodat v terminstoritev
