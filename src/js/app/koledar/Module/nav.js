@@ -12,19 +12,19 @@ define(['i18next'], function (i18n) {
 //            permission: "Koledar-read",
             pages: [
                 {
-                    label: i18n.t("koledar.nav.planiranje"),
-                    uri: '#koledar/planiranje',
+                    label: i18n.t("koledar.nav.dogodki"),
+                    uri: '#koledar/planiranje'
 //                    permission: "Koledar-read"
                 },
                 {
                     label: i18n.t("koledar.nav.planiranje"),
-                    uri: '#koledar/planer',
+                    uri: '#koledar/planer'
  //                   permission: ""
                 },
                 
                 {
                     label: i18n.t("Test"),
-                    uri: "#koledar/test",
+                    uri: "#koledar/test"
 //                    permission: "Koledar-read"
                 }
             ]

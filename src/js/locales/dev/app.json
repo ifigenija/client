@@ -41,7 +41,8 @@
             "prostori": "Prostori",
             "dogodki": "Dogodki",
             "ljudje": "Ljudje",
-            "zasedenost": "Rezervacije"
+            "zasedenost": "Rezervacije",
+            "planiranje": "Planiranje"
         },
         "dogodki": "Dogodki",
         "prostori": "Prostori",
@@ -157,6 +158,9 @@
         "uvoz": "Uvozi programske enote",
         "zasedeneOsebe": "Zasedene osebe",
         "nezasedeneOsebe": "Nezasedene osebe",
+        "podrobno": "Podrobno",
+        "nazaj": "Nazaj",
+        "naprej": "Naprej",
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
@@ -1732,12 +1736,13 @@
         }
     },
     "dogodek": {
-        "title": "Dogodki",
+        "title": "Dogodek",
+        "titles": "Dogodki",
         "allDay": "Celodnevni",
         "zacetek": "Začetek",
         "konec": "Konec",
         "status": "Status",
-        "razred": "Razred",
+        "razred": "Tip",
         "termin": "Termin",
         "predstava": "Predstava",
         "zasedenost": "Zasedenost",
@@ -1748,6 +1753,8 @@
         "prostor": "Prostor",
         "sezona": "Sezona",
         "dodajDogodek": "Dodaj dogodek",
+        "priloge": "Priloge",
+        "sodelujoci": "Sodelujoci",
         "d": {
             "allDay": "Dogodek se razteza skozi cel dan",
             "zacetek": "",

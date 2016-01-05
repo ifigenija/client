@@ -36,7 +36,8 @@ define([
     var tabVse = [
         {name: i18next.t('dogodek.title'), event: 'dogodek'},
         {name: i18next.t('dogodek.razred'), event: 'razred'},
-        {name: i18next.t('dogodek.sodelujoci'), event: 'sodelujoci'}
+        {name: i18next.t('dogodek.sodelujoci'), event: 'sodelujoci'},
+        {name: i18next.t('dogodek.priloge'), event: 'priloge'}
     ];
 
     var tabNovi = [
@@ -85,11 +86,8 @@ define([
      * @returns {undefined}
      */
     DogodekView.prototype.onRender = function () {
-        var tabs = tabVse;
-        if (this.model.get('id')) {
-            tabs.push({name: i18next.t('dogodek.priloge'), event: 'priloge'});
-        }
-        this.renderTabs(tabs);
+        this.tabs = tabVse;
+        this.renderTabs(this.tabs);
     };
 
     /**

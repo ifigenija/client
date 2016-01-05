@@ -138,11 +138,11 @@ define([
                     IzbiraView,
                     IzbiraDatumaView
                 ],
-                title: 'dodaj dogodek',
-                nazajText: 'nazaj',
-                naprejText: 'naprej',
-                okText: 'potrdi',
-                cancelText: 'preklici'
+                title: i18next.t('dogodek.dodajDogodek'),
+                nazajText: i18next.t('std.nazaj'),
+                naprejText: i18next.t('std.naprej'),
+                okText: i18next.t('std.potrdi'),
+                cancelText: i18next.t('std.preklici')
             }
         });
         

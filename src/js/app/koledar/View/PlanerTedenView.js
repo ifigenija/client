@@ -3,6 +3,7 @@
  */
 
 define([
+    'i18next',
     'marionette',
     'backbone',
     'moment',
@@ -21,6 +22,7 @@ define([
     './IzbiraDatumView',
     './VzporedniceView'
 ], function (
+        i18next,
         Marionette,
         Backbone,
         moment,
@@ -158,7 +160,7 @@ define([
                     IzbiraView,
                     IzbiraDatumView
                 ],
-                title: 'dodaj dogodek'
+                title: i18next.t('dogodek.dodajDogodek')
             }
         });
 
