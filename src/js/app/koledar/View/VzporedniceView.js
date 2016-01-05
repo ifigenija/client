@@ -41,7 +41,6 @@ define([
     });
     
     var VzporedniceView = Marionette.LayoutView.extend({
-        //className: 'vzporednice',
         template: vzporedniceTpl,
         regions: {
             vzporedniceR: '.region-vzporednice',
@@ -84,13 +83,11 @@ define([
 
     VzporedniceView.prototype.update = function () {
         this.renderVzporednice();
-//        this.renderPrekrivanja();
     };
 
     VzporedniceView.prototype.onRender = function () {
         this.renderVzporednice();
         this.renderZasedba();
-//        this.renderPrekrivanja();
     };
 
     /**
@@ -213,10 +210,11 @@ define([
 
     VzporedniceView.prototype.onSelected = function (model) {
         this.collectionUprizoritev.add(model);
+        this.$('.prikazi-prekrivanja').removeClass('hidden');
     };
     VzporedniceView.prototype.onChange = function () {
-//        this.renderPrekrivanja();
         this.renderVzporednice();
+        this.$('.prikazi-prekrivanja').removeClass('hidden');
     };
 
     return VzporedniceView;

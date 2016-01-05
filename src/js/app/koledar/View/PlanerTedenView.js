@@ -18,7 +18,8 @@ define([
     'template!../tpl/planer-dan.tpl',
     './WizardView',
     './IzbiraRazredDogodkaView',
-    './IzbiraDatumView'
+    './IzbiraDatumView',
+    './VzporedniceView'
 ], function (
         Marionette,
         Backbone,
@@ -35,13 +36,14 @@ define([
         tplDan,
         WizardView,
         IzbiraView,
-        IzbiraDatumView
+        IzbiraDatumView,
+        VzporedniceView
         ) {
 
-        var uraZacetek = 10;
-        var uraDopoldne = 14;
-        var uraPopoldne = 19;
-        var uraZvecer = 23;
+    var uraZacetek = 10;
+    var uraDopoldne = 14;
+    var uraPopoldne = 19;
+    var uraZvecer = 23;
     /**
      * Prikazuje posamezni dan v planeru
      * Regije za tri dele dneva, popoldne, dopoldne, zvečer. 
@@ -66,40 +68,52 @@ define([
     };
     DanView.prototype.renderDopoldne = function () {
         var view = this.dopoldneView = this.getDogodekView(
-            this.model.get('dopoldne'),
-            moment(this.model.get('datum')).set('hour', uraZacetek),
-            moment(this.model.get('datum')).set('hour', uraDopoldne)
-        );
+                this.model.get('dopoldne'),
+                moment(this.model.get('datum')).set('hour', uraZacetek),
+                moment(this.model.get('datum')).set('hour', uraDopoldne)
+                );
         this.dopoldneR.show(view);
     };
     DanView.prototype.renderPopoldne = function () {
         var view = this.popoldneView = this.getDogodekView(
-            this.model.get('popoldne'),
-            moment(this.model.get('datum')).set('hour', uraDopoldne),
-            moment(this.model.get('datum')).set('hour', uraPopoldne)
-        );
+                this.model.get('popoldne'),
+                moment(this.model.get('datum')).set('hour', uraDopoldne),
+                moment(this.model.get('datum')).set('hour', uraPopoldne)
+                );
         this.popoldneR.show(view);
     };
     DanView.prototype.renderZvecer = function () {
         var view = this.zvecerView = this.getDogodekView(
-            this.model.get('zvecer'),
-            moment(this.model.get('datum')).set('hour', uraPopoldne),
-            moment(this.model.get('datum')).set('hour', uraZvecer)
-        );
+                this.model.get('zvecer'),
+                moment(this.model.get('datum')).set('hour', uraPopoldne),
+                moment(this.model.get('datum')).set('hour', uraZvecer)
+                );
         this.zvecerR.show(view);
     };
+    /**
+     * inicializiramo instanco viewja
+     * @param {Backbone.Collection} collection
+     * @param {moment} zacetek
+     * @param {moment} konec
+     * @returns {PlanerTedenView_L22.PlanerDogodkiView|Marionette.LayoutView@call;extend.prototype.getDogodekView.view}
+     */
     DanView.prototype.getDogodekView = function (collection, zacetek, konec) {
         var view = new PlanerDogodkiView({
             collection: collection,
             zacetek: zacetek,
             konec: konec
         });
-        
+
         view.on('prikazi:dogodek', this.prikaziDogodek, this);
         view.on('dodaj:dogodek', this.dodajDogodek, this);
-        
+
         return view;
     };
+    /**
+     * Izris dogodka s podanim modelo
+     * @param {Dogodek} model
+     * @returns {undefined}
+     */
     DanView.prototype.prikaziDogodek = function (model) {
         var razred = model.get('dogodek').razred;
         var TipDogodkaView;
@@ -127,11 +141,16 @@ define([
         }, this);
         this.detailR.show(view);
     };
+    /**
+     * Dodaj dogodek, vsak od razredov dogodka potrebuje svoj Wizard View
+     * @param {type} interval
+     * @returns {undefined}
+     */
     DanView.prototype.dodajDogodek = function (interval) {
         var model = new Backbone.Model();
         model.set('zacetek', moment(interval.zacetek).toISOString());
         model.set('konec', moment(interval.konec).toISOString());
-        
+
         var view = new WizardView({
             model: model,
             defView: {

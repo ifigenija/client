@@ -31,7 +31,7 @@ define([
     };
 
     /**
-     * 
+     * Termin view je namenjen izbiri termina
      * @type @exp;Form@call;extend
      */
     var TerminView = Form.extend({

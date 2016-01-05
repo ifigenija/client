@@ -16,7 +16,7 @@ define([
     'app/Max/View/TabControl',
     'app/arhiv/Model/Besedilo',
     'app/arhiv/View/BesediloModal',
-    'app/produkcija/View/VzporedniceView'
+    'app/koledar/View/VzporedniceView'
 ], function (
         Radio,
         i18next,

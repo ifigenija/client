@@ -67,10 +67,10 @@ define([
                 var funkcija = funkcije[funkKey];
 
                 var zasedeneOsebe = funkcija['zasedeneOsebe'];
-                var zo = new Osebe(zasedeneOsebe);
+                var zo = new Osebe(zasedeneOsebe, {zasedene: true});
 
                 var nezasedeneOsebe = funkcija['nezasedeneOsebe'];
-                var nzo = new Osebe(nezasedeneOsebe, {zasedene: true});
+                var nzo = new Osebe(nezasedeneOsebe);
 
                 zo.add(nzo.toJSON());
                 funkcija['osebe'] = zo;
