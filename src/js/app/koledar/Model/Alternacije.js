@@ -8,13 +8,11 @@ define([
     'baseUrl',
     'backbone',
     'app/Max/Model/MaxPageableCollection',
-    './TerminiStoritve',
     'deep-model'
 ], function (
         baseUrl,
         Backbone,
-        Collection,
-        TerminiStoritve
+        Collection
         ) {
 
     var Model = Backbone.DeepModel.extend({
@@ -68,7 +66,7 @@ define([
                 konec: options.konec,
                 gost: options.gost ? options.gost : false,
                 dezurni: options.dezurni ? options.dezurni : false,
-                alternacija: model.get('id')
+                alternacija: model
             };
             modeli.push(alterModel);
         });

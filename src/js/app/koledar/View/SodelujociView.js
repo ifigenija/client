@@ -74,14 +74,17 @@ define([
     SodelujociView.prototype.razdeliAlternacije = function () {
         var modeli = this.alternacijeColl.razdeli();
 
+        this.izbraniUmetnikiColl = new Alternacije();
         this.umetnikiColl = new Alternacije();
         this.umetnikiColl.add(modeli.umetnik);
         this.umetnikiColl.add(modeli.igralec);
 
+        this.izbraniTehnikiColl = new Alternacije();
         this.tehnikiColl = new Alternacije();
         this.tehnikiColl.add(modeli.tehnik);
         this.tehnikiColl.add(modeli.inspicient);
 
+        this.izbraniGosDezColl = new Osebe();
         this.gosDezColl = new Osebe();
         this.gosDezColl.fetch({error: Radio.channel('error').request('handler', 'xhr')});
     };
@@ -116,7 +119,8 @@ define([
     };
     SodelujociView.prototype.urediUmetnike = function ($el) {
         this.renderUredi({
-            izbrani: this.izbraniUmetniki,
+            izbraniTS: this.izbraniUmetniki,
+            izbrani: this.izbraniUmetnikiColl,
             mozni: this.umetnikiColl,
             $el: $el,
             tpl: Handlebars.compile('{{oseba.label}}')
@@ -125,7 +129,8 @@ define([
 
     SodelujociView.prototype.urediTehnike = function ($el) {
         this.renderUredi({
-            izbrani: this.izbraniTehniki,
+            izbraniTS: this.izbraniTehniki,
+            izbrani: this.izbraniTehnikiColl,
             mozni: this.tehnikiColl,
             $el: $el,
             tpl: Handlebars.compile('{{oseba.label}}')
@@ -134,7 +139,8 @@ define([
 
     SodelujociView.prototype.urediGoste = function ($el) {
         this.renderUredi({
-            izbrani: this.izbraniGosDez,
+            izbraniTS: this.izbraniGosDez,
+            izbrani: this.izbraniGosDezColl,
             mozni: this.gosDezColl,
             $el: $el,
             tpl: Handlebars.compile('{{polnoIme}}')
@@ -156,11 +162,13 @@ define([
         //onclose proži changed:vrednosti
         view.on('changed:vrednosti', function () {
             self.trigger('changed:vrednosti');
-            var tsColl = self.umetnikiColl.toTS({
+            var tsModeli = options.izbrani.toTS({
                 dogodek: this.dogodek,
                 zacetek: moment(),
                 konec: moment()
             });
+            
+            options.izbraniTS.reset(tsModeli);
         }, this);
 
         view.render();

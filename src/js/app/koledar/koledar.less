@@ -77,3 +77,13 @@ Licenca GPLv3
     padding-top: 15px;
     padding-left: 15px;
 }
+
+.sodelujoci{
+    & .sodelujoc:not(:last-child):after {
+        content: ',';
+    }
+    
+    & .sodelujoc{
+        margin-right: 5px;
+    }
+}

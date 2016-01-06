@@ -22,8 +22,13 @@ define([
 
     var ItemView = Marionette.ItemView.extend({
         tagName: 'span',
-        className: 'sodelujoci-item',
-        template: Handlebars.compile('<label>{{oseba.label}}</label>')
+        className: 'sodelujoc',
+        template: Handlebars.compile('<label>{{ime}}</label>'),
+        serializeData: function () {
+            return{
+                ime: this.model.get('alternacija').get('oseba').label
+            };
+        }
     });
 
     var SeznamSodelujocihView = Marionette.CompositeView.extend({
