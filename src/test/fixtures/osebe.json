@@ -1,0 +1,515 @@
+{
+  "state": {
+    "sortKey": "priimek",
+    "order": "asc",
+    "currentPage": 1,
+    "totalRecords": 21,
+    "lastPage": 1,
+    "pageSize": 30
+  },
+  "data": [
+    {
+      "id": "00090000-568c-b751-eb9b-c0d393a6c22b",
+      "sifra": "0013",
+      "naziv": "",
+      "ime": "Tatjana",
+      "priimek": "Božič",
+      "funkcija": "tajnica",
+      "srednjeIme": "a",
+      "polnoIme": "Tatjana a Božič",
+      "psevdonim": "",
+      "spol": "Z",
+      "user": "00010000-568c-b751-4027-68cbc422e2f7",
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-461e-ac0ac190ed46",
+        "000c0000-568c-b751-e4bd-f7159af14cae",
+        "000c0000-568c-b751-128d-998d30ed400e",
+        "000c0000-568c-b751-6d91-0c61ecddb0b4",
+        "000c0000-568c-b751-92b7-e8364f3314b0",
+        "000c0000-568c-b751-6869-a74161da01b8",
+        "000c0000-568c-b751-8eb6-a4efb1f00673"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-a753-9ec00b8d90d6",
+      "sifra": "0016",
+      "naziv": "",
+      "ime": "Fjodor",
+      "priimek": "Dostojevski",
+      "funkcija": "avtor",
+      "srednjeIme": "Mihajlovič",
+      "polnoIme": "Fjodor Mihajlovič Dostojevski",
+      "psevdonim": "",
+      "spol": "M",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-14f6-378aa6d94fa9",
+        "000c0000-568c-b751-9b5a-4e9c2036417b"
+      ],
+      "avtorjiBesedil": [
+        "003d0000-568c-b751-b1d0-1416315f96a9"
+      ],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": [
+        "003d0000-568c-b751-b1d0-1416315f96a9"
+      ]
+    },
+    {
+      "id": "00090000-568c-b751-f9cf-46ab854c36c3",
+      "sifra": "0012",
+      "naziv": "",
+      "ime": "Luka",
+      "priimek": "Golob",
+      "funkcija": "luč",
+      "srednjeIme": "a",
+      "polnoIme": "Luka a Golob",
+      "psevdonim": "",
+      "spol": "M",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-c590-605d492dc93a"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-4bc8-5ccd5e334eb4",
+      "sifra": "0017",
+      "naziv": "",
+      "ime": "Berta ",
+      "priimek": "Hočevar",
+      "funkcija": "avtorica",
+      "srednjeIme": "",
+      "polnoIme": "Berta   Hočevar",
+      "psevdonim": "",
+      "spol": "Z",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [],
+      "avtorjiBesedil": [
+        "003d0000-568c-b751-0585-703ba096b2c9"
+      ],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": [
+        "003d0000-568c-b751-0585-703ba096b2c9"
+      ]
+    },
+    {
+      "id": "00090000-568c-b751-a495-d26d6053ab81",
+      "sifra": "0002",
+      "naziv": "dr.",
+      "ime": "Anton",
+      "priimek": "Horvat",
+      "funkcija": "b",
+      "srednjeIme": "",
+      "polnoIme": "Anton  Horvat",
+      "psevdonim": "Tona",
+      "spol": "M",
+      "user": "00010000-568c-b751-dcb8-7bd3965f64df",
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-6ca8-44805edfc05e"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-1730-fcf423e955df",
+      "sifra": "0015",
+      "naziv": "",
+      "ime": "Nebojša",
+      "priimek": "Kavader",
+      "funkcija": "avtor",
+      "srednjeIme": "",
+      "polnoIme": "Nebojša  Kavader",
+      "psevdonim": "",
+      "spol": "M",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [],
+      "avtorjiBesedil": [
+        "003d0000-568c-b751-06b1-b6e5abbc3216"
+      ],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": [
+        "003d0000-568c-b751-06b1-b6e5abbc3216"
+      ]
+    },
+    {
+      "id": "00090000-568c-b751-d8d9-bc7c7ddbeea1",
+      "sifra": "0009",
+      "naziv": "",
+      "ime": "Irena",
+      "priimek": "Kos",
+      "funkcija": "i",
+      "srednjeIme": "",
+      "polnoIme": "Irena  Kos",
+      "psevdonim": "",
+      "spol": "Z",
+      "user": "00010000-568c-b751-1110-a827819b9de8",
+      "kontaktneOsebe": [
+        "00260000-568c-b751-fb12-f9870a0b3df6"
+      ],
+      "alternacije": [
+        "000c0000-568c-b751-f08d-92635b0b3dc5"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [
+        "00100000-568c-b751-71d7-22caab33d04b"
+      ],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-a545-dff9715911a2",
+      "sifra": "0006",
+      "naziv": "ga.",
+      "ime": "Marija",
+      "priimek": "Kovač",
+      "funkcija": "f",
+      "srednjeIme": "",
+      "polnoIme": "Marija  Kovač",
+      "psevdonim": "",
+      "spol": "Z",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-07c5-f4cba8bf2ada"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-38a3-10e07fc2b723",
+      "sifra": "0003",
+      "naziv": "",
+      "ime": "Ivan",
+      "priimek": "Kovačič",
+      "funkcija": "c",
+      "srednjeIme": "",
+      "polnoIme": "Ivan  Kovačič",
+      "psevdonim": "Ivo",
+      "spol": "M",
+      "user": "00010000-568c-b751-0b1d-4da0e3787b6a",
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-c670-95e59ed28549",
+        "000c0000-568c-b751-a47d-05018753f5c1",
+        "000c0000-568c-b751-269e-19782ae8b9e8",
+        "000c0000-568c-b751-5192-99cc81ea21df",
+        "000c0000-568c-b751-c446-776e868dcee0"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [
+        "00100000-568c-b751-caee-980726872431"
+      ],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-fda5-d4f9402e85cb",
+      "sifra": "0004",
+      "naziv": "prof.",
+      "ime": "Jožef",
+      "priimek": "Krajnc",
+      "funkcija": "d",
+      "srednjeIme": "",
+      "polnoIme": "Jožef  Krajnc",
+      "psevdonim": "Joža",
+      "spol": "M",
+      "user": "00010000-568c-b751-969a-6a24fd62a964",
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-9913-fa8b8ed77a36"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [
+        "00100000-568c-b751-5fcb-5b1e035a9861"
+      ],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-ffdb-69a8746ffdba",
+      "sifra": "0008",
+      "naziv": "ga.",
+      "ime": "Maja",
+      "priimek": "Mlakar",
+      "funkcija": "h",
+      "srednjeIme": "",
+      "polnoIme": "Maja  Mlakar",
+      "psevdonim": "",
+      "spol": "Z",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-47e5-74e349d789b7",
+        "000c0000-568c-b751-8700-d5595784671b",
+        "000c0000-568c-b751-5ac9-e04ed2836ff4"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [
+        "00100000-568c-b751-de94-5ea70457ad97"
+      ],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-830c-c170510982bd",
+      "sifra": "0021",
+      "naziv": "",
+      "ime": "Vinko",
+      "priimek": "   Netriman   ",
+      "funkcija": "",
+      "srednjeIme": "",
+      "polnoIme": "Vinko     Netriman   ",
+      "psevdonim": "",
+      "spol": "M",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [],
+      "avtorjiBesedil": [],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-2183-eda597c78b6f",
+      "sifra": "0001",
+      "naziv": "g.",
+      "ime": "Janez",
+      "priimek": "Novak",
+      "funkcija": "a",
+      "srednjeIme": "Peter",
+      "polnoIme": "Janez Peter Novak",
+      "psevdonim": "Jani",
+      "spol": "M",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-4ea5-7da54524f510"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-cf3a-6c468d670e22",
+      "sifra": "0020",
+      "naziv": "",
+      "ime": "Luka",
+      "priimek": "Novak",
+      "funkcija": "",
+      "srednjeIme": "",
+      "polnoIme": "Luka  Novak",
+      "psevdonim": "",
+      "spol": "M",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [],
+      "avtorjiBesedil": [],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-0d55-62a8ceab7c12",
+      "sifra": "0018",
+      "naziv": "",
+      "ime": "Katarina",
+      "priimek": "Podbevšek",
+      "funkcija": "lektorica",
+      "srednjeIme": "",
+      "polnoIme": "Katarina  Podbevšek",
+      "psevdonim": "",
+      "spol": "Z",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-4a1a-c127f80a634b",
+        "000c0000-568c-b751-17a2-23c1c3dbb3ee",
+        "000c0000-568c-b751-37cf-cbe425f1e0b9",
+        "000c0000-568c-b751-75fe-89e82435d716",
+        "000c0000-568c-b751-9373-ccf5b99ac9fc",
+        "000c0000-568c-b751-1ead-2f3ac1a633a0",
+        "000c0000-568c-b751-8ab1-6f1b6c83dee3"
+      ],
+      "avtorjiBesedil": [
+        "003d0000-568c-b751-42f7-91525311adee"
+      ],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": [
+        "003d0000-568c-b751-42f7-91525311adee"
+      ]
+    },
+    {
+      "id": "00090000-568c-b751-64ec-79254256af89",
+      "sifra": "0007",
+      "naziv": "ga.",
+      "ime": "Ana",
+      "priimek": "Potočnik",
+      "funkcija": "g",
+      "srednjeIme": "",
+      "polnoIme": "Ana  Potočnik",
+      "psevdonim": "",
+      "spol": "Z",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-aa8b-dafa0f4aedd6"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [
+        "00100000-568c-b751-bc21-10432c4fae4a"
+      ],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-4005-b21f55b99cdc",
+      "sifra": "0014",
+      "naziv": "",
+      "ime": "William",
+      "priimek": "Shakespeare",
+      "funkcija": "avtor",
+      "srednjeIme": "",
+      "polnoIme": "William  Shakespeare",
+      "psevdonim": "",
+      "spol": "M",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-d2d5-cf6139917b57",
+        "000c0000-568c-b751-7faf-18f48ddf29be"
+      ],
+      "avtorjiBesedil": [
+        "003d0000-568c-b751-38a5-38d4f4ad47dc"
+      ],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": [
+        "003d0000-568c-b751-38a5-38d4f4ad47dc"
+      ]
+    },
+    {
+      "id": "00090000-568c-b751-1eb6-9224a004da3b",
+      "sifra": "0010",
+      "naziv": "",
+      "ime": "Mojca",
+      "priimek": "Vidmar",
+      "funkcija": "J",
+      "srednjeIme": "",
+      "polnoIme": "Mojca  Vidmar",
+      "psevdonim": "",
+      "spol": "Z",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [
+        "000c0000-568c-b751-6b1e-682aebc50bfa",
+        "000c0000-568c-b751-f298-389dd4e54869"
+      ],
+      "avtorjiBesedil": [],
+      "zaposlitve": [
+        "00100000-568c-b751-3c74-1f45821056a2"
+      ],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-d3b5-7293ec2c2d5b",
+      "sifra": "0011",
+      "naziv": "",
+      "ime": "xx",
+      "priimek": "write protected12345",
+      "funkcija": "a",
+      "srednjeIme": "",
+      "polnoIme": "xx  write protected12345",
+      "psevdonim": "",
+      "spol": "Z",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [],
+      "avtorjiBesedil": [],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-ad74-e798ad086b97",
+      "sifra": "0005",
+      "naziv": "",
+      "ime": "Marko",
+      "priimek": "Zupančič",
+      "funkcija": "e",
+      "srednjeIme": "",
+      "polnoIme": "Marko  Zupančič",
+      "psevdonim": "",
+      "spol": "M",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [],
+      "avtorjiBesedil": [],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    },
+    {
+      "id": "00090000-568c-b751-0fd8-263c01c3a1a5",
+      "sifra": "0019",
+      "naziv": "",
+      "ime": "Lojze",
+      "priimek": "Žumer",
+      "funkcija": "",
+      "srednjeIme": "",
+      "polnoIme": "Lojze  Žumer",
+      "psevdonim": "",
+      "spol": "M",
+      "user": null,
+      "kontaktneOsebe": [],
+      "alternacije": [],
+      "avtorjiBesedil": [],
+      "zaposlitve": [],
+      "zasedenosti": [],
+      "naslov": null,
+      "avtorji": []
+    }
+  ]
+}

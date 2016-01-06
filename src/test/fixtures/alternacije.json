@@ -1,0 +1,406 @@
+{
+  "state": {
+    "sortKey": "sifra",
+    "order": "asc",
+    "currentPage": 1,
+    "totalRecords": 12,
+    "lastPage": 1,
+    "pageSize": 30
+  },
+  "data": [
+    {
+      "id": "000c0000-568c-b751-4ea5-7da54524f510",
+      "sifra": "0001",
+      "zaposlen": false,
+      "zacetek": null,
+      "konec": null,
+      "opomba": null,
+      "sort": 3,
+      "privzeti": true,
+      "aktivna": null,
+      "imaPogodbo": true,
+      "pomembna": true,
+      "storitve": [
+        "001a0000-568c-b751-c3be-438df904c8a5"
+      ],
+      "funkcija": {
+        "id": "000d0000-568c-b751-493e-0fbf3e572dd5",
+        "ident": "Tezej",
+        "label": "Tezej",
+        "tipFunkcije.podrocje": "igralec"
+      },
+      "zaposlitev": null,
+      "oseba": {
+        "id": "00090000-568c-b751-2183-eda597c78b6f",
+        "ident": "0001",
+        "label": "Janez Peter Novak",
+        "priimek": "Novak",
+        "ime": "Janez",
+        "psevdonim": "Jani"
+      },
+      "pogodba": {
+        "id": "000b0000-568c-b751-d287-2a42bc20bca1",
+        "ident": "0001",
+        "label": "Janez Peter Novak",
+        "oseba.polnoIme": "Janez Peter Novak",
+        "popa.naziv": ""
+      }
+    },
+    {
+      "id": "000c0000-568c-b751-f298-389dd4e54869",
+      "sifra": "0002",
+      "zaposlen": true,
+      "zacetek": "2016-01-01T00:00:00+0100",
+      "konec": null,
+      "opomba": null,
+      "sort": 8,
+      "privzeti": true,
+      "aktivna": null,
+      "imaPogodbo": false,
+      "pomembna": false,
+      "storitve": [
+        "001a0000-568c-b751-03c5-a0267eeda445"
+      ],
+      "funkcija": {
+        "id": "000d0000-568c-b751-c688-4fcd3aebd0d3",
+        "ident": "Režija",
+        "label": "Režija",
+        "tipFunkcije.podrocje": "umetnik"
+      },
+      "zaposlitev": "00100000-568c-b751-3c74-1f45821056a2",
+      "oseba": {
+        "id": "00090000-568c-b751-1eb6-9224a004da3b",
+        "ident": "0010",
+        "label": "Mojca  Vidmar",
+        "priimek": "Vidmar",
+        "ime": "Mojca",
+        "psevdonim": ""
+      },
+      "pogodba": null
+    },
+    {
+      "id": "000c0000-568c-b751-c446-776e868dcee0",
+      "sifra": "0003",
+      "zaposlen": true,
+      "zacetek": null,
+      "konec": "2016-01-06T00:00:00+0100",
+      "opomba": null,
+      "sort": 2,
+      "privzeti": true,
+      "aktivna": null,
+      "imaPogodbo": false,
+      "pomembna": false,
+      "storitve": [
+        "001a0000-568c-b751-1417-99357c7b1662"
+      ],
+      "funkcija": {
+        "id": "000d0000-568c-b751-d4cb-78f4b8e80c34",
+        "ident": "Inšpicient",
+        "label": "Inšpicient",
+        "tipFunkcije.podrocje": "inspicient"
+      },
+      "zaposlitev": "00100000-568c-b751-caee-980726872431",
+      "oseba": {
+        "id": "00090000-568c-b751-38a3-10e07fc2b723",
+        "ident": "0003",
+        "label": "Ivan  Kovačič",
+        "priimek": "Kovačič",
+        "ime": "Ivan",
+        "psevdonim": "Ivo"
+      },
+      "pogodba": null
+    },
+    {
+      "id": "000c0000-568c-b751-6ca8-44805edfc05e",
+      "sifra": "0004",
+      "zaposlen": false,
+      "zacetek": "2016-01-01T00:00:00+0100",
+      "konec": "2016-01-01T00:00:00+0100",
+      "opomba": null,
+      "sort": 26,
+      "privzeti": true,
+      "aktivna": null,
+      "imaPogodbo": false,
+      "pomembna": false,
+      "storitve": [
+        "001a0000-568c-b751-e646-3a489e615b0d"
+      ],
+      "funkcija": {
+        "id": "000d0000-568c-b751-cf9a-2177a4b1a111",
+        "ident": "Tehnični vodja",
+        "label": "Tehnični vodja",
+        "tipFunkcije.podrocje": "tehnik"
+      },
+      "zaposlitev": null,
+      "oseba": {
+        "id": "00090000-568c-b751-a495-d26d6053ab81",
+        "ident": "0002",
+        "label": "Anton  Horvat",
+        "priimek": "Horvat",
+        "ime": "Anton",
+        "psevdonim": "Tona"
+      },
+      "pogodba": null
+    },
+    {
+      "id": "000c0000-568c-b751-c590-605d492dc93a",
+      "sifra": "0005",
+      "zaposlen": false,
+      "zacetek": "2016-01-01T00:00:00+0100",
+      "konec": "2016-01-01T00:00:00+0100",
+      "opomba": null,
+      "sort": 7,
+      "privzeti": true,
+      "aktivna": null,
+      "imaPogodbo": false,
+      "pomembna": false,
+      "storitve": [
+        "001a0000-568c-b751-84b1-24f8be1aa44d"
+      ],
+      "funkcija": {
+        "id": "000d0000-568c-b751-8b94-c6266cdfe138",
+        "ident": "Razsvetljava",
+        "label": "Razsvetljava",
+        "tipFunkcije.podrocje": "tehnik"
+      },
+      "zaposlitev": null,
+      "oseba": {
+        "id": "00090000-568c-b751-f9cf-46ab854c36c3",
+        "ident": "0012",
+        "label": "Luka a Golob",
+        "priimek": "Golob",
+        "ime": "Luka",
+        "psevdonim": ""
+      },
+      "pogodba": null
+    },
+    {
+      "id": "000c0000-568c-b751-07c5-f4cba8bf2ada",
+      "sifra": "0006",
+      "zaposlen": false,
+      "zacetek": "2016-01-01T00:00:00+0100",
+      "konec": "2016-01-01T00:00:00+0100",
+      "opomba": null,
+      "sort": 1,
+      "privzeti": true,
+      "aktivna": null,
+      "imaPogodbo": true,
+      "pomembna": true,
+      "storitve": [],
+      "funkcija": {
+        "id": "000d0000-568c-b751-7e65-4496ea447b47",
+        "ident": "Helena",
+        "label": "Helena",
+        "tipFunkcije.podrocje": "igralec"
+      },
+      "zaposlitev": null,
+      "oseba": {
+        "id": "00090000-568c-b751-a545-dff9715911a2",
+        "ident": "0006",
+        "label": "Marija  Kovač",
+        "priimek": "Kovač",
+        "ime": "Marija",
+        "psevdonim": ""
+      },
+      "pogodba": {
+        "id": "000b0000-568c-b751-bfc0-934f7c43383a",
+        "ident": "0002",
+        "label": "Marija  Kovač",
+        "oseba.polnoIme": "Marija  Kovač",
+        "popa.naziv": ""
+      }
+    },
+    {
+      "id": "000c0000-568c-b751-5ac9-e04ed2836ff4",
+      "sifra": "0007",
+      "zaposlen": true,
+      "zacetek": "2016-01-01T00:00:00+0100",
+      "konec": "2016-01-01T00:00:00+0100",
+      "opomba": null,
+      "sort": 14,
+      "privzeti": false,
+      "aktivna": null,
+      "imaPogodbo": false,
+      "pomembna": true,
+      "storitve": [],
+      "funkcija": {
+        "id": "000d0000-568c-b751-23d4-a021fc09440d",
+        "ident": "Hipolita",
+        "label": "Hipolita",
+        "tipFunkcije.podrocje": "igralec"
+      },
+      "zaposlitev": "00100000-568c-b751-de94-5ea70457ad97",
+      "oseba": {
+        "id": "00090000-568c-b751-ffdb-69a8746ffdba",
+        "ident": "0008",
+        "label": "Maja  Mlakar",
+        "priimek": "Mlakar",
+        "ime": "Maja",
+        "psevdonim": ""
+      },
+      "pogodba": null
+    },
+    {
+      "id": "000c0000-568c-b751-8eb6-a4efb1f00673",
+      "sifra": "0008",
+      "zaposlen": false,
+      "zacetek": "2016-01-01T00:00:00+0100",
+      "konec": "2016-01-01T00:00:00+0100",
+      "opomba": null,
+      "sort": 12,
+      "privzeti": true,
+      "aktivna": null,
+      "imaPogodbo": true,
+      "pomembna": true,
+      "storitve": [],
+      "funkcija": {
+        "id": "000d0000-568c-b751-0a2c-ba4966532bec",
+        "ident": "Lektoriranje",
+        "label": "Lektoriranje",
+        "tipFunkcije.podrocje": "umetnik"
+      },
+      "zaposlitev": null,
+      "oseba": {
+        "id": "00090000-568c-b751-eb9b-c0d393a6c22b",
+        "ident": "0013",
+        "label": "Tatjana a Božič",
+        "priimek": "Božič",
+        "ime": "Tatjana",
+        "psevdonim": ""
+      },
+      "pogodba": {
+        "id": "000b0000-568c-b751-b89e-0eb5c6db564e",
+        "ident": "0003",
+        "label": "Tatjana a Božič",
+        "oseba.polnoIme": "Tatjana a Božič",
+        "popa.naziv": ""
+      }
+    },
+    {
+      "id": "000c0000-568c-b751-9913-fa8b8ed77a36",
+      "sifra": "0009",
+      "zaposlen": true,
+      "zacetek": "2017-01-01T00:00:00+0100",
+      "konec": "2017-01-01T00:00:00+0100",
+      "opomba": null,
+      "sort": 15,
+      "privzeti": true,
+      "aktivna": null,
+      "imaPogodbo": false,
+      "pomembna": true,
+      "storitve": [],
+      "funkcija": {
+        "id": "000d0000-568c-b751-23d4-a021fc09440d",
+        "ident": "Hipolita",
+        "label": "Hipolita",
+        "tipFunkcije.podrocje": "igralec"
+      },
+      "zaposlitev": "00100000-568c-b751-5fcb-5b1e035a9861",
+      "oseba": {
+        "id": "00090000-568c-b751-fda5-d4f9402e85cb",
+        "ident": "0004",
+        "label": "Jožef  Krajnc",
+        "priimek": "Krajnc",
+        "ime": "Jožef",
+        "psevdonim": "Joža"
+      },
+      "pogodba": null
+    },
+    {
+      "id": "000c0000-568c-b751-f08d-92635b0b3dc5",
+      "sifra": "0010",
+      "zaposlen": true,
+      "zacetek": null,
+      "konec": "2016-01-06T00:00:00+0100",
+      "opomba": null,
+      "sort": 16,
+      "privzeti": false,
+      "aktivna": null,
+      "imaPogodbo": false,
+      "pomembna": true,
+      "storitve": [],
+      "funkcija": {
+        "id": "000d0000-568c-b751-23d4-a021fc09440d",
+        "ident": "Hipolita",
+        "label": "Hipolita",
+        "tipFunkcije.podrocje": "igralec"
+      },
+      "zaposlitev": "00100000-568c-b751-71d7-22caab33d04b",
+      "oseba": {
+        "id": "00090000-568c-b751-d8d9-bc7c7ddbeea1",
+        "ident": "0009",
+        "label": "Irena  Kos",
+        "priimek": "Kos",
+        "ime": "Irena",
+        "psevdonim": ""
+      },
+      "pogodba": null
+    },
+    {
+      "id": "000c0000-568c-b751-aa8b-dafa0f4aedd6",
+      "sifra": "0011",
+      "zaposlen": true,
+      "zacetek": "2017-01-01T00:00:00+0100",
+      "konec": null,
+      "opomba": null,
+      "sort": 17,
+      "privzeti": false,
+      "aktivna": null,
+      "imaPogodbo": false,
+      "pomembna": true,
+      "storitve": [],
+      "funkcija": {
+        "id": "000d0000-568c-b751-23d4-a021fc09440d",
+        "ident": "Hipolita",
+        "label": "Hipolita",
+        "tipFunkcije.podrocje": "igralec"
+      },
+      "zaposlitev": "00100000-568c-b751-bc21-10432c4fae4a",
+      "oseba": {
+        "id": "00090000-568c-b751-64ec-79254256af89",
+        "ident": "0007",
+        "label": "Ana  Potočnik",
+        "priimek": "Potočnik",
+        "ime": "Ana",
+        "psevdonim": ""
+      },
+      "pogodba": null
+    },
+    {
+      "id": "000c0000-568c-b751-6b1e-682aebc50bfa",
+      "sifra": "0012",
+      "zaposlen": true,
+      "zacetek": null,
+      "konec": null,
+      "opomba": null,
+      "sort": 2,
+      "privzeti": true,
+      "aktivna": null,
+      "imaPogodbo": true,
+      "pomembna": true,
+      "storitve": [],
+      "funkcija": {
+        "id": "000d0000-568c-b751-78fc-f76733498afe",
+        "ident": "Avtor",
+        "label": "Avtor",
+        "tipFunkcije.podrocje": "umetnik"
+      },
+      "zaposlitev": "00100000-568c-b751-3c74-1f45821056a2",
+      "oseba": {
+        "id": "00090000-568c-b751-1eb6-9224a004da3b",
+        "ident": "0010",
+        "label": "Mojca  Vidmar",
+        "priimek": "Vidmar",
+        "ime": "Mojca",
+        "psevdonim": ""
+      },
+      "pogodba": {
+        "id": "000b0000-568c-b751-a4f3-690d0f12df5f",
+        "ident": "0004",
+        "label": "Mojca  Vidmar",
+        "oseba.polnoIme": "Mojca  Vidmar",
+        "popa.naziv": ""
+      }
+    }
+  ]
+}
