@@ -9,13 +9,15 @@ define([
     'app/bars',
     'marionette',
     'jquery',
+    'app/koledar/Model/Alternacije',
+    'app/koledar/Model/Dogodki',
     'app/Max/View/TabControl',
     'app/Dokument/View/DokumentView',
+    'app/Zapisi/View/ZapisiLayout',
+    './SodelujociView',
     'formSchema!dogodek',
     'template!../tpl/dogodek-dok.tpl',
-    'template!../tpl/dogodek-form.tpl',
-    'app/Zapisi/View/ZapisiLayout',
-    './SodelujociView'
+    'template!../tpl/dogodek-form.tpl'
 ], function (
         Radio,
         i18next,
@@ -24,13 +26,15 @@ define([
         Handlebars,
         Marionette,
         $,
+        Alternacije,
+        Dogodki,
         TabControl,
         DokumentView,
+        ZapisiLayout,
+        SodelujociView,
         schemaDogodek,
         dokumentTpl,
-        dogodekTpl,
-        ZapisiLayout,
-        SodelujociView
+        dogodekTpl
         ) {
 
     var tabVse = [
@@ -154,10 +158,21 @@ define([
     };
 
     DogodekView.prototype.renderSodelujoci = function () {
-        var view = new SodelujociView({
-            uprizoritev: this.tipDogModel.get('uprizoritev')
+        var self = this;
+        var coll = this.collection = new Alternacije();
+        coll.queryParams.uprizoritev = this.tipDogModel.get('uprizoritev');
+        var dogodek = new Dogodki.prototype.model(self.tipDogModel.get('dogodek'));
+        
+        coll.fetch({
+            success: function (coll) {
+                var view = new SodelujociView({
+                    alternacije: coll,
+                    dogodek: dogodek
+                });
+                self.sodelujociR.show(view);
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
         });
-        this.sodelujociR.show(view);
     };
 
     DogodekView.prototype.renderRazredDogodka = function () {

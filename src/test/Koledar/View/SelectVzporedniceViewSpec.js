@@ -2,7 +2,7 @@ define([
     'jquery',
     'backbone',
     'app/koledar/View/SelectVzporedniceView',
-    'text!../fixtures/vzporednice.json'
+    'text!../../fixtures/vzporednice.json'
 ], function (
         $,
         Backbone,

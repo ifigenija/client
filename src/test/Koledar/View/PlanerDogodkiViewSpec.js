@@ -3,7 +3,7 @@ define([
     'moment',
     'app/koledar/Model/Dogodki',
     'app/koledar/View/PlanerDogodkiView',
-    'text!../fixtures/dogodki.json'
+    'text!../../fixtures/dogodki.json'
 ], function (
         $,
         moment,

@@ -9,13 +9,14 @@ define([
     'app/bars',
     'marionette',
     'underscore',
+    'moment',
     'jquery',
-    './SeznamSodelujocihView',
-    'template!../tpl/sodelujoci.tpl',
+    '../Model/TerminiStoritve',
     '../Model/Alternacije',
     '../Model/Osebe',
+    './SeznamSodelujocihView',
     'app/filter/View/DualListView',
-    '../Model/TerminiStoritev'
+    'template!../tpl/sodelujoci.tpl'
 ], function (
         Radio,
         i18next,
@@ -23,13 +24,14 @@ define([
         Handlebars,
         Marionette,
         _,
+        moment,
         $,
-        SeznamSodelujocihView,
-        sodelujociTpl,
+        TerminiStoritve,
         Alternacije,
         Osebe,
+        SeznamSodelujocihView,
         DualListView,
-        TerminiStoritev
+        sodelujociTpl
         ) {
 
     var SodelujociView = Marionette.LayoutView.extend({
@@ -38,7 +40,7 @@ define([
         regions: {
             umetnikiR: '.region-umetniki',
             tehnikiR: '.region-tehniki',
-            gostiR: '.region-gosti'
+            gosDezR: '.region-gosti'
         }
     });
     /**
@@ -48,27 +50,29 @@ define([
      * @returns {undefined}
      */
     SodelujociView.prototype.initialize = function (options) {
-        if (options && options.uprizoritev) {
-            this.uprizoritev = options.uprizoritev;
+        this.alternacijeColl = options.alternacije;
+        this.dogodek = options.dogodek;
+        this.tsColl = new TerminiStoritve(this.dogodek.get('terminiStoritve'));
 
-            var coll = this.collection = new Alternacije();
-            coll.queryParams.uprizoritev = this.uprizoritev;
-            var self = this;
-            coll.fetch({
-                success: function () {
-                    self.razdeliCollection();
-                    self.onRender();
-                },
-                error: Radio.channel('error').request('handler', 'xhr')
-            });
-        }
-
-        this.izbraniUmetniki = new TerminiStoritev();
-        this.izbraniTehniki = new TerminiStoritev();
-        this.izbraniGosti = new TerminiStoritev();
+        this.razdeliAlternacije();
+        this.razdeliTS();
     };
-    SodelujociView.prototype.razdeliCollection = function () {
-        var modeli = this.collection.razdeli();
+    SodelujociView.prototype.razdeliTS = function () {
+        var tsPodrocja = this.tsColl.razdeliPoPodrocjih();
+
+        this.izbraniUmetniki = new TerminiStoritve();
+        this.izbraniUmetniki.add(tsPodrocja.umetnik);
+        this.izbraniUmetniki.add(tsPodrocja.igralec);
+
+        this.izbraniTehniki = new TerminiStoritve();
+        this.izbraniTehniki.add(tsPodrocja.tehnik);
+        this.izbraniTehniki.add(tsPodrocja.inspicient);
+
+        this.izbraniGosDez = new TerminiStoritve();
+        this.izbraniTehniki.add(tsPodrocja.gostiDezurni);
+    };
+    SodelujociView.prototype.razdeliAlternacije = function () {
+        var modeli = this.alternacijeColl.razdeli();
 
         this.umetnikiColl = new Alternacije();
         this.umetnikiColl.add(modeli.umetnik);
@@ -78,13 +82,13 @@ define([
         this.tehnikiColl.add(modeli.tehnik);
         this.tehnikiColl.add(modeli.inspicient);
 
-        this.gostiColl = new Osebe();
-        this.gostiColl.fetch({error: Radio.channel('error').request('handler', 'xhr')});
+        this.gosDezColl = new Osebe();
+        this.gosDezColl.fetch({error: Radio.channel('error').request('handler', 'xhr')});
     };
     SodelujociView.prototype.onRender = function () {
         this.renderUmetniki();
         this.renderTehnika();
-        this.renderGosti();
+        this.renderGosDez();
     };
     SodelujociView.prototype.renderUmetniki = function () {
         var view = this.umetnikiView = new SeznamSodelujocihView({
@@ -102,13 +106,13 @@ define([
         view.on('render:uredi', this.urediTehnike, this);
         this.tehnikiR.show(view);
     };
-    SodelujociView.prototype.renderGosti = function () {
-        var view = this.gostiView = new SeznamSodelujocihView({
-            collection: this.izbraniGosti,
-            naslov: 'Gosti'
+    SodelujociView.prototype.renderGosDez = function () {
+        var view = this.gosDezView = new SeznamSodelujocihView({
+            collection: this.izbraniGosDez,
+            naslov: 'Gosti/Dežurni'
         });
         view.on('render:uredi', this.urediGoste, this);
-        this.gostiR.show(view);
+        this.gosDezR.show(view);
     };
     SodelujociView.prototype.urediUmetnike = function ($el) {
         this.renderUredi({
@@ -130,8 +134,8 @@ define([
 
     SodelujociView.prototype.urediGoste = function ($el) {
         this.renderUredi({
-            izbrani: this.izbraniGosti,
-            mozni: this.gostiColl,
+            izbrani: this.izbraniGosDez,
+            mozni: this.gosDezColl,
             $el: $el,
             tpl: Handlebars.compile('{{polnoIme}}')
         });
@@ -148,9 +152,15 @@ define([
             title: "izbira oseb"
         });
 
+        var self = this;
         //onclose proži changed:vrednosti
         view.on('changed:vrednosti', function () {
-            this.trigger('changed:vrednosti');
+            self.trigger('changed:vrednosti');
+            var tsColl = self.umetnikiColl.toTS({
+                dogodek: this.dogodek,
+                zacetek: moment(),
+                konec: moment()
+            });
         }, this);
 
         view.render();

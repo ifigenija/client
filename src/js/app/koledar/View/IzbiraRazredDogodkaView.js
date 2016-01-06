@@ -10,7 +10,7 @@ define([
     'moment',
     'template!../tpl/dogodek-izbira.tpl',
     '../Model/RazredDogodek',
-    '../Model/TerminiStoritev'
+    '../Model/TerminiStoritve'
 ], function (
         Radio,
         i18next,
@@ -20,7 +20,7 @@ define([
         moment,
         izbiraTpl,
         RazredDogodek,
-        TerminiStoritev
+        TerminiStoritve
         ) {
 
     var IzbiraRazredDogodkaView = Marionette.ItemView.extend({
@@ -69,7 +69,7 @@ define([
         this.trigger('ready:naprej', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onZasedenost = function () {
-        var model = this.model = new TerminiStoritev.prototype.model();
+        var model = this.model = new TerminiStoritve.prototype.model();
 
         if (this.zacetek) {
             model.set('planiranZacetek', this.zacetek);

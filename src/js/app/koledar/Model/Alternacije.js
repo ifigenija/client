@@ -8,13 +8,13 @@ define([
     'baseUrl',
     'backbone',
     'app/Max/Model/MaxPageableCollection',
-    './TerminStoritev',
+    './TerminiStoritve',
     'deep-model'
 ], function (
         baseUrl,
         Backbone,
         Collection,
-        TerminiStoritev
+        TerminiStoritve
         ) {
 
     var Model = Backbone.DeepModel.extend({
@@ -25,7 +25,11 @@ define([
         model: Model,
         mode: "server"
     });
-
+    
+    /**
+     * Metoda razdeli alternacije v posamezna področja v katera spadajo alternacije.
+     * @returns {Array|Collection@call;extend.prototype.razdeliVPodrocja.object}
+     */
     Collection.prototype.razdeli = function () {
         var models = this.models;
 
@@ -54,7 +58,7 @@ define([
      * @param {boolean} options.dezurni
      * @returns {Collection@call;extend.prototype.alternacije2TS.object|Array}
      */
-    Collection.prototype.alternacije2TS = function (options) {
+    Collection.prototype.toTS = function (options) {
 
         var modeli = [];
         this.each(function (model) {
@@ -69,7 +73,7 @@ define([
             modeli.push(alterModel);
         });
 
-        return new TerminiStoritev(modeli);
+        return modeli;
     };
 
     return Collection;

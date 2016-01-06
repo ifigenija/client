@@ -30,7 +30,29 @@ define([
         mode: "server"
     });
 
-    Collection.prototype.TS2Osebe = function () {
+    Collection.prototype.razdeliPoPodrocjih = function () {
+        var models = this.models;
+
+        var object = {};
+
+        this.each(function (model) {
+            var podrocje = model.get('alternacija.funkcija.tipFunkcije.podrocje');
+            if (podrocje) {
+                if (!object[podrocje]) {
+                    object[podrocje] = [];
+                }
+
+                object[podrocje].push(model);
+            } else {
+                object['gostiDezurni'] = [];
+                object['gostiDezurni'].push(model);
+            }
+        });
+
+        return object;
+    };
+
+    Collection.prototype.toOsebe = function () {
         var osebeColl = this.osebe = new Osebe();
 
         var models = this.models;
@@ -50,7 +72,7 @@ define([
 
         return osebeColl;
     };
-    Collection.prototype.TS2Alternacije = function () {
+    Collection.prototype.toAlternacije = function () {
         var alterColl = this.alternacije = new Alternacije();
 
         var models = this.models;
@@ -68,6 +90,7 @@ define([
 
         return alterColl;
     };
+    
     /**
      * Funkcija vrne collection oseb za odstranit iz terminov storitev in collection oseb za dodat v terminstoritev
      * @param {Collection} osebe    Vhodni podatek je collection izbranih oseb
