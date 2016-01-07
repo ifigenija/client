@@ -20,6 +20,7 @@ define([
     './WizardView',
     './IzbiraRazredDogodkaView',
     './IzbiraDatumView',
+    './IzbiraUprizoritveView',
     './VzporedniceView'
 ], function (
         i18next,
@@ -39,6 +40,7 @@ define([
         WizardView,
         IzbiraView,
         IzbiraDatumView,
+        IzbiraUprizoritveView,
         VzporedniceView
         ) {
 
@@ -158,6 +160,7 @@ define([
             defView: {
                 views: [
                     IzbiraView,
+                    IzbiraUprizoritveView,
                     IzbiraDatumView
                 ],
                 title: i18next.t('dogodek.dodajDogodek')
