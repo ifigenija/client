@@ -38,10 +38,10 @@ define([
         ) {
 
     var tabVse = [
-        {name: i18next.t('dogodek.title'), event: 'dogodek'},
-        {name: i18next.t('dogodek.razred'), event: 'razred'},
-        {name: i18next.t('dogodek.sodelujoci'), event: 'sodelujoci'},
-        {name: i18next.t('dogodek.priloge'), event: 'priloge'}
+        {id: 'naslov', name: i18next.t('dogodek.title'), event: 'dogodek'},
+        {id: 'razred', name: i18next.t('dogodek.razred'), event: 'razred'},
+        {id: 'sodelujoci', name: i18next.t('dogodek.sodelujoci'), event: 'sodelujoci'},
+        {id: 'priloge', name: i18next.t('dogodek.priloge'), event: 'priloge'}
     ];
 
     var tabNovi = [
@@ -112,6 +112,11 @@ define([
      */
     DogodekView.prototype.renderTabs = function (tabs) {
         this.tabControl = new TabControl({tabs: tabs, listener: this});
+        var tab = this.tabControl.findTab('razred');
+        var razred = this.getRazredNiz();
+        tab.set('name', razred);
+        
+        
         this.tabsR.show(this.tabControl);
         return this.tabControl;
     };
@@ -162,7 +167,7 @@ define([
         var coll = this.collection = new Alternacije();
         coll.queryParams.uprizoritev = this.tipDogModel.get('uprizoritev');
         var dogodek = new Dogodki.prototype.model(self.tipDogModel.get('dogodek'));
-        
+
         coll.fetch({
             success: function (coll) {
                 var view = new SodelujociView({
@@ -175,11 +180,36 @@ define([
         });
     };
 
-    DogodekView.prototype.renderRazredDogodka = function () {
+    DogodekView.prototype.renderRazredDogodka = function () {        
         var view = new this.TipDogView({
             model: this.tipDogModel
         });
         this.razredDogodkaR.show(view);
+    };
+
+    DogodekView.prototype.getRazredNiz = function () {
+
+        var razred = i18next.t(this.tipDogModel.get('dogodek').razred);
+        var niz;
+        if (razred === '100s') {
+            niz = i18next.t('std.predstava');
+        } else if (razred === '200s') {
+            niz = i18next.t('std.vaja');
+        }
+        else if (razred === '300s') {
+            niz = i18next.t('std.gostovanje');
+        }
+        else if (razred === '400s') {
+            niz = i18next.t('std.splosno');
+        }
+        else if (razred === '500s') {
+            niz = i18next.t('std.zasedenost');
+        }
+        else if (razred === '600s') {
+            niz = i18next.t('std.tehnicni');
+        }
+
+        return niz;
     };
 
     return DogodekView;

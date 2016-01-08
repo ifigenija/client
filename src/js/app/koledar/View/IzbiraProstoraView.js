@@ -17,12 +17,12 @@ define([
         Marionette,
         Form
         ) {
-    var sch = {type: 'Toone', targetEntity: 'uprizoritev', editorAttrs: {class: 'form-control'}, title: 'Uprizoritev'};
+    var sch = {type: 'Toone', targetEntity: 'prostor', editorAttrs: {class: 'form-control'}, title: 'Prostor'};
     
-    var IzbriraUprizoritveView = Form.extend({
-        template: Handlebars.compile('<form><div data-fields="uprizoritev"></div></form>'),
+    var IzbriraProstoraView = Form.extend({
+        template: Handlebars.compile('<form><div data-fields="prostor"></div></form>'),
         schema: {
-            uprizoritev: sch
+            prostor: sch
         },
         initialize: function (options) {
             Form.prototype.initialize.apply(this, arguments);
@@ -30,10 +30,10 @@ define([
             this.model = options.model;
             
             var self = this;
-            this.on('uprizoritev:change', function (form, editor) {
+            this.on('prostor:change', function (form, editor) {
                 var upr = editor.getValue();
                 if(upr && upr.id){
-                    self.model.set('uprizoritev', upr.id);
+                    self.model.set('prostor', upr.id);
                     self.trigger('ready', self.model);
                 }else{
                     self.trigger('not:ready');
@@ -41,5 +41,5 @@ define([
             }, this);
         }
     });
-    return IzbriraUprizoritveView;
+    return IzbriraProstoraView;
 });
