@@ -7,6 +7,7 @@ define([
     'i18next',
     'app/bars',
     'backbone',
+    'moment',
     'marionette',
     'underscore',
     'app/koledar/View/PrekrivanjaView',
@@ -24,6 +25,7 @@ define([
         i18next,
         Handlebars,
         Backbone,
+        moment,
         Marionette,
         _,
         PrekrivanjaView,
@@ -35,7 +37,10 @@ define([
         opozorilaTpl,
         $
         ) {
-
+    /**
+     * Prikaz prekrivanj alternacij med posameznimi uprizoritvami
+     * @type @exp;Marionette@pro;ItemView@call;extend
+     */
     var OpozoriloView = Marionette.ItemView.extend({
         template: opozorilaTpl
     });
@@ -56,7 +61,10 @@ define([
     /**
      * inicializacija collectiona Uprizoritev
      * V kolekcijo dodamo uprizoritev, ki jo trenutno gledamo
-     * @param {type} options
+     * @param {Object} options
+     * @param {Model} options.uprizoritev pošljemo lookup model uprizoritve
+     * @param {moment} options.zacetek
+     * @param {moment} options.konec
      * @returns {undefined}
      */
     VzporedniceView.prototype.initialize = function (options) {
@@ -67,13 +75,29 @@ define([
         if (options && options.uprizoritev) {
             this.collectionUprizoritev.add(options.uprizoritev);
         }
+
+        if (options && options.zacetek) {
+            this.zacetek = moment(options.zacetek).toISOString();
+        }
+
+        if (options && options.konec) {
+            this.konec = moment(options.konec).toISOString();
+        }
     };
 
+    /**
+     * Se izvede ob kliku na gumb za prikaz prekrivanja
+     * @returns {undefined}
+     */
     VzporedniceView.prototype.onPrikaziPrekrivanja = function () {
         this.renderPrekrivanja();
         this.$('.prikazi-prekrivanja').addClass('hidden');
     };
 
+    /**
+     * Funkcija se kliče ko se v kolekcijo uprizoritev doda ali odstrani uprizoritev
+     * @returns {undefined}
+     */
     VzporedniceView.prototype.update = function () {
         this.renderVzporednice();
         if (this.$('.prikazi-prekrivanja').hasClass('hidden')) {
@@ -102,7 +126,9 @@ define([
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
         rpc.call('dajVzporednice', {
             'uprizoritveIds': options.uprizoritve,
-            'alternacije': options.alternacije
+            'alternacije': options.alternacije,
+            'zacetek': options.zacetek || null,
+            'konec': options.konec || null
         }, options.success, options.error);
     };
 
@@ -115,14 +141,16 @@ define([
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/vzporednice'});
         rpc.call('dajPrekrivanja', {
             'uprizoritveIds': options.uprizoritve,
-            'alternacije': options.alternacije
+            'alternacije': options.alternacije,
+            'zacetek': options.zacetek || null,
+            'konec': options.konec || null
         }, options.success, options.error);
     };
 
-    VzporedniceView.prototype.vzporedniceTrigger = function (view, context) {
-        view.on('selected', context.onSelected, context);
-    };
-
+    /**
+     * Izris vzporednic
+     * @returns {undefined}
+     */
     VzporedniceView.prototype.renderVzporednice = function () {
         var self = this;
 
@@ -134,14 +162,16 @@ define([
                 collection: coll,
                 class: 'vzporednice'
             });
-            self.vzporedniceTrigger(view, self);
-            
+            view.on('selected', self.onSelected, self);
+
             self.vzporedniceR.show(view);
             self.prekrivanjaR.empty();
 
             var error = data.error;
 
             if (error.length) {
+                //iz objekta napak naredimo model za lažji prikaz podatkov
+                //izris opozoril
                 var model = new Backbone.Model({
                     opozorila: error
                 });
@@ -151,6 +181,7 @@ define([
 
                 self.opozorilaR.show(opozoriloView);
             } else {
+                //v primeru da ni prekrivanj se opozorila skrijejo
                 self.opozorilaR.empty();
             }
         };
@@ -165,6 +196,8 @@ define([
         this.rpcDajVzporednice({
             uprizoritve: upr,
             alternacije: alternacije,
+            zacetek: this.zacetek,
+            konec: this.konec,
             success: success,
             error: error
         });
@@ -195,13 +228,18 @@ define([
         this.rpcDajPrekrivanja({
             uprizoritve: upr,
             alternacije: alternacije,
+            zacetek: this.zacetek,
+            konec: this.konec,
             success: success,
             error: error
         });
     };
 
+    /**
+     * izris zasedb posameznih uprizoritev iz kolekcije uprizoritev
+     * @returns {undefined}
+     */
     VzporedniceView.prototype.renderZasedba = function () {
-
         var view = new ZasedbaView({
             collection: this.collectionUprizoritev
         });
@@ -209,10 +247,20 @@ define([
         this.zasedbaR.show(view);
     };
 
+    /**
+     * Funkcija se kliče, ko vzporedniceview/prekrivanjaView prožijo select oz takrak ko izberemo uprizoritev
+     * @param {type} model
+     * @returns {undefined}
+     */
     VzporedniceView.prototype.onSelected = function (model) {
         this.collectionUprizoritev.add(model);
         this.$('.prikazi-prekrivanja').removeClass('hidden');
     };
+    /**
+     * Funkcija se kliče, ko se v ZasedbaView sproži change ko izberemo drugo alternacijo
+     * @param {type} model
+     * @returns {undefined}
+     */
     VzporedniceView.prototype.onChange = function () {
         this.renderVzporednice();
         this.$('.prikazi-prekrivanja').removeClass('hidden');

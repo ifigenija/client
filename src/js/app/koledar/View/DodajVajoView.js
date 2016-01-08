@@ -14,7 +14,7 @@ define([
     './IzbiraRazredDogodkaView',
     './IzbiraDatumView',
     './IzbiraProstoraView',
-    './VzporedniceView'
+    './WizardVzporedniceView'
 ], function (
         Radio,
         i18next,
@@ -24,7 +24,7 @@ define([
         $,
         WizardView,
         IzbiraView,
-        IzbiraDatumView,
+        IzbiraCasView,
         IzbiraProstoraView,
         VzporedniceView
         ) {
@@ -33,9 +33,9 @@ define([
         defView: {
             views: [
                 IzbiraView,
-                IzbiraProstoraView,
+                IzbiraCasView,
                 VzporedniceView,
-                IzbiraDatumView
+                IzbiraProstoraView
             ],
             title: i18next.t('dogodek.dodajDogodek')
         }
