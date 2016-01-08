@@ -13,7 +13,8 @@ define([
     './WizardView',
     './IzbiraRazredDogodkaView',
     './IzbiraDatumView',
-    './IzbiraProstoraView'
+    './IzbiraProstoraView',
+    './VzporedniceView'
 ], function (
         Radio,
         i18next,
@@ -24,7 +25,8 @@ define([
         WizardView,
         IzbiraView,
         IzbiraDatumView,
-        IzbiraProstoraView
+        IzbiraProstoraView,
+        VzporedniceView
         ) {
 
     var DodajVajoView = WizardView.extend({
@@ -32,15 +34,12 @@ define([
             views: [
                 IzbiraView,
                 IzbiraProstoraView,
+                VzporedniceView,
                 IzbiraDatumView
             ],
             title: i18next.t('dogodek.dodajDogodek')
         }
     });
-
-    DodajVajoView.prototype.initialize = function (options) {
-        this.model = options.model;
-    };
 
     return DodajVajoView;
 });

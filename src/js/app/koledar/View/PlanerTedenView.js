@@ -17,11 +17,7 @@ define([
     './TehnicniView',
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
-    './WizardView',
-    './IzbiraRazredDogodkaView',
-    './IzbiraDatumView',
-    './IzbiraProstoraView',
-    './VzporedniceView'
+    './DodajVajoView'
 ], function (
         i18next,
         Marionette,
@@ -37,11 +33,7 @@ define([
         TehnicniView,
         PlanerDogodkiView,
         tplDan,
-        WizardView,
-        IzbiraView,
-        IzbiraDatumView,
-        IzbiraProstoraView,
-        VzporedniceView
+        DodajVajoView
         ) {
 
     var uraZacetek = 10;
@@ -155,16 +147,8 @@ define([
         model.set('zacetek', moment(interval.zacetek).toISOString());
         model.set('konec', moment(interval.konec).toISOString());
 
-        var view = new WizardView({
-            model: model,
-            defView: {
-                views: [
-                    IzbiraView,
-                    IzbiraProstoraView,
-                    IzbiraDatumView
-                ],
-                title: i18next.t('dogodek.dodajDogodek')
-            }
+        var view = new DodajVajoView({
+            model: model
         });
 
         view.on('zapri:wizard', function () {

@@ -41,12 +41,13 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.initialize = function (options) {
-        if (!_.isArray(options.defView.views)) {
+        this.defView = options.defView || this.defView;
+        
+        if (!_.isArray(this.defView.views)) {
             throw new 'Content naj bo array';
         } else {
             if (options) {
-                this.model = options.model;
-                this.defView = options.defView;
+                this.model = options.model || this.model;
                 this.title = this.defView.title || i18next.t('std.naslov');
                 this.views = this.defView.views;
             }

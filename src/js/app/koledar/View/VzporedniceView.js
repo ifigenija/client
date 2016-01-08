@@ -64,15 +64,8 @@ define([
         this.collectionUprizoritev.on('remove', this.update, this);
         this.collectionUprizoritev.on('added', this.update, this);
 
-        //nezadovoljen z rešitvijo
-        this.model.set('label', this.model.get('naslov'));
-        this.model.set('neBrisi', true);
-        this.collectionUprizoritev.add(this.model);
-
-        if (options && options.model) {
-            this.model = options.model;
-        } else {
-            //napaka
+        if (options && options.uprizoritev) {
+            this.collectionUprizoritev.add(options.uprizoritev);
         }
     };
 
@@ -126,6 +119,10 @@ define([
         }, options.success, options.error);
     };
 
+    VzporedniceView.prototype.vzporedniceTrigger = function (view, context) {
+        view.on('selected', context.onSelected, context);
+    };
+
     VzporedniceView.prototype.renderVzporednice = function () {
         var self = this;
 
@@ -137,7 +134,8 @@ define([
                 collection: coll,
                 class: 'vzporednice'
             });
-            view.on('selected', self.onSelected, self);
+            self.vzporedniceTrigger(view, self);
+            
             self.vzporedniceR.show(view);
             self.prekrivanjaR.empty();
 
