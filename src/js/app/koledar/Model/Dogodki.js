@@ -76,22 +76,22 @@ define([
 
             // V primeru da obstaja zacetek, preverimo v katerem terminu se začne dogodek
             if (zacetek) {
-                if (zacetekM.diff(uraDopoldan) < 0) {
+                if (zacetekM.diff(uraDopoldan) <= 0) {
                     terminZacetek = 1;
-                } else if (zacetekM.diff(uraDopoldan) >= 0 && zacetekM.diff(uraPopoldan) < 0) {
+                } else if (zacetekM.diff(uraDopoldan) > 0 && zacetekM.diff(uraPopoldan) <= 0) {
                     terminZacetek = 2;
-                } else if (zacetekM.diff(uraPopoldan) >= 0 && zacetekM.diff(uraZvecer) < 0) {
+                } else if (zacetekM.diff(uraPopoldan) > 0 && zacetekM.diff(uraZvecer) <= 0) {
                     terminZacetek = 3;
                 }
             }
 
             // primeru da obstaja zacetek, preverimo v katerem terminu se konča dogodek
             if (konec) {
-                if (konecM.diff(uraDopoldan) < 0) {
+                if (konecM.diff(uraDopoldan) <= 0) {
                     terminKonec = 1;
-                } else if (konecM.diff(uraDopoldan) >= 0 && konecM.diff(uraPopoldan) < 0) {
+                } else if (konecM.diff(uraDopoldan) > 0 && konecM.diff(uraPopoldan) <= 0) {
                     terminKonec = 2;
-                } else if (konecM.diff(uraPopoldan) >= 0 && konecM.diff(uraZvecer) < 0) {
+                } else if (konecM.diff(uraPopoldan) > 0 && konecM.diff(uraZvecer) <= 0) {
                     terminKonec = 3;
                 }
             }

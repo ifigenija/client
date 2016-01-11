@@ -17,7 +17,7 @@ define([
     './TehnicniView',
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
-    './DodajVajoView',
+    './WizardVajaView',
     './IzbiraRazredDogodkaView'
 ], function (
         i18next,
@@ -34,7 +34,7 @@ define([
         TehnicniView,
         PlanerDogodkiView,
         tplDan,
-        DodajVajoView,
+        WizardVajaView,
         IzbiraRazredDogodkaView
         ) {
 
@@ -155,12 +155,12 @@ define([
 
         view.on('izbrano', function (model) {
             if (model.get('view') === 'vaja') {
-                var view = new DodajVajoView({
+                var view = new WizardVajaView({
                     model: model
                 });
             }
 
-            view.on('zapri:wizard', function () {
+            view.on('close', function () {
                 self.detailR.empty();
             }, self);
 
