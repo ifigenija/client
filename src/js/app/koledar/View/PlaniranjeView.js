@@ -161,6 +161,10 @@ define([
         view.on('save:success', function () {
             self.koledarView.ui.koledar.fullCalendar('refetchEvents');
         }, self);
+        
+        view.on('destroy:success', function () {
+            self.koledarView.ui.koledar.fullCalendar('refetchEvents');
+        }, self);
         view.on('skrij', self.onPreklici, self);
         self.dogodekR.show(view);
     };

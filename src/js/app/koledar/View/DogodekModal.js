@@ -101,10 +101,10 @@ define([
             });
             this.renderIzbiraUprizoritve(i18next.t('predstava.title'));
         },
-        onGostovanje: function () {
+        onTehnicni: function () {
             this.initModel({
-                view: 'gostovanje',
-                title: 'Gostovanje',
+                view: 'dogodekTehnicni',
+                title: 'Tehnični',
                 status: '100s'
             });
             this.preklici();
@@ -116,13 +116,14 @@ define([
                 title: 'Splošni',
                 status: '100s'
             });
-            this.preklici();
-            this.trigger('potrdi:dogodek');
+            //this.preklici();
+            //this.trigger('potrdi:dogodek');
+            this.renderIzbiraProstora(i18next.t('predstava.title'));
         },
-        onTehnicni: function () {
+        onGostovanje: function () {
             this.initModel({
-                view: 'dogodekTehnicni',
-                title: 'Tehnični',
+                view: 'gostovanje',
+                title: 'Gostovanje',
                 status: '100s'
             });
             this.preklici();
@@ -158,6 +159,27 @@ define([
 
             this.podrobnoR.show(podrobnoView);
         },
+
+        renderIzbiraProstora: function (title) {
+            var sch = {type: 'Toone', targetEntity: 'prostor', editorAttrs: {class: 'form-control'}, title: 'Uprizoritev'};
+            var podrobnoView = new Form({
+                template: Handlebars.compile('<form><div data-fields="uprizoritev"></div></form>'),
+                schema: {
+                    uprizoritev: sch
+                }
+            });
+            var self = this;
+
+            //določimo uprizoritev modelu
+            podrobnoView.on('uprizoritev:change', function () {
+                var podatki = podrobnoView.fields.uprizoritev.getValue();
+                self.model.set('prostor', podatki.id);
+                self.model.set('title', podatki.label + (title ? ' : ' + title : i18next.t('dogodek.title')));
+            }, this);
+
+            this.podrobnoR.show(podrobnoView);
+        },
+        
         preklici: function () {
             this.podrobnoR.empty();
         }
@@ -195,9 +217,14 @@ define([
             });
         };
 
+        //TK: komentar
         var odpriDogodek = function () {
+            
+            console.log('odpriDogodek AA');
+            
             var model = view.model;
             if (model.view === 'vaja' || model.view === 'predstava') {
+            
                 if (model.get('uprizoritev')) {
                     if (options.cb) {
                         shraniRazredDogodka(model);
