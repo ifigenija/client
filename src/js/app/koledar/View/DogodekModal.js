@@ -137,8 +137,10 @@ define([
             }
             model.set('planiranKonec', this.konec);
 
-            this.preklici();
-            this.trigger('potrdi:dogodek');
+            //this.preklici();
+            //this.trigger('potrdi:dogodek');
+            this.renderIzbiraOsebe(i18next.t('predstava.title'));
+            
         },
         renderIzbiraUprizoritve: function (title) {
             var sch = {type: 'Toone', targetEntity: 'uprizoritev', editorAttrs: {class: 'form-control'}, title: 'Uprizoritev'};
@@ -161,23 +163,49 @@ define([
         },
 
         renderIzbiraProstora: function (title) {
-            var sch = {type: 'Toone', targetEntity: 'prostor', editorAttrs: {class: 'form-control'}, title: 'Uprizoritev'};
+            var sch = {type: 'Toone', targetEntity: 'prostor', editorAttrs: {class: 'form-control'}, title: 'Prostor'};
             var podrobnoView = new Form({
-                template: Handlebars.compile('<form><div data-fields="uprizoritev"></div></form>'),
+                template: Handlebars.compile('<form><div data-fields="prostor"></div></form>'),
                 schema: {
-                    uprizoritev: sch
+                    prostor: sch
                 }
             });
             var self = this;
 
-            //določimo uprizoritev modelu
-            podrobnoView.on('uprizoritev:change', function () {
-                var podatki = podrobnoView.fields.uprizoritev.getValue();
+            //določimo prostor modelu
+            podrobnoView.on('prostor:change', function () {
+                var podatki = podrobnoView.fields.prostor.getValue();
                 self.model.set('prostor', podatki.id);
                 self.model.set('title', podatki.label + (title ? ' : ' + title : i18next.t('dogodek.title')));
             }, this);
 
             this.podrobnoR.show(podrobnoView);
+        },
+        
+        //tomaz
+        renderIzbiraOsebe: function (title) {
+            var sch = {type: 'Toone', targetEntity: 'oseba', editorAttrs: {class: 'form-control'}, title: 'Oseba'};
+            var izbiraOsebeView = new Form({
+                template: Handlebars.compile('<form><div data-fields="oseba"></div></form>'),
+                schema: {
+                    oseba: sch
+                }
+            });
+            var self = this;
+            console.log('izbiraOsebeView 1');
+
+            //določimo osebo modelu
+            //Uredi model, Tomaz
+            izbiraOsebeView.on('oseba:change', function () {
+                var podatki = izbiraOsebeView.fields.oseba.getValue();
+                self.model.set('oseba', podatki.id);
+                self.model.set('gost', true);
+                self.model.set('title', podatki.label + (title ? ' : ' + title : i18next.t('dogodek.title')));
+                
+                console.log('izbiraOsebeView 2');
+            }, this);
+                     
+            this.podrobnoR.show(izbiraOsebeView);
         },
         
         preklici: function () {
@@ -217,10 +245,9 @@ define([
             });
         };
 
-        //TK: komentar
+        //Tomaz: Ta del bi bilo dobro komentirat
         var odpriDogodek = function () {
             
-            console.log('odpriDogodek AA');
             
             var model = view.model;
             if (model.view === 'vaja' || model.view === 'predstava') {
