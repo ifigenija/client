@@ -9,6 +9,7 @@ define([
     'app/bars',
     'marionette',
     'jquery',
+    'app/Max/View/Confirm',
     'app/koledar/Model/Alternacije',
     'app/koledar/Model/Dogodki',
     'app/Max/View/TabControl',
@@ -26,6 +27,7 @@ define([
         Handlebars,
         Marionette,
         $,
+        confirm,
         Alternacije,
         Dogodki,
         TabControl,
@@ -63,6 +65,35 @@ define([
             sodelujociR: '.region-sodelujoci',
             razredDogodkaR: '.region-razred-dogodka',
             prilogeR: '.region-priloge'
+        },
+        buttons: {
+            'doc-brisi': {
+                id: 'doc-brisi',
+                label: 'Briši',
+                element: 'button-trigger',
+                trigger: 'brisi',
+                disabled: false
+            },
+            'doc-shrani': {
+                id: 'doc-shrani',
+                label: i18next.t('std.shrani'),
+                element: 'button-trigger',
+                trigger: 'shrani',
+                disabled: true
+            },
+            'doc-skrij': {
+                id: 'doc-skrij',
+                label: i18next.t('std.skrij'),
+                element: 'button-trigger',
+                trigger: 'skrij'
+            },
+            'doc-nasvet': {
+                id: 'doc-nasvet',
+                icon: 'fa fa-info',
+                title: i18next.t('std.pomoc'),
+                element: 'button-trigger',
+                trigger: 'nasvet'
+            }
         },
         triggers: {
             'click .prikazi-koledar': 'koledar:prostor'
@@ -185,6 +216,34 @@ define([
             model: this.tipDogModel
         });
         this.razredDogodkaR.show(view);
+    };
+
+    
+    DogodekView.prototype.onBrisi = function (options) {
+        //console.log('onBrisi');
+        
+        var self = this;
+        var brisi = function () {
+            self.model.destroy({
+
+                success:function () {
+                    //alert('Dogodek izbrisan');
+                    self.trigger('destroy:success');
+                    
+                    self.trigger('skrij', self);
+                }
+            });
+        }
+        
+        confirm({
+            text: i18next.t('std.potrdiIzbris'),
+            modalOptions: {
+                title: "Briši postavko",
+                okText: i18next.t("std.brisi")
+            },
+            ok: brisi
+        });
+
     };
 
     DogodekView.prototype.getRazredNiz = function () {
