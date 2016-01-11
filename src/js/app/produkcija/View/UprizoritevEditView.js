@@ -489,8 +489,12 @@ define([
     UprizoritevEditView.prototype.onVzporednice = function () {
         this.skrijSplosni();
         
+        //nezadovoljen z rešitvijo
+        this.model.set('label', this.model.get('naslov'));
+        this.model.set('neBrisi', true);
+        
         var view = new VzporedniceView({
-            model: this.model
+            uprizoritev: this.model
         });
         this.regionDetail.show(view);
     };
