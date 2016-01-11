@@ -13,7 +13,7 @@ define([
     './KoledarView',
     './WizardView',
     './IzbiraRazredDogodkaView',
-    './IzbiraDatumView',
+    './IzbiraCasView',
     './DogodekView',
     './VajaView',
     './PredstavaView',
@@ -32,7 +32,7 @@ define([
         KoledarView,
         WizardView,
         IzbiraView,
-        IzbiraDatumaView,
+        IzbiraCasView,
         DogodekView,
         VajaView,
         PredstavaView,
@@ -136,7 +136,7 @@ define([
             defWizard: {
                 views: [
                     IzbiraView,
-                    IzbiraDatumaView
+                    IzbiraCasView
                 ],
                 title: i18next.t('dogodek.dodajDogodek'),
                 nazajText: i18next.t('std.nazaj'),
