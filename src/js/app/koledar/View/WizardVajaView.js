@@ -6,38 +6,41 @@
 define([
     'radio',
     'i18next',
-    'moment',
     'marionette',
     'underscore',
     'jquery',
     './WizardView',
-    './IzbiraRazredDogodkaView',
-    './IzbiraDatumView',
+    './IzbiraCasView',
     './IzbiraProstoraView',
     './IzbiraUprizoritveView'
 ], function (
         Radio,
         i18next,
-        moment,
         Marionette,
         _,
         $,
         WizardView,
-        IzbiraView,
         IzbiraCasView,
         IzbiraProstoraView,
         IzbiraUprizoritveView
         ) {
 
     var DodajVajoView = WizardView.extend({
-        defView: {
+        defWizard: {
             views: [
-                IzbiraView,
                 IzbiraCasView,
                 IzbiraUprizoritveView,
                 IzbiraProstoraView
             ],
-            title: i18next.t('dogodek.dodajDogodek')
+            title: i18next.t('dogodek.dodajDogodek'),
+            callback: function (model) {
+                model.save({}, {
+                    success: function () {
+                        Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
+                    },
+                    error: Radio.channel('error').request('handler', 'xhr')
+                });
+            }
         }
     });
 

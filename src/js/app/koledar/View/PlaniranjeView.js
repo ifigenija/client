@@ -133,7 +133,7 @@ define([
 
         var wizardView = new WizardView({
             model: model,
-            defView: {
+            defWizard: {
                 views: [
                     IzbiraView,
                     IzbiraDatumaView

@@ -17,7 +17,8 @@ define([
     './TehnicniView',
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
-    './DodajVajoView'
+    './WizardVajaView',
+    './IzbiraRazredDogodkaView'
 ], function (
         i18next,
         Marionette,
@@ -33,7 +34,8 @@ define([
         TehnicniView,
         PlanerDogodkiView,
         tplDan,
-        DodajVajoView
+        WizardVajaView,
+        IzbiraRazredDogodkaView
         ) {
 
     var uraZacetek = 10;
@@ -147,19 +149,27 @@ define([
         model.set('zacetek', moment(interval.zacetek).toISOString());
         model.set('konec', moment(interval.konec).toISOString());
 
-        var view = new DodajVajoView({
-            model: model
-        });
-
-        view.on('zapri:wizard', function () {
-            this.detailR.empty();
-        }, this);
-
-        view.on('preklici', function () {
-            this.detailR.empty();
-        }, this);
-
+        var view = new IzbiraRazredDogodkaView({model: model});
         this.detailR.show(view);
+        var self = this;
+
+        view.on('izbrano', function (model) {
+            if (model.get('view') === 'vaja') {
+                var view = new WizardVajaView({
+                    model: model
+                });
+            }
+
+            view.on('close', function () {
+                self.detailR.empty();
+            }, self);
+
+            view.on('preklici', function () {
+                self.detailR.empty();
+            }, self);
+
+            self.detailR.show(view);
+        }, this);
     };
 
 

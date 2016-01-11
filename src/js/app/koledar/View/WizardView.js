@@ -41,15 +41,16 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.initialize = function (options) {
-        this.defView = options.defView || this.defView;
+        this.defWizard = options.defWizard || this.defWizard;
 
-        if (!_.isArray(this.defView.views)) {
+        if (!_.isArray(this.defWizard.views)) {
             throw new 'Content naj bo array';
         } else {
             if (options) {
                 this.model = options.model || this.model;
-                this.title = this.defView.title || i18next.t('std.naslov');
-                this.views = this.defView.views;
+                this.title = this.defWizard.title || i18next.t('std.naslov');
+                this.views = this.defWizard.views;
+                this.callback = this.defWizard.callback;
             }
             this.stevecView = 0;
         }
@@ -69,7 +70,7 @@ define([
         this.renderView(this.stevecView);
 
         if (this.views.length > 1) {
-            this.skrijOK();
+            this.skrijPotrdi();
             this.disableNaprej();
         }
 
@@ -79,7 +80,7 @@ define([
      * Viewji prožijo ready, ko lahko wizard nadaljuje z naslednjim korakom
      * @returns {undefined}
      */
-    WizardView.prototype.onReadyNaprej = function (model) {
+    WizardView.prototype.onReadyForward = function (model) {
         this.onReady(model);
         this.onNaprej();
     };
@@ -90,7 +91,7 @@ define([
      */
     WizardView.prototype.onReady = function (model) {
         this.enableNaprej();
-        this.enableOK();
+        this.enablePotrdi();
         this.model = model;
     };
 
@@ -100,7 +101,7 @@ define([
      */
     WizardView.prototype.onNotReady = function () {
         this.disableNaprej();
-        this.disableOK();
+        this.disablePotrdi();
     };
 
     /**
@@ -111,12 +112,12 @@ define([
      */
     WizardView.prototype.onNaprej = function () {
         this.disableNaprej();
-        this.disableOK();
+        this.disablePotrdi();
 
         this.stevecView++;
         this.renderView(this.stevecView);
 
-        this.toggleNaprejOK(this.stevecView, this.views.length);
+        this.toggleNaprejPotrdi(this.stevecView, this.views.length);
         this.toggleNazaj(this.stevecView);
     };
     /**
@@ -127,35 +128,28 @@ define([
      */
     WizardView.prototype.onNazaj = function () {
         this.enableNaprej();
-        this.enableOK();
+        this.enablePotrdi();
 
         this.stevecView--;
         this.renderView(this.stevecView);
 
-        this.toggleNaprejOK(this.stevecView, this.views.length);
+        this.toggleNaprejPotrdi(this.stevecView, this.views.length);
         this.toggleNazaj(this.stevecView);
     };
 
     WizardView.prototype.onPotrdi = function () {
-        var self = this;
-
-        this.model.save({}, {
-            success: function () {
-                Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
-                self.trigger('zapri:wizard', this.model);
-            },
-            error: Radio.channel('error').request('handler', 'xhr')
-        });
+        this.callback(this.model);
+        this.trigger('close', this.model);
     };
 
     WizardView.prototype.bind = function (view) {
-        view.on('ready:naprej', this.onReadyNaprej, this);
+        view.on('ready:forward', this.onReadyForward, this);
         view.on('ready', this.onReady, this);
         view.on('not:ready', this.onNotReady, this);
     };
 
     WizardView.prototype.unBind = function (view) {
-        view.off('ready:naprej', this.onReadyNaprej, this);
+        view.off('ready:forward', this.onReadyForward, this);
         view.off('ready', this.onReady, this);
         view.off('not:ready', this.onNotReady, this);
     };
@@ -194,27 +188,27 @@ define([
         }
     };
 
-    WizardView.prototype.toggleNaprejOK = function (stevecView, stView) {
+    WizardView.prototype.toggleNaprejPotrdi = function (stevecView, stView) {
         if (stevecView < stView - 1) {
-            this.skrijOK();
+            this.skrijPotrdi();
             this.prikaziNaprej();
         } else {
-            this.prikaziOK();
+            this.prikaziPotrdi();
             this.skrijNaprej();
         }
     };
 
-    WizardView.prototype.prikaziOK = function () {
+    WizardView.prototype.prikaziPotrdi = function () {
         this.$('.potrdi').removeClass('hidden');
     };
-    WizardView.prototype.skrijOK = function () {
+    WizardView.prototype.skrijPotrdi = function () {
         this.$('.potrdi').addClass('hidden');
     };
-    WizardView.prototype.disableOK = function () {
+    WizardView.prototype.disablePotrdi = function () {
         this.$('.potrdi').addClass('disabled');
     };
 
-    WizardView.prototype.enableOK = function () {
+    WizardView.prototype.enablePotrdi = function () {
         this.$('.potrdi').removeClass('disabled');
     };
 
