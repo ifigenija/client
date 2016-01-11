@@ -241,6 +241,7 @@ define([
             this.collection.remove(child.model, {
                 wait: true
             });
+            this.trigger('change');
         }
     });
 

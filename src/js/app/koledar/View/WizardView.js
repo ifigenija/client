@@ -42,7 +42,7 @@ define([
      */
     WizardView.prototype.initialize = function (options) {
         this.defView = options.defView || this.defView;
-        
+
         if (!_.isArray(this.defView.views)) {
             throw new 'Content naj bo array';
         } else {
@@ -148,20 +148,35 @@ define([
         });
     };
 
+    WizardView.prototype.bind = function (view) {
+        view.on('ready:naprej', this.onReadyNaprej, this);
+        view.on('ready', this.onReady, this);
+        view.on('not:ready', this.onNotReady, this);
+    };
+
+    WizardView.prototype.unBind = function (view) {
+        view.off('ready:naprej', this.onReadyNaprej, this);
+        view.off('ready', this.onReady, this);
+        view.off('not:ready', this.onNotReady, this);
+    };
+
     /**
      * Render enega izmed podanih viewjev iz model.viewsa
      * @param {type} stevecView
      * @returns {Modal@call;extend.prototype.renderView.model.views|backbone.marionette_L26.model.views|Marionette@call;_getValue.model.views|backbone.marionette_L35.model.views|backbone_L34.model.views|message.model.views}
      */
     WizardView.prototype.renderView = function (stevecView) {
+        if (this.view) {
+            this.unBind(this.view);
+        }
+
         var View = this.views[stevecView];
         var view = this.view = new View({
             model: this.model
         });
-
-        view.on('ready:naprej', this.onReadyNaprej, this);
-        view.on('ready', this.onReady, this);
-        view.on('not:ready', this.onNotReady, this);
+        if (this.view) {
+            this.bind(this.view);
+        }
 
         this.detailR.show(view);
         return view;
