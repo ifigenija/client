@@ -32,7 +32,7 @@ define([
     var DodajVajoView = WizardView.extend({
         defView: {
             views: [
-                IzbiraView,
+                //IzbiraView,
                 IzbiraCasView,
                 IzbiraUprizoritveView,
                 IzbiraProstoraView
