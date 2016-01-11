@@ -25,7 +25,7 @@ define([
         IzbiraUprizoritveView
         ) {
 
-    var DodajVajoView = WizardView.extend({
+    var WizardVajaView = WizardView.extend({
         defWizard: {
             views: [
                 IzbiraCasView,
@@ -44,5 +44,5 @@ define([
         }
     });
 
-    return DodajVajoView;
+    return WizardVajaView;
 });
