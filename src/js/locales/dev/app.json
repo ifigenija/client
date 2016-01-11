@@ -161,6 +161,11 @@
         "podrobno": "Podrobno",
         "nazaj": "Nazaj",
         "naprej": "Naprej",
+        "predstava": "Predstava",
+        "vaja": "Vaja",
+        "splosno": "Splošni dogodek",
+        "tehnicni": "Tehnični dogodek",
+        
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",

@@ -146,6 +146,7 @@ define([
         var tab = this.tabControl.findTab('razred');
         var razred = this.getRazredNiz();
         tab.set('name', razred);
+        console.log('AAA renderTabs')
         
         
         this.tabsR.show(this.tabControl);
