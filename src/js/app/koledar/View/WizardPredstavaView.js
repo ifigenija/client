@@ -25,14 +25,14 @@ define([
         IzbiraUprizoritveView
         ) {
 
-    var WizardVajaView = WizardView.extend({
+    var WizardPredstavaView = WizardView.extend({
         defWizard: {
             views: [
                 IzbiraCasView,
                 IzbiraUprizoritveView,
                 IzbiraProstoraView
             ],
-            title: i18next.t('dogodek.dodajVajo'),
+            title: i18next.t('dogodek.dodajPredstavo'),
             callback: function (model) {
                 var self = this;
                 model.save({}, {
@@ -46,5 +46,5 @@ define([
         }
     });
 
-    return WizardVajaView;
+    return WizardPredstavaView;
 });

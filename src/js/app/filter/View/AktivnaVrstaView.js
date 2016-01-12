@@ -106,7 +106,7 @@ define([
             itemTemplate: modelM.get('itemTpl'),
             $anchor: $el,
             el: $e,
-            title: "izbira oseb"
+            title: modelM.get('title')
         });
 
         //onclose proži changed:vrednosti

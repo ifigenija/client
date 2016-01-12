@@ -165,7 +165,9 @@
         "vaja": "Vaja",
         "splosno": "Splošni dogodek",
         "tehnicni": "Tehnični dogodek",
-        
+        "oseba": "Oseba",
+        "prostor": "Prostor",
+        "uprizoritev": "Uprizoritev",
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
@@ -289,6 +291,7 @@
         "jePrizorisce": "Prizorišče",
         "jeMaticniOder": "Matični oder",
         "sePlanira": "Prostor se planira",
+        "izbira": "Izberi prostore",
         "d": {
             "sifra": "Enolična oznaka",
             "opis": "",
@@ -478,6 +481,7 @@
         "krajRojstva": "Kraj rojstva",
         "podatki": "Glavni podatki",
         "relacije": "Uporabljena v",
+        "izbira": "Izberi osebe",
         "d": {
             "sifra": "",
             "email": "",
@@ -662,6 +666,7 @@
         "avtorji": "Avtorji",
         "jeKoprodukcija": "Ali je uprizoritev koprodukcija",
         "vzporednice": "Vzporednice",
+        "izbira": "Izberi uprizoritve",
         "t": {
             "datumPremiere": "Datum premiere",
             "sifra": "Številka"
@@ -1757,9 +1762,13 @@
         "tehnicni": "Tehnični dogodek",
         "prostor": "Prostor",
         "sezona": "Sezona",
-        "dodajDogodek": "Dodaj dogodek",
         "priloge": "Priloge",
         "sodelujoci": "Sodelujoči",
+        "dodajDogodek": "Dodaj dogodek",
+        "dodajVajo": "Dodaj vajo",
+        "dodajPredstavo": "Dodaj predstavo",
+        "dodajTehnicni": "Dodaj tehnični dogodek",
+        "dodajSplosni": "Dodaj splošni dogodek",
         "d": {
             "allDay": "Dogodek se razteza skozi cel dan",
             "zacetek": "",

@@ -61,7 +61,7 @@ define([
         this.template = options.template || this.template;
         this.vrsteFiltrovData = options.vrsteFiltrov || this.vrsteFiltrovData;
         this.aktivneVrsteData = options.aktivneVrste || this.aktivneVrsteData;
-        
+
         this.vrsteFiltrov = new Vrsta(null, {
             vrsteFiltrov: this.vrsteFiltrovData
         });
@@ -104,7 +104,7 @@ define([
 
         if (buttons.length === 0) {
             toolbarView.disableButtons(['filter-dodaj']);
-        }else{
+        } else {
             toolbarView.enable(['filter-dodaj']);
         }
 
@@ -151,6 +151,10 @@ define([
         this.vrsteR.show(view);
     };
 
+    /**
+     * Pridobimo gumbe za dropdown gumb. Sestavimo gumbe. iz vrstefiltrov
+     * @returns {Array|Marionette.LayoutView@call;extend.prototype.getButtons.buttons}
+     */
     FilterView.prototype.getButtons = function () {
 
         var buttons = [];

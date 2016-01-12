@@ -2,23 +2,15 @@
  * Licenca GPLv3
  */
 define([
-    'backbone',
-    'marionette',
-    'underscore',
-    'jquery',
+    'i18next',
     'radio',
     'app/Max/Model/LookupModel',
-    '../../filter/View/FilterView',
-    'template!../tpl/koledarFilter.tpl'
+    '../../filter/View/FilterView'
 ], function (
-        Backbone,
-        Marionette,
-        _,
-        $,
+        i18next,
         Radio,
         LookupModel,
-        FilterView,
-        filterTpl
+        FilterView
         ) {
 
     var osebe = new LookupModel(null, {
@@ -40,26 +32,26 @@ define([
     var KoledarFilterView = FilterView.extend({
         //template: filterTpl,
         vrsteFiltrovData: [{
-                title: 'Izbira oseb',
+                title: i18next.t('oseba.izbira'),
                 id: 'oseba',
                 icon: 'fa fa-user',
                 stIzpisov: 3,
                 mozni: osebe,
-                label: 'oseba'
+                label: i18next.t('std.oseba')
             },
             {
-                title: 'Izbira prostorov',
+                title: i18next.t('prostor.izbira'),
                 id: 'prostor',
                 icon: 'fa fa-home',
                 mozni: prostori,
-                label: 'prostor'
+                label: i18next.t('std.prostor')
             },
             {
-                title: 'Izbira uprizoritev',
+                title: i18next.t('uprizoritev.izbira'),
                 id: 'uprizoritev',
                 icon: 'fa fa-play',
                 mozni: uprizoritve,
-                label: 'Uprizoritev'
+                label: i18next.t('std.uprizoritev')
             }]
     });
 

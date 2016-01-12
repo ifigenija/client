@@ -38,11 +38,13 @@ define([
     });
 
     /**
-     *
+     * Pretvorba Aktivnih vrst v kolekcijo.
+     * Pretvorba iz arraya v collection ali iz objecta v collection
      * @param {Object} models
      * @param {Object} options
      * @param {Object} [options.aktivneVrste]           Objekt vseh vrednosti aktivnih Vrst
      * @param {Collection} [options.vrsteFiltrov]       Collection vrstFiltrov, ki so navoljo
+     *                      {title, id, icon, stIzpisov, mozni(lookup model collection), label}
      */
     AktivnaVrstaCollection.prototype.initialize = function (models, options) {
         if (options && options.aktivneVrste) {
@@ -59,7 +61,12 @@ define([
             }
         }
     };
-
+    /**
+     * Poiščemo model po podanem ključu(vrsta)
+     * @param {type} vrsta                  Ključ vrsteModela
+     * @param {type} vrsteFiltrov           kolekcija vrstfiltrov
+     * @returns {vModel}                    Model vrsteFiltra
+     */
     var getVrstaModel = function (vrsta, vrsteFiltrov) {
         //v primeru da ni nedoločena poiščemo definicijo vrste v coll vrsteFiltra
         var vrstaModel;
@@ -74,6 +81,12 @@ define([
         return vrstaModel;
     };
 
+    /**
+     * Pretvorba arrayja objektov aktivnih vrst v kolekcijo aktivnih vrst
+     * @param {type} array
+     * @param {type} Coll
+     * @returns {AktivnaVrstaCollection_L7.array2Coll.Coll}
+     */
     var array2Coll = function (array, Coll) {
         var collection = new Coll();
         _.each(array, function (vrednost) {
@@ -82,12 +95,20 @@ define([
 
         return collection;
     };
-    
+
+    /**
+     * Poiščemo izbrane kriterije filtra
+     * @param {type} array
+     * @param {type} vrstaModel
+     * @param {type} Coll
+     * @returns {AktivnaVrstaCollection_L7.getIzbrani.Coll}
+     */
     var getIzbrani = function (array, vrstaModel, Coll) {
         var collection = new Coll();
+        //iz arraya ID-jev izbranih filtrov sestavimo collection izbranih modelov
         _.each(array, function (id) {
-            vrstaModel.get('mozni').each(function(model){
-                if(model.get('id') === id){
+            vrstaModel.get('mozni').each(function (model) {
+                if (model.get('id') === id) {
                     collection.add(model);
                 }
             });
@@ -96,16 +117,23 @@ define([
         return collection;
     };
 
+    /**
+     * @param {type} obj
+     * @param {type} vrsteFiltrov
+     * @returns {AktivnaVrstaCollection_L7.array2Coll.Coll}
+     */
     var obj2Coll = function (obj, vrsteFiltrov) {
         var array = [];
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
+                //iz kolekcije vrstfiltrov poiščemo model, ki spada k izbranim vrstam filtra iščemo po ključu aktivnih vrstfiltra
                 var vrstaModel = getVrstaModel(key, vrsteFiltrov);
                 var izbrani = getIzbrani(obj[key], vrstaModel, Backbone.Collection);
+                //pretvorba v polje vrst modela in izbrani modeli
                 array.push({vrsta: key, vrstaModel: vrstaModel, izbrani: izbrani});
             }
         }
-
+        //pretvorba polja v kolekcijo aktivnih vrst
         return array2Coll(array, AktivnaVrstaCollection);
     };
 

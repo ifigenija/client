@@ -72,7 +72,12 @@ define([
         this.attributes = _.extend(this.attributes, attr);
 
     };
-
+    /**
+     * 
+     * @param {Array} array
+     * @param {VrstaCollection} Coll
+     * @returns {VrstaCollection_L11.array2Coll.Coll}
+     */
     var array2Coll = function (array, Coll) {
         var collection = new Coll();
         _.each(array, function (vrednost) {
@@ -82,14 +87,21 @@ define([
         return collection;
     };
 
+    /**
+     * Pretvorba objekta vrste filtra v collection
+     * @param {Object} obj
+     * @param {VrstaCollection} Coll
+     * @returns {VrstaCollection_L11.array2Coll.Coll}
+     */
     var obj2Coll = function (obj, Coll) {
+        //pretvorba objekta prvo v array
         var array = [];
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 array.push(obj[key]);
             }
         }
-
+        //pretvorba arraya v collection
         return array2Coll(array, Coll);
     };
 
