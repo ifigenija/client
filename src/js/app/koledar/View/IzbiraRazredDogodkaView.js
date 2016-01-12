@@ -31,8 +31,7 @@ define([
             'click .dogodek-zasedenost': 'zasedenost',
             'click .dogodek-gostovanje': 'gostovanje',
             'click .dogodek-splosni': 'splosni',
-            'click .dogodek-tehnicni': 'tehnicni',
-            'click .dogodek-vaje': 'vaje'
+            'click .dogodek-tehnicni': 'tehnicni'
         }
     });
 
@@ -98,14 +97,6 @@ define([
         this.initRazredDogodka({
             view: 'dogodekTehnicni',
             title: 'Tehnični',
-            status: '100s'
-        });
-        this.trigger('izbrano', this.model);
-    };
-    IzbiraRazredDogodkaView.prototype.onVaje = function () {
-        this.initRazredDogodka({
-            view: 'vaja',
-            title: 'Vaje',
             status: '100s'
         });
         this.trigger('izbrano', this.model);
