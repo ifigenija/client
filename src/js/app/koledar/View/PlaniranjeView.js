@@ -6,7 +6,6 @@ define([
     'i18next',
     'backbone',
     'marionette',
-    'moment',
     'app/Max/View/Toolbar',
     'template!../tpl/planiranje.tpl',
     '../Model/Dogodki',
@@ -14,15 +13,14 @@ define([
     './Wizard/WizardView',
     './Wizard/IzbiraRazredDogodkaView',
     './Wizard/IzbiraCasView',
-    './DogodekView',
-    './VajaView',
-    './RazmnoziView'
+    './RazmnoziView',
+    './DogodekVajaView',
+    './DogodekPredstavaView'
 ], function (
         Radio,
         i18next,
         Backbone,
         Marionette,
-        moment,
         Toolbar,
         tpl,
         Dogodki,
@@ -30,10 +28,10 @@ define([
         WizardView,
         IzbiraView,
         IzbiraCasView,
-        DogodekView,
-        VajaView,
         RazmnoziView,
-        PredstavaView
+        PredstavaView,
+        DogodekVajaView,
+        DogodekPredstavaView
         ) {
 
     var PlaniranjeView = Marionette.LayoutView.extend({
@@ -100,9 +98,9 @@ define([
     PlaniranjeView.prototype.onUredi = function (model) {
         var razred = model.get('dogodek').razred;
         if (razred === '100s') {
-            this.renderRazredDogodek(model, PredstavaView);
+            this.renderRazredDogodek(model, DogodekPredstavaView);
         } else if (razred === '200s') {
-            this.renderRazredDogodek(model, VajaView);
+            this.renderRazredDogodek(model, DogodekVajaView);
         } else if (razred === '300s') {
             this.renderRazredDogodek(model, null);
         } else if (razred === '400s') {
@@ -148,9 +146,8 @@ define([
         var dogodekModel = new Dogodki.prototype.model(razredModel.get('dogodek'));
 
         var self = this;
-        var view = new DogodekView({
+        var view = new TipDogView({
             model: dogodekModel,
-            TipDogView: TipDogView,
             tipDogModel: razredModel
         });
         
