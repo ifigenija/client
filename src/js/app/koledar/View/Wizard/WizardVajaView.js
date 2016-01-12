@@ -9,10 +9,12 @@ define([
     'marionette',
     'underscore',
     'jquery',
-    '../Model/Dogodki',
+    '../../Model/Dogodki',
     './WizardView',
     './IzbiraCasView',
-    './IzbiraOsebeView'
+    './IzbiraTipaVajeView',
+    './IzbiraProstoraView',
+    './IzbiraUprizoritveView'
 ], function (
         Radio,
         i18next,
@@ -22,24 +24,27 @@ define([
         Dogodki,
         WizardView,
         IzbiraCasView,
-        IzbiraOsebeView
+        IzbiraTipaVajeView,
+        IzbiraProstoraView,
+        IzbiraUprizoritveView
         ) {
 
-    var WizardZasedenostView = WizardView.extend({
+    var WizardVajaView = WizardView.extend({
         defWizard: {
             views: [
                 IzbiraCasView,
-                IzbiraOsebeView
+                IzbiraUprizoritveView,
+                IzbiraTipaVajeView,
+                IzbiraProstoraView
             ],
-            title: i18next.t('terminStoritve.dodajZasedenost'),
+            title: i18next.t('dogodek.dodajVajo'),
             callback: function (model) {
-                model.set('planiranZacetek', model.get('planiranZacetek').toISOString());
-                model.set('planiranKonec', model.get('planiranKonec').toISOString());
-                model.set('zasedenost', true);
-                
+                var self = this;
                 model.save({}, {
                     success: function (model) {
                         Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
+                        var Dogodek = Dogodki.prototype.model.extend({});
+                        self.trigger('save:success', new Dogodek(model.get('dogodek')));
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
@@ -47,5 +52,5 @@ define([
         }
     });
 
-    return WizardZasedenostView;
+    return WizardVajaView;
 });

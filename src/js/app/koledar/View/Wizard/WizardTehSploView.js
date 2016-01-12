@@ -9,11 +9,10 @@ define([
     'marionette',
     'underscore',
     'jquery',
-    '../Model/Dogodki',
+    '../../Model/Dogodki',
     './WizardView',
     './IzbiraCasView',
-    './IzbiraProstoraView',
-    './IzbiraUprizoritveView'
+    './IzbiraProstoraView'
 ], function (
         Radio,
         i18next,
@@ -23,22 +22,20 @@ define([
         Dogodki,
         WizardView,
         IzbiraCasView,
-        IzbiraProstoraView,
-        IzbiraUprizoritveView
+        IzbiraProstoraView
         ) {
 
-    var WizardPredstavaView = WizardView.extend({
+    var WizardTehSploView = WizardView.extend({
         defWizard: {
             views: [
                 IzbiraCasView,
-                IzbiraUprizoritveView,
                 IzbiraProstoraView
             ],
-            title: i18next.t('dogodek.dodajPredstavo'),
+            title: i18next.t('dogodek.dodajVajo'),
             callback: function (model) {
                 var self = this;
                 model.save({}, {
-                    success: function () {
+                    success: function (model) {
                         Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
                         var Dogodek = Dogodki.prototype.model.extend({});
                         self.trigger('save:success', new Dogodek(model.get('dogodek')));
@@ -49,5 +46,5 @@ define([
         }
     });
 
-    return WizardPredstavaView;
+    return WizardTehSploView;
 });

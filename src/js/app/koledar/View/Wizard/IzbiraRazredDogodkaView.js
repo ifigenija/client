@@ -8,9 +8,9 @@ define([
     'backbone',
     'marionette',
     'moment',
-    'template!../tpl/dogodek-izbira.tpl',
-    '../Model/RazredDogodek',
-    '../Model/TerminiStoritve'
+    'template!../../tpl/dogodek-izbira.tpl',
+    '../../Model/RazredDogodek',
+    '../../Model/TerminiStoritve'
 ], function (
         Radio,
         i18next,

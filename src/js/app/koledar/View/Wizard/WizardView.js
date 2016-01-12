@@ -9,7 +9,7 @@ define([
     'app/bars',
     'marionette',
     'jquery',
-    'template!../tpl/wizard-layout.tpl'
+    'template!../../tpl/wizard-layout.tpl'
 ], function (
         Radio,
         i18next,

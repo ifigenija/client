@@ -17,11 +17,11 @@ define([
     './TehnicniView',
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
-    './WizardVajaView',
-    './WizardTehSploView',
-    './WizardZasedenostView',
-    './WizardPredstavaView',
-    './IzbiraRazredDogodkaView'
+    './Wizard/WizardVajaView',
+    './Wizard/WizardTehSploView',
+    './Wizard/WizardZasedenostView',
+    './Wizard/WizardPredstavaView',
+    './Wizard/IzbiraRazredDogodkaView'
 ], function (
         i18next,
         Marionette,
