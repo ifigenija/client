@@ -67,12 +67,36 @@ define([
             prilogeR: '.region-priloge'
         },
         buttons: {
+            'doc-razmnozi': {
+                id: 'doc-razmnozi',
+                label: 'Razmnoži',
+                element: 'button-trigger',
+                trigger: 'razmnozi',
+                disabled: false
+            },
+            'doc-zakljuci': {
+                id: 'doc-zakljuci',
+                label: 'Zaključi',
+                element: 'button-trigger',
+                trigger: 'zakljuci',
+                disabled: true,
+                hidden: true
+            },
+            'doc-odpovej': {
+                id: 'doc-odpovej',
+                label: 'Odpovej',
+                element: 'button-trigger',
+                trigger: 'odpovej',
+                disabled: true,
+                hidden: true
+            },
             'doc-brisi': {
                 id: 'doc-brisi',
                 label: 'Briši',
                 element: 'button-trigger',
                 trigger: 'brisi',
-                disabled: false
+                disabled: true,
+                hidden: true
             },
             'doc-shrani': {
                 id: 'doc-shrani',
@@ -245,6 +269,25 @@ define([
 
     };
 
+    //tk
+    DogodekView.prototype.onOdpovej = function (options) {
+        console.log('onOdpovej');
+    };
+
+    DogodekView.prototype.onZakljuci = function (options) {
+        console.log('onZakljuci');
+    };
+
+    DogodekView.prototype.onRazmnozi = function (options) {
+        console.log('onRazmnozi');
+        
+        //var razmnoziView = new RazmnoziView(); 
+        
+        //this.trigger('razmnozi', razmnoziView);
+        //this.trigger('razmnozi');
+
+    };
+
     DogodekView.prototype.getRazredNiz = function () {
 
         var razred = i18next.t(this.tipDogModel.get('dogodek').razred);
@@ -268,6 +311,55 @@ define([
         }
 
         return niz;
+    };
+    
+    //tk
+    DogodekView.prototype.setButtons = function () {
+        
+        
+        console.log('---- seting buttons ----');
+        
+        console.log('this:');
+        console.log(this);
+        console.table(this);
+
+        /*
+        
+        //C FormView.prototype.getToolbarModel
+        
+        var coll = this.getToolbarModel();
+        
+        //uredim
+    
+        var tb = this.getToolbarModel();
+        var but = tb.getButton('doc-shrani');
+        if (but && but.get('disabled')) {
+            but.set({
+                disabled: false
+            });
+        }
+        
+        
+
+        console.log('Test:');
+        console.log('Options: ');console.table(this.options);
+        console.log('regionToolbar: ');
+        console.table(this.regionToolbar);
+        console.dir(this.regionToolbar);
+        
+        console.log(this.toolbarView);
+        
+        console.log('model:'); console.log(this.model);
+        
+        var status = this.model.get('status');
+        console.log('status: ', status);
+        
+        //C odkrij delete tab button
+        
+        var tb = this.getToolbarModel();
+        
+        console.log('tb: ', this.toolbarView);
+        */
     };
 
     return DogodekView;

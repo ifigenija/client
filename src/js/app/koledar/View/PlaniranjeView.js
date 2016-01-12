@@ -19,7 +19,9 @@ define([
     './PredstavaView',
     './GostovanjeView',
     './SplosniView',
-    './TehnicniView'
+    './TehnicniView',
+    
+    './RazmnoziView'
 ], function (
         Radio,
         i18next,
@@ -38,7 +40,9 @@ define([
         PredstavaView,
         GostovanjeView,
         SplosniView,
-        TehnicniView
+        TehnicniView,
+        
+        RazmnoziView
         ) {
 
     var PlaniranjeView = Marionette.LayoutView.extend({
@@ -158,6 +162,13 @@ define([
             TipDogView: TipDogView,
             tipDogModel: razredModel
         });
+        
+        //view.setButtons();
+        
+        //console.log('(a) new DogodekView');
+        //console.log('view.model', view.model);
+        //console.log('view.model -> status', view.model.get('status'));
+                
         view.on('save:success', function () {
             self.koledarView.ui.koledar.fullCalendar('refetchEvents');
         }, self);
@@ -167,6 +178,30 @@ define([
         }, self);
         view.on('skrij', self.onPreklici, self);
         self.dogodekR.show(view);
+        
+        view.on('razmnozi', function () { 
+            console.log('event razmnozi detected.A.');
+            self.renderRazmnozi();
+        }, self);
+    };
+    
+
+    PlaniranjeView.prototype.renderRazmnozi = function () {
+        
+        var razmnoziView = new RazmnoziView({
+            model: new Backbone.Model({
+            
+            })
+        });
+           
+        razmnoziView.on('preklici', function () {
+            this.dogodekR.empty();
+        }, this)
+        razmnoziView.on('save:success', function () {
+           console.log('shranjeno, posodobi dogodke');
+           
+        }, this) 
+        this.dogodekR.show(razmnoziView);
     };
 
     PlaniranjeView.prototype.onZasedenost = function (model) {
