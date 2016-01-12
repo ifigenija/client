@@ -49,7 +49,7 @@ define([
      * 
      * @type @exp;Marionette@pro;LayoutView@call;extend
      */
-    var DanView = Marionette.LayoutView.extend({
+    var PlanerDanView = Marionette.LayoutView.extend({
         className: 'planer-dan',
         template: tplDan,
         regions: {
@@ -59,12 +59,12 @@ define([
             detailR: '.region-detail'
         }
     });
-    DanView.prototype.onRender = function () {
+    PlanerDanView.prototype.onRender = function () {
         this.renderDopoldne();
         this.renderPopoldne();
         this.renderZvecer();
     };
-    DanView.prototype.renderDopoldne = function () {
+    PlanerDanView.prototype.renderDopoldne = function () {
         var view = this.dopoldneView = this.getDogodekView(
                 this.model.get('dopoldne'),
                 moment(this.model.get('datum')).set('hour', uraZacetek),
@@ -72,7 +72,7 @@ define([
                 );
         this.dopoldneR.show(view);
     };
-    DanView.prototype.renderPopoldne = function () {
+    PlanerDanView.prototype.renderPopoldne = function () {
         var view = this.popoldneView = this.getDogodekView(
                 this.model.get('popoldne'),
                 moment(this.model.get('datum')).set('hour', uraDopoldne),
@@ -80,7 +80,7 @@ define([
                 );
         this.popoldneR.show(view);
     };
-    DanView.prototype.renderZvecer = function () {
+    PlanerDanView.prototype.renderZvecer = function () {
         var view = this.zvecerView = this.getDogodekView(
                 this.model.get('zvecer'),
                 moment(this.model.get('datum')).set('hour', uraPopoldne),
@@ -95,7 +95,7 @@ define([
      * @param {moment} konec
      * @returns {PlanerTedenView_L22.PlanerDogodkiView|Marionette.LayoutView@call;extend.prototype.getDogodekView.view}
      */
-    DanView.prototype.getDogodekView = function (collection, zacetek, konec) {
+    PlanerDanView.prototype.getDogodekView = function (collection, zacetek, konec) {
         var view = new PlanerDogodkiView({
             collection: collection,
             zacetek: zacetek,
@@ -112,7 +112,7 @@ define([
      * @param {Dogodek} model
      * @returns {undefined}
      */
-    DanView.prototype.prikaziDogodek = function (model) {
+    PlanerDanView.prototype.prikaziDogodek = function (model) {
         var razred = model.get('dogodek').razred;
         var TipDogodkaView;
         if (razred === '100s') {
@@ -144,7 +144,7 @@ define([
      * @param {type} options
      * @returns {undefined}
      */
-    DanView.prototype.dodajDogodek = function (options) {
+    PlanerDanView.prototype.dodajDogodek = function (options) {
         var model = new Backbone.Model();
         model.set('zacetek', moment(options.zacetek).toISOString());
         model.set('konec', moment(options.konec).toISOString());
@@ -192,7 +192,7 @@ define([
 
     var PlanerTedenView = Marionette.CollectionView.extend({
         className: 'planer-teden',
-        childView: DanView
+        childView: PlanerDanView
     });
 
     return PlanerTedenView;
