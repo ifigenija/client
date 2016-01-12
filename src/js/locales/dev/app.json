@@ -1755,7 +1755,6 @@
         "razred": "Tip",
         "termin": "Termin",
         "predstava": "Predstava",
-        "zasedenost": "Zasedenost",
         "vaja": "Vaja",
         "gostovanje": "Gostovanje",
         "splosni": "Splošni dogodek",
@@ -1769,6 +1768,7 @@
         "dodajPredstavo": "Dodaj predstavo",
         "dodajTehnicni": "Dodaj tehnični dogodek",
         "dodajSplosni": "Dodaj splošni dogodek",
+        "dodajGostovanje": "Dodaj gostovanje",
         "d": {
             "allDay": "Dogodek se razteza skozi cel dan",
             "zacetek": "",
@@ -1924,6 +1924,8 @@
         "dezurni": "Dežurni",
         "gost": "Gost",
         "oseba": "Oseba",
+        "dodajZasedenost": "Dodaj zasedenost",
+        "zasedenost": "Zasedenost",
         "d": {
             "title": "Termin storitve",
             "planiranZacetek": "Planiran začetek",

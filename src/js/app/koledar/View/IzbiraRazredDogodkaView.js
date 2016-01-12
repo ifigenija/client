@@ -78,6 +78,7 @@ define([
             model.set('planiranZacetek', this.zacetek);
         }
         model.set('planiranKonec', this.konec);
+        model.set('razred', '500s');
         this.trigger('izbrano', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onGostovanje = function () {

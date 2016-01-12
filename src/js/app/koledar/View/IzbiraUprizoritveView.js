@@ -37,10 +37,10 @@ define([
      */
     WizardVzporedniceView.prototype.initialize = function (options) {
         VzporedniceView.prototype.initialize.apply(this, arguments);
-        
+
         var zacetek = options.model.get('zacetek');
         var konec = options.model.get('konec');
-        
+
         if (options && options.model) {
             this.model = options.model;
         }
@@ -52,7 +52,7 @@ define([
         if (options && konec) {
             this.konec = moment(konec).toISOString();
         }
-        
+
         if (!this.collectionUprizoritev.length) {
             this.trigger('not:ready');
         }
@@ -66,13 +66,18 @@ define([
     WizardVzporedniceView.prototype.onSelected = function (model) {
         if (!this.collectionUprizoritev.length) {
             this.collectionUprizoritev.add(model);
+        } else {
+            this.collectionUprizoritev.reset(model);
+        }
+        
+        if (this.collectionUprizoritev.length) {
             this.$('.prikazi-prekrivanja').removeClass('hidden');
-            
+
             this.model.set('uprizoritev', model.get('id'));
             this.trigger('ready', this.model);
         }
     };
-    
+
     WizardVzporedniceView.prototype.onChange = function (model) {
         if (!this.collectionUprizoritev.length) {
             this.trigger('not:ready');

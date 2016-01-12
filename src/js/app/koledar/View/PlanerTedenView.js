@@ -18,6 +18,9 @@ define([
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
     './WizardVajaView',
+    './WizardTehSploView',
+    './WizardZasedenostView',
+    './WizardPredstavaView',
     './IzbiraRazredDogodkaView'
 ], function (
         i18next,
@@ -35,6 +38,9 @@ define([
         PlanerDogodkiView,
         tplDan,
         WizardVajaView,
+        WizardTehSploView,
+        WizardZasedenostView,
+        WizardPredstavaView,
         IzbiraRazredDogodkaView
         ) {
 
@@ -155,7 +161,9 @@ define([
 
         view.on('izbrano', function (model) {
             if (model.get('razred') === '100s') {
-
+                var view = new WizardPredstavaView({
+                    model: model
+                });
             } else if (model.get('razred') === '200s') {
                 var view = new WizardVajaView({
                     model: model
@@ -163,9 +171,17 @@ define([
             } else if (model.get('razred') === '300s') {
 
             } else if (model.get('razred') === '400s') {
-
+                var view = new WizardTehSploView({
+                    model: model
+                });
+            } else if (model.get('razred') === '500s') {
+                var view = new WizardZasedenostView({
+                    model: model
+                });
             } else if (model.get('razred') === '600s') {
-
+                var view = new WizardTehSploView({
+                    model: model
+                });
             }
 
             view.on('close', function () {

@@ -12,8 +12,7 @@ define([
     '../Model/Dogodki',
     './WizardView',
     './IzbiraCasView',
-    './IzbiraProstoraView',
-    './IzbiraUprizoritveView'
+    './IzbiraOsebeView'
 ], function (
         Radio,
         i18next,
@@ -23,25 +22,24 @@ define([
         Dogodki,
         WizardView,
         IzbiraCasView,
-        IzbiraProstoraView,
-        IzbiraUprizoritveView
+        IzbiraOsebeView
         ) {
 
-    var WizardPredstavaView = WizardView.extend({
+    var WizardZasedenostView = WizardView.extend({
         defWizard: {
             views: [
                 IzbiraCasView,
-                IzbiraUprizoritveView,
-                IzbiraProstoraView
+                IzbiraOsebeView
             ],
-            title: i18next.t('dogodek.dodajPredstavo'),
+            title: i18next.t('terminStoritve.dodajZasedenost'),
             callback: function (model) {
-                var self = this;
+                model.set('planiranZacetek', model.get('planiranZacetek').toISOString());
+                model.set('planiranKonec', model.get('planiranKonec').toISOString());
+                model.set('zasedenost', true);
+                
                 model.save({}, {
-                    success: function () {
+                    success: function (model) {
                         Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
-                        var Dogodek = Dogodki.prototype.model.extend({});
-                        self.trigger('save:success', new Dogodek(model.get('dogodek')));
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
@@ -49,5 +47,5 @@ define([
         }
     });
 
-    return WizardPredstavaView;
+    return WizardZasedenostView;
 });
