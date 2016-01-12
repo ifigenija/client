@@ -47,7 +47,8 @@ define([
             zacetek: this.zacetek,
             konec: this.konec,
             title: options.title,
-            status: options.status
+            status: options.status,
+            razred: options.razred
         });
 
         return model;
@@ -56,7 +57,8 @@ define([
         this.initRazredDogodka({
             view: 'vaja',
             title: 'Vaja',
-            status: '100s'
+            status: '100s',
+            razred: '200s'
         });
         this.trigger('izbrano', this.model);
     };
@@ -64,7 +66,8 @@ define([
         this.initRazredDogodka({
             view: 'predstava',
             title: 'Predstava',
-            status: '100s'
+            status: '100s',
+            razred: '100s'
         });
         this.trigger('izbrano', this.model);
     };
@@ -81,7 +84,8 @@ define([
         this.initRazredDogodka({
             view: 'gostovanje',
             title: 'Gostovanje',
-            status: '100s'
+            status: '100s',
+            razred: '300s'
         });
         this.trigger('izbrano', this.model);
     };
@@ -89,7 +93,8 @@ define([
         this.initRazredDogodka({
             view: 'dogodekSplosni',
             title: 'Splošni',
-            status: '100s'
+            status: '100s',
+            razred: '400s'
         });
         this.trigger('izbrano', this.model);
     };
@@ -97,7 +102,8 @@ define([
         this.initRazredDogodka({
             view: 'dogodekTehnicni',
             title: 'Tehnični',
-            status: '100s'
+            status: '100s',
+            razred: '600s'
         });
         this.trigger('izbrano', this.model);
     };

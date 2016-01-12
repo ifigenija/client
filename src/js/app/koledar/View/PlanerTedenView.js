@@ -89,7 +89,7 @@ define([
         this.zvecerR.show(view);
     };
     /**
-     * inicializiramo instanco viewja
+     * inicializiramo instanco viewja za prikaz dogodkov enega termina
      * @param {Backbone.Collection} collection
      * @param {moment} zacetek
      * @param {moment} konec
@@ -141,23 +141,31 @@ define([
     };
     /**
      * Dodaj dogodek, vsak od razredov dogodka potrebuje svoj Wizard View
-     * @param {type} interval
+     * @param {type} options
      * @returns {undefined}
      */
-    DanView.prototype.dodajDogodek = function (interval) {
+    DanView.prototype.dodajDogodek = function (options) {
         var model = new Backbone.Model();
-        model.set('zacetek', moment(interval.zacetek).toISOString());
-        model.set('konec', moment(interval.konec).toISOString());
+        model.set('zacetek', moment(options.zacetek).toISOString());
+        model.set('konec', moment(options.konec).toISOString());
 
         var view = new IzbiraRazredDogodkaView({model: model});
         this.detailR.show(view);
         var self = this;
 
         view.on('izbrano', function (model) {
-            if (model.get('view') === 'vaja') {
+            if (model.get('razred') === '100s') {
+
+            } else if (model.get('razred') === '200s') {
                 var view = new WizardVajaView({
                     model: model
                 });
+            } else if (model.get('razred') === '300s') {
+
+            } else if (model.get('razred') === '400s') {
+
+            } else if (model.get('razred') === '600s') {
+
             }
 
             view.on('close', function () {
@@ -166,6 +174,9 @@ define([
 
             view.on('preklici', function () {
                 self.detailR.empty();
+            }, self);
+            view.on('save:success', function (model) {
+                options.collection.add(model);
             }, self);
 
             self.detailR.show(view);

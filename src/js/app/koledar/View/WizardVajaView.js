@@ -34,9 +34,11 @@ define([
             ],
             title: i18next.t('dogodek.dodajDogodek'),
             callback: function (model) {
+                var self = this;
                 model.save({}, {
                     success: function () {
                         Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
+                        self.trigger('save:success', model);
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });

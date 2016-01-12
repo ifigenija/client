@@ -99,7 +99,8 @@ define([
         onDodaj: function () {
             this.trigger('dodaj:dogodek', {
                 zacetek: this.zacetek,
-                konec: this.konec
+                konec: this.konec,
+                collection: this.collection
             });
         },
         onOdstrani: function () {
