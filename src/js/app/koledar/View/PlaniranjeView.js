@@ -29,7 +29,6 @@ define([
         IzbiraView,
         IzbiraCasView,
         RazmnoziView,
-        PredstavaView,
         DogodekVajaView,
         DogodekPredstavaView
         ) {
