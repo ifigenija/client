@@ -108,7 +108,7 @@ define([
             konec: konec
         });
 
-        view.on('prikazi:dogodek', this.prikaziDogodek, this);
+        view.on('prikazi:dogodek', this.urediDogodek, this);
         view.on('dodaj:dogodek', this.dodajDogodek, this);
 
         return view;
@@ -118,7 +118,7 @@ define([
      * @param {Dogodek} model
      * @returns {undefined}
      */
-    PlanerDanView.prototype.prikaziDogodek = function (model) {
+    PlanerDanView.prototype.urediDogodek = function (model) {
         var razred = model.get('dogodek').razred;
         var TipDogodkaView;
         if (razred === '100s') {
@@ -128,12 +128,12 @@ define([
         } else if (razred === '300s') {
             TipDogodkaView = GostovanjeView;
         } else if (razred === '400s') {
-            TipDogodkaView = SplosniView;
+            TipDogodkaView = null;
         } else if (razred === '500s') {
             this.onZasedenost(model);
             this.dogodekView.on('skrij', this.onPreklici, this);
         } else if (razred === '600s') {
-            TipDogodkaView = TehnicniView;
+            TipDogodkaView = null;
         }
         var view = new DogodekView({
             model: model,

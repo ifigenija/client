@@ -146,8 +146,8 @@ define([
         var tab = this.tabControl.findTab('razred');
         var razred = this.getRazredNiz();
         tab.set('name', razred);
-        
-        
+
+
         this.tabsR.show(this.tabControl);
         return this.tabControl;
     };
@@ -211,30 +211,29 @@ define([
         });
     };
 
-    DogodekView.prototype.renderRazredDogodka = function () {        
-        var view = new this.TipDogView({
-            model: this.tipDogModel
-        });
-        this.razredDogodkaR.show(view);
+    DogodekView.prototype.renderRazredDogodka = function () {
+        if (this.TipDogView) {
+            var view = new this.TipDogView({
+                model: this.tipDogModel
+            });
+            this.razredDogodkaR.show(view);
+        }
     };
 
-    
+
     DogodekView.prototype.onBrisi = function (options) {
-        //console.log('onBrisi');
-        
         var self = this;
         var brisi = function () {
             self.model.destroy({
-
-                success:function () {
+                success: function () {
                     //alert('Dogodek izbrisan');
                     self.trigger('destroy:success');
-                    
+
                     self.trigger('skrij', self);
                 }
             });
-        }
-        
+        };
+
         confirm({
             text: i18next.t('std.potrdiIzbris'),
             modalOptions: {
