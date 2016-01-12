@@ -110,9 +110,21 @@ define([
         this.tehnikiR.show(view);
     };
     SodelujociView.prototype.renderGosDez = function () {
+        var ItemView = Marionette.ItemView.extend({
+            tagName: 'span',
+            className: 'sodelujoc',
+            template: Handlebars.compile('<label>{{ime}}</label>'),
+            serializeData: function () {
+                return{
+                    ime: this.model.get('oseba').get('polnoIme')
+                };
+            }
+        });
+
         var view = this.gosDezView = new SeznamSodelujocihView({
             collection: this.izbraniGosDez,
-            naslov: 'Gosti/Dežurni'
+            naslov: 'Gosti/Dežurni',
+            childView: ItemView
         });
         view.on('render:uredi', this.urediGoste, this);
         this.gosDezR.show(view);
@@ -167,7 +179,7 @@ define([
                 zacetek: moment(),
                 konec: moment()
             });
-            
+
             options.izbraniTS.reset(tsModeli);
         }, this);
 

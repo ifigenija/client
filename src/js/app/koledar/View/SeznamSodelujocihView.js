@@ -57,6 +57,7 @@ define([
     SeznamSodelujocihView.prototype.initialize = function (options) {
         this.collection = options.collection || new Backbone.Collection();
         this.naslov = options.naslov || this.naslov;
+        this.childview = options.childView || this.childView;
     };
 
     /**

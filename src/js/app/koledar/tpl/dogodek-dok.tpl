@@ -11,9 +11,7 @@
                 <div class="clearfix"></div>
                 <div class="region-form"></div>
             </div>
-            <div role="tabpanel" class="tab-pane pnl-sodelujoci region-sodelujoci"></div>
-            <div role="tabpanel" class="tab-pane pnl-razred-dogodka region-razred-dogodka"></div>
-            <div role="tabpanel" class="tab-pane pnl-priloge region-priloge"></div>
+            <div role="tabpanel" class="tab-pane pnl-detail region-detail"></div>
         </div>
     </div>
 </div>

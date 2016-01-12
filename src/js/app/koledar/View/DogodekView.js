@@ -62,9 +62,7 @@ define([
         tipDogModel: null,
         regions: {
             tabsR: '.dogodek-tabs',
-            sodelujociR: '.region-sodelujoci',
-            razredDogodkaR: '.region-razred-dogodka',
-            prilogeR: '.region-priloge'
+            detailR: '.region-detail'
         },
         buttons: {
             'doc-razmnozi': {
@@ -187,20 +185,20 @@ define([
 
     DogodekView.prototype.onSodelujoci = function () {
         this.deselectTab();
-        this.$('.pnl-sodelujoci').addClass('active');
+        this.$('.pnl-detail').addClass('active');
         this.renderSodelujoci();
 
     };
 
     DogodekView.prototype.onRazred = function () {
         this.deselectTab();
-        this.$('.pnl-razred-dogodka').addClass('active');
+        this.$('.pnl-detail').addClass('active');
         this.renderRazredDogodka();
 
     };
     DogodekView.prototype.onPriloge = function () {
         this.deselectTab();
-        this.$('.pnl-priloge').addClass('active');
+        this.$('.pnl-detail').addClass('active');
         this.renderPriloge();
 
     };
@@ -214,7 +212,7 @@ define([
             lastnik: this.model.get('id'),
             classLastnika: 'Dogodek'
         });
-        this.prilogeR.show(view);
+        this.detailR.show(view);
     };
 
     DogodekView.prototype.renderSodelujoci = function () {
@@ -229,7 +227,7 @@ define([
                     alternacije: coll,
                     dogodek: dogodek
                 });
-                self.sodelujociR.show(view);
+                self.detailR.show(view);
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
@@ -240,7 +238,7 @@ define([
             var view = new this.TipDogView({
                 model: this.tipDogModel
             });
-            this.razredDogodkaR.show(view);
+            this.detailR.show(view);
         }
     };
 

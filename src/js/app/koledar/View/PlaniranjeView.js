@@ -16,11 +16,6 @@ define([
     './Wizard/IzbiraCasView',
     './DogodekView',
     './VajaView',
-    './PredstavaView',
-    './GostovanjeView',
-    './SplosniView',
-    './TehnicniView',
-    
     './RazmnoziView'
 ], function (
         Radio,
@@ -37,12 +32,8 @@ define([
         IzbiraCasView,
         DogodekView,
         VajaView,
-        PredstavaView,
-        GostovanjeView,
-        SplosniView,
-        TehnicniView,
-        
-        RazmnoziView
+        RazmnoziView,
+        PredstavaView
         ) {
 
     var PlaniranjeView = Marionette.LayoutView.extend({
@@ -113,15 +104,15 @@ define([
         } else if (razred === '200s') {
             this.renderRazredDogodek(model, VajaView);
         } else if (razred === '300s') {
-            this.renderRazredDogodek(model, GostovanjeView);
+            this.renderRazredDogodek(model, null);
         } else if (razred === '400s') {
-            this.renderRazredDogodek(model, SplosniView);
+            this.renderRazredDogodek(model, null);
         } else if (razred === '500s') {
             this.onZasedenost(model);
             this.dogodekView.on('skrij', this.onPreklici, this);
 
         } else if (razred === '600s') {
-            this.renderRazredDogodek(model, TehnicniView);
+            this.renderRazredDogodek(model, null);
         }
     };
     PlaniranjeView.prototype.onPreklici = function () {

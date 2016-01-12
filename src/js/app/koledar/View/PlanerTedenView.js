@@ -9,12 +9,10 @@ define([
     'moment',
     'underscore',
     'jquery',
+    '../Model/Dogodki',
     './DogodekView',
-    './VajaView',
-    './PredstavaView',
-    './GostovanjeView',
-    './SplosniView',
-    './TehnicniView',
+    './DogodekVajaView',
+    './DogodekPredstavaView',
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
     './Wizard/WizardVajaView',
@@ -29,12 +27,10 @@ define([
         moment,
         _,
         $,
+        Dogodki,
         DogodekView,
-        VajaView,
-        PredstavaView,
-        GostovanjeView,
-        SplosniView,
-        TehnicniView,
+        DogodekVajaView,
+        DogodekPredstavaView,
         PlanerDogodkiView,
         tplDan,
         WizardVajaView,
@@ -122,11 +118,11 @@ define([
         var razred = model.get('dogodek').razred;
         var TipDogodkaView;
         if (razred === '100s') {
-            TipDogodkaView = PredstavaView;
+            TipDogodkaView = DogodekPredstavaView;
         } else if (razred === '200s') {
-            TipDogodkaView = VajaView;
+            TipDogodkaView = DogodekVajaView;
         } else if (razred === '300s') {
-            TipDogodkaView = GostovanjeView;
+            TipDogodkaView = null;
         } else if (razred === '400s') {
             TipDogodkaView = null;
         } else if (razred === '500s') {
@@ -135,9 +131,10 @@ define([
         } else if (razred === '600s') {
             TipDogodkaView = null;
         }
-        var view = new DogodekView({
-            model: model,
-            TipDogView: TipDogodkaView,
+        //model forme, ki je pogojena od dokumentview mora biti dogodek model
+        //tipDogModel pa je morel razreda dogodka
+        var view = new TipDogodkaView({
+            model: new Dogodki.prototype.model(model.get('dogodek')),
             tipDogModel: model
         });
         view.on('skrij', function () {
