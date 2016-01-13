@@ -109,6 +109,12 @@ define([
             while (model = this.collection.first()) {
                 model.destroy();
             }
+//            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar'});
+//            rpc.call('brisiDogodke', {
+//                'zacetek': 'isodatetime',
+//                'konec': 'isodatetime'
+//            }, options.success, options.error);
+
         },
         onChildviewPrikaziDogodek: function (dogodekM, razredDogodkaM) {
             this.trigger('prikazi:dogodek', razredDogodkaM);

@@ -59,9 +59,13 @@ define([
             this.konec = this.model.get('konec') || null;
         }
 
-        this.on('change', this.nadaljuj, this);
+        this.on('change', this.onChange, this);
     };
-
+    /*
+     * V funkciji render poskrbimo da sezačetek in konec, ki ga imamo v modelu izpišeta
+     * @param {type} options
+     * @returns {undefined}
+     */
     IzbiraCasView.prototype.render = function (options) {
         Form.prototype.render.apply(this, arguments);
         if (this.zacetek) {
@@ -73,10 +77,16 @@ define([
         this.trigger('change');
     };
 
-    IzbiraCasView.prototype.nadaljuj = function () {
+    /**
+     * V funkciji preverimo ali zadoščujemo kriterijem.
+     * Pomembno ali lahko nadaljujemo z naslednjim korakom v wizerdView-ju
+     * @returns {undefined}
+     */
+    IzbiraCasView.prototype.onChange = function () {
         var zacetek = this.fields.zacetek.getValue();
         var konec = this.fields.konec.getValue();
 
+        //če zadoščamo kriterijem dopolnimo model in prožimo ready
         if (zacetek && konec) {
             this.model.set('zacetek', zacetek);
             this.model.set('konec', konec);

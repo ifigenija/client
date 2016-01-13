@@ -21,9 +21,14 @@ define([
         tpl
         ) {
 
+    /**
+     * WizardView namenjen je izpolnjevanju večjih količin podatkov po korakih.
+     * @type @exp;Marionette@pro;LayoutView@call;extend
+     */
     var WizardView = Marionette.LayoutView.extend({
         template: tpl,
         className: 'wizard',
+        state: 0,
         triggers: {
             'click .naprej': 'naprej',
             'click .nazaj': 'nazaj',
@@ -142,12 +147,21 @@ define([
         this.trigger('close', this.model);
     };
 
+    /**
+     * Funkcija veže na podano instanco viewja poslušalce
+     * @param {type} view
+     * @returns {undefined}
+     */
     WizardView.prototype.bind = function (view) {
         view.on('ready:forward', this.onReadyForward, this);
         view.on('ready', this.onReady, this);
         view.on('not:ready', this.onNotReady, this);
     };
-
+    /**
+     * Funkcija odstrani poslušalje iz podane instance viewja
+     * @param {type} view
+     * @returns {undefined}
+     */
     WizardView.prototype.unBind = function (view) {
         view.off('ready:forward', this.onReadyForward, this);
         view.off('ready', this.onReady, this);
