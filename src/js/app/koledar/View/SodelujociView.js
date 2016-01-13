@@ -57,6 +57,12 @@ define([
         this.razdeliAlternacije();
         this.razdeliTS();
     };
+
+    /**
+     * Termine storitve iz dogodkarazdelimo po področjih v tri različne kolekcije.
+     * te kolekcije predstavljajo izbrane umetnike, tehnike in goste/dežurne
+     * @returns {undefined}
+     */
     SodelujociView.prototype.razdeliTS = function () {
         var tsPodrocja = this.tsColl.razdeliPoPodrocjih();
 
@@ -71,6 +77,12 @@ define([
         this.izbraniGosDez = new TerminiStoritve();
         this.izbraniTehniki.add(tsPodrocja.gostiDezurni);
     };
+    /**
+     * V tej funkciji inicializiramo 2 kolekciji ki predstavljajo alternacije umetnikov in tehnikov,
+     * ter kolekcijo gostov/dežurni, ki predstavljajo osebe.
+     * Prav tako inicializiramo 3 prazne kolekcije v katerih bomo izbra
+     * @returns {undefined}
+     */
     SodelujociView.prototype.razdeliAlternacije = function () {
         var modeli = this.alternacijeColl.razdeli();
 
@@ -93,6 +105,10 @@ define([
         this.renderTehnika();
         this.renderGosDez();
     };
+    /**
+     * Izris seznam izbranih umetnikov
+     * @returns {undefined}
+     */
     SodelujociView.prototype.renderUmetniki = function () {
         var view = this.umetnikiView = new SeznamSodelujocihView({
             collection: this.izbraniUmetniki,
@@ -101,6 +117,10 @@ define([
         view.on('render:uredi', this.urediUmetnike, this);
         this.umetnikiR.show(view);
     };
+    /**
+     * Izris seznam izbranih tehnikov
+     * @returns {undefined}
+     */
     SodelujociView.prototype.renderTehnika = function () {
         var view = this.tehnikiView = new SeznamSodelujocihView({
             collection: this.izbraniTehniki,
@@ -109,6 +129,11 @@ define([
         view.on('render:uredi', this.urediTehnike, this);
         this.tehnikiR.show(view);
     };
+    
+    /**
+     * Izris seznam izbranih gostov/dežurnih
+     * @returns {undefined}
+     */
     SodelujociView.prototype.renderGosDez = function () {
         var ItemView = Marionette.ItemView.extend({
             tagName: 'span',
@@ -123,7 +148,7 @@ define([
 
         var view = this.gosDezView = new SeznamSodelujocihView({
             collection: this.izbraniGosDez,
-            naslov: 'Gosti/Dežurni',
+            naslov: 'Gosti',
             childView: ItemView
         });
         view.on('render:uredi', this.urediGoste, this);
@@ -158,6 +183,11 @@ define([
             tpl: Handlebars.compile('{{polnoIme}}')
         });
     };
+    /**
+     * Ob kliku na gum uredi se nam odpre dualListView. Namen je da izberemo alternacije/osebe, ki bodo povabljene na dogodek.
+     * @param {type} options
+     * @returns {undefined}
+     */
     SodelujociView.prototype.renderUredi = function (options) {
         var $e = $('<div class="selectlist-content"></div>');
         $('body').append($e);
@@ -170,6 +200,7 @@ define([
             title: "izbira oseb"
         });
 
+        // ko dual list proži changed:vrednosti se kolekcija alternacij/oseb pretvori v polje objektov TS
         var self = this;
         //onclose proži changed:vrednosti
         view.on('changed:vrednosti', function () {
@@ -180,6 +211,7 @@ define([
                 konec: moment()
             });
 
+            // kolekcijo izbranihTerminostoritev resetiramo in dodamo v tem trenutku izbrane alternacije/osebe
             options.izbraniTS.reset(tsModeli);
         }, this);
 

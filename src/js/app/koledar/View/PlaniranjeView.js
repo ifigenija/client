@@ -14,8 +14,16 @@ define([
     './Wizard/IzbiraRazredDogodkaView',
     './Wizard/IzbiraCasView',
     './RazmnoziView',
-    './DogodekVajaView',
-    './DogodekPredstavaView'
+    './DogodekView',
+    './DogodekPredstavaView',
+    'template!../tpl/vaja-form.tpl',
+    'template!../tpl/predstava-form.tpl',
+    'template!../tpl/tehnicni-form.tpl',
+    'template!../tpl/splosni-form.tpl',
+    'formSchema!vaja',
+    'formSchema!predstava',
+    'formSchema!dogodekTehnicni',
+    'formSchema!dogodekSplosni'
 ], function (
         Radio,
         i18next,
@@ -29,8 +37,16 @@ define([
         IzbiraView,
         IzbiraCasView,
         RazmnoziView,
-        DogodekVajaView,
-        DogodekPredstavaView
+        DogodekView,
+        DogodekPredstavaView,
+        vajaTpl,
+        predstavaTpl,
+        tehnicniTpl,
+        splosniTpl,
+        vajaSch,
+        predstavaSch,
+        tehnicniSch,
+        splosniSch
         ) {
 
     var PlaniranjeView = Marionette.LayoutView.extend({
@@ -97,19 +113,19 @@ define([
     PlaniranjeView.prototype.onUredi = function (model) {
         var razred = model.get('dogodek').razred;
         if (razred === '100s') {
-            this.renderRazredDogodek(model, DogodekPredstavaView);
+            this.renderRazredDogodek(model, DogodekPredstavaView, predstavaSch, predstavaTpl);
         } else if (razred === '200s') {
-            this.renderRazredDogodek(model, DogodekVajaView);
+            this.renderRazredDogodek(model, DogodekView, vajaSch, vajaTpl);
         } else if (razred === '300s') {
             this.renderRazredDogodek(model, null);
         } else if (razred === '400s') {
-            this.renderRazredDogodek(model, null);
+            this.renderRazredDogodek(model, DogodekView, splosniSch, splosniTpl);
         } else if (razred === '500s') {
             this.onZasedenost(model);
             this.dogodekView.on('skrij', this.onPreklici, this);
 
         } else if (razred === '600s') {
-            this.renderRazredDogodek(model, null);
+            this.renderRazredDogodek(model, DogodekView, tehnicniSch, tehnicniTpl);
         }
     };
     PlaniranjeView.prototype.onPreklici = function () {
@@ -141,13 +157,12 @@ define([
         this.dogodekR.show(wizardView);
     };
 
-    PlaniranjeView.prototype.renderRazredDogodek = function (razredModel, TipDogView) {
-        var dogodekModel = new Dogodki.prototype.model(razredModel.get('dogodek'));
-
+    PlaniranjeView.prototype.renderRazredDogodek = function (razredModel, TipDogView, schema, tpl) {
         var self = this;
         var view = new TipDogView({
-            model: dogodekModel,
-            tipDogModel: razredModel
+            model: razredModel,
+            schema: schema.toFormSchema().schema,
+            formTemplate: tpl
         });
         
         //view.setButtons();

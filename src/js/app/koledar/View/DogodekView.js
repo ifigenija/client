@@ -38,14 +38,20 @@ define([
         dokumentTpl,
         dogodekTpl
         ) {
-
+    /**
+     * Vsi tabi, ki se bodo uporabilo, ko bo model imel id
+     * @type Array
+     */
     var tabVse = [
-        {id: 'naslov', name: i18next.t('dogodek.title'), event: 'dogodek'},
-        {id: 'razred', name: i18next.t('dogodek.razred'), event: 'razred'},
+        {id: 'dogodek', name: i18next.t('dogodek.title'), event: 'dogodek'},
         {id: 'sodelujoci', name: i18next.t('dogodek.sodelujoci'), event: 'sodelujoci'},
         {id: 'priloge', name: i18next.t('dogodek.priloge'), event: 'priloge'}
     ];
 
+    /**
+     * Tabi, ki se bodo prikazali ko bo model nov(brez id)
+     * @type Array
+     */
     var tabNovi = [
         {name: i18next.t('dogodek.title'), event: 'dogodek'}
     ];
@@ -58,8 +64,6 @@ define([
         template: dokumentTpl,
         formTemplate: dogodekTpl,
         schema: schemaDogodek.toFormSchema().schema,
-        TipDogView: null,
-        tipDogModel: null,
         regions: {
             tabsR: '.dogodek-tabs',
             detailR: '.region-detail'
@@ -121,10 +125,17 @@ define([
             'click .prikazi-koledar': 'koledar:prostor'
         }
     });
-
+    /**
+     * Overridana funkcija, ker ne želimo spremeniti urlja na strani
+     * @returns {undefined}
+     */
     DogodekView.prototype.posodobiUrlNaslov = function () {
     };
 
+    /**
+     * Kaj se bo zgodilo ob kliku na gumb zraven vnosnega polja za prostor
+     * @returns {undefined}
+     */
     DogodekView.prototype.onKoledarProstor = function () {
         console.log('onKoledarProstor');
     };
@@ -132,14 +143,11 @@ define([
     /**
      * 
      * @param {Array} options
-     * @param {View} options.TipDogView, namenjen prikazu tipa dogodka
-     * @param {model} options.TipDogModel model, ki bo uporabljen v tipDogView
      * @returns {undefined}
      */
     DogodekView.prototype.initialize = function (options) {
         this.schema = options.schema || this.schema;
-        this.TipDogView = options.TipDogView || this.TipDogView;
-        this.tipDogModel = options.tipDogModel || this.tipDogModel;
+        this.formTemplate = options.formTemplate || this.formTemplate;
     };
 
     /**
@@ -165,7 +173,7 @@ define([
      */
     DogodekView.prototype.renderTabs = function (tabs) {
         this.tabControl = new TabControl({tabs: tabs, listener: this});
-        var tab = this.tabControl.findTab('razred');
+        var tab = this.tabControl.findTab('dogodek');
         var razred = this.getRazredNiz();
         tab.set('name', razred);
 
@@ -183,19 +191,20 @@ define([
         this.$('.pnl-splosno').addClass('active');
     };
 
+    /**
+     * Klik na tab sodelujoči
+     * @returns {undefined}
+     */
     DogodekView.prototype.onSodelujoci = function () {
         this.deselectTab();
         this.$('.pnl-detail').addClass('active');
         this.renderSodelujoci();
 
     };
-
-    DogodekView.prototype.onRazred = function () {
-        this.deselectTab();
-        this.$('.pnl-detail').addClass('active');
-        this.renderRazredDogodka();
-
-    };
+    /**
+     * Klik na tab priloge
+     * @returns {undefined}
+     */
     DogodekView.prototype.onPriloge = function () {
         this.deselectTab();
         this.$('.pnl-detail').addClass('active');
@@ -215,12 +224,17 @@ define([
         this.detailR.show(view);
     };
 
+    /**
+     * Izris sodelujociView
+     * @returns {undefined}
+     */
     DogodekView.prototype.renderSodelujoci = function () {
         var self = this;
         var coll = this.collection = new Alternacije();
-        coll.queryParams.uprizoritev = this.tipDogModel.get('uprizoritev');
-        var dogodek = new Dogodki.prototype.model(self.tipDogModel.get('dogodek'));
+        coll.queryParams.uprizoritev = this.model.get('uprizoritev');
+        var dogodek = new Dogodki.prototype.model(this.model.get('dogodek'));
 
+        //ob uspešnem fetchu izrišemo sodelujociview
         coll.fetch({
             success: function (coll) {
                 var view = new SodelujociView({
@@ -229,19 +243,9 @@ define([
                 });
                 self.detailR.show(view);
             },
-            error: Radio.channel('error').request('handler', 'xhr')
+            error: Radio.channel('error').request('handler', 'flash')
         });
     };
-
-    DogodekView.prototype.renderRazredDogodka = function () {
-        if (this.TipDogView) {
-            var view = new this.TipDogView({
-                model: this.tipDogModel
-            });
-            this.detailR.show(view);
-        }
-    };
-
 
     DogodekView.prototype.onBrisi = function (options) {
         var self = this;
@@ -278,17 +282,21 @@ define([
 
     DogodekView.prototype.onRazmnozi = function (options) {
         console.log('onRazmnozi');
-        
+
         //var razmnoziView = new RazmnoziView(); 
-        
+
         //this.trigger('razmnozi', razmnoziView);
         //this.trigger('razmnozi');
 
     };
 
+    /**
+     * Pridobi prevod razreda dogodka, za izpis v tabu
+     * @returns {DokumentView@call;extend.prototype.getRazredNiz.niz}
+     */
     DogodekView.prototype.getRazredNiz = function () {
 
-        var razred = i18next.t(this.tipDogModel.get('dogodek').razred);
+        var razred = i18next.t(this.model.get('dogodek').razred);
         var niz;
         if (razred === '100s') {
             niz = i18next.t('std.predstava');
@@ -310,54 +318,54 @@ define([
 
         return niz;
     };
-    
+
     //tk
     DogodekView.prototype.setButtons = function () {
-        
-        
+
+
         console.log('---- seting buttons ----');
-        
+
         console.log('this:');
         console.log(this);
         console.table(this);
 
         /*
-        
-        //C FormView.prototype.getToolbarModel
-        
-        var coll = this.getToolbarModel();
-        
-        //uredim
-    
-        var tb = this.getToolbarModel();
-        var but = tb.getButton('doc-shrani');
-        if (but && but.get('disabled')) {
-            but.set({
-                disabled: false
-            });
-        }
-        
-        
-
-        console.log('Test:');
-        console.log('Options: ');console.table(this.options);
-        console.log('regionToolbar: ');
-        console.table(this.regionToolbar);
-        console.dir(this.regionToolbar);
-        
-        console.log(this.toolbarView);
-        
-        console.log('model:'); console.log(this.model);
-        
-        var status = this.model.get('status');
-        console.log('status: ', status);
-        
-        //C odkrij delete tab button
-        
-        var tb = this.getToolbarModel();
-        
-        console.log('tb: ', this.toolbarView);
-        */
+         
+         //C FormView.prototype.getToolbarModel
+         
+         var coll = this.getToolbarModel();
+         
+         //uredim
+         
+         var tb = this.getToolbarModel();
+         var but = tb.getButton('doc-shrani');
+         if (but && but.get('disabled')) {
+         but.set({
+         disabled: false
+         });
+         }
+         
+         
+         
+         console.log('Test:');
+         console.log('Options: ');console.table(this.options);
+         console.log('regionToolbar: ');
+         console.table(this.regionToolbar);
+         console.dir(this.regionToolbar);
+         
+         console.log(this.toolbarView);
+         
+         console.log('model:'); console.log(this.model);
+         
+         var status = this.model.get('status');
+         console.log('status: ', status);
+         
+         //C odkrij delete tab button
+         
+         var tb = this.getToolbarModel();
+         
+         console.log('tb: ', this.toolbarView);
+         */
     };
 
     return DogodekView;

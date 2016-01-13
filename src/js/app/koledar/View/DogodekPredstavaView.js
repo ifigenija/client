@@ -11,7 +11,8 @@ define([
     'marionette',
     'jquery',
     './DogodekView',
-    './PredstavaView'
+    'template!../tpl/predstava-form.tpl',
+    'formSchema!predstava'
 ], function (
         Radio,
         i18next,
@@ -22,12 +23,13 @@ define([
         Marionette,
         $,
         DogodekView,
-        PredstavaView
+        tpl,
+        schema
         ) {
 
     var DogodekPredstavaView = DogodekView.extend({
-        TipDogView: PredstavaView,
-        tipDogModel: null
+        schema: schema.toFormSchema().schema,
+        formTemplate: tpl
     });
 
     /**

@@ -11,7 +11,6 @@ define([
     'jquery',
     '../Model/Dogodki',
     './DogodekView',
-    './DogodekVajaView',
     './DogodekPredstavaView',
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
@@ -19,7 +18,15 @@ define([
     './Wizard/WizardTehSploView',
     './Wizard/WizardZasedenostView',
     './Wizard/WizardPredstavaView',
-    './Wizard/IzbiraRazredDogodkaView'
+    './Wizard/IzbiraRazredDogodkaView',
+    'template!../tpl/vaja-form.tpl',
+    'template!../tpl/predstava-form.tpl',
+    'template!../tpl/tehnicni-form.tpl',
+    'template!../tpl/splosni-form.tpl',
+    'formSchema!vaja',
+    'formSchema!predstava',
+    'formSchema!dogodekTehnicni',
+    'formSchema!dogodekSplosni'
 ], function (
         i18next,
         Marionette,
@@ -29,7 +36,6 @@ define([
         $,
         Dogodki,
         DogodekView,
-        DogodekVajaView,
         DogodekPredstavaView,
         PlanerDogodkiView,
         tplDan,
@@ -37,7 +43,15 @@ define([
         WizardTehSploView,
         WizardZasedenostView,
         WizardPredstavaView,
-        IzbiraRazredDogodkaView
+        IzbiraRazredDogodkaView,
+        vajaTpl,
+        predstavaTpl,
+        tehnicniTpl,
+        splosniTpl,
+        vajaSch,
+        predstavaSch,
+        tehnicniSch,
+        splosniSch
         ) {
 
     var uraZacetek = 10;
@@ -116,26 +130,35 @@ define([
      */
     PlanerDanView.prototype.urediDogodek = function (model) {
         var razred = model.get('dogodek').razred;
-        var TipDogodkaView;
+        var TipDogodkaView, schema, tpl;
         if (razred === '100s') {
             TipDogodkaView = DogodekPredstavaView;
+            schema = predstavaSch;
+            tpl = predstavaTpl;
         } else if (razred === '200s') {
-            TipDogodkaView = DogodekVajaView;
+            TipDogodkaView = DogodekView;
+            schema = vajaSch;
+            tpl = vajaTpl;
         } else if (razred === '300s') {
             TipDogodkaView = null;
         } else if (razred === '400s') {
-            TipDogodkaView = null;
+            TipDogodkaView = DogodekView;
+            schema = splosniSch;
+            tpl = splosniTpl;
         } else if (razred === '500s') {
             this.onZasedenost(model);
             this.dogodekView.on('skrij', this.onPreklici, this);
         } else if (razred === '600s') {
-            TipDogodkaView = null;
+            TipDogodkaView = DogodekView;
+            schema = tehnicniSch;
+            tpl = tehnicniTpl;
         }
         //model forme, ki je pogojena od dokumentview mora biti dogodek model
         //tipDogModel pa je morel razreda dogodka
         var view = new TipDogodkaView({
-            model: new Dogodki.prototype.model(model.get('dogodek')),
-            tipDogModel: model
+            model: model,
+            schema: schema.toFormSchema().schema,
+            formTemplate: tpl
         });
         view.on('skrij', function () {
             this.detailR.empty();
