@@ -41,6 +41,7 @@ define([
     DogodekPredstavaView.prototype.renderTabs = function (tabs) {
         DogodekView.prototype.renderTabs.apply(this, arguments);
         this.tabControl.addTab({id: 'abonmaji', name: i18next.t('predstava.abonmaji'), event: 'abonmaji'});
+        this.tabControl.onChildviewSelect(this.tabControl.collection.first());
         return this.tabControl;
     };
 
@@ -58,7 +59,7 @@ define([
 //        });
         this.deselectTab();
         this.$('.pnl-detail').addClass('active');
-        
+
         var itemView = new Marionette.ItemView({
             template: Handlebars.compile('I AM HERE!!!')
         });

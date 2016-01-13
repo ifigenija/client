@@ -44,8 +44,8 @@ define([
 
                 object[podrocje].push(model);
             } else {
-                object['gostiDezurni'] = [];
-                object['gostiDezurni'].push(model);
+                object['gosti'] = [];
+                object['gosti'].push(model);
             }
         });
 

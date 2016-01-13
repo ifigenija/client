@@ -40,7 +40,7 @@ define([
         regions: {
             umetnikiR: '.region-umetniki',
             tehnikiR: '.region-tehniki',
-            gosDezR: '.region-gosti'
+            gostiR: '.region-gosti'
         }
     });
     /**
@@ -74,8 +74,8 @@ define([
         this.izbraniTehniki.add(tsPodrocja.tehnik);
         this.izbraniTehniki.add(tsPodrocja.inspicient);
 
-        this.izbraniGosDez = new TerminiStoritve();
-        this.izbraniTehniki.add(tsPodrocja.gostiDezurni);
+        this.izbraniGosti = new TerminiStoritve();
+        this.izbraniTehniki.add(tsPodrocja.gosti);
     };
     /**
      * V tej funkciji inicializiramo 2 kolekciji ki predstavljajo alternacije umetnikov in tehnikov,
@@ -96,14 +96,14 @@ define([
         this.tehnikiColl.add(modeli.tehnik);
         this.tehnikiColl.add(modeli.inspicient);
 
-        this.izbraniGosDezColl = new Osebe();
-        this.gosDezColl = new Osebe();
-        this.gosDezColl.fetch({error: Radio.channel('error').request('handler', 'xhr')});
+        this.izbraniGostiColl = new Osebe();
+        this.gostiColl = new Osebe();
+        this.gostiColl.fetch({error: Radio.channel('error').request('handler', 'xhr')});
     };
     SodelujociView.prototype.onRender = function () {
         this.renderUmetniki();
         this.renderTehnika();
-        this.renderGosDez();
+        this.renderGosti();
     };
     /**
      * Izris seznam izbranih umetnikov
@@ -134,7 +134,7 @@ define([
      * Izris seznam izbranih gostov/dežurnih
      * @returns {undefined}
      */
-    SodelujociView.prototype.renderGosDez = function () {
+    SodelujociView.prototype.renderGosti = function () {
         var ItemView = Marionette.ItemView.extend({
             tagName: 'span',
             className: 'sodelujoc',
@@ -146,13 +146,13 @@ define([
             }
         });
 
-        var view = this.gosDezView = new SeznamSodelujocihView({
-            collection: this.izbraniGosDez,
+        var view = this.gostiView = new SeznamSodelujocihView({
+            collection: this.izbraniGosti,
             naslov: 'Gosti',
             childView: ItemView
         });
         view.on('render:uredi', this.urediGoste, this);
-        this.gosDezR.show(view);
+        this.gostiR.show(view);
     };
     SodelujociView.prototype.urediUmetnike = function ($el) {
         this.renderUredi({
@@ -176,9 +176,9 @@ define([
 
     SodelujociView.prototype.urediGoste = function ($el) {
         this.renderUredi({
-            izbraniTS: this.izbraniGosDez,
-            izbrani: this.izbraniGosDezColl,
-            mozni: this.gosDezColl,
+            izbraniTS: this.izbraniGosti,
+            izbrani: this.izbraniGostiColl,
+            mozni: this.gostiColl,
             $el: $el,
             tpl: Handlebars.compile('{{polnoIme}}')
         });
