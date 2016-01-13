@@ -182,7 +182,7 @@ define([
         self.dogodekR.show(view);
         
         view.on('razmnozi', function () { 
-            console.log('event razmnozi detected.A.');
+           
             self.renderRazmnozi();
         }, self);
     };
@@ -192,7 +192,13 @@ define([
         
         var razmnoziView = new RazmnoziView({
             model: new Backbone.Model({
-            
+                dni: ["1", "2","3","4", "5","6", "7"],
+                termini: [
+                        {kratica: "dop", ime: i18next.t('Dopoldan') },
+                        {kratica: "pop", ime: i18next.t('Popoldan') },
+                        {kratica: "zve", ime: i18next.t('Zvečer') }
+                    ]
+
             })
         });
            

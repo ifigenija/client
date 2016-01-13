@@ -1709,6 +1709,19 @@
         "porocilo": "Poročilo",
         "dogodek": "Dogodek",
         "uprizoritev": "Uprizoritev",
+        "razmnozi": {
+            "nacinVnosa": "Način vnosa",
+            "terminDopoldan": "Dopoldan",
+            "terminPopoldan": "Popoldan",
+            "terminZvecer": "Zvecer",
+            "ponedeljek": "pon",
+            "torek": "tor",
+            "sreda": "sre",
+            "cetrtek": "čet",
+            "petek": "pet",
+            "sobota": "sob",
+            "nedelja": "ned"
+        },
         "d": {
             "tipvaje": "",
             "zaporedna": "Zaporedna številka vaje",
