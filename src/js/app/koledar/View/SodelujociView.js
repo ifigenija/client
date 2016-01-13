@@ -117,7 +117,7 @@ define([
                 izbrani: this.izbraniUmetnikiColl,
                 mozni: this.umetnikiColl,
                 $el: $el,
-                tpl: Handlebars.compile('{{oseba.label}}')
+                tpl: Handlebars.compile('{{oseba.label}}({{funkcija.label}})')
             });
         };
 
@@ -141,7 +141,7 @@ define([
                 izbrani: this.izbraniTehnikiColl,
                 mozni: this.tehnikiColl,
                 $el: $el,
-                tpl: Handlebars.compile('{{oseba.label}}')
+                tpl: Handlebars.compile('{{oseba.label}}({{funkcija.label}})')
             });
         };
         this.tehnikiView = this.renderSeznam({

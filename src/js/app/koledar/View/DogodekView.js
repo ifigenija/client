@@ -17,6 +17,7 @@ define([
     'app/Dokument/View/DokumentView',
     'app/Zapisi/View/ZapisiLayout',
     './SodelujociView',
+    './SodelujociOsebeView',
     'formSchema!dogodek',
     'template!../tpl/dogodek-dok.tpl',
     'template!../tpl/dogodek-form.tpl'
@@ -36,6 +37,7 @@ define([
         DokumentView,
         ZapisiLayout,
         SodelujociView,
+        SodelujociOsebeView,
         schemaDogodek,
         dokumentTpl,
         dogodekTpl
@@ -232,25 +234,36 @@ define([
      */
     DogodekView.prototype.renderSodelujoci = function () {
         var self = this;
-        var alternacije = this.collection = new Alternacije();
-        alternacije.queryParams.uprizoritev = this.model.get('uprizoritev');
+
+        var uprizoritev = this.model.get('uprizoritev');
         var dogodek = new Dogodki.prototype.model(this.model.get('dogodek'));
         var osebe = new Osebe();
         //pridobimo kolekcijo oseb
         osebe.fetch({
             success: function (kol) {
                 //ob uspešnem fetchu izrišemo sodelujociview
-                alternacije.fetch({
-                    success: function (col) {
-                        var view = new SodelujociView({
-                            alternacije: col,
-                            osebe: kol,
-                            dogodek: dogodek
-                        });
-                        self.detailR.show(view);
-                    },
-                    error: Radio.channel('error').request('handler', 'flash')
-                });
+
+                if (uprizoritev) {
+                    var alternacije = this.collection = new Alternacije();
+                    alternacije.queryParams.uprizoritev = uprizoritev;
+                    alternacije.fetch({
+                        success: function (col) {
+                            var view = new SodelujociView({
+                                alternacije: col,
+                                osebe: kol,
+                                dogodek: dogodek
+                            });
+                            self.detailR.show(view);
+                        },
+                        error: Radio.channel('error').request('handler', 'flash')
+                    });
+                } else {
+                    var view = new SodelujociOsebeView({
+                        osebe: kol,
+                        dogodek: dogodek
+                    });
+                    self.detailR.show(view);
+                }
             }
         });
     };

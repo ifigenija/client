@@ -92,7 +92,7 @@ define([
             'click .dodaj-dogodek': 'dodaj',
             'click .odstrani-dogodke': 'odstrani'
         },
-        initialize: function(options){
+        initialize: function (options) {
             this.zacetek = options.zacetek || null;
             this.konec = options.konec || null;
         },
@@ -104,7 +104,11 @@ define([
             });
         },
         onOdstrani: function () {
-            this.trigger('odstrani:dogodke');
+            //radota prosit za rpc klic ki odstrani vse dogodke v določenem intervalu
+            var model;
+            while (model = this.collection.first()) {
+                model.destroy();
+            }
         },
         onChildviewPrikaziDogodek: function (dogodekM, razredDogodkaM) {
             this.trigger('prikazi:dogodek', razredDogodkaM);

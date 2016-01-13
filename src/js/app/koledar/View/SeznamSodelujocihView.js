@@ -9,6 +9,7 @@ define([
     'underscore',
     'app/bars',
     'marionette',
+    'app/Max/View/Toolbar',
     'template!../tpl/seznamSodelujoci.tpl'
 ], function (
         Radio,
@@ -17,10 +18,11 @@ define([
         _,
         Handlebars,
         Marionette,
+        Toolbar,
         sodelujociTpl
         ) {
 
-    var ItemView = Marionette.ItemView.extend({
+    var SodelujocView = Marionette.ItemView.extend({
         tagName: 'span',
         className: 'sodelujoc',
         template: Handlebars.compile('<label>{{ime}}</label>'),
@@ -31,16 +33,21 @@ define([
         }
     });
 
-    var SeznamSodelujocihView = Marionette.CompositeView.extend({
+    var SodelujociView = Marionette.CollectionView.extend({
         className: 'sodelujoci',
+        childView: SodelujocView,
+        initialize: function(options){
+            this.childView = options.childView || this.childView;
+        }
+    });
+    var SeznamSodelujocihView = Marionette.LayoutView.extend({
+        className: '',
         template: sodelujociTpl,
-        childView: ItemView,
-        childViewContainer: '.sodelujoci-list',
-        triggers: {
-            'click .sodelujoci-uredi': 'uredi',
-            'click .sodelujoci-podrobno': 'podrobno'
-        },
-        naslov: 'Naslov'
+        naslov: 'Naslov',
+        regions: {
+            toolbarR: '.region-toolbar',
+            sodelujociR: '.region-sodelujoci'
+        }
     });
 
     /**
@@ -57,7 +64,48 @@ define([
     SeznamSodelujocihView.prototype.initialize = function (options) {
         this.collection = options.collection || new Backbone.Collection();
         this.naslov = options.naslov || this.naslov;
-        this.childview = options.childView || this.childView;
+        this.childView = options.childView || this.childView;
+    };
+    /**
+     * 
+     * @returns {undefined}
+     */
+    SeznamSodelujocihView.prototype.onRender = function () {
+        this.renderToolbar();
+        this.renderSodelujoci();
+    };
+
+    SeznamSodelujocihView.prototype.renderToolbar = function () {
+        var groups = [[
+                {
+                    id: 'sodelujoci-uredi',
+                    icon: 'fa fa-pencil-square-o',
+                    element: 'button-trigger',
+                    trigger: 'uredi'
+                },
+                {
+                    id: 'sodelujoci-termin',
+                    icon: 'fa fa-calendar',
+                    element: 'button-trigger',
+                    trigger: 'uredi:termin'
+                }
+            ]];
+
+        var toolbarView = new Toolbar({
+            buttonGroups: groups,
+            listener: this
+        });
+
+        this.toolbarR.show(toolbarView);
+
+    };
+    SeznamSodelujocihView.prototype.renderSodelujoci = function () {
+        var sodelujociView = new SodelujociView({
+            collection: this.collection,
+            childView: this.childView
+        });
+
+        this.sodelujociR.show(sodelujociView);
     };
 
     /**
@@ -65,14 +113,14 @@ define([
      * @returns {undefined}
      */
     SeznamSodelujocihView.prototype.onUredi = function () {
-        this.trigger('uredi:seznam', this.$('.sodelujoci-uredi'));
+        this.trigger('uredi:seznam', this.$('.btn-toolbar'));
     };
 
     /**
      * Podatke v seznamu prikažemo na bolj podroben način
      * @returns {undefined}
      */
-    SeznamSodelujocihView.prototype.onPodrobno = function () {
+    SeznamSodelujocihView.prototype.onUreditermin = function () {
         this.trigger('uredi:TS', this.collection);
     };
 
