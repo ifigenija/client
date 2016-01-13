@@ -7,5 +7,4 @@
         </div>
     </div>
     <div clasS="col-sm-9 sodelujoci-list"></div>
-</div>  
-<div class="region-koledar"></div>
+</div>

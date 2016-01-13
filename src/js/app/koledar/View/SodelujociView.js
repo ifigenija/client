@@ -51,6 +51,7 @@ define([
      */
     SodelujociView.prototype.initialize = function (options) {
         this.alternacijeColl = options.alternacije;
+        this.osebeColl = options.osebe;
         this.dogodek = options.dogodek;
         this.tsColl = new TerminiStoritve(this.dogodek.get('terminiStoritve'));
 
@@ -97,8 +98,7 @@ define([
         this.tehnikiColl.add(modeli.inspicient);
 
         this.izbraniGostiColl = new Osebe();
-        this.gostiColl = new Osebe();
-        this.gostiColl.fetch({error: Radio.channel('error').request('handler', 'xhr')});
+        this.gostiColl = this.osebeColl;
     };
     SodelujociView.prototype.onRender = function () {
         this.renderUmetniki();
@@ -110,31 +110,54 @@ define([
      * @returns {undefined}
      */
     SodelujociView.prototype.renderUmetniki = function () {
-        var view = this.umetnikiView = new SeznamSodelujocihView({
+        //funkcija, ki jo prožimo ko kliknemo gumb uredi pri umetnikih
+        var uredi = function ($el) {
+            this.urediSeznam({
+                izbraniTS: this.izbraniUmetniki,
+                izbrani: this.izbraniUmetnikiColl,
+                mozni: this.umetnikiColl,
+                $el: $el,
+                tpl: Handlebars.compile('{{oseba.label}}')
+            });
+        };
+
+        this.umetnikiView = this.renderSeznam({
             collection: this.izbraniUmetniki,
-            naslov: 'Umetniki'
+            naslov: 'Umetniki',
+            uredi: uredi
         });
-        view.on('render:uredi', this.urediUmetnike, this);
-        this.umetnikiR.show(view);
+
+        this.umetnikiR.show(this.umetnikiView);
     };
     /**
      * Izris seznam izbranih tehnikov
      * @returns {undefined}
      */
     SodelujociView.prototype.renderTehnika = function () {
-        var view = this.tehnikiView = new SeznamSodelujocihView({
+        //funkcija, ki jo prožimo ko kliknemo gumb uredi pri tehniki
+        var uredi = function ($el) {
+            this.urediSeznam({
+                izbraniTS: this.izbraniTehniki,
+                izbrani: this.izbraniTehnikiColl,
+                mozni: this.tehnikiColl,
+                $el: $el,
+                tpl: Handlebars.compile('{{oseba.label}}')
+            });
+        };
+        this.tehnikiView = this.renderSeznam({
             collection: this.izbraniTehniki,
-            naslov: 'Tehniki'
+            naslov: 'Tehniki',
+            uredi: uredi
         });
-        view.on('render:uredi', this.urediTehnike, this);
-        this.tehnikiR.show(view);
+        this.tehnikiR.show(this.tehnikiView);
     };
-    
+
     /**
      * Izris seznam izbranih gostov/dežurnih
      * @returns {undefined}
      */
     SodelujociView.prototype.renderGosti = function () {
+        //itemView odgobvoren za izris modelov iz kolekcije seznamSodelujocihView
         var ItemView = Marionette.ItemView.extend({
             tagName: 'span',
             className: 'sodelujoc',
@@ -146,49 +169,55 @@ define([
             }
         });
 
-        var view = this.gostiView = new SeznamSodelujocihView({
+        //funkcija, ki jo prožimo ko kliknemo gumb uredi pri gostih
+        var uredi = function ($el) {
+            this.urediSeznam({
+                izbraniTS: this.izbraniGosti,
+                izbrani: this.izbraniGostiColl,
+                mozni: this.gostiColl,
+                $el: $el,
+                tpl: Handlebars.compile('{{polnoIme}}')
+            });
+        };
+
+        this.gostiView = this.renderSeznam({
             collection: this.izbraniGosti,
             naslov: 'Gosti',
-            childView: ItemView
+            childView: ItemView,
+            uredi: uredi
         });
-        view.on('render:uredi', this.urediGoste, this);
-        this.gostiR.show(view);
-    };
-    SodelujociView.prototype.urediUmetnike = function ($el) {
-        this.renderUredi({
-            izbraniTS: this.izbraniUmetniki,
-            izbrani: this.izbraniUmetnikiColl,
-            mozni: this.umetnikiColl,
-            $el: $el,
-            tpl: Handlebars.compile('{{oseba.label}}')
-        });
+
+        this.gostiR.show(this.gostiView);
     };
 
-    SodelujociView.prototype.urediTehnike = function ($el) {
-        this.renderUredi({
-            izbraniTS: this.izbraniTehniki,
-            izbrani: this.izbraniTehnikiColl,
-            mozni: this.tehnikiColl,
-            $el: $el,
-            tpl: Handlebars.compile('{{oseba.label}}')
-        });
-    };
-
-    SodelujociView.prototype.urediGoste = function ($el) {
-        this.renderUredi({
-            izbraniTS: this.izbraniGosti,
-            izbrani: this.izbraniGostiColl,
-            mozni: this.gostiColl,
-            $el: $el,
-            tpl: Handlebars.compile('{{polnoIme}}')
-        });
-    };
     /**
-     * Ob kliku na gum uredi se nam odpre dualListView. Namen je da izberemo alternacije/osebe, ki bodo povabljene na dogodek.
+     * Funkcija namenjena izrisu seznamaSodelujocihView
      * @param {type} options
      * @returns {undefined}
      */
-    SodelujociView.prototype.renderUredi = function (options) {
+    SodelujociView.prototype.renderSeznam = function (options) {
+        var view = new SeznamSodelujocihView({
+            collection: options.collection,
+            naslov: options.naslov,
+            childView: options.childView
+        });
+        view.on('uredi:seznam', options.uredi, this);
+        view.on('uredi:TS', this.urediTS, this);
+        return view;
+    };
+
+    /**
+     * Ob kliku na gum uredi se nam odpre dualListView. Namen je da izberemo alternacije/osebe, ki bodo povabljene na dogodek.
+     * @param {Object} options
+     * @param {Object} options.izbrani      koleckcija alternacija ali oseb, ki so trenutno izbrani
+     * @param {Object} options.mozni        kolekcija alternacij in oseb, med katerimi lahko izbiramo
+     * @param {Object} options.tpl          template za izpis modelov alternacij/oseb v seznamih dual lista
+     * @param {Object} options.$el          jquery objekt elementa, ki je pod katerim se naj izriše dualListView
+     * @param {Object} options.izbraniTS    kolekcija terminov storitev trenutno izbranih alternacij/oseb
+     * 
+     * @returns {undefined}
+     */
+    SodelujociView.prototype.urediSeznam = function (options) {
         var $e = $('<div class="selectlist-content"></div>');
         $('body').append($e);
         var view = new DualListView({
@@ -216,6 +245,15 @@ define([
         }, this);
 
         view.render();
+    };
+
+    /**
+     * Funkcija namenjena urejanju terminovstoritev izbranih alternacij/oseb
+     * @param {type} options
+     * @returns {undefined}
+     */
+    SodelujociView.prototype.urediTS = function (collection) {
+        console.log('urediTS');
     };
     return SodelujociView;
 });

@@ -12,6 +12,7 @@ define([
     'app/Max/View/Confirm',
     'app/koledar/Model/Alternacije',
     'app/koledar/Model/Dogodki',
+    '../Model/Osebe',
     'app/Max/View/TabControl',
     'app/Dokument/View/DokumentView',
     'app/Zapisi/View/ZapisiLayout',
@@ -30,6 +31,7 @@ define([
         confirm,
         Alternacije,
         Dogodki,
+        Osebe,
         TabControl,
         DokumentView,
         ZapisiLayout,
@@ -230,20 +232,26 @@ define([
      */
     DogodekView.prototype.renderSodelujoci = function () {
         var self = this;
-        var coll = this.collection = new Alternacije();
-        coll.queryParams.uprizoritev = this.model.get('uprizoritev');
+        var alternacije = this.collection = new Alternacije();
+        alternacije.queryParams.uprizoritev = this.model.get('uprizoritev');
         var dogodek = new Dogodki.prototype.model(this.model.get('dogodek'));
-
-        //ob uspešnem fetchu izrišemo sodelujociview
-        coll.fetch({
-            success: function (coll) {
-                var view = new SodelujociView({
-                    alternacije: coll,
-                    dogodek: dogodek
+        var osebe = new Osebe();
+        //pridobimo kolekcijo oseb
+        osebe.fetch({
+            success: function (kol) {
+                //ob uspešnem fetchu izrišemo sodelujociview
+                alternacije.fetch({
+                    success: function (col) {
+                        var view = new SodelujociView({
+                            alternacije: col,
+                            osebe: kol,
+                            dogodek: dogodek
+                        });
+                        self.detailR.show(view);
+                    },
+                    error: Radio.channel('error').request('handler', 'flash')
                 });
-                self.detailR.show(view);
-            },
-            error: Radio.channel('error').request('handler', 'flash')
+            }
         });
     };
 

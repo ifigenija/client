@@ -65,7 +65,7 @@ define([
      * @returns {undefined}
      */
     SeznamSodelujocihView.prototype.onUredi = function () {
-        this.trigger('render:uredi', this.$('.sodelujoci-uredi'));
+        this.trigger('uredi:seznam', this.$('.sodelujoci-uredi'));
     };
 
     /**
@@ -73,7 +73,7 @@ define([
      * @returns {undefined}
      */
     SeznamSodelujocihView.prototype.onPodrobno = function () {
-        console.log('podobno');
+        this.trigger('uredi:TS', this.collection);
     };
 
     return SeznamSodelujocihView;
