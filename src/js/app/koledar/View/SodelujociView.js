@@ -91,6 +91,7 @@ define([
         this.umetnikiColl = new Alternacije();
         this.umetnikiColl.add(modeli.umetnik);
         this.umetnikiColl.add(modeli.igralec);
+        this.umetnikiColl.add(modeli.sepetalec);
 
         this.izbraniTehnikiColl = new Alternacije();
         this.tehnikiColl = new Alternacije();

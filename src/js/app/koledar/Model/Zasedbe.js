@@ -6,23 +6,42 @@ define([
     'radio',
     'baseUrl',
     'i18next',
+    'moment',
     'backbone',
     'underscore',
-    'app/produkcija/Model/PlanFun',
+    './PlanFun',
+    './PlanAlter',
     'jquery',
     'jquery.jsonrpc'
 ], function (
         Radio,
         baseUrl,
         i18next,
+        moment,
         Backbone,
         _,
         PlanFun,
+        PlanAlter,
         $
         ) {
-    
+
     var Zasedbe = Backbone.Collection.extend({
         model: Backbone.Model,
+        initialize: function (models, options) {
+            this.datum = null;
+
+            if (options && options.datum) {
+                this.datum = options.datum;
+            }
+        },
+        /**
+         * Ko se model/modeli dodajo v collecijo se izvede ta funkcija
+         * @param {Object|Array} models
+         * @param {Object} options
+         * @param {Object} options.datum    v primeru da datum podamo želimo videti samo aktivne alternacije 
+         *                                  v nasprotnem primeru se bodo vse alternacije tretirale kot aktivne
+         * @returns {undefined}
+         */
         add: function (models, options) {
             var self = this;
 
@@ -32,29 +51,44 @@ define([
 
             for (var k in models) {
                 var planirane = new PlanFun();
-                planirane.queryParams.uprizoritev = models[k].id;
+                var uprID = models[k].id;
+
+                planirane.queryParams.uprizoritev = uprID;
+                if (this.datum) {
+                    planirane.queryParams.datum = this.datum.toISOString();
+                }
                 models[k].set('planiraneFunkcije', planirane);
                 planirane.fetch({
                     success: function (funkcije) {
-                        funkcije.each(function (funkcija) {
-                            var alternacije = new Backbone.Collection(funkcija.get('alternacije'));
-                            for (k in alternacije.models) {
-                                var alternacija = alternacije.models[k];
-                                var privzeti = alternacija.get('privzeti');
-                                if (privzeti) {
-                                    alternacija.set('izbran', true);
-                                }
-                            }
-                            funkcija.set('alternacije', alternacije);
-                        });
-                        funkcije.trigger('posodobljeno');
-                        self.trigger('added');
+                        self.getPlaniraneAlternacije(uprID, funkcije);
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
             }
             Backbone.Collection.prototype.add.apply(self, arguments);
 
+        },
+        getPlaniraneAlternacije: function (uprizoritevID, funkcije) {
+            var planiraneAlter = new PlanAlter();
+            planiraneAlter.queryParams.uprizoritev = uprizoritevID;
+            if (this.datum) {
+                    planiraneAlter.queryParams.datum = this.datum.toISOString();
+                }
+            planiraneAlter.fetch({
+                success: function (alternacije) {
+                    var alters = alternacije.groupBy(function (alternacija) {
+                        return alternacija.get('funkcija').id;
+                    });
+                    funkcije.each(function (funkcija) {
+                        var alterFun = alters[funkcija.get('id')];
+                        if (alterFun) {
+                            funkcija.set('alternacija', new Backbone.Collection(alterFun));
+                        }
+                    });
+                    funkcije.trigger('posodobljeno');
+                    this.trigger('added');
+                }
+            });
         },
         vrniIzbraneOsebe: function () {
             var funkOsebe = [];

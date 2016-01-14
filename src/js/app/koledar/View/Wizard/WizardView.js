@@ -46,6 +46,7 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.initialize = function (options) {
+        this.state = 0;
         this.defWizard = options.defWizard || this.defWizard;
 
         if (!_.isArray(this.defWizard.views)) {
@@ -73,12 +74,25 @@ define([
      */
     WizardView.prototype.onRender = function () {
         this.renderView(this.stevecView);
+        this.renderState();
+    };
 
-        if (this.views.length > 1) {
-            this.skrijPotrdi();
+    /**
+     * Funkcija ki skrbi da se stanja wizarda izrišejo
+     * state: 0 nepripravljen na naslednji korak
+     * state: 1 pripravljen na naslednji korak
+     * @returns {undefined}
+     */
+    WizardView.prototype.renderState = function () {
+        if (this.state === 0) {
             this.disableNaprej();
+            this.disablePotrdi();
+        } else if (this.state === 1) {
+            this.enableNaprej();
+            this.enablePotrdi();
         }
 
+        this.toggleNaprejPotrdi(this.stevecView, this.views.length);
         this.toggleNazaj(this.stevecView);
     };
     /**
@@ -95,8 +109,8 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.onReady = function (model) {
-        this.enableNaprej();
-        this.enablePotrdi();
+        this.state = 1;
+        this.renderState();
         this.model = model;
     };
 
@@ -105,8 +119,8 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.onNotReady = function () {
-        this.disableNaprej();
-        this.disablePotrdi();
+        this.state = 0;
+        this.renderState();
     };
 
     /**
@@ -116,14 +130,11 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.onNaprej = function () {
-        this.disableNaprej();
-        this.disablePotrdi();
-
         this.stevecView++;
-        this.renderView(this.stevecView);
+        this.state = 0;
+        this.renderState();
 
-        this.toggleNaprejPotrdi(this.stevecView, this.views.length);
-        this.toggleNazaj(this.stevecView);
+        this.renderView(this.stevecView);
     };
     /**
      * Ko se na viewju triggera nazaj se izvede ta funkcija.
@@ -132,14 +143,13 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.onNazaj = function () {
-        this.enableNaprej();
-        this.enablePotrdi();
 
         this.stevecView--;
+        this.state = 1;
+        this.renderState();
+
         this.renderView(this.stevecView);
 
-        this.toggleNaprejPotrdi(this.stevecView, this.views.length);
-        this.toggleNazaj(this.stevecView);
     };
 
     WizardView.prototype.onPotrdi = function () {
@@ -195,13 +205,19 @@ define([
      * @returns {undefined}
      */
     WizardView.prototype.toggleNazaj = function (stevecView) {
+        //v primeru da gledamo prvi view je gumb nazaj skrit
         if (stevecView === 0) {
             this.$('.nazaj').addClass('hidden');
         } else {
             this.$('.nazaj').removeClass('hidden');
         }
     };
-
+    /**
+     * 
+     * @param {type} stevecView
+     * @param {type} stView
+     * @returns {undefined}
+     */
     WizardView.prototype.toggleNaprejPotrdi = function (stevecView, stView) {
         if (stevecView < stView - 1) {
             this.skrijPotrdi();

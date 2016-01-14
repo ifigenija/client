@@ -54,7 +54,7 @@ define([
         // Iz modela poskušamo prebrati prostor in uprizoritev.
         // V primeru da je prostor že določen se ponovno nastavi v modelu
         if (this.options && this.options.model) {
-            var uprID = this.model.get('uprizoritev');
+            var uprID = this.model.get('uprizoritev').get('id');
             var prostorID = this.model.get('prostor');
 
             if (prostorID) {

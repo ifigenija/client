@@ -44,6 +44,10 @@ define([
         if (options && options.model) {
             this.model = options.model;
         }
+        
+        if (options && options.model.get('uprizoritev')) {
+            this.collectionUprizoritev.add(options.model.get('uprizoritev'));
+        }
 
         if (options && zacetek) {
             this.zacetek = moment(zacetek).toISOString();
@@ -73,7 +77,7 @@ define([
         if (this.collectionUprizoritev.length) {
             this.$('.prikazi-prekrivanja').removeClass('hidden');
 
-            this.model.set('uprizoritev', model.get('id'));
+            this.model.set('uprizoritev', model);
             this.trigger('ready', this.model);
         }
     };

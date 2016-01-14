@@ -1,5 +1,6 @@
 /* 
  * Planirane funkcije
+ * Vrne vse planirane funkcije določene uprizoritve, ki nimajo aktivnih alternacij
  * 
  * Licenca GPLv3
  */
