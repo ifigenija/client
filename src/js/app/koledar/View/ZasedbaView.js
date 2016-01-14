@@ -40,6 +40,7 @@ define([
     });
 
     var EmptyAlternacijeView = Marionette.ItemView.extend({
+        tagName: 'span',
         template: Handlebars.compile(i18next.t('vzporednice.niAlternacij'))
     });
 
@@ -116,6 +117,12 @@ define([
         initialize: function (options) {
             this.funkcijeOsebe = [];
 
+            this.collection.on('posodobljene:alternacije', function () {
+                this.render();
+                this.sortiraj();
+            }, this);
+        },
+        sortiraj: function () {
             this.collection.comparator = function (m1, m2) {
                 var m1Privzeti = m1.get('privzeti');
                 var m2Privzeti = m2.get('privzeti');
@@ -178,9 +185,18 @@ define([
         initialize: function (options) {
             this.funkcijeOsebe = [];
 
+            this.collection.on('posodobljene:funkcije', function () {
+                this.render();
+                this.sortiraj();
+            }, this);
+            this.collection.on('posodobljene:alternacije', function () {
+                this.sortiraj();
+            }, this);
+        },
+        sortiraj: function () {
             this.collection.comparator = function (m1, m2) {
-                var m1Count = m1.get('alterCount');
-                var m2Count = m2.get('alterCount');
+                var m1Count = m1.get('alternacije').length;//.get('alterCount');
+                var m2Count = m2.get('alternacije').length;//get('alterCount');
 
                 if (m1Count > m2Count) {
                     return -1;
@@ -194,10 +210,6 @@ define([
             };
 
             this.collection.sort();
-            var self = this;
-            this.collection.on('posodobljeno', function () {
-                self.render();
-            }, this);
         },
         onChildviewChange: function () {
             this.trigger('change');
