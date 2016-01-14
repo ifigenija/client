@@ -25,7 +25,7 @@ define([
     });
 
     /**
-     * Kolekcijo oseb pretvorimo v kolekcijo TS
+     * Kolekcijo oseb pretvorimo v polje objektov TS
      * @param {Array} options
      * @param {dogodekModel} options.dogodek
      * @param {moment} options.zacetek
@@ -38,15 +38,16 @@ define([
 
         var modeli = [];
         this.each(function (model) {
-            var osebaModel = {
+            var tsModel = {
                 dogodek: options.dogodek,
                 zacetek: options.zacetek,
                 konec: options.konec,
                 gost: options.gost ? options.gost : false,
                 dezurni: options.dezurni ? options.dezurni : false,
+                alternacija: null,
                 oseba: model
             };
-            modeli.push(osebaModel);
+            modeli.push(tsModel);
         });
 
         return modeli;
@@ -55,5 +56,3 @@ define([
     return Collection;
 
 });
-
-

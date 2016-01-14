@@ -104,16 +104,19 @@ define([
             });
         },
         onOdstrani: function () {
-            //radota prosit za rpc klic ki odstrani vse dogodke v določenem intervalu
             var model;
-            while (model = this.collection.first()) {
-                model.destroy();
+            var zaIzbris = [];
+            this.collection.each(function(model){
+                var zacetek = moment(model.get('zacetek'));
+                var konec = moment(model.get('konec'));
+                if(zacetek.diff(konec, 'days') === 0){
+                    zaIzbris.push(model);
+                }
+            });
+            
+            for(var key in zaIzbris){
+                zaIzbris[key].destroy();
             }
-//            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar'});
-//            rpc.call('brisiDogodke', {
-//                'zacetek': 'isodatetime',
-//                'konec': 'isodatetime'
-//            }, options.success, options.error);
 
         },
         onChildviewPrikaziDogodek: function (dogodekM, razredDogodkaM) {

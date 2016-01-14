@@ -72,8 +72,8 @@ define([
             var planiraneAlter = new PlanAlter();
             planiraneAlter.queryParams.uprizoritev = uprizoritevID;
             if (this.datum) {
-                    planiraneAlter.queryParams.datum = this.datum.toISOString();
-                }
+                planiraneAlter.queryParams.datum = this.datum.toISOString();
+            }
             planiraneAlter.fetch({
                 success: function (alternacije) {
                     var alters = alternacije.groupBy(function (alternacija) {

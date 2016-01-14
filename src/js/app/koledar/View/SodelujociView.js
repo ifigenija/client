@@ -58,6 +58,49 @@ define([
         this.razdeliAlternacije();
         this.razdeliTS();
     };
+    /**
+     * Funkcija namenjena da vrne seznam trenutno izbranih termino storitev dogodka
+     * @returns {TerminiStoritve}
+     */
+    SodelujociView.prototype.getTS = function () {
+        var self = this;
+        var terminiS = new TerminiStoritve();
+
+        terminiS.add(this.izbraniUmetniki.models);
+        terminiS.add(this.izbraniTehniki.models);
+        terminiS.add(this.izbraniGosti.models);
+
+        //iz trenutno izbranih terminov storitev, želimo prepisati tiste, ki že obstajajo
+        terminiS.each(function (terminS) {
+            var alterID;
+            if(terminS.get('alternacija')){
+                alterID = terminS.get('alternacija').get('id');
+            }
+            var osebaID = terminS.get('oseba').get('id');
+            var alterTermin = null;
+            var osebaTermin = null;
+            // v kolekciji TS, ki je shranjena na serverju prepišemo TS, ki ima isto alternacijo in osebo ter samo osebo
+            this.tsColl.each(function (ts) {
+                //preverjamo oboje v primeru da ima alternacije pri več kot eni funkciji
+                //v nasprotnem primeru preverimo samo osebo
+                var alter = ts.get('alternacija');
+                if (alter && alter.get('id') === alterID) {
+                    alterTermin = new TerminiStoritve.prototype.model(ts);
+                } else if (ts.get('oseba').get('id') === osebaID) {
+                    osebaTermin = new TerminiStoritve.prototype.model(ts);
+                }
+            });
+
+            //v kolikor smo našli enako alternacijo se prepiše generiran ts s TS, ki že obstaja
+            if (alterTermin) {
+                terminS = alterTermin;
+            } else if (osebaTermin) {
+                terminS = osebaTermin;
+            }
+        });
+
+        return terminiS;
+    };
 
     /**
      * Termine storitve iz dogodkarazdelimo po področjih v tri različne kolekcije.
@@ -76,7 +119,7 @@ define([
         this.izbraniTehniki.add(tsPodrocja.inspicient);
 
         this.izbraniGosti = new TerminiStoritve();
-        this.izbraniTehniki.add(tsPodrocja.gosti);
+        this.izbraniGosti.add(tsPodrocja.gosti);
     };
     /**
      * V tej funkciji inicializiramo 2 kolekciji ki predstavljajo alternacije umetnikov in tehnikov,
@@ -91,12 +134,12 @@ define([
         this.umetnikiColl = new Alternacije();
         this.umetnikiColl.add(modeli.umetnik);
         this.umetnikiColl.add(modeli.igralec);
-        this.umetnikiColl.add(modeli.sepetalec);
 
         this.izbraniTehnikiColl = new Alternacije();
         this.tehnikiColl = new Alternacije();
         this.tehnikiColl.add(modeli.tehnik);
         this.tehnikiColl.add(modeli.inspicient);
+        this.umetnikiColl.add(modeli.sepetalec);
 
         this.izbraniGostiColl = new Osebe();
         this.gostiColl = this.osebeColl;
@@ -243,6 +286,9 @@ define([
 
             // kolekcijo izbranihTerminostoritev resetiramo in dodamo v tem trenutku izbrane alternacije/osebe
             options.izbraniTS.reset(tsModeli);
+            var terminiStoritve = self.getTS();
+            
+            //izvediRpc Klic za pridobitev novih TS
         }, this);
 
         view.render();
