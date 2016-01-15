@@ -12,6 +12,7 @@
                 <div class="region-form"></div>
             </div>
             <div role="tabpanel" class="tab-pane pnl-detail region-detail"></div>
+            <div class="region-koledar"></div>
         </div>
     </div>
 </div>

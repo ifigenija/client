@@ -76,11 +76,11 @@ define([
 
             // V primeru da obstaja zacetek, preverimo v katerem terminu se začne dogodek
             if (zacetek) {
-                if (zacetekM.diff(uraDopoldan) <= 0) {
+                if (zacetekM.diff(uraDopoldan) < 0) {
                     terminZacetek = 1;
-                } else if (zacetekM.diff(uraDopoldan) > 0 && zacetekM.diff(uraPopoldan) <= 0) {
+                } else if (zacetekM.diff(uraDopoldan) >= 0 && zacetekM.diff(uraPopoldan) < 0) {
                     terminZacetek = 2;
-                } else if (zacetekM.diff(uraPopoldan) > 0 && zacetekM.diff(uraZvecer) <= 0) {
+                } else if (zacetekM.diff(uraPopoldan) >= 0 && zacetekM.diff(uraZvecer) < 0) {
                     terminZacetek = 3;
                 }
             }

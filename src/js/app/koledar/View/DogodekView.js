@@ -18,6 +18,7 @@ define([
     'app/Zapisi/View/ZapisiLayout',
     './SodelujociView',
     './SodelujociOsebeView',
+    './UrnikView',
     'formSchema!dogodek',
     'template!../tpl/dogodek-dok.tpl',
     'template!../tpl/dogodek-form.tpl'
@@ -38,6 +39,7 @@ define([
         ZapisiLayout,
         SodelujociView,
         SodelujociOsebeView,
+        UrnikView,
         schemaDogodek,
         dokumentTpl,
         dogodekTpl
@@ -70,7 +72,8 @@ define([
         schema: schemaDogodek.toFormSchema().schema,
         regions: {
             tabsR: '.dogodek-tabs',
-            detailR: '.region-detail'
+            detailR: '.region-detail',
+            koledarR: '.region-koledar'
         },
         buttons: {
             'doc-razmnozi': {
@@ -141,7 +144,12 @@ define([
      * @returns {undefined}
      */
     DogodekView.prototype.onKoledarProstor = function () {
-        console.log('onKoledarProstor');
+        var coll = new Dogodki();
+        var urnikView = new UrnikView({
+            collection: coll
+        });
+
+        this.koledarR.show(urnikView);
     };
 
     /**
