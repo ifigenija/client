@@ -180,42 +180,43 @@ define([
         var self = this;
 
         view.on('izbrano', function (model) {
+            var wizardView;
             if (model.get('razred') === '100s') {
-                var view = new WizardPredstavaView({
+                wizardView = new WizardPredstavaView({
                     model: model
                 });
             } else if (model.get('razred') === '200s') {
-                var view = new WizardVajaView({
+                wizardView = new WizardVajaView({
                     model: model
                 });
             } else if (model.get('razred') === '300s') {
 
             } else if (model.get('razred') === '400s') {
-                var view = new WizardTehSploView({
+                wizardView = new WizardTehSploView({
                     model: model
                 });
             } else if (model.get('razred') === '500s') {
-                var view = new WizardZasedenostView({
+                wizardView = new WizardZasedenostView({
                     model: model
                 });
             } else if (model.get('razred') === '600s') {
-                var view = new WizardTehSploView({
+                wizardView = new WizardTehSploView({
                     model: model
                 });
             }
 
-            view.on('close', function () {
+            wizardView.on('close', function () {
                 self.detailR.empty();
             }, self);
 
-            view.on('preklici', function () {
+            wizardView.on('preklici', function () {
                 self.detailR.empty();
             }, self);
-            view.on('save:success', function (model) {
+            wizardView.on('save:success', function (model) {
                 options.collection.add(model);
             }, self);
 
-            self.detailR.show(view);
+            self.detailR.show(wizardView);
         }, this);
     };
 

@@ -39,9 +39,9 @@ define([
         this.on('prostor:change', function (form, editor) {
             //pridobimo vrednost iz editorja. V kolikor ni vrednosti se proži not:ready
             var prostor = editor.getValue();
-            if (prostor && prostor.id) {
+            if (prostor) {
                 //nastavimo vrednost prostora v modelu
-                self.model.set('prostor', prostor.id);
+                self.model.set('prostor', prostor);
                 self.trigger('ready', self.model);
             } else {
                 self.trigger('not:ready');
@@ -55,10 +55,10 @@ define([
         // V primeru da je prostor že določen se ponovno nastavi v modelu
         if (this.options && this.options.model) {
             var uprID = this.model.get('uprizoritev').get('id');
-            var prostorID = this.model.get('prostor');
+            var prostor = this.model.get('prostor');
 
-            if (prostorID) {
-                this.nastaviProstor(prostorID);
+            if (prostor) {
+                this.nastaviProstor(prostor);
             } else if (uprID) {
                 //v primeru da prostor ne obstaja se nastavi kot prostor matični oder uprizoritve
                 this.nastaviProstorUprizoritve(uprID);
@@ -89,12 +89,12 @@ define([
 
     /**
      * Nastavimo prostor in kličemo on change, da se nastavi prostor tudi v modelu
-     * @param {type} prostorID
+     * @param {type} prostor
      * @returns {undefined}
      */
-    IzbiraProstoraView.prototype.nastaviProstor = function (prostorID) {
+    IzbiraProstoraView.prototype.nastaviProstor = function (prostor) {
         this.setValue({
-            prostor: prostorID
+            prostor: prostor
         });
         this.trigger('prostor:change', this, this.fields.prostor.editor);
     };
