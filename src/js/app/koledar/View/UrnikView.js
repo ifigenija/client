@@ -46,7 +46,7 @@ define([
                 center: 'title',
                 right: 'timelineDay,timelineWeek,timelineMonth'
             },
-            timezone: false,
+            timezone: true,
             aspectRatio: 1.6,
             selectable: true,
             defaultView: 'timelineDay',
@@ -81,15 +81,13 @@ define([
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
             },
-            eventResourceField: 'prostor',
+            eventResourceField: 'prostorID',
             eventSources: [
                 {
                     events: function (zacetek, konec, timezone, callback) {
                         var list = [];
-                        //var vrednosti = self.vrednostiFiltrov;
                         self.collection.queryParams.zacetek = zacetek.toISOString();
                         self.collection.queryParams.konec = konec.toISOString();
-                        //self.collection.queryParams = _.extend(self.collection.queryParams, vrednosti);
                         self.collection.fetch({
                             success: function (coll) {
                                 coll.each(function (eventModel) {

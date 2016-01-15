@@ -24,12 +24,7 @@ define([
         var polje = [];
         if (this.models.length) {
             for (var key in this.models) {
-                var model = this.models[key];
-                var obj = _.clone(model.attributes);
-                obj.start = moment(model.get('zacetek'));
-                obj.end = moment(model.get('konec'));
-
-                polje.push(obj);
+                polje.push(_.clone(this.models[key].attributes));
             }
         }
         return polje;
