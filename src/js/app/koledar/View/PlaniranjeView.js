@@ -6,26 +6,29 @@ define([
     'i18next',
     'backbone',
     'marionette',
-    'moment',
     'app/Max/View/Toolbar',
     'template!../tpl/planiranje.tpl',
     '../Model/Dogodki',
     './KoledarView',
-    './WizardView',
-    './IzbiraRazredDogodkaView',
-    './IzbiraCasView',
+    './Wizard/WizardView',
+    './Wizard/IzbiraRazredDogodkaView',
+    './Wizard/IzbiraCasView',
+    './RazmnoziView',
     './DogodekView',
-    './VajaView',
-    './PredstavaView',
-    './GostovanjeView',
-    './SplosniView',
-    './TehnicniView'
+    './DogodekPredstavaView',
+    'template!../tpl/vaja-form.tpl',
+    'template!../tpl/predstava-form.tpl',
+    'template!../tpl/tehnicni-form.tpl',
+    'template!../tpl/splosni-form.tpl',
+    'formSchema!vaja',
+    'formSchema!predstava',
+    'formSchema!dogodekTehnicni',
+    'formSchema!dogodekSplosni'
 ], function (
         Radio,
         i18next,
         Backbone,
         Marionette,
-        moment,
         Toolbar,
         tpl,
         Dogodki,
@@ -33,12 +36,17 @@ define([
         WizardView,
         IzbiraView,
         IzbiraCasView,
+        RazmnoziView,
         DogodekView,
-        VajaView,
-        PredstavaView,
-        GostovanjeView,
-        SplosniView,
-        TehnicniView
+        DogodekPredstavaView,
+        vajaTpl,
+        predstavaTpl,
+        tehnicniTpl,
+        splosniTpl,
+        vajaSch,
+        predstavaSch,
+        tehnicniSch,
+        splosniSch
         ) {
 
     var PlaniranjeView = Marionette.LayoutView.extend({
@@ -105,19 +113,19 @@ define([
     PlaniranjeView.prototype.onUredi = function (model) {
         var razred = model.get('dogodek').razred;
         if (razred === '100s') {
-            this.renderRazredDogodek(model, PredstavaView);
+            this.renderRazredDogodek(model, DogodekPredstavaView, predstavaSch, predstavaTpl);
         } else if (razred === '200s') {
-            this.renderRazredDogodek(model, VajaView);
+            this.renderRazredDogodek(model, DogodekView, vajaSch, vajaTpl);
         } else if (razred === '300s') {
-            this.renderRazredDogodek(model, GostovanjeView);
+            this.renderRazredDogodek(model, null);
         } else if (razred === '400s') {
-            this.renderRazredDogodek(model, SplosniView);
+            this.renderRazredDogodek(model, DogodekView, splosniSch, splosniTpl);
         } else if (razred === '500s') {
             this.onZasedenost(model);
             this.dogodekView.on('skrij', this.onPreklici, this);
 
         } else if (razred === '600s') {
-            this.renderRazredDogodek(model, TehnicniView);
+            this.renderRazredDogodek(model, DogodekView, tehnicniSch, tehnicniTpl);
         }
     };
     PlaniranjeView.prototype.onPreklici = function () {
@@ -149,15 +157,20 @@ define([
         this.dogodekR.show(wizardView);
     };
 
-    PlaniranjeView.prototype.renderRazredDogodek = function (razredModel, TipDogView) {
-        var dogodekModel = new Dogodki.prototype.model(razredModel.get('dogodek'));
-
+    PlaniranjeView.prototype.renderRazredDogodek = function (razredModel, TipDogView, schema, tpl) {
         var self = this;
-        var view = new DogodekView({
-            model: dogodekModel,
-            TipDogView: TipDogView,
-            tipDogModel: razredModel
+        var view = new TipDogView({
+            model: razredModel,
+            schema: schema.toFormSchema().schema,
+            formTemplate: tpl
         });
+        
+        //view.setButtons();
+        
+        //console.log('(a) new DogodekView');
+        //console.log('view.model', view.model);
+        //console.log('view.model -> status', view.model.get('status'));
+                
         view.on('save:success', function () {
             self.koledarView.ui.koledar.fullCalendar('refetchEvents');
         }, self);
@@ -167,6 +180,36 @@ define([
         }, self);
         view.on('skrij', self.onPreklici, self);
         self.dogodekR.show(view);
+        
+        view.on('razmnozi', function () { 
+           
+            self.renderRazmnozi();
+        }, self);
+    };
+    
+
+    PlaniranjeView.prototype.renderRazmnozi = function () {
+        
+        var razmnoziView = new RazmnoziView({
+            model: new Backbone.Model({
+                dni: ["1", "2","3","4", "5","6", "7"],
+                termini: [
+                        {kratica: "dop", ime: i18next.t('Dopoldan') },
+                        {kratica: "pop", ime: i18next.t('Popoldan') },
+                        {kratica: "zve", ime: i18next.t('Zvečer') }
+                    ]
+
+            })
+        });
+           
+        razmnoziView.on('preklici', function () {
+            this.dogodekR.empty();
+        }, this)
+        razmnoziView.on('save:success', function () {
+           console.log('shranjeno, posodobi dogodke');
+           
+        }, this) 
+        this.dogodekR.show(razmnoziView);
     };
 
     PlaniranjeView.prototype.onZasedenost = function (model) {

@@ -3,20 +3,18 @@
  */
 
 define([
-    'marionette',
-    'backbone',
-    'moment',
-    'underscore',
+    'radio',
     'jquery',
+    'moment',
+    'marionette',
     '../Model/RazredDogodek',
     'template!../tpl/planer-dogodek.tpl',
     'template!../tpl/planer-dogodki-termin.tpl'
 ], function (
-        Marionette,
-        Backbone,
-        moment,
-        _,
+        Radio,
         $,
+        moment,
+        Marionette,
         RazredDogodek,
         dogodekTpl,
         terminDogodkiTpl
@@ -90,9 +88,9 @@ define([
         childView: DogodekItemView,
         triggers: {
             'click .dodaj-dogodek': 'dodaj',
-            'click .odstrani-dogodke': 'odstrani'
+            'click .brisi-dogodke': 'brisi'
         },
-        initialize: function(options){
+        initialize: function (options) {
             this.zacetek = options.zacetek || null;
             this.konec = options.konec || null;
         },
@@ -103,8 +101,22 @@ define([
                 collection: this.collection
             });
         },
-        onOdstrani: function () {
-            this.trigger('odstrani:dogodke');
+        onBrisi: function () {
+            var zaIzbris = [];
+            this.collection.each(function(model){
+                var zacetek = moment(model.get('zacetek'));
+                var konec = moment(model.get('konec'));
+                if(zacetek.diff(konec, 'days') === 0){
+                    zaIzbris.push(model);
+                }
+            });
+            
+            for(var key in zaIzbris){
+                zaIzbris[key].destroy({
+                    error: Radio.channel('error').request('handler', 'xhr')
+                });
+            }
+
         },
         onChildviewPrikaziDogodek: function (dogodekM, razredDogodkaM) {
             this.trigger('prikazi:dogodek', razredDogodkaM);

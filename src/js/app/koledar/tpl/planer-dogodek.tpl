@@ -1,5 +1,7 @@
 <span class="label label-primary">
-    <span class="">{{title}}</span>
-    <span class="">{{u "cas" zacetek}}</span>
-    <span class="">{{prostor}}</span>
+    <span>{{title}}</span>
+    <span>{{u "cas" zacetek}}</span>
+    {{#if prostor.label}}
+        <span>{{prostor.label}}</span>
+    {{/if}}
 </span>

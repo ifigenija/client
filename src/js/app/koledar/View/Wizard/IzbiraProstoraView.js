@@ -21,14 +21,14 @@ define([
         ) {
     var sch = {type: 'Toone', targetEntity: 'prostor', editorAttrs: {class: 'form-control'}, title: 'Prostor'};
 
-    var IzbriraProstoraView = Form.extend({
+    var IzbiraProstoraView = Form.extend({
         template: Handlebars.compile('<form><div data-fields="prostor"></div></form>'),
         schema: {
             prostor: sch
         }
     });
 
-    IzbriraProstoraView.prototype.initialize = function (options) {
+    IzbiraProstoraView.prototype.initialize = function (options) {
         Form.prototype.initialize.apply(this, arguments);
 
         this.options = options;
@@ -39,9 +39,9 @@ define([
         this.on('prostor:change', function (form, editor) {
             //pridobimo vrednost iz editorja. V kolikor ni vrednosti se proži not:ready
             var prostor = editor.getValue();
-            if (prostor && prostor.id) {
+            if (prostor) {
                 //nastavimo vrednost prostora v modelu
-                self.model.set('prostor', prostor.id);
+                self.model.set('prostor', prostor);
                 self.trigger('ready', self.model);
             } else {
                 self.trigger('not:ready');
@@ -49,16 +49,20 @@ define([
         }, this);
     };
 
-    IzbriraProstoraView.prototype.render = function () {
+    IzbiraProstoraView.prototype.render = function () {
         Form.prototype.render.apply(this, arguments);
         // Iz modela poskušamo prebrati prostor in uprizoritev.
         // V primeru da je prostor že določen se ponovno nastavi v modelu
         if (this.options && this.options.model) {
-            var uprID = this.model.get('uprizoritev');
-            var prostorID = this.model.get('prostor');
+            var upr = this.model.get('uprizoritev');
+            var uprID;
+            if (upr) {
+                uprID = upr.get('id');
+            }
+            var prostor = this.model.get('prostor');
 
-            if (prostorID) {
-                this.nastaviProstor(prostorID);
+            if (prostor) {
+                this.nastaviProstor(prostor);
             } else if (uprID) {
                 //v primeru da prostor ne obstaja se nastavi kot prostor matični oder uprizoritve
                 this.nastaviProstorUprizoritve(uprID);
@@ -71,7 +75,7 @@ define([
      * @param {type} uprizoritevID
      * @returns {undefined}
      */
-    IzbriraProstoraView.prototype.nastaviProstorUprizoritve = function (uprizoritevID) {
+    IzbiraProstoraView.prototype.nastaviProstorUprizoritve = function (uprizoritevID) {
         var self = this;
 
         var UprModel = Backbone.Model.extend({
@@ -89,15 +93,15 @@ define([
 
     /**
      * Nastavimo prostor in kličemo on change, da se nastavi prostor tudi v modelu
-     * @param {type} prostorID
+     * @param {type} prostor
      * @returns {undefined}
      */
-    IzbriraProstoraView.prototype.nastaviProstor = function (prostorID) {
+    IzbiraProstoraView.prototype.nastaviProstor = function (prostor) {
         this.setValue({
-            prostor: prostorID
+            prostor: prostor
         });
         this.trigger('prostor:change', this, this.fields.prostor.editor);
     };
 
-    return IzbriraProstoraView;
+    return IzbiraProstoraView;
 });

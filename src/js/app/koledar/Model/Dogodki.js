@@ -32,6 +32,8 @@ define([
                     eObj[k] = this.get(k);
                 }
             }
+            //prostorID se izlušči, ker scheduler ne gleda v globino ko nastavimo eventResourceField
+            eObj.prostorID = this.get('prostor').id;
             eObj.start = moment(this.get('zacetek'));
             eObj.end = moment(this.get('konec'));
             return eObj;
@@ -76,11 +78,11 @@ define([
 
             // V primeru da obstaja zacetek, preverimo v katerem terminu se začne dogodek
             if (zacetek) {
-                if (zacetekM.diff(uraDopoldan) <= 0) {
+                if (zacetekM.diff(uraDopoldan) < 0) {
                     terminZacetek = 1;
-                } else if (zacetekM.diff(uraDopoldan) > 0 && zacetekM.diff(uraPopoldan) <= 0) {
+                } else if (zacetekM.diff(uraDopoldan) >= 0 && zacetekM.diff(uraPopoldan) < 0) {
                     terminZacetek = 2;
-                } else if (zacetekM.diff(uraPopoldan) > 0 && zacetekM.diff(uraZvecer) <= 0) {
+                } else if (zacetekM.diff(uraPopoldan) >= 0 && zacetekM.diff(uraZvecer) < 0) {
                     terminZacetek = 3;
                 }
             }

@@ -60,7 +60,7 @@ define([
         nestedCollections: {
             umetniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['umetnik']}},
             igralci: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['igralec']}},
-            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['tehnik','inspicient']}},
+            tehniki: {collection: ZasedbaCollection, mappedBy: 'uprizoritev', filterBy: {'podrocje': ['tehnik','inspicient','sepetalec']}},
             planVaje: {collection: VajeCollection, mappedBy: 'uprizoritev'},
             planPredstave: {collection: PredstaveCollection, mappedBy: 'uprizoritev'}
 

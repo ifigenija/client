@@ -84,6 +84,9 @@ define([
 
         //poslušamo resize event od windowa in naredimo proxy, da se uporabi pravi konteks pri klicanju funkcije
         $(window).on('resize', jQuery.proxy(this, "resize"));
+        
+        this.izbrani.on('update change', this.resize, this);
+        this.mozni.on('update change', this.resize, this);
     };
 
     DualListView.prototype.serializeData = function () {
@@ -103,8 +106,8 @@ define([
             var sirinaOkno = $(window).width();
             var visinaOkno = $(window).height();
 
-            var sirinaView = this.$el.width();
-            var visinaView = this.$el.height();
+            var sirinaView = this.$('.selectlist-content').width();
+            var visinaView = this.$('.selectlist-content').height();
 
             if (left + sirinaView > sirinaOkno && (sirinaView + sirinaView * 0.2) <= sirinaOkno) {
                 left = left - (sirinaView - $anchor.outerWidth());
@@ -128,7 +131,10 @@ define([
         this.renderDesniSeznam();
         this.renderFilter();
         this.filtrirajIzbrane();
-        this.triggerMethod('show');
+//        this.triggerMethod('show');
+        //dvakrat se kliče ker se ob prvem dodajanju v oknu pojavi scrollbar ki zmanjša širino okna in zato prviš pozicionira narobe
+        this.resize();
+        this.resize();
     };
 
     /**
@@ -253,7 +259,7 @@ define([
         this.izbraniView.resetSelection();
         this.mozniView.resetSelection();
     };
-    
+
     /**
      * vrne izbrane vrednosti filtra
      * @returns {Array}

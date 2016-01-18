@@ -1,11 +1,11 @@
 <form>
     <div class="row">
+        <div class="col-sm-12 col-md-6" data-fields="title,zacetek,konec"></div>
         <div class="col-sm-12 col-md-6">
-            <div data-fields="uprizoritev,title,tipvaje"></div>
             <div class="vnosno-polje">
                 <div class="naslov">
-                    <label class="">{{t "std.prostor"}}</label>
-                    <div class="help-block hidden">{{t "std.d.prostor"}}</div>
+                    <label class="">{{t "dogodek.prostor"}}</label>
+                    <div class="help-block hidden">{{t "dogodek.d.prostor"}}</div>
                     <div class="error-block"></div>
                 </div>
                 <div class="polje-z-gumbom">
@@ -15,7 +15,7 @@
                     </a>
                 </div>
             </div>
+            <div data-fields="status,tipvaje,zaporedna"></div>
         </div>
-        <div class="col-sm-12 col-md-6" data-fields="zacetek,konec,status,zaporedna"></div>        
     </div>
 </form>

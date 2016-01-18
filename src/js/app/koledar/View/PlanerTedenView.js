@@ -9,16 +9,24 @@ define([
     'moment',
     'underscore',
     'jquery',
+    '../Model/Dogodki',
     './DogodekView',
-    './VajaView',
-    './PredstavaView',
-    './GostovanjeView',
-    './SplosniView',
-    './TehnicniView',
+    './DogodekPredstavaView',
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
-    './WizardVajaView',
-    './IzbiraRazredDogodkaView'
+    './Wizard/WizardVajaView',
+    './Wizard/WizardTehSploView',
+    './Wizard/WizardZasedenostView',
+    './Wizard/WizardPredstavaView',
+    './Wizard/IzbiraRazredDogodkaView',
+    'template!../tpl/vaja-form.tpl',
+    'template!../tpl/predstava-form.tpl',
+    'template!../tpl/tehnicni-form.tpl',
+    'template!../tpl/splosni-form.tpl',
+    'formSchema!vaja',
+    'formSchema!predstava',
+    'formSchema!dogodekTehnicni',
+    'formSchema!dogodekSplosni'
 ], function (
         i18next,
         Marionette,
@@ -26,16 +34,24 @@ define([
         moment,
         _,
         $,
+        Dogodki,
         DogodekView,
-        VajaView,
-        PredstavaView,
-        GostovanjeView,
-        SplosniView,
-        TehnicniView,
+        DogodekPredstavaView,
         PlanerDogodkiView,
         tplDan,
         WizardVajaView,
-        IzbiraRazredDogodkaView
+        WizardTehSploView,
+        WizardZasedenostView,
+        WizardPredstavaView,
+        IzbiraRazredDogodkaView,
+        vajaTpl,
+        predstavaTpl,
+        tehnicniTpl,
+        splosniTpl,
+        vajaSch,
+        predstavaSch,
+        tehnicniSch,
+        splosniSch
         ) {
 
     var uraZacetek = 10;
@@ -102,7 +118,7 @@ define([
             konec: konec
         });
 
-        view.on('prikazi:dogodek', this.prikaziDogodek, this);
+        view.on('prikazi:dogodek', this.urediDogodek, this);
         view.on('dodaj:dogodek', this.dodajDogodek, this);
 
         return view;
@@ -112,27 +128,37 @@ define([
      * @param {Dogodek} model
      * @returns {undefined}
      */
-    PlanerDanView.prototype.prikaziDogodek = function (model) {
+    PlanerDanView.prototype.urediDogodek = function (model) {
         var razred = model.get('dogodek').razred;
-        var TipDogodkaView;
+        var TipDogodkaView, schema, tpl;
         if (razred === '100s') {
-            TipDogodkaView = PredstavaView;
+            TipDogodkaView = DogodekPredstavaView;
+            schema = predstavaSch;
+            tpl = predstavaTpl;
         } else if (razred === '200s') {
-            TipDogodkaView = VajaView;
+            TipDogodkaView = DogodekView;
+            schema = vajaSch;
+            tpl = vajaTpl;
         } else if (razred === '300s') {
-            TipDogodkaView = GostovanjeView;
+            TipDogodkaView = null;
         } else if (razred === '400s') {
-            TipDogodkaView = SplosniView;
+            TipDogodkaView = DogodekView;
+            schema = splosniSch;
+            tpl = splosniTpl;
         } else if (razred === '500s') {
             this.onZasedenost(model);
             this.dogodekView.on('skrij', this.onPreklici, this);
         } else if (razred === '600s') {
-            TipDogodkaView = TehnicniView;
+            TipDogodkaView = DogodekView;
+            schema = tehnicniSch;
+            tpl = tehnicniTpl;
         }
-        var view = new DogodekView({
+        //model forme, ki je pogojena od dokumentview mora biti dogodek model
+        //tipDogModel pa je morel razreda dogodka
+        var view = new TipDogodkaView({
             model: model,
-            TipDogView: TipDogodkaView,
-            tipDogModel: model
+            schema: schema.toFormSchema().schema,
+            formTemplate: tpl
         });
         view.on('skrij', function () {
             this.detailR.empty();
@@ -149,38 +175,53 @@ define([
         model.set('zacetek', moment(options.zacetek).toISOString());
         model.set('konec', moment(options.konec).toISOString());
 
-        var view = new IzbiraRazredDogodkaView({model: model});
-        this.detailR.show(view);
         var self = this;
+        var izbiraView = new IzbiraRazredDogodkaView({model: model});
+        izbiraView.on('preklici', function () {
+            this.detailR.empty();
+        }, this);
 
-        view.on('izbrano', function (model) {
+        izbiraView.on('izbrano', function (model) {
+            var wizardView;
             if (model.get('razred') === '100s') {
-
+                wizardView = new WizardPredstavaView({
+                    model: model
+                });
             } else if (model.get('razred') === '200s') {
-                var view = new WizardVajaView({
+                wizardView = new WizardVajaView({
                     model: model
                 });
             } else if (model.get('razred') === '300s') {
 
             } else if (model.get('razred') === '400s') {
-
+                wizardView = new WizardTehSploView({
+                    model: model
+                });
+            } else if (model.get('razred') === '500s') {
+                wizardView = new WizardZasedenostView({
+                    model: model
+                });
             } else if (model.get('razred') === '600s') {
-
+                wizardView = new WizardTehSploView({
+                    model: model
+                });
             }
 
-            view.on('close', function () {
+            wizardView.on('close', function () {
                 self.detailR.empty();
             }, self);
 
-            view.on('preklici', function () {
+            wizardView.on('preklici', function () {
                 self.detailR.empty();
             }, self);
-            view.on('save:success', function (model) {
+            wizardView.on('save:success', function (model) {
                 options.collection.add(model);
             }, self);
 
-            self.detailR.show(view);
+            self.detailR.show(wizardView);
         }, this);
+        
+        this.detailR.show(izbiraView);
     };
 
 

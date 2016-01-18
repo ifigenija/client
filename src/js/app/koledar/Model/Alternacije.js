@@ -8,11 +8,13 @@ define([
     'baseUrl',
     'backbone',
     'app/Max/Model/MaxPageableCollection',
+    './Osebe',
     'deep-model'
 ], function (
         baseUrl,
         Backbone,
-        Collection
+        Collection,
+        Osebe
         ) {
 
     var Model = Backbone.DeepModel.extend({
@@ -47,7 +49,7 @@ define([
     };
 
     /**
-     * 
+     * Funkcija pretvori kolekcijo alternacij v seznam objektov TS
      * @param {Array} options
      * @param {dogodekModel} options.dogodek
      * @param {moment} options.zacetek
@@ -60,15 +62,16 @@ define([
 
         var modeli = [];
         this.each(function (model) {
-            var alterModel = {
+            var tsModel = {
                 dogodek: options.dogodek,
                 zacetek: options.zacetek,
                 konec: options.konec,
                 gost: options.gost ? options.gost : false,
                 dezurni: options.dezurni ? options.dezurni : false,
-                alternacija: model
+                alternacija: model,
+                oseba: new Osebe.prototype.model(model.get('oseba'))
             };
-            modeli.push(alterModel);
+            modeli.push(tsModel);
         });
 
         return modeli;
@@ -77,5 +80,3 @@ define([
     return Collection;
 
 });
-
-

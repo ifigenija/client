@@ -2,25 +2,15 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
-    'i18next',
-    'app/bars',
-    'backbone',
     'marionette',
     'moment',
-    'template!../tpl/dogodek-izbira.tpl',
-    '../Model/RazredDogodek',
-    '../Model/TerminiStoritve'
+    'template!../../tpl/dogodek-izbira.tpl',
+    '../../Model/RazredDogodek'
 ], function (
-        Radio,
-        i18next,
-        Handlebars,
-        Backbone,
         Marionette,
         moment,
         izbiraTpl,
-        RazredDogodek,
-        TerminiStoritve
+        RazredDogodek
         ) {
 
     var IzbiraRazredDogodkaView = Marionette.ItemView.extend({
@@ -28,10 +18,10 @@ define([
         triggers: {
             'click .dogodek-vaja': 'vaja',
             'click .dogodek-predstava': 'predstava',
-            'click .dogodek-zasedenost': 'zasedenost',
             'click .dogodek-gostovanje': 'gostovanje',
             'click .dogodek-splosni': 'splosni',
-            'click .dogodek-tehnicni': 'tehnicni'
+            'click .dogodek-tehnicni': 'tehnicni',
+            'click .preklici': 'preklici'
         }
     });
 
@@ -57,7 +47,7 @@ define([
         this.initRazredDogodka({
             view: 'vaja',
             title: 'Vaja',
-            status: '100s',
+            status: '200s',
             razred: '200s'
         });
         this.trigger('izbrano', this.model);
@@ -66,25 +56,16 @@ define([
         this.initRazredDogodka({
             view: 'predstava',
             title: 'Predstava',
-            status: '100s',
+            status: '200s',
             razred: '100s'
         });
-        this.trigger('izbrano', this.model);
-    };
-    IzbiraRazredDogodkaView.prototype.onZasedenost = function () {
-        var model = this.model = new TerminiStoritve.prototype.model();
-
-        if (this.zacetek) {
-            model.set('planiranZacetek', this.zacetek);
-        }
-        model.set('planiranKonec', this.konec);
         this.trigger('izbrano', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onGostovanje = function () {
         this.initRazredDogodka({
             view: 'gostovanje',
             title: 'Gostovanje',
-            status: '100s',
+            status: '200s',
             razred: '300s'
         });
         this.trigger('izbrano', this.model);
@@ -93,7 +74,7 @@ define([
         this.initRazredDogodka({
             view: 'dogodekSplosni',
             title: 'Splošni',
-            status: '100s',
+            status: '200s',
             razred: '400s'
         });
         this.trigger('izbrano', this.model);
@@ -102,7 +83,7 @@ define([
         this.initRazredDogodka({
             view: 'dogodekTehnicni',
             title: 'Tehnični',
-            status: '100s',
+            status: '200s',
             razred: '600s'
         });
         this.trigger('izbrano', this.model);

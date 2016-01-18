@@ -40,7 +40,7 @@ define([
         regions: {
             umetnikiR: '.region-umetniki',
             tehnikiR: '.region-tehniki',
-            gosDezR: '.region-gosti'
+            gostiR: '.region-gosti'
         }
     });
     /**
@@ -51,12 +51,62 @@ define([
      */
     SodelujociView.prototype.initialize = function (options) {
         this.alternacijeColl = options.alternacije;
+        this.osebeColl = options.osebe;
         this.dogodek = options.dogodek;
         this.tsColl = new TerminiStoritve(this.dogodek.get('terminiStoritve'));
 
         this.razdeliAlternacije();
         this.razdeliTS();
     };
+    /**
+     * Funkcija namenjena da vrne seznam trenutno izbranih termino storitev dogodka
+     * @returns {TerminiStoritve}
+     */
+    SodelujociView.prototype.getTS = function () {
+        var self = this;
+        var terminiS = new TerminiStoritve();
+
+        terminiS.add(this.izbraniUmetniki.models);
+        terminiS.add(this.izbraniTehniki.models);
+        terminiS.add(this.izbraniGosti.models);
+
+        //iz trenutno izbranih terminov storitev, želimo prepisati tiste, ki že obstajajo
+        terminiS.each(function (terminS) {
+            var alterID;
+            if(terminS.get('alternacija')){
+                alterID = terminS.get('alternacija').get('id');
+            }
+            var osebaID = terminS.get('oseba').get('id');
+            var alterTermin = null;
+            var osebaTermin = null;
+            // v kolekciji TS, ki je shranjena na serverju prepišemo TS, ki ima isto alternacijo in osebo ter samo osebo
+            self.tsColl.each(function (ts) {
+                //preverjamo oboje v primeru da ima alternacije pri več kot eni funkciji
+                //v nasprotnem primeru preverimo samo osebo
+                var alter = ts.get('alternacija');
+                if (alter && alter.get('id') === alterID) {
+                    alterTermin = new TerminiStoritve.prototype.model(ts);
+                } else if (ts.get('oseba').get('id') === osebaID) {
+                    osebaTermin = new TerminiStoritve.prototype.model(ts);
+                }
+            });
+
+            //v kolikor smo našli enako alternacijo se prepiše generiran ts s TS, ki že obstaja
+            if (alterTermin) {
+                terminS = alterTermin;
+            } else if (osebaTermin) {
+                terminS = osebaTermin;
+            }
+        });
+
+        return terminiS;
+    };
+
+    /**
+     * Termine storitve iz dogodkarazdelimo po področjih v tri različne kolekcije.
+     * te kolekcije predstavljajo izbrane umetnike, tehnike in goste/dežurne
+     * @returns {undefined}
+     */
     SodelujociView.prototype.razdeliTS = function () {
         var tsPodrocja = this.tsColl.razdeliPoPodrocjih();
 
@@ -68,9 +118,15 @@ define([
         this.izbraniTehniki.add(tsPodrocja.tehnik);
         this.izbraniTehniki.add(tsPodrocja.inspicient);
 
-        this.izbraniGosDez = new TerminiStoritve();
-        this.izbraniTehniki.add(tsPodrocja.gostiDezurni);
+        this.izbraniGosti = new TerminiStoritve();
+        this.izbraniGosti.add(tsPodrocja.gosti);
     };
+    /**
+     * V tej funkciji inicializiramo 2 kolekciji ki predstavljajo alternacije umetnikov in tehnikov,
+     * ter kolekcijo gostov/dežurni, ki predstavljajo osebe.
+     * Prav tako inicializiramo 3 prazne kolekcije v katerih bomo izbra
+     * @returns {undefined}
+     */
     SodelujociView.prototype.razdeliAlternacije = function () {
         var modeli = this.alternacijeColl.razdeli();
 
@@ -83,70 +139,129 @@ define([
         this.tehnikiColl = new Alternacije();
         this.tehnikiColl.add(modeli.tehnik);
         this.tehnikiColl.add(modeli.inspicient);
+        this.umetnikiColl.add(modeli.sepetalec);
 
-        this.izbraniGosDezColl = new Osebe();
-        this.gosDezColl = new Osebe();
-        this.gosDezColl.fetch({error: Radio.channel('error').request('handler', 'xhr')});
+        this.izbraniGostiColl = new Osebe();
+        this.gostiColl = this.osebeColl;
     };
     SodelujociView.prototype.onRender = function () {
         this.renderUmetniki();
         this.renderTehnika();
-        this.renderGosDez();
+        this.renderGosti();
     };
+    /**
+     * Izris seznam izbranih umetnikov
+     * @returns {undefined}
+     */
     SodelujociView.prototype.renderUmetniki = function () {
-        var view = this.umetnikiView = new SeznamSodelujocihView({
+        //funkcija, ki jo prožimo ko kliknemo gumb uredi pri umetnikih
+        var uredi = function ($el) {
+            this.urediSeznam({
+                izbraniTS: this.izbraniUmetniki,
+                izbrani: this.izbraniUmetnikiColl,
+                mozni: this.umetnikiColl,
+                $el: $el,
+                tpl: Handlebars.compile('{{oseba.label}}({{funkcija.label}})')
+            });
+        };
+
+        this.umetnikiView = this.renderSeznam({
             collection: this.izbraniUmetniki,
-            naslov: 'Umetniki'
+            naslov: 'Umetniki',
+            uredi: uredi
         });
-        view.on('render:uredi', this.urediUmetnike, this);
-        this.umetnikiR.show(view);
+
+        this.umetnikiR.show(this.umetnikiView);
     };
+    /**
+     * Izris seznam izbranih tehnikov
+     * @returns {undefined}
+     */
     SodelujociView.prototype.renderTehnika = function () {
-        var view = this.tehnikiView = new SeznamSodelujocihView({
+        //funkcija, ki jo prožimo ko kliknemo gumb uredi pri tehniki
+        var uredi = function ($el) {
+            this.urediSeznam({
+                izbraniTS: this.izbraniTehniki,
+                izbrani: this.izbraniTehnikiColl,
+                mozni: this.tehnikiColl,
+                $el: $el,
+                tpl: Handlebars.compile('{{oseba.label}}({{funkcija.label}})')
+            });
+        };
+        this.tehnikiView = this.renderSeznam({
             collection: this.izbraniTehniki,
-            naslov: 'Tehniki'
+            naslov: 'Tehniki',
+            uredi: uredi
         });
-        view.on('render:uredi', this.urediTehnike, this);
-        this.tehnikiR.show(view);
-    };
-    SodelujociView.prototype.renderGosDez = function () {
-        var view = this.gosDezView = new SeznamSodelujocihView({
-            collection: this.izbraniGosDez,
-            naslov: 'Gosti/Dežurni'
-        });
-        view.on('render:uredi', this.urediGoste, this);
-        this.gosDezR.show(view);
-    };
-    SodelujociView.prototype.urediUmetnike = function ($el) {
-        this.renderUredi({
-            izbraniTS: this.izbraniUmetniki,
-            izbrani: this.izbraniUmetnikiColl,
-            mozni: this.umetnikiColl,
-            $el: $el,
-            tpl: Handlebars.compile('{{oseba.label}}')
-        });
+        this.tehnikiR.show(this.tehnikiView);
     };
 
-    SodelujociView.prototype.urediTehnike = function ($el) {
-        this.renderUredi({
-            izbraniTS: this.izbraniTehniki,
-            izbrani: this.izbraniTehnikiColl,
-            mozni: this.tehnikiColl,
-            $el: $el,
-            tpl: Handlebars.compile('{{oseba.label}}')
+    /**
+     * Izris seznam izbranih gostov/dežurnih
+     * @returns {undefined}
+     */
+    SodelujociView.prototype.renderGosti = function () {
+        //itemView odgobvoren za izris modelov iz kolekcije seznamSodelujocihView
+        var ItemView = Marionette.ItemView.extend({
+            tagName: 'span',
+            className: 'sodelujoc',
+            template: Handlebars.compile('<label>{{ime}}</label>'),
+            serializeData: function () {
+                return{
+                    ime: this.model.get('oseba').get('polnoIme')
+                };
+            }
         });
+
+        //funkcija, ki jo prožimo ko kliknemo gumb uredi pri gostih
+        var uredi = function ($el) {
+            this.urediSeznam({
+                izbraniTS: this.izbraniGosti,
+                izbrani: this.izbraniGostiColl,
+                mozni: this.gostiColl,
+                $el: $el,
+                tpl: Handlebars.compile('{{polnoIme}}')
+            });
+        };
+
+        this.gostiView = this.renderSeznam({
+            collection: this.izbraniGosti,
+            naslov: 'Gosti',
+            childView: ItemView,
+            uredi: uredi
+        });
+
+        this.gostiR.show(this.gostiView);
     };
 
-    SodelujociView.prototype.urediGoste = function ($el) {
-        this.renderUredi({
-            izbraniTS: this.izbraniGosDez,
-            izbrani: this.izbraniGosDezColl,
-            mozni: this.gosDezColl,
-            $el: $el,
-            tpl: Handlebars.compile('{{polnoIme}}')
+    /**
+     * Funkcija namenjena izrisu seznamaSodelujocihView
+     * @param {type} options
+     * @returns {undefined}
+     */
+    SodelujociView.prototype.renderSeznam = function (options) {
+        var view = new SeznamSodelujocihView({
+            collection: options.collection,
+            naslov: options.naslov,
+            childView: options.childView
         });
+        view.on('uredi:seznam', options.uredi, this);
+        view.on('uredi:TS', this.urediTS, this);
+        return view;
     };
-    SodelujociView.prototype.renderUredi = function (options) {
+
+    /**
+     * Ob kliku na gum uredi se nam odpre dualListView. Namen je da izberemo alternacije/osebe, ki bodo povabljene na dogodek.
+     * @param {Object} options
+     * @param {Object} options.izbrani      koleckcija alternacija ali oseb, ki so trenutno izbrani
+     * @param {Object} options.mozni        kolekcija alternacij in oseb, med katerimi lahko izbiramo
+     * @param {Object} options.tpl          template za izpis modelov alternacij/oseb v seznamih dual lista
+     * @param {Object} options.$el          jquery objekt elementa, ki je pod katerim se naj izriše dualListView
+     * @param {Object} options.izbraniTS    kolekcija terminov storitev trenutno izbranih alternacij/oseb
+     * 
+     * @returns {undefined}
+     */
+    SodelujociView.prototype.urediSeznam = function (options) {
         var $e = $('<div class="selectlist-content"></div>');
         $('body').append($e);
         var view = new DualListView({
@@ -158,6 +273,7 @@ define([
             title: "izbira oseb"
         });
 
+        // ko dual list proži changed:vrednosti se kolekcija alternacij/oseb pretvori v polje objektov TS
         var self = this;
         //onclose proži changed:vrednosti
         view.on('changed:vrednosti', function () {
@@ -167,11 +283,24 @@ define([
                 zacetek: moment(),
                 konec: moment()
             });
-            
+
+            // kolekcijo izbranihTerminostoritev resetiramo in dodamo v tem trenutku izbrane alternacije/osebe
             options.izbraniTS.reset(tsModeli);
+            var terminiStoritve = self.getTS();
+            
+            //izvediRpc Klic za pridobitev novih TS
         }, this);
 
         view.render();
+    };
+
+    /**
+     * Funkcija namenjena urejanju terminovstoritev izbranih alternacij/oseb
+     * @param {type} options
+     * @returns {undefined}
+     */
+    SodelujociView.prototype.urediTS = function (collection) {
+        console.log('urediTS');
     };
     return SodelujociView;
 });

@@ -89,7 +89,7 @@ define([
             this.initModel({
                 view: 'vaja',
                 title: 'Vaja',
-                status: '100s'
+                status: '200s'
             });
             this.renderIzbiraUprizoritve(i18next.t('vaja.title'));
         },
@@ -97,7 +97,7 @@ define([
             this.initModel({
                 view: 'predstava',
                 title: 'Predstava',
-                status: '100s'
+                status: '200s'
             });
             this.renderIzbiraUprizoritve(i18next.t('predstava.title'));
         },
@@ -105,7 +105,7 @@ define([
             this.initModel({
                 view: 'dogodekTehnicni',
                 title: 'Tehnični',
-                status: '100s'
+                status: '200s'
             });
             this.preklici();
             this.trigger('potrdi:dogodek');
@@ -114,7 +114,7 @@ define([
             this.initModel({
                 view: 'dogodekSplosni',
                 title: 'Splošni',
-                status: '100s'
+                status: '200s'
             });
             //this.preklici();
             //this.trigger('potrdi:dogodek');
@@ -124,7 +124,7 @@ define([
             this.initModel({
                 view: 'gostovanje',
                 title: 'Gostovanje',
-                status: '100s'
+                status: '200s'
             });
             this.preklici();
             this.trigger('potrdi:dogodek');

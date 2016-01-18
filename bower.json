@@ -36,8 +36,8 @@
     "backgrid-filter": "~0.3.5",
     "backgrid-moment-cell": "~0.3.5",
     "backgrid-select-all": "~0.3.5",
-    "fullcalendar": "~2.4.0",
-    "fullcalendar-scheduler": "~1.0.0",
+    "fullcalendar": "~2.6.0",
+    "fullcalendar-scheduler": "~1.2.0",
     "require-css": "~0.1.8"
   }
 }

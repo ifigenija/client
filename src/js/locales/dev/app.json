@@ -42,7 +42,8 @@
             "dogodki": "Dogodki",
             "ljudje": "Ljudje",
             "zasedenost": "Rezervacije",
-            "planiranje": "Planiranje"
+            "pregled": "Pregled",
+            "planer": "Planer"
         },
         "dogodki": "Dogodki",
         "prostori": "Prostori",
@@ -1709,6 +1710,19 @@
         "porocilo": "Poročilo",
         "dogodek": "Dogodek",
         "uprizoritev": "Uprizoritev",
+        "razmnozi": {
+            "nacinVnosa": "Način vnosa",
+            "terminDopoldan": "Dopoldan",
+            "terminPopoldan": "Popoldan",
+            "terminZvecer": "Zvecer",
+            "ponedeljek": "pon",
+            "torek": "tor",
+            "sreda": "sre",
+            "cetrtek": "čet",
+            "petek": "pet",
+            "sobota": "sob",
+            "nedelja": "ned"
+        },
         "d": {
             "tipvaje": "",
             "zaporedna": "Zaporedna številka vaje",
@@ -1727,6 +1741,7 @@
         "uprizoritev": "Uprizoritev",
         "gostovanje": "Gostovanje",
         "dezurni": "Dežurni",
+        "abonmaji": "Abonmaji",
         "d": {
             "zaporedna": "Zaporedna številka predstave",
             "zaporednaSez": "Zaporedna številka predstave v sezoni",
@@ -1755,7 +1770,6 @@
         "razred": "Tip",
         "termin": "Termin",
         "predstava": "Predstava",
-        "zasedenost": "Zasedenost",
         "vaja": "Vaja",
         "gostovanje": "Gostovanje",
         "splosni": "Splošni dogodek",
@@ -1769,6 +1783,7 @@
         "dodajPredstavo": "Dodaj predstavo",
         "dodajTehnicni": "Dodaj tehnični dogodek",
         "dodajSplosni": "Dodaj splošni dogodek",
+        "dodajGostovanje": "Dodaj gostovanje",
         "d": {
             "allDay": "Dogodek se razteza skozi cel dan",
             "zacetek": "",
@@ -1925,6 +1940,8 @@
         "gost": "Gost",
         "sodelujoc": "Sodelujoč",
         "oseba": "Oseba",
+        "dodajZasedenost": "Dodaj zasedenost",
+        "zasedenost": "Zasedenost",
         "d": {
             "title": "Termin storitve",
             "planiranZacetek": "Planiran začetek",

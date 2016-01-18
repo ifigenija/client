@@ -37,6 +37,7 @@ require.config({
         'formSchema': 'app/Max/Loader/formSchema',
         'formMeta': 'app/Max/Loader/formMeta',
         'template': 'app/Max/Loader/template',
+        'options': 'app/Max/Loader/options',
         'print-dialog': 'app/JobManager/View/PrintDialog'
     },
     shim: {
@@ -72,6 +73,9 @@ require.config({
         },
         'backgrid-select-all': {
             deps: ["backbone", "backgrid"]
+        },
+        'options': {
+            deps: ["jquery.jsonrpc"]
         },
         'deep-model': ['backbone', 'underscore'],
         'backbone-modal': ['jquery', 'backbone'],

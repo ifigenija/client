@@ -7173,7 +7173,7 @@ Licenca GPLv3
   z-index: 1040;
 }
 .selectlist-seznam {
-  max-height: 400px;
+  max-height: 300px;
   overflow: auto;
   margin-top: 10px;
   -webkit-user-select: none;

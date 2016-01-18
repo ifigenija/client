@@ -2,28 +2,11 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
-    'baseUrl',
-    'i18next',
-    'app/bars',
-    'backbone',
     'moment',
-    'marionette',
-    'underscore',
-    'app/koledar/View/VzporedniceView',
-    'jquery',
-    'jquery.jsonrpc'
+    'app/koledar/View/VzporedniceView'
 ], function (
-        Radio,
-        baseUrl,
-        i18next,
-        Handlebars,
-        Backbone,
         moment,
-        Marionette,
-        _,
-        VzporedniceView,
-        $
+        VzporedniceView
         ) {
 
     var WizardVzporedniceView = VzporedniceView.extend({
@@ -37,12 +20,16 @@ define([
      */
     WizardVzporedniceView.prototype.initialize = function (options) {
         VzporedniceView.prototype.initialize.apply(this, arguments);
-        
+
         var zacetek = options.model.get('zacetek');
         var konec = options.model.get('konec');
-        
+
         if (options && options.model) {
             this.model = options.model;
+        }
+
+        if (options && options.model.get('uprizoritev')) {
+            this.collectionUprizoritev.add(options.model.get('uprizoritev'));
         }
 
         if (options && zacetek) {
@@ -52,7 +39,7 @@ define([
         if (options && konec) {
             this.konec = moment(konec).toISOString();
         }
-        
+
         if (!this.collectionUprizoritev.length) {
             this.trigger('not:ready');
         }
@@ -66,16 +53,28 @@ define([
     WizardVzporedniceView.prototype.onSelected = function (model) {
         if (!this.collectionUprizoritev.length) {
             this.collectionUprizoritev.add(model);
+        } else {
+            this.collectionUprizoritev.reset(model);
+        }
+
+        if (this.collectionUprizoritev.length) {
             this.$('.prikazi-prekrivanja').removeClass('hidden');
-            
-            this.model.set('uprizoritev', model.get('id'));
-            this.trigger('ready', this.model);
+
+            this.model.set('uprizoritev', model);
+
+            this.collectionUprizoritev.on('added', function () {
+                this.model.set('alternacije', this.collectionUprizoritev.vrniIzbraneAlternacije());
+                this.trigger('ready', this.model);
+            }, this);
         }
     };
-    
+
     WizardVzporedniceView.prototype.onChange = function (model) {
         if (!this.collectionUprizoritev.length) {
             this.trigger('not:ready');
+        } else {
+            this.model.set('alternacije', this.collectionUprizoritev.vrniIzbraneAlternacije());
+            this.trigger('ready', this.model);
         }
     };
 
