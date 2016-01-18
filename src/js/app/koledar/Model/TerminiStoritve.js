@@ -24,6 +24,15 @@ define([
     var Model = Backbone.DeepModel.extend({
         urlRoot: baseUrl + '/rest/terminStoritve'
     });
+
+    Model.prototype.getEventObject = function () {
+        var object;
+        object = _.clone(this.attributes);
+        object.start = moment(this.get('zacetek'));
+        object.end = moment(this.get('konec'));
+        return object;
+    };
+
     var Collection = Collection.extend({
         url: baseUrl + '/rest/terminStoritve',
         model: Model,
@@ -90,7 +99,7 @@ define([
 
         return alterColl;
     };
-    
+
     /**
      * Funkcija vrne collection oseb za odstranit iz terminov storitev in collection oseb za dodat v terminstoritev
      * @param {Collection} osebe    Vhodni podatek je collection izbranih oseb
@@ -130,6 +139,14 @@ define([
                 });
             }
         }
+    };
+
+    Collection.prototype.getEventObjects = function () {
+        var objects = [];
+        this.each(function (model) {
+            objects.push(model.getEventObject());
+        });
+        return objects;
     };
 
     return Collection;
