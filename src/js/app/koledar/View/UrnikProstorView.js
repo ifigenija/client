@@ -7,6 +7,7 @@ define([
     'underscore',
     'template!../tpl/urnik-layout.tpl',
     '../Model/KoledarLookup',
+    'fullcalendar',
     'fc-schedule'
 ], function (
         Radio,
