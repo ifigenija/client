@@ -29,11 +29,5 @@
             <h5>{{t "dogodek.gostovanje"}}</h5>
         </div>
     </a>
-    <a class="btn btn-default col-md-2 dogodek-zasedenost" title="{{t "terminStoritve.dodajZasedenost"}}">
-        <i class="fa fa-times-circle-o fa-4x"> </i>
-        <div class="caption text-center">
-            <h5>{{t "terminStoritve.zasedenost"}}</h5>
-        </div>
-    </a>
 </div>
 <a class="btn preklici">{{t "std.preklici"}}</a>

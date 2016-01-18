@@ -80,7 +80,7 @@ define([
             var alterTermin = null;
             var osebaTermin = null;
             // v kolekciji TS, ki je shranjena na serverju prepišemo TS, ki ima isto alternacijo in osebo ter samo osebo
-            this.tsColl.each(function (ts) {
+            self.tsColl.each(function (ts) {
                 //preverjamo oboje v primeru da ima alternacije pri več kot eni funkciji
                 //v nasprotnem primeru preverimo samo osebo
                 var alter = ts.get('alternacija');

@@ -5,14 +5,12 @@ define([
     'marionette',
     'moment',
     'template!../../tpl/dogodek-izbira.tpl',
-    '../../Model/RazredDogodek',
-    '../../Model/TerminiStoritve'
+    '../../Model/RazredDogodek'
 ], function (
         Marionette,
         moment,
         izbiraTpl,
-        RazredDogodek,
-        TerminiStoritve
+        RazredDogodek
         ) {
 
     var IzbiraRazredDogodkaView = Marionette.ItemView.extend({
@@ -20,7 +18,6 @@ define([
         triggers: {
             'click .dogodek-vaja': 'vaja',
             'click .dogodek-predstava': 'predstava',
-            'click .dogodek-zasedenost': 'zasedenost',
             'click .dogodek-gostovanje': 'gostovanje',
             'click .dogodek-splosni': 'splosni',
             'click .dogodek-tehnicni': 'tehnicni',
@@ -62,16 +59,6 @@ define([
             status: '200s',
             razred: '100s'
         });
-        this.trigger('izbrano', this.model);
-    };
-    IzbiraRazredDogodkaView.prototype.onZasedenost = function () {
-        var model = this.model = new TerminiStoritve.prototype.model();
-
-        if (this.zacetek) {
-            model.set('planiranZacetek', this.zacetek);
-        }
-        model.set('planiranKonec', this.konec);
-        model.set('razred', '500s');
         this.trigger('izbrano', this.model);
     };
     IzbiraRazredDogodkaView.prototype.onGostovanje = function () {
