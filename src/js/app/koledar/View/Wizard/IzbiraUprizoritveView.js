@@ -27,7 +27,7 @@ define([
         if (options && options.model) {
             this.model = options.model;
         }
-        
+
         if (options && options.model.get('uprizoritev')) {
             this.collectionUprizoritev.add(options.model.get('uprizoritev'));
         }
@@ -56,29 +56,25 @@ define([
         } else {
             this.collectionUprizoritev.reset(model);
         }
-        
+
         if (this.collectionUprizoritev.length) {
             this.$('.prikazi-prekrivanja').removeClass('hidden');
-            
-            this.model.set('izbraneOsebe', this.collectionUprizoritev.vrniIzbraneOsebe);
+
             this.model.set('uprizoritev', model);
-            this.trigger('ready', this.model);
+
+            this.collectionUprizoritev.on('added', function () {
+                this.model.set('alternacije', this.collectionUprizoritev.vrniIzbraneAlternacije());
+                this.trigger('ready', this.model);
+            }, this);
         }
-    };
-    
-    WizardVzporedniceView.prototype.getIzbraneAlternacije = function (uprizoritev) {
-        var alternacije = uprizoritev.get('alternacije');
-        
-        alternacije.each(function(alternacija){
-            if(alternacija.get('izbran')){
-                
-            }
-        });
     };
 
     WizardVzporedniceView.prototype.onChange = function (model) {
         if (!this.collectionUprizoritev.length) {
             this.trigger('not:ready');
+        } else {
+            this.model.set('alternacije', this.collectionUprizoritev.vrniIzbraneAlternacije());
+            this.trigger('ready', this.model);
         }
     };
 

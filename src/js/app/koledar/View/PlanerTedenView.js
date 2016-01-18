@@ -175,11 +175,13 @@ define([
         model.set('zacetek', moment(options.zacetek).toISOString());
         model.set('konec', moment(options.konec).toISOString());
 
-        var view = new IzbiraRazredDogodkaView({model: model});
-        this.detailR.show(view);
         var self = this;
+        var izbiraView = new IzbiraRazredDogodkaView({model: model});
+        izbiraView.on('preklici', function () {
+            this.detailR.empty();
+        }, this);
 
-        view.on('izbrano', function (model) {
+        izbiraView.on('izbrano', function (model) {
             var wizardView;
             if (model.get('razred') === '100s') {
                 wizardView = new WizardPredstavaView({
@@ -218,6 +220,8 @@ define([
 
             self.detailR.show(wizardView);
         }, this);
+        
+        this.detailR.show(izbiraView);
     };
 
 

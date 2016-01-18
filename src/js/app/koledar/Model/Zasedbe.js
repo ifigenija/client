@@ -145,6 +145,24 @@ define([
 
         return funkOsebe;
     };
+    Zasedbe.prototype.vrniIzbraneAlternacije = function () {
+        var vseAlternacije = [];
+        this.each(function (uprizoritev) {
+            var funkcije = uprizoritev.get('planiraneFunkcije');
+            funkcije.each(function (funkcija) {
+                var alternacije = funkcija.get('alternacije');
+                if (alternacije instanceof Backbone.Collection) {
+                    alternacije.each(function (alternacija) {
+                        if (alternacija.get('izbran')) {
+                            vseAlternacije.push(alternacija.get('id'));
+                        }
+                    });
+                }
+            });
+        });
+
+        return vseAlternacije;
+    };
     return Zasedbe;
 });
 

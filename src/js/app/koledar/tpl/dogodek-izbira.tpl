@@ -36,3 +36,4 @@
         </div>
     </a>
 </div>
+<a class="btn preklici">{{t "std.preklici"}}</a>

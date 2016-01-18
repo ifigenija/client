@@ -168,10 +168,6 @@ define([
         // Lookup the model that has the ID of the event and update its attributes
         var model = fcEvent.source.coll.get(fcEvent.id);
         model.save({zacetek: fcEvent.start.toISOString(), konec: fcEvent.end.toISOString()}, {
-            success: function () {
-                var view = this.options.view;
-                view.trigger('event:drop:or:resize', arguments);
-            },
             error: function (model, xhr) {
                 revert();
                 Radio.channel('error').command('xhr', model, xhr);

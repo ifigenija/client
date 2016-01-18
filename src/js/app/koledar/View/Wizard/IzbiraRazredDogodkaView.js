@@ -2,20 +2,12 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
-    'i18next',
-    'app/bars',
-    'backbone',
     'marionette',
     'moment',
     'template!../../tpl/dogodek-izbira.tpl',
     '../../Model/RazredDogodek',
     '../../Model/TerminiStoritve'
 ], function (
-        Radio,
-        i18next,
-        Handlebars,
-        Backbone,
         Marionette,
         moment,
         izbiraTpl,
@@ -31,7 +23,8 @@ define([
             'click .dogodek-zasedenost': 'zasedenost',
             'click .dogodek-gostovanje': 'gostovanje',
             'click .dogodek-splosni': 'splosni',
-            'click .dogodek-tehnicni': 'tehnicni'
+            'click .dogodek-tehnicni': 'tehnicni',
+            'click .preklici': 'preklici'
         }
     });
 
