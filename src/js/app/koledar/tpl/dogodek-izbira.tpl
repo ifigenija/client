@@ -30,4 +30,4 @@
         </div>
     </a>
 </div>
-<a class="btn preklici">{{t "std.preklici"}}</a>
+<a class="btn btn-default preklici">{{t "std.preklici"}}</a>

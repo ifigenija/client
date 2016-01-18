@@ -5,9 +5,9 @@
     </div>
     <div class="wizard-body"></div>
     <div class="wizard-footer">
-        <a class="btn preklici">{{t "std.preklici"}}</a>
         <a class="btn btn-default nazaj">{{t "std.nazaj"}}</a>
-        <a class="btn btn-default naprej">{{t "std.naprej"}}</a>
+        <a class="btn btn-primary naprej">{{t "std.naprej"}}</a>
+        <a class="btn btn-default preklici">{{t "std.preklici"}}</a>
         <a class="btn btn-primary potrdi">{{t "std.potrdi"}}</a>
     </div>
 </div>

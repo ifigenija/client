@@ -1938,6 +1938,7 @@
         "alternacija": "Alternacija",
         "dezurni": "Dežurni",
         "gost": "Gost",
+        "sodelujoc": "Sodelujoč",
         "oseba": "Oseba",
         "dodajZasedenost": "Dodaj zasedenost",
         "zasedenost": "Zasedenost",
@@ -1952,62 +1953,77 @@
             "alternacija": "Alternacija",
             "dezurni": "Dežurni",
             "gost": "Gost",
+            "sodelujoc": "Sodelujoča oseba, ki ni alternacija in ni ne gost ne dežurni",
             "oseba": "Oseba"
-        }
-    },
-    "orgEnota": {
-        "nova": "Nova organizacijska enota",
-        "title": "Organizacijska enota",
-        "titles": "Organizacijske enote",
-        "zaposleni": "Zaposleni",
-        "zapisi": "Zapisi",
-        "sifra": "Oznaka",
-        "naziv": "Naziv",
-        "parent": "Nadrejena enota",
-        "vodja": "Vodja",
-        "namestnik": "Namestnik",
-        "d": {
-            "sifra": "Enolična oznaka",
-            "Naziv": "Ime organizacijske enote",
-            "parent": "Nadrejena organizacijska enota",
-            "vodja": "Oseba, ki vodi organizacijsko enoto",
-            "namestnik": "Oseba, ki bo nadomestila vodjo."
-        }
-    },
-    "kontaktnaOseba": {
-        "relacija": "Kontaktna oseba pri poslovnih partnerjih"
-    },
-    "vzporednice": {
-        "title": "Vzporednice",
-        "zasedba": "Zasedba",
-        "niAlternacij": "Na funkcijo ni vezana nobena oseba.",
-        "niFunkcij": "Na uprizoritvi ni nobene funkcije.",
-        "opozoriloPrekrivanja": "Alternacije se prekrivajo, prosim izberite drugo.",
-        "prikaziPrekrivanja": "Prikaži prekrivanja"
-    },
-    "prekrivanja": {
-        "title": "Prekrivanja"
-    },
-    "dodatek": {
-        "title": "Dodatek",
-        "trajanje": "Trajanje",
-        "terminStoritve": "Termin storitve",
-        "tipdodatka": "Tip dodatka",
-        "d": {
-            "trajanje": "Trajanje dodatka v minutah",
+        },
+        "Ura": {
+            "title": "Ura",
+            "zacetek": "Začetek",
+            "konec": "Konec",
+            "oseba": "Oseba",
             "terminStoritve": "Termin storitve",
-            "tipdodatka": "Tip dodatka"
-        }
-    },
-    "tipdodatka": {
-        "title": "Tip dodatka",
-        "sifra": "Šifra",
-        "ime": "Ime",
-        "opis": "Opis",
-        "d": {
+            "d": {
+                "title": "Termin storitve",
+                "zacetek": "Začetek",
+                "terminStoritve": "Termin storitve",
+                "konec": "Konec",
+                "oseba": "Oseba"
+            }
+        },
+        "orgEnota": {
+            "nova": "Nova organizacijska enota",
+            "title": "Organizacijska enota",
+            "titles": "Organizacijske enote",
+            "zaposleni": "Zaposleni",
+            "zapisi": "Zapisi",
+            "sifra": "Oznaka",
+            "naziv": "Naziv",
+            "parent": "Nadrejena enota",
+            "vodja": "Vodja",
+            "namestnik": "Namestnik",
+            "d": {
+                "sifra": "Enolična oznaka",
+                "Naziv": "Ime organizacijske enote",
+                "parent": "Nadrejena organizacijska enota",
+                "vodja": "Oseba, ki vodi organizacijsko enoto",
+                "namestnik": "Oseba, ki bo nadomestila vodjo."
+            }
+        },
+        "kontaktnaOseba": {
+            "relacija": "Kontaktna oseba pri poslovnih partnerjih"
+        },
+        "vzporednice": {
+            "title": "Vzporednice",
+            "zasedba": "Zasedba",
+            "niAlternacij": "Na funkcijo ni vezana nobena oseba.",
+            "niFunkcij": "Na uprizoritvi ni nobene funkcije.",
+            "opozoriloPrekrivanja": "Alternacije se prekrivajo, prosim izberite drugo.",
+            "prikaziPrekrivanja": "Prikaži prekrivanja"
+        },
+        "prekrivanja": {
+            "title": "Prekrivanja"
+        },
+        "dodatek": {
+            "title": "Dodatek",
+            "trajanje": "Trajanje",
+            "ura": "Ura",
+            "tipdodatka": "Tip dodatka",
+            "d": {
+                "trajanje": "Trajanje dodatka v minutah",
+                "ura": "Ura",
+                "tipdodatka": "Tip dodatka"
+            }
+        },
+        "tipdodatka": {
+            "title": "Tip dodatka",
             "sifra": "Šifra",
             "ime": "Ime",
-            "opis": "Opis"
+            "opis": "Opis",
+            "d": {
+                "sifra": "Šifra",
+                "ime": "Ime",
+                "opis": "Opis"
+            }
         }
     }
 }

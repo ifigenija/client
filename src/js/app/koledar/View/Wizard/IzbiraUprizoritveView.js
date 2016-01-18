@@ -42,6 +42,8 @@ define([
 
         if (!this.collectionUprizoritev.length) {
             this.trigger('not:ready');
+        }else{
+            this.trigger('ready', this.model);
         }
     };
 
