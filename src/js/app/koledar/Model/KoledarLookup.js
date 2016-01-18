@@ -5,22 +5,20 @@
  */
 
 define([
-    'baseUrl',
-    'moment',
-    'backbone',
     'underscore',
     'app/Max/Model/LookupModel'
 ], function (
-        baseUrl,
-        moment,
-        Backbone,
         _,
         LookupModel
         ) {
 
     var KoledarModel = LookupModel.extend({});
 
-    KoledarModel.prototype.getEventObjects = function () {
+    /**
+     * Funkcija pretvori collection v polje objektov modelovih attributov.
+     * @returns {Array|LookupModel@call;extend.prototype.getModels.polje}
+     */
+    KoledarModel.prototype.getResources = function () {
         var polje = [];
         if (this.models.length) {
             for (var key in this.models) {

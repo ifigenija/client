@@ -2,28 +2,11 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
-    'baseUrl',
-    'i18next',
-    'app/bars',
-    'backbone',
     'moment',
-    'marionette',
-    'underscore',
-    'app/koledar/View/VzporedniceView',
-    'jquery',
-    'jquery.jsonrpc'
+    'app/koledar/View/VzporedniceView'
 ], function (
-        Radio,
-        baseUrl,
-        i18next,
-        Handlebars,
-        Backbone,
         moment,
-        Marionette,
-        _,
-        VzporedniceView,
-        $
+        VzporedniceView
         ) {
 
     var WizardVzporedniceView = VzporedniceView.extend({
@@ -76,10 +59,21 @@ define([
         
         if (this.collectionUprizoritev.length) {
             this.$('.prikazi-prekrivanja').removeClass('hidden');
-
+            
+            this.model.set('izbraneOsebe', this.collectionUprizoritev.vrniIzbraneOsebe);
             this.model.set('uprizoritev', model);
             this.trigger('ready', this.model);
         }
+    };
+    
+    WizardVzporedniceView.prototype.getIzbraneAlternacije = function (uprizoritev) {
+        var alternacije = uprizoritev.get('alternacije');
+        
+        alternacije.each(function(alternacija){
+            if(alternacija.get('izbran')){
+                
+            }
+        });
     };
 
     WizardVzporedniceView.prototype.onChange = function (model) {

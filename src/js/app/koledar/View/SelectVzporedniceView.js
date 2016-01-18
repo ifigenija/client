@@ -2,18 +2,14 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
     'i18next',
     'app/bars',
-    'backbone',
     'underscore',
     'marionette',
     'template!../tpl/select-vzporednice.tpl'
 ], function (
-        Radio,
         i18next,
         Handlebars,
-        Backbone,
         _,
         Marionette,
         vzporedniceTpl
@@ -109,7 +105,34 @@ define([
     var EmptyView = Marionette.ItemView.extend({
         template: Handlebars.compile('Vzporednice ne obstajajo.')
     });
+/**
+ * Funkcija odgovorna za prikaz uprizoritev
+ * uprizoritve:[
+ *                  [
+ *                      id,
+ *                      ident,
+ *                      label,
+ *                      konfliktneFunkcije:[
+ *                                              [
+ *                                                  id
+ *                                                  ident
+ *                                                  podrocje
+ *                                                  zasedeneOsebe:[
+ *                                                                  id
+ *                                                                  ident
+ *                                                                  label
+ *                                                                  priimek
+ *                                                                  ime
+ *                                                                  psevdonim
+ *                                                                ]
+ *                                              nezasedeneOsebe:[enako kot pri zasedenih]
+ *                                              ]
+ *                                          ]
+ *                   ]
+ *              ]
 
+ * @type @exp;Marionette@pro;CompositeView@call;extend
+ */
     var UprizoritveView = Marionette.CompositeView.extend({
         emptyView: EmptyView,
         template: vzporedniceTpl,

@@ -3,12 +3,8 @@
  */
 define([
     'radio',
+    'moment',
     'i18next',
-    'backbone',
-    'underscore',
-    'app/bars',
-    'marionette',
-    'jquery',
     'app/Max/View/Confirm',
     'app/koledar/Model/Alternacije',
     'app/koledar/Model/Dogodki',
@@ -18,18 +14,14 @@ define([
     'app/Zapisi/View/ZapisiLayout',
     './SodelujociView',
     './SodelujociOsebeView',
-    './UrnikView',
+    './UrnikProstorView',
     'formSchema!dogodek',
     'template!../tpl/dogodek-dok.tpl',
     'template!../tpl/dogodek-form.tpl'
 ], function (
         Radio,
+        moment,
         i18next,
-        Backbone,
-        _,
-        Handlebars,
-        Marionette,
-        $,
         confirm,
         Alternacije,
         Dogodki,
@@ -145,8 +137,10 @@ define([
      */
     DogodekView.prototype.onKoledarProstor = function () {
         var coll = new Dogodki();
+        var datum = moment(this.model.get('zacetek'));
         var urnikView = new UrnikView({
-            collection: coll
+            collection: coll,
+            datum: datum
         });
 
         this.koledarR.show(urnikView);
