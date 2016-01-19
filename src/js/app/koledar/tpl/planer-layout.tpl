@@ -1,3 +1,4 @@
+<h3>{{t "koledar.nav.planer"}}</h3>
 <div class="region-termin"></div>
 <div class="planer-legenda">
   

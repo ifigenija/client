@@ -92,7 +92,7 @@ define([
        buttons: FormView.prototype.defaultButtons
        
     });
-
+    
     //
     RazmnoziView.prototype.addRequiredValidator = function (val) {
         val.push('required');
@@ -240,6 +240,7 @@ define([
             //tedenski vnos: zakrij upoštevajsobote in upoštevaj nedelje
             //hitri vnos: Zakori začetek in konec
             //
+            
         }
         
         this.trigger('save:success', 'nekaj');

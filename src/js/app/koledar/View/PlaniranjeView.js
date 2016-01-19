@@ -23,7 +23,9 @@ define([
     'formSchema!vaja',
     'formSchema!predstava',
     'formSchema!dogodekTehnicni',
-    'formSchema!dogodekSplosni'
+    'formSchema!dogodekSplosni',
+    
+    'baseUrl'
 ], function (
         Radio,
         i18next,
@@ -46,7 +48,9 @@ define([
         vajaSch,
         predstavaSch,
         tehnicniSch,
-        splosniSch
+        splosniSch,
+        
+        baseUrl
         ) {
 
     var PlaniranjeView = Marionette.LayoutView.extend({
@@ -192,6 +196,17 @@ define([
         
         //console.log('ID dogodka: ', this.dogodekR.currentView.model.id );
         var idDogodka = this.dogodekR.currentView.model.id;
+        
+        console.log('Poskusi nalozit opcije rpc/options ...');
+   
+        var rpc = new $.JsonRpcClient({
+            ajaxUrl: baseUrl + '/rpc/app/options'
+        });
+
+        rpc.call('getOptions', {'name': 'dogodek.delte'}, 
+            function(data) { console.log('rpc call /rpc/app/options success'); console.log(data); }, //success
+            function() { console.log('rpc call /rpc/app/options error'); } //error        
+        );
         
         var razmnoziView = new RazmnoziView({
             model: new Backbone.Model({
