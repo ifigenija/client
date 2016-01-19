@@ -180,6 +180,7 @@ define([
         }, this);
 
         izbiraView.on('izbrano', function (model) {
+            //views options so option za vsak korakView posebaj določene
             optionsProstorTipVaje(function (prostori, tipiVaj) {
                 var wizardView;
                 var razred = model.get('razred');
