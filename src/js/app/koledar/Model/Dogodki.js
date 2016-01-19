@@ -32,8 +32,8 @@ define([
                     eObj[k] = this.get(k);
                 }
             }
-            //prostorID se izlušči, ker scheduler ne gleda v globino ko nastavimo eventResourceField
-            eObj.prostorID = this.get('prostor').id;
+            //resourceId pomemben pri fullcalendarju s pravim resource-om
+            eObj.resourceId = this.get('prostor').id;
             eObj.start = moment(this.get('zacetek'));
             eObj.end = moment(this.get('konec'));
             return eObj;

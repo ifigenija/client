@@ -72,13 +72,7 @@ define([
                         self.collection.fetch({
                             success: function (coll) {
                                 coll.each(function (model) {
-                                    //list.push(model.getEventObject());
-                                    var d = _.clone(model.attributes);
-                                    d.start = d.zacetek;
-                                    d.end = d.konec;
-                                    d.resourceId = d['prostor'].id;
-                                    
-                                    list.push(d);
+                                    list.push(model.getEventObject());
                                 });
                                 callback(list);
                             }

@@ -39,7 +39,11 @@ define([
         if (options && konec) {
             this.konec = moment(konec).toISOString();
         }
-
+    };
+    
+    WizardVzporedniceView.prototype.onRender = function () {
+        VzporedniceView.prototype.onRender.apply(this, arguments);
+        
         if (!this.collectionUprizoritev.length) {
             this.trigger('not:ready');
         }else{
