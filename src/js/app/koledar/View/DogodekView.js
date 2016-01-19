@@ -315,13 +315,7 @@ define([
     };
 
     DogodekView.prototype.onRazmnozi = function (options) {
-        console.log('onRazmnozi');
-
-        //var razmnoziView = new RazmnoziView(); 
-
-        //this.trigger('razmnozi', razmnoziView);
-        //this.trigger('razmnozi');
-
+        //console.log('onRazmnozi');
     };
 
     /**

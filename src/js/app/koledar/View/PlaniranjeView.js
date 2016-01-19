@@ -190,15 +190,18 @@ define([
 
     PlaniranjeView.prototype.renderRazmnozi = function () {
         
+        //console.log('ID dogodka: ', this.dogodekR.currentView.model.id );
+        var idDogodka = this.dogodekR.currentView.model.id;
+        
         var razmnoziView = new RazmnoziView({
             model: new Backbone.Model({
+                id: idDogodka,
                 dni: ["1", "2","3","4", "5","6", "7"],
                 termini: [
                         {kratica: "dop", ime: i18next.t('Dopoldan') },
                         {kratica: "pop", ime: i18next.t('Popoldan') },
                         {kratica: "zve", ime: i18next.t('Zvečer') }
                     ]
-
             })
         });
            

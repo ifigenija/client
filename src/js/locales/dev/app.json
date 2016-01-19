@@ -48,7 +48,10 @@
         "dogodki": "Dogodki",
         "prostori": "Prostori",
         "ljudje": "Ljudje",
-        "konflikti": "Konflikti"
+        "konflikti": "Konflikti",
+        "terminDopoldan": "Dopoldan",
+        "terminPopoldan": "Popoldan",
+        "terminZvecer": "Zvecer"
     },
     "arhiv": {
         "nav": {
@@ -1714,16 +1717,17 @@
         "uprizoritev": "Uprizoritev",
         "razmnozi": {
             "nacinVnosa": "Način vnosa",
+            "terminDan": "Termin / Dan",
             "terminDopoldan": "Dopoldan",
             "terminPopoldan": "Popoldan",
             "terminZvecer": "Zvecer",
-            "ponedeljek": "pon",
-            "torek": "tor",
-            "sreda": "sre",
-            "cetrtek": "čet",
-            "petek": "pet",
-            "sobota": "sob",
-            "nedelja": "ned"
+            "ponedeljek": "Pon",
+            "torek": "Tor",
+            "sreda": "Sre",
+            "cetrtek": "Čet",
+            "petek": "Pet",
+            "sobota": "Sob",
+            "nedelja": "Ned"
         },
         "d": {
             "tipvaje": "",

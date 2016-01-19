@@ -5,9 +5,9 @@
                 <legend>
                     <span>{{t "std.glavniPodatki"}}</span>
                 </legend>
-                <div data-fields="zacetek,konec"></div>
+                <div id="zacetek-konec" data-fields="zacetek,konec"></div>
                 
-                <div id="stevilo" class="hide" data-fields="stevilo"></div>
+                <div data-fields="stevilo" id="stevilo" style="display: none"></div>
             </fieldset>
         </div>
         <div class="col-md-6">
@@ -16,51 +16,66 @@
                     <span>{{t "vaja.razmnozi.nacinVnosa"}}</span>
                 </legend>
                 
-                <div class="btn-group">
-                <button class="btn btn-default btn-md">Tedenski vnos</button>
-
-                <button class="btn btn-default btn-md">Hitri vnos</button>
+                <div class="btn-group" style="padding-bottom: 8px">
+                <a class="btn btn-default btn-md btnTedenski disabled" id="btnTedenski" style="margin-right: 4px">Tedenski vnos</a>
+                <a class="btn btn-default btn-md btnHitri" id="btnHitri">Hitri vnos</a>
                 </div>
                     
                 <div>
                     <div data-fields="upostevaj_praznike"></div>
-                    <div data-fields="upostevaj_sobote"></div>
-                    <div data-fields="upostevaj_nedelje"></div>
+                    <div data-fields="upostevaj_sobote" id="upostevaj-sobote" style="display: none"></div>
+                    <div data-fields="upostevaj_nedelje" id="upostevaj-nedelje" style="display: none"></div>
                 </div>
             </fieldset>    
             
         </div>
     </div>
-    <div id="tedenski" class="row panel panel-default zapisi-panel">
+                
 
-        <div class="panel-heading"> 
-            
-        <div class="col-md-3">{{t "vaja.razmnozi.terminDan"}}</div>
-        
-        <div class="col-md-1">{{t "vaja.razmnozi.ponedeljek"}}</div>
-        <div class="col-md-1">{{t "vaja.razmnozi.torek"}}</div>
-        <div class="col-md-1">{{t "vaja.razmnozi.sreda"}}</div>
-        <div class="col-md-1">{{t "vaja.razmnozi.cetrtek"}}</div>
-        <div class="col-md-1">{{t "vaja.razmnozi.petek"}}</div>
-        <div class="col-md-1">{{t "vaja.razmnozi.sobota"}}</div>
-        <div class="col-md-1">{{t "vaja.razmnozi.nedelja"}}</div>
-
-        </div>
-        
-    </div>          
-    {{#each termini}}
-    <div class="row">
-        <div class="col-md-3">
-            {{ime}}
-        </div>
-        {{#each ../dni}}
-        <div class="col-md-1">
-            
-            <div data-editors="chk_{{../kratica}}_{{this}}"></div>
-        </div>
-        {{/each}}
-    </div>
-    {{/each}}
+ 
+    <div class="panel panel-default" id="tedenski">
+    <div class="panel-heading">Tedenski vnos</div>
+    <div class="panel-body">
     
+    <table class="table">
+      <thead>
+      <tr>
+      <th>{{t "vaja.razmnozi.terminDan"}}</th>
+      <th></th>
+      <th>{{t "vaja.razmnozi.ponedeljek"}}</th>
+      <th>{{t "vaja.razmnozi.torek"}}</th>
+      <th>{{t "vaja.razmnozi.sreda"}}</th>
+      <th>{{t "vaja.razmnozi.cetrtek"}}</th>
+      <th>{{t "vaja.razmnozi.petek"}}</th>
+      <th>{{t "vaja.razmnozi.sobota"}}</th>
+      <th>{{t "vaja.razmnozi.nedelja"}}</th>
+      </tr>      
+      </thead>
 
+       <tbody>        
+   
+        
+      {{#each termini}}
+      <tr> 
+        <td>{{ime}}</td>
+        <td><div data-editors="time_{{kratica}}_from,time_{{kratica}}_to"></div></td>
+        {{#each ../dni}}
+        <td>          
+            <div data-editors="chk_{{../kratica}}_{{this}}"></div>
+        </td>
+        {{/each}}
+      </tr>
+      {{/each}}
+    
+      </tbody> 
+    </table>
+  </div>
+       
+        
 </form>
+<style type="text/css">
+    .koledar-razmnozi {
+        width:56px;
+        margin-right: 4px;
+    }
+</style>
