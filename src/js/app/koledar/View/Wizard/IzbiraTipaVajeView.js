@@ -2,39 +2,35 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
     'i18next',
     'app/bars',
-    'backbone',
-    'marionette',
     'app/Max/Module/Form'
 ], function (
-        Radio,
         i18next,
         Handlebars,
-        Backbone,
-        Marionette,
         Form
         ) {
 
-    var sch = {
-        tipvaje: {
-            type: 'Toone',
-            targetEntity: 'tipvaje',
-            title: i18next.t('vaja.tipvaje'),
-            help: i18next.t('vaja.d.tipvaje'),
-            editorAttrs: {
-                class: 'form-control'
-            }
-        }
-    };
-
     var IzbiraTipaVajeView = Form.extend({
-        template: Handlebars.compile('<form><div data-fields="tipvaje"></form>'),
-        schema: sch
+        template: Handlebars.compile('<form><div data-fields="tipvaje"></form>')
     });
 
     IzbiraTipaVajeView.prototype.initialize = function (options) {
+        this.schema = {
+            tipvaje: {
+                title: i18next.t('tipVaje.title'),
+                name: 'tipVaje',
+                type: 'Select',
+                targetEntity: 'tipVaje',
+                options: options.schemaOptions,
+                editorAttrs: {
+                    class: 'form-control',
+                    type: 'select',
+                    name: 'tipVaje'
+                }
+            }
+        };
+        
         Form.prototype.initialize.apply(this, arguments);
 
         if (options && options.model) {

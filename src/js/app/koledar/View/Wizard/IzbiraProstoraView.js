@@ -2,33 +2,40 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
     'baseUrl',
     'i18next',
     'app/bars',
     'backbone',
-    'marionette',
     'app/Max/Module/Form'
 
 ], function (
-        Radio,
         baseUrl,
         i18next,
         Handlebars,
         Backbone,
-        Marionette,
         Form
         ) {
-    var sch = {type: 'Toone', targetEntity: 'prostor', editorAttrs: {class: 'form-control'}, title: 'Prostor'};
 
     var IzbiraProstoraView = Form.extend({
-        template: Handlebars.compile('<form><div data-fields="prostor"></div></form>'),
-        schema: {
-            prostor: sch
-        }
+        template: Handlebars.compile('<form><div data-fields="prostor"></div></form>')
     });
 
     IzbiraProstoraView.prototype.initialize = function (options) {
+        this.schema = {
+            prostor: {
+                title: i18next.t('prostor.title'),
+                name: 'prostor',
+                type: 'Select',
+                targetEntity: 'prostor',
+                options: options.schemaOptions,
+                editorAttrs: {
+                    class: 'form-control',
+                    type: 'select',
+                    name: 'prostor'
+                }
+            }
+        };
+        
         Form.prototype.initialize.apply(this, arguments);
 
         this.options = options;

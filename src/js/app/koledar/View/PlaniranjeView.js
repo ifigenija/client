@@ -10,9 +10,11 @@ define([
     'template!../tpl/planiranje.tpl',
     '../Model/Dogodki',
     './KoledarView',
-    './Wizard/WizardView',
+    './Wizard/WizardVajaView',
+    './Wizard/WizardTehSploView',
+    './Wizard/WizardPredstavaView',
     './Wizard/IzbiraRazredDogodkaView',
-    './Wizard/IzbiraCasView',
+    '../Model/OptionsProstorTipVaje',
     './RazmnoziView',
     './DogodekView',
     './DogodekPredstavaView',
@@ -33,9 +35,11 @@ define([
         tpl,
         Dogodki,
         KoledarView,
-        WizardView,
-        IzbiraView,
-        IzbiraCasView,
+        WizardVajaView,
+        WizardTehSploView,
+        WizardPredstavaView,
+        IzbiraRazredDogodkaView,
+        optionsProstorTipVaje,
         RazmnoziView,
         DogodekView,
         DogodekPredstavaView,
@@ -71,7 +75,7 @@ define([
      * @returns {undefined}
      */
     PlaniranjeView.prototype.renderKoledar = function () {
-        var coll = new Dogodki();
+        var coll = this.collection = new Dogodki();
 
         var view = this.koledarView = new KoledarView({
             collection: coll
@@ -112,22 +116,30 @@ define([
      */
     PlaniranjeView.prototype.onUredi = function (model) {
         var razred = model.get('dogodek').razred;
-        if (razred === '100s') {
-            this.renderRazredDogodek(model, DogodekPredstavaView, predstavaSch, predstavaTpl);
-        } else if (razred === '200s') {
-            this.renderRazredDogodek(model, DogodekView, vajaSch, vajaTpl);
-        } else if (razred === '300s') {
-            this.renderRazredDogodek(model, null);
-        } else if (razred === '400s') {
-            this.renderRazredDogodek(model, DogodekView, splosniSch, splosniTpl);
-        } else if (razred === '500s') {
-            this.onZasedenost(model);
-            this.dogodekView.on('skrij', this.onPreklici, this);
 
-        } else if (razred === '600s') {
-            this.renderRazredDogodek(model, DogodekView, tehnicniSch, tehnicniTpl);
+        switch (razred) {
+            case '100s':
+                this.renderRazredDogodek(model, DogodekPredstavaView, predstavaSch, predstavaTpl);
+                break;
+            case '200s':
+                this.renderRazredDogodek(model, DogodekView, vajaSch, vajaTpl);
+                break;
+            case '300s':
+                this.renderRazredDogodek(model, null);
+                break;
+            case '400s':
+                this.renderRazredDogodek(model, DogodekView, splosniSch, splosniTpl);
+                break;
+            case '500s':
+                this.onZasedenost(model);
+                this.dogodekView.on('skrij', this.onPreklici, this);
+                break;
+            case '600s':
+                this.renderRazredDogodek(model, DogodekView, tehnicniSch, tehnicniTpl);
+                break;
         }
-    };
+    }
+    ;
     PlaniranjeView.prototype.onPreklici = function () {
         this.dogodekR.empty();
     };
@@ -139,22 +151,76 @@ define([
     PlaniranjeView.prototype.onDodaj = function () {
         var model = new Backbone.Model();
 
-        var wizardView = new WizardView({
-            model: model,
-            defWizard: {
-                views: [
-                    IzbiraView,
-                    IzbiraCasView
-                ],
-                title: i18next.t('dogodek.dodajDogodek'),
-                nazajText: i18next.t('std.nazaj'),
-                naprejText: i18next.t('std.naprej'),
-                okText: i18next.t('std.potrdi'),
-                cancelText: i18next.t('std.preklici')
-            }
-        });
-        
-        this.dogodekR.show(wizardView);
+        var self = this;
+        var izbiraView = new IzbiraRazredDogodkaView({model: model});
+        izbiraView.on('preklici', function () {
+            this.dogodekR.empty();
+        }, this);
+
+        izbiraView.on('izbrano', function (model) {
+            optionsProstorTipVaje(function (prostori, tipiVaj) {
+                var wizardView;
+                var razred = model.get('razred');
+                switch (razred) {
+                    case '100s':
+                        wizardView = new WizardPredstavaView({
+                            model: model,
+                            viewsOptions: [
+                                {},
+                                {},
+                                {schemaOptions: prostori}
+                            ]
+                        });
+                        break;
+                    case '200s':
+                        wizardView = new WizardVajaView({
+                            model: model,
+                            viewsOptions: [
+                                {},
+                                {},
+                                {schemaOptions: tipiVaj},
+                                {schemaOptions: prostori}
+                            ]
+                        });
+                        break;
+                    case '300s':
+                        break;
+                    case '400s':
+                        wizardView = new WizardTehSploView({
+                            model: model,
+                            viewsOptions: [
+                                {},
+                                {schemaOptions: prostori}
+                            ]
+                        });
+                        break;
+                    case '600s':
+                        wizardView = new WizardTehSploView({
+                            model: model,
+                            viewsOptions: [
+                                {},
+                                {schemaOptions: prostori}
+                            ]
+                        });
+                        break;
+                }
+
+                wizardView.on('close', function () {
+                    self.dogodekR.empty();
+                }, self);
+
+                wizardView.on('preklici', function () {
+                    self.dogodekR.empty();
+                }, self);
+                wizardView.on('save:success', function (model) {
+                    self.collection.add(model);
+                }, self);
+
+                self.dogodekR.show(wizardView);
+            });
+        }, this);
+
+        this.dogodekR.show(izbiraView);
     };
 
     PlaniranjeView.prototype.renderRazredDogodek = function (razredModel, TipDogView, schema, tpl) {
@@ -164,54 +230,54 @@ define([
             schema: schema.toFormSchema().schema,
             formTemplate: tpl
         });
-        
+
         //view.setButtons();
-        
+
         //console.log('(a) new DogodekView');
         //console.log('view.model', view.model);
         //console.log('view.model -> status', view.model.get('status'));
-                
+
         view.on('save:success', function () {
             self.koledarView.ui.koledar.fullCalendar('refetchEvents');
         }, self);
-        
+
         view.on('destroy:success', function () {
             self.koledarView.ui.koledar.fullCalendar('refetchEvents');
         }, self);
         view.on('skrij', self.onPreklici, self);
         self.dogodekR.show(view);
-        
-        view.on('razmnozi', function () { 
-           
+
+        view.on('razmnozi', function () {
+
             self.renderRazmnozi();
         }, self);
     };
-    
+
 
     PlaniranjeView.prototype.renderRazmnozi = function () {
-        
+
         //console.log('ID dogodka: ', this.dogodekR.currentView.model.id );
         var idDogodka = this.dogodekR.currentView.model.id;
-        
+
         var razmnoziView = new RazmnoziView({
             model: new Backbone.Model({
                 id: idDogodka,
-                dni: ["1", "2","3","4", "5","6", "7"],
+                dni: ["1", "2", "3", "4", "5", "6", "7"],
                 termini: [
-                        {kratica: "dop", ime: i18next.t('Dopoldan') },
-                        {kratica: "pop", ime: i18next.t('Popoldan') },
-                        {kratica: "zve", ime: i18next.t('Zvečer') }
-                    ]
+                    {kratica: "dop", ime: i18next.t('Dopoldan')},
+                    {kratica: "pop", ime: i18next.t('Popoldan')},
+                    {kratica: "zve", ime: i18next.t('Zvečer')}
+                ]
             })
         });
-           
+
         razmnoziView.on('preklici', function () {
             this.dogodekR.empty();
-        }, this)
+        }, this);
         razmnoziView.on('save:success', function () {
-           console.log('shranjeno, posodobi dogodke');
-           
-        }, this) 
+            console.log('shranjeno, posodobi dogodke');
+
+        }, this);
         this.dogodekR.show(razmnoziView);
     };
 
