@@ -17,7 +17,7 @@ define([
         KoledarLookup
         ) {
 
-    var KoledarView = Marionette.LayoutView.extend({
+    var UrnikProstorView = Marionette.LayoutView.extend({
         template: tpl,
         className: 'koledar',
         regions: {
@@ -29,11 +29,11 @@ define([
         }
     });
 
-    KoledarView.prototype.initialize = function (options) {
+    UrnikProstorView.prototype.initialize = function (options) {
         this.datum = options.datum;
     };
 
-    KoledarView.prototype.onRender = function () {
+    UrnikProstorView.prototype.onRender = function () {
         var self = this;
         var options = {
             view: self,
@@ -43,6 +43,8 @@ define([
                 center: 'title',
                 right:''
             },
+            selectHelper: true,
+            editable: true,
             lang: 'sl',
             now: this.datum,
             timeFormat: 'H(:mm)',
@@ -83,12 +85,28 @@ define([
                     },
                     coll: self.collection
                 }
-            ]
+            ],
+            eventClick: this.eventClick,
+            //eventDrop: this.eventDropOrResize,
+            eventResize: this.eventDropOrResize,
+            eventMouseover: this.eventMouseOver
         };
         setTimeout(function () {
             self.ui.koledar.fullCalendar(options);
         }, 200);
     };
+    
+    UrnikProstorView.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
+        //dogodki preko rest put z novim začetkom in koncem
+        var model = fcEvent.source.coll.get(fcEvent.id);
+        model.save({zacetek: fcEvent.start.toISOString(), konec: fcEvent.end.toISOString()}, {
+            error: function (model, xhr) {
+                revert();
+                Radio.channel('error').command('xhr', model, xhr);
+            }
+        });
+    };
+    
 
-    return KoledarView;
+    return UrnikProstorView;
 });

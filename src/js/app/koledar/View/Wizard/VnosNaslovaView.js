@@ -11,30 +11,29 @@ define([
         Form
         ) {
 
+    this.schema = {
+        title: {
+            title: i18next.t('ent.naslov'),
+            name: 'title',
+            type: 'Text',
+            editorAttrs: {
+                class: 'naziv-polje form-control',
+                type: 'naziv',
+                name: 'title'
+            }
+        }
+    };
+
     var IzbiraTipaVajeView = Form.extend({
-        template: Handlebars.compile('<form><div data-fields="tipvaje"></form>')
+        template: Handlebars.compile('<form><div data-fields="title"></form>'),
+        schema: schema
     });
 
     IzbiraTipaVajeView.prototype.initialize = function (options) {
-        this.schema = {
-            tipvaje: {
-                title: i18next.t('tipVaje.title'),
-                name: 'tipVaje',
-                type: 'Select',
-                targetEntity: 'tipVaje',
-                options: options.schemaOptions,
-                editorAttrs: {
-                    class: 'form-control',
-                    type: 'select',
-                    name: 'tipVaje'
-                }
-            }
-        };
-        
         Form.prototype.initialize.apply(this, arguments);
 
         if (options && options.model) {
-            this.tipvaje = options.model.get('tipvaje');
+            this.title = options.model.get('title');
         }
 
         this.on('change', this.nadaljuj, this);
@@ -42,8 +41,8 @@ define([
 
     IzbiraTipaVajeView.prototype.render = function (options) {
         Form.prototype.render.apply(this, arguments);
-        if (this.tipvaje) {
-            this.fields.tipvaje.editor.setValue(this.tipvaje);
+        if (this.title) {
+            this.fields.title.editor.setValue(this.title);
         }
         this.trigger('change');
     };
@@ -53,10 +52,10 @@ define([
      * @returns {undefined}
      */
     IzbiraTipaVajeView.prototype.nadaljuj = function () {
-        var tipvaje = this.fields.tipvaje.getValue();
+        var title = this.fields.title.getValue();
 
-        if (tipvaje) {
-            this.model.set('tipvaje', tipvaje);
+        if (title) {
+            this.model.set('title', title);
             this.trigger('ready', this.model);
         } else {
             this.trigger('ready', this.model);

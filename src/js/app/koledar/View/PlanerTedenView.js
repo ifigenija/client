@@ -7,16 +7,12 @@ define([
     'marionette',
     'backbone',
     'moment',
-    'underscore',
-    'jquery',
-    '../Model/Dogodki',
+    '../Model/OptionsProstorTipVaje',
     './DogodekView',
-    './DogodekPredstavaView',
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
     './Wizard/WizardVajaView',
     './Wizard/WizardTehSploView',
-    './Wizard/WizardZasedenostView',
     './Wizard/WizardPredstavaView',
     './Wizard/IzbiraRazredDogodkaView',
     'template!../tpl/vaja-form.tpl',
@@ -32,16 +28,12 @@ define([
         Marionette,
         Backbone,
         moment,
-        _,
-        $,
-        Dogodki,
+        optionsProstorTipVaje,
         DogodekView,
-        DogodekPredstavaView,
         PlanerDogodkiView,
         tplDan,
         WizardVajaView,
         WizardTehSploView,
-        WizardZasedenostView,
         WizardPredstavaView,
         IzbiraRazredDogodkaView,
         vajaTpl,
@@ -130,28 +122,28 @@ define([
      */
     PlanerDanView.prototype.urediDogodek = function (model) {
         var razred = model.get('dogodek').razred;
-        var TipDogodkaView, schema, tpl;
-        if (razred === '100s') {
-            TipDogodkaView = DogodekPredstavaView;
-            schema = predstavaSch;
-            tpl = predstavaTpl;
-        } else if (razred === '200s') {
-            TipDogodkaView = DogodekView;
-            schema = vajaSch;
-            tpl = vajaTpl;
-        } else if (razred === '300s') {
-            TipDogodkaView = null;
-        } else if (razred === '400s') {
-            TipDogodkaView = DogodekView;
-            schema = splosniSch;
-            tpl = splosniTpl;
-        } else if (razred === '500s') {
-            this.onZasedenost(model);
-            this.dogodekView.on('skrij', this.onPreklici, this);
-        } else if (razred === '600s') {
-            TipDogodkaView = DogodekView;
-            schema = tehnicniSch;
-            tpl = tehnicniTpl;
+        var TipDogodkaView = DogodekView, schema, tpl;
+
+        switch (razred) {
+            case '100s':
+                schema = predstavaSch;
+                tpl = predstavaTpl;
+                break;
+            case '200s':
+                schema = vajaSch;
+                tpl = vajaTpl;
+                break;
+            case '300s':
+                TipDogodkaView = null;
+                break;
+            case '400s':
+                schema = splosniSch;
+                tpl = splosniTpl;
+                break;
+            case '600s':
+                schema = tehnicniSch;
+                tpl = tehnicniTpl;
+                break;
         }
         //model forme, ki je pogojena od dokumentview mora biti dogodek model
         //tipDogModel pa je morel razreda dogodka
@@ -182,45 +174,71 @@ define([
         }, this);
 
         izbiraView.on('izbrano', function (model) {
-            var wizardView;
-            if (model.get('razred') === '100s') {
-                wizardView = new WizardPredstavaView({
-                    model: model
-                });
-            } else if (model.get('razred') === '200s') {
-                wizardView = new WizardVajaView({
-                    model: model
-                });
-            } else if (model.get('razred') === '300s') {
+            //views options so option za vsak korakView posebaj določene
+            optionsProstorTipVaje(function (prostori, tipiVaj) {
+                var wizardView;
+                var razred = model.get('razred');
+                switch (razred) {
+                    case '100s':
+                        wizardView = new WizardPredstavaView({
+                            model: model,
+                            viewsOptions: [
+                                {},
+                                {},
+                                {schemaOptions: prostori}
+                            ]
+                        });
+                        break;
+                    case '200s':
+                        wizardView = new WizardVajaView({
+                            model: model,
+                            viewsOptions: [
+                                {},
+                                {},
+                                {schemaOptions: tipiVaj},
+                                {schemaOptions: prostori}
+                            ]
+                        });
+                        break;
+                    case '300s':
+                        break;
+                    case '400s':
+                        wizardView = new WizardTehSploView({
+                            model: model,
+                            viewsOptions: [
+                                {},
+                                {},
+                                {schemaOptions: prostori}
+                            ]
+                        });
+                        break;
+                    case '600s':
+                        wizardView = new WizardTehSploView({
+                            model: model,
+                            viewsOptions: [
+                                {},
+                                {},
+                                {schemaOptions: prostori}
+                            ]
+                        });
+                        break;
+                }
 
-            } else if (model.get('razred') === '400s') {
-                wizardView = new WizardTehSploView({
-                    model: model
-                });
-            } else if (model.get('razred') === '500s') {
-                wizardView = new WizardZasedenostView({
-                    model: model
-                });
-            } else if (model.get('razred') === '600s') {
-                wizardView = new WizardTehSploView({
-                    model: model
-                });
-            }
+                wizardView.on('close', function () {
+                    self.detailR.empty();
+                }, self);
 
-            wizardView.on('close', function () {
-                self.detailR.empty();
-            }, self);
+                wizardView.on('preklici', function () {
+                    self.detailR.empty();
+                }, self);
+                wizardView.on('save:success', function (model) {
+                    options.collection.add(model);
+                }, self);
 
-            wizardView.on('preklici', function () {
-                self.detailR.empty();
-            }, self);
-            wizardView.on('save:success', function (model) {
-                options.collection.add(model);
-            }, self);
-
-            self.detailR.show(wizardView);
+                self.detailR.show(wizardView);
+            });
         }, this);
-        
+
         this.detailR.show(izbiraView);
     };
 

@@ -35,36 +35,37 @@ define([
             var razred = dogodekModel.get('razred');
             var modelT;
 
-            if (razred === '100s') {
-                modelT = new RazredDogodek({
-                    id: dogodekModel.get('predstava'),
-                    view: 'predstava'
-                });
-            } else if (razred === '200s') {
-                modelT = new RazredDogodek({
-                    id: dogodekModel.get('vaja'),
-                    view: 'vaja'
-                });
-            } else if (razred === '300s') {
-                modelT = new RazredDogodek({
-                    id: dogodekModel.get('gostovanje'),
-                    view: 'gostovanje'
-                });
-
-            } else if (razred === '400s') {
-                modelT = new RazredDogodek({
-                    id: dogodekModel.get('splosni'),
-                    view: 'dogodekSplosni'
-                });
-
-            } else if (razred === '500s') {
-
-            } else if (razred === '600s') {
-                modelT = new RazredDogodek({
-                    id: dogodekModel.get('tehnicni'),
-                    view: 'dogodekTehnicni'
-                });
-
+            switch (razred) {
+                case '100s':
+                    modelT = new RazredDogodek({
+                        id: dogodekModel.get('predstava'),
+                        view: 'predstava'
+                    });
+                    break;
+                case '200s':
+                    modelT = new RazredDogodek({
+                        id: dogodekModel.get('vaja'),
+                        view: 'vaja'
+                    });
+                    break;
+                case '300s':
+                    modelT = new RazredDogodek({
+                        id: dogodekModel.get('gostovanje'),
+                        view: 'gostovanje'
+                    });
+                    break;
+                case '400s':
+                    modelT = new RazredDogodek({
+                        id: dogodekModel.get('splosni'),
+                        view: 'dogodekSplosni'
+                    });
+                    break;
+                case '600s':
+                    modelT = new RazredDogodek({
+                        id: dogodekModel.get('tehnicni'),
+                        view: 'dogodekTehnicni'
+                    });
+                    break;
             }
             var self = this;
             modelT.fetch({
@@ -103,15 +104,15 @@ define([
         },
         onBrisi: function () {
             var zaIzbris = [];
-            this.collection.each(function(model){
+            this.collection.each(function (model) {
                 var zacetek = moment(model.get('zacetek'));
                 var konec = moment(model.get('konec'));
-                if(zacetek.diff(konec, 'days') === 0){
+                if (zacetek.diff(konec, 'days') === 0) {
                     zaIzbris.push(model);
                 }
             });
-            
-            for(var key in zaIzbris){
+
+            for (var key in zaIzbris) {
                 zaIzbris[key].destroy({
                     error: Radio.channel('error').request('handler', 'xhr')
                 });

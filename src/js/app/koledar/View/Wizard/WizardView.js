@@ -39,7 +39,6 @@ define([
             detailR: '.wizard-body'
         }
     });
-
     /**
      * 
      * @param {type} options
@@ -47,21 +46,21 @@ define([
      */
     WizardView.prototype.initialize = function (options) {
         this.state = 0;
-        this.defWizard = options.defWizard || this.defWizard;
-
-        if (!_.isArray(this.defWizard.views)) {
-            throw new 'Content naj bo array';
+        if (!options.views && !this.views) {
+            throw new 'Koraki niso podani';
         } else {
-            if (options) {
-                this.model = options.model || this.model;
-                this.title = this.defWizard.title || i18next.t('std.naslov');
-                this.views = this.defWizard.views;
-                this.callback = this.defWizard.callback;
+            this.model = options.model || this.model;
+            this.title = options.title || this.title || i18next.t('std.naslov');
+            this.views = options.views || this.views;
+            this.viewsOptions = options.viewsOptions || this.viewsOptions;
+            if (!options.callback && !this.callback) {
+                throw new 'Callback ni podan';
+            } else {
+                this.callback = options.callback || this.callback;
             }
             this.stevecView = 0;
         }
     };
-
     WizardView.prototype.serializeData = function () {
         return {
             title: this.title
@@ -76,7 +75,6 @@ define([
         this.renderView(this.stevecView);
         this.renderState();
     };
-
     /**
      * Funkcija ki skrbi da se stanja wizarda izrišejo
      * state: 0 nepripravljen na naslednji korak
@@ -103,7 +101,6 @@ define([
         this.onReady(model);
         this.onNaprej();
     };
-
     /**
      * Viewji prožijo ready, ko lahko wizard nadaljuje z naslednjim korakom
      * @returns {undefined}
@@ -113,7 +110,6 @@ define([
         this.renderState();
         this.model = model;
     };
-
     /**
      * Viewji prožijo not ready, da wizardview ne more nadaljevati z naslednjim korakom
      * @returns {undefined}
@@ -122,7 +118,6 @@ define([
         this.state = 0;
         this.renderState();
     };
-
     /**
      * Ko se na viewju triggera naprej se izvede ta funkcija.
      * Povečamo števec vzamemo pravi view iz model.viewsa
@@ -133,7 +128,6 @@ define([
         this.stevecView++;
         this.state = 0;
         this.renderState();
-
         this.renderView(this.stevecView);
     };
     /**
@@ -147,16 +141,12 @@ define([
         this.stevecView--;
         this.state = 1;
         this.renderState();
-
         this.renderView(this.stevecView);
-
     };
-
     WizardView.prototype.onPotrdi = function () {
         this.callback(this.model);
         this.trigger('close', this.model);
     };
-
     /**
      * Funkcija veže na podano instanco viewja poslušalce
      * @param {type} view
@@ -177,7 +167,6 @@ define([
         view.off('ready', this.onReady, this);
         view.off('not:ready', this.onNotReady, this);
     };
-
     /**
      * Render enega izmed podanih viewjev iz model.viewsa
      * @param {type} stevecView
@@ -188,10 +177,11 @@ define([
             this.unBind(this.view);
         }
 
+        var options = _.extend({model: this.model}, this.viewsOptions[stevecView]);
+
         var View = this.views[stevecView];
-        var view = this.view = new View({
-            model: this.model
-        });
+        var view = this.view = new View(options);
+
         if (this.view) {
             this.bind(this.view);
         }
@@ -199,7 +189,6 @@ define([
         this.detailR.show(view);
         return view;
     };
-
     /**
      * Funkcija skrije ali prikaže gumb nazaj glede na trenutni števec viewjev
      * @returns {undefined}
@@ -227,7 +216,6 @@ define([
             this.skrijNaprej();
         }
     };
-
     WizardView.prototype.prikaziPotrdi = function () {
         this.$('.potrdi').removeClass('hidden');
     };
@@ -237,23 +225,18 @@ define([
     WizardView.prototype.disablePotrdi = function () {
         this.$('.potrdi').addClass('disabled');
     };
-
     WizardView.prototype.enablePotrdi = function () {
         this.$('.potrdi').removeClass('disabled');
     };
-
     WizardView.prototype.disableNaprej = function () {
         this.$('.naprej').addClass('disabled');
     };
-
     WizardView.prototype.enableNaprej = function () {
         this.$('.naprej').removeClass('disabled');
     };
-
     WizardView.prototype.prikaziNaprej = function () {
         this.$('.naprej').removeClass('hidden');
     };
-
     WizardView.prototype.skrijNaprej = function () {
         this.$('.naprej').addClass('hidden');
     };
