@@ -9,18 +9,21 @@ define([
     '../../Model/Dogodki',
     './WizardView',
     './IzbiraCasView',
-    './IzbiraProstoraView'
+    './IzbiraProstoraView',
+    './VnosNaslovaView'
 ], function (
         Radio,
         i18next,
         Dogodki,
         WizardView,
         IzbiraCasView,
-        IzbiraProstoraView
+        IzbiraProstoraView,
+        VnosNaslovaView
         ) {
 
     var WizardTehSploView = WizardView.extend({
         views: [
+            VnosNaslovaView,
             IzbiraCasView,
             IzbiraProstoraView
         ],

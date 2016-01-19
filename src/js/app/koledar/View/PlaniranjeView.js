@@ -2,7 +2,6 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
     'i18next',
     'backbone',
     'marionette',
@@ -17,7 +16,6 @@ define([
     '../Model/OptionsProstorTipVaje',
     './RazmnoziView',
     './DogodekView',
-    './DogodekPredstavaView',
     'template!../tpl/vaja-form.tpl',
     'template!../tpl/predstava-form.tpl',
     'template!../tpl/tehnicni-form.tpl',
@@ -27,7 +25,6 @@ define([
     'formSchema!dogodekTehnicni',
     'formSchema!dogodekSplosni'
 ], function (
-        Radio,
         i18next,
         Backbone,
         Marionette,
@@ -42,7 +39,6 @@ define([
         optionsProstorTipVaje,
         RazmnoziView,
         DogodekView,
-        DogodekPredstavaView,
         vajaTpl,
         predstavaTpl,
         tehnicniTpl,
@@ -119,7 +115,7 @@ define([
 
         switch (razred) {
             case '100s':
-                this.renderRazredDogodek(model, DogodekPredstavaView, predstavaSch, predstavaTpl);
+                this.renderRazredDogodek(model, DogodekView, predstavaSch, predstavaTpl);
                 break;
             case '200s':
                 this.renderRazredDogodek(model, DogodekView, vajaSch, vajaTpl);

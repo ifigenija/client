@@ -9,7 +9,6 @@ define([
     'moment',
     '../Model/OptionsProstorTipVaje',
     './DogodekView',
-    './DogodekPredstavaView',
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
     './Wizard/WizardVajaView',
@@ -31,7 +30,6 @@ define([
         moment,
         optionsProstorTipVaje,
         DogodekView,
-        DogodekPredstavaView,
         PlanerDogodkiView,
         tplDan,
         WizardVajaView,
@@ -124,16 +122,14 @@ define([
      */
     PlanerDanView.prototype.urediDogodek = function (model) {
         var razred = model.get('dogodek').razred;
-        var TipDogodkaView, schema, tpl;
+        var TipDogodkaView = DogodekView, schema, tpl;
 
         switch (razred) {
             case '100s':
-                TipDogodkaView = DogodekPredstavaView;
                 schema = predstavaSch;
                 tpl = predstavaTpl;
                 break;
             case '200s':
-                TipDogodkaView = DogodekView;
                 schema = vajaSch;
                 tpl = vajaTpl;
                 break;
@@ -141,12 +137,10 @@ define([
                 TipDogodkaView = null;
                 break;
             case '400s':
-                TipDogodkaView = DogodekView;
                 schema = splosniSch;
                 tpl = splosniTpl;
                 break;
             case '600s':
-                TipDogodkaView = DogodekView;
                 schema = tehnicniSch;
                 tpl = tehnicniTpl;
                 break;
@@ -213,6 +207,7 @@ define([
                             model: model,
                             viewsOptions: [
                                 {},
+                                {},
                                 {schemaOptions: prostori}
                             ]
                         });
@@ -221,6 +216,7 @@ define([
                         wizardView = new WizardTehSploView({
                             model: model,
                             viewsOptions: [
+                                {},
                                 {},
                                 {schemaOptions: prostori}
                             ]
