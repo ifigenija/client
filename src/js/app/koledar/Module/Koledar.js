@@ -51,27 +51,14 @@ define([
          * @returns {undefined}
          */
         mod.pregled = function () {
-            require(['../View/PlaniranjeView'], function (View) {
-                var view = new View();
+            require(['../View/PlaniranjeView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
+                require(['fclang/sl'], function () {
+                    var view = new View();
 
-                ch.command('openTab', view, 'Koledar');
-                ch.command('enableMenu', 'koledar');
+                    ch.command('openTab', view, 'Koledar');
+                    ch.command('enableMenu', 'koledar');
+                });
             });
-        };
-        
-        mod.test = function () {
-//            require(['../View/KoledarView', '../Model/Dogodki', 'jquery', 'fullcalendar'], function (View, Collection) {
-//                require(['fclang/sl'], function () {
-//                    var coll = new Collection();
-//
-//                    var calView = new View({
-//                        collection: coll
-//                    });
-//                    ch.command('openTab', calView, 'Koledar');
-//                    ch.command('enableMenu', 'koledar');
-//                });
-//            });
-
         };
 
         /**
@@ -107,10 +94,13 @@ define([
          * @returns {undefined}
          */
         mod.planer = function () {
-            require(['../View/PlanerView'], function (Planer) {
-                var view = new Planer();
-                ch.command('open', view, 'Planer');
-                ch.command('enableMenu', 'koledar');
+            require(['../View/PlanerView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
+                require(['fclang/sl'], function () {
+                    var view = new View();
+
+                    ch.command('open', view, 'Planer');
+                    ch.command('enableMenu', 'koledar');
+                });
             });
         };
 
@@ -132,8 +122,7 @@ define([
                     'koledar/prostori': 'prostori',
                     'koledar/zasedenost': 'zasedenost',
                     'koledar/vaje': 'vaje',
-                    'koledar/predstave': 'predstave',
-                    'koledar/test': 'test'
+                    'koledar/predstave': 'predstave'
                 }
             });
         });

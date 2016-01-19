@@ -20,12 +20,6 @@ define(['i18next'], function (i18n) {
                     label: i18n.t("koledar.nav.planer"),
                     uri: '#koledar/planer'
  //                   permission: ""
-                },
-                
-                {
-                    label: i18n.t("Test"),
-                    uri: "#koledar/test"
-//                    permission: "Koledar-read"
                 }
             ]
         }
