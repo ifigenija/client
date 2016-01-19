@@ -10,12 +10,16 @@
                 </div>
                 <div class="polje-z-gumbom">
                     <div class="izbor"  data-editors="prostor"></div>
-                    <a class="btn btn-default dodaj prikazi-koledar" title="{{t "std.title.prikaziKoledar"}}">
+                    <a class="btn btn-default dodaj prikazi-koledar" title="{{t "std.title.prikaziKoledarProstor"}}">
                         <i class="fa fa-calendar"> </i>
                     </a>
                 </div>
             </div>
-            <div data-fields="status,tipvaje,zaporedna"></div>
+            <div data-fields="status,tipvaje"></div>
+            <div class="prikazno-polje">
+                <div class="pull-right zaporedna vrednost">{{zaporedna}}</div>
+                <div class="attribut">{{t "vaja.zaporedna"}}: </div>                    
+            </div>
         </div>
     </div>
 </form>

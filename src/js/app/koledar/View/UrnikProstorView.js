@@ -21,6 +21,7 @@ define([
         template: tpl,
         className: 'koledar',
         regions: {
+            toolbarR: '.koledar-toolbar',
             filterR: '.koledar-region-filter'
         },
         ui: {
@@ -42,7 +43,9 @@ define([
                 center: 'title',
                 right:''
             },
+            lang: 'sl',
             now: this.datum,
+            timeFormat: 'H(:mm)',
             defaultView: 'timelineDay',
             resourceColumns: [
                 {
@@ -57,8 +60,7 @@ define([
 
                 prostori.fetch({
                     success: function (collection) {
-                        var resources = collection.getResources();
-                        callback(resources);
+                        callback(collection.getResources());
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
@@ -75,7 +77,8 @@ define([
                                     list.push(model.getEventObject());
                                 });
                                 callback(list);
-                            }
+                            },
+                            error: Radio.channel('error').request('handler', 'xhr')
                         });
                     },
                     coll: self.collection

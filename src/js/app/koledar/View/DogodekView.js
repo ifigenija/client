@@ -53,6 +53,9 @@ define([
     var tabNovi = [
         {name: i18next.t('dogodek.title'), event: 'dogodek'}
     ];
+    
+    //namenjen kot toggle za prikaz koledarja prostorov
+    var prikazanKoledar = false;
     /**
      * Dogodekview namenjen prikazu dogodka in razreda dogodka
      * 
@@ -121,7 +124,7 @@ define([
             }
         },
         triggers: {
-            'click .prikazi-koledar': 'koledar:prostor'
+            'click .prikazi-koledar': 'prikazi:koledar'
         }
     });
     /**
@@ -135,15 +138,23 @@ define([
      * Kaj se bo zgodilo ob kliku na gumb zraven vnosnega polja za prostor
      * @returns {undefined}
      */
-    DogodekView.prototype.onKoledarProstor = function () {
-        var coll = new Dogodki();
-        var datum = moment(this.model.get('zacetek'));
-        var urnikView = new UrnikView({
-            collection: coll,
-            datum: datum
-        });
+    DogodekView.prototype.onPrikaziKoledar = function () {
+        if (!prikazanKoledar) {
+            var coll = new Dogodki();
+            var datum = moment(this.model.get('zacetek'));
+            var urnikView = new UrnikView({
+                collection: coll,
+                datum: datum
+            });
+            this.koledarR.show(urnikView);
+            prikazanKoledar = true;
+            this.$('.prikazi-koledar').attr('title', i18next.t('std.title.skrijKoledar'));
+        } else {
+            this.koledarR.empty();
+            prikazanKoledar = false;
+            this.$('.prikazi-koledar').attr('title', i18next.t('std.title.prikaziKoledarProstorProstor'));
+        }
 
-        this.koledarR.show(urnikView);
     };
 
     /**

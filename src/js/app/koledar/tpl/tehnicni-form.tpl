@@ -10,7 +10,7 @@
                 </div>
                 <div class="polje-z-gumbom">
                     <div class="izbor"  data-editors="prostor"></div>
-                    <a class="btn btn-default dodaj prikazi-koledar" title="{{t "std.title.prikaziKoledar"}}">
+                    <a class="btn btn-default dodaj prikazi-koledar" title="{{t "std.title.prikaziKoledarProstor"}}">
                         <i class="fa fa-calendar"> </i>
                     </a>
                 </div>
