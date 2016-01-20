@@ -53,8 +53,10 @@ define([
 
                 object[podrocje].push(model);
             } else {
-                object['gosti'] = [];
-                object['gosti'].push(model);
+                if (!object['ostali']) {
+                    object['ostali'] = [];
+                }
+                object['ostali'].push(model);
             }
         });
 
@@ -99,46 +101,43 @@ define([
 
         return alterColl;
     };
-
+    
     /**
-     * Funkcija vrne collection oseb za odstranit iz terminov storitev in collection oseb za dodat v terminstoritev
-     * @param {Collection} osebe    Vhodni podatek je collection izbranih oseb
+     * Funkcija je zadolžena da v collectionu, prepiše termine storitve, ki že obstajajo
      * @returns {undefined}
      */
-    Collection.prototype.dodajOdstrani = function (osebe) {
-        //ali je oseba v terminih storitve
-        for (var id in this.models) {
-            var model = this.models[id];
-            var vsebovana = false;
-            for (var ids in osebe) {
-                var oseba = osebe[ids];
-                if (model.get('oseba') === oseba.get('id')) {
-                    vsebovana = true;
+    Collection.prototype.getUrejenTS = function (stariTS) {
+        var self = this;
+        //iz trenutno izbranih terminov storitev, želimo prepisati tiste, ki že obstajajo
+        this.each(function (terminS) {
+            var alterID;
+            if (terminS.get('alternacija')) {
+                alterID = terminS.get('alternacija').id;
+            }
+            var osebaID = terminS.get('oseba').id;
+            var alterTermin = null;
+            var osebaTermin = null;
+            // v kolekciji TS, ki je shranjena na serverju prepišemo TS, ki ima isto alternacijo in osebo ter samo osebo
+            stariTS.each(function (ts) {
+                //preverjamo oboje v primeru da ima alternacije pri več kot eni funkciji
+                //v nasprotnem primeru preverimo samo osebo
+                var alter = ts.get('alternacija');
+                if (alter && alter.id === alterID) {
+                    alterTermin = new self.model(ts);
+                } else if (ts.get('oseba').id === osebaID) {
+                    osebaTermin = new self.model(ts);
                 }
-            }
-            if (!vsebovana) {
-                model.destroy({
-                    error: ''
-                });
-            }
-        }
+            });
 
-        //ali je oseba v terminih storitve
-        for (var ids in osebe) {
-            var oseba = osebe[ids];
-            vsebovana = false;
-            for (var id in this.models) {
-                var model = this.models[id];
-                if (oseba.get('id') === model.get('oseba')) {
-                    vsebovana = true;
-                }
+            //v kolikor smo našli enako alternacijo se prepiše generiran ts s TS, ki že obstaja
+            if (alterTermin) {
+                terminS = alterTermin;
+            } else if (osebaTermin) {
+                terminS = osebaTermin;
             }
-            if (!vsebovana) {
-                model.save({
-                    error: ''
-                });
-            }
-        }
+        });
+
+        return this;
     };
 
     Collection.prototype.getEventObjects = function () {

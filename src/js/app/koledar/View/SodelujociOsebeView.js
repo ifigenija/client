@@ -3,82 +3,83 @@
  */
 
 define([
-    'radio',
     'i18next',
-    'backbone',
     'app/bars',
-    'marionette',
-    'underscore',
-    'moment',
-    'jquery',
     './SodelujociView',
     '../Model/TerminiStoritve',
     '../Model/Osebe'
 ], function (
-        Radio,
         i18next,
-        Backbone,
         Handlebars,
-        Marionette,
-        _,
-        moment,
-        $,
         SodelujociView,
         TerminiStoritve,
         Osebe
         ) {
 
-    var SodelujociOsebeView = SodelujociView.extend({});
+    var SodelujociOstaliView = SodelujociView.extend({});
     /**
      * 
      * @param {Object} options
      * @param {String} options.uprizoritev  id uprizoritve
      * @returns {undefined}
      */
-    SodelujociOsebeView.prototype.initialize = function (options) {
-        this.osebe = options.osebe;
+    SodelujociOstaliView.prototype.initialize = function (options) {
         this.dogodek = options.dogodek;
-        this.osebeIz = new Osebe();
-        this.osebeIzTS = new TerminiStoritve();
+        this.ostali = options.osebe;
+        this.iOstali = new Osebe();
+        this.itsOstali = new TerminiStoritve();
     };
-    SodelujociOsebeView.prototype.onRender = function () {
-        this.renderOsebe();
+    SodelujociOstaliView.prototype.getTS = function () {
+        var terminiS = new TerminiStoritve();
+        terminiS.add(this.itsOstali.toJSON());
+        
+        return terminiS.getUrejenTS(this.tsColl);
+    };
+    
+
+    SodelujociOstaliView.prototype.razdeliTS = function (collection) {
+        var tsPodrocja = collection.razdeliPoPodrocjih();
+        
+        this.itsOstali.reset();
+        this.itsOstali.add(tsPodrocja.ostali);
+        this.iOstali = this.itsOstali.toOsebe();
+    };
+
+    SodelujociOstaliView.prototype.onRender = function () {
+        var self = this;
+        this.tsColl = new TerminiStoritve();
+        this.tsColl.queryParams.dogodek = this.dogodek.get('id');
+
+        this.tsColl.fetch({
+            success: function (collection) {
+                self.razdeliTS(collection);
+                self.renderOstali();
+            }
+        });
     };
     /**
      * Izris seznam izbranih umetnikov
      * @returns {undefined}
      */
-    SodelujociOsebeView.prototype.renderOsebe = function () {
-
-        var ItemView = Marionette.ItemView.extend({
-            tagName: 'span',
-            className: 'sodelujoc',
-            template: Handlebars.compile('<label>{{ime}}</label>'),
-            serializeData: function () {
-                return{
-                    ime: this.model.get('oseba').get('polnoIme')
-                };
-            }
-        });
+    SodelujociOstaliView.prototype.renderOstali = function () {
         //funkcija, ki jo prožimo ko kliknemo gumb uredi pri umetnikih
         var uredi = function ($el) {
             this.urediSeznam({
-                izbraniTS: this.osebeIzTS,
-                izbrani: this.osebeIz,
-                mozni: this.osebe,
+                izbraniTS: this.itsOstali,
+                izbrani: this.iOstali,
+                mozni: this.ostali,
                 $el: $el,
                 tpl: Handlebars.compile('{{polnoIme}}')
             });
         };
 
-        this.osebeView = this.renderSeznam({
-            collection: this.osebeIzTS,
-            naslov: i18next.t('Osebe'),
-            childView: ItemView,
+        this.ostaliView = this.renderSeznam({
+            collection: this.itsOstali,
+            naslov: i18next.t('Ostali'),
             uredi: uredi
         });
 
-        this.gostiR.show(this.osebeView);
+        this.ostaliR.show(this.ostaliView);
     };
-    return SodelujociOsebeView;
+    return SodelujociOstaliView;
 });

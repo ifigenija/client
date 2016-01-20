@@ -53,7 +53,7 @@ define([
     var tabNovi = [
         {name: i18next.t('dogodek.title'), event: 'dogodek'}
     ];
-    
+
     //namenjen kot toggle za prikaz koledarja prostorov
     var prikazanKoledar = false;
     /**
@@ -163,6 +163,7 @@ define([
      * @returns {undefined}
      */
     DogodekView.prototype.initialize = function (options) {
+        this.model = options.model || this.model;
         this.schema = options.schema || this.schema;
         this.formTemplate = options.formTemplate || this.formTemplate;
     };
@@ -251,6 +252,25 @@ define([
         var uprizoritev = this.model.get('uprizoritev');
         var dogodek = new Dogodki.prototype.model(this.model.get('dogodek'));
         var osebe = new Osebe();
+
+        var gost, dezurni, sodelujoc;
+        var razred = dogodek.get('razred');
+        switch (razred) {
+            case '100s':
+                dezurni = true;
+                break;
+            case '200s':
+                gost = true;
+                break;
+            case '300s':
+                break;
+            case '400s':
+                sodelujoc = true;
+                break;
+            case '600s':
+                sodelujoc = true;
+                break;
+        }
         //pridobimo kolekcijo oseb
         osebe.fetch({
             success: function (kol) {
@@ -264,7 +284,10 @@ define([
                             var view = new SodelujociView({
                                 alternacije: col,
                                 osebe: kol,
-                                dogodek: dogodek
+                                dogodek: dogodek,
+                                gost: gost,
+                                dezurni: dezurni,
+                                sodelujoc: sodelujoc
                             });
                             self.detailR.show(view);
                         },
@@ -273,7 +296,10 @@ define([
                 } else {
                     var view = new SodelujociOsebeView({
                         osebe: kol,
-                        dogodek: dogodek
+                        dogodek: dogodek,
+                        gost: gost,
+                        dezurni: dezurni,
+                        sodelujoc: sodelujoc
                     });
                     self.detailR.show(view);
                 }
