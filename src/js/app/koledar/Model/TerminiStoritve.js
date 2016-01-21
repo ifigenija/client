@@ -34,27 +34,23 @@ define([
         object = _.clone(this.attributes);
         object.start = moment(this.get('planiranZacetek'));
         object.end = moment(this.get('planiranKonec'));
+        object.resourceId = this.get('oseba.id');
 
-        var title, resourceId;
+        var title;
         if (this.get('alternacija')) {
             title = this.get('alternacija.funkcija.naziv');
-            resourceId = this.get('alternacija.id');
         }
         else if (this.get('dezurni')) {
             title = i18next.t('terminStoritve.dezurni');
-            resourceId = this.get('oseba.id');
         }
         else if (this.get('gost')) {
             title = i18next.t('terminStoritve.gost');
-            resourceId = this.get('oseba.id');
         }
         else if (this.get('sodelujoc')) {
             title = i18next.t('terminStoritve.sodelujoc');
-            resourceId = this.get('oseba.id');
-            
+
         }
         object.title = title;
-        object.resourceId = resourceId;
         return object;
     };
 
@@ -166,6 +162,25 @@ define([
 
         return this;
     };
+
+    Collection.prototype.getSeznamOseb = function () {
+        var osebeColl = this.osebe = new Osebe();
+
+        var models = this.models;
+        for (var id in models) {
+            var model = models[id];
+            var oseba = model.get('oseba');
+
+            if (_.isObject(oseba)) {
+                osebeColl.add(oseba);
+            } else {
+                osebeColl.add({id: oseba});
+            }
+        }
+
+        return osebeColl;
+    };
+
 
     Collection.prototype.getEventObjects = function () {
         var objects = [];

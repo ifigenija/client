@@ -31,6 +31,8 @@ define([
         this.datum = options.datum;
         this.dogodekId = options.dogodekId;
         this.osebe = options.osebe;
+        this.osebeIds = this.osebe.pluck('id');
+        this.collection = options.collection;
     };
 
     UrnikTSView.prototype.onRender = function () {
@@ -46,6 +48,7 @@ define([
             selectHelper: true,
             editable: true,
             lang: 'sl',
+            timezone: true,
             now: this.datum,
             timeFormat: 'H(:mm)',
             defaultView: 'timelineDay',
@@ -56,13 +59,17 @@ define([
                 }
             ],
             resources: function (callback) {
-                callback(self.osebe.getResources());
+                var osebe = self.osebe.getResources();
+                callback(osebe);
             },
             eventSources: [
                 {
                     events: function (zacetek, konec, timezone, callback) {
-                        self.collection.queryParams.zacetek = zacetek.toISOString();
-                        self.collection.queryParams.konec = konec.toISOString();
+                        var z = zacetek.format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
+                        var k = konec.format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
+                        self.collection.queryParams.zacetek = z;
+                        self.collection.queryParams.konec = k;
+                        self.collection.queryParams.oseba = self.osebeIds;
                         self.collection.fetch({
                             success: function (coll) {
                                 coll.remove(coll.where({dogodek: self.dogodekId}));
@@ -72,13 +79,17 @@ define([
                         });
                     },
                     editable: false,
+//                    color: 'red',
                     rendering: 'background',
                     coll: self.collection
                 },
                 {
                     events: function (zacetek, konec, timezone, callback) {
-                        self.collection.queryParams.zacetek = zacetek.toISOString();
-                        self.collection.queryParams.konec = konec.toISOString();
+                        var z = zacetek.format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
+                        var k = konec.format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
+                        self.collection.queryParams.zacetek = z;
+                        self.collection.queryParams.konec = k;
+                        self.collection.queryParams.oseba = self.osebeIds;
                         self.collection.fetch({
                             success: function (coll) {
                                 var modeli = coll.where({dogodek: self.dogodekId});
@@ -96,7 +107,6 @@ define([
         };
         setTimeout(function () {
             self.ui.koledar.fullCalendar(options);
-            self.ui.koledar.fullCalendar('refetchEvents');
         }, 200);
     };
 

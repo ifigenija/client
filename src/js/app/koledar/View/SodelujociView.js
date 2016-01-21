@@ -275,12 +275,7 @@ define([
             }, function () {
                 self.tsColl.queryParams.dogodek = self.dogodek.get('id');
 
-                self.tsColl.fetch({
-                    success: function (collection) {
-//                        self.tsColl = collection;
-                        self.razdeliTS(collection);
-                    }
-                });
+                self.tsColl.fetch();
 
             }, function (error) {
                 console.log(error);
@@ -301,7 +296,7 @@ define([
         var urnikTSView = new UrnikTSView({
             dogodekId: this.dogodek.get('id'),
             datum: this.dogodek.get('zacetek'),
-            osebe: collection.toOsebe(),
+            osebe: collection.getSeznamOseb(),
             collection: coll
         });
 
