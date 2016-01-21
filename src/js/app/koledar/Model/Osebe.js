@@ -7,11 +7,13 @@
 define([
     'baseUrl',
     'backbone',
+    'underscore',
     'app/Max/Model/MaxPageableCollection',
     'deep-model'
 ], function (
         baseUrl,
         Backbone,
+        _,
         Collection
         ) {
 
@@ -52,6 +54,16 @@ define([
         });
 
         return modeli;
+    };
+
+    Collection.prototype.getResources = function () {
+        var polje = [];
+        if (this.models.length) {
+            for (var key in this.models) {
+                polje.push(_.clone(this.models[key].attributes));
+            }
+        }
+        return polje;
     };
 
     return Collection;

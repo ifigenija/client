@@ -116,7 +116,7 @@ define([
      * Podatke v seznamu prikažemo na bolj podroben način
      * @returns {undefined}
      */
-    SeznamSodelujocihView.prototype.onUreditermin = function () {
+    SeznamSodelujocihView.prototype.onUrediTermin = function () {
         this.trigger('uredi:TS', this.collection);
     };
 

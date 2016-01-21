@@ -10,6 +10,7 @@ define([
     '../Model/TerminiStoritve',
     '../Model/Alternacije',
     './SeznamSodelujocihView',
+    './UrnikTSView',
     'app/filter/View/DualListView',
     'template!../tpl/sodelujoci.tpl'
 ], function (
@@ -20,6 +21,7 @@ define([
         TerminiStoritve,
         Alternacije,
         SeznamSodelujocihView,
+        UrnikTSView,
         DualListView,
         sodelujociTpl
         ) {
@@ -30,7 +32,8 @@ define([
         regions: {
             umetnikiR: '.region-umetniki',
             tehnikiR: '.region-tehniki',
-            ostaliR: '.region-ostali'
+            ostaliR: '.region-ostali',
+            koledarR: '.region-koledar'
         }
     });
     /**
@@ -52,7 +55,7 @@ define([
         //kolekcije brez predpone predstavljajo možne alternacije/osebe med katerimi lahko izbiramo
         this.umetniki = new Alternacije();
         this.tehniki = new Alternacije();
-        
+
         //dodamo atribut label, ker pričakujemo lookup osebe
         this.osebeColl.forEach(function (model) {
             model.set('label', model.get('polnoIme'));
@@ -274,7 +277,7 @@ define([
 
                 self.tsColl.fetch({
                     success: function (collection) {
-                        self.tsColl = collection;
+//                        self.tsColl = collection;
                         self.razdeliTS(collection);
                     }
                 });
@@ -293,7 +296,16 @@ define([
      * @returns {undefined}
      */
     SodelujociView.prototype.urediTS = function (collection) {
-        console.log('urediTS');
+        var coll = new TerminiStoritve();
+
+        var urnikTSView = new UrnikTSView({
+            dogodekId: this.dogodek.get('id'),
+            datum: this.dogodek.get('zacetek'),
+            osebe: collection.toOsebe(),
+            collection: coll
+        });
+
+        this.koledarR.show(urnikTSView);
     };
     return SodelujociView;
 });

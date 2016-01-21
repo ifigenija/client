@@ -5,16 +5,20 @@
  */
 
 define([
+    'i18next',
     'baseUrl',
     'backbone',
+    'moment',
     'underscore',
     'app/Max/Model/MaxPageableCollection',
     './Alternacije',
     './Osebe',
     'deep-model'
 ], function (
+        i18next,
         baseUrl,
         Backbone,
+        moment,
         _,
         Collection,
         Alternacije,
@@ -28,8 +32,29 @@ define([
     Model.prototype.getEventObject = function () {
         var object;
         object = _.clone(this.attributes);
-        object.start = moment(this.get('zacetek'));
-        object.end = moment(this.get('konec'));
+        object.start = moment(this.get('planiranZacetek'));
+        object.end = moment(this.get('planiranKonec'));
+
+        var title, resourceId;
+        if (this.get('alternacija')) {
+            title = this.get('alternacija.funkcija.naziv');
+            resourceId = this.get('alternacija.id');
+        }
+        else if (this.get('dezurni')) {
+            title = i18next.t('terminStoritve.dezurni');
+            resourceId = this.get('oseba.id');
+        }
+        else if (this.get('gost')) {
+            title = i18next.t('terminStoritve.gost');
+            resourceId = this.get('oseba.id');
+        }
+        else if (this.get('sodelujoc')) {
+            title = i18next.t('terminStoritve.sodelujoc');
+            resourceId = this.get('oseba.id');
+            
+        }
+        object.title = title;
+        object.resourceId = resourceId;
         return object;
     };
 
@@ -90,6 +115,8 @@ define([
         for (var id in models) {
             var model = models[id];
             var alter = model.get('alternacija');
+            alter['oseba'] = model.get('oseba');
+            alter['funkcija'].label = model.get('alternacija.funkcija.naziv');
             if (alter) {
                 if (_.isObject(alter)) {
                     alterColl.add(alter);
@@ -101,7 +128,7 @@ define([
 
         return alterColl;
     };
-    
+
     /**
      * Funkcija je zadolžena da v collectionu, prepiše termine storitve, ki že obstajajo
      * @returns {undefined}
