@@ -22,7 +22,8 @@ define([
     'formSchema!vaja',
     'formSchema!predstava',
     'formSchema!dogodekTehnicni',
-    'formSchema!dogodekSplosni'
+    'formSchema!dogodekSplosni',
+    'options!dogodek.termini'
 ], function (
         i18next,
         Marionette,
@@ -43,7 +44,8 @@ define([
         vajaSch,
         predstavaSch,
         tehnicniSch,
-        splosniSch
+        splosniSch,
+        termini
         ) {
 
     var uraZacetek = 10;

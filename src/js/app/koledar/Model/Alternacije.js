@@ -66,11 +66,11 @@ define([
                 dogodek: options.dogodek.get('id'),
                 planiranZacetek: options.zacetek,
                 planiranKonec: options.konec,
-                gost: options.gost ? options.gost : false,
-                dezurni: options.dezurni ? options.dezurni : false,
-                sodelujoc: options.sodelujoc ? options.sodelujoc : false,
+                gost: false,
+                dezurni: false,
+                sodelujoc:false,
                 alternacija: model,
-                oseba: new Osebe.prototype.model(model.get('oseba'))
+                oseba: model.get('oseba')
             };
             modeli.push(tsModel);
         });

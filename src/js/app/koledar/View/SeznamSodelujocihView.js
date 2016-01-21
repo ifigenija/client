@@ -24,7 +24,7 @@ define([
         template: Handlebars.compile('<label>{{ime}}</label>'),
         serializeData: function () {
             return{
-                ime: this.model.get('oseba').polnoIme
+                ime: this.model.get('oseba').label
             };
         }
     });

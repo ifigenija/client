@@ -82,13 +82,13 @@ define([
         this.itsUmetniki.reset();
         this.itsUmetniki.add(tsPodrocja.umetnik);
         this.itsUmetniki.add(tsPodrocja.igralec);
-        this.iUmetniki = this.itsUmetniki.toAlternacije();
+        this.iUmetniki = this.itsUmetniki.toAlternacije(this.umetniki);
 
         this.itsTehniki.reset();
         this.itsTehniki.add(tsPodrocja.tehnik);
         this.itsTehniki.add(tsPodrocja.inspicient);
         this.itsTehniki.add(tsPodrocja.sepetalec);
-        this.iTehniki = this.itsTehniki.toAlternacije();
+        this.iTehniki = this.itsTehniki.toAlternacije(this.tehniki);
 
         this.itsOstali.reset();
         this.itsOstali.add(tsPodrocja.ostali);
@@ -186,7 +186,7 @@ define([
                 izbrani: this.iOstali,
                 mozni: this.ostali,
                 $el: $el,
-                tpl: Handlebars.compile('{{polnoIme}}'),
+                tpl: Handlebars.compile('{{label}}'),
                 gost: this.options.gost,
                 dezurni: this.options.dezurni,
                 sodelujoc: this.options.sodelujoc

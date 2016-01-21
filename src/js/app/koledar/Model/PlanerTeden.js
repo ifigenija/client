@@ -5,25 +5,17 @@
  */
 
 define([
-    'baseUrl',
     'backbone',
-    'underscore',
     'moment',
     './Dogodki',
     'deep-model'
 ], function (
-        baseUrl,
         Backbone,
-        _,
         moment,
         Dogodki
         ) {
 
-    var Collection = Backbone.Collection.extend({
-        model: Dogodki.prototype.model
-    });
-
-    var PlanerModel = Backbone.Model.extend({
+    var PlanerDan = Backbone.Model.extend({
         defaults: {
             datum: null,
             dopoldne: null,
@@ -33,7 +25,7 @@ define([
     });
 
     var PlanerTeden = Backbone.Collection.extend({
-        model: PlanerModel,
+        model: PlanerDan,
         initTeden: function (datum) {
             var d = moment(datum);
 
@@ -41,11 +33,11 @@ define([
             var end = moment(d).endOf('week');
 
             while (end.isAfter(start)) {
-                this.add(new PlanerModel({
+                this.add(new PlanerDan({
                     datum: moment(start),
-                    dopoldne: new Collection(),
-                    popoldne: new Collection(),
-                    zvecer: new Collection()
+                    dopoldne: new Dogodki(),
+                    popoldne: new Dogodki(),
+                    zvecer: new Dogodki()
                 }));
                 start.add(1, 'days');
             }
