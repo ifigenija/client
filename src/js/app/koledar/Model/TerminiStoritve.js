@@ -83,21 +83,13 @@ define([
 
         return osebeColl;
     };
-    /**
-     * Funkcija pretvori trenutno kolekcijo terminov storitev v kolekcijo alternacij.
-     * @param {type} seznamAlternacij   Je seznam alternacij iz katere kolekcije bomo sestavili novo kolekcijo
-     * @returns {@this;@pro;alternacije@new;Alternacije|Collection@call;extend.prototype.toAlternacije.alterColl}
-     */
-    Collection.prototype.toAlternacije = function (seznamAlternacij) {
+    Collection.prototype.toAlternacije = function () {
         var alterColl = this.alternacije = new Alternacije();
 
         var models = this.models;
         for (var id in models) {
             var model = models[id];
-            //poiščemo isto alternacijo v seznamu možnih alternacij in jo dodamo v seznam
-            var alterId = model.get('alternacija').id;
-            var alter = seznamAlternacij.findWhere({id: alterId});
-            
+            var alter = model.get('alternacija');
             if (alter) {
                 if (_.isObject(alter)) {
                     alterColl.add(alter);
@@ -109,7 +101,7 @@ define([
 
         return alterColl;
     };
-
+    
     /**
      * Funkcija je zadolžena da v collectionu, prepiše termine storitve, ki že obstajajo
      * @returns {undefined}

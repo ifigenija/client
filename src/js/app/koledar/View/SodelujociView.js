@@ -52,6 +52,11 @@ define([
         //kolekcije brez predpone predstavljajo možne alternacije/osebe med katerimi lahko izbiramo
         this.umetniki = new Alternacije();
         this.tehniki = new Alternacije();
+        
+        //dodamo atribut label, ker pričakujemo lookup osebe
+        this.osebeColl.forEach(function (model) {
+            model.set('label', model.get('polnoIme'));
+        });
         this.ostali = this.osebeColl;
 
         this.razdeliAlternacije();
@@ -66,7 +71,7 @@ define([
         terminiS.add(this.itsUmetniki.toJSON());
         terminiS.add(this.itsTehniki.toJSON());
         terminiS.add(this.itsOstali.toJSON());
-        
+
         return terminiS.getUrejenTS(this.tsColl);
     };
 
