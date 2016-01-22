@@ -209,7 +209,6 @@ define([
                             model: model,
                             viewsOptions: [
                                 {},
-                                {},
                                 {schemaOptions: prostori}
                             ]
                         });
@@ -218,7 +217,6 @@ define([
                         wizardView = new WizardTehSploView({
                             model: model,
                             viewsOptions: [
-                                {},
                                 {},
                                 {schemaOptions: prostori}
                             ]

@@ -8,23 +8,20 @@ define([
     'i18next',
     '../../Model/Dogodki',
     './WizardView',
-    './IzbiraCasView',
     './IzbiraProstoraView',
-    './VnosNaslovaView'
+    './VnosNaslovCasView'
 ], function (
         Radio,
         i18next,
         Dogodki,
         WizardView,
-        IzbiraCasView,
         IzbiraProstoraView,
-        VnosNaslovaView
+        VnosNaslovCasView
         ) {
 
     var WizardTehSploView = WizardView.extend({
         views: [
-            VnosNaslovaView,
-            IzbiraCasView,
+            VnosNaslovCasView,
             IzbiraProstoraView
         ],
         title: i18next.t('dogodek.dodajVajo'),
