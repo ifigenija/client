@@ -200,10 +200,20 @@ define([
                 sodelujoc: this.options.sodelujoc
             });
         };
+        
+        var naslov, razred = this.dogodek.get('razred');
+        switch(razred){
+            case '100s':
+                naslov = i18next.t('terminStoritve.dezurni');
+                break;
+            case '200s':
+                naslov = i18next.t('terminStoritve.gosti');
+                break;
+        }
 
         this.ostaliView = this.renderSeznam({
             collection: this.itsOstali,
-            naslov: i18next.t('terminStoritve.gosti'),
+            naslov: naslov,
             uredi: uredi
         });
 

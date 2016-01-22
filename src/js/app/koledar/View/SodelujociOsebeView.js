@@ -25,6 +25,10 @@ define([
      */
     SodelujociOstaliView.prototype.initialize = function (options) {
         this.dogodek = options.dogodek;
+        //dodamo atribut label, ker pričakujemo lookup osebe
+        options.osebe.forEach(function (model) {
+            model.set('label', model.get('polnoIme'));
+        });
         this.ostali = options.osebe;
         this.iOstali = new Osebe();
         this.itsOstali = new TerminiStoritve();
@@ -69,13 +73,16 @@ define([
                 izbrani: this.iOstali,
                 mozni: this.ostali,
                 $el: $el,
-                tpl: Handlebars.compile('{{polnoIme}}')
+                tpl: Handlebars.compile('{{label}}'),
+                gost: this.options.gost,
+                dezurni: this.options.dezurni,
+                sodelujoc: this.options.sodelujoc
             });
         };
 
         this.ostaliView = this.renderSeznam({
             collection: this.itsOstali,
-            naslov: i18next.t('Ostali'),
+            naslov: i18next.t('terminStoritve.sodelujoci'),
             uredi: uredi
         });
 
