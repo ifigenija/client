@@ -8,6 +8,7 @@ define([
     'backbone',
     'marionette',
     'app/Max/Module/Form',
+    'template!../../tpl/izbira-deltacas.tpl',
     'options!dogodek.delte'
 ], function (
         Radio,
@@ -16,20 +17,11 @@ define([
         Backbone,
         Marionette,
         Form,
+        tpl,
         delte
         ) {
 
     var sch = {
-        title: {
-            title: i18next.t('ent.naslov'),
-            name: 'title',
-            type: 'Text',
-            editorAttrs: {
-                class: 'naziv-polje form-control',
-                type: 'naziv',
-                name: 'title'
-            }
-        },
         zacetek: {
             type: 'DateTimePicker',
             help: i18next.t('dogodek.d.zacetek'),
@@ -77,11 +69,35 @@ define([
                 type: 'integer',
                 name: 'delKon'
             }
+        },
+        delZacTeh: {
+            type: 'Number',
+            name: 'delZacTeh',
+            title: i18next.t('terminStoritve.delZacTeh'),
+            help: i18next.t('terminStoritve.d.delZacTeh'),
+            decimals: 0,
+            editorAttrs: {
+                class: 'integer-polje form-control',
+                type: 'integer',
+                name: 'delZacTeh'
+            }
+        },
+        delKonTeh: {
+            type: 'Number',
+            name: 'delKonTeh',
+            title: i18next.t('terminStoritve.delKonTeh'),
+            help: i18next.t('terminStoritve.d.delKonTeh'),
+            decimals: 0,
+            editorAttrs: {
+                class: 'integer-polje form-control',
+                type: 'integer',
+                name: 'delKonTeh'
+            }
         }
     };
 
     var IzbiraCasView = Form.extend({
-        template: Handlebars.compile('<form><div data-fields="title"></div><div class="row"><div class="col-sm-6" data-fields="zacetek,konec"></div><div class="col-sm-6" data-fields="delZac,delKon"></div></div></form>'),
+        template: tpl,
         schema: sch
     });
 
@@ -93,22 +109,28 @@ define([
 
             this.zacetek = this.model.get('zacetek') || null;
             this.konec = this.model.get('konec') || null;
-            this.title = this.model.get('title');
-            
+
             this.delZac = this.model.get('delZac') || null;
             this.delZacTeh = this.model.get('delZacTeh') || null;
-            
+            this.delKon = this.model.get('delKon') || null;
+            this.delKonTeh = this.model.get('delKonTeh') || null;
+
             switch (this.model.get('razred')) {
-                case '400s':
-                    this.delZac = this.delZac ? this.delZac : delte.delSplZac.value;
-                    this.delKon = this.delKon ? this.delKon : delte.delSplKon.value;
+                case '100s':
+                    this.delZac = this.delZac ? this.delZac : delte.delPreZac.value;
+                    this.delZacTeh = this.delZacTeh ? this.delZacTeh : delte.delPreZacTeh.value;
+                    this.delKon = this.delKon ? this.delKon : delte.delPreKon.value;
+                    this.delKonTeh = this.delKonTeh ? this.delKonTeh : delte.delPreKonTeh.value;
                     break;
-                case '600s':
-                    this.delZac = this.delZac ? this.delZac : delte.delTehZac.value;
-                    this.delKon = this.delKon ? this.delKon : delte.delTehKon.value;
+                case '200s':
+                    this.delZac = this.delZac ? this.delZac : delte.delVajZac.value;
+                    this.delZacTeh = this.delZacTeh ? this.delZacTeh : delte.delVajZacTeh.value;
+                    this.delKon = this.delKon ? this.delKon : delte.delVajKon.value;
+                    this.delKonTeh = this.delKonTeh ? this.delKonTeh : delte.delVajKonTeh.value;
+                    break;
+                case '300s':
                     break;
             }
-            
         }
 
         this.on('change', this.onChange, this);
@@ -126,14 +148,17 @@ define([
         if (this.konec) {
             this.fields.konec.editor.setValue(this.konec);
         }
-        if (this.title) {
-            this.fields.title.editor.setValue(this.title);
-        }
         if (this.delZac) {
             this.fields.delZac.editor.setValue(this.delZac);
         }
+        if (this.delZacTeh) {
+            this.fields.delZacTeh.editor.setValue(this.delZacTeh);
+        }
         if (this.delKon) {
             this.fields.delKon.editor.setValue(this.delKon);
+        }
+        if (this.delKonTeh) {
+            this.fields.delKonTeh.editor.setValue(this.delKonTeh);
         }
         this.trigger('change');
     };
@@ -146,20 +171,21 @@ define([
     IzbiraCasView.prototype.onChange = function () {
         var zacetek = this.fields.zacetek.getValue();
         var konec = this.fields.konec.getValue();
-        var title = this.fields.title.getValue();
-        
         var delZac = this.fields.delZac.getValue();
+        var delZacTeh = this.fields.delZacTeh.getValue();
         var delKon = this.fields.delKon.getValue();
+        var delKonTeh = this.fields.delKonTeh.getValue();
 
         //če zadoščamo kriterijem dopolnimo model in prožimo ready
-        if (zacetek && konec && title) {
+        if (zacetek && konec) {
             this.model.set('zacetek', zacetek);
             this.model.set('konec', konec);
-            this.model.set('title', title);
-            
+
             this.model.set('delZac', delZac);
+            this.model.set('delZacTeh', delZacTeh);
             this.model.set('delKon', delKon);
-            
+            this.model.set('delKonTeh', delKonTeh);
+
             this.trigger('ready', this.model);
         } else {
             this.trigger('not:ready');

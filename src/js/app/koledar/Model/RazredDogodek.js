@@ -17,10 +17,66 @@ define([
         moment
         ) {
 
+    /**
+     * If polja idjev sestavimo del urlja
+     * @param {type} array
+     * @param {type} prefix
+     * @returns {String}
+     */
+    var getPartOfUrl = function (array, prefix) {
+        var string = '';
+
+        for (var k in array) {
+            if (k === '0') {
+                string += prefix + '[]=' + array[k];
+            } else {
+                string += '&' + prefix + '[]=' + array[k];
+            }
+        }
+        return string;
+    };
+
     var Dogodek = Backbone.DeepModel.extend({
         view: 'default',
         urlRoot: function () {
-            return baseUrl + '/rest/' + this.view;
+            var url = baseUrl + '/rest/' + this.view;
+            var razred = this.get('razred');
+            if (razred) {
+                url += '?';
+                switch (razred) {
+                    case '100s':
+                        url += getPartOfUrl(this.get('alternacije'), 'alternacija');
+                        var niz = getPartOfUrl(this.get('ostali'), 'dezurni');
+                        url += niz ? '&' + niz : '';
+                        break;
+                    case '200s':
+                        url += getPartOfUrl(this.get('alternacije'), 'alternacija');
+                        var niz = getPartOfUrl(this.get('ostali'), 'gost');
+                        url += niz ? '&' + niz : '';
+                        break;
+                    case '400s':
+                        url += getPartOfUrl(this.get('ostali'), 'sodelujoc');
+                        break;
+                    case '600s':
+                        url += getPartOfUrl(this.get('ostali'), 'sodelujoc');
+                        break;
+                }
+
+                if (this.get('delZac')) {
+                    url += '&deltaZac=' + this.get('delZac');
+                }
+                if (this.get('delZacTeh')) {
+                    url += '&deltaZacTeh=' + this.get('delZacTeh');
+                }
+                if (this.get('delKon')) {
+                    url += '&deltaKon=' + this.get('delKon');
+                }
+                if (this.get('delKonTeh')) {
+                    url += '&deltaKonTeh=' + this.get('delKonTeh');
+                }
+            }
+
+            return url;
         },
         getEventObject: function (eObj) {
             if (!eObj) {

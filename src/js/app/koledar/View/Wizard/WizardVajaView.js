@@ -9,6 +9,7 @@ define([
     '../../Model/Dogodki',
     './WizardView',
     './IzbiraCasView',
+    './IzbiraCasDeltaCasView',
     './IzbiraTipaVajeView',
     './IzbiraProstoraView',
     './IzbiraUprizoritveView'
@@ -18,14 +19,16 @@ define([
         Dogodki,
         WizardView,
         IzbiraCasView,
+        IzbiraCasDeltaCasView,
         IzbiraTipaVajeView,
         IzbiraProstoraView,
         IzbiraUprizoritveView
         ) {
-    
+
     var WizardVajaView = WizardView.extend({
         views: [
-            IzbiraCasView,
+//            IzbiraCasView,
+            IzbiraCasDeltaCasView,
             IzbiraUprizoritveView,
             IzbiraTipaVajeView,
             IzbiraProstoraView

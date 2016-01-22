@@ -47,11 +47,6 @@ define([
         splosniSch,
         termini
         ) {
-
-    var uraZacetek = 10;
-    var uraDopoldne = 14;
-    var uraPopoldne = 19;
-    var uraZvecer = 23;
     /**
      * Prikazuje posamezni dan v planeru
      * Regije za tri dele dneva, popoldne, dopoldne, zvečer. 
@@ -77,24 +72,24 @@ define([
     PlanerDanView.prototype.renderDopoldne = function () {
         var view = this.dopoldneView = this.getDogodekView(
                 this.model.get('dopoldne'),
-                moment(this.model.get('datum')).set('hour', uraZacetek),
-                moment(this.model.get('datum')).set('hour', uraDopoldne)
+                moment(this.model.get('datum')).set({'hour': termini.dopoldanZacetek.h, 'minute': termini.dopoldanZacetek.m}),
+                moment(this.model.get('datum')).set({'hour': termini.dopoldanKonec.h, 'minute': termini.dopoldanKonec.m})
                 );
         this.dopoldneR.show(view);
     };
     PlanerDanView.prototype.renderPopoldne = function () {
         var view = this.popoldneView = this.getDogodekView(
                 this.model.get('popoldne'),
-                moment(this.model.get('datum')).set('hour', uraDopoldne),
-                moment(this.model.get('datum')).set('hour', uraPopoldne)
+                moment(this.model.get('datum')).set({'hour': termini.popoldanZacetek.h, 'minute': termini.popoldanZacetek.m}),
+                moment(this.model.get('datum')).set({'hour': termini.popoldanKonec.h, 'minute': termini.popoldanKonec.m})
                 );
         this.popoldneR.show(view);
     };
     PlanerDanView.prototype.renderZvecer = function () {
         var view = this.zvecerView = this.getDogodekView(
                 this.model.get('zvecer'),
-                moment(this.model.get('datum')).set('hour', uraPopoldne),
-                moment(this.model.get('datum')).set('hour', uraZvecer)
+                moment(this.model.get('datum')).set({'hour': termini.vecerZacetek.h, 'minute': termini.vecerZacetek.m}),
+                moment(this.model.get('datum')).set({'hour': termini.vecerKonec.h, 'minute': termini.vecerKonec.m})
                 );
         this.zvecerR.show(view);
     };

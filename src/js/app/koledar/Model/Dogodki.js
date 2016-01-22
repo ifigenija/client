@@ -10,13 +10,15 @@ define([
     'app/Max/Model/MaxPageableCollection',
     'underscore',
     'moment',
+    'options!dogodek.termini',
     'deep-model'
 ], function (
         baseUrl,
         Backbone,
         Pageable,
         _,
-        moment
+        moment,
+        termini
         ) {
 
     var Dogodek = Backbone.DeepModel.extend({
@@ -59,9 +61,10 @@ define([
             //v primeru da ni začetka se uporabi konec pomembno pri izračunu
             var ura = zacetek ? zacetekM : konecM;
             //mejnike terminov nastavimo na konce termnov
-            var uraDopoldan = moment(ura).startOf('day').set('hour', 14);
-            var uraPopoldan = moment(ura).startOf('day').set('hour', 19);
-            var uraZvecer = moment(ura).startOf('day').set('hour', 23);
+            
+            var uraDopoldan = moment(ura).startOf('day').set({'hour': termini.dopoldanKonec.h, 'minute': termini.dopoldanKonec.m});
+            var uraPopoldan = moment(ura).startOf('day').set({'hour': termini.popoldanKonec.h, 'minute': termini.popoldanKonec.m});
+            var uraZvecer = moment(ura).startOf('day').set({'hour': termini.vecerKonec.h, 'minute': termini.vecerKonec.m});
 
             var dopoldne = false;
             var popoldne = false;

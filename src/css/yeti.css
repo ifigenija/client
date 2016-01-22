@@ -7152,6 +7152,9 @@ Licenca GPLv3
 .sodelujoci .sodelujoc {
   margin-right: 5px;
 }
+.background-event {
+  opacity: 0.5;
+}
 /* Tomaz */
 .teden-editor input {
   width: auto;

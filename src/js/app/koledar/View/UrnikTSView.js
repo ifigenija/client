@@ -79,8 +79,8 @@ define([
                         });
                     },
                     editable: false,
-//                    color: 'red',
-                    rendering: 'background',
+                    color: 'red',
+                    className: 'background-event',
                     coll: self.collection
                 },
                 {
