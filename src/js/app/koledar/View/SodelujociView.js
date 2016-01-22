@@ -200,9 +200,9 @@ define([
                 sodelujoc: this.options.sodelujoc
             });
         };
-        
+
         var naslov, razred = this.dogodek.get('razred');
-        switch(razred){
+        switch (razred) {
             case '100s':
                 naslov = i18next.t('terminStoritve.dezurni');
                 break;
@@ -301,15 +301,17 @@ define([
      * @returns {undefined}
      */
     SodelujociView.prototype.urediTS = function (collection) {
-        var coll = new TerminiStoritve();
+        if (collection.length) {
+            var coll = new TerminiStoritve();
 
-        var urnikTSView = new UrnikTSView({
-            dogodek: this.dogodek,
-            osebe: collection.getSeznamOseb(),
-            collection: coll
-        });
+            var urnikTSView = new UrnikTSView({
+                dogodek: this.dogodek,
+                osebe: collection.getSeznamOseb(),
+                collection: coll
+            });
 
-        this.koledarR.show(urnikTSView);
+            this.koledarR.show(urnikTSView);
+        }
     };
     return SodelujociView;
 });

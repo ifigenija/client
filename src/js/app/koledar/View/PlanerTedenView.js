@@ -123,7 +123,7 @@ define([
     };
     /**
      * Izris dogodka s podanim modelo
-     * @param {Dogodek} model
+     * @param {RazredDogodek} model
      * @returns {undefined}
      */
     PlanerDanView.prototype.urediDogodek = function (model) {

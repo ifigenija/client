@@ -17,7 +17,7 @@ define([
         DualListView
         ) {
 
-    var IzbiraCasView = DualListView.extend({});
+    var IzbiraOstaliView = DualListView.extend({});
 
-    return IzbiraCasView;
+    return IzbiraOstaliView;
 });

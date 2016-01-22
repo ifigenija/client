@@ -31,7 +31,7 @@ define([
         ZapisiLayout,
         SodelujociView,
         SodelujociOsebeView,
-        UrnikView,
+        UrnikProstorView,
         schemaDogodek,
         dokumentTpl,
         dogodekTpl
@@ -142,11 +142,11 @@ define([
         if (!prikazanKoledar) {
             var coll = new Dogodki();
             var datum = moment(this.model.get('zacetek'));
-            var urnikView = new UrnikView({
+            var urnikProstorView = new UrnikProstorView({
                 collection: coll,
                 datum: datum
             });
-            this.koledarR.show(urnikView);
+            this.koledarR.show(urnikProstorView);
             prikazanKoledar = true;
             this.$('.prikazi-koledar').attr('title', i18next.t('std.title.skrijKoledar'));
         } else {
@@ -182,6 +182,8 @@ define([
      * @returns {undefined}
      */
     DogodekView.prototype.deselectTab = function () {
+        this.koledarR.empty();
+        prikazanKoledar = false;
         this.$('.dogodek-panels .tab-pane').removeClass('active');
     };
 

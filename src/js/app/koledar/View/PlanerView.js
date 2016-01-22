@@ -86,6 +86,10 @@ define([
                 self.tedenR.show(tedenView);
             }
         });
+        
+        this.collection.on('change', function(){
+            console.log('change');
+        }, this);
     };
 
     return PlanerView;
