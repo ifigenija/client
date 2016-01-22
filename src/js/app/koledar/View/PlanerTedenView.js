@@ -4,8 +4,9 @@
 
 define([
     'i18next',
-    'marionette',
     'backbone',
+    'marionette',
+    'underscore',
     'moment',
     '../Model/OptionsProstorTipVaje',
     './DogodekView',
@@ -26,8 +27,9 @@ define([
     'options!dogodek.termini'
 ], function (
         i18next,
-        Marionette,
         Backbone,
+        Marionette,
+        _,
         moment,
         optionsProstorTipVaje,
         DogodekView,
@@ -64,6 +66,13 @@ define([
             detailR: '.region-detail'
         }
     });
+
+    PlanerDanView.prototype.serializeData = function () {
+        return _.extend(this.model.toJSON(), {
+            danVTednu: moment(this.model.get('datum')).format('dddd')
+        });
+    };
+
     PlanerDanView.prototype.onRender = function () {
         this.renderDopoldne();
         this.renderPopoldne();

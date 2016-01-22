@@ -304,8 +304,7 @@ define([
         var coll = new TerminiStoritve();
 
         var urnikTSView = new UrnikTSView({
-            dogodekId: this.dogodek.get('id'),
-            datum: this.dogodek.get('zacetek'),
+            dogodek: this.dogodek,
             osebe: collection.getSeznamOseb(),
             collection: coll
         });

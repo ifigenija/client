@@ -28,11 +28,13 @@ define([
     });
 
     UrnikTSView.prototype.initialize = function (options) {
-        this.datum = options.datum;
-        this.dogodekId = options.dogodekId;
+        this.dogodek = options.dogodek;
         this.osebe = options.osebe;
-        this.osebeIds = this.osebe.pluck('id');
         this.collection = options.collection;
+
+        this.datum = this.dogodek.get('zacetek');
+        this.dogodekId = this.dogodek.get('id');
+        this.osebeIds = this.osebe.pluck('id');
     };
 
     UrnikTSView.prototype.onRender = function () {
@@ -47,6 +49,7 @@ define([
             },
             selectHelper: true,
             editable: true,
+            aspectRatio: 1.6,
             lang: 'sl',
             timezone: true,
             now: this.datum,
@@ -102,6 +105,17 @@ define([
                         });
                     },
                     coll: self.collection
+                },
+                {
+                    events: function (zacetek, konec, timezone, callback) {
+                        var eventDogodek = [{
+                                id: 'dg',
+                                rendering: 'background',
+                                start: self.dogodek.get('zacetek'),
+                                end: self.dogodek.get('konec')
+                            }];
+                        callback(eventDogodek);
+                    }
                 }
             ]
         };
