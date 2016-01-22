@@ -96,7 +96,7 @@ define([
             this.title = this.model.get('title');
             
             this.delZac = this.model.get('delZac') || null;
-            this.delZacTeh = this.model.get('delZacTeh') || null;
+            this.delKon = this.model.get('delKon') || null;
             
             switch (this.model.get('razred')) {
                 case '400s':
