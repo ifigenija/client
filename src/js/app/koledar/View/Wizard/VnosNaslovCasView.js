@@ -2,19 +2,13 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
     'i18next',
     'app/bars',
-    'backbone',
-    'marionette',
     'app/Max/Module/Form',
     'options!dogodek.delte'
 ], function (
-        Radio,
         i18next,
         Handlebars,
-        Backbone,
-        Marionette,
         Form,
         delte
         ) {
@@ -27,7 +21,8 @@ define([
             editorAttrs: {
                 class: 'naziv-polje form-control',
                 type: 'naziv',
-                name: 'title'
+                name: 'title',
+                placeholder: i18next.t('std.vnosNaslova')
             }
         },
         zacetek: {
