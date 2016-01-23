@@ -9,6 +9,7 @@ define([
     '../../Model/Dogodki',
     './WizardView',
     './IzbiraProstoraView',
+    './IzbiraOstaliView',
     './VnosNaslovCasView'
 ], function (
         Radio,
@@ -16,15 +17,16 @@ define([
         Dogodki,
         WizardView,
         IzbiraProstoraView,
+        IzbiraOstaliView,
         VnosNaslovCasView
         ) {
 
     var WizardTehSploView = WizardView.extend({
         views: [
             VnosNaslovCasView,
-            IzbiraProstoraView
+            IzbiraProstoraView,
+            IzbiraOstaliView
         ],
-        title: i18next.t('dogodek.dodajVajo'),
         callback: function (model) {
             var self = this;
             model.save({}, {

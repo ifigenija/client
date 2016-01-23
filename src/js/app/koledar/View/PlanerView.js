@@ -89,12 +89,6 @@ define([
 
         this.collection.on('change', function () {
             planerTeden.vnesiDogodke(self.collection);
-            planerTeden.each(function (planerM) {
-                
-                
-
-            });
-
         }, this);
     };
 

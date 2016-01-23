@@ -211,18 +211,22 @@ define([
                     case '400s':
                         wizardView = new WizardTehSploView({
                             model: model,
+                            title: i18next.t('dogodek.dodajSplosni'),
                             viewsOptions: [
                                 {},
-                                {schemaOptions: prostori}
+                                {schemaOptions: prostori},
+                                {}
                             ]
                         });
                         break;
                     case '600s':
                         wizardView = new WizardTehSploView({
                             model: model,
+                            title: i18next.t('dogodek.dodajTehnicni'),
                             viewsOptions: [
                                 {},
-                                {schemaOptions: prostori}
+                                {schemaOptions: prostori},
+                                {}
                             ]
                         });
                         break;
