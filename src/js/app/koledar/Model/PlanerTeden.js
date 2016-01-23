@@ -132,7 +132,8 @@ define([
         };
     };
     /**
-     * 
+     * Funkcija vzame dogodek in datum in preračuna v katere termine spada dogodek.
+     * Vrne polje terminov v katere spada dogodek na ta datum.
      * @param {type} datum
      * @returns {
      *          {Boolean} dopoldne,
