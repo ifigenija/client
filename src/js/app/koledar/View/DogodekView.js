@@ -353,23 +353,29 @@ define([
     DogodekView.prototype.getRazredNiz = function () {
 
         var razred = i18next.t(this.model.get('dogodek').razred);
-        var niz;
-        if (razred === '100s') {
-            niz = i18next.t('std.predstava');
-        } else if (razred === '200s') {
-            niz = i18next.t('std.vaja');
+        var niz = '';
+
+        var uprizoritev = this.model.get('uprizoritev');
+        if (uprizoritev) {
+            niz += uprizoritev.label + ': ';
         }
-        else if (razred === '300s') {
-            niz = i18next.t('std.gostovanje');
-        }
-        else if (razred === '400s') {
-            niz = i18next.t('std.splosno');
-        }
-        else if (razred === '500s') {
-            niz = i18next.t('std.zasedenost');
-        }
-        else if (razred === '600s') {
-            niz = i18next.t('std.tehnicni');
+
+        switch (razred) {
+            case '100s':
+                niz += i18next.t('std.predstava');
+                break;
+            case '200s':
+                niz += i18next.t('std.vaja');
+                break;
+            case '300s':
+                niz += i18next.t('std.gostovanje');
+                break;
+            case '400s':
+                niz += i18next.t('std.splosno');
+                break;
+            case '600s':
+                niz += i18next.t('std.tehnicni');
+                break;
         }
 
         return niz;

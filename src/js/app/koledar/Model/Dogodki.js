@@ -54,14 +54,14 @@ define([
          *          {Boolean} allDay
          *          }
          */
-        terminiZacetekKonec: function (zacetek, konec) {            
+        terminiZacetekKonec: function (zacetek, konec) {
             var zacetekM = moment(zacetek);
             var konecM = moment(konec);
-            
+
             //v primeru da ni začetka se uporabi konec pomembno pri izračunu
             var ura = zacetek ? zacetekM : konecM;
             //mejnike terminov nastavimo na konce termnov
-            
+
             var uraDopoldan = moment(ura).startOf('day').set({'hour': termini.dopoldanKonec.h, 'minute': termini.dopoldanKonec.m});
             var uraPopoldan = moment(ura).startOf('day').set({'hour': termini.popoldanKonec.h, 'minute': termini.popoldanKonec.m});
             var uraZvecer = moment(ura).startOf('day').set({'hour': termini.vecerKonec.h, 'minute': termini.vecerKonec.m});
@@ -188,27 +188,5 @@ define([
         }
     });
 
-    Dogodki.prototype.pretvoriVPlanerTeden = function (planerTeden) {
-        var self = this;
-        planerTeden.each(function (planerM) {
-            var dogodki = self.models;
-            for (var id in dogodki) {
-                var dogodek = dogodki[id];
-
-                var termini = dogodek.naDanNaTermin(planerM.get('datum'));
-                if (termini) {
-                    if (termini.dopoldne) {
-                        planerM.get('dopoldne').add(dogodek);
-                    }
-                    if (termini.popoldne) {
-                        planerM.get('popoldne').add(dogodek);
-                    }
-                    if (termini.zvecer) {
-                        planerM.get('zvecer').add(dogodek);
-                    }
-                }
-            }
-        });
-    };
     return Dogodki;
 });

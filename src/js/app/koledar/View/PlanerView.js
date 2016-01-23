@@ -78,7 +78,7 @@ define([
         var self = this;
         this.collection.fetch({
             success: function () {
-                self.collection.pretvoriVPlanerTeden(planerTeden);
+                planerTeden.vnesiDogodke(self.collection);
                 var tedenView = new PlanerTedenView({
                     collection: planerTeden
                 });
@@ -86,9 +86,15 @@ define([
                 self.tedenR.show(tedenView);
             }
         });
-        
-        this.collection.on('change', function(){
-            console.log('change');
+
+        this.collection.on('change', function () {
+            planerTeden.vnesiDogodke(self.collection);
+            planerTeden.each(function (planerM) {
+                
+                
+
+            });
+
         }, this);
     };
 
