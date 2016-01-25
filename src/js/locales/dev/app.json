@@ -2031,6 +2031,11 @@
             "ime": "Ime",
             "opis": "Opis"
         }
+    },
+    "moznosti": {
+        "title": "Nastavitvene možnosti",
+        "opis": "Opis nastavitvene možnosti",
+        "perUser": "Po uporabniku"
     }
 }
 
