@@ -4,7 +4,7 @@
 define([
     'radio',
     'marionette',
-    'template!../tpl/urnik-layout.tpl',
+    'template!../tpl/urnik-layout-ts.tpl',
     '../Model/TerminiStoritve',
     'fullcalendar',
     'fc-schedule'
@@ -23,25 +23,18 @@ define([
             filterR: '.koledar-region-filter'
         },
         ui: {
-            'koledar': '.koledar-container'
+            'koledar': '.urnik-container-prostor'
         }
     });
 
     UrnikTSView.prototype.initialize = function (options) {
         this.collection = options.collection;
-        this.tsCollBrezDogodka = new TerminiStoritve();
 
         this.dogodek = options.dogodek;
         this.datum = this.dogodek.get('zacetek');
-        this.dogodekId = this.dogodek.get('id');
 
         this.terminiStoritve = options.terminiStoritve;
         this.osebe = this.terminiStoritve.getSeznamOseb();
-        this.osebeIds = this.osebe.pluck('id');
-
-        this.osebe.on('change', function () {
-            this.ui.koledar.fullCalendar('refetchEvents');
-        }, this);
     };
 
     UrnikTSView.prototype.onRender = function () {
@@ -50,8 +43,8 @@ define([
             view: self,
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             header: {
-                left: 'prev,next,today',
-                center: 'title',
+                left: 'title',
+                center: '',
                 right: ''
             },
             selectHelper: true,
@@ -80,21 +73,18 @@ define([
                         var k = konec.format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
                         self.collection.queryParams.zacetek = z;
                         self.collection.queryParams.konec = k;
-                        self.collection.queryParams.oseba = self.osebeIds;
+                        self.collection.queryParams.oseba = self.osebe.pluck('id');
                         self.collection.fetch({
                             success: function (coll) {
-                                coll.remove(coll.where({dogodek: self.dogodekId}));
-
-                                self.tsCollBrezDogodka.reset(coll.models);
-                                callback(self.tsCollBrezDogodka.getEventObjects());
+                                coll.remove(coll.where({dogodek: self.dogodek.get('id')}));
+                                callback(coll.getEventObjects());
                             },
                             error: Radio.channel('error').request('handler', 'xhr')
                         });
                     },
                     editable: false,
                     color: 'red',
-                    className: 'background-event',
-                    coll: self.tsCollBrezDogodka
+                    className: 'background-event'
                 },
                 {
                     events: function (zacetek, konec, timezone, callback) {
@@ -123,8 +113,18 @@ define([
         };
         setTimeout(function () {
             self.ui.koledar.fullCalendar(options);
+
+            self.terminiStoritve.on('add remove', self.resetKoledar, self);
         }, 200);
     };
+
+    UrnikTSView.prototype.resetKoledar = function (fcEvent, jsEvent, ui, view) {
+        this.tsCollBrezDogodka = new TerminiStoritve();
+        this.osebe = this.terminiStoritve.getSeznamOseb();
+        this.ui.koledar.fullCalendar('refetchEvents');
+        this.ui.koledar.fullCalendar('refetchResources');
+    };
+
 
     /**
      * Funkcija določi resourceStart od katerega je event.
@@ -164,6 +164,19 @@ define([
         } else {
             revert();
         }
+    };
+
+    UrnikTSView.prototype.eventMouseOver = function (fcEvent, jsEvent, view) {
+        console.log('mouseover');
+    };
+
+    /**
+     * Funkcija unbinda callback funckije resetKoledar
+     * Narejeno zato da se ne kliče ko ni koledar odprt
+     * @returns {undefined}
+     */
+    UrnikTSView.prototype.onBeforeDestroy = function () {
+        this.terminiStoritve.off('add remove', this.resetKoledar, this);
     };
 
     return UrnikTSView;

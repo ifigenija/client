@@ -58,5 +58,17 @@ define([
         }
     });
 
+    Dogodki.prototype.getEventObjects = function () {
+        var objects = [];
+        var modeli = this.models;
+
+        for (var k in modeli) {
+            var model = modeli[k];
+            objects.push(model.getEventObject());
+        }
+
+        return objects;
+    };
+
     return Dogodki;
 });

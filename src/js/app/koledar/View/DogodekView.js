@@ -143,8 +143,9 @@ define([
             var coll = new Dogodki();
             var datum = moment(this.model.get('zacetek'));
             var urnikProstorView = new UrnikProstorView({
-                collection: coll,
-                datum: datum
+                datum: datum,
+                dogodek: new Dogodki.prototype.model(this.model.get('dogodek')),
+                collection: coll
             });
             this.koledarR.show(urnikProstorView);
             prikazanKoledar = true;
