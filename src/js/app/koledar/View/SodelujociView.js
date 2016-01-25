@@ -288,7 +288,7 @@ define([
                 self.tsColl.queryParams.dogodek = self.dogodek.get('id');
 
                 self.tsColl.fetch({
-                    success: function(coll){
+                    success: function (coll) {
                         self.razdeliTS(coll);
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
@@ -317,7 +317,17 @@ define([
                 collection: coll
             });
 
+            urnikTSView.on('zapri:urnik', function () {
+                this.koledarR.empty();
+                this.renderUmetniki();
+                this.renderTehnika();
+                this.renderOstali();
+            }, this);
+
             this.koledarR.show(urnikTSView);
+            this.umetnikiR.empty();
+            this.tehnikiR.empty();
+            this.ostaliR.empty();
         }
     };
     return SodelujociView;

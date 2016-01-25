@@ -3,6 +3,7 @@
  */
 define([
     'radio',
+    'i18next',
     'marionette',
     'template!../tpl/urnik-layout-ts.tpl',
     '../Model/TerminiStoritve',
@@ -10,6 +11,7 @@ define([
     'fc-schedule'
 ], function (
         Radio,
+        i18next,
         Marionette,
         tpl,
         TerminiStoritve
@@ -45,7 +47,7 @@ define([
             header: {
                 left: 'title',
                 center: '',
-                right: ''
+                right: 'zapri'
             },
             selectHelper: true,
             editable: true,
@@ -56,6 +58,14 @@ define([
             scrollTime: "10:00:00",
             timeFormat: 'H(:mm)',
             defaultView: 'timelineDay',
+            customButtons: {
+                zapri: {
+                    text: i18next.t('std.zapri'),
+                    click: function () {
+                        self.trigger('zapri:urnik');
+                    }
+                }
+            },
             resourceColumns: [
                 {
                     labelText: 'Oseba',

@@ -3,6 +3,7 @@
  */
 define([
     'radio',
+    'i18next',
     'marionette',
     'underscore',
     'template!../tpl/urnik-layout-prostor.tpl',
@@ -11,6 +12,7 @@ define([
     'fc-schedule'
 ], function (
         Radio,
+        i18next,
         Marionette,
         _,
         tpl,
@@ -42,7 +44,7 @@ define([
             header: {
                 left: 'title',
                 center: '',
-                right: ''
+                right: 'zapri'
             },
             selectHelper: true,
             editable: true,
@@ -51,6 +53,14 @@ define([
             scrollTime: "10:00:00",
             timeFormat: 'H(:mm)',
             defaultView: 'timelineDay',
+            customButtons: {
+                zapri: {
+                    text: i18next.t('std.zapri'),
+                    click: function () {
+                        self.trigger('zapri:urnik');
+                    }
+                }
+            },
             resourceColumns: [
                 {
                     labelText: 'Prostor',
