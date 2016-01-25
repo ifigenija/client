@@ -63,13 +63,14 @@ define([
         var modeli = [];
         this.each(function (model) {
             var tsModel = {
-                dogodek: options.dogodek,
-                zacetek: options.zacetek,
-                konec: options.konec,
-                gost: options.gost ? options.gost : false,
-                dezurni: options.dezurni ? options.dezurni : false,
+                dogodek: options.dogodek.get('id'),
+                planiranZacetek: options.zacetek,
+                planiranKonec: options.konec,
+                gost: false,
+                dezurni: false,
+                sodelujoc:false,
                 alternacija: model,
-                oseba: new Osebe.prototype.model(model.get('oseba'))
+                oseba: model.get('oseba')
             };
             modeli.push(tsModel);
         });

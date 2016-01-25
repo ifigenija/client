@@ -8,26 +8,25 @@ define([
     'i18next',
     '../../Model/Dogodki',
     './WizardView',
-    './IzbiraCasView',
     './IzbiraProstoraView',
-    './VnosNaslovaView'
+    './IzbiraOstaliView',
+    './VnosNaslovCasView'
 ], function (
         Radio,
         i18next,
         Dogodki,
         WizardView,
-        IzbiraCasView,
         IzbiraProstoraView,
-        VnosNaslovaView
+        IzbiraOstaliView,
+        VnosNaslovCasView
         ) {
 
     var WizardTehSploView = WizardView.extend({
         views: [
-            VnosNaslovaView,
-            IzbiraCasView,
-            IzbiraProstoraView
+            VnosNaslovCasView,
+            IzbiraProstoraView,
+            IzbiraOstaliView
         ],
-        title: i18next.t('dogodek.dodajVajo'),
         callback: function (model) {
             var self = this;
             model.save({}, {

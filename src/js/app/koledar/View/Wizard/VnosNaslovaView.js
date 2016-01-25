@@ -19,7 +19,8 @@ define([
             editorAttrs: {
                 class: 'naziv-polje form-control',
                 type: 'naziv',
-                name: 'title'
+                name: 'title',
+                placeholder: i18next.t('std.vnosNaslova')
             }
         }
     };

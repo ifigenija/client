@@ -7,11 +7,13 @@
 define([
     'baseUrl',
     'backbone',
+    'underscore',
     'app/Max/Model/MaxPageableCollection',
     'deep-model'
 ], function (
         baseUrl,
         Backbone,
+        _,
         Collection
         ) {
 
@@ -39,18 +41,29 @@ define([
         var modeli = [];
         this.each(function (model) {
             var tsModel = {
-                dogodek: options.dogodek,
-                zacetek: options.zacetek,
-                konec: options.konec,
+                dogodek: options.dogodek.get('id'),
+                planiranZacetek: options.zacetek,
+                planiranKonec: options.konec,
                 gost: options.gost ? options.gost : false,
                 dezurni: options.dezurni ? options.dezurni : false,
+                sodelujoc: options.sodelujoc ? options.sodelujoc : false,
                 alternacija: null,
-                oseba: model
+                oseba: model.attributes
             };
             modeli.push(tsModel);
         });
 
         return modeli;
+    };
+
+    Collection.prototype.getResources = function () {
+        var polje = [];
+        if (this.models.length) {
+            for (var key in this.models) {
+                polje.push(_.clone(this.models[key].attributes));
+            }
+        }
+        return polje;
     };
 
     return Collection;

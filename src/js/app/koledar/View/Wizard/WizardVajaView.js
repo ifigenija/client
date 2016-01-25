@@ -8,7 +8,7 @@ define([
     'i18next',
     '../../Model/Dogodki',
     './WizardView',
-    './IzbiraCasView',
+    './IzbiraCasDeltaCasView',
     './IzbiraTipaVajeView',
     './IzbiraProstoraView',
     './IzbiraUprizoritveView'
@@ -17,15 +17,15 @@ define([
         i18next,
         Dogodki,
         WizardView,
-        IzbiraCasView,
+        IzbiraCasDeltaCasView,
         IzbiraTipaVajeView,
         IzbiraProstoraView,
         IzbiraUprizoritveView
         ) {
-    
+
     var WizardVajaView = WizardView.extend({
         views: [
-            IzbiraCasView,
+            IzbiraCasDeltaCasView,
             IzbiraUprizoritveView,
             IzbiraTipaVajeView,
             IzbiraProstoraView

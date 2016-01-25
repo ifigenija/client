@@ -73,6 +73,15 @@ define([
                     self.trigger('prikazi:dogodek', modelT);
                 }
             });
+            
+            //poslušamo spremembe v razred model v kolikor se je model spremenil se dogodek ponovno naloži
+            // ko se model ponovno naloži bo collection v katerem je prožil ponoven preračun terminov v katerega spadajo dogodki
+            //v planerview vidimo poslušalca na change od collectiona dogodkov
+            modelT.on('change', function(){
+                dogodekModel.fetch({
+                    error: Radio.channel('error').request('handler', 'xhr')
+                });
+            }, this);
         }
     });
 

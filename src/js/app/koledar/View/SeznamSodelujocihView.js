@@ -3,8 +3,6 @@
  */
 
 define([
-    'radio',
-    'i18next',
     'backbone',
     'underscore',
     'app/bars',
@@ -12,8 +10,6 @@ define([
     'app/Max/View/Toolbar',
     'template!../tpl/seznamSodelujoci.tpl'
 ], function (
-        Radio,
-        i18next,
         Backbone,
         _,
         Handlebars,
@@ -28,7 +24,7 @@ define([
         template: Handlebars.compile('<label>{{ime}}</label>'),
         serializeData: function () {
             return{
-                ime: this.model.get('alternacija').get('oseba').label
+                ime: this.model.get('oseba').label
             };
         }
     });
@@ -120,7 +116,7 @@ define([
      * Podatke v seznamu prikažemo na bolj podroben način
      * @returns {undefined}
      */
-    SeznamSodelujocihView.prototype.onUreditermin = function () {
+    SeznamSodelujocihView.prototype.onUrediTermin = function () {
         this.trigger('uredi:TS', this.collection);
     };
 
