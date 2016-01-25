@@ -3,6 +3,7 @@
  */
 
 define([
+    'radio',
     'i18next',
     'app/bars',
     'marionette',
@@ -14,6 +15,7 @@ define([
     'app/filter/View/DualListView',
     'template!../tpl/sodelujoci.tpl'
 ], function (
+        Radio,
         i18next,
         Handlebars,
         Marionette,
@@ -285,7 +287,12 @@ define([
             }, function () {
                 self.tsColl.queryParams.dogodek = self.dogodek.get('id');
 
-                self.tsColl.fetch();
+                self.tsColl.fetch({
+                    success: function(coll){
+                        self.razdeliTS(coll);
+                    },
+                    error: Radio.channel('error').request('handler', 'xhr')
+                });
 
             }, function (error) {
                 console.log(error);
@@ -297,7 +304,7 @@ define([
 
     /**
      * Funkcija namenjena urejanju terminovstoritev izbranih alternacij/oseb
-     * @param {type} options
+     * @param {terminiStoritve} collection
      * @returns {undefined}
      */
     SodelujociView.prototype.urediTS = function (collection) {
@@ -306,7 +313,7 @@ define([
 
             var urnikTSView = new UrnikTSView({
                 dogodek: this.dogodek,
-                osebe: collection.getSeznamOseb(),
+                terminiStoritve: collection,
                 collection: coll
             });
 

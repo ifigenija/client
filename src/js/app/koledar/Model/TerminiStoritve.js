@@ -131,6 +131,7 @@ define([
      */
     Collection.prototype.getUrejenTS = function (stariTS) {
         var self = this;
+        var terminiStoritve = [];
         //iz trenutno izbranih terminov storitev, želimo prepisati tiste, ki že obstajajo
         this.each(function (terminS) {
             var alterID;
@@ -146,19 +147,23 @@ define([
                 //v nasprotnem primeru preverimo samo osebo
                 var alter = ts.get('alternacija');
                 if (alter && alter.id === alterID) {
-                    alterTermin = new self.model(ts);
+                    alterTermin = new self.model(ts.attributes);
                 } else if (ts.get('oseba').id === osebaID) {
-                    osebaTermin = new self.model(ts);
+                    osebaTermin = new self.model(ts.attributes);
                 }
             });
 
             //v kolikor smo našli enako alternacijo se prepiše generiran ts s TS, ki že obstaja
             if (alterTermin) {
-                terminS = alterTermin;
+                terminiStoritve.push(alterTermin);
             } else if (osebaTermin) {
-                terminS = osebaTermin;
+                terminiStoritve.push(osebaTermin);
+            } else {
+                terminiStoritve.push(terminS);
             }
         });
+
+        this.reset(terminiStoritve);
 
         return this;
     };
