@@ -95,6 +95,11 @@ Licenca GPLv3
     display: inline;
 }
 
+.planer-izbira-datum {
+    position: relative;
+}
+
+
 @media all and (min-width: 768px) {
     .planer-dan{    
         border-bottom: solid 1px @gray-light;
@@ -117,7 +122,9 @@ Licenca GPLv3
 
     .planer-cell-datum {
         width: 120px;
-        position:fixed;
+        /*position:fixed;*/
+        position: absolute;
+        left: 0px;
         white-space:nowrap;
     }
 
