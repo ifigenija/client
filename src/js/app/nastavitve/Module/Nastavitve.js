@@ -137,6 +137,19 @@ define([
             });
         };
         /**
+         * Urejanje nastavitev
+         * @returns {undefined}
+         */
+        model.moznostiOdpri = function (id) {
+            require(['app/nastavitve/View/MoznostiView'], function (View) {
+                var v = new View({
+                    modelId: id
+                });
+                ch.command('open', v, i18next.t('moznosti.title'));
+                ch.command('enableMenu', 'nastavitve');
+            });
+        };        
+        /**
          * Routing za modelule
          * 
          */
@@ -146,6 +159,9 @@ define([
             new Marionette.AppRouter({
                 controller: model,
                 appRoutes: {
+                    'moznosti': 'moznostiOdpri',
+                    'moznosti/:id': 'moznostiOdpri',
+
                     'stevilcenje/seznam': 'stevilcenjeSeznam',
                     'stevilcenje/konfig': 'stevilcenjeKonfig',
                     'stevilcenje/stanje': 'stevilcenjeStanje',
