@@ -18,6 +18,10 @@ define([
         FilterView: ZasedenostFilterView
     });
 
+    /**
+     * Definicija Fullcalendarja
+     * @returns {undefined}
+     */
     PlanerZasedenostView.prototype.initialize = function () {
         var self = this;
         this.koledarOptions = {
@@ -26,8 +30,8 @@ define([
                 center: 'title',
                 right: 'month,agendaWeek,basicDay'
             },
-            minTime:'6:00:00',
-            scrollTime:'10:00:00',
+            minTime: '6:00:00',
+            scrollTime: '10:00:00',
             timezone: true,
             selectable: true,
             defaultView: 'month',
@@ -57,10 +61,34 @@ define([
         };
     };
 
+    /**
+     * Funkcija se kliče, ko v fullcalendarju izberemo dan/interval dnevov
+     * Funkcija proži dodaj:zasedenost
+     * 
+     * Parametri definirani na http://fullcalendar.io/docs/selection/select_callback/
+     * @param {type} start
+     * @param {type} end
+     * @param {type} jsEvent
+     * @param {type} view
+     * @returns {undefined}
+     */
     PlanerZasedenostView.prototype.select = function (start, end, jsEvent, view) {
         this.options.view.trigger('dodaj:zasedenost', start, end);
     };
 
+    /**
+     * Funkcija se kliče ko v full calendarju končamo s premaknjem ali razširjanjem intervala eventa
+     * Funkcija je zadolžena da shrane spremembo eventov na server. Ob napaki se event povrne v prvotno stanje.
+     * 
+     * Parametri definirani na http://fullcalendar.io/docs/event_ui/eventDrop/ in http://fullcalendar.io/docs/event_ui/eventResize/
+     * @param {type} fcEvent
+     * @param {type} delta
+     * @param {type} revert
+     * @param {type} jsEvent
+     * @param {type} ui
+     * @param {type} view
+     * @returns {undefined}
+     */
     PlanerZasedenostView.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
         //poišči kliknjen event c kolekciji
         var model = fcEvent.source.coll.get(fcEvent.id);
@@ -72,6 +100,16 @@ define([
         });
     };
 
+    /**
+     * Funkcija se kliče ko kliknemo na event v full calendarju.
+     * Funkcija je zadolžena da proži uredi:zasedenost.
+     * 
+     * Parametri so definirani na http://fullcalendar.io/docs/mouse/eventClick/
+     * @param {type} fcEvent
+     * @param {type} jsEvent
+     * @param {type} view
+     * @returns {undefined}
+     */
     PlanerZasedenostView.prototype.eventClick = function (fcEvent, jsEvent, view) {
         var model = fcEvent.source.coll.get(fcEvent.id);
         this.trigger('uredi:zasedenost', model);

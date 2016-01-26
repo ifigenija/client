@@ -55,7 +55,7 @@ define([
                 right: 'month,basicWeek,agendaWeek,basicDay'
             },
             timezone: false,
-            aspectRatio: 1.8,
+            height: 'auto',
             selectable: true,
             defaultView: 'month',
             selectHelper: true,

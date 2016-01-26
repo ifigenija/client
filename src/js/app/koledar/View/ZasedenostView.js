@@ -1,13 +1,11 @@
 /* 
+ * View je odgovoren za urejanje in prikaz podatkov
  * Licenca GPLv3
  */
 
 define([
     'radio',
     'i18next',
-    'marionette',
-    'underscore',
-    'jquery',
     'app/Dokument/View/FormView',
     'template!app/Dokument/tpl/form-simple.tpl',
     'template!../tpl/zasedenost-form.tpl',
@@ -15,15 +13,15 @@ define([
 ], function (
         Radio,
         i18next,
-        Marionette,
-        _,
-        $,
         FormView,
         template,
         formTpl,
         schema
         ) {
-
+    /**
+     * Definicija ZasedenostiView
+     * @type @exp;FormView@call;extend
+     */
     var ZasedenostView = FormView.extend({
         template: template,
         formTemplate: formTpl,
@@ -59,11 +57,17 @@ define([
         }
     });
 
+    //dokler se ne uredi rest
     ZasedenostView.prototype.shrani = function () {
         this.model.set('zasedenost', true);
         FormView.prototype.shrani.apply(this, arguments);
     };
 
+    /**
+     * Funkcija izbriše odprt model
+     * V primeru da je model uspešno izbrisan se proši destroy:success
+     * @returns {undefined}
+     */
     ZasedenostView.prototype.onBrisi = function () {
         var self = this;
         this.model.destroy({
@@ -74,6 +78,12 @@ define([
             error: Radio.channel('error').request('handler', 'xhr')
         });
     };
+    /**
+     * Funkcija se kliče ko je model uspešno shranjen
+     * Funkcija posreduje naprej trigger iz formview-a
+     * @param {type} model
+     * @returns {undefined}
+     */
     ZasedenostView.prototype.onSaveSuccess = function (model) {
         this.trigger('save:success', model);
     };

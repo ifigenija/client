@@ -26,9 +26,15 @@ define([
         ) {
 
     var Model = Backbone.DeepModel.extend({
-        urlRoot: baseUrl + '/rest/terminStoritve'
+        view: 'default',
+        urlRoot: function () {
+            return baseUrl + '/rest/terminStoritve/' + this.view;
+        }
     });
-
+    /** 
+     * Funkcija nam pretvori model terminStoritve v objekt EventObject, ki ga uporablja fullcalendar
+     * @returns {Array|TerminiStoritve_L17.Model.prototype.getEventObject.object|Backbone.DeepModel@call;extend.prototype.getEventObject.object}
+     */
     Model.prototype.getEventObject = function () {
         var object;
         object = _.clone(this.attributes);
@@ -57,16 +63,23 @@ define([
     };
 
     var Collection = Collection.extend({
-        url: baseUrl + '/rest/terminStoritve',
+        view: 'default',
+        url: function () {
+            return baseUrl + '/rest/terminStoritve/' + this.view;
+        },
         model: Model,
         mode: "server"
     });
-
+    /*
+     * Funkcija razdeli collection terminov storitev po področjih v katere spadajo funkcije na alternacijah
+     * @returns {Object}
+     */
     Collection.prototype.razdeliPoPodrocjih = function () {
         var models = this.models;
 
         var object = {};
 
+        //v polja področij shranemo
         this.each(function (model) {
             var podrocje = model.get('alternacija.funkcija.tipFunkcije.podrocje');
             if (podrocje) {

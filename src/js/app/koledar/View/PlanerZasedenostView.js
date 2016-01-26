@@ -61,27 +61,33 @@ define([
         this.koledarR.show(view);
     };
 
+    /**
+     * Funkcija se kliče ko ZasedenostKoledarView proži uredi:zasedenost
+     * Funkcija je odgovorna da prikaže podatke zasedenosti(terminaStoritve)
+     * @param {type} model
+     * @returns {undefined}
+     */
     PlanerZasedenostiView.prototype.urediZasedenost = function (model) {
 
-        var Model = Backbone.Model.extend({
-            urlRoot: function () {
-                return baseUrl + '/rest/terminStoritve/zasedenost';
-            }
-        });
-        var mod = new Model(model.attributes);
+        //Model je terminStoritve s urlje rest/terminstoritve, kar ni vredu ko kličemo CREATE in PUT, ker ne upošteva osebe
+        //preko propertija view nastavimo da pošlje na rest/terminstoritve/zasedenost
+        model.view = 'zasedenost';
         var zasedenostView = new ZasedenostView({
-            model: mod
+            model: model
         });
 
+        //zapiranje forme
         zasedenostView.on('skrij', function () {
             this.detailR.empty();
             this.renderToolbar();
         }, this);
+        //zapiranje forme renderiramo koledar
         zasedenostView.on('destroy:success', function () {
             this.detailR.empty();
             this.renderKoledar();
             this.renderToolbar();
         }, this);
+        //na novo renderiramo koledar
         zasedenostView.on('save:success', function () {
             this.renderKoledar();
         }, this);
@@ -89,13 +95,19 @@ define([
         this.detailR.show(zasedenostView);
         this.toolbarR.empty();
     };
+    /**
+     * Funkcija se kliče ko se v zasedenostKoledarView proži dodaj:zasedenost
+     * Funkcija je zadolžena da prikaže wizardZasedenostview in uporabnika vodi skozi korake dodajanja.
+     * 
+     * @param {type} zacetek
+     * @param {type} konec
+     * @returns {undefined}
+     */
     PlanerZasedenostiView.prototype.dodajZasedenost = function (zacetek, konec) {
-        var Model = Backbone.Model.extend({
-            urlRoot: function () {
-                return baseUrl + '/rest/terminStoritve/zasedenost';
-            }
-        });
-        var model = new Model();
+
+        var model = new TerminiStoritve.prototype.model();
+        model.view = 'zasedenost';
+
         var zacetek = zacetek ? moment(zacetek.toISOString()) : moment().startOf('day');
         var konec = konec ? moment(konec.toISOString()) : moment().endOf('day');
         model.set('zacetek', zacetek);
@@ -108,24 +120,24 @@ define([
             ]
         });
 
-        wizardView.on('close', function () {
-            this.detailR.empty();
-            this.renderToolbar();
-        }, this);
-
+        //ob preklicanem dodajanju se  wizard zapre
         wizardView.on('preklici', function () {
             this.detailR.empty();
             this.renderToolbar();
         }, this);
+        //ob uspešno shranjenem modelu se na novo renderira koledar
         wizardView.on('save:success', function () {
             this.renderKoledar();
         }, this);
-
 
         this.detailR.show(wizardView);
         this.toolbarR.empty();
 
     };
+    /**
+     * Funkcija renderira toolbar view-a
+     * @returns {undefined}
+     */
     PlanerZasedenostiView.prototype.renderToolbar = function () {
         var groups = [[
                 {
@@ -144,6 +156,10 @@ define([
         this.toolbarR.show(toolbarView);
     };
 
+    /**
+     * Funkcija se kliče ob kliku na gumb dodaj(ko view proži dodaj)
+     * @returns {undefined}
+     */
     PlanerZasedenostiView.prototype.onDodaj = function () {
         this.dodajZasedenost();
     };
