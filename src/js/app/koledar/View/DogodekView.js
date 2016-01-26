@@ -53,9 +53,6 @@ define([
     var tabNovi = [
         {name: i18next.t('dogodek.title'), event: 'dogodek'}
     ];
-
-    //namenjen kot toggle za prikaz koledarja prostorov
-    var prikazanKoledar = false;
     /**
      * Dogodekview namenjen prikazu dogodka in razreda dogodka
      * 
@@ -139,22 +136,31 @@ define([
      * @returns {undefined}
      */
     DogodekView.prototype.onPrikaziKoledar = function () {
-        if (!prikazanKoledar) {
-            var coll = new Dogodki();
-            var datum = moment(this.model.get('zacetek'));
-            var urnikProstorView = new UrnikProstorView({
-                collection: coll,
-                datum: datum
-            });
-            this.koledarR.show(urnikProstorView);
-            prikazanKoledar = true;
-            this.$('.prikazi-koledar').attr('title', i18next.t('std.title.skrijKoledar'));
-        } else {
-            this.koledarR.empty();
-            prikazanKoledar = false;
-            this.$('.prikazi-koledar').attr('title', i18next.t('std.title.prikaziKoledarProstorProstor'));
-        }
+        var self = this;
+        var coll = new Dogodki();
+        var datum = moment(this.model.get('zacetek'));
+        var dogodek = new Dogodki.prototype.model(this.model.get('dogodek'));
 
+        var urnikProstorView = new UrnikProstorView({
+            datum: datum,
+            dogodek: dogodek,
+            collection: coll
+        });
+
+        //ko se želi urnik zapret renderiramo formo in toolbar ter zbrišemo koledar
+        urnikProstorView.on('zapri:urnik', function () {
+            self.model.fetch({
+                success: function () {
+                    self.koledarR.empty();
+                    self.renderFormAndToolbar();
+                }
+            });
+        }, self);
+
+        //ko narišemo izrisujemo koledar skrijemo formo in toolbar
+        this.koledarR.show(urnikProstorView);
+        this.regionForm.empty();
+        this.regionToolbar.empty();
     };
 
     /**
@@ -183,7 +189,7 @@ define([
      */
     DogodekView.prototype.deselectTab = function () {
         this.koledarR.empty();
-        prikazanKoledar = false;
+        this.renderFormAndToolbar();
         this.$('.dogodek-panels .tab-pane').removeClass('active');
     };
 

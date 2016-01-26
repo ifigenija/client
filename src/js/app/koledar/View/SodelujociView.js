@@ -3,6 +3,7 @@
  */
 
 define([
+    'radio',
     'i18next',
     'app/bars',
     'marionette',
@@ -14,6 +15,7 @@ define([
     'app/filter/View/DualListView',
     'template!../tpl/sodelujoci.tpl'
 ], function (
+        Radio,
         i18next,
         Handlebars,
         Marionette,
@@ -30,10 +32,10 @@ define([
         className: 'sodelujoci',
         template: sodelujociTpl,
         regions: {
-            umetnikiR: '.region-umetniki',
-            tehnikiR: '.region-tehniki',
-            ostaliR: '.region-ostali',
-            koledarR: '.region-koledar'
+            umetnikiR: '.region-umetniki-sodelujoci',
+            tehnikiR: '.region-tehniki-sodelujoci',
+            ostaliR: '.region-ostali-sodelujoci',
+            koledarR: '.region-koledar-sodelujoci'
         }
     });
     /**
@@ -285,7 +287,12 @@ define([
             }, function () {
                 self.tsColl.queryParams.dogodek = self.dogodek.get('id');
 
-                self.tsColl.fetch();
+                self.tsColl.fetch({
+                    success: function (coll) {
+                        self.razdeliTS(coll);
+                    },
+                    error: Radio.channel('error').request('handler', 'xhr')
+                });
 
             }, function (error) {
                 console.log(error);
@@ -297,7 +304,7 @@ define([
 
     /**
      * Funkcija namenjena urejanju terminovstoritev izbranih alternacij/oseb
-     * @param {type} options
+     * @param {terminiStoritve} collection
      * @returns {undefined}
      */
     SodelujociView.prototype.urediTS = function (collection) {
@@ -306,11 +313,21 @@ define([
 
             var urnikTSView = new UrnikTSView({
                 dogodek: this.dogodek,
-                osebe: collection.getSeznamOseb(),
+                terminiStoritve: collection,
                 collection: coll
             });
 
+            urnikTSView.on('zapri:urnik', function () {
+                this.koledarR.empty();
+                this.renderUmetniki();
+                this.renderTehnika();
+                this.renderOstali();
+            }, this);
+
             this.koledarR.show(urnikTSView);
+            this.umetnikiR.empty();
+            this.tehnikiR.empty();
+            this.ostaliR.empty();
         }
     };
     return SodelujociView;

@@ -1,57 +1,107 @@
 /* 
  * Licenca GPLv3
  */
-
 define([
+    'baseUrl',
+    'i18next',
     'backbone',
-    'marionette',
     'moment',
-    'underscore',
-    'jquery',
-    './PlanerView',
-    '../Model/PlanerTeden',
-    './PlanerTedenView'
+    'marionette',
+    'app/Max/View/Toolbar',
+    '../Model/TerminiStoritve',
+    './ZasedenostKoledarView',
+    './Wizard/WizardZasedenostView',
+    'template!../tpl/planer-zasedenost.tpl'
 ], function (
+        baseUrl,
+        i18next,
         Backbone,
-        Marionette,
         moment,
-        _,
-        $,
-        PlanerView,
+        Marionette,
+        Toolbar,
         TerminiStoritve,
-        PlanerTeden,
-        PlanerTedenView
-        ) {
+        ZasedenostKoledarView,
+        WizardZasedenostView,
+        tpl
+        ) {
 
-//WIP
-    var PlanerZasedenostView = PlanerView.extend({});
+    var PlanerZasedenostiView = Marionette.LayoutView.extend({
+        template: tpl,
+        regions: {
+            toolbarR: '.planer-region-toolbar-zasedenost',
+            detailR: '.planer-region-detail-zasedenost',
+            koledarR: '.planer-region-koledar-zasedenost'
+        }
+    });
 
-    PlanerZasedenostView.prototype.naloziDogodke = function () {
-        var datum = moment(this.form.getEditor('teden').getValue());
-
-        var planerTeden = new PlanerTeden();
-        planerTeden.initTeden(moment(datum));
-
-        var zacetek = moment(datum).startOf('week');
-        var konec = moment(datum).endOf('week');
-
-        this.collection = new TerminiStoritve();
-        this.collection.queryParams.zacetek = zacetek.toISOString();
-        this.collection.queryParams.konec = konec.toISOString();
-
-        var self = this;
-        this.collection.fetch({
-            success: function () {
-                self.collection.pretvoriVPlanerTeden(planerTeden);
-                var tedenView = new PlanerTedenView({
-                    collection: planerTeden
-                });
-
-                self.tedenR.show(tedenView);
-            }
-        });
-
+    PlanerZasedenostiView.prototype.initialize = function (options) {
+        this.template = options.template || this.template;
     };
 
-    return PlanerZasedenostView;
+    PlanerZasedenostiView.prototype.onRender = function () {
+        this.renderToolbar();
+        this.renderKoledar();
+    };
+    /**
+     * izris koledarja
+     * @returns {undefined}
+     */
+    PlanerZasedenostiView.prototype.renderKoledar = function () {
+        var coll = this.collection = new TerminiStoritve();
+
+        var view = this.koledarView = new ZasedenostKoledarView({
+            collection: coll
+        });
+
+        view.on('dodaj:zasedenost', function (zacetek, konec) {
+            var Model = Backbone.Model.extend({
+                urlRoot: function () {
+                    return baseUrl + '/rest/terminStoritve/zasedenost';
+                }
+            });
+            var model = new Model();
+            model.set('zacetek', moment(zacetek.toISOString()));
+            model.set('konec', moment(konec.toISOString()));
+            var wizardView = new WizardZasedenostView({
+                model: model,
+                viewsOptions: [
+                    {},
+                    {}
+                ]
+            });
+
+            wizardView.on('close', function () {
+                this.detailR.empty();
+            }, this);
+
+            wizardView.on('preklici', function () {
+                this.detailR.empty();
+            }, this);
+
+            this.detailR.show(wizardView);
+
+        }, this);
+
+        this.koledarR.show(view);
+    };
+
+    PlanerZasedenostiView.prototype.renderToolbar = function () {
+        var groups = [[
+                {
+                    id: 'planiranje-dodaj',
+                    label: i18next.t('std.dodaj'),
+                    element: 'button-trigger',
+                    trigger: 'dodaj'
+                }
+            ]];
+
+        var toolbarView = new Toolbar({
+            buttonGroups: groups,
+            listener: this
+        });
+
+        this.toolbarR.show(toolbarView);
+    };
+
+    return PlanerZasedenostiView;
 });
