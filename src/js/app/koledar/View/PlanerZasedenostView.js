@@ -9,6 +9,7 @@ define([
     'marionette',
     'app/Max/View/Toolbar',
     '../Model/TerminiStoritve',
+    './ZasedenostView',
     './ZasedenostKoledarView',
     './Wizard/WizardZasedenostView',
     'template!../tpl/planer-zasedenost.tpl'
@@ -20,6 +21,7 @@ define([
         Marionette,
         Toolbar,
         TerminiStoritve,
+        ZasedenostView,
         ZasedenostKoledarView,
         WizardZasedenostView,
         tpl
@@ -53,38 +55,77 @@ define([
             collection: coll
         });
 
-        view.on('dodaj:zasedenost', function (zacetek, konec) {
-            var Model = Backbone.Model.extend({
-                urlRoot: function () {
-                    return baseUrl + '/rest/terminStoritve/zasedenost';
-                }
-            });
-            var model = new Model();
-            model.set('zacetek', moment(zacetek.toISOString()));
-            model.set('konec', moment(konec.toISOString()));
-            var wizardView = new WizardZasedenostView({
-                model: model,
-                viewsOptions: [
-                    {},
-                    {}
-                ]
-            });
-
-            wizardView.on('close', function () {
-                this.detailR.empty();
-            }, this);
-
-            wizardView.on('preklici', function () {
-                this.detailR.empty();
-            }, this);
-
-            this.detailR.show(wizardView);
-
-        }, this);
+        view.on('dodaj:zasedenost', this.dodajZasedenost, this);
+        view.on('uredi:zasedenost', this.urediZasedenost, this);
 
         this.koledarR.show(view);
     };
 
+    PlanerZasedenostiView.prototype.urediZasedenost = function (model) {
+
+        var Model = Backbone.Model.extend({
+            urlRoot: function () {
+                return baseUrl + '/rest/terminStoritve/zasedenost';
+            }
+        });
+        var mod = new Model(model.attributes);
+        var zasedenostView = new ZasedenostView({
+            model: mod
+        });
+
+        zasedenostView.on('skrij', function () {
+            this.detailR.empty();
+            this.renderToolbar();
+        }, this);
+        zasedenostView.on('destroy:success', function () {
+            this.detailR.empty();
+            this.renderKoledar();
+            this.renderToolbar();
+        }, this);
+        zasedenostView.on('save:success', function () {
+            this.renderKoledar();
+        }, this);
+
+        this.detailR.show(zasedenostView);
+        this.toolbarR.empty();
+    };
+    PlanerZasedenostiView.prototype.dodajZasedenost = function (zacetek, konec) {
+        var Model = Backbone.Model.extend({
+            urlRoot: function () {
+                return baseUrl + '/rest/terminStoritve/zasedenost';
+            }
+        });
+        var model = new Model();
+        var zacetek = zacetek ? moment(zacetek.toISOString()) : moment().startOf('day');
+        var konec = konec ? moment(konec.toISOString()) : moment().endOf('day');
+        model.set('zacetek', zacetek);
+        model.set('konec', konec);
+        var wizardView = new WizardZasedenostView({
+            model: model,
+            viewsOptions: [
+                {},
+                {}
+            ]
+        });
+
+        wizardView.on('close', function () {
+            this.detailR.empty();
+            this.renderToolbar();
+        }, this);
+
+        wizardView.on('preklici', function () {
+            this.detailR.empty();
+            this.renderToolbar();
+        }, this);
+        wizardView.on('save:success', function () {
+            this.renderKoledar();
+        }, this);
+
+
+        this.detailR.show(wizardView);
+        this.toolbarR.empty();
+
+    };
     PlanerZasedenostiView.prototype.renderToolbar = function () {
         var groups = [[
                 {
@@ -101,6 +142,10 @@ define([
         });
 
         this.toolbarR.show(toolbarView);
+    };
+
+    PlanerZasedenostiView.prototype.onDodaj = function () {
+        this.dodajZasedenost();
     };
 
     return PlanerZasedenostiView;

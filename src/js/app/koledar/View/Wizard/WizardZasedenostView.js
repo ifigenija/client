@@ -29,9 +29,11 @@ define([
             model.set('planiranKonec', model.get('konec'));
             model.set('zasedenost', true);
 
+            var self = this;
             model.save({}, {
                 success: function (model) {
                     Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
+                    self.trigger('save:success', model);
                 },
                 error: Radio.channel('error').request('handler', 'xhr')
             });

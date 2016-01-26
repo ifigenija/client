@@ -3,10 +3,12 @@
  */
 
 define([
+    'radio',
     'underscore',
     './KoledarView',
     './ZasedenostFilterView'
 ], function (
+        Radio,
         _,
         KoledarView,
         ZasedenostFilterView
@@ -55,16 +57,24 @@ define([
         };
     };
 
-    KoledarView.prototype.select = function (start, end, jsEvent, view) {
+    PlanerZasedenostView.prototype.select = function (start, end, jsEvent, view) {
         this.options.view.trigger('dodaj:zasedenost', start, end);
     };
 
-    KoledarView.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
-        console.log('dropOrResize');
+    PlanerZasedenostView.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
+        //poišči kliknjen event c kolekciji
+        var model = fcEvent.source.coll.get(fcEvent.id);
+        model.save({planiranZacetek: fcEvent.start.toISOString(), planiranKonec: fcEvent.end.toISOString()}, {
+            error: function (model, xhr) {
+                revert();
+                Radio.channel('error').command('xhr', model, xhr);
+            }
+        });
     };
 
-    KoledarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
-        console.log('eventClick');
+    PlanerZasedenostView.prototype.eventClick = function (fcEvent, jsEvent, view) {
+        var model = fcEvent.source.coll.get(fcEvent.id);
+        this.trigger('uredi:zasedenost', model);
     };
 
     return PlanerZasedenostView;
