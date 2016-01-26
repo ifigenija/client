@@ -35,7 +35,7 @@ define([
             umetnikiR: '.region-umetniki',
             tehnikiR: '.region-tehniki',
             ostaliR: '.region-ostali',
-            koledarR: '.region-koledar'
+            koledarR: '.region-koledar-sodelujoci'
         }
     });
     /**

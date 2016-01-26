@@ -1,4 +1,4 @@
-<div class="region-umetniki"></div>
-<div class="region-tehniki"></div>
-<div class="region-ostali"></div>
-<div class="region-koledar"></div>
+<div class="region-umetniki-sodelujoci"></div>
+<div class="region-tehniki-sodelujoci"></div>
+<div class="region-ostali-sodelujoci"></div>
+<div class="region-koledar-sodelujoci"></div>
