@@ -38,11 +38,18 @@ define([
         };
 
         /**
-         * Koledar zasedenosti za po 
-         * @returns {undefined}
+         * Koledar zasedenosti
+         * @returns {undefined}S
          */
         mod.zasedenost = function () {
+            require(['../View/PlanerZasedenostView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
+                require(['fclang/sl'], function () {
+                    var view = new View();
 
+                    ch.command('open', view, 'Zasedenost');
+                    ch.command('enableMenu', 'koledar');
+                });
+            });
         };
 
         /**
@@ -55,7 +62,7 @@ define([
                 require(['fclang/sl'], function () {
                     var view = new View();
 
-                    ch.command('openTab', view, 'Koledar');
+                    ch.command('openTab', view, 'Planiranje');
                     ch.command('enableMenu', 'koledar');
                 });
             });

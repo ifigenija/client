@@ -37,11 +37,13 @@ define([
 
         this.terminiStoritve = options.terminiStoritve;
         this.osebe = this.terminiStoritve.getSeznamOseb();
+
+        this.koledarOptions = options.koledarOptions || this.koledarOptions;
     };
 
     UrnikTSView.prototype.onRender = function () {
         var self = this;
-        var options = {
+        var options = _.extend({
             view: self,
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             header: {
@@ -55,6 +57,7 @@ define([
             lang: 'sl',
             timezone: true,
             now: this.datum,
+            minTime: "06:00:00",
             scrollTime: "10:00:00",
             timeFormat: 'H(:mm)',
             defaultView: 'timelineDay',
@@ -120,7 +123,7 @@ define([
             eventResize: this.eventDropOrResize,
             eventDragStart: this.eventDropOrResizeStart,
             eventResizeStart: this.eventDropOrResizeStart
-        };
+        }, this.koledarOptions);
         setTimeout(function () {
             self.ui.koledar.fullCalendar(options);
 
@@ -177,7 +180,7 @@ define([
     };
 
     UrnikTSView.prototype.eventMouseOver = function (fcEvent, jsEvent, view) {
-        console.log('mouseover');
+//        console.log('mouseover');
     };
 
     /**

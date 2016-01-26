@@ -24,8 +24,9 @@ define([
         ],
         title: i18next.t('terminStoritve.dodajZasedenost'),
         callback: function (model) {
-            model.set('planiranZacetek', model.get('planiranZacetek').toISOString());
-            model.set('planiranKonec', model.get('planiranKonec').toISOString());
+            //transformacija podatkov modela
+            model.set('planiranZacetek', model.get('zacetek'));
+            model.set('planiranKonec', model.get('konec'));
             model.set('zasedenost', true);
 
             model.save({}, {

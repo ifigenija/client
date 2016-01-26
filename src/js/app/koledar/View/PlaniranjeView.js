@@ -24,7 +24,6 @@ define([
     'formSchema!predstava',
     'formSchema!dogodekTehnicni',
     'formSchema!dogodekSplosni',
-    
     'baseUrl'
 ], function (
         i18next,
@@ -49,7 +48,6 @@ define([
         predstavaSch,
         tehnicniSch,
         splosniSch,
-        
         baseUrl
         ) {
 
@@ -82,6 +80,7 @@ define([
         });
 
         view.on('prikazi:dogodek', this.prikaziDogodek, this);
+        view.on('dodaj:dogodek', this.onDodaj, this);
 
         this.koledarR.show(view);
     };
@@ -138,8 +137,8 @@ define([
                 this.renderRazredDogodek(model, DogodekView, tehnicniSch, tehnicniTpl);
                 break;
         }
-    }
-    ;
+    };
+
     PlaniranjeView.prototype.onPreklici = function () {
         this.dogodekR.empty();
     };
@@ -148,8 +147,15 @@ define([
      * Klik na gumb Dodaj
      * @returns {undefined}
      */
-    PlaniranjeView.prototype.onDodaj = function () {
+    PlaniranjeView.prototype.onDodaj = function (zacetek, konec) {
         var model = new Backbone.Model();
+
+        if (zacetek) {
+            model.set('zacetek', zacetek.toISOString());
+        }
+        if (konec) {
+            model.set('konec', konec.toISOString());
+        }
 
         var self = this;
         var izbiraView = new IzbiraRazredDogodkaView({model: model});
@@ -214,9 +220,6 @@ define([
                 wizardView.on('preklici', function () {
                     self.dogodekR.empty();
                 }, self);
-                wizardView.on('save:success', function (model) {
-                    self.collection.add(model);
-                }, self);
 
                 self.dogodekR.show(wizardView);
             });
@@ -260,18 +263,23 @@ define([
 
         //console.log('ID dogodka: ', this.dogodekR.currentView.model.id );
         var idDogodka = this.dogodekR.currentView.model.id;
-        
+
         console.log('Poskusi nalozit opcije rpc/options ...');
-   
+
         var rpc = new $.JsonRpcClient({
             ajaxUrl: baseUrl + '/rpc/app/options'
         });
 
-        rpc.call('getOptions', {'name': 'dogodek.delte'}, 
-            function(data) { console.log('rpc call /rpc/app/options success'); console.log(data); }, //success
-            function() { console.log('rpc call /rpc/app/options error'); } //error        
+        rpc.call('getOptions', {'name': 'dogodek.delte'},
+        function (data) {
+            console.log('rpc call /rpc/app/options success');
+            console.log(data);
+        }, //success
+                function () {
+                    console.log('rpc call /rpc/app/options error');
+                } //error        
         );
-        
+
         var razmnoziView = new RazmnoziView({
             model: new Backbone.Model({
                 id: idDogodka,

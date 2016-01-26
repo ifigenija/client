@@ -9,7 +9,6 @@ define([
     'jquery',
     'template!../tpl/koledar-layout.tpl',
     './KoledarFilterView',
-    './DogodekModal',
     '../Model/RazredDogodek',
     'fc-schedule'
 ], function (
@@ -20,7 +19,6 @@ define([
         $,
         tpl,
         KoledarFilterView,
-        DogodekModal,
         Dogodek
         ) {
 
@@ -36,8 +34,16 @@ define([
         }
     });
 
+    KoledarView.prototype.initialize = function (options) {
+        this.FilterView = options.FilterView || KoledarFilterView;
+        this.koledarOptions = options.koledarOptions || this.koledarOptions;
+    };
     KoledarView.prototype.onRender = function () {
-        this.renderFilterView();
+        this.renderFilter();
+        this.renderKoledar();
+    };
+
+    KoledarView.prototype.renderKoledar = function () {
         var self = this;
         var options = _.extend({
             view: self,
@@ -84,14 +90,14 @@ define([
                     coll: self.collection
                 }
             ]
-        });
+        }, this.koledarOptions);
         setTimeout(function () {
             self.ui.koledar.fullCalendar(options);
         }, 200);
     };
 
-    KoledarView.prototype.renderFilterView = function () {
-        var filterView = new KoledarFilterView();
+    KoledarView.prototype.renderFilter = function () {
+        var filterView = new this.FilterView();
         var self = this;
 
         filterView.on('changed', function () {
@@ -104,13 +110,7 @@ define([
 
     KoledarView.prototype.select = function (start, end, jsEvent, view) {
         var view = this.options.view;
-        DogodekModal({
-            zacetek: start.format(),
-            konec: end.format(),
-            cb: function (model) {
-                view.trigger('prikazi:dogodek', model);
-            }
-        });
+        view.trigger('dodaj:dogodek', start, end);
     };
 
     KoledarView.prototype.eventClick = function (fcEvent, jsEvent, view) {

@@ -48,7 +48,9 @@ define([
         }
         else if (this.get('sodelujoc')) {
             title = i18next.t('terminStoritve.sodelujoc');
-
+        }
+        else if (this.get('zasedenost')) {
+            title = /*i18next.t('terminStoritve.zasedenost')+' / ' +*/ this.get('oseba.label');
         }
         object.title = title;
         return object;
