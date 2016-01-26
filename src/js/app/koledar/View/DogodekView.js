@@ -189,6 +189,7 @@ define([
      */
     DogodekView.prototype.deselectTab = function () {
         this.koledarR.empty();
+        this.renderFormAndToolbar();
         this.$('.dogodek-panels .tab-pane').removeClass('active');
     };
 
