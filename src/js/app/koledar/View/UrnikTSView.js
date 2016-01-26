@@ -4,6 +4,7 @@
 define([
     'radio',
     'i18next',
+    'underscore',
     'marionette',
     'template!../tpl/urnik-layout-ts.tpl',
     '../Model/TerminiStoritve',
@@ -12,6 +13,7 @@ define([
 ], function (
         Radio,
         i18next,
+        _,
         Marionette,
         tpl,
         TerminiStoritve
@@ -55,6 +57,7 @@ define([
             editable: true,
             aspectRatio: 2,
             lang: 'sl',
+            height:'auto',
             timezone: true,
             now: this.datum,
             minTime: "06:00:00",

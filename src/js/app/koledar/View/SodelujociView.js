@@ -32,9 +32,9 @@ define([
         className: 'sodelujoci',
         template: sodelujociTpl,
         regions: {
-            umetnikiR: '.region-umetniki',
-            tehnikiR: '.region-tehniki',
-            ostaliR: '.region-ostali',
+            umetnikiR: '.region-umetniki-sodelujoci',
+            tehnikiR: '.region-tehniki-sodelujoci',
+            ostaliR: '.region-ostali-sodelujoci',
             koledarR: '.region-koledar-sodelujoci'
         }
     });

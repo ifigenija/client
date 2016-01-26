@@ -46,6 +46,7 @@ define([
                 center: '',
                 right: 'zapri'
             },
+            height:'auto',
             selectHelper: true,
             editable: true,
             lang: 'sl',
