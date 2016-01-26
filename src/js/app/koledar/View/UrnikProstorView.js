@@ -27,7 +27,7 @@ define([
             filterR: '.koledar-region-filter'
         },
         ui: {
-            'koledar': '.urnik-container-ts'
+            'koledar': '.urnik-container-prostor'
         }
     });
 
