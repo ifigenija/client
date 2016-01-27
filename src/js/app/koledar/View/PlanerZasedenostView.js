@@ -33,11 +33,19 @@ define([
             toolbarR: '.planer-region-toolbar-zasedenost',
             detailR: '.planer-region-detail-zasedenost',
             koledarR: '.planer-region-koledar-zasedenost'
-        }
+        },
+        title: i18next.t('koledar.zasedenost')
     });
+
+    PlanerZasedenostiView.prototype.serializeData = function () {
+        return{
+            title: this.title
+        };
+    };
 
     PlanerZasedenostiView.prototype.initialize = function (options) {
         this.template = options.template || this.template;
+        this.title = options.title || this.title;
     };
 
     PlanerZasedenostiView.prototype.onRender = function () {

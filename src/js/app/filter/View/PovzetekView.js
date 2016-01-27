@@ -48,31 +48,49 @@ define([
 
     PovzetekView.prototype.initialize = function (options) {
         this.stIzpisov = options.stIzpisov || 2;
-        
+
         this.collection.on('add remove reset', this.changeOstanek, this);
     };
 
-    PovzetekView.prototype.serializeData = function () {
-        var self = this;
+    PovzetekView.prototype.getOstanek = function () {
+        var dolzina = this.collection.length - this.stIzpisov;
+        if (dolzina <= 0) {
+            return 0;
+        }
+        return dolzina;
+    };
 
-        return {
-            dolzina: function () {
-
-                var dolzina = self.collection.length - self.stIzpisov;
-                if (dolzina <= 0) {
-                    return 0;
-                }
-                return dolzina;
+    PovzetekView.prototype.getTitle = function () {
+        var title = "";
+        var coll = this.collection;
+        
+        coll.each(function (model) {
+            title += model.get('label');
+            var zadnji = coll.at(coll.length - 1);
+            if (model.get('id') !== zadnji.id) {
+                title += ', ';
             }
+        });
+
+        return title;
+    };
+    PovzetekView.prototype.serializeData = function () {
+        return {
+            dolzina: this.getOstanek(),
+            title: this.getTitle()
         };
     };
 
     PovzetekView.prototype.changeOstanek = function () {
-        var dolzina = this.collection.length - this.stIzpisov;
+        var dolzina = this.getOstanek();
+        var title = this.getTitle();
+
         if (dolzina > 0) {
             this.$('.povzetek-ostanek').html('(' + dolzina + ')');
-        }else{
+            this.$('.povzetek-seznam').attr('title', title);
+        } else {
             this.$('.povzetek-ostanek').html('');
+            this.$('.povzetek-seznam').attr('title', '');
         }
     };
 

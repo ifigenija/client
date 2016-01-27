@@ -57,11 +57,19 @@ define([
             dogodekR: '.planiranje-region-dogodek',
             koledarR: '.planiranje-region-koledar',
             toolbarR: '.planiranje-region-toolbar'
-        }
+        },
+        title: i18next.t('koledar.pregled')
     });
+    
+    PlaniranjeView.prototype.serializeData = function () {
+        return{
+            title: this.title
+        };
+    };
 
     PlaniranjeView.prototype.initialize = function (options) {
         this.template = options.template || this.template;
+        this.title = options.title || this.title;
     };
 
     PlaniranjeView.prototype.onRender = function () {

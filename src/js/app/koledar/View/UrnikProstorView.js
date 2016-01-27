@@ -51,6 +51,7 @@ define([
             editable: true,
             lang: 'sl',
             now: this.datum,
+            minTime: "06:00:00",
             scrollTime: "10:00:00",
             timeFormat: 'H(:mm)',
             defaultView: 'timelineDay',

@@ -52,7 +52,9 @@
         "terminDopoldan": "Dopoldan",
         "terminPopoldan": "Popoldan",
         "terminZvecer": "Zvečer",
-        "dnevniRedTeden": "Teden po urah"
+        "dnevniRedTeden": "Teden po urah",
+        "zasedenost": "Zasedenosti",
+        "pregled": "Pregled dogodkov"
     },
     "arhiv": {
         "nav": {

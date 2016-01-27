@@ -1,5 +1,4 @@
-<span class="povzetek-seznam">
-</span>
+<span class="povzetek-seznam" title=" {{ title }} "></span>
 <span class="povzetek-ostanek">
     {{#if dolzina}}
     ({{dolzina}})
