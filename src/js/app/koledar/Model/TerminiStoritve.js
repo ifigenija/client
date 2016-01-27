@@ -44,21 +44,24 @@ define([
 
         var title = "";
         if (this.get('alternacija')) {
-            title += this.get('alternacija.funkcija.uprizoritev.label');
+            title += this.get('uprizoritev.label');
             title += ' / ' + this.get('alternacija.funkcija.naziv');
             title += ' / ' + this.get('alternacija.funkcija.tipFunkcije.ident');
         }
         else if (this.get('dezurni')) {
-            title = i18next.t('terminStoritve.dezurni');
+            title += this.get('uprizoritev.label');
+            title += ' / ' + i18next.t('terminStoritve.dezurni');
         }
         else if (this.get('gost')) {
-            title = i18next.t('terminStoritve.gost');
+            title += this.get('uprizoritev.label');
+            title += ' / ' + i18next.t('terminStoritve.gost');
         }
         else if (this.get('sodelujoc')) {
-            title = i18next.t('terminStoritve.sodelujoc');
+            title += this.get('dogodek.title');
+            title += ' / ' + i18next.t('terminStoritve.sodelujoc');
         }
         else if (this.get('zasedenost')) {
-            title = /*i18next.t('terminStoritve.zasedenost')+' / ' +*/ this.get('oseba.label');
+            title += this.get('oseba.label');
         }
         object.title = title;
         return object;
