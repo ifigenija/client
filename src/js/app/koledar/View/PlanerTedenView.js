@@ -10,6 +10,7 @@ define([
     'moment',
     '../Model/OptionsProstorTipVaje',
     './DogodekView',
+    './DogodekPredstavaView',
     './PlanerDogodkiView',
     'template!../tpl/planer-dan.tpl',
     './Wizard/WizardVajaView',
@@ -33,6 +34,7 @@ define([
         moment,
         optionsProstorTipVaje,
         DogodekView,
+        DogodekPredstavaView,
         PlanerDogodkiView,
         tplDan,
         WizardVajaView,
@@ -132,6 +134,7 @@ define([
 
         switch (razred) {
             case '100s':
+                TipDogodkaView = DogodekPredstavaView;
                 schema = predstavaSch;
                 tpl = predstavaTpl;
                 break;

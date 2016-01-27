@@ -41,7 +41,7 @@
             "prostori": "Prostori",
             "dogodki": "Dogodki",
             "ljudje": "Ljudje",
-            "zasedenost": "Rezervacije",
+            "zasedenost": "Zasedenost",
             "pregled": "Pregled",
             "planer": "Planer"
         },
@@ -51,7 +51,8 @@
         "konflikti": "Konflikti",
         "terminDopoldan": "Dopoldan",
         "terminPopoldan": "Popoldan",
-        "terminZvecer": "Zvečer"
+        "terminZvecer": "Zvečer",
+        "dnevniRedTeden": "Teden po urah"
     },
     "arhiv": {
         "nav": {

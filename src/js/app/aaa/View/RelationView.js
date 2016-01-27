@@ -38,7 +38,9 @@ define([
      */
     var MembersView = Marionette.CollectionView.extend({
         className: 'list-group',
-        childView: MemberView,
+        initialize: function (options) {
+            this.childView = options.ItemView || MemberView;
+        },
         onChildviewDelete: function (view) {
             this.collection.dissociate(view.model);
         }
@@ -59,6 +61,11 @@ define([
             this.renderSeznam();
         }
     });
+
+    RelationView.prototype.initialize = function (options) {
+        this.ItemView = options.ItemView;
+    };
+
     /**
      * Nariše vloge lookup in gumb dodaj
      * @returns {undefined}
@@ -111,7 +118,8 @@ define([
         });
 
         var vloge = new MembersView({
-            collection: c
+            collection: c,
+            ItemView: this.ItemView
         });
 
         c.fetch();

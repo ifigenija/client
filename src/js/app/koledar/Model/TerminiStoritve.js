@@ -42,9 +42,11 @@ define([
         object.end = moment(this.get('planiranKonec'));
         object.resourceId = this.get('oseba.id');
 
-        var title;
+        var title = "";
         if (this.get('alternacija')) {
-            title = this.get('alternacija.funkcija.naziv');
+            title += this.get('alternacija.funkcija.uprizoritev.label');
+            title += ' / ' + this.get('alternacija.funkcija.naziv');
+            title += ' / ' + this.get('alternacija.funkcija.tipFunkcije.ident');
         }
         else if (this.get('dezurni')) {
             title = i18next.t('terminStoritve.dezurni');
