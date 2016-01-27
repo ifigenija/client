@@ -82,7 +82,7 @@ Licenca GPLv3
     & .sodelujoc:not(:last-child):after {
         content: ',';
     }
-    
+
     & .sodelujoc{
         margin-right: 5px;
     }
@@ -110,10 +110,10 @@ Licenca GPLv3
         height: 40px;
         min-height: 40px;
         padding-bottom:10px;
-        
+
         display: table;
         width: 100%;
-        
+
     }
     .planer-cell {
         width: 30.6666667%;
@@ -121,7 +121,7 @@ Licenca GPLv3
         padding-left:110px;
     }
     .planer-first-cell{
-      /* padding-left:120px; */
+        /* padding-left:120px; */
     }
 
     .planer-cell-datum {
@@ -148,32 +148,45 @@ Licenca GPLv3
     .planer-dan {
         border-bottom: solid 1px @gray-light;
         height: 84px;
-        
+
         display: table;
         width:100%;
-        
+
     }
-    
+
     .planer-cell {       
         padding-left:130px;
         min-height: 20px;
     }
-    
+
     .planer-cell:before {
         content: attr(data-label);
     }
-    
+
     .planer-row {
         /*
         overflow: auto; border: solid 1px red
         */
         display: table-row;
     }
-    
+
 
 
     .planer-legenda div{
         display: none;
+    }
+}
+
+//planer paddind isti odmik on levega roba kot prvi termin
+
+.planer-padding-left{
+    padding-left: 105px;
+}
+
+.gumbi-razredi-dogodkov{
+    padding-top: @padding-base-vertical;
+    & .gumb-razred{
+        margin-bottom: @padding-base-vertical;
     }
 }
 

@@ -8,6 +8,4 @@
     <div data-label="{{t "koledar.terminZvecer"}}:" class="col-sm-3 planer-cell region-zvecer"></div>
     <div style="clear: both"></div>
 </div>
-<div class="row">
-    <div class="col-sm-9 col-sm-offset-3 region-detail"></div>    
-</div>
+<div class="planer-padding-left region-detail"></div>
