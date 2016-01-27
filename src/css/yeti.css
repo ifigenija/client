@@ -7220,12 +7220,16 @@ Licenca GPLv3
   }
 }
 .planer-padding-left {
-  padding-left: 105px;
+  padding-left: 100px;
 }
 .gumbi-razredi-dogodkov {
   padding-top: 5px;
 }
 .gumbi-razredi-dogodkov .gumb-razred {
+  margin-bottom: 5px;
+}
+.planer .planer-dogodek {
+  margin-top: 5px;
   margin-bottom: 5px;
 }
 /*
@@ -7267,8 +7271,7 @@ Licenca GPLv3
   width: 100%;
 }
 .selectlist-filter {
-  margin-left: 9px;
-  margin-right: 9px;
+  display: inline-block;
 }
 .selectlist-body {
   padding-bottom: 0px;

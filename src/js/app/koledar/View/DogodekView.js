@@ -59,6 +59,7 @@ define([
      * @type @exp;DokumentView@call;extend
      */
     var DogodekView = DokumentView.extend({
+        className:'planer-dogodek',
         template: dokumentTpl,
         formTemplate: dogodekTpl,
         schema: schemaDogodek.toFormSchema().schema,

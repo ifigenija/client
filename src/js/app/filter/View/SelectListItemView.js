@@ -48,6 +48,9 @@ define([
         events: {
             'click': 'klikVrstica'
         },
+        triggers: {
+            'dblclick' : 'dblclick'            
+        },
         klikVrstica: function (e) {
             this.trigger('select', e);
         }
