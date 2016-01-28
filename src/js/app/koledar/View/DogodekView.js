@@ -76,6 +76,14 @@ define([
                 trigger: 'razmnozi',
                 disabled: false
             },
+            'doc-pregledan': {
+                id: 'doc-pregledan',
+                label: 'Pregledan',
+                element: 'button-trigger',
+                trigger: 'pregledan',
+                disabled: true,
+                hidden: true
+            },
             'doc-zakljuci': {
                 id: 'doc-zakljuci',
                 label: 'Zaključi',
