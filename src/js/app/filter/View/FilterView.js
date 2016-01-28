@@ -52,8 +52,7 @@ define([
         className: 'filter-select',
         regions: {
             vrsteR: '.region-vrste-filtra',
-            toolbarLR: '.region-toolbar-left',
-            toolbarDR: '.region-toolbar-right'
+            toolbarR: '.region-toolbar'
         }
     });
 
@@ -79,14 +78,19 @@ define([
     };
 
     FilterView.prototype.onRender = function () {
-        this.renderToolbarLevo();
-        this.renderToolbarDesno();
+        this.renderToolbar();
         this.renderAktivniSeznam();
     };
 
-    FilterView.prototype.renderToolbarLevo = function () {
+    FilterView.prototype.renderToolbar = function () {
         var buttons = this.getButtons();
         var groups = [[
+                {
+                    id: 'filter-reset',
+                    icon: 'fa fa-undo',
+                    element: 'button-trigger',
+                    trigger: 'ponastavi'
+                },
                 {
                     id: 'filter-dodaj',
                     icon: 'fa fa-plus',
@@ -108,27 +112,8 @@ define([
             toolbarView.enable(['filter-dodaj']);
         }
 
-        this.toolbarLR.show(toolbarView);
+        this.toolbarR.show(toolbarView);
         return toolbarView;
-    };
-
-    FilterView.prototype.renderToolbarDesno = function () {
-        var groups = [[
-                {
-                    id: 'filter-reset',
-                    icon: 'fa fa-undo',
-                    element: 'button-trigger',
-                    trigger: 'ponastavi'
-                }
-            ]];
-
-        var toolbarView = new Toolbar({
-            buttonGroups: groups,
-            listener: this,
-            size: 'md'
-        });
-
-        this.toolbarDR.show(toolbarView);
     };
 
     FilterView.prototype.renderAktivniSeznam = function () {
@@ -145,7 +130,7 @@ define([
         //se proži ko smo dodali ali odstranili aktivni filter, ter če smo zaključili z urejanjem vrednosti aktivnega filtra
         view.on('changed:vrednosti', function () {
             this.trigger('changed');
-            this.renderToolbarLevo();
+            this.renderToolbar();
         }, this);
 
         this.vrsteR.show(view);

@@ -60,6 +60,7 @@ define([
                 }
             },
             timezone: false,
+            aspectRatio: 1.9,
             selectable: true,
             defaultView: 'month',
             selectHelper: true,
@@ -106,7 +107,7 @@ define([
             self.vrednostiFiltrov = filterView.getVrednostiAktivnihFiltrov();
             self.ui.koledar.fullCalendar('refetchEvents');
         });
-        this.filterR.show(filterView);
+        this.sidebarR.show(filterView);
     };
     KoledarView.prototype.select = function (start, end, jsEvent, view) {
         var view = this.options.view;
