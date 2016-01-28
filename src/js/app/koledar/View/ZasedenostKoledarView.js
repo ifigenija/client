@@ -44,10 +44,10 @@ define([
                         var vrednosti = self.vrednostiFiltrov;
                         self.collection.queryParams.zacetek = zacetek.format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
                         self.collection.queryParams.konec = konec.format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
+                        self.collection.queryParams.zasedenost = true;
                         self.collection.queryParams = _.extend(self.collection.queryParams, vrednosti);
                         self.collection.fetch({
                             success: function (coll) {
-                                coll.remove(coll.where({zasedenost: false}));
                                 coll.each(function (eventModel) {
                                     list.push(eventModel.getEventObject());
                                 });

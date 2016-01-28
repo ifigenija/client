@@ -57,8 +57,8 @@ define([
         this.PovzetekView = options.PovzetekView || PovzetekView;
         
         //za sprotno spreminjanje collectiona izbranih modelov
-        var izbrani = this.model.get('izbrani');        
-        izbrani.on('add remove reset', function(){
+        this.izbrani = this.model.get('izbrani');
+        this.izbrani.on('add remove reset', function(){
             this.trigger('change:vrednosti');
         }, this);
     };
@@ -80,7 +80,7 @@ define([
      */
     AktivnaVrstaView.prototype.renderPovzetek = function () {
         var view = new this.PovzetekView({
-            collection: this.model.get('izbrani'),
+            collection: this.izbrani,
             stIzpisov: this.model.get('vrstaModel').get('stIzpisov')
         });
         this.povzetekR.show(view);
@@ -100,7 +100,7 @@ define([
         var SelectView = modelM.get('SelectView');
 
         var view = new SelectView({
-            izbrani: model.get('izbrani'),
+            izbrani: this.izbrani,
             mozni: modelM.get('mozni'),
             ItemView: modelM.get('ItemView'),
             itemTemplate: modelM.get('itemTpl'),
@@ -121,7 +121,7 @@ define([
      * @returns {undefined}
      */
     AktivnaVrstaView.prototype.getIzbraneVrednosti = function () {
-        this.model.get('izbrani');
+        return this.izbrani;
     };
 
     /**

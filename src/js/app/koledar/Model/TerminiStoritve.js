@@ -44,16 +44,18 @@ define([
 
         var title = "";
         if (this.get('alternacija')) {
-            title += this.get('uprizoritev.label');
+            title += this.get('dogodek.title');
+            title += ' / ' + this.get('uprizoritev.label');
             title += ' / ' + this.get('alternacija.funkcija.naziv');
-            title += ' / ' + this.get('alternacija.funkcija.tipFunkcije.ident');
         }
         else if (this.get('dezurni')) {
-            title += this.get('uprizoritev.label');
+            title += this.get('dogodek.title');
+            title += ' / ' + this.get('uprizoritev.label');
             title += ' / ' + i18next.t('terminStoritve.dezurni');
         }
         else if (this.get('gost')) {
-            title += this.get('uprizoritev.label');
+            title += this.get('dogodek.title');
+            title += ' / ' + this.get('uprizoritev.label');
             title += ' / ' + i18next.t('terminStoritve.gost');
         }
         else if (this.get('sodelujoc')) {
@@ -168,7 +170,7 @@ define([
                 var alter = ts.get('alternacija');
                 if (alter && alter.id === alterID) {
                     alterTermin = new self.model(ts.attributes);
-                } else if (ts.get('oseba').id === osebaID) {
+                } else if (ts.get('oseba').id === osebaID && !alter) {
                     osebaTermin = new self.model(ts.attributes);
                 }
             });

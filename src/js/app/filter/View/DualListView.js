@@ -297,6 +297,7 @@ define([
     DualListView.prototype.onClose = function () {
         $(window).off('resize', jQuery.proxy(this, "resize"));
         this.trigger("changed:vrednosti");
+        this.filterView.clear();
         this.destroy();
     };
     /**
@@ -308,6 +309,7 @@ define([
         $(window).off('resize', jQuery.proxy(this, "resize"));
         this.izbrani.reset(this.izbraniPreklici.models);
         this.trigger("changed:vrednosti");
+        this.filterView.clear();
         this.destroy();
     };
 
