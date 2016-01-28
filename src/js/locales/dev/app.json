@@ -54,7 +54,13 @@
         "terminZvecer": "Zvečer",
         "dnevniRedTeden": "Teden po urah",
         "zasedenost": "Zasedenosti",
-        "pregled": "Pregled dogodkov"
+        "pregled": "Pregled dogodkov",
+        "dvaDni": "Dva dni",
+        "triDni": "Tri dni"
+    },
+    "urnik": {
+        "tsOsebe": "Koledar terminov po osebah",
+        "dogodkiProstori": "Koledar dogodkov po prostorih"
     },
     "arhiv": {
         "nav": {

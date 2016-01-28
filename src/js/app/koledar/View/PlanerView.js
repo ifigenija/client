@@ -32,8 +32,9 @@ define([
         className: 'planer',
         template: tpl,
         regions: {
-            tedenR: '.region-teden',
-            terminR: '.region-termin'
+            terminR: '.region-termin',
+            konfliktiR: '.region-konflikti',
+            tedenR: '.region-teden'
         }
     });
     /*

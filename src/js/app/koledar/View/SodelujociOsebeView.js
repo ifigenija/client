@@ -96,7 +96,7 @@ define([
      * @param {terminiStoritve} collection
      * @returns {undefined}
      */
-    SodelujociView.prototype.urediTS = function (collection) {
+    SodelujociOstaliView.prototype.urediTS = function (collection) {
         if (collection.length) {
             var coll = new TerminiStoritve();
 

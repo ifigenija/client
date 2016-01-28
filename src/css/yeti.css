@@ -7240,6 +7240,10 @@ Licenca GPLv3
   vertical-align: text-bottom;
   margin-bottom: 5px;
 }
+/*WizardView*/
+.wizard {
+  margin-bottom: 10px;
+}
 /*
 Licenca GPLv3
 */
