@@ -113,7 +113,12 @@
             "addUser": "Dodaj uporabnika",
             "users": "Uporabniki",
             "roles": "Vloge"
+        },
+        "moznosti": {
+            "perUser": "Osebne nastavitve",
+            "global":  "Skupne nastavitve"
         }
+
     },
     "std": {
         "brisi": "Briši",

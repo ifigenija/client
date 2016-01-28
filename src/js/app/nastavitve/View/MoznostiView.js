@@ -10,9 +10,12 @@ define([
     'app/Dokument/View/FormView',
     'formSchema!option?filter=1',
     'i18next',
+    'app/Max/View/TabControl',
     'radio',
     'template!../tpl/moznosti.tpl',
-    'baseUrl'
+    'baseUrl',
+    
+    'bootstrap-colorpicker',
 ], function (
         Handlebars,
         Backbone,
@@ -22,39 +25,47 @@ define([
         FormView,
         filterSchema,
         i18next,
+        TabControl,
         Radio,
         moznostiTpl,
         baseUrl
         ) {
-    
 
-    var metaData = {
+
+    //var forceGlobalPermission = false;  //undefined, false = force false, true forse
+
+    var configData = {
         'dogodek.delte': {
-            objtype: 'object',
-            datatypes: {
-                value: 'integer'
-            }
-        },
-        'test1.barva.ozadja': {
             objtype: 'array',
             datatypes: {
-                value: 'integer'
+                value: 'integer' //todo: prenesi ItemView-ov data-type sem
             }
         },
-        'test2.glob': {
-            objtype: 'array'
+        'dogodek.termini': {
+            objtype: 'arrayHM'
         },
-        'test4': {
-            objtype: 'array'
+        'dogodek.barve': {
+            objtype: 'colorpicker'
         },
-        'test5.notperUser': {
-            objtype: 'array'
+        'test1.barva.ozadja': {},
+        'test2.glob': {},
+        'test4': {},
+        'test5.notperUser': {},
+        'dogodek.razred': {},
+        'tomaz.barva.ozadja': {
+            objtype: 'scalar'
         },
-        'dogodek.razred': {
-            objtype: 'object'
-        }
     };
 
+    var tabs = [
+        {name: i18next.t('nastavitve.moznosti.perUser'), event: 'tabPerUser'},
+        {name: i18next.t('nastavitve.moznosti.global'), event: 'tabGlobal'},
+    ];
+
+    Handlebars.registerHelper("formatHM", function(value) {
+        var s = "00"+value
+        return s.substr(-2);
+    });
 
     /*
      * Detail views
@@ -65,23 +76,47 @@ define([
 
     var DetailItemView = Marionette.ItemView.extend({
         tagName: 'tr',
-        template: Handlebars.compile('<td><input type="text" name="{{key}}" data-type="scalar" data-input-type="string" value="{{value}}"></td>')
+        template: Handlebars.compile('<td><div class="col-xs-4 row"><input type="text" name="{{key}}" data-type="scalar" class="form-control" value="{{value}}"></div></td>')
     });
 
     var DetailItemViewReadOnly = Marionette.ItemView.extend({
         tagName: 'tr',
         template: Handlebars.compile('<td>{{value}}</td>')
     });
-    
+
     var DetailItemArrayView = Marionette.ItemView.extend({
         tagName: 'tr',
-        template: Handlebars.compile('<td>{{label}}:</td><td><input id="{{id}}" data-type="array" data-input-type="string" data-label="{{label}}" type="text" name="{{id}}" value="{{value}}"></td>')
+        template: Handlebars.compile('<td>{{label}}:</td><td><input type="text" id="{{id}}" name="{{id}}" data-label="{{label}}" class="form-control" value="{{value}}"></td>')
     });
 
     var DetailItemArrayViewReadOnly = Marionette.ItemView.extend({
         tagName: 'tr',
         template: Handlebars.compile('<td>{{label}}:</td><td width="30%">{{value}}</td>')
     });
+
+    DetailItemHourMinuteView = Marionette.ItemView.extend({
+        tagName: 'tr',
+        template: Handlebars.compile('<td>{{label}}:</td><td width="30%">'+
+                     '<input type="text" id="h-{{id}}" name="h-{{id}}" data-label="{{label}}" class="form-control hour-minute" size="2" value="{{formatHM h}}">:'+
+                     '<input type="text" id="m-{{id}}" name="m-{{id}}" class="form-control hour-minute" size="2" value="{{formatHM m}}"></td>')
+    });
+    
+    DetailItemHourMinuteViewReadOnly = Marionette.ItemView.extend({
+        tagName: 'tr',
+        template: Handlebars.compile('<td>{{label}}:</td><td width="30%">{{h}}:{{m}}</td>')
+    });
+
+    var DetailItemNoEdit = Marionette.ItemView.extend({
+        tagName: 'tr',
+        template: Handlebars.compile('<td> ??? </td>')
+    });
+    
+    DetailItemColorPickerView = Marionette.ItemView.extend({
+        tagName: 'tr',
+        template: Handlebars.compile('<td><div class="moznosti-label">{{label}}:</div></td><td width="30%">'+
+                '<div class="input-group colorpicker"><input type="text" id="{{id}}" name="{{id}}" data-label="{{label}}" class="form-control" value="{{value}}" /><span class="input-group-addon"><i></i></span></td>')
+    });
+
 
     var DetailCollection = Backbone.Collection.extend({
         fetchRpc: function (options) {
@@ -90,26 +125,38 @@ define([
 
             var self = this;
             rpc.call(options.method, options.parameters,
-                function (data) {
-                    //console.log('rpc call success');
-                    //console.log(data);                   
+                    function (data) {
+                        //console.log('rpc call success');
+                        //console.log(data);  
 
-                    for (var i in data) {
-                        //console.log( i + ': ', data[i]);
 
-                        var bm = new Backbone.Model(data[i]);
-                        bm.set('id', i);
-                        self.add(bm);
+                        if (typeof data === 'string') {
+
+                            var bm = new Backbone.Model({value: data});
+                            self.add(bm);
+
+                        } else {  //array
+
+                            for (var i in data) {
+
+                                var bm = new Backbone.Model(data[i]);
+                                bm.set('id', i);
+                                self.add(bm);
+
+                                //console.log(i + ': ', data[i]);
+                                //console.log('Adding to collection, model id:', i);
+                                //console.log('collection length:', self.length);
+                            }
+                        }
+
+                        var success = options.success;
+                        if (success)
+                            success.call(options);
+                    },
+                    function (data) {
+                        console.dir(data);
+                        throw new Marionette.Error('rpc call error');
                     }
-
-                    var success = options.success;
-                    if (success)
-                        success.call(options);
-                },
-                function (data) {
-                    console.dir(data);
-                    throw new Marionette.Error('rpc call error');
-                }
             );
 
         }
@@ -120,35 +167,56 @@ define([
         className: 'table',
         getChildView: function (item) {
 
-            var readonly = (this.perUser === false)  && (this.userGlobalPermission === false);
+            var readonly = (this.perUser === false) && (this.userGlobalPermission === false);
             //console.log('readonly test', this.perUser , this.userGlobalPermission, 'readonly: ', readonly);
 
-            switch (this.optionName) {
-                case '':
-                case 'dogodek.delte':
-                case 'dogodek.razred':
-                case 'dogodek.termini':
-                case 'dogodek.barve':
-                    
-                    if( readonly ) { return DetailItemArrayViewReadOnly; }
-                    return DetailItemArrayView;
-
-                case 'test1.barva.ozadja':
-                case 'test2.glob':
-                case 'test4':
-                case 'test5.notperUser':
-                default:
-                    if(readonly) { return DetailItemViewReadOnly; }
-                    return DetailItemView;
+            if (typeof configData[this.optionName] == 'undefined') {
+                console.log('No configuration for ' + this.optionName);
+                return DetailItemNoEdit;
             }
 
-            return DetailItemView;
+
+            switch (configData[this.optionName].objtype) {
+                case 'array':
+                    if (readonly) {
+                        return DetailItemArrayViewReadOnly;
+                    }
+                    return DetailItemArrayView;
+
+                case 'arrayHM':
+                    if(readonly) {
+                        return DetailItemHourMinuteViewReadOnly;
+                    }
+                    return DetailItemHourMinuteView;
+                    
+                case 'scalar':
+                case 'integer':
+                case 'string':
+                    
+                    if (readonly) {
+                        return DetailItemViewReadOnly;
+                    }
+                    return DetailItemView;
+
+                    
+                case 'colorpicker':
+                    this.useColorPicker = true;
+                    if (readonly) {
+                        this.useColorPickerDisabled = true;
+                    }
+                    return DetailItemColorPickerView;
+                
+                default:
+                    return DetailItemNoEdit;
+            }
+
+            return DetailItemNoEdit;
         }
     });
 
     DetailView.prototype.initialize = function (options) {
-        this.optionName           = options.optionName;
-        this.perUser              = options.perUser;
+        this.optionName = options.optionName;
+        this.perUser = options.perUser;
         this.userGlobalPermission = options.userGlobalPermission;
     };
 
@@ -166,7 +234,7 @@ define([
         template: moznostiTpl,
         regions: {
             detailsR: '.region-details',
-            tabsR: '.nastavitve-tabs'
+            tabsR: '.region-tabs'
         },
         buttons: {
             shrani: {
@@ -211,24 +279,42 @@ define([
 
     IzbranaMoznostView.prototype.onRender = function (options) {
         //console.log('IzbranaMoznostView.onRender');
+        
 
-        var coll = new DetailCollection();
+        var name = this.optionName = this.model.get('name');
+        var perUser = this.perUser = !!this.model.get('perUser');
+        //!! -> convert undefined to false
 
-        var name    = this.optionName = this.model.get('name');
-        var perUser = this.perUser    = !!this.model.get('perUser'); 
-                                        //!! -> convert undefined to false
-
-              
-        var userGlobalPermission = Radio.channel('global').request('isGranted', 'OptionValue-writeGlobal');
-
-        console.log('userGlobalPermission', userGlobalPermission);
+        this.userGlobalPermission = Radio.channel('global').request('isGranted', 'OptionValue-writeGlobal');
+        //console.log('userGlobalPermission', this.userGlobalPermission);
 
         //force
-        userGlobalPermission = true;
-        console.log('== Testing, userGlobalPermission to ' + userGlobalPermission);
-        console.log('== setting: perUser:' + perUser + ' vs userGlobalPermission: ' + userGlobalPermission );
-               
-        var parameters = {'name': name, nouser: perUser};
+        if(typeof forceGlobalPermission !== 'undefined') {
+           //forcing ..
+           this.userGlobalPermission = forceGlobalPermission;
+           console.log('== Forcing userGlobalPermission to ' + this.userGlobalPermission);
+        }
+        
+
+
+        //narisi tabe, ko je opcija tudi za uporabnika in 
+        //uporabnik lahko ureja globalno
+        if (this.userGlobalPermission && this.perUser) {
+
+            this.renderTabs(tabs);
+        } else {
+            this.renderUserOptions();
+        }
+    };
+
+    IzbranaMoznostView.prototype.renderGlobalOptions = function () {
+        //console.log('renderGlobalOptions');
+
+        this.optionLevel = 'global';
+
+        var coll = new DetailCollection();
+        var parameters = {'name': this.optionName, nouser: true};
+
 
         var self = this;
         coll.fetchRpc({
@@ -236,34 +322,84 @@ define([
             method: 'getOptions',
             parameters: parameters,
             success: function () {
-                //console.log('fetch success');
+                //console.log('GL fetch success');
 
-                var detailView = new DetailView({
+                var detailGlobalView = new DetailView({
                     collection: coll,
-                    optionName: name,
-                    perUser: perUser,
-                    userGlobalPermission: userGlobalPermission
+                    optionName: self.optionName,
+                    perUser: self.perUser,
+                    userGlobalPermission: self.userGlobalPermission
                 });
-                self.detailsR.show(detailView);
 
-                //console.log('aa', userGlobalPermission, perUser);
+                self.detailsR.show(detailGlobalView);
                 
-                if(userGlobalPermission || perUser) {
-                    self.omogociShraniGumb();
-                }
-                
-                if(userGlobalPermission && perUser ) {
-                    console.log('Omogoči tabe');
-                    
-                    //self.$('#nastavitve-tab').removeClass('hide');
+                if(detailGlobalView.useColorPicker) {
+                    detailGlobalView.$('.colorpicker').colorpicker({format: 'hex'});
                 }
 
             },
             error: function () {
-                //console.log('fetch error');
+                //console.log('GL fetch error');
             }
         });
     };
+
+    IzbranaMoznostView.prototype.renderUserOptions = function () {
+        //console.log('renderUserOptions');
+
+        var coll = new DetailCollection();
+        var parameters = {'name': this.optionName, nouser: false};
+
+        this.optionLevel = 'user';
+
+        //override if not peruser
+        if (this.perUser === false) {
+            parameters.nouser = true;
+            this.optionLevel = 'global';
+        }
+
+        var self = this;
+        coll.fetchRpc({
+            url: baseUrl + '/rpc/app/options',
+            method: 'getOptions',
+            parameters: parameters,
+            success: function () {
+                //console.log('US fetch success');
+
+                var detailUserView = new DetailView({
+                    collection: coll,
+                    optionName: self.optionName,
+                    perUser: self.perUser,
+                    userGlobalPermission: self.userGlobalPermission
+                });
+
+                self.detailsR.show(detailUserView);
+                                
+                if(detailUserView.useColorPicker) {
+                    
+                    detailUserView.$('.colorpicker').colorpicker({format: 'hex'});
+                     
+                    if(detailUserView.useColorPickerDisabled) { 
+                        detailUserView.$('.colorpicker').colorpicker('disable');
+                    } else {
+                       
+                    }
+                }
+
+                //uporabnik lahko ureja globalno ALI je opcija za uporabnika
+                if (self.userGlobalPermission || self.perUser) {
+                    self.omogociShraniGumb();
+                }
+
+            },
+            error: function () {
+                //console.log('US fetch error');
+            }
+        });
+    };
+
+
+
 
     /*toolbar*/
 
@@ -294,12 +430,12 @@ define([
     };
 
     /*tabs*/
-    
+
     IzbranaMoznostView.prototype.renderTabs = function (tabs) {
         this.tabControl = new TabControl({tabs: tabs, listener: this});
         this.tabsR.show(this.tabControl);
         return this.tabControl;
-    };  
+    };
 
     /**
      * 
@@ -320,6 +456,20 @@ define([
         }
     };
 
+    IzbranaMoznostView.prototype.onTabPerUser = function () {
+
+        //console.log('onTabPerUser');
+
+        this.renderUserOptions();
+
+    };
+
+    IzbranaMoznostView.prototype.onTabGlobal = function () {
+        //console.log('onTabGlobal');
+
+        this.renderGlobalOptions();
+    };
+
     /*save*/
 
     IzbranaMoznostView.prototype.onShrani = function () {
@@ -331,65 +481,92 @@ define([
         var inputFields = detailView.$('input[type=text]');
         var result = {};
 
+
         var inputVal = {};
-        var inputId;
+        var inputId, part, newKey, innerKey;
 
         if (inputFields) {
             for (var i = 0; i < inputFields.length; i++) {
 
                 inputVal = {};
+                
+                switch(configData[this.optionName].objtype) {
+                    case 'scalar':
+                        //console.log('type is scalar');
+                        result = inputFields[i].value;
+                        break;
+                        
+                    case 'array':
+                    case 'colorpicker':
+                        //console.log('type is array');
+                        inputId = inputFields[i].id;
+                        inputVal.label = detailView.$(inputFields[i]).data('label');
+                        inputVal.value = inputFields[i].value;
 
-
-                //if scalar
-                if (detailView.$(inputFields[i]).data('type') === 'scalar') {
-                    console.log('type is scalar');
-                    inputId = i;
-                    inputVal.key = inputFields[i].name;
-                    inputVal.value = inputFields[i].value;
+                        result[inputId] = inputVal;                     
+                        break;
+                        
+                    case 'arrayHM':
+                        //console.log('type is array HM ');//console.dir(inputFields[i]);
                     
-                    result = inputVal;
-                }
+                        inputId = inputFields[i].id;
+                        part = inputId.split('-'); //console.log('part', part);
+                        newKey = part[1];
+                        innerKey = part[0]
+                        if(typeof result[newKey] === 'undefined') { result[part[1]] = {}; }
+                        result[newKey][innerKey] = parseInt( inputFields[i].value, 10);
+                        if(typeof detailView.$(inputFields[i]).data('label') !== 'undefined') {
+                            result[newKey]['label'] = detailView.$(inputFields[i]).data('label');  //samo urni vsebuje label
+                        }
+                        break;
+                        
+                    default:
+                        console.error('Unknown objtype: ' + configData[this.optionName].objtype + ' for option ' + this.optionName);
+                } 
 
-                //if array
-                if (detailView.$(inputFields[i]).data('type') === 'array') {
-                    console.log('type is array');
-                    inputId = inputFields[i].id;
-                    inputVal.label = detailView.$(inputFields[i]).data('label');
-                    inputVal.value = inputFields[i].value;
-
-                    result[inputId] = inputVal;
-                }
             }
         }
-        console.group('Result');
-        console.log(result);
-        console.groupEnd();
+        
+
+        
+        //console.group('Result'); console.log(result); console.groupEnd();
 
         var callObject = {name: this.optionName, value: result};
+
+        //console.log('callObject', callObject);
+        //console.log('STOP'); return;
 
         //rezultat takoj shrani, rpc klic
         var rpc = new $.JsonRpcClient({ajaxUrl: baseUrl + '/rpc/app/options'});
 
         var self = this;
-        
+
         var method;
-        
-        if(this.perUser === true) {
-            method = 'setUserOption';
-        } else {
+
+        if (this.optionLevel && (this.optionLevel == 'global')) {
             method = 'setGlobalOption';
+
+        } else {
+            method = 'setUserOption';
         }
-        
-        //
-        
+
+        //console.log('call method debug: method = ' + method + ', optionLevel = ' + this.optionLevel);
+
         rpc.call(method, callObject,
                 function (data) {
                     console.log('save success');
                     console.log(data);
+                    Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
                 },
                 function (data) {
-                    console.error('save error');
+                    console.log('save error');
                     console.dir(data);
+                    var errMsg = '', errCode = 0;
+                    if (data.message) {
+                        errMsg = data.message;
+                        errCode = data.code;
+                    }
+                    Radio.channel('error').command('flash', {message: 'Napaka pri shranjevanju: ' + errMsg, code: errCode, severity: 'error'});
                 }
         );
     };
@@ -437,6 +614,9 @@ define([
     // override toolbar, blank
     MoznostiView.prototype.renderToolbar = function () {};
 
+    MoznostiView.prototype.zamenjajUrl = function () {
+    };
+        
     MoznostiView.prototype.getFormView = function (model) {
 
         return new IzbranaMoznostView({model: model});

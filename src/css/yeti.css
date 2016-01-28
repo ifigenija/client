@@ -7245,6 +7245,22 @@ Licenca GPLv3
   margin-bottom: 10px;
 }
 /*
+Nastavitve
+
+Licenca GPLv3
+*/
+.hour-minute {
+  width: 28px;
+  padding: 0 4px;
+  text-align: right;
+  display: inline;
+  margin: 0 4px;
+}
+.moznosti-tabs {
+  padding-left: 9px;
+  margin-bottom: -6px;
+}
+/*
 Licenca GPLv3
 */
 .selectlist {

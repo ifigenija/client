@@ -2,48 +2,35 @@
     <div class="panel-heading">
         <div class="clearfix">
             <div class="region-toolbar pull-right"></div>
-            <h4 class="glava-title">{{ formTitle }} </h4>       
+            <h4 class="moja-glava-title">{{ description }} </h4>       
         </div>
     </div>
     <div class="panel-body">    
     
     <div class="container">
     <div class="row">
-      <div class="col-sm-3 col-lg-3">Opis:</div>
-      <div class="col-sm-6 col-lg-5">{{description}}</div>
+      <div>&nbsp;</div>
+
     </div>
 
     <div class="row">
-      <div class="col-sm-3 col-lg-3">Po uporabniku:</div>
-      <div class="col-sm-6 col-lg-5">{{perUser}}</div>
+      <div class="col-sm-3 col-lg-2">Po uporabniku:</div>
+      <div class="col-sm-9 col-lg-10">{{#if perUser}}DA{{else}}NE{{/if}}</div>
     </div>
 
     <div class="row">
-      <div class="col-sm-3 col-lg-3">Ime opcije:</div>
-      <div class="col-sm-6 col-lg-5">{{name}}</div>
+      <div class="col-sm-3 col-lg-2">Ime opcije:</div>
+      <div class="col-sm-9 col-lg-10">{{name}}</div>
     </div>
     </div>
     
     <div class="row">&nbsp;</div>
     
-    <div class="nastavitve-tabs"></div>
+    <div class="region-tabs moznosti-tabs"></div>
     
-    <div id="nastavitve-tab" class="hide">
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#">Osebna nastavitev</a></li>
-      <li><a href="#">Skupna nastavitev</a></li>
-    </ul>
-    </div>
-    
-     
+         
     <div class="region-details"></div>
 
     
     </div>
 </div>
-
-
-
-
-
-

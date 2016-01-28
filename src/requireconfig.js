@@ -38,7 +38,8 @@ require.config({
         'formMeta': 'app/Max/Loader/formMeta',
         'template': 'app/Max/Loader/template',
         'options': 'app/Max/Loader/options',
-        'print-dialog': 'app/JobManager/View/PrintDialog'
+        'print-dialog': 'app/JobManager/View/PrintDialog',
+        'bootstrap-colorpicker': '../lib/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker'
     },
     shim: {
         underscore: {
@@ -81,7 +82,8 @@ require.config({
         'backbone-modal': ['jquery', 'backbone'],
         'bootstrap': ['jquery'],
         'jquery.jsonrpc': ['jquery'],
-        'bootstrap-datepicker': ['jquery', 'bootstrap']
+        'bootstrap-datepicker': ['jquery', 'bootstrap'],
+        'bootstrap-colorpicker': ['jquery', 'bootstrap', 'css!../lib/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker'] 
     },
     map: {
         '*': {

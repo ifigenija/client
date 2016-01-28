@@ -38,6 +38,13 @@
     "backgrid-select-all": "~0.3.5",
     "fullcalendar": "~2.6.0",
     "fullcalendar-scheduler": "~1.2.0",
-    "require-css": "~0.1.8"
+    "require-css": "~0.1.8",
+    "mjolnic-bootstrap-colorpicker": "~2.3.0"
+  },
+  "resolutions": {
+    "backbone": "1.0.0 - 1.2.3",
+    "underscore": "1.8.3",
+    "moment": "~2.10.2",
+    "jquery": "~2.1.3"
   }
 }
