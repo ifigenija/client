@@ -7260,6 +7260,10 @@ Licenca GPLv3
   padding-left: 9px;
   margin-bottom: -6px;
 }
+.moznosti-label {
+  line-height: 30px;
+  font-size: 14px;
+}
 /*
 Licenca GPLv3
 */
