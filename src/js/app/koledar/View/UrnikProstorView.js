@@ -6,6 +6,7 @@ define([
     'i18next',
     'marionette',
     'underscore',
+    'app/Max/View/Toolbar',
     'template!../tpl/urnik-layout-prostor.tpl',
     '../Model/KoledarLookup',
     'fullcalendar',
@@ -15,38 +16,78 @@ define([
         i18next,
         Marionette,
         _,
+        Toolbar,
         tpl,
         KoledarLookup
         ) {
 
     var UrnikProstorView = Marionette.LayoutView.extend({
         template: tpl,
-        className: 'koledar',
+        className: 'urnik-prostor',
         regions: {
-            toolbarR: '.koledar-toolbar',
-            filterR: '.koledar-region-filter'
+            toolbarR: '.urnik-toolbar'
         },
         ui: {
             'koledar': '.urnik-container-prostor'
-        }
+        },
+        naslov: i18next.t('urnik.dogodkiProstori')
     });
+
+    UrnikProstorView.prototype.serializeData = function (options) {
+        return{
+            naslov: this.naslov
+        };
+    };
 
     UrnikProstorView.prototype.initialize = function (options) {
         this.datum = options.datum;
         this.dogodek = options.dogodek;
+        this.naslov = options.naslov || this.naslov;
+    };
+
+    UrnikProstorView.prototype.renderToolbar = function () {
+        var groups = [[
+                {
+                    id: 'urnik-zapri',
+                    label: i18next.t('std.zapri'),
+                    element: 'button-trigger',
+                    trigger: 'zapri:urnik'
+                }
+            ]];
+
+        var toolbarView = new Toolbar({
+            buttonGroups: groups,
+            listener: this
+        });
+
+        this.toolbarR.show(toolbarView);
     };
 
     UrnikProstorView.prototype.onRender = function () {
+        this.renderToolbar();
+
         var self = this;
         var options = {
             view: self,
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             header: {
-                left: 'title',
-                center: '',
-                right: 'zapri'
+                left: 'prev,next,today',
+                center: 'title',
+                right: 'timelineDay,timelineTwoDays,timelineThreeDays'
             },
-            height:'auto',
+            views: {
+                timelineTwoDays: {
+                    type: 'timeline',
+                    duration: {days: 2},
+                    buttonText: i18next.t('koledar.dvaDni')
+                },
+                timelineThreeDays: {
+                    type: 'timeline',
+                    duration: {days: 3},
+                    buttonText: i18next.t('koledar.triDni')
+                }
+            },
+            height: 'auto',
             selectHelper: true,
             editable: true,
             lang: 'sl',
@@ -55,14 +96,6 @@ define([
             scrollTime: "10:00:00",
             timeFormat: 'H(:mm)',
             defaultView: 'timelineDay',
-            customButtons: {
-                zapri: {
-                    text: i18next.t('std.zapri'),
-                    click: function () {
-                        self.trigger('zapri:urnik');
-                    }
-                }
-            },
             resourceColumns: [
                 {
                     labelText: 'Prostor',
@@ -76,7 +109,12 @@ define([
 
                 prostori.fetch({
                     success: function (collection) {
-                        callback(collection.getResources());
+                        var resources = collection.getResources();
+                        resources.push({
+                            label: i18next.t('std.neuvrsceni'),
+                            id: '0'
+                        });
+                        callback(resources);
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });

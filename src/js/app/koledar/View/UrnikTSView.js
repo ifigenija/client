@@ -6,6 +6,7 @@ define([
     'i18next',
     'underscore',
     'marionette',
+    'app/Max/View/Toolbar',    
     'template!../tpl/urnik-layout-ts.tpl',
     '../Model/TerminiStoritve',
     'fullcalendar',
@@ -15,21 +16,28 @@ define([
         i18next,
         _,
         Marionette,
+        Toolbar,        
         tpl,
         TerminiStoritve
         ) {
 
     var UrnikTSView = Marionette.LayoutView.extend({
         template: tpl,
-        className: 'koledar',
+        className: 'urnik-oseba',
         regions: {
-            toolbarR: '.koledar-toolbar',
-            filterR: '.koledar-region-filter'
+            toolbarR: '.urnik-toolbar'
         },
         ui: {
             'koledar': '.urnik-container-ts'
-        }
+        },
+        naslov: i18next.t('urnik.tsOsebe')
     });
+    
+    UrnikTSView.prototype.serializeData = function (options) {
+        return{
+            naslov: this.naslov
+        };
+    };
 
     UrnikTSView.prototype.initialize = function (options) {
         this.collection = options.collection;
@@ -39,19 +47,42 @@ define([
 
         this.terminiStoritve = options.terminiStoritve;
         this.osebe = this.terminiStoritve.getSeznamOseb();
+        
+        this.naslov = options.naslov || this.naslov;
 
         this.koledarOptions = options.koledarOptions || this.koledarOptions;
     };
+    
+    UrnikTSView.prototype.renderToolbar = function () {
+        var groups = [[
+                {
+                    id: 'urnik-zapri',
+                    label: i18next.t('std.zapri'),
+                    element: 'button-trigger',
+                    trigger: 'zapri:urnik'
+                }
+            ]];
+
+        var toolbarView = new Toolbar({
+            buttonGroups: groups,
+            listener: this
+        });
+
+        this.toolbarR.show(toolbarView);
+    };
+    
 
     UrnikTSView.prototype.onRender = function () {
+        this.renderToolbar();
+        
         var self = this;
         var options = _.extend({
             view: self,
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             header: {
-                left: 'title',
-                center: '',
-                right: 'zapri'
+                left: 'prev,next,today',
+                center: 'title',
+                right: 'timelineDay,timelineTwoDays,timelineThreeDays'
             },
             selectHelper: true,
             editable: true,
@@ -64,12 +95,16 @@ define([
             scrollTime: "10:00:00",
             timeFormat: 'H(:mm)',
             defaultView: 'timelineDay',
-            customButtons: {
-                zapri: {
-                    text: i18next.t('std.zapri'),
-                    click: function () {
-                        self.trigger('zapri:urnik');
-                    }
+            views: {
+                timelineTwoDays: {
+                    type: 'timeline',
+                    duration: {days: 2},
+                    buttonText: i18next.t('koledar.dvaDni')
+                },
+                timelineThreeDays: {
+                    type: 'timeline',
+                    duration: {days: 3},
+                    buttonText: i18next.t('koledar.triDni')
                 }
             },
             resourceColumns: [

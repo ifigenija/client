@@ -33,7 +33,11 @@ define([
                 }
             }
             //resourceId pomemben pri fullcalendarju s pravim resource-om
-            eObj.resourceId = this.get('prostor').id;
+            if (this.get('prostor')) {
+                eObj.resourceId = this.get('prostor').id;
+            }else{
+                eObj.resourceId = '0';
+            }
             eObj.start = moment(this.get('zacetek'));
             eObj.end = moment(this.get('konec'));
             return eObj;

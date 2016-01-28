@@ -6,12 +6,14 @@ define([
     'i18next',
     'app/bars',
     './SodelujociView',
+    './UrnikTSView',
     '../Model/TerminiStoritve',
     '../Model/Osebe'
 ], function (
         i18next,
         Handlebars,
         SodelujociView,
+        UrnikTSView,
         TerminiStoritve,
         Osebe
         ) {
@@ -88,5 +90,31 @@ define([
 
         this.ostaliR.show(this.ostaliView);
     };
+    
+    /**
+     * Funkcija namenjena urejanju terminovstoritev izbranih alternacij/oseb
+     * @param {terminiStoritve} collection
+     * @returns {undefined}
+     */
+    SodelujociView.prototype.urediTS = function (collection) {
+        if (collection.length) {
+            var coll = new TerminiStoritve();
+
+            var urnikTSView = new UrnikTSView({
+                dogodek: this.dogodek,
+                terminiStoritve: collection,
+                collection: coll
+            });
+
+            urnikTSView.on('zapri:urnik', function () {
+                this.koledarR.empty();
+                this.renderOstali();
+            }, this);
+
+            this.koledarR.show(urnikTSView);
+            this.ostaliR.empty();
+        }
+    };
+    
     return SodelujociOstaliView;
 });
