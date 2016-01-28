@@ -5,6 +5,7 @@ define([
     'radio',
     'moment',
     'i18next',
+    'backbone',
     'app/Max/View/Confirm',
     'app/koledar/Model/Alternacije',
     'app/koledar/Model/Dogodki',
@@ -15,6 +16,7 @@ define([
     './SodelujociView',
     './SodelujociOsebeView',
     './UrnikProstorView',
+    './RazmnoziView',
     'formSchema!dogodek',
     'template!../tpl/dogodek-dok.tpl',
     'template!../tpl/dogodek-form.tpl'
@@ -22,6 +24,7 @@ define([
         Radio,
         moment,
         i18next,
+        Backbone,
         confirm,
         Alternacije,
         Dogodki,
@@ -32,6 +35,7 @@ define([
         SodelujociView,
         SodelujociOsebeView,
         UrnikProstorView,
+        RazmnoziView,
         schemaDogodek,
         dokumentTpl,
         dogodekTpl
@@ -59,7 +63,7 @@ define([
      * @type @exp;DokumentView@call;extend
      */
     var DogodekView = DokumentView.extend({
-        className:'planer-dogodek',
+        className: 'planer-dogodek',
         template: dokumentTpl,
         formTemplate: dogodekTpl,
         schema: schemaDogodek.toFormSchema().schema,
@@ -358,7 +362,31 @@ define([
     };
 
     DogodekView.prototype.onRazmnozi = function (options) {
-        //console.log('onRazmnozi');
+        var razmnoziView = new RazmnoziView({
+            model: new Backbone.Model({
+                id: this.model.get('id'),
+                dni: ["1", "2", "3", "4", "5", "6", "7"],
+                termini: [
+                    {kratica: "dop", ime: i18next.t('Dopoldan')},
+                    {kratica: "pop", ime: i18next.t('Popoldan')},
+                    {kratica: "zve", ime: i18next.t('Zvečer')}
+                ]
+            })
+        });
+
+        razmnoziView.on('preklici', function () {
+            this.koledarR.empty();
+            this.renderFormAndToolbar();
+        }, this);
+        razmnoziView.on('save:success', function () {
+            this.koledarR.empty();
+            this.renderFormAndToolbar();
+        }, this);
+
+        //ko narišemo izrisujemo koledar skrijemo formo in toolbar
+        this.koledarR.show(razmnoziView);
+        this.regionForm.empty();
+        this.regionToolbar.empty();
     };
 
     /**
@@ -394,55 +422,6 @@ define([
         }
 
         return niz;
-    };
-
-    //tk
-    DogodekView.prototype.setButtons = function () {
-
-
-        console.log('---- seting buttons ----');
-
-        console.log('this:');
-        console.log(this);
-        console.table(this);
-
-        /*
-         
-         //C FormView.prototype.getToolbarModel
-         
-         var coll = this.getToolbarModel();
-         
-         //uredim
-         
-         var tb = this.getToolbarModel();
-         var but = tb.getButton('doc-shrani');
-         if (but && but.get('disabled')) {
-         but.set({
-         disabled: false
-         });
-         }
-         
-         
-         
-         console.log('Test:');
-         console.log('Options: ');console.table(this.options);
-         console.log('regionToolbar: ');
-         console.table(this.regionToolbar);
-         console.dir(this.regionToolbar);
-         
-         console.log(this.toolbarView);
-         
-         console.log('model:'); console.log(this.model);
-         
-         var status = this.model.get('status');
-         console.log('status: ', status);
-         
-         //C odkrij delete tab button
-         
-         var tb = this.getToolbarModel();
-         
-         console.log('tb: ', this.toolbarView);
-         */
     };
 
     return DogodekView;
