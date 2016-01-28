@@ -15,7 +15,6 @@ define([
         ) {
 
     var AktivniFiltriCollectionView = Marionette.CollectionView.extend({
-        tagName:'span',
         className: 'filter-aktivni-filtri'
     });
     

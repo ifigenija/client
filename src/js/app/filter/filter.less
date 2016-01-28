@@ -76,3 +76,43 @@ h4.selectlist-naslov{
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+//filtervie
+
+.vrsta-filtra{
+    &-icon{
+        display: inline-block;
+    }
+    &-brisi{
+        display: inline-block;
+    }
+    &-povzetek-region{
+        display: inline-block;
+    }
+}
+.povzetek{
+    display: inline-block;
+    &-item{
+        display: inline-block;
+    }
+    &-seznam{
+        display: inline-block;
+    }
+    &-ostanek{
+        display: inline-block;
+    }
+}
+
+@media (min-width: @screen-lg-min) {
+    .povzetek{
+        display: block;
+        &-item{
+            vertical-align: top;
+            display: block;
+        }
+        &-seznam{
+            vertical-align: top;
+            display: block;
+        }
+    }
+}

@@ -1,6 +1,6 @@
-<span class="povzetek-seznam" title=" {{ title }} "></span>
-<span class="povzetek-ostanek">
+<div class="povzetek-seznam" title=" {{ title }} "></div>
+<div class="povzetek-ostanek">
     {{#if dolzina}}
     ({{dolzina}})
     {{/if}}
-</span>
+</div>

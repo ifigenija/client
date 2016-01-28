@@ -6,7 +6,7 @@ define([
     'i18next',
     'underscore',
     'marionette',
-    'app/Max/View/Toolbar',    
+    'app/Max/View/Toolbar',
     'template!../tpl/urnik-layout-ts.tpl',
     '../Model/TerminiStoritve',
     'fullcalendar',
@@ -16,7 +16,7 @@ define([
         i18next,
         _,
         Marionette,
-        Toolbar,        
+        Toolbar,
         tpl,
         TerminiStoritve
         ) {
@@ -32,7 +32,7 @@ define([
         },
         naslov: i18next.t('urnik.tsOsebe')
     });
-    
+
     UrnikTSView.prototype.serializeData = function (options) {
         return{
             naslov: this.naslov
@@ -47,12 +47,12 @@ define([
 
         this.terminiStoritve = options.terminiStoritve;
         this.osebe = this.terminiStoritve.getSeznamOseb();
-        
+
         this.naslov = options.naslov || this.naslov;
 
         this.koledarOptions = options.koledarOptions || this.koledarOptions;
     };
-    
+
     UrnikTSView.prototype.renderToolbar = function () {
         var groups = [[
                 {
@@ -70,11 +70,11 @@ define([
 
         this.toolbarR.show(toolbarView);
     };
-    
+
 
     UrnikTSView.prototype.onRender = function () {
         this.renderToolbar();
-        
+
         var self = this;
         var options = _.extend({
             view: self,
@@ -88,7 +88,7 @@ define([
             editable: true,
             aspectRatio: 2,
             lang: 'sl',
-            height:'auto',
+            height: 'auto',
             timezone: true,
             now: this.datum,
             minTime: "06:00:00",
@@ -107,6 +107,7 @@ define([
                     buttonText: i18next.t('koledar.triDni')
                 }
             },
+            resourceAreaWidth: '15%',
             resourceColumns: [
                 {
                     labelText: 'Oseba',
