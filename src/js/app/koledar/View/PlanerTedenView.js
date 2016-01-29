@@ -8,16 +8,11 @@ define([
     'marionette',
     'underscore',
     'moment',
-    '../Model/OptionsProstorTipVaje',
     './DogodekView',
     './DogodekPredstavaView',
     './DogodekGostovanjeView',
     './PlanerDogodkiView',
-    './Wizard/WizardVajaView',
-    './Wizard/WizardTehSploView',
-    './Wizard/WizardPredstavaView',
-    './Wizard/WizardGostovanjeView',
-    './Wizard/IzbiraRazredDogodkaView',
+    './Wizard/DodajDogodekWizardView',
     'template!../tpl/planer-dan.tpl',
     'template!../tpl/vaja-form.tpl',
     'template!../tpl/predstava-form.tpl',
@@ -36,16 +31,11 @@ define([
         Marionette,
         _,
         moment,
-        optionsProstorTipVaje,
         DogodekView,
         DogodekPredstavaView,
         DogodekGostovanjeView,
         PlanerDogodkiView,
-        WizardVajaView,
-        WizardTehSploView,
-        WizardPredstavaView,
-        WizardGostovanjeView,
-        IzbiraRazredDogodkaView,
+        DodajDogodekWizardView,
         tplDan,
         vajaTpl,
         predstavaTpl,
@@ -182,93 +172,12 @@ define([
      * @returns {undefined}
      */
     PlanerDanView.prototype.dodajDogodek = function (options) {
-        var model = new Backbone.Model();
-        model.set('zacetek', moment(options.zacetek).toISOString());
-        model.set('konec', moment(options.konec).toISOString());
-
-        var self = this;
-        var izbiraView = new IzbiraRazredDogodkaView({model: model});
-        izbiraView.on('preklici', function () {
-            this.detailR.empty();
-        }, this);
-
-        izbiraView.on('izbrano', function (model) {
-            //views options so option za vsak korakView posebaj določene
-            optionsProstorTipVaje(function (prostori, tipiVaj) {
-                var wizardView;
-                var razred = model.get('razred');
-                switch (razred) {
-                    case '100s':
-                        wizardView = new WizardPredstavaView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-                                {},
-                                {schemaOptions: prostori}
-                            ]
-                        });
-                        break;
-                    case '200s':
-                        wizardView = new WizardVajaView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-                                {},
-                                {schemaOptions: tipiVaj},
-                                {schemaOptions: prostori}
-                            ]
-                        });
-                        break;
-                    case '300s':
-                        wizardView = new WizardGostovanjeView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-//                                {},
-//                                {}
-                            ]
-                        });
-                        break;
-                    case '400s':
-                        wizardView = new WizardTehSploView({
-                            model: model,
-                            title: i18next.t('dogodek.dodajSplosni'),
-                            viewsOptions: [
-                                {},
-                                {schemaOptions: prostori},
-                                {}
-                            ]
-                        });
-                        break;
-                    case '600s':
-                        wizardView = new WizardTehSploView({
-                            model: model,
-                            title: i18next.t('dogodek.dodajTehnicni'),
-                            viewsOptions: [
-                                {},
-                                {schemaOptions: prostori},
-                                {}
-                            ]
-                        });
-                        break;
-                }
-
-                wizardView.on('close', function () {
-                    self.detailR.empty();
-                }, self);
-
-                wizardView.on('preklici', function () {
-                    self.detailR.empty();
-                }, self);
-                wizardView.on('save:success', function (model) {
-                    options.collection.add(model);
-                }, self);
-
-                self.detailR.show(wizardView);
-            });
-        }, this);
-
-        this.detailR.show(izbiraView);
+        var dodajDogodekView = new DodajDogodekWizardView({
+            zacetek: options.zacetek,
+            konec: options.konec,
+            collection: options.collection
+        });
+        this.detailR.show(dodajDogodekView);
     };
 
 

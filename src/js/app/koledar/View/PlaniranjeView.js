@@ -9,11 +9,7 @@ define([
     'template!../tpl/planiranje.tpl',
     '../Model/Dogodki',
     './KoledarView',
-    './Wizard/WizardVajaView',
-    './Wizard/WizardTehSploView',
-    './Wizard/WizardPredstavaView',
-    './Wizard/IzbiraRazredDogodkaView',
-    '../Model/OptionsProstorTipVaje',
+    './Wizard/DodajDogodekWizardView',
     './RazmnoziView',
     './DogodekView',
     'template!../tpl/vaja-form.tpl',
@@ -33,11 +29,7 @@ define([
         tpl,
         Dogodki,
         KoledarView,
-        WizardVajaView,
-        WizardTehSploView,
-        WizardPredstavaView,
-        IzbiraRazredDogodkaView,
-        optionsProstorTipVaje,
+        DodajDogodekWizardView,
         RazmnoziView,
         DogodekView,
         vajaTpl,
@@ -60,7 +52,7 @@ define([
         },
         title: i18next.t('koledar.pregled')
     });
-    
+
     PlaniranjeView.prototype.serializeData = function () {
         return{
             title: this.title
@@ -156,84 +148,13 @@ define([
      * @returns {undefined}
      */
     PlaniranjeView.prototype.onDodaj = function (zacetek, konec) {
-        var model = new Backbone.Model();
+        var dodajDogodekView = new DodajDogodekWizardView({
+            zacetek: zacetek,
+            konec: konec,
+            collection: this.collection
+        });
 
-        if (zacetek) {
-            model.set('zacetek', zacetek.toISOString());
-        }
-        if (konec) {
-            model.set('konec', konec.toISOString());
-        }
-
-        var self = this;
-        var izbiraView = new IzbiraRazredDogodkaView({model: model});
-        izbiraView.on('preklici', function () {
-            this.dogodekR.empty();
-        }, this);
-
-        izbiraView.on('izbrano', function (model) {
-            optionsProstorTipVaje(function (prostori, tipiVaj) {
-                var wizardView;
-                var razred = model.get('razred');
-                switch (razred) {
-                    case '100s':
-                        wizardView = new WizardPredstavaView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-                                {},
-                                {schemaOptions: prostori}
-                            ]
-                        });
-                        break;
-                    case '200s':
-                        wizardView = new WizardVajaView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-                                {},
-                                {schemaOptions: tipiVaj},
-                                {schemaOptions: prostori}
-                            ]
-                        });
-                        break;
-                    case '300s':
-                        break;
-                    case '400s':
-                        wizardView = new WizardTehSploView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-                                {},
-                                {schemaOptions: prostori}
-                            ]
-                        });
-                        break;
-                    case '600s':
-                        wizardView = new WizardTehSploView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-                                {},
-                                {schemaOptions: prostori}
-                            ]
-                        });
-                        break;
-                }
-
-                wizardView.on('close', function () {
-                    self.dogodekR.empty();
-                }, self);
-
-                wizardView.on('preklici', function () {
-                    self.dogodekR.empty();
-                }, self);
-
-                self.dogodekR.show(wizardView);
-            });
-        }, this);
-
-        this.dogodekR.show(izbiraView);
+        this.dogodekR.show(dodajDogodekView);
     };
 
     PlaniranjeView.prototype.renderRazredDogodek = function (razredModel, TipDogView, schema, tpl) {
