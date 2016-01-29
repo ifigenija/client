@@ -3,8 +3,6 @@
  */
 
 define([
-    'i18next',
-    'backbone',
     'marionette',
     'underscore',
     'moment',
@@ -26,8 +24,6 @@ define([
     'formSchema!dogodekSplosni',
     'options!dogodek.termini'
 ], function (
-        i18next,
-        Backbone,
         Marionette,
         _,
         moment,
