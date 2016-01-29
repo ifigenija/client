@@ -30,11 +30,27 @@ define([
             editorAttrs: {
                 class: 'form-control'
             }
+        },
+        barva: {
+            type: 'ColorPicker',
+            help: i18next.t('dogodek.d.barva'),
+            title: i18next.t('dogodek.barva'),
+            editorAttrs: {
+                class: 'form-control'
+            }
+        },
+        vrsta: {
+            type: 'Text',
+            help: i18next.t('dogodek.d.vrsta'),
+            title: i18next.t('dogodek.vrsta'),
+            editorAttrs: {
+                class: 'form-control'
+            }
         }
     };
     
     var VnosPodGosView = Form.extend({
-        template: Handlebars.compile('<form><div data-fields="title,drzava"></form>'),
+        template: Handlebars.compile('<form><div class="row"><div class="col-sm-6" data-fields="title,vrsta"></div><div class="col-sm-6" data-fields="drzava,barva"></div></div></form>'),
         schema: schema
     });
 

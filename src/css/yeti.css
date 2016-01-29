@@ -7295,28 +7295,30 @@ h4.selectlist-naslov {
   display: inline-block;
   vertical-align: text-bottom;
 }
-.vrsta-filtra-icon {
-  display: inline-block;
+@media (min-width: 992px) and (max-width: 1199px) {
+  .vrsta-filtra-icon {
+    display: inline-block;
+  }
+  .vrsta-filtra-brisi {
+    display: inline-block;
+  }
+  .vrsta-filtra-povzetek-region {
+    display: inline-block;
+  }
+  .povzetek {
+    display: inline-block;
+  }
+  .povzetek-item {
+    display: inline-block;
+  }
+  .povzetek-seznam {
+    display: inline-block;
+  }
+  .povzetek-ostanek {
+    display: inline-block;
+  }
 }
-.vrsta-filtra-brisi {
-  display: inline-block;
-}
-.vrsta-filtra-povzetek-region {
-  display: inline-block;
-}
-.povzetek {
-  display: inline-block;
-}
-.povzetek-item {
-  display: inline-block;
-}
-.povzetek-seznam {
-  display: inline-block;
-}
-.povzetek-ostanek {
-  display: inline-block;
-}
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .povzetek {
     display: block;
   }
