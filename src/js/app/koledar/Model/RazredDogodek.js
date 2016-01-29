@@ -54,6 +54,9 @@ define([
                         var niz = getPartOfUrl(this.get('ostali'), 'gost');
                         url += niz ? '&' + niz : '';
                         break;
+                    case '300s':
+                        url += getPartOfUrl(this.get('ostali'), 'sodelujoc');
+                        break;
                     case '400s':
                         url += getPartOfUrl(this.get('ostali'), 'sodelujoc');
                         break;

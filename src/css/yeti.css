@@ -7316,7 +7316,7 @@ h4.selectlist-naslov {
 .povzetek-ostanek {
   display: inline-block;
 }
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .povzetek {
     display: block;
   }

@@ -78,28 +78,29 @@ h4.selectlist-naslov{
 }
 
 //filtervie
-
-.vrsta-filtra{
-    &-icon{
-        display: inline-block;
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    .vrsta-filtra{
+        &-icon{
+            display: inline-block;
+        }
+        &-brisi{
+            display: inline-block;
+        }
+        &-povzetek-region{
+            display: inline-block;
+        }
     }
-    &-brisi{
+    .povzetek{
         display: inline-block;
-    }
-    &-povzetek-region{
-        display: inline-block;
-    }
-}
-.povzetek{
-    display: inline-block;
-    &-item{
-        display: inline-block;
-    }
-    &-seznam{
-        display: inline-block;
-    }
-    &-ostanek{
-        display: inline-block;
+        &-item{
+            display: inline-block;
+        }
+        &-seznam{
+            display: inline-block;
+        }
+        &-ostanek{
+            display: inline-block;
+        }
     }
 }
 

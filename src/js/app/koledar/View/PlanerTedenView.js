@@ -11,18 +11,22 @@ define([
     '../Model/OptionsProstorTipVaje',
     './DogodekView',
     './DogodekPredstavaView',
+    './DogodekGostovanjeView',
     './PlanerDogodkiView',
-    'template!../tpl/planer-dan.tpl',
     './Wizard/WizardVajaView',
     './Wizard/WizardTehSploView',
     './Wizard/WizardPredstavaView',
+    './Wizard/WizardGostovanjeView',
     './Wizard/IzbiraRazredDogodkaView',
+    'template!../tpl/planer-dan.tpl',
     'template!../tpl/vaja-form.tpl',
     'template!../tpl/predstava-form.tpl',
+    'template!../tpl/gostovanje-form.tpl',
     'template!../tpl/tehnicni-form.tpl',
     'template!../tpl/splosni-form.tpl',
     'formSchema!vaja',
     'formSchema!predstava',
+    'formSchema!gostovanje',
     'formSchema!dogodekTehnicni',
     'formSchema!dogodekSplosni',
     'options!dogodek.termini'
@@ -35,18 +39,22 @@ define([
         optionsProstorTipVaje,
         DogodekView,
         DogodekPredstavaView,
+        DogodekGostovanjeView,
         PlanerDogodkiView,
-        tplDan,
         WizardVajaView,
         WizardTehSploView,
         WizardPredstavaView,
+        WizardGostovanjeView,
         IzbiraRazredDogodkaView,
+        tplDan,
         vajaTpl,
         predstavaTpl,
+        gostovanjeTpl,
         tehnicniTpl,
         splosniTpl,
         vajaSch,
         predstavaSch,
+        gostovanjeSch,
         tehnicniSch,
         splosniSch,
         termini
@@ -143,7 +151,9 @@ define([
                 tpl = vajaTpl;
                 break;
             case '300s':
-                TipDogodkaView = null;
+                TipDogodkaView = DogodekGostovanjeView;
+                schema = gostovanjeSch;
+                tpl = gostovanjeTpl;
                 break;
             case '400s':
                 schema = splosniSch;
@@ -210,6 +220,14 @@ define([
                         });
                         break;
                     case '300s':
+                        wizardView = new WizardGostovanjeView({
+                            model: model,
+                            viewsOptions: [
+                                {},
+//                                {},
+//                                {}
+                            ]
+                        });
                         break;
                     case '400s':
                         wizardView = new WizardTehSploView({
