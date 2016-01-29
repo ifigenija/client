@@ -148,11 +148,15 @@ define([
             eventClick: this.eventClick,
             eventDrop: this.eventDropOrResize,
             eventResize: this.eventDropOrResize,
-            eventMouseover: this.eventMouseOver
+            eventAfterRender: this.eventAfterRender
         };
         setTimeout(function () {
             self.ui.koledar.fullCalendar(options);
         }, 200);
+    };
+    
+    UrnikProstorView.prototype.eventAfterRender = function (fcEvent, element, view) {
+        element.attr('title', fcEvent.title);
     };
 
     UrnikProstorView.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
