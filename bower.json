@@ -40,5 +40,11 @@
     "fullcalendar-scheduler": "~1.2.0",
     "require-css": "~0.1.8",
     "mjolnic-bootstrap-colorpicker": "~2.3.0"
+  },
+  "resolutions": {
+    "jquery": ">=1.7.1",
+    "backbone": "~1.2.1",
+    "underscore": "1.8.3",
+    "moment": "~2.10.2"
   }
 }
