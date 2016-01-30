@@ -254,9 +254,7 @@ define([
     SodelujociView.prototype.urediSeznam = function (options) {
         var $e = $('<div class="selectlist-content"></div>');
         $('body').append($e);
-        var DLV = DualListView.extend({renderFilter: function () { this.filterView = {clear:function(){}};
-            }});
-        var view = new DLV({
+        var view = new DualListView({
             izbrani: options.izbrani,
             mozni: options.mozni,
             itemTemplate: options.tpl,
