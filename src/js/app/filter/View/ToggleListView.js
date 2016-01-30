@@ -13,27 +13,18 @@
  *      - collection izbranih kriterijev
  */
 define([
-    'jquery',
-    'radio',
     'i18next',
-    'app/bars',
-    'backbone',
-    'underscore',
-    'marionette',
     'template!../tpl/toggleList.tpl',
     './ToggleListView',
-    './DualListView'
+    './DualListView',
+    'backgrid',
+    'backgrid-filter'
 ], function (
-        $,
-        Radio,
         i18next,
-        Handlebars,
-        Backbone,
-        _,
-        Marionette,
         toggleListTpl,
         ToggleListView,
-        DualListView
+        DualListView,
+        Backgrid
         ) {
 
     var ToggleListView = DualListView.extend({
@@ -133,6 +124,19 @@ define([
         }
         this.getIzbraniModeli();
         this.render();
+    };
+
+    /* Izris filtra
+     * @returns {undefined}
+     */
+    ToggleListView.prototype.renderFilter = function () {
+        var filterView = this.filterView = new Backgrid.Extension.ClientSideFilter({
+            collection: this.mozniView.collection,
+            fields: ['label'],
+            wait: 150
+        });
+
+        this.filterR.show(filterView);
     };
 
     return ToggleListView;

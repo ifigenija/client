@@ -305,6 +305,7 @@ define([
                             var view = new SodelujociView({
                                 alternacije: col,
                                 osebe: kol,
+                                uprizoritev: uprizoritev,
                                 dogodek: dogodek,
                                 gost: gost,
                                 dezurni: dezurni,

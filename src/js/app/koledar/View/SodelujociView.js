@@ -56,7 +56,9 @@ define([
 
         //kolekcije brez predpone predstavljajo možne alternacije/osebe med katerimi lahko izbiramo
         this.umetniki = new Alternacije();
+        this.umetniki.queryParams.uprizoritev = options.uprizoritev;
         this.tehniki = new Alternacije();
+        this.tehniki.queryParams.uprizoritev = options.uprizoritev;
 
         //dodamo atribut label, ker pričakujemo lookup osebe
         this.osebeColl.forEach(function (model) {
@@ -252,7 +254,9 @@ define([
     SodelujociView.prototype.urediSeznam = function (options) {
         var $e = $('<div class="selectlist-content"></div>');
         $('body').append($e);
-        var view = new DualListView({
+        var DLV = DualListView.extend({renderFilter: function () { this.filterView = {clear:function(){}};
+            }});
+        var view = new DLV({
             izbrani: options.izbrani,
             mozni: options.mozni,
             itemTemplate: options.tpl,
