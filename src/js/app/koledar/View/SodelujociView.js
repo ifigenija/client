@@ -136,6 +136,10 @@ define([
         this.tehniki.add(modeli.sepetalec);
 
     };
+    /**
+     * Funkcija se overrida da dosežemo različne načine izrisa sodelujočih
+     * @returns {undefined}
+     */
     SodelujociView.prototype.renderiraj = function () {
         this.renderUmetniki();
         this.renderTehnika();

@@ -274,21 +274,51 @@ define([
         var dogodek = new Dogodki.prototype.model(this.model.get('dogodek'));
         var osebe = new Osebe();
 
-        var gost, dezurni, sodelujoc;
+        var gost, dezurni, sodelujoc, SodView = SodelujociView;
         var razred = dogodek.get('razred');
         switch (razred) {
             case '100s':
                 dezurni = true;
+                SodView = SodelujociView.extend({
+                    renderiraj: function () {
+                        this.renderUmetniki();
+                        this.renderTehnika();
+                        this.renderGosti();
+                        this.renderDezurni();
+                    }
+                });
                 break;
             case '200s':
+                SodView = SodelujociView.extend({
+                    renderiraj: function () {
+                        this.renderUmetniki();
+                        this.renderTehnika();
+                        this.renderGosti();
+                    }
+                });
                 gost = true;
                 break;
             case '300s':
+                SodView = SodelujociView.extend({
+                    renderiraj: function () {
+                        this.renderSodelujoci();
+                    }
+                });
                 break;
             case '400s':
+                SodView = SodelujociView.extend({
+                    renderiraj: function () {
+                        this.renderSodelujoci();
+                    }
+                });
                 sodelujoc = true;
                 break;
             case '600s':
+                SodView = SodelujociView.extend({
+                    renderiraj: function () {
+                        this.renderSodelujoci();
+                    }
+                });
                 sodelujoc = true;
                 break;
         }
@@ -302,7 +332,7 @@ define([
                     alternacije.queryParams.uprizoritev = uprizoritev;
                     alternacije.fetch({
                         success: function (col) {
-                            var view = new SodelujociView({
+                            var view = new SodView({
                                 alternacije: col,
                                 osebe: kol,
                                 uprizoritev: uprizoritev,
@@ -316,7 +346,7 @@ define([
                         error: Radio.channel('error').request('handler', 'flash')
                     });
                 } else {
-                    var view = new SodelujociOsebeView({
+                    var view = new SodView({
                         osebe: kol,
                         dogodek: dogodek,
                         gost: gost,
