@@ -3,12 +3,14 @@
  */
 define([
     'i18next',
+    'underscore',
     './DogodekView',
     './DogodkiGostovanjaView',
     'template!../tpl/gostovanje-form.tpl',
     'formSchema!gostovanje'
 ], function (
         i18next,
+        _,
         DogodekView,
         DogodkiGostovanjaView,
         tpl,
@@ -27,14 +29,15 @@ define([
      * @returns {DogodekGostovanjeView_L14.DogodekGostovanjeView.tabControl}
      */
     DogodekGostovanjeView.prototype.renderTabs = function (tabs) {
-        tabs.push({id: 'dogodki', name: i18next.t('gostovanje.dogodki'), event: 'dogodki'});
-        DogodekView.prototype.renderTabs.apply(this, arguments);
+        var gosTabs = _.clone(tabs);
+        gosTabs.push({id: 'dogodki', name: i18next.t('gostovanje.dogodki'), event: 'dogodki'});
+        DogodekView.prototype.renderTabs.apply(this, [gosTabs]);
     };
 
     DogodekGostovanjeView.prototype.onDogodki = function () {
         this.deselectTab();
         this.$('.pnl-detail').addClass('active');
-        
+
         //render dogodki
         var view = new DogodkiGostovanjaView();
 

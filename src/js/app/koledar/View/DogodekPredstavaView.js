@@ -2,27 +2,19 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
     'i18next',
-    'baseUrl',
-    'backbone',
     'underscore',
     'app/bars',
     'marionette',
-    'jquery',
     './DogodekView',
     'app/aaa/View/RelationView',
     'template!../tpl/predstava-form.tpl',
     'formSchema!predstava'
 ], function (
-        Radio,
         i18next,
-        baseUrl,
-        Backbone,
         _,
         Handlebars,
         Marionette,
-        $,
         DogodekView,
         RelationView,
         tpl,
@@ -41,8 +33,9 @@ define([
      * @returns {DogodekPredstavaView_L14.DogodekPredstavaView.tabControl}
      */
     DogodekPredstavaView.prototype.renderTabs = function (tabs) {
-        tabs.push({id: 'abonmaji', name: i18next.t('predstava.abonmaji'), event: 'abonmaji'});
-        DogodekView.prototype.renderTabs.apply(this, arguments);
+        var predTabs = _.clone(tabs);
+        predTabs.push({id: 'abonmaji', name: i18next.t('predstava.abonmaji'), event: 'abonmaji'});
+        DogodekView.prototype.renderTabs.apply(this, [predTabs]);
     };
 
     DogodekPredstavaView.prototype.onAbonmaji = function () {

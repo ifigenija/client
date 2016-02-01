@@ -11,7 +11,7 @@ define([
     'moment',
     'underscore',
     'app/Max/Model/MaxPageableCollection',
-    './Alternacije',
+    './PlaniraneAlternacije',
     './Osebe',
     'deep-model'
 ], function (
@@ -95,11 +95,21 @@ define([
                 }
 
                 object[podrocje].push(model);
-            } else {
-                if (!object['ostali']) {
-                    object['ostali'] = [];
+            } else if(model.get('sodelujoc')){
+                if (!object['sodelujoci']) {
+                    object['sodelujoci'] = [];
                 }
-                object['ostali'].push(model);
+                object['sodelujoci'].push(model);
+            } else if(model.get('dezurni')){
+                if (!object['dezurni']) {
+                    object['dezurni'] = [];
+                }
+                object['dezurni'].push(model);
+            } else if(model.get('gost')){
+                if (!object['gosti']) {
+                    object['gosti'] = [];
+                }
+                object['gosti'].push(model);
             }
         });
 

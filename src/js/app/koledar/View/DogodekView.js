@@ -7,7 +7,7 @@ define([
     'i18next',
     'backbone',
     'app/Max/View/Confirm',
-    'app/koledar/Model/Alternacije',
+    'app/koledar/Model/PlaniraneAlternacije',
     'app/koledar/Model/Dogodki',
     '../Model/Osebe',
     'app/Max/View/TabControl',
