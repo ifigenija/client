@@ -12,14 +12,14 @@ define([
         ) {
 
     this.schema = {
-        naslov: {
-            title: i18next.t('ent.naslov'),
-            name: 'naslov',
+        title: {
+            title: i18next.t('ent.title'),
+            name: 'title',
             type: 'Text',
             editorAttrs: {
                 class: 'naziv-polje form-control',
                 type: 'naziv',
-                name: 'naslov',
+                name: 'title',
                 placeholder: i18next.t('std.vnosNaslova')
             }
         },
@@ -50,7 +50,7 @@ define([
     };
 
     var VnosPodGosView = Form.extend({
-        template: Handlebars.compile('<form><div class="row"><div class="col-sm-6" data-fields="naslov,vrsta"></div><div class="col-sm-6" data-fields="drzava,barva"></div></div></form>'),
+        template: Handlebars.compile('<form><div class="row"><div class="col-sm-6" data-fields="title,vrsta"></div><div class="col-sm-6" data-fields="drzava,barva"></div></div></form>'),
         schema: schema
     });
 
@@ -58,7 +58,7 @@ define([
         Form.prototype.initialize.apply(this, arguments);
 
         if (options && options.model) {
-            this.naslov = options.model.get('naslov');
+            this.title = options.model.get('title');
             this.drzava = options.model.get('drzava');
             this.vrsta = options.model.get('vrsta');
             this.barva = options.model.get('barva');
@@ -69,8 +69,8 @@ define([
 
     VnosPodGosView.prototype.render = function (options) {
         Form.prototype.render.apply(this, arguments);
-        if (this.naslov) {
-            this.fields.naslov.editor.setValue(this.naslov);
+        if (this.title) {
+            this.fields.title.editor.setValue(this.title);
         }
         if (this.drzava) {
             this.fields.drzava.editor.setValue(this.drzava);
@@ -89,19 +89,19 @@ define([
      * @returns {undefined}
      */
     VnosPodGosView.prototype.onChange = function () {
-        var naslov = this.fields.naslov.getValue();
+        var title = this.fields.title.getValue();
         var drzava = this.fields.drzava.getValue();
         var barva = this.fields.barva.getValue();
         var vrsta = this.fields.vrsta.getValue();
 
-        if (naslov && drzava && barva) {
-            this.model.set('naslov', naslov);
+        if (title && drzava && barva) {
+            this.model.set('title', title);
             this.model.set('drzava', drzava);
             this.model.set('vrsta', vrsta);
             this.model.set('barva', barva);
             this.trigger('ready', this.model);
         } else {
-            this.trigger('ready', this.model);
+            this.trigger('not:ready', this.model);
         }
     };
 

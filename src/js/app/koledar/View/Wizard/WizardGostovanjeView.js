@@ -10,22 +10,22 @@ define([
     './WizardView',
     './IzbiraCasView',
     './VnosPodGosView',
-//    './IzbiraDogodkovView'
+    './IzbiraDogodkovView'
 ], function (
         Radio,
         i18next,
         Dogodki,
         WizardView,
         IzbiraCasView,
-        VnosPodGosView//,
-//        IzbiraDogodkovView
+        VnosPodGosView,
+        IzbiraDogodkovView
         ) {
 
     var WizardGostovanjeView = WizardView.extend({
         views: [
             VnosPodGosView,
             IzbiraCasView,
-//            IzbiraDogodkovView
+            IzbiraDogodkovView
         ],
         title: i18next.t('dogodek.dodajGostovanje'),
         callback: function (model) {

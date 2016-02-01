@@ -46,7 +46,8 @@ define([
                 switch (razred) {
                     case '100s':
                         url += getPartOfUrl(this.get('alternacije'), 'alternacija');
-                        var niz = getPartOfUrl(this.get('ostali'), 'dezurni');
+                        var niz = getPartOfUrl(this.get('dezurni'), 'dezurni');
+                        var niz = getPartOfUrl(this.get('ostali'), 'gost');
                         url += niz ? '&' + niz : '';
                         break;
                     case '200s':
@@ -61,6 +62,7 @@ define([
                         url += getPartOfUrl(this.get('ostali'), 'sodelujoc');
                         break;
                     case '600s':
+                        url += getPartOfUrl(this.get('dogodki'), 'dogodek');
                         url += getPartOfUrl(this.get('ostali'), 'sodelujoc');
                         break;
                 }
