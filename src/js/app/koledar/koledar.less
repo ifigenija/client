@@ -184,6 +184,7 @@ Licenca GPLv3
 }
 
 .gumbi-razredi-dogodkov{
+    position: relative;
     padding-top: @padding-base-vertical;
     & .gumb-razred{
         margin-bottom: @padding-base-vertical;
@@ -212,8 +213,31 @@ Licenca GPLv3
     }
 }
 
+.brisi-grayed {
+    color: @gray-lighter;
+}
 /*WizardView*/
 
 .wizard{
     margin-bottom: @form-group-margin-bottom;
+
+    border: 2px solid @gray-lighter;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.05);
+}
+
+.wizard-header{
+    background-color: @panel-default-heading-bg;
+    padding: @padding-base-vertical @padding-base-horizontal;
+
+}
+.wizard-body{
+    padding: @padding-base-horizontal;
+    min-height: 320px;
+}
+
+.wizard-footer {
+    border-top: 1px solid #dddddd;
+    overflow-y: auto;
+    padding: @padding-base-horizontal;
 }

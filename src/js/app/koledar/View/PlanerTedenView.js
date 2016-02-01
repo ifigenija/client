@@ -95,6 +95,9 @@ define([
                 moment(this.model.get('datum')).set({'hour': termini.dopoldanKonec.h, 'minute': termini.dopoldanKonec.m})
                 );
         this.dopoldneR.show(view);
+        if(view.collection.length>0) {
+            view.$('.brisi-dogodke').removeClass('brisi-grayed');
+        }
     };
     PlanerDanView.prototype.renderPopoldne = function () {
         var view = this.popoldneView = this.getDogodekView(

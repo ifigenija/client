@@ -1,4 +1,4 @@
-<span class="label label-primary">
+<h4><span class="label label-primary">
     <span>{{title}}</span>
     {{#if uprizoritev.label}}
         <span>/ {{uprizoritev.label}}</span>
@@ -24,4 +24,4 @@
     {{else if isObdelan}}
         <i class="fa fa-pencil-square"></i>
     {{/if}}
-</span>
+</span></h4>
