@@ -133,7 +133,7 @@ define([
             this.renderToolbar();
         }, this);
 
-        this.vrsteR.show(view);
+        this.vrsteR.show(view);console.log('TK:render vrsteR(show)');
     };
 
     /**
@@ -179,7 +179,7 @@ define([
             vrstaModel: model,
             vrsta: model.get('id')
         });
-        this.render();
+        this.render();console.log('TK:onDodajAktivnoVrsto');
     };
 
     /**

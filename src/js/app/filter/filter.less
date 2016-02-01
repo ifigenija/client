@@ -62,10 +62,13 @@ h4.selectlist-naslov{
 
 .filter-select{
     & .vrsta-filtra-item{
-        display: inline-block;
-        margin-left: 5px;
+        
+        margin-left: 5px;      
+        margin-top: 2px;
         margin-bottom: 5px;
         font-size: 20px;
+        border: 1px solid @gray-lighter;
+        padding: 1px 4px;
     }
     & .vrsta-filtra{
         &-dodaj &-reset{
@@ -77,9 +80,14 @@ h4.selectlist-naslov{
     margin-bottom: 5px;
 }
 
-//filtervie
-@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+//mali ekran
+@media  (max-width: @screen-md-max) {
+    
     .vrsta-filtra{
+        
+        &-item{
+            display: inline-block;
+        }
         &-icon{
             display: inline-block;
         }
@@ -104,7 +112,27 @@ h4.selectlist-naslov{
     }
 }
 
+//velik ekran
 @media (min-width: @screen-lg-min) {
+
+    .vrsta-filtra{
+        
+        &-item{
+            display: block;
+        }
+        &-icon{
+            display: inline-block;
+            vertical-align: top;
+        }
+        &-brisi{
+            display: inline-block;
+            vertical-align: top;
+            float: right !important;
+        }
+        &-povzetek-region{
+            display: inline-block;
+        }
+    }
     .povzetek{
         display: block;
         &-item{
@@ -115,5 +143,17 @@ h4.selectlist-naslov{
             vertical-align: top;
             display: block;
         }
+        &-brisi{
+
+            
+        }
+        &-item span{
+            display: none;
+        }
+        
+    }
+    
+    .filter-aktivni-filtri {
+        margin-top: 16px;
     }
 }

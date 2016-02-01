@@ -7306,16 +7306,21 @@ h4.selectlist-naslov {
   margin-bottom: 5px;
 }
 .filter-select .vrsta-filtra-item {
-  display: inline-block;
   margin-left: 5px;
+  margin-top: 2px;
   margin-bottom: 5px;
   font-size: 20px;
+  border: 1px solid #eeeeee;
+  padding: 1px 4px;
 }
 .filter-select .vrsta-filtra-dodaj .filter-select .vrsta-filtra-reset {
   display: inline-block;
   vertical-align: text-bottom;
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (max-width: 1199px) {
+  .vrsta-filtra-item {
+    display: inline-block;
+  }
   .vrsta-filtra-icon {
     display: inline-block;
   }
@@ -7339,6 +7344,21 @@ h4.selectlist-naslov {
   }
 }
 @media (min-width: 1200px) {
+  .vrsta-filtra-item {
+    display: block;
+  }
+  .vrsta-filtra-icon {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .vrsta-filtra-brisi {
+    display: inline-block;
+    vertical-align: top;
+    float: right !important;
+  }
+  .vrsta-filtra-povzetek-region {
+    display: inline-block;
+  }
   .povzetek {
     display: block;
   }
@@ -7349,6 +7369,12 @@ h4.selectlist-naslov {
   .povzetek-seznam {
     vertical-align: top;
     display: block;
+  }
+  .povzetek-item span {
+    display: none;
+  }
+  .filter-aktivni-filtri {
+    margin-top: 16px;
   }
 }
 /*!

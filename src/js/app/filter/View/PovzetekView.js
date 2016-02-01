@@ -24,7 +24,7 @@ define([
 
     var ItemView = Backbone.Marionette.ItemView.extend({
         className: 'povzetek-item',
-        template: Handlebars.compile('{{#if index}}, {{/if}}{{label}}'),
+        template: Handlebars.compile('{{#if index}}<span>, </span>{{/if}}{{label}}'),
         serializeData: function () {
             return _.extend(this.model.toJSON(), {
                 index: this.options.index
