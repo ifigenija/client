@@ -59,11 +59,7 @@ define([
         this.umetniki.queryParams.uprizoritev = options.uprizoritev;
         this.tehniki = new Alternacije();
         this.tehniki.queryParams.uprizoritev = options.uprizoritev;
-
-        //dodamo atribut label, ker pričakujemo lookup osebe
-        this.osebeColl.forEach(function (model) {
-            model.set('label', model.get('polnoIme'));
-        });
+        
         this.ostali = this.osebeColl;
 
         this.razdeliAlternacije();
@@ -136,7 +132,8 @@ define([
                 self.renderUmetniki();
                 self.renderTehnika();
                 self.renderOstali();
-            }
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
         });
     };
     /**
@@ -198,7 +195,7 @@ define([
                 izbrani: this.iOstali,
                 mozni: this.ostali,
                 $el: $el,
-                tpl: Handlebars.compile('{{label}}'),
+                tpl: Handlebars.compile('{{polnoIme}}'),
                 gost: this.options.gost,
                 dezurni: this.options.dezurni,
                 sodelujoc: this.options.sodelujoc

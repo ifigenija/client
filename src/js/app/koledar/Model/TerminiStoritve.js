@@ -117,6 +117,7 @@ define([
                 var oseba = model.get('oseba');
 
                 if (_.isObject(oseba)) {
+                    oseba['polnoIme'] = oseba.label;
                     osebeColl.add(oseba);
                 } else {
                     osebeColl.add({id: oseba});
