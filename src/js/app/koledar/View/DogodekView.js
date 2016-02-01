@@ -14,7 +14,6 @@ define([
     'app/Dokument/View/DokumentView',
     'app/Zapisi/View/ZapisiLayout',
     './SodelujociView',
-    './SodelujociOsebeView',
     './UrnikProstorView',
     './RazmnoziView',
     'formSchema!dogodek',
@@ -33,7 +32,6 @@ define([
         DokumentView,
         ZapisiLayout,
         SodelujociView,
-        SodelujociOsebeView,
         UrnikProstorView,
         RazmnoziView,
         schemaDogodek,
@@ -274,16 +272,15 @@ define([
         var dogodek = new Dogodki.prototype.model(this.model.get('dogodek'));
         var osebe = new Osebe();
 
-        var gost, dezurni, sodelujoc, SodView = SodelujociView;
+        var SodView = SodelujociView;
         var razred = dogodek.get('razred');
         switch (razred) {
             case '100s':
-                dezurni = true;
                 SodView = SodelujociView.extend({
                     renderiraj: function () {
                         this.renderUmetniki();
                         this.renderTehnika();
-                        this.renderGosti();
+                        this.renderSodelujoci();
                         this.renderDezurni();
                     }
                 });
@@ -296,7 +293,6 @@ define([
                         this.renderGosti();
                     }
                 });
-                gost = true;
                 break;
             case '300s':
                 SodView = SodelujociView.extend({
@@ -311,7 +307,6 @@ define([
                         this.renderSodelujoci();
                     }
                 });
-                sodelujoc = true;
                 break;
             case '600s':
                 SodView = SodelujociView.extend({
@@ -319,7 +314,6 @@ define([
                         this.renderSodelujoci();
                     }
                 });
-                sodelujoc = true;
                 break;
         }
         //pridobimo kolekcijo oseb
@@ -336,10 +330,7 @@ define([
                                 alternacije: col,
                                 osebe: kol,
                                 uprizoritev: uprizoritev,
-                                dogodek: dogodek,
-                                gost: gost,
-                                dezurni: dezurni,
-                                sodelujoc: sodelujoc
+                                dogodek: dogodek
                             });
                             self.detailR.show(view);
                         },
@@ -348,10 +339,7 @@ define([
                 } else {
                     var view = new SodView({
                         osebe: kol,
-                        dogodek: dogodek,
-                        gost: gost,
-                        dezurni: dezurni,
-                        sodelujoc: sodelujoc
+                        dogodek: dogodek
                     });
                     self.detailR.show(view);
                 }

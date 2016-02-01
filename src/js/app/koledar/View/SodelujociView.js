@@ -221,9 +221,7 @@ define([
                 mozni: this.sodelujoci,
                 $el: $el,
                 tpl: Handlebars.compile('{{polnoIme}}'),
-                gost: this.options.gost,
-                dezurni: this.options.dezurni,
-                sodelujoc: this.options.sodelujoc
+                sodelujoc: true
             });
         };
 
@@ -248,9 +246,7 @@ define([
                 mozni: this.gosti,
                 $el: $el,
                 tpl: Handlebars.compile('{{polnoIme}}'),
-                gost: this.options.gost,
-                dezurni: this.options.dezurni,
-                sodelujoc: this.options.sodelujoc
+                gost: true
             });
         };
 
@@ -275,9 +271,7 @@ define([
                 mozni: this.dezurni,
                 $el: $el,
                 tpl: Handlebars.compile('{{polnoIme}}'),
-                gost: this.options.gost,
-                dezurni: this.options.dezurni,
-                sodelujoc: this.options.sodelujoc
+                dezurni: true
             });
         };
 
