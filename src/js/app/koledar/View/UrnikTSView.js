@@ -161,7 +161,8 @@ define([
             eventDrop: this.eventDropOrResize,
             eventResize: this.eventDropOrResize,
             eventDragStart: this.eventDropOrResizeStart,
-            eventResizeStart: this.eventDropOrResizeStart
+            eventResizeStart: this.eventDropOrResizeStart,
+            eventAfterRender: this.eventAfterRender
         }, this.koledarOptions);
         setTimeout(function () {
             self.ui.koledar.fullCalendar(options);
@@ -176,7 +177,10 @@ define([
         this.ui.koledar.fullCalendar('refetchEvents');
         this.ui.koledar.fullCalendar('refetchResources');
     };
-
+    
+    UrnikTSView.prototype.eventAfterRender = function (fcEvent, element, view) {
+        element.attr('title', fcEvent.title);
+    };
 
     /**
      * Funkcija določi resourceStart od katerega je event.

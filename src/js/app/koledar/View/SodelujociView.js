@@ -56,7 +56,9 @@ define([
 
         //kolekcije brez predpone predstavljajo možne alternacije/osebe med katerimi lahko izbiramo
         this.umetniki = new Alternacije();
+        this.umetniki.queryParams.uprizoritev = options.uprizoritev;
         this.tehniki = new Alternacije();
+        this.tehniki.queryParams.uprizoritev = options.uprizoritev;
 
         //dodamo atribut label, ker pričakujemo lookup osebe
         this.osebeColl.forEach(function (model) {
