@@ -21,8 +21,6 @@ define([
         Dogodki,
         Backgrid
         ) {
-    
-    var termini = {};
 
     var columns = [
         {
@@ -71,7 +69,10 @@ define([
     });
 
     IzbiraDogodkovView.prototype.initialize = function (options) {
-        this.dogodki = new Dogodki();
+        var Dog = Dogodki.extend({
+            view: 'mozniPoddogodki'
+        });
+        this.dogodki = new Dog();
         if (options && options.model) {
             //želimo pridobiti dogodke, ki se začnejo v času gosto vanja
             this.model = options.model;
@@ -101,16 +102,20 @@ define([
             var ids = [];
             ids = _.pluck(models, 'id');
 
-            var osebe = [];
+            var osebe = {};
             _.each(models, function (model) {
                 var ts = model.get('terminiStoritve');
                 _.each(ts, function (tsModel) {
-                    osebe.push(tsModel.id);
+                    osebe[tsModel.oseba.id] = true;
                 });
             });
-            
+
+            var osebeIds = _.map(osebe, function (oseba, key) {
+                return key;
+            });
+
             this.model.set('dogodki', ids);
-            this.model.set('sodelujoci', osebe);
+            this.model.set('sodelujoci', osebeIds);
             this.trigger('ready', this.model);
         } else {
             this.trigger('not:ready', this.model);
