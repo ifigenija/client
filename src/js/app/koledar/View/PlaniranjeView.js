@@ -180,55 +180,8 @@ define([
         view.on('skrij', self.onPreklici, self);
         self.dogodekR.show(view);
 
-        view.on('razmnozi', function () {
-
-            self.renderRazmnozi();
-        }, self);
     };
 
-
-    PlaniranjeView.prototype.renderRazmnozi = function () {
-
-        //console.log('ID dogodka: ', this.dogodekR.currentView.model.id );
-        var idDogodka = this.dogodekR.currentView.model.id;
-
-        console.log('Poskusi nalozit opcije rpc/options ...');
-
-        var rpc = new $.JsonRpcClient({
-            ajaxUrl: baseUrl + '/rpc/app/options'
-        });
-
-        rpc.call('getOptions', {'name': 'dogodek.delte'},
-        function (data) {
-            console.log('rpc call /rpc/app/options success');
-            console.log(data);
-        }, //success
-                function () {
-                    console.log('rpc call /rpc/app/options error');
-                } //error        
-        );
-
-        var razmnoziView = new RazmnoziView({
-            model: new Backbone.Model({
-                id: idDogodka,
-                dni: ["1", "2", "3", "4", "5", "6", "7"],
-                termini: [
-                    {kratica: "dop", ime: i18next.t('Dopoldan')},
-                    {kratica: "pop", ime: i18next.t('Popoldan')},
-                    {kratica: "zve", ime: i18next.t('Zvečer')}
-                ]
-            })
-        });
-
-        razmnoziView.on('preklici', function () {
-            this.dogodekR.empty();
-        }, this);
-        razmnoziView.on('save:success', function () {
-            console.log('shranjeno, posodobi dogodke');
-
-        }, this);
-        this.dogodekR.show(razmnoziView);
-    };
 
     PlaniranjeView.prototype.onZasedenost = function (model) {
         this.dogodekView = new Marionette.ItemView();

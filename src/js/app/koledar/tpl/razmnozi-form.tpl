@@ -41,7 +41,7 @@
       <thead>
       <tr>
       <th>{{t "vaja.razmnozi.terminDan"}}</th>
-      <th></th>
+      <th>Od (ura):</th>
       <th>{{t "vaja.razmnozi.ponedeljek"}}</th>
       <th>{{t "vaja.razmnozi.torek"}}</th>
       <th>{{t "vaja.razmnozi.sreda"}}</th>
@@ -58,7 +58,7 @@
       {{#each termini}}
       <tr> 
         <td>{{ime}}</td>
-        <td><div data-editors="time_{{kratica}}_from,time_{{kratica}}_to"></div></td>
+        <td><div data-editors="time_{{kratica}}"></div></td>
         {{#each ../dni}}
         <td>          
             <div data-editors="chk_{{../kratica}}_{{this}}"></div>

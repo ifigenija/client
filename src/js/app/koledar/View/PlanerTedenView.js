@@ -130,7 +130,7 @@ define([
      * @returns {undefined}
      */
     PlanerDanView.prototype.urediDogodek = function (model) {
-        console.log('urediDogodek');
+
         var razred = model.get('dogodek').razred;
         var TipDogodkaView = DogodekView, schema, tpl;
 

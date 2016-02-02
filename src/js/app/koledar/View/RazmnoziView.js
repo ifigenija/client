@@ -7,27 +7,26 @@ define([
     'i18next',
     'backbone',
     'marionette',
+    'moment',
     'app/Max/Module/Form',
     'app/Dokument/View/FormView',
-    'template!../tpl/razmnozi.tpl',
-    'template!../tpl/razmnozi-form.tpl'
+    'template!../tpl/razmnozi-form.tpl',
+    
+    'options!dogodek.termini'
 ], function (
         Radio,
         i18next,
         Backbone,
         Marionette,
+        moment,
         Form,
         FormView,
-        tpl,
-        formTpl
+        formTpl,
+        
+        termini
         ) {
     
-    
-    //var nacin_options = {
-    //    value1: "Hitri vnos" ,
-    //    value2: "Tedenski vnos" 
-    //};
-
+ 
     
     var RazmnoziView = FormView.extend({
        //template: tpl,
@@ -72,22 +71,22 @@ define([
 
             stevilo: {name: 'zacetek', type: 'Text', editorAttrs:{} },
           
-            time_dop_from: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
-            time_dop_to:   { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
+            time_dop: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
 
-            time_pop_from: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
-            time_pop_to:   { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
 
-            time_zve_from: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
-            time_zve_to:   { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}}
+            time_pop: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
+
+
+            time_zve: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}}
+
 
         },
        
         triggers: {
             'click .btnTedenski': 'show:tedenski',
             'click .btnHitri':    'show:hitri'    
-        },     
-        
+        },
+                
        formTemplate: formTpl,
        buttons: FormView.prototype.defaultButtons
        
@@ -149,10 +148,10 @@ define([
     };
     
     RazmnoziView.prototype.onBeforeShrani = function (options) {
-        console.log('onBeforeShrani');
+       // console.log('onBeforeShrani');
        
         
-        var ok = true; //future checkes
+        var ok = true; //not implemented
         
         if (!this.form.commit()) {
             
@@ -167,7 +166,7 @@ define([
     
     RazmnoziView.prototype.onShrani = function (options) {
         
-        console.log('onShrani');
+        //console.log('onShrani');
         
         if(this.checkBeforeSave) {
             this.onBeforeShrani(options);
@@ -176,13 +175,7 @@ define([
         }
         
         
-        
-        /*
-        Radio.channel('error').command('flash', {
-                    message: 'AAAAAA Shranjeno',
-                    severity: 'success'
-                });
-        */
+       
     };
     
     /**
@@ -192,9 +185,9 @@ define([
     RazmnoziView.prototype.shrani = function () {
         var self = this;
         
-        console.log('shrani');
+        //console.log('shrani');
         
-        var get_termini_fn = function(m) {
+        var get_termini_fn = function(model) {
             var data = [];
             var key, i, terminiVDnevu = ['dop', 'pop', 'zve'];
             
@@ -202,7 +195,7 @@ define([
                 for(i in terminiVDnevu) {
                     key = "chk_"+ terminiVDnevu[i] +"_"+ dan;
                     // za debug checkboxov// console.log(key, m.get(key));
-                    if(m.get(key) == true) {
+                    if(model.get(key) == true) {
                         if(!data[dan]) {data[dan] = []}; //init array row
                         data[dan][terminiVDnevu[i]] = 1;
                     }
@@ -213,28 +206,38 @@ define([
             return data;
         };
         
+        var get_casi_pricetka_fn = function(model) {
+            
+            
+            var data = {
+                dop: model.get('time_dop'),
+                pop: model.get('time_pop'),
+                zve: model.get('time_zve')
+            };
+            
+            return data;
+        }
+        
         if (!this.form.commit()) {
             console.log('After commit, prepare object for RPC Call');
             
             this.callObject = {
                 id: this.model.get('id'),  //id_dogodka
                 zacetek: this.model.get('zacetek'),
-                konec: this.model.get('konec'),
-                ura_od: '10:00',
-                ura_do: '14:00',
+                konec: moment(this.model.get('konec')).endOf('day').toISOString(),
+                casi_pricetka: get_casi_pricetka_fn(this.model),
                 termini: get_termini_fn(this.model),
                 upostevaj_praznike: this.model.get('upostevaj_praznike'),
                 upostevaj_sobote: this.model.get('upostevaj_sobote'), //ce bo to aktualno
                 upostevaj_nedelje: this.model.get('upostevaj_nedelje'), //ce bo to aktualno
-                stevilo_vaj: this.model.get('stevilo_vaj'), //ce bo to aktualno
+                stevilo_vaj: this.model.get('stevilo_vaj') //ce bo to aktualno
             }
             
       
-            console.group('Model:');console.dir(this.model);console.groupEnd();
+            //console.group('Model:');console.dir(this.model);console.groupEnd();
             
             console.group('Call object:');console.dir(this.callObject);console.groupEnd();
             
-            console.trace();
             
             //ure za termina dop,pop,zve, kot 10h-14
             //tedenski vnos: zakrij upoštevajsobote in upoštevaj nedelje

@@ -18,7 +18,8 @@ define([
     './RazmnoziView',
     'formSchema!dogodek',
     'template!../tpl/dogodek-dok.tpl',
-    'template!../tpl/dogodek-form.tpl'
+    'template!../tpl/dogodek-form.tpl',
+    'options!dogodek.termini'
 ], function (
         Radio,
         moment,
@@ -36,7 +37,8 @@ define([
         RazmnoziView,
         schemaDogodek,
         dokumentTpl,
-        dogodekTpl
+        dogodekTpl,
+        termini
         ) {
     /**
      * Vsi tabi, ki se bodo uporabilo, ko bo model imel id
@@ -381,6 +383,23 @@ define([
     };
 
     DogodekView.prototype.onRazmnozi = function (options) {
+        
+        var to_hours_minutes = function(terminObj) {
+            
+            var h = ('00'+terminObj.h).substr(-2);
+            var m = ('00'+terminObj.m).substr(-2);
+            return h + ':' + m;
+        }
+        
+        var add_day = function( adate ) {
+            
+            var nextDay = moment(adate).add(1, 'day').startOf('day');
+
+            //console.log( moment(nextDay).toISOString() );
+            
+            return nextDay;
+        }
+        
         var razmnoziView = new RazmnoziView({
             model: new Backbone.Model({
                 id: this.model.get('id'),
@@ -389,9 +408,17 @@ define([
                     {kratica: "dop", ime: i18next.t('Dopoldan')},
                     {kratica: "pop", ime: i18next.t('Popoldan')},
                     {kratica: "zve", ime: i18next.t('Zvečer')}
-                ]
+                ],
+                time_dop: to_hours_minutes(termini.dopoldanZacetek),
+                time_pop: to_hours_minutes(termini.popoldanZacetek),
+                time_zve: to_hours_minutes(termini.vecerZacetek),
+                
+                zacetek: add_day(this.model.get('zacetek'))
+                
             })
         });
+        
+        //console.log('termini', termini);
 
         razmnoziView.on('preklici', function () {
             this.koledarR.empty();
