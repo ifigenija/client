@@ -53,7 +53,7 @@ define([
                 };
             } else {
                 var coll = options.coll;
-                var tsModel = coll.findWhere({'id': model.get('tsId')});
+                var tsModel = coll.findWhere({'id': model.get('tsId')}).attributes;
             }
             modeli.push(tsModel);
         });

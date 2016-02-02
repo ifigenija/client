@@ -7113,6 +7113,12 @@ Licenca GPLv3
   margin-right: 5px;
   display: inline-block;
 }
+.sodelujoci .region-toolbar {
+  display: inline-block;
+}
+.sodelujoci .naslov {
+  display: inline-block;
+}
 .background-event {
   opacity: 0.5;
 }

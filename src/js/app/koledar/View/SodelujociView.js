@@ -6,6 +6,7 @@ define([
     'radio',
     'i18next',
     'app/bars',
+    'underscore',
     'marionette',
     'jquery',
     '../Model/TerminiStoritve',
@@ -19,6 +20,7 @@ define([
         Radio,
         i18next,
         Handlebars,
+        _,
         Marionette,
         $,
         TerminiStoritve,
@@ -178,7 +180,7 @@ define([
         //funkcija, ki jo prožimo ko kliknemo gumb uredi pri umetnikih
         var uredi = function ($el) {
             self.razdeliTS(self.tsColl);
-            
+
             this.urediSeznam({
                 itsIzbrani: this.itsUmetniki,
                 izbrani: this.iUmetniki,
@@ -350,9 +352,38 @@ define([
                 dezurni: options.dezurni || false,
                 coll: this.tsColl
             });
-            
+
+            //poskrbimo da izbrišemo samo termine od oseb, ki niso povabljene na dogodek
+            //preveri kako se obnaša pri več alternacijah z isto osebo
+            var polje = [];
+            options.itsIzbrani.each(function (model) {
+                var pusti = false;
+                for (var k in tsModeli) {
+                    var tsm = tsModeli[k];
+                    if (tsm && tsm.oseba) {
+                        var osebaId = tsModeli[k].oseba.id;
+                        var oId = model.get('oseba').id;
+                    }
+                    if (tsm && tsm.alternacija) {
+                        var alterId = tsModeli[k].alternacija.id;
+                        var aId = model.get('alternacija').id;
+                    }
+
+                    if (osebaId === oId && alterId === aId) {
+                        pusti = true;
+                        break;
+                    } else if (osebaId === oId && tsModeli[k].alternacija === null) {
+                        pusti = true;
+                        break;
+                    }
+                }
+                if (!pusti) {
+                    polje.push(model);
+                }
+            });
+
             //odstrani vse prej dodane termine storitve in dodana samo tiste ki smo jih izbrali
-            self.tsColl.remove(options.itsIzbrani.models);
+            self.tsColl.remove(polje);
             self.tsColl.add(tsModeli);
             var terminiStoritve = self.tsColl.toJSON();
             self.azurirajTsDogodka(self.dogodek.get('id'), terminiStoritve);
@@ -391,12 +422,17 @@ define([
         }
     };
     SodelujociView.prototype.azurirajTsDogodka = function (dogodekId, terminiStoritve) {
+        var tsji = _.map(terminiStoritve, function (object) {
+            object['dogodek'] = object.dogodek.id;
+            return object;
+        });
+
         var self = this;
-        
+
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/dogodek'});
         rpc.call('azurirajTSDogodka', {
             'dogodekId': dogodekId,
-            'terminiStoritev': terminiStoritve
+            'terminiStoritev': tsji
         }, function () {
             self.tsColl.queryParams.dogodek = dogodekId;
 
@@ -407,7 +443,9 @@ define([
                 error: Radio.channel('error').request('handler', 'xhr')
             });
 
-        }, Radio.channel('error').request('handler', 'flash'));
+        }, function (error) {
+            console.log(error);
+        });
     };
 
     SodelujociView.prototype.onRazdeljenTS = function () {

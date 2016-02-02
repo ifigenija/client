@@ -124,6 +124,7 @@
         "brisi": "Briši",
         "uredi": "Uredi",
         "potrdi": "Potrdi",
+        "razdeli": "Razdeli",
         "potrdiIzbris": "Ali res želite izbrisati podatek?",
         "izberi": "Izberi",
         "preklici": "Prekliči",
@@ -188,6 +189,7 @@
         "uprizoritev": "Uprizoritev",
         "izbiraOseb": "Izbira oseb",
         "vnosNaslova": "Predmet dogodka",
+        "nedoloceno": "Nedoločeno",
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",

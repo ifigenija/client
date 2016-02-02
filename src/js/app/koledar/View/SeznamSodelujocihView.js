@@ -3,6 +3,7 @@
  */
 
 define([
+    'i18next',
     'backbone',
     'moment',
     'underscore',
@@ -10,17 +11,16 @@ define([
     'marionette',
     'app/Max/View/Toolbar',
     'template!../tpl/seznamSodelujoci.tpl',
-    '../Model/TerminiStoritve',
     'bootstrap'
 ], function (
+        i18next,
         Backbone,
         moment,
         _,
         Handlebars,
         Marionette,
         Toolbar,
-        sodelujociTpl,
-        TerminiStoritve
+        sodelujociTpl
         ) {
 
     var Popover = Marionette.LayoutView.extend({
@@ -61,11 +61,10 @@ define([
 
             this.ui.sodelujoc.popover({
                 html: true,
-                title: 'this.Header',
-                content: popover.el || "",
-                placement: 'bottom' || "bottom",
-                trigger: this.Trigger || "click",
-                delay: this.Delay || 0
+                title: i18next.t('std.uredi'),
+                content: popover.el,
+                placement: 'bottom',
+                trigger: "click"
             });
         }
     });
@@ -122,7 +121,7 @@ define([
         }
     });
     var SeznamSodelujocihView = Marionette.LayoutView.extend({
-        className: '',
+        className: 'seznam-sodelujocih',
         template: sodelujociTpl,
         naslov: 'Naslov',
         regions: {
