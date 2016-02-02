@@ -128,7 +128,14 @@ define([
                         self.collection.queryParams.oseba = self.osebe.pluck('id');
                         self.collection.fetch({
                             success: function (coll) {
-                                coll.remove(coll.where({dogodek: self.dogodek.get('id')}));
+                                var odstrani = [];
+                                coll.each(function(model){
+                                    if(model.get('dogodek').id === self.dogodek.get('id')){
+                                        odstrani.push(model);
+                                    }
+                                });
+                                
+                                coll.remove(odstrani);
                                 callback(coll.getEventObjects());
                             },
                             error: Radio.channel('error').request('handler', 'xhr')

@@ -111,7 +111,7 @@ define([
                     success: function (collection) {
                         var resources = collection.getResources();
                         resources.push({
-                            label: i18next.t('std.neuvrsceni'),
+                            label: i18next.t('std.nedoloceno'),
                             id: '0'
                         });
                         callback(resources);
@@ -126,7 +126,14 @@ define([
                         self.collection.queryParams.konec = konec.format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
                         self.collection.fetch({
                             success: function (coll) {
-                                coll.remove(coll.where({id: self.dogodek.get('id')}));
+                                var odstrani = [];
+                                coll.each(function(model){
+                                    if(model.get('id') === self.dogodek.get('id')){
+                                        odstrani.push(model);
+                                    }
+                                });
+                                
+                                coll.remove(odstrani);
                                 callback(coll.getEventObjects());
                             },
                             error: Radio.channel('error').request('handler', 'xhr')

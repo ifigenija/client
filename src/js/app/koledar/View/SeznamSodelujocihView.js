@@ -3,7 +3,9 @@
  */
 
 define([
+    'i18next',
     'backbone',
+    'moment',
     'underscore',
     'app/bars',
     'marionette',
@@ -11,7 +13,9 @@ define([
     'template!../tpl/seznamSodelujoci.tpl',
     'bootstrap'
 ], function (
+        i18next,
         Backbone,
+        moment,
         _,
         Handlebars,
         Marionette,
@@ -21,19 +25,12 @@ define([
 
     var Popover = Marionette.LayoutView.extend({
         template: Handlebars.compile('<a class="btn btn-default gumb-razdeli">{{t "std.razdeli" }}</a><a class="btn btn-default gumb-brisi">{{t "std.brisi" }}</a>'),
-        triggers:{
-            'click .gumb-brisi' : 'brisi',
-            'click .gumb-razdeli' : 'razdeli'
+        triggers: {
+            'click .gumb-brisi': 'brisi',
+            'click .gumb-razdeli': 'razdeli'
         },
-        initialize: function(options){
+        initialize: function (options) {
             this.model = options.model;
-        },
-        onBrisi: function(){
-            this.model.destroy();
-            console.log('brisi');
-        },
-        onRazdeli: function(){
-            console.log('razdeli');
         }
     });
 
@@ -55,13 +52,19 @@ define([
             });
             popover.render();
 
+            popover.on('brisi', function () {
+                this.trigger('brisi');
+            }, this);
+            popover.on('razdeli', function () {
+                this.trigger('razdeli');
+            }, this);
+
             this.ui.sodelujoc.popover({
                 html: true,
-                title: 'this.Header',
-                content: popover.el || "",
-                placement: 'bottom' || "bottom",
-                trigger: this.Trigger || "click",
-                delay: this.Delay || 0
+                title: i18next.t('std.uredi'),
+                content: popover.el,
+                placement: 'bottom',
+                trigger: "click"
             });
         }
     });
@@ -71,10 +74,54 @@ define([
         childView: SodelujocView,
         initialize: function (options) {
             this.childView = options.childView || this.childView;
+            this.podrocja = options.podrocja;
+        },
+        onChildviewBrisi: function (child) {
+            child.model.destroy();
+        },
+        onChildviewRazdeli: function (child) {
+            var model = child.model;
+            var novModel = model.clone();
+
+            var zacetek = moment(model.get('planiranZacetek'));
+            var konec = moment(model.get('planiranKonec'));
+            var uk = konec.unix();
+            var uz = zacetek.unix();
+            var pol = (uk - uz) / 2;
+            var polovica = moment(zacetek).add(pol, 'second').toISOString();
+
+            model.set('planiranKonec', polovica);
+            novModel.set('planiranZacetek', polovica);
+            novModel.set('planiranKonec', konec.toISOString());
+            novModel.set('id', null);
+
+            this.collection.add(novModel);
+            this.collection.add(model);
+
+            this.trigger('razdeljen:TS');
+        },
+        addChild: function (child, ChildView, index) {
+            var podrocje = child.get('alternacija.funkcija.tipFunkcije.podrocje');
+
+            for (var key in this.podrocja) {
+                if (this.podrocja[key] === podrocje) {
+                    Marionette.CollectionView.prototype.addChild.apply(this, arguments);
+                    break;
+                } else if (child.get('sodelujoc') && this.podrocja[key] === 'sodelujoc') {
+                    Marionette.CollectionView.prototype.addChild.apply(this, arguments);
+                    break;
+                } else if (child.get('gost') && this.podrocja[key] === 'gost') {
+                    Marionette.CollectionView.prototype.addChild.apply(this, arguments);
+                    break;
+                } else if (child.get('dezurni') && this.podrocja[key] === 'dezurni') {
+                    Marionette.CollectionView.prototype.addChild.apply(this, arguments);
+                    break;
+                }
+            }
         }
     });
     var SeznamSodelujocihView = Marionette.LayoutView.extend({
-        className: '',
+        className: 'seznam-sodelujocih',
         template: sodelujociTpl,
         naslov: 'Naslov',
         regions: {
@@ -98,6 +145,7 @@ define([
         this.collection = options.collection || new Backbone.Collection();
         this.naslov = options.naslov || this.naslov;
         this.childView = options.childView || this.childView;
+        this.podrocja = options.podrocja || this.podrocja;
     };
     /**
      * 
@@ -135,8 +183,13 @@ define([
     SeznamSodelujocihView.prototype.renderSodelujoci = function () {
         var sodelujociView = new SodelujociView({
             collection: this.collection,
-            childView: this.childView
+            childView: this.childView,
+            podrocja: this.podrocja
         });
+
+        sodelujociView.on('razdeljen:TS', function () {
+            this.trigger('razdeljen:TS');
+        }, this);
 
         this.sodelujociR.show(sodelujociView);
     };
