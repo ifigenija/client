@@ -9,7 +9,8 @@ define([
     'marionette',
     'jquery',
     '../Model/TerminiStoritve',
-    '../Model/Alternacije',
+    '../Model/PlaniraneAlternacije',
+    '../Model/Osebe',
     './SeznamSodelujocihView',
     './UrnikTSView',
     'app/filter/View/DualListView',
@@ -22,6 +23,7 @@ define([
         $,
         TerminiStoritve,
         Alternacije,
+        Osebe,
         SeznamSodelujocihView,
         UrnikTSView,
         DualListView,
@@ -34,7 +36,9 @@ define([
         regions: {
             umetnikiR: '.region-umetniki-sodelujoci',
             tehnikiR: '.region-tehniki-sodelujoci',
-            ostaliR: '.region-ostali-sodelujoci',
+            sodelujociR: '.region-sodelujoci-sodelujoci',
+            gostiR: '.region-gosti-sodelujoci',
+            dezurniR: '.region-dezurni-sodelujoci',
             koledarR: '.region-koledar-sodelujoci'
         }
     });
@@ -45,22 +49,47 @@ define([
      * @returns {undefined}
      */
     SodelujociView.prototype.initialize = function (options) {
-        this.alternacijeColl = options.alternacije;
-        this.osebeColl = options.osebe;
+        this.alternacijeColl = options.alternacije || new Alternacije();
         this.dogodek = options.dogodek;
 
         //its kolekcije predstavljajo izbrane termine storitve
         this.itsUmetniki = new TerminiStoritve();
         this.itsTehniki = new TerminiStoritve();
-        this.itsOstali = new TerminiStoritve();
+        this.itsSodelujoci = new TerminiStoritve();
+        this.itsGosti = new TerminiStoritve();
+        this.itsDezurni = new TerminiStoritve();
+
+        this.iUmetniki = new Alternacije();
+        this.iTehniki = new Alternacije();
+        this.iSodelujoci = new Osebe();
+        this.iGosti = new Osebe();
+        this.iDezurni = new Osebe();
+
+        this.itsUmetniki.on('remove', function () {
+            this.iUmetniki.reset(this.itsUmetniki.toAlternacije());
+        }, this);
+        this.itsTehniki.on('remove', function () {
+            this.iTehniki.reset(this.itsTehniki.toAlternacije());
+        }, this);
+        this.itsSodelujoci.on('remove', function () {
+            this.iSodelujoci.reset(this.itsSodelujoci.toOsebe());
+        }, this);
+        this.itsGosti.on('remove', function () {
+            this.iGosti.reset(this.itsGosti.toOsebe());
+        }, this);
+        this.itsDezurni.on('remove', function () {
+            this.iDezurni.reset(this.itsDezurni.toOsebe());
+        }, this);
 
         //kolekcije brez predpone predstavljajo možne alternacije/osebe med katerimi lahko izbiramo
         this.umetniki = new Alternacije();
         this.umetniki.queryParams.uprizoritev = options.uprizoritev;
         this.tehniki = new Alternacije();
         this.tehniki.queryParams.uprizoritev = options.uprizoritev;
-        
-        this.ostali = this.osebeColl;
+
+        this.sodelujoci = options.osebe;
+        this.gosti = options.osebe;
+        this.dezurni = options.osebe;
 
         this.razdeliAlternacije();
     };
@@ -73,7 +102,9 @@ define([
 
         terminiS.add(this.itsUmetniki.toJSON());
         terminiS.add(this.itsTehniki.toJSON());
-        terminiS.add(this.itsOstali.toJSON());
+        terminiS.add(this.itsSodelujoci.toJSON());
+        terminiS.add(this.itsGosti.toJSON());
+        terminiS.add(this.itsDezurni.toJSON());
 
         return terminiS.getUrejenTS(this.tsColl);
     };
@@ -90,17 +121,25 @@ define([
         this.itsUmetniki.reset();
         this.itsUmetniki.add(tsPodrocja.umetnik);
         this.itsUmetniki.add(tsPodrocja.igralec);
-        this.iUmetniki = this.itsUmetniki.toAlternacije(this.umetniki);
+        this.iUmetniki.reset(this.itsUmetniki.toAlternacije());
 
         this.itsTehniki.reset();
         this.itsTehniki.add(tsPodrocja.tehnik);
         this.itsTehniki.add(tsPodrocja.inspicient);
         this.itsTehniki.add(tsPodrocja.sepetalec);
-        this.iTehniki = this.itsTehniki.toAlternacije(this.tehniki);
+        this.iTehniki.reset(this.itsTehniki.toAlternacije());
 
-        this.itsOstali.reset();
-        this.itsOstali.add(tsPodrocja.ostali);
-        this.iOstali = this.itsOstali.toOsebe();
+        this.itsSodelujoci.reset();
+        this.itsSodelujoci.add(tsPodrocja.sodelujoci);
+        this.iSodelujoci.reset(this.itsSodelujoci.toOsebe());
+
+        this.itsGosti.reset();
+        this.itsGosti.add(tsPodrocja.gosti);
+        this.iGosti.reset(this.itsGosti.toOsebe());
+
+        this.itsDezurni.reset();
+        this.itsDezurni.add(tsPodrocja.dezurni);
+        this.iDezurni.reset(this.itsDezurni.toOsebe());
     };
     /**
      * V tej funkciji inicializiramo 2 kolekciji ki predstavljajo alternacije umetnikov in tehnikov,
@@ -121,6 +160,17 @@ define([
         this.tehniki.add(modeli.sepetalec);
 
     };
+    /**
+     * Funkcija se overrida da dosežemo različne načine izrisa sodelujočih
+     * @returns {undefined}
+     */
+    SodelujociView.prototype.renderiraj = function () {
+        this.renderUmetniki();
+        this.renderTehnika();
+        this.renderSodelujoci();
+        this.renderGosti();
+        this.renderDezurni();
+    };
     SodelujociView.prototype.onRender = function () {
         var self = this;
         this.tsColl = new TerminiStoritve();
@@ -129,13 +179,12 @@ define([
         this.tsColl.fetch({
             success: function (collection) {
                 self.razdeliTS(collection);
-                self.renderUmetniki();
-                self.renderTehnika();
-                self.renderOstali();
+                self.renderiraj();
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
     };
+
     /**
      * Izris seznam izbranih umetnikov
      * @returns {undefined}
@@ -184,41 +233,79 @@ define([
     };
 
     /**
-     * Izris seznam izbranih gostov/dežurnih/sodelujoči
+     * Izris seznam izbranih gostov
      * @returns {undefined}
      */
-    SodelujociView.prototype.renderOstali = function () {
-        //funkcija, ki jo prožimo ko kliknemo gumb uredi pri ostalih
+    SodelujociView.prototype.renderSodelujoci = function () {
+        //funkcija, ki jo prožimo ko kliknemo gumb uredi pri sodelujocih
         var uredi = function ($el) {
             this.urediSeznam({
-                izbraniTS: this.itsOstali,
-                izbrani: this.iOstali,
-                mozni: this.ostali,
+                izbraniTS: this.itsSodelujoci,
+                izbrani: this.iSodelujoci,
+                mozni: this.sodelujoci,
                 $el: $el,
                 tpl: Handlebars.compile('{{polnoIme}}'),
-                gost: this.options.gost,
-                dezurni: this.options.dezurni,
-                sodelujoc: this.options.sodelujoc
+                sodelujoc: true
             });
         };
 
-        var naslov, razred = this.dogodek.get('razred');
-        switch (razred) {
-            case '100s':
-                naslov = i18next.t('terminStoritve.dezurni');
-                break;
-            case '200s':
-                naslov = i18next.t('terminStoritve.gosti');
-                break;
-        }
-
-        this.ostaliView = this.renderSeznam({
-            collection: this.itsOstali,
-            naslov: naslov,
+        this.sodelujociView = this.renderSeznam({
+            collection: this.itsSodelujoci,
+            naslov: i18next.t('terminStoritve.sodelujoci'),
             uredi: uredi
         });
 
-        this.ostaliR.show(this.ostaliView);
+        this.sodelujociR.show(this.sodelujociView);
+    };
+    /**
+     * Izris seznam izbranih gostov
+     * @returns {undefined}
+     */
+    SodelujociView.prototype.renderGosti = function () {
+        //funkcija, ki jo prožimo ko kliknemo gumb uredi pri gostih
+        var uredi = function ($el) {
+            this.urediSeznam({
+                izbraniTS: this.itsGosti,
+                izbrani: this.iGosti,
+                mozni: this.gosti,
+                $el: $el,
+                tpl: Handlebars.compile('{{polnoIme}}'),
+                gost: true
+            });
+        };
+
+        this.gostiView = this.renderSeznam({
+            collection: this.itsGosti,
+            naslov: i18next.t('terminStoritve.gosti'),
+            uredi: uredi
+        });
+
+        this.gostiR.show(this.gostiView);
+    };
+    /**
+     * Izris seznam izbranih dezurni
+     * @returns {undefined}
+     */
+    SodelujociView.prototype.renderDezurni = function () {
+        //funkcija, ki jo prožimo ko kliknemo gumb uredi pri dezurnih
+        var uredi = function ($el) {
+            this.urediSeznam({
+                izbraniTS: this.itsDezurni,
+                izbrani: this.iDezurni,
+                mozni: this.dezurni,
+                $el: $el,
+                tpl: Handlebars.compile('{{polnoIme}}'),
+                dezurni: true
+            });
+        };
+
+        this.dezurniView = this.renderSeznam({
+            collection: this.itsDezurni,
+            naslov: i18next.t('terminStoritve.dezurni'),
+            uredi: uredi
+        });
+
+        this.dezurniR.show(this.dezurniView);
     };
 
     /**
@@ -278,24 +365,8 @@ define([
             options.izbraniTS.reset(tsModeli);
             var terminiStoritve = self.getTS();
             terminiStoritve = terminiStoritve.toJSON();
-
-            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/dogodek'});
-            rpc.call('azurirajTSDogodka', {
-                'dogodekId': self.dogodek.get('id'),
-                'terminiStoritev': terminiStoritve
-            }, function () {
-                self.tsColl.queryParams.dogodek = self.dogodek.get('id');
-
-                self.tsColl.fetch({
-                    success: function (coll) {
-                        self.razdeliTS(coll);
-                    },
-                    error: Radio.channel('error').request('handler', 'xhr')
-                });
-
-            }, function (error) {
-                console.log(error);
-            });
+            
+            self.azurirajTsDogodka(self.dogodek.get('id'), terminiStoritve);
         }, this);
 
         view.render();
@@ -318,16 +389,36 @@ define([
 
             urnikTSView.on('zapri:urnik', function () {
                 this.koledarR.empty();
-                this.renderUmetniki();
-                this.renderTehnika();
-                this.renderOstali();
+                this.renderiraj();
             }, this);
 
             this.koledarR.show(urnikTSView);
             this.umetnikiR.empty();
             this.tehnikiR.empty();
-            this.ostaliR.empty();
+            this.sodelujociR.empty();
+            this.gostiR.empty();
+            this.dezurniR.empty();
         }
     };
+    SodelujociView.prototype.azurirajTsDogodka = function (dogodekId, terminiStoritve) {
+        var self = this;
+
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/dogodek'});
+        rpc.call('azurirajTSDogodka', {
+            'dogodekId': dogodekId,
+            'terminiStoritev': terminiStoritve
+        }, function () {
+            self.tsColl.queryParams.dogodek = dogodekId;
+
+            self.tsColl.fetch({
+                success: function (coll) {
+                    self.razdeliTS(coll);
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+
+        }, Radio.channel('error').request('handler', 'flash'));
+    };
+
     return SodelujociView;
 });

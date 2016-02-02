@@ -9,7 +9,7 @@ define([
     '../../Model/Dogodki',
     './WizardView',
     './IzbiraProstoraView',
-    './IzbiraOstaliView',
+    './IzbiraSodelujociView',
     './VnosNaslovCasView'
 ], function (
         Radio,
@@ -17,7 +17,7 @@ define([
         Dogodki,
         WizardView,
         IzbiraProstoraView,
-        IzbiraOstaliView,
+        IzbiraSodelujociView,
         VnosNaslovCasView
         ) {
 
@@ -25,7 +25,7 @@ define([
         views: [
             VnosNaslovCasView,
             IzbiraProstoraView,
-            IzbiraOstaliView
+            IzbiraSodelujociView
         ],
         callback: function (model) {
             var self = this;

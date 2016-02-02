@@ -47,23 +47,23 @@ define([
                     case '100s':
                         url += getPartOfUrl(this.get('alternacije'), 'alternacija');
                         var niz = getPartOfUrl(this.get('dezurni'), 'dezurni');
-                        var niz = getPartOfUrl(this.get('ostali'), 'gost');
+                        var niz = getPartOfUrl(this.get('gosti'), 'gost');
                         url += niz ? '&' + niz : '';
                         break;
                     case '200s':
                         url += getPartOfUrl(this.get('alternacije'), 'alternacija');
-                        var niz = getPartOfUrl(this.get('ostali'), 'gost');
+                        var niz = getPartOfUrl(this.get('gosti'), 'gost');
                         url += niz ? '&' + niz : '';
                         break;
                     case '300s':
-                        url += getPartOfUrl(this.get('ostali'), 'sodelujoc');
+                        url += getPartOfUrl(this.get('sodelujoci'), 'sodelujoc');
                         break;
                     case '400s':
-                        url += getPartOfUrl(this.get('ostali'), 'sodelujoc');
+                        url += getPartOfUrl(this.get('sodelujoci'), 'sodelujoc');
                         break;
                     case '600s':
                         url += getPartOfUrl(this.get('dogodki'), 'dogodek');
-                        url += getPartOfUrl(this.get('ostali'), 'sodelujoc');
+                        url += getPartOfUrl(this.get('sodelujoci'), 'sodelujoc');
                         break;
                 }
 

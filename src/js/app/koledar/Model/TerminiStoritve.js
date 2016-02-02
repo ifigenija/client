@@ -11,7 +11,7 @@ define([
     'moment',
     'underscore',
     'app/Max/Model/MaxPageableCollection',
-    './Alternacije',
+    './PlaniraneAlternacije',
     './Osebe',
     'deep-model'
 ], function (
@@ -95,11 +95,21 @@ define([
                 }
 
                 object[podrocje].push(model);
-            } else {
-                if (!object['ostali']) {
-                    object['ostali'] = [];
+            } else if(model.get('sodelujoc')){
+                if (!object['sodelujoci']) {
+                    object['sodelujoci'] = [];
                 }
-                object['ostali'].push(model);
+                object['sodelujoci'].push(model);
+            } else if(model.get('dezurni')){
+                if (!object['dezurni']) {
+                    object['dezurni'] = [];
+                }
+                object['dezurni'].push(model);
+            } else if(model.get('gost')){
+                if (!object['gosti']) {
+                    object['gosti'] = [];
+                }
+                object['gosti'].push(model);
             }
         });
 
@@ -107,7 +117,7 @@ define([
     };
 
     Collection.prototype.toOsebe = function () {
-        var osebeColl = this.osebe = new Osebe();
+        var osebeColl = [];
 
         var models = this.models;
         for (var id in models) {
@@ -118,9 +128,9 @@ define([
 
                 if (_.isObject(oseba)) {
                     oseba['polnoIme'] = oseba.label;
-                    osebeColl.add(oseba);
+                    osebeColl.push(oseba);
                 } else {
-                    osebeColl.add({id: oseba});
+                    osebeColl.push({id: oseba});
                 }
             }
         }
@@ -128,7 +138,7 @@ define([
         return osebeColl;
     };
     Collection.prototype.toAlternacije = function () {
-        var alterColl = this.alternacije = new Alternacije();
+        var alterColl = [];
 
         var models = this.models;
         for (var id in models) {
@@ -138,9 +148,9 @@ define([
             alter['funkcija'].label = model.get('alternacija.funkcija.naziv');
             if (alter) {
                 if (_.isObject(alter)) {
-                    alterColl.add(alter);
+                    alterColl.push(alter);
                 } else {
-                    alterColl.add({id: alter});
+                    alterColl.push({id: alter});
                 }
             }
         }

@@ -7,14 +7,13 @@ define([
     'i18next',
     'backbone',
     'app/Max/View/Confirm',
-    'app/koledar/Model/Alternacije',
+    'app/koledar/Model/PlaniraneAlternacije',
     'app/koledar/Model/Dogodki',
     '../Model/Osebe',
     'app/Max/View/TabControl',
     'app/Dokument/View/DokumentView',
     'app/Zapisi/View/ZapisiLayout',
     './SodelujociView',
-    './SodelujociOsebeView',
     './UrnikProstorView',
     './RazmnoziView',
     'formSchema!dogodek',
@@ -33,7 +32,6 @@ define([
         DokumentView,
         ZapisiLayout,
         SodelujociView,
-        SodelujociOsebeView,
         UrnikProstorView,
         RazmnoziView,
         schemaDogodek,
@@ -274,22 +272,48 @@ define([
         var dogodek = new Dogodki.prototype.model(this.model.get('dogodek'));
         var osebe = new Osebe();
 
-        var gost, dezurni, sodelujoc;
+        var SodView = SodelujociView;
         var razred = dogodek.get('razred');
         switch (razred) {
             case '100s':
-                dezurni = true;
+                SodView = SodelujociView.extend({
+                    renderiraj: function () {
+                        this.renderUmetniki();
+                        this.renderTehnika();
+                        this.renderSodelujoci();
+                        this.renderDezurni();
+                    }
+                });
                 break;
             case '200s':
-                gost = true;
+                SodView = SodelujociView.extend({
+                    renderiraj: function () {
+                        this.renderUmetniki();
+                        this.renderTehnika();
+                        this.renderGosti();
+                    }
+                });
                 break;
             case '300s':
+                SodView = SodelujociView.extend({
+                    renderiraj: function () {
+                        this.renderSodelujoci();
+                    }
+                });
                 break;
             case '400s':
-                sodelujoc = true;
+                SodView = SodelujociView.extend({
+                    renderiraj: function () {
+                        this.renderSodelujoci();
+                    }
+                });
                 break;
             case '600s':
-                sodelujoc = true;
+                SodView = SodelujociView.extend({
+                    renderiraj: function () {
+                        this.renderSodelujoci();
+                    }
+                });
                 break;
         }
         //pridobimo kolekcijo oseb
@@ -302,26 +326,20 @@ define([
                     alternacije.queryParams.uprizoritev = uprizoritev;
                     alternacije.fetch({
                         success: function (col) {
-                            var view = new SodelujociView({
+                            var view = new SodView({
                                 alternacije: col,
                                 osebe: kol,
                                 uprizoritev: uprizoritev,
-                                dogodek: dogodek,
-                                gost: gost,
-                                dezurni: dezurni,
-                                sodelujoc: sodelujoc
+                                dogodek: dogodek
                             });
                             self.detailR.show(view);
                         },
                         error: Radio.channel('error').request('handler', 'flash')
                     });
                 } else {
-                    var view = new SodelujociOsebeView({
+                    var view = new SodView({
                         osebe: kol,
-                        dogodek: dogodek,
-                        gost: gost,
-                        dezurni: dezurni,
-                        sodelujoc: sodelujoc
+                        dogodek: dogodek
                     });
                     self.detailR.show(view);
                 }

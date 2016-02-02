@@ -8,20 +8,18 @@ define([
     'baseUrl',
     'backbone',
     'app/Max/Model/MaxPageableCollection',
-    './Osebe',
     'deep-model'
 ], function (
         baseUrl,
         Backbone,
-        Collection,
-        Osebe
+        Collection
         ) {
 
     var Model = Backbone.DeepModel.extend({
-        urlRoot: baseUrl + '/rest/alternacija'
+        urlRoot: baseUrl + '/rest/alternacija/planirane'
     });
     var Collection = Collection.extend({
-        url: baseUrl + '/rest/alternacija',
+        url: baseUrl + '/rest/alternacija/planirane',
         model: Model,
         mode: "server"
     });

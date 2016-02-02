@@ -8,7 +8,8 @@ define([
     'app/bars',
     'marionette',
     'app/Max/View/Toolbar',
-    'template!../tpl/seznamSodelujoci.tpl'
+    'template!../tpl/seznamSodelujoci.tpl',
+    'bootstrap'
 ], function (
         Backbone,
         _,
@@ -18,21 +19,57 @@ define([
         sodelujociTpl
         ) {
 
+    var Popover = Marionette.LayoutView.extend({
+        template: Handlebars.compile('<a class="btn btn-default gumb-razdeli">{{t "std.razdeli" }}</a><a class="btn btn-default gumb-brisi">{{t "std.brisi" }}</a>'),
+        triggers:{
+            'click .gumb-brisi' : 'brisi',
+            'click .gumb-razdeli' : 'razdeli'
+        },
+        initialize: function(options){
+            this.model = options.model;
+        },
+        onBrisi: function(){
+            this.model.destroy();
+            console.log('brisi');
+        },
+        onRazdeli: function(){
+            console.log('razdeli');
+        }
+    });
+
     var SodelujocView = Marionette.ItemView.extend({
-        tagName: 'span',
+        tagName: 'label',
         className: 'sodelujoc',
-        template: Handlebars.compile('<label>{{ime}}</label>'),
+        template: Handlebars.compile('<a class="sodelujoc-polnoime">{{ime}}</a>'),
         serializeData: function () {
             return{
                 ime: this.model.get('oseba').label
             };
+        },
+        ui: {
+            'sodelujoc': '.sodelujoc-polnoime'
+        },
+        onRender: function () {
+            var popover = new Popover({
+                model: this.options.model
+            });
+            popover.render();
+
+            this.ui.sodelujoc.popover({
+                html: true,
+                title: 'this.Header',
+                content: popover.el || "",
+                placement: 'bottom' || "bottom",
+                trigger: this.Trigger || "click",
+                delay: this.Delay || 0
+            });
         }
     });
 
     var SodelujociView = Marionette.CollectionView.extend({
         className: 'sodelujoci',
         childView: SodelujocView,
-        initialize: function(options){
+        initialize: function (options) {
             this.childView = options.childView || this.childView;
         }
     });
