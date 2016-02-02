@@ -23,7 +23,7 @@ define([
         model: Model,
         mode: "server"
     });
-    
+
     /**
      * Metoda razdeli alternacije v posamezna področja v katera spadajo alternacije.
      * @returns {Array|Collection@call;extend.prototype.razdeliVPodrocja.object}
@@ -60,16 +60,21 @@ define([
 
         var modeli = [];
         this.each(function (model) {
-            var tsModel = {
-                dogodek: options.dogodek.get('id'),
-                planiranZacetek: options.zacetek,
-                planiranKonec: options.konec,
-                gost: false,
-                dezurni: false,
-                sodelujoc:false,
-                alternacija: model,
-                oseba: model.get('oseba')
-            };
+            if (!model.get('tsId')) {
+                var tsModel = {
+                    dogodek: options.dogodek.get('id'),
+                    planiranZacetek: options.zacetek,
+                    planiranKonec: options.konec,
+                    gost: false,
+                    dezurni: false,
+                    sodelujoc: false,
+                    alternacija: model,
+                    oseba: model.get('oseba')
+                };
+            } else {
+                var coll = options.coll;
+                var tsModel = coll.findWhere({'id': model.get('tsId')});
+            }
             modeli.push(tsModel);
         });
 

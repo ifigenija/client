@@ -40,16 +40,21 @@ define([
 
         var modeli = [];
         this.each(function (model) {
-            var tsModel = {
-                dogodek: options.dogodek.get('id'),
-                planiranZacetek: options.zacetek,
-                planiranKonec: options.konec,
-                gost: options.gost ? options.gost : false,
-                dezurni: options.dezurni ? options.dezurni : false,
-                sodelujoc: options.sodelujoc ? options.sodelujoc : false,
-                alternacija: null,
-                oseba: model.attributes
-            };
+            if (!model.get('tsId')) {
+                var tsModel = {
+                    dogodek: options.dogodek.get('id'),
+                    planiranZacetek: options.zacetek,
+                    planiranKonec: options.konec,
+                    gost: options.gost ? options.gost : false,
+                    dezurni: options.dezurni ? options.dezurni : false,
+                    sodelujoc: options.sodelujoc ? options.sodelujoc : false,
+                    alternacija: null,
+                    oseba: model.attributes
+                };
+            } else {
+                var coll = options.coll;
+                var tsModel = coll.findWhere({'id': model.get('tsId')});
+            }
             modeli.push(tsModel);
         });
 
