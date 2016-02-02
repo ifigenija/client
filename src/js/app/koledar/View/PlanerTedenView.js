@@ -81,10 +81,9 @@ define([
                 moment(this.model.get('datum')).set({'hour': termini.dopoldanKonec.h, 'minute': termini.dopoldanKonec.m})
                 );
         this.dopoldneR.show(view);
-        if(view.collection.length>0) {
-            view.$('.brisi-dogodke').removeClass('brisi-grayed');
-        }
+        if (view.collection.length > 0) { view.$('.brisi-dogodke').removeClass('brisi-hide'); }
     };
+    
     PlanerDanView.prototype.renderPopoldne = function () {
         var view = this.popoldneView = this.getDogodekView(
                 this.model.get('popoldne'),
@@ -92,7 +91,9 @@ define([
                 moment(this.model.get('datum')).set({'hour': termini.popoldanKonec.h, 'minute': termini.popoldanKonec.m})
                 );
         this.popoldneR.show(view);
+        if (view.collection.length > 0) { view.$('.brisi-dogodke').removeClass('brisi-hide'); }
     };
+    
     PlanerDanView.prototype.renderZvecer = function () {
         var view = this.zvecerView = this.getDogodekView(
                 this.model.get('zvecer'),
@@ -100,6 +101,8 @@ define([
                 moment(this.model.get('datum')).set({'hour': termini.vecerKonec.h, 'minute': termini.vecerKonec.m})
                 );
         this.zvecerR.show(view);
+        if (view.collection.length > 0) { view.$('.brisi-dogodke').removeClass('brisi-hide'); }
+
     };
     /**
      * inicializiramo instanco viewja za prikaz dogodkov enega termina
@@ -114,6 +117,7 @@ define([
             zacetek: zacetek,
             konec: konec
         });
+        //console.log('getDogodekView call');
 
         view.on('prikazi:dogodek', this.urediDogodek, this);
         view.on('dodaj:dogodek', this.dodajDogodek, this);
@@ -126,6 +130,7 @@ define([
      * @returns {undefined}
      */
     PlanerDanView.prototype.urediDogodek = function (model) {
+        console.log('urediDogodek');
         var razred = model.get('dogodek').razred;
         var TipDogodkaView = DogodekView, schema, tpl;
 
@@ -171,12 +176,14 @@ define([
      * @returns {undefined}
      */
     PlanerDanView.prototype.dodajDogodek = function (options) {
+        
         var dodajDogodekView = new DodajDogodekWizardView({
             zacetek: options.zacetek,
             konec: options.konec,
             collection: options.collection
         });
         this.detailR.show(dodajDogodekView);
+        
     };
 
 

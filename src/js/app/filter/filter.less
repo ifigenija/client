@@ -80,6 +80,12 @@ h4.selectlist-naslov{
     margin-bottom: 5px;
 }
 
+.povzetek{
+    &-item:not(:last-child):after {
+        content: ',\00a0';
+    }
+}
+
 //mali ekran
 @media  (max-width: @screen-md-max) {
     
@@ -101,7 +107,7 @@ h4.selectlist-naslov{
     .povzetek{
         display: inline-block;
         &-item{
-            display: inline-block;
+            display: inline-block;        
         }
         &-seznam{
             display: inline-block;
@@ -142,13 +148,6 @@ h4.selectlist-naslov{
         &-seznam{
             vertical-align: top;
             display: block;
-        }
-        &-brisi{
-
-            
-        }
-        &-item span{
-            display: none;
         }
         
     }

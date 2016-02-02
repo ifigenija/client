@@ -148,6 +148,11 @@ define([
         initialize: function (options) {
             this.zacetek = options.zacetek || null;
             this.konec = options.konec || null;
+            
+            //this.listenTo(this.collection, 'all', function(event){ console.log('## Listen ... ' + event); } );
+            this.listenTo(this.collection, 'add', this.showCloseButton );
+            this.listenTo(this.collection, 'remove', this.hideCloseButton );
+
         },
         onDodaj: function () {
             this.trigger('dodaj:dogodek', {
@@ -171,12 +176,21 @@ define([
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
             }
+            //this.showCloseButton();
 
         },
         onChildviewPrikaziDogodek: function (dogodekM, razredDogodkaM) {
             this.trigger('prikazi:dogodek', razredDogodkaM);
+        },
+        
+        showCloseButton: function () {
+            this.$('.brisi-dogodke').removeClass('brisi-hide');
+        },
+
+        hideCloseButton: function () {
+            this.$('.brisi-dogodke').addClass('brisi-hide');
         }
     });
-
+    
     return PlanerDogodkiView;
 });

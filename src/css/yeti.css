@@ -7201,8 +7201,8 @@ Licenca GPLv3
   vertical-align: text-bottom;
   margin-bottom: 5px;
 }
-.brisi-grayed {
-  color: #eeeeee;
+.brisi-hide {
+  display: none !important;
 }
 /*WizardView*/
 .wizard {
@@ -7317,6 +7317,9 @@ h4.selectlist-naslov {
   display: inline-block;
   vertical-align: text-bottom;
 }
+.povzetek-item:not(:last-child):after {
+  content: ',\00a0';
+}
 @media (max-width: 1199px) {
   .vrsta-filtra-item {
     display: inline-block;
@@ -7369,9 +7372,6 @@ h4.selectlist-naslov {
   .povzetek-seznam {
     vertical-align: top;
     display: block;
-  }
-  .povzetek-item span {
-    display: none;
   }
   .filter-aktivni-filtri {
     margin-top: 16px;

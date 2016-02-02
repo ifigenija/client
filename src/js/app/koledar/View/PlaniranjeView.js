@@ -153,7 +153,6 @@ define([
             konec: konec,
             collection: this.collection
         });
-
         this.dogodekR.show(dodajDogodekView);
     };
 

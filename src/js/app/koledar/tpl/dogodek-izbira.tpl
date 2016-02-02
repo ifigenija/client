@@ -29,5 +29,5 @@
             <h5>{{t "dogodek.gostovanje"}}</h5>
         </div>
     </a>
-            <div class="btn gumb-razred gumb-preklici preklici" style="position: absolute; top: 0;padding-left: 3px"><span class="fa fa-times"></span></div>        
+            <a class="btn gumb-razred gumb-preklici preklici" style="position: absolute; top: 0;padding-left: 3px" title="{{t "dogodek.preklici"}}"><span class="fa fa-times"></span></a>        
 </div>

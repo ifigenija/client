@@ -133,7 +133,7 @@ define([
             this.renderToolbar();
         }, this);
 
-        this.vrsteR.show(view);console.log('TK:render vrsteR(show)');
+        this.vrsteR.show(view);
     };
 
     /**
