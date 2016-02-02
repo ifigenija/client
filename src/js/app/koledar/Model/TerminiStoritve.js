@@ -117,7 +117,7 @@ define([
     };
 
     Collection.prototype.toOsebe = function () {
-        var osebeColl = this.osebe = new Osebe();
+        var osebeColl = [];
 
         var models = this.models;
         for (var id in models) {
@@ -128,9 +128,9 @@ define([
 
                 if (_.isObject(oseba)) {
                     oseba['polnoIme'] = oseba.label;
-                    osebeColl.add(oseba);
+                    osebeColl.push(oseba);
                 } else {
-                    osebeColl.add({id: oseba});
+                    osebeColl.push({id: oseba});
                 }
             }
         }
@@ -138,7 +138,7 @@ define([
         return osebeColl;
     };
     Collection.prototype.toAlternacije = function () {
-        var alterColl = this.alternacije = new Alternacije();
+        var alterColl = [];
 
         var models = this.models;
         for (var id in models) {
@@ -148,9 +148,9 @@ define([
             alter['funkcija'].label = model.get('alternacija.funkcija.naziv');
             if (alter) {
                 if (_.isObject(alter)) {
-                    alterColl.add(alter);
+                    alterColl.push(alter);
                 } else {
-                    alterColl.add({id: alter});
+                    alterColl.push({id: alter});
                 }
             }
         }

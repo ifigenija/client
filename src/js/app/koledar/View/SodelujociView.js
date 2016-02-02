@@ -10,6 +10,7 @@ define([
     'jquery',
     '../Model/TerminiStoritve',
     '../Model/PlaniraneAlternacije',
+    '../Model/Osebe',
     './SeznamSodelujocihView',
     './UrnikTSView',
     'app/filter/View/DualListView',
@@ -22,6 +23,7 @@ define([
         $,
         TerminiStoritve,
         Alternacije,
+        Osebe,
         SeznamSodelujocihView,
         UrnikTSView,
         DualListView,
@@ -56,6 +58,28 @@ define([
         this.itsSodelujoci = new TerminiStoritve();
         this.itsGosti = new TerminiStoritve();
         this.itsDezurni = new TerminiStoritve();
+
+        this.iUmetniki = new Alternacije();
+        this.iTehniki = new Alternacije();
+        this.iSodelujoci = new Osebe();
+        this.iGosti = new Osebe();
+        this.iDezurni = new Osebe();
+
+        this.itsUmetniki.on('remove', function () {
+            this.iUmetniki.reset(this.itsUmetniki.toAlternacije());
+        }, this);
+        this.itsTehniki.on('remove', function () {
+            this.iTehniki.reset(this.itsTehniki.toAlternacije());
+        }, this);
+        this.itsSodelujoci.on('remove', function () {
+            this.iSodelujoci.reset(this.itsSodelujoci.toOsebe());
+        }, this);
+        this.itsGosti.on('remove', function () {
+            this.iGosti.reset(this.itsGosti.toOsebe());
+        }, this);
+        this.itsDezurni.on('remove', function () {
+            this.iDezurni.reset(this.itsDezurni.toOsebe());
+        }, this);
 
         //kolekcije brez predpone predstavljajo možne alternacije/osebe med katerimi lahko izbiramo
         this.umetniki = new Alternacije();
@@ -97,25 +121,25 @@ define([
         this.itsUmetniki.reset();
         this.itsUmetniki.add(tsPodrocja.umetnik);
         this.itsUmetniki.add(tsPodrocja.igralec);
-        this.iUmetniki = this.itsUmetniki.toAlternacije(this.umetniki);
+        this.iUmetniki.reset(this.itsUmetniki.toAlternacije());
 
         this.itsTehniki.reset();
         this.itsTehniki.add(tsPodrocja.tehnik);
         this.itsTehniki.add(tsPodrocja.inspicient);
         this.itsTehniki.add(tsPodrocja.sepetalec);
-        this.iTehniki = this.itsTehniki.toAlternacije(this.tehniki);
+        this.iTehniki.reset(this.itsTehniki.toAlternacije());
 
         this.itsSodelujoci.reset();
         this.itsSodelujoci.add(tsPodrocja.sodelujoci);
-        this.iSodelujoci = this.itsSodelujoci.toOsebe();
+        this.iSodelujoci.reset(this.itsSodelujoci.toOsebe());
 
         this.itsGosti.reset();
         this.itsGosti.add(tsPodrocja.gosti);
-        this.iGosti = this.itsGosti.toOsebe();
+        this.iGosti.reset(this.itsGosti.toOsebe());
 
         this.itsDezurni.reset();
         this.itsDezurni.add(tsPodrocja.dezurni);
-        this.iDezurni = this.itsDezurni.toOsebe();
+        this.iDezurni.reset(this.itsDezurni.toOsebe());
     };
     /**
      * V tej funkciji inicializiramo 2 kolekciji ki predstavljajo alternacije umetnikov in tehnikov,
@@ -341,24 +365,8 @@ define([
             options.izbraniTS.reset(tsModeli);
             var terminiStoritve = self.getTS();
             terminiStoritve = terminiStoritve.toJSON();
-
-            var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/dogodek'});
-            rpc.call('azurirajTSDogodka', {
-                'dogodekId': self.dogodek.get('id'),
-                'terminiStoritev': terminiStoritve
-            }, function () {
-                self.tsColl.queryParams.dogodek = self.dogodek.get('id');
-
-                self.tsColl.fetch({
-                    success: function (coll) {
-                        self.razdeliTS(coll);
-                    },
-                    error: Radio.channel('error').request('handler', 'xhr')
-                });
-
-            }, function (error) {
-                console.log(error);
-            });
+            
+            self.azurirajTsDogodka(self.dogodek.get('id'), terminiStoritve);
         }, this);
 
         view.render();
@@ -392,5 +400,25 @@ define([
             this.dezurniR.empty();
         }
     };
+    SodelujociView.prototype.azurirajTsDogodka = function (dogodekId, terminiStoritve) {
+        var self = this;
+
+        var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/dogodek'});
+        rpc.call('azurirajTSDogodka', {
+            'dogodekId': dogodekId,
+            'terminiStoritev': terminiStoritve
+        }, function () {
+            self.tsColl.queryParams.dogodek = dogodekId;
+
+            self.tsColl.fetch({
+                success: function (coll) {
+                    self.razdeliTS(coll);
+                },
+                error: Radio.channel('error').request('handler', 'xhr')
+            });
+
+        }, Radio.channel('error').request('handler', 'flash'));
+    };
+
     return SodelujociView;
 });
