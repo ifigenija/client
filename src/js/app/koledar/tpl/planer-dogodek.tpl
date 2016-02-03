@@ -1,6 +1,6 @@
 <div class="planer-label-wrap">
     
-    <span class="label label-primary planer-label" title="{{u "cas" zacetek}} {{title}} {{#if uprizoritev.label}}/ {{uprizoritev.label}}{{/if}} {{#if prostor.label}}/ {{prostor.label}}{{/if}}">
+    <span class="label label-{{razredIme}} planer-label" {{#if barva}}style="background-color: {{barva}} !important"{{/if}} title="{{u "cas" zacetek}} {{title}} {{#if uprizoritev.label}}/ {{uprizoritev.label}}{{/if}} {{#if prostor.label}}/ {{prostor.label}}{{/if}}">
 
     {{#if isPlaniran}}
         <i class="fa fa-pencil-square-o"></i>
@@ -38,3 +38,4 @@
     </span>
 
 </div>
+    {{log this}}

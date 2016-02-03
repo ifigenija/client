@@ -10,7 +10,9 @@ define([
     'marionette',
     '../Model/RazredDogodek',
     'template!../tpl/planer-dogodek.tpl',
-    'template!../tpl/planer-dogodki-termin.tpl'
+    'template!../tpl/planer-dogodki-termin.tpl',
+    'options!dogodek.barve',
+    'options!dogodek.razred'
 ], function (
         Radio,
         $,
@@ -19,7 +21,9 @@ define([
         Marionette,
         RazredDogodek,
         dogodekTpl,
-        terminDogodkiTpl
+        terminDogodkiTpl,
+        barve,
+        razredi
         ) {
 
     /**
@@ -34,6 +38,7 @@ define([
         },
         serializeData: function () {
             var isPlaniran, isPregledan, isPotrjen, isZakljucen, isOdpovedan, isObdelanI, isObdelanT, isObdelan;
+            var razredIme = razredi[this.razred].type;
             switch (this.model.get('status')) {
                 case '200s':
                     isPlaniran = true;
@@ -69,7 +74,9 @@ define([
                 isOdpovedan: isOdpovedan,
                 isObdelanI: isObdelanI,
                 isObdelanT: isObdelanT,
-                isObdelan: isObdelan
+                isObdelan: isObdelan,
+                razredIme: razredIme,
+                barve: barve
             });
         },
         initialize: function (options) {
@@ -152,6 +159,12 @@ define([
             //this.listenTo(this.collection, 'all', function(event){ console.log('## Listen ... ' + event); } );
             this.listenTo(this.collection, 'add', this.showCloseButton );
             this.listenTo(this.collection, 'remove', this.hideCloseButton );
+            
+            if (!window.once) {
+                console.group('Barve');console.log(barve);console.groupEnd();
+                console.group('Razredi');console.log(razredi);console.groupEnd();
+                window.once = 1;
+            }
 
         },
         onDodaj: function () {

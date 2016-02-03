@@ -10,3 +10,11 @@
     <div class="col-sm-3 planer-cell">{{t "koledar.terminZvecer"}}</div>
 </div>
 <div class="region-teden"></div>
+
+<style type="text/css">
+    .label-predstava { background-color: {{barve.predstavaDoma.value}}; }
+    .label-vaja { background-color: {{barve.vaja.value}}; }
+    .label-gostovanje { background-color: {{barve.gostovanje.value}}; }
+    .label-splosni { background-color: {{barve.splosni.value}}; }
+    .label-tehnicni { background-color: {{barve.tehnicni.value}}; }
+</style>

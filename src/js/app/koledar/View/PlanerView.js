@@ -10,7 +10,8 @@ define([
     '../Model/PlanerTeden',
     './PlanerTedenView',
     './PlanerIzbiraDatumaView',
-    'template!../tpl/planer-layout.tpl'
+    'template!../tpl/planer-layout.tpl',
+    'options!dogodek.barve'
 ], function (
         Marionette,
         Backbone,
@@ -19,7 +20,8 @@ define([
         PlanerTeden,
         PlanerTedenView,
         PlanerIzbiraDatumaView,
-        tpl
+        tpl,
+        barve
         ) {
 
     /**
@@ -35,6 +37,12 @@ define([
             terminR: '.region-termin',
             konfliktiR: '.region-konflikti',
             tedenR: '.region-teden'
+        },
+        serializeData: function () {
+            
+            return {
+                barve: barve
+            };
         }
     });
     /*
