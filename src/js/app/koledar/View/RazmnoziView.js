@@ -144,13 +144,11 @@ define([
 
         //d//console.log(this.schema.zacetek.validators);console.log(this.schema.konec.validators);
         
-        //window.obj = this; debugger;
     };
     
     RazmnoziView.prototype.onBeforeShrani = function (options) {
        // console.log('onBeforeShrani');
        
-        
         var ok = true; //not implemented
         
         if (!this.form.commit()) {
@@ -159,7 +157,6 @@ define([
                 this.shrani(options);
             } else {
                 Radio.channel('error').command('flash', {message: 'onBeforeShrani error'});
-
             }
         }
     };
@@ -189,17 +186,17 @@ define([
         
         var get_termini_fn = function(model) {
             var data = [];
-            var key, i, terminiVDnevu = ['dop', 'pop', 'zve'];
+            var key, i;
+            var terminiVDnevu = ['dop', 'pop', 'zve'];
             
             for(var dan=1;dan<8;dan++) {
                 for(i in terminiVDnevu) {
                     key = "chk_"+ terminiVDnevu[i] +"_"+ dan;
-                    // za debug checkboxov// console.log(key, m.get(key));
+                    // za debug checkboxov// console.log(key, model.get(key));
                     if(model.get(key) == true) {
                         if(!data[dan]) {data[dan] = []}; //init array row
-                        data[dan][terminiVDnevu[i]] = 1;
+                        data[dan].push(terminiVDnevu[i].toUpperCase());
                     }
-                    
                 }
             }
             
@@ -208,29 +205,44 @@ define([
         
         var get_casi_pricetka_fn = function(model) {
             
+            var d,p,z;
+            d = model.get('time_dop').split(':');
+            p = model.get('time_pop').split(':');
+            z = model.get('time_zve').split(':');
             
             var data = {
-                dop: model.get('time_dop'),
-                pop: model.get('time_pop'),
-                zve: model.get('time_zve')
+                dop: {
+                        h: parseInt(d[0], 10),
+                        m: parseInt(d[1], 10)
+                },
+                pop: {
+                        h: parseInt(p[0], 10),
+                        m: parseInt(p[1], 10)
+                },
+                zve: {
+                        h: parseInt(z[0], 10),
+                        m: parseInt(z[1], 10)
+                     }
             };
             
             return data;
         }
         
         if (!this.form.commit()) {
-            console.log('After commit, prepare object for RPC Call');
+            //console.log('After commit, prepare object for RPC Call');
+            
+            var steviloVaj = (typeof this.model.get('stevilo_vaj') !== 'undefined')? this.model.get('stevilo_vaj') : 0;
             
             this.callObject = {
                 id: this.model.get('id'),  //id_dogodka
                 zacetek: this.model.get('zacetek'),
                 konec: moment(this.model.get('konec')).endOf('day').toISOString(),
-                casi_pricetka: get_casi_pricetka_fn(this.model),
+                casiPricetka: get_casi_pricetka_fn(this.model),
                 termini: get_termini_fn(this.model),
-                upostevaj_praznike: this.model.get('upostevaj_praznike'),
-                upostevaj_sobote: this.model.get('upostevaj_sobote'), //ce bo to aktualno
-                upostevaj_nedelje: this.model.get('upostevaj_nedelje'), //ce bo to aktualno
-                stevilo_vaj: this.model.get('stevilo_vaj') //ce bo to aktualno
+                upostevajPraznike: this.model.get('upostevaj_praznike'),
+                upostevajSobote: this.model.get('upostevaj_sobote'), 
+                upostevajNedelje: this.model.get('upostevaj_nedelje'),
+                steviloVaj: steviloVaj
             }
             
       
