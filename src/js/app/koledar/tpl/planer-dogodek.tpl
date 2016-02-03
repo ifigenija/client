@@ -5,13 +5,13 @@
     {{#if isPlaniran}}
         <i class="fa fa-pencil-square-o"></i>
     {{else if isPregledan}}
-        <i class="fa fa-pencil-check"></i>
+        <i class="fa fa-check"></i>
     {{else if isPotrjen}}
-        <i class="fa fa-pencil-calendar-check-o"></i>
+        <i class="fa fa-calendar-check-o"></i>
     {{else if isZakljucen}}
-        <i class="fa fa-pencil-hourglass-end"></i>
+        <i class="fa fa-hourglass-end"></i>
     {{else if isOdpovedan}}
-        <i class="fa fa-pencil-ban"></i>
+        <i class="fa fa-ban"></i>
     {{else if isObdelanI}}
         <i class="fa fa-pencil-square"></i>
     {{else if isObdelanT}}
