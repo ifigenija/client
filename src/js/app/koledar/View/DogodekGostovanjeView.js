@@ -3,16 +3,20 @@
  */
 define([
     'i18next',
+    'app/bars',
+    'marionette',
     'underscore',
     './DogodekView',
-    './DogodkiGostovanjaView',
+    'app/aaa/View/RelationView',
     'template!../tpl/gostovanje-form.tpl',
     'formSchema!gostovanje'
 ], function (
         i18next,
+        Handlebars,
+        Marionette,
         _,
         DogodekView,
-        DogodkiGostovanjaView,
+        RelationView,
         tpl,
         schema
         ) {
@@ -38,10 +42,25 @@ define([
         this.deselectTab();
         this.$('.pnl-detail').addClass('active');
 
-        //render dogodki
-        var view = new DogodkiGostovanjaView();
+        var ItemView = Marionette.ItemView.extend({
+            tagName: 'a',
+            className: 'list-group-item col-sm-6',
+            template: Handlebars.compile('{{ title }} / {{ razred }}<span class="badge"><span class="fa fa-trash"></span></span>'),
+            triggers: {
+                'click .fa-trash': 'delete'
+            }
+        });
 
-        this.detailR.show(view);
+        var rv = new RelationView({
+            owner: 'gostovanje',
+            ownerId: this.model.get('id'),
+            relation: 'podrejeniDogodki',
+            lookup: 'dogodek',
+            title: i18next.t("dogodek.title"),
+            ItemView: ItemView
+        });
+
+        this.detailR.show(rv);
     };
 
     return DogodekGostovanjeView;

@@ -38,6 +38,7 @@ define([
             }else{
                 eObj.resourceId = '0';
             }
+            eObj.color = this.get('barva');
             eObj.start = moment(this.get('zacetek'));
             eObj.end = moment(this.get('konec'));
             return eObj;

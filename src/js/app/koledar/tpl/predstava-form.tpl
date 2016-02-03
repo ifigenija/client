@@ -15,7 +15,7 @@
                     </a>
                 </div>
             </div>
-            <div data-fields="status"></div>
+            <div data-fields="barva,status"></div>
             <div class="prikazno-polje">
                 <div class="pull-right zaporedna vrednost">{{zaporedna}}</div>
                 <div class="attribut">{{t "predstava.zaporedna"}}: </div>                    

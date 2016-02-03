@@ -8,35 +8,34 @@ define([
     'i18next',
     '../../Model/Dogodki',
     './WizardView',
-    './IzbiraCasDeltaCasView',
     './IzbiraProstoraView',
-    './IzbiraUprizoritveView',
+    './IzbiraSodelujociView',
+    './VnosNaslovCasView',
     'options!dogodek.barve'
 ], function (
         Radio,
         i18next,
         Dogodki,
         WizardView,
-        IzbiraCasDeltaCasView,
         IzbiraProstoraView,
-        IzbiraUprizoritveView,
+        IzbiraSodelujociView,
+        VnosNaslovCasView,
         barve
         ) {
 
-    var WizardPredstavaView = WizardView.extend({
+    var WizardTehnicniView = WizardView.extend({
         views: [
-            IzbiraCasDeltaCasView,
-            IzbiraUprizoritveView,
-            IzbiraProstoraView
+            VnosNaslovCasView,
+            IzbiraProstoraView,
+            IzbiraSodelujociView
         ],
-        title: i18next.t('dogodek.dodajPredstavo'),
         callback: function (model) {
             var self = this;
             
-            model.set('barva', barve.predstavaDoma.value);
+            model.set('barva', barve.tehnicni.value);
             
             model.save({}, {
-                success: function () {
+                success: function (model) {
                     Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
                     var Dogodek = Dogodki.prototype.model.extend({});
                     self.trigger('save:success', new Dogodek(model.get('dogodek')));
@@ -46,5 +45,5 @@ define([
         }
     });
 
-    return WizardPredstavaView;
+    return WizardTehnicniView;
 });
