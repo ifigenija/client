@@ -1,12 +1,7 @@
-<h4><span class="label label-primary">
-    <span>{{title}}</span>
-    {{#if uprizoritev.label}}
-        <span>/ {{uprizoritev.label}}</span>
-    {{/if}}
-        <span>/ {{u "cas" zacetek}}</span>
-    {{#if prostor.label}}
-        <span>/ {{prostor.label}}</span>
-    {{/if}}
+<div class="planer-label-wrap">
+    
+    <span class="label label-primary planer-label" title="{{u "cas" zacetek}} {{title}} {{#if uprizoritev.label}}/ {{uprizoritev.label}}{{/if}} {{#if prostor.label}}/ {{prostor.label}}{{/if}}">
+
     {{#if isPlaniran}}
         <i class="fa fa-pencil-square-o"></i>
     {{else if isPregledan}}
@@ -24,4 +19,22 @@
     {{else if isObdelan}}
         <i class="fa fa-pencil-square"></i>
     {{/if}}
-</span></h4>
+    
+    <span> {{u "cas" zacetek}} </span>
+    
+
+    <span>{{title}}</span>
+    {{#if uprizoritev.label}}
+        <span>/ {{uprizoritev.label}}</span>
+    {{/if}}
+        
+    {{!--
+    {{#if prostor.label}}
+        <span>/ {{prostor.label}}</span>
+    {{/if}}
+    --}}
+    
+
+    </span>
+
+</div>

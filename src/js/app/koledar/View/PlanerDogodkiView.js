@@ -176,8 +176,6 @@ define([
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
             }
-            //this.showCloseButton();
-
         },
         onChildviewPrikaziDogodek: function (dogodekM, razredDogodkaM) {
             this.trigger('prikazi:dogodek', razredDogodkaM);

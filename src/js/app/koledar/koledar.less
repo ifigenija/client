@@ -110,6 +110,20 @@ Licenca GPLv3
     position: relative;
 }
 
+.planer-label{
+    font-size: 110%;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    line-height: 1.1;
+    padding: .2em .6em .3em !important;
+}
+
+.planer-label-wrap{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px 0;
+}
 
 @media all and (min-width: 768px) {
     .planer-dan{    
@@ -120,20 +134,21 @@ Licenca GPLv3
 
         display: table;
         width: 100%;
+        padding-left: 0;
+        padding-right: 0;
 
     }
     .planer-cell {
-        width: 30.6666667%;
-        /*width: 33.333333%; */
-        padding-left:110px;
+        width: 30%;
+        float: left;
     }
     .planer-first-cell{
-        /* padding-left:120px; */
+        width: 40%; //36
+        padding-left: 110px;
     }
 
     .planer-cell-datum {
-        width: 120px;
-        /*position:fixed;*/
+        width: 110px;
         position: absolute;
         left: 0px;
         white-space:nowrap;
@@ -148,6 +163,7 @@ Licenca GPLv3
 
         white-space:nowrap;
     }
+
 }
 
 @media all and (max-width: 767px) {
