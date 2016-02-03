@@ -8,7 +8,7 @@
             </fieldset>
         </div>
         <div class="col-sm-12 col-md-6" >
-            <fieldset class="fieldset-brez-legend" data-fields="polnoIme,naziv,spol,sifra,user">
+            <fieldset class="fieldset-brez-legend" data-fields="polnoIme,naziv,spol,sifra">
             </fieldset>
         </div>
     </div>
