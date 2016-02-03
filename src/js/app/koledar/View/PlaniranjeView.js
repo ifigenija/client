@@ -12,15 +12,18 @@ define([
     './Wizard/DodajDogodekWizardView',
     './RazmnoziView',
     './DogodekView',
+    './DogodekPredstavaView',
+    './DogodekGostovanjeView',
     'template!../tpl/vaja-form.tpl',
     'template!../tpl/predstava-form.tpl',
     'template!../tpl/tehnicni-form.tpl',
     'template!../tpl/splosni-form.tpl',
+    'template!../tpl/gostovanje-form.tpl',
     'formSchema!vaja',
     'formSchema!predstava',
     'formSchema!dogodekTehnicni',
     'formSchema!dogodekSplosni',
-    'baseUrl'
+    'formSchema!gostovanje'
 ], function (
         i18next,
         Backbone,
@@ -32,15 +35,18 @@ define([
         DodajDogodekWizardView,
         RazmnoziView,
         DogodekView,
+        DogodekPredstavaView,
+        DogodekGostovanjeView,
         vajaTpl,
         predstavaTpl,
         tehnicniTpl,
         splosniTpl,
+        gostovanjeTpl,
         vajaSch,
         predstavaSch,
         tehnicniSch,
         splosniSch,
-        baseUrl
+        gostovanjeSch
         ) {
 
     var PlaniranjeView = Marionette.LayoutView.extend({
@@ -118,20 +124,16 @@ define([
 
         switch (razred) {
             case '100s':
-                this.renderRazredDogodek(model, DogodekView, predstavaSch, predstavaTpl);
+                this.renderRazredDogodek(model, DogodekPredstavaView, predstavaSch, predstavaTpl);
                 break;
             case '200s':
                 this.renderRazredDogodek(model, DogodekView, vajaSch, vajaTpl);
                 break;
             case '300s':
-                this.renderRazredDogodek(model, null);
+                this.renderRazredDogodek(model, DogodekGostovanjeView, gostovanjeSch, gostovanjeTpl);
                 break;
             case '400s':
                 this.renderRazredDogodek(model, DogodekView, splosniSch, splosniTpl);
-                break;
-            case '500s':
-                this.onZasedenost(model);
-                this.dogodekView.on('skrij', this.onPreklici, this);
                 break;
             case '600s':
                 this.renderRazredDogodek(model, DogodekView, tehnicniSch, tehnicniTpl);
@@ -180,12 +182,6 @@ define([
         view.on('skrij', self.onPreklici, self);
         self.dogodekR.show(view);
 
-    };
-
-
-    PlaniranjeView.prototype.onZasedenost = function (model) {
-        this.dogodekView = new Marionette.ItemView();
-        console.log('zasedenost');
     };
 
     return PlaniranjeView;

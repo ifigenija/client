@@ -23,11 +23,14 @@ define([
      * @param {type} prefix
      * @returns {String}
      */
-    var getPartOfUrl = function (array, prefix) {
+    var getPartOfUrl = function (array, prefix, prvi) {
         var string = '';
 
         for (var k in array) {
             if (k === '0') {
+                if (!prvi) {
+                    string += '&';
+                }
                 string += prefix + '[]=' + array[k];
             } else {
                 string += '&' + prefix + '[]=' + array[k];
@@ -45,25 +48,25 @@ define([
                 url += '?';
                 switch (razred) {
                     case '100s':
-                        url += getPartOfUrl(this.get('alternacije'), 'alternacija');
-                        var niz = getPartOfUrl(this.get('dezurni'), 'dezurni');
-                        var niz = getPartOfUrl(this.get('gosti'), 'gost');
+                        url += getPartOfUrl(this.get('alternacije'), 'alternacija', true);
+                        var niz = getPartOfUrl(this.get('dezurni'), 'dezurni', false);
+                        var niz = getPartOfUrl(this.get('gosti'), 'gost', false);
                         url += niz ? '&' + niz : '';
                         break;
                     case '200s':
-                        url += getPartOfUrl(this.get('alternacije'), 'alternacija');
-                        var niz = getPartOfUrl(this.get('gosti'), 'gost');
+                        url += getPartOfUrl(this.get('alternacije'), 'alternacija', true);
+                        var niz = getPartOfUrl(this.get('gosti'), 'gost', false);
                         url += niz ? '&' + niz : '';
                         break;
                     case '300s':
-                        url += getPartOfUrl(this.get('sodelujoci'), 'sodelujoc');
+                        url += getPartOfUrl(this.get('dogodki'), 'dogodek', true);
+                        url += getPartOfUrl(this.get('sodelujoci'), 'sodelujoc', false);
                         break;
                     case '400s':
-                        url += getPartOfUrl(this.get('sodelujoci'), 'sodelujoc');
+                        url += getPartOfUrl(this.get('sodelujoci'), 'sodelujoc', true);
                         break;
                     case '600s':
-                        url += getPartOfUrl(this.get('dogodki'), 'dogodek');
-                        url += getPartOfUrl(this.get('sodelujoci'), 'sodelujoc');
+                        url += getPartOfUrl(this.get('sodelujoci'), 'sodelujoc', true);
                         break;
                 }
 

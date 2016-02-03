@@ -22,7 +22,11 @@ define([
     var Dogodek = Backbone.DeepModel.extend({
         view: 'default',
         urlRoot: function () {
-            return baseUrl + '/rest/dogodek/' + this.view;
+            if (this.view) {
+                return baseUrl + '/rest/dogodek/' + this.view;
+            } else {
+                return baseUrl + '/rest/dogodek';
+            }
         },
         getEventObject: function (eObj) {
             if (!eObj) {
@@ -35,7 +39,7 @@ define([
             //resourceId pomemben pri fullcalendarju s pravim resource-om
             if (this.get('prostor')) {
                 eObj.resourceId = this.get('prostor').id;
-            }else{
+            } else {
                 eObj.resourceId = '0';
             }
             eObj.color = this.get('barva');
@@ -59,7 +63,11 @@ define([
         },
         view: 'default',
         url: function () {
-            return baseUrl + '/rest/dogodek/' + this.view;
+            if (this.view) {
+                return baseUrl + '/rest/dogodek/' + this.view;
+            } else {
+                return baseUrl + '/rest/dogodek';
+            }
         }
     });
 
