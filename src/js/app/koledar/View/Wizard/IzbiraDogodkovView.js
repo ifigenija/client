@@ -102,17 +102,15 @@ define([
             var ids = [];
             ids = _.pluck(models, 'id');
 
-            var osebe = {};
-            _.each(models, function (model) {
-                var ts = model.get('terminiStoritve');
-                _.each(ts, function (tsModel) {
-                    osebe[tsModel.oseba.id] = true;
-                });
-            });
+//            var osebe = {};
+//            _.each(models, function (model) {
+//                var ts = model.get('terminiStoritve');
+//                _.each(ts, function (tsModel) {
+//                    osebe[tsModel.oseba.id] = true;
+//                });
+//            });
 
-            var osebeIds = _.map(osebe, function (oseba, key) {
-                return key;
-            });
+            var osebeIds = this.getSodelujoci(models);
 
             this.model.set('dogodki', ids);
             this.model.set('sodelujoci', osebeIds);
@@ -120,6 +118,22 @@ define([
         } else {
             this.trigger('not:ready', this.model);
         }
+    };
+    IzbiraDogodkovView.prototype.getSodelujoci = function () {
+        var modeli = this.gridView.getSelectedModels();
+        var sodelujoci = {};
+        _.each(modeli, function (model) {
+            var ts = model.get('terminiStoritve');
+            _.each(ts, function (tsModel) {
+                sodelujoci[tsModel.oseba.id] = true;
+            });
+        });
+
+        var sodelujociIds = _.map(sodelujoci, function (oseba, key) {
+            return key;
+        });
+        
+        return sodelujociIds;
     };
 
     return IzbiraDogodkovView;
