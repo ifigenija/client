@@ -15,7 +15,7 @@
                     </a>
                 </div>
             </div>
-            <div data-fields="status,tipvaje"></div>
+            <div data-fields="barva,status,tipvaje"></div>
             <div class="prikazno-polje">
                 <div class="pull-right zaporedna vrednost">{{zaporedna}}</div>
                 <div class="attribut">{{t "vaja.zaporedna"}}: </div>                    
