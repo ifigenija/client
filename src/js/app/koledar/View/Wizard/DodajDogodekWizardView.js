@@ -9,7 +9,8 @@ define([
     'app/bars',
     '../../Model/OptionsProstorTipVaje',
     './WizardVajaView',
-    './WizardTehSploView',
+    './WizardTehnicniView',
+    './WizardSplosniView',
     './WizardPredstavaView',
     './WizardGostovanjeView',
     './IzbiraRazredDogodkaView'
@@ -21,7 +22,8 @@ define([
         Handlebars,
         optionsProstorTipVaje,
         WizardVajaView,
-        WizardTehSploView,
+        WizardTehnicniView,
+        WizardSplosniView,
         WizardPredstavaView,
         WizardGostovanjeView,
         IzbiraRazredDogodkaView
@@ -45,7 +47,7 @@ define([
     };
     DodajDogodekWizardView.prototype.renderWizardView = function (model) {
         var self = this;
-        
+
         //views options so option za vsak korakView posebaj določene
         optionsProstorTipVaje(function (prostori, tipiVaj) {
             var wizardView;
@@ -77,13 +79,13 @@ define([
                         model: model,
                         viewsOptions: [
                             {},
-//                                {},
-//                                {}
+                            {},
+                            {}
                         ]
                     });
                     break;
                 case '400s':
-                    wizardView = new WizardTehSploView({
+                    wizardView = new WizardSplosniView({
                         model: model,
                         title: i18next.t('dogodek.dodajSplosni'),
                         viewsOptions: [
@@ -94,7 +96,7 @@ define([
                     });
                     break;
                 case '600s':
-                    wizardView = new WizardTehSploView({
+                    wizardView = new WizardTehnicniView({
                         model: model,
                         title: i18next.t('dogodek.dodajTehnicni'),
                         viewsOptions: [

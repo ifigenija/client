@@ -11,7 +11,8 @@ define([
     './IzbiraCasDeltaCasView',
     './IzbiraTipaVajeView',
     './IzbiraProstoraView',
-    './IzbiraUprizoritveView'
+    './IzbiraUprizoritveView',
+    'options!dogodek.barve'
 ], function (
         Radio,
         i18next,
@@ -20,7 +21,8 @@ define([
         IzbiraCasDeltaCasView,
         IzbiraTipaVajeView,
         IzbiraProstoraView,
-        IzbiraUprizoritveView
+        IzbiraUprizoritveView,
+        barve
         ) {
 
     var WizardVajaView = WizardView.extend({
@@ -33,6 +35,9 @@ define([
         title: i18next.t('dogodek.dodajVajo'),
         callback: function (model) {
             var self = this;
+            
+            model.set('barva', barve.vaja.value);
+            
             model.save({}, {
                 success: function (model) {
                     Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});

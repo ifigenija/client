@@ -10,7 +10,8 @@ define([
     './WizardView',
     './IzbiraCasView',
     './VnosPodGosView',
-    './IzbiraDogodkovView'
+    './IzbiraDogodkovView',
+    'options!dogodek.barve'
 ], function (
         Radio,
         i18next,
@@ -18,7 +19,8 @@ define([
         WizardView,
         IzbiraCasView,
         VnosPodGosView,
-        IzbiraDogodkovView
+        IzbiraDogodkovView,
+        barve
         ) {
 
     var WizardGostovanjeView = WizardView.extend({
@@ -30,6 +32,9 @@ define([
         title: i18next.t('dogodek.dodajGostovanje'),
         callback: function (model) {
             var self = this;
+            
+            model.set('barva', barve.gostovanje.value);
+            
             model.save({}, {
                 success: function () {
                     Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});

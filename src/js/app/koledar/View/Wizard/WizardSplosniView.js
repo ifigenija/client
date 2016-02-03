@@ -10,7 +10,8 @@ define([
     './WizardView',
     './IzbiraProstoraView',
     './IzbiraSodelujociView',
-    './VnosNaslovCasView'
+    './VnosNaslovCasView',
+    'options!dogodek.barve'
 ], function (
         Radio,
         i18next,
@@ -18,10 +19,11 @@ define([
         WizardView,
         IzbiraProstoraView,
         IzbiraSodelujociView,
-        VnosNaslovCasView
+        VnosNaslovCasView,
+        barve
         ) {
 
-    var WizardTehSploView = WizardView.extend({
+    var WizardSplosniView = WizardView.extend({
         views: [
             VnosNaslovCasView,
             IzbiraProstoraView,
@@ -29,6 +31,9 @@ define([
         ],
         callback: function (model) {
             var self = this;
+            
+            model.set('barva', barve.splosni.value);
+            
             model.save({}, {
                 success: function (model) {
                     Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
@@ -40,5 +45,5 @@ define([
         }
     });
 
-    return WizardTehSploView;
+    return WizardSplosniView;
 });
