@@ -11,6 +11,8 @@ define([
     './PlanerTedenView',
     './PlanerIzbiraDatumaView',
     'template!../tpl/planer-layout.tpl',
+    'moment',
+    'i18next',
     'options!dogodek.barve'
 ], function (
         Marionette,
@@ -21,6 +23,8 @@ define([
         PlanerTedenView,
         PlanerIzbiraDatumaView,
         tpl,
+        moment,
+        i18next,
         barve
         ) {
 
@@ -39,7 +43,6 @@ define([
             tedenR: '.region-teden'
         },
         serializeData: function () {
-            
             return {
                 barve: barve
             };
@@ -93,6 +96,7 @@ define([
                 });
 
                 self.tedenR.show(tedenView);
+                this.$('#tedenVDnevu').html(i18next.t('koledar.teden') + ' #' + moment(datum).format('w') );
             }
         });
 

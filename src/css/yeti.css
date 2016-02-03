@@ -7143,6 +7143,9 @@ Licenca GPLv3
   text-overflow: ellipsis;
   padding: 2px 0;
 }
+#tedenVDnevu {
+  font-weight: bold;
+}
 @media all and (min-width: 768px) {
   .planer-dan {
     border-bottom: solid 1px #999999;

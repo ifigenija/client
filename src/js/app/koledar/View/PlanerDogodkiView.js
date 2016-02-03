@@ -76,7 +76,8 @@ define([
                 isObdelanT: isObdelanT,
                 isObdelan: isObdelan,
                 razredIme: razredIme,
-                barve: barve
+                barve: barve,
+                barvaBesedila: this.textColor( this.model.get('barva') )
             });
         },
         initialize: function (options) {
@@ -134,6 +135,49 @@ define([
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
             }, this);
+        },
+        
+        textColor: function (color) {
+            
+            var trimLeft = /^\s+/;
+            var trimRight = /\s+$/;
+            var textColor, brightness;
+            var hex3 = /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/;
+            var hex6 = /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/;
+            var rgb = { r: 0, g: 0, b: 0 };
+            var darkTextColor = '#000000', lightTextColor = '#ffffff';
+            color = color.replace(trimLeft,'').replace(trimRight, '').toLowerCase();
+            
+            if (match = hex6.exec(color)) {
+
+                rgb.r = parseInt(match[1], 16);
+                rgb.g = parseInt(match[2], 16);
+                rgb.b = parseInt(match[3], 16);
+                
+            } else if(match = hex3.exec(color)){
+                
+                rgb.r = parseInt(match[1] + '' + match[1], 16);
+                rgb.g = parseInt(match[2] + '' + match[2], 16);
+                rgb.b = parseInt(match[3] + '' + match[3], 16);
+            } else {
+                return lightTextColor;
+            }
+            
+            brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+                       
+            //console.log('color',  color );
+            //console.log('rgb',  rgb );
+            //console.log('brightness',  brightness );
+            
+            if(brightness < 128) {
+                textColor = lightTextColor;
+            } else {
+                textColor = darkTextColor;
+            }
+            //console.log('textColor', textColor);
+            
+
+            return textColor;
         }
     });
 
@@ -159,12 +203,6 @@ define([
             //this.listenTo(this.collection, 'all', function(event){ console.log('## Listen ... ' + event); } );
             this.listenTo(this.collection, 'add', this.showCloseButton );
             this.listenTo(this.collection, 'remove', this.hideCloseButton );
-            
-            if (!window.once) {
-                console.group('Barve');console.log(barve);console.groupEnd();
-                console.group('Razredi');console.log(razredi);console.groupEnd();
-                window.once = 1;
-            }
 
         },
         onDodaj: function () {

@@ -4,7 +4,7 @@
     <div class="col-sm-6 region-konflikti"></div>
 </div>
 <div class="planer-legenda row">
-    <div class="col-sm-1 planer-cell-datum"></div>
+    <div class="col-sm-1 planer-cell-datum"><div id="tedenVDnevu"></div></div>
     <div class="col-sm-3 planer-cell planer-first-cell">{{t "koledar.terminDopoldan"}}</div>
     <div class="col-sm-3 planer-cell">{{t "koledar.terminPopoldan"}}</div>
     <div class="col-sm-3 planer-cell">{{t "koledar.terminZvecer"}}</div>
