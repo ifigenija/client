@@ -9,7 +9,6 @@ define([
     'i18next',
     'app/bars',
     'underscore',
-    'backbone',
     'marionette',
     '../../Model/Dogodki',
     'backgrid',
@@ -19,7 +18,6 @@ define([
         i18next,
         Handlebars,
         _,
-        Backbone,
         Marionette,
         Dogodki,
         Backgrid
@@ -77,8 +75,9 @@ define([
      */
     IzbiraDogodkovView.prototype.initialize = function (options) {
         if (options && options.model) {
-            //želimo pridobiti dogodke, ki se začnejo v času gosto vanja
+            //v primeru da ne podamo kolekcije
             if (!options.collection) {
+                //želimo pridobiti dogodke, ki se začnejo v času gosto vanja
                 var Dog = Dogodki.extend({
                     view: 'mozniPoddogodki'
                 });
@@ -90,7 +89,7 @@ define([
                 this.dogodki.fetch({
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
-            }else{
+            } else {
                 this.dogodki = options.collection;
             }
         }

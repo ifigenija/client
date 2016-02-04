@@ -2,7 +2,6 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
     'i18next',
     'underscore',
     './DogodekView',
@@ -10,7 +9,6 @@ define([
     'template!../tpl/gostovanje-form.tpl',
     'formSchema!gostovanje'
 ], function (
-        Radio,
         i18next,
         _,
         DogodekView,

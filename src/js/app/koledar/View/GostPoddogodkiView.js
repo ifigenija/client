@@ -3,13 +3,11 @@
  */
 define([
     'radio',
-    'baseUrl',
     'i18next',
-    'app/bars',
     'underscore',
     'marionette',
     '../Model/Dogodki',
-    'app/Max/Model/MaxNestedModel',
+    'app/Max/View/Toolbar',
     'app/Max/Module/Backgrid',
     'app/Max/View/BackgridFooter',
     './Wizard/IzbiraDogodkovView',
@@ -19,13 +17,11 @@ define([
     'jquery.jsonrpc'
 ], function (
         Radio,
-        baseUrl,
         i18next,
-        Handlebars,
         _,
         Marionette,
         Dogodki,
-        MaxNestedModel,
+        Toolbar,
         Backgrid,
         BackgridFooter,
         IzbiraDogodkovView,
@@ -86,7 +82,8 @@ define([
         template: template,
         regions: {
             mpDogodkiR: '.region-poddogodki-mozni',
-            pDogodkiR: '.region-poddogodki'
+            pDogodkiR: '.region-poddogodki',
+            toolbarR: '.region-toolbar-poddogodki'
         },
         triggers: {
             'click .dodaj-poddogodke': 'dodaj:poddogodke'
@@ -107,6 +104,7 @@ define([
     GostPoddogodkiView.prototype.onRender = function () {
         this.renderMozniPoddogodki();
         this.renderPoddogodki();
+        this.renderToolbar();
     };
 
     /**
@@ -123,10 +121,10 @@ define([
                         model: self.model,
                         collection: coll
                     });
-                    self.$('.gostovanje-mozni-poddogodki').show();
+                    self.$('.mozni-poddogodki').show();
                     self.mpDogodkiR.show(view);
                 } else {
-                    self.$('.gostovanje-mozni-poddogodki').hide();
+                    self.$('.mozni-poddogodki').hide();
                     self.mpDogodkiR.empty();
                 }
             },
@@ -269,6 +267,50 @@ define([
 
         }, Radio.channel('error').request('handler', 'flash'));
     };
+    
+    /**
+     * Funkcija renderira toolbar view-a
+     * @returns {undefined}
+     */
+    GostPoddogodkiView.prototype.renderToolbar = function () {
+        var groups = [[
+                {
+                    id: 'poddogodki-skrij',
+                    label: i18next.t('std.tiskanje'),
+                    element: 'button-trigger',
+                    trigger: 'skrij'
+                }
+            ]];
+
+        this.toolbarView = new Toolbar({
+            buttonGroups: groups,
+            listener: this
+        });
+
+        this.toolbarR.show(this.toolbarView);
+    };
+    GostPoddogodkiView.prototype.onSkrij = function () {
+        var tb = this.toolbarView.collection;
+        var but = tb.getButton('poddogodki-skrij');
+        but.set({
+            label: 'Pokaži',
+            trigger: 'pokazi'
+        });
+        
+        this.$('.mozni-poddogodki').hide();
+    };
+    
+    GostPoddogodkiView.prototype.onPokazi = function () {
+        var tb = this.toolbarView.collection;
+        var but = tb.getButton('poddogodki-skrij');
+        but.set({
+            label: 'Skrij',
+            trigger: 'skrij'
+        });
+        
+        this.$('.mozni-poddogodki').show();
+    };
+    
 
     return GostPoddogodkiView;
 });
