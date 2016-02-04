@@ -5,12 +5,14 @@ define([
     'marionette',
     'radio',
     'require',
-    './nav'
+    './nav',
+    'app/koledar/Model/TerminiStoritve'
 ], function (
         Marionette,
         Radio,
         require,
-        moduleNav
+        moduleNav,
+        TerminiStoritve
         ) {
 
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
@@ -47,6 +49,25 @@ define([
                     var view = new View();
 
                     ch.command('open', view, 'Zasedenost');
+                    ch.command('enableMenu', 'koledar');
+                });
+            });
+        };
+
+        /**
+         * Koledar posameznika
+         * @returns {undefined}S
+         */
+        mod.koledarPosameznik = function () {
+            require(['../View/KoledarPosameznikaView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
+                require(['fclang/sl'], function () {
+                    var coll = this.collection = new TerminiStoritve();
+                    //trebadodati queryparams za osebo ki gleda koledar
+                    var view = new View({
+                        collection: coll
+                    });
+
+                    ch.command('open', view, 'Moj Koledar');
                     ch.command('enableMenu', 'koledar');
                 });
             });
@@ -128,6 +149,7 @@ define([
                     'koledar/ludje': 'ljudje',
                     'koledar/prostori': 'prostori',
                     'koledar/zasedenost': 'zasedenost',
+                    'koledar/koledarPosameznik': 'koledarPosameznik',
                     'koledar/vaje': 'vaje',
                     'koledar/predstave': 'predstave'
                 }

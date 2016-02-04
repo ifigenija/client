@@ -10,7 +10,7 @@ define([
     'app/Max/View/Toolbar',
     '../Model/TerminiStoritve',
     './ZasedenostView',
-    './ZasedenostKoledarView',
+    './KoledarZasedenostView',
     './Wizard/WizardZasedenostView',
     'template!../tpl/planer-zasedenost.tpl'
 ], function (
@@ -22,7 +22,7 @@ define([
         Toolbar,
         TerminiStoritve,
         ZasedenostView,
-        ZasedenostKoledarView,
+        KoledarZasedenostView,
         WizardZasedenostView,
         tpl
         ) {
@@ -59,7 +59,7 @@ define([
     PlanerZasedenostiView.prototype.renderKoledar = function () {
         var coll = this.collection = new TerminiStoritve();
 
-        var view = this.koledarView = new ZasedenostKoledarView({
+        var view = this.koledarView = new KoledarZasedenostView({
             collection: coll
         });
 
@@ -70,7 +70,7 @@ define([
     };
 
     /**
-     * Funkcija se kliče ko ZasedenostKoledarView proži uredi:zasedenost
+     * Funkcija se kliče ko KoledarZasedenostView proži uredi:zasedenost
      * Funkcija je odgovorna da prikaže podatke zasedenosti(terminaStoritve)
      * @param {type} model
      * @returns {undefined}
@@ -104,7 +104,7 @@ define([
         this.toolbarR.empty();
     };
     /**
-     * Funkcija se kliče ko se v zasedenostKoledarView proži dodaj:zasedenost
+     * Funkcija se kliče ko se v KoledarZasedenostView proži dodaj:zasedenost
      * Funkcija je zadolžena da prikaže wizardZasedenostview in uporabnika vodi skozi korake dodajanja.
      * 
      * @param {type} zacetek

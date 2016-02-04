@@ -29,7 +29,7 @@ define([
     prostori.fetch({error: Radio.channel('error').request('handler', 'xhr')});
     uprizoritve.fetch({error: Radio.channel('error').request('handler', 'xhr')});
 
-    var KoledarFilterView = FilterView.extend({
+    var FilterKoledarView = FilterView.extend({
         //template: filterTpl,
         vrsteFiltrovData: [{
                 title: i18next.t('oseba.izbira'),
@@ -55,5 +55,5 @@ define([
             }]
     });
 
-    return KoledarFilterView;
+    return FilterKoledarView;
 });
