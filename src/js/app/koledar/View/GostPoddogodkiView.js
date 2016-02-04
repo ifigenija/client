@@ -113,7 +113,7 @@ define([
      */
     GostPoddogodkiView.prototype.renderMozniPoddogodki = function () {
         var self = this;
-        
+
         this.dogodki.fetch({
             success: function (coll) {
                 if (coll.length) {
@@ -121,10 +121,10 @@ define([
                         model: self.model,
                         collection: coll
                     });
-                    self.$('.mozni-poddogodki').show();
+                    self.onPokazi();
                     self.mpDogodkiR.show(view);
                 } else {
-                    self.$('.mozni-poddogodki').hide();
+                    self.onSkrij();
                     self.mpDogodkiR.empty();
                 }
             },
@@ -267,7 +267,7 @@ define([
 
         }, Radio.channel('error').request('handler', 'flash'));
     };
-    
+
     /**
      * Funkcija renderira toolbar view-a
      * @returns {undefined}
@@ -276,7 +276,7 @@ define([
         var groups = [[
                 {
                     id: 'poddogodki-skrij',
-                    label: i18next.t('std.tiskanje'),
+                    label: i18next.t('std.skrij'),
                     element: 'button-trigger',
                     trigger: 'skrij'
                 }
@@ -292,25 +292,32 @@ define([
     GostPoddogodkiView.prototype.onSkrij = function () {
         var tb = this.toolbarView.collection;
         var but = tb.getButton('poddogodki-skrij');
-        but.set({
-            label: 'Pokaži',
-            trigger: 'pokazi'
-        });
         
+        var hidden = false;
+        if (!this.dogodki.length) {
+            hidden = true;
+        }
+
+        but.set({
+            label: i18next.t('std.pokazi'),
+            trigger: 'pokazi',
+            hidden: hidden
+        });
+
         this.$('.mozni-poddogodki').hide();
     };
-    
+
     GostPoddogodkiView.prototype.onPokazi = function () {
         var tb = this.toolbarView.collection;
         var but = tb.getButton('poddogodki-skrij');
         but.set({
-            label: 'Skrij',
+            label: i18next.t('std.skrij'),
             trigger: 'skrij'
         });
-        
+
         this.$('.mozni-poddogodki').show();
     };
-    
+
 
     return GostPoddogodkiView;
 });
