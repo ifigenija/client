@@ -14,7 +14,9 @@ define([
     'app/Max/View/BackgridFooter',
     './Wizard/IzbiraDogodkovView',
     '../Model/TerminiStoritve',
-    'template!../tpl/gostovanje-poddog.tpl'
+    'template!../tpl/gostovanje-poddog.tpl',
+    'jquery',
+    'jquery.jsonrpc'
 ], function (
         Radio,
         baseUrl,
@@ -28,7 +30,8 @@ define([
         BackgridFooter,
         IzbiraDogodkovView,
         TerminiStoritve,
-        template
+        template,
+        $
         ) {
 
     var gridMeta = [
@@ -110,7 +113,7 @@ define([
         var Dog = Dogodki.extend({
             view: null
         });
-        
+
         var dogodki = new Dogodki();
         dogodki.queryParams.nadrejenoGostovanje = this.model.get('id');
         dogodki.queryParams.zacetek = this.model.get('zacetek');
@@ -142,6 +145,9 @@ define([
         terminiGostovanja.fetch({
             success: function (coll) {
                 var terminiStoritve = [];
+                coll.each(function (model) {
+                    terminiStoritve.push(model.attributes);
+                });
                 _.each(models, function (model) {
                     if (model) {
                         var termini = model.get('terminiStoritve');
@@ -153,17 +159,20 @@ define([
                                 }
                             });
                             if (!vsebovana) {
-                                termin['planiranZacetek'] = self.model.get('zacetek');
-                                termin['planiranKonec'] = self.model.get('konec');
-                                termin['id'] = null;
+                                termin = _.extend(termin, {
+                                    planiranZacetek: self.model.get('zacetek'),
+                                    planiranKonec: self.model.get('konec'),
+                                    dogodek: dogodekId,
+                                    id: null,
+                                    sodelujoc: true,
+                                    gost: false,
+                                    dezurni: false,
+                                    alternacija: null
+                                });
                                 terminiStoritve.push(termin);
                             }
                         });
                     }
-                });
-
-                coll.each(function (model) {
-                    terminiStoritve.push(model.attributes);
                 });
 
                 self.azurirajTsDogodka(dogodekId, terminiStoritve, models);
@@ -187,8 +196,12 @@ define([
     };
 
     GostPoddogodkiView.prototype.azurirajTsDogodka = function (dogodekId, terminiStoritve, modeli) {
+        var self = this;
+
         var tsji = _.map(terminiStoritve, function (object) {
-            object['dogodek'] = object.dogodek.id;
+            if (_.isObject(object.dogodek)) {
+                object['dogodek'] = dogodekId;
+            }
             return object;
         });
 
@@ -206,10 +219,12 @@ define([
                             message: i18next.t('std.messages.success'),
                             severity: 'success'
                         });
+                        self.onRender();
                     },
                     error: Radio.channel('error').request('handler', 'xhr')
                 });
             });
+
 
         }, function (error) {
             console.log(error);
