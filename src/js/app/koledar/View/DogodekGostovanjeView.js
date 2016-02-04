@@ -45,19 +45,5 @@ define([
         });
         this.detailR.show(view);
     };
-
-    DogodekGostovanjeView.prototype.onBrisi = function (model) {
-        model.destroy({
-            wait: true,
-            success: function () {
-                Radio.channel('error').command('flash', {
-                    message: i18next.t('std.messages.success'),
-                    severity: 'success'
-                });
-            },
-            error: Radio.channel('error').request('handler', 'xhr')
-        });
-    };
-
     return DogodekGostovanjeView;
 });

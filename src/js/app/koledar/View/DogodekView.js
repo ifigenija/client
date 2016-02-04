@@ -451,19 +451,19 @@ define([
 
         switch (razred) {
             case '100s':
-                niz += i18next.t('std.predstava');
+                niz += i18next.t('dogodek.predstava');
                 break;
             case '200s':
-                niz += i18next.t('std.vaja');
+                niz += i18next.t('dogodek.vaja');
                 break;
             case '300s':
-                niz += i18next.t('std.gostovanje');
+                niz += i18next.t('dogodek.gostovanje');
                 break;
             case '400s':
-                niz += i18next.t('std.splosno');
+                niz += i18next.t('dogodek.splosno');
                 break;
             case '600s':
-                niz += i18next.t('std.tehnicni');
+                niz += i18next.t('dogodek.tehnicni');
                 break;
         }
 

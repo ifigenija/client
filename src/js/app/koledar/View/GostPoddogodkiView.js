@@ -33,26 +33,26 @@ define([
         template,
         $
         ) {
-// definicija backgrid za prikaz podrejenih dogodkov gostovanja
+    // definicija backgrid za prikaz podrejenih dogodkov gostovanja
     var gridMeta = [
         {
             cell: 'string',
             editable: false,
-            label: i18next.t('gostovanje.title'),
+            label: i18next.t('dogodek.title'),
             name: 'title',
             sortable: true
         },
         {
             cell: 'string',
             editable: false,
-            label: i18next.t('gostovanje.prostor'),
+            label: i18next.t('dogodek.prostor'),
             name: 'prostor.label',
             sortable: true
         },
         {
             cell: 'string',
             editable: false,
-            label: i18next.t('gostovanje.razred'),
+            label: i18next.t('dogodek.razred'),
             name: 'razred',
             sortable: true
         },
@@ -60,7 +60,7 @@ define([
             headerCell: 'number',
             cell: 'date',
             editable: false,
-            label: i18next.t('gostovanje.zacetek'),
+            label: i18next.t('dogodek.zacetek'),
             name: 'zacetek',
             sortable: true
         },
@@ -68,7 +68,7 @@ define([
             headerCell: 'number',
             cell: 'date',
             editable: false,
-            label: i18next.t('gostovanje.konec'),
+            label: i18next.t('dogodek.konec'),
             name: 'konec',
             sortable: true
         },
