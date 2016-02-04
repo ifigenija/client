@@ -98,6 +98,12 @@ define([
                     label: i18next.t('std.dodaj'),
                     element: 'button-trigger',
                     trigger: 'dodaj'
+                },
+                {
+                    id: 'planer-natisni',
+                    label: i18next.t('std.tiskanje'),
+                    element: 'button-trigger',
+                    trigger: 'natisni'
                 }
             ]];
 
@@ -181,6 +187,10 @@ define([
         }, self);
         view.on('skrij', self.onPreklici, self);
         self.dogodekR.show(view);
+
+    };
+    
+    PlaniranjeView.prototype.onNatisni = function () {
 
     };
 

@@ -1,4 +1,6 @@
+<div class="pull-right region-toolbar"></div>
 <h3>{{t "koledar.nav.planer"}}</h3>
+<div class="clearfix"></div>
 <div class="row">
     <div class="col-sm-6 region-termin"></div>
     <div class="col-sm-6 region-konflikti"></div>

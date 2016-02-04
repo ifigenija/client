@@ -153,6 +153,12 @@ define([
                     label: i18next.t('std.dodaj'),
                     element: 'button-trigger',
                     trigger: 'dodaj'
+                },
+                {
+                    id: 'planiranje-natisni',
+                    label: i18next.t('std.tiskanje'),
+                    element: 'button-trigger',
+                    trigger: 'natisni'
                 }
             ]];
 
@@ -170,6 +176,10 @@ define([
      */
     PlanerZasedenostiView.prototype.onDodaj = function () {
         this.dodajZasedenost();
+    };
+    
+    PlanerZasedenostiView.prototype.onNatisni = function () {
+
     };
 
     return PlanerZasedenostiView;

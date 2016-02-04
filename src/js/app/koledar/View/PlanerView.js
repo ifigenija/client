@@ -10,6 +10,7 @@ define([
     '../Model/PlanerTeden',
     './PlanerTedenView',
     './PlanerIzbiraDatumaView',
+    'app/Max/View/Toolbar',
     'template!../tpl/planer-layout.tpl',
     'moment',
     'i18next',
@@ -22,6 +23,7 @@ define([
         PlanerTeden,
         PlanerTedenView,
         PlanerIzbiraDatumaView,
+        Toolbar,
         tpl,
         moment,
         i18next,
@@ -40,7 +42,8 @@ define([
         regions: {
             terminR: '.region-termin',
             konfliktiR: '.region-konflikti',
-            tedenR: '.region-teden'
+            tedenR: '.region-teden',
+            toolbarR: '.region-toolbar'
         },
         serializeData: function () {
             return {
@@ -65,10 +68,31 @@ define([
             })
         });
 
+        this.renderToolbar();
+
         this.form.on('change', this.naloziDogodke, this);
 
         this.terminR.show(this.form);
     };
+
+    PlanerView.prototype.renderToolbar = function (options) {
+        var groups = [[
+                {
+                    id: 'planer-natisni',
+                    label: i18next.t('std.tiskanje'),
+                    element: 'button-trigger',
+                    trigger: 'natisni'
+                }
+            ]];
+
+        var toolbarView = new Toolbar({
+            buttonGroups: groups,
+            listener: this
+        });
+
+        this.toolbarR.show(toolbarView);
+    };
+
     /**
      * Funkcija naloži evente v fullcalendar
      * V kolikor želimo druge evente vstavit v PlanerView extendamo to funkcijo
@@ -96,13 +120,17 @@ define([
                 });
 
                 self.tedenR.show(tedenView);
-                this.$('#tedenVDnevu').html(i18next.t('koledar.teden') + ' #' + moment(datum).format('w') );
+                this.$('#tedenVDnevu').html(i18next.t('koledar.teden') + ' #' + moment(datum).format('w'));
             }
         });
 
         this.collection.on('change', function () {
             planerTeden.vnesiDogodke(self.collection);
         }, this);
+    };
+    
+    PlanerView.prototype.onNatisni = function () {
+
     };
 
     return PlanerView;
