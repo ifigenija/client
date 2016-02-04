@@ -94,45 +94,36 @@ define([
         this.dogodki.on('backgrid:selected', this.selected, this);
 
         this.seznamR.show(this.gridView);
+        this.trigger('ready', this.model);
     };
 
     IzbiraDogodkovView.prototype.selected = function () {
         var models = this.gridView.getSelectedModels();
-        if (models.length) {
-            var ids = [];
-            ids = _.pluck(models, 'id');
+        var ids = [];
+        ids = _.pluck(models, 'id');
 
-//            var osebe = {};
-//            _.each(models, function (model) {
-//                var ts = model.get('terminiStoritve');
-//                _.each(ts, function (tsModel) {
-//                    osebe[tsModel.oseba.id] = true;
-//                });
-//            });
+        var osebeIds = this.getSodelujoci(models);
 
-            var osebeIds = this.getSodelujoci(models);
-
-            this.model.set('dogodki', ids);
-            this.model.set('sodelujoci', osebeIds);
-            this.trigger('ready', this.model);
-        } else {
-            this.trigger('not:ready', this.model);
-        }
+        this.model.set('dogodki', ids);
+        this.model.set('sodelujoci', osebeIds);
+        this.trigger('ready', this.model);
     };
     IzbiraDogodkovView.prototype.getSodelujoci = function () {
         var modeli = this.gridView.getSelectedModels();
         var sodelujoci = {};
         _.each(modeli, function (model) {
-            var ts = model.get('terminiStoritve');
-            _.each(ts, function (tsModel) {
-                sodelujoci[tsModel.oseba.id] = true;
-            });
+            if (model) {
+                var ts = model.get('terminiStoritve');
+                _.each(ts, function (tsModel) {
+                    sodelujoci[tsModel.oseba.id] = true;
+                });
+            }
         });
 
         var sodelujociIds = _.map(sodelujoci, function (oseba, key) {
             return key;
         });
-        
+
         return sodelujociIds;
     };
 

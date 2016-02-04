@@ -31,14 +31,6 @@ define([
                 class: 'form-control'
             }
         },
-        barva: {
-            type: 'ColorPicker',
-            help: i18next.t('dogodek.d.barva'),
-            title: i18next.t('dogodek.barva'),
-            editorAttrs: {
-                class: 'form-control'
-            }
-        },
         vrsta: {
             type: 'Text',
             help: i18next.t('dogodek.d.vrsta'),
@@ -50,7 +42,7 @@ define([
     };
 
     var VnosPodGosView = Form.extend({
-        template: Handlebars.compile('<form><div class="row"><div class="col-sm-6" data-fields="title,vrsta"></div><div class="col-sm-6" data-fields="drzava,barva"></div></div></form>'),
+        template: Handlebars.compile('<form><div class="row"><div class="col-sm-6" data-fields="title,vrsta"></div><div class="col-sm-6" data-fields="drzava"></div></div></form>'),
         schema: schema
     });
 
@@ -61,7 +53,6 @@ define([
             this.title = options.model.get('title');
             this.drzava = options.model.get('drzava');
             this.vrsta = options.model.get('vrsta');
-            this.barva = options.model.get('barva');
         }
 
         this.on('change', this.onChange, this);
@@ -78,9 +69,6 @@ define([
         if (this.vrsta) {
             this.fields.vrsta.editor.setValue(this.vrsta);
         }
-        if (this.barva) {
-            this.fields.barva.editor.setValue(this.barva);
-        }
         this.trigger('change');
     };
 
@@ -91,14 +79,12 @@ define([
     VnosPodGosView.prototype.onChange = function () {
         var title = this.fields.title.getValue();
         var drzava = this.fields.drzava.getValue();
-        var barva = this.fields.barva.getValue();
         var vrsta = this.fields.vrsta.getValue();
 
-        if (title && drzava && barva) {
+        if (title && drzava) {
             this.model.set('title', title);
             this.model.set('drzava', drzava);
             this.model.set('vrsta', vrsta);
-            this.model.set('barva', barva);
             this.trigger('ready', this.model);
         } else {
             this.trigger('not:ready', this.model);
