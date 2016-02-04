@@ -13,6 +13,7 @@ define([
     './Wizard/IzbiraDogodkovView',
     '../Model/TerminiStoritve',
     'template!../tpl/gostovanje-poddog.tpl',
+    'options!dogodek.razred',
     'jquery',
     'jquery.jsonrpc'
 ], function (
@@ -27,8 +28,15 @@ define([
         IzbiraDogodkovView,
         TerminiStoritve,
         template,
+        razredOptions,
         $
         ) {
+
+    var opt = function (options) {
+        return _.map(options, function (x, k) {
+            return [x.label, k];
+        });
+    };
     // definicija backgrid za prikaz podrejenih dogodkov gostovanja
     var gridMeta = [
         {
@@ -46,7 +54,9 @@ define([
             sortable: true
         },
         {
-            cell: 'string',
+            cell: Backgrid.SelectCell.extend({
+                optionValues: opt(razredOptions)
+            }),
             editable: false,
             label: i18next.t('dogodek.razred'),
             name: 'razred',
@@ -252,7 +262,12 @@ define([
             'terminiStoritev': tsji
         }, function () {
             _.each(modeli, function (model) {
-                model.save({nadrejenoGostovanje: self.model.get('id')}, {
+                //določi se id nadrejenega gostovanja
+                //in dogodek se razveže od prostora v primeru da ga je imel
+                model.save({
+                    nadrejenoGostovanje: self.model.get('id'),
+                    prostor: null
+                }, {
                     success: function () {
                         Radio.channel('error').command('flash', {
                             message: i18next.t('std.messages.success'),
@@ -292,7 +307,7 @@ define([
     GostPoddogodkiView.prototype.onSkrij = function () {
         var tb = this.toolbarView.collection;
         var but = tb.getButton('poddogodki-skrij');
-        
+
         var hidden = false;
         if (!this.dogodki.length) {
             hidden = true;
