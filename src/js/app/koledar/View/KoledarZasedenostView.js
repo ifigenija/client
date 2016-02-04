@@ -6,23 +6,23 @@ define([
     'radio',
     'underscore',
     './KoledarView',
-    './ZasedenostFilterView'
+    './FilterZasedenostView'
 ], function (
         Radio,
         _,
         KoledarView,
-        ZasedenostFilterView
+        FilterZasedenostView
         ) {
 
-    var PlanerZasedenostView = KoledarView.extend({
-        FilterView: ZasedenostFilterView
+    var KoledarZasedenost = KoledarView.extend({
+        FilterView: FilterZasedenostView
     });
 
     /**
      * Definicija Fullcalendarja
      * @returns {undefined}
      */
-    PlanerZasedenostView.prototype.initialize = function () {
+    KoledarZasedenost.prototype.initialize = function () {
         var self = this;
         this.koledarOptions = {
             header: {
@@ -72,7 +72,7 @@ define([
      * @param {type} view
      * @returns {undefined}
      */
-    PlanerZasedenostView.prototype.select = function (start, end, jsEvent, view) {
+    KoledarZasedenost.prototype.select = function (start, end, jsEvent, view) {
         this.options.view.trigger('dodaj:zasedenost', start, end);
     };
 
@@ -89,7 +89,7 @@ define([
      * @param {type} view
      * @returns {undefined}
      */
-    PlanerZasedenostView.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
+    KoledarZasedenost.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
         //poišči kliknjen event c kolekciji
         var model = fcEvent.source.coll.get(fcEvent.id);
         model.save({planiranZacetek: fcEvent.start.toISOString(), planiranKonec: fcEvent.end.toISOString()}, {
@@ -110,11 +110,11 @@ define([
      * @param {type} view
      * @returns {undefined}
      */
-    PlanerZasedenostView.prototype.eventClick = function (fcEvent, jsEvent, view) {
+    KoledarZasedenost.prototype.eventClick = function (fcEvent, jsEvent, view) {
         var model = fcEvent.source.coll.get(fcEvent.id);
         this.trigger('uredi:zasedenost', model);
     };
 
-    return PlanerZasedenostView;
+    return KoledarZasedenost;
 });
 

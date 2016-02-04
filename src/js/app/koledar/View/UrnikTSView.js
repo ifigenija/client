@@ -99,11 +99,17 @@ define([
                 timelineTwoDays: {
                     type: 'timeline',
                     duration: {days: 2},
+                    slotDuration: {hours: 1},
+                    slotLabelInterval: {hours: 2},
+                    snapDuration: {minutes: 30},
                     buttonText: i18next.t('koledar.dvaDni')
                 },
                 timelineThreeDays: {
                     type: 'timeline',
                     duration: {days: 3},
+                    slotDuration: {hours: 1},
+                    slotLabelInterval: {hours: 2},
+                    snapDuration: {minutes: 30},
                     buttonText: i18next.t('koledar.triDni')
                 }
             },

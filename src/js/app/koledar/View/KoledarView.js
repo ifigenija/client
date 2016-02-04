@@ -8,7 +8,7 @@ define([
     'underscore',
     'jquery',
     'template!../tpl/koledar-layout.tpl',
-    './KoledarFilterView',
+    './FilterKoledarView',
     '../Model/RazredDogodek',
     'fc-schedule'
 ], function (
@@ -18,7 +18,7 @@ define([
         _,
         $,
         tpl,
-        KoledarFilterView,
+        FilterKoledarView,
         Dogodek
         ) {
 
@@ -34,7 +34,7 @@ define([
         }
     });
     KoledarView.prototype.initialize = function (options) {
-        this.FilterView = options.FilterView || KoledarFilterView;
+        this.FilterView = options.FilterView || FilterKoledarView;
         this.koledarOptions = options.koledarOptions || this.koledarOptions;
     };
     KoledarView.prototype.onRender = function () {

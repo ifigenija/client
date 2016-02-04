@@ -79,11 +79,17 @@ define([
                 timelineTwoDays: {
                     type: 'timeline',
                     duration: {days: 2},
+                    slotDuration: {hours: 1},
+                    slotLabelInterval: {hours: 2},
+                    snapDuration: {minutes: 30},
                     buttonText: i18next.t('koledar.dvaDni')
                 },
                 timelineThreeDays: {
                     type: 'timeline',
                     duration: {days: 3},
+                    slotDuration: {hours: 1},
+                    slotLabelInterval: {hours: 2},
+                    snapDuration: {minutes: 30},
                     buttonText: i18next.t('koledar.triDni')
                 }
             },
@@ -92,7 +98,7 @@ define([
             editable: true,
             lang: 'sl',
             now: this.datum,
-            minTime: "06:00:00",
+            minTime: "08:00:00",
             scrollTime: "10:00:00",
             timeFormat: 'H(:mm)',
             defaultView: 'timelineDay',
@@ -127,12 +133,12 @@ define([
                         self.collection.fetch({
                             success: function (coll) {
                                 var odstrani = [];
-                                coll.each(function(model){
-                                    if(model.get('id') === self.dogodek.get('id')){
+                                coll.each(function (model) {
+                                    if (model.get('id') === self.dogodek.get('id')) {
                                         odstrani.push(model);
                                     }
                                 });
-                                
+
                                 coll.remove(odstrani);
                                 callback(coll.getEventObjects());
                             },
@@ -161,7 +167,7 @@ define([
             self.ui.koledar.fullCalendar(options);
         }, 200);
     };
-    
+
     UrnikProstorView.prototype.eventAfterRender = function (fcEvent, element, view) {
         element.attr('title', fcEvent.title);
     };
