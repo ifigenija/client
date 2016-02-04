@@ -33,7 +33,7 @@ define([
         template,
         $
         ) {
-
+// definicija backgrid za prikaz podrejenih dogodkov gostovanja
     var gridMeta = [
         {
             cell: 'string',
@@ -102,6 +102,10 @@ define([
         this.renderPoddogodki();
     };
 
+    /**
+     * Izris možnih podrejenih dogodkov 
+     * @returns {undefined}
+     */
     GostPoddogodkiView.prototype.renderMozniPoddogodki = function () {
         var view = this.mozniPoddogodki = new IzbiraDogodkovView({
             model: this.model
@@ -109,11 +113,14 @@ define([
         this.mpDogodkiR.show(view);
     };
 
+    /**
+     * Izris obstoječi podrejeni dogodki
+     * iz serverja pridobimo seznam podrejenih dogodkov ki ga potem prikažemo
+     * @returns {undefined}
+     */
     GostPoddogodkiView.prototype.renderPoddogodki = function () {
-        var Dog = Dogodki.extend({
-            view: null
-        });
-
+        //iz serverja zahtevamo seznam dogodkov s podanim nadrejenimGostovanjem
+        //čas začetek in konec samo dokler še ni liste
         var dogodki = new Dogodki();
         dogodki.queryParams.nadrejenoGostovanje = this.model.get('id');
         dogodki.queryParams.zacetek = this.model.get('zacetek');
@@ -125,14 +132,23 @@ define([
             columns: gridMeta,
             footer: BackgridFooter.extend({columns: gridMeta})
         });
-
+        
+        //ob kliku na gumbe v action cellu
         dogodki.on('backgrid:action', function (model, action) {
             this.triggerMethod(action, model);
         }, this);
 
         this.pDogodkiR.show(grid);
     };
-
+    /**
+     * Ob kliku na gumb dodaj se izvede naslednja funkcija.
+     * Namen funkcije je da označene dogodke dodamo v gostovanje
+     * Postopek dodajanja dogodka je naslednji:
+     * 1. dogodek s termini storitvami mora biti creiran
+     * 2. terminestoritve izbranega dogodka je potrebno umestit v gostovanje kot sodelujoče
+     * 3. dogodku s termini storitvami nastavimo nadrejenoGostovanje in ga updatamo
+     * @returns {undefined}
+     */
     GostPoddogodkiView.prototype.onDodajPoddogodke = function () {
         var models = this.mozniPoddogodki.gridView.getSelectedModels();
 
@@ -144,13 +160,17 @@ define([
 
         terminiGostovanja.fetch({
             success: function (coll) {
+                //trenutno stanje terminov storitev v gostovanju
                 var terminiStoritve = [];
                 coll.each(function (model) {
                     terminiStoritve.push(model.attributes);
                 });
+                //iz označenih modelov izluščimo termine storitve
                 _.each(models, function (model) {
                     if (model) {
                         var termini = model.get('terminiStoritve');
+                        //termine storitve primerjamo s trenutnim stanjem terminov storitev
+                        //v primeru da oseba obstaja v trenutnem seznamu ts se ts iz dogodka ne doda
                         _.each(termini, function (termin) {
                             var vsebovana = false;
                             _.each(terminiStoritve, function (ts) {
@@ -158,6 +178,7 @@ define([
                                     vsebovana = true;
                                 }
                             });
+                            //v kolikor osebe ni v ts gostovanja se ts pretvori v nov ts kot sodelujoc in začetkom in koncem od gostovanja
                             if (!vsebovana) {
                                 termin = _.extend(termin, {
                                     planiranZacetek: self.model.get('zacetek'),
@@ -174,10 +195,8 @@ define([
                         });
                     }
                 });
-
+                //novo stanje terminov storitev na gostovanju ažuriramo
                 self.azurirajTsDogodka(dogodekId, terminiStoritve, models);
-
-                console.log(terminiStoritve);
             }
         });
     };
@@ -226,9 +245,7 @@ define([
             });
 
 
-        }, function (error) {
-            console.log(error);
-        });
+        }, Radio.channel('error').request('handler', 'flash'));
     };
 
     return GostPoddogodkiView;
