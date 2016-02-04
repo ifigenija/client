@@ -39,6 +39,9 @@ define([
         serializeData: function () {
             var isPlaniran, isPregledan, isPotrjen, isZakljucen, isOdpovedan, isObdelanI, isObdelanT, isObdelan;
             var razredIme = razredi[this.razred].type;
+            
+            var barvaIzNastavitev = barve['vaja'].value;
+            
             switch (this.model.get('status')) {
                 case '200s':
                     isPlaniran = true;
@@ -77,7 +80,11 @@ define([
                 isObdelan: isObdelan,
                 razredIme: razredIme,
                 barve: barve,
-                barvaBesedila: this.textColor( this.model.get('barva') )
+                barvaBesedila: this.textColor(
+                        this.model.get('barva'), barvaIzNastavitev
+                        //{lightTextColor: '#ff0000', darkTextColor: '#00ff00'} 
+                        //,{ darkTextColor: '#000055'} 
+                        )
             });
         },
         initialize: function (options) {
@@ -137,7 +144,15 @@ define([
             }, this);
         },
         
-        textColor: function (color) {
+        textColor: function (color, colorFromOptions, textColors ) {
+            
+            //see: https://github.com/bgrins/TinyColor/blob/master/tinycolor.js
+            
+            //console.log('textColor: color', color);
+            //console.log('textColor: colorFromOptions', colorFromOptions);
+            //console.log('textColor: textColors', textColors);
+            
+            if( !(color) || (color=='') ) { color = colorFromOptions; }
             
             var trimLeft = /^\s+/;
             var trimRight = /\s+$/;
@@ -145,7 +160,9 @@ define([
             var hex3 = /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/;
             var hex6 = /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/;
             var rgb = { r: 0, g: 0, b: 0 };
-            var darkTextColor = '#000000', lightTextColor = '#ffffff';
+            var darkTextColor  = (textColors)? textColors.darkTextColor  : '#000000',
+                lightTextColor = (textColors)? textColors.lightTextColor : '#ffffff';
+            
             color = color.replace(trimLeft,'').replace(trimRight, '').toLowerCase();
             
             if (match = hex6.exec(color)) {
@@ -164,18 +181,13 @@ define([
             }
             
             brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
-                       
-            //console.log('color',  color );
-            //console.log('rgb',  rgb );
             //console.log('brightness',  brightness );
             
             if(brightness < 128) {
                 textColor = lightTextColor;
             } else {
                 textColor = darkTextColor;
-            }
-            //console.log('textColor', textColor);
-            
+            }           
 
             return textColor;
         }

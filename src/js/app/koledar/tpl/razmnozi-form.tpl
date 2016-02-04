@@ -1,4 +1,4 @@
-<form>
+<form id="razmnozi-form">
     <div class="row">
         <div class="col-md-6">
             <fieldset>
@@ -7,7 +7,7 @@
                 </legend>
                 <div id="zacetek-konec" data-fields="zacetek,konec"></div>
                 
-                <div data-fields="stevilo" id="stevilo" style="display: none"></div>
+                <div data-fields="stevilo_ponovitev" id="stevilo-ponovitev" style="display: none"></div>
             </fieldset>
         </div>
         <div class="col-md-6">
@@ -70,7 +70,7 @@
       </tbody> 
     </table>
   </div>
-       
+<div data-fields="show_mode"></div>       
         
 </form>
 <style type="text/css">

@@ -30,4 +30,4 @@
         
     </span>
 
-</div>{{!--  {{log this}} --}}
+</div>{{!-- {{log this}} --}}  

@@ -389,21 +389,19 @@ define([
             var h = ('00'+terminObj.h).substr(-2);
             var m = ('00'+terminObj.m).substr(-2);
             return h + ':' + m;
-        }
+        };
         
-        var add_day = function( adate ) {
+        var add_day = function(adate) {
             
             var nextDay = moment(adate).add(1, 'day').startOf('day');
-
-            //console.log( moment(nextDay).toISOString() );
-            
             return nextDay;
-        }
+        };
         
         var razmnoziView = new RazmnoziView({
             model: new Backbone.Model({
-                id: this.model.get('id'),
+                id: this.model.get('dogodek').id,
                 dni: ["1", "2", "3", "4", "5", "6", "7"],
+                show_mode: '',
                 termini: [
                     {kratica: "dop", ime: i18next.t('Dopoldan')},
                     {kratica: "pop", ime: i18next.t('Popoldan')},
@@ -424,9 +422,14 @@ define([
             this.koledarR.empty();
             this.renderFormAndToolbar();
         }, this);
+        
         razmnoziView.on('save:success', function () {
             this.koledarR.empty();
-            this.renderFormAndToolbar();
+            this.trigger('skrij', this);
+            //this.renderFormAndToolbar();
+            
+            
+            
         }, this);
 
         //ko narišemo izrisujemo koledar skrijemo formo in toolbar
