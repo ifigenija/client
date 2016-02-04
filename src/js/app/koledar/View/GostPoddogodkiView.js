@@ -95,6 +95,13 @@ define([
 
     GostPoddogodkiView.prototype.initialize = function (options) {
         this.model = options.model || this.model;
+
+        var Dog = Dogodki.extend({
+            view: 'mozniPoddogodki'
+        });
+        this.dogodki = new Dog();
+        this.dogodki.queryParams.zacetek = this.model.get('zacetek');
+        this.dogodki.queryParams.konec = this.model.get('konec');
     };
 
     GostPoddogodkiView.prototype.onRender = function () {
@@ -107,10 +114,25 @@ define([
      * @returns {undefined}
      */
     GostPoddogodkiView.prototype.renderMozniPoddogodki = function () {
-        var view = this.mozniPoddogodki = new IzbiraDogodkovView({
-            model: this.model
+        var self = this;
+        
+        this.dogodki.fetch({
+            success: function (coll) {
+                if (coll.length) {
+                    var view = self.mozniPoddogodki = new IzbiraDogodkovView({
+                        model: self.model,
+                        collection: coll
+                    });
+                    self.$('.gostovanje-mozni-poddogodki').show();
+                    self.mpDogodkiR.show(view);
+                } else {
+                    self.$('.gostovanje-mozni-poddogodki').hide();
+                    self.mpDogodkiR.empty();
+                }
+            },
+            error: Radio.channel('error').request('handler', 'xhr')
         });
-        this.mpDogodkiR.show(view);
+
     };
 
     /**
@@ -132,7 +154,7 @@ define([
             columns: gridMeta,
             footer: BackgridFooter.extend({columns: gridMeta})
         });
-        
+
         //ob kliku na gumbe v action cellu
         dogodki.on('backgrid:action', function (model, action) {
             this.triggerMethod(action, model);

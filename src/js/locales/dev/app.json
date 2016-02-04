@@ -1814,6 +1814,8 @@
         "splosno": "Splošni dogodek",
         "tehnicni": "Tehnični dogodek",
         "gostovanje": "Gostovanje",
+        "mozniPoddogodki": "Dogodki v času gostovanja",
+        "poddogodki": "Dogodki na gostovanju",
         "d": {
             "allDay": "Dogodek se razteza skozi cel dan",
             "zacetek": "",

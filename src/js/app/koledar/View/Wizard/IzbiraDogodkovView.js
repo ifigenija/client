@@ -76,19 +76,23 @@ define([
      * @returns {undefined}
      */
     IzbiraDogodkovView.prototype.initialize = function (options) {
-        var Dog = Dogodki.extend({
-            view: 'mozniPoddogodki'
-        });
-        this.dogodki = new Dog();
         if (options && options.model) {
             //želimo pridobiti dogodke, ki se začnejo v času gosto vanja
-            this.model = options.model;
-            this.dogodki.queryParams.zacetek = this.model.get('zacetek');
-            this.dogodki.queryParams.konec = this.model.get('konec');
+            if (!options.collection) {
+                var Dog = Dogodki.extend({
+                    view: 'mozniPoddogodki'
+                });
+                this.dogodki = new Dog();
+                this.model = options.model;
+                this.dogodki.queryParams.zacetek = this.model.get('zacetek');
+                this.dogodki.queryParams.konec = this.model.get('konec');
 
-            this.dogodki.fetch({
-                error: Radio.channel('error').request('handler', 'xhr')
-            });
+                this.dogodki.fetch({
+                    error: Radio.channel('error').request('handler', 'xhr')
+                });
+            }else{
+                this.dogodki = options.collection;
+            }
         }
     };
 
