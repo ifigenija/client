@@ -256,6 +256,7 @@
         "nova": "Nov Abonma",
         "ime": "Naziv",
         "opis": "Opis",
+        "barva": "Barva",
         "kapaciteta": "Kapaciteta",
         "nova": "Nov Abonma",
         "stPredstav": "Število predstav",
@@ -264,6 +265,7 @@
             "ime": "",
             "opis": "",
             "kapaciteta": "",
+            "barva": "Barva",
             "stPredstav": "",
             "stKuponov": ""
         }
@@ -297,6 +299,7 @@
         "jePrizorisce": "Prizorišče",
         "jeMaticniOder": "Matični oder",
         "sePlanira": "Prostor se planira",
+        "barva": "Barva",
         "izbira": "Izberi prostore",
         "d": {
             "sifra": "Enolična oznaka",
@@ -307,6 +310,7 @@
             "jePrizorisce": "Ali je prostor prizorišče.",
             "sePlanira": "Ali se upošteva pri planiranju koledarja.",
             "jeMaticniOder": "Ali je prostor matični oder",
+            "barva": "Barva",
             "kapaciteta": "Število mest v prostoru."
         }
     },
@@ -1739,6 +1743,9 @@
     },
     "predstava": {
         "title": "Predstave",
+        "zaporednaSezVsehUpr": "Zap. št. predstave v sezoni vseh uprizoritev",
+        "zaporedna": "Zap. št. predstave",
+        "zaporednaSez": "Zap. št. predstave v sezoni",
         "zaporedna": "Zaporedna št.",
         "zaporednaSez": "Zaporedna št. v sezoni",
         "objavljenZacetek": "Začetek za objavo",
@@ -1749,8 +1756,9 @@
         "dezurni": "Dežurni",
         "abonmaji": "Abonmaji",
         "d": {
-            "zaporedna": "Zaporedna številka predstave",
-            "zaporednaSez": "Zaporedna številka predstave v sezoni",
+            "zaporednaSezVsehUpr": "Zaporedna številka predstave v sezoni (ne glede na uprizoritev)",
+            "zaporedna": "Zaporedna številka predstave določene uprizoritve  (v vseh sezonah)",
+            "zaporednaSez": "Zaporedna številka predstave določene uprizoritve v sezoni",
             "porocilo": "",
             "dogodek": "",
             "uprizoritev": "",
@@ -1790,6 +1798,7 @@
         "dodajTehnicni": "Dodaj tehnični dogodek",
         "dodajSplosni": "Dodaj splošni dogodek",
         "dodajGostovanje": "Dodaj gostovanje",
+        "barva": "Barva",
         "d": {
             "allDay": "Dogodek se razteza skozi cel dan",
             "zacetek": "",
@@ -1804,6 +1813,7 @@
             "gostovanje": "",
             "splosni": "Dogodek, ki ni ne vaja, ne predstava, ne gostovanje, zaseda pa prostor",
             "tehnicni": "Samostojni dogodek za planiranje tehničnega osebja",
+            "barva": "Barva",
             "prostor": "",
             "sezona": ""
         }
