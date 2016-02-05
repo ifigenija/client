@@ -379,6 +379,7 @@ define([
             if(this.validationError > 0) {
                 
                 Radio.channel('error').command('flash', {message: 'Ura pričetka je v napačnem formatu',   severity: 'error'});
+                return false;
             }
         }
 
