@@ -92,7 +92,7 @@ define([
      * @returns {undefined}
      */
     PregledView.prototype.renderKoledar = function () {
-        var view = this.koledarView = new KoledarView({
+        var view = this.koledarView = new this.KoledarView({
             collection: this.collection
         });
 
