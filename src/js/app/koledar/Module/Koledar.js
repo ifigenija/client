@@ -6,13 +6,15 @@ define([
     'radio',
     'require',
     './nav',
-    'app/koledar/Model/TerminiStoritve'
+    'app/koledar/Model/TerminiStoritve',
+    'app/koledar/Model/Dogodki'
 ], function (
         Marionette,
         Radio,
         require,
         moduleNav,
-        TerminiStoritve
+        TerminiStoritve,
+        Dogodki
         ) {
 
     var modInit = function (mod, App, Backbone, Marionette, $, _) {
@@ -31,7 +33,7 @@ define([
             require(['../View/PlanerView', '../Model/Resursi', '.'], function (PlanerView, resursi, FilterView) {
                 var calView = new PlanerView({
                     resCollection: resursi.prostori,
-                    filterView: new FilterView(),
+                    filterView: new FilterView()
                 });
                 ch.command('open', calView, 'Planer');
                 ch.command('enableMenu', 'koledar');
@@ -44,9 +46,12 @@ define([
          * @returns {undefined}S
          */
         mod.zasedenost = function () {
-            require(['../View/PlanerZasedenostView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
+            require(['../View/PregledZasedenostView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
                 require(['fclang/sl'], function () {
-                    var view = new View();
+                    var coll = new TerminiStoritve();
+                    var view = new View({
+                        collection: coll
+                    });
 
                     ch.command('open', view, 'Zasedenost');
                     ch.command('enableMenu', 'koledar');
@@ -61,7 +66,7 @@ define([
         mod.koledarPosameznik = function () {
             require(['../View/KoledarPosameznikaView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
                 require(['fclang/sl'], function () {
-                    var coll = this.collection = new TerminiStoritve();
+                    var coll = new TerminiStoritve();
                     //trebadodati queryparams za osebo ki gleda koledar
                     var view = new View({
                         collection: coll
@@ -79,9 +84,12 @@ define([
          * @returns {undefined}
          */
         mod.pregled = function () {
-            require(['../View/PlaniranjeView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
+            require(['../View/PregledDogodkiView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
                 require(['fclang/sl'], function () {
-                    var view = new View();
+                    var coll = new Dogodki();
+                    var view = new View({
+                        collection: coll
+                    });
 
                     ch.command('openTab', view, 'Planiranje');
                     ch.command('enableMenu', 'koledar');
@@ -138,6 +146,8 @@ define([
          */
         mod.addInitializer(function (options) {
             App.nav.registerNav(moduleNav);
+
+            ch.comply('osveziPlaner', mod.planer);
 
             new Marionette.AppRouter({
                 controller: mod,

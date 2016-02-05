@@ -117,6 +117,7 @@ define([
             }, self);
             wizardView.on('save:success', function (model) {
                 this.options.collection.add(model);
+                this.trigger('save:success');
             }, self);
 
             self.contentR.show(wizardView);

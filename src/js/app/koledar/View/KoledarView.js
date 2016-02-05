@@ -111,7 +111,7 @@ define([
     };
     KoledarView.prototype.select = function (start, end, jsEvent, view) {
         var view = this.options.view;
-        view.trigger('dodaj:dogodek', start, end);
+        view.trigger('dodaj:event', start, end);
     };
     KoledarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
         var dogodekModel = fcEvent.source.coll.get(fcEvent.id);
@@ -148,7 +148,7 @@ define([
         var self = this;
         model.fetch({
             success: function () {
-                self.trigger('prikazi:dogodek', model);
+                self.trigger('uredi:event', model);
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
