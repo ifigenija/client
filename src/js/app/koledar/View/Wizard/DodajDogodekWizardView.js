@@ -91,7 +91,7 @@ define([
                         viewsOptions: [
                             {},
                             {schemaOptions: prostori},
-                            {}
+                            {izberiOsebe: false}
                         ]
                     });
                     break;
@@ -101,7 +101,10 @@ define([
                         title: i18next.t('dogodek.dodajTehnicni'),
                         viewsOptions: [
                             {},
-                            {schemaOptions: prostori},
+                            {
+                                schemaOptions: prostori,
+                                izberiProstor: false
+                            },
                             {}
                         ]
                     });

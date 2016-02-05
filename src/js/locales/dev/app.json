@@ -55,6 +55,7 @@
         "terminZvecer": "Zvečer",
         "dnevniRedTeden": "Teden po urah",
         "zasedenost": "Zasedenosti",
+        "posameznik": "Moj koledar",
         "pregled": "Pregled dogodkov",
         "dvaDni": "Dva dni",
         "triDni": "Tri dni",
@@ -190,6 +191,7 @@
         "nedoloceno": "Nedoločeno",
         "tiskanje": "Tiskanje",
         "pokazi": "Pokaži",
+        "razred": "Tip dogodka",
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
@@ -319,6 +321,7 @@
         "sePlanira": "Prostor se planira",
         "barva": "Barva",
         "izbira": "Izberi prostore",
+        "brez": "Brez prostora",
         "d": {
             "sifra": "Enolična oznaka",
             "opis": "",

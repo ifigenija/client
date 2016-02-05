@@ -64,7 +64,7 @@ define([
          * @returns {undefined}S
          */
         mod.koledarPosameznik = function () {
-            require(['../View/KoledarPosameznikaView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
+            require(['../View/PregledPosameznikaView', 'jquery', 'fullcalendar', 'fc-schedule'], function (View) {
                 require(['fclang/sl'], function () {
                     var coll = new TerminiStoritve();
                     //trebadodati queryparams za osebo ki gleda koledar

@@ -28,26 +28,42 @@ define([
     IzbiraSodelujociView.prototype.initialize = function (options) {
         if (options && options.model) {
             this.model = options.model || this.model;
+            
+            if (typeof (options.izberiOsebe) !== 'undefined') {
+                this.izberiOsebe = options.izberiOsebe;
+            } else {
+                this.izberiOsebe = true;
+            }
         }
 
         this.on('change', this.onChange, this);
     };
-    
+
 
     IzbiraSodelujociView.prototype.onRender = function () {
         var o = new LookupModel([], {
             entity: 'oseba'
         });
+        
+        if (this.izberiOsebe) {
+            this.trigger('not:ready');
+        } else {
+            this.trigger('ready', this.model);
+        }
 
         var self = this;
         this.sodelujoci = new Backbone.Collection();
 
         this.sodelujoci.on('change remove', function () {
-            if(self.sodelujoci.length){
+            if (self.sodelujoci.length) {
                 self.model.set('sodelujoci', self.sodelujoci.pluck('id'));
                 self.trigger('ready', self.model);
-            }else{
-                self.trigger('not:ready');
+            } else {
+                if (self.izberiOsebe) {
+                    self.trigger('not:ready');
+                } else {
+                    self.trigger('ready', self.model);
+                }
             }
         }, this);
 

@@ -3,12 +3,10 @@
  */
 
 define([
-    'radio',
     'underscore',
     './KoledarView',
     './FilterPosameznikView'
 ], function (
-        Radio,
         _,
         KoledarView,
         FilterPosameznikView
@@ -42,7 +40,7 @@ define([
                         var vrednosti = self.vrednostiFiltrov;
                         self.collection.queryParams.zacetek = zacetek.format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
                         self.collection.queryParams.konec = konec.format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
-                        self.collection.queryParams.zasedenost = true;
+                        self.collection.queryParams.oseba = sessionStorage.getItem('ifi.user.data').osebaId;
                         self.collection.queryParams = _.extend(self.collection.queryParams, vrednosti);
                         self.collection.fetch({
                             success: function (coll) {
@@ -61,7 +59,6 @@ define([
 
     /**
      * Funkcija se kliče ko kliknemo na event v full calendarju.
-     * Funkcija je zadolžena da proži uredi:zasedenost.
      * 
      * Parametri so definirani na http://fullcalendar.io/docs/mouse/eventClick/
      * @param {type} fcEvent
@@ -71,7 +68,7 @@ define([
      */
     KoledarPosameznikaView.prototype.eventClick = function (fcEvent, jsEvent, view) {
         var model = fcEvent.source.coll.get(fcEvent.id);
-        this.trigger('uredi:zasedenost', model);
+        this.trigger('uredi:event', model);
     };
 
     return KoledarPosameznikaView;
