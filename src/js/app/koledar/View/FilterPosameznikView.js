@@ -5,12 +5,14 @@ define([
     'i18next',
     'radio',
     'backbone',
-    '../../filter/View/FilterView'
+    '../../filter/View/FilterView',
+    'app/filter/View/ToggleListView'
 ], function (
         i18next,
         Radio,
         Backbone,
-        FilterView
+        FilterView,
+        ToggleListView
         ) {
 //v idju je vrednost razreda ker filter sestavi url z idji
     var modeli = [
@@ -54,7 +56,8 @@ define([
                 icon: 'fa fa-cubes',
                 stIzpisov: 2,
                 mozni: osebe,
-                label: i18next.t('std.razred')
+                label: i18next.t('std.razred'),
+                SelectView: ToggleListView
             }]
     });
 

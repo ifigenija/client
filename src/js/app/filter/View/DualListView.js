@@ -82,13 +82,13 @@ define([
         this.ItemView = options.ItemView || null;
         this.itemTemplate = options.itemTemplate || null;
         this.$anchor = options.$anchor || null;
-        
+
         //naredimo nov collection kjer si shranemo prvotno stanje v primeru da uporabnik prekliče postopek
         this.izbraniPreklici = new Backbone.Collection(this.izbrani.models);
 
         //poslušamo resize event od windowa in naredimo proxy, da se uporabi pravi konteks pri klicanju funkcije
         $(window).on('resize', jQuery.proxy(this, "resize"));
-        
+
         this.izbrani.on('update change', this.resize, this);
         this.mozni.on('update change', this.resize, this);
     };
@@ -172,7 +172,7 @@ define([
             ItemView: this.ItemView,
             itemTemplate: this.itemTemplate
         });
-        view.on('izbran:model', this.izbranDesno, this);        
+        view.on('izbran:model', this.izbranDesno, this);
 
         this.leviSeznamR.show(view);
         return view;
@@ -206,7 +206,7 @@ define([
         this.filtrirajIzbrane();
         this.refresh();
     };
-    
+
     DualListView.prototype.izbranDesno = function (model) {
         this.izbraniView.collection.add(model);
 
@@ -226,14 +226,14 @@ define([
         this.filtrirajIzbrane();
         this.refresh();
     };
-    
+
     DualListView.prototype.izbranLevo = function (model) {
         this.izbraniView.collection.remove(model);
 
         this.filtrirajIzbrane();
         this.refresh();
     };
-    
+
 
     /**
      * Premaknemo izbrane elemente iz desnega stolpca v levega
@@ -297,7 +297,9 @@ define([
     DualListView.prototype.onClose = function () {
         $(window).off('resize', jQuery.proxy(this, "resize"));
         this.trigger("changed:vrednosti");
-        this.filterView.clear();
+        if (this.filterView) {
+            this.filterView.clear();
+        }
         this.destroy();
     };
     /**
@@ -309,7 +311,9 @@ define([
         $(window).off('resize', jQuery.proxy(this, "resize"));
         this.izbrani.reset(this.izbraniPreklici.models);
         this.trigger("changed:vrednosti");
-        this.filterView.clear();
+        if (this.filterView) {
+            this.filterView.clear();
+        }
         this.destroy();
     };
 
