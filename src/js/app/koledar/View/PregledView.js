@@ -107,7 +107,13 @@ define([
      * @param {type} model
      * @returns {undefined}
      */
-    PregledView.prototype.onUredi = function (model) {
+    PregledView.prototype.onDodaj = function (model) {
+    };
+    
+    PregledView.prototype.urediEvent = function (model) {
+    };
+
+    PregledView.prototype.dodajEvent = function (model) {
     };
 
     PregledView.prototype.onNatisni = function () {

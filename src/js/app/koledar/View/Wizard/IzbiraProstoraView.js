@@ -41,18 +41,34 @@ define([
         Form.prototype.initialize.apply(this, arguments);
 
         this.options = options;
-        this.model = options.model;
+
+        if (options && options.model) {
+            this.model = options.model || this.model;
+            if (typeof (options.izberiProstor) !== 'undefined') {
+                this.izberiProstor = options.izberiProstor;
+            } else {
+                this.izberiProstor = true;
+            }
+        }
 
         var self = this;
         //ob spremembi izbranega prostora se mora prostor v model tudi zabeležit
         this.on('prostor:change', function (form, editor) {
             //pridobimo vrednost iz editorja. V kolikor ni vrednosti se proži not:ready
             var prostor = editor.getValue();
-            if (prostor) {
+            if (prostor !== '0') {
                 //nastavimo vrednost prostora v modelu
                 self.model.set('prostor', prostor);
+                self.trigger('ready', self.model);
             }
-            self.trigger('ready', self.model);
+            else {
+                if (self.izberiProstor) {
+                    self.trigger('not:ready');
+
+                } else {
+                    self.trigger('ready', self.model);
+                }
+            }
         }, this);
     };
 
