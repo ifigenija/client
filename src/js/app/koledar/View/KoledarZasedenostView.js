@@ -73,7 +73,7 @@ define([
      * @returns {undefined}
      */
     KoledarZasedenost.prototype.select = function (start, end, jsEvent, view) {
-        this.options.view.trigger('dodaj:zasedenost', start, end);
+        this.options.view.trigger('dodaj:event', start, end);
     };
 
     /**
@@ -112,7 +112,7 @@ define([
      */
     KoledarZasedenost.prototype.eventClick = function (fcEvent, jsEvent, view) {
         var model = fcEvent.source.coll.get(fcEvent.id);
-        this.trigger('uredi:zasedenost', model);
+        this.trigger('uredi:event', model);
     };
 
     return KoledarZasedenost;

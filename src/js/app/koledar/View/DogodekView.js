@@ -428,8 +428,7 @@ define([
             this.trigger('skrij', this);
             //this.renderFormAndToolbar();
             
-            
-            
+            Radio.channel('layout').command('osveziPlaner');
         }, this);
 
         //ko narišemo izrisujemo koledar skrijemo formo in toolbar
