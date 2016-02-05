@@ -41,7 +41,7 @@
       <thead>
       <tr>
       <th>{{t "vaja.razmnozi.terminDan"}}</th>
-      <th>Od (ura):</th>
+      <th>Od: [hh:mm]</th>
       <th>{{t "vaja.razmnozi.ponedeljek"}}</th>
       <th>{{t "vaja.razmnozi.torek"}}</th>
       <th>{{t "vaja.razmnozi.sreda"}}</th>

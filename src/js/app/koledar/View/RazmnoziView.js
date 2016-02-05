@@ -90,7 +90,9 @@ define([
         },
                 
        formTemplate: formTpl,
-       buttons: FormView.prototype.defaultButtons
+       buttons: FormView.prototype.defaultButtons,
+       
+       validationError: 0
            
     });
        
@@ -254,8 +256,60 @@ define([
             this.shrani(options);
         }
         
-        
-       
+    };
+    
+    RazmnoziView.prototype.getHourMinute = function ( inputFieldVal ) {
+ 
+        //console.log('inputFieldVal: ', inputFieldVal);
+
+        inputFieldVal = inputFieldVal.trim();
+
+        if(inputFieldVal == '') {
+            return null;
+        }
+
+        var h, m;
+        parts = inputFieldVal.split(':');
+
+        if(parts.length === 2) {
+            var h = parseInt(parts[0], 10);
+            var m = parseInt(parts[1], 10);
+
+            if((h == parts[0]) && (h>=0) && (h<24)) {
+                if((m == parts[1]) && (m>=0) && (m<60)) {
+
+                    return {h: h, m: m};                    
+                } else {
+                    this.validationError = 2;
+                }
+            } else {
+                this.validationError = 3;
+            }
+
+        }
+        this.validationError = 1;
+        return null;
+    };
+
+    RazmnoziView.prototype.getTermini = function(model) {
+        var data = [];
+        var key, i;
+        var terminiVDnevu = ['dop', 'pop', 'zve'];
+
+        data[0] = [];
+        for(var dan=1;dan<8;dan++) {
+            data[dan] = [];
+            for(i in terminiVDnevu) {
+                key = "chk_"+ terminiVDnevu[i] +"_"+ dan;
+                // za debug checkboxov// console.log(key, model.get(key));
+                if(model.get(key) === true) {
+
+                    data[dan].push(terminiVDnevu[i].toUpperCase());
+                }
+            }
+        }
+
+        return data;
     };
     
     /**
@@ -267,54 +321,21 @@ define([
         
         //console.log('shrani');
         
-        var get_termini_fn = function(model) {
-            var data = [];
-            var key, i;
-            var terminiVDnevu = ['dop', 'pop', 'zve'];
-            
-            data[0] = [];
-            for(var dan=1;dan<8;dan++) {
-                data[dan] = [];
-                for(i in terminiVDnevu) {
-                    key = "chk_"+ terminiVDnevu[i] +"_"+ dan;
-                    // za debug checkboxov// console.log(key, model.get(key));
-                    if(model.get(key) === true) {
-                        
-                        data[dan].push(terminiVDnevu[i].toUpperCase());
-                    }
-                }
-            }
-            //data = [[], ['DOP'], ['DOP']];
-            
-            return data;
-        };
-        
-        var get_casi_pricetka_fn = function(model) {
-            
-            var d,p,z;
-            d = model.get('time_dop').split(':');
-            p = model.get('time_pop').split(':');
-            z = model.get('time_zve').split(':');
-            
-            var data = {
-                dop: {
-                        h: parseInt(d[0], 10),
-                        m: parseInt(d[1], 10)
-                },
-                pop: {
-                        h: parseInt(p[0], 10),
-                        m: parseInt(p[1], 10)
-                },
-                zve: {
-                        h: parseInt(z[0], 10),
-                        m: parseInt(z[1], 10)
-                     }
-            };
-            
-            return data;
-        };
-        
 
+                      
+        var get_dopoldanOd = function(model) {          
+            return self.getHourMinute(model.get('time_dop'));
+        };
+
+
+        var get_popoldanOd = function(model) {
+            return self.getHourMinute(model.get('time_pop'));
+        };
+
+        var get_zvecerOd = function(model) {
+            return self.getHourMinute(model.get('time_zve'));
+        };
+        
         var steviloPonovitev = 0;
         if (typeof this.model.get('stevilo_ponovitev') !== 'undefined') {
             steviloPonovitev = +this.model.get('stevilo_ponovitev');
@@ -334,9 +355,31 @@ define([
             _.extend(this.callObject, {
                 zacetekObdobja: this.model.get('zacetek'),
                 konecObdobja: moment(this.model.get('konec')).endOf('day').toISOString(),
-                tedenskiTermini: get_termini_fn(this.model),
-                casiPricetka: get_casi_pricetka_fn(this.model)
+                tedenskiTermini: this.getTermini(this.model)
+                
             });
+            
+            var dopoldanOd = get_dopoldanOd(this.model);
+            if(dopoldanOd !== null) {
+                this.callObject.dopoldanOd = dopoldanOd;
+            }
+            
+            var popoldanOd = get_popoldanOd(this.model);
+            if(popoldanOd !== null) {
+                this.callObject.popoldanOd = popoldanOd;
+            }
+
+            var zvecerOd = get_zvecerOd(this.model);
+            if(zvecerOd !== null) {
+                this.callObject.zvecerOd = zvecerOd;
+            }
+
+            //console.log('err : ', this.validationError);
+
+            if(this.validationError > 0) {
+                
+                Radio.channel('error').command('flash', {message: 'Ura pričetka je v napačnem formatu',   severity: 'error'});
+            }
         }
 
         console.group('Model:');console.dir(this.model);console.groupEnd();            
