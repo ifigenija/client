@@ -8,8 +8,7 @@ define([
     'underscore',
     'jquery',
     'template!../tpl/koledar-layout.tpl',
-    './KoledarFilterView',
-    './DogodekModal',
+    './FilterKoledarView',
     '../Model/RazredDogodek',
     'fc-schedule'
 ], function (
@@ -19,8 +18,7 @@ define([
         _,
         $,
         tpl,
-        KoledarFilterView,
-        DogodekModal,
+        FilterKoledarView,
         Dogodek
         ) {
 
@@ -35,9 +33,15 @@ define([
             'koledar': '.koledar-container'
         }
     });
-
+    KoledarView.prototype.initialize = function (options) {
+        this.FilterView = options.FilterView || FilterKoledarView;
+        this.koledarOptions = options.koledarOptions || this.koledarOptions;
+    };
     KoledarView.prototype.onRender = function () {
-        this.renderFilterView();
+        this.renderFilter();
+        this.renderKoledar();
+    };
+    KoledarView.prototype.renderKoledar = function () {
         var self = this;
         var options = _.extend({
             view: self,
@@ -46,10 +50,17 @@ define([
             header: {
                 left: 'prev,next,today',
                 center: 'title',
-                right: 'month,basicWeek,agendaWeek,basicDay'
+                right: 'month,basicWeek,dnevniRedTeden,basicDay'
+            },
+            views: {
+                dnevniRedTeden: {
+                    type: 'agenda',
+                    duration: {weeks: 1},
+                    buttonText: i18next.t('koledar.dnevniRedTeden')
+                }
             },
             timezone: false,
-            aspectRatio: 1.8,
+            aspectRatio: 1.9,
             selectable: true,
             defaultView: 'month',
             selectHelper: true,
@@ -84,35 +95,24 @@ define([
                     coll: self.collection
                 }
             ]
-        });
+        }, this.koledarOptions);
         setTimeout(function () {
             self.ui.koledar.fullCalendar(options);
         }, 200);
     };
-
-    KoledarView.prototype.renderFilterView = function () {
-        var filterView = new KoledarFilterView();
+    KoledarView.prototype.renderFilter = function () {
+        var filterView = new this.FilterView();
         var self = this;
-
         filterView.on('changed', function () {
             self.vrednostiFiltrov = filterView.getVrednostiAktivnihFiltrov();
             self.ui.koledar.fullCalendar('refetchEvents');
         });
-
-        this.filterR.show(filterView);
+        this.sidebarR.show(filterView);
     };
-
     KoledarView.prototype.select = function (start, end, jsEvent, view) {
         var view = this.options.view;
-        DogodekModal({
-            zacetek: start.format(),
-            konec: end.format(),
-            cb: function (model) {
-                view.trigger('prikazi:dogodek', model);
-            }
-        });
+        view.trigger('dodaj:event', start, end);
     };
-
     KoledarView.prototype.eventClick = function (fcEvent, jsEvent, view) {
         var dogodekModel = fcEvent.source.coll.get(fcEvent.id);
         var razred = dogodekModel.get('razred');
@@ -132,13 +132,11 @@ define([
                 id: dogodekModel.get('gostovanje'),
                 view: 'gostovanje'
             });
-
         } else if (razred === '400s') {
             model = new Dogodek({
                 id: dogodekModel.get('splosni'),
                 view: 'dogodekSplosni'
             });
-
         } else if (razred === '500s') {
 
         } else if (razred === '600s') {
@@ -146,24 +144,21 @@ define([
                 id: dogodekModel.get('tehnicni'),
                 view: 'dogodekTehnicni'
             });
-
         }
         var self = this;
         model.fetch({
             success: function () {
-                self.trigger('prikazi:dogodek', model);
+                self.trigger('uredi:event', model);
             },
             error: Radio.channel('error').request('handler', 'xhr')
         });
     };
-
     KoledarView.prototype.change = function (event) {
         // Look up the underlying event in the koledar and update its details from the model
         var e = this.ui.koledar.fullCalendar('clientEvents', event.get('id'))[0];
         e = event.getEventObject(e);
         this.ui.koledar.fullCalendar('updateEvent', e);
     };
-
     KoledarView.prototype.eventDropOrResize = function (fcEvent, delta, revert, jsEvent, ui, view) {
         // Lookup the model that has the ID of the event and update its attributes
         var model = fcEvent.source.coll.get(fcEvent.id);
@@ -174,6 +169,5 @@ define([
             }
         });
     };
-
     return KoledarView;
 });

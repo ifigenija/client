@@ -5,16 +5,20 @@
  */
 
 define([
+    'i18next',
     'baseUrl',
     'backbone',
+    'moment',
     'underscore',
     'app/Max/Model/MaxPageableCollection',
-    './Alternacije',
+    './PlaniraneAlternacije',
     './Osebe',
     'deep-model'
 ], function (
+        i18next,
         baseUrl,
         Backbone,
+        moment,
         _,
         Collection,
         Alternacije,
@@ -22,38 +26,88 @@ define([
         ) {
 
     var Model = Backbone.DeepModel.extend({
-        urlRoot: baseUrl + '/rest/terminStoritve'
+        view: 'default',
+        urlRoot: function () {
+            return baseUrl + '/rest/terminStoritve/' + this.view;
+        }
     });
-
+    /** 
+     * Funkcija nam pretvori model terminStoritve v objekt EventObject, ki ga uporablja fullcalendar
+     * @returns {Array|TerminiStoritve_L17.Model.prototype.getEventObject.object|Backbone.DeepModel@call;extend.prototype.getEventObject.object}
+     */
     Model.prototype.getEventObject = function () {
         var object;
         object = _.clone(this.attributes);
-        object.start = moment(this.get('zacetek'));
-        object.end = moment(this.get('konec'));
+        object.start = moment(this.get('planiranZacetek'));
+        object.end = moment(this.get('planiranKonec'));
+        object.resourceId = this.get('oseba.id');
+
+        var title = "";
+        if (this.get('alternacija')) {
+            title += this.get('dogodek.title');
+            title += ' / ' + this.get('uprizoritev.label');
+            title += ' / ' + this.get('alternacija.funkcija.naziv');
+        }
+        else if (this.get('dezurni')) {
+            title += this.get('dogodek.title');
+            title += ' / ' + this.get('uprizoritev.label');
+            title += ' / ' + i18next.t('terminStoritve.dezurni');
+        }
+        else if (this.get('gost')) {
+            title += this.get('dogodek.title');
+            title += ' / ' + this.get('uprizoritev.label');
+            title += ' / ' + i18next.t('terminStoritve.gost');
+        }
+        else if (this.get('sodelujoc')) {
+            title += this.get('dogodek.title');
+            title += ' / ' + i18next.t('terminStoritve.sodelujoc');
+        }
+        else if (this.get('zasedenost')) {
+            title += this.get('oseba.label');
+        }
+        object.title = title;
         return object;
     };
 
     var Collection = Collection.extend({
-        url: baseUrl + '/rest/terminStoritve',
+        view: 'default',
+        url: function () {
+            return baseUrl + '/rest/terminStoritve/' + this.view;
+        },
         model: Model,
         mode: "server"
     });
-
+    /*
+     * Funkcija razdeli collection terminov storitev po področjih v katere spadajo funkcije na alternacijah
+     * @returns {Object}
+     */
     Collection.prototype.razdeliPoPodrocjih = function () {
         var models = this.models;
 
         var object = {};
 
+        //v polja področij shranemo
         this.each(function (model) {
             var podrocje = model.get('alternacija.funkcija.tipFunkcije.podrocje');
             if (podrocje) {
                 if (!object[podrocje]) {
                     object[podrocje] = [];
                 }
-
                 object[podrocje].push(model);
-            } else {
-                object['gosti'] = [];
+            } else if (model.get('sodelujoc')) {
+                if (!object['sodelujoci']) {
+                    object['sodelujoci'] = [];
+                }
+                object['sodelujoci'].push(model);
+            } else if (model.get('dezurni')) {
+                if (!object['dezurni']) {
+                    object['dezurni'] = [];
+                }
+                object['dezurni'].push(model);
+            } else if (model.get('gost')) {
+                if (!object['gosti']) {
+                    object['gosti'] = [];
+                }
                 object['gosti'].push(model);
             }
         });
@@ -62,7 +116,7 @@ define([
     };
 
     Collection.prototype.toOsebe = function () {
-        var osebeColl = this.osebe = new Osebe();
+        var osebeColl = [];
 
         var models = this.models;
         for (var id in models) {
@@ -70,11 +124,12 @@ define([
             var alter = model.get('alternacija');
             if (!alter) {
                 var oseba = model.get('oseba');
-
+                oseba['polnoIme'] = oseba.label;
+                oseba['tsId'] = model.get('id');
                 if (_.isObject(oseba)) {
-                    osebeColl.add(oseba);
+                    osebeColl.push(oseba);
                 } else {
-                    osebeColl.add({id: oseba});
+                    osebeColl.push({id: oseba});
                 }
             }
         }
@@ -82,17 +137,20 @@ define([
         return osebeColl;
     };
     Collection.prototype.toAlternacije = function () {
-        var alterColl = this.alternacije = new Alternacije();
+        var alterColl = [];
 
         var models = this.models;
         for (var id in models) {
             var model = models[id];
             var alter = model.get('alternacija');
+            alter['oseba'] = model.get('oseba');
+            alter['tsId'] = model.get('id');
+            alter['funkcija'].label = model.get('alternacija.funkcija.naziv');
             if (alter) {
                 if (_.isObject(alter)) {
-                    alterColl.add(alter);
+                    alterColl.push(alter);
                 } else {
-                    alterColl.add({id: alter});
+                    alterColl.push({id: alter});
                 }
             }
         }
@@ -100,46 +158,24 @@ define([
         return alterColl;
     };
 
-    /**
-     * Funkcija vrne collection oseb za odstranit iz terminov storitev in collection oseb za dodat v terminstoritev
-     * @param {Collection} osebe    Vhodni podatek je collection izbranih oseb
-     * @returns {undefined}
-     */
-    Collection.prototype.dodajOdstrani = function (osebe) {
-        //ali je oseba v terminih storitve
-        for (var id in this.models) {
-            var model = this.models[id];
-            var vsebovana = false;
-            for (var ids in osebe) {
-                var oseba = osebe[ids];
-                if (model.get('oseba') === oseba.get('id')) {
-                    vsebovana = true;
-                }
-            }
-            if (!vsebovana) {
-                model.destroy({
-                    error: ''
-                });
+    Collection.prototype.getSeznamOseb = function () {
+        var osebeColl = this.osebe = new Osebe();
+
+        var models = this.models;
+        for (var id in models) {
+            var model = models[id];
+            var oseba = model.get('oseba');
+
+            if (_.isObject(oseba)) {
+                osebeColl.add(oseba);
+            } else {
+                osebeColl.add({id: oseba});
             }
         }
 
-        //ali je oseba v terminih storitve
-        for (var ids in osebe) {
-            var oseba = osebe[ids];
-            vsebovana = false;
-            for (var id in this.models) {
-                var model = this.models[id];
-                if (oseba.get('id') === model.get('oseba')) {
-                    vsebovana = true;
-                }
-            }
-            if (!vsebovana) {
-                model.save({
-                    error: ''
-                });
-            }
-        }
+        return osebeColl;
     };
+
 
     Collection.prototype.getEventObjects = function () {
         var objects = [];

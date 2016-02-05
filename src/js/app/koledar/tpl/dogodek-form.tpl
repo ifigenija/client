@@ -15,7 +15,7 @@
                     </a>
                 </div>
             </div>
-            <div data-fields="status"></div>
+            <div data-fields="barva,status"></div>
         </div>
     </div>
 </form>

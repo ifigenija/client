@@ -82,10 +82,21 @@ Licenca GPLv3
     & .sodelujoc:not(:last-child):after {
         content: ',';
     }
-    
+
     & .sodelujoc{
         margin-right: 5px;
+        display: inline-block;
     }
+    & .region-toolbar{
+        display: inline-block;
+    }
+    & .naslov{
+        display: inline-block;
+    }
+}
+
+.background-event{
+    opacity: 0.5;
 }
 
 /* Tomaz */
@@ -95,29 +106,56 @@ Licenca GPLv3
     display: inline;
 }
 
+.planer-izbira-datum {
+    position: relative;
+}
+
+.planer-label{
+    font-size: 110%;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    line-height: 1.1;
+    padding: .2em .6em .3em !important;
+}
+
+.planer-label-wrap{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px 0;
+    cursor: pointer; cursor: hand;
+}
+
+#tedenVDnevu {
+    font-weight: bold;
+}
+
 @media all and (min-width: 768px) {
     .planer-dan{    
         border-bottom: solid 1px @gray-light;
         height: 40px;
         min-height: 40px;
         padding-bottom:10px;
-        
+
         display: table;
         width: 100%;
-        
+        padding-left: 0;
+        padding-right: 0;
+
     }
     .planer-cell {
-        width: 30.6666667%;
-        /*width: 33.333333%; */
-        padding-left:110px;
+        width: 30%;
+        float: left;
     }
     .planer-first-cell{
-      /* padding-left:120px; */
+        width: 40%;
+        padding-left: 110px;
     }
 
     .planer-cell-datum {
-        width: 120px;
-        position:fixed;
+        width: 110px;
+        position: absolute;
+        left: 0px;
         white-space:nowrap;
     }
 
@@ -130,6 +168,7 @@ Licenca GPLv3
 
         white-space:nowrap;
     }
+
 }
 
 @media all and (max-width: 767px) {
@@ -137,28 +176,28 @@ Licenca GPLv3
     .planer-dan {
         border-bottom: solid 1px @gray-light;
         height: 84px;
-        
+
         display: table;
         width:100%;
-        
+
     }
-    
+
     .planer-cell {       
         padding-left:130px;
         min-height: 20px;
     }
-    
+
     .planer-cell:before {
         content: attr(data-label);
     }
-    
+
     .planer-row {
         /*
         overflow: auto; border: solid 1px red
         */
         display: table-row;
     }
-    
+
 
 
     .planer-legenda div{
@@ -166,3 +205,73 @@ Licenca GPLv3
     }
 }
 
+//planer paddind isti odmik on levega roba kot prvi termin
+
+.planer-padding-left{
+    padding-left: 100px;
+}
+
+.gumbi-razredi-dogodkov{
+    position: relative;
+    padding-top: @padding-base-vertical;
+    & .gumb-razred{
+        margin-bottom: @padding-base-vertical;
+    }
+}
+
+//dogodekView v planerteden
+
+.planer{
+    & .planer-dogodek{
+        margin-top: @padding-base-vertical;
+        margin-bottom: @padding-base-vertical;
+    }
+}
+
+.urnik-prostor{
+    & .urnik-toolbar{
+        vertical-align: text-bottom;
+        margin-bottom: @padding-base-vertical;
+    }
+}
+.urnik-prostor{
+    & .urnik-toolbar{
+        vertical-align: text-bottom;
+        margin-bottom: @padding-base-vertical;
+    }
+}
+
+.brisi-hide {
+    display: none !important;
+}
+/*WizardView*/
+
+.wizard{
+    margin-bottom: @form-group-margin-bottom;
+
+    border: 2px solid @gray-lighter;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.05);
+}
+
+.wizard-header{
+    background-color: @panel-default-heading-bg;
+    padding: @padding-base-vertical @padding-base-horizontal;
+
+}
+.wizard-body{
+    padding: @padding-base-horizontal;
+    min-height: 320px;
+}
+
+.wizard-footer {
+    border-top: 1px solid #dddddd;
+    overflow-y: auto;
+    padding: @padding-base-horizontal;
+}
+
+//gostovanje
+
+.region-poddogodki-mozni{
+    padding-bottom: @padding-base-horizontal;
+}

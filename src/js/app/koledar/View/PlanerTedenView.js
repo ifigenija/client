@@ -3,53 +3,48 @@
  */
 
 define([
-    'i18next',
     'marionette',
-    'backbone',
+    'underscore',
     'moment',
-    '../Model/OptionsProstorTipVaje',
     './DogodekView',
+    './DogodekPredstavaView',
+    './DogodekGostovanjeView',
     './PlanerDogodkiView',
+    './Wizard/DodajDogodekWizardView',
     'template!../tpl/planer-dan.tpl',
-    './Wizard/WizardVajaView',
-    './Wizard/WizardTehSploView',
-    './Wizard/WizardPredstavaView',
-    './Wizard/IzbiraRazredDogodkaView',
     'template!../tpl/vaja-form.tpl',
     'template!../tpl/predstava-form.tpl',
+    'template!../tpl/gostovanje-form.tpl',
     'template!../tpl/tehnicni-form.tpl',
     'template!../tpl/splosni-form.tpl',
     'formSchema!vaja',
     'formSchema!predstava',
+    'formSchema!gostovanje',
     'formSchema!dogodekTehnicni',
-    'formSchema!dogodekSplosni'
+    'formSchema!dogodekSplosni',
+    'options!dogodek.termini'
 ], function (
-        i18next,
         Marionette,
-        Backbone,
+        _,
         moment,
-        optionsProstorTipVaje,
         DogodekView,
+        DogodekPredstavaView,
+        DogodekGostovanjeView,
         PlanerDogodkiView,
+        DodajDogodekWizardView,
         tplDan,
-        WizardVajaView,
-        WizardTehSploView,
-        WizardPredstavaView,
-        IzbiraRazredDogodkaView,
         vajaTpl,
         predstavaTpl,
+        gostovanjeTpl,
         tehnicniTpl,
         splosniTpl,
         vajaSch,
         predstavaSch,
+        gostovanjeSch,
         tehnicniSch,
-        splosniSch
+        splosniSch,
+        termini
         ) {
-
-    var uraZacetek = 10;
-    var uraDopoldne = 14;
-    var uraPopoldne = 19;
-    var uraZvecer = 23;
     /**
      * Prikazuje posamezni dan v planeru
      * Regije za tri dele dneva, popoldne, dopoldne, zvečer. 
@@ -67,6 +62,13 @@ define([
             detailR: '.region-detail'
         }
     });
+
+    PlanerDanView.prototype.serializeData = function () {
+        return _.extend(this.model.toJSON(), {
+            danVTednu: moment(this.model.get('datum')).format('dddd')
+        });
+    };
+
     PlanerDanView.prototype.onRender = function () {
         this.renderDopoldne();
         this.renderPopoldne();
@@ -75,26 +77,32 @@ define([
     PlanerDanView.prototype.renderDopoldne = function () {
         var view = this.dopoldneView = this.getDogodekView(
                 this.model.get('dopoldne'),
-                moment(this.model.get('datum')).set('hour', uraZacetek),
-                moment(this.model.get('datum')).set('hour', uraDopoldne)
+                moment(this.model.get('datum')).set({'hour': termini.dopoldanZacetek.h, 'minute': termini.dopoldanZacetek.m}),
+                moment(this.model.get('datum')).set({'hour': termini.dopoldanKonec.h, 'minute': termini.dopoldanKonec.m})
                 );
         this.dopoldneR.show(view);
+        if (view.collection.length > 0) { view.$('.brisi-dogodke').removeClass('brisi-hide'); }
     };
+    
     PlanerDanView.prototype.renderPopoldne = function () {
         var view = this.popoldneView = this.getDogodekView(
                 this.model.get('popoldne'),
-                moment(this.model.get('datum')).set('hour', uraDopoldne),
-                moment(this.model.get('datum')).set('hour', uraPopoldne)
+                moment(this.model.get('datum')).set({'hour': termini.popoldanZacetek.h, 'minute': termini.popoldanZacetek.m}),
+                moment(this.model.get('datum')).set({'hour': termini.popoldanKonec.h, 'minute': termini.popoldanKonec.m})
                 );
         this.popoldneR.show(view);
+        if (view.collection.length > 0) { view.$('.brisi-dogodke').removeClass('brisi-hide'); }
     };
+    
     PlanerDanView.prototype.renderZvecer = function () {
         var view = this.zvecerView = this.getDogodekView(
                 this.model.get('zvecer'),
-                moment(this.model.get('datum')).set('hour', uraPopoldne),
-                moment(this.model.get('datum')).set('hour', uraZvecer)
+                moment(this.model.get('datum')).set({'hour': termini.vecerZacetek.h, 'minute': termini.vecerZacetek.m}),
+                moment(this.model.get('datum')).set({'hour': termini.vecerKonec.h, 'minute': termini.vecerKonec.m})
                 );
         this.zvecerR.show(view);
+        if (view.collection.length > 0) { view.$('.brisi-dogodke').removeClass('brisi-hide'); }
+
     };
     /**
      * inicializiramo instanco viewja za prikaz dogodkov enega termina
@@ -109,6 +117,7 @@ define([
             zacetek: zacetek,
             konec: konec
         });
+        //console.log('getDogodekView call');
 
         view.on('prikazi:dogodek', this.urediDogodek, this);
         view.on('dodaj:dogodek', this.dodajDogodek, this);
@@ -117,15 +126,17 @@ define([
     };
     /**
      * Izris dogodka s podanim modelo
-     * @param {Dogodek} model
+     * @param {RazredDogodek} model
      * @returns {undefined}
      */
     PlanerDanView.prototype.urediDogodek = function (model) {
+
         var razred = model.get('dogodek').razred;
         var TipDogodkaView = DogodekView, schema, tpl;
 
         switch (razred) {
             case '100s':
+                TipDogodkaView = DogodekPredstavaView;
                 schema = predstavaSch;
                 tpl = predstavaTpl;
                 break;
@@ -134,7 +145,9 @@ define([
                 tpl = vajaTpl;
                 break;
             case '300s':
-                TipDogodkaView = null;
+                TipDogodkaView = DogodekGostovanjeView;
+                schema = gostovanjeSch;
+                tpl = gostovanjeTpl;
                 break;
             case '400s':
                 schema = splosniSch;
@@ -163,83 +176,14 @@ define([
      * @returns {undefined}
      */
     PlanerDanView.prototype.dodajDogodek = function (options) {
-        var model = new Backbone.Model();
-        model.set('zacetek', moment(options.zacetek).toISOString());
-        model.set('konec', moment(options.konec).toISOString());
-
-        var self = this;
-        var izbiraView = new IzbiraRazredDogodkaView({model: model});
-        izbiraView.on('preklici', function () {
-            this.detailR.empty();
-        }, this);
-
-        izbiraView.on('izbrano', function (model) {
-            //views options so option za vsak korakView posebaj določene
-            optionsProstorTipVaje(function (prostori, tipiVaj) {
-                var wizardView;
-                var razred = model.get('razred');
-                switch (razred) {
-                    case '100s':
-                        wizardView = new WizardPredstavaView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-                                {},
-                                {schemaOptions: prostori}
-                            ]
-                        });
-                        break;
-                    case '200s':
-                        wizardView = new WizardVajaView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-                                {},
-                                {schemaOptions: tipiVaj},
-                                {schemaOptions: prostori}
-                            ]
-                        });
-                        break;
-                    case '300s':
-                        break;
-                    case '400s':
-                        wizardView = new WizardTehSploView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-                                {},
-                                {schemaOptions: prostori}
-                            ]
-                        });
-                        break;
-                    case '600s':
-                        wizardView = new WizardTehSploView({
-                            model: model,
-                            viewsOptions: [
-                                {},
-                                {},
-                                {schemaOptions: prostori}
-                            ]
-                        });
-                        break;
-                }
-
-                wizardView.on('close', function () {
-                    self.detailR.empty();
-                }, self);
-
-                wizardView.on('preklici', function () {
-                    self.detailR.empty();
-                }, self);
-                wizardView.on('save:success', function (model) {
-                    options.collection.add(model);
-                }, self);
-
-                self.detailR.show(wizardView);
-            });
-        }, this);
-
-        this.detailR.show(izbiraView);
+        
+        var dodajDogodekView = new DodajDogodekWizardView({
+            zacetek: options.zacetek,
+            konec: options.konec,
+            collection: options.collection
+        });
+        this.detailR.show(dodajDogodekView);
+        
     };
 
 

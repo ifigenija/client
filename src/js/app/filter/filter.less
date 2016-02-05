@@ -39,8 +39,7 @@ Licenca GPLv3
         width: 100%;
     }
     &-filter{
-        margin-left: 9px;
-        margin-right: 9px;
+        display: inline-block;
     }
     &-body{
         padding-bottom: 0px;
@@ -63,10 +62,13 @@ h4.selectlist-naslov{
 
 .filter-select{
     & .vrsta-filtra-item{
-        display: inline-block;
-        margin-left: 5px;
+        
+        margin-left: 5px;      
+        margin-top: 2px;
         margin-bottom: 5px;
         font-size: 20px;
+        border: 1px solid @gray-lighter;
+        padding: 1px 4px;
     }
     & .vrsta-filtra{
         &-dodaj &-reset{
@@ -76,4 +78,81 @@ h4.selectlist-naslov{
     }
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.povzetek{
+    &-item:not(:last-child):after {
+        content: ',\00a0';
+    }
+}
+
+//mali ekran
+@media  (max-width: @screen-md-max) {
+    
+    .vrsta-filtra{
+        
+        &-item{
+            display: inline-block;
+        }
+        &-icon{
+            display: inline-block;
+        }
+        &-brisi{
+            display: inline-block;
+        }
+        &-povzetek-region{
+            display: inline-block;
+        }
+    }
+    .povzetek{
+        display: inline-block;
+        &-item{
+            display: inline-block;        
+        }
+        &-seznam{
+            display: inline-block;
+        }
+        &-ostanek{
+            display: inline-block;
+        }
+    }
+}
+
+//velik ekran
+@media (min-width: @screen-lg-min) {
+
+    .vrsta-filtra{
+        
+        &-item{
+            display: block;
+        }
+        &-icon{
+            display: inline-block;
+            vertical-align: top;
+        }
+        &-brisi{
+            display: inline-block;
+            vertical-align: top;
+            float: right !important;
+        }
+        &-povzetek-region{
+            display: inline-block;
+        }
+    }
+    .povzetek{
+        display: block;
+        &-item{
+            vertical-align: top;
+            display: block;
+        }
+        &-seznam{
+            vertical-align: top;
+            display: block;
+        }
+        
+    }
+    
+    .filter-aktivni-filtri {
+        margin-top: 16px;
+    }
 }

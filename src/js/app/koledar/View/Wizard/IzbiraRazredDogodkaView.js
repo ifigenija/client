@@ -64,7 +64,6 @@ define([
     IzbiraRazredDogodkaView.prototype.onGostovanje = function () {
         this.initRazredDogodka({
             view: 'gostovanje',
-            title: 'Gostovanje',
             status: '200s',
             razred: '300s'
         });
@@ -73,7 +72,6 @@ define([
     IzbiraRazredDogodkaView.prototype.onSplosni = function () {
         this.initRazredDogodka({
             view: 'dogodekSplosni',
-            title: 'Splošni',
             status: '200s',
             razred: '400s'
         });
@@ -82,7 +80,6 @@ define([
     IzbiraRazredDogodkaView.prototype.onTehnicni = function () {
         this.initRazredDogodka({
             view: 'dogodekTehnicni',
-            title: 'Tehnični',
             status: '200s',
             razred: '600s'
         });

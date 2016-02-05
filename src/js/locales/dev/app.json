@@ -41,7 +41,8 @@
             "prostori": "Prostori",
             "dogodki": "Dogodki",
             "ljudje": "Ljudje",
-            "zasedenost": "Rezervacije",
+            "zasedenost": "Zasedenost",
+            "koledarPosameznik": "Moj koledar",
             "pregled": "Pregled",
             "planer": "Planer"
         },
@@ -51,7 +52,17 @@
         "konflikti": "Konflikti",
         "terminDopoldan": "Dopoldan",
         "terminPopoldan": "Popoldan",
-        "terminZvecer": "Zvecer"
+        "terminZvecer": "Zvečer",
+        "dnevniRedTeden": "Teden po urah",
+        "zasedenost": "Zasedenosti",
+        "pregled": "Pregled dogodkov",
+        "dvaDni": "Dva dni",
+        "triDni": "Tri dni",
+        "teden": "Teden"
+    },
+    "urnik": {
+        "tsOsebe": "Koledar terminov po osebah",
+        "dogodkiProstori": "Koledar dogodkov po prostorih"
     },
     "arhiv": {
         "nav": {
@@ -104,12 +115,18 @@
             "addUser": "Dodaj uporabnika",
             "users": "Uporabniki",
             "roles": "Vloge"
+        },
+        "moznosti": {
+            "perUser": "Osebne nastavitve",
+            "global":  "Skupne nastavitve"
         }
+
     },
     "std": {
         "brisi": "Briši",
         "uredi": "Uredi",
         "potrdi": "Potrdi",
+        "razdeli": "Razdeli",
         "potrdiIzbris": "Ali res želite izbrisati podatek?",
         "izberi": "Izberi",
         "preklici": "Prekliči",
@@ -165,13 +182,14 @@
         "podrobno": "Podrobno",
         "nazaj": "Nazaj",
         "naprej": "Naprej",
-        "predstava": "Predstava",
-        "vaja": "Vaja",
-        "splosno": "Splošni dogodek",
-        "tehnicni": "Tehnični dogodek",
         "oseba": "Oseba",
         "prostor": "Prostor",
         "uprizoritev": "Uprizoritev",
+        "izbiraOseb": "Izbira oseb",
+        "vnosNaslova": "Predmet dogodka",
+        "nedoloceno": "Nedoločeno",
+        "tiskanje": "Tiskanje",
+        "pokazi": "Pokaži",
         "title": {
             "dodajOsebo": "Ustvari novo osebo",
             "dodajBesedilo": "Ustvari novo besedilo",
@@ -1336,6 +1354,7 @@
         "stroskiAvtorZun": "Stroški avtorskih honorarjev zunanjih sodelavcev",
         "krajGostovanja": "Kraj",
         "dnevPrvZad": "Dnevnice za prvi in zadnji dan",
+        "dogodki": "Dogodki na gostovanju",
         "d": {
             "transportniStroski": "Transportni stroški opreme ter stroški prevozov ansambla in tehnike",
             "dnevPrvZad": "Dnevnice za prvi in zadnji dan",
@@ -1792,12 +1811,21 @@
         "sezona": "Sezona",
         "priloge": "Priloge",
         "sodelujoci": "Sodelujoči",
+        "gostovanje": "Gostovanje",
         "dodajDogodek": "Dodaj dogodek",
         "dodajVajo": "Dodaj vajo",
         "dodajPredstavo": "Dodaj predstavo",
         "dodajTehnicni": "Dodaj tehnični dogodek",
         "dodajSplosni": "Dodaj splošni dogodek",
         "dodajGostovanje": "Dodaj gostovanje",
+        "preklici": "Prekliči izbiro",
+        "predstava": "Predstava",
+        "vaja": "Vaja",
+        "splosno": "Splošni dogodek",
+        "tehnicni": "Tehnični dogodek",
+        "gostovanje": "Gostovanje",
+        "mozniPoddogodki": "Dogodki v času gostovanja",
+        "poddogodki": "Dogodki na gostovanju",
         "barva": "Barva",
         "d": {
             "allDay": "Dogodek se razteza skozi cel dan",
@@ -1958,6 +1986,14 @@
         "oseba": "Oseba",
         "dodajZasedenost": "Dodaj zasedenost",
         "zasedenost": "Zasedenost",
+        "umetniki": "Umetniki",
+        "tehniki": "Tehniki",
+        "gosti": "Gosti",
+        "sodelujoci": "Sodelujoči",
+        "delZac": "Prihod pred dogodkom",
+        "delZacTeh": "Prihod tehnikov pred dogodkom",
+        "delKon": "Odhod po dogodku",
+        "delKonTeh": "Odhod tehnikov po dogodku",
         "d": {
             "title": "Termin storitve",
             "planiranZacetek": "Planiran začetek",
@@ -1970,7 +2006,11 @@
             "dezurni": "Dežurni",
             "gost": "Gost",
             "sodelujoc": "Sodelujoča oseba, ki ni alternacija in ni ne gost ne dežurni",
-            "oseba": "Oseba"
+            "oseba": "Oseba",
+            "delZac": "Koliko prej morajo povabljene osebe priti pred dogodkom.",
+            "delZacTeh": "Koliko prej morajo tehniki priti pred dogodkom.",
+            "delKon": "Koliko časa morajo povabljene osebe ostati po dogodku.",
+            "delKonTeh": "Koliko časa morajo tehniki ostati po dogodku,"
         }
     },
     "Ura": {
@@ -2041,6 +2081,11 @@
             "ime": "Ime",
             "opis": "Opis"
         }
+    },
+    "moznosti": {
+        "title": "Nastavitvene možnosti",
+        "opis": "Opis nastavitvene možnosti",
+        "perUser": "Po uporabniku"
     }
 }
 

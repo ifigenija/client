@@ -1,4 +1,4 @@
-<form>
+<form id="razmnozi-form">
     <div class="row">
         <div class="col-md-6">
             <fieldset>
@@ -7,7 +7,7 @@
                 </legend>
                 <div id="zacetek-konec" data-fields="zacetek,konec"></div>
                 
-                <div data-fields="stevilo" id="stevilo" style="display: none"></div>
+                <div data-fields="stevilo_ponovitev" id="stevilo-ponovitev" style="display: none"></div>
             </fieldset>
         </div>
         <div class="col-md-6">
@@ -41,7 +41,7 @@
       <thead>
       <tr>
       <th>{{t "vaja.razmnozi.terminDan"}}</th>
-      <th></th>
+      <th>Od (ura):</th>
       <th>{{t "vaja.razmnozi.ponedeljek"}}</th>
       <th>{{t "vaja.razmnozi.torek"}}</th>
       <th>{{t "vaja.razmnozi.sreda"}}</th>
@@ -58,7 +58,7 @@
       {{#each termini}}
       <tr> 
         <td>{{ime}}</td>
-        <td><div data-editors="time_{{kratica}}_from,time_{{kratica}}_to"></div></td>
+        <td><div data-editors="time_{{kratica}}"></div></td>
         {{#each ../dni}}
         <td>          
             <div data-editors="chk_{{../kratica}}_{{this}}"></div>
@@ -70,7 +70,7 @@
       </tbody> 
     </table>
   </div>
-       
+<div data-fields="show_mode"></div>       
         
 </form>
 <style type="text/css">

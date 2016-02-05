@@ -1,6 +1,6 @@
-<div class="region-umetniki"></div>
-<div class="region-umetniki-koledar"></div>
-<div class="region-tehniki"></div>
-<div class="region-tehniki-koledar"></div>
-<div class="region-gosti"></div>
-<div class="region-gosti-koledar"></div>
+<div class="region-umetniki-sodelujoci"></div>
+<div class="region-tehniki-sodelujoci"></div>
+<div class="region-sodelujoci-sodelujoci"></div>
+<div class="region-gosti-sodelujoci"></div>
+<div class="region-dezurni-sodelujoci"></div>
+<div class="region-koledar-sodelujoci"></div>

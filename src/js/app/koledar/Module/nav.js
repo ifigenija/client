@@ -20,6 +20,16 @@ define(['i18next'], function (i18n) {
                     label: i18n.t("koledar.nav.planer"),
                     uri: '#koledar/planer'
  //                   permission: ""
+                },
+                {
+                    label: i18n.t("koledar.nav.zasedenost"),
+                    uri: '#koledar/zasedenost'
+ //                   permission: ""
+                },
+                {
+                    label: i18n.t("koledar.nav.koledarPosameznik"),
+                    uri: '#koledar/koledarPosameznik'
+ //                   permission: ""
                 }
             ]
         }

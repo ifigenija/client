@@ -7,27 +7,26 @@ define([
     'i18next',
     'backbone',
     'marionette',
+    'moment',
     'app/Max/Module/Form',
     'app/Dokument/View/FormView',
-    'template!../tpl/razmnozi.tpl',
-    'template!../tpl/razmnozi-form.tpl'
+    'template!../tpl/razmnozi-form.tpl',   
+    'options!dogodek.termini',
+    'baseUrl'
 ], function (
         Radio,
         i18next,
         Backbone,
         Marionette,
+        moment,
         Form,
         FormView,
-        tpl,
-        formTpl
+        formTpl,        
+        termini,
+        baseUrl
         ) {
     
-    
-    //var nacin_options = {
-    //    value1: "Hitri vnos" ,
-    //    value2: "Tedenski vnos" 
-    //};
-
+ 
     
     var RazmnoziView = FormView.extend({
        //template: tpl,
@@ -70,29 +69,31 @@ define([
             upostevaj_sobote:   {title: 'Upoštevaj sobote',   name: 'zvecer',   type: 'Checkbox', editorAttrs:{}},
             upostevaj_nedelje:  {title: 'Upoštevaj nedelje',  name: 'zvecer',   type: 'Checkbox', editorAttrs:{}},
 
-            stevilo: {name: 'zacetek', type: 'Text', editorAttrs:{} },
+            stevilo_ponovitev: {title: 'Število ponovitev', name: 'stevilo_ponovitev', type: 'Text', editorAttrs:{} },
           
-            time_dop_from: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
-            time_dop_to:   { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
+            time_dop: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
 
-            time_pop_from: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
-            time_pop_to:   { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
 
-            time_zve_from: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
-            time_zve_to:   { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}}
+            time_pop: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
+
+
+            time_zve: { type: 'Text', editorAttrs:{class:'koledar-razmnozi'}},
+            
+            show_mode: { type: 'Hidden', name: 'show_mode', value: 'tedenski'}
+
 
         },
        
         triggers: {
             'click .btnTedenski': 'show:tedenski',
             'click .btnHitri':    'show:hitri'    
-        },     
-        
+        },
+                
        formTemplate: formTpl,
        buttons: FormView.prototype.defaultButtons
-       
+           
     });
-    
+       
     //
     RazmnoziView.prototype.addRequiredValidator = function (val) {
         val.push('required');
@@ -105,8 +106,85 @@ define([
         return val;
     };
 
+    RazmnoziView.prototype.formChange = function (form) {
+
+        var mode = this.form.fields.show_mode.getValue();
+        //console.log('formChange, valudate. mode= ' + mode);
+        
+        //fix value
+        if(mode==='') {
+            mode = 'tedenski';
+            this.form.fields.show_mode.setValue(mode);
+        }
+        
+        if( mode == 'hitri' ) {
+            st = this.form.fields.stevilo_ponovitev.getValue();
+            //console.log('st', st, st.length);
+            if(st.length>0) {
+                this.enableSaveButton();
+            } else {
+                this.disableSaveButton();
+            }            
+                        
+        } else { //tedenski
+
+            konec = this.form.fields.konec.getValue();
+            //console.log('konec', konec, konec.length);
+            if(konec && konec.length>0) {
+               
+
+                var self = this;
+                var chkCount = 0;
+                Object.keys(this.form.fields).forEach(function (elem) {
+                    if(elem.substr(0,4) == 'chk_') {
+                        //console.log(elem);
+                        if( self.form.fields[elem].getValue() ) { chkCount++; }
+                    }                   
+                });
+                if(chkCount>0) {
+                    this.enableSaveButton();
+                } else {
+                    this.disableSaveButton();
+                }
+                
+            } else {
+                this.disableSaveButton();
+            } 
+        }     
+        
+    };
+
+    RazmnoziView.prototype.enableSaveButton = function () {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton('doc-shrani');
+        if (but && but.get('disabled')) {
+            but.set({
+                disabled: false
+            });
+        }        
+    };
+
+    RazmnoziView.prototype.disableSaveButton = function () {
+        var tb = this.getToolbarModel();
+        var but = tb.getButton('doc-shrani');
+        if (but && !but.get('disabled')) {
+            but.set({
+                disabled: true
+            });
+        }        
+    };
+    
     RazmnoziView.prototype.onShowTedenski = function () {
-        this.$('#stevilo').hide();
+        
+        this.form.fields.show_mode.setValue('tedenski');
+        
+        //izbriše pilje št. ponovitev
+        //console.log(this.form.fields);
+        this.form.fields.stevilo_ponovitev.setValue('');
+        
+        this.form.fields.show_mode.setValue('tedenski');
+        
+        this.$('#stevilo-ponovitev').hide();
         this.$('#upostevaj-sobote').hide();
         this.$('#upostevaj-nedelje').hide();
         this.$('#tedenski').show();
@@ -128,7 +206,11 @@ define([
 
     
     RazmnoziView.prototype.onShowHitri = function () {
-        this.$('#stevilo').show();
+        
+        this.form.fields.show_mode.setValue('hitri');
+        //console.log( this.form.fields );
+        
+        this.$('#stevilo-ponovitev').show();
         this.$('#upostevaj-sobote').show();
         this.$('#upostevaj-nedelje').show();
         this.$('#tedenski').hide();
@@ -145,14 +227,12 @@ define([
 
         //d//console.log(this.schema.zacetek.validators);console.log(this.schema.konec.validators);
         
-        //window.obj = this; debugger;
     };
     
     RazmnoziView.prototype.onBeforeShrani = function (options) {
-        console.log('onBeforeShrani');
+       // console.log('onBeforeShrani');
        
-        
-        var ok = true; //future checkes
+        var ok = true; //not implemented
         
         if (!this.form.commit()) {
             
@@ -160,14 +240,13 @@ define([
                 this.shrani(options);
             } else {
                 Radio.channel('error').command('flash', {message: 'onBeforeShrani error'});
-
             }
         }
     };
     
     RazmnoziView.prototype.onShrani = function (options) {
         
-        console.log('onShrani');
+        //console.log('onShrani');
         
         if(this.checkBeforeSave) {
             this.onBeforeShrani(options);
@@ -176,13 +255,7 @@ define([
         }
         
         
-        
-        /*
-        Radio.channel('error').command('flash', {
-                    message: 'AAAAAA Shranjeno',
-                    severity: 'success'
-                });
-        */
+       
     };
     
     /**
@@ -192,70 +265,115 @@ define([
     RazmnoziView.prototype.shrani = function () {
         var self = this;
         
-        console.log('shrani');
+        //console.log('shrani');
         
-        var get_termini_fn = function(m) {
+        var get_termini_fn = function(model) {
             var data = [];
-            var key, i, terminiVDnevu = ['dop', 'pop', 'zve'];
+            var key, i;
+            var terminiVDnevu = ['dop', 'pop', 'zve'];
             
             for(var dan=1;dan<8;dan++) {
                 for(i in terminiVDnevu) {
                     key = "chk_"+ terminiVDnevu[i] +"_"+ dan;
-                    // za debug checkboxov// console.log(key, m.get(key));
-                    if(m.get(key) == true) {
-                        if(!data[dan]) {data[dan] = []}; //init array row
-                        data[dan][terminiVDnevu[i]] = 1;
+                    // za debug checkboxov// console.log(key, model.get(key));
+                    if(model.get(key) === true) {
+                        if(!data[dan]) {data[dan] = [];}; //init array row
+                        data[dan].push(terminiVDnevu[i].toUpperCase());
                     }
-                    
                 }
             }
             
             return data;
         };
         
-        if (!this.form.commit()) {
-            console.log('After commit, prepare object for RPC Call');
+        var get_casi_pricetka_fn = function(model) {
             
-            this.callObject = {
-                id: this.model.get('id'),  //id_dogodka
-                zacetek: this.model.get('zacetek'),
-                konec: this.model.get('konec'),
-                ura_od: '10:00',
-                ura_do: '14:00',
-                termini: get_termini_fn(this.model),
-                upostevaj_praznike: this.model.get('upostevaj_praznike'),
-                upostevaj_sobote: this.model.get('upostevaj_sobote'), //ce bo to aktualno
-                upostevaj_nedelje: this.model.get('upostevaj_nedelje'), //ce bo to aktualno
-                stevilo_vaj: this.model.get('stevilo_vaj'), //ce bo to aktualno
-            }
+            var d,p,z;
+            d = model.get('time_dop').split(':');
+            p = model.get('time_pop').split(':');
+            z = model.get('time_zve').split(':');
             
-      
-            console.group('Model:');console.dir(this.model);console.groupEnd();
+            var data = {
+                dop: {
+                        h: parseInt(d[0], 10),
+                        m: parseInt(d[1], 10)
+                },
+                pop: {
+                        h: parseInt(p[0], 10),
+                        m: parseInt(p[1], 10)
+                },
+                zve: {
+                        h: parseInt(z[0], 10),
+                        m: parseInt(z[1], 10)
+                     }
+            };
             
-            console.group('Call object:');console.dir(this.callObject);console.groupEnd();
-            
-            console.trace();
-            
-            //ure za termina dop,pop,zve, kot 10h-14
-            //tedenski vnos: zakrij upoštevajsobote in upoštevaj nedelje
-            //hitri vnos: Zakori začetek in konec
-            //
-            
-        }
+            return data;
+        };
         
-        this.trigger('save:success', 'nekaj');
-        return;
+
+        var steviloPonovitev = 0;
+        if (typeof this.model.get('stevilo_ponovitev') !== 'undefined') {
+            steviloPonovitev = +this.model.get('stevilo_ponovitev');
+        }
+
+        this.callObject = {
+            dogodekId: this.model.get('id'),
+            steviloPonovitev: steviloPonovitev,
+            upostevajPraznike: this.model.get('upostevaj_praznike'),
+            upostevajSobote: this.model.get('upostevaj_sobote'), 
+            upostevajNedelje: this.model.get('upostevaj_nedelje')              
+        }; 
+
+        if(this.model.get('show_mode') === 'tedenski') {
+            //console.log('tedenski is set ...');
+
+            _.extend(this.callObject, {
+                zacetekObdobja: this.model.get('zacetek'),
+                konecObdobja: moment(this.model.get('konec')).endOf('day').toISOString(),
+                tedenskiTermini: get_termini_fn(this.model),
+                casiPricetka: get_casi_pricetka_fn(this.model)
+            });
+        }
+
+        console.group('Model:');console.dir(this.model);console.groupEnd();            
+        console.group('Call object:');console.dir(this.callObject);console.groupEnd();
+            
+
+        
+        
+        //console.log('Stopped before call');
+        //return;
         
         // ----------------------------------
-        var rpc = new $.JsonRpcClient({
-            ajaxUrl: baseUrl + '/rpc/dogodek'
-        });
-       
-       rpc.call('razmnozi...', {           
-       }, function (response) {
-           self.trigger('save:success', response)
-        }, Radio.channel('error').request('handler','flash')
+        
+        var rpc = new $.JsonRpcClient({ajaxUrl: baseUrl + '/rpc/koledar/dogodek'});
+        
+        rpc.call('razmnozi', this.callObject,
+                function (response) {
+                    
+                    console.log('rpc call success');
+                    
+                    Radio.channel('error').command('flash', {message: 'Uspešno razmnoženo', code: 0, severity: 'success'});
+                    
+                    self.trigger('save:success', response);
+                },
+                
+                function (response) {
+                    console.log('rpc call error');
+                    console.log(response);
+                    
+                    var errMsg = '', errCode = 0;
+                    if (response.message) {
+                        errMsg = response.message;
+                        errCode = response.code;
+                    }
+                    
+                    Radio.channel('error').command('flash', {message: 'Napaka pri razmnoževanju dogodka: ' + errMsg, code: errCode, severity: 'error'});
+                }
        );
+       
+
     };
 
     

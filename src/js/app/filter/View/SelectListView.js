@@ -147,6 +147,10 @@ define([
         }
 
     };
+    SelectListView.prototype.onChildviewDblclick = function (item) {
+        var model = item.model;
+        this.trigger('izbran:model', model);
+    };
     /**
      * Vrne polje modelov, ki jih želimo izbrati
      * @returns {Marionette.CollectionView@call;extend.prototype.getSelectedModels.result|Array}

@@ -1,12 +1,6 @@
 <form>
     <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="prikazno-polje">
-                <div class="pull-right uprizoritev vrednost">{{uprizoritev.label}}</div>
-                <div class="attribut">{{t "vaja.uprizoritev"}}: </div>                    
-            </div>
-            <div data-fields="title,zacetek,konec"></div>
-        </div>
+        <div class="col-sm-12 col-md-6" data-fields="title,zacetek,konec"></div>
         <div class="col-sm-12 col-md-6">
             <div class="vnosno-polje">
                 <div class="naslov">
@@ -21,7 +15,7 @@
                     </a>
                 </div>
             </div>
-            <div data-fields="status,tipvaje"></div>
+            <div data-fields="barva,status,tipvaje"></div>
             <div class="prikazno-polje">
                 <div class="pull-right zaporedna vrednost">{{zaporedna}}</div>
                 <div class="attribut">{{t "vaja.zaporedna"}}: </div>                    

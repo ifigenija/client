@@ -2,22 +2,14 @@
  * Licenca GPLv3
  */
 define([
-    'radio',
     'i18next',
-    'backbone',
     'underscore',
-    'app/bars',
     'marionette',
-    'jquery',
     'template!../../tpl/wizard-layout.tpl'
 ], function (
-        Radio,
         i18next,
-        Backbone,
         _,
-        Handlebars,
         Marionette,
-        $,
         tpl
         ) {
 

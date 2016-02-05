@@ -8,24 +8,22 @@ define([
     'baseUrl',
     'backbone',
     'app/Max/Model/MaxPageableCollection',
-    './Osebe',
     'deep-model'
 ], function (
         baseUrl,
         Backbone,
-        Collection,
-        Osebe
+        Collection
         ) {
 
     var Model = Backbone.DeepModel.extend({
-        urlRoot: baseUrl + '/rest/alternacija'
+        urlRoot: baseUrl + '/rest/alternacija/planirane'
     });
     var Collection = Collection.extend({
-        url: baseUrl + '/rest/alternacija',
+        url: baseUrl + '/rest/alternacija/planirane',
         model: Model,
         mode: "server"
     });
-    
+
     /**
      * Metoda razdeli alternacije v posamezna področja v katera spadajo alternacije.
      * @returns {Array|Collection@call;extend.prototype.razdeliVPodrocja.object}
@@ -62,15 +60,21 @@ define([
 
         var modeli = [];
         this.each(function (model) {
-            var tsModel = {
-                dogodek: options.dogodek,
-                zacetek: options.zacetek,
-                konec: options.konec,
-                gost: options.gost ? options.gost : false,
-                dezurni: options.dezurni ? options.dezurni : false,
-                alternacija: model,
-                oseba: new Osebe.prototype.model(model.get('oseba'))
-            };
+            if (!model.get('tsId')) {
+                var tsModel = {
+                    dogodek: options.dogodek.get('id'),
+                    planiranZacetek: options.zacetek,
+                    planiranKonec: options.konec,
+                    gost: false,
+                    dezurni: false,
+                    sodelujoc: false,
+                    alternacija: model,
+                    oseba: model.get('oseba')
+                };
+            } else {
+                var coll = options.coll;
+                var tsModel = coll.findWhere({'id': model.get('tsId')}).attributes;
+            }
             modeli.push(tsModel);
         });
 

@@ -8,28 +8,32 @@ define([
     'i18next',
     '../../Model/Dogodki',
     './WizardView',
-    './IzbiraCasView',
     './IzbiraProstoraView',
-    './VnosNaslovaView'
+    './IzbiraSodelujociView',
+    './VnosNaslovCasView',
+    'options!dogodek.barve'
 ], function (
         Radio,
         i18next,
         Dogodki,
         WizardView,
-        IzbiraCasView,
         IzbiraProstoraView,
-        VnosNaslovaView
+        IzbiraSodelujociView,
+        VnosNaslovCasView,
+        barve
         ) {
 
-    var WizardTehSploView = WizardView.extend({
+    var WizardSplosniView = WizardView.extend({
         views: [
-            VnosNaslovaView,
-            IzbiraCasView,
-            IzbiraProstoraView
+            VnosNaslovCasView,
+            IzbiraProstoraView,
+            IzbiraSodelujociView
         ],
-        title: i18next.t('dogodek.dodajVajo'),
         callback: function (model) {
             var self = this;
+            
+            model.set('barva', barve.splosni.value);
+            
             model.save({}, {
                 success: function (model) {
                     Radio.channel('error').command('flash', {message: 'Uspešno shranjeno', code: 0, severity: 'success'});
@@ -41,5 +45,5 @@ define([
         }
     });
 
-    return WizardTehSploView;
+    return WizardSplosniView;
 });

@@ -21,6 +21,8 @@ define([
     });
 
     IzbiraProstoraView.prototype.initialize = function (options) {
+        options.schemaOptions[0] = i18next.t("prostor.brez");
+
         this.schema = {
             prostor: {
                 title: i18next.t('prostor.title'),
@@ -30,12 +32,12 @@ define([
                 options: options.schemaOptions,
                 editorAttrs: {
                     class: 'form-control',
-                    type: 'select',
+                    type: 'optionalselect',
                     name: 'prostor'
                 }
             }
         };
-        
+
         Form.prototype.initialize.apply(this, arguments);
 
         this.options = options;
@@ -49,10 +51,8 @@ define([
             if (prostor) {
                 //nastavimo vrednost prostora v modelu
                 self.model.set('prostor', prostor);
-                self.trigger('ready', self.model);
-            } else {
-                self.trigger('not:ready');
             }
+            self.trigger('ready', self.model);
         }, this);
     };
 
@@ -74,6 +74,7 @@ define([
                 //v primeru da prostor ne obstaja se nastavi kot prostor matični oder uprizoritve
                 this.nastaviProstorUprizoritve(uprID);
             }
+            this.trigger('prostor:change', this, this.fields.prostor.editor);
         }
     };
 

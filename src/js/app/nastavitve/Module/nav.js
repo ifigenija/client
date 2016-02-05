@@ -10,11 +10,11 @@ define(['i18next'], function (i18n) {
             permission: 'Options-write',
             id: "nastavitve",
             pages: [
-//                {
-//                    label: i18n.t("nastavitve.nav.moznosti"),
-//                    uri: "#aaa/moznosti"
-//                },
-                                 {
+                {
+                    label: i18n.t("nastavitve.nav.moznosti"),
+                    uri: "#moznosti"
+                },
+                {
                     label: i18n.t("stevilcenje.konfigmenu"),
                     uri: "#stevilcenje/konfig",
                     permission: 'Stevilcenje-write'
@@ -49,7 +49,7 @@ define(['i18next'], function (i18n) {
                     uri: "#aaa/permissions",
                     permission: 'Aaa-read'
 //                    role: "administrator-dostopov"
-                }
+                } 
 
             ]
         }

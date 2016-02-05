@@ -3,15 +3,18 @@
     <div class="selectlist-content">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="pull-right selectlist-zapri">
+                <div class="pull-right selectlist-preklici">
                     <i class="fa fa-times"></i>
                 </div>
                 <h4 class="selectlist-naslov">{{title}}</h4>
             </div>
             <div class="panel-body selectlist-body">
                 <div class="row">
-                    <div class="coll-xs-12">
-                        <div class="selectlist-filter"></div>
+                    <div class="col-xs-10 selectlist-filter"></div>
+                    <div class="col-xs-2">                    
+                        <a class="btn btn-default pull-right izbrani" title="{{t "duallist.izbrani"}}">
+                            <i class="fa fa-check"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="selectlist-seznama">
