@@ -272,16 +272,19 @@ define([
             var key, i;
             var terminiVDnevu = ['dop', 'pop', 'zve'];
             
+            data[0] = [];
             for(var dan=1;dan<8;dan++) {
+                data[dan] = [];
                 for(i in terminiVDnevu) {
                     key = "chk_"+ terminiVDnevu[i] +"_"+ dan;
                     // za debug checkboxov// console.log(key, model.get(key));
                     if(model.get(key) === true) {
-                        if(!data[dan]) {data[dan] = [];}; //init array row
+                        
                         data[dan].push(terminiVDnevu[i].toUpperCase());
                     }
                 }
             }
+            //data = [[], ['DOP'], ['DOP']];
             
             return data;
         };
