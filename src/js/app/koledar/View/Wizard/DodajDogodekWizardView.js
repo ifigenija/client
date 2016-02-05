@@ -120,7 +120,7 @@ define([
             }, self);
             wizardView.on('save:success', function (model) {
                 this.options.collection.add(model);
-                this.trigger('save:success');
+                this.trigger('save:success', model);
             }, self);
 
             self.contentR.show(wizardView);
