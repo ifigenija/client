@@ -37,11 +37,6 @@ define([
             id: '400s'
         },
         {
-            ident: '4',
-            label: 'Zasedenost',
-            id: '500s'
-        },
-        {
             ident: '5',
             label: 'Tehnični dogodek',
             id: '600s'

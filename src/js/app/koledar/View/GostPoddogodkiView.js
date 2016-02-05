@@ -213,7 +213,7 @@ define([
                                 termin = _.extend(termin, {
                                     planiranZacetek: self.model.get('zacetek'),
                                     planiranKonec: self.model.get('konec'),
-                                    dogodek: dogodekId,
+                                    dogodek: self.model.get('dogodek'),
                                     id: null,
                                     sodelujoc: true,
                                     gost: false,
@@ -247,19 +247,10 @@ define([
     GostPoddogodkiView.prototype.azurirajTsDogodka = function (dogodekId, terminiStoritve, modeli) {
         var self = this;
 
-        var tsji = _.map(terminiStoritve, function (object) {
-            if (_.isObject(object.dogodek)) {
-                object['dogodek'] = dogodekId;
-            }
-            return object;
-        });
-
-        var self = this;
-
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/dogodek'});
         rpc.call('azurirajTSDogodka', {
             'dogodekId': dogodekId,
-            'terminiStoritev': tsji
+            'terminiStoritev': terminiStoritve
         }, function () {
             _.each(modeli, function (model) {
                 //določi se id nadrejenega gostovanja

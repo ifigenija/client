@@ -40,6 +40,7 @@ define([
         object = _.clone(this.attributes);
         object.start = moment(this.get('planiranZacetek'));
         object.end = moment(this.get('planiranKonec'));
+        object.color = this.get('dogodek.barva');
         object.resourceId = this.get('oseba.id');
 
         var title = "";

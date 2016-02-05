@@ -42,7 +42,7 @@ define([
         this.each(function (model) {
             if (!model.get('tsId')) {
                 var tsModel = {
-                    dogodek: options.dogodek.get('id'),
+                    dogodek: options.dogodek.attributes,
                     planiranZacetek: options.zacetek,
                     planiranKonec: options.konec,
                     gost: options.gost ? options.gost : false,

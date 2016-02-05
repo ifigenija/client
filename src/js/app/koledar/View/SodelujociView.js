@@ -422,17 +422,13 @@ define([
         }
     };
     SodelujociView.prototype.azurirajTsDogodka = function (dogodekId, terminiStoritve) {
-        var tsji = _.map(terminiStoritve, function (object) {
-            object['dogodek'] = object.dogodek.id;
-            return object;
-        });
 
         var self = this;
 
         var rpc = new $.JsonRpcClient({ajaxUrl: '/rpc/koledar/dogodek'});
         rpc.call('azurirajTSDogodka', {
             'dogodekId': dogodekId,
-            'terminiStoritev': tsji
+            'terminiStoritev': terminiStoritve
         }, function () {
             self.tsColl.queryParams.dogodek = dogodekId;
 
